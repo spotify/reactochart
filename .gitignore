@@ -1,0 +1,5 @@
+node_modules
+.idea/
+*.sublime-*
+.DS_Store
+Thumbs.db
