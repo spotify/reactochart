@@ -74,12 +74,9 @@ const StackedBarChart = React.createClass({
         return (
             <svg className="stacked-bar-chart"
                 {...{width, height}}
-                style={{backgroundColor:'#e0e0e0'}}
-                fill="red"
             >
                 <g className="chart-inner"
                    transform={`translate(${marginLeft}, ${marginTop})`}
-                   fill='darkblue'
                 >
 
                     {this.renderBars()}
@@ -98,12 +95,14 @@ const StackedBarChart = React.createClass({
 
                 return isHorizontal ?
                     <rect
+                        className="chart-bar chart-bar-horizontal"
                         x={0}
                         y={this.state.barScale(i)}
                         width={barLength}
                         height={barThickness}
                     /> :
                     <rect
+                        className="chart-bar chart-bar-vertical"
                         x={this.state.barScale(i)}
                         y={this.state.innerHeight - barLength}
                         width={barThickness}

@@ -1,10 +1,53 @@
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: #f0f0f0;
   margin: 0;
   padding: 0;
 
   #container {
     margin: 10px;
+  }
+}
+
+.line-chart {
+  background: #f0f0f0;
+
+  * {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+  }
+  .chart-line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+    stroke-linejoin: bevel;
+  }
+  .chart-tick {
+    fill: none;
+    stroke: #333;
+    stroke-width: 1px;
+  }
+  .chart-tick-y {
+    stroke: #ccc;
+  }
+  .chart-axis-label {
+    font-size: 8pt;
+  }
+  .chart-x-label {
+    text-anchor: middle;
+  }
+  .chart-y-label {
+    text-anchor: end;
+  }
+  .chart-selected-range {
+    fill: #eeeef6;
+  }
+}
+
+.stacked-bar-chart {
+  background: #f0f0f0;
+
+  .chart-bar {
+    fill: steelblue;
   }
 }
