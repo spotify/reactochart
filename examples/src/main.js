@@ -1,12 +1,18 @@
 import '../styles/main.less'
 import React from 'react';
-import {Component1, Component2} from '../../src';
+import {StackedBarChart} from '../../src';
+
+import statesData from './data/statesData.json';
 
 const App = React.createClass({
     render() {
         return <div>
-            <Component1></Component1>
-            <Component2></Component2>
+            <h1>Reactochart</h1>
+
+            <h3>Bar Chart</h3>
+
+            <StackedBarChart data={statesData} plotKeys={['a','b','c','d','e','f','g']} />
+
         </div>
     }
 });
