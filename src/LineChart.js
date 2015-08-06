@@ -1,10 +1,12 @@
-import React from 'react';
+import React from 'react/addons';
 const {PropTypes} = React;
+const {PureRenderMixin} = React.addons;
 import _ from 'lodash';
 import d3 from 'd3';
 import moment from 'moment';
 
 const TimeseriesLineChart = React.createClass({
+    mixins: [PureRenderMixin],
     propTypes: {
         // the array of data objects
         data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -27,6 +29,9 @@ const TimeseriesLineChart = React.createClass({
         shouldDrawYTicks: PropTypes.bool,
         // whether or not to draw Y axis label text (values)
         shouldDrawYLabels: PropTypes.bool,
+
+        // called when user mouses over the chart
+        onMouseMove: PropTypes.func,
 
         // true if the user can click and drag to select a date range
         // (this doesn't change the date range on the chart, just calls callback with range and shows highlight)
@@ -77,9 +82,11 @@ const TimeseriesLineChart = React.createClass({
     },
     componentWillMount() {
         this.initScale(this.props);
+        this.initDataLookup(this.props);
     },
     componentWillReceiveProps(newProps) {
         this.initScale(newProps);
+        this.initDataLookup(newProps);
     },
 
     initScale(props) {
@@ -104,6 +111,9 @@ const TimeseriesLineChart = React.createClass({
 
         this.setState({xScale, yScale, innerWidth, innerHeight});
     },
+    initDataLookup(props) {
+        this.setState({bisectDate: d3.bisector(d => d[props.dateKey]).left});
+    },
 
     onMouseDown(e) {
         const chartBB = e.currentTarget.getBoundingClientRect();
@@ -112,7 +122,6 @@ const TimeseriesLineChart = React.createClass({
 
         this.setState({isSelecting: true});
         this.props.onChangeSelectedRange(chartDate, chartDate, true);
-
     },
     onMouseUp(e) {
         const chartBB = e.currentTarget.getBoundingClientRect();
@@ -126,11 +135,17 @@ const TimeseriesLineChart = React.createClass({
             this.props.onChangeSelectedRange(chartDate, this.props.selectedRangeMin, false);
     },
     onMouseMove(e) {
-        if(!this.state.isSelecting) return;
+        if(!this.props.onMouseMove && !this.state.isSelecting) return;
 
         const chartBB = e.currentTarget.getBoundingClientRect();
         const chartX = (e.clientX - chartBB.left) - this.props.marginLeft;
         const chartDate = this.state.xScale.invert(chartX);
+        const closestDataIndex = this.state.bisectDate(this.props.data, chartDate);
+
+        if(this.props.onMouseMove)
+            this.props.onMouseMove(this.props.data[closestDataIndex], closestDataIndex, e);
+
+        if(!this.state.isSelecting) return;
 
         if(chartDate > this.props.selectedRangeMin)
             this.props.onChangeSelectedRange(this.props.selectedRangeMin, chartDate, true);
@@ -139,6 +154,7 @@ const TimeseriesLineChart = React.createClass({
     },
 
     render() {
+        console.log('rendered line chart');
         const {xScale, yScale} = this.state;
         const {
             data, dateKey, plotKeys, isRangeSelectable,
