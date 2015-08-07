@@ -4,15 +4,16 @@ const {PureRenderMixin} = React.addons;
 
 import {
     StackedBarChart,
-    LineChart
+    LineChart,
+    V2MultiChart,
+    V2LineChart
 } from '../../src';
 
 import statesData from './data/statesData.json';
 import temperatureData from './data/dailyTemperature.json';
-
+import simpleXYData from './data/simpleXY.json';
 
 const tempDataClean = temperatureData.map(d => _.assign({}, d, {date: new Date(d.date)}));
-
 
 
 const App = React.createClass({
@@ -28,6 +29,18 @@ const App = React.createClass({
         const {hoveredLineChartData} = this.state;
         return <div>
             <h1>Reactochart</h1>
+
+            <h2>v2</h2>
+
+            <div>
+                <V2MultiChart>
+                    <V2LineChart data={simpleXYData} getX="x" getY="y" />
+                    <V2LineChart data={simpleXYData} getX="x" getY="y0" />
+                    <V2LineChart data={simpleXYData} getX="x" getY="y1" />
+                </V2MultiChart>
+            </div>
+
+            <h2>v1</h2>
 
             <h3>Timeseries Line Chart</h3>
 
