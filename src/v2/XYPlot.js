@@ -3,7 +3,7 @@ const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
 
-const MultiChart = React.createClass({
+const XYPlot = React.createClass({
     propTypes: {
         // (outer) width and height of the chart
         width: PropTypes.number,
@@ -24,6 +24,8 @@ const MultiChart = React.createClass({
         shouldDrawYTicks: PropTypes.bool,
         // whether or not to draw Y axis label text (values)
         shouldDrawYLabels: PropTypes.bool,
+
+        onMouseMove: PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -37,6 +39,7 @@ const MultiChart = React.createClass({
             shouldDrawXLabels: true,
             shouldDrawYTicks: true,
             shouldDrawYLabels: true,
+            onMouseMove: _.noop
         }
     },
     getInitialState() {
@@ -60,7 +63,6 @@ const MultiChart = React.createClass({
     initScale(props) {
         const innerWidth = props.width - (props.marginLeft + props.marginRight);
         const innerHeight = props.height - (props.marginTop + props.marginBottom);
-        //const {data, dateKey, plotKeys, shouldIncludeZero} = props;
 
         let childExtents = [];
         React.Children.forEach(props.children, child => {
@@ -72,8 +74,6 @@ const MultiChart = React.createClass({
         const xExtent = d3.extent(_.flatten(_.pluck(childExtents, 'x')));
         const yExtent = d3.extent(_.flatten(_.pluck(childExtents, 'y')));
 
-
-        // todo handle missing values/date gaps
         const xScale = d3.scale.linear()
             .range([0, innerWidth])
             .domain(xExtent);
@@ -87,17 +87,39 @@ const MultiChart = React.createClass({
 
         this.setState({xScale, yScale, innerWidth, innerHeight});
     },
-    initDataLookup(props) {
-        this.setState({bisectDate: d3.bisector(d => d[props.dateKey]).left});
+
+    onMouseMove(e) {
+        //if(!this.props.onMouseMove && !this.state.isSelecting) return;
+
+        const chartBB = e.currentTarget.getBoundingClientRect();
+        const chartX = (e.clientX - chartBB.left) - this.props.marginLeft;
+        const chartXVal = this.state.xScale.invert(chartX);
+
+        const hovered = this.refs['chart-series-0'].getHovered(chartXVal);
+
+        this.props.onMouseMove(hovered, e);
+
+
+        //const closestDataIndex = this.state.bisectDate(this.props.data, chartXVal);
+
+        //if(this.props.onMouseMove)
+        //    this.props.onMouseMove(this.props.data[closestDataIndex], closestDataIndex, e);
+        //
+        //if(!this.state.isSelecting) return;
+        //
+        //if(chartDate > this.props.selectedRangeMin)
+        //    this.props.onChangeSelectedRange(this.props.selectedRangeMin, chartDate, true);
+        //else
+        //    this.props.onChangeSelectedRange(chartDate, this.props.selectedRangeMin, true);
     },
-
-
 
     render() {
         const {width, height, marginLeft, marginTop} = this.props;
         const {xScale, yScale, innerWidth, innerHeight} = this.state;
         return (
-            <svg className="multi-chart" {...{width, height}}>
+            <svg className="multi-chart" {...{width, height}}
+                 onMouseMove={this.onMouseMove}
+            >
                 <g className="chart-inner"
                    transform={`translate(${marginLeft}, ${marginTop})`}
                 >
@@ -105,11 +127,9 @@ const MultiChart = React.createClass({
                     {this.renderYAxis()}
 
                     {React.Children.map(this.props.children, (child, i) => {
-                        const {data, getX, getY} = child.props;
-                        const extent = child.type.getExtent(data, getX, getY);
-                        console.log('extent', extent);
+                        const name = child.props.name || 'chart-series-' + i;
                         return React.cloneElement(child,
-                            {name: 'chart-series-'+i, xScale, yScale, innerWidth, innerHeight}
+                            {ref: name, name, xScale, yScale, innerWidth, innerHeight}
                         );
                         //return child;
                     })}
@@ -125,7 +145,6 @@ const MultiChart = React.createClass({
 
         return <g className="chart-axis chart-axis-x" transform={`translate(0, ${innerHeight})`}>
             {_.map(xTicks, (x) => {
-                console.log(x);
                 return <g transform={`translate(${xScale(x)}, 0)`}>
                     {shouldDrawXTicks ?
                         <line className="chart-tick chart-tick-x" x2={0} y2={6} />
@@ -163,7 +182,7 @@ const MultiChart = React.createClass({
                 </g>
             })}
         </g>
-    },
+    }
 });
 
-export default MultiChart;
+export default XYPlot;

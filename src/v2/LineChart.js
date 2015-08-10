@@ -3,16 +3,12 @@ const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
 
-const AccessorPropType = PropTypes.oneOfType(PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.func);
-
-function accessor(key) {
-    return _.isFunction(key) ? key: _.property(key);
-}
+import {accessor, AccessorPropType} from './util.js';
 
 const LineChart = React.createClass({
     propTypes: {
         // the array of data objects
-        data: PropTypes.arrayOf(PropTypes.object).isRequired,
+        data: PropTypes.array.isRequired,
         // accessor for X & Y coordinates
         getX: AccessorPropType,
         getY: AccessorPropType,
@@ -20,6 +16,7 @@ const LineChart = React.createClass({
         xScale: PropTypes.object,
         yScale: PropTypes.object
     },
+
     statics: {
         getExtent(data, getX, getY) {
             return {
@@ -28,6 +25,23 @@ const LineChart = React.createClass({
             }
         }
     },
+
+    componentWillMount() {
+        this.initBisector(this.props);
+    },
+    componentWillReceiveProps(newProps) {
+        this.initBisector(newProps);
+    },
+    initBisector(props) {
+        this.setState({bisectX: d3.bisector(d => accessor(this.props.getX)(d)).left});
+    },
+
+    getHovered(x, y) {
+        const closestDataIndex = this.state.bisectX(this.props.data, x);
+        console.log(closestDataIndex, this.props.data[closestDataIndex]);
+        return this.props.data[closestDataIndex];
+    },
+
     render() {
         const {data, getX, getY, xScale, yScale} = this.props;
         const points = _.map(data, d => [xScale(accessor(getX)(d)), yScale(accessor(getY)(d))]);
