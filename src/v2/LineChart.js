@@ -21,17 +21,19 @@ const LineChart = React.createClass({
         yScale: PropTypes.object
     },
     statics: {
-        getExtent(data) {
-            //
+        getExtent(data, getX, getY) {
+            return {
+                x: d3.extent(data, accessor(getX)),
+                y: d3.extent(data, accessor(getY))
+            }
         }
     },
     render() {
         const {data, getX, getY, xScale, yScale} = this.props;
         const points = _.map(data, d => [xScale(accessor(getX)(d)), yScale(accessor(getY)(d))]);
-        console.log('points', points);
         const pathStr = pointsToPathStr(points);
 
-        return <g>
+        return <g className={this.props.name}>
             <path d={pathStr} />
         </g>;
 

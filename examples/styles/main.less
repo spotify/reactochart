@@ -8,7 +8,7 @@ body {
   }
 }
 
-.line-chart {
+.line-chart, .multi-chart {
   background: #f0f0f0;
 
   * {
@@ -52,13 +52,19 @@ body {
   }
 }
 
-.multi-chart {
-  background: silver;
-}
 
 path {
   fill: none;
   stroke: steelblue;
   stroke-width: 1.5px;
   stroke-linejoin: bevel;
+}
+.chart-series-0 {
+  path { stroke: steelblue; }
+}
+.chart-series-1 {
+  path { stroke: darkred; }
+}
+.chart-series-2 {
+  path { stroke: orange; }
 }

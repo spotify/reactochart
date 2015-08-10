@@ -180,7 +180,10 @@ const TimeseriesLineChart = React.createClass({
                     {this.renderXAxis()}
                     {this.renderYAxis()}
 
-                    <path className="chart-line" d={pathStr} />
+                    <g>
+                        <path className="chart-line" d={pathStr} />
+                    </g>
+
                 </g>
             </svg>
         );

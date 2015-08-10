@@ -15,6 +15,9 @@ import simpleXYData from './data/simpleXY.json';
 
 const tempDataClean = temperatureData.map(d => _.assign({}, d, {date: new Date(d.date)}));
 
+import {randomWalk, randomWalkSeries} from './data/util';
+window.randomWalkSeries = randomWalkSeries;
+
 
 const App = React.createClass({
     getInitialState() {
@@ -33,7 +36,15 @@ const App = React.createClass({
             <h2>v2</h2>
 
             <div>
-                <V2MultiChart>
+                <V2MultiChart width={700} height={400}>
+                    <V2LineChart data={randomWalkSeries(400, 100, 3)} getX={0} getY={1} />
+                    <V2LineChart data={randomWalkSeries(400)} getX={0} getY={1} />
+                    <V2LineChart data={randomWalkSeries(400, -100, 4)} getX={0} getY={1} />
+                </V2MultiChart>
+            </div>
+
+            <div>
+                <V2MultiChart width={600} height={400}>
                     <V2LineChart data={simpleXYData} getX="x" getY="y" />
                     <V2LineChart data={simpleXYData} getX="x" getY="y0" />
                     <V2LineChart data={simpleXYData} getX="x" getY="y1" />
