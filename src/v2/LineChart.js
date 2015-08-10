@@ -13,8 +13,8 @@ const LineChart = React.createClass({
         getX: AccessorPropType,
         getY: AccessorPropType,
 
-        xScale: PropTypes.object,
-        yScale: PropTypes.object
+        xScale: PropTypes.func,
+        yScale: PropTypes.func
     },
 
     statics: {

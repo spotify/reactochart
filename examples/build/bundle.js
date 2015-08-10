@@ -67,19 +67,19 @@
 	
 	var _src = __webpack_require__(179);
 	
-	var _dataStatesDataJson = __webpack_require__(276);
+	var _dataStatesDataJson = __webpack_require__(277);
 	
 	var _dataStatesDataJson2 = _interopRequireDefault(_dataStatesDataJson);
 	
-	var _dataDailyTemperatureJson = __webpack_require__(277);
+	var _dataDailyTemperatureJson = __webpack_require__(278);
 	
 	var _dataDailyTemperatureJson2 = _interopRequireDefault(_dataDailyTemperatureJson);
 	
-	var _dataSimpleXYJson = __webpack_require__(278);
+	var _dataSimpleXYJson = __webpack_require__(279);
 	
 	var _dataSimpleXYJson2 = _interopRequireDefault(_dataSimpleXYJson);
 	
-	var _dataUtil = __webpack_require__(279);
+	var _dataUtil = __webpack_require__(280);
 	
 	var PureRenderMixin = _reactAddons2['default'].addons.PureRenderMixin;
 	
@@ -87,7 +87,9 @@
 	    return _.assign({}, d, { date: new Date(d.date) });
 	});
 	
-	var randomSequences = [(0, _dataUtil.randomWalkSeries)(400, 100, 3), (0, _dataUtil.randomWalkSeries)(400), (0, _dataUtil.randomWalkSeries)(400, -100, 4)];
+	var randomSequences = [(0, _dataUtil.randomWalkSeries)(500, 100, 3), (0, _dataUtil.randomWalkSeries)(500), (0, _dataUtil.randomWalkSeries)(500, -100, 4)];
+	
+	var randomBars = [(0, _dataUtil.randomWalkSeries)(20, 0, 5)];
 	
 	_.extend(window, { randomWalk: _dataUtil.randomWalk });
 	
@@ -123,6 +125,16 @@
 	                'h2',
 	                null,
 	                'v2'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    null,
+	                    _reactAddons2['default'].createElement(_src.V2BarChart, { data: randomBars[0], getX: 0, getY: 1 }),
+	                    _reactAddons2['default'].createElement(_src.V2LineChart, { data: randomBars[0], getX: 0, getY: 1 })
+	                )
 	            ),
 	            _reactAddons2['default'].createElement(
 	                'div',
@@ -23050,6 +23062,10 @@
 	var _v2LineChart = __webpack_require__(274);
 	
 	exports.V2LineChart = _interopRequire(_v2LineChart);
+	
+	var _v2BarChart = __webpack_require__(276);
+	
+	exports.V2BarChart = _interopRequire(_v2BarChart);
 
 /***/ },
 /* 180 */
@@ -57136,8 +57152,8 @@
 	        getX: _utilJs.AccessorPropType,
 	        getY: _utilJs.AccessorPropType,
 	
-	        xScale: PropTypes.object,
-	        yScale: PropTypes.object
+	        xScale: PropTypes.func,
+	        yScale: PropTypes.func
 	    },
 	
 	    statics: {
@@ -57242,6 +57258,105 @@
 
 /***/ },
 /* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _react = __webpack_require__(181);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(182);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d3 = __webpack_require__(184);
+	
+	var _d32 = _interopRequireDefault(_d3);
+	
+	var _utilJs = __webpack_require__(275);
+	
+	var PropTypes = _react2['default'].PropTypes;
+	
+	var BarChart = _react2['default'].createClass({
+	    displayName: 'BarChart',
+	
+	    propTypes: {
+	        // the array of data objects
+	        data: PropTypes.array.isRequired,
+	        // accessor for X & Y coordinates
+	        getX: _utilJs.AccessorPropType,
+	        getY: _utilJs.AccessorPropType,
+	
+	        xScale: PropTypes.func,
+	        yScale: PropTypes.func
+	    },
+	
+	    statics: {
+	        getExtent: function getExtent(data, getX, getY) {
+	            return {
+	                x: _d32['default'].extent(data, (0, _utilJs.accessor)(getX)),
+	                y: _d32['default'].extent(_d32['default'].extent(data, (0, _utilJs.accessor)(getY)).concat(0))
+	            };
+	        }
+	    },
+	    getHovered: function getHovered() {},
+	
+	    render: function render() {
+	        console.log('barchart', this.props);
+	        return _react2['default'].createElement(
+	            'g',
+	            null,
+	            this.renderBars()
+	        );
+	    },
+	    renderBars: function renderBars() {
+	        var _this = this;
+	
+	        var _props = this.props;
+	        var xScale = _props.xScale;
+	        var yScale = _props.yScale;
+	        var getX = _props.getX;
+	        var getY = _props.getY;
+	
+	        var isHorizontal = this.props.orientation === 'bar';
+	        //const barThickness = this.state.barScale.rangeBand();
+	        var barThickness = 5;
+	
+	        var xAccessor = (0, _utilJs.accessor)(getX);
+	        var yAccessor = (0, _utilJs.accessor)(getY);
+	
+	        return _react2['default'].createElement(
+	            'g',
+	            null,
+	            this.props.data.map(function (d, i) {
+	                var yVal = yAccessor(d);
+	                var barLength = Math.abs(yScale(0) - yScale(yVal));
+	                var barY = yVal >= 0 ? yScale(0) - barLength : yScale(0);
+	
+	                return _react2['default'].createElement('rect', {
+	                    className: 'chart-bar chart-bar-vertical',
+	                    x: _this.props.xScale(xAccessor(d)) - barThickness / 2,
+	                    y: barY,
+	                    width: barThickness,
+	                    height: barLength
+	                });
+	            })
+	        );
+	    }
+	});
+	
+	exports['default'] = BarChart;
+	module.exports = exports['default'];
+
+/***/ },
+/* 277 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -57378,7 +57493,7 @@
 	]
 
 /***/ },
-/* 277 */
+/* 278 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -59581,7 +59696,7 @@
 	]
 
 /***/ },
-/* 278 */
+/* 279 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -59700,7 +59815,7 @@
 	]
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

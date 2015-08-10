@@ -6,7 +6,8 @@ import {
     StackedBarChart,
     LineChart,
     XYPlot,
-    V2LineChart
+    V2LineChart,
+    V2BarChart
 } from '../../src';
 
 import statesData from './data/statesData.json';
@@ -18,9 +19,13 @@ const tempDataClean = temperatureData.map(d => _.assign({}, d, {date: new Date(d
 import {randomWalk, randomWalkSeries} from './data/util';
 
 const randomSequences = [
-    randomWalkSeries(400, 100, 3),
-    randomWalkSeries(400),
-    randomWalkSeries(400, -100, 4)
+    randomWalkSeries(500, 100, 3),
+    randomWalkSeries(500),
+    randomWalkSeries(500, -100, 4)
+];
+
+const randomBars = [
+    randomWalkSeries(20, 0, 5)
 ];
 
 _.extend(window, {randomWalk});
@@ -48,6 +53,13 @@ const App = React.createClass({
             <h1>Reactochart</h1>
 
             <h2>v2</h2>
+
+            <div>
+                <XYPlot>
+                    <V2BarChart data={randomBars[0]} getX={0} getY={1} />
+                    <V2LineChart data={randomBars[0]} getX={0} getY={1} />
+                </XYPlot>
+            </div>
 
             <div>
                 {hoveredXYPlotData ?
