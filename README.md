@@ -44,3 +44,12 @@ regenerated on each build.
 * The development server uses [react-hot-loader](https://github.com/gaearon/react-hot-loader) to automatically
 "hot reload" changes to React components, so refreshing your web browser is usually not necessary. However, some
 changes will still require a refresh to propagate.
+
+# TODO:
+
+## chart types
+* Scatterplot
+* Horizontal bar chart
+* Stacked bar chart
+* Grouped bar chart
+

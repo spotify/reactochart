@@ -7,9 +7,11 @@ import {
     LineChart,
     XYPlot,
     V2LineChart,
-    V2BarChart
+    V2BarChart,
+    V2ScatterPlot
 } from '../../src';
 
+// get/make fake data for testing
 import statesData from './data/statesData.json';
 import temperatureData from './data/dailyTemperature.json';
 import simpleXYData from './data/simpleXY.json';
@@ -17,6 +19,7 @@ import simpleXYData from './data/simpleXY.json';
 const tempDataClean = temperatureData.map(d => _.assign({}, d, {date: new Date(d.date)}));
 
 import {randomWalk, randomWalkSeries} from './data/util';
+_.extend(window, {randomWalk});
 
 const randomSequences = [
     randomWalkSeries(500, 100, 3),
@@ -28,7 +31,16 @@ const randomBars = [
     randomWalkSeries(20, 0, 5)
 ];
 
-_.extend(window, {randomWalk});
+const randomScatter = [
+    _.zip(randomWalk(20, 100), randomWalk(20, 100)),
+    _.zip(randomWalk(30, 100), randomWalk(30, 100)),
+    _.zip(randomWalk(50, 100), randomWalk(50, 100)),
+    _.zip(randomWalk(100, 100), randomWalk(100, 100)),
+    _.zip(randomWalk(200, 100), randomWalk(200, 100))
+];
+
+const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
+// end fake data
 
 const App = React.createClass({
     getInitialState() {
@@ -49,24 +61,67 @@ const App = React.createClass({
     },
     render() {
         const {hoveredLineChartData, hoveredXYPlotData} = this.state;
+
+        const triangleSymbol = <svg><polygon points="0,0 8,0 4,8" style={{fill: 'darkgreen'}} /></svg>;
         return <div>
             <h1>Reactochart</h1>
 
             <h2>v2</h2>
 
+            <h3>ScatterPlot</h3>
+
             <div>
-                <XYPlot>
-                    <V2BarChart data={randomBars[0]} getX={0} getY={1} />
-                    <V2LineChart data={randomBars[0]} getX={0} getY={1} />
+                <XYPlot width={700} height={500}>
+                    <V2ScatterPlot
+                        data={randomScatter[3]} getX={0} getY={1}
+                        pointSymbol={<rect width={5} height={5} fill="rebeccapurple" />}
+                    />
+                    <V2ScatterPlot
+                        data={randomScatter[4]} getX={0} getY={1}
+                        pointRadius={2}
+                    />
+                    <V2ScatterPlot
+                        data={randomScatter[1]} getX={0} getY={1}
+                        pointSymbol={(d, i) => _.sample(emojis)}
+                        pointOffset={[0, 2]}
+                    />
+                    <V2ScatterPlot
+                        data={randomScatter[0]} getX={0} getY={1}
+                        pointSymbol={(d, i) => i}
+                    />
+                    <V2ScatterPlot
+                        data={randomScatter[2]} getX={0} getY={1}
+                        pointSymbol={triangleSymbol}
+                        pointOffset={[-4, -3]}
+                        />
                 </XYPlot>
             </div>
+
+            <h3>LineChart</h3>
+
+            <div>
+                <XYPlot width={700}>
+                    <V2LineChart
+                        data={_.range(0,20,0.01)}
+                        getX={null}
+                        getY={(n) => Math.sin(n)}
+                        />
+                    <V2LineChart
+                        data={_.range(0,20,0.01)}
+                        getX={null}
+                        getY={(n) => Math.sin(Math.pow(n,1.2)) * Math.cos(n)}
+                        />
+                </XYPlot>
+            </div>
+
+            <h3>Interactive LineChart</h3>
 
             <div>
                 {hoveredXYPlotData ?
                     <div>
                         {hoveredXYPlotData[0] + ', ' + hoveredXYPlotData[1]}
-                    </div>
-                    : null
+                    </div> :
+                    <div>Hover over the chart to show values</div>
                 }
                 <XYPlot width={700} height={400} onMouseMove={this.onMouseMoveXYPlot}>
                     <V2LineChart data={randomSequences[0]} getX={0} getY={1} />
@@ -75,13 +130,19 @@ const App = React.createClass({
                 </XYPlot>
             </div>
 
+            <h3>Multiple chart types in one XYPlot</h3>
+
             <div>
-                <XYPlot width={600} height={400}>
-                    <V2LineChart data={simpleXYData} getX="x" getY="y" />
-                    <V2LineChart data={simpleXYData} getX="x" getY="y0" />
-                    <V2LineChart data={simpleXYData} getX="x" getY="y1" />
+                <XYPlot>
+                    <V2BarChart data={randomBars[0]} getX={0} getY={1} />
+                    <V2LineChart data={randomBars[0]} getX={0} getY={1} />
+                    <V2ScatterPlot data={randomBars[0]} getX={0} getY={1} />
                 </XYPlot>
             </div>
+
+
+
+
 
             <h2>v1</h2>
 

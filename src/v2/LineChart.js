@@ -38,7 +38,7 @@ const LineChart = React.createClass({
 
     getHovered(x, y) {
         const closestDataIndex = this.state.bisectX(this.props.data, x);
-        console.log(closestDataIndex, this.props.data[closestDataIndex]);
+        //console.log(closestDataIndex, this.props.data[closestDataIndex]);
         return this.props.data[closestDataIndex];
     },
 

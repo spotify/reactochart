@@ -98,19 +98,6 @@ const XYPlot = React.createClass({
         const hovered = this.refs['chart-series-0'].getHovered(chartXVal);
 
         this.props.onMouseMove(hovered, e);
-
-
-        //const closestDataIndex = this.state.bisectDate(this.props.data, chartXVal);
-
-        //if(this.props.onMouseMove)
-        //    this.props.onMouseMove(this.props.data[closestDataIndex], closestDataIndex, e);
-        //
-        //if(!this.state.isSelecting) return;
-        //
-        //if(chartDate > this.props.selectedRangeMin)
-        //    this.props.onChangeSelectedRange(this.props.selectedRangeMin, chartDate, true);
-        //else
-        //    this.props.onChangeSelectedRange(chartDate, this.props.selectedRangeMin, true);
     },
 
     render() {
@@ -131,7 +118,6 @@ const XYPlot = React.createClass({
                         return React.cloneElement(child,
                             {ref: name, name, xScale, yScale, innerWidth, innerHeight}
                         );
-                        //return child;
                     })}
                 </g>
             </svg>
