@@ -23,7 +23,7 @@ const Histogram = React.createClass({
         getExtent(data, getX, getY) {
             return {
                 x: d3.extent(data, accessor(getX)),
-                y: [0,100]
+                y: [0,200]
                 //y: d3.extent(d3.extent(data, accessor(getY)).concat(0))
             }
         }

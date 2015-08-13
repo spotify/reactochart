@@ -44,7 +44,8 @@ const randomScatter = [
 ];
 
 const normalDistribution = d3.random.normal(0);
-const randomNormal = _.times(1000, normalDistribution);
+//const randomNormal = _.times(1000, normalDistribution);
+const randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.random.normal(3, 0.5)));
 
 const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 // end fake data
@@ -81,12 +82,21 @@ const App = React.createClass({
                 <XYPlot width={700} height={300}>
                     <Histogram
                         data={randomNormal} getX={null}
-                        />
+                    />
+                    <KernelDensityEstimation
+                        data={randomNormal} bandwidth={0.5}
+                    />
+                    <KernelDensityEstimation
+                        data={randomNormal} bandwidth={0.1}
+                    />
+                    <KernelDensityEstimation
+                        data={randomNormal} bandwidth={2}
+                    />
                 </XYPlot>
             </div>
 
             <div>
-                <XYPlot width={700} height={80}>
+                <XYPlot width={700} height={80} shouldDrawYLabels={false}>
                     <ScatterPlot
                         data={randomNormal} getX={null} getY={() => Math.random()}
                         pointRadius={1.5}

@@ -98,7 +98,8 @@
 	var randomScatter = [_.zip((0, _dataUtil.randomWalk)(20, 100), (0, _dataUtil.randomWalk)(20, 100)), _.zip((0, _dataUtil.randomWalk)(30, 100), (0, _dataUtil.randomWalk)(30, 100)), _.zip((0, _dataUtil.randomWalk)(50, 100), (0, _dataUtil.randomWalk)(50, 100)), _.zip((0, _dataUtil.randomWalk)(100, 100), (0, _dataUtil.randomWalk)(100, 100)), _.zip((0, _dataUtil.randomWalk)(200, 100), (0, _dataUtil.randomWalk)(200, 100))];
 	
 	var normalDistribution = d3.random.normal(0);
-	var randomNormal = _.times(1000, normalDistribution);
+	//const randomNormal = _.times(1000, normalDistribution);
+	var randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.random.normal(3, 0.5)));
 	
 	var emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 	// end fake data
@@ -154,6 +155,15 @@
 	                    { width: 700, height: 300 },
 	                    _reactAddons2['default'].createElement(_src.Histogram, {
 	                        data: randomNormal, getX: null
+	                    }),
+	                    _reactAddons2['default'].createElement(_src.KernelDensityEstimation, {
+	                        data: randomNormal, bandwidth: 0.5
+	                    }),
+	                    _reactAddons2['default'].createElement(_src.KernelDensityEstimation, {
+	                        data: randomNormal, bandwidth: 0.1
+	                    }),
+	                    _reactAddons2['default'].createElement(_src.KernelDensityEstimation, {
+	                        data: randomNormal, bandwidth: 2
 	                    })
 	                )
 	            ),
@@ -162,7 +172,7 @@
 	                null,
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
-	                    { width: 700, height: 80 },
+	                    { width: 700, height: 80, shouldDrawYLabels: false },
 	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
 	                        data: randomNormal, getX: null, getY: function () {
 	                            return Math.random();
@@ -45217,7 +45227,7 @@
 	
 	function accessor(key) {
 	    return _lodash2['default'].isFunction(key) ? key : // pass an accessor function...
-	    _lodash2['default'].isNull(key) ? _lodash2['default'].identity : // or null to just return the item itself...
+	    _lodash2['default'].isNull(key) || _lodash2['default'].isUndefined(key) ? _lodash2['default'].identity : // or null/undefined to just return the item itself...
 	    _lodash2['default'].property(key); // or an array index or object key
 	}
 
@@ -57645,7 +57655,7 @@
 	        getExtent: function getExtent(data, getX, getY) {
 	            return {
 	                x: _d32['default'].extent(data, (0, _utilJs.accessor)(getX)),
-	                y: [0, 100]
+	                y: [0, 200]
 	                //y: d3.extent(d3.extent(data, accessor(getY)).concat(0))
 	            };
 	        }
@@ -57690,6 +57700,8 @@
 	    value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _react = __webpack_require__(181);
@@ -57719,10 +57731,57 @@
 	var KernelDensityEstimation = _react2['default'].createClass({
 	    displayName: 'KernelDensityEstimation',
 	
-	    getInitialState: function getInitialState() {
-	        return {};
+	    propTypes: {
+	        // the array of data objects
+	        data: PropTypes.array.isRequired,
+	        // accessor for data values
+	        getValue: _utilJs.AccessorPropType,
+	
+	        // kernel bandwidth for kernel density estimator
+	        // https://en.wikipedia.org/wiki/Kernel_density_estimation#Bandwidth_selection
+	        // high bandwidth => oversmoothing & underfitting; low bandwidth => undersmoothing & overfitting
+	        bandwidth: PropTypes.number,
+	        // number of samples to take from the KDE
+	        // ie. the resolution/smoothness of the KDE line - more samples => higher resolution, smooth line
+	        sampleCount: PropTypes.number,
+	
+	        // common props from XYPlot
+	        name: PropTypes.string,
+	        xScale: PropTypes.func,
+	        yScale: PropTypes.func,
+	        innerWidth: PropTypes.number,
+	        innerHeight: PropTypes.number
 	    },
-	    componentWillMount: function componentWillMount() {},
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            getValue: null, // null accessor = _.identity
+	            bandwidth: 0.5,
+	            sampleCount: null, // null = auto-determined based on width
+	            name: ''
+	        };
+	    },
+	    getInitialState: function getInitialState() {
+	        return {
+	            kdeData: null
+	        };
+	    },
+	    componentWillMount: function componentWillMount() {
+	        this.initKDE(this.props);
+	    },
+	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+	        this.initKDE(newProps);
+	    },
+	    initKDE: function initKDE(props) {
+	        var data = props.data;
+	        var bandwidth = props.bandwidth;
+	        var sampleCount = props.sampleCount;
+	        var xScale = props.xScale;
+	        var innerWidth = props.innerWidth;
+	
+	        var kernel = epanechnikovKernel(bandwidth);
+	        var samples = xScale.ticks(sampleCount || Math.ceil(innerWidth / 2));
+	        this.setState({ kdeData: kernelDensityEstimator(kernel, samples)(data) });
+	    },
 	
 	    statics: {
 	        getExtent: function getExtent(data, getX, getY) {
@@ -57741,16 +57800,14 @@
 	        var yScale = _props.yScale;
 	        var innerWidth = _props.innerWidth;
 	        var innerHeight = _props.innerHeight;
+	        var kdeData = this.state.kdeData;
 	
-	        return _react2['default'].createElement(
-	            'svg',
-	            null,
-	            _react2['default'].createElement(
-	                'text',
-	                null,
-	                'Hello!'
-	            )
-	        );
+	        return _react2['default'].createElement(_LineChartJs2['default'], _extends({
+	            data: kdeData,
+	            getX: 0, getY: function (d) {
+	                return d[1] * 500;
+	            }
+	        }, { name: name, xScale: xScale, yScale: yScale, innerWidth: innerWidth, innerHeight: innerHeight }));
 	    }
 	});
 	
