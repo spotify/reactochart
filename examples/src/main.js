@@ -3,12 +3,16 @@ import React from 'react/addons';
 const {PureRenderMixin} = React.addons;
 
 import {
-    StackedBarChart,
-    LineChart,
+    // old charts
+    V1StackedBarChart,
+    V1LineChart,
+    // new charts
     XYPlot,
-    V2LineChart,
-    V2BarChart,
-    V2ScatterPlot
+    LineChart,
+    BarChart,
+    ScatterPlot,
+    Histogram,
+    KernelDensityEstimation
 } from '../../src';
 
 // get/make fake data for testing
@@ -39,13 +43,16 @@ const randomScatter = [
     _.zip(randomWalk(200, 100), randomWalk(200, 100))
 ];
 
+const normalDistribution = d3.random.normal(0);
+const randomNormal = _.times(1000, normalDistribution);
+
 const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 // end fake data
 
 const App = React.createClass({
     getInitialState() {
         return {
-            hoveredLineChartData: null,
+            hoveredV1LineChartData: null,
             randomSeries: [
                 randomWalkSeries(400, 100, 3),
                 randomWalkSeries(400),
@@ -53,14 +60,14 @@ const App = React.createClass({
             ]
         }
     },
-    onMouseMoveLineChart(d, index, event) {
-        this.setState({hoveredLineChartData: d})
+    onMouseMoveV1LineChart(d, index, event) {
+        this.setState({hoveredV1LineChartData: d})
     },
     onMouseMoveXYPlot(d, event) {
         this.setState({hoveredXYPlotData: d})
     },
     render() {
-        const {hoveredLineChartData, hoveredXYPlotData} = this.state;
+        const {hoveredV1LineChartData, hoveredXYPlotData} = this.state;
 
         const triangleSymbol = <svg><polygon points="0,0 8,0 4,8" style={{fill: 'darkgreen'}} /></svg>;
         return <div>
@@ -68,28 +75,47 @@ const App = React.createClass({
 
             <h2>v2</h2>
 
+            <h3>Histogram</h3>
+
+            <div>
+                <XYPlot width={700} height={300}>
+                    <Histogram
+                        data={randomNormal} getX={null}
+                        />
+                </XYPlot>
+            </div>
+
+            <div>
+                <XYPlot width={700} height={80}>
+                    <ScatterPlot
+                        data={randomNormal} getX={null} getY={() => Math.random()}
+                        pointRadius={1.5}
+                        />
+                </XYPlot>
+            </div>
+
             <h3>ScatterPlot</h3>
 
             <div>
                 <XYPlot width={700} height={500}>
-                    <V2ScatterPlot
+                    <ScatterPlot
                         data={randomScatter[3]} getX={0} getY={1}
                         pointSymbol={<rect width={5} height={5} fill="rebeccapurple" />}
                     />
-                    <V2ScatterPlot
+                    <ScatterPlot
                         data={randomScatter[4]} getX={0} getY={1}
                         pointRadius={2}
                     />
-                    <V2ScatterPlot
+                    <ScatterPlot
                         data={randomScatter[1]} getX={0} getY={1}
                         pointSymbol={(d, i) => _.sample(emojis)}
                         pointOffset={[0, 2]}
                     />
-                    <V2ScatterPlot
+                    <ScatterPlot
                         data={randomScatter[0]} getX={0} getY={1}
                         pointSymbol={(d, i) => i}
                     />
-                    <V2ScatterPlot
+                    <ScatterPlot
                         data={randomScatter[2]} getX={0} getY={1}
                         pointSymbol={triangleSymbol}
                         pointOffset={[-4, -3]}
@@ -101,12 +127,12 @@ const App = React.createClass({
 
             <div>
                 <XYPlot width={700}>
-                    <V2LineChart
+                    <LineChart
                         data={_.range(0,20,0.01)}
                         getX={null}
                         getY={(n) => Math.sin(n)}
                         />
-                    <V2LineChart
+                    <LineChart
                         data={_.range(0,20,0.01)}
                         getX={null}
                         getY={(n) => Math.sin(Math.pow(n,1.2)) * Math.cos(n)}
@@ -124,9 +150,9 @@ const App = React.createClass({
                     <div>Hover over the chart to show values</div>
                 }
                 <XYPlot width={700} height={400} onMouseMove={this.onMouseMoveXYPlot}>
-                    <V2LineChart data={randomSequences[0]} getX={0} getY={1} />
-                    <V2LineChart data={randomSequences[1]} getX={0} getY={1} />
-                    <V2LineChart data={randomSequences[2]} getX={0} getY={1} />
+                    <LineChart data={randomSequences[0]} getX={0} getY={1} />
+                    <LineChart data={randomSequences[1]} getX={0} getY={1} />
+                    <LineChart data={randomSequences[2]} getX={0} getY={1} />
                 </XYPlot>
             </div>
 
@@ -134,14 +160,11 @@ const App = React.createClass({
 
             <div>
                 <XYPlot>
-                    <V2BarChart data={randomBars[0]} getX={0} getY={1} />
-                    <V2LineChart data={randomBars[0]} getX={0} getY={1} />
-                    <V2ScatterPlot data={randomBars[0]} getX={0} getY={1} />
+                    <BarChart data={randomBars[0]} getX={0} getY={1} />
+                    <LineChart data={randomBars[0]} getX={0} getY={1} />
+                    <ScatterPlot data={randomBars[0]} getX={0} getY={1} pointSymbol={(d, i) => _.sample(emojis)} />
                 </XYPlot>
             </div>
-
-
-
 
 
             <h2>v1</h2>
@@ -149,44 +172,42 @@ const App = React.createClass({
             <h3>Timeseries Line Chart</h3>
 
             <div>
-                {hoveredLineChartData ?
+                {hoveredV1LineChartData ?
                     <div>
-                        {hoveredLineChartData.date + ''}
+                        {hoveredV1LineChartData.date + ''}
                         <br/>
-                        New York Temperature: {hoveredLineChartData.newYork}
+                        New York Temperature: {hoveredV1LineChartData.newYork}
                     </div>
                     : null
                 }
                 <div>
                 </div>
-                <LineChart
+                <V1LineChart
                     width={1000}
                     height={400}
                     data={tempDataClean}
                     plotKeys={['newYork']}
                     dateKey="date"
-                    onMouseMove={this.onMouseMoveLineChart}
+                    onMouseMove={this.onMouseMoveV1LineChart}
                 />
             </div>
 
             <h3>Bar Chart</h3>
 
             <div>
-                <StackedBarChart
+                <V1StackedBarChart
                     data={statesData}
                     plotKeys={['a','b','c','d','e','f','g']}
                 />
             </div>
 
             <div>
-                <StackedBarChart
+                <V1StackedBarChart
                     orientation="column"
                     data={statesData}
                     plotKeys={['a','b','c','d','e','f','g']}
                 />
             </div>
-
-
         </div>
     }
 });

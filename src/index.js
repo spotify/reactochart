@@ -1,7 +1,11 @@
-export { default as StackedBarChart } from './StackedBarChart';
-export { default as LineChart } from './LineChart';
+export { default as V1StackedBarChart } from './StackedBarChart';
+export { default as V1LineChart } from './LineChart';
 
 export { default as XYPlot } from './v2/XYPlot';
-export { default as V2LineChart } from './v2/LineChart';
-export { default as V2BarChart } from './v2/BarChart';
-export { default as V2ScatterPlot } from './v2/ScatterPlot';
+
+export { default as LineChart } from './v2/LineChart';
+export { default as BarChart } from './v2/BarChart';
+export { default as ScatterPlot } from './v2/ScatterPlot';
+
+export { default as Histogram } from './v2/Histogram';
+export { default as KernelDensityEstimation } from './v2/KernelDensityEstimation';

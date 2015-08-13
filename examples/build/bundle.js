@@ -69,19 +69,19 @@
 	
 	// get/make fake data for testing
 	
-	var _dataStatesDataJson = __webpack_require__(278);
+	var _dataStatesDataJson = __webpack_require__(280);
 	
 	var _dataStatesDataJson2 = _interopRequireDefault(_dataStatesDataJson);
 	
-	var _dataDailyTemperatureJson = __webpack_require__(279);
+	var _dataDailyTemperatureJson = __webpack_require__(281);
 	
 	var _dataDailyTemperatureJson2 = _interopRequireDefault(_dataDailyTemperatureJson);
 	
-	var _dataSimpleXYJson = __webpack_require__(280);
+	var _dataSimpleXYJson = __webpack_require__(282);
 	
 	var _dataSimpleXYJson2 = _interopRequireDefault(_dataSimpleXYJson);
 	
-	var _dataUtil = __webpack_require__(281);
+	var _dataUtil = __webpack_require__(283);
 	
 	var PureRenderMixin = _reactAddons2['default'].addons.PureRenderMixin;
 	
@@ -97,6 +97,9 @@
 	
 	var randomScatter = [_.zip((0, _dataUtil.randomWalk)(20, 100), (0, _dataUtil.randomWalk)(20, 100)), _.zip((0, _dataUtil.randomWalk)(30, 100), (0, _dataUtil.randomWalk)(30, 100)), _.zip((0, _dataUtil.randomWalk)(50, 100), (0, _dataUtil.randomWalk)(50, 100)), _.zip((0, _dataUtil.randomWalk)(100, 100), (0, _dataUtil.randomWalk)(100, 100)), _.zip((0, _dataUtil.randomWalk)(200, 100), (0, _dataUtil.randomWalk)(200, 100))];
 	
+	var normalDistribution = d3.random.normal(0);
+	var randomNormal = _.times(1000, normalDistribution);
+	
 	var emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 	// end fake data
 	
@@ -105,19 +108,19 @@
 	
 	    getInitialState: function getInitialState() {
 	        return {
-	            hoveredLineChartData: null,
+	            hoveredV1LineChartData: null,
 	            randomSeries: [(0, _dataUtil.randomWalkSeries)(400, 100, 3), (0, _dataUtil.randomWalkSeries)(400), (0, _dataUtil.randomWalkSeries)(400, -100, 4)]
 	        };
 	    },
-	    onMouseMoveLineChart: function onMouseMoveLineChart(d, index, event) {
-	        this.setState({ hoveredLineChartData: d });
+	    onMouseMoveV1LineChart: function onMouseMoveV1LineChart(d, index, event) {
+	        this.setState({ hoveredV1LineChartData: d });
 	    },
 	    onMouseMoveXYPlot: function onMouseMoveXYPlot(d, event) {
 	        this.setState({ hoveredXYPlotData: d });
 	    },
 	    render: function render() {
 	        var _state = this.state;
-	        var hoveredLineChartData = _state.hoveredLineChartData;
+	        var hoveredV1LineChartData = _state.hoveredV1LineChartData;
 	        var hoveredXYPlotData = _state.hoveredXYPlotData;
 	
 	        var triangleSymbol = _reactAddons2['default'].createElement(
@@ -141,6 +144,36 @@
 	            _reactAddons2['default'].createElement(
 	                'h3',
 	                null,
+	                'Histogram'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 700, height: 300 },
+	                    _reactAddons2['default'].createElement(_src.Histogram, {
+	                        data: randomNormal, getX: null
+	                    })
+	                )
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 700, height: 80 },
+	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
+	                        data: randomNormal, getX: null, getY: function () {
+	                            return Math.random();
+	                        },
+	                        pointRadius: 1.5
+	                    })
+	                )
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'h3',
+	                null,
 	                'ScatterPlot'
 	            ),
 	            _reactAddons2['default'].createElement(
@@ -149,28 +182,28 @@
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
 	                    { width: 700, height: 500 },
-	                    _reactAddons2['default'].createElement(_src.V2ScatterPlot, {
+	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
 	                        data: randomScatter[3], getX: 0, getY: 1,
 	                        pointSymbol: _reactAddons2['default'].createElement('rect', { width: 5, height: 5, fill: 'rebeccapurple' })
 	                    }),
-	                    _reactAddons2['default'].createElement(_src.V2ScatterPlot, {
+	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
 	                        data: randomScatter[4], getX: 0, getY: 1,
 	                        pointRadius: 2
 	                    }),
-	                    _reactAddons2['default'].createElement(_src.V2ScatterPlot, {
+	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
 	                        data: randomScatter[1], getX: 0, getY: 1,
 	                        pointSymbol: function (d, i) {
 	                            return _.sample(emojis);
 	                        },
 	                        pointOffset: [0, 2]
 	                    }),
-	                    _reactAddons2['default'].createElement(_src.V2ScatterPlot, {
+	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
 	                        data: randomScatter[0], getX: 0, getY: 1,
 	                        pointSymbol: function (d, i) {
 	                            return i;
 	                        }
 	                    }),
-	                    _reactAddons2['default'].createElement(_src.V2ScatterPlot, {
+	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
 	                        data: randomScatter[2], getX: 0, getY: 1,
 	                        pointSymbol: triangleSymbol,
 	                        pointOffset: [-4, -3]
@@ -188,14 +221,14 @@
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
 	                    { width: 700 },
-	                    _reactAddons2['default'].createElement(_src.V2LineChart, {
+	                    _reactAddons2['default'].createElement(_src.LineChart, {
 	                        data: _.range(0, 20, 0.01),
 	                        getX: null,
 	                        getY: function (n) {
 	                            return Math.sin(n);
 	                        }
 	                    }),
-	                    _reactAddons2['default'].createElement(_src.V2LineChart, {
+	                    _reactAddons2['default'].createElement(_src.LineChart, {
 	                        data: _.range(0, 20, 0.01),
 	                        getX: null,
 	                        getY: function (n) {
@@ -224,9 +257,9 @@
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
 	                    { width: 700, height: 400, onMouseMove: this.onMouseMoveXYPlot },
-	                    _reactAddons2['default'].createElement(_src.V2LineChart, { data: randomSequences[0], getX: 0, getY: 1 }),
-	                    _reactAddons2['default'].createElement(_src.V2LineChart, { data: randomSequences[1], getX: 0, getY: 1 }),
-	                    _reactAddons2['default'].createElement(_src.V2LineChart, { data: randomSequences[2], getX: 0, getY: 1 })
+	                    _reactAddons2['default'].createElement(_src.LineChart, { data: randomSequences[0], getX: 0, getY: 1 }),
+	                    _reactAddons2['default'].createElement(_src.LineChart, { data: randomSequences[1], getX: 0, getY: 1 }),
+	                    _reactAddons2['default'].createElement(_src.LineChart, { data: randomSequences[2], getX: 0, getY: 1 })
 	                )
 	            ),
 	            _reactAddons2['default'].createElement(
@@ -240,9 +273,11 @@
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
 	                    null,
-	                    _reactAddons2['default'].createElement(_src.V2BarChart, { data: randomBars[0], getX: 0, getY: 1 }),
-	                    _reactAddons2['default'].createElement(_src.V2LineChart, { data: randomBars[0], getX: 0, getY: 1 }),
-	                    _reactAddons2['default'].createElement(_src.V2ScatterPlot, { data: randomBars[0], getX: 0, getY: 1 })
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBars[0], getX: 0, getY: 1 }),
+	                    _reactAddons2['default'].createElement(_src.LineChart, { data: randomBars[0], getX: 0, getY: 1 }),
+	                    _reactAddons2['default'].createElement(_src.ScatterPlot, { data: randomBars[0], getX: 0, getY: 1, pointSymbol: function (d, i) {
+	                            return _.sample(emojis);
+	                        } })
 	                )
 	            ),
 	            _reactAddons2['default'].createElement(
@@ -258,22 +293,22 @@
 	            _reactAddons2['default'].createElement(
 	                'div',
 	                null,
-	                hoveredLineChartData ? _reactAddons2['default'].createElement(
+	                hoveredV1LineChartData ? _reactAddons2['default'].createElement(
 	                    'div',
 	                    null,
-	                    hoveredLineChartData.date + '',
+	                    hoveredV1LineChartData.date + '',
 	                    _reactAddons2['default'].createElement('br', null),
 	                    'New York Temperature: ',
-	                    hoveredLineChartData.newYork
+	                    hoveredV1LineChartData.newYork
 	                ) : null,
 	                _reactAddons2['default'].createElement('div', null),
-	                _reactAddons2['default'].createElement(_src.LineChart, {
+	                _reactAddons2['default'].createElement(_src.V1LineChart, {
 	                    width: 1000,
 	                    height: 400,
 	                    data: tempDataClean,
 	                    plotKeys: ['newYork'],
 	                    dateKey: 'date',
-	                    onMouseMove: this.onMouseMoveLineChart
+	                    onMouseMove: this.onMouseMoveV1LineChart
 	                })
 	            ),
 	            _reactAddons2['default'].createElement(
@@ -284,7 +319,7 @@
 	            _reactAddons2['default'].createElement(
 	                'div',
 	                null,
-	                _reactAddons2['default'].createElement(_src.StackedBarChart, {
+	                _reactAddons2['default'].createElement(_src.V1StackedBarChart, {
 	                    data: _dataStatesDataJson2['default'],
 	                    plotKeys: ['a', 'b', 'c', 'd', 'e', 'f', 'g']
 	                })
@@ -292,7 +327,7 @@
 	            _reactAddons2['default'].createElement(
 	                'div',
 	                null,
-	                _reactAddons2['default'].createElement(_src.StackedBarChart, {
+	                _reactAddons2['default'].createElement(_src.V1StackedBarChart, {
 	                    orientation: 'column',
 	                    data: _dataStatesDataJson2['default'],
 	                    plotKeys: ['a', 'b', 'c', 'd', 'e', 'f', 'g']
@@ -306,6 +341,10 @@
 	
 	exports['default'] = App;
 	module.exports = exports['default'];
+
+	// old charts
+
+	// new charts
 
 /***/ },
 /* 2 */
@@ -23131,27 +23170,35 @@
 	
 	var _StackedBarChart = __webpack_require__(186);
 	
-	exports.StackedBarChart = _interopRequire(_StackedBarChart);
+	exports.V1StackedBarChart = _interopRequire(_StackedBarChart);
 	
 	var _LineChart = __webpack_require__(187);
 	
-	exports.LineChart = _interopRequire(_LineChart);
+	exports.V1LineChart = _interopRequire(_LineChart);
 	
 	var _v2XYPlot = __webpack_require__(275);
 	
 	exports.XYPlot = _interopRequire(_v2XYPlot);
 	
-	var _v2LineChart = __webpack_require__(180);
+	var _v2LineChart = __webpack_require__(276);
 	
-	exports.V2LineChart = _interopRequire(_v2LineChart);
+	exports.LineChart = _interopRequire(_v2LineChart);
 	
-	var _v2BarChart = __webpack_require__(276);
+	var _v2BarChart = __webpack_require__(180);
 	
-	exports.V2BarChart = _interopRequire(_v2BarChart);
+	exports.BarChart = _interopRequire(_v2BarChart);
 	
 	var _v2ScatterPlot = __webpack_require__(277);
 	
-	exports.V2ScatterPlot = _interopRequire(_v2ScatterPlot);
+	exports.ScatterPlot = _interopRequire(_v2ScatterPlot);
+	
+	var _v2Histogram = __webpack_require__(278);
+	
+	exports.Histogram = _interopRequire(_v2Histogram);
+	
+	var _v2KernelDensityEstimation = __webpack_require__(279);
+	
+	exports.KernelDensityEstimation = _interopRequire(_v2KernelDensityEstimation);
 
 /***/ },
 /* 180 */
@@ -23162,8 +23209,6 @@
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
-	
-	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -23183,8 +23228,8 @@
 	
 	var PropTypes = _react2['default'].PropTypes;
 	
-	var LineChart = _react2['default'].createClass({
-	    displayName: 'LineChart',
+	var BarChart = _react2['default'].createClass({
+	    displayName: 'BarChart',
 	
 	    propTypes: {
 	        // the array of data objects
@@ -23201,70 +23246,57 @@
 	        getExtent: function getExtent(data, getX, getY) {
 	            return {
 	                x: _d32['default'].extent(data, (0, _utilJs.accessor)(getX)),
-	                y: _d32['default'].extent(data, (0, _utilJs.accessor)(getY))
+	                y: _d32['default'].extent(_d32['default'].extent(data, (0, _utilJs.accessor)(getY)).concat(0))
 	            };
 	        }
 	    },
-	
-	    componentWillMount: function componentWillMount() {
-	        this.initBisector(this.props);
-	    },
-	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
-	        this.initBisector(newProps);
-	    },
-	    initBisector: function initBisector(props) {
-	        var _this = this;
-	
-	        this.setState({ bisectX: _d32['default'].bisector(function (d) {
-	                return (0, _utilJs.accessor)(_this.props.getX)(d);
-	            }).left });
-	    },
-	
-	    getHovered: function getHovered(x, y) {
-	        var closestDataIndex = this.state.bisectX(this.props.data, x);
-	        //console.log(closestDataIndex, this.props.data[closestDataIndex]);
-	        return this.props.data[closestDataIndex];
-	    },
+	    getHovered: function getHovered() {},
 	
 	    render: function render() {
+	        console.log('barchart', this.props);
+	        return _react2['default'].createElement(
+	            'g',
+	            null,
+	            this.renderBars()
+	        );
+	    },
+	    renderBars: function renderBars() {
+	        var _this = this;
+	
 	        var _props = this.props;
-	        var data = _props.data;
-	        var getX = _props.getX;
-	        var getY = _props.getY;
 	        var xScale = _props.xScale;
 	        var yScale = _props.yScale;
+	        var getX = _props.getX;
+	        var getY = _props.getY;
 	
-	        var points = _lodash2['default'].map(data, function (d) {
-	            return [xScale((0, _utilJs.accessor)(getX)(d)), yScale((0, _utilJs.accessor)(getY)(d))];
-	        });
-	        var pathStr = pointsToPathStr(points);
+	        var isHorizontal = this.props.orientation === 'bar';
+	        //const barThickness = this.state.barScale.rangeBand();
+	        var barThickness = 5;
+	
+	        var xAccessor = (0, _utilJs.accessor)(getX);
+	        var yAccessor = (0, _utilJs.accessor)(getY);
 	
 	        return _react2['default'].createElement(
 	            'g',
-	            { className: this.props.name },
-	            _react2['default'].createElement('path', { d: pathStr })
-	        );
+	            null,
+	            this.props.data.map(function (d, i) {
+	                var yVal = yAccessor(d);
+	                var barLength = Math.abs(yScale(0) - yScale(yVal));
+	                var barY = yVal >= 0 ? yScale(0) - barLength : yScale(0);
 	
-	        return _react2['default'].createElement('rect', { x: _lodash2['default'].random(200), y: 20, width: 50, height: 80, opacity: 0.5 });
+	                return _react2['default'].createElement('rect', {
+	                    className: 'chart-bar chart-bar-vertical',
+	                    x: _this.props.xScale(xAccessor(d)) - barThickness / 2,
+	                    y: barY,
+	                    width: barThickness,
+	                    height: barLength
+	                });
+	            })
+	        );
 	    }
 	});
 	
-	function pointsToPathStr(points) {
-	    // takes array of points in [[x, y], [x, y]... ] format
-	    // returns SVG path string in "M X Y L X Y" format
-	    // https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Line_commands
-	    return _lodash2['default'].map(points, function (_ref, i) {
-	        var _ref2 = _slicedToArray(_ref, 2);
-	
-	        var x = _ref2[0];
-	        var y = _ref2[1];
-	
-	        var command = i === 0 ? 'M' : 'L';
-	        return command + ' ' + x + ' ' + y;
-	    }).join(' ');
-	}
-	
-	exports['default'] = LineChart;
+	exports['default'] = BarChart;
 	module.exports = exports['default'];
 
 /***/ },
@@ -57341,6 +57373,8 @@
 	    value: true
 	});
 	
+	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _react = __webpack_require__(181);
@@ -57359,8 +57393,8 @@
 	
 	var PropTypes = _react2['default'].PropTypes;
 	
-	var BarChart = _react2['default'].createClass({
-	    displayName: 'BarChart',
+	var LineChart = _react2['default'].createClass({
+	    displayName: 'LineChart',
 	
 	    propTypes: {
 	        // the array of data objects
@@ -57377,57 +57411,70 @@
 	        getExtent: function getExtent(data, getX, getY) {
 	            return {
 	                x: _d32['default'].extent(data, (0, _utilJs.accessor)(getX)),
-	                y: _d32['default'].extent(_d32['default'].extent(data, (0, _utilJs.accessor)(getY)).concat(0))
+	                y: _d32['default'].extent(data, (0, _utilJs.accessor)(getY))
 	            };
 	        }
 	    },
-	    getHovered: function getHovered() {},
 	
-	    render: function render() {
-	        console.log('barchart', this.props);
-	        return _react2['default'].createElement(
-	            'g',
-	            null,
-	            this.renderBars()
-	        );
+	    componentWillMount: function componentWillMount() {
+	        this.initBisector(this.props);
 	    },
-	    renderBars: function renderBars() {
+	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+	        this.initBisector(newProps);
+	    },
+	    initBisector: function initBisector(props) {
 	        var _this = this;
 	
+	        this.setState({ bisectX: _d32['default'].bisector(function (d) {
+	                return (0, _utilJs.accessor)(_this.props.getX)(d);
+	            }).left });
+	    },
+	
+	    getHovered: function getHovered(x, y) {
+	        var closestDataIndex = this.state.bisectX(this.props.data, x);
+	        //console.log(closestDataIndex, this.props.data[closestDataIndex]);
+	        return this.props.data[closestDataIndex];
+	    },
+	
+	    render: function render() {
 	        var _props = this.props;
-	        var xScale = _props.xScale;
-	        var yScale = _props.yScale;
+	        var data = _props.data;
 	        var getX = _props.getX;
 	        var getY = _props.getY;
+	        var xScale = _props.xScale;
+	        var yScale = _props.yScale;
 	
-	        var isHorizontal = this.props.orientation === 'bar';
-	        //const barThickness = this.state.barScale.rangeBand();
-	        var barThickness = 5;
-	
-	        var xAccessor = (0, _utilJs.accessor)(getX);
-	        var yAccessor = (0, _utilJs.accessor)(getY);
+	        var points = _lodash2['default'].map(data, function (d) {
+	            return [xScale((0, _utilJs.accessor)(getX)(d)), yScale((0, _utilJs.accessor)(getY)(d))];
+	        });
+	        var pathStr = pointsToPathStr(points);
 	
 	        return _react2['default'].createElement(
 	            'g',
-	            null,
-	            this.props.data.map(function (d, i) {
-	                var yVal = yAccessor(d);
-	                var barLength = Math.abs(yScale(0) - yScale(yVal));
-	                var barY = yVal >= 0 ? yScale(0) - barLength : yScale(0);
-	
-	                return _react2['default'].createElement('rect', {
-	                    className: 'chart-bar chart-bar-vertical',
-	                    x: _this.props.xScale(xAccessor(d)) - barThickness / 2,
-	                    y: barY,
-	                    width: barThickness,
-	                    height: barLength
-	                });
-	            })
+	            { className: this.props.name },
+	            _react2['default'].createElement('path', { d: pathStr })
 	        );
+	
+	        return _react2['default'].createElement('rect', { x: _lodash2['default'].random(200), y: 20, width: 50, height: 80, opacity: 0.5 });
 	    }
 	});
 	
-	exports['default'] = BarChart;
+	function pointsToPathStr(points) {
+	    // takes array of points in [[x, y], [x, y]... ] format
+	    // returns SVG path string in "M X Y L X Y" format
+	    // https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Line_commands
+	    return _lodash2['default'].map(points, function (_ref, i) {
+	        var _ref2 = _slicedToArray(_ref, 2);
+	
+	        var x = _ref2[0];
+	        var y = _ref2[1];
+	
+	        var command = i === 0 ? 'M' : 'L';
+	        return command + ' ' + x + ' ' + y;
+	    }).join(' ');
+	}
+	
+	exports['default'] = LineChart;
 	module.exports = exports['default'];
 
 /***/ },
@@ -57548,6 +57595,186 @@
 
 /***/ },
 /* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _react = __webpack_require__(181);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(182);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d3 = __webpack_require__(184);
+	
+	var _d32 = _interopRequireDefault(_d3);
+	
+	var _BarChartJs = __webpack_require__(180);
+	
+	var _BarChartJs2 = _interopRequireDefault(_BarChartJs);
+	
+	var _utilJs = __webpack_require__(185);
+	
+	var PropTypes = _react2['default'].PropTypes;
+	
+	var Histogram = _react2['default'].createClass({
+	    displayName: 'Histogram',
+	
+	    getInitialState: function getInitialState() {
+	        return {
+	            histogramData: null
+	        };
+	    },
+	    componentWillMount: function componentWillMount() {
+	        var histogramData = _d32['default'].layout.histogram().bins(30)(this.props.data);
+	        console.log('histogram', this.props.data, histogramData);
+	        this.setState({ histogramData: histogramData });
+	    },
+	
+	    statics: {
+	        getExtent: function getExtent(data, getX, getY) {
+	            return {
+	                x: _d32['default'].extent(data, (0, _utilJs.accessor)(getX)),
+	                y: [0, 100]
+	                //y: d3.extent(d3.extent(data, accessor(getY)).concat(0))
+	            };
+	        }
+	    },
+	    getHovered: function getHovered() {},
+	    render: function render() {
+	        if (!this.state.histogramData) return _react2['default'].createElement('g', null);
+	        var _props = this.props;
+	        var name = _props.name;
+	        var xScale = _props.xScale;
+	        var yScale = _props.yScale;
+	        var innerWidth = _props.innerWidth;
+	        var innerHeight = _props.innerHeight;
+	
+	        return _react2['default'].createElement(_BarChartJs2['default'], _extends({
+	            data: this.state.histogramData,
+	            getX: 'x', getY: 'y'
+	        }, { name: name, xScale: xScale, yScale: yScale, innerWidth: innerWidth, innerHeight: innerHeight }));
+	
+	        return _react2['default'].createElement(
+	            'svg',
+	            null,
+	            _react2['default'].createElement(
+	                'text',
+	                null,
+	                'Hello!'
+	            )
+	        );
+	    }
+	});
+	
+	exports['default'] = Histogram;
+	module.exports = exports['default'];
+
+/***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _react = __webpack_require__(181);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(182);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d3 = __webpack_require__(184);
+	
+	var _d32 = _interopRequireDefault(_d3);
+	
+	var _utilJs = __webpack_require__(185);
+	
+	var _BarChartJs = __webpack_require__(180);
+	
+	var _BarChartJs2 = _interopRequireDefault(_BarChartJs);
+	
+	var _LineChartJs = __webpack_require__(276);
+	
+	var _LineChartJs2 = _interopRequireDefault(_LineChartJs);
+	
+	var PropTypes = _react2['default'].PropTypes;
+	
+	var KernelDensityEstimation = _react2['default'].createClass({
+	    displayName: 'KernelDensityEstimation',
+	
+	    getInitialState: function getInitialState() {
+	        return {};
+	    },
+	    componentWillMount: function componentWillMount() {},
+	
+	    statics: {
+	        getExtent: function getExtent(data, getX, getY) {
+	            return {
+	                x: _d32['default'].extent(data, (0, _utilJs.accessor)(getX)),
+	                y: [0, 100]
+	                //y: d3.extent(d3.extent(data, accessor(getY)).concat(0))
+	            };
+	        }
+	    },
+	    getHovered: function getHovered() {},
+	    render: function render() {
+	        var _props = this.props;
+	        var name = _props.name;
+	        var xScale = _props.xScale;
+	        var yScale = _props.yScale;
+	        var innerWidth = _props.innerWidth;
+	        var innerHeight = _props.innerHeight;
+	
+	        return _react2['default'].createElement(
+	            'svg',
+	            null,
+	            _react2['default'].createElement(
+	                'text',
+	                null,
+	                'Hello!'
+	            )
+	        );
+	    }
+	});
+	
+	function kernelDensityEstimator(kernel, x) {
+	    return function (sample) {
+	        return x.map(function (x) {
+	            return [x, _d32['default'].mean(sample, function (v) {
+	                return kernel(x - v);
+	            })];
+	        });
+	    };
+	}
+	
+	function epanechnikovKernel(scale) {
+	    return function (u) {
+	        return Math.abs(u /= scale) <= 1 ? .75 * (1 - u * u) / scale : 0;
+	    };
+	}
+	
+	exports['default'] = KernelDensityEstimation;
+	module.exports = exports['default'];
+
+/***/ },
+/* 280 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -57684,7 +57911,7 @@
 	]
 
 /***/ },
-/* 279 */
+/* 281 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -59887,7 +60114,7 @@
 	]
 
 /***/ },
-/* 280 */
+/* 282 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -60006,7 +60233,7 @@
 	]
 
 /***/ },
-/* 281 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
