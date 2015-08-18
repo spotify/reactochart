@@ -25,6 +25,10 @@ const tempDataClean = temperatureData.map(d => _.assign({}, d, {date: new Date(d
 import {randomWalk, randomWalkSeries} from './data/util';
 _.extend(window, {randomWalk});
 
+// sample ordinal data
+const ordinalData = ['Always', 'Usually', 'Sometimes', 'Rarely', 'Never'];
+const ordinalData2 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+
 const randomSequences = [
     randomWalkSeries(500, 100, 3),
     randomWalkSeries(500),
@@ -43,12 +47,48 @@ const randomScatter = [
     _.zip(randomWalk(200, 100), randomWalk(200, 100))
 ];
 
+const randomBarData = {
+    valueValue: randomWalkSeries(20, 0, 5)
+};
+const randomBarData2 = {
+    ordinalOrdinal: ordinalData.map(d => [d, _.sample(ordinalData2)]),
+    ordinalNumber: _.zip(ordinalData, randomWalk(ordinalData.length, 5))
+};
+console.log(randomBarData2);
+
 const normalDistribution = d3.random.normal(0);
 //const randomNormal = _.times(1000, normalDistribution);
 const randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.random.normal(3, 0.5)));
 
 const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 // end fake data
+
+const InteractiveLineExample = React.createClass({
+    getInitialState() {
+        return {
+            hoveredXYPlotData: null
+        }
+    },
+    onMouseMoveXYPlot(d, event) {
+        this.setState({hoveredXYPlotData: d})
+    },
+    render() {
+        const {hoveredXYPlotData} = this.state;
+        return <div>
+            {hoveredXYPlotData ?
+                <div>
+                    {hoveredXYPlotData[0] + ', ' + hoveredXYPlotData[1]}
+                </div> :
+                <div>Hover over the chart to show values</div>
+            }
+            <XYPlot width={700} height={400} onMouseMove={this.onMouseMoveXYPlot}>
+                <LineChart data={randomSequences[0]} getX={0} getY={1} />
+                <LineChart data={randomSequences[1]} getX={0} getY={1} />
+                <LineChart data={randomSequences[2]} getX={0} getY={1} />
+            </XYPlot>
+        </div>
+    }
+});
 
 const App = React.createClass({
     getInitialState() {
@@ -69,12 +109,64 @@ const App = React.createClass({
     },
     render() {
         const {hoveredV1LineChartData, hoveredXYPlotData} = this.state;
-
         const triangleSymbol = <svg><polygon points="0,0 8,0 4,8" style={{fill: 'darkgreen'}} /></svg>;
+
+
         return <div>
             <h1>Reactochart</h1>
 
             <h2>v2</h2>
+
+            <h3>Bar Charts</h3>
+
+            <div>
+                <XYPlot width={300} height={300} xType='ordinal'>
+                    <BarChart data={randomBarData2.ordinalNumber} getX={0} getY={1} />
+                </XYPlot>
+            </div>
+
+            <div>
+                <XYPlot width={300} height={300}>
+                    <BarChart data={randomBarData.valueValue} getX={0} getY={1} />
+                    <BarChart data={[[25,20], [30, 10]]} getX={0} getY={1} />
+                </XYPlot>
+            </div>
+
+
+
+            <div>
+                <XYPlot width={300} height={300} >
+                    <BarChart data={randomBarData.valueValue} getX={0} getY={1} />
+                </XYPlot>
+                <XYPlot width={300} height={300}>
+                    <BarChart data={randomBarData.valueValue} getX={1} getY={0} orientation="horizontal" />
+                </XYPlot>
+            </div>
+
+        </div>
+    },
+    _render() {
+        const {hoveredV1LineChartData, hoveredXYPlotData} = this.state;
+        const triangleSymbol = <svg><polygon points="0,0 8,0 4,8" style={{fill: 'darkgreen'}} /></svg>;
+
+        return <div>
+            <h1>Reactochart</h1>
+
+            <h2>v2</h2>
+
+            <h3>Bar Charts</h3>
+
+            <h4>Value-Value Bar Chart</h4>
+
+            <div>
+                <XYPlot width={300} height={300}>
+                    <BarChart data={randomBarData.valueValue} getX={0} getY={1} />
+                </XYPlot>
+                <XYPlot width={300} height={300}>
+                    <BarChart data={randomBarData.valueValue} getX={1} getY={0} orientation="horizontal" />
+                </XYPlot>
+            </div>
+
 
             <h3>Histogram</h3>
 
@@ -152,19 +244,7 @@ const App = React.createClass({
 
             <h3>Interactive LineChart</h3>
 
-            <div>
-                {hoveredXYPlotData ?
-                    <div>
-                        {hoveredXYPlotData[0] + ', ' + hoveredXYPlotData[1]}
-                    </div> :
-                    <div>Hover over the chart to show values</div>
-                }
-                <XYPlot width={700} height={400} onMouseMove={this.onMouseMoveXYPlot}>
-                    <LineChart data={randomSequences[0]} getX={0} getY={1} />
-                    <LineChart data={randomSequences[1]} getX={0} getY={1} />
-                    <LineChart data={randomSequences[2]} getX={0} getY={1} />
-                </XYPlot>
-            </div>
+            <InteractiveLineExample></InteractiveLineExample>
 
             <h3>Multiple chart types in one XYPlot</h3>
 

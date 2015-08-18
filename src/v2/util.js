@@ -10,3 +10,4 @@ export function accessor(key) {
         _.isNull(key) || _.isUndefined(key) ? _.identity : // or null/undefined to just return the item itself...
         _.property(key);                                   // or an array index or object key
 }
+

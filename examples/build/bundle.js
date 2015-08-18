@@ -91,11 +91,26 @@
 	
 	_.extend(window, { randomWalk: _dataUtil.randomWalk });
 	
+	// sample ordinal data
+	var ordinalData = ['Always', 'Usually', 'Sometimes', 'Rarely', 'Never'];
+	var ordinalData2 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+	
 	var randomSequences = [(0, _dataUtil.randomWalkSeries)(500, 100, 3), (0, _dataUtil.randomWalkSeries)(500), (0, _dataUtil.randomWalkSeries)(500, -100, 4)];
 	
 	var randomBars = [(0, _dataUtil.randomWalkSeries)(20, 0, 5)];
 	
 	var randomScatter = [_.zip((0, _dataUtil.randomWalk)(20, 100), (0, _dataUtil.randomWalk)(20, 100)), _.zip((0, _dataUtil.randomWalk)(30, 100), (0, _dataUtil.randomWalk)(30, 100)), _.zip((0, _dataUtil.randomWalk)(50, 100), (0, _dataUtil.randomWalk)(50, 100)), _.zip((0, _dataUtil.randomWalk)(100, 100), (0, _dataUtil.randomWalk)(100, 100)), _.zip((0, _dataUtil.randomWalk)(200, 100), (0, _dataUtil.randomWalk)(200, 100))];
+	
+	var randomBarData = {
+	    valueValue: (0, _dataUtil.randomWalkSeries)(20, 0, 5)
+	};
+	var randomBarData2 = {
+	    ordinalOrdinal: ordinalData.map(function (d) {
+	        return [d, _.sample(ordinalData2)];
+	    }),
+	    ordinalNumber: _.zip(ordinalData, (0, _dataUtil.randomWalk)(ordinalData.length, 5))
+	};
+	console.log(randomBarData2);
 	
 	var normalDistribution = d3.random.normal(0);
 	//const randomNormal = _.times(1000, normalDistribution);
@@ -103,6 +118,43 @@
 	
 	var emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 	// end fake data
+	
+	var InteractiveLineExample = _reactAddons2['default'].createClass({
+	    displayName: 'InteractiveLineExample',
+	
+	    getInitialState: function getInitialState() {
+	        return {
+	            hoveredXYPlotData: null
+	        };
+	    },
+	    onMouseMoveXYPlot: function onMouseMoveXYPlot(d, event) {
+	        this.setState({ hoveredXYPlotData: d });
+	    },
+	    render: function render() {
+	        var hoveredXYPlotData = this.state.hoveredXYPlotData;
+	
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            null,
+	            hoveredXYPlotData ? _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                hoveredXYPlotData[0] + ', ' + hoveredXYPlotData[1]
+	            ) : _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                'Hover over the chart to show values'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                _src.XYPlot,
+	                { width: 700, height: 400, onMouseMove: this.onMouseMoveXYPlot },
+	                _reactAddons2['default'].createElement(_src.LineChart, { data: randomSequences[0], getX: 0, getY: 1 }),
+	                _reactAddons2['default'].createElement(_src.LineChart, { data: randomSequences[1], getX: 0, getY: 1 }),
+	                _reactAddons2['default'].createElement(_src.LineChart, { data: randomSequences[2], getX: 0, getY: 1 })
+	            )
+	        );
+	    }
+	});
 	
 	var App = _reactAddons2['default'].createClass({
 	    displayName: 'App',
@@ -129,6 +181,7 @@
 	            null,
 	            _reactAddons2['default'].createElement('polygon', { points: '0,0 8,0 4,8', style: { fill: 'darkgreen' } })
 	        );
+	
 	        return _reactAddons2['default'].createElement(
 	            'div',
 	            null,
@@ -141,6 +194,94 @@
 	                'h2',
 	                null,
 	                'v2'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'h3',
+	                null,
+	                'Bar Charts'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, xType: 'ordinal' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.ordinalNumber, getX: 0, getY: 1 })
+	                )
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300 },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData.valueValue, getX: 0, getY: 1 }),
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: [[25, 20], [30, 10]], getX: 0, getY: 1 })
+	                )
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300 },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData.valueValue, getX: 0, getY: 1 })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300 },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData.valueValue, getX: 1, getY: 0, orientation: 'horizontal' })
+	                )
+	            )
+	        );
+	    },
+	    _render: function _render() {
+	        var _state2 = this.state;
+	        var hoveredV1LineChartData = _state2.hoveredV1LineChartData;
+	        var hoveredXYPlotData = _state2.hoveredXYPlotData;
+	
+	        var triangleSymbol = _reactAddons2['default'].createElement(
+	            'svg',
+	            null,
+	            _reactAddons2['default'].createElement('polygon', { points: '0,0 8,0 4,8', style: { fill: 'darkgreen' } })
+	        );
+	
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            null,
+	            _reactAddons2['default'].createElement(
+	                'h1',
+	                null,
+	                'Reactochart'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'h2',
+	                null,
+	                'v2'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'h3',
+	                null,
+	                'Bar Charts'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'h4',
+	                null,
+	                'Value-Value Bar Chart'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300 },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData.valueValue, getX: 0, getY: 1 })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300 },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData.valueValue, getX: 1, getY: 0, orientation: 'horizontal' })
+	                )
 	            ),
 	            _reactAddons2['default'].createElement(
 	                'h3',
@@ -252,26 +393,7 @@
 	                null,
 	                'Interactive LineChart'
 	            ),
-	            _reactAddons2['default'].createElement(
-	                'div',
-	                null,
-	                hoveredXYPlotData ? _reactAddons2['default'].createElement(
-	                    'div',
-	                    null,
-	                    hoveredXYPlotData[0] + ', ' + hoveredXYPlotData[1]
-	                ) : _reactAddons2['default'].createElement(
-	                    'div',
-	                    null,
-	                    'Hover over the chart to show values'
-	                ),
-	                _reactAddons2['default'].createElement(
-	                    _src.XYPlot,
-	                    { width: 700, height: 400, onMouseMove: this.onMouseMoveXYPlot },
-	                    _reactAddons2['default'].createElement(_src.LineChart, { data: randomSequences[0], getX: 0, getY: 1 }),
-	                    _reactAddons2['default'].createElement(_src.LineChart, { data: randomSequences[1], getX: 0, getY: 1 }),
-	                    _reactAddons2['default'].createElement(_src.LineChart, { data: randomSequences[2], getX: 0, getY: 1 })
-	                )
-	            ),
+	            _reactAddons2['default'].createElement(InteractiveLineExample, null),
 	            _reactAddons2['default'].createElement(
 	                'h3',
 	                null,
@@ -23236,7 +23358,77 @@
 	
 	var _utilJs = __webpack_require__(185);
 	
+	// on the taxonomy of bar charts:
+	
+	// there are 3 types of bar charts,
+	// distinguished by whether the 2D data points they plot represent values or ranges
+	
+	// 1. Value-Value
+	// typical bar chart, plotting values that look like [[0,5], [1,3], ...]
+	// with bars that are centered horizontally on x-value and extend from 0 to y-value,
+	// (or centered vertically on their y-value and extend from 0 to the x-value, in the case of horizontal chart variant)
+	// eg. http://www.snapsurveys.com/wp-content/uploads/2012/10/bar_2d8.png
+	
+	// 2. Range-Value
+	// instead of a single value, one of the two data points represents a range of values
+	// usually the range is the independent variable and the value is the observation
+	// most commonly used in histogram, where each bar represents a bin (which is a range)
+	// data may look something like [[0, 5], 100], [[5, 15], 300], ...] or [{x: 0, xEnd: 5, y:100}...]
+	// often all bars are the same width, (same range sizes) but not necessarily
+	// bars still from extend from 0 to y-value,
+	// but the x-values of their sides, and therefore their width, is determined by the range
+	// (or vice versa in the case of horizontal variant)
+	// eg. http://labs.physics.dur.ac.uk/skills/skills/images/histogram4.jpg
+	
+	// 3. Value-Range
+	// like Range-Value, one of the two data points represents a range of values
+	// but generally the range is the dependent variable (ie. observation) instead of vice versa in #2
+	// bars are centered over their x-value as in #1,
+	// but their top & bottom y-values, and therefore their length, is determined by the range. they don't extend to 0.
+	// (or vice versa in the case of horizontal variant)
+	// eg. (horizontal) http://6.anychart.com/products/anychart/docs/users-guide/img/Samples/sample-range-bar-chart-y-datetime-axis.png
+	
+	// 4. Range-Range
+	// both of the data points represent ranges
+	// ie. data looks like [{x: 10, xEnd: 20, y: 12, yEnd: 40} ...]
+	// these are simply plotted as floating rectangles whose coordinates, length and width are all determined by the ranges
+	// there is no horizontal or vertical variant
+	// eg... can't find a good example
+	
+	// creating a BarChart component...
+	// x and y values are represented by getX and getY accessors passed in as props
+	// to represent a range instead of a single value, call with both getX and getXEnd (or getY and getYEnd),
+	// which will be the accessors for the start and end values of the range
+	// to represent horizontal vs. vertical variant, pass in orientation="horizontal" or orientation="vertical"
+	
+	// so to create the types described above:
+	// 1. Value-Value - only pass in getX and getY, + orientation
+	// 2. Range-Value
+	//   a. pass in getX, getXEnd and getY with orientation="vertical"
+	//   b. or getX, getY and getYEnd with orientation="horizontal"
+	// 3. Value-Range
+	//   a. pass in getX, getY and getYEnd with orientation="vertical"
+	//   b. or getX, getXEnd and getY with orientation="horizontal"
+	// 4. Range-Range - pass in all of getX, getXEnd, getY and getYEnd. no need for orientation.
+	
+	//const BAR_CHART_TYPES = {
+	//    VALUE_VALUE: 'VALUE_VALUE',
+	//    RANGE_VALUE: 'RANGE_VALUE',
+	//    VALUE_RANGE: 'VALUE_RANGE',
+	//    RANGE_RANGE: 'RANGE_RANGE',
+	//};
+	
 	var PropTypes = _react2['default'].PropTypes;
+	function getBarChartType(props) {
+	    var getXEnd = props.getXEnd;
+	    var getYEnd = props.getYEnd;
+	    var orientation = props.orientation;
+	
+	    var isVertical = orientation === 'vertical';
+	    return _lodash2['default'].isUndefined(getXEnd) && _lodash2['default'].isUndefined(getYEnd) ? 'ValueValue' : _lodash2['default'].isUndefined(getYEnd) && isVertical || _lodash2['default'].isUndefined(getXEnd) && !isVertical ? 'RangeValue' : _lodash2['default'].isUndefined(getXEnd) && isVertical || _lodash2['default'].isUndefined(getYEnd) && !isVertical ? 'ValueRange' : 'RangeRange';
+	}
+	
+	function domain(data, type) {}
 	
 	var BarChart = _react2['default'].createClass({
 	    displayName: 'BarChart',
@@ -23248,12 +23440,54 @@
 	        getX: _utilJs.AccessorPropType,
 	        getY: _utilJs.AccessorPropType,
 	
+	        orientation: PropTypes.string,
+	
 	        xScale: PropTypes.func,
 	        yScale: PropTypes.func
 	    },
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            orientation: 'vertical'
+	        };
+	    },
 	
 	    statics: {
-	        getExtent: function getExtent(data, getX, getY) {
+	        getOptions: function getOptions(props, xType, yType) {},
+	        //getDomain(props, xType, yType) {
+	        //    const {data, getX, getY, orientation} = props;
+	        //    const [xAccessor, yAccessor] = [accessor(getX), accessor(getY)];
+	        //    const barType = getBarChartType(props);
+	        //    const isVertical = (orientation === 'vertical');
+	        //
+	        //    if(barType === 'ValueValue') {
+	        //        console.log(d3.extent(data, yAccessor), d3.extent(data, yAccessor).reverse());
+	        //        // bar extends to zero, so the bar axis must include zero
+	        //        const x = isVertical ?
+	        //            d3.extent(data, xAccessor) :
+	        //            d3.extent(d3.extent(data, xAccessor).concat(0));
+	        //        const y = isVertical ?
+	        //            d3.extent(d3.extent(data, yAccessor).concat(0)) :
+	        //            d3.extent(data, yAccessor).reverse();
+	        //        return {x, y}
+	        //    }
+	        //},
+	        getExtent: function getExtent(data, getX, getY, props) {
+	            console.log('props', props);
+	            console.log('extent', _d32['default'].extent(data, (0, _utilJs.accessor)(getX)));
+	
+	            var xAccessor = (0, _utilJs.accessor)(getX);
+	            var yAccessor = (0, _utilJs.accessor)(getY);
+	            var type = getBarChartType(props);
+	            var isVertical = props.orientation === 'vertical';
+	
+	            if (type === 'ValueValue') {
+	                console.log(_d32['default'].extent(data, yAccessor), _d32['default'].extent(data, yAccessor).reverse());
+	                // bar extends to zero, so the bar axis must include zero
+	                var x = isVertical ? _d32['default'].extent(data, xAccessor) : _d32['default'].extent(_d32['default'].extent(data, xAccessor).concat(0));
+	                var y = isVertical ? _d32['default'].extent(_d32['default'].extent(data, yAccessor).concat(0)) : _d32['default'].extent(data, yAccessor).reverse();
+	                return { x: x, y: y };
+	            }
+	
 	            return {
 	                x: _d32['default'].extent(data, (0, _utilJs.accessor)(getX)),
 	                y: _d32['default'].extent(_d32['default'].extent(data, (0, _utilJs.accessor)(getY)).concat(0))
@@ -23264,20 +23498,76 @@
 	
 	    render: function render() {
 	        console.log('barchart', this.props);
+	
+	        //const type = getBarChartType(this.props);
+	        var renderer = this['render' + getBarChartType(this.props) + 'Bars'];
+	
 	        return _react2['default'].createElement(
 	            'g',
 	            null,
-	            this.renderBars()
+	            renderer()
 	        );
 	    },
-	    renderBars: function renderBars() {
+	    renderValueValueBars: function renderValueValueBars() {
 	        var _this = this;
 	
 	        var _props = this.props;
+	
+	        //const isHorizontal = this.props.orientation === 'bar';
+	        //const barThickness = this.state.barScale.rangeBand();
 	        var xScale = _props.xScale;
 	        var yScale = _props.yScale;
 	        var getX = _props.getX;
 	        var getY = _props.getY;
+	        var barThickness = 5;
+	
+	        var xAccessor = (0, _utilJs.accessor)(getX);
+	        var yAccessor = (0, _utilJs.accessor)(getY);
+	
+	        return this.props.orientation === 'vertical' ? _react2['default'].createElement(
+	            'g',
+	            null,
+	            this.props.data.map(function (d, i) {
+	                var yVal = yAccessor(d);
+	                var barLength = Math.abs(yScale(0) - yScale(yVal));
+	                var barY = yVal >= 0 ? yScale(0) - barLength : yScale(0);
+	
+	                return _react2['default'].createElement('rect', {
+	                    className: 'chart-bar chart-bar-vertical',
+	                    x: _this.props.xScale(xAccessor(d)) - barThickness / 2,
+	                    y: barY,
+	                    width: barThickness,
+	                    height: barLength
+	                });
+	            })
+	        ) : _react2['default'].createElement(
+	            'g',
+	            null,
+	            this.props.data.map(function (d, i) {
+	                var xVal = xAccessor(d);
+	                var barLength = Math.abs(xScale(0) - xScale(xVal));
+	                var barX = xVal >= 0 ? xScale(0) : xScale(0) - barLength;
+	
+	                return _react2['default'].createElement('rect', {
+	                    className: 'chart-bar chart-bar-vertical',
+	                    x: barX,
+	                    y: _this.props.yScale(yAccessor(d)) - barThickness / 2,
+	                    width: barLength,
+	                    height: barThickness
+	                });
+	            })
+	        );
+	    },
+	    renderRangeValueBars: function renderRangeValueBars() {
+	        var _this2 = this;
+	
+	        return renderNotImplemented();
+	
+	        var _props2 = this.props;
+	        var xScale = _props2.xScale;
+	        var yScale = _props2.yScale;
+	        var getX = _props2.getX;
+	        var getY = _props2.getY;
 	
 	        var isHorizontal = this.props.orientation === 'bar';
 	        //const barThickness = this.state.barScale.rangeBand();
@@ -23296,15 +23586,33 @@
 	
 	                return _react2['default'].createElement('rect', {
 	                    className: 'chart-bar chart-bar-vertical',
-	                    x: _this.props.xScale(xAccessor(d)) - barThickness / 2,
+	                    x: _this2.props.xScale(xAccessor(d)) - barThickness / 2,
 	                    y: barY,
 	                    width: barThickness,
 	                    height: barLength
 	                });
 	            })
 	        );
-	    }
+	    },
+	    renderValueRangeBars: function renderValueRangeBars() {
+	        return renderNotImplemented('value range');
+	    },
+	    renderRangeRangeBars: function renderRangeRangeBars() {}
 	});
+	
+	function renderNotImplemented() {
+	    var text = arguments.length <= 0 || arguments[0] === undefined ? "not implemented" : arguments[0];
+	
+	    return _react2['default'].createElement(
+	        'svg',
+	        { x: 100, y: 100, style: { overflow: 'visible' } },
+	        _react2['default'].createElement(
+	            'text',
+	            null,
+	            text
+	        )
+	    );
+	}
 	
 	exports['default'] = BarChart;
 	module.exports = exports['default'];
@@ -57177,12 +57485,66 @@
 	
 	var _d32 = _interopRequireDefault(_d3);
 	
+	var _utilJs = __webpack_require__(185);
+	
 	var PropTypes = _react2['default'].PropTypes;
+	
+	window.accessor = _utilJs.accessor;
+	
+	function makeScale(type) {
+	    switch (type) {
+	        case 'number':
+	            return _d32['default'].scale.linear();
+	        case 'ordinal':
+	            return _d32['default'].scale.ordinal();
+	        case 'time':
+	            return _d32['default'].time.scale();
+	    }
+	}
+	
+	function domainFromChildren(children, xType, yType) {
+	    var childDomains = [];
+	    _react2['default'].Children.forEach(children, function (child) {
+	        var domain = _lodash2['default'].isFunction(child.type.getDomain) ? child.type.getDomain(child.props, xType, yType) : { x: null, y: null };
+	
+	        if (_lodash2['default'].isNull(domain.x)) domain.x = defaultDomain(child.props.data, child.props.getX, xType);
+	        if (_lodash2['default'].isNull(domain.y)) domain.y = defaultDomain(child.props.data, child.props.getY, yType);
+	        childDomains.push(domain);
+	    });
+	
+	    return {
+	        x: defaultDomain(_lodash2['default'].flatten(_lodash2['default'].pluck(childDomains, 'x')), null, xType),
+	        y: defaultDomain(_lodash2['default'].flatten(_lodash2['default'].pluck(childDomains, 'y')), null, yType)
+	    };
+	}
+	
+	function defaultDomain(data, getter, scaleType) {
+	    switch (scaleType) {
+	        // extent for number/time scales, coerce dates to numbers
+	        case 'number':
+	        case 'time':
+	            return _d32['default'].extent(data, function (d) {
+	                return +(0, _utilJs.accessor)(getter)(d);
+	            });
+	        // all unique values for ordinal scale
+	        case 'ordinal':
+	            return _lodash2['default'].uniq(data.map((0, _utilJs.accessor)(getter)));
+	    }
+	    return [];
+	}
 	
 	var XYPlot = _react2['default'].createClass({
 	    displayName: 'XYPlot',
 	
 	    propTypes: {
+	        // x & y scale types
+	        xType: PropTypes.oneOf(['number', 'time', 'ordinal']),
+	        yType: PropTypes.oneOf(['number', 'time', 'ordinal']),
+	
+	        // scale domains may be provided, otherwise will be inferred from data
+	        xDomain: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
+	        yDomain: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
+	
 	        // (outer) width and height of the chart
 	        width: PropTypes.number,
 	        height: PropTypes.number,
@@ -57207,6 +57569,10 @@
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return {
+	            xType: 'number',
+	            yType: 'number',
+	            xDomain: null,
+	            yDomain: null,
 	            width: 400,
 	            height: 250,
 	            marginTop: 10,
@@ -57220,28 +57586,59 @@
 	            onMouseMove: _lodash2['default'].noop
 	        };
 	    },
-	    getInitialState: function getInitialState() {
-	        return {
-	            xScale: null,
-	            yScale: null,
-	            innerWidth: null,
-	            innerHeight: null
-	        };
-	    },
 	
 	    componentWillMount: function componentWillMount() {
 	        this.initScale(this.props);
-	        //this.initDataLookup(this.props);
 	    },
 	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
 	        this.initScale(newProps);
-	        //this.initDataLookup(newProps);
 	    },
 	
 	    initScale: function initScale(props) {
 	        var innerWidth = props.width - (props.marginLeft + props.marginRight);
 	        var innerHeight = props.height - (props.marginTop + props.marginBottom);
 	
+	        var chartDomains = [];
+	        _react2['default'].Children.forEach(props.children, function (child) {
+	            var domain = _lodash2['default'].isFunction(child.type.getDomain) ? child.type.getDomain(child.props, props.xType, props.yType) : { x: null, y: null };
+	
+	            if (_lodash2['default'].isNull(domain.x)) domain.x = defaultDomain(child.props.data, child.props.getX, props.xType);
+	            if (_lodash2['default'].isNull(domain.y)) domain.y = defaultDomain(child.props.data, child.props.getY, props.yType);
+	            chartDomains.push(domain);
+	        });
+	
+	        var xDomain = defaultDomain(_lodash2['default'].flatten(_lodash2['default'].pluck(chartDomains, 'x')), null, props.xType);
+	        var yDomain = defaultDomain(_lodash2['default'].flatten(_lodash2['default'].pluck(chartDomains, 'y')), null, props.yType);
+	
+	        var xScale = makeScale(props.xType)
+	        //.range([0, innerWidth])
+	        .domain(xDomain);
+	        props.xType === 'ordinal' ? xScale.rangePoints([0, innerWidth]) : xScale.range([0, innerWidth]);
+	
+	        var yScale = makeScale(props.yType).range([innerHeight, 0]).domain(yDomain);
+	
+	        _lodash2['default'].assign(this, { xScale: xScale, yScale: yScale, innerWidth: innerWidth, innerHeight: innerHeight });
+	    },
+	
+	    _initScale: function _initScale(props) {
+	        var innerWidth = props.width - (props.marginLeft + props.marginRight);
+	        var innerHeight = props.height - (props.marginTop + props.marginBottom);
+	
+	        console.log('domainFromChildren', domainFromChildren(props.children, props.xType, props.yType));
+	
+	        //let xDomain = props.xDomain;
+	        //if(!xDomain) {
+	        //    let childDomains = [];
+	        //    React.Children.forEach(props.children, child => {
+	        //        childDomains.push(child.type.getDomain(child.props, props.xType));
+	        //    });
+	        //    xDomain = (props.xType === 'number' || props.xType === 'time') ?
+	        //            d3.extent(_.flatten(childDomains), (d) => +d) : // extent for numbers, coerce dates to numbers
+	        //            _.uniq(_.flatten(childDomains)); // unique for ordinal scale
+	        //}
+	
+	        // children are required to implement the static method `getExtent`
+	        // which returns the extent of the data domain that will be plotted on that chart for given dataset
 	        var childExtents = [];
 	        _react2['default'].Children.forEach(props.children, function (child) {
 	            var _child$props = child.props;
@@ -57249,22 +57646,19 @@
 	            var getX = _child$props.getX;
 	            var getY = _child$props.getY;
 	
-	            childExtents.push(child.type.getExtent(data, getX, getY));
+	            childExtents.push(child.type.getExtent(data, getX, getY, child.props));
 	        });
-	        console.log('childExtents', childExtents);
 	
+	        // take the total combined extent of all children's domain extents to determine the overall domain extent
 	        var xExtent = _d32['default'].extent(_lodash2['default'].flatten(_lodash2['default'].pluck(childExtents, 'x')));
 	        var yExtent = _d32['default'].extent(_lodash2['default'].flatten(_lodash2['default'].pluck(childExtents, 'y')));
 	
-	        var xScale = _d32['default'].scale.linear().range([0, innerWidth]).domain(xExtent);
+	        var xScale = makeScale(props.xType).range([0, innerWidth]).domain(xExtent);
 	
-	        var yScale = _d32['default'].scale.linear().range([innerHeight, 0])
-	        // get the max/min for each dataset we're plotting, then the overall max/min of all of them
-	        .domain(yExtent)
-	        // extend domain to start/end at nice round values
-	        .nice();
+	        var yScale = makeScale(props.yType).range([innerHeight, 0]).domain(yExtent).nice();
 	
-	        this.setState({ xScale: xScale, yScale: yScale, innerWidth: innerWidth, innerHeight: innerHeight });
+	        //this.setState({xScale, yScale, innerWidth, innerHeight});
+	        _lodash2['default'].assign(this, { xScale: xScale, yScale: yScale, innerWidth: innerWidth, innerHeight: innerHeight });
 	    },
 	
 	    onMouseMove: function onMouseMove(e) {
@@ -57272,7 +57666,7 @@
 	
 	        var chartBB = e.currentTarget.getBoundingClientRect();
 	        var chartX = e.clientX - chartBB.left - this.props.marginLeft;
-	        var chartXVal = this.state.xScale.invert(chartX);
+	        var chartXVal = this.xScale.invert(chartX);
 	
 	        var hovered = this.refs['chart-series-0'].getHovered(chartXVal);
 	
@@ -57285,11 +57679,10 @@
 	        var height = _props.height;
 	        var marginLeft = _props.marginLeft;
 	        var marginTop = _props.marginTop;
-	        var _state = this.state;
-	        var xScale = _state.xScale;
-	        var yScale = _state.yScale;
-	        var innerWidth = _state.innerWidth;
-	        var innerHeight = _state.innerHeight;
+	        var xScale = this.xScale;
+	        var yScale = this.yScale;
+	        var innerWidth = this.innerWidth;
+	        var innerHeight = this.innerHeight;
 	
 	        return _react2['default'].createElement(
 	            'svg',
@@ -57314,13 +57707,13 @@
 	        var _props2 = this.props;
 	        var shouldDrawXTicks = _props2.shouldDrawXTicks;
 	        var shouldDrawXLabels = _props2.shouldDrawXLabels;
+	        var xType = _props2.xType;
 	
 	        if (!(shouldDrawXTicks || shouldDrawXLabels)) return null;
-	        var _state2 = this.state;
-	        var xScale = _state2.xScale;
-	        var innerHeight = _state2.innerHeight;
+	        var xScale = this.xScale;
+	        var innerHeight = this.innerHeight;
 	
-	        var xTicks = xScale.ticks();
+	        var xTicks = xType == 'ordinal' ? xScale.domain() : xScale.ticks();
 	
 	        return _react2['default'].createElement(
 	            'g',
@@ -57345,9 +57738,8 @@
 	        var shouldDrawYLabels = _props3.shouldDrawYLabels;
 	
 	        if (!(shouldDrawYTicks || shouldDrawYLabels)) return null;
-	        var _state3 = this.state;
-	        var yScale = _state3.yScale;
-	        var innerWidth = _state3.innerWidth;
+	        var yScale = this.yScale;
+	        var innerWidth = this.innerWidth;
 	
 	        var yTicks = yScale.ticks();
 	
