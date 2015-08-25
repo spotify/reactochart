@@ -81,6 +81,24 @@ function domain(data, type) {
 
 }
 
+function valueAxisDomain(data, dAccessor, axisType) {
+    const dataExtent = d3.extent(data, dAccessor);
+
+    switch (axisType) {
+        case 'number':
+            return d3.extent(dataExtent.concat(0));
+        case 'date':
+            // date values need a "zero" value to stretch from - the first date minus one day
+            // todo make this less arbitrary? should be a rare case anyway.
+            return d3.extent(dataExtent.concat(dataExtent[0] - (24 * 60 * 60 * 1000)));
+        case 'ordinal':
+            // ordinal values need a "zero" value to stretch from -
+            // empty string since it's unlikely to be used in real data and won't show a label
+            return _.uniq([''].concat(data.map(accessor(dAccessor))));
+    }
+    return null;
+}
+
 const BarChart = React.createClass({
     propTypes: {
         // the array of data objects
@@ -104,24 +122,43 @@ const BarChart = React.createClass({
         getOptions(props, xType, yType) {
 
         },
-        //getDomain(props, xType, yType) {
-        //    const {data, getX, getY, orientation} = props;
-        //    const [xAccessor, yAccessor] = [accessor(getX), accessor(getY)];
-        //    const barType = getBarChartType(props);
-        //    const isVertical = (orientation === 'vertical');
-        //
-        //    if(barType === 'ValueValue') {
-        //        console.log(d3.extent(data, yAccessor), d3.extent(data, yAccessor).reverse());
-        //        // bar extends to zero, so the bar axis must include zero
-        //        const x = isVertical ?
-        //            d3.extent(data, xAccessor) :
-        //            d3.extent(d3.extent(data, xAccessor).concat(0));
-        //        const y = isVertical ?
-        //            d3.extent(d3.extent(data, yAccessor).concat(0)) :
-        //            d3.extent(data, yAccessor).reverse();
-        //        return {x, y}
-        //    }
-        //},
+        getDomain(props, xType, yType) {
+            const {data, getX, getY, orientation} = props;
+            const [xAccessor, yAccessor] = [accessor(getX), accessor(getY)];
+            const barType = getBarChartType(props);
+            const isVertical = (orientation === 'vertical');
+
+            const accessors = {x: xAccessor, y: yAccessor};
+            const axisTypes = {x: xType, y: yType};
+            let domains = {x: null, y: null};
+
+            if(barType === 'ValueValue') {
+                let valueAxis = isVertical ? 'y' : 'x'; // the axis along which the bar's length shows value
+                domains[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
+                return domains;
+            }
+
+            if(barType === 'ValueValue') {
+                console.log(d3.extent(data, yAccessor), d3.extent(data, yAccessor).reverse());
+                // bar extends to zero, so the bar axis must include zero
+                const x = isVertical ?
+                    d3.extent(data, xAccessor) :
+                    d3.extent(d3.extent(data, xAccessor).concat(0));
+                const y = isVertical ?
+                    d3.extent(d3.extent(data, yAccessor).concat(0)) :
+                    d3.extent(data, yAccessor).reverse();
+                return {x, y}
+            }
+        },
+        getBarDomain(getter, axisType) {
+            // domain for the axis which defines the location of the bar
+            // ie. X for vertical bars, Y for horizontal bars
+
+        },
+        getValueValueDomain() {
+
+        },
+
         getExtent(data, getX, getY, props) {
             console.log('props', props);
             console.log('extent', d3.extent(data, accessor(getX)));
@@ -155,7 +192,7 @@ const BarChart = React.createClass({
     },
 
     render() {
-        console.log('barchart', this.props);
+        //console.log('barchart', this.props);
 
         //const type = getBarChartType(this.props);
         const renderer = this[`render${getBarChartType(this.props)}Bars`];

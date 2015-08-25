@@ -3,33 +3,7 @@ const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
 import {accessor} from './util.js';
-
-window.accessor = accessor;
-
-function makeScale(type) {
-    switch(type) {
-        case 'number': return d3.scale.linear();
-        case 'ordinal': return d3.scale.ordinal();
-        case 'time': return d3.time.scale();
-    }
-}
-
-function domainFromChildren(children, xType, yType) {
-    let childDomains = [];
-    React.Children.forEach(children, child => {
-        let domain = _.isFunction(child.type.getDomain) ?
-            child.type.getDomain(child.props, xType, yType) : {x: null, y: null};
-
-        if(_.isNull(domain.x)) domain.x = defaultDomain(child.props.data, child.props.getX, xType);
-        if(_.isNull(domain.y)) domain.y = defaultDomain(child.props.data, child.props.getY, yType);
-        childDomains.push(domain);
-    });
-
-    return {
-        x: defaultDomain(_.flatten(_.pluck(childDomains, 'x')), null, xType),
-        y: defaultDomain(_.flatten(_.pluck(childDomains, 'y')), null, yType)
-    };
-}
+import moment from 'moment';
 
 function defaultDomain(data, getter, scaleType) {
     switch(scaleType) {
@@ -42,6 +16,22 @@ function defaultDomain(data, getter, scaleType) {
     }
     return [];
 }
+
+function initScale(type) {
+    switch(type) {
+        case 'number': return d3.scale.linear();
+        case 'ordinal': return d3.scale.ordinal();
+        case 'time': return d3.time.scale();
+    }
+}
+
+function makeScale(domains, range, axisType) {
+    const domain = defaultDomain(_.flatten(domains), null, axisType);
+    const scale = initScale(axisType).domain(domain);
+    axisType === 'ordinal' ? scale.rangePoints(range) : scale.range(range);
+    return scale;
+}
+
 
 const XYPlot = React.createClass({
     propTypes: {
@@ -110,67 +100,15 @@ const XYPlot = React.createClass({
         React.Children.forEach(props.children, child => {
             let domain = _.isFunction(child.type.getDomain) ?
                 child.type.getDomain(child.props, props.xType, props.yType) : {x: null, y: null};
-
             if(_.isNull(domain.x)) domain.x = defaultDomain(child.props.data, child.props.getX, props.xType);
             if(_.isNull(domain.y)) domain.y = defaultDomain(child.props.data, child.props.getY, props.yType);
+            console.log('chartDomain', domain);
             chartDomains.push(domain);
         });
 
-        const xDomain = defaultDomain(_.flatten(_.pluck(chartDomains, 'x')), null, props.xType);
-        const yDomain = defaultDomain(_.flatten(_.pluck(chartDomains, 'y')), null, props.yType);
+        const xScale = makeScale(_.pluck(chartDomains, 'x'), [0, innerWidth], props.xType);
+        const yScale = makeScale(_.pluck(chartDomains, 'y'), [innerHeight, 0], props.yType);
 
-        const xScale = makeScale(props.xType)
-            //.range([0, innerWidth])
-            .domain(xDomain);
-        props.xType === 'ordinal' ? xScale.rangePoints([0, innerWidth]) : xScale.range([0, innerWidth]);
-
-        const yScale = makeScale(props.yType)
-            .range([innerHeight, 0])
-            .domain(yDomain);
-
-        _.assign(this, {xScale, yScale, innerWidth, innerHeight});
-    },
-
-    _initScale(props) {
-        const innerWidth = props.width - (props.marginLeft + props.marginRight);
-        const innerHeight = props.height - (props.marginTop + props.marginBottom);
-
-        console.log('domainFromChildren', domainFromChildren(props.children, props.xType, props.yType));
-
-        //let xDomain = props.xDomain;
-        //if(!xDomain) {
-        //    let childDomains = [];
-        //    React.Children.forEach(props.children, child => {
-        //        childDomains.push(child.type.getDomain(child.props, props.xType));
-        //    });
-        //    xDomain = (props.xType === 'number' || props.xType === 'time') ?
-        //            d3.extent(_.flatten(childDomains), (d) => +d) : // extent for numbers, coerce dates to numbers
-        //            _.uniq(_.flatten(childDomains)); // unique for ordinal scale
-        //}
-
-
-        // children are required to implement the static method `getExtent`
-        // which returns the extent of the data domain that will be plotted on that chart for given dataset
-        let childExtents = [];
-        React.Children.forEach(props.children, child => {
-            const {data, getX, getY} = child.props;
-            childExtents.push(child.type.getExtent(data, getX, getY, child.props));
-        });
-
-        // take the total combined extent of all children's domain extents to determine the overall domain extent
-        const xExtent = d3.extent(_.flatten(_.pluck(childExtents, 'x')));
-        const yExtent = d3.extent(_.flatten(_.pluck(childExtents, 'y')));
-
-        const xScale = makeScale(props.xType)
-            .range([0, innerWidth])
-            .domain(xExtent);
-
-        const yScale = makeScale(props.yType)
-            .range([innerHeight, 0])
-            .domain(yExtent)
-            .nice();
-
-        //this.setState({xScale, yScale, innerWidth, innerHeight});
         _.assign(this, {xScale, yScale, innerWidth, innerHeight});
     },
 
@@ -224,7 +162,7 @@ const XYPlot = React.createClass({
                     }
                     {shouldDrawXLabels ?
                         <text className="chart-axis-label chart-x-label" dy="0.8em" y="9" >
-                            {x+""}
+                            {xType === 'time' ? moment(x).format('M/DD') : x}
                         </text>
                         : null
                     }
@@ -233,10 +171,12 @@ const XYPlot = React.createClass({
         </g>
     },
     renderYAxis() {
-        const {shouldDrawYTicks, shouldDrawYLabels} = this.props;
+        const {shouldDrawYTicks, shouldDrawYLabels, yType} = this.props;
         if(!(shouldDrawYTicks || shouldDrawYLabels)) return null;
         const {yScale, innerWidth} = this;
-        const yTicks = yScale.ticks();
+        //if(!yScale.ticks) return; // todo handle ordinals?
+        //const yTicks = yScale.ticks();
+        const yTicks = yType == 'ordinal' ? yScale.domain() : yScale.ticks();
 
         return <g className="chart-axis chart-axis-y">
             {_.map(yTicks, (value) => {
@@ -247,7 +187,7 @@ const XYPlot = React.createClass({
                     }
                     {shouldDrawYLabels ?
                         <text className="chart-axis-label chart-y-label" dy="0.32em" x={-3}>
-                            {value}
+                            {yType === 'time' ? moment(value).format('MM-DD') : value}
                         </text>
                         : null
                     }

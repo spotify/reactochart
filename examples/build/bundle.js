@@ -95,6 +95,13 @@
 	var ordinalData = ['Always', 'Usually', 'Sometimes', 'Rarely', 'Never'];
 	var ordinalData2 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 	
+	var timeData = _.range(ordinalData.length).map(function (i) {
+	    return new Date(+new Date() + i * 24 * 60 * 60 * 1000);
+	});
+	var timeData2 = _.range(ordinalData.length).map(function (i) {
+	    return new Date(+new Date() - i * 2 * 24 * 60 * 60 * 1000);
+	});
+	
 	var randomSequences = [(0, _dataUtil.randomWalkSeries)(500, 100, 3), (0, _dataUtil.randomWalkSeries)(500), (0, _dataUtil.randomWalkSeries)(500, -100, 4)];
 	
 	var randomBars = [(0, _dataUtil.randomWalkSeries)(20, 0, 5)];
@@ -105,6 +112,10 @@
 	    valueValue: (0, _dataUtil.randomWalkSeries)(20, 0, 5)
 	};
 	var randomBarData2 = {
+	    numberNumber: _.zip((0, _dataUtil.randomWalk)(ordinalData.length, 5), (0, _dataUtil.randomWalk)(ordinalData.length, 5)),
+	    numberOrdinal: _.zip((0, _dataUtil.randomWalk)(ordinalData.length, 5), ordinalData),
+	    numberTime: _.zip((0, _dataUtil.randomWalk)(timeData.length, 5), timeData),
+	
 	    ordinalOrdinal: ordinalData.map(function (d) {
 	        return [d, _.sample(ordinalData2)];
 	    }),
@@ -201,12 +212,66 @@
 	                'Bar Charts'
 	            ),
 	            _reactAddons2['default'].createElement(
+	                'h3',
+	                null,
+	                'Value-Value Bar Charts'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'h2',
+	                null,
+	                'Vertical'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    'div',
+	                    null,
+	                    'Number-Number, Ordinal-Number, Date-Number'
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300 },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberNumber, getX: 1, getY: 0 })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, xType: 'ordinal' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 1, getY: 0 })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, xType: 'time' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberTime, getX: 1, getY: 0 })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    'div',
+	                    null,
+	                    'Number-Ordinal, Ordinal-Ordinal, Date-Ordinal'
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    'div',
+	                    null,
+	                    'Number-Date, Ordinal-Date, Date-Date'
+	                )
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'h2',
+	                null,
+	                'old'
+	            ),
+	            _reactAddons2['default'].createElement(
 	                'div',
 	                null,
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, xType: 'ordinal' },
-	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.ordinalNumber, getX: 0, getY: 1 })
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 1, getY: 0 })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, yType: 'ordinal' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1, orientation: 'horizontal' })
 	                )
 	            ),
 	            _reactAddons2['default'].createElement(
@@ -23430,6 +23495,24 @@
 	
 	function domain(data, type) {}
 	
+	function valueAxisDomain(data, dAccessor, axisType) {
+	    var dataExtent = _d32['default'].extent(data, dAccessor);
+	
+	    switch (axisType) {
+	        case 'number':
+	            return _d32['default'].extent(dataExtent.concat(0));
+	        case 'date':
+	            // date values need a "zero" value to stretch from - the first date minus one day
+	            // todo make this less arbitrary? should be a rare case anyway.
+	            return _d32['default'].extent(dataExtent.concat(dataExtent[0] - 24 * 60 * 60 * 1000));
+	        case 'ordinal':
+	            // ordinal values need a "zero" value to stretch from -
+	            // empty string since it's unlikely to be used in real data and won't show a label
+	            return _lodash2['default'].uniq([''].concat(data.map((0, _utilJs.accessor)(dAccessor))));
+	    }
+	    return null;
+	}
+	
 	var BarChart = _react2['default'].createClass({
 	    displayName: 'BarChart',
 	
@@ -23453,24 +23536,42 @@
 	
 	    statics: {
 	        getOptions: function getOptions(props, xType, yType) {},
-	        //getDomain(props, xType, yType) {
-	        //    const {data, getX, getY, orientation} = props;
-	        //    const [xAccessor, yAccessor] = [accessor(getX), accessor(getY)];
-	        //    const barType = getBarChartType(props);
-	        //    const isVertical = (orientation === 'vertical');
-	        //
-	        //    if(barType === 'ValueValue') {
-	        //        console.log(d3.extent(data, yAccessor), d3.extent(data, yAccessor).reverse());
-	        //        // bar extends to zero, so the bar axis must include zero
-	        //        const x = isVertical ?
-	        //            d3.extent(data, xAccessor) :
-	        //            d3.extent(d3.extent(data, xAccessor).concat(0));
-	        //        const y = isVertical ?
-	        //            d3.extent(d3.extent(data, yAccessor).concat(0)) :
-	        //            d3.extent(data, yAccessor).reverse();
-	        //        return {x, y}
-	        //    }
-	        //},
+	        getDomain: function getDomain(props, xType, yType) {
+	            var data = props.data;
+	            var getX = props.getX;
+	            var getY = props.getY;
+	            var orientation = props.orientation;
+	            var xAccessor = (0, _utilJs.accessor)(getX);
+	            var yAccessor = (0, _utilJs.accessor)(getY);
+	
+	            var barType = getBarChartType(props);
+	            var isVertical = orientation === 'vertical';
+	
+	            var accessors = { x: xAccessor, y: yAccessor };
+	            var axisTypes = { x: xType, y: yType };
+	            var domains = { x: null, y: null };
+	
+	            if (barType === 'ValueValue') {
+	                var valueAxis = isVertical ? 'y' : 'x'; // the axis along which the bar's length shows value
+	                domains[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
+	                return domains;
+	            }
+	
+	            if (barType === 'ValueValue') {
+	                console.log(_d32['default'].extent(data, yAccessor), _d32['default'].extent(data, yAccessor).reverse());
+	                // bar extends to zero, so the bar axis must include zero
+	                var x = isVertical ? _d32['default'].extent(data, xAccessor) : _d32['default'].extent(_d32['default'].extent(data, xAccessor).concat(0));
+	                var y = isVertical ? _d32['default'].extent(_d32['default'].extent(data, yAccessor).concat(0)) : _d32['default'].extent(data, yAccessor).reverse();
+	                return { x: x, y: y };
+	            }
+	        },
+	        getBarDomain: function getBarDomain(getter, axisType) {
+	            // domain for the axis which defines the location of the bar
+	            // ie. X for vertical bars, Y for horizontal bars
+	
+	        },
+	        getValueValueDomain: function getValueValueDomain() {},
+	
 	        getExtent: function getExtent(data, getX, getY, props) {
 	            console.log('props', props);
 	            console.log('extent', _d32['default'].extent(data, (0, _utilJs.accessor)(getX)));
@@ -23497,7 +23598,7 @@
 	    getHovered: function getHovered() {},
 	
 	    render: function render() {
-	        console.log('barchart', this.props);
+	        //console.log('barchart', this.props);
 	
 	        //const type = getBarChartType(this.props);
 	        var renderer = this['render' + getBarChartType(this.props) + 'Bars'];
@@ -57487,36 +57588,11 @@
 	
 	var _utilJs = __webpack_require__(185);
 	
+	var _moment = __webpack_require__(188);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
 	var PropTypes = _react2['default'].PropTypes;
-	
-	window.accessor = _utilJs.accessor;
-	
-	function makeScale(type) {
-	    switch (type) {
-	        case 'number':
-	            return _d32['default'].scale.linear();
-	        case 'ordinal':
-	            return _d32['default'].scale.ordinal();
-	        case 'time':
-	            return _d32['default'].time.scale();
-	    }
-	}
-	
-	function domainFromChildren(children, xType, yType) {
-	    var childDomains = [];
-	    _react2['default'].Children.forEach(children, function (child) {
-	        var domain = _lodash2['default'].isFunction(child.type.getDomain) ? child.type.getDomain(child.props, xType, yType) : { x: null, y: null };
-	
-	        if (_lodash2['default'].isNull(domain.x)) domain.x = defaultDomain(child.props.data, child.props.getX, xType);
-	        if (_lodash2['default'].isNull(domain.y)) domain.y = defaultDomain(child.props.data, child.props.getY, yType);
-	        childDomains.push(domain);
-	    });
-	
-	    return {
-	        x: defaultDomain(_lodash2['default'].flatten(_lodash2['default'].pluck(childDomains, 'x')), null, xType),
-	        y: defaultDomain(_lodash2['default'].flatten(_lodash2['default'].pluck(childDomains, 'y')), null, yType)
-	    };
-	}
 	
 	function defaultDomain(data, getter, scaleType) {
 	    switch (scaleType) {
@@ -57531,6 +57607,24 @@
 	            return _lodash2['default'].uniq(data.map((0, _utilJs.accessor)(getter)));
 	    }
 	    return [];
+	}
+	
+	function initScale(type) {
+	    switch (type) {
+	        case 'number':
+	            return _d32['default'].scale.linear();
+	        case 'ordinal':
+	            return _d32['default'].scale.ordinal();
+	        case 'time':
+	            return _d32['default'].time.scale();
+	    }
+	}
+	
+	function makeScale(domains, range, axisType) {
+	    var domain = defaultDomain(_lodash2['default'].flatten(domains), null, axisType);
+	    var scale = initScale(axisType).domain(domain);
+	    axisType === 'ordinal' ? scale.rangePoints(range) : scale.range(range);
+	    return scale;
 	}
 	
 	var XYPlot = _react2['default'].createClass({
@@ -57601,63 +57695,15 @@
 	        var chartDomains = [];
 	        _react2['default'].Children.forEach(props.children, function (child) {
 	            var domain = _lodash2['default'].isFunction(child.type.getDomain) ? child.type.getDomain(child.props, props.xType, props.yType) : { x: null, y: null };
-	
 	            if (_lodash2['default'].isNull(domain.x)) domain.x = defaultDomain(child.props.data, child.props.getX, props.xType);
 	            if (_lodash2['default'].isNull(domain.y)) domain.y = defaultDomain(child.props.data, child.props.getY, props.yType);
+	            console.log('chartDomain', domain);
 	            chartDomains.push(domain);
 	        });
 	
-	        var xDomain = defaultDomain(_lodash2['default'].flatten(_lodash2['default'].pluck(chartDomains, 'x')), null, props.xType);
-	        var yDomain = defaultDomain(_lodash2['default'].flatten(_lodash2['default'].pluck(chartDomains, 'y')), null, props.yType);
+	        var xScale = makeScale(_lodash2['default'].pluck(chartDomains, 'x'), [0, innerWidth], props.xType);
+	        var yScale = makeScale(_lodash2['default'].pluck(chartDomains, 'y'), [innerHeight, 0], props.yType);
 	
-	        var xScale = makeScale(props.xType)
-	        //.range([0, innerWidth])
-	        .domain(xDomain);
-	        props.xType === 'ordinal' ? xScale.rangePoints([0, innerWidth]) : xScale.range([0, innerWidth]);
-	
-	        var yScale = makeScale(props.yType).range([innerHeight, 0]).domain(yDomain);
-	
-	        _lodash2['default'].assign(this, { xScale: xScale, yScale: yScale, innerWidth: innerWidth, innerHeight: innerHeight });
-	    },
-	
-	    _initScale: function _initScale(props) {
-	        var innerWidth = props.width - (props.marginLeft + props.marginRight);
-	        var innerHeight = props.height - (props.marginTop + props.marginBottom);
-	
-	        console.log('domainFromChildren', domainFromChildren(props.children, props.xType, props.yType));
-	
-	        //let xDomain = props.xDomain;
-	        //if(!xDomain) {
-	        //    let childDomains = [];
-	        //    React.Children.forEach(props.children, child => {
-	        //        childDomains.push(child.type.getDomain(child.props, props.xType));
-	        //    });
-	        //    xDomain = (props.xType === 'number' || props.xType === 'time') ?
-	        //            d3.extent(_.flatten(childDomains), (d) => +d) : // extent for numbers, coerce dates to numbers
-	        //            _.uniq(_.flatten(childDomains)); // unique for ordinal scale
-	        //}
-	
-	        // children are required to implement the static method `getExtent`
-	        // which returns the extent of the data domain that will be plotted on that chart for given dataset
-	        var childExtents = [];
-	        _react2['default'].Children.forEach(props.children, function (child) {
-	            var _child$props = child.props;
-	            var data = _child$props.data;
-	            var getX = _child$props.getX;
-	            var getY = _child$props.getY;
-	
-	            childExtents.push(child.type.getExtent(data, getX, getY, child.props));
-	        });
-	
-	        // take the total combined extent of all children's domain extents to determine the overall domain extent
-	        var xExtent = _d32['default'].extent(_lodash2['default'].flatten(_lodash2['default'].pluck(childExtents, 'x')));
-	        var yExtent = _d32['default'].extent(_lodash2['default'].flatten(_lodash2['default'].pluck(childExtents, 'y')));
-	
-	        var xScale = makeScale(props.xType).range([0, innerWidth]).domain(xExtent);
-	
-	        var yScale = makeScale(props.yType).range([innerHeight, 0]).domain(yExtent).nice();
-	
-	        //this.setState({xScale, yScale, innerWidth, innerHeight});
 	        _lodash2['default'].assign(this, { xScale: xScale, yScale: yScale, innerWidth: innerWidth, innerHeight: innerHeight });
 	    },
 	
@@ -57726,7 +57772,7 @@
 	                    shouldDrawXLabels ? _react2['default'].createElement(
 	                        'text',
 	                        { className: 'chart-axis-label chart-x-label', dy: '0.8em', y: '9' },
-	                        x + ""
+	                        xType === 'time' ? (0, _moment2['default'])(x).format('M/DD') : x
 	                    ) : null
 	                );
 	            })
@@ -57736,12 +57782,15 @@
 	        var _props3 = this.props;
 	        var shouldDrawYTicks = _props3.shouldDrawYTicks;
 	        var shouldDrawYLabels = _props3.shouldDrawYLabels;
+	        var yType = _props3.yType;
 	
 	        if (!(shouldDrawYTicks || shouldDrawYLabels)) return null;
 	        var yScale = this.yScale;
-	        var innerWidth = this.innerWidth;
 	
-	        var yTicks = yScale.ticks();
+	        //if(!yScale.ticks) return; // todo handle ordinals?
+	        //const yTicks = yScale.ticks();
+	        var innerWidth = this.innerWidth;
+	        var yTicks = yType == 'ordinal' ? yScale.domain() : yScale.ticks();
 	
 	        return _react2['default'].createElement(
 	            'g',
@@ -57754,7 +57803,7 @@
 	                    shouldDrawYLabels ? _react2['default'].createElement(
 	                        'text',
 	                        { className: 'chart-axis-label chart-y-label', dy: '0.32em', x: -3 },
-	                        value
+	                        yType === 'time' ? (0, _moment2['default'])(value).format('MM-DD') : value
 	                    ) : null
 	                );
 	            })

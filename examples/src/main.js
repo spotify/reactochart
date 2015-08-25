@@ -29,6 +29,9 @@ _.extend(window, {randomWalk});
 const ordinalData = ['Always', 'Usually', 'Sometimes', 'Rarely', 'Never'];
 const ordinalData2 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
+const timeData = _.range(ordinalData.length).map((i) => new Date(+(new Date()) + (i * 24*60*60*1000)));
+const timeData2 = _.range(ordinalData.length).map((i) => new Date(+(new Date()) - (i * 2 * 24*60*60*1000)));
+
 const randomSequences = [
     randomWalkSeries(500, 100, 3),
     randomWalkSeries(500),
@@ -51,6 +54,10 @@ const randomBarData = {
     valueValue: randomWalkSeries(20, 0, 5)
 };
 const randomBarData2 = {
+    numberNumber: _.zip(randomWalk(ordinalData.length, 5), randomWalk(ordinalData.length, 5)),
+    numberOrdinal: _.zip(randomWalk(ordinalData.length, 5), ordinalData),
+    numberTime: _.zip(randomWalk(timeData.length, 5), timeData),
+
     ordinalOrdinal: ordinalData.map(d => [d, _.sample(ordinalData2)]),
     ordinalNumber: _.zip(ordinalData, randomWalk(ordinalData.length, 5))
 };
@@ -119,9 +126,36 @@ const App = React.createClass({
 
             <h3>Bar Charts</h3>
 
+            <h3>Value-Value Bar Charts</h3>
+
+            <h2>Vertical</h2>
+
+            <div>
+                <div>Number-Number, Ordinal-Number, Date-Number</div>
+                <XYPlot width={300} height={300}>
+                    <BarChart data={randomBarData2.numberNumber} getX={1} getY={0} />
+                </XYPlot>
+                <XYPlot width={300} height={300} xType='ordinal'>
+                    <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} />
+                </XYPlot>
+                <XYPlot width={300} height={300} xType='time'>
+                    <BarChart data={randomBarData2.numberTime} getX={1} getY={0} />
+                </XYPlot>
+
+                <div>Number-Ordinal, Ordinal-Ordinal, Date-Ordinal</div>
+
+                <div>Number-Date, Ordinal-Date, Date-Date</div>
+            </div>
+
+
+            <h2>old</h2>
+
             <div>
                 <XYPlot width={300} height={300} xType='ordinal'>
-                    <BarChart data={randomBarData2.ordinalNumber} getX={0} getY={1} />
+                    <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} />
+                </XYPlot>
+                <XYPlot width={300} height={300} yType='ordinal'>
+                    <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
                 </XYPlot>
             </div>
 
