@@ -45,11 +45,15 @@ regenerated on each build.
 "hot reload" changes to React components, so refreshing your web browser is usually not necessary. However, some
 changes will still require a refresh to propagate.
 
-# TODO:
+# TO DO:
 
-## chart types
-* Scatterplot
-* Horizontal bar chart
-* Stacked bar chart
-* Grouped bar chart
+* write unit tests
+* ensure all charts have common proptypes
+* documentation
 
+## additional chart types
+* Range-Value Bar Chart
+* Value-Range Bar Chart
+* Range-Range Bar Chart
+* 2D Histogram (heatmap)
+* 2D KDE?
