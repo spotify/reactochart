@@ -1,10 +1,10 @@
 import '../styles/main.less'
 import React from 'react/addons';
-const {PureRenderMixin, update} = React.addons;
+const {PureRenderMixin, update, Perf} = React.addons;
+_.extend(window, {Perf});
 
 import {
     // old charts
-    V1StackedBarChart,
     V1LineChart,
     // new charts
     XYPlot,
@@ -53,7 +53,7 @@ const randomBarData = {
     valueValue: randomWalkSeries(20, 0, 5)
 };
 const randomBarData2 = {
-    numberNumber: _.zip(randomWalk(ordinalData.length, 5), randomWalk(ordinalData.length, 5)),
+    numberNumber: _.zip(_.range(0,20), randomWalk(20, 5)),
     numberOrdinal: _.zip(randomWalk(ordinalData.length, 5), ordinalData),
     numberTime: _.zip(randomWalk(timeData.length, 5), timeData),
 
@@ -71,7 +71,6 @@ const randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.r
 
 const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 // end fake data
-
 
 
 const ScatterPlotExample = React.createClass({
@@ -211,7 +210,7 @@ const ValueValueBarExample = React.createClass({
             <div>
                 <div>Number-Number, Ordinal-Number, Time-Number</div>
                 <XYPlot width={300} height={300}>
-                    <BarChart data={randomBarData2.numberNumber} getX={1} getY={0} />
+                    <BarChart data={randomBarData2.numberNumber} getX={0} getY={1} />
                 </XYPlot>
                 <XYPlot width={300} height={300} xType='ordinal'>
                     <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} />
@@ -325,26 +324,9 @@ const V1Examples = React.createClass({
                     onMouseMove={this.onMouseMoveV1LineChart}
                     />
             </div>
-
-            <h3>Bar Chart</h3>
-            <div>
-                <V1StackedBarChart
-                    data={statesData}
-                    plotKeys={['a','b','c','d','e','f','g']}
-                    />
-            </div>
-
-            <div>
-                <V1StackedBarChart
-                    orientation="column"
-                    data={statesData}
-                    plotKeys={['a','b','c','d','e','f','g']}
-                    />
-            </div>
         </div>
     }
 });
-
 
 
 const examples = [
@@ -354,7 +336,7 @@ const examples = [
     {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
     {id: 'histogram', title: 'Histogram', Component: HistogramExample},
     {id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample},
-    {id: 'v1', title: 'v1 Examples (old & deprecated)', Component: V1Examples}
+    {id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples}
 ];
 
 const App = React.createClass({
@@ -366,6 +348,13 @@ const App = React.createClass({
     toggleExample(id) {
         const isVisible = this.state.visibleExamples[id];
         this.setState(update(this.state, {visibleExamples: {[id]: {$set: !isVisible}}}));
+    },
+
+    render() {
+        return <div>
+            <h1>Reactochart Examples</h1>
+            {this.renderExamples()}
+        </div>
     },
     renderExamples() {
         return <div class='example-sections'>
@@ -379,8 +368,9 @@ const App = React.createClass({
             <div
                 className={`example-section-button ${isVisible ? 'active' : ''}`}
                 onClick={this.toggleExample.bind(null, example.id)}
-            >
-                {example.title} {isVisible ? "▼" : "►"}
+                >
+                {example.title}
+                <span className="example-arrow">{isVisible ? " ▼" : " ►"}</span>
             </div>
             {isVisible ?
                 <div className="example-section-content">
@@ -388,12 +378,6 @@ const App = React.createClass({
                 </div>
                 : null
             }
-        </div>
-    },
-    render() {
-        return <div>
-            <h1>Reactochart Examples</h1>
-            {this.renderExamples()}
         </div>
     }
 });

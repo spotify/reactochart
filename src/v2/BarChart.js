@@ -109,6 +109,10 @@ const BarChart = React.createClass({
         getX: AccessorPropType,
         getY: AccessorPropType,
 
+        // x & y scale types
+        xType: PropTypes.oneOf(['number', 'time', 'ordinal']),
+        yType: PropTypes.oneOf(['number', 'time', 'ordinal']),
+
         orientation: PropTypes.string,
 
         xScale: PropTypes.func,
@@ -139,47 +143,9 @@ const BarChart = React.createClass({
                 domains[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
                 return domains;
             }
-        },
-        getBarDomain(getter, axisType) {
-            // domain for the axis which defines the location of the bar
-            // ie. X for vertical bars, Y for horizontal bars
-
-        },
-        getValueValueDomain() {
-
-        },
-
-        getExtent(data, getX, getY, props) {
-            console.log('props', props);
-            console.log('extent', d3.extent(data, accessor(getX)));
-
-            const xAccessor = accessor(getX);
-            const yAccessor = accessor(getY);
-            const type = getBarChartType(props);
-            const isVertical = props.orientation === 'vertical';
-
-            if(type === 'ValueValue') {
-                console.log(d3.extent(data, yAccessor), d3.extent(data, yAccessor).reverse());
-                // bar extends to zero, so the bar axis must include zero
-                const x = isVertical ?
-                    d3.extent(data, xAccessor) :
-                    d3.extent(d3.extent(data, xAccessor).concat(0));
-                const y = isVertical ?
-                    d3.extent(d3.extent(data, yAccessor).concat(0)) :
-                    d3.extent(data, yAccessor).reverse();
-                return {x, y}
-            }
-
-
-            return {
-                x: d3.extent(data, accessor(getX)),
-                y: d3.extent(d3.extent(data, accessor(getY)).concat(0))
-            }
         }
     },
-    getHovered() {
-
-    },
+    getHovered() {},
 
     render() {
         //console.log('barchart', this.props);

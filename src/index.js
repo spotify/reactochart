@@ -1,4 +1,3 @@
-export { default as V1StackedBarChart } from './StackedBarChart';
 export { default as V1LineChart } from './LineChart';
 
 export { default as XYPlot } from './v2/XYPlot';

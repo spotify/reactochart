@@ -5,34 +5,6 @@ import d3 from 'd3';
 import {accessor} from './util.js';
 import moment from 'moment';
 
-function defaultDomain(data, getter, scaleType) {
-    switch(scaleType) {
-        // extent for number/time scales, coerce dates to numbers
-        case 'number':
-        case 'time':
-            return d3.extent(data, (d) => +accessor(getter)(d));
-        // all unique values for ordinal scale
-        case 'ordinal': return _.uniq(data.map(accessor(getter)));
-    }
-    return [];
-}
-
-function initScale(type) {
-    switch(type) {
-        case 'number': return d3.scale.linear();
-        case 'ordinal': return d3.scale.ordinal();
-        case 'time': return d3.time.scale();
-    }
-}
-
-function makeScale(domains, range, axisType) {
-    const domain = defaultDomain(_.flatten(domains), null, axisType);
-    const scale = initScale(axisType).domain(domain);
-    axisType === 'ordinal' ? scale.rangePoints(range) : scale.range(range);
-    return scale;
-}
-
-
 const XYPlot = React.createClass({
     propTypes: {
         // x & y scale types
@@ -62,6 +34,10 @@ const XYPlot = React.createClass({
         shouldDrawYTicks: PropTypes.bool,
         // whether or not to draw Y axis label text (values)
         shouldDrawYLabels: PropTypes.bool,
+
+        // todo: niceX, niceY
+        // todo: shouldDrawXGrid, shouldDrawYGrid, shouldDrawXZero, shouldDrawYZero
+        // todo: padding
 
         onMouseMove: PropTypes.func
     },
@@ -93,11 +69,9 @@ const XYPlot = React.createClass({
     },
 
     initScale(props) {
-        const innerWidth = props.width - (props.marginLeft + props.marginRight);
-        const innerHeight = props.height - (props.marginTop + props.marginBottom);
-
         let chartDomains = [];
         React.Children.forEach(props.children, child => {
+            // todo handle domain passed in as prop
             let domain = _.isFunction(child.type.getDomain) ?
                 child.type.getDomain(child.props, props.xType, props.yType) : {x: null, y: null};
             if(_.isNull(domain.x)) domain.x = defaultDomain(child.props.data, child.props.getX, props.xType);
@@ -106,20 +80,23 @@ const XYPlot = React.createClass({
             chartDomains.push(domain);
         });
 
+        const innerWidth = props.width - (props.marginLeft + props.marginRight);
+        const innerHeight = props.height - (props.marginTop + props.marginBottom);
         const xScale = makeScale(_.pluck(chartDomains, 'x'), [0, innerWidth], props.xType);
         const yScale = makeScale(_.pluck(chartDomains, 'y'), [innerHeight, 0], props.yType);
 
-        _.assign(this, {xScale, yScale, innerWidth, innerHeight});
+        _.assign(this, {innerWidth, innerHeight, xScale, yScale});
     },
 
     onMouseMove(e) {
         //if(!this.props.onMouseMove && !this.state.isSelecting) return;
-
         const chartBB = e.currentTarget.getBoundingClientRect();
         const chartX = (e.clientX - chartBB.left) - this.props.marginLeft;
+        // todo alternative to invert for ordinal scales
         const chartXVal = this.xScale.invert(chartX);
 
-        const hovered = this.refs['chart-series-0'].getHovered(chartXVal);
+        const chart = this.refs['chart-series-0'];
+        const hovered = _.isFunction(chart.getHovered) ? chart.getHovered(chartXVal) : null;
 
         this.props.onMouseMove(hovered, e);
     },
@@ -171,11 +148,10 @@ const XYPlot = React.createClass({
         </g>
     },
     renderYAxis() {
+        // todo combine into one renderAxis method
         const {shouldDrawYTicks, shouldDrawYLabels, yType} = this.props;
         if(!(shouldDrawYTicks || shouldDrawYLabels)) return null;
         const {yScale, innerWidth} = this;
-        //if(!yScale.ticks) return; // todo handle ordinals?
-        //const yTicks = yScale.ticks();
         const yTicks = yType == 'ordinal' ? yScale.domain() : yScale.ticks();
 
         return <g className="chart-axis chart-axis-y">
@@ -196,5 +172,32 @@ const XYPlot = React.createClass({
         </g>
     }
 });
+
+function defaultDomain(data, getter, scaleType) {
+    switch(scaleType) {
+        // extent for number/time scales, coerce dates to numbers
+        case 'number':
+        case 'time':
+            return d3.extent(data, (d) => +accessor(getter)(d));
+        // all unique values for ordinal scale
+        case 'ordinal': return _.uniq(data.map(accessor(getter)));
+    }
+    return [];
+}
+
+function initScale(type) {
+    switch(type) {
+        case 'number': return d3.scale.linear();
+        case 'ordinal': return d3.scale.ordinal();
+        case 'time': return d3.time.scale();
+    }
+}
+
+function makeScale(domains, range, axisType) {
+    const domain = defaultDomain(_.flatten(domains), null, axisType);
+    const scale = initScale(axisType).domain(domain);
+    axisType === 'ordinal' ? scale.rangePoints(range) : scale.range(range);
+    return scale;
+}
 
 export default XYPlot;

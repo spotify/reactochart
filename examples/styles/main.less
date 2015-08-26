@@ -3,6 +3,7 @@ body {
   margin: 0;
   padding: 0;
   background: #f0f0f0;
+  color: #0f0f0f;
 
   #container {
     margin: 10px;
@@ -18,13 +19,19 @@ body {
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
+    .example-arrow {
+      color: #888;
+    }
     &.active {
       background-color: #4cba6f;
+      .example-arrow {
+        color: #0f0f0f;
+      }
     }
   }
   margin: 10px 0;
   .example-section-content {
-    margin: 10px 0;
+    margin: 10px 20px;
   }
 }
 

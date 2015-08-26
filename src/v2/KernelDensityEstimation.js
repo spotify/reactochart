@@ -42,6 +42,16 @@ const KernelDensityEstimation = React.createClass({
             kdeData: null
         }
     },
+    statics: {
+        getDomain(data, getX, getY) {
+            return {
+                x: null,
+                // todo figure out real domain
+                y: [0,200]
+            }
+        }
+    },
+
     componentWillMount() {
         this.initKDE(this.props);
     },
@@ -55,15 +65,7 @@ const KernelDensityEstimation = React.createClass({
         this.setState({kdeData: kernelDensityEstimator(kernel, samples)(data)});
     },
 
-    statics: {
-        getExtent(data, getX, getY) {
-            return {
-                x: d3.extent(data, accessor(getX)),
-                y: [0,100]
-                //y: d3.extent(d3.extent(data, accessor(getY)).concat(0))
-            }
-        }
-    },
+
     getHovered() {
 
     },
