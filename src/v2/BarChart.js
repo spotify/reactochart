@@ -77,24 +77,26 @@ function getBarChartType(props) {
         'RangeRange';
 }
 
-function domain(data, type) {
-
+function barZeroValue(data, dAccessor, axisType) {
+    switch (axisType) {
+        // number bars go from zero to value
+        case 'number': return 0;
+        // date values need a "zero" value to stretch from - the first date minus one day
+        // todo make this less arbitrary? should be a rare case anyway.
+        case 'date': return d3.extent(data, dAccessor)[0] - (24 * 60 * 60 * 1000);
+        // ordinal values need a "zero" value to stretch from -
+        // empty string since it's unlikely to be used in real data and won't show a label
+        case 'ordinal': return '';
+    }
 }
 
 function valueAxisDomain(data, dAccessor, axisType) {
-    const dataExtent = d3.extent(data, dAccessor);
-
     switch (axisType) {
         case 'number':
-            return d3.extent(dataExtent.concat(0));
         case 'date':
-            // date values need a "zero" value to stretch from - the first date minus one day
-            // todo make this less arbitrary? should be a rare case anyway.
-            return d3.extent(dataExtent.concat(dataExtent[0] - (24 * 60 * 60 * 1000)));
+            return d3.extent(d3.extent(data, dAccessor).concat(barZeroValue(data, dAccessor, axisType)));
         case 'ordinal':
-            // ordinal values need a "zero" value to stretch from -
-            // empty string since it's unlikely to be used in real data and won't show a label
-            return _.uniq([''].concat(data.map(accessor(dAccessor))));
+            return _.uniq([barZeroValue(data, dAccessor, axisType)].concat(data.map(accessor(dAccessor))));
     }
     return null;
 }
@@ -136,18 +138,6 @@ const BarChart = React.createClass({
                 let valueAxis = isVertical ? 'y' : 'x'; // the axis along which the bar's length shows value
                 domains[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
                 return domains;
-            }
-
-            if(barType === 'ValueValue') {
-                console.log(d3.extent(data, yAccessor), d3.extent(data, yAccessor).reverse());
-                // bar extends to zero, so the bar axis must include zero
-                const x = isVertical ?
-                    d3.extent(data, xAccessor) :
-                    d3.extent(d3.extent(data, xAccessor).concat(0));
-                const y = isVertical ?
-                    d3.extent(d3.extent(data, yAccessor).concat(0)) :
-                    d3.extent(data, yAccessor).reverse();
-                return {x, y}
             }
         },
         getBarDomain(getter, axisType) {
@@ -202,7 +192,7 @@ const BarChart = React.createClass({
         </g>
     },
     renderValueValueBars() {
-        const {xScale, yScale, getX, getY} = this.props;
+        const {data, xScale, yScale, getX, getY, xType, yType} = this.props;
         //const isHorizontal = this.props.orientation === 'bar';
         //const barThickness = this.state.barScale.rangeBand();
         const barThickness = 5;
@@ -213,9 +203,10 @@ const BarChart = React.createClass({
         return this.props.orientation === 'vertical' ?
             <g>
                 {this.props.data.map((d, i) => {
+                    const barZero = barZeroValue(data, getY, yType);
                     const yVal = yAccessor(d);
-                    const barLength = Math.abs(yScale(0) - yScale(yVal));
-                    const barY = yVal >= 0 ? yScale(0) - barLength : yScale(0);
+                    const barLength = Math.abs(yScale(barZero) - yScale(yVal));
+                    const barY = (yVal >= 0 || yType === 'ordinal') ? yScale(barZero) - barLength : yScale(barZero);
 
                     return <rect
                             className="chart-bar chart-bar-vertical"

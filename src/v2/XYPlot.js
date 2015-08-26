@@ -102,7 +102,7 @@ const XYPlot = React.createClass({
                 child.type.getDomain(child.props, props.xType, props.yType) : {x: null, y: null};
             if(_.isNull(domain.x)) domain.x = defaultDomain(child.props.data, child.props.getX, props.xType);
             if(_.isNull(domain.y)) domain.y = defaultDomain(child.props.data, child.props.getY, props.yType);
-            console.log('chartDomain', domain);
+            //console.log('chartDomain', domain);
             chartDomains.push(domain);
         });
 
@@ -125,7 +125,7 @@ const XYPlot = React.createClass({
     },
 
     render() {
-        const {width, height, marginLeft, marginTop} = this.props;
+        const {width, height, marginLeft, marginTop, xType, yType} = this.props;
         const {xScale, yScale, innerWidth, innerHeight} = this;
         return (
             <svg className="multi-chart" {...{width, height}}
@@ -140,7 +140,7 @@ const XYPlot = React.createClass({
                     {React.Children.map(this.props.children, (child, i) => {
                         const name = child.props.name || 'chart-series-' + i;
                         return React.cloneElement(child,
-                            {ref: name, name, xScale, yScale, innerWidth, innerHeight}
+                            {ref: name, name, xType, yType, xScale, yScale, innerWidth, innerHeight}
                         );
                     })}
                 </g>

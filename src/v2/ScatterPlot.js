@@ -31,14 +31,6 @@ const ScatterPlot = React.createClass({
         }
     },
 
-    statics: {
-        getExtent(data, getX, getY) {
-            return {
-                x: d3.extent(data, accessor(getX)),
-                y: d3.extent(data, accessor(getY))
-            }
-        }
-    },
     getHovered() {},
 
     render() {

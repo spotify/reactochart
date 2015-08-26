@@ -2,9 +2,29 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background: #f0f0f0;
 
   #container {
     margin: 10px;
+  }
+}
+
+.example-section {
+  .example-section-button {
+    font-size: 20pt;
+    font-weight: bold;
+    background: #cccccc;
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    &.active {
+      background-color: #4cba6f;
+    }
+  }
+  margin: 10px 0;
+  .example-section-content {
+    margin: 10px 0;
   }
 }
 

@@ -17,15 +17,6 @@ const LineChart = React.createClass({
         yScale: PropTypes.func
     },
 
-    statics: {
-        getExtent(data, getX, getY) {
-            return {
-                x: d3.extent(data, accessor(getX)),
-                y: d3.extent(data, accessor(getY))
-            }
-        }
-    },
-
     componentWillMount() {
         this.initBisector(this.props);
     },
@@ -50,8 +41,6 @@ const LineChart = React.createClass({
         return <g className={this.props.name}>
             <path d={pathStr} />
         </g>;
-
-        return <rect x={_.random(200)} y={20} width={50} height={80} opacity={0.5}></rect>
     }
 });
 

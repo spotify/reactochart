@@ -59,6 +59,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
 	__webpack_require__(2);
 	
 	var _reactAddons = __webpack_require__(6);
@@ -83,15 +85,15 @@
 	
 	var _dataUtil = __webpack_require__(283);
 	
-	var PureRenderMixin = _reactAddons2['default'].addons.PureRenderMixin;
+	// sample ordinal data
+	var _React$addons = _reactAddons2['default'].addons;
+	var PureRenderMixin = _React$addons.PureRenderMixin;
+	var update = _React$addons.update;
 	
 	var tempDataClean = _dataDailyTemperatureJson2['default'].map(function (d) {
 	    return _.assign({}, d, { date: new Date(d.date) });
 	});
 	
-	_.extend(window, { randomWalk: _dataUtil.randomWalk });
-	
-	// sample ordinal data
 	var ordinalData = ['Always', 'Usually', 'Sometimes', 'Rarely', 'Never'];
 	var ordinalData2 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 	
@@ -116,10 +118,11 @@
 	    numberOrdinal: _.zip((0, _dataUtil.randomWalk)(ordinalData.length, 5), ordinalData),
 	    numberTime: _.zip((0, _dataUtil.randomWalk)(timeData.length, 5), timeData),
 	
-	    ordinalOrdinal: ordinalData.map(function (d) {
-	        return [d, _.sample(ordinalData2)];
-	    }),
-	    ordinalNumber: _.zip(ordinalData, (0, _dataUtil.randomWalk)(ordinalData.length, 5))
+	    //ordinalOrdinal: ordinalData.map(d => [d, _.sample(ordinalData2)]),
+	    ordinalOrdinal: _.zip(ordinalData, ordinalData2),
+	    ordinalTime: _.zip(ordinalData, timeData),
+	
+	    timeTime: _.zip(timeData, timeData2)
 	};
 	console.log(randomBarData2);
 	
@@ -129,6 +132,91 @@
 	
 	var emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 	// end fake data
+	
+	var ScatterPlotExample = _reactAddons2['default'].createClass({
+	    displayName: 'ScatterPlotExample',
+	
+	    render: function render() {
+	        var rectangleSymbol = _reactAddons2['default'].createElement('rect', { width: 5, height: 5, fill: 'rebeccapurple' });
+	        var triangleSymbol = _reactAddons2['default'].createElement(
+	            'svg',
+	            null,
+	            _reactAddons2['default'].createElement('polygon', { points: '0,0 8,0 4,8', style: { fill: 'darkgreen' } })
+	        );
+	        var randomEmoji = function randomEmoji(d, i) {
+	            return _.sample(emojis);
+	        };
+	
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            null,
+	            _reactAddons2['default'].createElement(
+	                _src.XYPlot,
+	                { width: 700, height: 500 },
+	                _reactAddons2['default'].createElement(_src.ScatterPlot, {
+	                    data: randomScatter[3], getX: 0, getY: 1,
+	                    pointSymbol: rectangleSymbol
+	                }),
+	                _reactAddons2['default'].createElement(_src.ScatterPlot, {
+	                    data: randomScatter[4], getX: 0, getY: 1,
+	                    pointRadius: 2
+	                }),
+	                _reactAddons2['default'].createElement(_src.ScatterPlot, {
+	                    data: randomScatter[1], getX: 0, getY: 1,
+	                    pointSymbol: randomEmoji,
+	                    pointOffset: [0, 2]
+	                }),
+	                _reactAddons2['default'].createElement(_src.ScatterPlot, {
+	                    data: randomScatter[0], getX: 0, getY: 1,
+	                    pointSymbol: function (d, i) {
+	                        return i;
+	                    }
+	                }),
+	                _reactAddons2['default'].createElement(_src.ScatterPlot, {
+	                    data: randomScatter[2], getX: 0, getY: 1,
+	                    pointSymbol: triangleSymbol,
+	                    pointOffset: [-4, -3]
+	                })
+	            )
+	        );
+	    }
+	});
+	
+	var LineChartExample = _reactAddons2['default'].createClass({
+	    displayName: 'LineChartExample',
+	
+	    render: function render() {
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            null,
+	            _reactAddons2['default'].createElement(
+	                _src.XYPlot,
+	                { width: 700 },
+	                _reactAddons2['default'].createElement(_src.LineChart, {
+	                    data: _.range(0, 20, 0.01),
+	                    getX: null,
+	                    getY: function (n) {
+	                        return Math.sin(n);
+	                    }
+	                }),
+	                _reactAddons2['default'].createElement(_src.LineChart, {
+	                    data: _.range(0, 20, 0.01),
+	                    getX: null,
+	                    getY: function (n) {
+	                        return Math.sin(Math.pow(n, 1.2)) * Math.cos(n);
+	                    }
+	                }),
+	                _reactAddons2['default'].createElement(_src.LineChart, {
+	                    data: _.range(0, 20, 0.01),
+	                    getX: null,
+	                    getY: function (n) {
+	                        return Math.sin(n * 0.5) * Math.cos(n);
+	                    }
+	                })
+	            )
+	        );
+	    }
+	});
 	
 	var InteractiveLineExample = _reactAddons2['default'].createClass({
 	    displayName: 'InteractiveLineExample',
@@ -167,55 +255,78 @@
 	    }
 	});
 	
-	var App = _reactAddons2['default'].createClass({
-	    displayName: 'App',
+	var HistogramExample = _reactAddons2['default'].createClass({
+	    displayName: 'HistogramExample',
 	
-	    getInitialState: function getInitialState() {
-	        return {
-	            hoveredV1LineChartData: null,
-	            randomSeries: [(0, _dataUtil.randomWalkSeries)(400, 100, 3), (0, _dataUtil.randomWalkSeries)(400), (0, _dataUtil.randomWalkSeries)(400, -100, 4)]
-	        };
-	    },
-	    onMouseMoveV1LineChart: function onMouseMoveV1LineChart(d, index, event) {
-	        this.setState({ hoveredV1LineChartData: d });
-	    },
-	    onMouseMoveXYPlot: function onMouseMoveXYPlot(d, event) {
-	        this.setState({ hoveredXYPlotData: d });
-	    },
 	    render: function render() {
-	        var _state = this.state;
-	        var hoveredV1LineChartData = _state.hoveredV1LineChartData;
-	        var hoveredXYPlotData = _state.hoveredXYPlotData;
-	
-	        var triangleSymbol = _reactAddons2['default'].createElement(
-	            'svg',
-	            null,
-	            _reactAddons2['default'].createElement('polygon', { points: '0,0 8,0 4,8', style: { fill: 'darkgreen' } })
-	        );
-	
 	        return _reactAddons2['default'].createElement(
 	            'div',
 	            null,
 	            _reactAddons2['default'].createElement(
-	                'h1',
+	                'div',
 	                null,
-	                'Reactochart'
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 700, height: 300 },
+	                    _reactAddons2['default'].createElement(_src.Histogram, {
+	                        data: randomNormal, getX: null
+	                    }),
+	                    _reactAddons2['default'].createElement(_src.KernelDensityEstimation, {
+	                        data: randomNormal, bandwidth: 0.5
+	                    }),
+	                    _reactAddons2['default'].createElement(_src.KernelDensityEstimation, {
+	                        data: randomNormal, bandwidth: 0.1
+	                    }),
+	                    _reactAddons2['default'].createElement(_src.KernelDensityEstimation, {
+	                        data: randomNormal, bandwidth: 2
+	                    })
+	                )
 	            ),
 	            _reactAddons2['default'].createElement(
-	                'h2',
+	                'div',
 	                null,
-	                'v2'
-	            ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 700, height: 80, shouldDrawYLabels: false },
+	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
+	                        data: randomNormal, getX: null, getY: function () {
+	                            return Math.random();
+	                        },
+	                        pointRadius: 1.5
+	                    })
+	                )
+	            )
+	        );
+	    }
+	});
+	
+	var MultipleXYExample = _reactAddons2['default'].createClass({
+	    displayName: 'MultipleXYExample',
+	
+	    render: function render() {
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            null,
 	            _reactAddons2['default'].createElement(
-	                'h3',
+	                _src.XYPlot,
 	                null,
-	                'Bar Charts'
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'h3',
-	                null,
-	                'Value-Value Bar Charts'
-	            ),
+	                _reactAddons2['default'].createElement(_src.BarChart, { data: randomBars[0], getX: 0, getY: 1 }),
+	                _reactAddons2['default'].createElement(_src.LineChart, { data: randomBars[0], getX: 0, getY: 1 }),
+	                _reactAddons2['default'].createElement(_src.ScatterPlot, { data: randomBars[0], getX: 0, getY: 1, pointSymbol: function (d, i) {
+	                        return _.sample(emojis);
+	                    } })
+	            )
+	        );
+	    }
+	});
+	
+	var ValueValueBarExample = _reactAddons2['default'].createClass({
+	    displayName: 'ValueValueBarExample',
+	
+	    render: function render() {
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            null,
 	            _reactAddons2['default'].createElement(
 	                'h2',
 	                null,
@@ -227,7 +338,7 @@
 	                _reactAddons2['default'].createElement(
 	                    'div',
 	                    null,
-	                    'Number-Number, Ordinal-Number, Date-Number'
+	                    'Number-Number, Ordinal-Number, Time-Number'
 	                ),
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
@@ -243,6 +354,75 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, xType: 'time' },
 	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberTime, getX: 1, getY: 0 })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    'div',
+	                    null,
+	                    'Number-Ordinal, Ordinal-Ordinal, Time-Ordinal'
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, yType: 'ordinal' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1 })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, xType: 'ordinal', yType: 'ordinal' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.ordinalOrdinal, getX: 0, getY: 1 })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, xType: 'time', yType: 'ordinal' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getX: 1, getY: 0 })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    'div',
+	                    null,
+	                    'Number-Time, Ordinal-Time, Time-Time'
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, yType: 'time' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberTime, getX: 0, getY: 1 })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, xType: 'ordinal', yType: 'time' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getX: 0, getY: 1 })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, xType: 'time', yType: 'time' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.timeTime, getX: 0, getY: 1 })
+	                )
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'h2',
+	                null,
+	                'Horizontal'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    'div',
+	                    null,
+	                    'Number-Number, Ordinal-Number, Date-Number'
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300 },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberNumber, getX: 0, getY: 1, orientation: 'horizontal' })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, yType: 'ordinal' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1, orientation: 'horizontal' })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, yType: 'time' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberTime, getX: 0, getY: 1, orientation: 'horizontal' })
 	                ),
 	                _reactAddons2['default'].createElement(
 	                    'div',
@@ -299,184 +479,24 @@
 	                )
 	            )
 	        );
-	    },
-	    _render: function _render() {
-	        var _state2 = this.state;
-	        var hoveredV1LineChartData = _state2.hoveredV1LineChartData;
-	        var hoveredXYPlotData = _state2.hoveredXYPlotData;
+	    }
+	});
 	
-	        var triangleSymbol = _reactAddons2['default'].createElement(
-	            'svg',
-	            null,
-	            _reactAddons2['default'].createElement('polygon', { points: '0,0 8,0 4,8', style: { fill: 'darkgreen' } })
-	        );
+	var V1Examples = _reactAddons2['default'].createClass({
+	    displayName: 'V1Examples',
+	
+	    getInitialState: function getInitialState() {
+	        return { hoveredV1LineChartData: null };
+	    },
+	    onMouseMoveV1LineChart: function onMouseMoveV1LineChart(d, index, event) {
+	        this.setState({ hoveredV1LineChartData: d });
+	    },
+	    render: function render() {
+	        var hoveredV1LineChartData = this.state.hoveredV1LineChartData;
 	
 	        return _reactAddons2['default'].createElement(
 	            'div',
 	            null,
-	            _reactAddons2['default'].createElement(
-	                'h1',
-	                null,
-	                'Reactochart'
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'h2',
-	                null,
-	                'v2'
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'h3',
-	                null,
-	                'Bar Charts'
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'h4',
-	                null,
-	                'Value-Value Bar Chart'
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'div',
-	                null,
-	                _reactAddons2['default'].createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300 },
-	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData.valueValue, getX: 0, getY: 1 })
-	                ),
-	                _reactAddons2['default'].createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300 },
-	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData.valueValue, getX: 1, getY: 0, orientation: 'horizontal' })
-	                )
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'h3',
-	                null,
-	                'Histogram'
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'div',
-	                null,
-	                _reactAddons2['default'].createElement(
-	                    _src.XYPlot,
-	                    { width: 700, height: 300 },
-	                    _reactAddons2['default'].createElement(_src.Histogram, {
-	                        data: randomNormal, getX: null
-	                    }),
-	                    _reactAddons2['default'].createElement(_src.KernelDensityEstimation, {
-	                        data: randomNormal, bandwidth: 0.5
-	                    }),
-	                    _reactAddons2['default'].createElement(_src.KernelDensityEstimation, {
-	                        data: randomNormal, bandwidth: 0.1
-	                    }),
-	                    _reactAddons2['default'].createElement(_src.KernelDensityEstimation, {
-	                        data: randomNormal, bandwidth: 2
-	                    })
-	                )
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'div',
-	                null,
-	                _reactAddons2['default'].createElement(
-	                    _src.XYPlot,
-	                    { width: 700, height: 80, shouldDrawYLabels: false },
-	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
-	                        data: randomNormal, getX: null, getY: function () {
-	                            return Math.random();
-	                        },
-	                        pointRadius: 1.5
-	                    })
-	                )
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'h3',
-	                null,
-	                'ScatterPlot'
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'div',
-	                null,
-	                _reactAddons2['default'].createElement(
-	                    _src.XYPlot,
-	                    { width: 700, height: 500 },
-	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
-	                        data: randomScatter[3], getX: 0, getY: 1,
-	                        pointSymbol: _reactAddons2['default'].createElement('rect', { width: 5, height: 5, fill: 'rebeccapurple' })
-	                    }),
-	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
-	                        data: randomScatter[4], getX: 0, getY: 1,
-	                        pointRadius: 2
-	                    }),
-	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
-	                        data: randomScatter[1], getX: 0, getY: 1,
-	                        pointSymbol: function (d, i) {
-	                            return _.sample(emojis);
-	                        },
-	                        pointOffset: [0, 2]
-	                    }),
-	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
-	                        data: randomScatter[0], getX: 0, getY: 1,
-	                        pointSymbol: function (d, i) {
-	                            return i;
-	                        }
-	                    }),
-	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
-	                        data: randomScatter[2], getX: 0, getY: 1,
-	                        pointSymbol: triangleSymbol,
-	                        pointOffset: [-4, -3]
-	                    })
-	                )
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'h3',
-	                null,
-	                'LineChart'
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'div',
-	                null,
-	                _reactAddons2['default'].createElement(
-	                    _src.XYPlot,
-	                    { width: 700 },
-	                    _reactAddons2['default'].createElement(_src.LineChart, {
-	                        data: _.range(0, 20, 0.01),
-	                        getX: null,
-	                        getY: function (n) {
-	                            return Math.sin(n);
-	                        }
-	                    }),
-	                    _reactAddons2['default'].createElement(_src.LineChart, {
-	                        data: _.range(0, 20, 0.01),
-	                        getX: null,
-	                        getY: function (n) {
-	                            return Math.sin(Math.pow(n, 1.2)) * Math.cos(n);
-	                        }
-	                    })
-	                )
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'h3',
-	                null,
-	                'Interactive LineChart'
-	            ),
-	            _reactAddons2['default'].createElement(InteractiveLineExample, null),
-	            _reactAddons2['default'].createElement(
-	                'h3',
-	                null,
-	                'Multiple chart types in one XYPlot'
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'div',
-	                null,
-	                _reactAddons2['default'].createElement(
-	                    _src.XYPlot,
-	                    null,
-	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBars[0], getX: 0, getY: 1 }),
-	                    _reactAddons2['default'].createElement(_src.LineChart, { data: randomBars[0], getX: 0, getY: 1 }),
-	                    _reactAddons2['default'].createElement(_src.ScatterPlot, { data: randomBars[0], getX: 0, getY: 1, pointSymbol: function (d, i) {
-	                            return _.sample(emojis);
-	                        } })
-	                )
-	            ),
 	            _reactAddons2['default'].createElement(
 	                'h2',
 	                null,
@@ -534,6 +554,64 @@
 	    }
 	});
 	
+	var examples = [{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'v1', title: 'v1 Examples (old & deprecated)', Component: V1Examples }];
+	
+	var App = _reactAddons2['default'].createClass({
+	    displayName: 'App',
+	
+	    getInitialState: function getInitialState() {
+	        return {
+	            visibleExamples: {}
+	        };
+	    },
+	    toggleExample: function toggleExample(id) {
+	        var isVisible = this.state.visibleExamples[id];
+	        this.setState(update(this.state, { visibleExamples: _defineProperty({}, id, { $set: !isVisible }) }));
+	    },
+	    renderExamples: function renderExamples() {
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            { 'class': 'example-sections' },
+	            examples.map(this.renderExample)
+	        );
+	    },
+	    renderExample: function renderExample(example) {
+	        var isVisible = this.state.visibleExamples[example.id];
+	        var ExampleComponent = example.Component;
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            { className: 'example-section example-section-' + example.id },
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                {
+	                    className: 'example-section-button ' + (isVisible ? 'active' : ''),
+	                    onClick: this.toggleExample.bind(null, example.id)
+	                },
+	                example.title,
+	                ' ',
+	                isVisible ? "▼" : "►"
+	            ),
+	            isVisible ? _reactAddons2['default'].createElement(
+	                'div',
+	                { className: 'example-section-content' },
+	                _reactAddons2['default'].createElement(ExampleComponent, null)
+	            ) : null
+	        );
+	    },
+	    render: function render() {
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            null,
+	            _reactAddons2['default'].createElement(
+	                'h1',
+	                null,
+	                'Reactochart Examples'
+	            ),
+	            this.renderExamples()
+	        );
+	    }
+	});
+	
 	_reactAddons2['default'].render(_reactAddons2['default'].createElement(App, null), document.getElementById('container'));
 	
 	exports['default'] = App;
@@ -578,7 +656,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n}\nbody #container {\n  margin: 10px;\n}\n.line-chart,\n.multi-chart {\n  background: #f0f0f0;\n}\n.line-chart *,\n.multi-chart * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.multi-chart .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.multi-chart .chart-tick {\n  fill: none;\n  stroke: #333;\n  stroke-width: 1px;\n}\n.line-chart .chart-tick-y,\n.multi-chart .chart-tick-y {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-label,\n.multi-chart .chart-axis-label {\n  font-size: 8pt;\n}\n.line-chart .chart-x-label,\n.multi-chart .chart-x-label {\n  text-anchor: middle;\n}\n.line-chart .chart-y-label,\n.multi-chart .chart-y-label {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.multi-chart .chart-selected-range {\n  fill: #eeeef6;\n}\n.stacked-bar-chart {\n  background: #f0f0f0;\n}\n.stacked-bar-chart .chart-bar {\n  fill: steelblue;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
+	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-content {\n  margin: 10px 0;\n}\n.line-chart,\n.multi-chart {\n  background: #f0f0f0;\n}\n.line-chart *,\n.multi-chart * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.multi-chart .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.multi-chart .chart-tick {\n  fill: none;\n  stroke: #333;\n  stroke-width: 1px;\n}\n.line-chart .chart-tick-y,\n.multi-chart .chart-tick-y {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-label,\n.multi-chart .chart-axis-label {\n  font-size: 8pt;\n}\n.line-chart .chart-x-label,\n.multi-chart .chart-x-label {\n  text-anchor: middle;\n}\n.line-chart .chart-y-label,\n.multi-chart .chart-y-label {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.multi-chart .chart-selected-range {\n  fill: #eeeef6;\n}\n.stacked-bar-chart {\n  background: #f0f0f0;\n}\n.stacked-bar-chart .chart-bar {\n  fill: steelblue;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
 	
 	// exports
 
@@ -23493,22 +23571,29 @@
 	    return _lodash2['default'].isUndefined(getXEnd) && _lodash2['default'].isUndefined(getYEnd) ? 'ValueValue' : _lodash2['default'].isUndefined(getYEnd) && isVertical || _lodash2['default'].isUndefined(getXEnd) && !isVertical ? 'RangeValue' : _lodash2['default'].isUndefined(getXEnd) && isVertical || _lodash2['default'].isUndefined(getYEnd) && !isVertical ? 'ValueRange' : 'RangeRange';
 	}
 	
-	function domain(data, type) {}
+	function barZeroValue(data, dAccessor, axisType) {
+	    switch (axisType) {
+	        // number bars go from zero to value
+	        case 'number':
+	            return 0;
+	        // date values need a "zero" value to stretch from - the first date minus one day
+	        // todo make this less arbitrary? should be a rare case anyway.
+	        case 'date':
+	            return _d32['default'].extent(data, dAccessor)[0] - 24 * 60 * 60 * 1000;
+	        // ordinal values need a "zero" value to stretch from -
+	        // empty string since it's unlikely to be used in real data and won't show a label
+	        case 'ordinal':
+	            return '';
+	    }
+	}
 	
 	function valueAxisDomain(data, dAccessor, axisType) {
-	    var dataExtent = _d32['default'].extent(data, dAccessor);
-	
 	    switch (axisType) {
 	        case 'number':
-	            return _d32['default'].extent(dataExtent.concat(0));
 	        case 'date':
-	            // date values need a "zero" value to stretch from - the first date minus one day
-	            // todo make this less arbitrary? should be a rare case anyway.
-	            return _d32['default'].extent(dataExtent.concat(dataExtent[0] - 24 * 60 * 60 * 1000));
+	            return _d32['default'].extent(_d32['default'].extent(data, dAccessor).concat(barZeroValue(data, dAccessor, axisType)));
 	        case 'ordinal':
-	            // ordinal values need a "zero" value to stretch from -
-	            // empty string since it's unlikely to be used in real data and won't show a label
-	            return _lodash2['default'].uniq([''].concat(data.map((0, _utilJs.accessor)(dAccessor))));
+	            return _lodash2['default'].uniq([barZeroValue(data, dAccessor, axisType)].concat(data.map((0, _utilJs.accessor)(dAccessor))));
 	    }
 	    return null;
 	}
@@ -23555,14 +23640,6 @@
 	                var valueAxis = isVertical ? 'y' : 'x'; // the axis along which the bar's length shows value
 	                domains[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
 	                return domains;
-	            }
-	
-	            if (barType === 'ValueValue') {
-	                console.log(_d32['default'].extent(data, yAccessor), _d32['default'].extent(data, yAccessor).reverse());
-	                // bar extends to zero, so the bar axis must include zero
-	                var x = isVertical ? _d32['default'].extent(data, xAccessor) : _d32['default'].extent(_d32['default'].extent(data, xAccessor).concat(0));
-	                var y = isVertical ? _d32['default'].extent(_d32['default'].extent(data, yAccessor).concat(0)) : _d32['default'].extent(data, yAccessor).reverse();
-	                return { x: x, y: y };
 	            }
 	        },
 	        getBarDomain: function getBarDomain(getter, axisType) {
@@ -23616,10 +23693,13 @@
 	
 	        //const isHorizontal = this.props.orientation === 'bar';
 	        //const barThickness = this.state.barScale.rangeBand();
+	        var data = _props.data;
 	        var xScale = _props.xScale;
 	        var yScale = _props.yScale;
 	        var getX = _props.getX;
 	        var getY = _props.getY;
+	        var xType = _props.xType;
+	        var yType = _props.yType;
 	        var barThickness = 5;
 	
 	        var xAccessor = (0, _utilJs.accessor)(getX);
@@ -23629,9 +23709,10 @@
 	            'g',
 	            null,
 	            this.props.data.map(function (d, i) {
+	                var barZero = barZeroValue(data, getY, yType);
 	                var yVal = yAccessor(d);
-	                var barLength = Math.abs(yScale(0) - yScale(yVal));
-	                var barY = yVal >= 0 ? yScale(0) - barLength : yScale(0);
+	                var barLength = Math.abs(yScale(barZero) - yScale(yVal));
+	                var barY = yVal >= 0 || yType === 'ordinal' ? yScale(barZero) - barLength : yScale(barZero);
 	
 	                return _react2['default'].createElement('rect', {
 	                    className: 'chart-bar chart-bar-vertical',
@@ -57697,7 +57778,7 @@
 	            var domain = _lodash2['default'].isFunction(child.type.getDomain) ? child.type.getDomain(child.props, props.xType, props.yType) : { x: null, y: null };
 	            if (_lodash2['default'].isNull(domain.x)) domain.x = defaultDomain(child.props.data, child.props.getX, props.xType);
 	            if (_lodash2['default'].isNull(domain.y)) domain.y = defaultDomain(child.props.data, child.props.getY, props.yType);
-	            console.log('chartDomain', domain);
+	            //console.log('chartDomain', domain);
 	            chartDomains.push(domain);
 	        });
 	
@@ -57725,6 +57806,8 @@
 	        var height = _props.height;
 	        var marginLeft = _props.marginLeft;
 	        var marginTop = _props.marginTop;
+	        var xType = _props.xType;
+	        var yType = _props.yType;
 	        var xScale = this.xScale;
 	        var yScale = this.yScale;
 	        var innerWidth = this.innerWidth;
@@ -57744,7 +57827,7 @@
 	                this.renderYAxis(),
 	                _react2['default'].Children.map(this.props.children, function (child, i) {
 	                    var name = child.props.name || 'chart-series-' + i;
-	                    return _react2['default'].cloneElement(child, { ref: name, name: name, xScale: xScale, yScale: yScale, innerWidth: innerWidth, innerHeight: innerHeight });
+	                    return _react2['default'].cloneElement(child, { ref: name, name: name, xType: xType, yType: yType, xScale: xScale, yScale: yScale, innerWidth: innerWidth, innerHeight: innerHeight });
 	                })
 	            )
 	        );
@@ -57858,15 +57941,6 @@
 	        yScale: PropTypes.func
 	    },
 	
-	    statics: {
-	        getExtent: function getExtent(data, getX, getY) {
-	            return {
-	                x: _d32['default'].extent(data, (0, _utilJs.accessor)(getX)),
-	                y: _d32['default'].extent(data, (0, _utilJs.accessor)(getY))
-	            };
-	        }
-	    },
-	
 	    componentWillMount: function componentWillMount() {
 	        this.initBisector(this.props);
 	    },
@@ -57905,8 +57979,6 @@
 	            { className: this.props.name },
 	            _react2['default'].createElement('path', { d: pathStr })
 	        );
-	
-	        return _react2['default'].createElement('rect', { x: _lodash2['default'].random(200), y: 20, width: 50, height: 80, opacity: 0.5 });
 	    }
 	});
 	
@@ -57984,14 +58056,6 @@
 	        };
 	    },
 	
-	    statics: {
-	        getExtent: function getExtent(data, getX, getY) {
-	            return {
-	                x: _d32['default'].extent(data, (0, _utilJs.accessor)(getX)),
-	                y: _d32['default'].extent(data, (0, _utilJs.accessor)(getY))
-	            };
-	        }
-	    },
 	    getHovered: function getHovered() {},
 	
 	    render: function render() {
