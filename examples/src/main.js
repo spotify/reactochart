@@ -247,7 +247,7 @@ const ValueValueBarExample = React.createClass({
             <div>
                 <div>Number-Number, Ordinal-Number, Date-Number</div>
                 <XYPlot width={300} height={300}>
-                    <BarChart data={randomBarData2.numberNumber} getX={0} getY={1} orientation="horizontal" />
+                    <BarChart data={randomBarData2.numberNumber} getX={1} getY={0} orientation="horizontal"/>
                 </XYPlot>
                 <XYPlot width={300} height={300} yType='ordinal'>
                     <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
@@ -257,37 +257,34 @@ const ValueValueBarExample = React.createClass({
                 </XYPlot>
 
                 <div>Number-Ordinal, Ordinal-Ordinal, Date-Ordinal</div>
-
-                <div>Number-Date, Ordinal-Date, Date-Date</div>
-            </div>
-
-            <h2>old</h2>
-
-            <div>
                 <XYPlot width={300} height={300} xType='ordinal'>
-                    <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} />
+                    <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} orientation="horizontal" />
                 </XYPlot>
-                <XYPlot width={300} height={300} yType='ordinal'>
-                    <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
+                <XYPlot width={300} height={300} xType='ordinal' yType='ordinal'>
+                    <BarChart data={randomBarData2.ordinalOrdinal} getX={1} getY={0} orientation="horizontal" />
                 </XYPlot>
-            </div>
+                <XYPlot width={300} height={300} xType='ordinal' yType='time'>
+                    <BarChart data={randomBarData2.ordinalTime} getX={0} getY={1} orientation="horizontal" />
+                </XYPlot>
 
-            <div>
-                <XYPlot width={300} height={300}>
-                    <BarChart data={randomBarData.valueValue} getX={0} getY={1} />
-                    <BarChart data={[[25,20], [30, 10]]} getX={0} getY={1} />
+                <div>Number-Time, Ordinal-Time, Time-Time</div>
+                <XYPlot width={300} height={300} xType='time'>
+                    <BarChart data={randomBarData2.numberTime} getX={1} getY={0} orientation="horizontal" />
                 </XYPlot>
-            </div>
-
-            <div>
-                <XYPlot width={300} height={300} >
-                    <BarChart data={randomBarData.valueValue} getX={0} getY={1} />
+                <XYPlot width={300} height={300} yType='ordinal' xType='time'>
+                    <BarChart data={randomBarData2.ordinalTime} getX={1} getY={0} orientation="horizontal" />
                 </XYPlot>
-                <XYPlot width={300} height={300}>
-                    <BarChart data={randomBarData.valueValue} getX={1} getY={0} orientation="horizontal" />
+                <XYPlot width={300} height={300} yType='time' xType='time'>
+                    <BarChart data={randomBarData2.timeTime} getX={1} getY={0} orientation="horizontal" />
                 </XYPlot>
             </div>
         </div>
+    }
+});
+
+const RangeValueBarExample = React.createClass({
+    render() {
+        return <div>coming soon</div>
     }
 });
 
@@ -333,6 +330,7 @@ const examples = [
     {id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample},
     {id: 'line', title: 'Line Chart', Component: LineChartExample},
     {id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample},
+    {id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample},
     {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
     {id: 'histogram', title: 'Histogram', Component: HistogramExample},
     {id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample},
@@ -353,6 +351,9 @@ const App = React.createClass({
     render() {
         return <div>
             <h1>Reactochart Examples</h1>
+
+
+
             {this.renderExamples()}
         </div>
     },

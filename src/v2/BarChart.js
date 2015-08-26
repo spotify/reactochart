@@ -81,9 +81,9 @@ function barZeroValue(data, dAccessor, axisType) {
     switch (axisType) {
         // number bars go from zero to value
         case 'number': return 0;
-        // date values need a "zero" value to stretch from - the first date minus one day
+        // time values need a "zero" value to stretch from - the first date minus one day
         // todo make this less arbitrary? should be a rare case anyway.
-        case 'date': return d3.extent(data, dAccessor)[0] - (24 * 60 * 60 * 1000);
+        case 'time': return d3.extent(data, dAccessor)[0] - (24 * 60 * 60 * 1000);
         // ordinal values need a "zero" value to stretch from -
         // empty string since it's unlikely to be used in real data and won't show a label
         case 'ordinal': return '';
@@ -93,7 +93,7 @@ function barZeroValue(data, dAccessor, axisType) {
 function valueAxisDomain(data, dAccessor, axisType) {
     switch (axisType) {
         case 'number':
-        case 'date':
+        case 'time':
             return d3.extent(d3.extent(data, dAccessor).concat(barZeroValue(data, dAccessor, axisType)));
         case 'ordinal':
             return _.uniq([barZeroValue(data, dAccessor, axisType)].concat(data.map(accessor(dAccessor))));
@@ -148,12 +148,8 @@ const BarChart = React.createClass({
     getHovered() {},
 
     render() {
-        //console.log('barchart', this.props);
-
-        //const type = getBarChartType(this.props);
         const renderer = this[`render${getBarChartType(this.props)}Bars`];
-
-        return <g>
+        return <g className="bar-chart">
             {renderer()}
         </g>
     },
@@ -161,7 +157,8 @@ const BarChart = React.createClass({
         const {data, xScale, yScale, getX, getY, xType, yType} = this.props;
         //const isHorizontal = this.props.orientation === 'bar';
         //const barThickness = this.state.barScale.rangeBand();
-        const barThickness = 5;
+        // todo handle barthickness in props/auto width
+        const barThickness = 10;
 
         const xAccessor = accessor(getX);
         const yAccessor = accessor(getY);
@@ -169,7 +166,7 @@ const BarChart = React.createClass({
         return this.props.orientation === 'vertical' ?
             <g>
                 {this.props.data.map((d, i) => {
-                    const barZero = barZeroValue(data, getY, yType);
+                    const barZero = barZeroValue(data, yAccessor, yType);
                     const yVal = yAccessor(d);
                     const barLength = Math.abs(yScale(barZero) - yScale(yVal));
                     const barY = (yVal >= 0 || yType === 'ordinal') ? yScale(barZero) - barLength : yScale(barZero);
@@ -185,9 +182,10 @@ const BarChart = React.createClass({
             </g> :
             <g>
                 {this.props.data.map((d, i) => {
+                    const barZero = barZeroValue(data, xAccessor, xType);
                     const xVal = xAccessor(d);
-                    const barLength = Math.abs(xScale(0) - xScale(xVal));
-                    const barX = xVal >= 0 ? xScale(0) : xScale(0) - barLength;
+                    const barLength = Math.abs(xScale(barZero) - xScale(xVal));
+                    const barX = (xVal >= 0 || xType === 'ordinal') ? xScale(barZero) : xScale(barZero) - barLength;
 
                     return <rect
                         className="chart-bar chart-bar-vertical"

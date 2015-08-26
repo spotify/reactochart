@@ -415,7 +415,7 @@
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
 	                    { width: 300, height: 300 },
-	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberNumber, getX: 0, getY: 1, orientation: 'horizontal' })
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberNumber, getX: 1, getY: 0, orientation: 'horizontal' })
 	                ),
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
@@ -433,54 +433,53 @@
 	                    'Number-Ordinal, Ordinal-Ordinal, Date-Ordinal'
 	                ),
 	                _reactAddons2['default'].createElement(
-	                    'div',
-	                    null,
-	                    'Number-Date, Ordinal-Date, Date-Date'
-	                )
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'h2',
-	                null,
-	                'old'
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'div',
-	                null,
-	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, xType: 'ordinal' },
-	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 1, getY: 0 })
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 1, getY: 0, orientation: 'horizontal' })
 	                ),
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, yType: 'ordinal' },
-	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1, orientation: 'horizontal' })
-	                )
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'div',
-	                null,
-	                _reactAddons2['default'].createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300 },
-	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData.valueValue, getX: 0, getY: 1 }),
-	                    _reactAddons2['default'].createElement(_src.BarChart, { data: [[25, 20], [30, 10]], getX: 0, getY: 1 })
-	                )
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'div',
-	                null,
-	                _reactAddons2['default'].createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300 },
-	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData.valueValue, getX: 0, getY: 1 })
+	                    { width: 300, height: 300, xType: 'ordinal', yType: 'ordinal' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.ordinalOrdinal, getX: 1, getY: 0, orientation: 'horizontal' })
 	                ),
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300 },
-	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData.valueValue, getX: 1, getY: 0, orientation: 'horizontal' })
+	                    { width: 300, height: 300, xType: 'ordinal', yType: 'time' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getX: 0, getY: 1, orientation: 'horizontal' })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    'div',
+	                    null,
+	                    'Number-Time, Ordinal-Time, Time-Time'
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, xType: 'time' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberTime, getX: 1, getY: 0, orientation: 'horizontal' })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, yType: 'ordinal', xType: 'time' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getX: 1, getY: 0, orientation: 'horizontal' })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, yType: 'time', xType: 'time' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.timeTime, getX: 1, getY: 0, orientation: 'horizontal' })
 	                )
 	            )
+	        );
+	    }
+	});
+	
+	var RangeValueBarExample = _reactAddons2['default'].createClass({
+	    displayName: 'RangeValueBarExample',
+	
+	    render: function render() {
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            null,
+	            'coming soon'
 	        );
 	    }
 	});
@@ -535,7 +534,7 @@
 	    }
 	});
 	
-	var examples = [{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples }];
+	var examples = [{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples }];
 	
 	var App = _reactAddons2['default'].createClass({
 	    displayName: 'App',
@@ -641,7 +640,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.multi-chart {\n  background: #f0f0f0;\n}\n.line-chart *,\n.multi-chart * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.multi-chart .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.multi-chart .chart-tick {\n  fill: none;\n  stroke: #333;\n  stroke-width: 1px;\n}\n.line-chart .chart-tick-y,\n.multi-chart .chart-tick-y {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-label,\n.multi-chart .chart-axis-label {\n  font-size: 8pt;\n}\n.line-chart .chart-x-label,\n.multi-chart .chart-x-label {\n  text-anchor: middle;\n}\n.line-chart .chart-y-label,\n.multi-chart .chart-y-label {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.multi-chart .chart-selected-range {\n  fill: #eeeef6;\n}\n.stacked-bar-chart {\n  background: #f0f0f0;\n}\n.stacked-bar-chart .chart-bar {\n  fill: steelblue;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
+	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.multi-chart {\n  background: #f0f0f0;\n}\n.line-chart *,\n.multi-chart * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.multi-chart .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.multi-chart .chart-tick {\n  fill: none;\n  stroke: #333;\n  stroke-width: 1px;\n}\n.line-chart .chart-tick-y,\n.multi-chart .chart-tick-y {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-label,\n.multi-chart .chart-axis-label {\n  font-size: 8pt;\n}\n.line-chart .chart-x-label,\n.multi-chart .chart-x-label {\n  text-anchor: middle;\n}\n.line-chart .chart-y-label,\n.multi-chart .chart-y-label {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.multi-chart .chart-selected-range {\n  fill: #eeeef6;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
 	
 	// exports
 
@@ -57613,9 +57612,9 @@
 	        // number bars go from zero to value
 	        case 'number':
 	            return 0;
-	        // date values need a "zero" value to stretch from - the first date minus one day
+	        // time values need a "zero" value to stretch from - the first date minus one day
 	        // todo make this less arbitrary? should be a rare case anyway.
-	        case 'date':
+	        case 'time':
 	            return _d32['default'].extent(data, dAccessor)[0] - 24 * 60 * 60 * 1000;
 	        // ordinal values need a "zero" value to stretch from -
 	        // empty string since it's unlikely to be used in real data and won't show a label
@@ -57627,7 +57626,7 @@
 	function valueAxisDomain(data, dAccessor, axisType) {
 	    switch (axisType) {
 	        case 'number':
-	        case 'date':
+	        case 'time':
 	            return _d32['default'].extent(_d32['default'].extent(data, dAccessor).concat(barZeroValue(data, dAccessor, axisType)));
 	        case 'ordinal':
 	            return _lodash2['default'].uniq([barZeroValue(data, dAccessor, axisType)].concat(data.map((0, _utilJs.accessor)(dAccessor))));
@@ -57687,14 +57686,10 @@
 	    getHovered: function getHovered() {},
 	
 	    render: function render() {
-	        //console.log('barchart', this.props);
-	
-	        //const type = getBarChartType(this.props);
 	        var renderer = this['render' + getBarChartType(this.props) + 'Bars'];
-	
 	        return _react2['default'].createElement(
 	            'g',
-	            null,
+	            { className: 'bar-chart' },
 	            renderer()
 	        );
 	    },
@@ -57705,6 +57700,7 @@
 	
 	        //const isHorizontal = this.props.orientation === 'bar';
 	        //const barThickness = this.state.barScale.rangeBand();
+	        // todo handle barthickness in props/auto width
 	        var data = _props.data;
 	        var xScale = _props.xScale;
 	        var yScale = _props.yScale;
@@ -57712,7 +57708,7 @@
 	        var getY = _props.getY;
 	        var xType = _props.xType;
 	        var yType = _props.yType;
-	        var barThickness = 5;
+	        var barThickness = 10;
 	
 	        var xAccessor = (0, _utilJs.accessor)(getX);
 	        var yAccessor = (0, _utilJs.accessor)(getY);
@@ -57721,7 +57717,7 @@
 	            'g',
 	            null,
 	            this.props.data.map(function (d, i) {
-	                var barZero = barZeroValue(data, getY, yType);
+	                var barZero = barZeroValue(data, yAccessor, yType);
 	                var yVal = yAccessor(d);
 	                var barLength = Math.abs(yScale(barZero) - yScale(yVal));
 	                var barY = yVal >= 0 || yType === 'ordinal' ? yScale(barZero) - barLength : yScale(barZero);
@@ -57738,9 +57734,10 @@
 	            'g',
 	            null,
 	            this.props.data.map(function (d, i) {
+	                var barZero = barZeroValue(data, xAccessor, xType);
 	                var xVal = xAccessor(d);
-	                var barLength = Math.abs(xScale(0) - xScale(xVal));
-	                var barX = xVal >= 0 ? xScale(0) : xScale(0) - barLength;
+	                var barLength = Math.abs(xScale(barZero) - xScale(xVal));
+	                var barX = xVal >= 0 || xType === 'ordinal' ? xScale(barZero) : xScale(barZero) - barLength;
 	
 	                return _react2['default'].createElement('rect', {
 	                    className: 'chart-bar chart-bar-vertical',
