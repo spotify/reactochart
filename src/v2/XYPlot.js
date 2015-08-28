@@ -105,7 +105,7 @@ const XYPlot = React.createClass({
         const {width, height, marginLeft, marginTop, xType, yType} = this.props;
         const {xScale, yScale, innerWidth, innerHeight} = this;
         return (
-            <svg className="multi-chart" {...{width, height}}
+            <svg className="xy-plot" {...{width, height}}
                  onMouseMove={this.onMouseMove}
             >
                 <g className="chart-inner"
