@@ -5,7 +5,7 @@ import d3 from 'd3';
 
 import BarChart from './BarChart.js';
 
-import {accessor, AccessorPropType} from './util.js';
+import {accessor, AccessorPropType} from '../util.js';
 
 const Histogram = React.createClass({
     propTypes: {

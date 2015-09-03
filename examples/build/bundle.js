@@ -23436,33 +23436,33 @@
 	
 	function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 	
-	var _LineChart = __webpack_require__(180);
+	var _v1LineChart = __webpack_require__(180);
 	
-	exports.V1LineChart = _interopRequire(_LineChart);
+	exports.V1LineChart = _interopRequire(_v1LineChart);
 	
-	var _v2XYPlot = __webpack_require__(271);
+	var _chartsXYPlot = __webpack_require__(271);
 	
-	exports.XYPlot = _interopRequire(_v2XYPlot);
+	exports.XYPlot = _interopRequire(_chartsXYPlot);
 	
-	var _v2LineChart = __webpack_require__(274);
+	var _chartsLineChart = __webpack_require__(274);
 	
-	exports.LineChart = _interopRequire(_v2LineChart);
+	exports.LineChart = _interopRequire(_chartsLineChart);
 	
-	var _v2BarChart = __webpack_require__(275);
+	var _chartsBarChart = __webpack_require__(275);
 	
-	exports.BarChart = _interopRequire(_v2BarChart);
+	exports.BarChart = _interopRequire(_chartsBarChart);
 	
-	var _v2ScatterPlot = __webpack_require__(276);
+	var _chartsScatterPlot = __webpack_require__(276);
 	
-	exports.ScatterPlot = _interopRequire(_v2ScatterPlot);
+	exports.ScatterPlot = _interopRequire(_chartsScatterPlot);
 	
-	var _v2Histogram = __webpack_require__(277);
+	var _chartsHistogram = __webpack_require__(277);
 	
-	exports.Histogram = _interopRequire(_v2Histogram);
+	exports.Histogram = _interopRequire(_chartsHistogram);
 	
-	var _v2KernelDensityEstimation = __webpack_require__(278);
+	var _chartsKernelDensityEstimation = __webpack_require__(278);
 	
-	exports.KernelDensityEstimation = _interopRequire(_v2KernelDensityEstimation);
+	exports.KernelDensityEstimation = _interopRequire(_chartsKernelDensityEstimation);
 
 /***/ },
 /* 180 */
