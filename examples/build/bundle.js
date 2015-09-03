@@ -290,7 +290,7 @@
 	                null,
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
-	                    { width: 700, height: 80, shouldDrawYLabels: false },
+	                    { width: 700, height: 80, showYLabels: false },
 	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
 	                        data: randomNormal, getX: null, getY: function () {
 	                            return Math.random();
@@ -558,6 +558,15 @@
 	                null,
 	                'Reactochart Examples'
 	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 300, height: 300 },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberNumber, getX: 0, getY: 1 })
+	                )
+	            ),
 	            this.renderExamples()
 	        );
 	    },
@@ -640,7 +649,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: #f0f0f0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #333;\n  stroke-width: 1px;\n}\n.line-chart .chart-tick-y,\n.xy-plot .chart-tick-y {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 8pt;\n}\n.line-chart .chart-x-label,\n.xy-plot .chart-x-label {\n  text-anchor: middle;\n}\n.line-chart .chart-y-label,\n.xy-plot .chart-y-label {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
+	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: #f0f0f0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-label-x,\n.xy-plot .chart-axis-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-label-y,\n.xy-plot .chart-axis-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
 	
 	// exports
 
@@ -23505,17 +23514,17 @@
 	        // whether or not the scale of the Y-axis should always include zero
 	        shouldIncludeZero: PropTypes.bool,
 	        // whether or not to draw a zero line
-	        shouldDrawZero: PropTypes.bool,
+	        showZero: PropTypes.bool,
 	
 	        // whether or not to draw the tick lines on the X axis
-	        shouldDrawXTicks: PropTypes.bool,
+	        showXTicks: PropTypes.bool,
 	        // whether or not to draw X axis label text (dates)
-	        shouldDrawXLabels: PropTypes.bool,
+	        showXLabels: PropTypes.bool,
 	
 	        // whether or not to draw the tick lines on the Y axis
-	        shouldDrawYTicks: PropTypes.bool,
+	        showYTicks: PropTypes.bool,
 	        // whether or not to draw Y axis label text (values)
-	        shouldDrawYLabels: PropTypes.bool,
+	        showYLabels: PropTypes.bool,
 	
 	        // called when user mouses over the chart
 	        onMouseMove: PropTypes.func,
@@ -23543,11 +23552,11 @@
 	        return {
 	            dateKey: 'date',
 	            shouldIncludeZero: true,
-	            shouldDrawZero: true,
-	            shouldDrawXTicks: true,
-	            shouldDrawXLabels: true,
-	            shouldDrawYTicks: true,
-	            shouldDrawYLabels: true,
+	            showZero: true,
+	            showXTicks: true,
+	            showXLabels: true,
+	            showYTicks: true,
+	            showYLabels: true,
 	            isRangeSelectable: false,
 	            onChangeSelectedRange: _lodash2['default'].noop,
 	            width: 400,
@@ -23684,10 +23693,10 @@
 	    },
 	    renderXAxis: function renderXAxis() {
 	        var _props2 = this.props;
-	        var shouldDrawXTicks = _props2.shouldDrawXTicks;
-	        var shouldDrawXLabels = _props2.shouldDrawXLabels;
+	        var showXTicks = _props2.showXTicks;
+	        var showXLabels = _props2.showXLabels;
 	
-	        if (!(shouldDrawXTicks || shouldDrawXLabels)) return null;
+	        if (!(showXTicks || showXLabels)) return null;
 	        var _state2 = this.state;
 	        var xScale = _state2.xScale;
 	        var innerHeight = _state2.innerHeight;
@@ -23701,8 +23710,8 @@
 	                return _reactAddons2['default'].createElement(
 	                    'g',
 	                    { transform: 'translate(' + xScale(date) + ', 0)' },
-	                    shouldDrawXTicks ? _reactAddons2['default'].createElement('line', { className: 'chart-tick chart-tick-x', x2: 0, y2: 6 }) : null,
-	                    shouldDrawXLabels ? _reactAddons2['default'].createElement(
+	                    showXTicks ? _reactAddons2['default'].createElement('line', { className: 'chart-tick chart-tick-x', x2: 0, y2: 6 }) : null,
+	                    showXLabels ? _reactAddons2['default'].createElement(
 	                        'text',
 	                        { className: 'chart-axis-label chart-x-label', dy: '0.8em', y: '9' },
 	                        (0, _moment2['default'])(date).format("MMM 'YY")
@@ -23713,10 +23722,10 @@
 	    },
 	    renderYAxis: function renderYAxis() {
 	        var _props3 = this.props;
-	        var shouldDrawYTicks = _props3.shouldDrawYTicks;
-	        var shouldDrawYLabels = _props3.shouldDrawYLabels;
+	        var showYTicks = _props3.showYTicks;
+	        var showYLabels = _props3.showYLabels;
 	
-	        if (!(shouldDrawYTicks || shouldDrawYLabels)) return null;
+	        if (!(showYTicks || showYLabels)) return null;
 	        var _state3 = this.state;
 	        var yScale = _state3.yScale;
 	        var innerWidth = _state3.innerWidth;
@@ -23730,8 +23739,8 @@
 	                return _reactAddons2['default'].createElement(
 	                    'g',
 	                    { transform: 'translate(0, ' + yScale(value) + ')' },
-	                    shouldDrawYTicks ? _reactAddons2['default'].createElement('line', { className: 'chart-tick chart-tick-y', x2: innerWidth, y2: 0 }) : null,
-	                    shouldDrawYLabels ? _reactAddons2['default'].createElement(
+	                    showYTicks ? _reactAddons2['default'].createElement('line', { className: 'chart-tick chart-tick-y', x2: innerWidth, y2: 0 }) : null,
+	                    showYLabels ? _reactAddons2['default'].createElement(
 	                        'text',
 	                        { className: 'chart-axis-label chart-y-label', dy: '0.32em', x: -3 },
 	                        value
@@ -57119,6 +57128,8 @@
 	    value: true
 	});
 	
+	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
+	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -57147,7 +57158,7 @@
 	    displayName: 'XYPlot',
 	
 	    propTypes: {
-	        // x & y scale types
+	        // x & y scale types, defaults to 'number'
 	        xType: PropTypes.oneOf(['number', 'time', 'ordinal']),
 	        yType: PropTypes.oneOf(['number', 'time', 'ordinal']),
 	
@@ -57156,6 +57167,7 @@
 	        yDomain: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
 	
 	        // (outer) width and height of the chart
+	        // todo infer from data/other props??
 	        width: PropTypes.number,
 	        height: PropTypes.number,
 	
@@ -57165,18 +57177,22 @@
 	        marginLeft: PropTypes.number,
 	        marginRight: PropTypes.number,
 	
-	        // whether or not to draw the tick lines on the X axis
-	        shouldDrawXTicks: PropTypes.bool,
-	        // whether or not to draw X axis label text (dates)
-	        shouldDrawXLabels: PropTypes.bool,
+	        // should we draw axis labels
+	        showXLabels: PropTypes.bool,
+	        showYLabels: PropTypes.bool,
+	        // should we draw the grid lines in the main chart space
+	        showXGrid: PropTypes.bool,
+	        showYGrid: PropTypes.bool,
+	        // should we draw the little tick lines along the axis
+	        showXTicks: PropTypes.bool,
+	        showYTicks: PropTypes.bool,
+	        // should we draw a line showing where zero is
+	        showXZero: PropTypes.bool,
+	        showYZero: PropTypes.bool,
 	
-	        // whether or not to draw the tick lines on the Y axis
-	        shouldDrawYTicks: PropTypes.bool,
-	        // whether or not to draw Y axis label text (values)
-	        shouldDrawYLabels: PropTypes.bool,
-	
+	        // todo: tickLength, labelPadding
+	        // todo: labelFormat
 	        // todo: niceX, niceY
-	        // todo: shouldDrawXGrid, shouldDrawYGrid, shouldDrawXZero, shouldDrawYZero
 	        // todo: padding
 	
 	        onMouseMove: PropTypes.func
@@ -57193,36 +57209,64 @@
 	            marginBottom: 40,
 	            marginLeft: 60,
 	            marginRight: 10,
-	            shouldDrawXTicks: true,
-	            shouldDrawXLabels: true,
-	            shouldDrawYTicks: true,
-	            shouldDrawYLabels: true,
+	            showXLabels: true,
+	            showYLabels: true,
+	            showXGrid: true,
+	            showYGrid: true,
+	            showXTicks: true,
+	            showYTicks: true,
+	            showXZero: true,
+	            showYZero: true,
 	            onMouseMove: _lodash2['default'].noop
 	        };
 	    },
+	    getInitialState: function getInitialState() {
+	        return { preRender: false };
+	    },
 	
 	    componentWillMount: function componentWillMount() {
+	        //this.initMargin(this.props);
 	        this.initScale(this.props);
 	    },
 	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
 	        this.initScale(newProps);
 	    },
 	
+	    initMargin: function initMargin(props) {
+	        if (props.showXLabels) {
+	            props.data.forEach(function (d) {
+	                console.log();
+	            });
+	        }
+	    },
 	    initScale: function initScale(props) {
+	        // create the X and Y scales shared by charts
+	        // first figure out the domains for each axis (ie. data extent)
 	        var chartDomains = [];
-	        _react2['default'].Children.forEach(props.children, function (child) {
-	            // todo handle domain passed in as prop
-	            var domain = _lodash2['default'].isFunction(child.type.getDomain) ? child.type.getDomain(child.props, props.xType, props.yType) : { x: null, y: null };
-	            if (_lodash2['default'].isNull(domain.x)) domain.x = defaultDomain(child.props.data, child.props.getX, props.xType);
-	            if (_lodash2['default'].isNull(domain.y)) domain.y = defaultDomain(child.props.data, child.props.getY, props.yType);
-	            //console.log('chartDomain', domain);
-	            chartDomains.push(domain);
-	        });
+	        // unless both domains are given, ask each child chart for it's desired domain, & flatten them into one domain.
+	        // this is so that charts can plot their own modified version of the data (ie. a histogram),
+	        // even if it has a different domain than the original data
+	        if (!(this.props.xDomain && this.props.yDomain)) {
+	            _react2['default'].Children.forEach(props.children, function (child) {
+	                // todo handle domain passed in as prop
+	                var domain = _lodash2['default'].isFunction(child.type.getDomain) ? child.type.getDomain(child.props, props.xType, props.yType) : { x: null, y: null };
+	                if (_lodash2['default'].isNull(domain.x)) domain.x = defaultDomain(child.props.data, child.props.getX, props.xType);
+	                if (_lodash2['default'].isNull(domain.y)) domain.y = defaultDomain(child.props.data, child.props.getY, props.yType);
+	                //console.log('chartDomain', domain);
+	                chartDomains.push(domain);
+	            });
+	        }
 	
+	        // calculate the inner width and height based on margin
+	        // todo get padding too
 	        var innerWidth = props.width - (props.marginLeft + props.marginRight);
 	        var innerHeight = props.height - (props.marginTop + props.marginBottom);
-	        var xScale = makeScale(_lodash2['default'].pluck(chartDomains, 'x'), [0, innerWidth], props.xType);
-	        var yScale = makeScale(_lodash2['default'].pluck(chartDomains, 'y'), [innerHeight, 0], props.yType);
+	
+	        // make the scales, combining all domains to create one
+	        var xDomains = this.props.xDomain || _lodash2['default'].pluck(chartDomains, 'x');
+	        var yDomains = this.props.yDomain || _lodash2['default'].pluck(chartDomains, 'y');
+	        var xScale = makeScale(xDomains, [0, innerWidth], props.xType);
+	        var yScale = makeScale(yDomains, [innerHeight, 0], props.yType);
 	
 	        _lodash2['default'].assign(this, { innerWidth: innerWidth, innerHeight: innerHeight, xScale: xScale, yScale: yScale });
 	    },
@@ -57241,6 +57285,8 @@
 	    },
 	
 	    render: function render() {
+	        if (this.state.preRender) return this.preRender();
+	
 	        var _props = this.props;
 	        var width = _props.width;
 	        var height = _props.height;
@@ -57272,70 +57318,148 @@
 	            )
 	        );
 	    },
-	    renderXAxis: function renderXAxis() {
+	    preRender: function preRender() {
+	        var _this = this;
+	
+	        window.requestAnimationFrame(function () {
+	            // stuff to do after the pre-render
+	            // ie. measure what you rendered & set state to trigger a real render
+	            //const labels = this.refs.labels.getDOMNode().children;
+	            //console.log(labels);
+	            //const labelBoxes = _.map(labels, label => label.getBoundingClientRect());
+	            //console.log(labelBoxes);
+	            //const maxLabelWidth = Math.max.apply(null, _.pluck(labelBoxes, 'width'));
+	            //console.log(maxLabelWidth);
+	            _this.setState({ maxLabelWidth: 0, preRender: false });
+	        });
+	
 	        var _props2 = this.props;
-	        var shouldDrawXTicks = _props2.shouldDrawXTicks;
-	        var shouldDrawXLabels = _props2.shouldDrawXLabels;
-	        var xType = _props2.xType;
+	        var width = _props2.width;
+	        var height = _props2.height;
 	
-	        if (!(shouldDrawXTicks || shouldDrawXLabels)) return null;
-	        var xScale = this.xScale;
-	        var innerHeight = this.innerHeight;
+	        return _react2['default'].createElement(
+	            'svg',
+	            _extends({ className: 'xy-plot' }, { width: width, height: height }),
+	            _react2['default'].createElement(
+	                'g',
+	                { className: 'chart-inner', ref: 'labels', transform: 'translate(30,10)' },
+	                this.renderXAxis(),
+	                this.renderYAxis()
+	            )
+	        );
+	    },
+	    renderXAxis: function renderXAxis() {
+	        return this.renderAxis({
+	            letter: 'x',
+	            orientation: 'horizontal',
+	            axisTransform: 'translate(0, ' + this.innerHeight + ')'
+	        });
+	    },
+	    renderYAxis: function renderYAxis() {
+	        return this.renderAxis({
+	            letter: 'y',
+	            orientation: 'vertical'
+	        });
+	    },
+	    renderAxis: function renderAxis(options) {
+	        var _this2 = this;
 	
-	        var xTicks = xType == 'ordinal' ? xScale.domain() : xScale.ticks();
+	        var letter = options.letter;
+	        var orientation = options.orientation;
+	        var axisTransform = options.axisTransform;
+	
+	        var upperLetter = letter.toUpperCase();
+	        var showLabels = this.props['show' + upperLetter + 'Labels'];
+	        var showTicks = this.props['show' + upperLetter + 'Ticks'];
+	        var showGrid = this.props['show' + upperLetter + 'Grid'];
+	        if (!(showLabels || showTicks || showGrid)) return null;
+	
+	        var scale = this[letter + 'Scale'];
+	        var type = this.props[letter + 'Type'];
+	        var ticks = type === 'ordinal' ? scale.domain() : scale.ticks();
+	        var tickTransform = function tickTransform(value) {
+	            return orientation === 'vertical' ? 'translate(0, ' + scale(value) + ')' : 'translate(' + scale(value) + ', 0)';
+	        };
+	        var labelPadding = 6; // todo make prop
+	        var tickLength = 6; // todo make prop
+	        var distance = showTicks ? tickLength + labelPadding : labelPadding;
+	        var labelOffset = orientation === 'vertical' ? { x: -distance } : { y: distance };
+	        var gridLength = orientation === 'vertical' ? this.innerWidth : this.innerHeight;
 	
 	        return _react2['default'].createElement(
 	            'g',
-	            { className: 'chart-axis chart-axis-x', transform: 'translate(0, ' + innerHeight + ')' },
-	            _lodash2['default'].map(xTicks, function (x) {
+	            { ref: letter + 'Axis', className: 'chart-axis chart-axis-' + letter, transform: axisTransform },
+	            _lodash2['default'].map(ticks, function (value) {
+	                var tickOptions = { value: value, letter: letter, type: type, orientation: orientation, labelOffset: labelOffset, gridLength: gridLength, tickLength: tickLength };
 	                return _react2['default'].createElement(
 	                    'g',
-	                    { transform: 'translate(' + xScale(x) + ', 0)' },
-	                    shouldDrawXTicks ? _react2['default'].createElement('line', { className: 'chart-tick chart-tick-x', x2: 0, y2: 6 }) : null,
-	                    shouldDrawXLabels ? _react2['default'].createElement(
-	                        'text',
-	                        { className: 'chart-axis-label chart-x-label', dy: '0.8em', y: '9' },
-	                        xType === 'time' ? (0, _moment2['default'])(x).format('M/DD') : x
-	                    ) : null
+	                    { transform: tickTransform(value) },
+	                    showLabels ? _this2.renderLabel(tickOptions) : null,
+	                    showGrid ? _this2.renderGrid(tickOptions) : null,
+	                    showTicks ? _this2.renderTick(tickOptions) : null
 	                );
 	            })
 	        );
 	    },
-	    renderYAxis: function renderYAxis() {
-	        // todo combine into one renderAxis method
-	        var _props3 = this.props;
-	        var shouldDrawYTicks = _props3.shouldDrawYTicks;
-	        var shouldDrawYLabels = _props3.shouldDrawYLabels;
-	        var yType = _props3.yType;
+	    renderLabel: function renderLabel(options) {
+	        var letter = options.letter;
+	        var value = options.value;
+	        var type = options.type;
+	        var labelOffset = options.labelOffset;
 	
-	        if (!(shouldDrawYTicks || shouldDrawYLabels)) return null;
-	        var yScale = this.yScale;
-	        var innerWidth = this.innerWidth;
-	
-	        var yTicks = yType == 'ordinal' ? yScale.domain() : yScale.ticks();
-	
+	        var className = 'chart-axis-label chart-axis-label-' + letter;
+	        console.log('labelOffset', labelOffset);
+	        // todo generalize dy for all text sizes...?
 	        return _react2['default'].createElement(
-	            'g',
-	            { className: 'chart-axis chart-axis-y' },
-	            _lodash2['default'].map(yTicks, function (value) {
-	                return _react2['default'].createElement(
-	                    'g',
-	                    { transform: 'translate(0, ' + yScale(value) + ')' },
-	                    shouldDrawYTicks ? _react2['default'].createElement('line', { className: 'chart-tick chart-tick-y', x2: innerWidth, y2: 0 }) : null,
-	                    shouldDrawYLabels ? _react2['default'].createElement(
-	                        'text',
-	                        { className: 'chart-axis-label chart-y-label', dy: '0.32em', x: -3 },
-	                        yType === 'time' ? (0, _moment2['default'])(value).format('MM-DD') : value
-	                    ) : null
-	                );
-	            })
+	            'text',
+	            _extends({ className: className }, { dy: '0.32em' }, labelOffset),
+	            type === 'time' ? (0, _moment2['default'])(value).format('MM-DD') : value
 	        );
+	    },
+	    renderTick: function renderTick(options) {
+	        var letter = options.letter;
+	        var tickLength = options.tickLength;
+	        var orientation = options.orientation;
+	
+	        var className = 'chart-tick chart-tick-' + letter;
+	
+	        var _ref = orientation === 'vertical' ? [-tickLength, 0] : [0, tickLength];
+	
+	        var _ref2 = _slicedToArray(_ref, 2);
+	
+	        var x2 = _ref2[0];
+	        var y2 = _ref2[1];
+	
+	        return _react2['default'].createElement('line', { className: className, x2: x2, y2: y2 });
+	    },
+	    renderGrid: function renderGrid(options) {
+	        var letter = options.letter;
+	        var gridLength = options.gridLength;
+	        var orientation = options.orientation;
+	
+	        var className = 'chart-grid chart-grid-' + letter;
+	
+	        var _ref3 = orientation === 'vertical' ? [gridLength, 0] : [0, -gridLength];
+	
+	        var _ref32 = _slicedToArray(_ref3, 2);
+	
+	        var x2 = _ref32[0];
+	        var y2 = _ref32[1];
+	
+	        return _react2['default'].createElement('line', { className: className, x2: x2, y2: y2 });
 	    }
 	});
 	
+	function makeScale(domains, range, axisType) {
+	    var domain = defaultDomain(_lodash2['default'].flatten(domains), null, axisType);
+	    var scale = initScale(axisType).domain(domain);
+	    axisType === 'ordinal' ? scale.rangePoints(range) : scale.range(range);
+	    return scale;
+	}
+	
 	function defaultDomain(data, getter, scaleType) {
 	    switch (scaleType) {
-	        // extent for number/time scales, coerce dates to numbers
+	        // extent for number & time scales, coerce dates to numbers
 	        case 'number':
 	        case 'time':
 	            return _d32['default'].extent(data, function (d) {
@@ -57357,13 +57481,6 @@
 	        case 'time':
 	            return _d32['default'].time.scale();
 	    }
-	}
-	
-	function makeScale(domains, range, axisType) {
-	    var domain = defaultDomain(_lodash2['default'].flatten(domains), null, axisType);
-	    var scale = initScale(axisType).domain(domain);
-	    axisType === 'ordinal' ? scale.rangePoints(range) : scale.range(range);
-	    return scale;
 	}
 	
 	exports['default'] = XYPlot;

@@ -18,17 +18,17 @@ const TimeseriesLineChart = React.createClass({
         // whether or not the scale of the Y-axis should always include zero
         shouldIncludeZero: PropTypes.bool,
         // whether or not to draw a zero line
-        shouldDrawZero: PropTypes.bool,
+        showZero: PropTypes.bool,
 
         // whether or not to draw the tick lines on the X axis
-        shouldDrawXTicks: PropTypes.bool,
+        showXTicks: PropTypes.bool,
         // whether or not to draw X axis label text (dates)
-        shouldDrawXLabels: PropTypes.bool,
+        showXLabels: PropTypes.bool,
 
         // whether or not to draw the tick lines on the Y axis
-        shouldDrawYTicks: PropTypes.bool,
+        showYTicks: PropTypes.bool,
         // whether or not to draw Y axis label text (values)
-        shouldDrawYLabels: PropTypes.bool,
+        showYLabels: PropTypes.bool,
 
         // called when user mouses over the chart
         onMouseMove: PropTypes.func,
@@ -56,11 +56,11 @@ const TimeseriesLineChart = React.createClass({
         return {
             dateKey: 'date',
             shouldIncludeZero: true,
-            shouldDrawZero: true,
-            shouldDrawXTicks: true,
-            shouldDrawXLabels: true,
-            shouldDrawYTicks: true,
-            shouldDrawYLabels: true,
+            showZero: true,
+            showXTicks: true,
+            showXLabels: true,
+            showYTicks: true,
+            showYLabels: true,
             isRangeSelectable: false,
             onChangeSelectedRange: _.noop,
             width: 400,
@@ -189,19 +189,19 @@ const TimeseriesLineChart = React.createClass({
         );
     },
     renderXAxis() {
-        const {shouldDrawXTicks, shouldDrawXLabels} = this.props;
-        if(!(shouldDrawXTicks || shouldDrawXLabels)) return null;
+        const {showXTicks, showXLabels} = this.props;
+        if(!(showXTicks || showXLabels)) return null;
         const {xScale, innerHeight} = this.state;
         const xTicks = xScale.ticks();
 
         return <g className="chart-axis chart-axis-x" transform={`translate(0, ${innerHeight})`}>
             {_.map(xTicks, (date) => {
                 return <g transform={`translate(${xScale(date)}, 0)`}>
-                    {shouldDrawXTicks ?
+                    {showXTicks ?
                         <line className="chart-tick chart-tick-x" x2={0} y2={6} />
                         : null
                     }
-                    {shouldDrawXLabels ?
+                    {showXLabels ?
                         <text className="chart-axis-label chart-x-label" dy="0.8em" y="9" >
                             {moment(date).format("MMM 'YY")}
                         </text>
@@ -212,19 +212,19 @@ const TimeseriesLineChart = React.createClass({
         </g>
     },
     renderYAxis() {
-        const {shouldDrawYTicks, shouldDrawYLabels} = this.props;
-        if(!(shouldDrawYTicks || shouldDrawYLabels)) return null;
+        const {showYTicks, showYLabels} = this.props;
+        if(!(showYTicks || showYLabels)) return null;
         const {yScale, innerWidth} = this.state;
         const yTicks = yScale.ticks();
 
         return <g className="chart-axis chart-axis-y">
             {_.map(yTicks, (value) => {
                 return <g transform={`translate(0, ${yScale(value)})`}>
-                    {shouldDrawYTicks ?
+                    {showYTicks ?
                         <line className="chart-tick chart-tick-y" x2={innerWidth} y2={0} />
                         : null
                     }
-                    {shouldDrawYLabels ?
+                    {showYLabels ?
                         <text className="chart-axis-label chart-y-label" dy="0.32em" x={-3}>
                             {value}
                         </text>

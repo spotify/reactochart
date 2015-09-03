@@ -179,7 +179,7 @@ const HistogramExample = React.createClass({
                 </XYPlot>
             </div>
             <div>
-                <XYPlot width={700} height={80} shouldDrawYLabels={false}>
+                <XYPlot width={700} height={80} showYLabels={false}>
                     <ScatterPlot
                         data={randomNormal} getX={null} getY={() => Math.random()}
                         pointRadius={1.5}
@@ -352,6 +352,11 @@ const App = React.createClass({
         return <div>
             <h1>Reactochart Examples</h1>
 
+            <div>
+                <XYPlot width={300} height={300}>
+                    <BarChart data={randomBarData2.numberNumber} getX={0} getY={1} />
+                </XYPlot>
+            </div>
 
 
             {this.renderExamples()}
