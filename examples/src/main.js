@@ -74,13 +74,17 @@ const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", 
 // end fake data
 
 const PieChartExample = React.createClass({
+    getInitialState() { return {sinVal: 0}; },
+    componentWillMount() {
+        this.interval = setInterval(() => this.setState({ // why? because fun!
+            sinVal: Math.min(Math.abs(Math.cos(new Date() * .001) * Math.sin(new Date() * .0011)), 1)
+        }), 20);
+    },
+    componentWillUnmount() { clearInterval(this.interval); },
+
     render() {
         return <div>
-            <PieChart
-                data={[45, 35, 20]}
-                margin={{top: 10, left: 20, right: 30, bottom: 40}}
-                radius={100}
-                />
+            <PieChart data={[45, 35, 20]} />
             <PieChart
                 data={[10, 20, 30]}
                 radius={100}
@@ -88,11 +92,18 @@ const PieChartExample = React.createClass({
                 margin={20}
                 />
             <PieChart
-                data={[10, 20, 30]}
-                total={70}
-                radius={100}
+                data={[42]}
+                total={100}
+                radius={80}
                 holeRadius={50}
-                margin={20}
+                centerLabel="42%"
+                />
+            <PieChart
+                data={[this.state.sinVal]}
+                total={1}
+                radius={200}
+                holeRadius={50}
+                centerLabel={(this.state.sinVal * 100).toFixed(0)}
                 />
         </div>
     }

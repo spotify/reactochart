@@ -139,15 +139,27 @@
 	var PieChartExample = _reactAddons2['default'].createClass({
 	    displayName: 'PieChartExample',
 	
+	    getInitialState: function getInitialState() {
+	        return { sinVal: 0 };
+	    },
+	    componentWillMount: function componentWillMount() {
+	        var _this = this;
+	
+	        this.interval = setInterval(function () {
+	            return _this.setState({ // why? because fun!
+	                sinVal: Math.min(Math.abs(Math.cos(new Date() * .001) * Math.sin(new Date() * .0011)), 1)
+	            });
+	        }, 20);
+	    },
+	    componentWillUnmount: function componentWillUnmount() {
+	        clearInterval(this.interval);
+	    },
+	
 	    render: function render() {
 	        return _reactAddons2['default'].createElement(
 	            'div',
 	            null,
-	            _reactAddons2['default'].createElement(_src.PieChart, {
-	                data: [45, 35, 20],
-	                margin: { top: 10, left: 20, right: 30, bottom: 40 },
-	                radius: 100
-	            }),
+	            _reactAddons2['default'].createElement(_src.PieChart, { data: [45, 35, 20] }),
 	            _reactAddons2['default'].createElement(_src.PieChart, {
 	                data: [10, 20, 30],
 	                radius: 100,
@@ -155,11 +167,18 @@
 	                margin: 20
 	            }),
 	            _reactAddons2['default'].createElement(_src.PieChart, {
-	                data: [10, 20, 30],
-	                total: 70,
-	                radius: 100,
+	                data: [42],
+	                total: 100,
+	                radius: 80,
 	                holeRadius: 50,
-	                margin: 20
+	                centerLabel: '42%'
+	            }),
+	            _reactAddons2['default'].createElement(_src.PieChart, {
+	                data: [this.state.sinVal],
+	                total: 1,
+	                radius: 200,
+	                holeRadius: 50,
+	                centerLabel: (this.state.sinVal * 100).toFixed(0)
 	            })
 	        );
 	    }
@@ -678,7 +697,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: #f0f0f0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-label-x,\n.xy-plot .chart-axis-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-label-y,\n.xy-plot .chart-axis-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
+	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: #f0f0f0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-label-x,\n.xy-plot .chart-axis-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-label-y,\n.xy-plot .chart-axis-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\n.pie-chart .pie-label-center {\n  font-size: 26pt;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
 	
 	// exports
 
@@ -57518,27 +57537,8 @@
 	var PropTypes = _reactAddons2['default'].PropTypes;
 	
 	var DEFAULT_PROPS = {
-	    // accessor for getting the values plotted on the pie chart
-	    // if not provided, just uses the value itself at given index
 	    getValue: null,
-	    // (optional) total expected sum of all the pie slice values
-	    // if provided && slices don't add up to total, an "empty" slice will be rendered for the rest
-	    // if not provided, will be the sum of all values (ie. all values will always add up to 100%)
-	    total: null,
-	    // height and width of the SVG
-	    // if only one is passed, same # is used for both (ie. width=100 means height=100 also)
-	    // if neither is passed, but radius is, radius+margins is used
-	    // if neither is passed, and radius isn't either, DEFAULTS.size is used
-	    width: null,
-	    height: null,
-	    // pass *either* radius or margin to determine the pie chart size
-	    // main radius of the pie chart, inferred from margin if not provided
-	    radius: null,
-	    // margins (space between svg edges and pie circle), inferred from radius if not provided
-	    // can either be a single number (to make all margins equal), or {top, bottom, left, right} object
-	    margin: { top: 0, bottom: 0, left: 0, right: 0 },
-	    // optional radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
-	    holeRadius: 0
+	    margin: { top: 0, bottom: 0, left: 0, right: 0 }
 	};
 	
 	// default height/width, used only if height & width & radius are all undefined
@@ -57548,13 +57548,31 @@
 	    displayName: 'PieChart',
 	
 	    propTypes: {
+	        // array of data to plot with pie chart
 	        data: PropTypes.array.isRequired,
+	        // (optional) accessor for getting the values plotted on the pie chart
+	        // if not provided, just uses the value itself at given index
 	        getValue: _utilJs.AccessorPropType,
+	        // (optional) total expected sum of all the pie slice values
+	        // if provided && slices don't add up to total, an "empty" slice will be rendered for the rest
+	        // if not provided, will be the sum of all values (ie. all values will always add up to 100%)
+	        total: PropTypes.number,
+	        // (optional) height and width of the SVG
+	        // if only one is passed, same # is used for both (ie. width=100 means height=100 also)
+	        // if neither is passed, but radius is, radius+margins is used
+	        // if neither is passed, and radius isn't either, DEFAULTS.size is used
 	        width: PropTypes.number,
 	        height: PropTypes.number,
+	        // (optional) main radius of the pie chart, inferred from margin/width/height if not provided
 	        radius: PropTypes.number,
-	        margin: PropTypes.object,
-	        holeRadius: PropTypes.number
+	        // (optional) margins (between svg edges and pie circle), inferred from radius/width/height if not provided
+	        // can either be a single number (to make all margins equal), or {top, bottom, left, right} object
+	        margin: PropTypes.oneOfType(PropTypes.object, PropTypes.number),
+	        // (optional) radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
+	        holeRadius: PropTypes.number,
+	        // (optional) label text to display in the middle of the pie/donut
+	        centerLabel: PropTypes.string
+	
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return DEFAULT_PROPS;
@@ -57563,8 +57581,8 @@
 	    render: function render() {
 	        var margin = _lodash2['default'].isNumber(this.props.margin) ? { top: this.props.margin, bottom: this.props.margin, left: this.props.margin, right: this.props.margin } : _lodash2['default'].defaults({}, this.props.margin, DEFAULT_PROPS.margin);
 	        // sizes fallback based on provided info: given dimension -> radius + margin -> other dimension -> default
-	        var width = this.props.width || this.props.radius ? this.props.radius * 2 + margin.left + margin.right : this.props.height || DEFAULTS.size;
-	        var height = this.props.height || this.props.radius ? this.props.radius * 2 + margin.top + margin.bottom : this.props.width || DEFAULTS.size;
+	        var width = this.props.width || this.props.radius ? this.props.radius * 2 + margin.left + margin.right : this.props.height || DEFAULT_SIZE;
+	        var height = this.props.height || this.props.radius ? this.props.radius * 2 + margin.top + margin.bottom : this.props.width || DEFAULT_SIZE;
 	        var radius = this.props.radius || Math.min((width - (margin.left + margin.right)) / 2, (height - (margin.top + margin.bottom)) / 2);
 	        var holeRadius = this.props.holeRadius;
 	
@@ -57583,20 +57601,35 @@
 	                var slicePercent = valueAccessor(d) / total;
 	                var endPercent = startPercent + slicePercent;
 	                var pathStr = pieSlicePath(startPercent, endPercent, center, radius, holeRadius);
-	                var path = _reactAddons2['default'].createElement('path', { className: className, d: pathStr });
 	                startPercent += slicePercent;
-	                return path;
+	                //const path =
+	
+	                return _reactAddons2['default'].createElement('path', { className: className, d: pathStr });
 	            }),
 	            sum < total ? // draw empty slice if the sum of slices is less than expected total
 	            _reactAddons2['default'].createElement('path', {
 	                className: 'pie-slice pie-slice-empty',
 	                d: pieSlicePath(startPercent, 1, center, radius, holeRadius)
-	            }) : null
+	            }) : null,
+	            this.props.centerLabel ? this.renderCenterLabel(center) : null
+	        );
+	    },
+	    renderCenterLabel: function renderCenterLabel(center) {
+	        var x = center.x;
+	        var y = center.y;
+	
+	        var style = { textAnchor: 'middle', dominantBaseline: 'central' };
+	        return _reactAddons2['default'].createElement(
+	            'text',
+	            _extends({ className: 'pie-label-center' }, { x: x, y: y, style: style }),
+	            this.props.centerLabel
 	        );
 	    }
 	});
 	
-	function pieSlicePath(startPercent, endPercent, center, radius, holeRadius) {
+	function pieSlicePath(startPercent, endPercent, center, radius) {
+	    var holeRadius = arguments.length <= 4 || arguments[4] === undefined ? 0 : arguments[4];
+	
 	    if (endPercent == 1) endPercent = .9999999; // arc cannot be a full circle
 	    var startX = Math.sin(2 * Math.PI / (1 / startPercent));
 	    var startY = Math.cos(2 * Math.PI / (1 / startPercent));
@@ -58200,7 +58233,7 @@
 	        if (pointSymbol.type === 'circle' || pointSymbol.type === 'ellipse') {
 	            _lodash2['default'].assign(symbolProps, { cx: cx, cy: cy });
 	        } else if (pointSymbol.type === 'text') {
-	            _lodash2['default'].assign(symbolProps, { x: cx, y: cy, style: { textAnchor: 'middle', dominantBaseline: 'middle' } });
+	            _lodash2['default'].assign(symbolProps, { x: cx, y: cy, style: { textAnchor: 'middle', dominantBaseline: 'central' } });
 	        } else {
 	            _lodash2['default'].assign(symbolProps, { x: cx, y: cy, style: { transform: "translate(-50%, -50%)" } });
 	        }

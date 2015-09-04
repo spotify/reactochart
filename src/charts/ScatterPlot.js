@@ -58,9 +58,9 @@ const ScatterPlot = React.createClass({
         if(pointSymbol.type === 'circle' || pointSymbol.type === 'ellipse') {
             _.assign(symbolProps, {cx, cy});
         } else if(pointSymbol.type === 'text') {
-            _.assign(symbolProps, {x: cx, y: cy, style: {textAnchor: 'middle', dominantBaseline: 'middle'}})
+            _.assign(symbolProps, {x: cx, y: cy, style: {textAnchor: 'middle', dominantBaseline: 'central'}});
         } else {
-            _.assign(symbolProps, {x: cx, y: cy, style: {transform: "translate(-50%, -50%)"}})
+            _.assign(symbolProps, {x: cx, y: cy, style: {transform: "translate(-50%, -50%)"}});
         }
 
         return React.cloneElement(pointSymbol, symbolProps);
