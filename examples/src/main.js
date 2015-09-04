@@ -73,6 +73,30 @@ const randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.r
 const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 // end fake data
 
+const PieChartExample = React.createClass({
+    render() {
+        return <div>
+            <PieChart
+                data={[45, 35, 20]}
+                margin={{top: 10, left: 20, right: 30, bottom: 40}}
+                radius={100}
+                />
+            <PieChart
+                data={[10, 20, 30]}
+                radius={100}
+                holeRadius={50}
+                margin={20}
+                />
+            <PieChart
+                data={[10, 20, 30]}
+                total={70}
+                radius={100}
+                holeRadius={50}
+                margin={20}
+                />
+        </div>
+    }
+});
 
 const ScatterPlotExample = React.createClass({
     render() {
@@ -328,6 +352,7 @@ const V1Examples = React.createClass({
 
 
 const examples = [
+    {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample},
     {id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample},
     {id: 'line', title: 'Line Chart', Component: LineChartExample},
     {id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample},
@@ -353,19 +378,7 @@ const App = React.createClass({
         return <div>
             <h1>Reactochart Examples</h1>
 
-            <div>
-                <PieChart
-                    data={[45, 35, 20]}
-                    margin={{top: 20, left: 20, right: 50, bottom: 50}}
-                    radius={100}
-                />
-                <PieChart
-                    data={[45, 35, 20]}
-                    radius={100}
-                    holeRadius={50}
-                    margin={20}
-                />
-            </div>
+
 
             <div>
                 <XYPlot width={300} height={300}>

@@ -136,6 +136,35 @@
 	var emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 	// end fake data
 	
+	var PieChartExample = _reactAddons2['default'].createClass({
+	    displayName: 'PieChartExample',
+	
+	    render: function render() {
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            null,
+	            _reactAddons2['default'].createElement(_src.PieChart, {
+	                data: [45, 35, 20],
+	                margin: { top: 10, left: 20, right: 30, bottom: 40 },
+	                radius: 100
+	            }),
+	            _reactAddons2['default'].createElement(_src.PieChart, {
+	                data: [10, 20, 30],
+	                radius: 100,
+	                holeRadius: 50,
+	                margin: 20
+	            }),
+	            _reactAddons2['default'].createElement(_src.PieChart, {
+	                data: [10, 20, 30],
+	                total: 70,
+	                radius: 100,
+	                holeRadius: 50,
+	                margin: 20
+	            })
+	        );
+	    }
+	});
+	
 	var ScatterPlotExample = _reactAddons2['default'].createClass({
 	    displayName: 'ScatterPlotExample',
 	
@@ -534,7 +563,7 @@
 	    }
 	});
 	
-	var examples = [{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples }];
+	var examples = [{ id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples }];
 	
 	var App = _reactAddons2['default'].createClass({
 	    displayName: 'App',
@@ -557,21 +586,6 @@
 	                'h1',
 	                null,
 	                'Reactochart Examples'
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'div',
-	                null,
-	                _reactAddons2['default'].createElement(_src.PieChart, {
-	                    data: [45, 35, 20],
-	                    margin: { top: 20, left: 20, right: 50, bottom: 50 },
-	                    radius: 100
-	                }),
-	                _reactAddons2['default'].createElement(_src.PieChart, {
-	                    data: [45, 35, 20],
-	                    radius: 100,
-	                    holeRadius: 50,
-	                    margin: 20
-	                })
 	            ),
 	            _reactAddons2['default'].createElement(
 	                'div',
@@ -664,7 +678,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: #f0f0f0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-label-x,\n.xy-plot .chart-axis-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-label-y,\n.xy-plot .chart-axis-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.pie-chart {\n  background: white;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
+	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: #f0f0f0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-label-x,\n.xy-plot .chart-axis-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-label-y,\n.xy-plot .chart-axis-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
 	
 	// exports
 
@@ -57557,7 +57571,8 @@
 	        var center = { x: margin.left + radius, y: margin.top + radius };
 	
 	        var valueAccessor = (0, _utilJs.accessor)(this.props.getValue);
-	        var total = this.props.total || _lodash2['default'].sum(this.props.data, valueAccessor);
+	        var sum = _lodash2['default'].sum(this.props.data, valueAccessor);
+	        var total = this.props.total || sum;
 	
 	        var startPercent = 0;
 	        return _reactAddons2['default'].createElement(
@@ -57571,7 +57586,12 @@
 	                var path = _reactAddons2['default'].createElement('path', { className: className, d: pathStr });
 	                startPercent += slicePercent;
 	                return path;
-	            })
+	            }),
+	            sum < total ? // draw empty slice if the sum of slices is less than expected total
+	            _reactAddons2['default'].createElement('path', {
+	                className: 'pie-slice pie-slice-empty',
+	                d: pieSlicePath(startPercent, 1, center, radius, holeRadius)
+	            }) : null
 	        );
 	    }
 	});
@@ -57586,17 +57606,19 @@
 	    var c = center;
 	    var r = radius;
 	    var rH = holeRadius;
+	    var x0 = startX;
+	    var x1 = endX;
+	    var y0 = startY;
+	    var y1 = endY;
 	
-	    var pathParts = [// construct a string representing the pie slice path
-	    'M ' + (c.x + startX * rH) + ',' + (c.y - startY * rH), // start at edge of donut hole (inner circle)
-	    'L ' + (c.x + startX * r) + ',' + (c.y - startY * r), // straight line to outer circle, along radius
-	    'A ' + r + ',' + r + ' 0 ' + largeArc + ' 1 ' + (c.x + endX * r) + ',' + (c.y - endY * r) // outer arc
+	    return [// construct a string representing the pie slice path
+	    'M ' + (c.x + x0 * rH) + ',' + (c.y - y0 * rH), // start at edge of inner (hole) circle, or center if no hole
+	    'L ' + (c.x + x0 * r) + ',' + (c.y - y0 * r), // straight line to outer circle, along radius
+	    'A ' + r + ',' + r + ' 0 ' + largeArc + ' 1 ' + (c.x + x1 * r) + ',' + (c.y - y1 * r) // outer arc
 	    ].concat(holeRadius ? [// if we have an inner (donut) hole, draw an inner arc too, otherwise we're done
-	    'L ' + (c.x + endX * rH) + ',' + (c.y - endY * rH), // straight line to inner circle, along radius
-	    'A ' + rH + ',' + rH + ' 0 ' + largeArc + ' 0 ' + (c.x + startX * rH) + ',' + (c.y - startY * rH) + ' z' // inner arc
-	    ] : 'z');
-	
-	    return pathParts.join(' ');
+	    'L ' + (c.x + x1 * rH) + ',' + (c.y - y1 * rH), // straight line to inner (hole) circle, along radius
+	    'A ' + rH + ',' + rH + ' 0 ' + largeArc + ' 0 ' + (c.x + x0 * rH) + ',' + (c.y - y0 * rH) + ' z' // inner arc
+	    ] : 'z').join(' ');
 	}
 	
 	exports['default'] = PieChart;

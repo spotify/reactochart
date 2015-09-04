@@ -60,7 +60,8 @@ const PieChart = React.createClass({
         const center = {x: margin.left + radius, y: margin.top + radius};
 
         const valueAccessor = accessor(this.props.getValue);
-        const total = this.props.total || _.sum(this.props.data, valueAccessor);
+        const sum = _.sum(this.props.data, valueAccessor);
+        const total = this.props.total || sum;
 
         let startPercent = 0;
         return <svg className="pie-chart" {...{width, height}}>
@@ -73,6 +74,13 @@ const PieChart = React.createClass({
                 startPercent += slicePercent;
                 return path;
             })}
+
+            {sum < total ? // draw empty slice if the sum of slices is less than expected total
+                <path
+                    className='pie-slice pie-slice-empty'
+                    d={pieSlicePath(startPercent, 1, center, radius, holeRadius)}
+                /> : null
+            }
         </svg>
     }
 });
@@ -84,18 +92,16 @@ function pieSlicePath(startPercent, endPercent, center, radius, holeRadius) {
     const endX = Math.sin((2 * Math.PI) / (1 / endPercent));
     const endY = Math.cos((2 * Math.PI) / (1 / endPercent));
     const largeArc = (endPercent - startPercent <= 0.5) ? 0 : 1;
-    const [c, r, rH] = [center, radius, holeRadius];
+    const [c, r, rH, x0, x1, y0, y1] = [center, radius, holeRadius, startX, endX, startY, endY];
 
-    let pathParts = [ // construct a string representing the pie slice path
-        `M ${c.x + (startX * rH)},${c.y - (startY * rH)}`, // start at edge of donut hole (inner circle)
-        `L ${c.x + (startX * r)},${c.y - (startY * r)}`, // straight line to outer circle, along radius
-        `A ${r},${r} 0 ${largeArc} 1 ${c.x + (endX * r)},${c.y - (endY * r)}` // outer arc
+    return [ // construct a string representing the pie slice path
+        `M ${c.x + (x0 * rH)},${c.y - (y0 * rH)}`, // start at edge of inner (hole) circle, or center if no hole
+        `L ${c.x + (x0 * r)},${c.y - (y0 * r)}`, // straight line to outer circle, along radius
+        `A ${r},${r} 0 ${largeArc} 1 ${c.x + (x1 * r)},${c.y - (y1 * r)}` // outer arc
     ].concat(holeRadius ? [ // if we have an inner (donut) hole, draw an inner arc too, otherwise we're done
-        `L ${c.x + (endX * rH)},${c.y - (endY * rH)}`, // straight line to inner circle, along radius
-        `A ${rH},${rH} 0 ${largeArc} 0 ${c.x + (startX * rH)},${c.y - (startY * rH)} z` // inner arc
-    ] : 'z');
-
-    return pathParts.join(' ');
+        `L ${c.x + (x1 * rH)},${c.y - (y1 * rH)}`, // straight line to inner (hole) circle, along radius
+        `A ${rH},${rH} 0 ${largeArc} 0 ${c.x + (x0 * rH)},${c.y - (y0 * rH)} z` // inner arc
+    ] : 'z').join(' ');
 }
 
 export default PieChart;
