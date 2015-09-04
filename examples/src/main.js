@@ -7,6 +7,7 @@ import {
     // old charts
     V1LineChart,
     // new charts
+    PieChart,
     XYPlot,
     LineChart,
     BarChart,
@@ -63,7 +64,7 @@ const randomBarData2 = {
 
     timeTime: _.zip(timeData, timeData2)
 };
-console.log(randomBarData2);
+//console.log(randomBarData2);
 
 const normalDistribution = d3.random.normal(0);
 //const randomNormal = _.times(1000, normalDistribution);
@@ -353,6 +354,20 @@ const App = React.createClass({
             <h1>Reactochart Examples</h1>
 
             <div>
+                <PieChart
+                    data={[45, 35, 20]}
+                    margin={{top: 20, left: 20, right: 50, bottom: 50}}
+                    radius={100}
+                />
+                <PieChart
+                    data={[45, 35, 20]}
+                    radius={100}
+                    holeRadius={50}
+                    margin={20}
+                />
+            </div>
+
+            <div>
                 <XYPlot width={300} height={300}>
                     <BarChart data={randomBarData2.numberNumber} getX={0} getY={1} />
                 </XYPlot>
@@ -363,7 +378,7 @@ const App = React.createClass({
         </div>
     },
     renderExamples() {
-        return <div class='example-sections'>
+        return <div className='example-sections'>
             {examples.map(this.renderExample)}
         </div>;
     },

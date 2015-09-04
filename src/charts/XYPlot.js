@@ -26,6 +26,8 @@ const XYPlot = React.createClass({
         marginLeft: PropTypes.number,
         marginRight: PropTypes.number,
 
+        // todo: padding
+
         // should we draw axis labels
         showXLabels: PropTypes.bool,
         showYLabels: PropTypes.bool,
@@ -42,8 +44,9 @@ const XYPlot = React.createClass({
         // todo: tickLength, labelPadding
         // todo: labelFormat
         // todo: niceX, niceY
-        // todo: padding
+        // todo: xAxisLabel, yAxisLabel
 
+        // todo more interaction?
         onMouseMove: PropTypes.func
     },
     getDefaultProps() {
@@ -70,7 +73,7 @@ const XYPlot = React.createClass({
         }
     },
     getInitialState() {
-        return {preRender: false};
+        return {preRender: true};
     },
 
     componentWillMount() {
@@ -134,6 +137,33 @@ const XYPlot = React.createClass({
         this.props.onMouseMove(hovered, e);
     },
 
+    preRender() {
+        window.requestAnimationFrame(this.postPreRender);
+
+        const {width, height} = this.props;
+        return (
+            <svg className="xy-plot" {...{width, height}}>
+                <g className="chart-inner" ref="labels" transform="translate(30,10)">
+                    {this.renderXAxis()}
+                    {this.renderYAxis()}
+                </g>
+            </svg>
+        );
+    },
+    postPreRender() {
+        // stuff to do after the pre-render (measure what you rendered & set state to trigger a real render)
+        // get the width of the largest y-label and the height of the largest x-label, to auto-set margins
+        const getAxisLabelBoxes = (axisRef) => {
+            const labels = this.refs[axisRef].getDOMNode().getElementsByClassName('chart-axis-label');
+            return _.map(labels, label => label.getBoundingClientRect());
+        };
+        const maxXLabelHeight = Math.max.apply(null, _.pluck(getAxisLabelBoxes('xAxis'), 'height'));
+        const maxYLabelWidth = Math.max.apply(null, _.pluck(getAxisLabelBoxes('yAxis'), 'width'));
+
+        //console.log({maxXLabelHeight, maxYLabelWidth, preRender: false});
+        this.setState({maxXLabelHeight, maxYLabelWidth, preRender: false});
+    },
+
     render() {
         if(this.state.preRender) return this.preRender();
 
@@ -159,30 +189,7 @@ const XYPlot = React.createClass({
             </svg>
         );
     },
-    preRender() {
-        window.requestAnimationFrame(() => {
-            // stuff to do after the pre-render
-            // ie. measure what you rendered & set state to trigger a real render
-            //const labels = this.refs.labels.getDOMNode().children;
-            //console.log(labels);
-            //const labelBoxes = _.map(labels, label => label.getBoundingClientRect());
-            //console.log(labelBoxes);
-            //const maxLabelWidth = Math.max.apply(null, _.pluck(labelBoxes, 'width'));
-            //console.log(maxLabelWidth);
-            this.setState({maxLabelWidth: 0, preRender: false});
-        });
 
-        const {width, height} = this.props;
-
-        return (
-            <svg className="xy-plot" {...{width, height}}>
-                <g className="chart-inner" ref="labels" transform="translate(30,10)">
-                    {this.renderXAxis()}
-                    {this.renderYAxis()}
-                </g>
-            </svg>
-        );
-    },
     renderXAxis() {
         return this.renderAxis({
             letter: 'x',
@@ -230,7 +237,6 @@ const XYPlot = React.createClass({
     renderLabel(options) {
         const {letter, value, type, labelOffset} = options;
         const className = `chart-axis-label chart-axis-label-${letter}`;
-        console.log('labelOffset', labelOffset);
         // todo generalize dy for all text sizes...?
         return <text {...{className}} dy="0.32em" {...labelOffset}>
             {type === 'time' ? moment(value).format('MM-DD') : value}
