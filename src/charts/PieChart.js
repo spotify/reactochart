@@ -38,7 +38,6 @@ const PieChart = React.createClass({
         holeRadius: PropTypes.number,
         // (optional) label text to display in the middle of the pie/donut
         centerLabel: PropTypes.string
-
     },
     getDefaultProps() { return DEFAULT_PROPS; },
 

@@ -39,7 +39,7 @@ const randomSequences = [
 ];
 
 const randomBars = [
-    randomWalkSeries(20, 0, 5)
+    randomWalkSeries(21, 0, 5)
 ];
 
 const randomScatter = [
@@ -54,7 +54,7 @@ const randomBarData = {
     valueValue: randomWalkSeries(20, 0, 5)
 };
 const randomBarData2 = {
-    numberNumber: _.zip(_.range(0,20), randomWalk(20, 5)),
+    numberNumber: _.zip(_.range(0,21), randomWalk(21, 5)),
     numberOrdinal: _.zip(randomWalk(ordinalData.length, 5), ordinalData),
     numberTime: _.zip(randomWalk(timeData.length, 5), timeData),
 
@@ -77,7 +77,7 @@ const PieChartExample = React.createClass({
     getInitialState() { return {sinVal: 0}; },
     componentWillMount() {
         this.interval = setInterval(() => this.setState({ // why? because fun!
-            sinVal: Math.min(Math.abs(Math.cos(new Date() * .001) * Math.sin(new Date() * .0011)), 1)
+            sinVal: Math.min(Math.abs((Math.cos(new Date() * .001) * Math.sin(new Date() * .0011)) + 1), 2)
         }), 20);
     },
     componentWillUnmount() { clearInterval(this.interval); },
@@ -100,10 +100,10 @@ const PieChartExample = React.createClass({
                 />
             <PieChart
                 data={[this.state.sinVal]}
-                total={1}
+                total={2}
                 radius={200}
                 holeRadius={50}
-                centerLabel={(this.state.sinVal * 100).toFixed(0)}
+                centerLabel={(this.state.sinVal * 50).toFixed(0)}
                 />
         </div>
     }
@@ -389,14 +389,11 @@ const App = React.createClass({
         return <div>
             <h1>Reactochart Examples</h1>
 
-
-
             <div>
                 <XYPlot width={300} height={300}>
                     <BarChart data={randomBarData2.numberNumber} getX={0} getY={1} />
                 </XYPlot>
             </div>
-
 
             {this.renderExamples()}
         </div>
@@ -413,7 +410,7 @@ const App = React.createClass({
             <div
                 className={`example-section-button ${isVisible ? 'active' : ''}`}
                 onClick={this.toggleExample.bind(null, example.id)}
-                >
+            >
                 {example.title}
                 <span className="example-arrow">{isVisible ? " ▼" : " ►"}</span>
             </div>
