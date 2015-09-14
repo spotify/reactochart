@@ -47,11 +47,11 @@ const PieChart = React.createClass({
             _.defaults({}, this.props.margin, DEFAULT_PROPS.margin);
         // sizes fallback based on provided info: given dimension -> radius + margin -> other dimension -> default
         const width = this.props.width ||
-            (this.props.radius) ? (this.props.radius * 2) + margin.left + margin.right :
-            this.props.height || DEFAULT_SIZE;
+            (this.props.radius ? (this.props.radius * 2) + margin.left + margin.right : this.props.height)
+            || DEFAULT_SIZE;
         const height = this.props.height ||
-            (this.props.radius) ? (this.props.radius * 2) + margin.top + margin.bottom :
-            this.props.width || DEFAULT_SIZE;
+            (this.props.radius ? (this.props.radius * 2) + margin.top + margin.bottom : this.props.width)
+            || DEFAULT_SIZE;
         const radius = this.props.radius ||
             Math.min((width - (margin.left + margin.right)) / 2, (height - (margin.top + margin.bottom)) / 2);
         const {holeRadius} = this.props;
