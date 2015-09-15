@@ -4,6 +4,7 @@ import _ from 'lodash';
 import d3 from 'd3';
 import {accessor} from '../util.js';
 import moment from 'moment';
+import numeral from 'numeral';
 import $ from 'jquery';
 
 const DEFAULTS = {
@@ -51,6 +52,8 @@ const XYPlot = React.createClass({
         showXZero: PropTypes.bool,
         showYZero: PropTypes.bool,
 
+        xLabelFormat: PropTypes.string,
+        yLabelFormat: PropTypes.string,
 
         // todo: tickLength, labelPadding
         // todo: labelFormat
@@ -83,6 +86,8 @@ const XYPlot = React.createClass({
             showYTicks: true,
             showXZero: true,
             showYZero: true,
+            xLabelFormat: null,
+            yLabelFormat: null,
             onMouseMove: _.noop
         }
     },
@@ -92,10 +97,12 @@ const XYPlot = React.createClass({
 
     componentWillMount() {
         this.initDomains(this.props);
+        this.initLabelFormats(this.props);
         this.initScale(this.props);
     },
     componentWillReceiveProps(newProps) {
         this.initDomains(newProps);
+        this.initLabelFormats(this.props);
         this.initScale(newProps);
     },
 
@@ -119,11 +126,31 @@ const XYPlot = React.createClass({
         const yDomains = props.yDomain || _.pluck(chartDomains, 'y');
         _.assign(this, {xDomains, yDomains});
     },
+    initLabelFormats(props) {
+        ['x', 'y'].forEach(letter => {
+            const formatKey = `${letter}LabelFormat`;
+            const axisType = props[`${letter}Type`];
+
+            // use given format if provided
+            if(!_.isNull(props[formatKey])) this[formatKey] = props[formatKey];
+            // otherwise determine appropriate format for axis type
+            else if(axisType == 'number') {
+                this[formatKey] = '0.[000000]a';
+            } else if(axisType === 'time') {
+                // todo determine most appropriate date format for this domain
+                //const domains = this[`${letter}Domains`];
+                //const domain = defaultDomain(_.flatten(domains), null, axisType);
+                this[formatKey] = 'MM-DD';
+            }
+        })
+    },
+
     initScale(props) {
         // create the X and Y scales shared by charts
         // calculate the inner width and height based on margins
         // todo get padding too
         const {width, height, xType, yType, labelPadding, tickLength, showXTicks, showYTicks} = props;
+        const {xLabelFormat, yLabelFormat} = this;
         this.margin = _.defaults(this.props.margin, DEFAULTS.margin);
 
         const shouldMeasureLabels = _.any(this.margin, _.isNull);
@@ -143,7 +170,7 @@ const XYPlot = React.createClass({
                 const yTicks = (yType === 'ordinal') ? yScale.domain() : yScale.ticks();
                 if(xType !== 'ordinal') xScale.nice(xTicks.length);
                 if(yType !== 'ordinal') yScale.nice(yTicks.length);
-                const labelBoxes = measureAxisLabels(xTicks, yTicks, xType, yType);
+                const labelBoxes = measureAxisLabels(xTicks, yTicks, xType, yType, xLabelFormat, yLabelFormat);
                 //console.log(xTicks, yTicks);
                 //console.log(labelBoxes);
                 let newMargin = {
@@ -250,9 +277,10 @@ const XYPlot = React.createClass({
     renderLabel(options) {
         const {letter, value, type, labelOffset} = options;
         const className = `chart-axis-label chart-axis-label-${letter}`;
+        const format = this[`${letter}LabelFormat`];
         // todo generalize dy for all text sizes...?
         return <text {...{className}} dy="0.32em" {...labelOffset}>
-            {formatAxisLabel(value, type)}
+            {formatAxisLabel(value, type, format)}
         </text>
     },
     renderTick(options) {
@@ -298,14 +326,16 @@ function initScale(type) {
     }
 }
 
-function formatAxisLabel(value, type) {
-    return type === 'time' ? moment(value).format('MM-DD') : value;
+function formatAxisLabel(value, type, format) {
+    return type === 'number' ? numeral(value).format(format)
+        : type === 'time' ? moment(value).format(format)
+        : value;
 }
 
 
-function measureAxisLabels(xLabels, yLabels, xType, yType) {
-    const xLabelEls = xLabels.map(l => `<text class='chart-axis-label chart-axis-label-x'>${formatAxisLabel(l, xType)}</text>`);
-    const yLabelEls = yLabels.map(l => `<text class='chart-axis-label chart-axis-label-y'>${formatAxisLabel(l, yType)}</text>`);
+function measureAxisLabels(xLabels, yLabels, xType, yType, xFormat, yFormat) {
+    const xLabelEls = xLabels.map(l => `<text class='chart-axis-label chart-axis-label-x'>${formatAxisLabel(l, xType, xFormat)}</text>`);
+    const yLabelEls = yLabels.map(l => `<text class='chart-axis-label chart-axis-label-y'>${formatAxisLabel(l, yType, yFormat)}</text>`);
     // todo don't use jquery
     const $testSvg = $(`<svg class="xy-plot">\
         <g class="chart-inner">\

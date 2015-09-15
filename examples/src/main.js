@@ -1,7 +1,8 @@
 import '../styles/main.less'
 import React from 'react/addons';
 const {PureRenderMixin, update, Perf} = React.addons;
-_.extend(window, {Perf});
+import numeral from 'numeral';
+_.extend(window, {Perf, numeral});
 
 import {
     // old charts
@@ -54,7 +55,7 @@ const randomBarData = {
     valueValue: randomWalkSeries(20, 0, 5)
 };
 const randomBarData2 = {
-    numberNumber: _.zip(_.range(0,21), randomWalk(21, 5)),
+    numberNumber: _.zip(_.range(0,21), randomWalk(21, 0, 10000)),
     numberOrdinal: _.zip(randomWalk(ordinalData.length, 5), ordinalData),
     numberTime: _.zip(randomWalk(timeData.length, 5), timeData),
 
@@ -390,7 +391,7 @@ const App = React.createClass({
             <h1>Reactochart Examples</h1>
 
             <div>
-                <XYPlot width={300} height={300}>
+                <XYPlot width={400} height={300}>
                     <BarChart data={randomBarData2.numberNumber} getX={0} getY={1} />
                 </XYPlot>
             </div>

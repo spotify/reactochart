@@ -16,6 +16,7 @@
     "jquery": "^2.1.4",
     "lodash": "^3.10.0",
     "moment": "^2.10.6",
+    "numeral": "^1.5.3",
     "react": "^0.13.3"
   },
   "devDependencies": {
