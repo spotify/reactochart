@@ -8,7 +8,7 @@ import numeral from 'numeral';
 import $ from 'jquery';
 
 const DEFAULTS = {
-    margin: {top: null, right: null, left: null, bottom: null}
+    margin: {top: null, bottom: null, left: null, right: null}
 };
 
 const XYPlot = React.createClass({
@@ -21,18 +21,29 @@ const XYPlot = React.createClass({
         xDomain: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
         yDomain: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
 
+        // approximate # of ticks to include on each axis (actual # may be slightly different, to get nicest intervals)
+        xTickCount: PropTypes.number,
+        yTickCount: PropTypes.number,
+
         // (outer) width and height of the chart
         // todo infer from data/other props??
         width: PropTypes.number,
         height: PropTypes.number,
 
         // chart margins
-        marginTop: PropTypes.number,
-        marginBottom: PropTypes.number,
-        marginLeft: PropTypes.number,
-        marginRight: PropTypes.number,
+        margin: PropTypes.shape({
+            top: PropTypes.number,
+            bottom: PropTypes.number,
+            left: PropTypes.number,
+            right: PropTypes.number
+        }),
 
         // todo: padding
+
+        // format to use for the axis value labels
+        // interpreted as momentjs formats for time axes, or numeraljs formats for number axes
+        xLabelFormat: PropTypes.string,
+        yLabelFormat: PropTypes.string,
 
         // padding between axis value labels and the axis/ticks
         labelPadding: PropTypes.number,
@@ -52,11 +63,6 @@ const XYPlot = React.createClass({
         showXZero: PropTypes.bool,
         showYZero: PropTypes.bool,
 
-        xLabelFormat: PropTypes.string,
-        yLabelFormat: PropTypes.string,
-
-        // todo: tickLength, labelPadding
-        // todo: labelFormat
         // todo: niceX, niceY
         // todo: xAxisLabel, yAxisLabel
 
@@ -69,12 +75,10 @@ const XYPlot = React.createClass({
             yType: 'number',
             xDomain: null,
             yDomain: null,
+            xTickCount: 10,
+            yTickCount: 10,
             width: 400,
             height: 250,
-            marginTop: 10,
-            marginBottom: 40,
-            marginLeft: 60,
-            marginRight: 10,
             margin: DEFAULTS.margin,
             labelPadding: 6,
             tickLength: 6,
@@ -149,7 +153,7 @@ const XYPlot = React.createClass({
         // create the X and Y scales shared by charts
         // calculate the inner width and height based on margins
         // todo get padding too
-        const {width, height, xType, yType, labelPadding, tickLength, showXTicks, showYTicks} = props;
+        const {width, height, xType, yType, xTickCount, yTickCount, labelPadding, tickLength, showXTicks, showYTicks} = props;
         const {xLabelFormat, yLabelFormat} = this;
         this.margin = _.defaults(this.props.margin, DEFAULTS.margin);
 
@@ -166,8 +170,8 @@ const XYPlot = React.createClass({
                 innerHeight = height - (margin.top + margin.bottom);
                 xScale = makeScale(this.xDomains, [0, innerWidth], xType);
                 yScale = makeScale(this.yDomains, [innerHeight, 0], yType);
-                const xTicks = (xType === 'ordinal') ? xScale.domain() : xScale.ticks();
-                const yTicks = (yType === 'ordinal') ? yScale.domain() : yScale.ticks();
+                const xTicks = (xType === 'ordinal') ? xScale.domain() : xScale.ticks(xTickCount);
+                const yTicks = (yType === 'ordinal') ? yScale.domain() : yScale.ticks(yTickCount);
                 if(xType !== 'ordinal') xScale.nice(xTicks.length);
                 if(yType !== 'ordinal') yScale.nice(yTicks.length);
                 const labelBoxes = measureAxisLabels(xTicks, yTicks, xType, yType, xLabelFormat, yLabelFormat);
@@ -191,14 +195,14 @@ const XYPlot = React.createClass({
             const innerHeight = height - (props.margin.top + props.margin.bottom);
             const xScale = makeScale(this.xDomains, [0, innerWidth], xType);
             const yScale = makeScale(this.yDomains, [innerHeight, 0], yType);
-            _.assign(this, {innerWidth, innerHeight, xScale, yScale});
+            _.assign(this, {margin: props.margin, innerWidth, innerHeight, xScale, yScale});
         }
     },
 
     onMouseMove(e) {
         //if(!this.props.onMouseMove && !this.state.isSelecting) return;
         const chartBB = e.currentTarget.getBoundingClientRect();
-        const chartX = (e.clientX - chartBB.left) - this.props.marginLeft;
+        const chartX = (e.clientX - chartBB.left) - this.margin.left;
         // todo alternative to invert for ordinal scales
         const chartXVal = this.xScale.invert(chartX);
 
@@ -256,7 +260,8 @@ const XYPlot = React.createClass({
         const {labelPadding, tickLength} = this.props;
         const scale = this[`${letter}Scale`];
         const type = this.props[`${letter}Type`];
-        const ticks = (type === 'ordinal') ? scale.domain() : scale.ticks();
+        const tickCount = this.props[`${letter}TickCount`];
+        const ticks = (type === 'ordinal') ? scale.domain() : scale.ticks(tickCount);
         const tickTransform = (value) => (orientation === 'vertical') ?
             `translate(0, ${scale(value)})` : `translate(${scale(value)}, 0)`;
         const distance = (showTicks) ? tickLength + labelPadding : labelPadding;
