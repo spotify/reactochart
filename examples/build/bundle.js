@@ -133,6 +133,17 @@
 	};
 	//console.log(randomBarData2);
 	
+	var variableBins = _.range(0, 12).reduce(function (bins, i) {
+	    var lastBinEnd = bins.length ? _.last(bins)[1] : 0;
+	    //return bins.concat([[lastBinEnd, lastBinEnd + _.random(5, 20)]])
+	    return bins.concat([[lastBinEnd, lastBinEnd + i]]);
+	}, []);
+	
+	var rangeValueData = {
+	    numberNumber: _.zip(variableBins, (0, _dataUtil.randomWalk)(variableBins.length, 50, 20))
+	};
+	//console.log('rangeValue', rangeValueData);
+	
 	var normalDistribution = d3.random.normal(0);
 	//const randomNormal = _.times(1000, normalDistribution);
 	var randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.random.normal(3, 0.5)));
@@ -531,7 +542,53 @@
 	        return _reactAddons2['default'].createElement(
 	            'div',
 	            null,
-	            'coming soon'
+	            _reactAddons2['default'].createElement(
+	                'h2',
+	                null,
+	                'Vertical'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 400, height: 300 },
+	                    _reactAddons2['default'].createElement(_src.BarChart, {
+	                        data: rangeValueData.numberNumber,
+	                        getX: function (d) {
+	                            return d[0][0];
+	                        },
+	                        getXEnd: function (d) {
+	                            return d[0][1];
+	                        },
+	                        getY: 1
+	                    })
+	                )
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'h2',
+	                null,
+	                'Horizontal'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 400, height: 300 },
+	                    _reactAddons2['default'].createElement(_src.BarChart, {
+	                        data: rangeValueData.numberNumber,
+	                        orientation: 'horizontal',
+	                        getX: 1,
+	                        getY: function (d) {
+	                            return d[0][0];
+	                        },
+	                        getYEnd: function (d) {
+	                            return d[0][1];
+	                        }
+	                    })
+	                )
+	            )
 	        );
 	    }
 	});
@@ -24352,6 +24409,8 @@
 	    value: true
 	});
 	
+	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _react = __webpack_require__(183);
@@ -24465,6 +24524,21 @@
 	    return null;
 	}
 	
+	function rangeAxisDomain(data, rangeStartAccessor, rangeEndAccessor, scaleType) {
+	    switch (scaleType) {
+	        case 'number':
+	        case 'time':
+	            return _d32['default'].extent(_lodash2['default'].flatten([_d32['default'].extent(data, function (d) {
+	                return +rangeStartAccessor(d);
+	            }), _d32['default'].extent(data, function (d) {
+	                return +rangeEndAccessor(d);
+	            })]));
+	        case 'ordinal':
+	            return _lodash2['default'].uniq(_lodash2['default'].flatten([data.map(rangeStartAccessor), data.map(rangeEndAccessor)]));
+	    }
+	    return [];
+	}
+	
 	var BarChart = _react2['default'].createClass({
 	    displayName: 'BarChart',
 	
@@ -24496,6 +24570,8 @@
 	            var data = props.data;
 	            var getX = props.getX;
 	            var getY = props.getY;
+	            var getXEnd = props.getXEnd;
+	            var getYEnd = props.getYEnd;
 	            var orientation = props.orientation;
 	            var xAccessor = (0, _utilJs.accessor)(getX);
 	            var yAccessor = (0, _utilJs.accessor)(getY);
@@ -24504,14 +24580,21 @@
 	            var isVertical = orientation === 'vertical';
 	
 	            var accessors = { x: xAccessor, y: yAccessor };
+	            var rangeEndAccessors = { x: (0, _utilJs.accessor)(getXEnd), y: (0, _utilJs.accessor)(getYEnd) };
 	            var axisTypes = { x: xType, y: yType };
 	            var domains = { x: null, y: null };
 	
 	            if (barType === 'ValueValue') {
 	                var valueAxis = isVertical ? 'y' : 'x'; // the axis along which the bar's length shows value
 	                domains[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
-	                return domains;
+	            } else if (barType === 'RangeValue') {
+	                var valueAxis = isVertical ? 'y' : 'x'; // the axis along which the bar's length shows value
+	                var rangeAxis = isVertical ? 'x' : 'y';
+	                domains[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
+	                domains[rangeAxis] = rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisTypes[rangeAxis]);
+	                //console.log(barType, domains, props.data);
 	            }
+	            return domains;
 	        }
 	    },
 	    getHovered: function getHovered() {},
@@ -24581,49 +24664,77 @@
 	        );
 	    },
 	    renderRangeValueBars: function renderRangeValueBars() {
-	        var _this2 = this;
-	
-	        return renderNotImplemented();
-	
 	        var _props2 = this.props;
+	        var data = _props2.data;
 	        var xScale = _props2.xScale;
 	        var yScale = _props2.yScale;
 	        var getX = _props2.getX;
 	        var getY = _props2.getY;
+	        var getXEnd = _props2.getXEnd;
+	        var getYEnd = _props2.getYEnd;
+	        var xType = _props2.xType;
+	        var yType = _props2.yType;
 	
-	        var isHorizontal = this.props.orientation === 'bar';
-	        //const barThickness = this.state.barScale.rangeBand();
-	        var barThickness = 5;
+	        var _$map = _lodash2['default'].map([getX, getXEnd, getY, getYEnd], _utilJs.accessor);
 	
-	        var xAccessor = (0, _utilJs.accessor)(getX);
-	        var yAccessor = (0, _utilJs.accessor)(getY);
+	        var _$map2 = _slicedToArray(_$map, 4);
 	
-	        return _react2['default'].createElement(
+	        var xAccessor = _$map2[0];
+	        var xEndAccessor = _$map2[1];
+	        var yAccessor = _$map2[2];
+	        var yEndAccessor = _$map2[3];
+	
+	        return this.props.orientation === 'vertical' ? _react2['default'].createElement(
 	            'g',
 	            null,
 	            this.props.data.map(function (d, i) {
+	                var barZero = barZeroValue(data, yAccessor, yType);
 	                var yVal = yAccessor(d);
-	                var barLength = Math.abs(yScale(0) - yScale(yVal));
-	                var barY = yVal >= 0 ? yScale(0) - barLength : yScale(0);
+	                var barLength = Math.abs(yScale(barZero) - yScale(yVal));
+	                var barY = yVal >= 0 || yType === 'ordinal' ? yScale(barZero) - barLength : yScale(barZero);
+	                var barX = Math.round(xScale(xAccessor(d)));
+	                var barThickness = Math.round(xScale(xEndAccessor(d))) - barX;
 	
 	                return _react2['default'].createElement('rect', {
 	                    className: 'chart-bar chart-bar-vertical',
-	                    x: _this2.props.xScale(xAccessor(d)) - barThickness / 2,
+	                    x: barX,
 	                    y: barY,
 	                    width: barThickness,
 	                    height: barLength
 	                });
 	            })
+	        ) : _react2['default'].createElement(
+	            'g',
+	            null,
+	            this.props.data.map(function (d, i) {
+	                var barZero = barZeroValue(data, xAccessor, xType);
+	                var xVal = xAccessor(d);
+	                var barLength = Math.abs(xScale(barZero) - xScale(xVal));
+	                var barX = xVal >= 0 || xType === 'ordinal' ? xScale(barZero) : xScale(barZero) - barLength;
+	
+	                var barY = Math.round(yScale(yEndAccessor(d)));
+	                var barThickness = Math.round(yScale(yAccessor(d))) - barY;
+	
+	                return _react2['default'].createElement('rect', {
+	                    className: 'chart-bar chart-bar-vertical',
+	                    x: barX,
+	                    y: barY,
+	                    width: barLength,
+	                    height: barThickness
+	                });
+	            })
 	        );
 	    },
 	    renderValueRangeBars: function renderValueRangeBars() {
-	        return renderNotImplemented('value range');
+	        return renderNotImplemented();
 	    },
-	    renderRangeRangeBars: function renderRangeRangeBars() {}
+	    renderRangeRangeBars: function renderRangeRangeBars() {
+	        return renderNotImplemented();
+	    }
 	});
 	
 	function renderNotImplemented() {
-	    var text = arguments.length <= 0 || arguments[0] === undefined ? "not implemented" : arguments[0];
+	    var text = arguments.length <= 0 || arguments[0] === undefined ? "not implemented yet" : arguments[0];
 	
 	    return _react2['default'].createElement(
 	        'svg',
@@ -68457,10 +68568,10 @@
 	    statics: {
 	        getDomain: function getDomain(data, getX, getY) {
 	            return {
+	                // todo: real x domain
 	                x: _d32['default'].extent(data, (0, _utilJs.accessor)(getX)),
 	                // todo: real y domain
 	                y: [0, 200]
-	                //y: d3.extent(d3.extent(data, accessor(getY)).concat(0))
 	            };
 	        }
 	    },
@@ -68478,7 +68589,11 @@
 	
 	        return _react2['default'].createElement(_BarChartJs2['default'], _extends({
 	            data: this.state.histogramData,
-	            getX: 'x', getY: 'y'
+	            getX: 'x',
+	            getY: 'y',
+	            getXEnd: function (d) {
+	                return d.x + d.dx;
+	            }
 	        }, { name: name, xScale: xScale, yScale: yScale, xType: xType, yType: yType, innerWidth: innerWidth, innerHeight: innerHeight }));
 	    }
 	});

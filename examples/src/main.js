@@ -67,6 +67,17 @@ const randomBarData2 = {
 };
 //console.log(randomBarData2);
 
+const variableBins = _.range(0,12).reduce((bins, i) => {
+    const lastBinEnd = bins.length ? _.last(bins)[1] : 0;
+    //return bins.concat([[lastBinEnd, lastBinEnd + _.random(5, 20)]])
+    return bins.concat([[lastBinEnd, lastBinEnd + i]])
+}, []);
+
+const rangeValueData = {
+    numberNumber: _.zip(variableBins, randomWalk(variableBins.length, 50, 20))
+};
+//console.log('rangeValue', rangeValueData);
+
 const normalDistribution = d3.random.normal(0);
 //const randomNormal = _.times(1000, normalDistribution);
 const randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.random.normal(3, 0.5)));
@@ -321,7 +332,33 @@ const ValueValueBarExample = React.createClass({
 
 const RangeValueBarExample = React.createClass({
     render() {
-        return <div>coming soon</div>
+        return <div>
+            <h2>Vertical</h2>
+            <div>
+                <XYPlot width={400} height={300}>
+                    <BarChart
+                        data={rangeValueData.numberNumber}
+                        getX={d => d[0][0]}
+                        getXEnd={d => d[0][1]}
+                        getY={1}
+                        />
+                </XYPlot>
+            </div>
+
+            <h2>Horizontal</h2>
+            <div>
+                <XYPlot width={400} height={300}>
+                    <BarChart
+                        data={rangeValueData.numberNumber}
+                        orientation="horizontal"
+                        getX={1}
+                        getY={d => d[0][0]}
+                        getYEnd={d => d[0][1]}
+                        />
+                </XYPlot>
+            </div>
+
+        </div>
     }
 });
 

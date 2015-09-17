@@ -101,6 +101,20 @@ function valueAxisDomain(data, dAccessor, axisType) {
     return null;
 }
 
+function rangeAxisDomain(data, rangeStartAccessor, rangeEndAccessor, scaleType) {
+    switch(scaleType) {
+        case 'number':
+        case 'time':
+            return d3.extent(_.flatten([
+                d3.extent(data, (d) => +rangeStartAccessor(d)),
+                d3.extent(data, (d) => +rangeEndAccessor(d))
+            ]));
+        case 'ordinal':
+            return _.uniq(_.flatten([data.map(rangeStartAccessor), data.map(rangeEndAccessor)]));
+    }
+    return [];
+}
+
 const BarChart = React.createClass({
     propTypes: {
         // the array of data objects
@@ -129,20 +143,28 @@ const BarChart = React.createClass({
 
         },
         getDomain(props, xType, yType) {
-            const {data, getX, getY, orientation} = props;
+            const {data, getX, getY, getXEnd, getYEnd, orientation} = props;
             const [xAccessor, yAccessor] = [accessor(getX), accessor(getY)];
             const barType = getBarChartType(props);
             const isVertical = (orientation === 'vertical');
 
             const accessors = {x: xAccessor, y: yAccessor};
+            const rangeEndAccessors = {x: accessor(getXEnd), y: accessor(getYEnd)};
             const axisTypes = {x: xType, y: yType};
             let domains = {x: null, y: null};
 
             if(barType === 'ValueValue') {
                 let valueAxis = isVertical ? 'y' : 'x'; // the axis along which the bar's length shows value
                 domains[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
-                return domains;
+
+            } else if(barType === 'RangeValue') {
+                let valueAxis = isVertical ? 'y' : 'x'; // the axis along which the bar's length shows value
+                let rangeAxis = isVertical ? 'x' : 'y';
+                domains[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
+                domains[rangeAxis] = rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisTypes[rangeAxis]);
+                //console.log(barType, domains, props.data);
             }
+            return domains;
         }
     },
     getHovered() {},
@@ -199,41 +221,58 @@ const BarChart = React.createClass({
 
     },
     renderRangeValueBars() {
-        return renderNotImplemented();
+        const {data, xScale, yScale, getX, getY, getXEnd, getYEnd, xType, yType} = this.props;
+        const [xAccessor, xEndAccessor, yAccessor, yEndAccessor] = _.map([getX, getXEnd, getY, getYEnd], accessor);
 
-        const {xScale, yScale, getX, getY} = this.props;
-        const isHorizontal = this.props.orientation === 'bar';
-        //const barThickness = this.state.barScale.rangeBand();
-        const barThickness = 5;
+        return this.props.orientation === 'vertical' ?
+            <g>
+                {this.props.data.map((d, i) => {
+                    const barZero = barZeroValue(data, yAccessor, yType);
+                    const yVal = yAccessor(d);
+                    const barLength = Math.abs(yScale(barZero) - yScale(yVal));
+                    const barY = (yVal >= 0 || yType === 'ordinal') ? yScale(barZero) - barLength : yScale(barZero);
+                    const barX = Math.round(xScale(xAccessor(d)));
+                    const barThickness = Math.round(xScale(xEndAccessor(d))) - barX;
 
-        const xAccessor = accessor(getX);
-        const yAccessor = accessor(getY);
+                    return <rect
+                        className="chart-bar chart-bar-vertical"
+                        x={barX}
+                        y={barY}
+                        width={barThickness}
+                        height={barLength}
+                        />
+                })}
+            </g> :
+            <g>
+                {this.props.data.map((d, i) => {
+                    const barZero = barZeroValue(data, xAccessor, xType);
+                    const xVal = xAccessor(d);
+                    const barLength = Math.abs(xScale(barZero) - xScale(xVal));
+                    const barX = (xVal >= 0 || xType === 'ordinal') ? xScale(barZero) : xScale(barZero) - barLength;
 
-        return <g>
-            {this.props.data.map((d, i) => {
-                const yVal = yAccessor(d);
-                const barLength = Math.abs(yScale(0) - yScale(yVal));
-                const barY = yVal >= 0 ? yScale(0) - barLength : yScale(0);
+                    const barY = Math.round(yScale(yEndAccessor(d)));
+                    const barThickness = Math.round(yScale(yAccessor(d))) - barY;
 
-                return <rect
-                    className="chart-bar chart-bar-vertical"
-                    x={this.props.xScale(xAccessor(d)) - (barThickness / 2)}
-                    y={barY}
-                    width={barThickness}
-                    height={barLength}
-                    />
-            })}
-        </g>
+                    return <rect
+                        className="chart-bar chart-bar-vertical"
+                        x={barX}
+                        y={barY}
+                        width={barLength}
+                        height={barThickness}
+                        />
+                })}
+            </g>
+
     },
     renderValueRangeBars() {
-        return renderNotImplemented('value range');
+        return renderNotImplemented();
     },
     renderRangeRangeBars() {
-
+        return renderNotImplemented();
     }
 });
 
-function renderNotImplemented(text="not implemented") {
+function renderNotImplemented(text="not implemented yet") {
     return <svg x={100} y={100} style={{overflow:'visible'}}><text>{text}</text></svg>
 }
 

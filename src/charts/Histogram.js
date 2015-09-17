@@ -39,10 +39,10 @@ const Histogram = React.createClass({
     statics: {
         getDomain(data, getX, getY) {
             return {
+                // todo: real x domain
                 x: d3.extent(data, accessor(getX)),
                 // todo: real y domain
                 y: [0,200]
-                //y: d3.extent(d3.extent(data, accessor(getY)).concat(0))
             }
         }
     },
@@ -55,7 +55,9 @@ const Histogram = React.createClass({
 
         return <BarChart
             data={this.state.histogramData}
-            getX={'x'} getY={'y'}
+            getX={'x'}
+            getY={'y'}
+            getXEnd={d => d.x + d.dx}
             {...{name, xScale, yScale, xType, yType, innerWidth, innerHeight}}
         />;
     }
