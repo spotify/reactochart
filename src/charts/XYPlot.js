@@ -118,6 +118,7 @@ const XYPlot = React.createClass({
         // even if it has a different domain than the original data
         if(!(props.xDomain && props.yDomain)) {
             React.Children.forEach(props.children, child => {
+                if(!child) return;
                 // todo handle domain passed in as prop
                 let domain = _.isFunction(child.type.getDomain) ?
                     child.type.getDomain(child.props, props.xType, props.yType) : {x: null, y: null};
@@ -226,6 +227,7 @@ const XYPlot = React.createClass({
                     {this.renderYAxis()}
 
                     {React.Children.map(this.props.children, (child, i) => {
+                        if(!child) return null;
                         const name = child.props.name || 'chart-series-' + i;
                         return React.cloneElement(child,
                             {ref: name, name, xType, yType, xScale, yScale, innerWidth, innerHeight}
