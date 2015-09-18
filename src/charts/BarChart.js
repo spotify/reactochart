@@ -127,7 +127,7 @@ const BarChart = React.createClass({
         xType: PropTypes.oneOf(['number', 'time', 'ordinal']),
         yType: PropTypes.oneOf(['number', 'time', 'ordinal']),
 
-        orientation: PropTypes.string,
+        orientation: PropTypes.oneOf(['vertical', 'horizontal']),
 
         xScale: PropTypes.func,
         yScale: PropTypes.func

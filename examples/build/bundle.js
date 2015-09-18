@@ -79,15 +79,15 @@
 	
 	var _dataStatesDataJson2 = _interopRequireDefault(_dataStatesDataJson);
 	
-	var _dataDailyTemperatureJson = __webpack_require__(283);
+	var _dataDailyTemperatureJson = __webpack_require__(284);
 	
 	var _dataDailyTemperatureJson2 = _interopRequireDefault(_dataDailyTemperatureJson);
 	
-	var _dataSimpleXYJson = __webpack_require__(284);
+	var _dataSimpleXYJson = __webpack_require__(285);
 	
 	var _dataSimpleXYJson2 = _interopRequireDefault(_dataSimpleXYJson);
 	
-	var _dataUtil = __webpack_require__(285);
+	var _dataUtil = __webpack_require__(286);
 	
 	// sample ordinal data
 	var _React$addons = _reactAddons2['default'].addons;
@@ -140,7 +140,16 @@
 	}, []);
 	
 	var rangeValueData = {
-	    numberNumber: _.zip(variableBins, (0, _dataUtil.randomWalk)(variableBins.length, 50, 20))
+	    numberNumber: _.zip(variableBins, (0, _dataUtil.randomWalk)(variableBins.length, 10000, 10000))
+	};
+	
+	var barTickData = {
+	    numberNumber: randomBarData2.numberNumber.map(function (d) {
+	        return [d[0], d[1] + _.random(-5000, 5000)];
+	    }),
+	    numberRangeNumber: rangeValueData.numberNumber.map(function (d) {
+	        return [d[0], d[1] + _.random(-5000, 5000)];
+	    })
 	};
 	//console.log('rangeValue', rangeValueData);
 	
@@ -673,7 +682,68 @@
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
 	                    { width: 400, height: 300 },
-	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberNumber, getX: 0, getY: 1 })
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberNumber, getX: 0, getY: 1 }),
+	                    _reactAddons2['default'].createElement(_src.MarkerLineChart, { data: barTickData.numberNumber, getX: 0, getY: 1, lineLength: 15 })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 400, height: 300 },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberNumber, getX: 1, getY: 0, orientation: 'horizontal' }),
+	                    _reactAddons2['default'].createElement(_src.MarkerLineChart, { data: barTickData.numberNumber, getX: 1, getY: 0, lineLength: 15, orientation: 'horizontal' })
+	                )
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 400, height: 300 },
+	                    _reactAddons2['default'].createElement(_src.BarChart, {
+	                        data: rangeValueData.numberNumber,
+	                        getX: function (d) {
+	                            return d[0][0];
+	                        },
+	                        getXEnd: function (d) {
+	                            return d[0][1];
+	                        },
+	                        getY: 1
+	                    }),
+	                    _reactAddons2['default'].createElement(_src.MarkerLineChart, {
+	                        data: barTickData.numberRangeNumber,
+	                        getX: function (d) {
+	                            return d[0][0];
+	                        },
+	                        getXEnd: function (d) {
+	                            return d[0][1];
+	                        },
+	                        getY: 1
+	                    })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 400, height: 300 },
+	                    _reactAddons2['default'].createElement(_src.BarChart, {
+	                        data: rangeValueData.numberNumber,
+	                        orientation: 'horizontal',
+	                        getX: 1,
+	                        getY: function (d) {
+	                            return d[0][0];
+	                        },
+	                        getYEnd: function (d) {
+	                            return d[0][1];
+	                        }
+	                    }),
+	                    _reactAddons2['default'].createElement(_src.MarkerLineChart, {
+	                        data: barTickData.numberRangeNumber,
+	                        orientation: 'horizontal',
+	                        getX: 1,
+	                        getY: function (d) {
+	                            return d[0][0];
+	                        },
+	                        getYEnd: function (d) {
+	                            return d[0][1];
+	                        }
+	                    })
 	                )
 	            ),
 	            this.renderExamples()
@@ -895,7 +965,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: #f0f0f0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-label-x,\n.xy-plot .chart-axis-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-label-y,\n.xy-plot .chart-axis-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\n.pie-chart .pie-label-center {\n  font-size: 26pt;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
+	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: #f0f0f0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-label-x,\n.xy-plot .chart-axis-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-label-y,\n.xy-plot .chart-axis-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.bar-tick-chart line {\n  stroke: black;\n  stroke-width: 2px;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\n.pie-chart .pie-label-center {\n  font-size: 26pt;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
 	
 	// exports
 
@@ -24367,35 +24437,39 @@
 	
 	function _interopRequire(obj) { return obj && obj.__esModule ? obj['default'] : obj; }
 	
-	var _v1LineChart = __webpack_require__(188);
+	var _v1LineChart = __webpack_require__(182);
 	
 	exports.V1LineChart = _interopRequire(_v1LineChart);
 	
-	var _chartsPieChart = __webpack_require__(276);
+	var _chartsPieChart = __webpack_require__(273);
 	
 	exports.PieChart = _interopRequire(_chartsPieChart);
 	
-	var _chartsXYPlot = __webpack_require__(277);
+	var _chartsXYPlot = __webpack_require__(276);
 	
 	exports.XYPlot = _interopRequire(_chartsXYPlot);
 	
-	var _chartsLineChart = __webpack_require__(279);
+	var _chartsLineChart = __webpack_require__(278);
 	
 	exports.LineChart = _interopRequire(_chartsLineChart);
 	
-	var _chartsBarChart = __webpack_require__(182);
+	var _chartsBarChart = __webpack_require__(279);
 	
 	exports.BarChart = _interopRequire(_chartsBarChart);
 	
-	var _chartsScatterPlot = __webpack_require__(280);
+	var _chartsMarkerLineChart = __webpack_require__(280);
+	
+	exports.MarkerLineChart = _interopRequire(_chartsMarkerLineChart);
+	
+	var _chartsScatterPlot = __webpack_require__(281);
 	
 	exports.ScatterPlot = _interopRequire(_chartsScatterPlot);
 	
-	var _chartsHistogram = __webpack_require__(281);
+	var _chartsHistogram = __webpack_require__(282);
 	
 	exports.Histogram = _interopRequire(_chartsHistogram);
 	
-	var _chartsKernelDensityEstimation = __webpack_require__(282);
+	var _chartsKernelDensityEstimation = __webpack_require__(283);
 	
 	exports.KernelDensityEstimation = _interopRequire(_chartsKernelDensityEstimation);
 
@@ -24411,354 +24485,323 @@
 	
 	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _react = __webpack_require__(183);
+	var _reactAddons = __webpack_require__(7);
 	
-	var _react2 = _interopRequireDefault(_react);
+	var _reactAddons2 = _interopRequireDefault(_reactAddons);
 	
-	var _lodash = __webpack_require__(184);
+	var _lodash = __webpack_require__(183);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d3 = __webpack_require__(186);
+	var _d3 = __webpack_require__(185);
 	
 	var _d32 = _interopRequireDefault(_d3);
 	
-	var _utilJs = __webpack_require__(187);
+	var _moment = __webpack_require__(186);
 	
-	// on the taxonomy of bar charts:
+	var _moment2 = _interopRequireDefault(_moment);
 	
-	// there are 3 types of bar charts,
-	// distinguished by whether the 2D data points they plot represent values or ranges
+	var PropTypes = _reactAddons2['default'].PropTypes;
+	var PureRenderMixin = _reactAddons2['default'].addons.PureRenderMixin;
 	
-	// 1. Value-Value
-	// typical bar chart, plotting values that look like [[0,5], [1,3], ...]
-	// with bars that are centered horizontally on x-value and extend from 0 to y-value,
-	// (or centered vertically on their y-value and extend from 0 to the x-value, in the case of horizontal chart variant)
-	// eg. http://www.snapsurveys.com/wp-content/uploads/2012/10/bar_2d8.png
+	var TimeseriesLineChart = _reactAddons2['default'].createClass({
+	    displayName: 'TimeseriesLineChart',
 	
-	// 2. Range-Value
-	// instead of a single value, one of the two data points represents a range of values
-	// usually the range is the independent variable and the value is the observation
-	// most commonly used in histogram, where each bar represents a bin (which is a range)
-	// data may look something like [[0, 5], 100], [[5, 15], 300], ...] or [{x: 0, xEnd: 5, y:100}...]
-	// often all bars are the same width, (same range sizes) but not necessarily
-	// bars still from extend from 0 to y-value,
-	// but the x-values of their sides, and therefore their width, is determined by the range
-	// (or vice versa in the case of horizontal variant)
-	// eg. http://labs.physics.dur.ac.uk/skills/skills/images/histogram4.jpg
-	
-	// 3. Value-Range
-	// like Range-Value, one of the two data points represents a range of values
-	// but generally the range is the dependent variable (ie. observation) instead of vice versa in #2
-	// bars are centered over their x-value as in #1,
-	// but their top & bottom y-values, and therefore their length, is determined by the range. they don't extend to 0.
-	// (or vice versa in the case of horizontal variant)
-	// eg. (horizontal) http://6.anychart.com/products/anychart/docs/users-guide/img/Samples/sample-range-bar-chart-y-datetime-axis.png
-	
-	// 4. Range-Range
-	// both of the data points represent ranges
-	// ie. data looks like [{x: 10, xEnd: 20, y: 12, yEnd: 40} ...]
-	// these are simply plotted as floating rectangles whose coordinates, length and width are all determined by the ranges
-	// there is no horizontal or vertical variant
-	// eg... can't find a good example
-	
-	// creating a BarChart component...
-	// x and y values are represented by getX and getY accessors passed in as props
-	// to represent a range instead of a single value, call with both getX and getXEnd (or getY and getYEnd),
-	// which will be the accessors for the start and end values of the range
-	// to represent horizontal vs. vertical variant, pass in orientation="horizontal" or orientation="vertical"
-	
-	// so to create the types described above:
-	// 1. Value-Value - only pass in getX and getY, + orientation
-	// 2. Range-Value
-	//   a. pass in getX, getXEnd and getY with orientation="vertical"
-	//   b. or getX, getY and getYEnd with orientation="horizontal"
-	// 3. Value-Range
-	//   a. pass in getX, getY and getYEnd with orientation="vertical"
-	//   b. or getX, getXEnd and getY with orientation="horizontal"
-	// 4. Range-Range - pass in all of getX, getXEnd, getY and getYEnd. no need for orientation.
-	
-	//const BAR_CHART_TYPES = {
-	//    VALUE_VALUE: 'VALUE_VALUE',
-	//    RANGE_VALUE: 'RANGE_VALUE',
-	//    VALUE_RANGE: 'VALUE_RANGE',
-	//    RANGE_RANGE: 'RANGE_RANGE',
-	//};
-	
-	var PropTypes = _react2['default'].PropTypes;
-	function getBarChartType(props) {
-	    var getXEnd = props.getXEnd;
-	    var getYEnd = props.getYEnd;
-	    var orientation = props.orientation;
-	
-	    var isVertical = orientation === 'vertical';
-	    return _lodash2['default'].isUndefined(getXEnd) && _lodash2['default'].isUndefined(getYEnd) ? 'ValueValue' : _lodash2['default'].isUndefined(getYEnd) && isVertical || _lodash2['default'].isUndefined(getXEnd) && !isVertical ? 'RangeValue' : _lodash2['default'].isUndefined(getXEnd) && isVertical || _lodash2['default'].isUndefined(getYEnd) && !isVertical ? 'ValueRange' : 'RangeRange';
-	}
-	
-	function barZeroValue(data, dAccessor, axisType) {
-	    switch (axisType) {
-	        // number bars go from zero to value
-	        case 'number':
-	            return 0;
-	        // time values need a "zero" value to stretch from - the first date minus one day
-	        // todo make this less arbitrary? should be a rare case anyway.
-	        case 'time':
-	            return _d32['default'].extent(data, dAccessor)[0] - 24 * 60 * 60 * 1000;
-	        // ordinal values need a "zero" value to stretch from -
-	        // empty string since it's unlikely to be used in real data and won't show a label
-	        case 'ordinal':
-	            return '';
-	    }
-	}
-	
-	function valueAxisDomain(data, dAccessor, axisType) {
-	    switch (axisType) {
-	        case 'number':
-	        case 'time':
-	            return _d32['default'].extent(_d32['default'].extent(data, dAccessor).concat(barZeroValue(data, dAccessor, axisType)));
-	        case 'ordinal':
-	            return _lodash2['default'].uniq([barZeroValue(data, dAccessor, axisType)].concat(data.map((0, _utilJs.accessor)(dAccessor))));
-	    }
-	    return null;
-	}
-	
-	function rangeAxisDomain(data, rangeStartAccessor, rangeEndAccessor, scaleType) {
-	    switch (scaleType) {
-	        case 'number':
-	        case 'time':
-	            return _d32['default'].extent(_lodash2['default'].flatten([_d32['default'].extent(data, function (d) {
-	                return +rangeStartAccessor(d);
-	            }), _d32['default'].extent(data, function (d) {
-	                return +rangeEndAccessor(d);
-	            })]));
-	        case 'ordinal':
-	            return _lodash2['default'].uniq(_lodash2['default'].flatten([data.map(rangeStartAccessor), data.map(rangeEndAccessor)]));
-	    }
-	    return [];
-	}
-	
-	var BarChart = _react2['default'].createClass({
-	    displayName: 'BarChart',
-	
+	    mixins: [PureRenderMixin],
 	    propTypes: {
 	        // the array of data objects
-	        data: PropTypes.array.isRequired,
-	        // accessor for X & Y coordinates
-	        getX: _utilJs.AccessorPropType,
-	        getY: _utilJs.AccessorPropType,
+	        data: PropTypes.arrayOf(PropTypes.object).isRequired,
+	        // keys for props.data objects, whose values will be plotted (on y-axis)
+	        plotKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
+	        // key for props.data referring to the date (to be plotted on x-axis)
+	        dateKey: PropTypes.string,
 	
-	        // x & y scale types
-	        xType: PropTypes.oneOf(['number', 'time', 'ordinal']),
-	        yType: PropTypes.oneOf(['number', 'time', 'ordinal']),
+	        // whether or not the scale of the Y-axis should always include zero
+	        shouldIncludeZero: PropTypes.bool,
+	        // whether or not to draw a zero line
+	        showZero: PropTypes.bool,
 	
-	        orientation: PropTypes.string,
+	        // whether or not to draw the tick lines on the X axis
+	        showXTicks: PropTypes.bool,
+	        // whether or not to draw X axis label text (dates)
+	        showXLabels: PropTypes.bool,
 	
-	        xScale: PropTypes.func,
-	        yScale: PropTypes.func
+	        // whether or not to draw the tick lines on the Y axis
+	        showYTicks: PropTypes.bool,
+	        // whether or not to draw Y axis label text (values)
+	        showYLabels: PropTypes.bool,
+	
+	        // called when user mouses over the chart
+	        onMouseMove: PropTypes.func,
+	
+	        // true if the user can click and drag to select a date range
+	        // (this doesn't change the date range on the chart, just calls callback with range and shows highlight)
+	        isRangeSelectable: PropTypes.bool,
+	        // callback called when selected range changes
+	        // (this is a controlled component, parent must maintain selected range state)
+	        onChangeSelectedRange: PropTypes.func,
+	        // min and max dates of the selected range
+	        selectedRangeMin: PropTypes.object,
+	        selectedRangeMax: PropTypes.object,
+	
+	        // (outer) width and height of the chart
+	        width: PropTypes.number,
+	        height: PropTypes.number,
+	        // chart margins
+	        marginTop: PropTypes.number,
+	        marginBottom: PropTypes.number,
+	        marginLeft: PropTypes.number,
+	        marginRight: PropTypes.number
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return {
-	            orientation: 'vertical'
+	            dateKey: 'date',
+	            shouldIncludeZero: true,
+	            showZero: true,
+	            showXTicks: true,
+	            showXLabels: true,
+	            showYTicks: true,
+	            showYLabels: true,
+	            isRangeSelectable: false,
+	            onChangeSelectedRange: _lodash2['default'].noop,
+	            width: 400,
+	            height: 250,
+	            marginTop: 10,
+	            marginBottom: 40,
+	            marginLeft: 60,
+	            marginRight: 10
 	        };
 	    },
-	
-	    statics: {
-	        getOptions: function getOptions(props, xType, yType) {},
-	        getDomain: function getDomain(props, xType, yType) {
-	            var data = props.data;
-	            var getX = props.getX;
-	            var getY = props.getY;
-	            var getXEnd = props.getXEnd;
-	            var getYEnd = props.getYEnd;
-	            var orientation = props.orientation;
-	            var xAccessor = (0, _utilJs.accessor)(getX);
-	            var yAccessor = (0, _utilJs.accessor)(getY);
-	
-	            var barType = getBarChartType(props);
-	            var isVertical = orientation === 'vertical';
-	
-	            var accessors = { x: xAccessor, y: yAccessor };
-	            var rangeEndAccessors = { x: (0, _utilJs.accessor)(getXEnd), y: (0, _utilJs.accessor)(getYEnd) };
-	            var axisTypes = { x: xType, y: yType };
-	            var domains = { x: null, y: null };
-	
-	            if (barType === 'ValueValue') {
-	                var valueAxis = isVertical ? 'y' : 'x'; // the axis along which the bar's length shows value
-	                domains[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
-	            } else if (barType === 'RangeValue') {
-	                var valueAxis = isVertical ? 'y' : 'x'; // the axis along which the bar's length shows value
-	                var rangeAxis = isVertical ? 'x' : 'y';
-	                domains[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
-	                domains[rangeAxis] = rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisTypes[rangeAxis]);
-	                //console.log(barType, domains, props.data);
-	            }
-	            return domains;
-	        }
+	    getInitialState: function getInitialState() {
+	        return {
+	            isSelecting: false,
+	            xScale: null,
+	            yScale: null,
+	            innerWidth: null,
+	            innerHeight: null
+	        };
 	    },
-	    getHovered: function getHovered() {},
+	    componentWillMount: function componentWillMount() {
+	        this.initScale(this.props);
+	        this.initDataLookup(this.props);
+	    },
+	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+	        this.initScale(newProps);
+	        this.initDataLookup(newProps);
+	    },
+	
+	    initScale: function initScale(props) {
+	        var innerWidth = props.width - (props.marginLeft + props.marginRight);
+	        var innerHeight = props.height - (props.marginTop + props.marginBottom);
+	        var data = props.data;
+	
+	        // todo handle missing values/date gaps
+	        var dateKey = props.dateKey;
+	        var plotKeys = props.plotKeys;
+	        var shouldIncludeZero = props.shouldIncludeZero;
+	        var xScale = _d32['default'].time.scale().range([0, innerWidth]).domain(_d32['default'].extent(data, function (d) {
+	            return d[dateKey];
+	        }));
+	
+	        var yScale = _d32['default'].scale.linear().range([innerHeight, 0])
+	        // get the max/min for each dataset we're plotting, then the overall max/min of all of them
+	        .domain(_d32['default'].extent(_lodash2['default'].flatten(_lodash2['default'].map(plotKeys, function (plotKey) {
+	            return _d32['default'].extent(data, function (d) {
+	                return d[plotKey];
+	            });
+	        }).concat(shouldIncludeZero ? [0] : []))))
+	        // extend domain to start/end at nice round values
+	        .nice();
+	
+	        this.setState({ xScale: xScale, yScale: yScale, innerWidth: innerWidth, innerHeight: innerHeight });
+	    },
+	    initDataLookup: function initDataLookup(props) {
+	        this.setState({ bisectDate: _d32['default'].bisector(function (d) {
+	                return d[props.dateKey];
+	            }).left });
+	    },
+	
+	    onMouseDown: function onMouseDown(e) {
+	        var chartBB = e.currentTarget.getBoundingClientRect();
+	        var chartX = e.clientX - chartBB.left - this.props.marginLeft;
+	        var chartDate = this.state.xScale.invert(chartX);
+	
+	        this.setState({ isSelecting: true });
+	        this.props.onChangeSelectedRange(chartDate, chartDate, true);
+	    },
+	    onMouseUp: function onMouseUp(e) {
+	        var chartBB = e.currentTarget.getBoundingClientRect();
+	        var chartX = e.clientX - chartBB.left - this.props.marginLeft;
+	        var chartDate = this.state.xScale.invert(chartX);
+	
+	        this.setState({ isSelecting: false });
+	        if (chartDate > this.props.selectedRangeMin) this.props.onChangeSelectedRange(this.props.selectedRangeMin, chartDate, false);else this.props.onChangeSelectedRange(chartDate, this.props.selectedRangeMin, false);
+	    },
+	    onMouseMove: function onMouseMove(e) {
+	        if (!this.props.onMouseMove && !this.state.isSelecting) return;
+	
+	        var chartBB = e.currentTarget.getBoundingClientRect();
+	        var chartX = e.clientX - chartBB.left - this.props.marginLeft;
+	        var chartDate = this.state.xScale.invert(chartX);
+	        var closestDataIndex = this.state.bisectDate(this.props.data, chartDate);
+	
+	        if (this.props.onMouseMove) this.props.onMouseMove(this.props.data[closestDataIndex], closestDataIndex, e);
+	
+	        if (!this.state.isSelecting) return;
+	
+	        if (chartDate > this.props.selectedRangeMin) this.props.onChangeSelectedRange(this.props.selectedRangeMin, chartDate, true);else this.props.onChangeSelectedRange(chartDate, this.props.selectedRangeMin, true);
+	    },
 	
 	    render: function render() {
-	        var renderer = this['render' + getBarChartType(this.props) + 'Bars'];
-	        return _react2['default'].createElement(
-	            'g',
-	            { className: 'bar-chart' },
-	            renderer()
-	        );
-	    },
-	    renderValueValueBars: function renderValueValueBars() {
-	        var _this = this;
-	
+	        console.log('rendered line chart');
+	        var _state = this.state;
+	        var xScale = _state.xScale;
+	        var yScale = _state.yScale;
 	        var _props = this.props;
-	
-	        //const isHorizontal = this.props.orientation === 'bar';
-	        //const barThickness = this.state.barScale.rangeBand();
-	        // todo handle barthickness in props/auto width
 	        var data = _props.data;
-	        var xScale = _props.xScale;
-	        var yScale = _props.yScale;
-	        var getX = _props.getX;
-	        var getY = _props.getY;
-	        var xType = _props.xType;
-	        var yType = _props.yType;
-	        var barThickness = 10;
+	        var dateKey = _props.dateKey;
+	        var plotKeys = _props.plotKeys;
+	        var isRangeSelectable = _props.isRangeSelectable;
+	        var width = _props.width;
+	        var height = _props.height;
+	        var marginLeft = _props.marginLeft;
+	        var marginTop = _props.marginTop;
 	
-	        var xAccessor = (0, _utilJs.accessor)(getX);
-	        var yAccessor = (0, _utilJs.accessor)(getY);
+	        var points = _lodash2['default'].map(data, function (d) {
+	            return [xScale(d[dateKey]), yScale(d[plotKeys[0]])];
+	        });
+	        var pathStr = pointsToPathStr(points);
 	
-	        return this.props.orientation === 'vertical' ? _react2['default'].createElement(
-	            'g',
-	            null,
-	            this.props.data.map(function (d, i) {
-	                var barZero = barZeroValue(data, yAccessor, yType);
-	                var yVal = yAccessor(d);
-	                var barLength = Math.abs(yScale(barZero) - yScale(yVal));
-	                var barY = yVal >= 0 || yType === 'ordinal' ? yScale(barZero) - barLength : yScale(barZero);
-	
-	                return _react2['default'].createElement('rect', {
-	                    className: 'chart-bar chart-bar-vertical',
-	                    x: _this.props.xScale(xAccessor(d)) - barThickness / 2,
-	                    y: barY,
-	                    width: barThickness,
-	                    height: barLength
-	                });
-	            })
-	        ) : _react2['default'].createElement(
-	            'g',
-	            null,
-	            this.props.data.map(function (d, i) {
-	                var barZero = barZeroValue(data, xAccessor, xType);
-	                var xVal = xAccessor(d);
-	                var barLength = Math.abs(xScale(barZero) - xScale(xVal));
-	                var barX = xVal >= 0 || xType === 'ordinal' ? xScale(barZero) : xScale(barZero) - barLength;
-	
-	                return _react2['default'].createElement('rect', {
-	                    className: 'chart-bar chart-bar-vertical',
-	                    x: barX,
-	                    y: _this.props.yScale(yAccessor(d)) - barThickness / 2,
-	                    width: barLength,
-	                    height: barThickness
-	                });
-	            })
+	        return _reactAddons2['default'].createElement(
+	            'svg',
+	            _extends({ className: 'line-chart'
+	            }, { width: width, height: height }, {
+	                onMouseDown: this.onMouseDown,
+	                onMouseUp: this.onMouseUp,
+	                onMouseMove: this.onMouseMove
+	            }),
+	            _reactAddons2['default'].createElement(
+	                'g',
+	                { className: 'chart-inner',
+	                    transform: 'translate(' + marginLeft + ', ' + marginTop + ')'
+	                },
+	                isRangeSelectable ? this.renderSelectedRange() : null,
+	                this.renderXAxis(),
+	                this.renderYAxis(),
+	                _reactAddons2['default'].createElement(
+	                    'g',
+	                    null,
+	                    _reactAddons2['default'].createElement('path', { className: 'chart-line', d: pathStr })
+	                )
+	            )
 	        );
 	    },
-	    renderRangeValueBars: function renderRangeValueBars() {
+	    renderXAxis: function renderXAxis() {
 	        var _props2 = this.props;
-	        var data = _props2.data;
-	        var xScale = _props2.xScale;
-	        var yScale = _props2.yScale;
-	        var getX = _props2.getX;
-	        var getY = _props2.getY;
-	        var getXEnd = _props2.getXEnd;
-	        var getYEnd = _props2.getYEnd;
-	        var xType = _props2.xType;
-	        var yType = _props2.yType;
+	        var showXTicks = _props2.showXTicks;
+	        var showXLabels = _props2.showXLabels;
 	
-	        var _$map = _lodash2['default'].map([getX, getXEnd, getY, getYEnd], _utilJs.accessor);
+	        if (!(showXTicks || showXLabels)) return null;
+	        var _state2 = this.state;
+	        var xScale = _state2.xScale;
+	        var innerHeight = _state2.innerHeight;
 	
-	        var _$map2 = _slicedToArray(_$map, 4);
+	        var xTicks = xScale.ticks();
 	
-	        var xAccessor = _$map2[0];
-	        var xEndAccessor = _$map2[1];
-	        var yAccessor = _$map2[2];
-	        var yEndAccessor = _$map2[3];
-	
-	        return this.props.orientation === 'vertical' ? _react2['default'].createElement(
+	        return _reactAddons2['default'].createElement(
 	            'g',
-	            null,
-	            this.props.data.map(function (d, i) {
-	                var barZero = barZeroValue(data, yAccessor, yType);
-	                var yVal = yAccessor(d);
-	                var barLength = Math.abs(yScale(barZero) - yScale(yVal));
-	                var barY = yVal >= 0 || yType === 'ordinal' ? yScale(barZero) - barLength : yScale(barZero);
-	                var barX = Math.round(xScale(xAccessor(d)));
-	                var barThickness = Math.round(xScale(xEndAccessor(d))) - barX;
-	
-	                return _react2['default'].createElement('rect', {
-	                    className: 'chart-bar chart-bar-vertical',
-	                    x: barX,
-	                    y: barY,
-	                    width: barThickness,
-	                    height: barLength
-	                });
-	            })
-	        ) : _react2['default'].createElement(
-	            'g',
-	            null,
-	            this.props.data.map(function (d, i) {
-	                var barZero = barZeroValue(data, xAccessor, xType);
-	                var xVal = xAccessor(d);
-	                var barLength = Math.abs(xScale(barZero) - xScale(xVal));
-	                var barX = xVal >= 0 || xType === 'ordinal' ? xScale(barZero) : xScale(barZero) - barLength;
-	
-	                var barY = Math.round(yScale(yEndAccessor(d)));
-	                var barThickness = Math.round(yScale(yAccessor(d))) - barY;
-	
-	                return _react2['default'].createElement('rect', {
-	                    className: 'chart-bar chart-bar-vertical',
-	                    x: barX,
-	                    y: barY,
-	                    width: barLength,
-	                    height: barThickness
-	                });
+	            { className: 'chart-axis chart-axis-x', transform: 'translate(0, ' + innerHeight + ')' },
+	            _lodash2['default'].map(xTicks, function (date) {
+	                return _reactAddons2['default'].createElement(
+	                    'g',
+	                    { transform: 'translate(' + xScale(date) + ', 0)' },
+	                    showXTicks ? _reactAddons2['default'].createElement('line', { className: 'chart-tick chart-tick-x', x2: 0, y2: 6 }) : null,
+	                    showXLabels ? _reactAddons2['default'].createElement(
+	                        'text',
+	                        { className: 'chart-axis-label chart-x-label', dy: '0.8em', y: '9' },
+	                        (0, _moment2['default'])(date).format("MMM 'YY")
+	                    ) : null
+	                );
 	            })
 	        );
 	    },
-	    renderValueRangeBars: function renderValueRangeBars() {
-	        return renderNotImplemented();
+	    renderYAxis: function renderYAxis() {
+	        var _props3 = this.props;
+	        var showYTicks = _props3.showYTicks;
+	        var showYLabels = _props3.showYLabels;
+	
+	        if (!(showYTicks || showYLabels)) return null;
+	        var _state3 = this.state;
+	        var yScale = _state3.yScale;
+	        var innerWidth = _state3.innerWidth;
+	
+	        var yTicks = yScale.ticks();
+	
+	        return _reactAddons2['default'].createElement(
+	            'g',
+	            { className: 'chart-axis chart-axis-y' },
+	            _lodash2['default'].map(yTicks, function (value) {
+	                return _reactAddons2['default'].createElement(
+	                    'g',
+	                    { transform: 'translate(0, ' + yScale(value) + ')' },
+	                    showYTicks ? _reactAddons2['default'].createElement('line', { className: 'chart-tick chart-tick-y', x2: innerWidth, y2: 0 }) : null,
+	                    showYLabels ? _reactAddons2['default'].createElement(
+	                        'text',
+	                        { className: 'chart-axis-label chart-y-label', dy: '0.32em', x: -3 },
+	                        value
+	                    ) : null
+	                );
+	            })
+	        );
 	    },
-	    renderRangeRangeBars: function renderRangeRangeBars() {
-	        return renderNotImplemented();
+	    renderSelectedRange: function renderSelectedRange() {
+	        var _state4 = this.state;
+	        var xScale = _state4.xScale;
+	        var yScale = _state4.yScale;
+	        var innerWidth = _state4.innerWidth;
+	        var innerHeight = _state4.innerHeight;
+	        var _props4 = this.props;
+	        var isRangeSelectable = _props4.isRangeSelectable;
+	        var selectedRangeMin = _props4.selectedRangeMin;
+	        var selectedRangeMax = _props4.selectedRangeMax;
+	
+	        if (!(isRangeSelectable && selectedRangeMin && selectedRangeMax)) return null;
+	
+	        var x = xScale(selectedRangeMin);
+	        var width = xScale(selectedRangeMax) - x;
+	
+	        return _reactAddons2['default'].createElement('rect', _extends({
+	            className: 'chart-selected-range'
+	        }, { x: x, width: width }, {
+	            y: yScale.range()[1], height: innerHeight
+	        }));
 	    }
 	});
 	
-	function renderNotImplemented() {
-	    var text = arguments.length <= 0 || arguments[0] === undefined ? "not implemented yet" : arguments[0];
+	function pointsToPathStr(points) {
+	    // takes array of points in [[x, y], [x, y]... ] format
+	    // returns SVG path string in "M X Y L X Y" format
+	    // https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Line_commands
+	    return _lodash2['default'].map(points, function (_ref, i) {
+	        var _ref2 = _slicedToArray(_ref, 2);
 	
-	    return _react2['default'].createElement(
-	        'svg',
-	        { x: 100, y: 100, style: { overflow: 'visible' } },
-	        _react2['default'].createElement(
-	            'text',
-	            null,
-	            text
-	        )
-	    );
+	        var x = _ref2[0];
+	        var y = _ref2[1];
+	
+	        var command = i === 0 ? 'M' : 'L';
+	        return command + ' ' + x + ' ' + y;
+	    }).join(' ');
 	}
 	
-	exports['default'] = BarChart;
+	exports['default'] = TimeseriesLineChart;
 	module.exports = exports['default'];
 
 /***/ },
 /* 183 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(35);
-
-
-/***/ },
-/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -37113,10 +37156,10 @@
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(185)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(184)(module), (function() { return this; }())))
 
 /***/ },
-/* 185 */
+/* 184 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -37132,7 +37175,7 @@
 
 
 /***/ },
-/* 186 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
@@ -46641,366 +46684,7 @@
 	}();
 
 /***/ },
-/* 187 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	exports.accessor = accessor;
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _react = __webpack_require__(183);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _lodash = __webpack_require__(184);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	var PropTypes = _react2['default'].PropTypes;
-	var AccessorPropType = PropTypes.oneOfType(PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.func);
-	
-	exports.AccessorPropType = AccessorPropType;
-	
-	function accessor(key) {
-	    return _lodash2['default'].isFunction(key) ? key : // pass an accessor function...
-	    _lodash2['default'].isNull(key) || _lodash2['default'].isUndefined(key) ? _lodash2['default'].identity : // or null/undefined to just return the item itself...
-	    _lodash2['default'].property(key); // or an array index or object key
-	}
-
-/***/ },
-/* 188 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	    value: true
-	});
-	
-	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var _reactAddons = __webpack_require__(7);
-	
-	var _reactAddons2 = _interopRequireDefault(_reactAddons);
-	
-	var _lodash = __webpack_require__(184);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	var _d3 = __webpack_require__(186);
-	
-	var _d32 = _interopRequireDefault(_d3);
-	
-	var _moment = __webpack_require__(189);
-	
-	var _moment2 = _interopRequireDefault(_moment);
-	
-	var PropTypes = _reactAddons2['default'].PropTypes;
-	var PureRenderMixin = _reactAddons2['default'].addons.PureRenderMixin;
-	
-	var TimeseriesLineChart = _reactAddons2['default'].createClass({
-	    displayName: 'TimeseriesLineChart',
-	
-	    mixins: [PureRenderMixin],
-	    propTypes: {
-	        // the array of data objects
-	        data: PropTypes.arrayOf(PropTypes.object).isRequired,
-	        // keys for props.data objects, whose values will be plotted (on y-axis)
-	        plotKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
-	        // key for props.data referring to the date (to be plotted on x-axis)
-	        dateKey: PropTypes.string,
-	
-	        // whether or not the scale of the Y-axis should always include zero
-	        shouldIncludeZero: PropTypes.bool,
-	        // whether or not to draw a zero line
-	        showZero: PropTypes.bool,
-	
-	        // whether or not to draw the tick lines on the X axis
-	        showXTicks: PropTypes.bool,
-	        // whether or not to draw X axis label text (dates)
-	        showXLabels: PropTypes.bool,
-	
-	        // whether or not to draw the tick lines on the Y axis
-	        showYTicks: PropTypes.bool,
-	        // whether or not to draw Y axis label text (values)
-	        showYLabels: PropTypes.bool,
-	
-	        // called when user mouses over the chart
-	        onMouseMove: PropTypes.func,
-	
-	        // true if the user can click and drag to select a date range
-	        // (this doesn't change the date range on the chart, just calls callback with range and shows highlight)
-	        isRangeSelectable: PropTypes.bool,
-	        // callback called when selected range changes
-	        // (this is a controlled component, parent must maintain selected range state)
-	        onChangeSelectedRange: PropTypes.func,
-	        // min and max dates of the selected range
-	        selectedRangeMin: PropTypes.object,
-	        selectedRangeMax: PropTypes.object,
-	
-	        // (outer) width and height of the chart
-	        width: PropTypes.number,
-	        height: PropTypes.number,
-	        // chart margins
-	        marginTop: PropTypes.number,
-	        marginBottom: PropTypes.number,
-	        marginLeft: PropTypes.number,
-	        marginRight: PropTypes.number
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            dateKey: 'date',
-	            shouldIncludeZero: true,
-	            showZero: true,
-	            showXTicks: true,
-	            showXLabels: true,
-	            showYTicks: true,
-	            showYLabels: true,
-	            isRangeSelectable: false,
-	            onChangeSelectedRange: _lodash2['default'].noop,
-	            width: 400,
-	            height: 250,
-	            marginTop: 10,
-	            marginBottom: 40,
-	            marginLeft: 60,
-	            marginRight: 10
-	        };
-	    },
-	    getInitialState: function getInitialState() {
-	        return {
-	            isSelecting: false,
-	            xScale: null,
-	            yScale: null,
-	            innerWidth: null,
-	            innerHeight: null
-	        };
-	    },
-	    componentWillMount: function componentWillMount() {
-	        this.initScale(this.props);
-	        this.initDataLookup(this.props);
-	    },
-	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
-	        this.initScale(newProps);
-	        this.initDataLookup(newProps);
-	    },
-	
-	    initScale: function initScale(props) {
-	        var innerWidth = props.width - (props.marginLeft + props.marginRight);
-	        var innerHeight = props.height - (props.marginTop + props.marginBottom);
-	        var data = props.data;
-	
-	        // todo handle missing values/date gaps
-	        var dateKey = props.dateKey;
-	        var plotKeys = props.plotKeys;
-	        var shouldIncludeZero = props.shouldIncludeZero;
-	        var xScale = _d32['default'].time.scale().range([0, innerWidth]).domain(_d32['default'].extent(data, function (d) {
-	            return d[dateKey];
-	        }));
-	
-	        var yScale = _d32['default'].scale.linear().range([innerHeight, 0])
-	        // get the max/min for each dataset we're plotting, then the overall max/min of all of them
-	        .domain(_d32['default'].extent(_lodash2['default'].flatten(_lodash2['default'].map(plotKeys, function (plotKey) {
-	            return _d32['default'].extent(data, function (d) {
-	                return d[plotKey];
-	            });
-	        }).concat(shouldIncludeZero ? [0] : []))))
-	        // extend domain to start/end at nice round values
-	        .nice();
-	
-	        this.setState({ xScale: xScale, yScale: yScale, innerWidth: innerWidth, innerHeight: innerHeight });
-	    },
-	    initDataLookup: function initDataLookup(props) {
-	        this.setState({ bisectDate: _d32['default'].bisector(function (d) {
-	                return d[props.dateKey];
-	            }).left });
-	    },
-	
-	    onMouseDown: function onMouseDown(e) {
-	        var chartBB = e.currentTarget.getBoundingClientRect();
-	        var chartX = e.clientX - chartBB.left - this.props.marginLeft;
-	        var chartDate = this.state.xScale.invert(chartX);
-	
-	        this.setState({ isSelecting: true });
-	        this.props.onChangeSelectedRange(chartDate, chartDate, true);
-	    },
-	    onMouseUp: function onMouseUp(e) {
-	        var chartBB = e.currentTarget.getBoundingClientRect();
-	        var chartX = e.clientX - chartBB.left - this.props.marginLeft;
-	        var chartDate = this.state.xScale.invert(chartX);
-	
-	        this.setState({ isSelecting: false });
-	        if (chartDate > this.props.selectedRangeMin) this.props.onChangeSelectedRange(this.props.selectedRangeMin, chartDate, false);else this.props.onChangeSelectedRange(chartDate, this.props.selectedRangeMin, false);
-	    },
-	    onMouseMove: function onMouseMove(e) {
-	        if (!this.props.onMouseMove && !this.state.isSelecting) return;
-	
-	        var chartBB = e.currentTarget.getBoundingClientRect();
-	        var chartX = e.clientX - chartBB.left - this.props.marginLeft;
-	        var chartDate = this.state.xScale.invert(chartX);
-	        var closestDataIndex = this.state.bisectDate(this.props.data, chartDate);
-	
-	        if (this.props.onMouseMove) this.props.onMouseMove(this.props.data[closestDataIndex], closestDataIndex, e);
-	
-	        if (!this.state.isSelecting) return;
-	
-	        if (chartDate > this.props.selectedRangeMin) this.props.onChangeSelectedRange(this.props.selectedRangeMin, chartDate, true);else this.props.onChangeSelectedRange(chartDate, this.props.selectedRangeMin, true);
-	    },
-	
-	    render: function render() {
-	        console.log('rendered line chart');
-	        var _state = this.state;
-	        var xScale = _state.xScale;
-	        var yScale = _state.yScale;
-	        var _props = this.props;
-	        var data = _props.data;
-	        var dateKey = _props.dateKey;
-	        var plotKeys = _props.plotKeys;
-	        var isRangeSelectable = _props.isRangeSelectable;
-	        var width = _props.width;
-	        var height = _props.height;
-	        var marginLeft = _props.marginLeft;
-	        var marginTop = _props.marginTop;
-	
-	        var points = _lodash2['default'].map(data, function (d) {
-	            return [xScale(d[dateKey]), yScale(d[plotKeys[0]])];
-	        });
-	        var pathStr = pointsToPathStr(points);
-	
-	        return _reactAddons2['default'].createElement(
-	            'svg',
-	            _extends({ className: 'line-chart'
-	            }, { width: width, height: height }, {
-	                onMouseDown: this.onMouseDown,
-	                onMouseUp: this.onMouseUp,
-	                onMouseMove: this.onMouseMove
-	            }),
-	            _reactAddons2['default'].createElement(
-	                'g',
-	                { className: 'chart-inner',
-	                    transform: 'translate(' + marginLeft + ', ' + marginTop + ')'
-	                },
-	                isRangeSelectable ? this.renderSelectedRange() : null,
-	                this.renderXAxis(),
-	                this.renderYAxis(),
-	                _reactAddons2['default'].createElement(
-	                    'g',
-	                    null,
-	                    _reactAddons2['default'].createElement('path', { className: 'chart-line', d: pathStr })
-	                )
-	            )
-	        );
-	    },
-	    renderXAxis: function renderXAxis() {
-	        var _props2 = this.props;
-	        var showXTicks = _props2.showXTicks;
-	        var showXLabels = _props2.showXLabels;
-	
-	        if (!(showXTicks || showXLabels)) return null;
-	        var _state2 = this.state;
-	        var xScale = _state2.xScale;
-	        var innerHeight = _state2.innerHeight;
-	
-	        var xTicks = xScale.ticks();
-	
-	        return _reactAddons2['default'].createElement(
-	            'g',
-	            { className: 'chart-axis chart-axis-x', transform: 'translate(0, ' + innerHeight + ')' },
-	            _lodash2['default'].map(xTicks, function (date) {
-	                return _reactAddons2['default'].createElement(
-	                    'g',
-	                    { transform: 'translate(' + xScale(date) + ', 0)' },
-	                    showXTicks ? _reactAddons2['default'].createElement('line', { className: 'chart-tick chart-tick-x', x2: 0, y2: 6 }) : null,
-	                    showXLabels ? _reactAddons2['default'].createElement(
-	                        'text',
-	                        { className: 'chart-axis-label chart-x-label', dy: '0.8em', y: '9' },
-	                        (0, _moment2['default'])(date).format("MMM 'YY")
-	                    ) : null
-	                );
-	            })
-	        );
-	    },
-	    renderYAxis: function renderYAxis() {
-	        var _props3 = this.props;
-	        var showYTicks = _props3.showYTicks;
-	        var showYLabels = _props3.showYLabels;
-	
-	        if (!(showYTicks || showYLabels)) return null;
-	        var _state3 = this.state;
-	        var yScale = _state3.yScale;
-	        var innerWidth = _state3.innerWidth;
-	
-	        var yTicks = yScale.ticks();
-	
-	        return _reactAddons2['default'].createElement(
-	            'g',
-	            { className: 'chart-axis chart-axis-y' },
-	            _lodash2['default'].map(yTicks, function (value) {
-	                return _reactAddons2['default'].createElement(
-	                    'g',
-	                    { transform: 'translate(0, ' + yScale(value) + ')' },
-	                    showYTicks ? _reactAddons2['default'].createElement('line', { className: 'chart-tick chart-tick-y', x2: innerWidth, y2: 0 }) : null,
-	                    showYLabels ? _reactAddons2['default'].createElement(
-	                        'text',
-	                        { className: 'chart-axis-label chart-y-label', dy: '0.32em', x: -3 },
-	                        value
-	                    ) : null
-	                );
-	            })
-	        );
-	    },
-	    renderSelectedRange: function renderSelectedRange() {
-	        var _state4 = this.state;
-	        var xScale = _state4.xScale;
-	        var yScale = _state4.yScale;
-	        var innerWidth = _state4.innerWidth;
-	        var innerHeight = _state4.innerHeight;
-	        var _props4 = this.props;
-	        var isRangeSelectable = _props4.isRangeSelectable;
-	        var selectedRangeMin = _props4.selectedRangeMin;
-	        var selectedRangeMax = _props4.selectedRangeMax;
-	
-	        if (!(isRangeSelectable && selectedRangeMin && selectedRangeMax)) return null;
-	
-	        var x = xScale(selectedRangeMin);
-	        var width = xScale(selectedRangeMax) - x;
-	
-	        return _reactAddons2['default'].createElement('rect', _extends({
-	            className: 'chart-selected-range'
-	        }, { x: x, width: width }, {
-	            y: yScale.range()[1], height: innerHeight
-	        }));
-	    }
-	});
-	
-	function pointsToPathStr(points) {
-	    // takes array of points in [[x, y], [x, y]... ] format
-	    // returns SVG path string in "M X Y L X Y" format
-	    // https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Line_commands
-	    return _lodash2['default'].map(points, function (_ref, i) {
-	        var _ref2 = _slicedToArray(_ref, 2);
-	
-	        var x = _ref2[0];
-	        var y = _ref2[1];
-	
-	        var command = i === 0 ? 'M' : 'L';
-	        return command + ' ' + x + ' ' + y;
-	    }).join(' ');
-	}
-	
-	exports['default'] = TimeseriesLineChart;
-	module.exports = exports['default'];
-
-/***/ },
-/* 189 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
@@ -47271,7 +46955,7 @@
 	                module && module.exports) {
 	            try {
 	                oldLocale = globalLocale._abbr;
-	                __webpack_require__(190)("./" + name);
+	                __webpack_require__(187)("./" + name);
 	                // because defineLocale currently also sets the global locale, we
 	                // want to undo that for lazy loaded locales
 	                locale_locales__getSetGlobalLocale(oldLocale);
@@ -50198,183 +49882,183 @@
 	    return _moment;
 	
 	}));
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(185)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(184)(module)))
 
 /***/ },
-/* 190 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./af": 191,
-		"./af.js": 191,
-		"./ar": 192,
-		"./ar-ma": 193,
-		"./ar-ma.js": 193,
-		"./ar-sa": 194,
-		"./ar-sa.js": 194,
-		"./ar-tn": 195,
-		"./ar-tn.js": 195,
-		"./ar.js": 192,
-		"./az": 196,
-		"./az.js": 196,
-		"./be": 197,
-		"./be.js": 197,
-		"./bg": 198,
-		"./bg.js": 198,
-		"./bn": 199,
-		"./bn.js": 199,
-		"./bo": 200,
-		"./bo.js": 200,
-		"./br": 201,
-		"./br.js": 201,
-		"./bs": 202,
-		"./bs.js": 202,
-		"./ca": 203,
-		"./ca.js": 203,
-		"./cs": 204,
-		"./cs.js": 204,
-		"./cv": 205,
-		"./cv.js": 205,
-		"./cy": 206,
-		"./cy.js": 206,
-		"./da": 207,
-		"./da.js": 207,
-		"./de": 208,
-		"./de-at": 209,
-		"./de-at.js": 209,
-		"./de.js": 208,
-		"./el": 210,
-		"./el.js": 210,
-		"./en-au": 211,
-		"./en-au.js": 211,
-		"./en-ca": 212,
-		"./en-ca.js": 212,
-		"./en-gb": 213,
-		"./en-gb.js": 213,
-		"./eo": 214,
-		"./eo.js": 214,
-		"./es": 215,
-		"./es.js": 215,
-		"./et": 216,
-		"./et.js": 216,
-		"./eu": 217,
-		"./eu.js": 217,
-		"./fa": 218,
-		"./fa.js": 218,
-		"./fi": 219,
-		"./fi.js": 219,
-		"./fo": 220,
-		"./fo.js": 220,
-		"./fr": 221,
-		"./fr-ca": 222,
-		"./fr-ca.js": 222,
-		"./fr.js": 221,
-		"./fy": 223,
-		"./fy.js": 223,
-		"./gl": 224,
-		"./gl.js": 224,
-		"./he": 225,
-		"./he.js": 225,
-		"./hi": 226,
-		"./hi.js": 226,
-		"./hr": 227,
-		"./hr.js": 227,
-		"./hu": 228,
-		"./hu.js": 228,
-		"./hy-am": 229,
-		"./hy-am.js": 229,
-		"./id": 230,
-		"./id.js": 230,
-		"./is": 231,
-		"./is.js": 231,
-		"./it": 232,
-		"./it.js": 232,
-		"./ja": 233,
-		"./ja.js": 233,
-		"./jv": 234,
-		"./jv.js": 234,
-		"./ka": 235,
-		"./ka.js": 235,
-		"./km": 236,
-		"./km.js": 236,
-		"./ko": 237,
-		"./ko.js": 237,
-		"./lb": 238,
-		"./lb.js": 238,
-		"./lt": 239,
-		"./lt.js": 239,
-		"./lv": 240,
-		"./lv.js": 240,
-		"./me": 241,
-		"./me.js": 241,
-		"./mk": 242,
-		"./mk.js": 242,
-		"./ml": 243,
-		"./ml.js": 243,
-		"./mr": 244,
-		"./mr.js": 244,
-		"./ms": 245,
-		"./ms-my": 246,
-		"./ms-my.js": 246,
-		"./ms.js": 245,
-		"./my": 247,
-		"./my.js": 247,
-		"./nb": 248,
-		"./nb.js": 248,
-		"./ne": 249,
-		"./ne.js": 249,
-		"./nl": 250,
-		"./nl.js": 250,
-		"./nn": 251,
-		"./nn.js": 251,
-		"./pl": 252,
-		"./pl.js": 252,
-		"./pt": 253,
-		"./pt-br": 254,
-		"./pt-br.js": 254,
-		"./pt.js": 253,
-		"./ro": 255,
-		"./ro.js": 255,
-		"./ru": 256,
-		"./ru.js": 256,
-		"./si": 257,
-		"./si.js": 257,
-		"./sk": 258,
-		"./sk.js": 258,
-		"./sl": 259,
-		"./sl.js": 259,
-		"./sq": 260,
-		"./sq.js": 260,
-		"./sr": 261,
-		"./sr-cyrl": 262,
-		"./sr-cyrl.js": 262,
-		"./sr.js": 261,
-		"./sv": 263,
-		"./sv.js": 263,
-		"./ta": 264,
-		"./ta.js": 264,
-		"./th": 265,
-		"./th.js": 265,
-		"./tl-ph": 266,
-		"./tl-ph.js": 266,
-		"./tr": 267,
-		"./tr.js": 267,
-		"./tzl": 268,
-		"./tzl.js": 268,
-		"./tzm": 269,
-		"./tzm-latn": 270,
-		"./tzm-latn.js": 270,
-		"./tzm.js": 269,
-		"./uk": 271,
-		"./uk.js": 271,
-		"./uz": 272,
-		"./uz.js": 272,
-		"./vi": 273,
-		"./vi.js": 273,
-		"./zh-cn": 274,
-		"./zh-cn.js": 274,
-		"./zh-tw": 275,
-		"./zh-tw.js": 275
+		"./af": 188,
+		"./af.js": 188,
+		"./ar": 189,
+		"./ar-ma": 190,
+		"./ar-ma.js": 190,
+		"./ar-sa": 191,
+		"./ar-sa.js": 191,
+		"./ar-tn": 192,
+		"./ar-tn.js": 192,
+		"./ar.js": 189,
+		"./az": 193,
+		"./az.js": 193,
+		"./be": 194,
+		"./be.js": 194,
+		"./bg": 195,
+		"./bg.js": 195,
+		"./bn": 196,
+		"./bn.js": 196,
+		"./bo": 197,
+		"./bo.js": 197,
+		"./br": 198,
+		"./br.js": 198,
+		"./bs": 199,
+		"./bs.js": 199,
+		"./ca": 200,
+		"./ca.js": 200,
+		"./cs": 201,
+		"./cs.js": 201,
+		"./cv": 202,
+		"./cv.js": 202,
+		"./cy": 203,
+		"./cy.js": 203,
+		"./da": 204,
+		"./da.js": 204,
+		"./de": 205,
+		"./de-at": 206,
+		"./de-at.js": 206,
+		"./de.js": 205,
+		"./el": 207,
+		"./el.js": 207,
+		"./en-au": 208,
+		"./en-au.js": 208,
+		"./en-ca": 209,
+		"./en-ca.js": 209,
+		"./en-gb": 210,
+		"./en-gb.js": 210,
+		"./eo": 211,
+		"./eo.js": 211,
+		"./es": 212,
+		"./es.js": 212,
+		"./et": 213,
+		"./et.js": 213,
+		"./eu": 214,
+		"./eu.js": 214,
+		"./fa": 215,
+		"./fa.js": 215,
+		"./fi": 216,
+		"./fi.js": 216,
+		"./fo": 217,
+		"./fo.js": 217,
+		"./fr": 218,
+		"./fr-ca": 219,
+		"./fr-ca.js": 219,
+		"./fr.js": 218,
+		"./fy": 220,
+		"./fy.js": 220,
+		"./gl": 221,
+		"./gl.js": 221,
+		"./he": 222,
+		"./he.js": 222,
+		"./hi": 223,
+		"./hi.js": 223,
+		"./hr": 224,
+		"./hr.js": 224,
+		"./hu": 225,
+		"./hu.js": 225,
+		"./hy-am": 226,
+		"./hy-am.js": 226,
+		"./id": 227,
+		"./id.js": 227,
+		"./is": 228,
+		"./is.js": 228,
+		"./it": 229,
+		"./it.js": 229,
+		"./ja": 230,
+		"./ja.js": 230,
+		"./jv": 231,
+		"./jv.js": 231,
+		"./ka": 232,
+		"./ka.js": 232,
+		"./km": 233,
+		"./km.js": 233,
+		"./ko": 234,
+		"./ko.js": 234,
+		"./lb": 235,
+		"./lb.js": 235,
+		"./lt": 236,
+		"./lt.js": 236,
+		"./lv": 237,
+		"./lv.js": 237,
+		"./me": 238,
+		"./me.js": 238,
+		"./mk": 239,
+		"./mk.js": 239,
+		"./ml": 240,
+		"./ml.js": 240,
+		"./mr": 241,
+		"./mr.js": 241,
+		"./ms": 242,
+		"./ms-my": 243,
+		"./ms-my.js": 243,
+		"./ms.js": 242,
+		"./my": 244,
+		"./my.js": 244,
+		"./nb": 245,
+		"./nb.js": 245,
+		"./ne": 246,
+		"./ne.js": 246,
+		"./nl": 247,
+		"./nl.js": 247,
+		"./nn": 248,
+		"./nn.js": 248,
+		"./pl": 249,
+		"./pl.js": 249,
+		"./pt": 250,
+		"./pt-br": 251,
+		"./pt-br.js": 251,
+		"./pt.js": 250,
+		"./ro": 252,
+		"./ro.js": 252,
+		"./ru": 253,
+		"./ru.js": 253,
+		"./si": 254,
+		"./si.js": 254,
+		"./sk": 255,
+		"./sk.js": 255,
+		"./sl": 256,
+		"./sl.js": 256,
+		"./sq": 257,
+		"./sq.js": 257,
+		"./sr": 258,
+		"./sr-cyrl": 259,
+		"./sr-cyrl.js": 259,
+		"./sr.js": 258,
+		"./sv": 260,
+		"./sv.js": 260,
+		"./ta": 261,
+		"./ta.js": 261,
+		"./th": 262,
+		"./th.js": 262,
+		"./tl-ph": 263,
+		"./tl-ph.js": 263,
+		"./tr": 264,
+		"./tr.js": 264,
+		"./tzl": 265,
+		"./tzl.js": 265,
+		"./tzm": 266,
+		"./tzm-latn": 267,
+		"./tzm-latn.js": 267,
+		"./tzm.js": 266,
+		"./uk": 268,
+		"./uk.js": 268,
+		"./uz": 269,
+		"./uz.js": 269,
+		"./vi": 270,
+		"./vi.js": 270,
+		"./zh-cn": 271,
+		"./zh-cn.js": 271,
+		"./zh-tw": 272,
+		"./zh-tw.js": 272
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -50387,11 +50071,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 190;
+	webpackContext.id = 187;
 
 
 /***/ },
-/* 191 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50399,7 +50083,7 @@
 	//! author : Werner Mollentze : https://github.com/wernerm
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50468,7 +50152,7 @@
 	}));
 
 /***/ },
-/* 192 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50478,7 +50162,7 @@
 	//! Native plural forms: forabi https://github.com/forabi
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50608,7 +50292,7 @@
 	}));
 
 /***/ },
-/* 193 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50617,7 +50301,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50671,7 +50355,7 @@
 	}));
 
 /***/ },
-/* 194 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50679,7 +50363,7 @@
 	//! author : Suhail Alkowaileet : https://github.com/xsoh
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50778,14 +50462,14 @@
 	}));
 
 /***/ },
-/* 195 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale  : Tunisian Arabic (ar-tn)
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50839,7 +50523,7 @@
 	}));
 
 /***/ },
-/* 196 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50847,7 +50531,7 @@
 	//! author : topchiyev : https://github.com/topchiyev
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50947,7 +50631,7 @@
 	}));
 
 /***/ },
-/* 197 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50957,7 +50641,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51098,7 +50782,7 @@
 	}));
 
 /***/ },
-/* 198 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51106,7 +50790,7 @@
 	//! author : Krasen Borisov : https://github.com/kraz
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51192,7 +50876,7 @@
 	}));
 
 /***/ },
-/* 199 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51200,7 +50884,7 @@
 	//! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51309,7 +50993,7 @@
 	}));
 
 /***/ },
-/* 200 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51317,7 +51001,7 @@
 	//! author : Thupten N. Chakrishar : https://github.com/vajradog
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51423,7 +51107,7 @@
 	}));
 
 /***/ },
-/* 201 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51431,7 +51115,7 @@
 	//! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51534,7 +51218,7 @@
 	}));
 
 /***/ },
-/* 202 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51543,7 +51227,7 @@
 	//! based on (hr) translation by Bojan Marković
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51679,7 +51363,7 @@
 	}));
 
 /***/ },
-/* 203 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51687,7 +51371,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51762,7 +51446,7 @@
 	}));
 
 /***/ },
-/* 204 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51770,7 +51454,7 @@
 	//! author : petrbela : https://github.com/petrbela
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51923,7 +51607,7 @@
 	}));
 
 /***/ },
-/* 205 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51931,7 +51615,7 @@
 	//! author : Anatoly Mironov : https://github.com/mirontoli
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51990,7 +51674,7 @@
 	}));
 
 /***/ },
-/* 206 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51998,7 +51682,7 @@
 	//! author : Robert Allen
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52073,7 +51757,7 @@
 	}));
 
 /***/ },
-/* 207 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52081,7 +51765,7 @@
 	//! author : Ulrik Nielsen : https://github.com/mrbase
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52137,7 +51821,7 @@
 	}));
 
 /***/ },
-/* 208 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52146,7 +51830,7 @@
 	//! author: Menelion Elensúle: https://github.com/Oire
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52216,7 +51900,7 @@
 	}));
 
 /***/ },
-/* 209 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52226,7 +51910,7 @@
 	//! author : Martin Groller : https://github.com/MadMG
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52296,7 +51980,7 @@
 	}));
 
 /***/ },
-/* 210 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52304,7 +51988,7 @@
 	//! author : Aggelos Karalias : https://github.com/mehiel
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52394,14 +52078,14 @@
 	}));
 
 /***/ },
-/* 211 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : australian english (en-au)
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52464,7 +52148,7 @@
 	}));
 
 /***/ },
-/* 212 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52472,7 +52156,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52531,7 +52215,7 @@
 	}));
 
 /***/ },
-/* 213 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52539,7 +52223,7 @@
 	//! author : Chris Gedrim : https://github.com/chrisgedrim
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52602,7 +52286,7 @@
 	}));
 
 /***/ },
-/* 214 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52612,7 +52296,7 @@
 	//!          Se ne, bonvolu korekti kaj avizi min por ke mi povas lerni!
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52679,7 +52363,7 @@
 	}));
 
 /***/ },
-/* 215 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52687,7 +52371,7 @@
 	//! author : Julio Napurí : https://github.com/julionc
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52762,7 +52446,7 @@
 	}));
 
 /***/ },
-/* 216 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52771,7 +52455,7 @@
 	//! improvements : Illimar Tambek : https://github.com/ragulka
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52846,7 +52530,7 @@
 	}));
 
 /***/ },
-/* 217 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52854,7 +52538,7 @@
 	//! author : Eneko Illarramendi : https://github.com/eillarra
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52914,7 +52598,7 @@
 	}));
 
 /***/ },
-/* 218 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52922,7 +52606,7 @@
 	//! author : Ebrahim Byagowi : https://github.com/ebraminio
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53023,7 +52707,7 @@
 	}));
 
 /***/ },
-/* 219 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53031,7 +52715,7 @@
 	//! author : Tarmo Aidantausta : https://github.com/bleadof
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53134,7 +52818,7 @@
 	}));
 
 /***/ },
-/* 220 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53142,7 +52826,7 @@
 	//! author : Ragnar Johannesen : https://github.com/ragnar123
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53198,7 +52882,7 @@
 	}));
 
 /***/ },
-/* 221 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53206,7 +52890,7 @@
 	//! author : John Fischer : https://github.com/jfroffice
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53264,7 +52948,7 @@
 	}));
 
 /***/ },
-/* 222 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53272,7 +52956,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53326,7 +53010,7 @@
 	}));
 
 /***/ },
-/* 223 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53334,7 +53018,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53401,7 +53085,7 @@
 	}));
 
 /***/ },
-/* 224 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53409,7 +53093,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53480,7 +53164,7 @@
 	}));
 
 /***/ },
-/* 225 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53490,7 +53174,7 @@
 	//! author : Tal Ater : https://github.com/TalAter
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53566,7 +53250,7 @@
 	}));
 
 /***/ },
-/* 226 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53574,7 +53258,7 @@
 	//! author : Mayank Singhal : https://github.com/mayanksinghal
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53693,7 +53377,7 @@
 	}));
 
 /***/ },
-/* 227 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53701,7 +53385,7 @@
 	//! author : Bojan Marković : https://github.com/bmarkovic
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53837,7 +53521,7 @@
 	}));
 
 /***/ },
-/* 228 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53845,7 +53529,7 @@
 	//! author : Adam Brunner : https://github.com/adambrunner
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53950,7 +53634,7 @@
 	}));
 
 /***/ },
-/* 229 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53958,7 +53642,7 @@
 	//! author : Armendarabyan : https://github.com/armendarabyan
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54065,7 +53749,7 @@
 	}));
 
 /***/ },
-/* 230 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54074,7 +53758,7 @@
 	//! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54152,7 +53836,7 @@
 	}));
 
 /***/ },
-/* 231 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54160,7 +53844,7 @@
 	//! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54283,7 +53967,7 @@
 	}));
 
 /***/ },
-/* 232 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54292,7 +53976,7 @@
 	//! author: Mattia Larentis: https://github.com/nostalgiaz
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54357,7 +54041,7 @@
 	}));
 
 /***/ },
-/* 233 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54365,7 +54049,7 @@
 	//! author : LI Long : https://github.com/baryon
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54426,7 +54110,7 @@
 	}));
 
 /***/ },
-/* 234 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54435,7 +54119,7 @@
 	//! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54513,7 +54197,7 @@
 	}));
 
 /***/ },
-/* 235 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54521,7 +54205,7 @@
 	//! author : Irakli Janiashvili : https://github.com/irakli-janiashvili
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54620,7 +54304,7 @@
 	}));
 
 /***/ },
-/* 236 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54628,7 +54312,7 @@
 	//! author : Kruy Vanna : https://github.com/kruyvanna
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54682,7 +54366,7 @@
 	}));
 
 /***/ },
-/* 237 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54694,7 +54378,7 @@
 	//! - Jeeeyul Lee <jeeeyul@gmail.com>
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54754,7 +54438,7 @@
 	}));
 
 /***/ },
-/* 238 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54762,7 +54446,7 @@
 	//! author : mweimerskirch : https://github.com/mweimerskirch, David Raison : https://github.com/kwisatz
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54892,7 +54576,7 @@
 	}));
 
 /***/ },
-/* 239 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54900,7 +54584,7 @@
 	//! author : Mindaugas Mozūras : https://github.com/mmozuras
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55021,7 +54705,7 @@
 	}));
 
 /***/ },
-/* 240 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55030,7 +54714,7 @@
 	//! author : Jānis Elmeris : https://github.com/JanisE
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55121,7 +54805,7 @@
 	}));
 
 /***/ },
-/* 241 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55129,7 +54813,7 @@
 	//! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55234,7 +54918,7 @@
 	}));
 
 /***/ },
-/* 242 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55242,7 +54926,7 @@
 	//! author : Borislav Mickov : https://github.com/B0k0
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55328,7 +55012,7 @@
 	}));
 
 /***/ },
-/* 243 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55336,7 +55020,7 @@
 	//! author : Floyd Pink : https://github.com/floydpink
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55403,7 +55087,7 @@
 	}));
 
 /***/ },
-/* 244 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55411,7 +55095,7 @@
 	//! author : Harshad Kale : https://github.com/kalehv
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55528,7 +55212,7 @@
 	}));
 
 /***/ },
-/* 245 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55536,7 +55220,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55614,7 +55298,7 @@
 	}));
 
 /***/ },
-/* 246 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55622,7 +55306,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55700,7 +55384,7 @@
 	}));
 
 /***/ },
-/* 247 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55708,7 +55392,7 @@
 	//! author : Squar team, mysquar.com
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55797,7 +55481,7 @@
 	}));
 
 /***/ },
-/* 248 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55806,7 +55490,7 @@
 	//!           Sigurd Gartmann : https://github.com/sigurdga
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55862,7 +55546,7 @@
 	}));
 
 /***/ },
-/* 249 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55870,7 +55554,7 @@
 	//! author : suvash : https://github.com/suvash
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55989,7 +55673,7 @@
 	}));
 
 /***/ },
-/* 250 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55997,7 +55681,7 @@
 	//! author : Joris Röling : https://github.com/jjupiter
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56064,7 +55748,7 @@
 	}));
 
 /***/ },
-/* 251 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56072,7 +55756,7 @@
 	//! author : https://github.com/mechuwind
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56128,7 +55812,7 @@
 	}));
 
 /***/ },
-/* 252 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56136,7 +55820,7 @@
 	//! author : Rafal Hirsz : https://github.com/evoL
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56237,7 +55921,7 @@
 	}));
 
 /***/ },
-/* 253 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56245,7 +55929,7 @@
 	//! author : Jefferson : https://github.com/jalex79
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56305,7 +55989,7 @@
 	}));
 
 /***/ },
-/* 254 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56313,7 +55997,7 @@
 	//! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56369,7 +56053,7 @@
 	}));
 
 /***/ },
-/* 255 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56378,7 +56062,7 @@
 	//! author : Valentin Agachi : https://github.com/avaly
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56447,7 +56131,7 @@
 	}));
 
 /***/ },
-/* 256 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56456,7 +56140,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56615,7 +56299,7 @@
 	}));
 
 /***/ },
-/* 257 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56623,7 +56307,7 @@
 	//! author : Sampath Sitinamaluwa : https://github.com/sampathsris
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56684,7 +56368,7 @@
 	}));
 
 /***/ },
-/* 258 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56693,7 +56377,7 @@
 	//! based on work of petrbela : https://github.com/petrbela
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56846,7 +56530,7 @@
 	}));
 
 /***/ },
-/* 259 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56854,7 +56538,7 @@
 	//! author : Robert Sedovšek : https://github.com/sedovsek
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57010,7 +56694,7 @@
 	}));
 
 /***/ },
-/* 260 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57020,7 +56704,7 @@
 	//! author : Oerd Cukalla : https://github.com/oerd (fixes)
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57083,7 +56767,7 @@
 	}));
 
 /***/ },
-/* 261 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57091,7 +56775,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57195,7 +56879,7 @@
 	}));
 
 /***/ },
-/* 262 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57203,7 +56887,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57307,7 +56991,7 @@
 	}));
 
 /***/ },
-/* 263 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57315,7 +56999,7 @@
 	//! author : Jens Alm : https://github.com/ulmus
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57378,7 +57062,7 @@
 	}));
 
 /***/ },
-/* 264 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57386,7 +57070,7 @@
 	//! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57477,7 +57161,7 @@
 	}));
 
 /***/ },
-/* 265 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57485,7 +57169,7 @@
 	//! author : Kridsada Thanabulpong : https://github.com/sirn
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57546,7 +57230,7 @@
 	}));
 
 /***/ },
-/* 266 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57554,7 +57238,7 @@
 	//! author : Dan Hagman
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57612,7 +57296,7 @@
 	}));
 
 /***/ },
-/* 267 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57621,7 +57305,7 @@
 	//!           Burak Yiğit Kaya: https://github.com/BYK
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57706,7 +57390,7 @@
 	}));
 
 /***/ },
-/* 268 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57714,7 +57398,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v with the help of Iustì Canun
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57795,7 +57479,7 @@
 	}));
 
 /***/ },
-/* 269 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57803,7 +57487,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57857,7 +57541,7 @@
 	}));
 
 /***/ },
-/* 270 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57865,7 +57549,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57919,7 +57603,7 @@
 	}));
 
 /***/ },
-/* 271 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57928,7 +57612,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -58076,7 +57760,7 @@
 	}));
 
 /***/ },
-/* 272 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58084,7 +57768,7 @@
 	//! author : Sardor Muminov : https://github.com/muminoff
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -58138,7 +57822,7 @@
 	}));
 
 /***/ },
-/* 273 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58146,7 +57830,7 @@
 	//! author : Bang Nguyen : https://github.com/bangnk
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -58208,7 +57892,7 @@
 	}));
 
 /***/ },
-/* 274 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58217,7 +57901,7 @@
 	//! author : Zeno Zeng : https://github.com/zenozeng
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -58339,7 +58023,7 @@
 	}));
 
 /***/ },
-/* 275 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58347,7 +58031,7 @@
 	//! author : Ben : https://github.com/ben-lin
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(189)) :
+	    true ? factory(__webpack_require__(186)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -58444,7 +58128,7 @@
 	}));
 
 /***/ },
-/* 276 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58461,15 +58145,15 @@
 	
 	var _reactAddons2 = _interopRequireDefault(_reactAddons);
 	
-	var _lodash = __webpack_require__(184);
+	var _lodash = __webpack_require__(183);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d3 = __webpack_require__(186);
+	var _d3 = __webpack_require__(185);
 	
 	var _d32 = _interopRequireDefault(_d3);
 	
-	var _utilJs = __webpack_require__(187);
+	var _utilJs = __webpack_require__(274);
 	
 	var PropTypes = _reactAddons2['default'].PropTypes;
 	
@@ -58594,7 +58278,46 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 277 */
+/* 274 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	exports.accessor = accessor;
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _react = __webpack_require__(275);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(183);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var PropTypes = _react2['default'].PropTypes;
+	var AccessorPropType = PropTypes.oneOfType(PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.func);
+	
+	exports.AccessorPropType = AccessorPropType;
+	
+	function accessor(key) {
+	    return _lodash2['default'].isFunction(key) ? key : // pass an accessor function...
+	    _lodash2['default'].isNull(key) || _lodash2['default'].isUndefined(key) ? _lodash2['default'].identity : // or null/undefined to just return the item itself...
+	    _lodash2['default'].property(key); // or an array index or object key
+	}
+
+/***/ },
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(35);
+
+
+/***/ },
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58609,21 +58332,21 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _react = __webpack_require__(183);
+	var _react = __webpack_require__(275);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(184);
+	var _lodash = __webpack_require__(183);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d3 = __webpack_require__(186);
+	var _d3 = __webpack_require__(185);
 	
 	var _d32 = _interopRequireDefault(_d3);
 	
-	var _utilJs = __webpack_require__(187);
+	var _utilJs = __webpack_require__(274);
 	
-	var _moment = __webpack_require__(189);
+	var _moment = __webpack_require__(186);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -58631,7 +58354,7 @@
 	
 	var _numeral2 = _interopRequireDefault(_numeral);
 	
-	var _jquery = __webpack_require__(278);
+	var _jquery = __webpack_require__(277);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
@@ -59074,7 +58797,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 278 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -68290,7 +68013,7 @@
 
 
 /***/ },
-/* 279 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68303,19 +68026,19 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _react = __webpack_require__(183);
+	var _react = __webpack_require__(275);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(184);
+	var _lodash = __webpack_require__(183);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d3 = __webpack_require__(186);
+	var _d3 = __webpack_require__(185);
 	
 	var _d32 = _interopRequireDefault(_d3);
 	
-	var _utilJs = __webpack_require__(187);
+	var _utilJs = __webpack_require__(274);
 	
 	var PropTypes = _react2['default'].PropTypes;
 	
@@ -68393,7 +68116,526 @@
 	module.exports = exports['default'];
 
 /***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	
+	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _react = __webpack_require__(275);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(183);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d3 = __webpack_require__(185);
+	
+	var _d32 = _interopRequireDefault(_d3);
+	
+	var _utilJs = __webpack_require__(274);
+	
+	// on the taxonomy of bar charts:
+	
+	// there are 3 types of bar charts,
+	// distinguished by whether the 2D data points they plot represent values or ranges
+	
+	// 1. Value-Value
+	// typical bar chart, plotting values that look like [[0,5], [1,3], ...]
+	// with bars that are centered horizontally on x-value and extend from 0 to y-value,
+	// (or centered vertically on their y-value and extend from 0 to the x-value, in the case of horizontal chart variant)
+	// eg. http://www.snapsurveys.com/wp-content/uploads/2012/10/bar_2d8.png
+	
+	// 2. Range-Value
+	// instead of a single value, one of the two data points represents a range of values
+	// usually the range is the independent variable and the value is the observation
+	// most commonly used in histogram, where each bar represents a bin (which is a range)
+	// data may look something like [[0, 5], 100], [[5, 15], 300], ...] or [{x: 0, xEnd: 5, y:100}...]
+	// often all bars are the same width, (same range sizes) but not necessarily
+	// bars still from extend from 0 to y-value,
+	// but the x-values of their sides, and therefore their width, is determined by the range
+	// (or vice versa in the case of horizontal variant)
+	// eg. http://labs.physics.dur.ac.uk/skills/skills/images/histogram4.jpg
+	
+	// 3. Value-Range
+	// like Range-Value, one of the two data points represents a range of values
+	// but generally the range is the dependent variable (ie. observation) instead of vice versa in #2
+	// bars are centered over their x-value as in #1,
+	// but their top & bottom y-values, and therefore their length, is determined by the range. they don't extend to 0.
+	// (or vice versa in the case of horizontal variant)
+	// eg. (horizontal) http://6.anychart.com/products/anychart/docs/users-guide/img/Samples/sample-range-bar-chart-y-datetime-axis.png
+	
+	// 4. Range-Range
+	// both of the data points represent ranges
+	// ie. data looks like [{x: 10, xEnd: 20, y: 12, yEnd: 40} ...]
+	// these are simply plotted as floating rectangles whose coordinates, length and width are all determined by the ranges
+	// there is no horizontal or vertical variant
+	// eg... can't find a good example
+	
+	// creating a BarChart component...
+	// x and y values are represented by getX and getY accessors passed in as props
+	// to represent a range instead of a single value, call with both getX and getXEnd (or getY and getYEnd),
+	// which will be the accessors for the start and end values of the range
+	// to represent horizontal vs. vertical variant, pass in orientation="horizontal" or orientation="vertical"
+	
+	// so to create the types described above:
+	// 1. Value-Value - only pass in getX and getY, + orientation
+	// 2. Range-Value
+	//   a. pass in getX, getXEnd and getY with orientation="vertical"
+	//   b. or getX, getY and getYEnd with orientation="horizontal"
+	// 3. Value-Range
+	//   a. pass in getX, getY and getYEnd with orientation="vertical"
+	//   b. or getX, getXEnd and getY with orientation="horizontal"
+	// 4. Range-Range - pass in all of getX, getXEnd, getY and getYEnd. no need for orientation.
+	
+	//const BAR_CHART_TYPES = {
+	//    VALUE_VALUE: 'VALUE_VALUE',
+	//    RANGE_VALUE: 'RANGE_VALUE',
+	//    VALUE_RANGE: 'VALUE_RANGE',
+	//    RANGE_RANGE: 'RANGE_RANGE',
+	//};
+	
+	var PropTypes = _react2['default'].PropTypes;
+	function getBarChartType(props) {
+	    var getXEnd = props.getXEnd;
+	    var getYEnd = props.getYEnd;
+	    var orientation = props.orientation;
+	
+	    var isVertical = orientation === 'vertical';
+	    return _lodash2['default'].isUndefined(getXEnd) && _lodash2['default'].isUndefined(getYEnd) ? 'ValueValue' : _lodash2['default'].isUndefined(getYEnd) && isVertical || _lodash2['default'].isUndefined(getXEnd) && !isVertical ? 'RangeValue' : _lodash2['default'].isUndefined(getXEnd) && isVertical || _lodash2['default'].isUndefined(getYEnd) && !isVertical ? 'ValueRange' : 'RangeRange';
+	}
+	
+	function barZeroValue(data, dAccessor, axisType) {
+	    switch (axisType) {
+	        // number bars go from zero to value
+	        case 'number':
+	            return 0;
+	        // time values need a "zero" value to stretch from - the first date minus one day
+	        // todo make this less arbitrary? should be a rare case anyway.
+	        case 'time':
+	            return _d32['default'].extent(data, dAccessor)[0] - 24 * 60 * 60 * 1000;
+	        // ordinal values need a "zero" value to stretch from -
+	        // empty string since it's unlikely to be used in real data and won't show a label
+	        case 'ordinal':
+	            return '';
+	    }
+	}
+	
+	function valueAxisDomain(data, dAccessor, axisType) {
+	    switch (axisType) {
+	        case 'number':
+	        case 'time':
+	            return _d32['default'].extent(_d32['default'].extent(data, dAccessor).concat(barZeroValue(data, dAccessor, axisType)));
+	        case 'ordinal':
+	            return _lodash2['default'].uniq([barZeroValue(data, dAccessor, axisType)].concat(data.map((0, _utilJs.accessor)(dAccessor))));
+	    }
+	    return null;
+	}
+	
+	function rangeAxisDomain(data, rangeStartAccessor, rangeEndAccessor, scaleType) {
+	    switch (scaleType) {
+	        case 'number':
+	        case 'time':
+	            return _d32['default'].extent(_lodash2['default'].flatten([_d32['default'].extent(data, function (d) {
+	                return +rangeStartAccessor(d);
+	            }), _d32['default'].extent(data, function (d) {
+	                return +rangeEndAccessor(d);
+	            })]));
+	        case 'ordinal':
+	            return _lodash2['default'].uniq(_lodash2['default'].flatten([data.map(rangeStartAccessor), data.map(rangeEndAccessor)]));
+	    }
+	    return [];
+	}
+	
+	var BarChart = _react2['default'].createClass({
+	    displayName: 'BarChart',
+	
+	    propTypes: {
+	        // the array of data objects
+	        data: PropTypes.array.isRequired,
+	        // accessor for X & Y coordinates
+	        getX: _utilJs.AccessorPropType,
+	        getY: _utilJs.AccessorPropType,
+	
+	        // x & y scale types
+	        xType: PropTypes.oneOf(['number', 'time', 'ordinal']),
+	        yType: PropTypes.oneOf(['number', 'time', 'ordinal']),
+	
+	        orientation: PropTypes.oneOf(['vertical', 'horizontal']),
+	
+	        xScale: PropTypes.func,
+	        yScale: PropTypes.func
+	    },
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            orientation: 'vertical'
+	        };
+	    },
+	
+	    statics: {
+	        getOptions: function getOptions(props, xType, yType) {},
+	        getDomain: function getDomain(props, xType, yType) {
+	            var data = props.data;
+	            var getX = props.getX;
+	            var getY = props.getY;
+	            var getXEnd = props.getXEnd;
+	            var getYEnd = props.getYEnd;
+	            var orientation = props.orientation;
+	            var xAccessor = (0, _utilJs.accessor)(getX);
+	            var yAccessor = (0, _utilJs.accessor)(getY);
+	
+	            var barType = getBarChartType(props);
+	            var isVertical = orientation === 'vertical';
+	
+	            var accessors = { x: xAccessor, y: yAccessor };
+	            var rangeEndAccessors = { x: (0, _utilJs.accessor)(getXEnd), y: (0, _utilJs.accessor)(getYEnd) };
+	            var axisTypes = { x: xType, y: yType };
+	            var domains = { x: null, y: null };
+	
+	            if (barType === 'ValueValue') {
+	                var valueAxis = isVertical ? 'y' : 'x'; // the axis along which the bar's length shows value
+	                domains[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
+	            } else if (barType === 'RangeValue') {
+	                var valueAxis = isVertical ? 'y' : 'x'; // the axis along which the bar's length shows value
+	                var rangeAxis = isVertical ? 'x' : 'y';
+	                domains[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
+	                domains[rangeAxis] = rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisTypes[rangeAxis]);
+	                //console.log(barType, domains, props.data);
+	            }
+	            return domains;
+	        }
+	    },
+	    getHovered: function getHovered() {},
+	
+	    render: function render() {
+	        var renderer = this['render' + getBarChartType(this.props) + 'Bars'];
+	        return _react2['default'].createElement(
+	            'g',
+	            { className: 'bar-chart' },
+	            renderer()
+	        );
+	    },
+	    renderValueValueBars: function renderValueValueBars() {
+	        var _this = this;
+	
+	        var _props = this.props;
+	
+	        //const isHorizontal = this.props.orientation === 'bar';
+	        //const barThickness = this.state.barScale.rangeBand();
+	        // todo handle barthickness in props/auto width
+	        var data = _props.data;
+	        var xScale = _props.xScale;
+	        var yScale = _props.yScale;
+	        var getX = _props.getX;
+	        var getY = _props.getY;
+	        var xType = _props.xType;
+	        var yType = _props.yType;
+	        var barThickness = 10;
+	
+	        var xAccessor = (0, _utilJs.accessor)(getX);
+	        var yAccessor = (0, _utilJs.accessor)(getY);
+	
+	        return this.props.orientation === 'vertical' ? _react2['default'].createElement(
+	            'g',
+	            null,
+	            this.props.data.map(function (d, i) {
+	                var barZero = barZeroValue(data, yAccessor, yType);
+	                var yVal = yAccessor(d);
+	                var barLength = Math.abs(yScale(barZero) - yScale(yVal));
+	                var barY = yVal >= 0 || yType === 'ordinal' ? yScale(barZero) - barLength : yScale(barZero);
+	
+	                return _react2['default'].createElement('rect', {
+	                    className: 'chart-bar chart-bar-vertical',
+	                    x: _this.props.xScale(xAccessor(d)) - barThickness / 2,
+	                    y: barY,
+	                    width: barThickness,
+	                    height: barLength
+	                });
+	            })
+	        ) : _react2['default'].createElement(
+	            'g',
+	            null,
+	            this.props.data.map(function (d, i) {
+	                var barZero = barZeroValue(data, xAccessor, xType);
+	                var xVal = xAccessor(d);
+	                var barLength = Math.abs(xScale(barZero) - xScale(xVal));
+	                var barX = xVal >= 0 || xType === 'ordinal' ? xScale(barZero) : xScale(barZero) - barLength;
+	
+	                return _react2['default'].createElement('rect', {
+	                    className: 'chart-bar chart-bar-vertical',
+	                    x: barX,
+	                    y: _this.props.yScale(yAccessor(d)) - barThickness / 2,
+	                    width: barLength,
+	                    height: barThickness
+	                });
+	            })
+	        );
+	    },
+	    renderRangeValueBars: function renderRangeValueBars() {
+	        var _props2 = this.props;
+	        var data = _props2.data;
+	        var xScale = _props2.xScale;
+	        var yScale = _props2.yScale;
+	        var getX = _props2.getX;
+	        var getY = _props2.getY;
+	        var getXEnd = _props2.getXEnd;
+	        var getYEnd = _props2.getYEnd;
+	        var xType = _props2.xType;
+	        var yType = _props2.yType;
+	
+	        var _$map = _lodash2['default'].map([getX, getXEnd, getY, getYEnd], _utilJs.accessor);
+	
+	        var _$map2 = _slicedToArray(_$map, 4);
+	
+	        var xAccessor = _$map2[0];
+	        var xEndAccessor = _$map2[1];
+	        var yAccessor = _$map2[2];
+	        var yEndAccessor = _$map2[3];
+	
+	        return this.props.orientation === 'vertical' ? _react2['default'].createElement(
+	            'g',
+	            null,
+	            this.props.data.map(function (d, i) {
+	                var barZero = barZeroValue(data, yAccessor, yType);
+	                var yVal = yAccessor(d);
+	                var barLength = Math.abs(yScale(barZero) - yScale(yVal));
+	                var barY = yVal >= 0 || yType === 'ordinal' ? yScale(barZero) - barLength : yScale(barZero);
+	                var barX = Math.round(xScale(xAccessor(d)));
+	                var barThickness = Math.round(xScale(xEndAccessor(d))) - barX;
+	
+	                return _react2['default'].createElement('rect', {
+	                    className: 'chart-bar chart-bar-vertical',
+	                    x: barX,
+	                    y: barY,
+	                    width: barThickness,
+	                    height: barLength
+	                });
+	            })
+	        ) : _react2['default'].createElement(
+	            'g',
+	            null,
+	            this.props.data.map(function (d, i) {
+	                var barZero = barZeroValue(data, xAccessor, xType);
+	                var xVal = xAccessor(d);
+	                var barLength = Math.abs(xScale(barZero) - xScale(xVal));
+	                var barX = xVal >= 0 || xType === 'ordinal' ? xScale(barZero) : xScale(barZero) - barLength;
+	
+	                var barY = Math.round(yScale(yEndAccessor(d)));
+	                var barThickness = Math.round(yScale(yAccessor(d))) - barY;
+	
+	                return _react2['default'].createElement('rect', {
+	                    className: 'chart-bar chart-bar-vertical',
+	                    x: barX,
+	                    y: barY,
+	                    width: barLength,
+	                    height: barThickness
+	                });
+	            })
+	        );
+	    },
+	    renderValueRangeBars: function renderValueRangeBars() {
+	        return renderNotImplemented();
+	    },
+	    renderRangeRangeBars: function renderRangeRangeBars() {
+	        return renderNotImplemented();
+	    }
+	});
+	
+	function renderNotImplemented() {
+	    var text = arguments.length <= 0 || arguments[0] === undefined ? "not implemented yet" : arguments[0];
+	
+	    return _react2['default'].createElement(
+	        'svg',
+	        { x: 100, y: 100, style: { overflow: 'visible' } },
+	        _react2['default'].createElement(
+	            'text',
+	            null,
+	            text
+	        )
+	    );
+	}
+	
+	exports['default'] = BarChart;
+	module.exports = exports['default'];
+
+/***/ },
 /* 280 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var _react = __webpack_require__(275);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(183);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d3 = __webpack_require__(185);
+	
+	var _d32 = _interopRequireDefault(_d3);
+	
+	var _utilJs = __webpack_require__(274);
+	
+	// BarTickChart is like a bar chart,
+	// except that it just draws a line at the data value, rather than a full bar
+	// If the independent variable is a range, the length of the line will represent that range
+	// Otherwise all lines will be the same length.
+	// The dependent variable must be a single value, not a range.
+	
+	var PropTypes = _react2['default'].PropTypes;
+	function getTickType(props) {
+	    var getXEnd = props.getXEnd;
+	    var getYEnd = props.getYEnd;
+	    var orientation = props.orientation;
+	
+	    var isVertical = orientation === 'vertical';
+	    // warn if a range is passed for the dependent variable, which is expected to be a value
+	    if (isVertical && !_lodash2['default'].isUndefined(getYEnd) || !isVertical && !_lodash2['default'].isUndefined(getXEnd)) console.warn("Warning: BarTickChart can only show the independent variable as a range, not the dependent variable.");
+	
+	    if (isVertical && !_lodash2['default'].isUndefined(getXEnd) || !isVertical && !_lodash2['default'].isUndefined(getYEnd)) return "RangeValue";
+	    return "ValueValue";
+	}
+	
+	function rangeAxisDomain(data, rangeStartAccessor, rangeEndAccessor, scaleType) {
+	    switch (scaleType) {
+	        case 'number':
+	        case 'time':
+	            return _d32['default'].extent(_lodash2['default'].flatten([_d32['default'].extent(data, function (d) {
+	                return +rangeStartAccessor(d);
+	            }), _d32['default'].extent(data, function (d) {
+	                return +rangeEndAccessor(d);
+	            })]));
+	        case 'ordinal':
+	            return _lodash2['default'].uniq(_lodash2['default'].flatten([data.map(rangeStartAccessor), data.map(rangeEndAccessor)]));
+	    }
+	    return [];
+	}
+	
+	var MarkerLineChart = _react2['default'].createClass({
+	    displayName: 'MarkerLineChart',
+	
+	    propTypes: {
+	        // the array of data objects
+	        data: PropTypes.array.isRequired,
+	        // accessor for X & Y coordinates
+	        getX: _utilJs.AccessorPropType,
+	        getY: _utilJs.AccessorPropType,
+	
+	        orientation: PropTypes.oneOf(['vertical', 'horizontal']),
+	        lineLength: PropTypes.number,
+	
+	        // x & y scale types
+	        xType: PropTypes.oneOf(['number', 'time', 'ordinal']),
+	        yType: PropTypes.oneOf(['number', 'time', 'ordinal']),
+	        xScale: PropTypes.func,
+	        yScale: PropTypes.func
+	    },
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            orientation: 'vertical',
+	            lineLength: 10
+	        };
+	    },
+	    statics: {
+	        getDomain: function getDomain(props, xType, yType) {
+	            var data = props.data;
+	            var getX = props.getX;
+	            var getY = props.getY;
+	            var getXEnd = props.getXEnd;
+	            var getYEnd = props.getYEnd;
+	            var orientation = props.orientation;
+	
+	            var tickType = getTickType(props);
+	            var isVertical = orientation === 'vertical';
+	            var accessors = { x: (0, _utilJs.accessor)(getX), y: (0, _utilJs.accessor)(getY) };
+	            var rangeEndAccessors = { x: (0, _utilJs.accessor)(getXEnd), y: (0, _utilJs.accessor)(getYEnd) };
+	            var axisTypes = { x: xType, y: yType };
+	            var domains = { x: null, y: null };
+	
+	            if (tickType === 'RangeValue') {
+	                var rangeAxis = isVertical ? 'x' : 'y';
+	                domains[rangeAxis] = rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisTypes[rangeAxis]);
+	            }
+	            // value axis/axes use default domain
+	
+	            return domains;
+	        }
+	    },
+	    render: function render() {
+	        var tickType = getTickType(this.props);
+	        return _react2['default'].createElement(
+	            'g',
+	            { className: 'bar-tick-chart' },
+	            tickType === 'RangeValue' ? this.props.data.map(this.renderRangeValueLine) : this.props.data.map(this.renderValueValueLine)
+	        );
+	    },
+	    renderRangeValueLine: function renderRangeValueLine(d) {
+	        var _props = this.props;
+	        var getX = _props.getX;
+	        var getY = _props.getY;
+	        var getXEnd = _props.getXEnd;
+	        var getYEnd = _props.getYEnd;
+	        var orientation = _props.orientation;
+	        var xScale = _props.xScale;
+	        var yScale = _props.yScale;
+	
+	        var isVertical = orientation === 'vertical';
+	        var xVal = xScale((0, _utilJs.accessor)(getX)(d));
+	        var yVal = yScale((0, _utilJs.accessor)(getY)(d));
+	        var xEndVal = _lodash2['default'].isUndefined(getXEnd) ? 0 : xScale((0, _utilJs.accessor)(getXEnd)(d));
+	        var yEndVal = _lodash2['default'].isUndefined(getYEnd) ? 0 : yScale((0, _utilJs.accessor)(getYEnd)(d));
+	        var x1 = xVal;
+	        var y1 = yVal;
+	
+	        var x2 = isVertical ? xEndVal : xVal;
+	        var y2 = isVertical ? yVal : yEndVal;
+	
+	        return _react2['default'].createElement('line', _extends({ className: 'bar-tick-line' }, { x1: x1, x2: x2, y1: y1, y2: y2 }));
+	    },
+	    renderValueValueLine: function renderValueValueLine(d) {
+	        var _props2 = this.props;
+	        var getX = _props2.getX;
+	        var getY = _props2.getY;
+	        var orientation = _props2.orientation;
+	        var lineLength = _props2.lineLength;
+	        var xScale = _props2.xScale;
+	        var yScale = _props2.yScale;
+	
+	        var isVertical = orientation === 'vertical';
+	        var xVal = xScale((0, _utilJs.accessor)(getX)(d));
+	        var yVal = yScale((0, _utilJs.accessor)(getY)(d));
+	        var x1 = isVertical ? xVal - lineLength / 2 : xVal;
+	        var x2 = isVertical ? xVal + lineLength / 2 : xVal;
+	        var y1 = isVertical ? yVal : yVal - lineLength / 2;
+	        var y2 = isVertical ? yVal : yVal + lineLength / 2;
+	
+	        return _react2['default'].createElement('line', _extends({ className: 'bar-tick-line' }, { x1: x1, x2: x2, y1: y1, y2: y2 }));
+	    }
+	});
+	
+	exports['default'] = MarkerLineChart;
+	module.exports = exports['default'];
+
+/***/ },
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68404,19 +68646,19 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _react = __webpack_require__(183);
+	var _react = __webpack_require__(275);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(184);
+	var _lodash = __webpack_require__(183);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d3 = __webpack_require__(186);
+	var _d3 = __webpack_require__(185);
 	
 	var _d32 = _interopRequireDefault(_d3);
 	
-	var _utilJs = __webpack_require__(187);
+	var _utilJs = __webpack_require__(274);
 	
 	var PropTypes = _react2['default'].PropTypes;
 	
@@ -68501,7 +68743,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 281 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68514,23 +68756,23 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _react = __webpack_require__(183);
+	var _react = __webpack_require__(275);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(184);
+	var _lodash = __webpack_require__(183);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d3 = __webpack_require__(186);
+	var _d3 = __webpack_require__(185);
 	
 	var _d32 = _interopRequireDefault(_d3);
 	
-	var _BarChartJs = __webpack_require__(182);
+	var _BarChartJs = __webpack_require__(279);
 	
 	var _BarChartJs2 = _interopRequireDefault(_BarChartJs);
 	
-	var _utilJs = __webpack_require__(187);
+	var _utilJs = __webpack_require__(274);
 	
 	var PropTypes = _react2['default'].PropTypes;
 	
@@ -68602,7 +68844,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 282 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68615,25 +68857,25 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _react = __webpack_require__(183);
+	var _react = __webpack_require__(275);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(184);
+	var _lodash = __webpack_require__(183);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d3 = __webpack_require__(186);
+	var _d3 = __webpack_require__(185);
 	
 	var _d32 = _interopRequireDefault(_d3);
 	
-	var _utilJs = __webpack_require__(187);
+	var _utilJs = __webpack_require__(274);
 	
-	var _BarChartJs = __webpack_require__(182);
+	var _BarChartJs = __webpack_require__(279);
 	
 	var _BarChartJs2 = _interopRequireDefault(_BarChartJs);
 	
-	var _LineChartJs = __webpack_require__(279);
+	var _LineChartJs = __webpack_require__(278);
 	
 	var _LineChartJs2 = _interopRequireDefault(_LineChartJs);
 	
@@ -68743,7 +68985,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 283 */
+/* 284 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -70946,7 +71188,7 @@
 	]
 
 /***/ },
-/* 284 */
+/* 285 */
 /***/ function(module, exports) {
 
 	module.exports = [
@@ -71065,7 +71307,7 @@
 	]
 
 /***/ },
-/* 285 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71078,7 +71320,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _lodash = __webpack_require__(184);
+	var _lodash = __webpack_require__(183);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	

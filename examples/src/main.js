@@ -12,6 +12,7 @@ import {
     XYPlot,
     LineChart,
     BarChart,
+    MarkerLineChart,
     ScatterPlot,
     Histogram,
     KernelDensityEstimation
@@ -74,7 +75,12 @@ const variableBins = _.range(0,12).reduce((bins, i) => {
 }, []);
 
 const rangeValueData = {
-    numberNumber: _.zip(variableBins, randomWalk(variableBins.length, 50, 20))
+    numberNumber: _.zip(variableBins, randomWalk(variableBins.length, 10000, 10000))
+};
+
+const barTickData = {
+    numberNumber: randomBarData2.numberNumber.map(d => [d[0], d[1] + _.random(-5000, 5000)]),
+    numberRangeNumber: rangeValueData.numberNumber.map(d => [d[0], d[1] + _.random(-5000, 5000)]),
 };
 //console.log('rangeValue', rangeValueData);
 
@@ -430,6 +436,44 @@ const App = React.createClass({
             <div>
                 <XYPlot width={400} height={300}>
                     <BarChart data={randomBarData2.numberNumber} getX={0} getY={1} />
+                    <MarkerLineChart data={barTickData.numberNumber} getX={0} getY={1} lineLength={15} />
+                </XYPlot>
+                <XYPlot width={400} height={300}>
+                    <BarChart data={randomBarData2.numberNumber} getX={1} getY={0} orientation="horizontal" />
+                    <MarkerLineChart data={barTickData.numberNumber} getX={1} getY={0} lineLength={15} orientation="horizontal" />
+                </XYPlot>
+            </div>
+
+            <div>
+                <XYPlot width={400} height={300}>
+                    <BarChart
+                        data={rangeValueData.numberNumber}
+                        getX={d => d[0][0]}
+                        getXEnd={d => d[0][1]}
+                        getY={1}
+                        />
+                    <MarkerLineChart
+                        data={barTickData.numberRangeNumber}
+                        getX={d => d[0][0]}
+                        getXEnd={d => d[0][1]}
+                        getY={1}
+                        />
+                </XYPlot>
+                <XYPlot width={400} height={300}>
+                    <BarChart
+                        data={rangeValueData.numberNumber}
+                        orientation="horizontal"
+                        getX={1}
+                        getY={d => d[0][0]}
+                        getYEnd={d => d[0][1]}
+                        />
+                    <MarkerLineChart
+                        data={barTickData.numberRangeNumber}
+                        orientation="horizontal"
+                        getX={1}
+                        getY={d => d[0][0]}
+                        getYEnd={d => d[0][1]}
+                        />
                 </XYPlot>
             </div>
 
