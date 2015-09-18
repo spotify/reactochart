@@ -81,7 +81,7 @@ const MarkerLineChart = React.createClass({
     },
     render() {
         const tickType = getTickType(this.props);
-        return <g className="bar-tick-chart">
+        return <g className="marker-line-chart">
             {tickType === 'RangeValue' ?
                 this.props.data.map(this.renderRangeValueLine) :
                 this.props.data.map(this.renderValueValueLine)
@@ -99,7 +99,7 @@ const MarkerLineChart = React.createClass({
         const x2 = isVertical ? xEndVal : xVal;
         const y2 = isVertical ? yVal : yEndVal;
 
-        return <line className="bar-tick-line" {...{x1, x2, y1, y2}}></line>
+        return <line className="marker-line" {...{x1, x2, y1, y2}}></line>
     },
     renderValueValueLine(d) {
         const {getX, getY, orientation, lineLength, xScale, yScale} = this.props;
@@ -111,7 +111,7 @@ const MarkerLineChart = React.createClass({
         const y1 = isVertical ? yVal : yVal - (lineLength / 2);
         const y2 = isVertical ? yVal : yVal + (lineLength / 2);
 
-        return <line className="bar-tick-line" {...{x1, x2, y1, y2}} />;
+        return <line className="marker-line" {...{x1, x2, y1, y2}} />;
     }
 });
 

@@ -68583,7 +68583,7 @@
 	        var tickType = getTickType(this.props);
 	        return _react2['default'].createElement(
 	            'g',
-	            { className: 'bar-tick-chart' },
+	            { className: 'marker-line-chart' },
 	            tickType === 'RangeValue' ? this.props.data.map(this.renderRangeValueLine) : this.props.data.map(this.renderValueValueLine)
 	        );
 	    },
@@ -68608,7 +68608,7 @@
 	        var x2 = isVertical ? xEndVal : xVal;
 	        var y2 = isVertical ? yVal : yEndVal;
 	
-	        return _react2['default'].createElement('line', _extends({ className: 'bar-tick-line' }, { x1: x1, x2: x2, y1: y1, y2: y2 }));
+	        return _react2['default'].createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2 }));
 	    },
 	    renderValueValueLine: function renderValueValueLine(d) {
 	        var _props2 = this.props;
@@ -68627,7 +68627,7 @@
 	        var y1 = isVertical ? yVal : yVal - lineLength / 2;
 	        var y2 = isVertical ? yVal : yVal + lineLength / 2;
 	
-	        return _react2['default'].createElement('line', _extends({ className: 'bar-tick-line' }, { x1: x1, x2: x2, y1: y1, y2: y2 }));
+	        return _react2['default'].createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2 }));
 	    }
 	});
 	
