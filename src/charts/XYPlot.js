@@ -127,7 +127,7 @@ const XYPlot = React.createClass({
         this.initScale(this.props);
     },
     componentWillReceiveProps(newProps) {
-        this.initLabelFormats(this.props);
+        this.initLabelFormats(newProps);
         this.initDomains(newProps);
         this.initScale(newProps);
     },
