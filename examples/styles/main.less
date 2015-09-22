@@ -36,8 +36,8 @@ body {
 }
 
 .line-chart, .xy-plot {
-  background: #f0f0f0;
-  //background: lightblue;
+  //background: #f0f0f0;
+  background: lightblue;
 
   * {
     user-select: none;
@@ -58,17 +58,22 @@ body {
   .chart-grid {
     stroke: #ccc;
   }
-  .chart-axis-label {
+  .chart-axis-value-label {
     font-size: 8pt;
   }
-  .chart-axis-label-x {
+  .chart-axis-value-label-x {
     text-anchor: middle;
   }
-  .chart-axis-label-y {
+  .chart-axis-value-label-y {
     text-anchor: end;
   }
   .chart-selected-range {
     fill: #eeeef6;
+  }
+
+  .chart-axis-label {
+    font-size: 16pt;
+    font-weight: bold;
   }
 }
 

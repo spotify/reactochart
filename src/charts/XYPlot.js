@@ -8,7 +8,9 @@ import numeral from 'numeral';
 import $ from 'jquery';
 
 const DEFAULTS = {
-    margin: {top: null, bottom: null, left: null, right: null}
+    margin: {top: null, bottom: null, left: null, right: null},
+    xAxisLabelAlign: {horizontal: 'left', vertical: 'top'},
+    yAxisLabelAlign: {horizontal: 'right', vertical: 'top'}
 };
 
 const XYPlot = React.createClass({
@@ -66,6 +68,20 @@ const XYPlot = React.createClass({
         // todo: niceX, niceY
         // todo: xAxisLabel, yAxisLabel
 
+        xAxisLabel: PropTypes.string,
+        xAxisLabelAlign: PropTypes.shape({
+            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
+            vertical: PropTypes.oneOf(['top', 'bottom'])
+        }),
+        xAxisLabelPadding: PropTypes.number,
+
+        yAxisLabel: PropTypes.string,
+        yAxisLabelAlign: PropTypes.shape({
+            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
+            vertical: PropTypes.oneOf(['top', 'bottom'])
+        }),
+        yAxisLabelPadding: PropTypes.number,
+
         // todo more interaction?
         onMouseMove: PropTypes.func
     },
@@ -92,6 +108,12 @@ const XYPlot = React.createClass({
             showYZero: true,
             xLabelFormat: null,
             yLabelFormat: null,
+            xAxisLabel: null,
+            xAxisLabelAlign: DEFAULTS.xAxisLabelAlign,
+            xAxisLabelPadding: 10,
+            yAxisLabel: null,
+            yAxisLabelAlign: DEFAULTS.yAxisLabelAlign,
+            yAxisLabelPadding: 10,
             onMouseMove: _.noop
         }
     },
@@ -154,18 +176,22 @@ const XYPlot = React.createClass({
         // create the X and Y scales shared by charts
         // calculate the inner width and height based on margins
         // todo get padding too
-        const {width, height, xType, yType, xTickCount, yTickCount, labelPadding, tickLength, showXTicks, showYTicks} = props;
+        const {
+            width, height, xType, yType, xTickCount, yTickCount,
+            xAxisLabel, xAxisLabelPadding, yAxisLabel, yAxisLabelPadding,
+            labelPadding, tickLength, showXTicks, showYTicks
+        } = props;
         const {xLabelFormat, yLabelFormat} = this;
-        this.margin = _.defaults(this.props.margin, DEFAULTS.margin);
+        const origMargin = _.defaults(this.props.margin, DEFAULTS.margin);
 
-        const shouldMeasureLabels = _.any(this.margin, _.isNull);
+        const shouldMeasureLabels = _.any(origMargin, _.isNull);
         if(shouldMeasureLabels) {
             let isDone = false;
             // start with a margin of 10 pixels for all unknown margins
-            let margin = _.transform(this.margin, (result, m, key) => result[key] = _.isNull(m) ? 10 : m);
+            let margin = _.transform(origMargin, (result, m, key) => result[key] = _.isNull(m) ? 10 : m);
             // make scales using margin, measure labels, make new margins
             // repeat until we converge on a margin that works
-            let innerWidth, innerHeight, xScale, yScale;
+            let innerWidth, innerHeight, xScale, yScale, labelBoxes;
             while(!isDone) {
                 innerWidth = width - (margin.left + margin.right);
                 innerHeight = height - (margin.top + margin.bottom);
@@ -175,21 +201,56 @@ const XYPlot = React.createClass({
                 const yTicks = (yType === 'ordinal') ? yScale.domain() : yScale.ticks(yTickCount);
                 if(xType !== 'ordinal') xScale.nice(xTicks.length);
                 if(yType !== 'ordinal') yScale.nice(yTicks.length);
-                const labelBoxes = measureAxisLabels(xTicks, yTicks, xType, yType, xLabelFormat, yLabelFormat);
-                //console.log(xTicks, yTicks);
-                //console.log(labelBoxes);
+                //const labelBoxes = measureAxisLabels(xTicks, yTicks, xType, yType, xLabelFormat, yLabelFormat);
+
+                const xAxisLabelProps = xAxisLabel ? {letter: 'x', label: xAxisLabel} : null;
+
+                labelBoxes = measureAxisLabels(
+                    this.getXAxisProps({innerWidth, innerHeight, scale: xScale}),
+                    this.getYAxisProps({innerWidth, innerHeight, scale: yScale}),
+                    xAxisLabel ? this.getXAxisLabelProps({margin}) : null,
+                    yAxisLabel ? this.getYAxisLabelProps({margin}) : null
+                );
+
+                // todo: modify to handle all possible label alignments
+                // todo: handle case of labels not shown (ie if !this.props.showYLabels)
+                const topYValOverhang = Math.ceil(_.last(labelBoxes.yVal).height / 2);
+                const xAxisLabelOuterHeight = xAxisLabel && labelBoxes.xAxis ?
+                    Math.ceil(labelBoxes.xAxis.height + xAxisLabelPadding) : 0;
+                const yAxisLabelOuterHeight = yAxisLabel && labelBoxes.yAxis ?
+                    Math.ceil(labelBoxes.yAxis.height + yAxisLabelPadding) : 0;
+
+                const topMargin = _.isNull(origMargin.top) ?
+                    Math.max(topYValOverhang, xAxisLabelOuterHeight, yAxisLabelOuterHeight) : origMargin.top;
+
+                const yTickAndPadSpace = labelPadding + (showYTicks ? tickLength : 0);
+
+                const maxYValWidth = Math.ceil(d3.max(labelBoxes.yVal, accessor('width')) + yTickAndPadSpace);
+                const yAxisLabelOuterWidth = yAxisLabel && labelBoxes.yAxis ?
+                    Math.ceil(labelBoxes.yAxis.width) + yTickAndPadSpace : 0;
+                //console.log(maxYValWidth, yAxisLabelOuterWidth);
+
+                const leftMargin =  _.isNull(origMargin.left) ?
+                    Math.max(maxYValWidth, yAxisLabelOuterWidth) : origMargin.left;
+
                 let newMargin = {
-                    top: Math.ceil(_.last(labelBoxes.y).height / 2),
-                    right: Math.ceil(_.last(labelBoxes.x).width / 2),
-                    left: Math.ceil(d3.max(labelBoxes.y, accessor('width')) + labelPadding + (showYTicks ? tickLength : 0)),
-                    bottom: Math.ceil(d3.max(labelBoxes.x, accessor('height')) + labelPadding + (showXTicks ? tickLength : 0))
+                    top: topMargin,
+                    right: _.isNull(origMargin.right) ?
+                        Math.ceil(_.last(labelBoxes.xVal).width / 2)
+                        : origMargin.right,
+                    left: leftMargin,
+                    bottom: _.isNull(origMargin.bottom) ?
+                        Math.ceil(d3.max(labelBoxes.xVal, accessor('height')) + labelPadding + (showXTicks ? tickLength : 0))
+                        : origMargin.bottom
                 };
                 isDone = _.all(_.keys(margin), k => margin[k] === newMargin[k]);
                 //console.log('calculated margin', newMargin);
                 //console.log(xScale.domain(), yScale.domain());
                 margin = newMargin;
+                innerWidth = width - (margin.left + margin.right);
+                innerHeight = height - (margin.top + margin.bottom);
             }
-            _.assign(this, {margin, innerWidth, innerHeight, xScale, yScale});
+            _.assign(this, {margin, innerWidth, innerHeight, xScale, yScale, labelBoxes});
         } else {
             // margins are all pre-defined, just make the scales
             const innerWidth = width - (props.margin.left + props.margin.right);
@@ -214,7 +275,7 @@ const XYPlot = React.createClass({
     },
 
     render() {
-        const {width, height, xType, yType} = this.props;
+        const {width, height, xType, yType, xAxisLabel, yAxisLabel} = this.props;
         const {margin, xScale, yScale, innerWidth, innerHeight} = this;
         return (
             <svg className="xy-plot" {...{width, height}}
@@ -223,8 +284,8 @@ const XYPlot = React.createClass({
                 <g className="chart-inner"
                    transform={`translate(${margin.left}, ${margin.top})`}
                 >
-                    {this.renderXAxis()}
-                    {this.renderYAxis()}
+                    <ChartAxis {...this.getXAxisProps()} />
+                    <ChartAxis {...this.getYAxisProps()} />
 
                     {React.Children.map(this.props.children, (child, i) => {
                         if(!child) return null;
@@ -234,45 +295,219 @@ const XYPlot = React.createClass({
                         );
                     })}
                 </g>
+
+                {xAxisLabel ?
+                    <XAxisLabel {...this.getXAxisLabelProps()} />
+                    : null
+                }
+                {yAxisLabel ?
+                    <YAxisLabel {...this.getYAxisLabelProps()} />
+                    : null
+                }
             </svg>
         );
     },
 
-    renderXAxis() {
-        return this.renderAxis({
+    getXAxisProps(options={}) {
+        const innerHeight = options.innerHeight || this.innerHeight;
+        return this.getAxisProps(_.assign({
             letter: 'x',
             orientation: 'horizontal',
-            axisTransform: `translate(0, ${this.innerHeight})`
-        });
+            axisTransform: `translate(0, ${innerHeight})`
+        }, options));
     },
-    renderYAxis() {
-        return this.renderAxis({
+    getYAxisProps(options={}) {
+        return this.getAxisProps(_.assign({
             letter: 'y',
             orientation: 'vertical'
-        });
+        }, options));
     },
-    renderAxis(options) {
+    getAxisProps(options) {
         const {letter, orientation, axisTransform} = options;
         const upperLetter = letter.toUpperCase();
-        const showLabels = this.props[`show${upperLetter}Labels`];
-        const showTicks = this.props[`show${upperLetter}Ticks`];
-        const showGrid = this.props[`show${upperLetter}Grid`];
+        return {
+            letter, orientation, axisTransform,
+            labelPadding: options.labelPadding || this.props.labelPadding,
+            tickLength: options.tickLength || this.props.tickLength,
+            innerWidth: options.innerWidth || this.innerWidth,
+            innerHeight: options.innerWidth || this.innerHeight,
+            scale: options.scale || this[`${letter}Scale`],
+            type: options.type || this.props[`${letter}Type`],
+            tickCount: options.tickCount || this.props[`${letter}TickCount`],
+            labelFormat: options.labelFormat || this[`${letter}LabelFormat`],
+            showLabels: options.showLabels || this.props[`show${upperLetter}Labels`],
+            showTicks: options.showTicks || this.props[`show${upperLetter}Ticks`],
+            showGrid: options.showGrid || this.props[`show${upperLetter}Grid`]
+        };
+    },
+
+    getXAxisLabelProps(options={}) {
+        const {labelBoxes} = this;
+        return _.defaults(options, {
+            label: this.props.xAxisLabel,
+            margin: this.margin,
+            innerWidth: this.innerWidth,
+            innerHeight: this.innerHeight,
+            alignment: this.props.xAxisLabelAlign,
+            axisLabelPadding: this.props.xAxisLabelPadding,
+            valueLabelPadding: this.props.labelPadding,
+            tickLength: this.props.tickLength,
+            showTicks: this.props.showXTicks,
+            labelBox: (labelBoxes && labelBoxes.xAxis) ? labelBoxes.xAxis : {width: 10, height: 10}
+        })
+    },
+    getYAxisLabelProps(options={}) {
+        const {labelBoxes} = this;
+        return _.defaults(options, {
+            label: this.props.yAxisLabel,
+            margin: this.margin,
+            innerWidth: this.innerWidth,
+            innerHeight: this.innerHeight,
+            alignment: this.props.yAxisLabelAlign,
+            axisLabelPadding: this.props.yAxisLabelPadding,
+            valueLabelPadding: this.props.labelPadding,
+            tickLength: this.props.tickLength,
+            showTicks: this.props.showYTicks,
+            labelBox: (labelBoxes && labelBoxes.yAxis) ? labelBoxes.yAxis : {width: 10, height: 10}
+        })
+    }
+});
+
+const XAxisLabel = React.createClass({
+    propTypes: {
+        label: PropTypes.string,
+        //letter: PropTypes.string,
+        margin: PropTypes.object,
+        innerWidth: PropTypes.number,
+        innerHeight: PropTypes.number,
+        alignment: PropTypes.shape({
+            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
+            vertical: PropTypes.oneOf(['top', 'bottom'])
+        }),
+        axisLabelPadding: PropTypes.number,
+        valueLabelPadding: PropTypes.number,
+        tickLength: PropTypes.number,
+        // bounding box of the label
+        labelBox: PropTypes.object
+    },
+    getDefaultProps() {
+        return {
+            labelBox: {height: 10, width: 10},
+            innerWidth: 0
+        }
+    },
+    render() {
+        const {label, labelBox, margin, alignment} = this.props;
+
+        const top = labelBox.height;
+        const left = margin.left;
+        const x =
+            (alignment.horizontal === 'left') ? 0 :
+            (alignment.horizontal === 'right') ? this.props.innerWidth :
+            this.props.innerWidth / 2;
+        const textAnchor =
+            (alignment.horizontal === 'left') ? 'start' :
+            (alignment.horizontal === 'right') ? 'end' :
+            'middle';
+
+        // todo implement vertical alignment
+
+        return <g
+            className={`chart-axis-label chart-axis-label-x`}
+            transform={`translate(${left},${top})`}
+            >
+            <text {...{x, style: {textAnchor}}}>{label}</text>
+        </g>
+    }
+});
+
+const YAxisLabel = React.createClass({
+    propTypes: {
+        label: PropTypes.string,
+        //letter: PropTypes.string,
+        margin: PropTypes.object,
+        innerWidth: PropTypes.number,
+        innerHeight: PropTypes.number,
+        alignment: PropTypes.shape({
+            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
+            vertical: PropTypes.oneOf(['top', 'bottom'])
+        }),
+        axisLabelPadding: PropTypes.number,
+        valueLabelPadding: PropTypes.number,
+        tickLength: PropTypes.number,
+        showTicks: PropTypes.bool,
+        // bounding box of the label
+        labelBox: PropTypes.object
+    },
+    getDefaultProps() {
+        return {
+            labelBox: {height: 10, width: 10},
+            innerWidth: 0
+        }
+    },
+    render() {
+        const {label, labelBox, margin, valueLabelPadding, showTicks, tickLength} = this.props;
+        const alignment = {horizontal: 'center'};
+        const yTickAndPadSpace = valueLabelPadding + (showTicks ? tickLength : 0);
+
+        const top = labelBox.height;
+        const left = 0;
+        const x =
+            (alignment.horizontal === 'left') ? 0 :
+            (alignment.horizontal === 'right') ? margin.left - yTickAndPadSpace :
+            (margin.left - yTickAndPadSpace) / 2;
+        const textAnchor =
+            (alignment.horizontal === 'left') ? 'start' :
+            (alignment.horizontal === 'right') ? 'end' :
+            'middle';
+
+        // todo implement vertical alignment
+
+        return <g
+            className={`chart-axis-label chart-axis-label-y`}
+            transform={`translate(${left},${top})`}
+            >
+            <text {...{x, style: {textAnchor}}}>{label}</text>
+        </g>
+    }
+});
+
+const ChartAxis = React.createClass({
+    propTypes: {
+        scale: PropTypes.object,
+        type: PropTypes.string,
+        orientation: PropTypes.string,
+        axisTransform: PropTypes.string,
+        tickCount: PropTypes.number,
+        labelFormat: PropTypes.string,
+        letter: PropTypes.string,
+
+        innerWidth: PropTypes.number,
+        innerHeight: PropTypes.number,
+        labelPadding: PropTypes.number,
+        tickLength: PropTypes.number,
+        showLabels: PropTypes.bool,
+        showTicks: PropTypes.bool,
+        showGrid: PropTypes.bool
+    },
+    render() {
+        const {
+            scale, type, orientation, axisTransform, tickCount, letter, labelFormat,
+            innerWidth, innerHeight, labelPadding, tickLength, showLabels, showTicks, showGrid
+        } = this.props;
+
         if(!(showLabels || showTicks || showGrid)) return null;
 
-        const {labelPadding, tickLength} = this.props;
-        const scale = this[`${letter}Scale`];
-        const type = this.props[`${letter}Type`];
-        const tickCount = this.props[`${letter}TickCount`];
         const ticks = (type === 'ordinal') ? scale.domain() : scale.ticks(tickCount);
         const tickTransform = (value) => (orientation === 'vertical') ?
             `translate(0, ${scale(value)})` : `translate(${scale(value)}, 0)`;
         const distance = (showTicks) ? tickLength + labelPadding : labelPadding;
         const labelOffset = (orientation === 'vertical') ? {x: -distance} : {y: distance};
-        const gridLength = (orientation === 'vertical') ? this.innerWidth : this.innerHeight;
+        const gridLength = (orientation === 'vertical') ? innerWidth : innerHeight;
 
         return <g ref={`${letter}Axis`} className={`chart-axis chart-axis-${letter}`} transform={axisTransform}>
             {_.map(ticks, (value) => {
-                const tickOptions = {value, letter, type, orientation, labelOffset, gridLength, tickLength};
+                const tickOptions = {value, letter, type, orientation, labelOffset, gridLength, tickLength, labelFormat};
                 return <g transform={tickTransform(value)}>
                     {showLabels ? this.renderLabel(tickOptions): null}
                     {showGrid ? this.renderGrid(tickOptions): null}
@@ -282,12 +517,11 @@ const XYPlot = React.createClass({
         </g>
     },
     renderLabel(options) {
-        const {letter, value, type, labelOffset} = options;
-        const className = `chart-axis-label chart-axis-label-${letter}`;
-        const format = this[`${letter}LabelFormat`];
+        const {letter, value, type, labelOffset, labelFormat} = options;
+        const className = `chart-axis-value-label chart-axis-value-label-${letter}`;
         // todo generalize dy for all text sizes...?
         return <text {...{className}} dy="0.32em" {...labelOffset}>
-            {formatAxisLabel(value, type, format)}
+            {formatAxisLabel(value, type, labelFormat)}
         </text>
     },
     renderTick(options) {
@@ -339,22 +573,27 @@ function formatAxisLabel(value, type, format) {
         : value;
 }
 
-
-function measureAxisLabels(xLabels, yLabels, xType, yType, xFormat, yFormat) {
-    const xLabelEls = xLabels.map(l => `<text class='chart-axis-label chart-axis-label-x'>${formatAxisLabel(l, xType, xFormat)}</text>`);
-    const yLabelEls = yLabels.map(l => `<text class='chart-axis-label chart-axis-label-y'>${formatAxisLabel(l, yType, yFormat)}</text>`);
-    // todo don't use jquery
+function measureAxisLabels(xProps, yProps, xAxisLabelProps, yAxisLabelProps) {
+    _.assign(xProps, {showTicks: false, showGrid: false});
+    _.assign(yProps, {showTicks: false, showGrid: false});
+    const xAxisHtml = React.renderToStaticMarkup(<ChartAxis {...xProps}/>);
+    const yAxisHtml = React.renderToStaticMarkup(<ChartAxis {...yProps}/>);
+    const xLabelHtml = xAxisLabelProps ? React.renderToStaticMarkup(<XAxisLabel {...xAxisLabelProps}/>) : '';
+    const yLabelHtml = yAxisLabelProps ? React.renderToStaticMarkup(<YAxisLabel {...yAxisLabelProps}/>) : '';
+    // todo don't use jquery...
     const $testSvg = $(`<svg class="xy-plot">\
         <g class="chart-inner">\
-            <g class="chart-axis chart-axis-x">${xLabelEls.join('')}</g>\
-            <g class="chart-axis chart-axis-y">${yLabelEls.join('')}</g>\
+            ${xAxisHtml}${yAxisHtml}${xLabelHtml}${yLabelHtml}
         </g>\
-    </svg>`).css({visibility: 'hidden'});
+    </svg>`);
     $('body').append($testSvg);
-    const xLabelBoxes = _.map($testSvg.find('.chart-axis-label-x'), el => el.getBoundingClientRect());
-    const yLabelBoxes = _.map($testSvg.find('.chart-axis-label-y'), el => el.getBoundingClientRect());
+    const xValLabelBoxes = _.map($testSvg.find('.chart-axis-value-label-x'), el => el.getBoundingClientRect());
+    const yValLabelBoxes = _.map($testSvg.find('.chart-axis-value-label-y'), el => el.getBoundingClientRect());
+    const xAxisLabelBox = xAxisLabelProps ? $testSvg.find('.chart-axis-label-x text')[0].getBoundingClientRect() : null;
+    const yAxisLabelBox = yAxisLabelProps ? $testSvg.find('.chart-axis-label-y text')[0].getBoundingClientRect() : null;
     $testSvg.remove();
-    return {x: xLabelBoxes, y: yLabelBoxes};
+    //console.log({xAxis: xAxisLabelBox, yAxis: yAxisLabelBox, xVal: xValLabelBoxes, yVal: yValLabelBoxes});
+    return {xAxis: xAxisLabelBox, yAxis: yAxisLabelBox, xVal: xValLabelBoxes, yVal: yValLabelBoxes};
 }
 
 export default XYPlot;

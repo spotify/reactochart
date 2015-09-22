@@ -602,80 +602,13 @@
 	    }
 	});
 	
-	var V1Examples = _reactAddons2['default'].createClass({
-	    displayName: 'V1Examples',
-	
-	    getInitialState: function getInitialState() {
-	        return { hoveredV1LineChartData: null };
-	    },
-	    onMouseMoveV1LineChart: function onMouseMoveV1LineChart(d, index, event) {
-	        this.setState({ hoveredV1LineChartData: d });
-	    },
-	    render: function render() {
-	        var hoveredV1LineChartData = this.state.hoveredV1LineChartData;
-	
-	        return _reactAddons2['default'].createElement(
-	            'div',
-	            null,
-	            _reactAddons2['default'].createElement(
-	                'h2',
-	                null,
-	                'v1'
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'h3',
-	                null,
-	                'Timeseries Line Chart'
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'div',
-	                null,
-	                hoveredV1LineChartData ? _reactAddons2['default'].createElement(
-	                    'div',
-	                    null,
-	                    hoveredV1LineChartData.date + '',
-	                    _reactAddons2['default'].createElement('br', null),
-	                    'New York Temperature: ',
-	                    hoveredV1LineChartData.newYork
-	                ) : null,
-	                _reactAddons2['default'].createElement('div', null),
-	                _reactAddons2['default'].createElement(_src.V1LineChart, {
-	                    width: 1000,
-	                    height: 400,
-	                    data: tempDataClean,
-	                    plotKeys: ['newYork'],
-	                    dateKey: 'date',
-	                    onMouseMove: this.onMouseMoveV1LineChart
-	                })
-	            )
-	        );
-	    }
-	});
-	
-	var examples = [{ id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples }];
-	
-	var App = _reactAddons2['default'].createClass({
-	    displayName: 'App',
-	
-	    getInitialState: function getInitialState() {
-	        return {
-	            visibleExamples: {}
-	        };
-	    },
-	    toggleExample: function toggleExample(id) {
-	        var isVisible = this.state.visibleExamples[id];
-	        this.setState(update(this.state, { visibleExamples: _defineProperty({}, id, { $set: !isVisible }) }));
-	    },
+	var BarMarkerLineExample = _reactAddons2['default'].createClass({
+	    displayName: 'BarMarkerLineExample',
 	
 	    render: function render() {
 	        return _reactAddons2['default'].createElement(
 	            'div',
 	            null,
-	            _reactAddons2['default'].createElement(
-	                'h1',
-	                null,
-	                'Reactochart Examples'
-	            ),
 	            _reactAddons2['default'].createElement(
 	                'div',
 	                null,
@@ -744,6 +677,112 @@
 	                            return d[0][1];
 	                        }
 	                    })
+	                )
+	            )
+	        );
+	    }
+	});
+	
+	var V1Examples = _reactAddons2['default'].createClass({
+	    displayName: 'V1Examples',
+	
+	    getInitialState: function getInitialState() {
+	        return { hoveredV1LineChartData: null };
+	    },
+	    onMouseMoveV1LineChart: function onMouseMoveV1LineChart(d, index, event) {
+	        this.setState({ hoveredV1LineChartData: d });
+	    },
+	    render: function render() {
+	        var hoveredV1LineChartData = this.state.hoveredV1LineChartData;
+	
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            null,
+	            _reactAddons2['default'].createElement(
+	                'h2',
+	                null,
+	                'v1'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'h3',
+	                null,
+	                'Timeseries Line Chart'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                hoveredV1LineChartData ? _reactAddons2['default'].createElement(
+	                    'div',
+	                    null,
+	                    hoveredV1LineChartData.date + '',
+	                    _reactAddons2['default'].createElement('br', null),
+	                    'New York Temperature: ',
+	                    hoveredV1LineChartData.newYork
+	                ) : null,
+	                _reactAddons2['default'].createElement('div', null),
+	                _reactAddons2['default'].createElement(_src.V1LineChart, {
+	                    width: 1000,
+	                    height: 400,
+	                    data: tempDataClean,
+	                    plotKeys: ['newYork'],
+	                    dateKey: 'date',
+	                    onMouseMove: this.onMouseMoveV1LineChart
+	                })
+	            )
+	        );
+	    }
+	});
+	
+	var examples = [{ id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples }];
+	
+	var App = _reactAddons2['default'].createClass({
+	    displayName: 'App',
+	
+	    getInitialState: function getInitialState() {
+	        return {
+	            visibleExamples: {}
+	        };
+	    },
+	    toggleExample: function toggleExample(id) {
+	        var isVisible = this.state.visibleExamples[id];
+	        this.setState(update(this.state, { visibleExamples: _defineProperty({}, id, { $set: !isVisible }) }));
+	    },
+	
+	    render: function render() {
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            null,
+	            _reactAddons2['default'].createElement(
+	                'h1',
+	                null,
+	                'Reactochart Examples'
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 400, height: 300, yType: 'ordinal' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1, orientation: 'horizontal' })
+	                )
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 400, height: 300, yType: 'ordinal', xAxisLabel: 'Account Age' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1, orientation: 'horizontal' })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 400, height: 300, yType: 'ordinal', yAxisLabel: 'Active Users' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1, orientation: 'horizontal' })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 400, height: 300, yType: 'ordinal', xAxisLabel: 'Account Age', yAxisLabel: 'Active Users' },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1, orientation: 'horizontal' })
 	                )
 	            ),
 	            this.renderExamples()
@@ -965,7 +1004,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: #f0f0f0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-label-x,\n.xy-plot .chart-axis-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-label-y,\n.xy-plot .chart-axis-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.marker-line-chart line {\n  stroke: black;\n  stroke-width: 2px;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\n.pie-chart .pie-label-center {\n  font-size: 26pt;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
+	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: lightblue;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-value-label,\n.xy-plot .chart-axis-value-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-value-label-x,\n.xy-plot .chart-axis-value-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-value-label-y,\n.xy-plot .chart-axis-value-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 16pt;\n  font-weight: bold;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.marker-line-chart line {\n  stroke: black;\n  stroke-width: 2px;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\n.pie-chart .pie-label-center {\n  font-size: 26pt;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
 	
 	// exports
 
@@ -58361,7 +58400,9 @@
 	var PropTypes = _react2['default'].PropTypes;
 	
 	var DEFAULTS = {
-	    margin: { top: null, bottom: null, left: null, right: null }
+	    margin: { top: null, bottom: null, left: null, right: null },
+	    xAxisLabelAlign: { horizontal: 'left', vertical: 'top' },
+	    yAxisLabelAlign: { horizontal: 'right', vertical: 'top' }
 	};
 	
 	var XYPlot = _react2['default'].createClass({
@@ -58421,6 +58462,20 @@
 	        // todo: niceX, niceY
 	        // todo: xAxisLabel, yAxisLabel
 	
+	        xAxisLabel: PropTypes.string,
+	        xAxisLabelAlign: PropTypes.shape({
+	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
+	            vertical: PropTypes.oneOf(['top', 'bottom'])
+	        }),
+	        xAxisLabelPadding: PropTypes.number,
+	
+	        yAxisLabel: PropTypes.string,
+	        yAxisLabelAlign: PropTypes.shape({
+	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
+	            vertical: PropTypes.oneOf(['top', 'bottom'])
+	        }),
+	        yAxisLabelPadding: PropTypes.number,
+	
 	        // todo more interaction?
 	        onMouseMove: PropTypes.func
 	    },
@@ -58447,6 +58502,12 @@
 	            showYZero: true,
 	            xLabelFormat: null,
 	            yLabelFormat: null,
+	            xAxisLabel: null,
+	            xAxisLabelAlign: DEFAULTS.xAxisLabelAlign,
+	            xAxisLabelPadding: 10,
+	            yAxisLabel: null,
+	            yAxisLabelAlign: DEFAULTS.yAxisLabelAlign,
+	            yAxisLabelPadding: 10,
 	            onMouseMove: _lodash2['default'].noop
 	        };
 	    },
@@ -58518,6 +58579,10 @@
 	        var yType = props.yType;
 	        var xTickCount = props.xTickCount;
 	        var yTickCount = props.yTickCount;
+	        var xAxisLabel = props.xAxisLabel;
+	        var xAxisLabelPadding = props.xAxisLabelPadding;
+	        var yAxisLabel = props.yAxisLabel;
+	        var yAxisLabelPadding = props.yAxisLabelPadding;
 	        var labelPadding = props.labelPadding;
 	        var tickLength = props.tickLength;
 	        var showXTicks = props.showXTicks;
@@ -58525,14 +58590,14 @@
 	        var xLabelFormat = this.xLabelFormat;
 	        var yLabelFormat = this.yLabelFormat;
 	
-	        this.margin = _lodash2['default'].defaults(this.props.margin, DEFAULTS.margin);
+	        var origMargin = _lodash2['default'].defaults(this.props.margin, DEFAULTS.margin);
 	
-	        var shouldMeasureLabels = _lodash2['default'].any(this.margin, _lodash2['default'].isNull);
+	        var shouldMeasureLabels = _lodash2['default'].any(origMargin, _lodash2['default'].isNull);
 	        if (shouldMeasureLabels) {
 	            (function () {
 	                var isDone = false;
 	                // start with a margin of 10 pixels for all unknown margins
-	                var margin = _lodash2['default'].transform(_this2.margin, function (result, m, key) {
+	                var margin = _lodash2['default'].transform(origMargin, function (result, m, key) {
 	                    return result[key] = _lodash2['default'].isNull(m) ? 10 : m;
 	                });
 	                // make scales using margin, measure labels, make new margins
@@ -58540,7 +58605,8 @@
 	                var innerWidth = undefined,
 	                    innerHeight = undefined,
 	                    xScale = undefined,
-	                    yScale = undefined;
+	                    yScale = undefined,
+	                    labelBoxes = undefined;
 	
 	                var _loop = function () {
 	                    innerWidth = width - (margin.left + margin.right);
@@ -58551,14 +58617,33 @@
 	                    var yTicks = yType === 'ordinal' ? yScale.domain() : yScale.ticks(yTickCount);
 	                    if (xType !== 'ordinal') xScale.nice(xTicks.length);
 	                    if (yType !== 'ordinal') yScale.nice(yTicks.length);
-	                    var labelBoxes = measureAxisLabels(xTicks, yTicks, xType, yType, xLabelFormat, yLabelFormat);
-	                    //console.log(xTicks, yTicks);
-	                    //console.log(labelBoxes);
+	                    //const labelBoxes = measureAxisLabels(xTicks, yTicks, xType, yType, xLabelFormat, yLabelFormat);
+	
+	                    var xAxisLabelProps = xAxisLabel ? { letter: 'x', label: xAxisLabel } : null;
+	
+	                    labelBoxes = measureAxisLabels(_this2.getXAxisProps({ innerWidth: innerWidth, innerHeight: innerHeight, scale: xScale }), _this2.getYAxisProps({ innerWidth: innerWidth, innerHeight: innerHeight, scale: yScale }), xAxisLabel ? _this2.getXAxisLabelProps({ margin: margin }) : null, yAxisLabel ? _this2.getYAxisLabelProps({ margin: margin }) : null);
+	
+	                    // todo: modify to handle all possible label alignments
+	                    // todo: handle case of labels not shown (ie if !this.props.showYLabels)
+	                    var topYValOverhang = Math.ceil(_lodash2['default'].last(labelBoxes.yVal).height / 2);
+	                    var xAxisLabelOuterHeight = xAxisLabel && labelBoxes.xAxis ? Math.ceil(labelBoxes.xAxis.height + xAxisLabelPadding) : 0;
+	                    var yAxisLabelOuterHeight = yAxisLabel && labelBoxes.yAxis ? Math.ceil(labelBoxes.yAxis.height + yAxisLabelPadding) : 0;
+	
+	                    var topMargin = _lodash2['default'].isNull(origMargin.top) ? Math.max(topYValOverhang, xAxisLabelOuterHeight, yAxisLabelOuterHeight) : origMargin.top;
+	
+	                    var yTickAndPadSpace = labelPadding + (showYTicks ? tickLength : 0);
+	
+	                    var maxYValWidth = Math.ceil(_d32['default'].max(labelBoxes.yVal, (0, _utilJs.accessor)('width')) + yTickAndPadSpace);
+	                    var yAxisLabelOuterWidth = yAxisLabel && labelBoxes.yAxis ? Math.ceil(labelBoxes.yAxis.width) + yTickAndPadSpace : 0;
+	                    //console.log(maxYValWidth, yAxisLabelOuterWidth);
+	
+	                    var leftMargin = _lodash2['default'].isNull(origMargin.left) ? Math.max(maxYValWidth, yAxisLabelOuterWidth) : origMargin.left;
+	
 	                    var newMargin = {
-	                        top: Math.ceil(_lodash2['default'].last(labelBoxes.y).height / 2),
-	                        right: Math.ceil(_lodash2['default'].last(labelBoxes.x).width / 2),
-	                        left: Math.ceil(_d32['default'].max(labelBoxes.y, (0, _utilJs.accessor)('width')) + labelPadding + (showYTicks ? tickLength : 0)),
-	                        bottom: Math.ceil(_d32['default'].max(labelBoxes.x, (0, _utilJs.accessor)('height')) + labelPadding + (showXTicks ? tickLength : 0))
+	                        top: topMargin,
+	                        right: _lodash2['default'].isNull(origMargin.right) ? Math.ceil(_lodash2['default'].last(labelBoxes.xVal).width / 2) : origMargin.right,
+	                        left: leftMargin,
+	                        bottom: _lodash2['default'].isNull(origMargin.bottom) ? Math.ceil(_d32['default'].max(labelBoxes.xVal, (0, _utilJs.accessor)('height')) + labelPadding + (showXTicks ? tickLength : 0)) : origMargin.bottom
 	                    };
 	                    isDone = _lodash2['default'].all(_lodash2['default'].keys(margin), function (k) {
 	                        return margin[k] === newMargin[k];
@@ -58566,12 +58651,14 @@
 	                    //console.log('calculated margin', newMargin);
 	                    //console.log(xScale.domain(), yScale.domain());
 	                    margin = newMargin;
+	                    innerWidth = width - (margin.left + margin.right);
+	                    innerHeight = height - (margin.top + margin.bottom);
 	                };
 	
 	                while (!isDone) {
 	                    _loop();
 	                }
-	                _lodash2['default'].assign(_this2, { margin: margin, innerWidth: innerWidth, innerHeight: innerHeight, xScale: xScale, yScale: yScale });
+	                _lodash2['default'].assign(_this2, { margin: margin, innerWidth: innerWidth, innerHeight: innerHeight, xScale: xScale, yScale: yScale, labelBoxes: labelBoxes });
 	            })();
 	        } else {
 	            // margins are all pre-defined, just make the scales
@@ -58602,6 +58689,8 @@
 	        var height = _props.height;
 	        var xType = _props.xType;
 	        var yType = _props.yType;
+	        var xAxisLabel = _props.xAxisLabel;
+	        var yAxisLabel = _props.yAxisLabel;
 	        var margin = this.margin;
 	        var xScale = this.xScale;
 	        var yScale = this.yScale;
@@ -58618,63 +58707,263 @@
 	                { className: 'chart-inner',
 	                    transform: 'translate(' + margin.left + ', ' + margin.top + ')'
 	                },
-	                this.renderXAxis(),
-	                this.renderYAxis(),
+	                _react2['default'].createElement(ChartAxis, this.getXAxisProps()),
+	                _react2['default'].createElement(ChartAxis, this.getYAxisProps()),
 	                _react2['default'].Children.map(this.props.children, function (child, i) {
 	                    if (!child) return null;
 	                    var name = child.props.name || 'chart-series-' + i;
 	                    return _react2['default'].cloneElement(child, { ref: name, name: name, xType: xType, yType: yType, xScale: xScale, yScale: yScale, innerWidth: innerWidth, innerHeight: innerHeight });
 	                })
-	            )
+	            ),
+	            xAxisLabel ? _react2['default'].createElement(XAxisLabel, this.getXAxisLabelProps()) : null,
+	            yAxisLabel ? _react2['default'].createElement(YAxisLabel, this.getYAxisLabelProps()) : null
 	        );
 	    },
 	
-	    renderXAxis: function renderXAxis() {
-	        return this.renderAxis({
+	    getXAxisProps: function getXAxisProps() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	
+	        var innerHeight = options.innerHeight || this.innerHeight;
+	        return this.getAxisProps(_lodash2['default'].assign({
 	            letter: 'x',
 	            orientation: 'horizontal',
-	            axisTransform: 'translate(0, ' + this.innerHeight + ')'
-	        });
+	            axisTransform: 'translate(0, ' + innerHeight + ')'
+	        }, options));
 	    },
-	    renderYAxis: function renderYAxis() {
-	        return this.renderAxis({
+	    getYAxisProps: function getYAxisProps() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	
+	        return this.getAxisProps(_lodash2['default'].assign({
 	            letter: 'y',
 	            orientation: 'vertical'
-	        });
+	        }, options));
 	    },
-	    renderAxis: function renderAxis(options) {
-	        var _this3 = this;
-	
+	    getAxisProps: function getAxisProps(options) {
 	        var letter = options.letter;
 	        var orientation = options.orientation;
 	        var axisTransform = options.axisTransform;
 	
 	        var upperLetter = letter.toUpperCase();
-	        var showLabels = this.props['show' + upperLetter + 'Labels'];
-	        var showTicks = this.props['show' + upperLetter + 'Ticks'];
-	        var showGrid = this.props['show' + upperLetter + 'Grid'];
+	        return {
+	            letter: letter, orientation: orientation, axisTransform: axisTransform,
+	            labelPadding: options.labelPadding || this.props.labelPadding,
+	            tickLength: options.tickLength || this.props.tickLength,
+	            innerWidth: options.innerWidth || this.innerWidth,
+	            innerHeight: options.innerWidth || this.innerHeight,
+	            scale: options.scale || this[letter + 'Scale'],
+	            type: options.type || this.props[letter + 'Type'],
+	            tickCount: options.tickCount || this.props[letter + 'TickCount'],
+	            labelFormat: options.labelFormat || this[letter + 'LabelFormat'],
+	            showLabels: options.showLabels || this.props['show' + upperLetter + 'Labels'],
+	            showTicks: options.showTicks || this.props['show' + upperLetter + 'Ticks'],
+	            showGrid: options.showGrid || this.props['show' + upperLetter + 'Grid']
+	        };
+	    },
+	
+	    getXAxisLabelProps: function getXAxisLabelProps() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	        var labelBoxes = this.labelBoxes;
+	
+	        return _lodash2['default'].defaults(options, {
+	            label: this.props.xAxisLabel,
+	            margin: this.margin,
+	            innerWidth: this.innerWidth,
+	            innerHeight: this.innerHeight,
+	            alignment: this.props.xAxisLabelAlign,
+	            axisLabelPadding: this.props.xAxisLabelPadding,
+	            valueLabelPadding: this.props.labelPadding,
+	            tickLength: this.props.tickLength,
+	            showTicks: this.props.showXTicks,
+	            labelBox: labelBoxes && labelBoxes.xAxis ? labelBoxes.xAxis : { width: 10, height: 10 }
+	        });
+	    },
+	    getYAxisLabelProps: function getYAxisLabelProps() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	        var labelBoxes = this.labelBoxes;
+	
+	        return _lodash2['default'].defaults(options, {
+	            label: this.props.yAxisLabel,
+	            margin: this.margin,
+	            innerWidth: this.innerWidth,
+	            innerHeight: this.innerHeight,
+	            alignment: this.props.yAxisLabelAlign,
+	            axisLabelPadding: this.props.yAxisLabelPadding,
+	            valueLabelPadding: this.props.labelPadding,
+	            tickLength: this.props.tickLength,
+	            showTicks: this.props.showYTicks,
+	            labelBox: labelBoxes && labelBoxes.yAxis ? labelBoxes.yAxis : { width: 10, height: 10 }
+	        });
+	    }
+	});
+	
+	var XAxisLabel = _react2['default'].createClass({
+	    displayName: 'XAxisLabel',
+	
+	    propTypes: {
+	        label: PropTypes.string,
+	        //letter: PropTypes.string,
+	        margin: PropTypes.object,
+	        innerWidth: PropTypes.number,
+	        innerHeight: PropTypes.number,
+	        alignment: PropTypes.shape({
+	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
+	            vertical: PropTypes.oneOf(['top', 'bottom'])
+	        }),
+	        axisLabelPadding: PropTypes.number,
+	        valueLabelPadding: PropTypes.number,
+	        tickLength: PropTypes.number,
+	        // bounding box of the label
+	        labelBox: PropTypes.object
+	    },
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            labelBox: { height: 10, width: 10 },
+	            innerWidth: 0
+	        };
+	    },
+	    render: function render() {
+	        var _props2 = this.props;
+	        var label = _props2.label;
+	        var labelBox = _props2.labelBox;
+	        var margin = _props2.margin;
+	        var alignment = _props2.alignment;
+	
+	        var top = labelBox.height;
+	        var left = margin.left;
+	        var x = alignment.horizontal === 'left' ? 0 : alignment.horizontal === 'right' ? this.props.innerWidth : this.props.innerWidth / 2;
+	        var textAnchor = alignment.horizontal === 'left' ? 'start' : alignment.horizontal === 'right' ? 'end' : 'middle';
+	
+	        // todo implement vertical alignment
+	
+	        return _react2['default'].createElement(
+	            'g',
+	            {
+	                className: 'chart-axis-label chart-axis-label-x',
+	                transform: 'translate(' + left + ',' + top + ')'
+	            },
+	            _react2['default'].createElement(
+	                'text',
+	                { x: x, style: { textAnchor: textAnchor } },
+	                label
+	            )
+	        );
+	    }
+	});
+	
+	var YAxisLabel = _react2['default'].createClass({
+	    displayName: 'YAxisLabel',
+	
+	    propTypes: {
+	        label: PropTypes.string,
+	        //letter: PropTypes.string,
+	        margin: PropTypes.object,
+	        innerWidth: PropTypes.number,
+	        innerHeight: PropTypes.number,
+	        alignment: PropTypes.shape({
+	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
+	            vertical: PropTypes.oneOf(['top', 'bottom'])
+	        }),
+	        axisLabelPadding: PropTypes.number,
+	        valueLabelPadding: PropTypes.number,
+	        tickLength: PropTypes.number,
+	        showTicks: PropTypes.bool,
+	        // bounding box of the label
+	        labelBox: PropTypes.object
+	    },
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            labelBox: { height: 10, width: 10 },
+	            innerWidth: 0
+	        };
+	    },
+	    render: function render() {
+	        var _props3 = this.props;
+	        var label = _props3.label;
+	        var labelBox = _props3.labelBox;
+	        var margin = _props3.margin;
+	        var valueLabelPadding = _props3.valueLabelPadding;
+	        var showTicks = _props3.showTicks;
+	        var tickLength = _props3.tickLength;
+	
+	        var alignment = { horizontal: 'center' };
+	        var yTickAndPadSpace = valueLabelPadding + (showTicks ? tickLength : 0);
+	
+	        var top = labelBox.height;
+	        var left = 0;
+	        var x = alignment.horizontal === 'left' ? 0 : alignment.horizontal === 'right' ? margin.left - yTickAndPadSpace : (margin.left - yTickAndPadSpace) / 2;
+	        var textAnchor = alignment.horizontal === 'left' ? 'start' : alignment.horizontal === 'right' ? 'end' : 'middle';
+	
+	        // todo implement vertical alignment
+	
+	        return _react2['default'].createElement(
+	            'g',
+	            {
+	                className: 'chart-axis-label chart-axis-label-y',
+	                transform: 'translate(' + left + ',' + top + ')'
+	            },
+	            _react2['default'].createElement(
+	                'text',
+	                { x: x, style: { textAnchor: textAnchor } },
+	                label
+	            )
+	        );
+	    }
+	});
+	
+	var ChartAxis = _react2['default'].createClass({
+	    displayName: 'ChartAxis',
+	
+	    propTypes: {
+	        scale: PropTypes.object,
+	        type: PropTypes.string,
+	        orientation: PropTypes.string,
+	        axisTransform: PropTypes.string,
+	        tickCount: PropTypes.number,
+	        labelFormat: PropTypes.string,
+	        letter: PropTypes.string,
+	
+	        innerWidth: PropTypes.number,
+	        innerHeight: PropTypes.number,
+	        labelPadding: PropTypes.number,
+	        tickLength: PropTypes.number,
+	        showLabels: PropTypes.bool,
+	        showTicks: PropTypes.bool,
+	        showGrid: PropTypes.bool
+	    },
+	    render: function render() {
+	        var _this3 = this;
+	
+	        var _props4 = this.props;
+	        var scale = _props4.scale;
+	        var type = _props4.type;
+	        var orientation = _props4.orientation;
+	        var axisTransform = _props4.axisTransform;
+	        var tickCount = _props4.tickCount;
+	        var letter = _props4.letter;
+	        var labelFormat = _props4.labelFormat;
+	        var innerWidth = _props4.innerWidth;
+	        var innerHeight = _props4.innerHeight;
+	        var labelPadding = _props4.labelPadding;
+	        var tickLength = _props4.tickLength;
+	        var showLabels = _props4.showLabels;
+	        var showTicks = _props4.showTicks;
+	        var showGrid = _props4.showGrid;
+	
 	        if (!(showLabels || showTicks || showGrid)) return null;
 	
-	        var _props2 = this.props;
-	        var labelPadding = _props2.labelPadding;
-	        var tickLength = _props2.tickLength;
-	
-	        var scale = this[letter + 'Scale'];
-	        var type = this.props[letter + 'Type'];
-	        var tickCount = this.props[letter + 'TickCount'];
 	        var ticks = type === 'ordinal' ? scale.domain() : scale.ticks(tickCount);
 	        var tickTransform = function tickTransform(value) {
 	            return orientation === 'vertical' ? 'translate(0, ' + scale(value) + ')' : 'translate(' + scale(value) + ', 0)';
 	        };
 	        var distance = showTicks ? tickLength + labelPadding : labelPadding;
 	        var labelOffset = orientation === 'vertical' ? { x: -distance } : { y: distance };
-	        var gridLength = orientation === 'vertical' ? this.innerWidth : this.innerHeight;
+	        var gridLength = orientation === 'vertical' ? innerWidth : innerHeight;
 	
 	        return _react2['default'].createElement(
 	            'g',
 	            { ref: letter + 'Axis', className: 'chart-axis chart-axis-' + letter, transform: axisTransform },
 	            _lodash2['default'].map(ticks, function (value) {
-	                var tickOptions = { value: value, letter: letter, type: type, orientation: orientation, labelOffset: labelOffset, gridLength: gridLength, tickLength: tickLength };
+	                var tickOptions = { value: value, letter: letter, type: type, orientation: orientation, labelOffset: labelOffset, gridLength: gridLength, tickLength: tickLength, labelFormat: labelFormat };
 	                return _react2['default'].createElement(
 	                    'g',
 	                    { transform: tickTransform(value) },
@@ -58690,14 +58979,14 @@
 	        var value = options.value;
 	        var type = options.type;
 	        var labelOffset = options.labelOffset;
+	        var labelFormat = options.labelFormat;
 	
-	        var className = 'chart-axis-label chart-axis-label-' + letter;
-	        var format = this[letter + 'LabelFormat'];
+	        var className = 'chart-axis-value-label chart-axis-value-label-' + letter;
 	        // todo generalize dy for all text sizes...?
 	        return _react2['default'].createElement(
 	            'text',
 	            _extends({ className: className }, { dy: '0.32em' }, labelOffset),
-	            formatAxisLabel(value, type, format)
+	            formatAxisLabel(value, type, labelFormat)
 	        );
 	    },
 	    renderTick: function renderTick(options) {
@@ -58775,24 +59064,27 @@
 	    return type === 'number' ? (0, _numeral2['default'])(value).format(format) : type === 'time' ? (0, _moment2['default'])(value).format(format) : value;
 	}
 	
-	function measureAxisLabels(xLabels, yLabels, xType, yType, xFormat, yFormat) {
-	    var xLabelEls = xLabels.map(function (l) {
-	        return '<text class=\'chart-axis-label chart-axis-label-x\'>' + formatAxisLabel(l, xType, xFormat) + '</text>';
-	    });
-	    var yLabelEls = yLabels.map(function (l) {
-	        return '<text class=\'chart-axis-label chart-axis-label-y\'>' + formatAxisLabel(l, yType, yFormat) + '</text>';
-	    });
-	    // todo don't use jquery
-	    var $testSvg = (0, _jquery2['default'])('<svg class="xy-plot">        <g class="chart-inner">            <g class="chart-axis chart-axis-x">' + xLabelEls.join('') + '</g>            <g class="chart-axis chart-axis-y">' + yLabelEls.join('') + '</g>        </g>    </svg>').css({ visibility: 'hidden' });
+	function measureAxisLabels(xProps, yProps, xAxisLabelProps, yAxisLabelProps) {
+	    _lodash2['default'].assign(xProps, { showTicks: false, showGrid: false });
+	    _lodash2['default'].assign(yProps, { showTicks: false, showGrid: false });
+	    var xAxisHtml = _react2['default'].renderToStaticMarkup(_react2['default'].createElement(ChartAxis, xProps));
+	    var yAxisHtml = _react2['default'].renderToStaticMarkup(_react2['default'].createElement(ChartAxis, yProps));
+	    var xLabelHtml = xAxisLabelProps ? _react2['default'].renderToStaticMarkup(_react2['default'].createElement(XAxisLabel, xAxisLabelProps)) : '';
+	    var yLabelHtml = yAxisLabelProps ? _react2['default'].renderToStaticMarkup(_react2['default'].createElement(YAxisLabel, yAxisLabelProps)) : '';
+	    // todo don't use jquery...
+	    var $testSvg = (0, _jquery2['default'])('<svg class="xy-plot">        <g class="chart-inner">            ' + xAxisHtml + yAxisHtml + xLabelHtml + yLabelHtml + '\n        </g>    </svg>');
 	    (0, _jquery2['default'])('body').append($testSvg);
-	    var xLabelBoxes = _lodash2['default'].map($testSvg.find('.chart-axis-label-x'), function (el) {
+	    var xValLabelBoxes = _lodash2['default'].map($testSvg.find('.chart-axis-value-label-x'), function (el) {
 	        return el.getBoundingClientRect();
 	    });
-	    var yLabelBoxes = _lodash2['default'].map($testSvg.find('.chart-axis-label-y'), function (el) {
+	    var yValLabelBoxes = _lodash2['default'].map($testSvg.find('.chart-axis-value-label-y'), function (el) {
 	        return el.getBoundingClientRect();
 	    });
+	    var xAxisLabelBox = xAxisLabelProps ? $testSvg.find('.chart-axis-label-x text')[0].getBoundingClientRect() : null;
+	    var yAxisLabelBox = yAxisLabelProps ? $testSvg.find('.chart-axis-label-y text')[0].getBoundingClientRect() : null;
 	    $testSvg.remove();
-	    return { x: xLabelBoxes, y: yLabelBoxes };
+	    //console.log({xAxis: xAxisLabelBox, yAxis: yAxisLabelBox, xVal: xValLabelBoxes, yVal: yValLabelBoxes});
+	    return { xAxis: xAxisLabelBox, yAxis: yAxisLabelBox, xVal: xValLabelBoxes, yVal: yValLabelBoxes };
 	}
 	
 	exports['default'] = XYPlot;
