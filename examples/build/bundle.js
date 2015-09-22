@@ -58884,8 +58884,8 @@
 	        var valueLabelPadding = _props3.valueLabelPadding;
 	        var showTicks = _props3.showTicks;
 	        var tickLength = _props3.tickLength;
+	        var alignment = _props3.alignment;
 	
-	        var alignment = { horizontal: 'center' };
 	        var yTickAndPadSpace = valueLabelPadding + (showTicks ? tickLength : 0);
 	
 	        var top = labelBox.height;

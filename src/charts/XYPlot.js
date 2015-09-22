@@ -446,8 +446,7 @@ const YAxisLabel = React.createClass({
         }
     },
     render() {
-        const {label, labelBox, margin, valueLabelPadding, showTicks, tickLength} = this.props;
-        const alignment = {horizontal: 'center'};
+        const {label, labelBox, margin, valueLabelPadding, showTicks, tickLength, alignment} = this.props;
         const yTickAndPadSpace = valueLabelPadding + (showTicks ? tickLength : 0);
 
         const top = labelBox.height;
