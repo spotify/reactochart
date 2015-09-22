@@ -58516,13 +58516,13 @@
 	    },
 	
 	    componentWillMount: function componentWillMount() {
-	        this.initDomains(this.props);
 	        this.initLabelFormats(this.props);
+	        this.initDomains(this.props);
 	        this.initScale(this.props);
 	    },
 	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
-	        this.initDomains(newProps);
 	        this.initLabelFormats(this.props);
+	        this.initDomains(newProps);
 	        this.initScale(newProps);
 	    },
 	
