@@ -417,6 +417,22 @@ const BarMarkerLineExample = React.createClass({
     }
 });
 
+const AxisLabelExample = React.createClass({
+    render() {
+        return <div>
+            <XYPlot width={400} height={300} yType='ordinal' xAxisLabel="Account Age">
+                <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
+            </XYPlot>
+            <XYPlot width={400} height={300} yType='ordinal' yAxisLabel="Active Users">
+                <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
+            </XYPlot>
+            <XYPlot width={400} height={300} yType='ordinal' xAxisLabel="Account Age" yAxisLabel="Active Users">
+                <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
+            </XYPlot>
+        </div>
+    }
+});
+
 const V1Examples = React.createClass({
     getInitialState() {
         return {hoveredV1LineChartData: null}
@@ -456,16 +472,16 @@ const V1Examples = React.createClass({
 
 
 const examples = [
-    {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample},
-    {id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample},
     {id: 'line', title: 'Line Chart', Component: LineChartExample},
+    {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
+    {id: 'axisLabels', title: 'Axis Labels', Component: AxisLabelExample},
     {id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample},
     {id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample},
     {id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample},
-
-    {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
+    {id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample},
     {id: 'histogram', title: 'Histogram', Component: HistogramExample},
     {id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample},
+    {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample},
     {id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples}
 ];
 
@@ -485,19 +501,17 @@ const App = React.createClass({
             <h1>Reactochart Examples</h1>
 
             <div>
-                <XYPlot width={400} height={300} yType='ordinal'>
+                <XYPlot width={200} height={200} yType='ordinal' showYLabels={false}>
                     <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
                 </XYPlot>
-            </div>
-
-            <div>
-                <XYPlot width={400} height={300} yType='ordinal' xAxisLabel="Account Age">
+                <XYPlot width={200} height={200} yType='ordinal' showXLabels={false}>
                     <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
                 </XYPlot>
-                <XYPlot width={400} height={300} yType='ordinal' yAxisLabel="Active Users">
+                <XYPlot width={200} height={200} yType='ordinal' showXLabels={false} showYLabels={false}>
                     <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
                 </XYPlot>
-                <XYPlot width={400} height={300} yType='ordinal' xAxisLabel="Account Age" yAxisLabel="Active Users">
+                <XYPlot width={200} height={200} yType='ordinal'
+                        showXLabels={false} showYLabels={false} showXTicks={false} showYTicks={false}>
                     <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
                 </XYPlot>
             </div>

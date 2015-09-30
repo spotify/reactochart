@@ -192,7 +192,9 @@ const XYPlot = React.createClass({
             // make scales using margin, measure labels, make new margins
             // repeat until we converge on a margin that works
             let innerWidth, innerHeight, xScale, yScale, labelBoxes;
-            while(!isDone) {
+            let i=0, limit=5; // ensure we dont loop forever
+            while(!isDone && i<limit) {
+                i++;
                 innerWidth = width - (margin.left + margin.right);
                 innerHeight = height - (margin.top + margin.bottom);
                 xScale = makeScale(this.xDomains, [0, innerWidth], xType);
@@ -201,9 +203,6 @@ const XYPlot = React.createClass({
                 const yTicks = (yType === 'ordinal') ? yScale.domain() : yScale.ticks(yTickCount);
                 if(xType !== 'ordinal') xScale.nice(xTicks.length);
                 if(yType !== 'ordinal') yScale.nice(yTicks.length);
-                //const labelBoxes = measureAxisLabels(xTicks, yTicks, xType, yType, xLabelFormat, yLabelFormat);
-
-                const xAxisLabelProps = xAxisLabel ? {letter: 'x', label: xAxisLabel} : null;
 
                 labelBoxes = measureAxisLabels(
                     this.getXAxisProps({innerWidth, innerHeight, scale: xScale}),
@@ -214,34 +213,44 @@ const XYPlot = React.createClass({
 
                 // todo: modify to handle all possible label alignments
                 // todo: handle case of labels not shown (ie if !this.props.showYLabels)
-                const topYValOverhang = Math.ceil(_.last(labelBoxes.yVal).height / 2);
-                const xAxisLabelOuterHeight = xAxisLabel && labelBoxes.xAxis ?
-                    Math.ceil(labelBoxes.xAxis.height + xAxisLabelPadding) : 0;
-                const yAxisLabelOuterHeight = yAxisLabel && labelBoxes.yAxis ?
-                    Math.ceil(labelBoxes.yAxis.height + yAxisLabelPadding) : 0;
+                const hasXAxisLabel = xAxisLabel && labelBoxes.xAxis;
+                const hasYAxisLabel = yAxisLabel && labelBoxes.yAxis;
+                const hasXValLabels = !!labelBoxes.xVal.length;
+                const hasYValLabels = !!labelBoxes.yVal.length;
+
+                const topYValOverhang = hasYValLabels ? Math.ceil(_.last(labelBoxes.yVal).height / 2) : 0;
+                const xAxisLabelOuterHeight = hasXAxisLabel ? Math.ceil(labelBoxes.xAxis.height + xAxisLabelPadding) : 0;
+                const yAxisLabelOuterHeight = hasYAxisLabel ? Math.ceil(labelBoxes.yAxis.height + yAxisLabelPadding) : 0;
 
                 const topMargin = _.isNull(origMargin.top) ?
                     Math.max(topYValOverhang, xAxisLabelOuterHeight, yAxisLabelOuterHeight) : origMargin.top;
 
-                const yTickAndPadSpace = labelPadding + (showYTicks ? tickLength : 0);
+                const yTickAndPadSpace =
+                    ((hasYValLabels || hasYAxisLabel) ? labelPadding : 0) + (showYTicks ? tickLength : 0);
 
-                const maxYValWidth = Math.ceil(d3.max(labelBoxes.yVal, accessor('width')) + yTickAndPadSpace);
-                const yAxisLabelOuterWidth = yAxisLabel && labelBoxes.yAxis ?
-                    Math.ceil(labelBoxes.yAxis.width) + yTickAndPadSpace : 0;
+                const maxYValWidth =
+                    (hasYValLabels ? Math.ceil(d3.max(labelBoxes.yVal, accessor('width'))) : 0) + yTickAndPadSpace;
+                const yAxisLabelOuterWidth = hasYAxisLabel ? Math.ceil(labelBoxes.yAxis.width) + yTickAndPadSpace : 0;
                 //console.log(maxYValWidth, yAxisLabelOuterWidth);
 
                 const leftMargin =  _.isNull(origMargin.left) ?
                     Math.max(maxYValWidth, yAxisLabelOuterWidth) : origMargin.left;
 
+                const xTickAndPadSpace =
+                    ((hasXValLabels || hasXAxisLabel) ? labelPadding : 0) + (showXTicks ? tickLength : 0);
+
+                const rightXValOverhang = hasXValLabels ? Math.ceil(_.last(labelBoxes.xVal).width / 2) : 0;
+
+                const maxXValHeight =
+                    (hasXValLabels ? Math.ceil(d3.max(labelBoxes.xVal, accessor('height'))) : 0) + xTickAndPadSpace;
+
                 let newMargin = {
                     top: topMargin,
                     right: _.isNull(origMargin.right) ?
-                        Math.ceil(_.last(labelBoxes.xVal).width / 2)
-                        : origMargin.right,
+                        rightXValOverhang : origMargin.right,
                     left: leftMargin,
                     bottom: _.isNull(origMargin.bottom) ?
-                        Math.ceil(d3.max(labelBoxes.xVal, accessor('height')) + labelPadding + (showXTicks ? tickLength : 0))
-                        : origMargin.bottom
+                        maxXValHeight : origMargin.bottom
                 };
                 isDone = _.all(_.keys(margin), k => margin[k] === newMargin[k]);
                 //console.log('calculated margin', newMargin);
@@ -580,19 +589,20 @@ function measureAxisLabels(xProps, yProps, xAxisLabelProps, yAxisLabelProps) {
     const xLabelHtml = xAxisLabelProps ? React.renderToStaticMarkup(<XAxisLabel {...xAxisLabelProps}/>) : '';
     const yLabelHtml = yAxisLabelProps ? React.renderToStaticMarkup(<YAxisLabel {...yAxisLabelProps}/>) : '';
     // todo don't use jquery...
-    const $testSvg = $(`<svg class="xy-plot">\
-        <g class="chart-inner">\
-            ${xAxisHtml}${yAxisHtml}${xLabelHtml}${yLabelHtml}
-        </g>\
-    </svg>`);
+    const $testSvg = $(`<svg class="xy-plot"><g class="chart-inner">\
+        ${xAxisHtml}${yAxisHtml}${xLabelHtml}${yLabelHtml}
+    </g></svg>`);
     $('body').append($testSvg);
-    const xValLabelBoxes = _.map($testSvg.find('.chart-axis-value-label-x'), el => el.getBoundingClientRect());
-    const yValLabelBoxes = _.map($testSvg.find('.chart-axis-value-label-y'), el => el.getBoundingClientRect());
-    const xAxisLabelBox = xAxisLabelProps ? $testSvg.find('.chart-axis-label-x text')[0].getBoundingClientRect() : null;
-    const yAxisLabelBox = yAxisLabelProps ? $testSvg.find('.chart-axis-label-y text')[0].getBoundingClientRect() : null;
+
+    const getRect = (el => el.getBoundingClientRect()); // get rekt
+    const labelBoxes = {
+        xVal: xProps.showLabels ? _.map($testSvg.find('.chart-axis-value-label-x'), getRect) : [],
+        yVal: yProps.showLabels ? _.map($testSvg.find('.chart-axis-value-label-y'), getRect) : [],
+        xAxis: xAxisLabelProps ? $testSvg.find('.chart-axis-label-x text')[0].getBoundingClientRect() : null,
+        yAxis: yAxisLabelProps ? $testSvg.find('.chart-axis-label-y text')[0].getBoundingClientRect() : null
+    };
     $testSvg.remove();
-    //console.log({xAxis: xAxisLabelBox, yAxis: yAxisLabelBox, xVal: xValLabelBoxes, yVal: yValLabelBoxes});
-    return {xAxis: xAxisLabelBox, yAxis: yAxisLabelBox, xVal: xValLabelBoxes, yVal: yValLabelBoxes};
+    return labelBoxes;
 }
 
 export default XYPlot;

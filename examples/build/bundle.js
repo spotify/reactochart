@@ -683,6 +683,32 @@
 	    }
 	});
 	
+	var AxisLabelExample = _reactAddons2['default'].createClass({
+	    displayName: 'AxisLabelExample',
+	
+	    render: function render() {
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            null,
+	            _reactAddons2['default'].createElement(
+	                _src.XYPlot,
+	                { width: 400, height: 300, yType: 'ordinal', xAxisLabel: 'Account Age' },
+	                _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1, orientation: 'horizontal' })
+	            ),
+	            _reactAddons2['default'].createElement(
+	                _src.XYPlot,
+	                { width: 400, height: 300, yType: 'ordinal', yAxisLabel: 'Active Users' },
+	                _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1, orientation: 'horizontal' })
+	            ),
+	            _reactAddons2['default'].createElement(
+	                _src.XYPlot,
+	                { width: 400, height: 300, yType: 'ordinal', xAxisLabel: 'Account Age', yAxisLabel: 'Active Users' },
+	                _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1, orientation: 'horizontal' })
+	            )
+	        );
+	    }
+	});
+	
 	var V1Examples = _reactAddons2['default'].createClass({
 	    displayName: 'V1Examples',
 	
@@ -733,7 +759,7 @@
 	    }
 	});
 	
-	var examples = [{ id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples }];
+	var examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'axisLabels', title: 'Axis Labels', Component: AxisLabelExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples }];
 	
 	var App = _reactAddons2['default'].createClass({
 	    displayName: 'App',
@@ -762,26 +788,23 @@
 	                null,
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
-	                    { width: 400, height: 300, yType: 'ordinal' },
-	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1, orientation: 'horizontal' })
-	                )
-	            ),
-	            _reactAddons2['default'].createElement(
-	                'div',
-	                null,
-	                _reactAddons2['default'].createElement(
-	                    _src.XYPlot,
-	                    { width: 400, height: 300, yType: 'ordinal', xAxisLabel: 'Account Age' },
+	                    { width: 200, height: 200, yType: 'ordinal', showYLabels: false },
 	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1, orientation: 'horizontal' })
 	                ),
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
-	                    { width: 400, height: 300, yType: 'ordinal', yAxisLabel: 'Active Users' },
+	                    { width: 200, height: 200, yType: 'ordinal', showXLabels: false },
 	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1, orientation: 'horizontal' })
 	                ),
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
-	                    { width: 400, height: 300, yType: 'ordinal', xAxisLabel: 'Account Age', yAxisLabel: 'Active Users' },
+	                    { width: 200, height: 200, yType: 'ordinal', showXLabels: false, showYLabels: false },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1, orientation: 'horizontal' })
+	                ),
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    { width: 200, height: 200, yType: 'ordinal',
+	                        showXLabels: false, showYLabels: false, showXTicks: false, showYTicks: false },
 	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 0, getY: 1, orientation: 'horizontal' })
 	                )
 	            ),
@@ -1004,7 +1027,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: lightblue;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-value-label,\n.xy-plot .chart-axis-value-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-value-label-x,\n.xy-plot .chart-axis-value-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-value-label-y,\n.xy-plot .chart-axis-value-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 16pt;\n  font-weight: bold;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.marker-line-chart line {\n  stroke: black;\n  stroke-width: 2px;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\n.pie-chart .pie-label-center {\n  font-size: 26pt;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
+	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: #f0f0f0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-value-label,\n.xy-plot .chart-axis-value-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-value-label-x,\n.xy-plot .chart-axis-value-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-value-label-y,\n.xy-plot .chart-axis-value-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 16pt;\n  font-weight: bold;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.marker-line-chart line {\n  stroke: black;\n  stroke-width: 2px;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\n.pie-chart .pie-label-center {\n  font-size: 26pt;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
 	
 	// exports
 
@@ -58607,8 +58630,11 @@
 	                    xScale = undefined,
 	                    yScale = undefined,
 	                    labelBoxes = undefined;
+	                var i = 0,
+	                    limit = 5; // ensure we dont loop forever
 	
 	                var _loop = function () {
+	                    i++;
 	                    innerWidth = width - (margin.left + margin.right);
 	                    innerHeight = height - (margin.top + margin.bottom);
 	                    xScale = makeScale(_this2.xDomains, [0, innerWidth], xType);
@@ -58617,33 +58643,41 @@
 	                    var yTicks = yType === 'ordinal' ? yScale.domain() : yScale.ticks(yTickCount);
 	                    if (xType !== 'ordinal') xScale.nice(xTicks.length);
 	                    if (yType !== 'ordinal') yScale.nice(yTicks.length);
-	                    //const labelBoxes = measureAxisLabels(xTicks, yTicks, xType, yType, xLabelFormat, yLabelFormat);
-	
-	                    var xAxisLabelProps = xAxisLabel ? { letter: 'x', label: xAxisLabel } : null;
 	
 	                    labelBoxes = measureAxisLabels(_this2.getXAxisProps({ innerWidth: innerWidth, innerHeight: innerHeight, scale: xScale }), _this2.getYAxisProps({ innerWidth: innerWidth, innerHeight: innerHeight, scale: yScale }), xAxisLabel ? _this2.getXAxisLabelProps({ margin: margin }) : null, yAxisLabel ? _this2.getYAxisLabelProps({ margin: margin }) : null);
 	
 	                    // todo: modify to handle all possible label alignments
 	                    // todo: handle case of labels not shown (ie if !this.props.showYLabels)
-	                    var topYValOverhang = Math.ceil(_lodash2['default'].last(labelBoxes.yVal).height / 2);
-	                    var xAxisLabelOuterHeight = xAxisLabel && labelBoxes.xAxis ? Math.ceil(labelBoxes.xAxis.height + xAxisLabelPadding) : 0;
-	                    var yAxisLabelOuterHeight = yAxisLabel && labelBoxes.yAxis ? Math.ceil(labelBoxes.yAxis.height + yAxisLabelPadding) : 0;
+	                    var hasXAxisLabel = xAxisLabel && labelBoxes.xAxis;
+	                    var hasYAxisLabel = yAxisLabel && labelBoxes.yAxis;
+	                    var hasXValLabels = !!labelBoxes.xVal.length;
+	                    var hasYValLabels = !!labelBoxes.yVal.length;
+	
+	                    var topYValOverhang = hasYValLabels ? Math.ceil(_lodash2['default'].last(labelBoxes.yVal).height / 2) : 0;
+	                    var xAxisLabelOuterHeight = hasXAxisLabel ? Math.ceil(labelBoxes.xAxis.height + xAxisLabelPadding) : 0;
+	                    var yAxisLabelOuterHeight = hasYAxisLabel ? Math.ceil(labelBoxes.yAxis.height + yAxisLabelPadding) : 0;
 	
 	                    var topMargin = _lodash2['default'].isNull(origMargin.top) ? Math.max(topYValOverhang, xAxisLabelOuterHeight, yAxisLabelOuterHeight) : origMargin.top;
 	
-	                    var yTickAndPadSpace = labelPadding + (showYTicks ? tickLength : 0);
+	                    var yTickAndPadSpace = (hasYValLabels || hasYAxisLabel ? labelPadding : 0) + (showYTicks ? tickLength : 0);
 	
-	                    var maxYValWidth = Math.ceil(_d32['default'].max(labelBoxes.yVal, (0, _utilJs.accessor)('width')) + yTickAndPadSpace);
-	                    var yAxisLabelOuterWidth = yAxisLabel && labelBoxes.yAxis ? Math.ceil(labelBoxes.yAxis.width) + yTickAndPadSpace : 0;
+	                    var maxYValWidth = (hasYValLabels ? Math.ceil(_d32['default'].max(labelBoxes.yVal, (0, _utilJs.accessor)('width'))) : 0) + yTickAndPadSpace;
+	                    var yAxisLabelOuterWidth = hasYAxisLabel ? Math.ceil(labelBoxes.yAxis.width) + yTickAndPadSpace : 0;
 	                    //console.log(maxYValWidth, yAxisLabelOuterWidth);
 	
 	                    var leftMargin = _lodash2['default'].isNull(origMargin.left) ? Math.max(maxYValWidth, yAxisLabelOuterWidth) : origMargin.left;
 	
+	                    var xTickAndPadSpace = (hasXValLabels || hasXAxisLabel ? labelPadding : 0) + (showXTicks ? tickLength : 0);
+	
+	                    var rightXValOverhang = hasXValLabels ? Math.ceil(_lodash2['default'].last(labelBoxes.xVal).width / 2) : 0;
+	
+	                    var maxXValHeight = (hasXValLabels ? Math.ceil(_d32['default'].max(labelBoxes.xVal, (0, _utilJs.accessor)('height'))) : 0) + xTickAndPadSpace;
+	
 	                    var newMargin = {
 	                        top: topMargin,
-	                        right: _lodash2['default'].isNull(origMargin.right) ? Math.ceil(_lodash2['default'].last(labelBoxes.xVal).width / 2) : origMargin.right,
+	                        right: _lodash2['default'].isNull(origMargin.right) ? rightXValOverhang : origMargin.right,
 	                        left: leftMargin,
-	                        bottom: _lodash2['default'].isNull(origMargin.bottom) ? Math.ceil(_d32['default'].max(labelBoxes.xVal, (0, _utilJs.accessor)('height')) + labelPadding + (showXTicks ? tickLength : 0)) : origMargin.bottom
+	                        bottom: _lodash2['default'].isNull(origMargin.bottom) ? maxXValHeight : origMargin.bottom
 	                    };
 	                    isDone = _lodash2['default'].all(_lodash2['default'].keys(margin), function (k) {
 	                        return margin[k] === newMargin[k];
@@ -58655,7 +58689,7 @@
 	                    innerHeight = height - (margin.top + margin.bottom);
 	                };
 	
-	                while (!isDone) {
+	                while (!isDone && i < limit) {
 	                    _loop();
 	                }
 	                _lodash2['default'].assign(_this2, { margin: margin, innerWidth: innerWidth, innerHeight: innerHeight, xScale: xScale, yScale: yScale, labelBoxes: labelBoxes });
@@ -59072,19 +59106,20 @@
 	    var xLabelHtml = xAxisLabelProps ? _react2['default'].renderToStaticMarkup(_react2['default'].createElement(XAxisLabel, xAxisLabelProps)) : '';
 	    var yLabelHtml = yAxisLabelProps ? _react2['default'].renderToStaticMarkup(_react2['default'].createElement(YAxisLabel, yAxisLabelProps)) : '';
 	    // todo don't use jquery...
-	    var $testSvg = (0, _jquery2['default'])('<svg class="xy-plot">        <g class="chart-inner">            ' + xAxisHtml + yAxisHtml + xLabelHtml + yLabelHtml + '\n        </g>    </svg>');
+	    var $testSvg = (0, _jquery2['default'])('<svg class="xy-plot"><g class="chart-inner">        ' + xAxisHtml + yAxisHtml + xLabelHtml + yLabelHtml + '\n    </g></svg>');
 	    (0, _jquery2['default'])('body').append($testSvg);
-	    var xValLabelBoxes = _lodash2['default'].map($testSvg.find('.chart-axis-value-label-x'), function (el) {
+	
+	    var getRect = function getRect(el) {
 	        return el.getBoundingClientRect();
-	    });
-	    var yValLabelBoxes = _lodash2['default'].map($testSvg.find('.chart-axis-value-label-y'), function (el) {
-	        return el.getBoundingClientRect();
-	    });
-	    var xAxisLabelBox = xAxisLabelProps ? $testSvg.find('.chart-axis-label-x text')[0].getBoundingClientRect() : null;
-	    var yAxisLabelBox = yAxisLabelProps ? $testSvg.find('.chart-axis-label-y text')[0].getBoundingClientRect() : null;
+	    }; // get rekt
+	    var labelBoxes = {
+	        xVal: xProps.showLabels ? _lodash2['default'].map($testSvg.find('.chart-axis-value-label-x'), getRect) : [],
+	        yVal: yProps.showLabels ? _lodash2['default'].map($testSvg.find('.chart-axis-value-label-y'), getRect) : [],
+	        xAxis: xAxisLabelProps ? $testSvg.find('.chart-axis-label-x text')[0].getBoundingClientRect() : null,
+	        yAxis: yAxisLabelProps ? $testSvg.find('.chart-axis-label-y text')[0].getBoundingClientRect() : null
+	    };
 	    $testSvg.remove();
-	    //console.log({xAxis: xAxisLabelBox, yAxis: yAxisLabelBox, xVal: xValLabelBoxes, yVal: yValLabelBoxes});
-	    return { xAxis: xAxisLabelBox, yAxis: yAxisLabelBox, xVal: xValLabelBoxes, yVal: yValLabelBoxes };
+	    return labelBoxes;
 	}
 	
 	exports['default'] = XYPlot;
