@@ -68734,7 +68734,7 @@
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return {
-	            barThickness: 20,
+	            barThickness: 10,
 	            orientation: 'vertical'
 	        };
 	    },

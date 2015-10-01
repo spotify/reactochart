@@ -263,7 +263,7 @@ const XYPlot = React.createClass({
                 ] : [0, 0];
 
                 // find # of pixels by which the left- and right-most x axis labels overhang the left/right chart edges
-                // todo: do the rest of this 
+                // todo: do the rest of this
                 //const [leftXTick, rightXTick] = [_.min(xTicks, yScale), _.max(yTicks, yScale)];
 
 

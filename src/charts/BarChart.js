@@ -136,7 +136,7 @@ const BarChart = React.createClass({
     },
     getDefaultProps() {
         return {
-            barThickness: 20,
+            barThickness: 10,
             orientation: 'vertical'
         }
     },
