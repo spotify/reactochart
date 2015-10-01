@@ -31,6 +31,8 @@ const ScatterPlot = React.createClass({
         }
     },
 
+    // todo: figure out spacing in statics.getOptions
+
     getHovered() {},
 
     render() {

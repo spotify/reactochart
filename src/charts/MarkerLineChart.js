@@ -61,22 +61,27 @@ const MarkerLineChart = React.createClass({
         }
     },
     statics: {
-        getDomain(props, xType, yType) {
-            const {data, getX, getY, getXEnd, getYEnd, orientation} = props;
+        getOptions(props) {
+            const {data, xType, yType, getX, getY, getXEnd, getYEnd, orientation, lineLength} = props;
             const tickType = getTickType(props);
             const isVertical = (orientation === 'vertical');
             const accessors = {x: accessor(getX), y: accessor(getY)};
             const rangeEndAccessors = {x: accessor(getXEnd), y: accessor(getYEnd)};
             const axisTypes = {x: xType, y: yType};
-            let domains = {x: null, y: null};
+            let options = {xDomain: null, yDomain: null, spacing: null};
 
-            if(tickType === 'RangeValue') {
+            if(tickType === 'RangeValue') { // value axis/axes use default domain
                 let rangeAxis = isVertical ? 'x' : 'y';
-                domains[rangeAxis] = rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisTypes[rangeAxis]);
+                options[`${rangeAxis}Domain`] =
+                    rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisTypes[rangeAxis]);
             }
-            // value axis/axes use default domain
 
-            return domains;
+            // the value, and therefore the center of the marker line, may fall exactly on the axis min or max,
+            // therefore marker lines need (0.5*lineLength) spacing so they don't hang over the edge of the chart
+            const halfLine = Math.ceil(0.5 * lineLength);
+            options.spacing = isVertical ? {left: halfLine, right: halfLine} : {top: halfLine, bottom: halfLine};
+
+            return options;
         }
     },
     render() {

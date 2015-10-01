@@ -123,6 +123,8 @@ const BarChart = React.createClass({
         getX: AccessorPropType,
         getY: AccessorPropType,
 
+        barThickness: PropTypes.number,
+
         // x & y scale types
         xType: PropTypes.oneOf(['number', 'time', 'ordinal']),
         yType: PropTypes.oneOf(['number', 'time', 'ordinal']),
@@ -134,16 +136,14 @@ const BarChart = React.createClass({
     },
     getDefaultProps() {
         return {
+            barThickness: 20,
             orientation: 'vertical'
         }
     },
 
     statics: {
-        getOptions(props, xType, yType) {
-
-        },
-        getDomain(props, xType, yType) {
-            const {data, getX, getY, getXEnd, getYEnd, orientation} = props;
+        getOptions(props) {
+            const {data, xType, yType, getX, getY, getXEnd, getYEnd, orientation, barThickness} = props;
             const [xAccessor, yAccessor] = [accessor(getX), accessor(getY)];
             const barType = getBarChartType(props);
             const isVertical = (orientation === 'vertical');
@@ -151,20 +151,24 @@ const BarChart = React.createClass({
             const accessors = {x: xAccessor, y: yAccessor};
             const rangeEndAccessors = {x: accessor(getXEnd), y: accessor(getYEnd)};
             const axisTypes = {x: xType, y: yType};
-            let domains = {x: null, y: null};
+            let options = {xDomain: null, yDomain: null, spacing: null};
 
             if(barType === 'ValueValue') {
-                let valueAxis = isVertical ? 'y' : 'x'; // the axis along which the bar's length shows value
-                domains[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
-
+                let valueAxis = isVertical ? 'y' : 'x'; // axis along which the bar's length shows value
+                options[`${valueAxis}Domain`] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
+                // the value, and therefore the center of the bar, may fall exactly on the axis min or max,
+                // therefore bars need (0.5*barThickness) spacing so they don't hang over the edge of the chart
+                const halfBar = Math.ceil(0.5 * barThickness);
+                options.spacing = isVertical ? {left: halfBar, right: halfBar} : {top: halfBar, bottom: halfBar};
             } else if(barType === 'RangeValue') {
-                let valueAxis = isVertical ? 'y' : 'x'; // the axis along which the bar's length shows value
-                let rangeAxis = isVertical ? 'x' : 'y';
-                domains[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
-                domains[rangeAxis] = rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisTypes[rangeAxis]);
-                //console.log(barType, domains, props.data);
+                let valueAxis = isVertical ? 'y' : 'x'; // axis along which the bar's length shows value
+                let rangeAxis = isVertical ? 'x' : 'y'; // axis along which the bar's thickness shows range
+                options[`${valueAxis}Domain`] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
+                options[`${rangeAxis}Domain`] =
+                    rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisTypes[rangeAxis]);
+                // no spacing necessary since bars are drawn *between* values, not on them.
             }
-            return domains;
+            return options;
         }
     },
     getHovered() {},
@@ -176,12 +180,7 @@ const BarChart = React.createClass({
         </g>
     },
     renderValueValueBars() {
-        const {data, xScale, yScale, getX, getY, xType, yType} = this.props;
-        //const isHorizontal = this.props.orientation === 'bar';
-        //const barThickness = this.state.barScale.rangeBand();
-        // todo handle barthickness in props/auto width
-        const barThickness = 10;
-
+        const {data, xScale, yScale, getX, getY, xType, yType, barThickness} = this.props;
         const xAccessor = accessor(getX);
         const yAccessor = accessor(getY);
 

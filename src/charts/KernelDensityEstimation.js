@@ -43,11 +43,12 @@ const KernelDensityEstimation = React.createClass({
         }
     },
     statics: {
-        getDomain(data, getX, getY) {
+        getOptions(props) {
             return {
-                x: null,
-                // todo figure out real domain
-                y: [0,200]
+                // todo: real x domain
+                xDomain: null,
+                // todo: real y domain
+                yDomain: [0,200]
             }
         }
     },

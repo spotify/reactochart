@@ -9,6 +9,7 @@ import $ from 'jquery';
 
 const DEFAULTS = {
     margin: {top: null, bottom: null, left: null, right: null},
+    spacing: {top: 0, bottom: 0, left: 0, right: 0},
     xAxisLabelAlign: {horizontal: 'left', vertical: 'top'},
     yAxisLabelAlign: {horizontal: 'right', vertical: 'top'}
 };
@@ -40,7 +41,18 @@ const XYPlot = React.createClass({
             right: PropTypes.number
         }),
 
-        // todo: padding
+        // whether or not to extend the scales to end on nice values (see docs for d3 scale.linear.nice())
+        niceX: PropTypes.bool,
+        niceY: PropTypes.bool,
+
+        // todo: ability to pass in array of ticks
+        // todo: minMargin - margin will be at least X, or more if necessary
+        // todo: extraMargin
+        // todo: padding, minPadding, extraPadding
+        // todo: spacing, minSpacing, extraSpacing ???
+        // todo: niceX, niceY
+        // todo: xAxisLabel, yAxisLabel
+
 
         // format to use for the axis value labels
         // interpreted as momentjs formats for time axes, or numeraljs formats for number axes
@@ -64,9 +76,6 @@ const XYPlot = React.createClass({
         // should we draw a line showing where zero is
         showXZero: PropTypes.bool,
         showYZero: PropTypes.bool,
-
-        // todo: niceX, niceY
-        // todo: xAxisLabel, yAxisLabel
 
         xAxisLabel: PropTypes.string,
         xAxisLabelAlign: PropTypes.shape({
@@ -96,6 +105,8 @@ const XYPlot = React.createClass({
             width: 400,
             height: 250,
             margin: DEFAULTS.margin,
+            niceX: true,
+            niceY: true,
             labelPadding: 6,
             tickLength: 6,
             showXLabels: true,
@@ -133,25 +144,32 @@ const XYPlot = React.createClass({
     },
 
     initDomains(props) {
+        const {xType, yType} = this.props;
         // figure out the domains for each axis (ie. data extents)
-        let chartDomains = [];
+        let allChartOptions = [];
         // unless both domains are given, ask each child chart for it's desired domain, & flatten them into one domain.
         // this is so that charts can plot their own modified version of the data (ie. a histogram),
         // even if it has a different domain than the original data
-        if(!(props.xDomain && props.yDomain)) {
-            React.Children.forEach(props.children, child => {
-                if(!child) return;
-                // todo handle domain passed in as prop
-                let domain = _.isFunction(child.type.getDomain) ?
-                    child.type.getDomain(child.props, props.xType, props.yType) : {x: null, y: null};
-                if(_.isNull(domain.x)) domain.x = defaultDomain(child.props.data, child.props.getX, props.xType);
-                if(_.isNull(domain.y)) domain.y = defaultDomain(child.props.data, child.props.getY, props.yType);
-                chartDomains.push(domain);
-            });
-        }
-        const xDomains = props.xDomain || _.pluck(chartDomains, 'x');
-        const yDomains = props.yDomain || _.pluck(chartDomains, 'y');
-        _.assign(this, {xDomains, yDomains});
+        //if(!(props.xDomain && props.yDomain)) {
+        React.Children.forEach(props.children, child => {
+            if(!child) return;
+            const childProps = _.assign({}, {xType, yType}, child.props);
+            // todo handle children which aren't chart components? render with same props?
+
+            // todo handle domain passed in as prop
+            let {xDomain, yDomain, spacing} = _.isFunction(child.type.getOptions) ?
+                child.type.getOptions(childProps) : {xDomain: null, yDomain: null, spacing: null};
+            if(_.isNull(xDomain)) xDomain = defaultDomain(child.props.data, child.props.getX, xType);
+            if(_.isNull(yDomain)) yDomain = defaultDomain(child.props.data, child.props.getY, yType);
+            spacing = _.isNull(spacing) ? _.clone(DEFAULTS.spacing) : _.defaults({}, spacing, DEFAULTS.spacing);
+
+            allChartOptions.push({xDomain, yDomain, spacing});
+        });
+        //}
+        const xDomains = props.xDomain || _.pluck(allChartOptions, 'xDomain');
+        const yDomains = props.yDomain || _.pluck(allChartOptions, 'yDomain');
+        const spacings = props.spacing || _.pluck(allChartOptions, 'spacing');
+        _.assign(this, {xDomains, yDomains, spacings});
     },
     initLabelFormats(props) {
         ['x', 'y'].forEach(letter => {
@@ -165,8 +183,6 @@ const XYPlot = React.createClass({
                 this[formatKey] = '0.[000000]a';
             } else if(axisType === 'time') {
                 // todo determine most appropriate date format for this domain
-                //const domains = this[`${letter}Domains`];
-                //const domain = defaultDomain(_.flatten(domains), null, axisType);
                 this[formatKey] = 'MM-DD';
             }
         })
@@ -177,39 +193,53 @@ const XYPlot = React.createClass({
         // calculate the inner width and height based on margins
         // todo get padding too
         const {
-            width, height, xType, yType, xTickCount, yTickCount,
+            width, height, xType, yType, xTickCount, yTickCount, niceX, niceY,
             xAxisLabel, xAxisLabelPadding, yAxisLabel, yAxisLabelPadding,
             labelPadding, tickLength, showXTicks, showYTicks
         } = props;
-        const {xLabelFormat, yLabelFormat} = this;
-        const origMargin = _.defaults(this.props.margin, DEFAULTS.margin);
+        const {spacings, xLabelFormat, yLabelFormat} = this;
+        const origMargin = _.defaults({}, this.props.margin, DEFAULTS.margin);
 
         const shouldMeasureLabels = _.any(origMargin, _.isNull);
         if(shouldMeasureLabels) {
             let isDone = false;
             // start with a margin of 10 pixels for all unknown margins
             let margin = _.transform(origMargin, (result, m, key) => result[key] = _.isNull(m) ? 10 : m);
+            // and padding equal to the first chart's spacing
+            let padding = _.clone(spacings[0]);
             // make scales using margin, measure labels, make new margins
             // repeat until we converge on a margin that works
-            let innerWidth, innerHeight, xScale, yScale, labelBoxes;
+            let xScale, yScale, scaleWidth, scaleHeight, chartWidth, chartHeight, labelBoxes;
             let i=0, limit=5; // ensure we dont loop forever
             while(!isDone && i<limit) {
                 i++;
-                innerWidth = width - (margin.left + margin.right);
-                innerHeight = height - (margin.top + margin.bottom);
-                xScale = makeScale(this.xDomains, [0, innerWidth], xType);
-                yScale = makeScale(this.yDomains, [innerHeight, 0], yType);
-                const xTicks = (xType === 'ordinal') ? xScale.domain() : xScale.ticks(xTickCount);
-                const yTicks = (yType === 'ordinal') ? yScale.domain() : yScale.ticks(yTickCount);
-                if(xType !== 'ordinal') xScale.nice(xTicks.length);
-                if(yType !== 'ordinal') yScale.nice(yTicks.length);
+                scaleWidth = width - (margin.left + margin.right + padding.left + padding.right);
+                scaleHeight = height - (margin.top + margin.bottom + padding.top + padding.bottom);
+                xScale = makeScale(this.xDomains, [padding.left, scaleWidth + padding.left], xType);
+                yScale = makeScale(this.yDomains, [scaleHeight + padding.top, padding.top], yType);
+                // todo cleanup ticks... doing more than i need to here...
+                let xTicks = (xType === 'ordinal') ? xScale.domain() : xScale.ticks(xTickCount);
+                let yTicks = (yType === 'ordinal') ? yScale.domain() : yScale.ticks(yTickCount);
+                if(niceX && xType !== 'ordinal') xTicks = xScale.nice(xTicks.length);
+                if(niceY && yType !== 'ordinal') yTicks = yScale.nice(yTicks.length).ticks();
 
                 labelBoxes = measureAxisLabels(
-                    this.getXAxisProps({innerWidth, innerHeight, scale: xScale}),
-                    this.getYAxisProps({innerWidth, innerHeight, scale: yScale}),
+                    this.getXAxisProps({scaleWidth, scaleHeight, scale: xScale}),
+                    this.getYAxisProps({scaleWidth, scaleHeight, scale: yScale}),
                     xAxisLabel ? this.getXAxisLabelProps({margin}) : null,
                     yAxisLabel ? this.getYAxisLabelProps({margin}) : null
                 );
+
+                // calculate padding based on spacings and domains
+                // spacing is the amount of outer space ('margin') required by the outermost elements of each chart,
+                // so that they still fit within the chart boundaries, defined by chartWidth and chartHeight.
+                // padding is the actual amount of extra space required, after taking into account the scales.
+                // if the outermost chart elements are on the scale extrema, padding = spacing,
+                // but the scale may extend beyond the last element anyway, so we may not need the extra padding.
+                // todo: temporarily set as padding = max spacing, implement this for real
+                padding = _.reduce(spacings, (result, spacing) => {
+                    return _.transform(spacing, (max, space, dir) => max[dir] = Math.max(result[dir] || space));
+                }, {});
 
                 // todo: modify to handle all possible label alignments
                 // todo: handle case of labels not shown (ie if !this.props.showYLabels)
@@ -218,7 +248,28 @@ const XYPlot = React.createClass({
                 const hasXValLabels = !!labelBoxes.xVal.length;
                 const hasYValLabels = !!labelBoxes.yVal.length;
 
-                const topYValOverhang = hasYValLabels ? Math.ceil(_.last(labelBoxes.yVal).height / 2) : 0;
+
+                const [xRange, yRange] = [xScale.range(), yScale.range()];
+
+                // find # of pixels by which the top- and bottom-most y axis labels overhang the top/bottom chart edges
+                const [topYTick, bottomYTick] = [_.min(yTicks, yScale), _.max(yTicks, yScale)];
+                const [topYTickFromTop, bottomYTickFromBottom] =
+                    [Math.abs(yScale(topYTick) - _.min(yRange)), Math.abs(yScale(bottomYTick) - _.max(yRange))];
+                const [topYValBox, bottomYValBox] = hasYValLabels ?
+                    [_.min(labelBoxes.yVal, accessor('top')), _.max(labelBoxes.yVal, accessor('top'))] : [null, null];
+                const [topYValOverhang, bottomYValOverhang] = hasYValLabels ? [
+                    Math.ceil(Math.max((0.5 * topYValBox.height) - (topYTickFromTop + padding.top), 0)),
+                    Math.ceil(Math.max((0.5 * bottomYValBox.height) - (bottomYTickFromBottom + padding.bottom), 0))
+                ] : [0, 0];
+
+                // find # of pixels by which the left- and right-most x axis labels overhang the left/right chart edges
+                // todo: do the rest of this 
+                //const [leftXTick, rightXTick] = [_.min(xTicks, yScale), _.max(yTicks, yScale)];
+
+
+                // todo: modify to handle padding!!
+                //
+                //const topYValOverhang = hasYValLabels ? Math.ceil(_.last(labelBoxes.yVal).height / 2) : 0;
                 const xAxisLabelOuterHeight = hasXAxisLabel ? Math.ceil(labelBoxes.xAxis.height + xAxisLabelPadding) : 0;
                 const yAxisLabelOuterHeight = hasYAxisLabel ? Math.ceil(labelBoxes.yAxis.height + yAxisLabelPadding) : 0;
 
@@ -244,29 +295,43 @@ const XYPlot = React.createClass({
                 const maxXValHeight =
                     (hasXValLabels ? Math.ceil(d3.max(labelBoxes.xVal, accessor('height'))) : 0) + xTickAndPadSpace;
 
-                let newMargin = {
+
+                let requiredMargin = {
                     top: topMargin,
-                    right: _.isNull(origMargin.right) ?
-                        rightXValOverhang : origMargin.right,
+                    bottom: maxXValHeight,
                     left: leftMargin,
-                    bottom: _.isNull(origMargin.bottom) ?
-                        maxXValHeight : origMargin.bottom
+                    right: rightXValOverhang
                 };
+
+                let newMargin = _(requiredMargin)
+                    .map((v,k) => [k, _.isNull(origMargin[k]) ? v : origMargin[k]])
+                    .object().value();
+
+                //let newMargin = {
+                //    top: topMargin,
+                //    right: _.isNull(origMargin.right) ?
+                //        rightXValOverhang : origMargin.right,
+                //    left: leftMargin,
+                //    bottom: _.isNull(origMargin.bottom) ?
+                //        maxXValHeight : origMargin.bottom
+                //};
                 isDone = _.all(_.keys(margin), k => margin[k] === newMargin[k]);
                 //console.log('calculated margin', newMargin);
                 //console.log(xScale.domain(), yScale.domain());
                 margin = newMargin;
-                innerWidth = width - (margin.left + margin.right);
-                innerHeight = height - (margin.top + margin.bottom);
+                scaleWidth = width - (margin.left + margin.right + padding.left + padding.right);
+                scaleHeight = height - (margin.top + margin.bottom + padding.top + padding.bottom);
             }
-            _.assign(this, {margin, innerWidth, innerHeight, xScale, yScale, labelBoxes});
+            //console.log('padding', padding);
+            //console.log({scaleWidth, scaleHeight});
+            _.assign(this, {margin, padding, scaleWidth, scaleHeight, xScale, yScale, labelBoxes});
         } else {
             // margins are all pre-defined, just make the scales
-            const innerWidth = width - (props.margin.left + props.margin.right);
-            const innerHeight = height - (props.margin.top + props.margin.bottom);
-            const xScale = makeScale(this.xDomains, [0, innerWidth], xType);
-            const yScale = makeScale(this.yDomains, [innerHeight, 0], yType);
-            _.assign(this, {margin: props.margin, innerWidth, innerHeight, xScale, yScale});
+            const scaleWidth = width - (props.margin.left + props.margin.right);
+            const scaleHeight = height - (props.margin.top + props.margin.bottom);
+            const xScale = makeScale(this.xDomains, [0, scaleWidth], xType);
+            const yScale = makeScale(this.yDomains, [scaleHeight, 0], yType);
+            _.assign(this, {margin: props.margin, scaleWidth, scaleHeight, xScale, yScale});
         }
     },
 
@@ -285,7 +350,9 @@ const XYPlot = React.createClass({
 
     render() {
         const {width, height, xType, yType, xAxisLabel, yAxisLabel} = this.props;
-        const {margin, xScale, yScale, innerWidth, innerHeight} = this;
+        const {margin, padding, xScale, yScale, scaleWidth, scaleHeight} = this;
+        const chartWidth = scaleWidth + padding.left + padding.right;
+        const chartHeight = scaleHeight + padding.top + padding.bottom;
         return (
             <svg className="xy-plot" {...{width, height}}
                  onMouseMove={this.onMouseMove}
@@ -293,6 +360,8 @@ const XYPlot = React.createClass({
                 <g className="chart-inner"
                    transform={`translate(${margin.left}, ${margin.top})`}
                 >
+                    <rect className="chart-background" width={chartWidth} height={chartHeight} />
+
                     <ChartAxis {...this.getXAxisProps()} />
                     <ChartAxis {...this.getYAxisProps()} />
 
@@ -300,7 +369,7 @@ const XYPlot = React.createClass({
                         if(!child) return null;
                         const name = child.props.name || 'chart-series-' + i;
                         return React.cloneElement(child,
-                            {ref: name, name, xType, yType, xScale, yScale, innerWidth, innerHeight}
+                            {ref: name, name, xType, yType, xScale, yScale, scaleWidth, scaleHeight}
                         );
                     })}
                 </g>
@@ -318,11 +387,12 @@ const XYPlot = React.createClass({
     },
 
     getXAxisProps(options={}) {
-        const innerHeight = options.innerHeight || this.innerHeight;
+        const scaleHeight = options.scaleHeight || this.scaleHeight;
+        const padding = options.padding || this.padding || {};
         return this.getAxisProps(_.assign({
             letter: 'x',
             orientation: 'horizontal',
-            axisTransform: `translate(0, ${innerHeight})`
+            axisTransform: `translate(0, ${scaleHeight + (padding.top || 0) + (padding.bottom || 0)})`
         }, options));
     },
     getYAxisProps(options={}) {
@@ -334,12 +404,14 @@ const XYPlot = React.createClass({
     getAxisProps(options) {
         const {letter, orientation, axisTransform} = options;
         const upperLetter = letter.toUpperCase();
+
         return {
             letter, orientation, axisTransform,
             labelPadding: options.labelPadding || this.props.labelPadding,
             tickLength: options.tickLength || this.props.tickLength,
-            innerWidth: options.innerWidth || this.innerWidth,
-            innerHeight: options.innerWidth || this.innerHeight,
+            scaleWidth: options.scaleWidth || this.scaleWidth,
+            scaleHeight: options.scaleWidth || this.scaleHeight,
+            padding: options.padding || this.padding,
             scale: options.scale || this[`${letter}Scale`],
             type: options.type || this.props[`${letter}Type`],
             tickCount: options.tickCount || this.props[`${letter}TickCount`],
@@ -355,8 +427,8 @@ const XYPlot = React.createClass({
         return _.defaults(options, {
             label: this.props.xAxisLabel,
             margin: this.margin,
-            innerWidth: this.innerWidth,
-            innerHeight: this.innerHeight,
+            scaleWidth: this.scaleWidth,
+            scaleHeight: this.scaleHeight,
             alignment: this.props.xAxisLabelAlign,
             axisLabelPadding: this.props.xAxisLabelPadding,
             valueLabelPadding: this.props.labelPadding,
@@ -370,8 +442,8 @@ const XYPlot = React.createClass({
         return _.defaults(options, {
             label: this.props.yAxisLabel,
             margin: this.margin,
-            innerWidth: this.innerWidth,
-            innerHeight: this.innerHeight,
+            scaleWidth: this.scaleWidth,
+            scaleHeight: this.scaleHeight,
             alignment: this.props.yAxisLabelAlign,
             axisLabelPadding: this.props.yAxisLabelPadding,
             valueLabelPadding: this.props.labelPadding,
@@ -387,8 +459,8 @@ const XAxisLabel = React.createClass({
         label: PropTypes.string,
         //letter: PropTypes.string,
         margin: PropTypes.object,
-        innerWidth: PropTypes.number,
-        innerHeight: PropTypes.number,
+        scaleWidth: PropTypes.number,
+        scaleHeight: PropTypes.number,
         alignment: PropTypes.shape({
             horizontal: PropTypes.oneOf(['left', 'center', 'right']),
             vertical: PropTypes.oneOf(['top', 'bottom'])
@@ -402,7 +474,7 @@ const XAxisLabel = React.createClass({
     getDefaultProps() {
         return {
             labelBox: {height: 10, width: 10},
-            innerWidth: 0
+            scaleWidth: 0
         }
     },
     render() {
@@ -412,8 +484,8 @@ const XAxisLabel = React.createClass({
         const left = margin.left;
         const x =
             (alignment.horizontal === 'left') ? 0 :
-            (alignment.horizontal === 'right') ? this.props.innerWidth :
-            this.props.innerWidth / 2;
+            (alignment.horizontal === 'right') ? this.props.scaleWidth :
+            this.props.scaleWidth / 2;
         const textAnchor =
             (alignment.horizontal === 'left') ? 'start' :
             (alignment.horizontal === 'right') ? 'end' :
@@ -435,8 +507,8 @@ const YAxisLabel = React.createClass({
         label: PropTypes.string,
         //letter: PropTypes.string,
         margin: PropTypes.object,
-        innerWidth: PropTypes.number,
-        innerHeight: PropTypes.number,
+        scaleWidth: PropTypes.number,
+        scaleHeight: PropTypes.number,
         alignment: PropTypes.shape({
             horizontal: PropTypes.oneOf(['left', 'center', 'right']),
             vertical: PropTypes.oneOf(['top', 'bottom'])
@@ -451,7 +523,7 @@ const YAxisLabel = React.createClass({
     getDefaultProps() {
         return {
             labelBox: {height: 10, width: 10},
-            innerWidth: 0
+            scaleWidth: 0
         }
     },
     render() {
@@ -490,28 +562,32 @@ const ChartAxis = React.createClass({
         labelFormat: PropTypes.string,
         letter: PropTypes.string,
 
-        innerWidth: PropTypes.number,
-        innerHeight: PropTypes.number,
+        scaleWidth: PropTypes.number,
+        scaleHeight: PropTypes.number,
+        padding: PropTypes.object,
         labelPadding: PropTypes.number,
         tickLength: PropTypes.number,
         showLabels: PropTypes.bool,
         showTicks: PropTypes.bool,
         showGrid: PropTypes.bool
     },
+    getDefaultProps() {
+        return { padding: DEFAULTS.spacing }
+    },
     render() {
         const {
             scale, type, orientation, axisTransform, tickCount, letter, labelFormat,
-            innerWidth, innerHeight, labelPadding, tickLength, showLabels, showTicks, showGrid
+            scaleWidth, scaleHeight, padding, labelPadding, tickLength, showLabels, showTicks, showGrid
         } = this.props;
 
         if(!(showLabels || showTicks || showGrid)) return null;
 
         const ticks = (type === 'ordinal') ? scale.domain() : scale.ticks(tickCount);
-        const tickTransform = (value) => (orientation === 'vertical') ?
-            `translate(0, ${scale(value)})` : `translate(${scale(value)}, 0)`;
         const distance = (showTicks) ? tickLength + labelPadding : labelPadding;
-        const labelOffset = (orientation === 'vertical') ? {x: -distance} : {y: distance};
-        const gridLength = (orientation === 'vertical') ? innerWidth : innerHeight;
+        const [tickTransform, labelOffset, gridLength] = (orientation === 'vertical') ?
+            [v => `translate(0, ${scale(v)})`, {x: -distance}, scaleWidth + padding.left + padding.right] :
+            [v => `translate(${scale(v)}, 0)`, {y: distance}, scaleHeight + padding.top + padding.bottom];
+
 
         return <g ref={`${letter}Axis`} className={`chart-axis chart-axis-${letter}`} transform={axisTransform}>
             {_.map(ticks, (value) => {
