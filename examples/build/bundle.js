@@ -58867,7 +58867,7 @@
 	        var chartYVal = !_lodash2['default'].inRange(chartY, 0, scaleHeight + padding.top + padding.bottom) ? null : yType === 'ordinal' ? this.yScale.domain()[indexOfClosestNumberInList(chartY, this.yScale.range())] : this.yScale.invert(chartY);
 	
 	        var chart = this.refs['chart-series-0'];
-	        var hovered = _lodash2['default'].isFunction(chart.getHovered) ? chart.getHovered(chartXVal) : null;
+	        var hovered = chart && _lodash2['default'].isFunction(chart.getHovered) ? chart.getHovered(chartXVal) : null;
 	
 	        this.props.onMouseMove(hovered, e, { chartX: chartX, chartY: chartY, chartXVal: chartXVal, chartYVal: chartYVal });
 	    },

@@ -342,7 +342,7 @@ const XYPlot = React.createClass({
                 this.yScale.invert(chartY);
 
         const chart = this.refs['chart-series-0'];
-        const hovered = _.isFunction(chart.getHovered) ? chart.getHovered(chartXVal) : null;
+        const hovered = (chart && _.isFunction(chart.getHovered)) ? chart.getHovered(chartXVal) : null;
 
         this.props.onMouseMove(hovered, e, {chartX, chartY, chartXVal, chartYVal});
     },
