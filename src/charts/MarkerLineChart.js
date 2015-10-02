@@ -3,7 +3,7 @@ const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
 
-import {accessor, AccessorPropType} from '../util.js';
+import {accessor, AccessorPropType, InterfaceMixin} from '../util.js';
 
 // BarTickChart is like a bar chart,
 // except that it just draws a line at the data value, rather than a full bar
@@ -38,6 +38,7 @@ function rangeAxisDomain(data, rangeStartAccessor, rangeEndAccessor, scaleType) 
 }
 
 const MarkerLineChart = React.createClass({
+    mixins: [InterfaceMixin('XYChart')],
     propTypes: {
         // the array of data objects
         data: PropTypes.array.isRequired,

@@ -485,10 +485,24 @@ const examples = [
     {id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples}
 ];
 
+const TestingRectangle = React.createClass({
+    render() {
+        return this.props.hoveredYVal ?
+            <rect
+                x="0"
+                y={this.props.yScale(this.props.hoveredYVal) - 20}
+                width="200" height="40"
+                underAxes={true}
+                style={{fill: 'red'}}
+            /> : null;
+    }
+});
+
 const App = React.createClass({
     getInitialState() {
         return {
-            visibleExamples: {}
+            visibleExamples: {},
+            hoveredYVal: null
         }
     },
     toggleExample(id) {
@@ -496,13 +510,23 @@ const App = React.createClass({
         this.setState(update(this.state, {visibleExamples: {[id]: {$set: !isVisible}}}));
     },
 
+    onMouseMoveChart(hovered, e, options) {
+        const {chartYVal} = options;
+        this.setState({hoveredYVal: chartYVal});
+    },
+
     render() {
         return <div>
             <h1>Reactochart Examples</h1>
 
             <div>
-                <XYPlot width={200} height={200} xType='ordinal' showXLabels={false}>
-                    <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} />
+                <XYPlot width={200} height={200} yType='ordinal' onMouseMove={this.onMouseMoveChart}>
+                    <TestingRectangle underAxes={true} hoveredYVal={this.state.hoveredYVal} />
+                    <BarChart
+                        data={randomBarData2.numberOrdinal}
+                        getX={0} getY={1} orientation="horizontal"
+                        barThickness={20}
+                    />
                 </XYPlot>
             </div>
             {/*

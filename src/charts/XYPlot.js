@@ -152,11 +152,9 @@ const XYPlot = React.createClass({
         // even if it has a different domain than the original data
         //if(!(props.xDomain && props.yDomain)) {
         React.Children.forEach(props.children, child => {
-            if(!child) return;
-            const childProps = _.assign({}, {xType, yType}, child.props);
-            // todo handle children which aren't chart components? render with same props?
+            if(!childIsXYChart(child)) return; // only get options for children which identify themselves as XYCharts
 
-            // todo handle domain passed in as prop
+            const childProps = _.assign({}, {xType, yType}, child.props);
             let {xDomain, yDomain, spacing} = _.isFunction(child.type.getOptions) ?
                 child.type.getOptions(childProps) : {xDomain: null, yDomain: null, spacing: null};
             if(_.isNull(xDomain)) xDomain = defaultDomain(child.props.data, child.props.getX, xType);
@@ -307,17 +305,8 @@ const XYPlot = React.createClass({
                     .map((v,k) => [k, _.isNull(origMargin[k]) ? v : origMargin[k]])
                     .object().value();
 
-                //let newMargin = {
-                //    top: topMargin,
-                //    right: _.isNull(origMargin.right) ?
-                //        rightXValOverhang : origMargin.right,
-                //    left: leftMargin,
-                //    bottom: _.isNull(origMargin.bottom) ?
-                //        maxXValHeight : origMargin.bottom
-                //};
                 isDone = _.all(_.keys(margin), k => margin[k] === newMargin[k]);
                 //console.log('calculated margin', newMargin);
-                //console.log(xScale.domain(), yScale.domain());
                 margin = newMargin;
                 scaleWidth = width - (margin.left + margin.right + padding.left + padding.right);
                 scaleHeight = height - (margin.top + margin.bottom + padding.top + padding.bottom);
@@ -336,16 +325,26 @@ const XYPlot = React.createClass({
     },
 
     onMouseMove(e) {
-        //if(!this.props.onMouseMove && !this.state.isSelecting) return;
+        const {xType, yType, height, width} = this.props;
+        const {margin, padding, scaleWidth, scaleHeight} = this;
+        // todo faster method than getBoundingClientRect on every mouseover?
         const chartBB = e.currentTarget.getBoundingClientRect();
-        const chartX = (e.clientX - chartBB.left) - this.margin.left;
-        // todo alternative to invert for ordinal scales
-        const chartXVal = this.xScale.invert(chartX);
+        const chartX = Math.round((e.clientX - chartBB.left) - this.margin.left);
+        const chartY = Math.round((e.clientY - chartBB.top) - this.margin.top);
+
+        const chartXVal = (!_.inRange(chartX, 0, scaleWidth + padding.left + padding.right)) ? null :
+            (xType === 'ordinal') ?
+                this.xScale.domain()[indexOfClosestNumberInList(chartX, this.xScale.range())] :
+                this.xScale.invert(chartX);
+        const chartYVal = (!_.inRange(chartY, 0, scaleHeight + padding.top + padding.bottom)) ? null :
+            (yType === 'ordinal') ?
+                this.yScale.domain()[indexOfClosestNumberInList(chartY, this.yScale.range())] :
+                this.yScale.invert(chartY);
 
         const chart = this.refs['chart-series-0'];
         const hovered = _.isFunction(chart.getHovered) ? chart.getHovered(chartXVal) : null;
 
-        this.props.onMouseMove(hovered, e);
+        this.props.onMouseMove(hovered, e, {chartX, chartY, chartXVal, chartYVal});
     },
 
     render() {
@@ -353,25 +352,41 @@ const XYPlot = React.createClass({
         const {margin, padding, xScale, yScale, scaleWidth, scaleHeight} = this;
         const chartWidth = scaleWidth + padding.left + padding.right;
         const chartHeight = scaleHeight + padding.top + padding.bottom;
+
+        const propsToPass = {
+            xType, yType, xScale, yScale, scaleWidth, scaleHeight, plotWidth: width, plotHeight: height,
+            chartMargin: margin, chartPadding: padding
+        };
+
+        const seriesI = 0;
+        const childrenUnderAxes = React.Children.map(this.props.children, (child, i) => {
+            if(!child || !child.props || !child.props.underAxes) return null;
+            // todo fix chart series #
+            const name = child.props.name || 'chart-series-' + i;
+            return React.cloneElement(child, _.assign({ref: name, name}, propsToPass));
+        });
+        const childrenAboveAxes = React.Children.map(this.props.children, (child, i) => {
+            if(!child || (child.props && child.props.underAxes)) return null;
+            const name = child.props.name || 'chart-series-' + i;
+            return React.cloneElement(child, _.assign({ref: name, name}, propsToPass));
+        });
+
+
         return (
             <svg className="xy-plot" {...{width, height}}
-                 onMouseMove={this.onMouseMove}
+                 onMouseMove={_.isFunction(this.props.onMouseMove) ? this.onMouseMove : null}
             >
                 <g className="chart-inner"
                    transform={`translate(${margin.left}, ${margin.top})`}
                 >
                     <rect className="chart-background" width={chartWidth} height={chartHeight} />
 
+                    {childrenUnderAxes}
+
                     <ChartAxis {...this.getXAxisProps()} />
                     <ChartAxis {...this.getYAxisProps()} />
 
-                    {React.Children.map(this.props.children, (child, i) => {
-                        if(!child) return null;
-                        const name = child.props.name || 'chart-series-' + i;
-                        return React.cloneElement(child,
-                            {ref: name, name, xType, yType, xScale, yScale, scaleWidth, scaleHeight}
-                        );
-                    })}
+                    {childrenAboveAxes}
                 </g>
 
                 {xAxisLabel ?
@@ -622,6 +637,30 @@ const ChartAxis = React.createClass({
     }
 });
 
+function closestNumberInList(number, list) {
+    return list.reduce((closest, current) => {
+        return Math.abs(current - number) < Math.abs(closest - number) ? current : closest;
+    });
+}
+function indexOfClosestNumberInList(number, list) {
+    //let closestIndex = 0;
+    //const closestNumber = list.reduce((closest, current, i) => {
+    //    if(Math.abs(current - number) < Math.abs(closest - number)) {
+    //        closestIndex = i;
+    //        return current;
+    //    } else return closest;
+    //}, Infinity);
+
+    return list.reduce((closestI, current, i) => {
+        return Math.abs(current - number) < Math.abs(list[closestI] - number) ? i : closestI;
+    }, 0);
+    //return closestIndex;
+}
+
+function childIsXYChart(child) {
+    return !!(child && _.has(child, 'type.implementsInterface') && child.type.implementsInterface('XYChart'));
+}
+
 function isNullOrUndefined(d) { return _.isNull(d) || _.isUndefined(d); }
 
 function makeScale(domains, range, axisType) {
@@ -658,8 +697,8 @@ function formatAxisLabel(value, type, format) {
 }
 
 function measureAxisLabels(xProps, yProps, xAxisLabelProps, yAxisLabelProps) {
-    _.assign(xProps, {showTicks: false, showGrid: false});
-    _.assign(yProps, {showTicks: false, showGrid: false});
+    xProps = _.assign({}, xProps, {showTicks: false, showGrid: false});
+    yProps = _.assign({}, yProps, {showTicks: false, showGrid: false});
     const xAxisHtml = React.renderToStaticMarkup(<ChartAxis {...xProps}/>);
     const yAxisHtml = React.renderToStaticMarkup(<ChartAxis {...yProps}/>);
     const xLabelHtml = xAxisLabelProps ? React.renderToStaticMarkup(<XAxisLabel {...xAxisLabelProps}/>) : '';

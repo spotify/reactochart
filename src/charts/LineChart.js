@@ -3,9 +3,10 @@ const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
 
-import {accessor, AccessorPropType} from '../util.js';
+import {accessor, AccessorPropType, InterfaceMixin} from '../util.js';
 
 const LineChart = React.createClass({
+    mixins: [InterfaceMixin('XYChart')],
     propTypes: {
         // the array of data objects
         data: PropTypes.array.isRequired,

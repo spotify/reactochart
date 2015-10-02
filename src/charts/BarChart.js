@@ -3,7 +3,7 @@ const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
 
-import {accessor, AccessorPropType} from '../util.js';
+import {accessor, AccessorPropType, InterfaceMixin} from '../util.js';
 
 // on the taxonomy of bar charts:
 
@@ -116,6 +116,7 @@ function rangeAxisDomain(data, rangeStartAccessor, rangeEndAccessor, scaleType) 
 }
 
 const BarChart = React.createClass({
+    mixins: [InterfaceMixin('XYChart')],
     propTypes: {
         // the array of data objects
         data: PropTypes.array.isRequired,

@@ -761,17 +761,38 @@
 	
 	var examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'axisLabels', title: 'Axis Labels', Component: AxisLabelExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples }];
 	
+	var TestingRectangle = _reactAddons2['default'].createClass({
+	    displayName: 'TestingRectangle',
+	
+	    render: function render() {
+	        return this.props.hoveredYVal ? _reactAddons2['default'].createElement('rect', {
+	            x: '0',
+	            y: this.props.yScale(this.props.hoveredYVal) - 20,
+	            width: '200', height: '40',
+	            underAxes: true,
+	            style: { fill: 'red' }
+	        }) : null;
+	    }
+	});
+	
 	var App = _reactAddons2['default'].createClass({
 	    displayName: 'App',
 	
 	    getInitialState: function getInitialState() {
 	        return {
-	            visibleExamples: {}
+	            visibleExamples: {},
+	            hoveredYVal: null
 	        };
 	    },
 	    toggleExample: function toggleExample(id) {
 	        var isVisible = this.state.visibleExamples[id];
 	        this.setState(update(this.state, { visibleExamples: _defineProperty({}, id, { $set: !isVisible }) }));
+	    },
+	
+	    onMouseMoveChart: function onMouseMoveChart(hovered, e, options) {
+	        var chartYVal = options.chartYVal;
+	
+	        this.setState({ hoveredYVal: chartYVal });
 	    },
 	
 	    render: function render() {
@@ -788,8 +809,13 @@
 	                null,
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
-	                    { width: 200, height: 200, xType: 'ordinal', showXLabels: false },
-	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getX: 1, getY: 0 })
+	                    { width: 200, height: 200, yType: 'ordinal', onMouseMove: this.onMouseMoveChart },
+	                    _reactAddons2['default'].createElement(TestingRectangle, { underAxes: true, hoveredYVal: this.state.hoveredYVal }),
+	                    _reactAddons2['default'].createElement(_src.BarChart, {
+	                        data: randomBarData2.numberOrdinal,
+	                        getX: 0, getY: 1, orientation: 'horizontal',
+	                        barThickness: 20
+	                    })
 	                )
 	            ),
 	            this.renderExamples()
@@ -58365,6 +58391,7 @@
 	    value: true
 	});
 	exports.accessor = accessor;
+	exports.InterfaceMixin = InterfaceMixin;
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -58385,6 +58412,25 @@
 	    return _lodash2['default'].isFunction(key) ? key : // pass an accessor function...
 	    _lodash2['default'].isNull(key) || _lodash2['default'].isUndefined(key) ? _lodash2['default'].identity : // or null/undefined to just return the item itself...
 	    _lodash2['default'].property(key); // or an array index or object key
+	}
+	
+	// InterfaceMixin takes a list of string "interfaces"
+	// and adds a static called implementsInterface to the component that simply checks if an interface is in the list
+	// This way, a parent component can pass particular props only to children which implement the relevant interface
+	// by checking child.type.implementsInterface('SomeInterface')
+	// usage:
+	// mixins: [InterfaceMixin('SomeInterface')] // or...
+	// mixins: [InterfaceMixin(['SomeInterface', 'AnotherInterface'])]
+	
+	function InterfaceMixin(interfaces) {
+	    interfaces = _lodash2['default'].isString(interfaces) ? [interfaces] : interfaces;
+	    return {
+	        statics: {
+	            implementsInterface: function implementsInterface(name) {
+	                return interfaces.indexOf(name) > -1;
+	            }
+	        }
+	    };
 	}
 
 /***/ },
@@ -58587,11 +58633,9 @@
 	        // even if it has a different domain than the original data
 	        //if(!(props.xDomain && props.yDomain)) {
 	        _react2['default'].Children.forEach(props.children, function (child) {
-	            if (!child) return;
-	            var childProps = _lodash2['default'].assign({}, { xType: xType, yType: yType }, child.props);
-	            // todo handle children which aren't chart components? render with same props?
+	            if (!childIsXYChart(child)) return; // only get options for children which identify themselves as XYCharts
 	
-	            // todo handle domain passed in as prop
+	            var childProps = _lodash2['default'].assign({}, { xType: xType, yType: yType }, child.props);
 	
 	            var _ref = _lodash2['default'].isFunction(child.type.getOptions) ? child.type.getOptions(childProps) : { xDomain: null, yDomain: null, spacing: null };
 	
@@ -58777,19 +58821,10 @@
 	                        return [k, _lodash2['default'].isNull(origMargin[k]) ? v : origMargin[k]];
 	                    }).object().value();
 	
-	                    //let newMargin = {
-	                    //    top: topMargin,
-	                    //    right: _.isNull(origMargin.right) ?
-	                    //        rightXValOverhang : origMargin.right,
-	                    //    left: leftMargin,
-	                    //    bottom: _.isNull(origMargin.bottom) ?
-	                    //        maxXValHeight : origMargin.bottom
-	                    //};
 	                    isDone = _lodash2['default'].all(_lodash2['default'].keys(margin), function (k) {
 	                        return margin[k] === newMargin[k];
 	                    });
 	                    //console.log('calculated margin', newMargin);
-	                    //console.log(xScale.domain(), yScale.domain());
 	                    margin = newMargin;
 	                    scaleWidth = width - (margin.left + margin.right + padding.left + padding.right);
 	                    scaleHeight = height - (margin.top + margin.bottom + padding.top + padding.bottom);
@@ -58813,26 +58848,38 @@
 	    },
 	
 	    onMouseMove: function onMouseMove(e) {
-	        //if(!this.props.onMouseMove && !this.state.isSelecting) return;
+	        var _props2 = this.props;
+	        var xType = _props2.xType;
+	        var yType = _props2.yType;
+	        var height = _props2.height;
+	        var width = _props2.width;
+	        var margin = this.margin;
+	
+	        // todo faster method than getBoundingClientRect on every mouseover?
+	        var padding = this.padding;
+	        var scaleWidth = this.scaleWidth;
+	        var scaleHeight = this.scaleHeight;
 	        var chartBB = e.currentTarget.getBoundingClientRect();
-	        var chartX = e.clientX - chartBB.left - this.margin.left;
-	        // todo alternative to invert for ordinal scales
-	        var chartXVal = this.xScale.invert(chartX);
+	        var chartX = Math.round(e.clientX - chartBB.left - this.margin.left);
+	        var chartY = Math.round(e.clientY - chartBB.top - this.margin.top);
+	
+	        var chartXVal = !_lodash2['default'].inRange(chartX, 0, scaleWidth + padding.left + padding.right) ? null : xType === 'ordinal' ? this.xScale.domain()[indexOfClosestNumberInList(chartX, this.xScale.range())] : this.xScale.invert(chartX);
+	        var chartYVal = !_lodash2['default'].inRange(chartY, 0, scaleHeight + padding.top + padding.bottom) ? null : yType === 'ordinal' ? this.yScale.domain()[indexOfClosestNumberInList(chartY, this.yScale.range())] : this.yScale.invert(chartY);
 	
 	        var chart = this.refs['chart-series-0'];
 	        var hovered = _lodash2['default'].isFunction(chart.getHovered) ? chart.getHovered(chartXVal) : null;
 	
-	        this.props.onMouseMove(hovered, e);
+	        this.props.onMouseMove(hovered, e, { chartX: chartX, chartY: chartY, chartXVal: chartXVal, chartYVal: chartYVal });
 	    },
 	
 	    render: function render() {
-	        var _props2 = this.props;
-	        var width = _props2.width;
-	        var height = _props2.height;
-	        var xType = _props2.xType;
-	        var yType = _props2.yType;
-	        var xAxisLabel = _props2.xAxisLabel;
-	        var yAxisLabel = _props2.yAxisLabel;
+	        var _props3 = this.props;
+	        var width = _props3.width;
+	        var height = _props3.height;
+	        var xType = _props3.xType;
+	        var yType = _props3.yType;
+	        var xAxisLabel = _props3.xAxisLabel;
+	        var yAxisLabel = _props3.yAxisLabel;
 	        var margin = this.margin;
 	        var padding = this.padding;
 	        var xScale = this.xScale;
@@ -58842,10 +58889,29 @@
 	
 	        var chartWidth = scaleWidth + padding.left + padding.right;
 	        var chartHeight = scaleHeight + padding.top + padding.bottom;
+	
+	        var propsToPass = {
+	            xType: xType, yType: yType, xScale: xScale, yScale: yScale, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: width, plotHeight: height,
+	            chartMargin: margin, chartPadding: padding
+	        };
+	
+	        var seriesI = 0;
+	        var childrenUnderAxes = _react2['default'].Children.map(this.props.children, function (child, i) {
+	            if (!child || !child.props || !child.props.underAxes) return null;
+	            // todo fix chart series #
+	            var name = child.props.name || 'chart-series-' + i;
+	            return _react2['default'].cloneElement(child, _lodash2['default'].assign({ ref: name, name: name }, propsToPass));
+	        });
+	        var childrenAboveAxes = _react2['default'].Children.map(this.props.children, function (child, i) {
+	            if (!child || child.props && child.props.underAxes) return null;
+	            var name = child.props.name || 'chart-series-' + i;
+	            return _react2['default'].cloneElement(child, _lodash2['default'].assign({ ref: name, name: name }, propsToPass));
+	        });
+	
 	        return _react2['default'].createElement(
 	            'svg',
 	            _extends({ className: 'xy-plot' }, { width: width, height: height }, {
-	                onMouseMove: this.onMouseMove
+	                onMouseMove: _lodash2['default'].isFunction(this.props.onMouseMove) ? this.onMouseMove : null
 	            }),
 	            _react2['default'].createElement(
 	                'g',
@@ -58853,13 +58919,10 @@
 	                    transform: 'translate(' + margin.left + ', ' + margin.top + ')'
 	                },
 	                _react2['default'].createElement('rect', { className: 'chart-background', width: chartWidth, height: chartHeight }),
+	                childrenUnderAxes,
 	                _react2['default'].createElement(ChartAxis, this.getXAxisProps()),
 	                _react2['default'].createElement(ChartAxis, this.getYAxisProps()),
-	                _react2['default'].Children.map(this.props.children, function (child, i) {
-	                    if (!child) return null;
-	                    var name = child.props.name || 'chart-series-' + i;
-	                    return _react2['default'].cloneElement(child, { ref: name, name: name, xType: xType, yType: yType, xScale: xScale, yScale: yScale, scaleWidth: scaleWidth, scaleHeight: scaleHeight });
-	                })
+	                childrenAboveAxes
 	            ),
 	            xAxisLabel ? _react2['default'].createElement(XAxisLabel, this.getXAxisLabelProps()) : null,
 	            yAxisLabel ? _react2['default'].createElement(YAxisLabel, this.getYAxisLabelProps()) : null
@@ -58971,11 +59034,11 @@
 	        };
 	    },
 	    render: function render() {
-	        var _props3 = this.props;
-	        var label = _props3.label;
-	        var labelBox = _props3.labelBox;
-	        var margin = _props3.margin;
-	        var alignment = _props3.alignment;
+	        var _props4 = this.props;
+	        var label = _props4.label;
+	        var labelBox = _props4.labelBox;
+	        var margin = _props4.margin;
+	        var alignment = _props4.alignment;
 	
 	        var top = labelBox.height;
 	        var left = margin.left;
@@ -59026,14 +59089,14 @@
 	        };
 	    },
 	    render: function render() {
-	        var _props4 = this.props;
-	        var label = _props4.label;
-	        var labelBox = _props4.labelBox;
-	        var margin = _props4.margin;
-	        var valueLabelPadding = _props4.valueLabelPadding;
-	        var showTicks = _props4.showTicks;
-	        var tickLength = _props4.tickLength;
-	        var alignment = _props4.alignment;
+	        var _props5 = this.props;
+	        var label = _props5.label;
+	        var labelBox = _props5.labelBox;
+	        var margin = _props5.margin;
+	        var valueLabelPadding = _props5.valueLabelPadding;
+	        var showTicks = _props5.showTicks;
+	        var tickLength = _props5.tickLength;
+	        var alignment = _props5.alignment;
 	
 	        var yTickAndPadSpace = valueLabelPadding + (showTicks ? tickLength : 0);
 	
@@ -59086,22 +59149,22 @@
 	    render: function render() {
 	        var _this3 = this;
 	
-	        var _props5 = this.props;
-	        var scale = _props5.scale;
-	        var type = _props5.type;
-	        var orientation = _props5.orientation;
-	        var axisTransform = _props5.axisTransform;
-	        var tickCount = _props5.tickCount;
-	        var letter = _props5.letter;
-	        var labelFormat = _props5.labelFormat;
-	        var scaleWidth = _props5.scaleWidth;
-	        var scaleHeight = _props5.scaleHeight;
-	        var padding = _props5.padding;
-	        var labelPadding = _props5.labelPadding;
-	        var tickLength = _props5.tickLength;
-	        var showLabels = _props5.showLabels;
-	        var showTicks = _props5.showTicks;
-	        var showGrid = _props5.showGrid;
+	        var _props6 = this.props;
+	        var scale = _props6.scale;
+	        var type = _props6.type;
+	        var orientation = _props6.orientation;
+	        var axisTransform = _props6.axisTransform;
+	        var tickCount = _props6.tickCount;
+	        var letter = _props6.letter;
+	        var labelFormat = _props6.labelFormat;
+	        var scaleWidth = _props6.scaleWidth;
+	        var scaleHeight = _props6.scaleHeight;
+	        var padding = _props6.padding;
+	        var labelPadding = _props6.labelPadding;
+	        var tickLength = _props6.tickLength;
+	        var showLabels = _props6.showLabels;
+	        var showTicks = _props6.showTicks;
+	        var showGrid = _props6.showGrid;
 	
 	        if (!(showLabels || showTicks || showGrid)) return null;
 	
@@ -59184,6 +59247,30 @@
 	    }
 	});
 	
+	function closestNumberInList(number, list) {
+	    return list.reduce(function (closest, current) {
+	        return Math.abs(current - number) < Math.abs(closest - number) ? current : closest;
+	    });
+	}
+	function indexOfClosestNumberInList(number, list) {
+	    //let closestIndex = 0;
+	    //const closestNumber = list.reduce((closest, current, i) => {
+	    //    if(Math.abs(current - number) < Math.abs(closest - number)) {
+	    //        closestIndex = i;
+	    //        return current;
+	    //    } else return closest;
+	    //}, Infinity);
+	
+	    return list.reduce(function (closestI, current, i) {
+	        return Math.abs(current - number) < Math.abs(list[closestI] - number) ? i : closestI;
+	    }, 0);
+	    //return closestIndex;
+	}
+	
+	function childIsXYChart(child) {
+	    return !!(child && _lodash2['default'].has(child, 'type.implementsInterface') && child.type.implementsInterface('XYChart'));
+	}
+	
 	function isNullOrUndefined(d) {
 	    return _lodash2['default'].isNull(d) || _lodash2['default'].isUndefined(d);
 	}
@@ -59226,8 +59313,8 @@
 	}
 	
 	function measureAxisLabels(xProps, yProps, xAxisLabelProps, yAxisLabelProps) {
-	    _lodash2['default'].assign(xProps, { showTicks: false, showGrid: false });
-	    _lodash2['default'].assign(yProps, { showTicks: false, showGrid: false });
+	    xProps = _lodash2['default'].assign({}, xProps, { showTicks: false, showGrid: false });
+	    yProps = _lodash2['default'].assign({}, yProps, { showTicks: false, showGrid: false });
 	    var xAxisHtml = _react2['default'].renderToStaticMarkup(_react2['default'].createElement(ChartAxis, xProps));
 	    var yAxisHtml = _react2['default'].renderToStaticMarkup(_react2['default'].createElement(ChartAxis, yProps));
 	    var xLabelHtml = xAxisLabelProps ? _react2['default'].renderToStaticMarkup(_react2['default'].createElement(XAxisLabel, xAxisLabelProps)) : '';
@@ -68501,6 +68588,7 @@
 	var LineChart = _react2['default'].createClass({
 	    displayName: 'LineChart',
 	
+	    mixins: [(0, _utilJs.InterfaceMixin)('XYChart')],
 	    propTypes: {
 	        // the array of data objects
 	        data: PropTypes.array.isRequired,
@@ -68714,6 +68802,7 @@
 	var BarChart = _react2['default'].createClass({
 	    displayName: 'BarChart',
 	
+	    mixins: [(0, _utilJs.InterfaceMixin)('XYChart')],
 	    propTypes: {
 	        // the array of data objects
 	        data: PropTypes.array.isRequired,
@@ -68993,6 +69082,7 @@
 	var MarkerLineChart = _react2['default'].createClass({
 	    displayName: 'MarkerLineChart',
 	
+	    mixins: [(0, _utilJs.InterfaceMixin)('XYChart')],
 	    propTypes: {
 	        // the array of data objects
 	        data: PropTypes.array.isRequired,
@@ -69134,6 +69224,7 @@
 	var ScatterPlot = _react2['default'].createClass({
 	    displayName: 'ScatterPlot',
 	
+	    mixins: [(0, _utilJs.InterfaceMixin)('XYChart')],
 	    propTypes: {
 	        // the array of data objects
 	        data: PropTypes.array.isRequired,
@@ -69250,6 +69341,7 @@
 	var Histogram = _react2['default'].createClass({
 	    displayName: 'Histogram',
 	
+	    mixins: [(0, _utilJs.InterfaceMixin)('XYChart')],
 	    propTypes: {
 	        // the array of data objects
 	        data: PropTypes.array.isRequired,
@@ -69358,6 +69450,7 @@
 	var KernelDensityEstimation = _react2['default'].createClass({
 	    displayName: 'KernelDensityEstimation',
 	
+	    mixins: [(0, _utilJs.InterfaceMixin)('XYChart')],
 	    propTypes: {
 	        // the array of data objects
 	        data: PropTypes.array.isRequired,

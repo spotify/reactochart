@@ -5,9 +5,10 @@ import d3 from 'd3';
 
 import BarChart from './BarChart.js';
 
-import {accessor, AccessorPropType} from '../util.js';
+import {accessor, AccessorPropType, InterfaceMixin} from '../util.js';
 
 const Histogram = React.createClass({
+    mixins: [InterfaceMixin('XYChart')],
     propTypes: {
         // the array of data objects
         data: PropTypes.array.isRequired,
