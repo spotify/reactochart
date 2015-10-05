@@ -523,6 +523,7 @@ const App = React.createClass({
                 <XYPlot width={200} height={200} yType='ordinal' onMouseMove={this.onMouseMoveChart}>
                     <TestingRectangle underAxes={true} hoveredYVal={this.state.hoveredYVal} />
                     <BarChart
+                        getClass={d => `test${d[0]}`}
                         data={randomBarData2.numberOrdinal}
                         getX={0} getY={1} orientation="horizontal"
                         barThickness={20}

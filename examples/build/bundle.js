@@ -812,6 +812,9 @@
 	                    { width: 200, height: 200, yType: 'ordinal', onMouseMove: this.onMouseMoveChart },
 	                    _reactAddons2['default'].createElement(TestingRectangle, { underAxes: true, hoveredYVal: this.state.hoveredYVal }),
 	                    _reactAddons2['default'].createElement(_src.BarChart, {
+	                        getClass: function (d) {
+	                            return 'test' + d[0];
+	                        },
 	                        data: randomBarData2.numberOrdinal,
 	                        getX: 0, getY: 1, orientation: 'horizontal',
 	                        barThickness: 20
@@ -68809,7 +68812,9 @@
 	        // accessor for X & Y coordinates
 	        getX: _utilJs.AccessorPropType,
 	        getY: _utilJs.AccessorPropType,
-	
+	        // allow user to pass an accessor for setting the class of a bar
+	        getClass: _utilJs.AccessorPropType,
+	        // thickness of value bars, in pixels, (ignored for RangeValue and RangeRange charts)
 	        barThickness: PropTypes.number,
 	
 	        // x & y scale types
@@ -68878,8 +68883,8 @@
 	        );
 	    },
 	    renderValueValueBars: function renderValueValueBars() {
-	        var _this = this;
-	
+	        // typical bar chart, plotting values that look like [[0,5], [1,3], ...]
+	        // ie. both independent and dependent variables are single values
 	        var _props = this.props;
 	        var data = _props.data;
 	        var xScale = _props.xScale;
@@ -68888,44 +68893,49 @@
 	        var getY = _props.getY;
 	        var xType = _props.xType;
 	        var yType = _props.yType;
+	        var getClass = _props.getClass;
 	        var barThickness = _props.barThickness;
+	        var orientation = _props.orientation;
 	
-	        var xAccessor = (0, _utilJs.accessor)(getX);
-	        var yAccessor = (0, _utilJs.accessor)(getY);
+	        var _map = [getX, getY, getClass].map(_utilJs.accessor);
 	
-	        return this.props.orientation === 'vertical' ? _react2['default'].createElement(
+	        var _map2 = _slicedToArray(_map, 3);
+	
+	        var xAccessor = _map2[0];
+	        var yAccessor = _map2[1];
+	        var classAccessor = _map2[2];
+	
+	        var isVertical = this.props.orientation === 'vertical';
+	
+	        return _react2['default'].createElement(
 	            'g',
 	            null,
-	            this.props.data.map(function (d, i) {
-	                var barZero = barZeroValue(data, yAccessor, yType);
-	                var yVal = yAccessor(d);
-	                var barLength = Math.abs(yScale(barZero) - yScale(yVal));
-	                var barY = yVal >= 0 || yType === 'ordinal' ? yScale(barZero) - barLength : yScale(barZero);
+	            data.map(function (d) {
+	                // essentially the same process, whether horizontal or vertical bars
 	
-	                return _react2['default'].createElement('rect', {
-	                    className: 'chart-bar chart-bar-vertical',
-	                    x: _this.props.xScale(xAccessor(d)) - barThickness / 2,
-	                    y: barY,
-	                    width: barThickness,
-	                    height: barLength
-	                });
-	            })
-	        ) : _react2['default'].createElement(
-	            'g',
-	            null,
-	            this.props.data.map(function (d, i) {
-	                var barZero = barZeroValue(data, xAccessor, xType);
-	                var xVal = xAccessor(d);
-	                var barLength = Math.abs(xScale(barZero) - xScale(xVal));
-	                var barX = xVal >= 0 || xType === 'ordinal' ? xScale(barZero) : xScale(barZero) - barLength;
+	                var _ref = isVertical ? [yScale, yType, yAccessor] : [xScale, xType, xAccessor];
 	
-	                return _react2['default'].createElement('rect', {
-	                    className: 'chart-bar chart-bar-vertical',
-	                    x: barX,
-	                    y: _this.props.yScale(yAccessor(d)) - barThickness / 2,
-	                    width: barLength,
-	                    height: barThickness
-	                });
+	                var _ref2 = _slicedToArray(_ref, 3);
+	
+	                var valueScale = _ref2[0];
+	                var valueScaleType = _ref2[1];
+	                var valueAccessor = _ref2[2];
+	
+	                var barZero = barZeroValue(data, valueAccessor, valueScaleType);
+	                var value = valueAccessor(d);
+	                var barLength = Math.abs(valueScale(barZero) - valueScale(value));
+	                var className = 'chart-bar chart-bar-' + orientation + ' ' + (getClass ? classAccessor(d) : '');
+	                var x = isVertical ? xScale(xAccessor(d)) - barThickness / 2 : value >= 0 || xType === 'ordinal' ? xScale(barZero) : xScale(barZero) - barLength;
+	                var y = !isVertical ? yScale(yAccessor(d)) - barThickness / 2 : value >= 0 || yType === 'ordinal' ? yScale(barZero) - barLength : yScale(barZero);
+	
+	                var _ref3 = isVertical ? [barThickness, barLength] : [barLength, barThickness];
+	
+	                var _ref32 = _slicedToArray(_ref3, 2);
+	
+	                var width = _ref32[0];
+	                var height = _ref32[1];
+	
+	                return _react2['default'].createElement('rect', { className: className, x: x, y: y, width: width, height: height });
 	            })
 	        );
 	    },
@@ -68940,17 +68950,20 @@
 	        var getYEnd = _props2.getYEnd;
 	        var xType = _props2.xType;
 	        var yType = _props2.yType;
+	        var getClass = _props2.getClass;
+	        var orientation = _props2.orientation;
 	
-	        var _$map = _lodash2['default'].map([getX, getXEnd, getY, getYEnd], _utilJs.accessor);
+	        var _$map = _lodash2['default'].map([getX, getXEnd, getY, getYEnd, getClass], _utilJs.accessor);
 	
-	        var _$map2 = _slicedToArray(_$map, 4);
+	        var _$map2 = _slicedToArray(_$map, 5);
 	
 	        var xAccessor = _$map2[0];
 	        var xEndAccessor = _$map2[1];
 	        var yAccessor = _$map2[2];
 	        var yEndAccessor = _$map2[3];
+	        var classAccessor = _$map2[4];
 	
-	        return this.props.orientation === 'vertical' ? _react2['default'].createElement(
+	        return orientation === 'vertical' ? _react2['default'].createElement(
 	            'g',
 	            null,
 	            this.props.data.map(function (d, i) {
@@ -68960,9 +68973,10 @@
 	                var barY = yVal >= 0 || yType === 'ordinal' ? yScale(barZero) - barLength : yScale(barZero);
 	                var barX = Math.round(xScale(xAccessor(d)));
 	                var barThickness = Math.round(xScale(xEndAccessor(d))) - barX;
+	                var className = 'chart-bar chart-bar-' + orientation + ' ' + (getClass ? classAccessor(d) : '');
 	
 	                return _react2['default'].createElement('rect', {
-	                    className: 'chart-bar chart-bar-vertical',
+	                    className: className,
 	                    x: barX,
 	                    y: barY,
 	                    width: barThickness,
@@ -68977,12 +68991,12 @@
 	                var xVal = xAccessor(d);
 	                var barLength = Math.abs(xScale(barZero) - xScale(xVal));
 	                var barX = xVal >= 0 || xType === 'ordinal' ? xScale(barZero) : xScale(barZero) - barLength;
-	
 	                var barY = Math.round(yScale(yEndAccessor(d)));
 	                var barThickness = Math.round(yScale(yAccessor(d))) - barY;
+	                var className = 'chart-bar chart-bar-' + orientation + ' ' + (getClass ? classAccessor(d) : '');
 	
 	                return _react2['default'].createElement('rect', {
-	                    className: 'chart-bar chart-bar-vertical',
+	                    className: className,
 	                    x: barX,
 	                    y: barY,
 	                    width: barLength,

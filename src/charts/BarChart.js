@@ -123,7 +123,9 @@ const BarChart = React.createClass({
         // accessor for X & Y coordinates
         getX: AccessorPropType,
         getY: AccessorPropType,
-
+        // allow user to pass an accessor for setting the class of a bar
+        getClass: AccessorPropType,
+        // thickness of value bars, in pixels, (ignored for RangeValue and RangeRange charts)
         barThickness: PropTypes.number,
 
         // x & y scale types
@@ -181,50 +183,37 @@ const BarChart = React.createClass({
         </g>
     },
     renderValueValueBars() {
-        const {data, xScale, yScale, getX, getY, xType, yType, barThickness} = this.props;
-        const xAccessor = accessor(getX);
-        const yAccessor = accessor(getY);
+        // typical bar chart, plotting values that look like [[0,5], [1,3], ...]
+        // ie. both independent and dependent variables are single values
+        const {data, xScale, yScale, getX, getY, xType, yType, getClass, barThickness, orientation} = this.props;
+        const [xAccessor, yAccessor, classAccessor] = [getX, getY, getClass].map(accessor);
+        const isVertical = (this.props.orientation === 'vertical');
 
-        return this.props.orientation === 'vertical' ?
-            <g>
-                {this.props.data.map((d, i) => {
-                    const barZero = barZeroValue(data, yAccessor, yType);
-                    const yVal = yAccessor(d);
-                    const barLength = Math.abs(yScale(barZero) - yScale(yVal));
-                    const barY = (yVal >= 0 || yType === 'ordinal') ? yScale(barZero) - barLength : yScale(barZero);
+        return <g>
+            {data.map(d => {
+                // essentially the same process, whether horizontal or vertical bars
+                const [valueScale, valueScaleType, valueAccessor] = isVertical ?
+                    [yScale, yType, yAccessor] : [xScale, xType, xAccessor];
+                const barZero = barZeroValue(data, valueAccessor, valueScaleType);
+                const value = valueAccessor(d);
+                const barLength = Math.abs(valueScale(barZero) - valueScale(value));
+                const className = `chart-bar chart-bar-${orientation} ${getClass ? classAccessor(d) : ''}`;
+                const x = isVertical ? xScale(xAccessor(d)) - (barThickness / 2) :
+                    (value >= 0 || xType === 'ordinal') ? xScale(barZero) : xScale(barZero) - barLength;
+                const y = !isVertical ? yScale(yAccessor(d)) - (barThickness / 2) :
+                    (value >= 0 || yType === 'ordinal') ? yScale(barZero) - barLength : yScale(barZero);
+                const [width, height] = isVertical ? [barThickness, barLength] : [barLength, barThickness];
 
-                    return <rect
-                            className="chart-bar chart-bar-vertical"
-                            x={this.props.xScale(xAccessor(d)) - (barThickness / 2)}
-                            y={barY}
-                            width={barThickness}
-                            height={barLength}
-                            />
-                })}
-            </g> :
-            <g>
-                {this.props.data.map((d, i) => {
-                    const barZero = barZeroValue(data, xAccessor, xType);
-                    const xVal = xAccessor(d);
-                    const barLength = Math.abs(xScale(barZero) - xScale(xVal));
-                    const barX = (xVal >= 0 || xType === 'ordinal') ? xScale(barZero) : xScale(barZero) - barLength;
-
-                    return <rect
-                        className="chart-bar chart-bar-vertical"
-                        x={barX}
-                        y={this.props.yScale(yAccessor(d)) - (barThickness / 2)}
-                        width={barLength}
-                        height={barThickness}
-                        />
-                })}
-            </g>
-
+                return <rect {...{className, x, y, width, height}}/>
+            })}
+        </g>;
     },
     renderRangeValueBars() {
-        const {data, xScale, yScale, getX, getY, getXEnd, getYEnd, xType, yType} = this.props;
-        const [xAccessor, xEndAccessor, yAccessor, yEndAccessor] = _.map([getX, getXEnd, getY, getYEnd], accessor);
+        const {data, xScale, yScale, getX, getY, getXEnd, getYEnd, xType, yType, getClass, orientation} = this.props;
+        const [xAccessor, xEndAccessor, yAccessor, yEndAccessor, classAccessor] =
+            _.map([getX, getXEnd, getY, getYEnd, getClass], accessor);
 
-        return this.props.orientation === 'vertical' ?
+        return orientation === 'vertical' ?
             <g>
                 {this.props.data.map((d, i) => {
                     const barZero = barZeroValue(data, yAccessor, yType);
@@ -233,9 +222,10 @@ const BarChart = React.createClass({
                     const barY = (yVal >= 0 || yType === 'ordinal') ? yScale(barZero) - barLength : yScale(barZero);
                     const barX = Math.round(xScale(xAccessor(d)));
                     const barThickness = Math.round(xScale(xEndAccessor(d))) - barX;
+                    const className = `chart-bar chart-bar-${orientation} ${getClass ? classAccessor(d) : ''}`;
 
                     return <rect
-                        className="chart-bar chart-bar-vertical"
+                        className={className}
                         x={barX}
                         y={barY}
                         width={barThickness}
@@ -249,12 +239,12 @@ const BarChart = React.createClass({
                     const xVal = xAccessor(d);
                     const barLength = Math.abs(xScale(barZero) - xScale(xVal));
                     const barX = (xVal >= 0 || xType === 'ordinal') ? xScale(barZero) : xScale(barZero) - barLength;
-
                     const barY = Math.round(yScale(yEndAccessor(d)));
                     const barThickness = Math.round(yScale(yAccessor(d))) - barY;
+                    const className = `chart-bar chart-bar-${orientation} ${getClass ? classAccessor(d) : ''}`;
 
                     return <rect
-                        className="chart-bar chart-bar-vertical"
+                        className={className}
                         x={barX}
                         y={barY}
                         width={barLength}
