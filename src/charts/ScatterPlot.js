@@ -13,6 +13,8 @@ const ScatterPlot = React.createClass({
         // accessor for X & Y coordinates
         getX: AccessorPropType,
         getY: AccessorPropType,
+        // allow user to pass an accessor for setting the class of a point
+        getClass: AccessorPropType,
 
         xScale: PropTypes.func,
         yScale: PropTypes.func,
@@ -42,9 +44,10 @@ const ScatterPlot = React.createClass({
         </g>
     },
     renderPoint(d, i) {
-        const {xScale, yScale, getX, getY, pointRadius, pointOffset} = this.props;
+        const {xScale, yScale, getX, getY, pointRadius, pointOffset, getClass} = this.props;
         let {pointSymbol} = this.props;
-        let symbolProps = {};
+        const className = `chart-scatterplot-point ${getClass ? accessor(getClass)(d) : ''}`;
+        let symbolProps = {className};
 
         // resolve symbol-generating functions into real symbols
         if(_.isFunction(pointSymbol)) pointSymbol = pointSymbol(d, i);

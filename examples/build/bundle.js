@@ -69245,6 +69245,8 @@
 	        // accessor for X & Y coordinates
 	        getX: _utilJs.AccessorPropType,
 	        getY: _utilJs.AccessorPropType,
+	        // allow user to pass an accessor for setting the class of a point
+	        getClass: _utilJs.AccessorPropType,
 	
 	        xScale: PropTypes.func,
 	        yScale: PropTypes.func,
@@ -69283,9 +69285,11 @@
 	        var getY = _props.getY;
 	        var pointRadius = _props.pointRadius;
 	        var pointOffset = _props.pointOffset;
+	        var getClass = _props.getClass;
 	        var pointSymbol = this.props.pointSymbol;
 	
-	        var symbolProps = {};
+	        var className = 'chart-scatterplot-point ' + (getClass ? (0, _utilJs.accessor)(getClass)(d) : '');
+	        var symbolProps = { className: className };
 	
 	        // resolve symbol-generating functions into real symbols
 	        if (_lodash2['default'].isFunction(pointSymbol)) pointSymbol = pointSymbol(d, i);
