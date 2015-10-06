@@ -809,7 +809,8 @@
 	                null,
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
-	                    { width: 200, height: 200, yType: 'ordinal', onMouseMove: this.onMouseMoveChart },
+	                    { width: 200, height: 200, yType: 'ordinal', onMouseMove: this.onMouseMoveChart,
+	                        padding: { bottom: 20, top: 20 } },
 	                    _reactAddons2['default'].createElement(TestingRectangle, { underAxes: true, hoveredYVal: this.state.hoveredYVal }),
 	                    _reactAddons2['default'].createElement(_src.BarChart, {
 	                        getClass: function (d) {
@@ -58489,6 +58490,7 @@
 	
 	var DEFAULTS = {
 	    margin: { top: null, bottom: null, left: null, right: null },
+	    padding: { top: null, bottom: null, left: null, right: null },
 	    spacing: { top: 0, bottom: 0, left: 0, right: 0 },
 	    xAxisLabelAlign: { horizontal: 'left', vertical: 'top' },
 	    yAxisLabelAlign: { horizontal: 'right', vertical: 'top' }
@@ -58704,8 +58706,10 @@
 	        var yLabelFormat = this.yLabelFormat;
 	
 	        var origMargin = _lodash2['default'].defaults({}, this.props.margin, DEFAULTS.margin);
+	        var origPadding = _lodash2['default'].defaults({}, this.props.padding, DEFAULTS.padding);
 	
 	        var shouldMeasureLabels = _lodash2['default'].any(origMargin, _lodash2['default'].isNull);
+	
 	        if (shouldMeasureLabels) {
 	            (function () {
 	                var isDone = false;
@@ -58713,8 +58717,10 @@
 	                var margin = _lodash2['default'].transform(origMargin, function (result, m, key) {
 	                    return result[key] = _lodash2['default'].isNull(m) ? 10 : m;
 	                });
-	                // and padding equal to the first chart's spacing
-	                var padding = _lodash2['default'].clone(spacings[0]);
+	                // and padding equal to the first chart's spacing for unknown paddings
+	                var padding = _lodash2['default'].transform(origPadding, function (res, p, key) {
+	                    return res[key] = _lodash2['default'].isNull(p) ? spacings[0][key] : p;
+	                });
 	                // make scales using margin, measure labels, make new margins
 	                // repeat until we converge on a margin that works
 	                var xScale = undefined,
@@ -58747,10 +58753,10 @@
 	                    // padding is the actual amount of extra space required, after taking into account the scales.
 	                    // if the outermost chart elements are on the scale extrema, padding = spacing,
 	                    // but the scale may extend beyond the last element anyway, so we may not need the extra padding.
-	                    // todo: temporarily set as padding = max spacing, implement this for real
+	                    // NOTE: temporarily set as padding = max spacing, todo: implement real padding
 	                    padding = _lodash2['default'].reduce(spacings, function (result, spacing) {
-	                        return _lodash2['default'].transform(spacing, function (max, space, dir) {
-	                            return max[dir] = Math.max(result[dir] || space);
+	                        return _lodash2['default'].transform(spacing, function (result, space, dir) {
+	                            result[dir] = _lodash2['default'].isNull(origPadding[dir]) ? Math.max(result[dir] || space) : origPadding[dir];
 	                        });
 	                    }, {});
 	
@@ -58898,7 +58904,6 @@
 	            chartMargin: margin, chartPadding: padding
 	        };
 	
-	        var seriesI = 0;
 	        var childrenUnderAxes = _react2['default'].Children.map(this.props.children, function (child, i) {
 	            if (!child || !child.props || !child.props.underAxes) return null;
 	            // todo fix chart series #

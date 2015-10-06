@@ -9,6 +9,7 @@ import $ from 'jquery';
 
 const DEFAULTS = {
     margin: {top: null, bottom: null, left: null, right: null},
+    padding: {top: null, bottom: null, left: null, right: null},
     spacing: {top: 0, bottom: 0, left: 0, right: 0},
     xAxisLabelAlign: {horizontal: 'left', vertical: 'top'},
     yAxisLabelAlign: {horizontal: 'right', vertical: 'top'}
@@ -197,14 +198,16 @@ const XYPlot = React.createClass({
         } = props;
         const {spacings, xLabelFormat, yLabelFormat} = this;
         const origMargin = _.defaults({}, this.props.margin, DEFAULTS.margin);
+        const origPadding = _.defaults({}, this.props.padding, DEFAULTS.padding);
 
         const shouldMeasureLabels = _.any(origMargin, _.isNull);
+
         if(shouldMeasureLabels) {
             let isDone = false;
             // start with a margin of 10 pixels for all unknown margins
             let margin = _.transform(origMargin, (result, m, key) => result[key] = _.isNull(m) ? 10 : m);
-            // and padding equal to the first chart's spacing
-            let padding = _.clone(spacings[0]);
+            // and padding equal to the first chart's spacing for unknown paddings
+            let padding = _.transform(origPadding, (res, p, key) => res[key] = _.isNull(p) ? spacings[0][key] : p);
             // make scales using margin, measure labels, make new margins
             // repeat until we converge on a margin that works
             let xScale, yScale, scaleWidth, scaleHeight, chartWidth, chartHeight, labelBoxes;
@@ -234,9 +237,11 @@ const XYPlot = React.createClass({
                 // padding is the actual amount of extra space required, after taking into account the scales.
                 // if the outermost chart elements are on the scale extrema, padding = spacing,
                 // but the scale may extend beyond the last element anyway, so we may not need the extra padding.
-                // todo: temporarily set as padding = max spacing, implement this for real
+                // NOTE: temporarily set as padding = max spacing, todo: implement real padding
                 padding = _.reduce(spacings, (result, spacing) => {
-                    return _.transform(spacing, (max, space, dir) => max[dir] = Math.max(result[dir] || space));
+                    return _.transform(spacing, (result, space, dir) => {
+                        result[dir] = _.isNull(origPadding[dir]) ? Math.max(result[dir] || space) : origPadding[dir];
+                    });
                 }, {});
 
                 // todo: modify to handle all possible label alignments
@@ -358,7 +363,6 @@ const XYPlot = React.createClass({
             chartMargin: margin, chartPadding: padding
         };
 
-        const seriesI = 0;
         const childrenUnderAxes = React.Children.map(this.props.children, (child, i) => {
             if(!child || !child.props || !child.props.underAxes) return null;
             // todo fix chart series #
@@ -370,7 +374,6 @@ const XYPlot = React.createClass({
             const name = child.props.name || 'chart-series-' + i;
             return React.cloneElement(child, _.assign({ref: name, name}, propsToPass));
         });
-
 
         return (
             <svg className="xy-plot" {...{width, height}}
