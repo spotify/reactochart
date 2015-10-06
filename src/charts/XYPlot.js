@@ -55,10 +55,11 @@ const XYPlot = React.createClass({
         // todo: xAxisLabel, yAxisLabel
 
 
-        // format to use for the axis value labels
-        // interpreted as momentjs formats for time axes, or numeraljs formats for number axes
-        xLabelFormat: PropTypes.string,
-        yLabelFormat: PropTypes.string,
+        // format to use for the axis value labels. can be a function or a string.
+        // if function, called on each label.
+        // if string, interpreted as momentjs formats for time axes, or numeraljs formats for number axes
+        xLabelFormat: PropTypes.oneOfType([PropTypes.function, PropTypes.string]),
+        yLabelFormat: PropTypes.oneOfType([PropTypes.function, PropTypes.string]),
 
         // padding between axis value labels and the axis/ticks
         labelPadding: PropTypes.number,
@@ -705,7 +706,8 @@ function initScale(type) {
 }
 
 function formatAxisLabel(value, type, format) {
-    return type === 'number' ? numeral(value).format(format)
+    return _.isFunction(format) ? format(value)
+        : type === 'number' ? numeral(value).format(format)
         : type === 'time' ? moment(value).format(format)
         : value;
 }

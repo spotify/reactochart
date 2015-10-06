@@ -526,6 +526,7 @@ const App = React.createClass({
                         showXGrid={false} showYGrid={false}
                         showXLabels={false}
                         showXZero={true}
+                        yLabelFormat={d => 'Dude, ' + d.toLowerCase()}
                     >
                     <TestingRectangle underAxes={true} hoveredYVal={this.state.hoveredYVal} />
                     <BarChart

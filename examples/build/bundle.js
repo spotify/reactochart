@@ -814,7 +814,10 @@
 	                        showXTicks: false, showYTicks: false,
 	                        showXGrid: false, showYGrid: false,
 	                        showXLabels: false,
-	                        showXZero: true
+	                        showXZero: true,
+	                        yLabelFormat: function (d) {
+	                            return 'Dude, ' + d.toLowerCase();
+	                        }
 	                    },
 	                    _reactAddons2['default'].createElement(TestingRectangle, { underAxes: true, hoveredYVal: this.state.hoveredYVal }),
 	                    _reactAddons2['default'].createElement(_src.BarChart, {
@@ -58546,10 +58549,11 @@
 	        // todo: niceX, niceY
 	        // todo: xAxisLabel, yAxisLabel
 	
-	        // format to use for the axis value labels
-	        // interpreted as momentjs formats for time axes, or numeraljs formats for number axes
-	        xLabelFormat: PropTypes.string,
-	        yLabelFormat: PropTypes.string,
+	        // format to use for the axis value labels. can be a function or a string.
+	        // if function, called on each label.
+	        // if string, interpreted as momentjs formats for time axes, or numeraljs formats for number axes
+	        xLabelFormat: PropTypes.oneOfType([PropTypes['function'], PropTypes.string]),
+	        yLabelFormat: PropTypes.oneOfType([PropTypes['function'], PropTypes.string]),
 	
 	        // padding between axis value labels and the axis/ticks
 	        labelPadding: PropTypes.number,
@@ -59343,7 +59347,7 @@
 	}
 	
 	function formatAxisLabel(value, type, format) {
-	    return type === 'number' ? (0, _numeral2['default'])(value).format(format) : type === 'time' ? (0, _moment2['default'])(value).format(format) : value;
+	    return _lodash2['default'].isFunction(format) ? format(value) : type === 'number' ? (0, _numeral2['default'])(value).format(format) : type === 'time' ? (0, _moment2['default'])(value).format(format) : value;
 	}
 	
 	function measureAxisLabels(xProps, yProps, xAxisLabelProps, yAxisLabelProps) {
