@@ -529,6 +529,10 @@ const App = React.createClass({
                         getX={0} getY={1} orientation="horizontal"
                         barThickness={20}
                     />
+                    <ScatterPlot
+                        data={randomBarData2.numberOrdinal}
+                        getX={0} getY={1}
+                    />
                 </XYPlot>
             </div>
             {/*

@@ -239,7 +239,7 @@ const XYPlot = React.createClass({
                 // but the scale may extend beyond the last element anyway, so we may not need the extra padding.
                 // NOTE: temporarily set as padding = max spacing, todo: implement real padding
                 padding = _.reduce(spacings, (newPadding, spacing) => {
-                    newPadding =  _.transform(spacing, (result, space, dir) => {
+                    return _.transform(spacing, (result, space, dir) => {
                         result[dir] = _.isNull(origPadding[dir]) ?
                             Math.max(newPadding[dir] || space) : origPadding[dir];
                     });

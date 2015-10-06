@@ -819,6 +819,10 @@
 	                        data: randomBarData2.numberOrdinal,
 	                        getX: 0, getY: 1, orientation: 'horizontal',
 	                        barThickness: 20
+	                    }),
+	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
+	                        data: randomBarData2.numberOrdinal,
+	                        getX: 0, getY: 1
 	                    })
 	                )
 	            ),
@@ -58755,7 +58759,7 @@
 	                    // but the scale may extend beyond the last element anyway, so we may not need the extra padding.
 	                    // NOTE: temporarily set as padding = max spacing, todo: implement real padding
 	                    padding = _lodash2['default'].reduce(spacings, function (newPadding, spacing) {
-	                        newPadding = _lodash2['default'].transform(spacing, function (result, space, dir) {
+	                        return _lodash2['default'].transform(spacing, function (result, space, dir) {
 	                            result[dir] = _lodash2['default'].isNull(origPadding[dir]) ? Math.max(newPadding[dir] || space) : origPadding[dir];
 	                        });
 	                    }, {});
