@@ -238,9 +238,10 @@ const XYPlot = React.createClass({
                 // if the outermost chart elements are on the scale extrema, padding = spacing,
                 // but the scale may extend beyond the last element anyway, so we may not need the extra padding.
                 // NOTE: temporarily set as padding = max spacing, todo: implement real padding
-                padding = _.reduce(spacings, (result, spacing) => {
-                    return _.transform(spacing, (result, space, dir) => {
-                        result[dir] = _.isNull(origPadding[dir]) ? Math.max(result[dir] || space) : origPadding[dir];
+                padding = _.reduce(spacings, (newPadding, spacing) => {
+                    newPadding =  _.transform(spacing, (result, space, dir) => {
+                        result[dir] = _.isNull(origPadding[dir]) ?
+                            Math.max(newPadding[dir] || space) : origPadding[dir];
                     });
                 }, {});
 
