@@ -810,7 +810,12 @@
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
 	                    { width: 200, height: 200, yType: 'ordinal', onMouseMove: this.onMouseMoveChart,
-	                        padding: { bottom: 20, top: 20 } },
+	                        padding: { bottom: 20, top: 20 },
+	                        showXTicks: false, showYTicks: false,
+	                        showXGrid: false, showYGrid: false,
+	                        showXLabels: false,
+	                        showXZero: true
+	                    },
 	                    _reactAddons2['default'].createElement(TestingRectangle, { underAxes: true, hoveredYVal: this.state.hoveredYVal }),
 	                    _reactAddons2['default'].createElement(_src.BarChart, {
 	                        getClass: function (d) {
@@ -59202,7 +59207,7 @@
 	        return _react2['default'].createElement(
 	            'g',
 	            { ref: letter + 'Axis', className: 'chart-axis chart-axis-' + letter, transform: axisTransform },
-	            _lodash2['default'].map(ticks, function (value) {
+	            showLabels || showTicks || showGrid ? _lodash2['default'].map(ticks, function (value) {
 	                var tickOptions = _lodash2['default'].assign({}, options, { value: value });
 	                return _react2['default'].createElement(
 	                    'g',
@@ -59211,11 +59216,11 @@
 	                    showGrid ? _this3.renderGrid(tickOptions) : null,
 	                    showTicks ? _this3.renderTick(tickOptions) : null
 	                );
-	            }),
+	            }) : null,
 	            showZero ? _react2['default'].createElement(
 	                'g',
 	                { transform: tickTransform(0) },
-	                showLabels ? this.renderZero(options) : null
+	                showZero ? this.renderZero(options) : null
 	            ) : null
 	        );
 	    },
@@ -59291,18 +59296,9 @@
 	    });
 	}
 	function indexOfClosestNumberInList(number, list) {
-	    //let closestIndex = 0;
-	    //const closestNumber = list.reduce((closest, current, i) => {
-	    //    if(Math.abs(current - number) < Math.abs(closest - number)) {
-	    //        closestIndex = i;
-	    //        return current;
-	    //    } else return closest;
-	    //}, Infinity);
-	
 	    return list.reduce(function (closestI, current, i) {
 	        return Math.abs(current - number) < Math.abs(list[closestI] - number) ? i : closestI;
 	    }, 0);
-	    //return closestIndex;
 	}
 	
 	function childIsXYChart(child) {

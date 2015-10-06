@@ -612,17 +612,20 @@ const ChartAxis = React.createClass({
 
         const options = {letter, type, orientation, labelOffset, gridLength, tickLength, labelFormat};
         return <g ref={`${letter}Axis`} className={`chart-axis chart-axis-${letter}`} transform={axisTransform}>
-            {_.map(ticks, (value) => {
-                const tickOptions = _.assign({}, options, {value});
-                return <g transform={tickTransform(value)}>
-                    {showLabels ? this.renderLabel(tickOptions): null}
-                    {showGrid ? this.renderGrid(tickOptions): null}
-                    {showTicks ? this.renderTick(tickOptions) : null}
-                </g>
-            })}
+            {showLabels || showTicks || showGrid ?
+                _.map(ticks, (value) => {
+                    const tickOptions = _.assign({}, options, {value});
+                    return <g transform={tickTransform(value)}>
+                        {showLabels ? this.renderLabel(tickOptions): null}
+                        {showGrid ? this.renderGrid(tickOptions): null}
+                        {showTicks ? this.renderTick(tickOptions) : null}
+                    </g>
+                })
+                : null
+            }
             {showZero ?
                 <g transform={tickTransform(0)}>
-                    {showLabels ? this.renderZero(options): null}
+                    {showZero ? this.renderZero(options): null}
                 </g>
                 : null
             }
@@ -663,18 +666,9 @@ function closestNumberInList(number, list) {
     });
 }
 function indexOfClosestNumberInList(number, list) {
-    //let closestIndex = 0;
-    //const closestNumber = list.reduce((closest, current, i) => {
-    //    if(Math.abs(current - number) < Math.abs(closest - number)) {
-    //        closestIndex = i;
-    //        return current;
-    //    } else return closest;
-    //}, Infinity);
-
     return list.reduce((closestI, current, i) => {
         return Math.abs(current - number) < Math.abs(list[closestI] - number) ? i : closestI;
     }, 0);
-    //return closestIndex;
 }
 
 function childIsXYChart(child) {

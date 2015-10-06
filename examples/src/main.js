@@ -521,7 +521,12 @@ const App = React.createClass({
 
             <div>
                 <XYPlot width={200} height={200} yType='ordinal' onMouseMove={this.onMouseMoveChart}
-                    padding={{bottom: 20, top: 20}} >
+                    padding={{bottom: 20, top: 20}}
+                        showXTicks={false} showYTicks={false}
+                        showXGrid={false} showYGrid={false}
+                        showXLabels={false}
+                        showXZero={true}
+                    >
                     <TestingRectangle underAxes={true} hoveredYVal={this.state.hoveredYVal} />
                     <BarChart
                         getClass={d => `test${d[0]}`}
