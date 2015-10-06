@@ -167,17 +167,17 @@ const LineChartExample = React.createClass({
         return <div>
             <XYPlot width={700}>
                 <LineChart
-                    data={_.range(0,20,0.01)}
+                    data={_.range(-10,10,0.01)}
                     getX={null}
                     getY={(n) => Math.sin(n)}
                     />
                 <LineChart
-                    data={_.range(0,20,0.01)}
+                    data={_.range(-10,10,0.01)}
                     getX={null}
-                    getY={(n) => Math.sin(Math.pow(n,1.2)) * Math.cos(n)}
+                    getY={(n) => Math.sin(Math.pow(Math.abs(n), Math.abs(n*.18))) * Math.cos(n)}
                     />
                 <LineChart
-                    data={_.range(0,20,0.01)}
+                    data={_.range(-10,10,0.01)}
                     getX={null}
                     getY={(n) => Math.sin(n*0.5) * Math.cos(n)}
                     />

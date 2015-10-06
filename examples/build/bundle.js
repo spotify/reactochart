@@ -268,21 +268,21 @@
 	                _src.XYPlot,
 	                { width: 700 },
 	                _reactAddons2['default'].createElement(_src.LineChart, {
-	                    data: _.range(0, 20, 0.01),
+	                    data: _.range(-10, 10, 0.01),
 	                    getX: null,
 	                    getY: function (n) {
 	                        return Math.sin(n);
 	                    }
 	                }),
 	                _reactAddons2['default'].createElement(_src.LineChart, {
-	                    data: _.range(0, 20, 0.01),
+	                    data: _.range(-10, 10, 0.01),
 	                    getX: null,
 	                    getY: function (n) {
-	                        return Math.sin(Math.pow(n, 1.2)) * Math.cos(n);
+	                        return Math.sin(Math.pow(Math.abs(n), Math.abs(n * .18))) * Math.cos(n);
 	                    }
 	                }),
 	                _reactAddons2['default'].createElement(_src.LineChart, {
-	                    data: _.range(0, 20, 0.01),
+	                    data: _.range(-10, 10, 0.01),
 	                    getX: null,
 	                    getY: function (n) {
 	                        return Math.sin(n * 0.5) * Math.cos(n);
@@ -1077,7 +1077,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: lightblue;\n  margin-right: 6px;\n}\n.line-chart .chart-background,\n.xy-plot .chart-background {\n  fill: #e0e0e0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-axis-value-label,\n.xy-plot .chart-axis-value-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-value-label-x,\n.xy-plot .chart-axis-value-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-value-label-y,\n.xy-plot .chart-axis-value-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 16pt;\n  font-weight: bold;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.marker-line-chart line {\n  stroke: black;\n  stroke-width: 2px;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\n.pie-chart .pie-label-center {\n  font-size: 26pt;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
+	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: lightblue;\n  margin-right: 6px;\n}\n.line-chart .chart-background,\n.xy-plot .chart-background {\n  fill: #e0e0e0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-zero-line,\n.xy-plot .chart-zero-line {\n  stroke: #888;\n  stroke-width: 1.5px;\n}\n.line-chart .chart-axis-value-label,\n.xy-plot .chart-axis-value-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-value-label-x,\n.xy-plot .chart-axis-value-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-value-label-y,\n.xy-plot .chart-axis-value-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 16pt;\n  font-weight: bold;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.marker-line-chart line {\n  stroke: black;\n  stroke-width: 2px;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\n.pie-chart .pie-label-center {\n  font-size: 26pt;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
 	
 	// exports
 
@@ -58602,8 +58602,8 @@
 	            showYGrid: true,
 	            showXTicks: true,
 	            showYTicks: true,
-	            showXZero: true,
-	            showYZero: true,
+	            showXZero: false,
+	            showYZero: false,
 	            xLabelFormat: null,
 	            yLabelFormat: null,
 	            xAxisLabel: null,
@@ -58980,7 +58980,8 @@
 	            labelFormat: options.labelFormat || this[letter + 'LabelFormat'],
 	            showLabels: options.showLabels || this.props['show' + upperLetter + 'Labels'],
 	            showTicks: options.showTicks || this.props['show' + upperLetter + 'Ticks'],
-	            showGrid: options.showGrid || this.props['show' + upperLetter + 'Grid']
+	            showGrid: options.showGrid || this.props['show' + upperLetter + 'Grid'],
+	            showZero: options.showZero || this.props['show' + upperLetter + 'Zero']
 	        };
 	    },
 	
@@ -59153,7 +59154,8 @@
 	        tickLength: PropTypes.number,
 	        showLabels: PropTypes.bool,
 	        showTicks: PropTypes.bool,
-	        showGrid: PropTypes.bool
+	        showGrid: PropTypes.bool,
+	        showZero: PropTypes.bool
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return { padding: DEFAULTS.spacing };
@@ -59177,8 +59179,9 @@
 	        var showLabels = _props6.showLabels;
 	        var showTicks = _props6.showTicks;
 	        var showGrid = _props6.showGrid;
+	        var showZero = _props6.showZero;
 	
-	        if (!(showLabels || showTicks || showGrid)) return null;
+	        if (!(showLabels || showTicks || showGrid || showZero)) return null;
 	
 	        var ticks = type === 'ordinal' ? scale.domain() : scale.ticks(tickCount);
 	        var distance = showTicks ? tickLength + labelPadding : labelPadding;
@@ -59195,11 +59198,12 @@
 	        var labelOffset = _ref42[1];
 	        var gridLength = _ref42[2];
 	
+	        var options = { letter: letter, type: type, orientation: orientation, labelOffset: labelOffset, gridLength: gridLength, tickLength: tickLength, labelFormat: labelFormat };
 	        return _react2['default'].createElement(
 	            'g',
 	            { ref: letter + 'Axis', className: 'chart-axis chart-axis-' + letter, transform: axisTransform },
 	            _lodash2['default'].map(ticks, function (value) {
-	                var tickOptions = { value: value, letter: letter, type: type, orientation: orientation, labelOffset: labelOffset, gridLength: gridLength, tickLength: tickLength, labelFormat: labelFormat };
+	                var tickOptions = _lodash2['default'].assign({}, options, { value: value });
 	                return _react2['default'].createElement(
 	                    'g',
 	                    { transform: tickTransform(value) },
@@ -59207,7 +59211,12 @@
 	                    showGrid ? _this3.renderGrid(tickOptions) : null,
 	                    showTicks ? _this3.renderTick(tickOptions) : null
 	                );
-	            })
+	            }),
+	            showZero ? _react2['default'].createElement(
+	                'g',
+	                { transform: tickTransform(0) },
+	                showLabels ? this.renderZero(options) : null
+	            ) : null
 	        );
 	    },
 	    renderLabel: function renderLabel(options) {
@@ -59225,6 +59234,7 @@
 	            formatAxisLabel(value, type, labelFormat)
 	        );
 	    },
+	    // todo unify into drawLine
 	    renderTick: function renderTick(options) {
 	        var letter = options.letter;
 	        var tickLength = options.tickLength;
@@ -59254,6 +59264,22 @@
 	
 	        var x2 = _ref62[0];
 	        var y2 = _ref62[1];
+	
+	        return _react2['default'].createElement('line', { className: className, x2: x2, y2: y2 });
+	    },
+	    renderZero: function renderZero(options) {
+	        var letter = options.letter;
+	        var gridLength = options.gridLength;
+	        var orientation = options.orientation;
+	
+	        var className = 'chart-zero-line chart-zero-line-' + letter;
+	
+	        var _ref7 = orientation === 'vertical' ? [gridLength, 0] : [0, -gridLength];
+	
+	        var _ref72 = _slicedToArray(_ref7, 2);
+	
+	        var x2 = _ref72[0];
+	        var y2 = _ref72[1];
 	
 	        return _react2['default'].createElement('line', { className: className, x2: x2, y2: y2 });
 	    }
@@ -69275,7 +69301,7 @@
 	        };
 	    },
 	
-	    // todo: figure out spacing in statics.getOptions
+	    // todo: return spacing in statics.getOptions
 	
 	    getHovered: function getHovered() {},
 	

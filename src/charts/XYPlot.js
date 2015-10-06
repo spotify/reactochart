@@ -116,8 +116,8 @@ const XYPlot = React.createClass({
             showYGrid: true,
             showXTicks: true,
             showYTicks: true,
-            showXZero: true,
-            showYZero: true,
+            showXZero: false,
+            showYZero: false,
             xLabelFormat: null,
             yLabelFormat: null,
             xAxisLabel: null,
@@ -437,7 +437,8 @@ const XYPlot = React.createClass({
             labelFormat: options.labelFormat || this[`${letter}LabelFormat`],
             showLabels: options.showLabels || this.props[`show${upperLetter}Labels`],
             showTicks: options.showTicks || this.props[`show${upperLetter}Ticks`],
-            showGrid: options.showGrid || this.props[`show${upperLetter}Grid`]
+            showGrid: options.showGrid || this.props[`show${upperLetter}Grid`],
+            showZero: options.showZero || this.props[`show${upperLetter}Zero`]
         };
     },
 
@@ -588,7 +589,8 @@ const ChartAxis = React.createClass({
         tickLength: PropTypes.number,
         showLabels: PropTypes.bool,
         showTicks: PropTypes.bool,
-        showGrid: PropTypes.bool
+        showGrid: PropTypes.bool,
+        showZero: PropTypes.bool
     },
     getDefaultProps() {
         return { padding: DEFAULTS.spacing }
@@ -596,10 +598,11 @@ const ChartAxis = React.createClass({
     render() {
         const {
             scale, type, orientation, axisTransform, tickCount, letter, labelFormat,
-            scaleWidth, scaleHeight, padding, labelPadding, tickLength, showLabels, showTicks, showGrid
+            scaleWidth, scaleHeight, padding, labelPadding, tickLength,
+            showLabels, showTicks, showGrid, showZero
         } = this.props;
 
-        if(!(showLabels || showTicks || showGrid)) return null;
+        if(!(showLabels || showTicks || showGrid || showZero)) return null;
 
         const ticks = (type === 'ordinal') ? scale.domain() : scale.ticks(tickCount);
         const distance = (showTicks) ? tickLength + labelPadding : labelPadding;
@@ -607,16 +610,22 @@ const ChartAxis = React.createClass({
             [v => `translate(0, ${scale(v)})`, {x: -distance}, scaleWidth + padding.left + padding.right] :
             [v => `translate(${scale(v)}, 0)`, {y: distance}, scaleHeight + padding.top + padding.bottom];
 
-
+        const options = {letter, type, orientation, labelOffset, gridLength, tickLength, labelFormat};
         return <g ref={`${letter}Axis`} className={`chart-axis chart-axis-${letter}`} transform={axisTransform}>
             {_.map(ticks, (value) => {
-                const tickOptions = {value, letter, type, orientation, labelOffset, gridLength, tickLength, labelFormat};
+                const tickOptions = _.assign({}, options, {value});
                 return <g transform={tickTransform(value)}>
                     {showLabels ? this.renderLabel(tickOptions): null}
                     {showGrid ? this.renderGrid(tickOptions): null}
                     {showTicks ? this.renderTick(tickOptions) : null}
                 </g>
             })}
+            {showZero ?
+                <g transform={tickTransform(0)}>
+                    {showLabels ? this.renderZero(options): null}
+                </g>
+                : null
+            }
         </g>
     },
     renderLabel(options) {
@@ -627,6 +636,7 @@ const ChartAxis = React.createClass({
             {formatAxisLabel(value, type, labelFormat)}
         </text>
     },
+    // todo unify into drawLine
     renderTick(options) {
         const {letter, tickLength, orientation} = options;
         const className = `chart-tick chart-tick-${letter}`;
@@ -636,6 +646,12 @@ const ChartAxis = React.createClass({
     renderGrid(options) {
         const {letter, gridLength, orientation} = options;
         const className = `chart-grid chart-grid-${letter}`;
+        const [x2, y2] = (orientation === 'vertical') ? [gridLength, 0] : [0, -gridLength];
+        return <line {...{className, x2, y2}} />
+    },
+    renderZero(options) {
+        const {letter, gridLength, orientation} = options;
+        const className = `chart-zero-line chart-zero-line-${letter}`;
         const [x2, y2] = (orientation === 'vertical') ? [gridLength, 0] : [0, -gridLength];
         return <line {...{className, x2, y2}} />
     }
