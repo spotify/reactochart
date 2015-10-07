@@ -133,7 +133,6 @@ const XYPlot = React.createClass({
             yAxisLabel: null,
             yAxisLabelAlign: DEFAULTS.yAxisLabelAlign,
             yAxisLabelPadding: 10,
-            onMouseMove: _.noop
         }
     },
     getInitialState() {

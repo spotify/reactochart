@@ -135,7 +135,11 @@ const BarChart = React.createClass({
         orientation: PropTypes.oneOf(['vertical', 'horizontal']),
 
         xScale: PropTypes.func,
-        yScale: PropTypes.func
+        yScale: PropTypes.func,
+
+        onMouseEnterBar: PropTypes.func, // A mouse walks into a bar.
+        onMouseMoveBar: PropTypes.func,  // He is immediately killed by the bartender,
+        onMouseLeaveBar: PropTypes.func, // who can't risk another "C" rating from the health department.
     },
     getDefaultProps() {
         return {
@@ -176,6 +180,17 @@ const BarChart = React.createClass({
     },
     getHovered() {},
 
+
+    onMouseEnterBar(e) {
+        this.props.onMouseEnterBar(e);
+    },
+    onMouseMoveBar(e) {
+        this.props.onMouseMoveBar(e);
+    },
+    onMouseLeaveBar(e) {
+        this.props.onMouseLeaveBar(e);
+    },
+
     render() {
         const renderer = this[`render${getBarChartType(this.props)}Bars`];
         return <g className="bar-chart">
@@ -188,6 +203,8 @@ const BarChart = React.createClass({
         const {data, xScale, yScale, getX, getY, xType, yType, getClass, barThickness, orientation} = this.props;
         const [xAccessor, yAccessor, classAccessor] = [getX, getY, getClass].map(accessor);
         const isVertical = (this.props.orientation === 'vertical');
+        const [onMouseEnter, onMouseMove, onMouseLeave] = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar']
+            .map(eventName => methodIfFuncProp(eventName, this.props, this));
 
         return <g>
             {data.map(d => {
@@ -203,8 +220,7 @@ const BarChart = React.createClass({
                 const y = !isVertical ? yScale(yAccessor(d)) - (barThickness / 2) :
                     (value >= 0 || yType === 'ordinal') ? yScale(barZero) - barLength : yScale(barZero);
                 const [width, height] = isVertical ? [barThickness, barLength] : [barLength, barThickness];
-
-                return <rect {...{className, x, y, width, height}}/>
+                return <rect {...{className, x, y, width, height, onMouseEnter, onMouseMove, onMouseLeave}} />
             })}
         </g>;
     },
@@ -212,6 +228,8 @@ const BarChart = React.createClass({
         const {data, xScale, yScale, getX, getY, getXEnd, getYEnd, xType, yType, getClass, orientation} = this.props;
         const [xAccessor, xEndAccessor, yAccessor, yEndAccessor, classAccessor] =
             _.map([getX, getXEnd, getY, getYEnd, getClass], accessor);
+        const [onMouseEnter, onMouseMove, onMouseLeave] = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar']
+            .map(eventName => methodIfFuncProp(eventName, this.props, this));
 
         return orientation === 'vertical' ?
             <g>
@@ -230,6 +248,7 @@ const BarChart = React.createClass({
                         y={barY}
                         width={barThickness}
                         height={barLength}
+                        {...{onMouseEnter, onMouseMove, onMouseLeave}}
                         />
                 })}
             </g> :
@@ -249,6 +268,7 @@ const BarChart = React.createClass({
                         y={barY}
                         width={barLength}
                         height={barThickness}
+                        {...{onMouseEnter, onMouseMove, onMouseLeave}}
                         />
                 })}
             </g>
@@ -261,6 +281,13 @@ const BarChart = React.createClass({
         return renderNotImplemented();
     }
 });
+
+function methodIfFuncProp(propName, props, context) {
+    // convenience function for event callbacks... we often want to say
+    // "if this.props.onThing is a function, call this.onThing(e) (which will do stuff, then call this.props.onThing)"
+    return _.isFunction(props[propName]) && _.isFunction(context[propName]) ?
+        context[propName] : null;
+}
 
 function renderNotImplemented(text="not implemented yet") {
     return <svg x={100} y={100} style={{overflow:'visible'}}><text>{text}</text></svg>

@@ -876,7 +876,10 @@
 	                    _reactAddons2['default'].createElement(_src.BarChart, {
 	                        data: randomBarData2.numberNumber,
 	                        getX: 0, getY: 1,
-	                        barThickness: 20
+	                        barThickness: 20,
+	                        onMouseMoveBar: function () {
+	                            return console.log('test');
+	                        }
 	                    })
 	                )
 	            ),
@@ -58672,8 +58675,7 @@
 	            xAxisLabelPadding: 10,
 	            yAxisLabel: null,
 	            yAxisLabelAlign: DEFAULTS.yAxisLabelAlign,
-	            yAxisLabelPadding: 10,
-	            onMouseMove: _lodash2['default'].noop
+	            yAxisLabelPadding: 10
 	        };
 	    },
 	    getInitialState: function getInitialState() {
@@ -68779,6 +68781,8 @@
 	    value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -68931,8 +68935,12 @@
 	        orientation: PropTypes.oneOf(['vertical', 'horizontal']),
 	
 	        xScale: PropTypes.func,
-	        yScale: PropTypes.func
-	    },
+	        yScale: PropTypes.func,
+	
+	        onMouseEnterBar: PropTypes.func, // A mouse walks into a bar.
+	        onMouseMoveBar: PropTypes.func, // He is immediately killed by the bartender,
+	        onMouseLeaveBar: PropTypes.func },
+	    // who can't risk another "C" rating from the health department.
 	    getDefaultProps: function getDefaultProps() {
 	        return {
 	            barThickness: 10,
@@ -68981,6 +68989,16 @@
 	    },
 	    getHovered: function getHovered() {},
 	
+	    onMouseEnterBar: function onMouseEnterBar(e) {
+	        this.props.onMouseEnterBar(e);
+	    },
+	    onMouseMoveBar: function onMouseMoveBar(e) {
+	        this.props.onMouseMoveBar(e);
+	    },
+	    onMouseLeaveBar: function onMouseLeaveBar(e) {
+	        this.props.onMouseLeaveBar(e);
+	    },
+	
 	    render: function render() {
 	        var renderer = this['render' + getBarChartType(this.props) + 'Bars'];
 	        return _react2['default'].createElement(
@@ -68990,6 +69008,8 @@
 	        );
 	    },
 	    renderValueValueBars: function renderValueValueBars() {
+	        var _this = this;
+	
 	        // typical bar chart, plotting values that look like [[0,5], [1,3], ...]
 	        // ie. both independent and dependent variables are single values
 	        var _props = this.props;
@@ -69013,6 +69033,16 @@
 	        var classAccessor = _map2[2];
 	
 	        var isVertical = this.props.orientation === 'vertical';
+	
+	        var _map3 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
+	            return methodIfFuncProp(eventName, _this.props, _this);
+	        });
+	
+	        var _map32 = _slicedToArray(_map3, 3);
+	
+	        var onMouseEnter = _map32[0];
+	        var onMouseMove = _map32[1];
+	        var onMouseLeave = _map32[2];
 	
 	        return _react2['default'].createElement(
 	            'g',
@@ -69042,11 +69072,13 @@
 	                var width = _ref32[0];
 	                var height = _ref32[1];
 	
-	                return _react2['default'].createElement('rect', { className: className, x: x, y: y, width: width, height: height });
+	                return _react2['default'].createElement('rect', { className: className, x: x, y: y, width: width, height: height, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave });
 	            })
 	        );
 	    },
 	    renderRangeValueBars: function renderRangeValueBars() {
+	        var _this2 = this;
+	
 	        var _props2 = this.props;
 	        var data = _props2.data;
 	        var xScale = _props2.xScale;
@@ -69070,6 +69102,16 @@
 	        var yEndAccessor = _$map2[3];
 	        var classAccessor = _$map2[4];
 	
+	        var _map4 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
+	            return methodIfFuncProp(eventName, _this2.props, _this2);
+	        });
+	
+	        var _map42 = _slicedToArray(_map4, 3);
+	
+	        var onMouseEnter = _map42[0];
+	        var onMouseMove = _map42[1];
+	        var onMouseLeave = _map42[2];
+	
 	        return orientation === 'vertical' ? _react2['default'].createElement(
 	            'g',
 	            null,
@@ -69082,13 +69124,13 @@
 	                var barThickness = Math.round(xScale(xEndAccessor(d))) - barX;
 	                var className = 'chart-bar chart-bar-' + orientation + ' ' + (getClass ? classAccessor(d) : '');
 	
-	                return _react2['default'].createElement('rect', {
+	                return _react2['default'].createElement('rect', _extends({
 	                    className: className,
 	                    x: barX,
 	                    y: barY,
 	                    width: barThickness,
 	                    height: barLength
-	                });
+	                }, { onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }));
 	            })
 	        ) : _react2['default'].createElement(
 	            'g',
@@ -69102,13 +69144,13 @@
 	                var barThickness = Math.round(yScale(yAccessor(d))) - barY;
 	                var className = 'chart-bar chart-bar-' + orientation + ' ' + (getClass ? classAccessor(d) : '');
 	
-	                return _react2['default'].createElement('rect', {
+	                return _react2['default'].createElement('rect', _extends({
 	                    className: className,
 	                    x: barX,
 	                    y: barY,
 	                    width: barLength,
 	                    height: barThickness
-	                });
+	                }, { onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }));
 	            })
 	        );
 	    },
@@ -69119,6 +69161,12 @@
 	        return renderNotImplemented();
 	    }
 	});
+	
+	function methodIfFuncProp(propName, props, context) {
+	    // convenience function for event callbacks... we often want to say
+	    // "if this.props.onThing is a function, call this.onThing(e) (which will do stuff, then call this.props.onThing)"
+	    return _lodash2['default'].isFunction(props[propName]) && _lodash2['default'].isFunction(context[propName]) ? context[propName] : null;
+	}
 	
 	function renderNotImplemented() {
 	    var text = arguments.length <= 0 || arguments[0] === undefined ? "not implemented yet" : arguments[0];

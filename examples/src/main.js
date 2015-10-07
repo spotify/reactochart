@@ -578,6 +578,7 @@ const App = React.createClass({
                         data={randomBarData2.numberNumber}
                         getX={0} getY={1}
                         barThickness={20}
+                        onMouseMoveBar={() => console.log('test')}
                     />
                 </XYPlot>
             </div>
