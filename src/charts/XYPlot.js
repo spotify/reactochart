@@ -366,6 +366,12 @@ const XYPlot = React.createClass({
 
         this.props.onMouseMove(hovered, e, {chartX, chartY, chartXVal, chartYVal});
     },
+    onMouseEnter(e) {
+        this.props.onMouseMove(e);
+    },
+    onMouseLeave(e) {
+        this.props.onMouseLeave(e);
+    },
 
     render() {
         const {width, height, xType, yType, xAxisLabel, yAxisLabel} = this.props;
@@ -393,6 +399,8 @@ const XYPlot = React.createClass({
         return (
             <svg className="xy-plot" {...{width, height}}
                  onMouseMove={_.isFunction(this.props.onMouseMove) ? this.onMouseMove : null}
+                 onMouseEnter={_.isFunction(this.props.onMouseEnter) ? this.onMouseEnter : null}
+                 onMouseLeave={_.isFunction(this.props.onMouseLeave) ? this.onMouseLeave : null}
             >
                 <g className="chart-inner"
                    transform={`translate(${margin.left}, ${margin.top})`}

@@ -58953,6 +58953,12 @@
 	
 	        this.props.onMouseMove(hovered, e, { chartX: chartX, chartY: chartY, chartXVal: chartXVal, chartYVal: chartYVal });
 	    },
+	    onMouseEnter: function onMouseEnter(e) {
+	        this.props.onMouseMove(e);
+	    },
+	    onMouseLeave: function onMouseLeave(e) {
+	        this.props.onMouseLeave(e);
+	    },
 	
 	    render: function render() {
 	        var _props3 = this.props;
@@ -58992,7 +58998,9 @@
 	        return _react2['default'].createElement(
 	            'svg',
 	            _extends({ className: 'xy-plot' }, { width: width, height: height }, {
-	                onMouseMove: _lodash2['default'].isFunction(this.props.onMouseMove) ? this.onMouseMove : null
+	                onMouseMove: _lodash2['default'].isFunction(this.props.onMouseMove) ? this.onMouseMove : null,
+	                onMouseEnter: _lodash2['default'].isFunction(this.props.onMouseEnter) ? this.onMouseEnter : null,
+	                onMouseLeave: _lodash2['default'].isFunction(this.props.onMouseLeave) ? this.onMouseLeave : null
 	            }),
 	            _react2['default'].createElement(
 	                'g',
