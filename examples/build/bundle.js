@@ -68989,14 +68989,14 @@
 	    },
 	    getHovered: function getHovered() {},
 	
-	    onMouseEnterBar: function onMouseEnterBar(e) {
-	        this.props.onMouseEnterBar(e);
+	    onMouseEnterBar: function onMouseEnterBar(e, d) {
+	        this.props.onMouseEnterBar(e, d);
 	    },
-	    onMouseMoveBar: function onMouseMoveBar(e) {
-	        this.props.onMouseMoveBar(e);
+	    onMouseMoveBar: function onMouseMoveBar(e, d) {
+	        this.props.onMouseMoveBar(e, d);
 	    },
-	    onMouseLeaveBar: function onMouseLeaveBar(e) {
-	        this.props.onMouseLeaveBar(e);
+	    onMouseLeaveBar: function onMouseLeaveBar(e, d) {
+	        this.props.onMouseLeaveBar(e, d);
 	    },
 	
 	    render: function render() {
@@ -69034,21 +69034,23 @@
 	
 	        var isVertical = this.props.orientation === 'vertical';
 	
-	        var _map3 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
-	            return methodIfFuncProp(eventName, _this.props, _this);
-	        });
-	
-	        var _map32 = _slicedToArray(_map3, 3);
-	
-	        var onMouseEnter = _map32[0];
-	        var onMouseMove = _map32[1];
-	        var onMouseLeave = _map32[2];
-	
 	        return _react2['default'].createElement(
 	            'g',
 	            null,
 	            data.map(function (d) {
+	                var _map3 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
+	                    // partially apply this bar's data point as 2nd callback argument
+	                    var callback = methodIfFuncProp(eventName, _this.props, _this);
+	                    return _lodash2['default'].isFunction(callback) ? _lodash2['default'].partial(callback, _lodash2['default'], d) : null;
+	                });
+	
 	                // essentially the same process, whether horizontal or vertical bars
+	
+	                var _map32 = _slicedToArray(_map3, 3);
+	
+	                var onMouseEnter = _map32[0];
+	                var onMouseMove = _map32[1];
+	                var onMouseLeave = _map32[2];
 	
 	                var _ref = isVertical ? [yScale, yType, yAccessor] : [xScale, xType, xAccessor];
 	

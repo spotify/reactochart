@@ -181,14 +181,14 @@ const BarChart = React.createClass({
     getHovered() {},
 
 
-    onMouseEnterBar(e) {
-        this.props.onMouseEnterBar(e);
+    onMouseEnterBar(e, d) {
+        this.props.onMouseEnterBar(e, d);
     },
-    onMouseMoveBar(e) {
-        this.props.onMouseMoveBar(e);
+    onMouseMoveBar(e, d) {
+        this.props.onMouseMoveBar(e, d);
     },
-    onMouseLeaveBar(e) {
-        this.props.onMouseLeaveBar(e);
+    onMouseLeaveBar(e, d) {
+        this.props.onMouseLeaveBar(e, d);
     },
 
     render() {
@@ -203,11 +203,17 @@ const BarChart = React.createClass({
         const {data, xScale, yScale, getX, getY, xType, yType, getClass, barThickness, orientation} = this.props;
         const [xAccessor, yAccessor, classAccessor] = [getX, getY, getClass].map(accessor);
         const isVertical = (this.props.orientation === 'vertical');
-        const [onMouseEnter, onMouseMove, onMouseLeave] = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar']
-            .map(eventName => methodIfFuncProp(eventName, this.props, this));
+
 
         return <g>
             {data.map(d => {
+                const [onMouseEnter, onMouseMove, onMouseLeave] =
+                    ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(eventName => {
+                        // partially apply this bar's data point as 2nd callback argument
+                        const callback = methodIfFuncProp(eventName, this.props, this);
+                        return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+                    });
+
                 // essentially the same process, whether horizontal or vertical bars
                 const [valueScale, valueScaleType, valueAccessor] = isVertical ?
                     [yScale, yType, yAccessor] : [xScale, xType, xAccessor];
