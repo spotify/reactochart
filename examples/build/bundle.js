@@ -375,6 +375,84 @@
 	    }
 	});
 	
+	var CustomTicksExample = _reactAddons2['default'].createClass({
+	    displayName: 'CustomTicksExample',
+	
+	    render: function render() {
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            null,
+	            _reactAddons2['default'].createElement(
+	                _src.XYPlot,
+	                {
+	                    width: 300, height: 300,
+	                    xTicks: [0, 1, 2, 4, 8, 16],
+	                    yTicks: [-8000, -3000, 0, 10000, 5000, 40000]
+	                },
+	                _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberNumber, getX: 0, getY: 1 })
+	            )
+	        );
+	    }
+	});
+	
+	var CustomChildExample = _reactAddons2['default'].createClass({
+	    displayName: 'CustomChildExample',
+	
+	    getInitialState: function getInitialState() {
+	        return {
+	            hoveredYVal: null
+	        };
+	    },
+	    onMouseMoveChart: function onMouseMoveChart(hovered, e, options) {
+	        var chartYVal = options.chartYVal;
+	
+	        this.setState({ hoveredYVal: chartYVal });
+	    },
+	    render: function render() {
+	        return _reactAddons2['default'].createElement(
+	            'div',
+	            null,
+	            _reactAddons2['default'].createElement(
+	                _src.XYPlot,
+	                {
+	                    width: 200, height: 200,
+	                    yType: 'ordinal',
+	                    onMouseMove: this.onMouseMoveChart,
+	                    padding: { bottom: 20, top: 20 },
+	                    showXTicks: false, showYTicks: false,
+	                    showXGrid: false, showYGrid: false,
+	                    showXLabels: false,
+	                    showXZero: true
+	                },
+	                _reactAddons2['default'].createElement(CustomSelectionRect, { underAxes: true, hoveredYVal: this.state.hoveredYVal }),
+	                _reactAddons2['default'].createElement(_src.BarChart, {
+	                    data: randomBarData2.numberOrdinal,
+	                    getX: 0, getY: 1, orientation: 'horizontal',
+	                    barThickness: 20
+	                })
+	            )
+	        );
+	    }
+	});
+	
+	var CustomSelectionRect = _reactAddons2['default'].createClass({
+	    displayName: 'CustomSelectionRect',
+	
+	    render: function render() {
+	        var _props = this.props;
+	        var yScale = _props.yScale;
+	        var hoveredYVal = _props.hoveredYVal;
+	
+	        return hoveredYVal ? _reactAddons2['default'].createElement('rect', {
+	            x: '0',
+	            y: yScale(hoveredYVal) - 20,
+	            width: '200', height: '40',
+	            underAxes: true,
+	            style: { fill: 'red' }
+	        }) : null;
+	    }
+	});
+	
 	var MultipleXYExample = _reactAddons2['default'].createClass({
 	    displayName: 'MultipleXYExample',
 	
@@ -759,21 +837,7 @@
 	    }
 	});
 	
-	var examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'axisLabels', title: 'Axis Labels', Component: AxisLabelExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples }];
-	
-	var TestingRectangle = _reactAddons2['default'].createClass({
-	    displayName: 'TestingRectangle',
-	
-	    render: function render() {
-	        return this.props.hoveredYVal ? _reactAddons2['default'].createElement('rect', {
-	            x: '0',
-	            y: this.props.yScale(this.props.hoveredYVal) - 20,
-	            width: '200', height: '40',
-	            underAxes: true,
-	            style: { fill: 'red' }
-	        }) : null;
-	    }
-	});
+	var examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'axisLabels', title: 'Axis Labels', Component: AxisLabelExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples }];
 	
 	var App = _reactAddons2['default'].createClass({
 	    displayName: 'App',
@@ -787,12 +851,6 @@
 	    toggleExample: function toggleExample(id) {
 	        var isVisible = this.state.visibleExamples[id];
 	        this.setState(update(this.state, { visibleExamples: _defineProperty({}, id, { $set: !isVisible }) }));
-	    },
-	
-	    onMouseMoveChart: function onMouseMoveChart(hovered, e, options) {
-	        var chartYVal = options.chartYVal;
-	
-	        this.setState({ hoveredYVal: chartYVal });
 	    },
 	
 	    render: function render() {
@@ -809,28 +867,16 @@
 	                null,
 	                _reactAddons2['default'].createElement(
 	                    _src.XYPlot,
-	                    { width: 200, height: 200, yType: 'ordinal', onMouseMove: this.onMouseMoveChart,
-	                        padding: { bottom: 20, top: 20 },
-	                        showXTicks: false, showYTicks: false,
-	                        showXGrid: false, showYGrid: false,
-	                        showXLabels: false,
-	                        showXZero: true,
-	                        yLabelFormat: function (d) {
-	                            return 'Dude, ' + d.toLowerCase();
-	                        }
+	                    {
+	                        width: 500, height: 300,
+	                        xTicks: [0, 1, 2, 4, 8, 16],
+	                        yTicks: [-8000, -3000, 0, 10000, 5000, 20000],
+	                        showYZero: true
 	                    },
-	                    _reactAddons2['default'].createElement(TestingRectangle, { underAxes: true, hoveredYVal: this.state.hoveredYVal }),
 	                    _reactAddons2['default'].createElement(_src.BarChart, {
-	                        getClass: function (d) {
-	                            return 'test' + d[0];
-	                        },
-	                        data: randomBarData2.numberOrdinal,
-	                        getX: 0, getY: 1, orientation: 'horizontal',
+	                        data: randomBarData2.numberNumber,
+	                        getX: 0, getY: 1,
 	                        barThickness: 20
-	                    }),
-	                    _reactAddons2['default'].createElement(_src.ScatterPlot, {
-	                        data: randomBarData2.numberOrdinal,
-	                        getX: 0, getY: 1
 	                    })
 	                )
 	            ),
@@ -58520,9 +58566,13 @@
 	        xDomain: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
 	        yDomain: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
 	
-	        // approximate # of ticks to include on each axis (actual # may be slightly different, to get nicest intervals)
+	        // approximate # of ticks to include on each axis - 10 is default
+	        // (actual # may be slightly different, to get nicest intervals)
 	        xTickCount: PropTypes.number,
 	        yTickCount: PropTypes.number,
+	        // or alternatively, you can pass an array of the exact tick values to use on each axis
+	        xTicks: PropTypes.array,
+	        yTicks: PropTypes.array,
 	
 	        // (outer) width and height of the chart
 	        // todo infer from data/other props??
@@ -58596,6 +58646,8 @@
 	            yType: 'number',
 	            xDomain: null,
 	            yDomain: null,
+	            xTicks: null,
+	            yTicks: null,
 	            xTickCount: 10,
 	            yTickCount: 10,
 	            width: 400,
@@ -58645,6 +58697,8 @@
 	        // figure out the domains for each axis (ie. data extents)
 	        var xType = _props.xType;
 	        var yType = _props.yType;
+	        var xTicks = _props.xTicks;
+	        var yTicks = _props.yTicks;
 	        var allChartOptions = [];
 	        // unless both domains are given, ask each child chart for it's desired domain, & flatten them into one domain.
 	        // this is so that charts can plot their own modified version of the data (ie. a histogram),
@@ -58668,9 +58722,18 @@
 	            allChartOptions.push({ xDomain: xDomain, yDomain: yDomain, spacing: spacing });
 	        });
 	        //}
+	
 	        var xDomains = props.xDomain || _lodash2['default'].pluck(allChartOptions, 'xDomain');
 	        var yDomains = props.yDomain || _lodash2['default'].pluck(allChartOptions, 'yDomain');
 	        var spacings = props.spacing || _lodash2['default'].pluck(allChartOptions, 'spacing');
+	
+	        // if user has passed in custom ticks, extend the domains to ensure all ticks are included
+	        if (xTicks) xDomains.push(xType === 'ordinal' ? xTicks : _d32['default'].extent(xTicks));
+	        if (yTicks) yDomains.push(yType === 'ordinal' ? yTicks : _d32['default'].extent(yTicks));
+	
+	        console.log(xDomains, yDomains, spacings);
+	
+	        // if user has passed in custom ticks, extend the domains to ensure all ticks are included
 	        _lodash2['default'].assign(this, { xDomains: xDomains, yDomains: yDomains, spacings: spacings });
 	    },
 	    initLabelFormats: function initLabelFormats(props) {
@@ -58738,6 +58801,8 @@
 	                // repeat until we converge on a margin that works
 	                var xScale = undefined,
 	                    yScale = undefined,
+	                    xTicks = undefined,
+	                    yTicks = undefined,
 	                    scaleWidth = undefined,
 	                    scaleHeight = undefined,
 	                    chartWidth = undefined,
@@ -58750,15 +58815,13 @@
 	                    i++;
 	                    scaleWidth = width - (margin.left + margin.right + padding.left + padding.right);
 	                    scaleHeight = height - (margin.top + margin.bottom + padding.top + padding.bottom);
-	                    xScale = makeScale(_this2.xDomains, [padding.left, scaleWidth + padding.left], xType);
-	                    yScale = makeScale(_this2.yDomains, [scaleHeight + padding.top, padding.top], yType);
-	                    // todo cleanup ticks... doing more than i need to here...
-	                    var xTicks = xType === 'ordinal' ? xScale.domain() : xScale.ticks(xTickCount);
-	                    var yTicks = yType === 'ordinal' ? yScale.domain() : yScale.ticks(yTickCount);
-	                    if (niceX && xType !== 'ordinal') xTicks = xScale.nice(xTicks.length);
-	                    if (niceY && yType !== 'ordinal') yTicks = yScale.nice(yTicks.length).ticks();
+	                    xScale = makeScale(_this2.xDomains, [padding.left, scaleWidth + padding.left], xType, niceX, xTickCount);
+	                    yScale = makeScale(_this2.yDomains, [scaleHeight + padding.top, padding.top], yType, niceY, yTickCount);
+	                    xTicks = props.xTicks || (xType === 'ordinal' ? xScale.domain() : xScale.ticks(xTickCount));
+	                    yTicks = props.yTicks || (yType === 'ordinal' ? yScale.domain() : yScale.ticks(yTickCount));
+	                    console.log(xTicks, yTicks);
 	
-	                    labelBoxes = measureAxisLabels(_this2.getXAxisProps({ scaleWidth: scaleWidth, scaleHeight: scaleHeight, scale: xScale }), _this2.getYAxisProps({ scaleWidth: scaleWidth, scaleHeight: scaleHeight, scale: yScale }), xAxisLabel ? _this2.getXAxisLabelProps({ margin: margin }) : null, yAxisLabel ? _this2.getYAxisLabelProps({ margin: margin }) : null);
+	                    labelBoxes = measureAxisLabels(_this2.getXAxisProps({ scaleWidth: scaleWidth, scaleHeight: scaleHeight, scale: xScale, ticks: xTicks }), _this2.getYAxisProps({ scaleWidth: scaleWidth, scaleHeight: scaleHeight, scale: yScale, ticks: yTicks }), xAxisLabel ? _this2.getXAxisLabelProps({ margin: margin }) : null, yAxisLabel ? _this2.getYAxisLabelProps({ margin: margin }) : null);
 	
 	                    // calculate padding based on spacings and domains
 	                    // spacing is the amount of outer space ('margin') required by the outermost elements of each chart,
@@ -58857,7 +58920,7 @@
 	                }
 	                //console.log('padding', padding);
 	                //console.log({scaleWidth, scaleHeight});
-	                _lodash2['default'].assign(_this2, { margin: margin, padding: padding, scaleWidth: scaleWidth, scaleHeight: scaleHeight, xScale: xScale, yScale: yScale, labelBoxes: labelBoxes });
+	                _lodash2['default'].assign(_this2, { margin: margin, padding: padding, scaleWidth: scaleWidth, scaleHeight: scaleHeight, xScale: xScale, yScale: yScale, xTicks: xTicks, yTicks: yTicks, labelBoxes: labelBoxes });
 	            })();
 	        } else {
 	            // margins are all pre-defined, just make the scales
@@ -58985,6 +59048,7 @@
 	            padding: options.padding || this.padding,
 	            scale: options.scale || this[letter + 'Scale'],
 	            type: options.type || this.props[letter + 'Type'],
+	            ticks: options.ticks || this[letter + 'Ticks'],
 	            tickCount: options.tickCount || this.props[letter + 'TickCount'],
 	            labelFormat: options.labelFormat || this[letter + 'LabelFormat'],
 	            showLabels: options.showLabels || this.props['show' + upperLetter + 'Labels'],
@@ -59152,6 +59216,7 @@
 	        type: PropTypes.string,
 	        orientation: PropTypes.string,
 	        axisTransform: PropTypes.string,
+	        ticks: PropTypes.array,
 	        tickCount: PropTypes.number,
 	        labelFormat: PropTypes.string,
 	        letter: PropTypes.string,
@@ -59180,6 +59245,7 @@
 	        var tickCount = _props6.tickCount;
 	        var letter = _props6.letter;
 	        var labelFormat = _props6.labelFormat;
+	        var ticks = _props6.ticks;
 	        var scaleWidth = _props6.scaleWidth;
 	        var scaleHeight = _props6.scaleHeight;
 	        var padding = _props6.padding;
@@ -59192,7 +59258,7 @@
 	
 	        if (!(showLabels || showTicks || showGrid || showZero)) return null;
 	
-	        var ticks = type === 'ordinal' ? scale.domain() : scale.ticks(tickCount);
+	        //const ticks = (type === 'ordinal') ? scale.domain() : scale.ticks(tickCount);
 	        var distance = showTicks ? tickLength + labelPadding : labelPadding;
 	
 	        var _ref4 = orientation === 'vertical' ? [function (v) {
@@ -59313,10 +59379,11 @@
 	    return _lodash2['default'].isNull(d) || _lodash2['default'].isUndefined(d);
 	}
 	
-	function makeScale(domains, range, axisType) {
+	function makeScale(domains, range, axisType, isNice, tickCount) {
 	    var domain = defaultDomain(_lodash2['default'].flatten(domains), null, axisType);
 	    var scale = initScale(axisType).domain(domain);
 	    axisType === 'ordinal' ? scale.rangePoints(range) : scale.range(range);
+	    if (isNice && axisType !== 'ordinal') scale.nice(tickCount);
 	    return scale;
 	}
 	
@@ -59338,11 +59405,11 @@
 	function initScale(type) {
 	    switch (type) {
 	        case 'number':
-	            return _d32['default'].scale.linear().nice();
+	            return _d32['default'].scale.linear();
 	        case 'ordinal':
 	            return _d32['default'].scale.ordinal();
 	        case 'time':
-	            return _d32['default'].time.scale().nice();
+	            return _d32['default'].time.scale();
 	    }
 	}
 	
@@ -69425,6 +69492,7 @@
 	
 	    statics: {
 	        getOptions: function getOptions(props) {
+	            var data = props.data;
 	            var getX = props.getX;
 	            var getY = props.getY;
 	

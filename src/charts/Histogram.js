@@ -39,7 +39,7 @@ const Histogram = React.createClass({
 
     statics: {
         getOptions(props) {
-            const {getX, getY} = props;
+            const {data, getX, getY} = props;
             return {
                 // todo: real x domain
                 xDomain: d3.extent(data, accessor(getX)),

@@ -244,6 +244,67 @@ const HistogramExample = React.createClass({
     }
 });
 
+const CustomTicksExample = React.createClass({
+    render() {
+        return <div>
+            <XYPlot
+                width={300} height={300}
+                xTicks={[0, 1, 2, 4, 8, 16]}
+                yTicks={[-8000, -3000, 0, 10000, 5000, 40000]}
+                >
+                <BarChart data={randomBarData2.numberNumber} getX={0} getY={1} />
+            </XYPlot>
+        </div>
+    }
+});
+
+const CustomChildExample = React.createClass({
+    getInitialState() {
+        return {
+            hoveredYVal: null
+        }
+    },
+    onMouseMoveChart(hovered, e, options) {
+        const {chartYVal} = options;
+        this.setState({hoveredYVal: chartYVal});
+    },
+    render() {
+        return <div>
+            <XYPlot
+                    width={200} height={200}
+                    yType='ordinal'
+                    onMouseMove={this.onMouseMoveChart}
+                    padding={{bottom: 20, top: 20}}
+                    showXTicks={false} showYTicks={false}
+                    showXGrid={false} showYGrid={false}
+                    showXLabels={false}
+                    showXZero={true}
+                >
+                <CustomSelectionRect underAxes={true} hoveredYVal={this.state.hoveredYVal} />
+                <BarChart
+                    data={randomBarData2.numberOrdinal}
+                    getX={0} getY={1} orientation="horizontal"
+                    barThickness={20}
+                    />
+            </XYPlot>
+        </div>
+    }
+});
+
+const CustomSelectionRect = React.createClass({
+    render() {
+        const {yScale, hoveredYVal} = this.props;
+        return hoveredYVal ?
+            <rect
+                x="0"
+                y={yScale(hoveredYVal) - 20}
+                width="200" height="40"
+                underAxes={true}
+                style={{fill: 'red'}}
+                /> : null;
+    }
+});
+
 const MultipleXYExample = React.createClass({
     render() {
         return <div>
@@ -470,7 +531,6 @@ const V1Examples = React.createClass({
     }
 });
 
-
 const examples = [
     {id: 'line', title: 'Line Chart', Component: LineChartExample},
     {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
@@ -480,23 +540,14 @@ const examples = [
     {id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample},
     {id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample},
     {id: 'histogram', title: 'Histogram', Component: HistogramExample},
+    {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
+    {id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample},
     {id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample},
     {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample},
     {id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples}
 ];
 
-const TestingRectangle = React.createClass({
-    render() {
-        return this.props.hoveredYVal ?
-            <rect
-                x="0"
-                y={this.props.yScale(this.props.hoveredYVal) - 20}
-                width="200" height="40"
-                underAxes={true}
-                style={{fill: 'red'}}
-            /> : null;
-    }
-});
+
 
 const App = React.createClass({
     getInitialState() {
@@ -510,34 +561,23 @@ const App = React.createClass({
         this.setState(update(this.state, {visibleExamples: {[id]: {$set: !isVisible}}}));
     },
 
-    onMouseMoveChart(hovered, e, options) {
-        const {chartYVal} = options;
-        this.setState({hoveredYVal: chartYVal});
-    },
+
 
     render() {
         return <div>
             <h1>Reactochart Examples</h1>
 
             <div>
-                <XYPlot width={200} height={200} yType='ordinal' onMouseMove={this.onMouseMoveChart}
-                    padding={{bottom: 20, top: 20}}
-                        showXTicks={false} showYTicks={false}
-                        showXGrid={false} showYGrid={false}
-                        showXLabels={false}
-                        showXZero={true}
-                        yLabelFormat={d => 'Dude, ' + d.toLowerCase()}
-                    >
-                    <TestingRectangle underAxes={true} hoveredYVal={this.state.hoveredYVal} />
+                <XYPlot
+                    width={500} height={300}
+                    xTicks={[0, 1, 2, 4, 8, 16]}
+                    yTicks={[-8000, -3000, 0, 10000, 5000, 20000]}
+                    showYZero={true}
+                >
                     <BarChart
-                        getClass={d => `test${d[0]}`}
-                        data={randomBarData2.numberOrdinal}
-                        getX={0} getY={1} orientation="horizontal"
-                        barThickness={20}
-                    />
-                    <ScatterPlot
-                        data={randomBarData2.numberOrdinal}
+                        data={randomBarData2.numberNumber}
                         getX={0} getY={1}
+                        barThickness={20}
                     />
                 </XYPlot>
             </div>

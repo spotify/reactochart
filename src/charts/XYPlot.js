@@ -25,9 +25,13 @@ const XYPlot = React.createClass({
         xDomain: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
         yDomain: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
 
-        // approximate # of ticks to include on each axis (actual # may be slightly different, to get nicest intervals)
+        // approximate # of ticks to include on each axis - 10 is default
+        // (actual # may be slightly different, to get nicest intervals)
         xTickCount: PropTypes.number,
         yTickCount: PropTypes.number,
+        // or alternatively, you can pass an array of the exact tick values to use on each axis
+        xTicks: PropTypes.array,
+        yTicks: PropTypes.array,
 
         // (outer) width and height of the chart
         // todo infer from data/other props??
@@ -102,6 +106,8 @@ const XYPlot = React.createClass({
             yType: 'number',
             xDomain: null,
             yDomain: null,
+            xTicks: null,
+            yTicks: null,
             xTickCount: 10,
             yTickCount: 10,
             width: 400,
@@ -146,7 +152,7 @@ const XYPlot = React.createClass({
     },
 
     initDomains(props) {
-        const {xType, yType} = this.props;
+        const {xType, yType, xTicks, yTicks} = this.props;
         // figure out the domains for each axis (ie. data extents)
         let allChartOptions = [];
         // unless both domains are given, ask each child chart for it's desired domain, & flatten them into one domain.
@@ -166,9 +172,21 @@ const XYPlot = React.createClass({
             allChartOptions.push({xDomain, yDomain, spacing});
         });
         //}
-        const xDomains = props.xDomain || _.pluck(allChartOptions, 'xDomain');
-        const yDomains = props.yDomain || _.pluck(allChartOptions, 'yDomain');
+
+
+
+
+        let xDomains = props.xDomain || _.pluck(allChartOptions, 'xDomain');
+        let yDomains = props.yDomain || _.pluck(allChartOptions, 'yDomain');
         const spacings = props.spacing || _.pluck(allChartOptions, 'spacing');
+
+        // if user has passed in custom ticks, extend the domains to ensure all ticks are included
+        if(xTicks) xDomains.push(xType === 'ordinal' ? xTicks : d3.extent(xTicks));
+        if(yTicks) yDomains.push(yType === 'ordinal' ? yTicks : d3.extent(yTicks));
+
+        console.log(xDomains, yDomains, spacings);
+
+        // if user has passed in custom ticks, extend the domains to ensure all ticks are included
         _.assign(this, {xDomains, yDomains, spacings});
     },
     initLabelFormats(props) {
@@ -211,23 +229,21 @@ const XYPlot = React.createClass({
             let padding = _.transform(origPadding, (res, p, key) => res[key] = _.isNull(p) ? spacings[0][key] : p);
             // make scales using margin, measure labels, make new margins
             // repeat until we converge on a margin that works
-            let xScale, yScale, scaleWidth, scaleHeight, chartWidth, chartHeight, labelBoxes;
+            let xScale, yScale, xTicks, yTicks, scaleWidth, scaleHeight, chartWidth, chartHeight, labelBoxes;
             let i=0, limit=5; // ensure we dont loop forever
             while(!isDone && i<limit) {
                 i++;
                 scaleWidth = width - (margin.left + margin.right + padding.left + padding.right);
                 scaleHeight = height - (margin.top + margin.bottom + padding.top + padding.bottom);
-                xScale = makeScale(this.xDomains, [padding.left, scaleWidth + padding.left], xType);
-                yScale = makeScale(this.yDomains, [scaleHeight + padding.top, padding.top], yType);
-                // todo cleanup ticks... doing more than i need to here...
-                let xTicks = (xType === 'ordinal') ? xScale.domain() : xScale.ticks(xTickCount);
-                let yTicks = (yType === 'ordinal') ? yScale.domain() : yScale.ticks(yTickCount);
-                if(niceX && xType !== 'ordinal') xTicks = xScale.nice(xTicks.length);
-                if(niceY && yType !== 'ordinal') yTicks = yScale.nice(yTicks.length).ticks();
+                xScale = makeScale(this.xDomains, [padding.left, scaleWidth + padding.left], xType, niceX, xTickCount);
+                yScale = makeScale(this.yDomains, [scaleHeight + padding.top, padding.top], yType, niceY, yTickCount);
+                xTicks = props.xTicks || ((xType === 'ordinal') ? xScale.domain() : xScale.ticks(xTickCount));
+                yTicks = props.yTicks || ((yType === 'ordinal') ? yScale.domain() : yScale.ticks(yTickCount));
+                console.log(xTicks, yTicks);
 
                 labelBoxes = measureAxisLabels(
-                    this.getXAxisProps({scaleWidth, scaleHeight, scale: xScale}),
-                    this.getYAxisProps({scaleWidth, scaleHeight, scale: yScale}),
+                    this.getXAxisProps({scaleWidth, scaleHeight, scale: xScale, ticks: xTicks}),
+                    this.getYAxisProps({scaleWidth, scaleHeight, scale: yScale, ticks: yTicks}),
                     xAxisLabel ? this.getXAxisLabelProps({margin}) : null,
                     yAxisLabel ? this.getYAxisLabelProps({margin}) : null
                 );
@@ -320,7 +336,7 @@ const XYPlot = React.createClass({
             }
             //console.log('padding', padding);
             //console.log({scaleWidth, scaleHeight});
-            _.assign(this, {margin, padding, scaleWidth, scaleHeight, xScale, yScale, labelBoxes});
+            _.assign(this, {margin, padding, scaleWidth, scaleHeight, xScale, yScale, xTicks, yTicks, labelBoxes});
         } else {
             // margins are all pre-defined, just make the scales
             const scaleWidth = width - (props.margin.left + props.margin.right);
@@ -434,6 +450,7 @@ const XYPlot = React.createClass({
             padding: options.padding || this.padding,
             scale: options.scale || this[`${letter}Scale`],
             type: options.type || this.props[`${letter}Type`],
+            ticks: options.ticks || this[`${letter}Ticks`],
             tickCount: options.tickCount || this.props[`${letter}TickCount`],
             labelFormat: options.labelFormat || this[`${letter}LabelFormat`],
             showLabels: options.showLabels || this.props[`show${upperLetter}Labels`],
@@ -579,6 +596,7 @@ const ChartAxis = React.createClass({
         type: PropTypes.string,
         orientation: PropTypes.string,
         axisTransform: PropTypes.string,
+        ticks: PropTypes.array,
         tickCount: PropTypes.number,
         labelFormat: PropTypes.string,
         letter: PropTypes.string,
@@ -598,14 +616,14 @@ const ChartAxis = React.createClass({
     },
     render() {
         const {
-            scale, type, orientation, axisTransform, tickCount, letter, labelFormat,
+            scale, type, orientation, axisTransform, tickCount, letter, labelFormat, ticks,
             scaleWidth, scaleHeight, padding, labelPadding, tickLength,
             showLabels, showTicks, showGrid, showZero
         } = this.props;
 
         if(!(showLabels || showTicks || showGrid || showZero)) return null;
 
-        const ticks = (type === 'ordinal') ? scale.domain() : scale.ticks(tickCount);
+        //const ticks = (type === 'ordinal') ? scale.domain() : scale.ticks(tickCount);
         const distance = (showTicks) ? tickLength + labelPadding : labelPadding;
         const [tickTransform, labelOffset, gridLength] = (orientation === 'vertical') ?
             [v => `translate(0, ${scale(v)})`, {x: -distance}, scaleWidth + padding.left + padding.right] :
@@ -678,10 +696,11 @@ function childIsXYChart(child) {
 
 function isNullOrUndefined(d) { return _.isNull(d) || _.isUndefined(d); }
 
-function makeScale(domains, range, axisType) {
+function makeScale(domains, range, axisType, isNice, tickCount) {
     const domain = defaultDomain(_.flatten(domains), null, axisType);
     const scale = initScale(axisType).domain(domain);
     axisType === 'ordinal' ? scale.rangePoints(range) : scale.range(range);
+    if(isNice && axisType !== 'ordinal') scale.nice(tickCount);
     return scale;
 }
 
@@ -699,9 +718,9 @@ function defaultDomain(data, getter, scaleType) {
 
 function initScale(type) {
     switch(type) {
-        case 'number': return d3.scale.linear().nice();
+        case 'number': return d3.scale.linear();
         case 'ordinal': return d3.scale.ordinal();
-        case 'time': return d3.time.scale().nice();
+        case 'time': return d3.time.scale();
     }
 }
 
