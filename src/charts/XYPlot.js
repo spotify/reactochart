@@ -184,8 +184,6 @@ const XYPlot = React.createClass({
         if(xTicks) xDomains.push(xType === 'ordinal' ? xTicks : d3.extent(xTicks));
         if(yTicks) yDomains.push(yType === 'ordinal' ? yTicks : d3.extent(yTicks));
 
-        console.log(xDomains, yDomains, spacings);
-
         // if user has passed in custom ticks, extend the domains to ensure all ticks are included
         _.assign(this, {xDomains, yDomains, spacings});
     },
@@ -239,7 +237,6 @@ const XYPlot = React.createClass({
                 yScale = makeScale(this.yDomains, [scaleHeight + padding.top, padding.top], yType, niceY, yTickCount);
                 xTicks = props.xTicks || ((xType === 'ordinal') ? xScale.domain() : xScale.ticks(xTickCount));
                 yTicks = props.yTicks || ((yType === 'ordinal') ? yScale.domain() : yScale.ticks(yTickCount));
-                console.log(xTicks, yTicks);
 
                 labelBoxes = measureAxisLabels(
                     this.getXAxisProps({scaleWidth, scaleHeight, scale: xScale, ticks: xTicks}),
