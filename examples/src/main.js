@@ -571,50 +571,32 @@ const App = React.createClass({
                 <XYPlot
                     width={500} height={300}
                     xTicks={[0, 1, 2, 4, 8, 16]}
+                    xLabels={[0, 1, 3, 9, 12]}
                     yTicks={[-8000, -3000, 0, 10000, 5000, 20000]}
+                    yLabels={[-5000, -2000, 0, 8000, 3000, 16000]}
                     showYZero={true}
                 >
                     <BarChart
                         data={randomBarData2.numberNumber}
                         getX={0} getY={1}
                         barThickness={20}
-                        onMouseMoveBar={() => console.log('test')}
                     />
                 </XYPlot>
             </div>
-            {/*
             <div>
-                <XYPlot width={200} height={200} yType='ordinal' showYLabels={false} showYTicks={false}>
-                    <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
-                </XYPlot>
-                <XYPlot width={200} height={200} yType='ordinal' showXLabels={false}>
-                    <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
-                </XYPlot>
-                <XYPlot width={200} height={200} yType='ordinal' showXLabels={false} showYLabels={false}>
-                    <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
-                </XYPlot>
-                <XYPlot width={200} height={200} yType='ordinal'
-                        showXLabels={false} showYLabels={false} showXTicks={false} showYTicks={false}>
-                    <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
+                <XYPlot
+                    width={500} height={300}
+                    xTicks={[0, 1, 2, 4, 8, 16]}
+                    yTicks={[-8000, -3000, 0, 10000, 5000, 20000]}
+                    showYZero={true}
+                    >
+                    <BarChart
+                        data={randomBarData2.numberNumber}
+                        getX={0} getY={1}
+                        barThickness={20}
+                        />
                 </XYPlot>
             </div>
-
-            <div>
-                <XYPlot width={200} height={200} xType='ordinal' showYLabels={false} showYTicks={false}>
-                    <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} />
-                </XYPlot>
-                <XYPlot width={200} height={200} xType='ordinal' showXLabels={false}>
-                    <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} />
-                </XYPlot>
-                <XYPlot width={200} height={200} xType='ordinal' showXLabels={false} showYLabels={false}>
-                    <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} />
-                </XYPlot>
-                <XYPlot width={200} height={200} xType='ordinal'
-                        showXLabels={false} showYLabels={false} showXTicks={false} showYTicks={false}>
-                    <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} />
-                </XYPlot>
-            </div>
-             */}
 
             {this.renderExamples()}
         </div>

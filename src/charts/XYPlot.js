@@ -30,8 +30,11 @@ const XYPlot = React.createClass({
         xTickCount: PropTypes.number,
         yTickCount: PropTypes.number,
         // or alternatively, you can pass an array of the exact tick values to use on each axis
-        xTicks: PropTypes.array,
-        yTicks: PropTypes.array,
+        xTicks: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
+        yTicks: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
+        // axis value labels will be created for each tick, unless you specify a different list of values to label
+        xLabels: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
+        yLabels: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
 
         // (outer) width and height of the chart
         // todo infer from data/other props??
@@ -40,6 +43,13 @@ const XYPlot = React.createClass({
 
         // chart margins
         margin: PropTypes.shape({
+            top: PropTypes.number,
+            bottom: PropTypes.number,
+            left: PropTypes.number,
+            right: PropTypes.number
+        }),
+        // internal chart padding
+        padding: PropTypes.shape({
             top: PropTypes.number,
             bottom: PropTypes.number,
             left: PropTypes.number,
@@ -55,8 +65,6 @@ const XYPlot = React.createClass({
         // todo: extraMargin
         // todo: padding, minPadding, extraPadding
         // todo: spacing, minSpacing, extraSpacing ???
-        // todo: niceX, niceY
-        // todo: xAxisLabel, yAxisLabel
 
 
         // format to use for the axis value labels. can be a function or a string.
@@ -108,6 +116,8 @@ const XYPlot = React.createClass({
             yDomain: null,
             xTicks: null,
             yTicks: null,
+            xLabels: null,
+            yLabels: null,
             xTickCount: 10,
             yTickCount: 10,
             width: 400,
@@ -171,9 +181,6 @@ const XYPlot = React.createClass({
             allChartOptions.push({xDomain, yDomain, spacing});
         });
         //}
-
-
-
 
         let xDomains = props.xDomain || _.pluck(allChartOptions, 'xDomain');
         let yDomains = props.yDomain || _.pluck(allChartOptions, 'yDomain');
@@ -455,6 +462,7 @@ const XYPlot = React.createClass({
             scale: options.scale || this[`${letter}Scale`],
             type: options.type || this.props[`${letter}Type`],
             ticks: options.ticks || this[`${letter}Ticks`],
+            labels: options.labels || this.props[`${letter}Labels`],
             tickCount: options.tickCount || this.props[`${letter}TickCount`],
             labelFormat: options.labelFormat || this[`${letter}LabelFormat`],
             showLabels: options.showLabels || this.props[`show${upperLetter}Labels`],
@@ -596,11 +604,12 @@ const YAxisLabel = React.createClass({
 
 const ChartAxis = React.createClass({
     propTypes: {
-        scale: PropTypes.object,
+        scale: PropTypes.func,
         type: PropTypes.string,
         orientation: PropTypes.string,
         axisTransform: PropTypes.string,
         ticks: PropTypes.array,
+        labels: PropTypes.array,
         tickCount: PropTypes.number,
         labelFormat: PropTypes.string,
         letter: PropTypes.string,
@@ -619,6 +628,7 @@ const ChartAxis = React.createClass({
         return { padding: DEFAULTS.spacing }
     },
     render() {
+        console.log('labels', this.props.labels);
         const {
             scale, type, orientation, axisTransform, tickCount, letter, labelFormat, ticks,
             scaleWidth, scaleHeight, padding, labelPadding, tickLength,
@@ -627,7 +637,7 @@ const ChartAxis = React.createClass({
 
         if(!(showLabels || showTicks || showGrid || showZero)) return null;
 
-        //const ticks = (type === 'ordinal') ? scale.domain() : scale.ticks(tickCount);
+        const labels = _.isArray(this.props.labels) ? this.props.labels : ticks;
         const distance = (showTicks) ? tickLength + labelPadding : labelPadding;
         const [tickTransform, labelOffset, gridLength] = (orientation === 'vertical') ?
             [v => `translate(0, ${scale(v)})`, {x: -distance}, scaleWidth + padding.left + padding.right] :
@@ -635,13 +645,21 @@ const ChartAxis = React.createClass({
 
         const options = {letter, type, orientation, labelOffset, gridLength, tickLength, labelFormat};
         return <g ref={`${letter}Axis`} className={`chart-axis chart-axis-${letter}`} transform={axisTransform}>
-            {showLabels || showTicks || showGrid ?
+            {showTicks || showGrid || (showLabels && labels === ticks) ?
                 _.map(ticks, (value) => {
                     const tickOptions = _.assign({}, options, {value});
                     return <g transform={tickTransform(value)}>
-                        {showLabels ? this.renderLabel(tickOptions): null}
-                        {showGrid ? this.renderGrid(tickOptions): null}
+                        {showGrid ? this.renderGrid(tickOptions) : null}
                         {showTicks ? this.renderTick(tickOptions) : null}
+                        {(showLabels && labels === ticks) ? this.renderLabel(tickOptions) : null}
+                    </g>
+                })
+                : null
+            }
+            {(showLabels && labels !== ticks) ? // render custom labels (passed in, not same as ticks)
+                _.map(labels, (value) => {
+                    return <g transform={tickTransform(value)}>
+                        {this.renderLabel(_.assign({}, options, {value}))}
                     </g>
                 })
                 : null

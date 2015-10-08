@@ -870,16 +870,33 @@
 	                    {
 	                        width: 500, height: 300,
 	                        xTicks: [0, 1, 2, 4, 8, 16],
+	                        xLabels: [0, 1, 3, 9, 12],
+	                        yTicks: [-8000, -3000, 0, 10000, 5000, 20000],
+	                        yLabels: [-5000, -2000, 0, 8000, 3000, 16000],
+	                        showYZero: true
+	                    },
+	                    _reactAddons2['default'].createElement(_src.BarChart, {
+	                        data: randomBarData2.numberNumber,
+	                        getX: 0, getY: 1,
+	                        barThickness: 20
+	                    })
+	                )
+	            ),
+	            _reactAddons2['default'].createElement(
+	                'div',
+	                null,
+	                _reactAddons2['default'].createElement(
+	                    _src.XYPlot,
+	                    {
+	                        width: 500, height: 300,
+	                        xTicks: [0, 1, 2, 4, 8, 16],
 	                        yTicks: [-8000, -3000, 0, 10000, 5000, 20000],
 	                        showYZero: true
 	                    },
 	                    _reactAddons2['default'].createElement(_src.BarChart, {
 	                        data: randomBarData2.numberNumber,
 	                        getX: 0, getY: 1,
-	                        barThickness: 20,
-	                        onMouseMoveBar: function () {
-	                            return console.log('test');
-	                        }
+	                        barThickness: 20
 	                    })
 	                )
 	            ),
@@ -929,38 +946,6 @@
 	// old charts
 
 	// new charts
-	/*
-	<div>
-	   <XYPlot width={200} height={200} yType='ordinal' showYLabels={false} showYTicks={false}>
-	       <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
-	   </XYPlot>
-	   <XYPlot width={200} height={200} yType='ordinal' showXLabels={false}>
-	       <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
-	   </XYPlot>
-	   <XYPlot width={200} height={200} yType='ordinal' showXLabels={false} showYLabels={false}>
-	       <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
-	   </XYPlot>
-	   <XYPlot width={200} height={200} yType='ordinal'
-	           showXLabels={false} showYLabels={false} showXTicks={false} showYTicks={false}>
-	       <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
-	   </XYPlot>
-	</div>
-	<div>
-	   <XYPlot width={200} height={200} xType='ordinal' showYLabels={false} showYTicks={false}>
-	       <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} />
-	   </XYPlot>
-	   <XYPlot width={200} height={200} xType='ordinal' showXLabels={false}>
-	       <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} />
-	   </XYPlot>
-	   <XYPlot width={200} height={200} xType='ordinal' showXLabels={false} showYLabels={false}>
-	       <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} />
-	   </XYPlot>
-	   <XYPlot width={200} height={200} xType='ordinal'
-	           showXLabels={false} showYLabels={false} showXTicks={false} showYTicks={false}>
-	       <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} />
-	   </XYPlot>
-	</div>
-	*/
 
 /***/ },
 /* 2 */
@@ -58574,8 +58559,11 @@
 	        xTickCount: PropTypes.number,
 	        yTickCount: PropTypes.number,
 	        // or alternatively, you can pass an array of the exact tick values to use on each axis
-	        xTicks: PropTypes.array,
-	        yTicks: PropTypes.array,
+	        xTicks: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
+	        yTicks: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
+	        // axis value labels will be created for each tick, unless you specify a different list of values to label
+	        xLabels: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
+	        yLabels: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
 	
 	        // (outer) width and height of the chart
 	        // todo infer from data/other props??
@@ -58584,6 +58572,13 @@
 	
 	        // chart margins
 	        margin: PropTypes.shape({
+	            top: PropTypes.number,
+	            bottom: PropTypes.number,
+	            left: PropTypes.number,
+	            right: PropTypes.number
+	        }),
+	        // internal chart padding
+	        padding: PropTypes.shape({
 	            top: PropTypes.number,
 	            bottom: PropTypes.number,
 	            left: PropTypes.number,
@@ -58599,8 +58594,6 @@
 	        // todo: extraMargin
 	        // todo: padding, minPadding, extraPadding
 	        // todo: spacing, minSpacing, extraSpacing ???
-	        // todo: niceX, niceY
-	        // todo: xAxisLabel, yAxisLabel
 	
 	        // format to use for the axis value labels. can be a function or a string.
 	        // if function, called on each label.
@@ -58651,6 +58644,8 @@
 	            yDomain: null,
 	            xTicks: null,
 	            yTicks: null,
+	            xLabels: null,
+	            yLabels: null,
 	            xTickCount: 10,
 	            yTickCount: 10,
 	            width: 400,
@@ -59056,6 +59051,7 @@
 	            scale: options.scale || this[letter + 'Scale'],
 	            type: options.type || this.props[letter + 'Type'],
 	            ticks: options.ticks || this[letter + 'Ticks'],
+	            labels: options.labels || this.props[letter + 'Labels'],
 	            tickCount: options.tickCount || this.props[letter + 'TickCount'],
 	            labelFormat: options.labelFormat || this[letter + 'LabelFormat'],
 	            showLabels: options.showLabels || this.props['show' + upperLetter + 'Labels'],
@@ -59219,11 +59215,12 @@
 	    displayName: 'ChartAxis',
 	
 	    propTypes: {
-	        scale: PropTypes.object,
+	        scale: PropTypes.func,
 	        type: PropTypes.string,
 	        orientation: PropTypes.string,
 	        axisTransform: PropTypes.string,
 	        ticks: PropTypes.array,
+	        labels: PropTypes.array,
 	        tickCount: PropTypes.number,
 	        labelFormat: PropTypes.string,
 	        letter: PropTypes.string,
@@ -59244,6 +59241,7 @@
 	    render: function render() {
 	        var _this3 = this;
 	
+	        console.log('labels', this.props.labels);
 	        var _props6 = this.props;
 	        var scale = _props6.scale;
 	        var type = _props6.type;
@@ -59265,7 +59263,7 @@
 	
 	        if (!(showLabels || showTicks || showGrid || showZero)) return null;
 	
-	        //const ticks = (type === 'ordinal') ? scale.domain() : scale.ticks(tickCount);
+	        var labels = _lodash2['default'].isArray(this.props.labels) ? this.props.labels : ticks;
 	        var distance = showTicks ? tickLength + labelPadding : labelPadding;
 	
 	        var _ref4 = orientation === 'vertical' ? [function (v) {
@@ -59284,14 +59282,22 @@
 	        return _react2['default'].createElement(
 	            'g',
 	            { ref: letter + 'Axis', className: 'chart-axis chart-axis-' + letter, transform: axisTransform },
-	            showLabels || showTicks || showGrid ? _lodash2['default'].map(ticks, function (value) {
+	            showTicks || showGrid || showLabels && labels === ticks ? _lodash2['default'].map(ticks, function (value) {
 	                var tickOptions = _lodash2['default'].assign({}, options, { value: value });
 	                return _react2['default'].createElement(
 	                    'g',
 	                    { transform: tickTransform(value) },
-	                    showLabels ? _this3.renderLabel(tickOptions) : null,
 	                    showGrid ? _this3.renderGrid(tickOptions) : null,
-	                    showTicks ? _this3.renderTick(tickOptions) : null
+	                    showTicks ? _this3.renderTick(tickOptions) : null,
+	                    showLabels && labels === ticks ? _this3.renderLabel(tickOptions) : null
+	                );
+	            }) : null,
+	            showLabels && labels !== ticks ? // render custom labels (passed in, not same as ticks)
+	            _lodash2['default'].map(labels, function (value) {
+	                return _react2['default'].createElement(
+	                    'g',
+	                    { transform: tickTransform(value) },
+	                    _this3.renderLabel(_lodash2['default'].assign({}, options, { value: value }))
 	                );
 	            }) : null,
 	            showZero ? _react2['default'].createElement(
