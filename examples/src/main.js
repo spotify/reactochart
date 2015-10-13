@@ -136,24 +136,29 @@ const ScatterPlotExample = React.createClass({
         return <div>
             <XYPlot width={700} height={500}>
                 <ScatterPlot
-                    data={randomScatter[3]} getX={0} getY={1}
+                    data={randomScatter[3]}
+                    getValue={{x: 0, y: 1}}
                     pointSymbol={rectangleSymbol}
                     />
                 <ScatterPlot
-                    data={randomScatter[4]} getX={0} getY={1}
+                    data={randomScatter[4]}
+                    getValue={{x: 0, y: 1}}
                     pointRadius={2}
                     />
                 <ScatterPlot
-                    data={randomScatter[1]} getX={0} getY={1}
+                    data={randomScatter[1]}
+                    getValue={{x: 0, y: 1}}
                     pointSymbol={randomEmoji}
                     pointOffset={[0, 2]}
                     />
                 <ScatterPlot
-                    data={randomScatter[0]} getX={0} getY={1}
+                    data={randomScatter[0]}
+                    getValue={{x: 0, y: 1}}
                     pointSymbol={(d, i) => i}
                     />
                 <ScatterPlot
-                    data={randomScatter[2]} getX={0} getY={1}
+                    data={randomScatter[2]}
+                    getValue={{x: 0, y: 1}}
                     pointSymbol={triangleSymbol}
                     pointOffset={[-4, -3]}
                     />
@@ -168,19 +173,22 @@ const LineChartExample = React.createClass({
             <XYPlot width={700}>
                 <LineChart
                     data={_.range(-10,10,0.01)}
-                    getX={null}
-                    getY={(n) => Math.sin(n)}
-                    />
+                    getValue={{x: null, y: (n) => Math.sin(n)}}
+                />
                 <LineChart
                     data={_.range(-10,10,0.01)}
-                    getX={null}
-                    getY={(n) => Math.sin(Math.pow(Math.abs(n), Math.abs(n*.18))) * Math.cos(n)}
-                    />
+                    getValue={{
+                        x: null,
+                        y: (n) => Math.sin(Math.pow(Math.abs(n), Math.abs(n*.18))) * Math.cos(n)
+                    }}
+                />
                 <LineChart
                     data={_.range(-10,10,0.01)}
-                    getX={null}
-                    getY={(n) => Math.sin(n*0.5) * Math.cos(n)}
-                    />
+                    getValue={{
+                        x: null,
+                        y: (n) => Math.sin(n*0.5) * Math.cos(n)
+                    }}
+                />
             </XYPlot>
         </div>
     }
@@ -205,9 +213,9 @@ const InteractiveLineExample = React.createClass({
                 <div>Hover over the chart to show values</div>
             }
             <XYPlot width={700} height={400} onMouseMove={this.onMouseMoveXYPlot}>
-                <LineChart data={randomSequences[0]} getX={0} getY={1} />
-                <LineChart data={randomSequences[1]} getX={0} getY={1} />
-                <LineChart data={randomSequences[2]} getX={0} getY={1} />
+                <LineChart data={randomSequences[0]} getValue={{x: 0, y: 1}} />
+                <LineChart data={randomSequences[1]} getValue={{x: 0, y: 1}} />
+                <LineChart data={randomSequences[2]} getValue={{x: 0, y: 1}} />
             </XYPlot>
         </div>
     }
@@ -219,7 +227,7 @@ const HistogramExample = React.createClass({
             <div>
                 <XYPlot width={700} height={300}>
                     <Histogram
-                        data={randomNormal} getX={null}
+                        data={randomNormal} getValue={{x: null}}
                         />
                     <KernelDensityEstimation
                         data={randomNormal} bandwidth={0.5}
@@ -235,9 +243,13 @@ const HistogramExample = React.createClass({
             <div>
                 <XYPlot width={700} height={80} showYLabels={false}>
                     <ScatterPlot
-                        data={randomNormal} getX={null} getY={() => Math.random()}
+                        data={randomNormal}
+                        getValue={{
+                            x: null,
+                            y: () => Math.random()
+                        }}
                         pointRadius={1.5}
-                        />
+                    />
                 </XYPlot>
             </div>
         </div>
@@ -249,10 +261,37 @@ const CustomTicksExample = React.createClass({
         return <div>
             <XYPlot
                 width={300} height={300}
-                xTicks={[0, 1, 2, 4, 8, 16]}
-                yTicks={[-8000, -3000, 0, 10000, 5000, 40000]}
+                ticks={{
+                    x: [0, 1, 2, 4, 8, 16],
+                    y: [-8000, -3000, 0, 10000, 5000, 40000]
+                }}
+            >
+                <BarChart data={randomBarData2.numberNumber} getValue={{x: 0, y: 1}} />
+            </XYPlot>
+        </div>
+    }
+});
+
+const CustomAxisLabelsExample = React.createClass({
+    render() {
+        return <div>
+            <XYPlot
+                width={500} height={300}
+                ticks={{
+                        x: [0, 1, 2, 4, 8, 16],
+                        y: [-8000, -3000, 0, 10000, 5000, 20000]
+                    }}
+                labelValues={{
+                        x: [0, 1, 3, 9, 12],
+                        y: [-5000, -2000, 0, 8000, 3000, 16000]
+                    }}
+                showZero={{y: true}}
                 >
-                <BarChart data={randomBarData2.numberNumber} getX={0} getY={1} />
+                <BarChart
+                    data={randomBarData2.numberNumber}
+                    getValue={{x: 0, y: 1}}
+                    barThickness={20}
+                    />
             </XYPlot>
         </div>
     }
@@ -275,17 +314,18 @@ const CustomChildExample = React.createClass({
                     yType='ordinal'
                     onMouseMove={this.onMouseMoveChart}
                     padding={{bottom: 20, top: 20}}
-                    showXTicks={false} showYTicks={false}
-                    showXGrid={false} showYGrid={false}
-                    showXLabels={false}
-                    showXZero={true}
+                    showTicks={{x: false, y: false}}
+                    showGrid={{x: false, y: false}}
+                    showLabels={{x: false}}
+                    showXZero={{x: true}}
                 >
                 <CustomSelectionRect underAxes={true} hoveredYVal={this.state.hoveredYVal} />
                 <BarChart
                     data={randomBarData2.numberOrdinal}
-                    getX={0} getY={1} orientation="horizontal"
+                    getValue={{x: 0, y: 1}}
+                    orientation="horizontal"
                     barThickness={20}
-                    />
+                />
             </XYPlot>
         </div>
     }
@@ -293,11 +333,11 @@ const CustomChildExample = React.createClass({
 
 const CustomSelectionRect = React.createClass({
     render() {
-        const {yScale, hoveredYVal} = this.props;
+        const {scale, hoveredYVal} = this.props;
         return hoveredYVal ?
             <rect
                 x="0"
-                y={yScale(hoveredYVal) - 20}
+                y={scale.y(hoveredYVal) - 20}
                 width="200" height="40"
                 underAxes={true}
                 style={{fill: 'red'}}
@@ -309,9 +349,9 @@ const MultipleXYExample = React.createClass({
     render() {
         return <div>
             <XYPlot>
-                <BarChart data={randomBars[0]} getX={0} getY={1} />
-                <LineChart data={randomBars[0]} getX={0} getY={1} />
-                <ScatterPlot data={randomBars[0]} getX={0} getY={1} pointSymbol={(d, i) => _.sample(emojis)} />
+                <BarChart data={randomBars[0]} getValue={{x: 0, y: 1}} />
+                <LineChart data={randomBars[0]} getValue={{x: 0, y: 1}} />
+                <ScatterPlot data={randomBars[0]} getValue={{x: 0, y: 1}} pointSymbol={(d, i) => _.sample(emojis)} />
             </XYPlot>
         </div>
     }
@@ -325,35 +365,35 @@ const ValueValueBarExample = React.createClass({
             <div>
                 <div>Number-Number, Ordinal-Number, Time-Number</div>
                 <XYPlot width={300} height={300}>
-                    <BarChart data={randomBarData2.numberNumber} getX={0} getY={1} />
+                    <BarChart data={randomBarData2.numberNumber} getValue={{x: 0, y: 1}} />
                 </XYPlot>
-                <XYPlot width={300} height={300} xType='ordinal'>
-                    <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} />
+                <XYPlot width={300} height={300} axisType={{x: 'ordinal'}}>
+                    <BarChart data={randomBarData2.numberOrdinal} getValue={{x: 1, y: 0}} />
                 </XYPlot>
-                <XYPlot width={300} height={300} xType='time'>
-                    <BarChart data={randomBarData2.numberTime} getX={1} getY={0} />
+                <XYPlot width={300} height={300} axisType={{x: 'time'}}>
+                    <BarChart data={randomBarData2.numberTime} getValue={{x: 1, y: 0}} />
                 </XYPlot>
 
                 <div>Number-Ordinal, Ordinal-Ordinal, Time-Ordinal</div>
-                <XYPlot width={300} height={300} yType='ordinal'>
-                    <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} />
+                <XYPlot width={300} height={300} axisType={{y: 'ordinal'}}>
+                    <BarChart data={randomBarData2.numberOrdinal} getValue={{x: 0, y: 1}} />
                 </XYPlot>
-                <XYPlot width={300} height={300} xType='ordinal' yType='ordinal'>
-                    <BarChart data={randomBarData2.ordinalOrdinal} getX={0} getY={1} />
+                <XYPlot width={300} height={300} axisType={{x: 'ordinal', y: 'ordinal'}}>
+                    <BarChart data={randomBarData2.ordinalOrdinal} getValue={{x: 0, y: 1}} />
                 </XYPlot>
-                <XYPlot width={300} height={300} xType='time' yType='ordinal'>
-                    <BarChart data={randomBarData2.ordinalTime} getX={1} getY={0} />
+                <XYPlot width={300} height={300} axisType={{x: 'time', y: 'ordinal'}}>
+                    <BarChart data={randomBarData2.ordinalTime} getValue={{x: 1, y: 0}} />
                 </XYPlot>
 
                 <div>Number-Time, Ordinal-Time, Time-Time</div>
-                <XYPlot width={300} height={300} yType='time'>
-                    <BarChart data={randomBarData2.numberTime} getX={0} getY={1} />
+                <XYPlot width={300} height={300} axisType={{y: 'time'}}>
+                    <BarChart data={randomBarData2.numberTime} getValue={{x: 0, y: 1}} />
                 </XYPlot>
-                <XYPlot width={300} height={300} xType='ordinal' yType='time'>
-                    <BarChart data={randomBarData2.ordinalTime} getX={0} getY={1} />
+                <XYPlot width={300} height={300} axisType={{x: 'ordinal', y: 'time'}}>
+                    <BarChart data={randomBarData2.ordinalTime} getValue={{x: 0, y: 1}} />
                 </XYPlot>
-                <XYPlot width={300} height={300} xType='time' yType='time'>
-                    <BarChart data={randomBarData2.timeTime} getX={0} getY={1} />
+                <XYPlot width={300} height={300} axisType={{x: 'time', y: 'time'}}>
+                    <BarChart data={randomBarData2.timeTime} getValue={{x: 0, y: 1}} />
                 </XYPlot>
             </div>
 
@@ -362,35 +402,35 @@ const ValueValueBarExample = React.createClass({
             <div>
                 <div>Number-Number, Ordinal-Number, Date-Number</div>
                 <XYPlot width={300} height={300}>
-                    <BarChart data={randomBarData2.numberNumber} getX={1} getY={0} orientation="horizontal"/>
+                    <BarChart data={randomBarData2.numberNumber} getValue={{x: 1, y: 0}} orientation="horizontal"/>
                 </XYPlot>
-                <XYPlot width={300} height={300} yType='ordinal'>
-                    <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
+                <XYPlot width={300} height={300} axisType={{y: 'ordinal'}}>
+                    <BarChart data={randomBarData2.numberOrdinal} getValue={{x: 0, y: 1}} orientation="horizontal" />
                 </XYPlot>
-                <XYPlot width={300} height={300} yType='time'>
-                    <BarChart data={randomBarData2.numberTime} getX={0} getY={1} orientation="horizontal" />
+                <XYPlot width={300} height={300} axisType={{y: 'time'}}>
+                    <BarChart data={randomBarData2.numberTime} getValue={{x: 0, y: 1}} orientation="horizontal" />
                 </XYPlot>
 
                 <div>Number-Ordinal, Ordinal-Ordinal, Date-Ordinal</div>
-                <XYPlot width={300} height={300} xType='ordinal'>
-                    <BarChart data={randomBarData2.numberOrdinal} getX={1} getY={0} orientation="horizontal" />
+                <XYPlot width={300} height={300} axisType={{x: 'ordinal'}}>
+                    <BarChart data={randomBarData2.numberOrdinal} getValue={{x: 1, y: 0}} orientation="horizontal" />
                 </XYPlot>
-                <XYPlot width={300} height={300} xType='ordinal' yType='ordinal'>
-                    <BarChart data={randomBarData2.ordinalOrdinal} getX={1} getY={0} orientation="horizontal" />
+                <XYPlot width={300} height={300} axisType={{x: 'ordinal', y: 'ordinal'}}>
+                    <BarChart data={randomBarData2.ordinalOrdinal} getValue={{x: 1, y: 0}} orientation="horizontal" />
                 </XYPlot>
-                <XYPlot width={300} height={300} xType='ordinal' yType='time'>
-                    <BarChart data={randomBarData2.ordinalTime} getX={0} getY={1} orientation="horizontal" />
+                <XYPlot width={300} height={300} axisType={{x: 'ordinal', y: 'time'}}>
+                    <BarChart data={randomBarData2.ordinalTime} getValue={{x: 0, y: 1}} orientation="horizontal" />
                 </XYPlot>
 
                 <div>Number-Time, Ordinal-Time, Time-Time</div>
-                <XYPlot width={300} height={300} xType='time'>
-                    <BarChart data={randomBarData2.numberTime} getX={1} getY={0} orientation="horizontal" />
+                <XYPlot width={300} height={300} axisType={{x: 'time'}}>
+                    <BarChart data={randomBarData2.numberTime} getValue={{x: 1, y: 0}} orientation="horizontal" />
                 </XYPlot>
-                <XYPlot width={300} height={300} yType='ordinal' xType='time'>
-                    <BarChart data={randomBarData2.ordinalTime} getX={1} getY={0} orientation="horizontal" />
+                <XYPlot width={300} height={300} axisType={{x: 'time', y: 'ordinal'}}>
+                    <BarChart data={randomBarData2.ordinalTime} getValue={{x: 1, y: 0}} orientation="horizontal" />
                 </XYPlot>
-                <XYPlot width={300} height={300} yType='time' xType='time'>
-                    <BarChart data={randomBarData2.timeTime} getX={1} getY={0} orientation="horizontal" />
+                <XYPlot width={300} height={300} axisType={{x: 'time', y: 'time'}}>
+                    <BarChart data={randomBarData2.timeTime} getValue={{x: 1, y: 0}} orientation="horizontal" />
                 </XYPlot>
             </div>
         </div>
@@ -405,10 +445,9 @@ const RangeValueBarExample = React.createClass({
                 <XYPlot width={400} height={300}>
                     <BarChart
                         data={rangeValueData.numberNumber}
-                        getX={d => d[0][0]}
-                        getXEnd={d => d[0][1]}
-                        getY={1}
-                        />
+                        getValue={{x: d => d[0][0], y: 1}}
+                        getEndValue={{x: d => d[0][1]}}
+                    />
                 </XYPlot>
             </div>
 
@@ -418,10 +457,9 @@ const RangeValueBarExample = React.createClass({
                     <BarChart
                         data={rangeValueData.numberNumber}
                         orientation="horizontal"
-                        getX={1}
-                        getY={d => d[0][0]}
-                        getYEnd={d => d[0][1]}
-                        />
+                        getValue={{x: 1, y: d => d[0][0]}}
+                        getEndValue={{y: d => d[0][1]}}
+                    />
                 </XYPlot>
             </div>
 
@@ -434,44 +472,54 @@ const BarMarkerLineExample = React.createClass({
         return <div>
             <div>
                 <XYPlot width={400} height={300}>
-                    <BarChart data={randomBarData2.numberNumber} getX={0} getY={1} />
-                    <MarkerLineChart data={barTickData.numberNumber} getX={0} getY={1} lineLength={15} />
+                    <BarChart
+                        data={randomBarData2.numberNumber}
+                        getValue={{x: 0, y: 1}}
+                    />
+                    <MarkerLineChart
+                        data={barTickData.numberNumber}
+                        getValue={{x: 0, y: 1}}
+                        lineLength={15}
+                    />
                 </XYPlot>
                 <XYPlot width={400} height={300}>
-                    <BarChart data={randomBarData2.numberNumber} getX={1} getY={0} orientation="horizontal" />
-                    <MarkerLineChart data={barTickData.numberNumber} getX={1} getY={0} lineLength={15} orientation="horizontal" />
+                    <BarChart
+                        data={randomBarData2.numberNumber}
+                        getValue={{x: 1, y: 0}}
+                        orientation="horizontal" />
+                    <MarkerLineChart
+                        data={barTickData.numberNumber}
+                        getValue={{x: 1, y: 0}}
+                        lineLength={15}
+                        orientation="horizontal" />
                 </XYPlot>
             </div>
             <div>
                 <XYPlot width={400} height={300}>
                     <BarChart
                         data={rangeValueData.numberNumber}
-                        getX={d => d[0][0]}
-                        getXEnd={d => d[0][1]}
-                        getY={1}
-                        />
+                        getValue={{x: d => d[0][0], y: 1}}
+                        getEndValue={{x: d => d[0][1]}}
+                    />
                     <MarkerLineChart
                         data={barTickData.numberRangeNumber}
-                        getX={d => d[0][0]}
-                        getXEnd={d => d[0][1]}
-                        getY={1}
-                        />
+                        getValue={{x: d => d[0][0], y: 1}}
+                        getEndValue={{x: d => d[0][1]}}
+                    />
                 </XYPlot>
                 <XYPlot width={400} height={300}>
                     <BarChart
                         data={rangeValueData.numberNumber}
                         orientation="horizontal"
-                        getX={1}
-                        getY={d => d[0][0]}
-                        getYEnd={d => d[0][1]}
-                        />
+                        getValue={{x: 1, y: d => d[0][0]}}
+                        getEndValue={{y: d => d[0][1]}}
+                    />
                     <MarkerLineChart
                         data={barTickData.numberRangeNumber}
                         orientation="horizontal"
-                        getX={1}
-                        getY={d => d[0][0]}
-                        getYEnd={d => d[0][1]}
-                        />
+                        getValue={{x: 1, y: d => d[0][0]}}
+                        getEndValue={{y: d => d[0][1]}}
+                    />
                 </XYPlot>
             </div>
         </div>
@@ -482,13 +530,13 @@ const AxisLabelExample = React.createClass({
     render() {
         return <div>
             <XYPlot width={400} height={300} yType='ordinal' xAxisLabel="Account Age">
-                <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
+                <BarChart data={randomBarData2.numberOrdinal} getValue={{x: 0, y: 1}} orientation="horizontal" />
             </XYPlot>
             <XYPlot width={400} height={300} yType='ordinal' yAxisLabel="Active Users">
-                <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
+                <BarChart data={randomBarData2.numberOrdinal} getValue={{x: 0, y: 1}} orientation="horizontal" />
             </XYPlot>
             <XYPlot width={400} height={300} yType='ordinal' xAxisLabel="Account Age" yAxisLabel="Active Users">
-                <BarChart data={randomBarData2.numberOrdinal} getX={0} getY={1} orientation="horizontal" />
+                <BarChart data={randomBarData2.numberOrdinal} getValue={{x: 0, y: 1}} orientation="horizontal" />
             </XYPlot>
         </div>
     }
@@ -541,6 +589,7 @@ const examples = [
     {id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample},
     {id: 'histogram', title: 'Histogram', Component: HistogramExample},
     {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
+    {id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample},
     {id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample},
     {id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample},
     {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample},
@@ -561,12 +610,22 @@ const App = React.createClass({
         this.setState(update(this.state, {visibleExamples: {[id]: {$set: !isVisible}}}));
     },
 
-
-
     render() {
         return <div>
             <h1>Reactochart Examples</h1>
 
+            <div>
+                <XYPlot width={400} height={300}>
+                    <BarChart
+                        data={rangeValueData.numberNumber}
+                        orientation="horizontal"
+                        getValue={{x: 1, y: d => d[0][0]}}
+                        getEndValue={{y: d => d[0][1]}}
+                        />
+                </XYPlot>
+            </div>
+
+            {/*
             <div>
                 <XYPlot
                     width={500} height={300}
@@ -578,7 +637,7 @@ const App = React.createClass({
                 >
                     <BarChart
                         data={randomBarData2.numberNumber}
-                        getX={0} getY={1}
+                        getValue={{x: 0, y: 1}}
                         barThickness={20}
                     />
                 </XYPlot>
@@ -592,11 +651,13 @@ const App = React.createClass({
                     >
                     <BarChart
                         data={randomBarData2.numberNumber}
-                        getX={0} getY={1}
+                        getValue={{x: 0, y: 1}}
                         barThickness={20}
                         />
                 </XYPlot>
             </div>
+
+             */}
 
             {this.renderExamples()}
         </div>

@@ -43,20 +43,20 @@ import {accessor, AccessorPropType, InterfaceMixin} from '../util.js';
 // eg... can't find a good example
 
 // creating a BarChart component...
-// x and y values are represented by getX and getY accessors passed in as props
-// to represent a range instead of a single value, call with both getX and getXEnd (or getY and getYEnd),
+// x and y values are represented by getValue.x and getValue.y accessors passed in as props
+// to represent a range instead of a single value, call with both getValue.x and getEndValue.x (or y),
 // which will be the accessors for the start and end values of the range
 // to represent horizontal vs. vertical variant, pass in orientation="horizontal" or orientation="vertical"
 
 // so to create the types described above:
-// 1. Value-Value - only pass in getX and getY, + orientation
+// 1. Value-Value - only pass in getValue.x and getValue.y, + orientation
 // 2. Range-Value
-//   a. pass in getX, getXEnd and getY with orientation="vertical"
-//   b. or getX, getY and getYEnd with orientation="horizontal"
+//   a. pass in getValue.x, getEndValue.x and getValue.y with orientation="vertical"
+//   b. or getValue.x, getValue.y and getEndValue.y with orientation="horizontal"
 // 3. Value-Range
-//   a. pass in getX, getY and getYEnd with orientation="vertical"
-//   b. or getX, getXEnd and getY with orientation="horizontal"
-// 4. Range-Range - pass in all of getX, getXEnd, getY and getYEnd. no need for orientation.
+//   a. pass in getValue.x, getValue.y and getEndValue.y with orientation="vertical"
+//   b. or getValue.x, getEndValue.x and getValue.y with orientation="horizontal"
+// 4. Range-Range - pass in ALL of getValue.x, getValue.y, getEndValue.x and getEndValue.y. no need for orientation.
 
 //const BAR_CHART_TYPES = {
 //    VALUE_VALUE: 'VALUE_VALUE',
@@ -66,13 +66,13 @@ import {accessor, AccessorPropType, InterfaceMixin} from '../util.js';
 //};
 
 function getBarChartType(props) {
-    const {getXEnd, getYEnd, orientation} = props;
+    const {getValue, getEndValue, orientation} = props;
     const isVertical = (orientation === 'vertical');
-    return _.isUndefined(getXEnd) && _.isUndefined(getYEnd) ?
+    return _.isUndefined(getEndValue.x) && _.isUndefined(getEndValue.y) ?
         'ValueValue' :
-    (_.isUndefined(getYEnd) && isVertical) || (_.isUndefined(getXEnd) && !isVertical) ?
+    (_.isUndefined(getEndValue.y) && isVertical) || (_.isUndefined(getEndValue.x) && !isVertical) ?
         'RangeValue' :
-    (_.isUndefined(getXEnd) && isVertical) || (_.isUndefined(getYEnd) && !isVertical) ?
+    (_.isUndefined(getEndValue.x) && isVertical) || (_.isUndefined(getEndValue.y) && !isVertical) ?
         'ValueRange' :
         'RangeRange';
 }
@@ -121,21 +121,18 @@ const BarChart = React.createClass({
         // the array of data objects
         data: PropTypes.array.isRequired,
         // accessor for X & Y coordinates
-        getX: AccessorPropType,
-        getY: AccessorPropType,
+        getValue: PropTypes.object,
+        getEndValue: PropTypes.object,
         // allow user to pass an accessor for setting the class of a bar
         getClass: AccessorPropType,
         // thickness of value bars, in pixels, (ignored for RangeValue and RangeRange charts)
         barThickness: PropTypes.number,
 
         // x & y scale types
-        xType: PropTypes.oneOf(['number', 'time', 'ordinal']),
-        yType: PropTypes.oneOf(['number', 'time', 'ordinal']),
+        axisType: PropTypes.object,
+        scale: PropTypes.object,
 
         orientation: PropTypes.oneOf(['vertical', 'horizontal']),
-
-        xScale: PropTypes.func,
-        yScale: PropTypes.func,
 
         onMouseEnterBar: PropTypes.func, // A mouse walks into a bar.
         onMouseMoveBar: PropTypes.func,  // He is immediately killed by the bartender,
@@ -144,35 +141,38 @@ const BarChart = React.createClass({
     getDefaultProps() {
         return {
             barThickness: 10,
-            orientation: 'vertical'
+            orientation: 'vertical',
+            getValue: {},
+            getEndValue: {}
         }
     },
 
     statics: {
         getOptions(props) {
-            const {data, xType, yType, getX, getY, getXEnd, getYEnd, orientation, barThickness} = props;
-            const [xAccessor, yAccessor] = [accessor(getX), accessor(getY)];
+            const {data, axisType, getValue, getEndValue, orientation, barThickness} = props;
+            const [xAccessor, yAccessor] = [accessor(getValue.x), accessor(getValue.y)];
             const barType = getBarChartType(props);
             const isVertical = (orientation === 'vertical');
 
             const accessors = {x: xAccessor, y: yAccessor};
-            const rangeEndAccessors = {x: accessor(getXEnd), y: accessor(getYEnd)};
-            const axisTypes = {x: xType, y: yType};
-            let options = {xDomain: null, yDomain: null, spacing: null};
+            const rangeEndAccessors = {x: accessor(getEndValue.x), y: accessor(getEndValue.y)};
+
+            let options = {domain: {}, spacing: null};
 
             if(barType === 'ValueValue') {
                 let valueAxis = isVertical ? 'y' : 'x'; // axis along which the bar's length shows value
-                options[`${valueAxis}Domain`] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
+                options.domain[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisType[valueAxis]);
                 // the value, and therefore the center of the bar, may fall exactly on the axis min or max,
                 // therefore bars need (0.5*barThickness) spacing so they don't hang over the edge of the chart
                 const halfBar = Math.ceil(0.5 * barThickness);
                 options.spacing = isVertical ? {left: halfBar, right: halfBar} : {top: halfBar, bottom: halfBar};
             } else if(barType === 'RangeValue') {
-                let valueAxis = isVertical ? 'y' : 'x'; // axis along which the bar's length shows value
-                let rangeAxis = isVertical ? 'x' : 'y'; // axis along which the bar's thickness shows range
-                options[`${valueAxis}Domain`] = valueAxisDomain(data, accessors[valueAxis], axisTypes[valueAxis]);
-                options[`${rangeAxis}Domain`] =
-                    rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisTypes[rangeAxis]);
+                // rangeAxis: axis along which the bar's length shows value
+                // valueAxis: axis along which the bar's thickness shows range
+                let [rangeAxis, valueAxis] = isVertical ? ['x', 'y'] : ['y', 'x'];
+                options.domain[valueAxis] = valueAxisDomain(data, accessors[valueAxis], axisType[valueAxis]);
+                options.domain[rangeAxis] =
+                    rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisType[rangeAxis]);
                 // no spacing necessary since bars are drawn *between* values, not on them.
             }
             return options;
@@ -200,8 +200,8 @@ const BarChart = React.createClass({
     renderValueValueBars() {
         // typical bar chart, plotting values that look like [[0,5], [1,3], ...]
         // ie. both independent and dependent variables are single values
-        const {data, xScale, yScale, getX, getY, xType, yType, getClass, barThickness, orientation} = this.props;
-        const [xAccessor, yAccessor, classAccessor] = [getX, getY, getClass].map(accessor);
+        const {data, scale, getValue, axisType, getClass, barThickness, orientation} = this.props;
+        const [xAccessor, yAccessor, classAccessor] = [getValue.x, getValue.y, getClass].map(accessor);
         const isVertical = (this.props.orientation === 'vertical');
 
 
@@ -216,36 +216,37 @@ const BarChart = React.createClass({
 
                 // essentially the same process, whether horizontal or vertical bars
                 const [valueScale, valueScaleType, valueAccessor] = isVertical ?
-                    [yScale, yType, yAccessor] : [xScale, xType, xAccessor];
+                    [scale.y, axisType.y, yAccessor] : [scale.x, axisType.x, xAccessor];
                 const barZero = barZeroValue(data, valueAccessor, valueScaleType);
                 const value = valueAccessor(d);
                 const barLength = Math.abs(valueScale(barZero) - valueScale(value));
                 const className = `chart-bar chart-bar-${orientation} ${getClass ? classAccessor(d) : ''}`;
-                const x = isVertical ? xScale(xAccessor(d)) - (barThickness / 2) :
-                    (value >= 0 || xType === 'ordinal') ? xScale(barZero) : xScale(barZero) - barLength;
-                const y = !isVertical ? yScale(yAccessor(d)) - (barThickness / 2) :
-                    (value >= 0 || yType === 'ordinal') ? yScale(barZero) - barLength : yScale(barZero);
+                const x = isVertical ? scale.x(xAccessor(d)) - (barThickness / 2) :
+                    (value >= 0 || axisType.x === 'ordinal') ? scale.x(barZero) : scale.x(barZero) - barLength;
+                const y = !isVertical ? scale.y(yAccessor(d)) - (barThickness / 2) :
+                    (value >= 0 || axisType.y === 'ordinal') ? scale.y(barZero) - barLength : scale.y(barZero);
                 const [width, height] = isVertical ? [barThickness, barLength] : [barLength, barThickness];
                 return <rect {...{className, x, y, width, height, onMouseEnter, onMouseMove, onMouseLeave}} />
             })}
         </g>;
     },
     renderRangeValueBars() {
-        const {data, xScale, yScale, getX, getY, getXEnd, getYEnd, xType, yType, getClass, orientation} = this.props;
+        const {data, scale, getValue, getEndValue, axisType, getClass, orientation} = this.props;
         const [xAccessor, xEndAccessor, yAccessor, yEndAccessor, classAccessor] =
-            _.map([getX, getXEnd, getY, getYEnd, getClass], accessor);
+            _.map([getValue.x, getEndValue.x, getValue.y, getEndValue.y, getClass], accessor);
         const [onMouseEnter, onMouseMove, onMouseLeave] = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar']
             .map(eventName => methodIfFuncProp(eventName, this.props, this));
 
         return orientation === 'vertical' ?
             <g>
                 {this.props.data.map((d, i) => {
-                    const barZero = barZeroValue(data, yAccessor, yType);
+                    const barZero = barZeroValue(data, yAccessor, axisType.y);
                     const yVal = yAccessor(d);
-                    const barLength = Math.abs(yScale(barZero) - yScale(yVal));
-                    const barY = (yVal >= 0 || yType === 'ordinal') ? yScale(barZero) - barLength : yScale(barZero);
-                    const barX = Math.round(xScale(xAccessor(d)));
-                    const barThickness = Math.round(xScale(xEndAccessor(d))) - barX;
+                    const barLength = Math.abs(scale.y(barZero) - scale.y(yVal));
+                    const barY = (yVal >= 0 || axisType.y === 'ordinal') ?
+                        scale.y(barZero) - barLength : scale.y(barZero);
+                    const barX = Math.round(scale.x(xAccessor(d)));
+                    const barThickness = Math.round(scale.x(xEndAccessor(d))) - barX;
                     const className = `chart-bar chart-bar-${orientation} ${getClass ? classAccessor(d) : ''}`;
 
                     return <rect
@@ -260,12 +261,13 @@ const BarChart = React.createClass({
             </g> :
             <g>
                 {this.props.data.map((d, i) => {
-                    const barZero = barZeroValue(data, xAccessor, xType);
+                    const barZero = barZeroValue(data, xAccessor, axisType.x);
                     const xVal = xAccessor(d);
-                    const barLength = Math.abs(xScale(barZero) - xScale(xVal));
-                    const barX = (xVal >= 0 || xType === 'ordinal') ? xScale(barZero) : xScale(barZero) - barLength;
-                    const barY = Math.round(yScale(yEndAccessor(d)));
-                    const barThickness = Math.round(yScale(yAccessor(d))) - barY;
+                    const barLength = Math.abs(scale.x(barZero) - scale.x(xVal));
+                    const barX = (xVal >= 0 || axisType.x === 'ordinal') ?
+                        scale.x(barZero) : scale.x(barZero) - barLength;
+                    const barY = Math.round(scale.y(yEndAccessor(d)));
+                    const barThickness = Math.round(scale.y(yAccessor(d))) - barY;
                     const className = `chart-bar chart-bar-${orientation} ${getClass ? classAccessor(d) : ''}`;
 
                     return <rect
@@ -275,7 +277,7 @@ const BarChart = React.createClass({
                         width={barLength}
                         height={barThickness}
                         {...{onMouseEnter, onMouseMove, onMouseLeave}}
-                        />
+                    />
                 })}
             </g>
 

@@ -11,13 +11,12 @@ const ScatterPlot = React.createClass({
         // the array of data objects
         data: PropTypes.array.isRequired,
         // accessor for X & Y coordinates
-        getX: AccessorPropType,
-        getY: AccessorPropType,
+        getValue: PropTypes.object,
         // allow user to pass an accessor for setting the class of a point
         getClass: AccessorPropType,
 
-        xScale: PropTypes.func,
-        yScale: PropTypes.func,
+        axisType: PropTypes.object,
+        scale: PropTypes.object,
 
         // used with the default point symbol (circle), defines the circle radius
         pointRadius: PropTypes.number,
@@ -44,7 +43,7 @@ const ScatterPlot = React.createClass({
         </g>
     },
     renderPoint(d, i) {
-        const {xScale, yScale, getX, getY, pointRadius, pointOffset, getClass} = this.props;
+        const {scale, getValue, pointRadius, pointOffset, getClass} = this.props;
         let {pointSymbol} = this.props;
         const className = `chart-scatterplot-point ${getClass ? accessor(getClass)(d) : ''}`;
         let symbolProps = {className};
@@ -57,8 +56,8 @@ const ScatterPlot = React.createClass({
         if(pointSymbol.type === 'circle' && _.isUndefined(pointSymbol.props.r)) symbolProps.r = pointRadius;
 
         // x,y coords of center of symbol
-        const cx = xScale(accessor(getX)(d)) + pointOffset[0];
-        const cy = yScale(accessor(getY)(d)) + pointOffset[1];
+        const cx = scale.x(accessor(getValue.x)(d)) + pointOffset[0];
+        const cy = scale.y(accessor(getValue.y)(d)) + pointOffset[1];
 
         // set positioning attributes based on symbol type
         if(pointSymbol.type === 'circle' || pointSymbol.type === 'ellipse') {
