@@ -5,20 +5,20 @@ import d3 from 'd3';
 
 import {accessor, AccessorPropType, InterfaceMixin} from '../util.js';
 
-// BarTickChart is like a bar chart,
+// MarkerLine is similar to a bar chart,
 // except that it just draws a line at the data value, rather than a full bar
 // If the independent variable is a range, the length of the line will represent that range
 // Otherwise all lines will be the same length.
 // The dependent variable must be a single value, not a range.
 
 function getTickType(props) {
-    const {getXEnd, getYEnd, orientation} = props;
+    const {getEndValue, orientation} = props;
     const isVertical = (orientation === 'vertical');
     // warn if a range is passed for the dependent variable, which is expected to be a value
-    if((isVertical && !_.isUndefined(getYEnd)) || (!isVertical && !_.isUndefined(getXEnd)))
-        console.warn("Warning: BarTickChart can only show the independent variable as a range, not the dependent variable.");
+    if((isVertical && !_.isUndefined(getEndValue.y)) || (!isVertical && !_.isUndefined(getEndValue.x)))
+        console.warn("Warning: MarkerLineChart can only show the independent variable as a range, not the dependent variable.");
 
-    if((isVertical && !_.isUndefined(getXEnd)) || (!isVertical && !_.isUndefined(getYEnd)))
+    if((isVertical && !_.isUndefined(getEndValue.x)) || (!isVertical && !_.isUndefined(getEndValue.y)))
         return "RangeValue";
     return "ValueValue";
 }
@@ -43,38 +43,38 @@ const MarkerLineChart = React.createClass({
         // the array of data objects
         data: PropTypes.array.isRequired,
         // accessor for X & Y coordinates
-        getX: AccessorPropType,
-        getY: AccessorPropType,
+        getValue: PropTypes.object,
+        getEndValue: PropTypes.object,
 
         orientation: PropTypes.oneOf(['vertical', 'horizontal']),
         lineLength: PropTypes.number,
 
         // x & y scale types
-        xType: PropTypes.oneOf(['number', 'time', 'ordinal']),
-        yType: PropTypes.oneOf(['number', 'time', 'ordinal']),
-        xScale: PropTypes.func,
-        yScale: PropTypes.func
+        axisType: PropTypes.object,
+        scale: PropTypes.object,
     },
     getDefaultProps() {
         return {
             orientation: 'vertical',
-            lineLength: 10
+            lineLength: 10,
+            getValue: {},
+            getEndValue: {}
         }
     },
     statics: {
         getOptions(props) {
-            const {data, xType, yType, getX, getY, getXEnd, getYEnd, orientation, lineLength} = props;
+            const {data, axisType, getValue, getEndValue, orientation, lineLength} = props;
             const tickType = getTickType(props);
             const isVertical = (orientation === 'vertical');
-            const accessors = {x: accessor(getX), y: accessor(getY)};
-            const rangeEndAccessors = {x: accessor(getXEnd), y: accessor(getYEnd)};
-            const axisTypes = {x: xType, y: yType};
-            let options = {xDomain: null, yDomain: null, spacing: null};
+            const accessors = {x: accessor(getValue.x), y: accessor(getValue.y)};
+            const rangeEndAccessors = {x: accessor(getEndValue.x), y: accessor(getEndValue.y)};
+
+            let options = {domain: {}, spacing: {}};
 
             if(tickType === 'RangeValue') { // value axis/axes use default domain
                 let rangeAxis = isVertical ? 'x' : 'y';
-                options[`${rangeAxis}Domain`] =
-                    rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisTypes[rangeAxis]);
+                options.domain[rangeAxis] =
+                    rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisType[rangeAxis]);
             }
 
             // the value, and therefore the center of the marker line, may fall exactly on the axis min or max,
@@ -95,12 +95,12 @@ const MarkerLineChart = React.createClass({
         </g>
     },
     renderRangeValueLine(d) {
-        const {getX, getY, getXEnd, getYEnd, orientation, xScale, yScale} = this.props;
+        const {getValue, getEndValue, orientation, scale} = this.props;
         const isVertical = (orientation === 'vertical');
-        const xVal = xScale(accessor(getX)(d));
-        const yVal = yScale(accessor(getY)(d));
-        const xEndVal = _.isUndefined(getXEnd) ? 0 : xScale(accessor(getXEnd)(d));
-        const yEndVal = _.isUndefined(getYEnd) ? 0 : yScale(accessor(getYEnd)(d));
+        const xVal = scale.x(accessor(getValue.x)(d));
+        const yVal = scale.y(accessor(getValue.y)(d));
+        const xEndVal = _.isUndefined(getEndValue.x) ? 0 : scale.x(accessor(getEndValue.x)(d));
+        const yEndVal = _.isUndefined(getEndValue.y) ? 0 : scale.y(accessor(getEndValue)(d));
         const [x1, y1] = [xVal, yVal];
         const x2 = isVertical ? xEndVal : xVal;
         const y2 = isVertical ? yVal : yEndVal;
@@ -108,10 +108,10 @@ const MarkerLineChart = React.createClass({
         return <line className="marker-line" {...{x1, x2, y1, y2}}></line>
     },
     renderValueValueLine(d) {
-        const {getX, getY, orientation, lineLength, xScale, yScale} = this.props;
+        const {getValue, orientation, lineLength, scale} = this.props;
         const isVertical = (orientation === 'vertical');
-        const xVal = xScale(accessor(getX)(d));
-        const yVal = yScale(accessor(getY)(d));
+        const xVal = scale.x(accessor(getValue.x)(d));
+        const yVal = scale.y(accessor(getValue.y)(d));
         const x1 = isVertical ? xVal - (lineLength / 2) : xVal;
         const x2 = isVertical ? xVal + (lineLength / 2) : xVal;
         const y1 = isVertical ? yVal : yVal - (lineLength / 2);

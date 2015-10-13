@@ -66,7 +66,7 @@ import {accessor, AccessorPropType, InterfaceMixin} from '../util.js';
 //};
 
 function getBarChartType(props) {
-    const {getValue, getEndValue, orientation} = props;
+    const {getEndValue, orientation} = props;
     const isVertical = (orientation === 'vertical');
     return _.isUndefined(getEndValue.x) && _.isUndefined(getEndValue.y) ?
         'ValueValue' :
