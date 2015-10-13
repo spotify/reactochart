@@ -149,7 +149,8 @@ const XYPlot = React.createClass({
         // because the user can pass in eg. {x: 'ordinal'} and we still want to default y to number
         const xyKeys = [
             'axisType', 'domain', 'nice', 'tickCount', 'ticks', 'tickLength', 'labelValues', 'labelFormat',
-            'labelPadding', 'showLabels', 'showGrid', 'showTicks', 'showZero', 'axisLabel', 'axisLabelPadding'
+            'labelPadding', 'showLabels', 'showGrid', 'showTicks', 'showZero',
+            'axisLabel', 'axisLabelAlign', 'axisLabelPadding'
         ];
         const dirKeys = ['margin', 'padding', 'spacing'];
 
@@ -531,12 +532,12 @@ const XYPlot = React.createClass({
 
         return _.defaults({}, options, {
             margin, scaleWidth, scaleHeight,
-            label: props.axisLabel[k],
-            alignment: props.axisLabelAlign[k],
-            axisLabelPadding: props.axisLabelPadding[k],
-            valueLabelPadding: props.labelPadding[k],
-            tickLength: props.tickLength[k],
-            showTicks: props.showTicks[k],
+            label: _.get(props.axisLabel, k),
+            alignment: _.get(props.axisLabelAlign, k),
+            axisLabelPadding: _.get(props.axisLabelPadding, k),
+            valueLabelPadding: _.get(props.labelPadding, k),
+            tickLength: _.get(props.tickLength, k),
+            showTicks: _.get(props.showTicks, k),
             labelBox: (labelBoxes && labelBoxes[`${k}Axis`]) ? labelBoxes[`${k}Axis`] : {width: 10, height: 10}
         })
     }
