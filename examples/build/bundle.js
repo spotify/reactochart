@@ -58660,13 +58660,6 @@
 	    stringFormatter: PropTypes.oneOfType([PropTypes['function'], PropTypes.string])
 	});
 	
-	function getXY(obj, xOrY) {
-	    if (!_lodash2['default'].includes(['x', 'y'], xOrY)) throw Error('getXY must be called with x or y as second argument');
-	    // if the prop is of form {x: val, y: val}, return the requested value, even if undefined
-	    // otherwise it is a single value for both axes, so return it
-	    return _lodash2['default'].isEqual(obj, {}) ? undefined : _lodash2['default'].isObject(obj) && (_lodash2['default'].has(obj, 'x') || _lodash2['default'].has(obj, 'y')) ? obj[xOrY] : obj;
-	}
-	
 	var DEFAULTS = {
 	    axisType: { x: 'number', y: 'number' },
 	    nice: { x: true, y: true },

@@ -26,14 +26,6 @@ PropTypes = _.assign({}, PropTypes, {
     stringFormatter: PropTypes.oneOfType([PropTypes.function, PropTypes.string]),
 });
 
-function getXY(obj, xOrY) {
-    if(!_.includes(['x', 'y'], xOrY)) throw Error('getXY must be called with x or y as second argument');
-    // if the prop is of form {x: val, y: val}, return the requested value, even if undefined
-    // otherwise it is a single value for both axes, so return it
-    return _.isEqual(obj, {}) ? undefined :
-        _.isObject(obj) && (_.has(obj, 'x') || _.has(obj, 'y')) ? obj[xOrY] : obj;
-}
-
 const DEFAULTS = {
     axisType: {x: 'number', y: 'number'},
     nice: {x: true, y: true},
