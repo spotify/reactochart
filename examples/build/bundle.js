@@ -934,11 +934,12 @@
 	            _reactAddons2['default'].createElement(
 	                'div',
 	                null,
-	                _reactAddons2['default'].createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, margin: { right: 10 } },
-	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 0, y: 1 } })
-	                )
+	                _reactAddons2['default'].createElement(_src.PieChart, {
+	                    data: [45, 35, 20],
+	                    onMouseEnterSlice: function (e, d) {
+	                        return console.log(e, d);
+	                    }
+	                })
 	            ),
 	            this.renderExamples()
 	        );
@@ -58424,6 +58425,16 @@
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return DEFAULT_PROPS;
+	    },
+	
+	    onMouseEnterSlice: function onMouseEnterSlice(e, d) {
+	        this.props.onMouseEnterSlice(e, d);
+	    },
+	    onMouseMoveSlice: function onMouseMoveSlice(e, d) {
+	        this.props.onMouseMoveSlice(e, d);
+	    },
+	    onMouseLeaveSlice: function onMouseLeaveSlice(e, d) {
+	        this.props.onMouseLeaveSlice(e, d);
 	    },
 	
 	    render: function render() {

@@ -628,9 +628,10 @@ const App = React.createClass({
             <h1>Reactochart Examples</h1>
 
             <div>
-                <XYPlot width={300} height={300} margin={{right: 10}}>
-                    <BarChart data={randomBarData2.numberNumber} getValue={{x: 0, y: 1}} />
-                </XYPlot>
+                <PieChart
+                    data={[45, 35, 20]}
+                    onMouseEnterSlice={(e,d) => console.log(e, d)}
+                />
             </div>
 
 

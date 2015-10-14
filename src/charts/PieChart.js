@@ -41,6 +41,16 @@ const PieChart = React.createClass({
     },
     getDefaultProps() { return DEFAULT_PROPS; },
 
+    onMouseEnterSlice(e, d) {
+        this.props.onMouseEnterSlice(e, d);
+    },
+    onMouseMoveSlice(e, d) {
+        this.props.onMouseMoveSlice(e, d);
+    },
+    onMouseLeaveSlice(e, d) {
+        this.props.onMouseLeaveSlice(e, d);
+    },
+
     render() {
         const margin = _.isNumber(this.props.margin) ?
             {top: this.props.margin, bottom: this.props.margin, left: this.props.margin, right: this.props.margin} :
