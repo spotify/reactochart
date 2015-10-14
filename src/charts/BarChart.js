@@ -234,12 +234,17 @@ const BarChart = React.createClass({
         const {data, scale, getValue, getEndValue, axisType, getClass, orientation} = this.props;
         const [xAccessor, xEndAccessor, yAccessor, yEndAccessor, classAccessor] =
             _.map([getValue.x, getEndValue.x, getValue.y, getEndValue.y, getClass], accessor);
-        const [onMouseEnter, onMouseMove, onMouseLeave] = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar']
-            .map(eventName => methodIfFuncProp(eventName, this.props, this));
 
         return orientation === 'vertical' ?
             <g>
                 {this.props.data.map((d, i) => {
+                    const [onMouseEnter, onMouseMove, onMouseLeave] =
+                        ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(eventName => {
+                            // partially apply this bar's data point as 2nd callback argument
+                            const callback = methodIfFuncProp(eventName, this.props, this);
+                            return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+                        });
+
                     const barZero = barZeroValue(data, yAccessor, axisType.y);
                     const yVal = yAccessor(d);
                     const barLength = Math.abs(scale.y(barZero) - scale.y(yVal));

@@ -69203,20 +69203,22 @@
 	        var yEndAccessor = _$map2[3];
 	        var classAccessor = _$map2[4];
 	
-	        var _map4 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
-	            return methodIfFuncProp(eventName, _this2.props, _this2);
-	        });
-	
-	        var _map42 = _slicedToArray(_map4, 3);
-	
-	        var onMouseEnter = _map42[0];
-	        var onMouseMove = _map42[1];
-	        var onMouseLeave = _map42[2];
-	
 	        return orientation === 'vertical' ? _react2['default'].createElement(
 	            'g',
 	            null,
 	            this.props.data.map(function (d, i) {
+	                var _map4 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
+	                    // partially apply this bar's data point as 2nd callback argument
+	                    var callback = methodIfFuncProp(eventName, _this2.props, _this2);
+	                    return _lodash2['default'].isFunction(callback) ? _lodash2['default'].partial(callback, _lodash2['default'], d) : null;
+	                });
+	
+	                var _map42 = _slicedToArray(_map4, 3);
+	
+	                var onMouseEnter = _map42[0];
+	                var onMouseMove = _map42[1];
+	                var onMouseLeave = _map42[2];
+	
 	                var barZero = barZeroValue(data, yAccessor, axisType.y);
 	                var yVal = yAccessor(d);
 	                var barLength = Math.abs(scale.y(barZero) - scale.y(yVal));
