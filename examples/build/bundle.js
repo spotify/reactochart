@@ -68956,7 +68956,6 @@
 	
 	var PropTypes = _react2['default'].PropTypes;
 	function getBarChartType(props) {
-	    var getValue = props.getValue;
 	    var getEndValue = props.getEndValue;
 	    var orientation = props.orientation;
 	
@@ -69305,7 +69304,7 @@
 	
 	var _utilJs = __webpack_require__(274);
 	
-	// BarTickChart is like a bar chart,
+	// MarkerLine is similar to a bar chart,
 	// except that it just draws a line at the data value, rather than a full bar
 	// If the independent variable is a range, the length of the line will represent that range
 	// Otherwise all lines will be the same length.
@@ -69313,15 +69312,14 @@
 	
 	var PropTypes = _react2['default'].PropTypes;
 	function getTickType(props) {
-	    var getXEnd = props.getXEnd;
-	    var getYEnd = props.getYEnd;
+	    var getEndValue = props.getEndValue;
 	    var orientation = props.orientation;
 	
 	    var isVertical = orientation === 'vertical';
 	    // warn if a range is passed for the dependent variable, which is expected to be a value
-	    if (isVertical && !_lodash2['default'].isUndefined(getYEnd) || !isVertical && !_lodash2['default'].isUndefined(getXEnd)) console.warn("Warning: BarTickChart can only show the independent variable as a range, not the dependent variable.");
+	    if (isVertical && !_lodash2['default'].isUndefined(getEndValue.y) || !isVertical && !_lodash2['default'].isUndefined(getEndValue.x)) console.warn("Warning: MarkerLineChart can only show the independent variable as a range, not the dependent variable.");
 	
-	    if (isVertical && !_lodash2['default'].isUndefined(getXEnd) || !isVertical && !_lodash2['default'].isUndefined(getYEnd)) return "RangeValue";
+	    if (isVertical && !_lodash2['default'].isUndefined(getEndValue.x) || !isVertical && !_lodash2['default'].isUndefined(getEndValue.y)) return "RangeValue";
 	    return "ValueValue";
 	}
 	
@@ -69348,47 +69346,44 @@
 	        // the array of data objects
 	        data: PropTypes.array.isRequired,
 	        // accessor for X & Y coordinates
-	        getX: _utilJs.AccessorPropType,
-	        getY: _utilJs.AccessorPropType,
+	        getValue: PropTypes.object,
+	        getEndValue: PropTypes.object,
 	
 	        orientation: PropTypes.oneOf(['vertical', 'horizontal']),
 	        lineLength: PropTypes.number,
 	
 	        // x & y scale types
-	        xType: PropTypes.oneOf(['number', 'time', 'ordinal']),
-	        yType: PropTypes.oneOf(['number', 'time', 'ordinal']),
-	        xScale: PropTypes.func,
-	        yScale: PropTypes.func
+	        axisType: PropTypes.object,
+	        scale: PropTypes.object
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return {
 	            orientation: 'vertical',
-	            lineLength: 10
+	            lineLength: 10,
+	            getValue: {},
+	            getEndValue: {}
 	        };
 	    },
 	    statics: {
 	        getOptions: function getOptions(props) {
 	            var data = props.data;
-	            var xType = props.xType;
-	            var yType = props.yType;
-	            var getX = props.getX;
-	            var getY = props.getY;
-	            var getXEnd = props.getXEnd;
-	            var getYEnd = props.getYEnd;
+	            var axisType = props.axisType;
+	            var getValue = props.getValue;
+	            var getEndValue = props.getEndValue;
 	            var orientation = props.orientation;
 	            var lineLength = props.lineLength;
 	
 	            var tickType = getTickType(props);
 	            var isVertical = orientation === 'vertical';
-	            var accessors = { x: (0, _utilJs.accessor)(getX), y: (0, _utilJs.accessor)(getY) };
-	            var rangeEndAccessors = { x: (0, _utilJs.accessor)(getXEnd), y: (0, _utilJs.accessor)(getYEnd) };
-	            var axisTypes = { x: xType, y: yType };
-	            var options = { xDomain: null, yDomain: null, spacing: null };
+	            var accessors = { x: (0, _utilJs.accessor)(getValue.x), y: (0, _utilJs.accessor)(getValue.y) };
+	            var rangeEndAccessors = { x: (0, _utilJs.accessor)(getEndValue.x), y: (0, _utilJs.accessor)(getEndValue.y) };
+	
+	            var options = { domain: {}, spacing: {} };
 	
 	            if (tickType === 'RangeValue') {
 	                // value axis/axes use default domain
 	                var rangeAxis = isVertical ? 'x' : 'y';
-	                options[rangeAxis + 'Domain'] = rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisTypes[rangeAxis]);
+	                options.domain[rangeAxis] = rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisType[rangeAxis]);
 	            }
 	
 	            // the value, and therefore the center of the marker line, may fall exactly on the axis min or max,
@@ -69409,19 +69404,16 @@
 	    },
 	    renderRangeValueLine: function renderRangeValueLine(d) {
 	        var _props = this.props;
-	        var getX = _props.getX;
-	        var getY = _props.getY;
-	        var getXEnd = _props.getXEnd;
-	        var getYEnd = _props.getYEnd;
+	        var getValue = _props.getValue;
+	        var getEndValue = _props.getEndValue;
 	        var orientation = _props.orientation;
-	        var xScale = _props.xScale;
-	        var yScale = _props.yScale;
+	        var scale = _props.scale;
 	
 	        var isVertical = orientation === 'vertical';
-	        var xVal = xScale((0, _utilJs.accessor)(getX)(d));
-	        var yVal = yScale((0, _utilJs.accessor)(getY)(d));
-	        var xEndVal = _lodash2['default'].isUndefined(getXEnd) ? 0 : xScale((0, _utilJs.accessor)(getXEnd)(d));
-	        var yEndVal = _lodash2['default'].isUndefined(getYEnd) ? 0 : yScale((0, _utilJs.accessor)(getYEnd)(d));
+	        var xVal = scale.x((0, _utilJs.accessor)(getValue.x)(d));
+	        var yVal = scale.y((0, _utilJs.accessor)(getValue.y)(d));
+	        var xEndVal = _lodash2['default'].isUndefined(getEndValue.x) ? 0 : scale.x((0, _utilJs.accessor)(getEndValue.x)(d));
+	        var yEndVal = _lodash2['default'].isUndefined(getEndValue.y) ? 0 : scale.y((0, _utilJs.accessor)(getEndValue)(d));
 	        var x1 = xVal;
 	        var y1 = yVal;
 	
@@ -69432,16 +69424,14 @@
 	    },
 	    renderValueValueLine: function renderValueValueLine(d) {
 	        var _props2 = this.props;
-	        var getX = _props2.getX;
-	        var getY = _props2.getY;
+	        var getValue = _props2.getValue;
 	        var orientation = _props2.orientation;
 	        var lineLength = _props2.lineLength;
-	        var xScale = _props2.xScale;
-	        var yScale = _props2.yScale;
+	        var scale = _props2.scale;
 	
 	        var isVertical = orientation === 'vertical';
-	        var xVal = xScale((0, _utilJs.accessor)(getX)(d));
-	        var yVal = yScale((0, _utilJs.accessor)(getY)(d));
+	        var xVal = scale.x((0, _utilJs.accessor)(getValue.x)(d));
+	        var yVal = scale.y((0, _utilJs.accessor)(getValue.y)(d));
 	        var x1 = isVertical ? xVal - lineLength / 2 : xVal;
 	        var x2 = isVertical ? xVal + lineLength / 2 : xVal;
 	        var y1 = isVertical ? yVal : yVal - lineLength / 2;

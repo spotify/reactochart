@@ -615,15 +615,17 @@ const App = React.createClass({
             <h1>Reactochart Examples</h1>
 
             <div>
-                <XYPlot width={400} height={300}>
-                    <BarChart
-                        data={rangeValueData.numberNumber}
-                        orientation="horizontal"
-                        getValue={{x: 1, y: d => d[0][0]}}
-                        getEndValue={{y: d => d[0][1]}}
-                        />
+                <XYPlot
+                    width={300} height={300}
+                    ticks={{
+                    x: [0, 1, 2, 4, 8, 16],
+                    y: [-8000, -3000, 0, 10000, 5000, 40000]
+                }}
+                    >
+                    <BarChart data={randomBarData2.numberNumber} getValue={{x: 0, y: 1}} />
                 </XYPlot>
             </div>
+
 
             {/*
             <div>

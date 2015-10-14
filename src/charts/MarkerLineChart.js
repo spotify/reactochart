@@ -66,21 +66,21 @@ const MarkerLineChart = React.createClass({
             const {data, axisType, getValue, getEndValue, orientation, lineLength} = props;
             const tickType = getTickType(props);
             const isVertical = (orientation === 'vertical');
-            const accessors = {x: accessor(getValue.x), y: accessor(getValue.y)};
-            const rangeEndAccessors = {x: accessor(getEndValue.x), y: accessor(getEndValue.y)};
+            const accessors = _.mapValues(getValue, accessor);
+            const endAccessors = _.mapValues(getEndValue, accessor);
 
             let options = {domain: {}, spacing: {}};
 
-            if(tickType === 'RangeValue') { // value axis/axes use default domain
+            if(tickType === 'RangeValue') { // set range domain for range type
                 let rangeAxis = isVertical ? 'x' : 'y';
                 options.domain[rangeAxis] =
-                    rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], axisType[rangeAxis]);
+                    rangeAxisDomain(data, accessors[rangeAxis], endAccessors[rangeAxis], axisType[rangeAxis]);
+            } else {
+                // the value, and therefore the center of the marker line, may fall exactly on the axis min or max,
+                // therefore marker lines need (0.5*lineLength) spacing so they don't hang over the edge of the chart
+                const halfLine = Math.ceil(0.5 * lineLength);
+                options.spacing = isVertical ? {left: halfLine, right: halfLine} : {top: halfLine, bottom: halfLine};
             }
-
-            // the value, and therefore the center of the marker line, may fall exactly on the axis min or max,
-            // therefore marker lines need (0.5*lineLength) spacing so they don't hang over the edge of the chart
-            const halfLine = Math.ceil(0.5 * lineLength);
-            options.spacing = isVertical ? {left: halfLine, right: halfLine} : {top: halfLine, bottom: halfLine};
 
             return options;
         }
@@ -100,7 +100,7 @@ const MarkerLineChart = React.createClass({
         const xVal = scale.x(accessor(getValue.x)(d));
         const yVal = scale.y(accessor(getValue.y)(d));
         const xEndVal = _.isUndefined(getEndValue.x) ? 0 : scale.x(accessor(getEndValue.x)(d));
-        const yEndVal = _.isUndefined(getEndValue.y) ? 0 : scale.y(accessor(getEndValue)(d));
+        const yEndVal = _.isUndefined(getEndValue.y) ? 0 : scale.y(accessor(getEndValue.y)(d));
         const [x1, y1] = [xVal, yVal];
         const x2 = isVertical ? xEndVal : xVal;
         const y2 = isVertical ? yVal : yEndVal;

@@ -153,34 +153,28 @@ const XYPlot = React.createClass({
             'axisLabel', 'axisLabelAlign', 'axisLabelPadding'
         ];
         const dirKeys = ['margin', 'padding', 'spacing'];
+        const directions = ['top', 'bottom', 'left', 'right'];
 
-
-        const xyProps = _.object(xyKeys.map(propName => {
-            const val = props[propName];
-            return _.has(props, propName) ?
-                // for any of the {x,y} props, allow the user to pass in one value for both axes
-                (_.any(['x','y'], k => _.has(val, k)) ?
-                    [propName, _.defaults({}, val, DEFAULTS[propName])] :
-                    [propName, {x: val, y: val}]
+        function resolvePropObj(propKey, expectedKeys) {
+            // resolves a passed prop key into the true object we use
+            // by filling in defaults and converting single-passed values into the right format
+            const val = props[propKey];
+            return _.has(props, propKey) ?
+                // check for the keys we expect to be in the object
+                (_.any(expectedKeys, k => _.has(val, k)) ?
+                        // if some are present, fill in the rest with defaults
+                        _.defaults({}, val, DEFAULTS[propKey]) :
+                        // otherwise, user has passed in a single value, so set it as the value for all keys
+                        _.object(expectedKeys.map(k => [k, val]))
                 )
-                : [propName, DEFAULTS[propName]];
-        }));
+                // user didn't pass in anything, so use default
+                : DEFAULTS[propKey];
+        }
 
-        const dirProps = _.object(dirKeys.map(propName => {
-            const val = props[propName];
-            return _.has(props, propName) ?
-                // same for directional {top,bottom,left,right} props
-                (_.any(['top','bottom','left','right'], k => _.has(val, k)) ?
-                    [propName, _.defaults({}, val, DEFAULTS[propName])] :
-                    [propName, {top: val, bottom: val, left: val, right: val}]
-                )
-                : [propName, DEFAULTS[propName]];
-        }));
-
-        const otherProps = _.transform(props, (result, val, key) => {
-            if(_.includes(xyKeys, key) || _.includes(dirKeys, key)) return;
-            result[key] = val;
-        });
+        const xyProps = _.assign.apply(this, xyKeys.map(k => ({[k]: resolvePropObj(k, ['x', 'y'])})));
+        const dirProps = _.assign.apply(this, dirKeys.map(k => ({[k]: resolvePropObj(k, directions)})));
+        const otherProps = _.omit(props, xyKeys.concat(dirKeys));
+        //console.log(xyProps, dirProps, otherProps);
 
         return _.assign({}, xyProps, dirProps, otherProps);
     },
@@ -285,7 +279,7 @@ const XYPlot = React.createClass({
                 ['x', 'y'].forEach(k => {
                     scale[k] = makeScale(domains[k], range[k], axisType[k], nice[k], tickCount[k]);
                     ticks[k] = props.ticks[k] ||
-                        (axisType[k] === 'ordinal') ? scale[k].domain() : scale[k].ticks(tickCount[k]);
+                        ((axisType[k] === 'ordinal') ? scale[k].domain() : scale[k].ticks(tickCount[k]));
                 });
 
                 labelBoxes = measureAxisLabels(
@@ -667,7 +661,6 @@ const ChartAxis = React.createClass({
         return { padding: DEFAULTS.spacing }
     },
     render() {
-        console.log('labels', this.props.labels);
         const {
             scale, type, orientation, axisTransform, tickCount, letter, labelFormat, ticks,
             scaleWidth, scaleHeight, padding, labelPadding, tickLength,
