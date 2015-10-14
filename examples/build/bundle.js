@@ -935,48 +935,9 @@
 	                'div',
 	                null,
 	                _reactAddons2['default'].createElement(
-	                    'div',
-	                    null,
-	                    _reactAddons2['default'].createElement(
-	                        _src.XYPlot,
-	                        { margin: { left: 40, right: 8 }, width: 700, height: 300 },
-	                        _reactAddons2['default'].createElement(_src.Histogram, {
-	                            data: randomNormal, getValue: { x: null }
-	                        }),
-	                        _reactAddons2['default'].createElement(_src.KernelDensityEstimation, {
-	                            data: randomNormal, getValue: { x: null }, bandwidth: 0.5
-	                        }),
-	                        _reactAddons2['default'].createElement(_src.KernelDensityEstimation, {
-	                            data: randomNormal, getValue: { x: null }, bandwidth: 0.1
-	                        }),
-	                        _reactAddons2['default'].createElement(_src.KernelDensityEstimation, {
-	                            data: randomNormal, getValue: { x: null }, bandwidth: 2
-	                        })
-	                    )
-	                ),
-	                _reactAddons2['default'].createElement(
-	                    'div',
-	                    null,
-	                    _reactAddons2['default'].createElement(
-	                        _src.XYPlot,
-	                        {
-	                            margin: { left: 40, right: 8 },
-	                            width: 700, height: 40,
-	                            showGrid: false,
-	                            showLabels: false,
-	                            showTicks: false
-	                        },
-	                        _reactAddons2['default'].createElement(_src.ScatterPlot, {
-	                            data: randomNormal,
-	                            getValue: {
-	                                x: null,
-	                                y: function y() {
-	                                    return Math.random();
-	                                }
-	                            },
-	                            pointRadius: 1
-	                        })
-	                    )
+	                    _src.XYPlot,
+	                    { width: 300, height: 300, margin: { right: 10 } },
+	                    _reactAddons2['default'].createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 0, y: 1 } })
 	                )
 	            ),
 	            this.renderExamples()
@@ -58955,9 +58916,9 @@
 	                    // if the outermost chart elements are on the scale extrema, padding = spacing,
 	                    // but the scale may extend beyond the last element anyway, so we may not need the extra padding.
 	                    // NOTE: temporarily set as padding = max spacing, todo: implement real padding
-	                    padding = _lodash2['default'].defaults(_lodash2['default'].reduce(spacings, function (newPadding, spacing) {
+	                    padding = _lodash2['default'].defaults(origPadding, _lodash2['default'].reduce(spacings, function (newPadding, spacing) {
 	                        return _lodash2['default'].transform(spacing, function (result, space, dir) {
-	                            result[dir] = !_lodash2['default'].has(origPadding, dir) ? Math.max(newPadding[dir] || space) : origPadding[dir];
+	                            result[dir] = Math.max(newPadding[dir] || space);
 	                        });
 	                    }, {}), { top: 0, bottom: 0, left: 0, right: 0 });
 	

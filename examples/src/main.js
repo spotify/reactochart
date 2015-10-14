@@ -628,40 +628,9 @@ const App = React.createClass({
             <h1>Reactochart Examples</h1>
 
             <div>
-                <div>
-                    <XYPlot margin={{left: 40, right: 8}} width={700} height={300}>
-                        <Histogram
-                            data={randomNormal} getValue={{x: null}}
-                            />
-                         <KernelDensityEstimation
-                            data={randomNormal} getValue={{x: null}} bandwidth={0.5}
-                         />
-                         <KernelDensityEstimation
-                            data={randomNormal} getValue={{x: null}} bandwidth={0.1}
-                         />
-                         <KernelDensityEstimation
-                            data={randomNormal} getValue={{x: null}} bandwidth={2}
-                         />
-                    </XYPlot>
-                </div>
-                <div>
-                    <XYPlot
-                        margin={{left: 40, right: 8}}
-                        width={700} height={40}
-                        showGrid={false}
-                        showLabels={false}
-                        showTicks={false}
-                    >
-                        <ScatterPlot
-                            data={randomNormal}
-                            getValue={{
-                                x: null,
-                                y: () => Math.random()
-                            }}
-                            pointRadius={1}
-                        />
-                    </XYPlot>
-                </div>
+                <XYPlot width={300} height={300} margin={{right: 10}}>
+                    <BarChart data={randomBarData2.numberNumber} getValue={{x: 0, y: 1}} />
+                </XYPlot>
             </div>
 
 
