@@ -12,8 +12,6 @@ const KernelDensityEstimation = React.createClass({
     propTypes: {
         // the array of data objects
         data: PropTypes.array.isRequired,
-        // accessor for data values
-        getValue: AccessorPropType,
 
         // kernel bandwidth for kernel density estimator
         // https://en.wikipedia.org/wiki/Kernel_density_estimation#Bandwidth_selection
@@ -24,11 +22,13 @@ const KernelDensityEstimation = React.createClass({
         sampleCount: PropTypes.number,
 
         // common props from XYPlot
+        // accessor for data values
+        getValue: PropTypes.object,
         name: PropTypes.string,
-        xScale: PropTypes.func,
-        yScale: PropTypes.func,
-        innerWidth: PropTypes.number,
-        innerHeight: PropTypes.number
+        axisType: PropTypes.object,
+        scale: PropTypes.object,
+        scaleWidth: PropTypes.number,
+        scaleHeight: PropTypes.number
     },
     getDefaultProps() {
         return {
@@ -46,10 +46,12 @@ const KernelDensityEstimation = React.createClass({
     statics: {
         getOptions(props) {
             return {
-                // todo: real x domain
-                xDomain: null,
-                // todo: real y domain
-                yDomain: [0,200]
+                domain: {
+                    // todo: real x domain
+                    x: null,
+                    // todo: real y domain
+                    y: [0,200]
+                }
             }
         }
     },
@@ -61,9 +63,9 @@ const KernelDensityEstimation = React.createClass({
         this.initKDE(newProps);
     },
     initKDE(props) {
-        const {data, bandwidth, sampleCount, xScale, innerWidth} = props;
+        const {data, bandwidth, sampleCount, scale, scaleWidth} = props;
         const kernel = epanechnikovKernel(bandwidth);
-        const samples = xScale.ticks(sampleCount || Math.ceil(innerWidth / 2));
+        const samples = scale.x.ticks(sampleCount || Math.ceil(scaleWidth / 2));
         this.setState({kdeData: kernelDensityEstimator(kernel, samples)(data)});
     },
 
@@ -72,13 +74,13 @@ const KernelDensityEstimation = React.createClass({
 
     },
     render() {
-        const {name, xScale, yScale, innerWidth, innerHeight} = this.props;
+        const {name, scale, scaleWidth, scaleHeight, plotWidth, plotHeight} = this.props;
         const {kdeData} = this.state;
 
         return <LineChart
             data={kdeData}
-            getX={0} getY={d => d[1] * 500}
-            {...{name, xScale, yScale, innerWidth, innerHeight}}
+            getValue={{x: 0, y: d => d[1] * 500}}
+            {...{name, scale, scaleWidth, scaleHeight, plotWidth, plotHeight}}
         />;
     }
 });

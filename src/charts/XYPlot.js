@@ -407,8 +407,8 @@ const XYPlot = React.createClass({
                 this.scale.x.invert(chartX);
         const chartYVal = (!_.inRange(chartY, 0, scaleHeight + padding.top + padding.bottom)) ? null :
             (axisType.y === 'ordinal') ?
-                this.scale.x.domain()[indexOfClosestNumberInList(chartY, this.scale.y.range())] :
-                this.scale.x.invert(chartY);
+                this.scale.y.domain()[indexOfClosestNumberInList(chartY, this.scale.y.range())] :
+                this.scale.y.invert(chartY);
 
         const chart = this.refs['chart-series-0'];
         const hovered = (chart && _.isFunction(chart.getHovered)) ? chart.getHovered(chartXVal) : null;

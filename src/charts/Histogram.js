@@ -12,16 +12,11 @@ const Histogram = React.createClass({
     propTypes: {
         // the array of data objects
         data: PropTypes.array.isRequired,
+
         // accessor for X & Y coordinates
-        getX: AccessorPropType,
-        getY: AccessorPropType,
-
-        // x & y scale types
-        xType: PropTypes.oneOf(['number', 'time', 'ordinal']),
-        yType: PropTypes.oneOf(['number', 'time', 'ordinal']),
-
-        xScale: PropTypes.func,
-        yScale: PropTypes.func
+        getValue: PropTypes.object,
+        axisType: PropTypes.object,
+        scale: PropTypes.object
     },
     getDefaultProps() {
         return {}
@@ -34,17 +29,19 @@ const Histogram = React.createClass({
     componentWillMount() {
         const histogramData = d3.layout.histogram().bins(30)(this.props.data);
         //console.log('histogram', this.props.data, histogramData);
-        this.setState({histogramData})
+        this.setState({histogramData});
     },
 
     statics: {
         getOptions(props) {
-            const {data, getX, getY} = props;
+            const {data, getValue} = props;
             return {
                 // todo: real x domain
-                xDomain: d3.extent(data, accessor(getX)),
-                // todo: real y domain
-                yDomain: [0,200]
+                domain: {
+                    x: d3.extent(data, accessor(getValue.x)),
+                    // todo: real y domain
+                    y: [0,200]
+                }
             }
         }
     },
@@ -53,14 +50,13 @@ const Histogram = React.createClass({
     },
     render() {
         if(!this.state.histogramData) return <g></g>;
-        const {name, xScale, yScale, xType, yType, innerWidth, innerHeight} = this.props;
+        const {name, scale, axisType, scaleWidth, scaleHeight, plotWidth, plotHeight} = this.props;
 
         return <BarChart
             data={this.state.histogramData}
-            getX={'x'}
-            getY={'y'}
-            getXEnd={d => d.x + d.dx}
-            {...{name, xScale, yScale, xType, yType, innerWidth, innerHeight}}
+            getValue={{x: 'x', y: 'y'}}
+            getEndValue={{x: d => d.x + d.dx}}
+            {...{name, scale, axisType, scaleWidth, scaleHeight, plotWidth, plotHeight}}
         />;
     }
 });

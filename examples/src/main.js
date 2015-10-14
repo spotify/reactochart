@@ -225,31 +225,37 @@ const HistogramExample = React.createClass({
     render() {
         return <div>
             <div>
-                <XYPlot width={700} height={300}>
+                <XYPlot margin={{left: 40, right: 8}} width={700} height={300}>
                     <Histogram
                         data={randomNormal} getValue={{x: null}}
                         />
                     <KernelDensityEstimation
-                        data={randomNormal} bandwidth={0.5}
+                        data={randomNormal} getValue={{x: null}} bandwidth={0.5}
                         />
                     <KernelDensityEstimation
-                        data={randomNormal} bandwidth={0.1}
+                        data={randomNormal} getValue={{x: null}} bandwidth={0.1}
                         />
                     <KernelDensityEstimation
-                        data={randomNormal} bandwidth={2}
+                        data={randomNormal} getValue={{x: null}} bandwidth={2}
                         />
                 </XYPlot>
             </div>
             <div>
-                <XYPlot width={700} height={80} showYLabels={false}>
+                <XYPlot
+                    margin={{left: 40, right: 8}}
+                    width={700} height={40}
+                    showGrid={false}
+                    showLabels={false}
+                    showTicks={false}
+                    >
                     <ScatterPlot
                         data={randomNormal}
                         getValue={{
-                            x: null,
-                            y: () => Math.random()
-                        }}
-                        pointRadius={1.5}
-                    />
+                                x: null,
+                                y: () => Math.random()
+                            }}
+                        pointRadius={1}
+                        />
                 </XYPlot>
             </div>
         </div>
@@ -304,6 +310,7 @@ const CustomChildExample = React.createClass({
         }
     },
     onMouseMoveChart(hovered, e, options) {
+        console.log(hovered, e, options);
         const {chartYVal} = options;
         this.setState({hoveredYVal: chartYVal});
     },
@@ -311,13 +318,13 @@ const CustomChildExample = React.createClass({
         return <div>
             <XYPlot
                     width={200} height={200}
-                    yType='ordinal'
-                    onMouseMove={this.onMouseMoveChart}
+                    axisType={{y: 'ordinal'}}
                     padding={{bottom: 20, top: 20}}
                     showTicks={{x: false, y: false}}
                     showGrid={{x: false, y: false}}
                     showLabels={{x: false}}
                     showXZero={{x: true}}
+                    onMouseMove={this.onMouseMoveChart}
                 >
                 <CustomSelectionRect underAxes={true} hoveredYVal={this.state.hoveredYVal} />
                 <BarChart
@@ -528,15 +535,21 @@ const BarMarkerLineExample = React.createClass({
 
 const AxisLabelExample = React.createClass({
     render() {
+        const xyProps = {width: 400, height: 300, axisType: {y: 'ordinal'}};
+        const barChartProps = {
+            data: randomBarData2.numberOrdinal,
+            getValue: {x: 0, y: 1},
+            orientation: 'horizontal'
+        };
         return <div>
-            <XYPlot width={400} height={300} yType='ordinal' xAxisLabel="Account Age">
-                <BarChart data={randomBarData2.numberOrdinal} getValue={{x: 0, y: 1}} orientation="horizontal" />
+            <XYPlot {...xyProps} axisLabel={{x: "Account Age"}}>
+                <BarChart {...barChartProps} />
             </XYPlot>
-            <XYPlot width={400} height={300} yType='ordinal' yAxisLabel="Active Users">
-                <BarChart data={randomBarData2.numberOrdinal} getValue={{x: 0, y: 1}} orientation="horizontal" />
+            <XYPlot {...xyProps} axisLabel={{y: "Active Users"}}>
+                <BarChart {...barChartProps} />
             </XYPlot>
-            <XYPlot width={400} height={300} yType='ordinal' xAxisLabel="Account Age" yAxisLabel="Active Users">
-                <BarChart data={randomBarData2.numberOrdinal} getValue={{x: 0, y: 1}} orientation="horizontal" />
+            <XYPlot {...xyProps} axisLabel={{x: "Account Age", y: "Active Users"}}>
+                <BarChart {...barChartProps} />
             </XYPlot>
         </div>
     }
@@ -615,15 +628,40 @@ const App = React.createClass({
             <h1>Reactochart Examples</h1>
 
             <div>
-                <XYPlot
-                    width={300} height={300}
-                    ticks={{
-                    x: [0, 1, 2, 4, 8, 16],
-                    y: [-8000, -3000, 0, 10000, 5000, 40000]
-                }}
+                <div>
+                    <XYPlot margin={{left: 40, right: 8}} width={700} height={300}>
+                        <Histogram
+                            data={randomNormal} getValue={{x: null}}
+                            />
+                         <KernelDensityEstimation
+                            data={randomNormal} getValue={{x: null}} bandwidth={0.5}
+                         />
+                         <KernelDensityEstimation
+                            data={randomNormal} getValue={{x: null}} bandwidth={0.1}
+                         />
+                         <KernelDensityEstimation
+                            data={randomNormal} getValue={{x: null}} bandwidth={2}
+                         />
+                    </XYPlot>
+                </div>
+                <div>
+                    <XYPlot
+                        margin={{left: 40, right: 8}}
+                        width={700} height={40}
+                        showGrid={false}
+                        showLabels={false}
+                        showTicks={false}
                     >
-                    <BarChart data={randomBarData2.numberNumber} getValue={{x: 0, y: 1}} />
-                </XYPlot>
+                        <ScatterPlot
+                            data={randomNormal}
+                            getValue={{
+                                x: null,
+                                y: () => Math.random()
+                            }}
+                            pointRadius={1}
+                        />
+                    </XYPlot>
+                </div>
             </div>
 
 
