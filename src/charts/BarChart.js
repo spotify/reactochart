@@ -3,7 +3,7 @@ const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
 
-import {accessor, AccessorPropType, InterfaceMixin} from '../util.js';
+import {accessor, AccessorPropType, InterfaceMixin, methodIfFuncProp} from '../util.js';
 
 // on the taxonomy of bar charts:
 
@@ -294,13 +294,6 @@ const BarChart = React.createClass({
         return renderNotImplemented();
     }
 });
-
-function methodIfFuncProp(propName, props, context) {
-    // convenience function for event callbacks... we often want to say
-    // "if this.props.onThing is a function, call this.onThing(e) (which will do stuff, then call this.props.onThing)"
-    return _.isFunction(props[propName]) && _.isFunction(context[propName]) ?
-        context[propName] : null;
-}
 
 function renderNotImplemented(text="not implemented yet") {
     return <svg x={100} y={100} style={{overflow:'visible'}}><text>{text}</text></svg>

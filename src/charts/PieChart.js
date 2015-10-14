@@ -2,7 +2,7 @@ import React from 'react/addons';
 const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
-import {accessor, AccessorPropType} from '../util.js';
+import {accessor, AccessorPropType, methodIfFuncProp} from '../util.js';
 
 const DEFAULT_PROPS = {
     getValue: null,
@@ -64,14 +64,20 @@ const PieChart = React.createClass({
         let startPercent = 0;
         return <svg className="pie-chart" {...{width, height}}>
             {this.props.data.map((d, i) => {
+                const [onMouseEnter, onMouseMove, onMouseLeave] =
+                    ['onMouseEnterSlice', 'onMouseMoveSlice', 'onMouseLeaveSlice'].map(eventName => {
+                        // partially apply this bar's data point as 2nd callback argument
+                        const callback = methodIfFuncProp(eventName, this.props, this);
+                        return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+                    });
+
                 const className = `pie-slice pie-slice-${i}`;
                 const slicePercent = valueAccessor(d) / total;
                 const endPercent = startPercent + slicePercent;
                 const pathStr = pieSlicePath(startPercent, endPercent, center, radius, holeRadius);
                 startPercent += slicePercent;
-                //const path =
 
-                return <path {...{className, d: pathStr}} />;
+                return <path {...{className, d: pathStr, onMouseEnter, onMouseMove, onMouseLeave}} />;
             })}
 
             {sum < total ? // draw empty slice if the sum of slices is less than expected total

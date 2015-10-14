@@ -58363,6 +58363,8 @@
 	    value: true
 	});
 	
+	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
+	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -58425,6 +58427,8 @@
 	    },
 	
 	    render: function render() {
+	        var _this = this;
+	
 	        var margin = _lodash2['default'].isNumber(this.props.margin) ? { top: this.props.margin, bottom: this.props.margin, left: this.props.margin, right: this.props.margin } : _lodash2['default'].defaults({}, this.props.margin, DEFAULT_PROPS.margin);
 	        // sizes fallback based on provided info: given dimension -> radius + margin -> other dimension -> default
 	        var width = this.props.width || (this.props.radius ? this.props.radius * 2 + margin.left + margin.right : this.props.height) || DEFAULT_SIZE;
@@ -58443,14 +58447,25 @@
 	            'svg',
 	            _extends({ className: 'pie-chart' }, { width: width, height: height }),
 	            this.props.data.map(function (d, i) {
+	                var _map = ['onMouseEnterSlice', 'onMouseMoveSlice', 'onMouseLeaveSlice'].map(function (eventName) {
+	                    // partially apply this bar's data point as 2nd callback argument
+	                    var callback = (0, _utilJs.methodIfFuncProp)(eventName, _this.props, _this);
+	                    return _lodash2['default'].isFunction(callback) ? _lodash2['default'].partial(callback, _lodash2['default'], d) : null;
+	                });
+	
+	                var _map2 = _slicedToArray(_map, 3);
+	
+	                var onMouseEnter = _map2[0];
+	                var onMouseMove = _map2[1];
+	                var onMouseLeave = _map2[2];
+	
 	                var className = 'pie-slice pie-slice-' + i;
 	                var slicePercent = valueAccessor(d) / total;
 	                var endPercent = startPercent + slicePercent;
 	                var pathStr = pieSlicePath(startPercent, endPercent, center, radius, holeRadius);
 	                startPercent += slicePercent;
-	                //const path =
 	
-	                return _reactAddons2['default'].createElement('path', { className: className, d: pathStr });
+	                return _reactAddons2['default'].createElement('path', { className: className, d: pathStr, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave });
 	            }),
 	            sum < total ? // draw empty slice if the sum of slices is less than expected total
 	            _reactAddons2['default'].createElement('path', {
@@ -58553,6 +58568,12 @@
 	            }
 	        }
 	    };
+	}
+	
+	// convenience function for event callbacks... we often want to say
+	// "if this.props.onThing is a function, call this.onThing(e) (which will do stuff, then call this.props.onThing)"
+	function methodIfFuncProp(propName, props, context) {
+	    return _lodash2['default'].isFunction(props[propName]) && _lodash2['default'].isFunction(context[propName]) ? context[propName] : null;
 	}
 
 /***/ },
@@ -69143,7 +69164,7 @@
 	            data.map(function (d) {
 	                var _map3 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
 	                    // partially apply this bar's data point as 2nd callback argument
-	                    var callback = methodIfFuncProp(eventName, _this.props, _this);
+	                    var callback = (0, _utilJs.methodIfFuncProp)(eventName, _this.props, _this);
 	                    return _lodash2['default'].isFunction(callback) ? _lodash2['default'].partial(callback, _lodash2['default'], d) : null;
 	                });
 	
@@ -69209,7 +69230,7 @@
 	            this.props.data.map(function (d, i) {
 	                var _map4 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
 	                    // partially apply this bar's data point as 2nd callback argument
-	                    var callback = methodIfFuncProp(eventName, _this2.props, _this2);
+	                    var callback = (0, _utilJs.methodIfFuncProp)(eventName, _this2.props, _this2);
 	                    return _lodash2['default'].isFunction(callback) ? _lodash2['default'].partial(callback, _lodash2['default'], d) : null;
 	                });
 	
@@ -69264,12 +69285,6 @@
 	        return renderNotImplemented();
 	    }
 	});
-	
-	function methodIfFuncProp(propName, props, context) {
-	    // convenience function for event callbacks... we often want to say
-	    // "if this.props.onThing is a function, call this.onThing(e) (which will do stuff, then call this.props.onThing)"
-	    return _lodash2['default'].isFunction(props[propName]) && _lodash2['default'].isFunction(context[propName]) ? context[propName] : null;
-	}
 	
 	function renderNotImplemented() {
 	    var text = arguments.length <= 0 || arguments[0] === undefined ? "not implemented yet" : arguments[0];
