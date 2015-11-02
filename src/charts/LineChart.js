@@ -13,7 +13,7 @@ const LineChart = React.createClass({
         // accessor for X & Y coordinates
         getValue: PropTypes.object,
 
-        axisType: PropTypes.object,
+        // props from XYPlot
         scale: PropTypes.object
     },
 

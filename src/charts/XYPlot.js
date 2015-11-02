@@ -5,8 +5,6 @@ import d3 from 'd3';
 import {accessor} from '../util.js';
 import moment from 'moment';
 import numeral from 'numeral';
-import $ from 'jquery';
-
 
 let PropTypes = React.PropTypes;
 PropTypes = _.assign({}, PropTypes, {
@@ -669,9 +667,9 @@ const ChartAxis = React.createClass({
         const options = {letter, type, orientation, labelOffset, gridLength, tickLength, labelFormat};
         return <g ref={`${letter}Axis`} className={`chart-axis chart-axis-${letter}`} transform={axisTransform}>
             {showTicks || showGrid || (showLabels && labels === ticks) ?
-                _.map(ticks, (value) => {
+                _.map(ticks, (value, i) => {
                     const tickOptions = _.assign({}, options, {value});
-                    return <g transform={tickTransform(value)}>
+                    return <g transform={tickTransform(value)} key={`tick-${i}`}>
                         {showGrid ? this.renderGrid(tickOptions) : null}
                         {showTicks ? this.renderTick(tickOptions) : null}
                         {(showLabels && labels === ticks) ? this.renderLabel(tickOptions) : null}
@@ -680,8 +678,8 @@ const ChartAxis = React.createClass({
                 : null
             }
             {(showLabels && labels !== ticks) ? // render custom labels (passed in, not same as ticks)
-                _.map(labels, (value) => {
-                    return <g transform={tickTransform(value)}>
+                _.map(labels, (value, i) => {
+                    return <g transform={tickTransform(value)} key={`tick-${i}`}>
                         {this.renderLabel(_.assign({}, options, {value}))}
                     </g>
                 })
@@ -777,26 +775,30 @@ function formatAxisLabel(value, type, format) {
 }
 
 function measureAxisLabels(xProps, yProps, xAxisLabelProps, yAxisLabelProps) {
+    // hacky... pre-measure the bounding boxes of all axis labels,
+    // by rendering axis HTML to the DOM, measuring them with getBoundingClientRect, then deleting them.
     xProps = _.assign({}, xProps, {showTicks: false, showGrid: false});
     yProps = _.assign({}, yProps, {showTicks: false, showGrid: false});
     const xAxisHtml = React.renderToStaticMarkup(<ChartAxis {...xProps}/>);
     const yAxisHtml = React.renderToStaticMarkup(<ChartAxis {...yProps}/>);
     const xLabelHtml = xAxisLabelProps ? React.renderToStaticMarkup(<XAxisLabel {...xAxisLabelProps}/>) : '';
     const yLabelHtml = yAxisLabelProps ? React.renderToStaticMarkup(<YAxisLabel {...yAxisLabelProps}/>) : '';
-    // todo don't use jquery...
-    const $testSvg = $(`<svg class="xy-plot"><g class="chart-inner">\
+
+    let testSvg = document.createElement('div');
+    testSvg.innerHTML = `<svg class="xy-plot"><g class="chart-inner">\
         ${xAxisHtml}${yAxisHtml}${xLabelHtml}${yLabelHtml}
-    </g></svg>`);
-    $('body').append($testSvg);
+    </g></svg>`;
+    document.body.appendChild(testSvg);
 
     const getRect = (el => el.getBoundingClientRect()); // get rekt
     const labelBoxes = {
-        xVal: xProps.showLabels ? _.map($testSvg.find('.chart-axis-value-label-x'), getRect) : [],
-        yVal: yProps.showLabels ? _.map($testSvg.find('.chart-axis-value-label-y'), getRect) : [],
-        xAxis: xAxisLabelProps ? $testSvg.find('.chart-axis-label-x text')[0].getBoundingClientRect() : null,
-        yAxis: yAxisLabelProps ? $testSvg.find('.chart-axis-label-y text')[0].getBoundingClientRect() : null
+        xVal: xProps.showLabels ? _.map(testSvg.querySelectorAll('.chart-axis-value-label-x'), getRect) : [],
+        yVal: yProps.showLabels ? _.map(testSvg.querySelectorAll('.chart-axis-value-label-y'), getRect) : [],
+        xAxis: xAxisLabelProps ? testSvg.querySelectorAll('.chart-axis-label-x text')[0].getBoundingClientRect() : null,
+        yAxis: yAxisLabelProps ? testSvg.querySelectorAll('.chart-axis-label-y text')[0].getBoundingClientRect() : null
     };
-    $testSvg.remove();
+    document.body.removeChild(testSvg);
+
     return labelBoxes;
 }
 

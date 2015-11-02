@@ -91,6 +91,12 @@ const randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.r
 const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 // end fake data
 
+const getXYArrayValue = {
+    // accessors for getting (X, Y) data from simple arrays-of-arrays that look like [[x, y], [x, y]]
+    x: d => d[0],
+    y: d => d[1]
+};
+
 const PieChartExample = React.createClass({
     getInitialState() { return {sinVal: 0}; },
     componentWillMount() {
@@ -628,10 +634,12 @@ const App = React.createClass({
             <h1>Reactochart Examples</h1>
 
             <div>
-                <PieChart
-                    data={[45, 35, 20]}
-                    onMouseEnterSlice={(e,d) => console.log(e, d)}
-                />
+                <XYPlot axisType={{x: 'ordinal'}}>
+                    <LineChart
+                        data={[['a', 0.5], ['b', 1], ['c', 0.25]]}
+                        getValue={getXYArrayValue}
+                    />
+                </XYPlot>
             </div>
 
 
@@ -680,7 +688,7 @@ const App = React.createClass({
     renderExample(example) {
         const isVisible = this.state.visibleExamples[example.id];
         const ExampleComponent = example.Component;
-        return <div className={`example-section example-section-${example.id}`}>
+        return <div className={`example-section example-section-${example.id}`} key={`${example.id}`}>
             <div
                 className={`example-section-button ${isVisible ? 'active' : ''}`}
                 onClick={this.toggleExample.bind(null, example.id)}
