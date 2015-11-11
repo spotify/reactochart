@@ -5,25 +5,15 @@ import d3 from 'd3';
 import jsdom from 'mocha-jsdom';
 import {expect} from 'chai';
 
+import {XYPlot, LineChart} from '../../src/index.js';
 
-import {XYPlot, LineChart} from '../src/index.js';
-
-const getXYArrayValue = {
-    // accessors for getting (X, Y) data from simple arrays-of-arrays that look like [[x, y], [x, y]]
+const getXYArrayValue = { // accessors for (X, Y) data from simple arrays that look like [[x, y], [x, y]]
     x: d => d[0],
     y: d => d[1]
 };
 
-
 describe('LineChart', () => {
-    var $;
-    jsdom();
-
     const linearYScale = d3.scale.linear().domain([0, 1]).range([100, 0]);
-
-    before(function() {
-        $ = require('jquery')(window);
-    });
 
     it('renders a line with number X & Y scales', () => {
         // make simple number-number line chart with 3 datapoints
@@ -91,11 +81,6 @@ describe('LineChart', () => {
             data: [[0, 0.5], [1, 1], [2, 0.25]]
         };
 
-        //console.log(document);
-        //console.log(window.document);
-
-        //return;
-
         var chart = TestUtils.renderIntoDocument(
             <XYPlot {...xyProps}>
                 <LineChart {...lineProps} />
@@ -103,6 +88,5 @@ describe('LineChart', () => {
         );
         var path = TestUtils.findRenderedDOMComponentWithTag(chart, 'path');
         const pathData = path.getDOMNode().getAttribute('d');
-        console.log(pathData);
     })
 });
