@@ -266,6 +266,13 @@ const BarChart = React.createClass({
             </g> :
             <g>
                 {this.props.data.map((d, i) => {
+                    const [onMouseEnter, onMouseMove, onMouseLeave] =
+                        ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(eventName => {
+                            // partially apply this bar's data point as 2nd callback argument
+                            const callback = methodIfFuncProp(eventName, this.props, this);
+                            return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+                        });
+
                     const barZero = barZeroValue(data, xAccessor, axisType.x);
                     const xVal = xAccessor(d);
                     const barLength = Math.abs(scale.x(barZero) - scale.x(xVal));

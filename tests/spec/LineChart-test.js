@@ -1,5 +1,5 @@
-import React from 'react/addons';
-const {TestUtils} = React.addons;
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 import d3 from 'd3';
 
 //import jsdom from 'mocha-jsdom';
@@ -29,7 +29,7 @@ describe('LineChart', () => {
         // ensure line is drawn as expected
         var chart = TestUtils.renderIntoDocument(<LineChart {...props} />);
         var path = TestUtils.findRenderedDOMComponentWithTag(chart, 'path');
-        const pathData = path.getDOMNode().getAttribute('d');
+        const pathData = path.getAttribute('d');
         expect(pathData).to.equal('M 0 50 L 50 0 L 100 75');
     });
 
@@ -52,7 +52,7 @@ describe('LineChart', () => {
         // ensure line is drawn as expected
         var chart = TestUtils.renderIntoDocument(<LineChart {...props} />);
         var path = TestUtils.findRenderedDOMComponentWithTag(chart, 'path');
-        const pathData = path.getDOMNode().getAttribute('d');
+        const pathData = path.getAttribute('d');
         expect(pathData).to.equal('M 0 50 L 50 0 L 100 75');
     });
 
@@ -70,7 +70,7 @@ describe('LineChart', () => {
         // ensure line is drawn as expected
         var chart = TestUtils.renderIntoDocument(<LineChart {...props} />);
         var path = TestUtils.findRenderedDOMComponentWithTag(chart, 'path');
-        const pathData = path.getDOMNode().getAttribute('d');
+        const pathData = path.getAttribute('d');
         expect(pathData).to.equal('M 0 50 L 50 0 L 100 75');
     });
 
@@ -87,6 +87,6 @@ describe('LineChart', () => {
             </XYPlot>
         );
         var path = TestUtils.findRenderedDOMComponentWithTag(chart, 'path');
-        const pathData = path.getDOMNode().getAttribute('d');
+        const pathData = path.getAttribute('d');
     })
 });

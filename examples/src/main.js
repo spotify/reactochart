@@ -1,8 +1,9 @@
 import '../styles/main.less'
-import React from 'react/addons';
-const {PureRenderMixin, update, Perf} = React.addons;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import update from 'react-addons-update';
 import numeral from 'numeral';
-_.extend(window, {Perf, numeral});
+//_.extend(window, {Perf, numeral});
 
 import {
     // old charts
@@ -706,6 +707,6 @@ const App = React.createClass({
     }
 });
 
-React.render(<App />, document.getElementById('container'));
+ReactDOM.render(<App />, document.getElementById('container'));
 
 export default App;

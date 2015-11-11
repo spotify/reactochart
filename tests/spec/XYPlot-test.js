@@ -1,8 +1,7 @@
-import React from 'react/addons';
-const {TestUtils} = React.addons;
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 import d3 from 'd3';
 
-//import jsdom from 'mocha-jsdom';
 import {expect} from 'chai';
 
 
@@ -36,11 +35,11 @@ describe('XYPlot', () => {
         const margin = {top: 10, bottom: 20, left: 30, right: 40};
         const chart = TestUtils.renderIntoDocument(<XYPlot width={size} height={size} margin={margin} />);
         const inner = TestUtils.findRenderedDOMComponentWithClass(chart, 'chart-inner');
-        const bg = TestUtils.findRenderedDOMComponentWithClass(inner, 'chart-background');
-        expect(inner.getDOMNode().getAttribute('transform').replace(/\s/, ''))
+        const bg = TestUtils.findRenderedDOMComponentWithClass(chart, 'chart-background');
+        expect(inner.getAttribute('transform').replace(/\s/, ''))
             .to.contain(`translate(${margin.left},${margin.top})`);
-        expect(parseInt(bg.getDOMNode().getAttribute('width'))).to.equal(size - (margin.left + margin.right));
-        expect(parseInt(bg.getDOMNode().getAttribute('height'))).to.equal(size - (margin.top + margin.bottom));
+        expect(parseInt(bg.getAttribute('width'))).to.equal(size - (margin.left + margin.right));
+        expect(parseInt(bg.getAttribute('height'))).to.equal(size - (margin.top + margin.bottom));
     });
 
     it('creates a top/bottom/left/right object from single value, if object is not given for directional props', () => {
@@ -48,11 +47,11 @@ describe('XYPlot', () => {
         const margin = 50;
         const chart = TestUtils.renderIntoDocument(<XYPlot width={size} height={size} margin={margin} />);
         const inner = TestUtils.findRenderedDOMComponentWithClass(chart, 'chart-inner');
-        const bg = TestUtils.findRenderedDOMComponentWithClass(inner, 'chart-background');
-        expect(inner.getDOMNode().getAttribute('transform').replace(/\s/, ''))
+        const bg = TestUtils.findRenderedDOMComponentWithClass(chart, 'chart-background');
+        expect(inner.getAttribute('transform').replace(/\s/, ''))
             .to.contain(`translate(${margin},${margin})`);
-        expect(parseInt(bg.getDOMNode().getAttribute('width'))).to.equal(size - (margin + margin));
-        expect(parseInt(bg.getDOMNode().getAttribute('height'))).to.equal(size - (margin + margin));
+        expect(parseInt(bg.getAttribute('width'))).to.equal(size - (margin + margin));
+        expect(parseInt(bg.getAttribute('height'))).to.equal(size - (margin + margin));
     });
 
     /*

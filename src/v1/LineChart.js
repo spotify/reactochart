@@ -1,12 +1,10 @@
-import React from 'react/addons';
+import React from 'react';
 const {PropTypes} = React;
-const {PureRenderMixin} = React.addons;
 import _ from 'lodash';
 import d3 from 'd3';
 import moment from 'moment';
 
 const TimeseriesLineChart = React.createClass({
-    mixins: [PureRenderMixin],
     propTypes: {
         // the array of data objects
         data: PropTypes.arrayOf(PropTypes.object).isRequired,

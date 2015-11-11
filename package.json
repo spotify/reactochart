@@ -21,7 +21,8 @@
     "numeral": "^1.5.3"
   },
   "peerDependencies": {
-    "react": "^0.13.3"
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2"
   },
   "devDependencies": {
     "babel-cli": "^6.1.1",
@@ -36,8 +37,11 @@
     "less-loader": "^2.2.0",
     "mocha": "^2.3.3",
     "mocha-phantomjs": "^4.0.1",
+    "react": "^0.14.2",
+    "react-addons-test-utils": "^0.14.2",
+    "react-addons-update": "^0.14.2",
+    "react-dom": "^0.14.2",
     "react-hot-loader": "^1.2.8",
-    "react": "^0.13.3",
     "style-loader": "^0.12.3",
     "webpack": "^1.10.5",
     "webpack-dev-server": "^1.10.1"

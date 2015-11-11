@@ -1,5 +1,4 @@
 
-require('./spec/exampleTest');
 require('./spec/LineChart-test');
 require('./spec/XYPlot-test');
 

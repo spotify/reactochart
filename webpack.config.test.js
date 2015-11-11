@@ -14,6 +14,6 @@ config = _.merge(config, {
     }
 });
 
-delete config.devtool;
+//delete config.devtool;
 
 module.exports = config;

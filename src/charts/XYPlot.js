@@ -5,6 +5,7 @@ import d3 from 'd3';
 import {accessor} from '../util.js';
 import moment from 'moment';
 import numeral from 'numeral';
+import ReactDOMServer from 'react-dom/server';
 
 let PropTypes = React.PropTypes;
 PropTypes = _.assign({}, PropTypes, {
@@ -383,7 +384,7 @@ const XYPlot = React.createClass({
     },
 
     onMouseMove(e) {
-        const {axisType, height, width} = this.props;
+        const {axisType, height, width} = this.trueProps;
         const {margin, padding, scaleWidth, scaleHeight} = this;
         // todo faster method than getBoundingClientRect on every mouseover?
         const chartBB = e.currentTarget.getBoundingClientRect();
@@ -402,13 +403,13 @@ const XYPlot = React.createClass({
         const chart = this.refs['chart-series-0'];
         const hovered = (chart && _.isFunction(chart.getHovered)) ? chart.getHovered(chartXVal) : null;
 
-        this.props.onMouseMove(hovered, e, {chartX, chartY, chartXVal, chartYVal});
+        this.trueProps.onMouseMove(hovered, e, {chartX, chartY, chartXVal, chartYVal});
     },
     onMouseEnter(e) {
-        this.props.onMouseMove(e);
+        this.trueProps.onMouseMove(e);
     },
     onMouseLeave(e) {
-        this.props.onMouseLeave(e);
+        this.trueProps.onMouseLeave(e);
     },
 
     render() {
@@ -779,10 +780,10 @@ function measureAxisLabels(xProps, yProps, xAxisLabelProps, yAxisLabelProps) {
     // by rendering axis HTML to the DOM, measuring them with getBoundingClientRect, then deleting them.
     xProps = _.assign({}, xProps, {showTicks: false, showGrid: false});
     yProps = _.assign({}, yProps, {showTicks: false, showGrid: false});
-    const xAxisHtml = React.renderToStaticMarkup(<ChartAxis {...xProps}/>);
-    const yAxisHtml = React.renderToStaticMarkup(<ChartAxis {...yProps}/>);
-    const xLabelHtml = xAxisLabelProps ? React.renderToStaticMarkup(<XAxisLabel {...xAxisLabelProps}/>) : '';
-    const yLabelHtml = yAxisLabelProps ? React.renderToStaticMarkup(<YAxisLabel {...yAxisLabelProps}/>) : '';
+    const xAxisHtml = ReactDOMServer.renderToStaticMarkup(<ChartAxis {...xProps}/>);
+    const yAxisHtml = ReactDOMServer.renderToStaticMarkup(<ChartAxis {...yProps}/>);
+    const xLabelHtml = xAxisLabelProps ? ReactDOMServer.renderToStaticMarkup(<XAxisLabel {...xAxisLabelProps}/>) : '';
+    const yLabelHtml = yAxisLabelProps ? ReactDOMServer.renderToStaticMarkup(<YAxisLabel {...yAxisLabelProps}/>) : '';
 
     let testSvg = document.createElement('div');
     testSvg.innerHTML = `<svg class="xy-plot"><g class="chart-inner">\
