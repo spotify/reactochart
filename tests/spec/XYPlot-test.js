@@ -2,7 +2,7 @@ import React from 'react/addons';
 const {TestUtils} = React.addons;
 import d3 from 'd3';
 
-import jsdom from 'mocha-jsdom';
+//import jsdom from 'mocha-jsdom';
 import {expect} from 'chai';
 
 
@@ -15,7 +15,7 @@ const getXYArrayValue = { // accessors for (X, Y) data from simple arrays that l
 
 
 describe('XYPlot', () => {
-    jsdom();
+    //jsdom();
 
     it('renders SVG with given width & height (or a default)', () => {
         const chart = TestUtils.renderIntoDocument(<XYPlot width={600} height={800} />);

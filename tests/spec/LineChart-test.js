@@ -2,7 +2,7 @@ import React from 'react/addons';
 const {TestUtils} = React.addons;
 import d3 from 'd3';
 
-import jsdom from 'mocha-jsdom';
+//import jsdom from 'mocha-jsdom';
 import {expect} from 'chai';
 
 import {XYPlot, LineChart} from '../../src/index.js';

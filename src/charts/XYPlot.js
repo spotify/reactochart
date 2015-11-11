@@ -798,7 +798,7 @@ function measureAxisLabels(xProps, yProps, xAxisLabelProps, yAxisLabelProps) {
         yAxis: yAxisLabelProps ? testSvg.querySelectorAll('.chart-axis-label-y text')[0].getBoundingClientRect() : null
     };
     document.body.removeChild(testSvg);
-    console.log(labelBoxes);
+    //console.log(labelBoxes);
 
     return labelBoxes;
 }

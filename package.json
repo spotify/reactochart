@@ -18,7 +18,9 @@
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
-    "numeral": "^1.5.3",
+    "numeral": "^1.5.3"
+  },
+  "peerDependencies": {
     "react": "^0.13.3"
   },
   "devDependencies": {
@@ -29,15 +31,13 @@
     "babel-preset-react": "^6.0.15",
     "chai": "^3.4.0",
     "css-loader": "^0.15.6",
-    "jsdom": "^7.0.2",
     "json-loader": "^0.5.2",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",
     "mocha": "^2.3.3",
-    "mocha-jsdom": "^1.0.0",
     "mocha-phantomjs": "^4.0.1",
     "react-hot-loader": "^1.2.8",
-    "requirejs": "^2.1.20",
+    "react": "^0.13.3",
     "style-loader": "^0.12.3",
     "webpack": "^1.10.5",
     "webpack-dev-server": "^1.10.1"
