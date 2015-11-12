@@ -10,7 +10,7 @@ import ReactDOMServer from 'react-dom/server';
 let PropTypes = React.PropTypes;
 PropTypes = _.assign({}, PropTypes, {
     // all props that can apply to both axes take the form {x: val, y: val}
-    xyObjectOf: (propType) => PropTypes.shape({x: propType, y: propType}),
+    xyObjectOf: (type) => PropTypes.oneOfType([type, PropTypes.shape({x: type, y: type})]),
     axisType: PropTypes.oneOf(['number', 'time', 'ordinal']),
     //DomainType: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
     dataArray: PropTypes.arrayOf(PropTypes.oneOfType([

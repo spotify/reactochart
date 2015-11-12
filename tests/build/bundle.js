@@ -61986,7 +61986,7 @@
 	        radius: PropTypes.number,
 	        // (optional) margins (between svg edges and pie circle), inferred from radius/width/height if not provided
 	        // can either be a single number (to make all margins equal), or {top, bottom, left, right} object
-	        margin: PropTypes.oneOfType(PropTypes.object, PropTypes.number),
+	        margin: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
 	        // (optional) radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
 	        holeRadius: PropTypes.number,
 	        // (optional) label text to display in the middle of the pie/donut
@@ -62139,7 +62139,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var PropTypes = _react2.default.PropTypes;
-	var AccessorPropType = exports.AccessorPropType = PropTypes.oneOfType(PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.func);
+	var AccessorPropType = exports.AccessorPropType = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.func]);
 	
 	function accessor(key) {
 	    return _lodash2.default.isFunction(key) ? key : // pass an accessor function...
@@ -62220,8 +62220,8 @@
 	var PropTypes = _react2.default.PropTypes;
 	PropTypes = _lodash2.default.assign({}, PropTypes, {
 	    // all props that can apply to both axes take the form {x: val, y: val}
-	    xyObjectOf: function xyObjectOf(propType) {
-	        return PropTypes.shape({ x: propType, y: propType });
+	    xyObjectOf: function xyObjectOf(type) {
+	        return PropTypes.oneOfType([type, PropTypes.shape({ x: type, y: type })]);
 	    },
 	    axisType: PropTypes.oneOf(['number', 'time', 'ordinal']),
 	    //DomainType: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
@@ -64755,7 +64755,7 @@
 	        // used with the default point symbol (circle), defines the circle radius
 	        pointRadius: PropTypes.number,
 	        // text or SVG node to use as custom point symbol, or function which returns text/SVG
-	        pointSymbol: PropTypes.oneOfType(PropTypes.node, PropTypes.func),
+	        pointSymbol: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 	        // manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered
 	        pointOffset: PropTypes.arrayOf(PropTypes.number)
 	    },

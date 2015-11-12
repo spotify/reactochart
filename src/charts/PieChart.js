@@ -33,7 +33,7 @@ const PieChart = React.createClass({
         radius: PropTypes.number,
         // (optional) margins (between svg edges and pie circle), inferred from radius/width/height if not provided
         // can either be a single number (to make all margins equal), or {top, bottom, left, right} object
-        margin: PropTypes.oneOfType(PropTypes.object, PropTypes.number),
+        margin: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
         // (optional) radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
         holeRadius: PropTypes.number,
         // (optional) label text to display in the middle of the pie/donut

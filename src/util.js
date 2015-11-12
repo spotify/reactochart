@@ -3,7 +3,7 @@ const {PropTypes} = React;
 import _ from 'lodash';
 
 export const AccessorPropType =
-    PropTypes.oneOfType(PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.func);
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.func]);
 
 export function accessor(key) {
     return _.isFunction(key) ? key :                       // pass an accessor function...
