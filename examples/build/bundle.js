@@ -210,6 +210,7 @@
 	                radius: 100,
 	                holeRadius: 50,
 	                margin: 20,
+	                markerLineValue: 20,
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
 	                    lineNumber: 113
@@ -223,7 +224,7 @@
 	                centerLabel: '42%',
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 119
+	                    lineNumber: 120
 	                }
 	            }),
 	            _react2.default.createElement(_src.PieChart, {
@@ -234,7 +235,7 @@
 	                centerLabel: (this.state.sinVal * 50).toFixed(0),
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 126
+	                    lineNumber: 127
 	                }
 	            })
 	        );
@@ -246,7 +247,7 @@
 	    render: function render() {
 	        var rectangleSymbol = _react2.default.createElement('rect', { width: 5, height: 5, fill: 'rebeccapurple', __source: {
 	                fileName: '../../../examples/src/main.js',
-	                lineNumber: 139
+	                lineNumber: 140
 	            }
 	        });
 	        var triangleSymbol = _react2.default.createElement(
@@ -254,12 +255,12 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 140
+	                    lineNumber: 141
 	                }
 	            },
 	            _react2.default.createElement('polygon', { points: '0,0 8,0 4,8', style: { fill: 'darkgreen' }, __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 140
+	                    lineNumber: 141
 	                }
 	            })
 	        );
@@ -272,14 +273,14 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 143
+	                    lineNumber: 144
 	                }
 	            },
 	            _react2.default.createElement(
 	                _src.XYPlot,
 	                { width: 700, height: 500, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 144
+	                        lineNumber: 145
 	                    }
 	                },
 	                _react2.default.createElement(_src.ScatterPlot, {
@@ -288,7 +289,7 @@
 	                    pointSymbol: rectangleSymbol,
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 145
+	                        lineNumber: 146
 	                    }
 	                }),
 	                _react2.default.createElement(_src.ScatterPlot, {
@@ -297,7 +298,7 @@
 	                    pointRadius: 2,
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 150
+	                        lineNumber: 151
 	                    }
 	                }),
 	                _react2.default.createElement(_src.ScatterPlot, {
@@ -307,7 +308,7 @@
 	                    pointOffset: [0, 2],
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 155
+	                        lineNumber: 156
 	                    }
 	                }),
 	                _react2.default.createElement(_src.ScatterPlot, {
@@ -318,7 +319,7 @@
 	                    },
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 161
+	                        lineNumber: 162
 	                    }
 	                }),
 	                _react2.default.createElement(_src.ScatterPlot, {
@@ -328,7 +329,7 @@
 	                    pointOffset: [-4, -3],
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 166
+	                        lineNumber: 167
 	                    }
 	                })
 	            )
@@ -344,14 +345,14 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 179
+	                    lineNumber: 180
 	                }
 	            },
 	            _react2.default.createElement(
 	                _src.XYPlot,
 	                { width: 700, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 180
+	                        lineNumber: 181
 	                    }
 	                },
 	                _react2.default.createElement(_src.LineChart, {
@@ -361,7 +362,7 @@
 	                        } },
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 181
+	                        lineNumber: 182
 	                    }
 	                }),
 	                _react2.default.createElement(_src.LineChart, {
@@ -374,7 +375,7 @@
 	                    },
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 185
+	                        lineNumber: 186
 	                    }
 	                }),
 	                _react2.default.createElement(_src.LineChart, {
@@ -387,7 +388,7 @@
 	                    },
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 192
+	                        lineNumber: 193
 	                    }
 	                })
 	            )
@@ -413,7 +414,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 215
+	                    lineNumber: 216
 	                }
 	            },
 	            hoveredXYPlotData ? _react2.default.createElement(
@@ -421,7 +422,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 217
+	                        lineNumber: 218
 	                    }
 	                },
 	                hoveredXYPlotData[0] + ', ' + hoveredXYPlotData[1]
@@ -430,7 +431,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 220
+	                        lineNumber: 221
 	                    }
 	                },
 	                'Hover over the chart to show values'
@@ -439,22 +440,22 @@
 	                _src.XYPlot,
 	                { width: 700, height: 400, onMouseMove: this.onMouseMoveXYPlot, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 222
+	                        lineNumber: 223
 	                    }
 	                },
 	                _react2.default.createElement(_src.LineChart, { data: randomSequences[0], getValue: { x: 0, y: 1 }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 223
+	                        lineNumber: 224
 	                    }
 	                }),
 	                _react2.default.createElement(_src.LineChart, { data: randomSequences[1], getValue: { x: 0, y: 1 }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 224
+	                        lineNumber: 225
 	                    }
 	                }),
 	                _react2.default.createElement(_src.LineChart, { data: randomSequences[2], getValue: { x: 0, y: 1 }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 225
+	                        lineNumber: 226
 	                    }
 	                })
 	            )
@@ -470,7 +471,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 233
+	                    lineNumber: 234
 	                }
 	            },
 	            _react2.default.createElement(
@@ -478,42 +479,42 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 234
+	                        lineNumber: 235
 	                    }
 	                },
 	                _react2.default.createElement(
 	                    _src.XYPlot,
 	                    { margin: { left: 40, right: 8 }, width: 700, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 235
+	                            lineNumber: 236
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.Histogram, {
 	                        data: randomNormal, getValue: { x: null },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 236
+	                            lineNumber: 237
 	                        }
 	                    }),
 	                    _react2.default.createElement(_src.KernelDensityEstimation, {
 	                        data: randomNormal, getValue: { x: null }, bandwidth: 0.5,
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 239
+	                            lineNumber: 240
 	                        }
 	                    }),
 	                    _react2.default.createElement(_src.KernelDensityEstimation, {
 	                        data: randomNormal, getValue: { x: null }, bandwidth: 0.1,
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 242
+	                            lineNumber: 243
 	                        }
 	                    }),
 	                    _react2.default.createElement(_src.KernelDensityEstimation, {
 	                        data: randomNormal, getValue: { x: null }, bandwidth: 2,
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 245
+	                            lineNumber: 246
 	                        }
 	                    })
 	                )
@@ -523,7 +524,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 250
+	                        lineNumber: 251
 	                    }
 	                },
 	                _react2.default.createElement(
@@ -536,7 +537,7 @@
 	                        showTicks: false,
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 251
+	                            lineNumber: 252
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.ScatterPlot, {
@@ -550,7 +551,7 @@
 	                        pointRadius: 1,
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 258
+	                            lineNumber: 259
 	                        }
 	                    })
 	                )
@@ -567,7 +568,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 274
+	                    lineNumber: 275
 	                }
 	            },
 	            _react2.default.createElement(
@@ -580,12 +581,12 @@
 	                    },
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 275
+	                        lineNumber: 276
 	                    }
 	                },
 	                _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 0, y: 1 }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 282
+	                        lineNumber: 283
 	                    }
 	                })
 	            )
@@ -601,7 +602,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 290
+	                    lineNumber: 291
 	                }
 	            },
 	            _react2.default.createElement(
@@ -619,7 +620,7 @@
 	                    showZero: { y: true },
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 291
+	                        lineNumber: 292
 	                    }
 	                },
 	                _react2.default.createElement(_src.BarChart, {
@@ -628,7 +629,7 @@
 	                    barThickness: 20,
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 303
+	                        lineNumber: 304
 	                    }
 	                })
 	            )
@@ -655,7 +656,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 325
+	                    lineNumber: 326
 	                }
 	            },
 	            _react2.default.createElement(
@@ -671,12 +672,12 @@
 	                    onMouseMove: this.onMouseMoveChart,
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 326
+	                        lineNumber: 327
 	                    }
 	                },
 	                _react2.default.createElement(CustomSelectionRect, { underAxes: true, hoveredYVal: this.state.hoveredYVal, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 336
+	                        lineNumber: 337
 	                    }
 	                }),
 	                _react2.default.createElement(_src.BarChart, {
@@ -686,7 +687,7 @@
 	                    barThickness: 20,
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 337
+	                        lineNumber: 338
 	                    }
 	                })
 	            )
@@ -709,7 +710,7 @@
 	            style: { fill: 'red' },
 	            __source: {
 	                fileName: '../../../examples/src/main.js',
-	                lineNumber: 352
+	                lineNumber: 353
 	            }
 	        }) : null;
 	    }
@@ -723,7 +724,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 364
+	                    lineNumber: 365
 	                }
 	            },
 	            _react2.default.createElement(
@@ -731,24 +732,24 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 365
+	                        lineNumber: 366
 	                    }
 	                },
 	                _react2.default.createElement(_src.BarChart, { data: randomBars[0], getValue: { x: 0, y: 1 }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 366
+	                        lineNumber: 367
 	                    }
 	                }),
 	                _react2.default.createElement(_src.LineChart, { data: randomBars[0], getValue: { x: 0, y: 1 }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 367
+	                        lineNumber: 368
 	                    }
 	                }),
 	                _react2.default.createElement(_src.ScatterPlot, { data: randomBars[0], getValue: { x: 0, y: 1 }, pointSymbol: function pointSymbol(d, i) {
 	                        return _.sample(emojis);
 	                    }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 368
+	                        lineNumber: 369
 	                    }
 	                })
 	            )
@@ -764,7 +765,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 376
+	                    lineNumber: 377
 	                }
 	            },
 	            _react2.default.createElement(
@@ -772,7 +773,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 377
+	                        lineNumber: 378
 	                    }
 	                },
 	                'Vertical'
@@ -782,7 +783,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 379
+	                        lineNumber: 380
 	                    }
 	                },
 	                _react2.default.createElement(
@@ -790,7 +791,7 @@
 	                    {
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 380
+	                            lineNumber: 381
 	                        }
 	                    },
 	                    'Number-Number, Ordinal-Number, Time-Number'
@@ -799,12 +800,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 381
+	                            lineNumber: 382
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 0, y: 1 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 382
+	                            lineNumber: 383
 	                        }
 	                    })
 	                ),
@@ -812,12 +813,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 384
+	                            lineNumber: 385
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 1, y: 0 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 385
+	                            lineNumber: 386
 	                        }
 	                    })
 	                ),
@@ -825,12 +826,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 387
+	                            lineNumber: 388
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 1, y: 0 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 388
+	                            lineNumber: 389
 	                        }
 	                    })
 	                ),
@@ -839,7 +840,7 @@
 	                    {
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 391
+	                            lineNumber: 392
 	                        }
 	                    },
 	                    'Number-Ordinal, Ordinal-Ordinal, Time-Ordinal'
@@ -848,12 +849,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { y: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 392
+	                            lineNumber: 393
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 0, y: 1 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 393
+	                            lineNumber: 394
 	                        }
 	                    })
 	                ),
@@ -861,12 +862,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 395
+	                            lineNumber: 396
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalOrdinal, getValue: { x: 0, y: 1 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 396
+	                            lineNumber: 397
 	                        }
 	                    })
 	                ),
@@ -874,12 +875,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'time', y: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 398
+	                            lineNumber: 399
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 1, y: 0 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 399
+	                            lineNumber: 400
 	                        }
 	                    })
 	                ),
@@ -888,7 +889,7 @@
 	                    {
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 402
+	                            lineNumber: 403
 	                        }
 	                    },
 	                    'Number-Time, Ordinal-Time, Time-Time'
@@ -897,12 +898,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { y: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 403
+	                            lineNumber: 404
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 0, y: 1 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 404
+	                            lineNumber: 405
 	                        }
 	                    })
 	                ),
@@ -910,12 +911,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 406
+	                            lineNumber: 407
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 0, y: 1 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 407
+	                            lineNumber: 408
 	                        }
 	                    })
 	                ),
@@ -923,12 +924,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'time', y: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 409
+	                            lineNumber: 410
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.timeTime, getValue: { x: 0, y: 1 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 410
+	                            lineNumber: 411
 	                        }
 	                    })
 	                )
@@ -938,7 +939,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 414
+	                        lineNumber: 415
 	                    }
 	                },
 	                'Horizontal'
@@ -948,7 +949,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 416
+	                        lineNumber: 417
 	                    }
 	                },
 	                _react2.default.createElement(
@@ -956,7 +957,7 @@
 	                    {
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 417
+	                            lineNumber: 418
 	                        }
 	                    },
 	                    'Number-Number, Ordinal-Number, Date-Number'
@@ -965,12 +966,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 418
+	                            lineNumber: 419
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 419
+	                            lineNumber: 420
 	                        }
 	                    })
 	                ),
@@ -978,12 +979,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { y: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 421
+	                            lineNumber: 422
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 0, y: 1 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 422
+	                            lineNumber: 423
 	                        }
 	                    })
 	                ),
@@ -991,12 +992,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { y: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 424
+	                            lineNumber: 425
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 0, y: 1 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 425
+	                            lineNumber: 426
 	                        }
 	                    })
 	                ),
@@ -1005,7 +1006,7 @@
 	                    {
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 428
+	                            lineNumber: 429
 	                        }
 	                    },
 	                    'Number-Ordinal, Ordinal-Ordinal, Date-Ordinal'
@@ -1014,12 +1015,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 429
+	                            lineNumber: 430
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 430
+	                            lineNumber: 431
 	                        }
 	                    })
 	                ),
@@ -1027,12 +1028,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 432
+	                            lineNumber: 433
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalOrdinal, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 433
+	                            lineNumber: 434
 	                        }
 	                    })
 	                ),
@@ -1040,12 +1041,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 435
+	                            lineNumber: 436
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 0, y: 1 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 436
+	                            lineNumber: 437
 	                        }
 	                    })
 	                ),
@@ -1054,7 +1055,7 @@
 	                    {
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 439
+	                            lineNumber: 440
 	                        }
 	                    },
 	                    'Number-Time, Ordinal-Time, Time-Time'
@@ -1063,12 +1064,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 440
+	                            lineNumber: 441
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 441
+	                            lineNumber: 442
 	                        }
 	                    })
 	                ),
@@ -1076,12 +1077,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'time', y: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 443
+	                            lineNumber: 444
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 444
+	                            lineNumber: 445
 	                        }
 	                    })
 	                ),
@@ -1089,12 +1090,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'time', y: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 446
+	                            lineNumber: 447
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.timeTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 447
+	                            lineNumber: 448
 	                        }
 	                    })
 	                )
@@ -1111,7 +1112,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 456
+	                    lineNumber: 457
 	                }
 	            },
 	            _react2.default.createElement(
@@ -1119,7 +1120,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 457
+	                        lineNumber: 458
 	                    }
 	                },
 	                'Vertical'
@@ -1129,14 +1130,14 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 458
+	                        lineNumber: 459
 	                    }
 	                },
 	                _react2.default.createElement(
 	                    _src.XYPlot,
 	                    { width: 400, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 459
+	                            lineNumber: 460
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, {
@@ -1149,7 +1150,7 @@
 	                            } },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 460
+	                            lineNumber: 461
 	                        }
 	                    })
 	                )
@@ -1159,7 +1160,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 468
+	                        lineNumber: 469
 	                    }
 	                },
 	                'Horizontal'
@@ -1169,14 +1170,14 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 469
+	                        lineNumber: 470
 	                    }
 	                },
 	                _react2.default.createElement(
 	                    _src.XYPlot,
 	                    { width: 400, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 470
+	                            lineNumber: 471
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, {
@@ -1190,7 +1191,7 @@
 	                            } },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 471
+	                            lineNumber: 472
 	                        }
 	                    })
 	                )
@@ -1207,7 +1208,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 486
+	                    lineNumber: 487
 	                }
 	            },
 	            _react2.default.createElement(
@@ -1215,14 +1216,14 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 487
+	                        lineNumber: 488
 	                    }
 	                },
 	                _react2.default.createElement(
 	                    _src.XYPlot,
 	                    { width: 400, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 488
+	                            lineNumber: 489
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, {
@@ -1230,7 +1231,7 @@
 	                        getValue: { x: 0, y: 1 },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 489
+	                            lineNumber: 490
 	                        }
 	                    }),
 	                    _react2.default.createElement(_src.MarkerLineChart, {
@@ -1239,7 +1240,7 @@
 	                        lineLength: 15,
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 493
+	                            lineNumber: 494
 	                        }
 	                    })
 	                ),
@@ -1247,7 +1248,7 @@
 	                    _src.XYPlot,
 	                    { width: 400, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 499
+	                            lineNumber: 500
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, {
@@ -1255,7 +1256,7 @@
 	                        getValue: { x: 1, y: 0 },
 	                        orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 500
+	                            lineNumber: 501
 	                        }
 	                    }),
 	                    _react2.default.createElement(_src.MarkerLineChart, {
@@ -1264,7 +1265,7 @@
 	                        lineLength: 15,
 	                        orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 504
+	                            lineNumber: 505
 	                        }
 	                    })
 	                )
@@ -1274,14 +1275,14 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 511
+	                        lineNumber: 512
 	                    }
 	                },
 	                _react2.default.createElement(
 	                    _src.XYPlot,
 	                    { width: 400, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 512
+	                            lineNumber: 513
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, {
@@ -1294,7 +1295,7 @@
 	                            } },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 513
+	                            lineNumber: 514
 	                        }
 	                    }),
 	                    _react2.default.createElement(_src.MarkerLineChart, {
@@ -1307,7 +1308,7 @@
 	                            } },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 518
+	                            lineNumber: 519
 	                        }
 	                    })
 	                ),
@@ -1315,7 +1316,7 @@
 	                    _src.XYPlot,
 	                    { width: 400, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 524
+	                            lineNumber: 525
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, {
@@ -1329,7 +1330,7 @@
 	                            } },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 525
+	                            lineNumber: 526
 	                        }
 	                    }),
 	                    _react2.default.createElement(_src.MarkerLineChart, {
@@ -1343,7 +1344,7 @@
 	                            } },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 531
+	                            lineNumber: 532
 	                        }
 	                    })
 	                )
@@ -1366,20 +1367,20 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 551
+	                    lineNumber: 552
 	                }
 	            },
 	            _react2.default.createElement(
 	                _src.XYPlot,
 	                _extends({}, xyProps, { axisLabel: { x: "Account Age" }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 552
+	                        lineNumber: 553
 	                    }
 	                }),
 	                _react2.default.createElement(_src.BarChart, _extends({}, barChartProps, {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 553
+	                        lineNumber: 554
 	                    }
 	                }))
 	            ),
@@ -1387,13 +1388,13 @@
 	                _src.XYPlot,
 	                _extends({}, xyProps, { axisLabel: { y: "Active Users" }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 555
+	                        lineNumber: 556
 	                    }
 	                }),
 	                _react2.default.createElement(_src.BarChart, _extends({}, barChartProps, {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 556
+	                        lineNumber: 557
 	                    }
 	                }))
 	            ),
@@ -1401,13 +1402,13 @@
 	                _src.XYPlot,
 	                _extends({}, xyProps, { axisLabel: { x: "Account Age", y: "Active Users" }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 558
+	                        lineNumber: 559
 	                    }
 	                }),
 	                _react2.default.createElement(_src.BarChart, _extends({}, barChartProps, {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 559
+	                        lineNumber: 560
 	                    }
 	                }))
 	            )
@@ -1431,7 +1432,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 574
+	                    lineNumber: 575
 	                }
 	            },
 	            _react2.default.createElement(
@@ -1439,7 +1440,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 575
+	                        lineNumber: 576
 	                    }
 	                },
 	                'v1'
@@ -1449,7 +1450,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 576
+	                        lineNumber: 577
 	                    }
 	                },
 	                'Timeseries Line Chart'
@@ -1459,7 +1460,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 578
+	                        lineNumber: 579
 	                    }
 	                },
 	                hoveredV1LineChartData ? _react2.default.createElement(
@@ -1467,14 +1468,14 @@
 	                    {
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 580
+	                            lineNumber: 581
 	                        }
 	                    },
 	                    hoveredV1LineChartData.date + '',
 	                    _react2.default.createElement('br', {
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 582
+	                            lineNumber: 583
 	                        }
 	                    }),
 	                    'New York Temperature: ',
@@ -1483,7 +1484,7 @@
 	                _react2.default.createElement('div', {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 587
+	                        lineNumber: 588
 	                    }
 	                }),
 	                _react2.default.createElement(_src.V1LineChart, {
@@ -1495,7 +1496,7 @@
 	                    onMouseMove: this.onMouseMoveV1LineChart,
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 589
+	                        lineNumber: 590
 	                    }
 	                })
 	            )
@@ -1523,7 +1524,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 634
+	                    lineNumber: 635
 	                }
 	            },
 	            _react2.default.createElement(
@@ -1531,7 +1532,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 635
+	                        lineNumber: 636
 	                    }
 	                },
 	                'Reactochart Examples'
@@ -1541,14 +1542,14 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 637
+	                        lineNumber: 638
 	                    }
 	                },
 	                _react2.default.createElement(
 	                    _src.XYPlot,
 	                    { axisType: { x: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 638
+	                            lineNumber: 639
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.LineChart, {
@@ -1556,7 +1557,7 @@
 	                        getValue: getXYArrayValue,
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 639
+	                            lineNumber: 640
 	                        }
 	                    })
 	                )
@@ -1569,7 +1570,7 @@
 	            'div',
 	            { className: 'example-sections', __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 685
+	                    lineNumber: 686
 	                }
 	            },
 	            examples.map(this.renderExample)
@@ -1582,7 +1583,7 @@
 	            'div',
 	            { className: 'example-section example-section-' + example.id, key: '' + example.id, __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 692
+	                    lineNumber: 693
 	                }
 	            },
 	            _react2.default.createElement(
@@ -1592,7 +1593,7 @@
 	                    onClick: this.toggleExample.bind(null, example.id),
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 693
+	                        lineNumber: 694
 	                    }
 	                },
 	                example.title,
@@ -1600,7 +1601,7 @@
 	                    'span',
 	                    { className: 'example-arrow', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 698
+	                            lineNumber: 699
 	                        }
 	                    },
 	                    isVisible ? " ▼" : " ►"
@@ -1610,13 +1611,13 @@
 	                'div',
 	                { className: 'example-section-content', __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 701
+	                        lineNumber: 702
 	                    }
 	                },
 	                _react2.default.createElement(ExampleComponent, {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 702
+	                        lineNumber: 703
 	                    }
 	                })
 	            ) : null
@@ -1627,7 +1628,7 @@
 	_reactDom2.default.render(_react2.default.createElement(App, {
 	    __source: {
 	        fileName: '../../../examples/src/main.js',
-	        lineNumber: 710
+	        lineNumber: 711
 	    }
 	}), document.getElementById('container'));
 	
@@ -1668,7 +1669,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: lightblue;\n  margin-right: 6px;\n}\n.line-chart .chart-background,\n.xy-plot .chart-background {\n  fill: #e0e0e0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-zero-line,\n.xy-plot .chart-zero-line {\n  stroke: #888;\n  stroke-width: 1.5px;\n}\n.line-chart .chart-axis-value-label,\n.xy-plot .chart-axis-value-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-value-label-x,\n.xy-plot .chart-axis-value-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-value-label-y,\n.xy-plot .chart-axis-value-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 16pt;\n  font-weight: bold;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.marker-line-chart line {\n  stroke: black;\n  stroke-width: 2px;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\n.pie-chart .pie-label-center {\n  font-size: 26pt;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
+	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  background: lightblue;\n  margin-right: 6px;\n}\n.line-chart .chart-background,\n.xy-plot .chart-background {\n  fill: #e0e0e0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-zero-line,\n.xy-plot .chart-zero-line {\n  stroke: #888;\n  stroke-width: 1.5px;\n}\n.line-chart .chart-axis-value-label,\n.xy-plot .chart-axis-value-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-value-label-x,\n.xy-plot .chart-axis-value-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-value-label-y,\n.xy-plot .chart-axis-value-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 16pt;\n  font-weight: bold;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.marker-line-chart line {\n  stroke: black;\n  stroke-width: 2px;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\n.pie-chart .pie-label-center {\n  font-size: 26pt;\n}\n.pie-chart .marker-line {\n  stroke: black;\n  stroke-width: 2px;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
 	
 	// exports
 
@@ -56215,7 +56216,10 @@
 	
 	var DEFAULT_PROPS = {
 	    getValue: null,
-	    margin: { top: 0, bottom: 0, left: 0, right: 0 }
+	    margin: { top: 0, bottom: 0, left: 0, right: 0 },
+	    markerLineClass: 'marker-line',
+	    markerLineOverhangInner: 2,
+	    markerLineOverhangOuter: 2
 	};
 	
 	// default height/width, used only if height & width & radius are all undefined
@@ -56248,7 +56252,12 @@
 	        // (optional) radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
 	        holeRadius: PropTypes.number,
 	        // (optional) label text to display in the middle of the pie/donut
-	        centerLabel: PropTypes.string
+	        centerLabel: PropTypes.string,
+	
+	        markerLineValue: PropTypes.number,
+	        markerLineClass: PropTypes.string,
+	        markerLineOverhangInner: PropTypes.number,
+	        markerLineOverhangOuter: PropTypes.number
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return DEFAULT_PROPS;
@@ -56274,9 +56283,16 @@
 	
 	        var center = { x: margin.left + radius, y: margin.top + radius };
 	
+	        var _props = this.props;
+	        var markerLineValue = _props.markerLineValue;
+	        var markerLineClass = _props.markerLineClass;
+	        var markerLineOverhangInner = _props.markerLineOverhangInner;
+	        var markerLineOverhangOuter = _props.markerLineOverhangOuter;
+	
 	        var valueAccessor = (0, _util.accessor)(this.props.getValue);
 	        var sum = _lodash2.default.sum(this.props.data, valueAccessor);
 	        var total = this.props.total || sum;
+	        var markerLinePercent = _lodash2.default.isFinite(markerLineValue) ? markerLineValue / total : null;
 	
 	        var startPercent = 0;
 	        return _react2.default.createElement(
@@ -56284,7 +56300,7 @@
 	            _extends({ className: 'pie-chart' }, { width: width, height: height }, {
 	                __source: {
 	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 75
+	                    lineNumber: 86
 	                }
 	            }),
 	            this.props.data.map(function (d, i) {
@@ -56309,7 +56325,7 @@
 	                return _react2.default.createElement('path', _extends({ className: className, d: pathStr, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
 	                    __source: {
 	                        fileName: '../../../src/charts/PieChart.js',
-	                        lineNumber: 90
+	                        lineNumber: 101
 	                    }
 	                }));
 	            }),
@@ -56319,7 +56335,15 @@
 	                d: pieSlicePath(startPercent, 1, center, radius, holeRadius),
 	                __source: {
 	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 94
+	                    lineNumber: 105
+	                }
+	            }) : null,
+	            _lodash2.default.isFinite(markerLinePercent) ? _react2.default.createElement('path', {
+	                className: markerLineClass,
+	                d: markerLine(markerLinePercent, center, radius, holeRadius, markerLineOverhangOuter, markerLineOverhangInner),
+	                __source: {
+	                    fileName: '../../../src/charts/PieChart.js',
+	                    lineNumber: 112
 	                }
 	            }) : null,
 	            this.props.centerLabel ? this.renderCenterLabel(center) : null
@@ -56335,13 +56359,35 @@
 	            _extends({ className: 'pie-label-center' }, { x: x, y: y, style: style }, {
 	                __source: {
 	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 106
+	                    lineNumber: 125
 	                }
 	            }),
 	            this.props.centerLabel
 	        );
 	    }
 	});
+	
+	function markerLine(percentValue, center, radius) {
+	    var holeRadius = arguments.length <= 3 || arguments[3] === undefined ? 0 : arguments[3];
+	    var overhangOuter = arguments.length <= 4 || arguments[4] === undefined ? 0 : arguments[4];
+	    var overhangInner = arguments.length <= 5 || arguments[5] === undefined ? 0 : arguments[5];
+	
+	    if (percentValue == 1) endPercent = .9999999; // arc cannot be a full circle
+	    var startX = Math.sin(2 * Math.PI / (1 / percentValue));
+	    var startY = Math.cos(2 * Math.PI / (1 / percentValue));
+	    var c = center;
+	    var r = radius;
+	    var rH = holeRadius;
+	    var x0 = startX;
+	    var y0 = startY;
+	    var r0 = Math.max(rH - overhangInner, 0);
+	    var r1 = r + overhangOuter;
+	
+	    return [// construct a string representing the marker line
+	    'M ' + (c.x + x0 * r0) + ',' + (c.y - y0 * r0), // start at edge of inner (hole) circle, or center if no hole
+	    'L ' + (c.x + x0 * r1) + ',' + (c.y - y0 * r1) + ' z' // straight line to outer circle, along radius
+	    ].join(' ');
+	}
 	
 	function pieSlicePath(startPercent, endPercent, center, radius) {
 	    var holeRadius = arguments.length <= 4 || arguments[4] === undefined ? 0 : arguments[4];

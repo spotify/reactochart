@@ -115,6 +115,7 @@ const PieChartExample = React.createClass({
                 radius={100}
                 holeRadius={50}
                 margin={20}
+                markerLineValue={20}
                 />
             <PieChart
                 data={[42]}

@@ -6,7 +6,10 @@ import {accessor, AccessorPropType, methodIfFuncProp} from '../util.js';
 
 const DEFAULT_PROPS = {
     getValue: null,
-    margin: { top: 0, bottom: 0, left: 0, right: 0 }
+    margin: { top: 0, bottom: 0, left: 0, right: 0 },
+    markerLineClass: 'marker-line',
+    markerLineOverhangInner: 2,
+    markerLineOverhangOuter: 2
 };
 
 // default height/width, used only if height & width & radius are all undefined
@@ -37,7 +40,12 @@ const PieChart = React.createClass({
         // (optional) radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
         holeRadius: PropTypes.number,
         // (optional) label text to display in the middle of the pie/donut
-        centerLabel: PropTypes.string
+        centerLabel: PropTypes.string,
+
+        markerLineValue: PropTypes.number,
+        markerLineClass: PropTypes.string,
+        markerLineOverhangInner: PropTypes.number,
+        markerLineOverhangOuter: PropTypes.number
     },
     getDefaultProps() { return DEFAULT_PROPS; },
 
@@ -67,9 +75,12 @@ const PieChart = React.createClass({
         const {holeRadius} = this.props;
         const center = {x: margin.left + radius, y: margin.top + radius};
 
+        const {markerLineValue, markerLineClass, markerLineOverhangInner, markerLineOverhangOuter} = this.props;
+
         const valueAccessor = accessor(this.props.getValue);
         const sum = _.sum(this.props.data, valueAccessor);
         const total = this.props.total || sum;
+        const markerLinePercent = _.isFinite(markerLineValue) ? markerLineValue / total : null;
 
         let startPercent = 0;
         return <svg className="pie-chart" {...{width, height}}>
@@ -97,6 +108,14 @@ const PieChart = React.createClass({
                 /> : null
             }
 
+            {_.isFinite(markerLinePercent) ?
+                <path
+                    className={markerLineClass}
+                    d={markerLine(markerLinePercent, center, radius, holeRadius, markerLineOverhangOuter, markerLineOverhangInner)}
+                />
+                : null
+            }
+
             {this.props.centerLabel ? this.renderCenterLabel(center) : null}
         </svg>
     },
@@ -108,6 +127,19 @@ const PieChart = React.createClass({
         </text>
     }
 });
+
+function markerLine(percentValue, center, radius, holeRadius=0, overhangOuter=0, overhangInner=0) {
+    if(percentValue == 1) endPercent = .9999999; // arc cannot be a full circle
+    const startX = Math.sin((2 * Math.PI) / (1 / percentValue));
+    const startY = Math.cos((2 * Math.PI) / (1 / percentValue));
+    const [c, r, rH, x0, y0] = [center, radius, holeRadius, startX, startY];
+    const [r0, r1] = [Math.max(rH - overhangInner, 0), r + overhangOuter];
+
+    return [ // construct a string representing the marker line
+        `M ${c.x + (x0 * r0)},${c.y - (y0 * r0)}`, // start at edge of inner (hole) circle, or center if no hole
+        `L ${c.x + (x0 * r1)},${c.y - (y0 * r1)} z` // straight line to outer circle, along radius
+    ].join(' ');
+}
 
 function pieSlicePath(startPercent, endPercent, center, radius, holeRadius=0) {
     if(endPercent == 1) endPercent = .9999999; // arc cannot be a full circle

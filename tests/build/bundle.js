@@ -61957,7 +61957,10 @@
 	
 	var DEFAULT_PROPS = {
 	    getValue: null,
-	    margin: { top: 0, bottom: 0, left: 0, right: 0 }
+	    margin: { top: 0, bottom: 0, left: 0, right: 0 },
+	    markerLineClass: 'marker-line',
+	    markerLineOverhangInner: 2,
+	    markerLineOverhangOuter: 2
 	};
 	
 	// default height/width, used only if height & width & radius are all undefined
@@ -61990,7 +61993,12 @@
 	        // (optional) radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
 	        holeRadius: PropTypes.number,
 	        // (optional) label text to display in the middle of the pie/donut
-	        centerLabel: PropTypes.string
+	        centerLabel: PropTypes.string,
+	
+	        markerLineValue: PropTypes.number,
+	        markerLineClass: PropTypes.string,
+	        markerLineOverhangInner: PropTypes.number,
+	        markerLineOverhangOuter: PropTypes.number
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return DEFAULT_PROPS;
@@ -62016,9 +62024,16 @@
 	
 	        var center = { x: margin.left + radius, y: margin.top + radius };
 	
+	        var _props = this.props;
+	        var markerLineValue = _props.markerLineValue;
+	        var markerLineClass = _props.markerLineClass;
+	        var markerLineOverhangInner = _props.markerLineOverhangInner;
+	        var markerLineOverhangOuter = _props.markerLineOverhangOuter;
+	
 	        var valueAccessor = (0, _util.accessor)(this.props.getValue);
 	        var sum = _lodash2.default.sum(this.props.data, valueAccessor);
 	        var total = this.props.total || sum;
+	        var markerLinePercent = _lodash2.default.isFinite(markerLineValue) ? markerLineValue / total : null;
 	
 	        var startPercent = 0;
 	        return _react2.default.createElement(
@@ -62026,7 +62041,7 @@
 	            _extends({ className: 'pie-chart' }, { width: width, height: height }, {
 	                __source: {
 	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 75
+	                    lineNumber: 86
 	                }
 	            }),
 	            this.props.data.map(function (d, i) {
@@ -62051,7 +62066,7 @@
 	                return _react2.default.createElement('path', _extends({ className: className, d: pathStr, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
 	                    __source: {
 	                        fileName: '../../../src/charts/PieChart.js',
-	                        lineNumber: 90
+	                        lineNumber: 101
 	                    }
 	                }));
 	            }),
@@ -62061,7 +62076,15 @@
 	                d: pieSlicePath(startPercent, 1, center, radius, holeRadius),
 	                __source: {
 	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 94
+	                    lineNumber: 105
+	                }
+	            }) : null,
+	            _lodash2.default.isFinite(markerLinePercent) ? _react2.default.createElement('path', {
+	                className: markerLineClass,
+	                d: markerLine(markerLinePercent, center, radius, holeRadius, markerLineOverhangOuter, markerLineOverhangInner),
+	                __source: {
+	                    fileName: '../../../src/charts/PieChart.js',
+	                    lineNumber: 112
 	                }
 	            }) : null,
 	            this.props.centerLabel ? this.renderCenterLabel(center) : null
@@ -62077,13 +62100,35 @@
 	            _extends({ className: 'pie-label-center' }, { x: x, y: y, style: style }, {
 	                __source: {
 	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 106
+	                    lineNumber: 125
 	                }
 	            }),
 	            this.props.centerLabel
 	        );
 	    }
 	});
+	
+	function markerLine(percentValue, center, radius) {
+	    var holeRadius = arguments.length <= 3 || arguments[3] === undefined ? 0 : arguments[3];
+	    var overhangOuter = arguments.length <= 4 || arguments[4] === undefined ? 0 : arguments[4];
+	    var overhangInner = arguments.length <= 5 || arguments[5] === undefined ? 0 : arguments[5];
+	
+	    if (percentValue == 1) endPercent = .9999999; // arc cannot be a full circle
+	    var startX = Math.sin(2 * Math.PI / (1 / percentValue));
+	    var startY = Math.cos(2 * Math.PI / (1 / percentValue));
+	    var c = center;
+	    var r = radius;
+	    var rH = holeRadius;
+	    var x0 = startX;
+	    var y0 = startY;
+	    var r0 = Math.max(rH - overhangInner, 0);
+	    var r1 = r + overhangOuter;
+	
+	    return [// construct a string representing the marker line
+	    'M ' + (c.x + x0 * r0) + ',' + (c.y - y0 * r0), // start at edge of inner (hole) circle, or center if no hole
+	    'L ' + (c.x + x0 * r1) + ',' + (c.y - y0 * r1) + ' z' // straight line to outer circle, along radius
+	    ].join(' ');
+	}
 	
 	function pieSlicePath(startPercent, endPercent, center, radius) {
 	    var holeRadius = arguments.length <= 4 || arguments[4] === undefined ? 0 : arguments[4];
