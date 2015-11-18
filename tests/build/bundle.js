@@ -64268,6 +64268,8 @@
 	        // thickness of value bars, in pixels, (ignored for RangeValue and RangeRange charts)
 	        barThickness: PropTypes.number,
 	
+	        name: PropTypes.string,
+	
 	        // x & y scale types
 	        axisType: PropTypes.object,
 	        scale: PropTypes.object,
@@ -64344,9 +64346,9 @@
 	        var renderer = this['render' + getBarChartType(this.props) + 'Bars'];
 	        return _react2.default.createElement(
 	            'g',
-	            { className: 'bar-chart', __source: {
+	            { className: 'bar-chart ' + (this.props.name || ''), __source: {
 	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 196
+	                    lineNumber: 198
 	                }
 	            },
 	            renderer()
@@ -64381,7 +64383,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 208
+	                    lineNumber: 209
 	                }
 	            },
 	            data.map(function (d) {
@@ -64424,7 +64426,7 @@
 	                return _react2.default.createElement('rect', _extends({ className: className, x: x, y: y, width: width, height: height, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
 	                    __source: {
 	                        fileName: '../../../src/charts/BarChart.js',
-	                        lineNumber: 229
+	                        lineNumber: 230
 	                    }
 	                }));
 	            })
@@ -64457,7 +64459,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 239
+	                    lineNumber: 240
 	                }
 	            },
 	            this.props.data.map(function (d, i) {
@@ -64490,7 +64492,7 @@
 	                }, { onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
 	                    __source: {
 	                        fileName: '../../../src/charts/BarChart.js',
-	                        lineNumber: 257
+	                        lineNumber: 258
 	                    }
 	                }));
 	            })
@@ -64499,7 +64501,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 267
+	                    lineNumber: 268
 	                }
 	            },
 	            this.props.data.map(function (d, i) {
@@ -64532,7 +64534,7 @@
 	                }, { onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
 	                    __source: {
 	                        fileName: '../../../src/charts/BarChart.js',
-	                        lineNumber: 285
+	                        lineNumber: 286
 	                    }
 	                }));
 	            })
@@ -64553,7 +64555,7 @@
 	        'svg',
 	        { x: 100, y: 100, style: { overflow: 'visible' }, __source: {
 	                fileName: '../../../src/charts/BarChart.js',
-	                lineNumber: 306
+	                lineNumber: 307
 	            }
 	        },
 	        _react2.default.createElement(
@@ -64561,7 +64563,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 306
+	                    lineNumber: 307
 	                }
 	            },
 	            text

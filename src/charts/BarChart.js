@@ -128,6 +128,8 @@ const BarChart = React.createClass({
         // thickness of value bars, in pixels, (ignored for RangeValue and RangeRange charts)
         barThickness: PropTypes.number,
 
+        name: PropTypes.string,
+
         // x & y scale types
         axisType: PropTypes.object,
         scale: PropTypes.object,
@@ -193,7 +195,7 @@ const BarChart = React.createClass({
 
     render() {
         const renderer = this[`render${getBarChartType(this.props)}Bars`];
-        return <g className="bar-chart">
+        return <g className={`bar-chart ${this.props.name || ''}`}>
             {renderer()}
         </g>
     },
@@ -203,7 +205,6 @@ const BarChart = React.createClass({
         const {data, scale, getValue, axisType, getClass, barThickness, orientation} = this.props;
         const [xAccessor, yAccessor, classAccessor] = [getValue.x, getValue.y, getClass].map(accessor);
         const isVertical = (this.props.orientation === 'vertical');
-
 
         return <g>
             {data.map(d => {
