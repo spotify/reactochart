@@ -28,6 +28,7 @@ PropTypes = _.assign({}, PropTypes, {
 const DEFAULTS = {
     axisType: {x: 'number', y: 'number'},
     nice: {x: true, y: true},
+    invertAxis: {x: false, y: false},
     tickCount: {x: 10, y: 10},
     tickLength: {x: 6, y: 6},
     labelPadding: {x: 6, y: 6},
@@ -68,6 +69,8 @@ const XYPlot = React.createClass({
         domain: PropTypes.xyObjectOf(PropTypes.dataArray),
         // whether or not to extend the scales to end on nice values (see docs for d3 scale.linear.nice())
         nice: PropTypes.xyObjectOf(PropTypes.bool),
+        // whether or not to invert the axis (ie. put largest numbers on bottom for Y axis, or on left for X)
+        invertAxis: PropTypes.xyObjectOf(PropTypes.bool),
 
         // approximate # of ticks to include on each axis - 10 is default
         // (actual # may be slightly different, to get nicest intervals)
@@ -139,8 +142,8 @@ const XYPlot = React.createClass({
         // this is a bit hacky, but we can't use getDefaultProps for most of the defaults,
         // because the user can pass in eg. {x: 'ordinal'} and we still want to default y to number
         const xyKeys = [
-            'axisType', 'domain', 'nice', 'tickCount', 'ticks', 'tickLength', 'labelValues', 'labelFormat',
-            'labelPadding', 'showLabels', 'showGrid', 'showTicks', 'showZero',
+            'axisType', 'domain', 'nice', 'invertAxis', 'tickCount', 'ticks', 'tickLength',
+            'labelValues', 'labelFormat', 'labelPadding', 'showLabels', 'showGrid', 'showTicks', 'showZero',
             'axisLabel', 'axisLabelAlign', 'axisLabelPadding'
         ];
         const dirKeys = ['margin', 'padding', 'spacing'];
@@ -269,6 +272,7 @@ const XYPlot = React.createClass({
 
                 ['x', 'y'].forEach(k => {
                     scale[k] = makeScale(domains[k], range[k], axisType[k], nice[k], tickCount[k]);
+                    if(props.invertAxis[k]) scale[k].domain(scale[k].domain().reverse());
                     ticks[k] = props.ticks[k] ||
                         ((axisType[k] === 'ordinal') ? scale[k].domain() : scale[k].ticks(tickCount[k]));
                 });
