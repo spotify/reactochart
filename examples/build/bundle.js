@@ -56950,16 +56950,17 @@
 	        var width = _trueProps.width;
 	        var margin = this.margin;
 	        var padding = this.padding;
+	        var scale = this.scale;
 	        var scaleWidth = this.scaleWidth;
 	        var scaleHeight = this.scaleHeight;
 	        // todo faster method than getBoundingClientRect on every mouseover?
 	
 	        var chartBB = e.currentTarget.getBoundingClientRect();
-	        var chartX = Math.round(e.clientX - chartBB.left - this.margin.left);
-	        var chartY = Math.round(e.clientY - chartBB.top - this.margin.top);
+	        var chartX = Math.round(e.clientX - chartBB.left - margin.left);
+	        var chartY = Math.round(e.clientY - chartBB.top - margin.top);
 	
-	        var chartXVal = !_lodash2.default.inRange(chartX, 0, scaleWidth + padding.left + padding.right) ? null : axisType.x === 'ordinal' ? this.scale.x.domain()[indexOfClosestNumberInList(chartX, this.scale.x.range())] : this.scale.x.invert(chartX);
-	        var chartYVal = !_lodash2.default.inRange(chartY, 0, scaleHeight + padding.top + padding.bottom) ? null : axisType.y === 'ordinal' ? this.scale.y.domain()[indexOfClosestNumberInList(chartY, this.scale.y.range())] : this.scale.y.invert(chartY);
+	        var chartXVal = !_lodash2.default.inRange(chartX, 0, scaleWidth + padding.left + padding.right) ? null : axisType.x === 'ordinal' ? scale.x.domain()[indexOfClosestNumberInList(chartX, scale.x.range())] : scale.x.invert(chartX);
+	        var chartYVal = !_lodash2.default.inRange(chartY, 0, scaleHeight + padding.top + padding.bottom) ? null : axisType.y === 'ordinal' ? scale.y.domain()[indexOfClosestNumberInList(chartY, scale.y.range())] : scale.y.invert(chartY);
 	
 	        var chart = this.refs['chart-series-0'];
 	        var hovered = chart && _lodash2.default.isFunction(chart.getHovered) ? chart.getHovered(chartXVal) : null;
@@ -56967,7 +56968,7 @@
 	        this.trueProps.onMouseMove(hovered, e, { chartX: chartX, chartY: chartY, chartXVal: chartXVal, chartYVal: chartYVal });
 	    },
 	    onMouseEnter: function onMouseEnter(e) {
-	        this.trueProps.onMouseMove(e);
+	        this.trueProps.onMouseEnter(e);
 	    },
 	    onMouseLeave: function onMouseLeave(e) {
 	        this.trueProps.onMouseLeave(e);

@@ -389,20 +389,20 @@ const XYPlot = React.createClass({
 
     onMouseMove(e) {
         const {axisType, height, width} = this.trueProps;
-        const {margin, padding, scaleWidth, scaleHeight} = this;
+        const {margin, padding, scale, scaleWidth, scaleHeight} = this;
         // todo faster method than getBoundingClientRect on every mouseover?
         const chartBB = e.currentTarget.getBoundingClientRect();
-        const chartX = Math.round((e.clientX - chartBB.left) - this.margin.left);
-        const chartY = Math.round((e.clientY - chartBB.top) - this.margin.top);
+        const chartX = Math.round((e.clientX - chartBB.left) - margin.left);
+        const chartY = Math.round((e.clientY - chartBB.top) - margin.top);
 
         const chartXVal = (!_.inRange(chartX, 0, scaleWidth + padding.left + padding.right)) ? null :
             (axisType.x === 'ordinal') ?
-                this.scale.x.domain()[indexOfClosestNumberInList(chartX, this.scale.x.range())] :
-                this.scale.x.invert(chartX);
+                scale.x.domain()[indexOfClosestNumberInList(chartX, scale.x.range())] :
+                scale.x.invert(chartX);
         const chartYVal = (!_.inRange(chartY, 0, scaleHeight + padding.top + padding.bottom)) ? null :
             (axisType.y === 'ordinal') ?
-                this.scale.y.domain()[indexOfClosestNumberInList(chartY, this.scale.y.range())] :
-                this.scale.y.invert(chartY);
+                scale.y.domain()[indexOfClosestNumberInList(chartY, scale.y.range())] :
+                scale.y.invert(chartY);
 
         const chart = this.refs['chart-series-0'];
         const hovered = (chart && _.isFunction(chart.getHovered)) ? chart.getHovered(chartXVal) : null;
@@ -410,7 +410,7 @@ const XYPlot = React.createClass({
         this.trueProps.onMouseMove(hovered, e, {chartX, chartY, chartXVal, chartYVal});
     },
     onMouseEnter(e) {
-        this.trueProps.onMouseMove(e);
+        this.trueProps.onMouseEnter(e);
     },
     onMouseLeave(e) {
         this.trueProps.onMouseLeave(e);
