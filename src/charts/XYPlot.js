@@ -638,7 +638,7 @@ const ChartAxis = React.createClass({
         ticks: PropTypes.array,
         labels: PropTypes.array,
         tickCount: PropTypes.number,
-        labelFormat: PropTypes.string,
+        labelFormat: PropTypes.stringFormatter,
         letter: PropTypes.string,
 
         scaleWidth: PropTypes.number,

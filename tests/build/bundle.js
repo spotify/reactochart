@@ -63020,7 +63020,7 @@
 	        ticks: PropTypes.array,
 	        labels: PropTypes.array,
 	        tickCount: PropTypes.number,
-	        labelFormat: PropTypes.string,
+	        labelFormat: PropTypes.stringFormatter,
 	        letter: PropTypes.string,
 	
 	        scaleWidth: PropTypes.number,
@@ -64731,10 +64731,11 @@
 	        var x2 = isVertical ? xEndVal : xVal;
 	        var y2 = isVertical ? yVal : yEndVal;
 	
+	        if (!_lodash2.default.all([x1, x2, y1, y2], _lodash2.default.isFinite)) return null;
 	        return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2 }, {
 	            __source: {
 	                fileName: '../../../src/charts/MarkerLineChart.js',
-	                lineNumber: 108
+	                lineNumber: 109
 	            }
 	        }));
 	    },
@@ -64753,10 +64754,11 @@
 	        var y1 = isVertical ? yVal : yVal - lineLength / 2;
 	        var y2 = isVertical ? yVal : yVal + lineLength / 2;
 	
+	        if (!_lodash2.default.all([x1, x2, y1, y2], _lodash2.default.isFinite)) return null;
 	        return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2 }, {
 	            __source: {
 	                fileName: '../../../src/charts/MarkerLineChart.js',
-	                lineNumber: 120
+	                lineNumber: 122
 	            }
 	        }));
 	    }

@@ -105,7 +105,8 @@ const MarkerLineChart = React.createClass({
         const x2 = isVertical ? xEndVal : xVal;
         const y2 = isVertical ? yVal : yEndVal;
 
-        return <line className="marker-line" {...{x1, x2, y1, y2}}></line>
+        if(!_.all([x1, x2, y1, y2], _.isFinite)) return null;
+        return <line className="marker-line" {...{x1, x2, y1, y2}} />
     },
     renderValueValueLine(d) {
         const {getValue, orientation, lineLength, scale} = this.props;
@@ -117,6 +118,7 @@ const MarkerLineChart = React.createClass({
         const y1 = isVertical ? yVal : yVal - (lineLength / 2);
         const y2 = isVertical ? yVal : yVal + (lineLength / 2);
 
+        if(!_.all([x1, x2, y1, y2], _.isFinite)) return null;
         return <line className="marker-line" {...{x1, x2, y1, y2}} />;
     }
 });
