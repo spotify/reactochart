@@ -56955,7 +56955,7 @@
 	        var chartHeight = scaleHeight + padding.top + padding.bottom;
 	
 	        var propsToPass = {
-	            axisType: axisType, scale: scale, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: width, plotHeight: height,
+	            axisType: axisType, invertAxis: invertAxis, scale: scale, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: width, plotHeight: height,
 	            chartMargin: margin, chartPadding: padding
 	        };
 	

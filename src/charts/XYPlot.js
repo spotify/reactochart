@@ -424,7 +424,7 @@ const XYPlot = React.createClass({
         const chartHeight = scaleHeight + padding.top + padding.bottom;
 
         const propsToPass = {
-            axisType, scale, scaleWidth, scaleHeight, plotWidth: width, plotHeight: height,
+            axisType, invertAxis, scale, scaleWidth, scaleHeight, plotWidth: width, plotHeight: height,
             chartMargin: margin, chartPadding: padding
         };
 
