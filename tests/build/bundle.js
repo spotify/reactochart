@@ -62355,7 +62355,7 @@
 	        // should we draw a line showing where zero is
 	        showZero: PropTypes.xyObjectOf(PropTypes.bool),
 	
-	        //
+	        // label for entire axis, not value labels
 	        axisLabel: PropTypes.xyObjectOf(PropTypes.string),
 	        axisLabelAlign: PropTypes.xyObjectOf(PropTypes.shape({
 	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
@@ -62370,8 +62370,8 @@
 	
 	        // todo: minMargin - margin will be at least X, or more if necessary
 	        // todo: extraMargin - margin to add to calculated necessary margin
-	        // todo: padding, minPadding, extraPadding
-	        // todo: spacing, minSpacing, extraSpacing ???
+	        // todo: minPadding, extraPadding ?
+	        // todo: minSpacing, extraSpacing ?
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return {
@@ -62724,6 +62724,7 @@
 	        var onMouseMove = _trueProps2.onMouseMove;
 	        var onMouseEnter = _trueProps2.onMouseEnter;
 	        var onMouseLeave = _trueProps2.onMouseLeave;
+	        var invertAxis = _trueProps2.invertAxis;
 	        var scale = this.scale;
 	        var margin = this.margin;
 	        var padding = this.padding;
@@ -62758,7 +62759,7 @@
 	                onMouseLeave: _lodash2.default.isFunction(onMouseLeave) ? this.onMouseLeave : null,
 	                __source: {
 	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 443
+	                    lineNumber: 444
 	                }
 	            }),
 	            _react2.default.createElement(
@@ -62767,25 +62768,25 @@
 	                    transform: 'translate(' + margin.left + ', ' + margin.top + ')',
 	                    __source: {
 	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 448
+	                        lineNumber: 449
 	                    }
 	                },
 	                _react2.default.createElement('rect', { className: 'chart-background', width: chartWidth, height: chartHeight, __source: {
 	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 451
+	                        lineNumber: 452
 	                    }
 	                }),
 	                childrenUnderAxes,
 	                _react2.default.createElement(ChartAxis, _extends({}, this.getXAxisProps(), {
 	                    __source: {
 	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 455
+	                        lineNumber: 456
 	                    }
 	                })),
 	                _react2.default.createElement(ChartAxis, _extends({}, this.getYAxisProps(), {
 	                    __source: {
 	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 456
+	                        lineNumber: 457
 	                    }
 	                })),
 	                childrenAboveAxes
@@ -62793,13 +62794,13 @@
 	            axisLabel.x ? _react2.default.createElement(XAxisLabel, _extends({}, this.getXAxisLabelProps(), {
 	                __source: {
 	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 462
+	                    lineNumber: 463
 	                }
 	            })) : null,
 	            axisLabel.y ? _react2.default.createElement(YAxisLabel, _extends({}, this.getYAxisLabelProps(), {
 	                __source: {
 	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 466
+	                    lineNumber: 467
 	                }
 	            })) : null
 	        );
@@ -62923,7 +62924,7 @@
 	                transform: 'translate(' + left + ',' + top + ')',
 	                __source: {
 	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 573
+	                    lineNumber: 574
 	                }
 	            },
 	            _react2.default.createElement(
@@ -62931,7 +62932,7 @@
 	                _extends({ x: x, style: { textAnchor: textAnchor } }, {
 	                    __source: {
 	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 577
+	                        lineNumber: 578
 	                    }
 	                }),
 	                label
@@ -62992,7 +62993,7 @@
 	                transform: 'translate(' + left + ',' + top + ')',
 	                __source: {
 	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 623
+	                    lineNumber: 624
 	                }
 	            },
 	            _react2.default.createElement(
@@ -63000,7 +63001,7 @@
 	                _extends({ x: x, style: { textAnchor: textAnchor } }, {
 	                    __source: {
 	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 627
+	                        lineNumber: 628
 	                    }
 	                }),
 	                label
@@ -63080,7 +63081,7 @@
 	            'g',
 	            { ref: letter + 'Axis', className: 'chart-axis chart-axis-' + letter, transform: axisTransform, __source: {
 	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 673
+	                    lineNumber: 674
 	                }
 	            },
 	            showTicks || showGrid || showLabels && labels === ticks ? _lodash2.default.map(ticks, function (value, i) {
@@ -63089,7 +63090,7 @@
 	                    'g',
 	                    { transform: tickTransform(value), key: 'tick-' + i, __source: {
 	                            fileName: '../../../src/charts/XYPlot.js',
-	                            lineNumber: 677
+	                            lineNumber: 678
 	                        }
 	                    },
 	                    showGrid ? _this2.renderGrid(tickOptions) : null,
@@ -63103,7 +63104,7 @@
 	                    'g',
 	                    { transform: tickTransform(value), key: 'tick-' + i, __source: {
 	                            fileName: '../../../src/charts/XYPlot.js',
-	                            lineNumber: 687
+	                            lineNumber: 688
 	                        }
 	                    },
 	                    _this2.renderLabel(_lodash2.default.assign({}, options, { value: value }))
@@ -63113,7 +63114,7 @@
 	                'g',
 	                { transform: tickTransform(0), __source: {
 	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 694
+	                        lineNumber: 695
 	                    }
 	                },
 	                showZero ? this.renderZero(options) : null
@@ -63134,7 +63135,7 @@
 	            _extends({ className: className }, { dy: '0.32em' }, labelOffset, {
 	                __source: {
 	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 705
+	                    lineNumber: 706
 	                }
 	            }),
 	            formatAxisLabel(value, type, labelFormat)
@@ -63159,7 +63160,7 @@
 	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
 	            __source: {
 	                fileName: '../../../src/charts/XYPlot.js',
-	                lineNumber: 714
+	                lineNumber: 715
 	            }
 	        }));
 	    },
@@ -63180,7 +63181,7 @@
 	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
 	            __source: {
 	                fileName: '../../../src/charts/XYPlot.js',
-	                lineNumber: 720
+	                lineNumber: 721
 	            }
 	        }));
 	    },
@@ -63201,7 +63202,7 @@
 	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
 	            __source: {
 	                fileName: '../../../src/charts/XYPlot.js',
-	                lineNumber: 726
+	                lineNumber: 727
 	            }
 	        }));
 	    }
@@ -63272,25 +63273,25 @@
 	    var xAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, _extends({}, xProps, {
 	        __source: {
 	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 787
+	            lineNumber: 788
 	        }
 	    })));
 	    var yAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, _extends({}, yProps, {
 	        __source: {
 	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 788
+	            lineNumber: 789
 	        }
 	    })));
 	    var xLabelHtml = xAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(XAxisLabel, _extends({}, xAxisLabelProps, {
 	        __source: {
 	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 789
+	            lineNumber: 790
 	        }
 	    }))) : '';
 	    var yLabelHtml = yAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(YAxisLabel, _extends({}, yAxisLabelProps, {
 	        __source: {
 	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 790
+	            lineNumber: 791
 	        }
 	    }))) : '';
 	

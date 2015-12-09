@@ -47,7 +47,7 @@ const randomBars = [
 
 const randomScatter = [
     _.zip(randomWalk(20, 100), randomWalk(20, 100)),
-    _.zip(randomWalk(30, 100), randomWalk(30, 100)),
+    _.zip(randomWalk(3000, 10000), randomWalk(3000, 10000)),
     _.zip(randomWalk(50, 100), randomWalk(50, 100)),
     _.zip(randomWalk(100, 100), randomWalk(100, 100)),
     _.zip(randomWalk(200, 100), randomWalk(200, 100))
@@ -142,7 +142,8 @@ const ScatterPlotExample = React.createClass({
         const randomEmoji = (d, i) => _.sample(emojis);
 
         return <div>
-            <XYPlot width={700} height={500}>
+            <XYPlot width={700} height={500} axisLabel={{x: "TIME", y: "EMOJI"}}>
+                {/*
                 <ScatterPlot
                     data={randomScatter[3]}
                     getValue={{x: 0, y: 1}}
@@ -153,12 +154,7 @@ const ScatterPlotExample = React.createClass({
                     getValue={{x: 0, y: 1}}
                     pointRadius={2}
                     />
-                <ScatterPlot
-                    data={randomScatter[1]}
-                    getValue={{x: 0, y: 1}}
-                    pointSymbol={randomEmoji}
-                    pointOffset={[0, 2]}
-                    />
+
                 <ScatterPlot
                     data={randomScatter[0]}
                     getValue={{x: 0, y: 1}}
@@ -170,6 +166,13 @@ const ScatterPlotExample = React.createClass({
                     pointSymbol={triangleSymbol}
                     pointOffset={[-4, -3]}
                     />
+                    */}
+                <ScatterPlot
+                    data={randomScatter[1]}
+                    getValue={{x: 0, y: 1}}
+                    pointSymbol={randomEmoji}
+                    pointOffset={[0, 2]}
+                />
             </XYPlot>
         </div>
     }

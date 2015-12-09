@@ -98,7 +98,7 @@ const XYPlot = React.createClass({
         // should we draw a line showing where zero is
         showZero: PropTypes.xyObjectOf(PropTypes.bool),
 
-        //
+        // label for entire axis, not value labels
         axisLabel: PropTypes.xyObjectOf(PropTypes.string),
         axisLabelAlign: PropTypes.xyObjectOf(PropTypes.shape({
             horizontal: PropTypes.oneOf(['left', 'center', 'right']),
@@ -113,8 +113,8 @@ const XYPlot = React.createClass({
 
         // todo: minMargin - margin will be at least X, or more if necessary
         // todo: extraMargin - margin to add to calculated necessary margin
-        // todo: padding, minPadding, extraPadding
-        // todo: spacing, minSpacing, extraSpacing ???
+        // todo: minPadding, extraPadding ?
+        // todo: minSpacing, extraSpacing ?
     },
     getDefaultProps() {
         return {
@@ -417,7 +417,8 @@ const XYPlot = React.createClass({
     },
 
     render() {
-        const {children, width, height, axisType, axisLabel, onMouseMove, onMouseEnter, onMouseLeave} = this.trueProps;
+        const {children, width, height, axisType, axisLabel, onMouseMove, onMouseEnter, onMouseLeave, invertAxis} =
+            this.trueProps;
         const {scale, margin, padding, scaleWidth, scaleHeight} = this;
         const chartWidth = scaleWidth + padding.left + padding.right;
         const chartHeight = scaleHeight + padding.top + padding.bottom;
