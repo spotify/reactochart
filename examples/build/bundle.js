@@ -56956,7 +56956,7 @@
 	
 	        var propsToPass = {
 	            axisType: axisType, invertAxis: invertAxis, scale: scale, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: width, plotHeight: height,
-	            chartMargin: margin, chartPadding: padding
+	            chartMargin: margin, chartPadding: padding, margin: margin, padding: padding
 	        };
 	
 	        var childrenUnderAxes = _react2.default.Children.map(children, function (child, i) {

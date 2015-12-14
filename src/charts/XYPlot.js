@@ -425,7 +425,7 @@ const XYPlot = React.createClass({
 
         const propsToPass = {
             axisType, invertAxis, scale, scaleWidth, scaleHeight, plotWidth: width, plotHeight: height,
-            chartMargin: margin, chartPadding: padding
+            chartMargin: margin, chartPadding: padding, margin, padding
         };
 
         const childrenUnderAxes = React.Children.map(children, (child, i) => {
