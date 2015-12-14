@@ -9,3 +9,4 @@ export { default as MarkerLineChart } from './charts/MarkerLineChart';
 export { default as ScatterPlot } from './charts/ScatterPlot';
 export { default as Histogram } from './charts/Histogram';
 export { default as KernelDensityEstimation } from './charts/KernelDensityEstimation';
+export { default as AreaHeatmap } from './charts/AreaHeatmap';
