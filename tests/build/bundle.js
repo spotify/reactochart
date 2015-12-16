@@ -62737,6 +62737,7 @@
 	        var onMouseEnter = _trueProps2.onMouseEnter;
 	        var onMouseLeave = _trueProps2.onMouseLeave;
 	        var invertAxis = _trueProps2.invertAxis;
+	        var data = _trueProps2.data;
 	        var scale = this.scale;
 	        var margin = this.margin;
 	        var padding = this.padding;

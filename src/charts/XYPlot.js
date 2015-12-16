@@ -417,7 +417,7 @@ const XYPlot = React.createClass({
     },
 
     render() {
-        const {children, width, height, axisType, axisLabel, onMouseMove, onMouseEnter, onMouseLeave, invertAxis} =
+        const {children, width, height, axisType, axisLabel, onMouseMove, onMouseEnter, onMouseLeave, invertAxis, data} =
             this.trueProps;
         const {scale, margin, padding, scaleWidth, scaleHeight} = this;
         const chartWidth = scaleWidth + padding.left + padding.right;
