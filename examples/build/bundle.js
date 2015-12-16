@@ -56649,7 +56649,7 @@
 	                return [k, val];
 	            })) :
 	            // user didn't pass in anything, so use default
-	            DEFAULTS[propKey];
+	            _lodash2.default.clone(DEFAULTS[propKey]);
 	        }
 	
 	        var xyProps = _lodash2.default.assign.apply(this, xyKeys.map(function (k) {

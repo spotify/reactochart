@@ -162,7 +162,7 @@ const XYPlot = React.createClass({
                         _.object(expectedKeys.map(k => [k, val]))
                 )
                 // user didn't pass in anything, so use default
-                : DEFAULTS[propKey];
+                : _.clone(DEFAULTS[propKey]);
         }
 
         const xyProps = _.assign.apply(this, xyKeys.map(k => ({[k]: resolvePropObj(k, ['x', 'y'])})));
