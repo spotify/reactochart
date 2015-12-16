@@ -56509,7 +56509,7 @@
 	        left: PropTypes.number,
 	        right: PropTypes.number
 	    }),
-	    stringFormatter: PropTypes.oneOfType([PropTypes.function, PropTypes.string])
+	    stringFormatter: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
 	});
 	
 	var DEFAULTS = {
