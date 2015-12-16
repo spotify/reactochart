@@ -56957,7 +56957,6 @@
 	        var onMouseEnter = _trueProps2.onMouseEnter;
 	        var onMouseLeave = _trueProps2.onMouseLeave;
 	        var invertAxis = _trueProps2.invertAxis;
-	        var data = _trueProps2.data;
 	        var scale = this.scale;
 	        var margin = this.margin;
 	        var padding = this.padding;
@@ -56969,7 +56968,7 @@
 	
 	        var propsToPass = {
 	            axisType: axisType, invertAxis: invertAxis, scale: scale, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: width, plotHeight: height,
-	            chartMargin: margin, chartPadding: padding, margin: margin, padding: padding, data: data
+	            chartMargin: margin, chartPadding: padding, margin: margin, padding: padding
 	        };
 	
 	        var childrenUnderAxes = _react2.default.Children.map(children, function (child, i) {

@@ -417,7 +417,7 @@ const XYPlot = React.createClass({
     },
 
     render() {
-        const {children, width, height, axisType, axisLabel, onMouseMove, onMouseEnter, onMouseLeave, invertAxis, data} =
+        const {children, width, height, axisType, axisLabel, onMouseMove, onMouseEnter, onMouseLeave, invertAxis} =
             this.trueProps;
         const {scale, margin, padding, scaleWidth, scaleHeight} = this;
         const chartWidth = scaleWidth + padding.left + padding.right;
@@ -425,7 +425,7 @@ const XYPlot = React.createClass({
 
         const propsToPass = {
             axisType, invertAxis, scale, scaleWidth, scaleHeight, plotWidth: width, plotHeight: height,
-            chartMargin: margin, chartPadding: padding, margin, padding, data
+            chartMargin: margin, chartPadding: padding, margin, padding
         };
 
         const childrenUnderAxes = React.Children.map(children, (child, i) => {
