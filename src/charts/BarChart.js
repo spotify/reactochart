@@ -227,9 +227,10 @@ const BarChart = React.createClass({
                 const y = !isVertical ? scale.y(yAccessor(d)) - (barThickness / 2) :
                     (value >= 0 || axisType.y === 'ordinal') ? scale.y(barZero) - barLength : scale.y(barZero);
                 const [width, height] = isVertical ? [barThickness, barLength] : [barLength, barThickness];
+                const key = `chart-bar-${i}`;
 
                 if(!_.all([x, y, width, height], _.isFinite)) return null;
-                return <rect {...{className, x, y, width, height, onMouseEnter, onMouseMove, onMouseLeave}} />
+                return <rect {...{className, key, x, y, width, height, onMouseEnter, onMouseMove, onMouseLeave}} />
             })}
         </g>;
     },
@@ -256,15 +257,15 @@ const BarChart = React.createClass({
                     const barX = Math.round(scale.x(xAccessor(d)));
                     const barThickness = Math.round(scale.x(xEndAccessor(d))) - barX;
                     const className = `chart-bar chart-bar-${orientation} ${getClass ? classAccessor(d) : ''}`;
+                    const key = `chart-bar-${i}`;
                     if(!_.all([barX, barY, barThickness, barLength], _.isFinite)) return null;
 
                     return <rect
-                        className={className}
                         x={barX}
                         y={barY}
                         width={barThickness}
                         height={barLength}
-                        {...{onMouseEnter, onMouseMove, onMouseLeave}}
+                        {...{className, key, onMouseEnter, onMouseMove, onMouseLeave}}
                         />
                 })}
             </g> :
@@ -285,15 +286,15 @@ const BarChart = React.createClass({
                     const barY = Math.round(scale.y(yEndAccessor(d)));
                     const barThickness = Math.round(scale.y(yAccessor(d))) - barY;
                     const className = `chart-bar chart-bar-${orientation} ${getClass ? classAccessor(d) : ''}`;
+                    const key = `chart-bar-${i}`;
                     if(!_.all([barX, barY, barThickness, barLength], _.isFinite)) return null;
 
                     return <rect
-                        className={className}
                         x={barX}
                         y={barY}
                         width={barLength}
                         height={barThickness}
-                        {...{onMouseEnter, onMouseMove, onMouseLeave}}
+                        {...{className, key, onMouseEnter, onMouseMove, onMouseLeave}}
                     />
                 })}
             </g>

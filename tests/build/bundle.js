@@ -64438,11 +64438,13 @@
 	                var width = _ref6[0];
 	                var height = _ref6[1];
 	
+	                var key = 'chart-bar-' + i;
+	
 	                if (!_lodash2.default.all([x, y, width, height], _lodash2.default.isFinite)) return null;
-	                return _react2.default.createElement('rect', _extends({ className: className, x: x, y: y, width: width, height: height, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
+	                return _react2.default.createElement('rect', _extends({ className: className, key: key, x: x, y: y, width: width, height: height, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
 	                    __source: {
 	                        fileName: '../../../src/charts/BarChart.js',
-	                        lineNumber: 232
+	                        lineNumber: 233
 	                    }
 	                }));
 	            })
@@ -64475,7 +64477,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 242
+	                    lineNumber: 243
 	                }
 	            },
 	            this.props.data.map(function (d, i) {
@@ -64498,18 +64500,18 @@
 	                var barX = Math.round(scale.x(xAccessor(d)));
 	                var barThickness = Math.round(scale.x(xEndAccessor(d))) - barX;
 	                var className = 'chart-bar chart-bar-' + orientation + ' ' + (getClass ? classAccessor(d) : '');
+	                var key = 'chart-bar-' + i;
 	                if (!_lodash2.default.all([barX, barY, barThickness, barLength], _lodash2.default.isFinite)) return null;
 	
 	                return _react2.default.createElement('rect', _extends({
-	                    className: className,
 	                    x: barX,
 	                    y: barY,
 	                    width: barThickness,
 	                    height: barLength
-	                }, { onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
+	                }, { className: className, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
 	                    __source: {
 	                        fileName: '../../../src/charts/BarChart.js',
-	                        lineNumber: 261
+	                        lineNumber: 263
 	                    }
 	                }));
 	            })
@@ -64518,7 +64520,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 271
+	                    lineNumber: 272
 	                }
 	            },
 	            this.props.data.map(function (d, i) {
@@ -64541,18 +64543,18 @@
 	                var barY = Math.round(scale.y(yEndAccessor(d)));
 	                var barThickness = Math.round(scale.y(yAccessor(d))) - barY;
 	                var className = 'chart-bar chart-bar-' + orientation + ' ' + (getClass ? classAccessor(d) : '');
+	                var key = 'chart-bar-' + i;
 	                if (!_lodash2.default.all([barX, barY, barThickness, barLength], _lodash2.default.isFinite)) return null;
 	
 	                return _react2.default.createElement('rect', _extends({
-	                    className: className,
 	                    x: barX,
 	                    y: barY,
 	                    width: barLength,
 	                    height: barThickness
-	                }, { onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
+	                }, { className: className, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
 	                    __source: {
 	                        fileName: '../../../src/charts/BarChart.js',
-	                        lineNumber: 290
+	                        lineNumber: 292
 	                    }
 	                }));
 	            })
@@ -64573,7 +64575,7 @@
 	        'svg',
 	        { x: 100, y: 100, style: { overflow: 'visible' }, __source: {
 	                fileName: '../../../src/charts/BarChart.js',
-	                lineNumber: 311
+	                lineNumber: 312
 	            }
 	        },
 	        _react2.default.createElement(
@@ -64581,7 +64583,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 311
+	                    lineNumber: 312
 	                }
 	            },
 	            text
