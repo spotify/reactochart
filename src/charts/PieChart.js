@@ -97,14 +97,16 @@ const PieChart = React.createClass({
                 const endPercent = startPercent + slicePercent;
                 const pathStr = pieSlicePath(startPercent, endPercent, center, radius, holeRadius);
                 startPercent += slicePercent;
+                const key = `pie-slice-${i}`;
 
-                return <path {...{className, d: pathStr, onMouseEnter, onMouseMove, onMouseLeave}} />;
+                return <path {...{className, d: pathStr, onMouseEnter, onMouseMove, onMouseLeave, key}} />;
             })}
 
             {sum < total ? // draw empty slice if the sum of slices is less than expected total
                 <path
                     className='pie-slice pie-slice-empty'
                     d={pieSlicePath(startPercent, 1, center, radius, holeRadius)}
+                    key="pie-slice-empty"
                 /> : null
             }
 
@@ -112,6 +114,7 @@ const PieChart = React.createClass({
                 <path
                     className={markerLineClass}
                     d={markerLine(markerLinePercent, center, radius, holeRadius, markerLineOverhangOuter, markerLineOverhangInner)}
+                    key="pie-slice-marker-line"
                 />
                 : null
             }

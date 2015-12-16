@@ -207,7 +207,7 @@ const BarChart = React.createClass({
         const isVertical = (this.props.orientation === 'vertical');
 
         return <g>
-            {data.map(d => {
+            {data.map((d, i) => {
                 const [onMouseEnter, onMouseMove, onMouseLeave] =
                     ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(eventName => {
                         // partially apply this bar's data point as 2nd callback argument

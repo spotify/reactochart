@@ -94,7 +94,7 @@ const MarkerLineChart = React.createClass({
             }
         </g>
     },
-    renderRangeValueLine(d) {
+    renderRangeValueLine(d, i) {
         const {getValue, getEndValue, orientation, scale} = this.props;
         const isVertical = (orientation === 'vertical');
         const xVal = scale.x(accessor(getValue.x)(d));
@@ -104,11 +104,12 @@ const MarkerLineChart = React.createClass({
         const [x1, y1] = [xVal, yVal];
         const x2 = isVertical ? xEndVal : xVal;
         const y2 = isVertical ? yVal : yEndVal;
+        const key = `marker-line-${i}`;
 
         if(!_.all([x1, x2, y1, y2], _.isFinite)) return null;
-        return <line className="marker-line" {...{x1, x2, y1, y2}} />
+        return <line className="marker-line" {...{x1, x2, y1, y2, key}} />
     },
-    renderValueValueLine(d) {
+    renderValueValueLine(d, i) {
         const {getValue, orientation, lineLength, scale} = this.props;
         const isVertical = (orientation === 'vertical');
         const xVal = scale.x(accessor(getValue.x)(d));
@@ -117,9 +118,10 @@ const MarkerLineChart = React.createClass({
         const x2 = isVertical ? xVal + (lineLength / 2) : xVal;
         const y1 = isVertical ? yVal : yVal - (lineLength / 2);
         const y2 = isVertical ? yVal : yVal + (lineLength / 2);
+        const key = `marker-line-${i}`;
 
         if(!_.all([x1, x2, y1, y2], _.isFinite)) return null;
-        return <line className="marker-line" {...{x1, x2, y1, y2}} />;
+        return <line className="marker-line" {...{x1, x2, y1, y2, key}} />;
     }
 });
 

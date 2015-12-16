@@ -56291,11 +56291,12 @@
 	                var endPercent = startPercent + slicePercent;
 	                var pathStr = pieSlicePath(startPercent, endPercent, center, radius, holeRadius);
 	                startPercent += slicePercent;
+	                var key = 'pie-slice-' + i;
 	
-	                return _react2.default.createElement('path', _extends({ className: className, d: pathStr, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
+	                return _react2.default.createElement('path', _extends({ className: className, d: pathStr, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave, key: key }, {
 	                    __source: {
 	                        fileName: '../../../src/charts/PieChart.js',
-	                        lineNumber: 101
+	                        lineNumber: 102
 	                    }
 	                }));
 	            }),
@@ -56303,17 +56304,19 @@
 	            _react2.default.createElement('path', {
 	                className: 'pie-slice pie-slice-empty',
 	                d: pieSlicePath(startPercent, 1, center, radius, holeRadius),
+	                key: 'pie-slice-empty',
 	                __source: {
 	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 105
+	                    lineNumber: 106
 	                }
 	            }) : null,
 	            _lodash2.default.isFinite(markerLinePercent) ? _react2.default.createElement('path', {
 	                className: markerLineClass,
 	                d: markerLine(markerLinePercent, center, radius, holeRadius, markerLineOverhangOuter, markerLineOverhangInner),
+	                key: 'pie-slice-marker-line',
 	                __source: {
 	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 112
+	                    lineNumber: 114
 	                }
 	            }) : null,
 	            this.props.centerLabel ? this.renderCenterLabel(center) : null
@@ -56329,7 +56332,7 @@
 	            _extends({ className: 'pie-label-center' }, { x: x, y: y, style: style }, {
 	                __source: {
 	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 125
+	                    lineNumber: 128
 	                }
 	            }),
 	            this.props.centerLabel
@@ -57936,7 +57939,7 @@
 	                    lineNumber: 209
 	                }
 	            },
-	            data.map(function (d) {
+	            data.map(function (d, i) {
 	                var _map3 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
 	                    // partially apply this bar's data point as 2nd callback argument
 	                    var callback = (0, _util.methodIfFuncProp)(eventName, _this.props, _this);
@@ -58260,7 +58263,7 @@
 	            tickType === 'RangeValue' ? this.props.data.map(this.renderRangeValueLine) : this.props.data.map(this.renderValueValueLine)
 	        );
 	    },
-	    renderRangeValueLine: function renderRangeValueLine(d) {
+	    renderRangeValueLine: function renderRangeValueLine(d, i) {
 	        var _props = this.props;
 	        var getValue = _props.getValue;
 	        var getEndValue = _props.getEndValue;
@@ -58277,16 +58280,17 @@
 	
 	        var x2 = isVertical ? xEndVal : xVal;
 	        var y2 = isVertical ? yVal : yEndVal;
+	        var key = 'marker-line-' + i;
 	
 	        if (!_lodash2.default.all([x1, x2, y1, y2], _lodash2.default.isFinite)) return null;
-	        return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2 }, {
+	        return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2, key: key }, {
 	            __source: {
 	                fileName: '../../../src/charts/MarkerLineChart.js',
-	                lineNumber: 109
+	                lineNumber: 110
 	            }
 	        }));
 	    },
-	    renderValueValueLine: function renderValueValueLine(d) {
+	    renderValueValueLine: function renderValueValueLine(d, i) {
 	        var _props2 = this.props;
 	        var getValue = _props2.getValue;
 	        var orientation = _props2.orientation;
@@ -58300,12 +58304,13 @@
 	        var x2 = isVertical ? xVal + lineLength / 2 : xVal;
 	        var y1 = isVertical ? yVal : yVal - lineLength / 2;
 	        var y2 = isVertical ? yVal : yVal + lineLength / 2;
+	        var key = 'marker-line-' + i;
 	
 	        if (!_lodash2.default.all([x1, x2, y1, y2], _lodash2.default.isFinite)) return null;
-	        return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2 }, {
+	        return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2, key: key }, {
 	            __source: {
 	                fileName: '../../../src/charts/MarkerLineChart.js',
-	                lineNumber: 122
+	                lineNumber: 124
 	            }
 	        }));
 	    }
