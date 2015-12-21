@@ -65256,10 +65256,13 @@
 	        var yD = _lodash2.default.find(data, function (d) {
 	            return yVal >= yAccessor(d) && yVal < yEndAccessor(d);
 	        });
+	        var d = _lodash2.default.find(data, function (d) {
+	            return xVal >= xAccessor(d) && xVal < xEndAccessor(d) && yVal >= yAccessor(d) && yVal < yEndAccessor(d);
+	        });
 	        var xBin = [xAccessor(xD), xEndAccessor(xD)];
 	        var yBin = [yAccessor(yD), yEndAccessor(yD)];
 	
-	        onMouseMove(e, { xVal: xVal, yVal: yVal, xD: xD, yD: yD, xBin: xBin, yBin: yBin });
+	        onMouseMove(e, { xVal: xVal, yVal: yVal, d: d, xD: xD, yD: yD, xBin: xBin, yBin: yBin });
 	    },
 	    render: function render() {
 	        var _props2 = this.props;
@@ -65294,12 +65297,12 @@
 	            'g',
 	            { className: 'area-heatmap-chart', onMouseMove: this.onMouseMove, onMouseLeave: this.onMouseLeave, __source: {
 	                    fileName: '../../../src/charts/AreaHeatmap.js',
-	                    lineNumber: 59
+	                    lineNumber: 61
 	                }
 	            },
 	            _react2.default.createElement('rect', { x: '0', y: '0', width: scaleWidth, height: scaleHeight, ref: 'background', fill: 'transparent', __source: {
 	                    fileName: '../../../src/charts/AreaHeatmap.js',
-	                    lineNumber: 60
+	                    lineNumber: 62
 	                }
 	            }),
 	            data.map(function (d, i) {
@@ -65329,7 +65332,7 @@
 	                return _react2.default.createElement('rect', _extends({ x: x, y: y, width: width, height: height, className: 'area-heatmap-rect', key: 'rect-' + i }, {
 	                    __source: {
 	                        fileName: '../../../src/charts/AreaHeatmap.js',
-	                        lineNumber: 85
+	                        lineNumber: 87
 	                    }
 	                }));
 	            })
