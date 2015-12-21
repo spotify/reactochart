@@ -35,14 +35,15 @@ const AreaHeatmap = React.createClass({
         if(!boundBox) return;
         const [x, y] = [e.clientX - (boundBox.left || 0), e.clientY - (boundBox.top || 0)];
         const [xVal, yVal] = [scale.x.invert(x), scale.y.invert(y)];
-        const xD = _.find(data, d => xVal >= xAccessor(d) && xVal < xEndAccessor(d));
-        const yD = _.find(data, d => yVal >= yAccessor(d) && yVal < yEndAccessor(d));
-        const d = _.find(data,
-            d => xVal >= xAccessor(d) && xVal < xEndAccessor(d) && yVal >= yAccessor(d) && yVal < yEndAccessor(d));
-        const xBin = [xAccessor(xD), xEndAccessor(xD)];
-        const yBin = [yAccessor(yD), yEndAccessor(yD)];
+        //const xD = _.find(data, d => xVal >= xAccessor(d) && xVal < xEndAccessor(d));
+        //const yD = _.find(data, d => yVal >= yAccessor(d) && yVal < yEndAccessor(d));
+        //const d = _.find(data,
+        //    d => xVal >= xAccessor(d) && xVal < xEndAccessor(d) && yVal >= yAccessor(d) && yVal < yEndAccessor(d));
+        //const xBin = [xAccessor(xD), xEndAccessor(xD)];
+        //const yBin = [yAccessor(yD), yEndAccessor(yD)];
 
-        onMouseMove(e, {xVal, yVal, d, xD, yD, xBin, yBin});
+        //onMouseMove(e, {xVal, yVal, d, xD, yD, xBin, yBin});
+        onMouseMove(e, {xVal, yVal});
     },
 
     render() {
