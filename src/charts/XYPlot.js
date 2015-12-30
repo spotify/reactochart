@@ -32,6 +32,7 @@ const DEFAULTS = {
     tickCount: {x: 10, y: 10},
     tickLength: {x: 6, y: 6},
     labelPadding: {x: 6, y: 6},
+    emptyLabel: "Unknown",
     showLabels: {x: true, y: true},
     showGrid: {x: true, y: true},
     showTicks: {x: true, y: true},
@@ -88,6 +89,8 @@ const XYPlot = React.createClass({
         labelFormat: PropTypes.xyObjectOf(PropTypes.stringFormatter),
         // padding between axis value labels and the axis/ticks
         labelPadding: PropTypes.xyObjectOf(PropTypes.number),
+        // label to show for null/undefined values
+        emptyLabel: PropTypes.string,
 
         // should we draw axis value labels
         showLabels: PropTypes.xyObjectOf(PropTypes.bool),
@@ -501,6 +504,7 @@ const XYPlot = React.createClass({
             ticks: _.get(this.ticks, k) || [],
             labels: props.labelValues[k],
             labelPadding: props.labelPadding[k],
+            emptyLabel: props.emptyLabel,
             tickLength: props.tickLength[k],
             showLabels: props.showLabels[k],
             showTicks: props.showTicks[k],
@@ -640,6 +644,7 @@ const ChartAxis = React.createClass({
         labels: PropTypes.array,
         tickCount: PropTypes.number,
         labelFormat: PropTypes.stringFormatter,
+        emptyLabel: PropTypes.string,
         letter: PropTypes.string,
 
         scaleWidth: PropTypes.number,
@@ -653,11 +658,14 @@ const ChartAxis = React.createClass({
         showZero: PropTypes.bool
     },
     getDefaultProps() {
-        return { padding: DEFAULTS.spacing }
+        return {
+            padding: DEFAULTS.spacing,
+            emptyLabel: DEFAULTS.emptyLabel
+        }
     },
     render() {
         const {
-            scale, type, orientation, axisTransform, tickCount, letter, labelFormat, ticks,
+            scale, type, orientation, axisTransform, tickCount, letter, labelFormat, emptyLabel, ticks,
             scaleWidth, scaleHeight, padding, labelPadding, tickLength,
             showLabels, showTicks, showGrid, showZero
         } = this.props;
@@ -670,7 +678,7 @@ const ChartAxis = React.createClass({
             [v => `translate(0, ${scale(v)})`, {x: -distance}, scaleWidth + padding.left + padding.right] :
             [v => `translate(${scale(v)}, 0)`, {y: distance}, scaleHeight + padding.top + padding.bottom];
 
-        const options = {letter, type, orientation, labelOffset, gridLength, tickLength, labelFormat};
+        const options = {letter, type, orientation, labelOffset, gridLength, tickLength, labelFormat, emptyLabel};
         return <g ref={`${letter}Axis`} className={`chart-axis chart-axis-${letter}`} transform={axisTransform}>
             {showTicks || showGrid || (showLabels && labels === ticks) ?
                 _.map(ticks, (value, i) => {
@@ -700,11 +708,11 @@ const ChartAxis = React.createClass({
         </g>
     },
     renderLabel(options) {
-        const {letter, value, type, labelOffset, labelFormat} = options;
+        const {letter, value, type, labelOffset, labelFormat, emptyLabel} = options;
         const className = `chart-axis-value-label chart-axis-value-label-${letter}`;
         // todo generalize dy for all text sizes...?
         return <text {...{className}} dy="0.32em" {...labelOffset}>
-            {formatAxisLabel(value, type, labelFormat)}
+            {formatAxisLabel(value, type, labelFormat, emptyLabel)}
         </text>
     },
     // todo unify into drawLine
@@ -773,8 +781,9 @@ function initScale(type) {
     }
 }
 
-function formatAxisLabel(value, type, format) {
-    return _.isFunction(format) ? format(value)
+function formatAxisLabel(value, type, format, emptyLabel) {
+    return _.isNull(value) || _.isUndefined(value) ? emptyLabel
+        : _.isFunction(format) ? format(value)
         : type === 'number' ? numeral(value).format(format)
         : type === 'time' ? moment(value).format(format)
         : value;
