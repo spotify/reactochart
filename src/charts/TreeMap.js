@@ -2,6 +2,7 @@ import React from 'react';
 const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
+import {accessor} from '../util.js';
 
 const TreeMapNode = React.createClass({
     propTypes: {
