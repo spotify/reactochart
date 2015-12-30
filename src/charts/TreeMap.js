@@ -135,7 +135,7 @@ const TreeMap = React.createClass({
         const {
             width, height, nodeStyle, labelStyle, getLabel, minLabelWidth, minLabelHeight,
             onClickNode, onMouseEnterNode, onMouseLeaveNode, onMouseMoveNode, NodeComponent, NodeLabelComponent
-            } = this.props;
+        } = this.props;
 
         // clone the data because d3 mutates it!
         const data = _.cloneDeep(this.props.data);
@@ -147,9 +147,10 @@ const TreeMap = React.createClass({
         const style = {position: 'relative', width, height};
 
         return <div className="tree-map" {...{style}}>
-            {nodes.map(node => <NodeComponent {...{
+            {nodes.map((node, i) => <NodeComponent {...{
                 node, nodeStyle, minLabelWidth, minLabelHeight, labelStyle, getLabel, NodeLabelComponent,
-                onClickNode, onMouseEnterNode, onMouseLeaveNode, onMouseMoveNode
+                onClickNode, onMouseEnterNode, onMouseLeaveNode, onMouseMoveNode,
+                key: `node-${i}`
             }} />)}
         </div>;
     }

@@ -59133,10 +59133,11 @@
 	                    lineNumber: 149
 	                }
 	            }),
-	            nodes.map(function (node) {
+	            nodes.map(function (node, i) {
 	                return _react2.default.createElement(NodeComponent, _extends({
 	                    node: node, nodeStyle: nodeStyle, minLabelWidth: minLabelWidth, minLabelHeight: minLabelHeight, labelStyle: labelStyle, getLabel: getLabel, NodeLabelComponent: NodeLabelComponent,
-	                    onClickNode: onClickNode, onMouseEnterNode: onMouseEnterNode, onMouseLeaveNode: onMouseLeaveNode, onMouseMoveNode: onMouseMoveNode
+	                    onClickNode: onClickNode, onMouseEnterNode: onMouseEnterNode, onMouseLeaveNode: onMouseLeaveNode, onMouseMoveNode: onMouseMoveNode,
+	                    key: 'node-' + i
 	                }, {
 	                    __source: {
 	                        fileName: '../../../src/charts/TreeMap.js',
