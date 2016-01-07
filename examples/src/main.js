@@ -6,8 +6,6 @@ import numeral from 'numeral';
 //_.extend(window, {Perf, numeral});
 
 import {
-    // old charts
-    V1LineChart,
     // new charts
     PieChart,
     XYPlot,
@@ -566,43 +564,6 @@ const AxisLabelExample = React.createClass({
     }
 });
 
-const V1Examples = React.createClass({
-    getInitialState() {
-        return {hoveredV1LineChartData: null}
-    },
-    onMouseMoveV1LineChart(d, index, event) {
-        this.setState({hoveredV1LineChartData: d})
-    },
-    render() {
-        const {hoveredV1LineChartData} = this.state;
-        return <div>
-            <h2>v1</h2>
-            <h3>Timeseries Line Chart</h3>
-
-            <div>
-                {hoveredV1LineChartData ?
-                    <div>
-                        {hoveredV1LineChartData.date + ''}
-                        <br/>
-                        New York Temperature: {hoveredV1LineChartData.newYork}
-                    </div>
-                    : null
-                }
-                <div>
-                </div>
-                <V1LineChart
-                    width={1000}
-                    height={400}
-                    data={tempDataClean}
-                    plotKeys={['newYork']}
-                    dateKey="date"
-                    onMouseMove={this.onMouseMoveV1LineChart}
-                    />
-            </div>
-        </div>
-    }
-});
-
 const examples = [
     {id: 'line', title: 'Line Chart', Component: LineChartExample},
     {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
@@ -616,8 +577,7 @@ const examples = [
     {id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample},
     {id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample},
     {id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample},
-    {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample},
-    {id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples}
+    {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample}
 ];
 
 

@@ -72,6 +72,11 @@ const XYPlot = React.createClass({
         nice: PropTypes.xyObjectOf(PropTypes.bool),
         // whether or not to invert the axis (ie. put largest numbers on bottom for Y axis, or on left for X)
         invertAxis: PropTypes.xyObjectOf(PropTypes.bool),
+        // placement of the axis labels/ticks on the chart
+        axisPosition: PropTypes.shape({
+            x: PropTypes.oneOf(['top', 'bottom']),
+            y: PropTypes.oneOf(['left', 'right'])
+        }),
 
         // approximate # of ticks to include on each axis - 10 is default
         // (actual # may be slightly different, to get nicest intervals)
@@ -300,6 +305,7 @@ const XYPlot = React.createClass({
                     });
                 }, {}), {top: 0, bottom: 0, left: 0, right: 0});
 
+
                 // todo: modify to handle all possible label alignments
                 // todo: handle case of labels not shown (ie if !this.props.showYLabels)
                 const hasXAxisLabel = axisLabel.x && labelBoxes.xAxis;
@@ -422,13 +428,13 @@ const XYPlot = React.createClass({
     render() {
         const {children, width, height, axisType, axisLabel, onMouseMove, onMouseEnter, onMouseLeave, invertAxis} =
             this.trueProps;
-        const {scale, margin, padding, scaleWidth, scaleHeight} = this;
+        const {scale, margin, padding, scaleWidth, scaleHeight, ticks} = this;
         const chartWidth = scaleWidth + padding.left + padding.right;
         const chartHeight = scaleHeight + padding.top + padding.bottom;
 
         const propsToPass = {
             axisType, invertAxis, scale, scaleWidth, scaleHeight, plotWidth: width, plotHeight: height,
-            chartMargin: margin, chartPadding: padding, margin, padding
+            chartMargin: margin, chartPadding: padding, margin, padding, ticks
         };
 
         const childrenUnderAxes = React.Children.map(children, (child, i) => {
@@ -533,6 +539,32 @@ const XYPlot = React.createClass({
             showTicks: _.get(props.showTicks, k),
             labelBox: (labelBoxes && labelBoxes[`${k}Axis`]) ? labelBoxes[`${k}Axis`] : {width: 10, height: 10}
         })
+    }
+});
+
+const XGrid = React.createClass({
+    propTypes: {
+        ticks: PropTypes.array,
+        scale: PropTypes.array,
+        chartWidth: PropTypes.number,
+        chartHeight: PropTypes.number,
+    },
+    render() {
+        const {ticks, scale, chartWidth, chartHeight} = this.props;
+
+        return ticks.map((value, i) => {
+            const x = scale(value);
+
+        })
+    }
+});
+
+const GridLine = React.createClass({
+    render(options) {
+        const {letter, gridLength, orientation} = options;
+        const className = `chart-grid chart-grid-${letter || ''}`;
+        const [x2, y2] = (orientation === 'vertical') ? [gridLength, 0] : [0, -gridLength];
+        return <line {...{className, x2, y2}} />
     }
 });
 
