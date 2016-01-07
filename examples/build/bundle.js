@@ -56,8 +56,6 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	//_.extend(window, {Perf, numeral});
 	
-	// get/make fake data for testing
-	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
@@ -82,27 +80,11 @@
 	
 	var _src = __webpack_require__(167);
 	
-	var _statesData = __webpack_require__(271);
-	
-	var _statesData2 = _interopRequireDefault(_statesData);
-	
-	var _dailyTemperature = __webpack_require__(272);
-	
-	var _dailyTemperature2 = _interopRequireDefault(_dailyTemperature);
-	
-	var _simpleXY = __webpack_require__(273);
-	
-	var _simpleXY2 = _interopRequireDefault(_simpleXY);
-	
-	var _util = __webpack_require__(274);
+	var _util = __webpack_require__(270);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
-	var tempDataClean = _dailyTemperature2.default.map(function (d) {
-	    return _.assign({}, d, { date: new Date(d.date) });
-	});
 	
 	// sample ordinal data
 	var ordinalData = ['Always', 'Usually', 'Sometimes', 'Rarely', 'Never'];
@@ -197,12 +179,12 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 111
+	                    lineNumber: 102
 	                }
 	            },
 	            _react2.default.createElement(_src.PieChart, { data: [45, 35, 20], __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 112
+	                    lineNumber: 103
 	                }
 	            }),
 	            _react2.default.createElement(_src.PieChart, {
@@ -213,7 +195,7 @@
 	                markerLineValue: 20,
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 113
+	                    lineNumber: 104
 	                }
 	            }),
 	            _react2.default.createElement(_src.PieChart, {
@@ -224,7 +206,7 @@
 	                centerLabel: '42%',
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 120
+	                    lineNumber: 111
 	                }
 	            }),
 	            _react2.default.createElement(_src.PieChart, {
@@ -235,7 +217,7 @@
 	                centerLabel: (this.state.sinVal * 50).toFixed(0),
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 127
+	                    lineNumber: 118
 	                }
 	            })
 	        );
@@ -247,7 +229,7 @@
 	    render: function render() {
 	        var rectangleSymbol = _react2.default.createElement('rect', { width: 5, height: 5, fill: 'rebeccapurple', __source: {
 	                fileName: '../../../examples/src/main.js',
-	                lineNumber: 140
+	                lineNumber: 131
 	            }
 	        });
 	        var triangleSymbol = _react2.default.createElement(
@@ -255,12 +237,12 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 141
+	                    lineNumber: 132
 	                }
 	            },
 	            _react2.default.createElement('polygon', { points: '0,0 8,0 4,8', style: { fill: 'darkgreen' }, __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 141
+	                    lineNumber: 132
 	                }
 	            })
 	        );
@@ -273,14 +255,14 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 144
+	                    lineNumber: 135
 	                }
 	            },
 	            _react2.default.createElement(
 	                _src.XYPlot,
 	                { width: 700, height: 500, axisLabel: { x: "TIME", y: "EMOJI" }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 145
+	                        lineNumber: 136
 	                    }
 	                },
 	                _react2.default.createElement(_src.ScatterPlot, {
@@ -290,7 +272,7 @@
 	                    pointOffset: [0, 2],
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 170
+	                        lineNumber: 161
 	                    }
 	                })
 	            )
@@ -306,14 +288,14 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 183
+	                    lineNumber: 174
 	                }
 	            },
 	            _react2.default.createElement(
 	                _src.XYPlot,
 	                { width: 700, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 184
+	                        lineNumber: 175
 	                    }
 	                },
 	                _react2.default.createElement(_src.LineChart, {
@@ -323,7 +305,7 @@
 	                        } },
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 185
+	                        lineNumber: 176
 	                    }
 	                }),
 	                _react2.default.createElement(_src.LineChart, {
@@ -336,7 +318,7 @@
 	                    },
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 189
+	                        lineNumber: 180
 	                    }
 	                }),
 	                _react2.default.createElement(_src.LineChart, {
@@ -349,7 +331,7 @@
 	                    },
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 196
+	                        lineNumber: 187
 	                    }
 	                })
 	            )
@@ -375,7 +357,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 219
+	                    lineNumber: 210
 	                }
 	            },
 	            hoveredXYPlotData ? _react2.default.createElement(
@@ -383,7 +365,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 221
+	                        lineNumber: 212
 	                    }
 	                },
 	                hoveredXYPlotData[0] + ', ' + hoveredXYPlotData[1]
@@ -392,7 +374,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 224
+	                        lineNumber: 215
 	                    }
 	                },
 	                'Hover over the chart to show values'
@@ -401,22 +383,22 @@
 	                _src.XYPlot,
 	                { width: 700, height: 400, onMouseMove: this.onMouseMoveXYPlot, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 226
+	                        lineNumber: 217
 	                    }
 	                },
 	                _react2.default.createElement(_src.LineChart, { data: randomSequences[0], getValue: { x: 0, y: 1 }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 227
+	                        lineNumber: 218
 	                    }
 	                }),
 	                _react2.default.createElement(_src.LineChart, { data: randomSequences[1], getValue: { x: 0, y: 1 }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 228
+	                        lineNumber: 219
 	                    }
 	                }),
 	                _react2.default.createElement(_src.LineChart, { data: randomSequences[2], getValue: { x: 0, y: 1 }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 229
+	                        lineNumber: 220
 	                    }
 	                })
 	            )
@@ -432,7 +414,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 237
+	                    lineNumber: 228
 	                }
 	            },
 	            _react2.default.createElement(
@@ -440,42 +422,42 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 238
+	                        lineNumber: 229
 	                    }
 	                },
 	                _react2.default.createElement(
 	                    _src.XYPlot,
 	                    { margin: { left: 40, right: 8 }, width: 700, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 239
+	                            lineNumber: 230
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.Histogram, {
 	                        data: randomNormal, getValue: { x: null },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 240
+	                            lineNumber: 231
 	                        }
 	                    }),
 	                    _react2.default.createElement(_src.KernelDensityEstimation, {
 	                        data: randomNormal, getValue: { x: null }, bandwidth: 0.5,
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 243
+	                            lineNumber: 234
 	                        }
 	                    }),
 	                    _react2.default.createElement(_src.KernelDensityEstimation, {
 	                        data: randomNormal, getValue: { x: null }, bandwidth: 0.1,
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 246
+	                            lineNumber: 237
 	                        }
 	                    }),
 	                    _react2.default.createElement(_src.KernelDensityEstimation, {
 	                        data: randomNormal, getValue: { x: null }, bandwidth: 2,
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 249
+	                            lineNumber: 240
 	                        }
 	                    })
 	                )
@@ -485,7 +467,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 254
+	                        lineNumber: 245
 	                    }
 	                },
 	                _react2.default.createElement(
@@ -498,7 +480,7 @@
 	                        showTicks: false,
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 255
+	                            lineNumber: 246
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.ScatterPlot, {
@@ -512,7 +494,7 @@
 	                        pointRadius: 1,
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 262
+	                            lineNumber: 253
 	                        }
 	                    })
 	                )
@@ -529,7 +511,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 278
+	                    lineNumber: 269
 	                }
 	            },
 	            _react2.default.createElement(
@@ -542,12 +524,12 @@
 	                    },
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 279
+	                        lineNumber: 270
 	                    }
 	                },
 	                _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 0, y: 1 }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 286
+	                        lineNumber: 277
 	                    }
 	                })
 	            )
@@ -563,7 +545,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 294
+	                    lineNumber: 285
 	                }
 	            },
 	            _react2.default.createElement(
@@ -581,7 +563,7 @@
 	                    showZero: { y: true },
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 295
+	                        lineNumber: 286
 	                    }
 	                },
 	                _react2.default.createElement(_src.BarChart, {
@@ -590,7 +572,7 @@
 	                    barThickness: 20,
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 307
+	                        lineNumber: 298
 	                    }
 	                })
 	            )
@@ -617,7 +599,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 329
+	                    lineNumber: 320
 	                }
 	            },
 	            _react2.default.createElement(
@@ -633,12 +615,12 @@
 	                    onMouseMove: this.onMouseMoveChart,
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 330
+	                        lineNumber: 321
 	                    }
 	                },
 	                _react2.default.createElement(CustomSelectionRect, { underAxes: true, hoveredYVal: this.state.hoveredYVal, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 340
+	                        lineNumber: 331
 	                    }
 	                }),
 	                _react2.default.createElement(_src.BarChart, {
@@ -648,7 +630,7 @@
 	                    barThickness: 20,
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 341
+	                        lineNumber: 332
 	                    }
 	                })
 	            )
@@ -671,7 +653,7 @@
 	            style: { fill: 'red' },
 	            __source: {
 	                fileName: '../../../examples/src/main.js',
-	                lineNumber: 356
+	                lineNumber: 347
 	            }
 	        }) : null;
 	    }
@@ -685,7 +667,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 368
+	                    lineNumber: 359
 	                }
 	            },
 	            _react2.default.createElement(
@@ -693,24 +675,24 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 369
+	                        lineNumber: 360
 	                    }
 	                },
 	                _react2.default.createElement(_src.BarChart, { data: randomBars[0], getValue: { x: 0, y: 1 }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 370
+	                        lineNumber: 361
 	                    }
 	                }),
 	                _react2.default.createElement(_src.LineChart, { data: randomBars[0], getValue: { x: 0, y: 1 }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 371
+	                        lineNumber: 362
 	                    }
 	                }),
 	                _react2.default.createElement(_src.ScatterPlot, { data: randomBars[0], getValue: { x: 0, y: 1 }, pointSymbol: function pointSymbol(d, i) {
 	                        return _.sample(emojis);
 	                    }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 372
+	                        lineNumber: 363
 	                    }
 	                })
 	            )
@@ -726,7 +708,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 380
+	                    lineNumber: 371
 	                }
 	            },
 	            _react2.default.createElement(
@@ -734,7 +716,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 381
+	                        lineNumber: 372
 	                    }
 	                },
 	                'Vertical'
@@ -744,7 +726,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 383
+	                        lineNumber: 374
 	                    }
 	                },
 	                _react2.default.createElement(
@@ -752,7 +734,7 @@
 	                    {
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 384
+	                            lineNumber: 375
 	                        }
 	                    },
 	                    'Number-Number, Ordinal-Number, Time-Number'
@@ -761,12 +743,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 385
+	                            lineNumber: 376
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 0, y: 1 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 386
+	                            lineNumber: 377
 	                        }
 	                    })
 	                ),
@@ -774,12 +756,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 388
+	                            lineNumber: 379
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 1, y: 0 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 389
+	                            lineNumber: 380
 	                        }
 	                    })
 	                ),
@@ -787,12 +769,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 391
+	                            lineNumber: 382
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 1, y: 0 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 392
+	                            lineNumber: 383
 	                        }
 	                    })
 	                ),
@@ -801,7 +783,7 @@
 	                    {
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 395
+	                            lineNumber: 386
 	                        }
 	                    },
 	                    'Number-Ordinal, Ordinal-Ordinal, Time-Ordinal'
@@ -810,12 +792,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { y: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 396
+	                            lineNumber: 387
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 0, y: 1 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 397
+	                            lineNumber: 388
 	                        }
 	                    })
 	                ),
@@ -823,12 +805,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 399
+	                            lineNumber: 390
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalOrdinal, getValue: { x: 0, y: 1 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 400
+	                            lineNumber: 391
 	                        }
 	                    })
 	                ),
@@ -836,12 +818,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'time', y: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 402
+	                            lineNumber: 393
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 1, y: 0 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 403
+	                            lineNumber: 394
 	                        }
 	                    })
 	                ),
@@ -850,7 +832,7 @@
 	                    {
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 406
+	                            lineNumber: 397
 	                        }
 	                    },
 	                    'Number-Time, Ordinal-Time, Time-Time'
@@ -859,12 +841,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { y: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 407
+	                            lineNumber: 398
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 0, y: 1 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 408
+	                            lineNumber: 399
 	                        }
 	                    })
 	                ),
@@ -872,12 +854,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 410
+	                            lineNumber: 401
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 0, y: 1 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 411
+	                            lineNumber: 402
 	                        }
 	                    })
 	                ),
@@ -885,12 +867,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'time', y: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 413
+	                            lineNumber: 404
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.timeTime, getValue: { x: 0, y: 1 }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 414
+	                            lineNumber: 405
 	                        }
 	                    })
 	                )
@@ -900,7 +882,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 418
+	                        lineNumber: 409
 	                    }
 	                },
 	                'Horizontal'
@@ -910,7 +892,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 420
+	                        lineNumber: 411
 	                    }
 	                },
 	                _react2.default.createElement(
@@ -918,7 +900,7 @@
 	                    {
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 421
+	                            lineNumber: 412
 	                        }
 	                    },
 	                    'Number-Number, Ordinal-Number, Date-Number'
@@ -927,12 +909,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 422
+	                            lineNumber: 413
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 423
+	                            lineNumber: 414
 	                        }
 	                    })
 	                ),
@@ -940,12 +922,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { y: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 425
+	                            lineNumber: 416
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 0, y: 1 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 426
+	                            lineNumber: 417
 	                        }
 	                    })
 	                ),
@@ -953,12 +935,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { y: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 428
+	                            lineNumber: 419
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 0, y: 1 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 429
+	                            lineNumber: 420
 	                        }
 	                    })
 	                ),
@@ -967,7 +949,7 @@
 	                    {
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 432
+	                            lineNumber: 423
 	                        }
 	                    },
 	                    'Number-Ordinal, Ordinal-Ordinal, Date-Ordinal'
@@ -976,12 +958,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 433
+	                            lineNumber: 424
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 434
+	                            lineNumber: 425
 	                        }
 	                    })
 	                ),
@@ -989,12 +971,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 436
+	                            lineNumber: 427
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalOrdinal, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 437
+	                            lineNumber: 428
 	                        }
 	                    })
 	                ),
@@ -1002,12 +984,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 439
+	                            lineNumber: 430
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 0, y: 1 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 440
+	                            lineNumber: 431
 	                        }
 	                    })
 	                ),
@@ -1016,7 +998,7 @@
 	                    {
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 443
+	                            lineNumber: 434
 	                        }
 	                    },
 	                    'Number-Time, Ordinal-Time, Time-Time'
@@ -1025,12 +1007,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 444
+	                            lineNumber: 435
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 445
+	                            lineNumber: 436
 	                        }
 	                    })
 	                ),
@@ -1038,12 +1020,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'time', y: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 447
+	                            lineNumber: 438
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 448
+	                            lineNumber: 439
 	                        }
 	                    })
 	                ),
@@ -1051,12 +1033,12 @@
 	                    _src.XYPlot,
 	                    { width: 300, height: 300, axisType: { x: 'time', y: 'time' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 450
+	                            lineNumber: 441
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.timeTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 451
+	                            lineNumber: 442
 	                        }
 	                    })
 	                )
@@ -1073,7 +1055,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 460
+	                    lineNumber: 451
 	                }
 	            },
 	            _react2.default.createElement(
@@ -1081,7 +1063,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 461
+	                        lineNumber: 452
 	                    }
 	                },
 	                'Vertical'
@@ -1091,14 +1073,14 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 462
+	                        lineNumber: 453
 	                    }
 	                },
 	                _react2.default.createElement(
 	                    _src.XYPlot,
 	                    { width: 400, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 463
+	                            lineNumber: 454
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, {
@@ -1111,7 +1093,7 @@
 	                            } },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 464
+	                            lineNumber: 455
 	                        }
 	                    })
 	                )
@@ -1121,7 +1103,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 472
+	                        lineNumber: 463
 	                    }
 	                },
 	                'Horizontal'
@@ -1131,14 +1113,14 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 473
+	                        lineNumber: 464
 	                    }
 	                },
 	                _react2.default.createElement(
 	                    _src.XYPlot,
 	                    { width: 400, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 474
+	                            lineNumber: 465
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, {
@@ -1152,7 +1134,7 @@
 	                            } },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 475
+	                            lineNumber: 466
 	                        }
 	                    })
 	                )
@@ -1169,7 +1151,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 490
+	                    lineNumber: 481
 	                }
 	            },
 	            _react2.default.createElement(
@@ -1177,14 +1159,14 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 491
+	                        lineNumber: 482
 	                    }
 	                },
 	                _react2.default.createElement(
 	                    _src.XYPlot,
 	                    { width: 400, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 492
+	                            lineNumber: 483
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, {
@@ -1192,7 +1174,7 @@
 	                        getValue: { x: 0, y: 1 },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 493
+	                            lineNumber: 484
 	                        }
 	                    }),
 	                    _react2.default.createElement(_src.MarkerLineChart, {
@@ -1201,7 +1183,7 @@
 	                        lineLength: 15,
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 497
+	                            lineNumber: 488
 	                        }
 	                    })
 	                ),
@@ -1209,7 +1191,7 @@
 	                    _src.XYPlot,
 	                    { width: 400, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 503
+	                            lineNumber: 494
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, {
@@ -1217,7 +1199,7 @@
 	                        getValue: { x: 1, y: 0 },
 	                        orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 504
+	                            lineNumber: 495
 	                        }
 	                    }),
 	                    _react2.default.createElement(_src.MarkerLineChart, {
@@ -1226,7 +1208,7 @@
 	                        lineLength: 15,
 	                        orientation: 'horizontal', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 508
+	                            lineNumber: 499
 	                        }
 	                    })
 	                )
@@ -1236,14 +1218,14 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 515
+	                        lineNumber: 506
 	                    }
 	                },
 	                _react2.default.createElement(
 	                    _src.XYPlot,
 	                    { width: 400, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 516
+	                            lineNumber: 507
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, {
@@ -1256,7 +1238,7 @@
 	                            } },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 517
+	                            lineNumber: 508
 	                        }
 	                    }),
 	                    _react2.default.createElement(_src.MarkerLineChart, {
@@ -1269,7 +1251,7 @@
 	                            } },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 522
+	                            lineNumber: 513
 	                        }
 	                    })
 	                ),
@@ -1277,7 +1259,7 @@
 	                    _src.XYPlot,
 	                    { width: 400, height: 300, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 528
+	                            lineNumber: 519
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.BarChart, {
@@ -1291,7 +1273,7 @@
 	                            } },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 529
+	                            lineNumber: 520
 	                        }
 	                    }),
 	                    _react2.default.createElement(_src.MarkerLineChart, {
@@ -1305,7 +1287,7 @@
 	                            } },
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 535
+	                            lineNumber: 526
 	                        }
 	                    })
 	                )
@@ -1328,20 +1310,20 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 555
+	                    lineNumber: 546
 	                }
 	            },
 	            _react2.default.createElement(
 	                _src.XYPlot,
 	                _extends({}, xyProps, { axisLabel: { x: "Account Age" }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 556
+	                        lineNumber: 547
 	                    }
 	                }),
 	                _react2.default.createElement(_src.BarChart, _extends({}, barChartProps, {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 557
+	                        lineNumber: 548
 	                    }
 	                }))
 	            ),
@@ -1349,13 +1331,13 @@
 	                _src.XYPlot,
 	                _extends({}, xyProps, { axisLabel: { y: "Active Users" }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 559
+	                        lineNumber: 550
 	                    }
 	                }),
 	                _react2.default.createElement(_src.BarChart, _extends({}, barChartProps, {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 560
+	                        lineNumber: 551
 	                    }
 	                }))
 	            ),
@@ -1363,13 +1345,13 @@
 	                _src.XYPlot,
 	                _extends({}, xyProps, { axisLabel: { x: "Account Age", y: "Active Users" }, __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 562
+	                        lineNumber: 553
 	                    }
 	                }),
 	                _react2.default.createElement(_src.BarChart, _extends({}, barChartProps, {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 563
+	                        lineNumber: 554
 	                    }
 	                }))
 	            )
@@ -1377,95 +1359,7 @@
 	    }
 	});
 	
-	var V1Examples = _react2.default.createClass({
-	    displayName: 'V1Examples',
-	    getInitialState: function getInitialState() {
-	        return { hoveredV1LineChartData: null };
-	    },
-	    onMouseMoveV1LineChart: function onMouseMoveV1LineChart(d, index, event) {
-	        this.setState({ hoveredV1LineChartData: d });
-	    },
-	    render: function render() {
-	        var hoveredV1LineChartData = this.state.hoveredV1LineChartData;
-	
-	        return _react2.default.createElement(
-	            'div',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 578
-	                }
-	            },
-	            _react2.default.createElement(
-	                'h2',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 579
-	                    }
-	                },
-	                'v1'
-	            ),
-	            _react2.default.createElement(
-	                'h3',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 580
-	                    }
-	                },
-	                'Timeseries Line Chart'
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 582
-	                    }
-	                },
-	                hoveredV1LineChartData ? _react2.default.createElement(
-	                    'div',
-	                    {
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 584
-	                        }
-	                    },
-	                    hoveredV1LineChartData.date + '',
-	                    _react2.default.createElement('br', {
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 586
-	                        }
-	                    }),
-	                    'New York Temperature: ',
-	                    hoveredV1LineChartData.newYork
-	                ) : null,
-	                _react2.default.createElement('div', {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 591
-	                    }
-	                }),
-	                _react2.default.createElement(_src.V1LineChart, {
-	                    width: 1000,
-	                    height: 400,
-	                    data: tempDataClean,
-	                    plotKeys: ['newYork'],
-	                    dateKey: 'date',
-	                    onMouseMove: this.onMouseMoveV1LineChart,
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 593
-	                    }
-	                })
-	            )
-	        );
-	    }
-	});
-	
-	var examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'axisLabels', title: 'Axis Labels', Component: AxisLabelExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample }, { id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'v1', title: 'v1 Examples (old/deprecated)', Component: V1Examples }];
+	var examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'axisLabels', title: 'Axis Labels', Component: AxisLabelExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample }, { id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }];
 	
 	var App = _react2.default.createClass({
 	    displayName: 'App',
@@ -1485,7 +1379,7 @@
 	            {
 	                __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 638
+	                    lineNumber: 591
 	                }
 	            },
 	            _react2.default.createElement(
@@ -1493,7 +1387,7 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 639
+	                        lineNumber: 592
 	                    }
 	                },
 	                'Reactochart Examples'
@@ -1503,14 +1397,14 @@
 	                {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 641
+	                        lineNumber: 594
 	                    }
 	                },
 	                _react2.default.createElement(
 	                    _src.XYPlot,
 	                    { axisType: { x: 'ordinal' }, __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 642
+	                            lineNumber: 595
 	                        }
 	                    },
 	                    _react2.default.createElement(_src.LineChart, {
@@ -1518,7 +1412,7 @@
 	                        getValue: getXYArrayValue,
 	                        __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 643
+	                            lineNumber: 596
 	                        }
 	                    })
 	                )
@@ -1531,7 +1425,7 @@
 	            'div',
 	            { className: 'example-sections', __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 689
+	                    lineNumber: 642
 	                }
 	            },
 	            examples.map(this.renderExample)
@@ -1544,7 +1438,7 @@
 	            'div',
 	            { className: 'example-section example-section-' + example.id, key: '' + example.id, __source: {
 	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 696
+	                    lineNumber: 649
 	                }
 	            },
 	            _react2.default.createElement(
@@ -1554,7 +1448,7 @@
 	                    onClick: this.toggleExample.bind(null, example.id),
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 697
+	                        lineNumber: 650
 	                    }
 	                },
 	                example.title,
@@ -1562,7 +1456,7 @@
 	                    'span',
 	                    { className: 'example-arrow', __source: {
 	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 702
+	                            lineNumber: 655
 	                        }
 	                    },
 	                    isVisible ? " ▼" : " ►"
@@ -1572,13 +1466,13 @@
 	                'div',
 	                { className: 'example-section-content', __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 705
+	                        lineNumber: 658
 	                    }
 	                },
 	                _react2.default.createElement(ExampleComponent, {
 	                    __source: {
 	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 706
+	                        lineNumber: 659
 	                    }
 	                })
 	            ) : null
@@ -1589,7 +1483,7 @@
 	_reactDom2.default.render(_react2.default.createElement(App, {
 	    __source: {
 	        fileName: '../../../examples/src/main.js',
-	        lineNumber: 714
+	        lineNumber: 667
 	    }
 	}), document.getElementById('container'));
 	
@@ -22314,25 +22208,7 @@
 	  value: true
 	});
 	
-	var _LineChart = __webpack_require__(168);
-	
-	Object.defineProperty(exports, 'V1LineChart', {
-	  enumerable: true,
-	  get: function get() {
-	    return _LineChart.default;
-	  }
-	});
-	
-	var _PieChart = __webpack_require__(259);
-	
-	Object.defineProperty(exports, 'PieChart', {
-	  enumerable: true,
-	  get: function get() {
-	    return _PieChart.default;
-	  }
-	});
-	
-	var _XYPlot = __webpack_require__(261);
+	var _XYPlot = __webpack_require__(168);
 	
 	Object.defineProperty(exports, 'XYPlot', {
 	  enumerable: true,
@@ -22341,16 +22217,16 @@
 	  }
 	});
 	
-	var _LineChart2 = __webpack_require__(263);
+	var _LineChart = __webpack_require__(261);
 	
 	Object.defineProperty(exports, 'LineChart', {
 	  enumerable: true,
 	  get: function get() {
-	    return _LineChart2.default;
+	    return _LineChart.default;
 	  }
 	});
 	
-	var _BarChart = __webpack_require__(264);
+	var _BarChart = __webpack_require__(262);
 	
 	Object.defineProperty(exports, 'BarChart', {
 	  enumerable: true,
@@ -22359,7 +22235,7 @@
 	  }
 	});
 	
-	var _MarkerLineChart = __webpack_require__(265);
+	var _MarkerLineChart = __webpack_require__(263);
 	
 	Object.defineProperty(exports, 'MarkerLineChart', {
 	  enumerable: true,
@@ -22368,7 +22244,7 @@
 	  }
 	});
 	
-	var _ScatterPlot = __webpack_require__(266);
+	var _ScatterPlot = __webpack_require__(264);
 	
 	Object.defineProperty(exports, 'ScatterPlot', {
 	  enumerable: true,
@@ -22377,7 +22253,7 @@
 	  }
 	});
 	
-	var _Histogram = __webpack_require__(267);
+	var _Histogram = __webpack_require__(265);
 	
 	Object.defineProperty(exports, 'Histogram', {
 	  enumerable: true,
@@ -22386,7 +22262,7 @@
 	  }
 	});
 	
-	var _KernelDensityEstimation = __webpack_require__(268);
+	var _KernelDensityEstimation = __webpack_require__(266);
 	
 	Object.defineProperty(exports, 'KernelDensityEstimation', {
 	  enumerable: true,
@@ -22395,7 +22271,7 @@
 	  }
 	});
 	
-	var _AreaHeatmap = __webpack_require__(269);
+	var _AreaHeatmap = __webpack_require__(267);
 	
 	Object.defineProperty(exports, 'AreaHeatmap', {
 	  enumerable: true,
@@ -22404,7 +22280,16 @@
 	  }
 	});
 	
-	var _TreeMap = __webpack_require__(270);
+	var _PieChart = __webpack_require__(268);
+	
+	Object.defineProperty(exports, 'PieChart', {
+	  enumerable: true,
+	  get: function get() {
+	    return _PieChart.default;
+	  }
+	});
+	
+	var _TreeMap = __webpack_require__(269);
 	
 	Object.defineProperty(exports, 'TreeMap', {
 	  enumerable: true,
@@ -22419,9 +22304,9 @@
 
 	'use strict';
 	
-	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
-	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -22439,354 +22324,1141 @@
 	
 	var _d2 = _interopRequireDefault(_d);
 	
-	var _moment = __webpack_require__(172);
+	var _util = __webpack_require__(172);
+	
+	var _moment = __webpack_require__(173);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
+	var _numeral = __webpack_require__(166);
+	
+	var _numeral2 = _interopRequireDefault(_numeral);
+	
+	var _server = __webpack_require__(260);
+	
+	var _server2 = _interopRequireDefault(_server);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var PropTypes = _react2.default.PropTypes;
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	//const {PropTypes} = React;
 	
-	var TimeseriesLineChart = _react2.default.createClass({
-	    displayName: 'TimeseriesLineChart',
+	var PropTypes = _react2.default.PropTypes;
+	PropTypes = _lodash2.default.assign({}, PropTypes, {
+	    // all props that can apply to both axes take the form {x: val, y: val}
+	    xyObjectOf: function xyObjectOf(type) {
+	        return PropTypes.oneOfType([type, PropTypes.shape({ x: type, y: type })]);
+	    },
+	    axisType: PropTypes.oneOf(['number', 'time', 'ordinal']),
+	    //DomainType: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
+	    dataArray: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
+	    fourDirections: PropTypes.shape({
+	        top: PropTypes.number,
+	        bottom: PropTypes.number,
+	        left: PropTypes.number,
+	        right: PropTypes.number
+	    }),
+	    stringFormatter: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+	});
+	
+	var DEFAULTS = {
+	    axisType: { x: 'number', y: 'number' },
+	    nice: { x: true, y: true },
+	    invertAxis: { x: false, y: false },
+	    tickCount: { x: 10, y: 10 },
+	    tickLength: { x: 6, y: 6 },
+	    labelPadding: { x: 6, y: 6 },
+	    emptyLabel: "Unknown",
+	    showLabels: { x: true, y: true },
+	    showGrid: { x: true, y: true },
+	    showTicks: { x: true, y: true },
+	    showZero: { x: false, y: false },
+	    axisLabelPadding: { x: 10, y: 10 },
+	    axisLabelAlign: {
+	        x: { horizontal: 'left', vertical: 'top' },
+	        y: { horizontal: 'right', vertical: 'top' }
+	    },
+	
+	    // these values are inferred from data if not provided, therefore empty defaults
+	    margin: {}, padding: {}, spacing: {}, domain: {},
+	    ticks: {}, labelValues: {}, labelFormat: {}, axisLabel: {}
+	};
+	
+	var XYPlot = _react2.default.createClass({
+	    displayName: 'XYPlot',
 	
 	    propTypes: {
-	        // the array of data objects
-	        data: PropTypes.arrayOf(PropTypes.object).isRequired,
-	        // keys for props.data objects, whose values will be plotted (on y-axis)
-	        plotKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
-	        // key for props.data referring to the date (to be plotted on x-axis)
-	        dateKey: PropTypes.string,
-	
-	        // whether or not the scale of the Y-axis should always include zero
-	        shouldIncludeZero: PropTypes.bool,
-	        // whether or not to draw a zero line
-	        showZero: PropTypes.bool,
-	
-	        // whether or not to draw the tick lines on the X axis
-	        showXTicks: PropTypes.bool,
-	        // whether or not to draw X axis label text (dates)
-	        showXLabels: PropTypes.bool,
-	
-	        // whether or not to draw the tick lines on the Y axis
-	        showYTicks: PropTypes.bool,
-	        // whether or not to draw Y axis label text (values)
-	        showYLabels: PropTypes.bool,
-	
-	        // called when user mouses over the chart
-	        onMouseMove: PropTypes.func,
-	
-	        // true if the user can click and drag to select a date range
-	        // (this doesn't change the date range on the chart, just calls callback with range and shows highlight)
-	        isRangeSelectable: PropTypes.bool,
-	        // callback called when selected range changes
-	        // (this is a controlled component, parent must maintain selected range state)
-	        onChangeSelectedRange: PropTypes.func,
-	        // min and max dates of the selected range
-	        selectedRangeMin: PropTypes.object,
-	        selectedRangeMax: PropTypes.object,
-	
 	        // (outer) width and height of the chart
-	        width: PropTypes.number,
-	        height: PropTypes.number,
-	        // chart margins
-	        marginTop: PropTypes.number,
-	        marginBottom: PropTypes.number,
-	        marginLeft: PropTypes.number,
-	        marginRight: PropTypes.number
+	        width: PropTypes.number.isRequired,
+	        height: PropTypes.number.isRequired,
+	
+	        // chart margins (space around edges where axis labels live)
+	        margin: PropTypes.fourDirections,
+	        // internal chart padding (space between scale ends and edge of inner chart background)
+	        padding: PropTypes.fourDirections,
+	        // the max extra spacing required by the plot elements, if they were on the edge of the chart
+	        // eg. if a 10px radius dot is plotted at the end of one axis,
+	        // it needs 10px of spacing so it doesn't hang over the edge of the chart
+	        // spacing is the max possible necessary padding, and will == padding if plot elements are on scale extrema
+	        spacing: PropTypes.fourDirections,
+	
+	        // axis types - number, time or ordinal
+	        axisType: PropTypes.xyObjectOf(PropTypes.axisType),
+	        // scale domains may be provided, otherwise will be inferred from data
+	        domain: PropTypes.xyObjectOf(PropTypes.dataArray),
+	        // whether or not to extend the scales to end on nice values (see docs for d3 scale.linear.nice())
+	        nice: PropTypes.xyObjectOf(PropTypes.bool),
+	        // whether or not to invert the axis (ie. put largest numbers on bottom for Y axis, or on left for X)
+	        invertAxis: PropTypes.xyObjectOf(PropTypes.bool),
+	        // placement of the axis labels/ticks on the chart
+	        axisPosition: PropTypes.shape({
+	            x: PropTypes.oneOf(['top', 'bottom']),
+	            y: PropTypes.oneOf(['left', 'right'])
+	        }),
+	
+	        // approximate # of ticks to include on each axis - 10 is default
+	        // (actual # may be slightly different, to get nicest intervals)
+	        tickCount: PropTypes.xyObjectOf(PropTypes.number),
+	        // or alternatively, you can pass an array of the exact tick values to use on each axis
+	        ticks: PropTypes.xyObjectOf(PropTypes.dataArray),
+	        // size of axis ticks
+	        tickLength: PropTypes.xyObjectOf(PropTypes.number),
+	
+	        // axis value labels will be created for each tick, unless you specify a different list of values to label
+	        labelValues: PropTypes.xyObjectOf(PropTypes.dataArray),
+	        // format to use for the axis value labels. can be a function or a string.
+	        // if function, called on each label.
+	        // if string, interpreted as momentjs formats for time axes, or numeraljs formats for number axes
+	        labelFormat: PropTypes.xyObjectOf(PropTypes.stringFormatter),
+	        // padding between axis value labels and the axis/ticks
+	        labelPadding: PropTypes.xyObjectOf(PropTypes.number),
+	        // label to show for null/undefined values
+	        emptyLabel: PropTypes.string,
+	
+	        // should we draw axis value labels
+	        showLabels: PropTypes.xyObjectOf(PropTypes.bool),
+	        // should we draw the grid lines in the main chart space
+	        showGrid: PropTypes.xyObjectOf(PropTypes.bool),
+	        // should we draw the little tick lines along the axis
+	        showTicks: PropTypes.xyObjectOf(PropTypes.bool),
+	        // should we draw a line showing where zero is
+	        showZero: PropTypes.xyObjectOf(PropTypes.bool),
+	
+	        // label for entire axis, not value labels
+	        axisLabel: PropTypes.xyObjectOf(PropTypes.string),
+	        axisLabelAlign: PropTypes.xyObjectOf(PropTypes.shape({
+	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
+	            vertical: PropTypes.oneOf(['top', 'bottom'])
+	        })),
+	        axisLabelPadding: PropTypes.xyObjectOf(PropTypes.number),
+	
+	        // todo more interaction
+	        onMouseMove: PropTypes.func,
+	        onMouseEnter: PropTypes.func,
+	        onMouseLeave: PropTypes.func
+	
+	        // todo: minMargin - margin will be at least X, or more if necessary
+	        // todo: extraMargin - margin to add to calculated necessary margin
+	        // todo: minPadding, extraPadding ?
+	        // todo: minSpacing, extraSpacing ?
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return {
-	            dateKey: 'date',
-	            shouldIncludeZero: true,
-	            showZero: true,
-	            showXTicks: true,
-	            showXLabels: true,
-	            showYTicks: true,
-	            showYLabels: true,
-	            isRangeSelectable: false,
-	            onChangeSelectedRange: _lodash2.default.noop,
 	            width: 400,
-	            height: 250,
-	            marginTop: 10,
-	            marginBottom: 40,
-	            marginLeft: 60,
-	            marginRight: 10
+	            height: 250
 	        };
 	    },
 	    getInitialState: function getInitialState() {
-	        return {
-	            isSelecting: false,
-	            xScale: null,
-	            yScale: null,
-	            innerWidth: null,
-	            innerHeight: null
-	        };
+	        return {};
 	    },
 	    componentWillMount: function componentWillMount() {
-	        this.initScale(this.props);
-	        this.initDataLookup(this.props);
+	        this.trueProps = this.initProps(this.props);
+	        this.initLabelFormats(this.trueProps);
+	        this.initDomains(this.trueProps);
+	        this.initScale(this.trueProps);
 	    },
 	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
-	        this.initScale(newProps);
-	        this.initDataLookup(newProps);
+	        this.trueProps = this.initProps(newProps);
+	        this.initLabelFormats(this.trueProps);
+	        this.initDomains(this.trueProps);
+	        this.initScale(this.trueProps);
+	    },
+	    initProps: function initProps(props) {
+	        // this is a bit hacky, but we can't use getDefaultProps for most of the defaults,
+	        // because the user can pass in eg. {x: 'ordinal'} and we still want to default y to number
+	        var xyKeys = ['axisType', 'domain', 'nice', 'invertAxis', 'tickCount', 'ticks', 'tickLength', 'labelValues', 'labelFormat', 'labelPadding', 'showLabels', 'showGrid', 'showTicks', 'showZero', 'axisLabel', 'axisLabelAlign', 'axisLabelPadding'];
+	        var dirKeys = ['margin', 'padding', 'spacing'];
+	        var directions = ['top', 'bottom', 'left', 'right'];
+	
+	        function resolvePropObj(propKey, expectedKeys) {
+	            // resolves a passed prop key into the true object we use
+	            // by filling in defaults and converting single-passed values into the right format
+	            var val = props[propKey];
+	            return _lodash2.default.has(props, propKey) ?
+	            // check for the keys we expect to be in the object
+	            _lodash2.default.any(expectedKeys, function (k) {
+	                return _lodash2.default.has(val, k);
+	            }) ?
+	            // if some are present, fill in the rest with defaults
+	            _lodash2.default.defaults({}, val, DEFAULTS[propKey]) :
+	            // otherwise, user has passed in a single value, so set it as the value for all keys
+	            _lodash2.default.object(expectedKeys.map(function (k) {
+	                return [k, val];
+	            })) :
+	            // user didn't pass in anything, so use default
+	            _lodash2.default.clone(DEFAULTS[propKey]);
+	        }
+	
+	        var xyProps = _lodash2.default.assign.apply(this, xyKeys.map(function (k) {
+	            return _defineProperty({}, k, resolvePropObj(k, ['x', 'y']));
+	        }));
+	        var dirProps = _lodash2.default.assign.apply(this, dirKeys.map(function (k) {
+	            return _defineProperty({}, k, resolvePropObj(k, directions));
+	        }));
+	        var otherProps = _lodash2.default.omit(props, xyKeys.concat(dirKeys));
+	        //console.log(xyProps, dirProps, otherProps);
+	
+	        return _lodash2.default.assign({}, xyProps, dirProps, otherProps);
+	    },
+	    initDomains: function initDomains(props) {
+	        var axisType = props.axisType;
+	        var ticks = props.ticks;
+	        var labelValues = props.labelValues;
+	
+	        // figure out the domains for each axis (ie. data extents)
+	        // unless both domains are given, ask each child chart for it's desired domain, & flatten them into one domain.
+	        // this is so that charts can plot their own modified version of the data (ie. a histogram),
+	        // even if it has a different domain than the original data
+	        // todo: only do this when necessary
+	
+	        var allChartOptions = [];
+	        _react2.default.Children.forEach(props.children, function (child) {
+	            if (!childIsXYChart(child)) return; // only get options for children which identify themselves as XYCharts
+	
+	            var childProps = _lodash2.default.assign({}, { axisType: axisType }, child.props);
+	
+	            var _ref3 = _lodash2.default.isFunction(child.type.getOptions) ? child.type.getOptions(childProps) : {};
+	
+	            var domain = _ref3.domain;
+	            var spacing = _ref3.spacing;
+	
+	            domain = domain || {};
+	            ['x', 'y'].forEach(function (k) {
+	                if (isNullOrUndefined(domain[k])) domain[k] = defaultDomain(child.props.data, child.props.getValue[k], axisType[k]);
+	            });
+	            spacing = isNullOrUndefined(spacing) ? _lodash2.default.clone(DEFAULTS.spacing) : _lodash2.default.defaults({}, spacing, DEFAULTS.spacing);
+	
+	            allChartOptions.push({ domain: domain, spacing: spacing });
+	        });
+	
+	        // use domain from props if provided, else calculated domains from children
+	        var domains = _lodash2.default.object(_lodash2.default.map(['x', 'y'], function (k) {
+	            return [k, props.domain[k] || _lodash2.default.compact(_lodash2.default.pluck(allChartOptions, 'domain.' + k))];
+	        }));
+	        // if user has passed in custom ticks or label values, extend the domain to ensure they are all are included
+	        ['x', 'y'].forEach(function (k) {
+	            var isOrdinal = axisType[k] === 'ordinal';
+	            [ticks[k], labelValues[k]].forEach(function (values) {
+	                if (values) domains[k].push(isOrdinal ? values : _d2.default.extent(values));
+	            });
+	        });
+	        // use spacing from props if provided, else calculated spacings from children
+	        var spacings = _lodash2.default.pluck(allChartOptions, 'spacing').map(function (spacing) {
+	            return _lodash2.default.defaults({}, spacing, props.spacing);
+	        });
+	
+	        _lodash2.default.assign(this, { domains: domains, spacings: spacings });
+	    },
+	    initLabelFormats: function initLabelFormats(props) {
+	        this.labelFormat = _lodash2.default.object(_lodash2.default.map(['x', 'y'], function (k) {
+	            var axisType = props.axisType[k];
+	            // use given format if provided
+	            return _lodash2.default.isObject(props.labelFormat) && _lodash2.default.has(props.labelFormat, k) ? [k, props.labelFormat[k]] :
+	            // otherwise determine appropriate format for axis type
+	            axisType == 'number' ? [k, '0.[000000]a'] :
+	            // todo determine most appropriate date format for this domain
+	            axisType === 'time' ? [k, 'MM-DD'] : [k, undefined];
+	        }));
 	    },
 	    initScale: function initScale(props) {
-	        var innerWidth = props.width - (props.marginLeft + props.marginRight);
-	        var innerHeight = props.height - (props.marginTop + props.marginBottom);
-	        var data = props.data;
-	        var dateKey = props.dateKey;
-	        var plotKeys = props.plotKeys;
-	        var shouldIncludeZero = props.shouldIncludeZero;
+	        var _this = this;
 	
-	        // todo handle missing values/date gaps
+	        // create the X and Y scales shared by charts
+	        // calculate the inner width and height based on margins
+	        var width = props.width;
+	        var height = props.height;
+	        var axisType = props.axisType;
+	        var tickCount = props.tickCount;
+	        var nice = props.nice;
+	        var axisLabel = props.axisLabel;
+	        var axisLabelPadding = props.axisLabelPadding;
+	        var labelPadding = props.labelPadding;
+	        var tickLength = props.tickLength;
+	        var showTicks = props.showTicks;
+	        var domains = this.domains;
+	        var spacings = this.spacings;
+	        var labelFormat = this.labelFormat;
 	
-	        var xScale = _d2.default.time.scale().range([0, innerWidth]).domain(_d2.default.extent(data, function (d) {
-	            return d[dateKey];
-	        }));
+	        var origMargin = props.margin;
+	        var origPadding = props.padding;
 	
-	        var yScale = _d2.default.scale.linear().range([innerHeight, 0])
-	        // get the max/min for each dataset we're plotting, then the overall max/min of all of them
-	        .domain(_d2.default.extent(_lodash2.default.flatten(_lodash2.default.map(plotKeys, function (plotKey) {
-	            return _d2.default.extent(data, function (d) {
-	                return d[plotKey];
-	            });
-	        }).concat(shouldIncludeZero ? [0] : []))))
-	        // extend domain to start/end at nice round values
-	        .nice();
+	        // todo fix
+	        var shouldMeasureLabels = true;
+	        if (shouldMeasureLabels) {
+	            (function () {
+	                // several inferred variables depend on each other in a complicated/circular way:
+	                // the axis scales, margin, padding, ticks and labels.
+	                // eg. scale width depends on margin, which depends on the axis labels, which depend on the scale
+	                // so we set some sane initial values and iterate until it settles down (or we get tired of waiting)
 	
-	        this.setState({ xScale: xScale, yScale: yScale, innerWidth: innerWidth, innerHeight: innerHeight });
-	    },
-	    initDataLookup: function initDataLookup(props) {
-	        this.setState({ bisectDate: _d2.default.bisector(function (d) {
-	                return d[props.dateKey];
-	            }).left });
-	    },
-	    onMouseDown: function onMouseDown(e) {
-	        var chartBB = e.currentTarget.getBoundingClientRect();
-	        var chartX = e.clientX - chartBB.left - this.props.marginLeft;
-	        var chartDate = this.state.xScale.invert(chartX);
+	                // start with a margin of 10 pixels for all unknown margins
+	                //let margin = _.transform(origMargin, (result, m, key) => result[key] = isNullOrUndefined(m) ? 10 : m);
+	                var margin = _lodash2.default.defaults({}, origMargin, { top: 10, bottom: 10, left: 10, right: 10 });
+	                // and padding equal to the first chart's spacing for unknown paddings
+	                //let padding = _.transform(origPadding, (res, p, key) => res[key] = _.isNull(p) ? spacings[0][key] : p);
+	                var padding = _lodash2.default.defaults({}, origPadding, { top: 0, bottom: 0, left: 0, right: 0 });
+	                // make scales using margin, measure labels, make new margins
+	                // repeat until we converge on a margin that works
+	                var scaleWidth = undefined,
+	                    scaleHeight = undefined,
+	                    labelBoxes = undefined;
+	                var scale = {};
+	                var ticks = {};
 	
-	        this.setState({ isSelecting: true });
-	        this.props.onChangeSelectedRange(chartDate, chartDate, true);
-	    },
-	    onMouseUp: function onMouseUp(e) {
-	        var chartBB = e.currentTarget.getBoundingClientRect();
-	        var chartX = e.clientX - chartBB.left - this.props.marginLeft;
-	        var chartDate = this.state.xScale.invert(chartX);
+	                var isDone = false,
+	                    i = 0,
+	                    limit = 5; // don't loop forever
 	
-	        this.setState({ isSelecting: false });
-	        if (chartDate > this.props.selectedRangeMin) this.props.onChangeSelectedRange(this.props.selectedRangeMin, chartDate, false);else this.props.onChangeSelectedRange(chartDate, this.props.selectedRangeMin, false);
+	                var _loop = function _loop() {
+	                    i++;
+	                    // calculate scale width based on previous margin
+	                    scaleWidth = width - (margin.left + margin.right + padding.left + padding.right);
+	                    scaleHeight = height - (margin.top + margin.bottom + padding.top + padding.bottom);
+	                    var range = {
+	                        x: [padding.left, scaleWidth + padding.left],
+	                        y: [scaleHeight + padding.top, padding.top]
+	                    };
+	
+	                    ['x', 'y'].forEach(function (k) {
+	                        scale[k] = makeScale(domains[k], range[k], axisType[k], nice[k], tickCount[k]);
+	                        if (props.invertAxis[k]) scale[k].domain(scale[k].domain().reverse());
+	                        ticks[k] = props.ticks[k] || (axisType[k] === 'ordinal' ? scale[k].domain() : scale[k].ticks(tickCount[k]));
+	                    });
+	
+	                    labelBoxes = measureAxisLabels(_this.getXAxisProps({ scaleWidth: scaleWidth, scaleHeight: scaleHeight, scale: scale.x, ticks: ticks.x }), _this.getYAxisProps({ scaleWidth: scaleWidth, scaleHeight: scaleHeight, scale: scale.y, ticks: ticks.y }), axisLabel.x ? _this.getXAxisLabelProps({ margin: margin }) : null, axisLabel.y ? _this.getYAxisLabelProps({ margin: margin }) : null);
+	
+	                    // calculate padding based on spacings and domains
+	                    // spacing is the amount of outer space ('margin') required by the outermost elements of each chart,
+	                    // so that they still fit within the chart boundaries, defined by chartWidth and chartHeight.
+	                    // padding is the actual amount of extra space required, after taking into account the scales.
+	                    // if the outermost chart elements are on the scale extrema, padding = spacing,
+	                    // but the scale may extend beyond the last element anyway, so we may not need the extra padding.
+	                    // NOTE: temporarily set as padding = max spacing, todo: implement real padding
+	                    padding = _lodash2.default.defaults(origPadding, _lodash2.default.reduce(spacings, function (newPadding, spacing) {
+	                        return _lodash2.default.transform(spacing, function (result, space, dir) {
+	                            result[dir] = Math.max(newPadding[dir] || space);
+	                        });
+	                    }, {}), { top: 0, bottom: 0, left: 0, right: 0 });
+	
+	                    // todo: modify to handle all possible label alignments
+	                    // todo: handle case of labels not shown (ie if !this.props.showYLabels)
+	                    var hasXAxisLabel = axisLabel.x && labelBoxes.xAxis;
+	                    var hasYAxisLabel = axisLabel.y && labelBoxes.yAxis;
+	                    var hasXValLabels = !!labelBoxes.xVal.length;
+	                    var hasYValLabels = !!labelBoxes.yVal.length;
+	
+	                    var xRange = scale.x.range();
+	                    var yRange = scale.y.range();
+	
+	                    // find # of pixels by which the top- and bottom-most y axis labels overhang the top/bottom chart edges
+	
+	                    var topYTick = _lodash2.default.min(ticks.y, scale.y);
+	
+	                    var bottomYTick = _lodash2.default.max(ticks.y, scale.y);
+	
+	                    var topYTickFromTop = Math.abs(scale.y(topYTick) - _lodash2.default.min(yRange));
+	                    var bottomYTickFromBottom = Math.abs(scale.y(bottomYTick) - _lodash2.default.max(yRange));
+	
+	                    var _ref4 = hasYValLabels ? [_lodash2.default.min(labelBoxes.yVal, (0, _util.accessor)('top')), _lodash2.default.max(labelBoxes.yVal, (0, _util.accessor)('top'))] : [null, null];
+	
+	                    var _ref5 = _slicedToArray(_ref4, 2);
+	
+	                    var topYValBox = _ref5[0];
+	                    var bottomYValBox = _ref5[1];
+	
+	                    var _ref6 = hasYValLabels ? [Math.ceil(Math.max(0.5 * topYValBox.height - (topYTickFromTop + padding.top), 0)), Math.ceil(Math.max(0.5 * bottomYValBox.height - (bottomYTickFromBottom + padding.bottom), 0))] : [0, 0];
+	
+	                    var _ref7 = _slicedToArray(_ref6, 2);
+	
+	                    var topYValOverhang = _ref7[0];
+	                    var bottomYValOverhang = _ref7[1];
+	
+	                    // find # of pixels by which the left- and right-most x axis labels overhang the left/right chart edges
+	
+	                    var leftXTick = _lodash2.default.min(ticks.x, scale.x);
+	
+	                    var rightXTick = _lodash2.default.max(ticks.x, scale.x);
+	
+	                    var leftXTickFromLeft = Math.abs(scale.x(leftXTick) - _lodash2.default.min(xRange));
+	                    var rightXTickFromRight = Math.abs(scale.x(rightXTick) - _lodash2.default.max(xRange));
+	
+	                    var _ref8 = hasXValLabels ? [_lodash2.default.min(labelBoxes.xVal, (0, _util.accessor)('left')), _lodash2.default.max(labelBoxes.xVal, (0, _util.accessor)('right'))] : [null, null];
+	
+	                    var _ref9 = _slicedToArray(_ref8, 2);
+	
+	                    var leftXValBox = _ref9[0];
+	                    var rightXValBox = _ref9[1];
+	
+	                    var _ref10 = hasXValLabels ? [Math.ceil(Math.max(0.5 * leftXValBox.width - (leftXTickFromLeft + padding.left), 0)), Math.ceil(Math.max(0.5 * rightXValBox.width - (rightXTickFromRight + padding.right), 0))] : [0, 0];
+	
+	                    var _ref11 = _slicedToArray(_ref10, 2);
+	
+	                    var leftXValOverhang = _ref11[0];
+	                    var rightXValOverhang = _ref11[1];
+	
+	                    // todo: fix all of this... sigh...
+	                    //
+	
+	                    var xAxisLabelOuterHeight = hasXAxisLabel ? Math.ceil(labelBoxes.xAxis.height + axisLabelPadding.x) : 0;
+	                    var yAxisLabelOuterHeight = hasYAxisLabel ? Math.ceil(labelBoxes.yAxis.height + axisLabelPadding.y) : 0;
+	
+	                    var topMargin = _lodash2.default.has(origMargin, 'top') ? origMargin.top : Math.max(topYValOverhang, xAxisLabelOuterHeight, yAxisLabelOuterHeight);
+	
+	                    var yTickAndPadSpace = (hasYValLabels || hasYAxisLabel ? labelPadding.y : 0) + (showTicks.y ? tickLength.y : 0);
+	
+	                    var maxYValWidth = (hasYValLabels ? Math.ceil(_d2.default.max(labelBoxes.yVal, (0, _util.accessor)('width'))) : 0) + yTickAndPadSpace;
+	                    var yAxisLabelOuterWidth = hasYAxisLabel ? Math.ceil(labelBoxes.yAxis.width) + yTickAndPadSpace : 0;
+	                    //console.log(maxYValWidth, yAxisLabelOuterWidth);
+	
+	                    var leftMargin = _lodash2.default.has(origMargin, 'left') ? origMargin.left : Math.max(leftXValOverhang, maxYValWidth, yAxisLabelOuterWidth);
+	
+	                    var xTickAndPadSpace = (hasXValLabels || hasXAxisLabel ? labelPadding.x : 0) + (showTicks.x ? tickLength.x : 0);
+	
+	                    var maxXValHeight = (hasXValLabels ? Math.ceil(_d2.default.max(labelBoxes.xVal, (0, _util.accessor)('height'))) : 0) + xTickAndPadSpace;
+	
+	                    var requiredMargin = {
+	                        top: topMargin,
+	                        bottom: maxXValHeight,
+	                        left: leftMargin,
+	                        right: rightXValOverhang
+	                    };
+	
+	                    var newMargin = (0, _lodash2.default)(requiredMargin).map(function (v, k) {
+	                        return [k, _lodash2.default.has(origMargin, k) ? origMargin[k] : v];
+	                    }).object().value();
+	
+	                    isDone = _lodash2.default.all(_lodash2.default.keys(margin), function (k) {
+	                        return margin[k] === newMargin[k];
+	                    });
+	                    //console.log('calculated margin', newMargin);
+	                    margin = newMargin;
+	                    scaleWidth = width - (margin.left + margin.right + padding.left + padding.right);
+	                    scaleHeight = height - (margin.top + margin.bottom + padding.top + padding.bottom);
+	                };
+	
+	                while (!isDone && i < limit) {
+	                    _loop();
+	                }
+	                //console.log('padding', padding);
+	                //console.log({scaleWidth, scaleHeight});
+	                _lodash2.default.assign(_this, { scale: scale, ticks: ticks, margin: margin, padding: padding, scaleWidth: scaleWidth, scaleHeight: scaleHeight, labelBoxes: labelBoxes });
+	            })();
+	        } else {
+	            // margins are all pre-defined, just make the scales
+	            // todo still need to determine padding??
+	            //const scaleWidth = width - (props.margin.left + props.margin.right);
+	            //const scaleHeight = height - (props.margin.top + props.margin.bottom);
+	            //const xScale = makeScale(this.xDomains, [0, scaleWidth], xType);
+	            //const yScale = makeScale(this.yDomains, [scaleHeight, 0], yType);
+	            //_.assign(this, {margin: props.margin, scaleWidth, scaleHeight, xScale, yScale});
+	        }
 	    },
 	    onMouseMove: function onMouseMove(e) {
-	        if (!this.props.onMouseMove && !this.state.isSelecting) return;
+	        var _trueProps = this.trueProps;
+	        var axisType = _trueProps.axisType;
+	        var height = _trueProps.height;
+	        var width = _trueProps.width;
+	        var margin = this.margin;
+	        var padding = this.padding;
+	        var scale = this.scale;
+	        var scaleWidth = this.scaleWidth;
+	        var scaleHeight = this.scaleHeight;
+	        // todo faster method than getBoundingClientRect on every mouseover?
 	
 	        var chartBB = e.currentTarget.getBoundingClientRect();
-	        var chartX = e.clientX - chartBB.left - this.props.marginLeft;
-	        var chartDate = this.state.xScale.invert(chartX);
-	        var closestDataIndex = this.state.bisectDate(this.props.data, chartDate);
+	        var chartX = Math.round(e.clientX - chartBB.left - margin.left);
+	        var chartY = Math.round(e.clientY - chartBB.top - margin.top);
 	
-	        if (this.props.onMouseMove) this.props.onMouseMove(this.props.data[closestDataIndex], closestDataIndex, e);
+	        var chartXVal = !_lodash2.default.inRange(chartX, 0, scaleWidth + padding.left + padding.right) ? null : axisType.x === 'ordinal' ? scale.x.domain()[indexOfClosestNumberInList(chartX, scale.x.range())] : scale.x.invert(chartX);
+	        var chartYVal = !_lodash2.default.inRange(chartY, 0, scaleHeight + padding.top + padding.bottom) ? null : axisType.y === 'ordinal' ? scale.y.domain()[indexOfClosestNumberInList(chartY, scale.y.range())] : scale.y.invert(chartY);
 	
-	        if (!this.state.isSelecting) return;
+	        var chart = this.refs['chart-series-0'];
+	        var hovered = chart && _lodash2.default.isFunction(chart.getHovered) ? chart.getHovered(chartXVal) : null;
 	
-	        if (chartDate > this.props.selectedRangeMin) this.props.onChangeSelectedRange(this.props.selectedRangeMin, chartDate, true);else this.props.onChangeSelectedRange(chartDate, this.props.selectedRangeMin, true);
+	        this.trueProps.onMouseMove(hovered, e, { chartX: chartX, chartY: chartY, chartXVal: chartXVal, chartYVal: chartYVal });
+	    },
+	    onMouseEnter: function onMouseEnter(e) {
+	        this.trueProps.onMouseEnter(e);
+	    },
+	    onMouseLeave: function onMouseLeave(e) {
+	        this.trueProps.onMouseLeave(e);
 	    },
 	    render: function render() {
-	        console.log('rendered line chart');
-	        var _state = this.state;
-	        var xScale = _state.xScale;
-	        var yScale = _state.yScale;
-	        var _props = this.props;
-	        var data = _props.data;
-	        var dateKey = _props.dateKey;
-	        var plotKeys = _props.plotKeys;
-	        var isRangeSelectable = _props.isRangeSelectable;
-	        var width = _props.width;
-	        var height = _props.height;
-	        var marginLeft = _props.marginLeft;
-	        var marginTop = _props.marginTop;
+	        var _trueProps2 = this.trueProps;
+	        var children = _trueProps2.children;
+	        var width = _trueProps2.width;
+	        var height = _trueProps2.height;
+	        var axisType = _trueProps2.axisType;
+	        var axisLabel = _trueProps2.axisLabel;
+	        var onMouseMove = _trueProps2.onMouseMove;
+	        var onMouseEnter = _trueProps2.onMouseEnter;
+	        var onMouseLeave = _trueProps2.onMouseLeave;
+	        var invertAxis = _trueProps2.invertAxis;
+	        var scale = this.scale;
+	        var margin = this.margin;
+	        var padding = this.padding;
+	        var scaleWidth = this.scaleWidth;
+	        var scaleHeight = this.scaleHeight;
+	        var ticks = this.ticks;
 	
-	        var points = _lodash2.default.map(data, function (d) {
-	            return [xScale(d[dateKey]), yScale(d[plotKeys[0]])];
+	        var chartWidth = scaleWidth + padding.left + padding.right;
+	        var chartHeight = scaleHeight + padding.top + padding.bottom;
+	
+	        var propsToPass = {
+	            axisType: axisType, invertAxis: invertAxis, scale: scale, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: width, plotHeight: height,
+	            chartMargin: margin, chartPadding: padding, margin: margin, padding: padding, ticks: ticks
+	        };
+	
+	        var childrenUnderAxes = _react2.default.Children.map(children, function (child, i) {
+	            if (!child || !child.props || !child.props.underAxes) return null;
+	            // todo fix chart series #
+	            var name = child.props.name || 'chart-series-' + i;
+	            return _react2.default.cloneElement(child, _lodash2.default.assign({ ref: name, name: name }, propsToPass));
 	        });
-	        var pathStr = pointsToPathStr(points);
+	        var childrenAboveAxes = _react2.default.Children.map(children, function (child, i) {
+	            if (!child || child.props && child.props.underAxes) return null;
+	            var name = child.props.name || 'chart-series-' + i;
+	            return _react2.default.cloneElement(child, _lodash2.default.assign({ ref: name, name: name }, propsToPass));
+	        });
 	
 	        return _react2.default.createElement(
 	            'svg',
-	            _extends({ className: 'line-chart'
-	            }, { width: width, height: height }, {
-	                onMouseDown: this.onMouseDown,
-	                onMouseUp: this.onMouseUp,
-	                onMouseMove: this.onMouseMove,
+	            _extends({ className: 'xy-plot' }, { width: width, height: height }, {
+	                onMouseMove: _lodash2.default.isFunction(onMouseMove) ? this.onMouseMove : null,
+	                onMouseEnter: _lodash2.default.isFunction(onMouseEnter) ? this.onMouseEnter : null,
+	                onMouseLeave: _lodash2.default.isFunction(onMouseLeave) ? this.onMouseLeave : null,
 	                __source: {
-	                    fileName: '../../../src/v1/LineChart.js',
-	                    lineNumber: 166
+	                    fileName: '../../../src/charts/XYPlot.js',
+	                    lineNumber: 453
 	                }
 	            }),
 	            _react2.default.createElement(
 	                'g',
 	                { className: 'chart-inner',
-	                    transform: 'translate(' + marginLeft + ', ' + marginTop + ')',
+	                    transform: 'translate(' + margin.left + ', ' + margin.top + ')',
 	                    __source: {
-	                        fileName: '../../../src/v1/LineChart.js',
-	                        lineNumber: 172
+	                        fileName: '../../../src/charts/XYPlot.js',
+	                        lineNumber: 458
 	                    }
 	                },
-	                isRangeSelectable ? this.renderSelectedRange() : null,
-	                this.renderXAxis(),
-	                this.renderYAxis(),
-	                _react2.default.createElement(
-	                    'g',
-	                    {
-	                        __source: {
-	                            fileName: '../../../src/v1/LineChart.js',
-	                            lineNumber: 181
-	                        }
-	                    },
-	                    _react2.default.createElement('path', { className: 'chart-line', d: pathStr, __source: {
-	                            fileName: '../../../src/v1/LineChart.js',
-	                            lineNumber: 182
-	                        }
-	                    })
-	                )
-	            )
-	        );
-	    },
-	    renderXAxis: function renderXAxis() {
-	        var _props2 = this.props;
-	        var showXTicks = _props2.showXTicks;
-	        var showXLabels = _props2.showXLabels;
-	
-	        if (!(showXTicks || showXLabels)) return null;
-	        var _state2 = this.state;
-	        var xScale = _state2.xScale;
-	        var innerHeight = _state2.innerHeight;
-	
-	        var xTicks = xScale.ticks();
-	
-	        return _react2.default.createElement(
-	            'g',
-	            { className: 'chart-axis chart-axis-x', transform: 'translate(0, ' + innerHeight + ')', __source: {
-	                    fileName: '../../../src/v1/LineChart.js',
-	                    lineNumber: 195
+	                _react2.default.createElement('rect', { className: 'chart-background', width: chartWidth, height: chartHeight, __source: {
+	                        fileName: '../../../src/charts/XYPlot.js',
+	                        lineNumber: 461
+	                    }
+	                }),
+	                childrenUnderAxes,
+	                _react2.default.createElement(ChartAxis, _extends({}, this.getXAxisProps(), {
+	                    __source: {
+	                        fileName: '../../../src/charts/XYPlot.js',
+	                        lineNumber: 465
+	                    }
+	                })),
+	                _react2.default.createElement(ChartAxis, _extends({}, this.getYAxisProps(), {
+	                    __source: {
+	                        fileName: '../../../src/charts/XYPlot.js',
+	                        lineNumber: 466
+	                    }
+	                })),
+	                childrenAboveAxes
+	            ),
+	            axisLabel.x ? _react2.default.createElement(XAxisLabel, _extends({}, this.getXAxisLabelProps(), {
+	                __source: {
+	                    fileName: '../../../src/charts/XYPlot.js',
+	                    lineNumber: 472
 	                }
-	            },
-	            _lodash2.default.map(xTicks, function (date) {
-	                return _react2.default.createElement(
-	                    'g',
-	                    { transform: 'translate(' + xScale(date) + ', 0)', __source: {
-	                            fileName: '../../../src/v1/LineChart.js',
-	                            lineNumber: 197
-	                        }
-	                    },
-	                    showXTicks ? _react2.default.createElement('line', { className: 'chart-tick chart-tick-x', x2: 0, y2: 6, __source: {
-	                            fileName: '../../../src/v1/LineChart.js',
-	                            lineNumber: 199
-	                        }
-	                    }) : null,
-	                    showXLabels ? _react2.default.createElement(
-	                        'text',
-	                        { className: 'chart-axis-label chart-x-label', dy: '0.8em', y: '9', __source: {
-	                                fileName: '../../../src/v1/LineChart.js',
-	                                lineNumber: 203
-	                            }
-	                        },
-	                        (0, _moment2.default)(date).format("MMM 'YY")
-	                    ) : null
-	                );
-	            })
-	        );
-	    },
-	    renderYAxis: function renderYAxis() {
-	        var _props3 = this.props;
-	        var showYTicks = _props3.showYTicks;
-	        var showYLabels = _props3.showYLabels;
-	
-	        if (!(showYTicks || showYLabels)) return null;
-	        var _state3 = this.state;
-	        var yScale = _state3.yScale;
-	        var innerWidth = _state3.innerWidth;
-	
-	        var yTicks = yScale.ticks();
-	
-	        return _react2.default.createElement(
-	            'g',
-	            { className: 'chart-axis chart-axis-y', __source: {
-	                    fileName: '../../../src/v1/LineChart.js',
-	                    lineNumber: 218
+	            })) : null,
+	            axisLabel.y ? _react2.default.createElement(YAxisLabel, _extends({}, this.getYAxisLabelProps(), {
+	                __source: {
+	                    fileName: '../../../src/charts/XYPlot.js',
+	                    lineNumber: 476
 	                }
-	            },
-	            _lodash2.default.map(yTicks, function (value) {
-	                return _react2.default.createElement(
-	                    'g',
-	                    { transform: 'translate(0, ' + yScale(value) + ')', __source: {
-	                            fileName: '../../../src/v1/LineChart.js',
-	                            lineNumber: 220
-	                        }
-	                    },
-	                    showYTicks ? _react2.default.createElement('line', { className: 'chart-tick chart-tick-y', x2: innerWidth, y2: 0, __source: {
-	                            fileName: '../../../src/v1/LineChart.js',
-	                            lineNumber: 222
-	                        }
-	                    }) : null,
-	                    showYLabels ? _react2.default.createElement(
-	                        'text',
-	                        { className: 'chart-axis-label chart-y-label', dy: '0.32em', x: -3, __source: {
-	                                fileName: '../../../src/v1/LineChart.js',
-	                                lineNumber: 226
-	                            }
-	                        },
-	                        value
-	                    ) : null
-	                );
-	            })
+	            })) : null
 	        );
 	    },
-	    renderSelectedRange: function renderSelectedRange() {
-	        var _state4 = this.state;
-	        var xScale = _state4.xScale;
-	        var yScale = _state4.yScale;
-	        var innerWidth = _state4.innerWidth;
-	        var innerHeight = _state4.innerHeight;
-	        var _props4 = this.props;
-	        var isRangeSelectable = _props4.isRangeSelectable;
-	        var selectedRangeMin = _props4.selectedRangeMin;
-	        var selectedRangeMax = _props4.selectedRangeMax;
+	    getXAxisProps: function getXAxisProps() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	
-	        if (!(isRangeSelectable && selectedRangeMin && selectedRangeMax)) return null;
+	        var scaleHeight = options.scaleHeight || this.scaleHeight;
+	        var padding = options.padding || this.padding || {};
+	        return this.getAxisProps(_lodash2.default.assign({
+	            letter: 'x',
+	            orientation: 'horizontal',
+	            axisTransform: 'translate(0, ' + (scaleHeight + (padding.top || 0) + (padding.bottom || 0)) + ')'
+	        }, options));
+	    },
+	    getYAxisProps: function getYAxisProps() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	
-	        var x = xScale(selectedRangeMin);
-	        var width = xScale(selectedRangeMax) - x;
+	        return this.getAxisProps(_lodash2.default.assign({
+	            letter: 'y',
+	            orientation: 'vertical'
+	        }, options));
+	    },
+	    getAxisProps: function getAxisProps(options) {
+	        var props = this.trueProps;
+	        var k = options.letter;
 	
-	        return _react2.default.createElement('rect', _extends({
-	            className: 'chart-selected-range'
-	        }, { x: x, width: width }, {
-	            y: yScale.range()[1], height: innerHeight,
+	        return _lodash2.default.defaults({}, options, {
+	            scale: _lodash2.default.get(this.scale, k),
+	            padding: this.padding,
+	            scaleHeight: this.scaleHeight,
+	            scaleWidth: this.scaleWidth,
+	            labelFormat: this.labelFormat[k],
+	            type: props.axisType[k],
+	            tickCount: props.tickCount[k],
+	            ticks: _lodash2.default.get(this.ticks, k) || [],
+	            labels: props.labelValues[k],
+	            labelPadding: props.labelPadding[k],
+	            emptyLabel: props.emptyLabel,
+	            tickLength: props.tickLength[k],
+	            showLabels: props.showLabels[k],
+	            showTicks: props.showTicks[k],
+	            showGrid: props.showGrid[k],
+	            showZero: props.showZero[k]
+	        });
+	    },
+	    getXAxisLabelProps: function getXAxisLabelProps() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	
+	        return this.getAxisLabelProps('x', options);
+	    },
+	    getYAxisLabelProps: function getYAxisLabelProps() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	
+	        return this.getAxisLabelProps('y', options);
+	    },
+	    getAxisLabelProps: function getAxisLabelProps(k) {
+	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	        var props = this.trueProps;
+	        var labelBoxes = this.labelBoxes;
+	        var margin = this.margin;
+	        var scaleWidth = this.scaleWidth;
+	        var scaleHeight = this.scaleHeight;
+	
+	        return _lodash2.default.defaults({}, options, {
+	            margin: margin, scaleWidth: scaleWidth, scaleHeight: scaleHeight,
+	            label: _lodash2.default.get(props.axisLabel, k),
+	            alignment: _lodash2.default.get(props.axisLabelAlign, k),
+	            axisLabelPadding: _lodash2.default.get(props.axisLabelPadding, k),
+	            valueLabelPadding: _lodash2.default.get(props.labelPadding, k),
+	            tickLength: _lodash2.default.get(props.tickLength, k),
+	            showTicks: _lodash2.default.get(props.showTicks, k),
+	            labelBox: labelBoxes && labelBoxes[k + 'Axis'] ? labelBoxes[k + 'Axis'] : { width: 10, height: 10 }
+	        });
+	    }
+	});
+	
+	var XGrid = _react2.default.createClass({
+	    displayName: 'XGrid',
+	
+	    propTypes: {
+	        ticks: PropTypes.array,
+	        scale: PropTypes.array,
+	        chartWidth: PropTypes.number,
+	        chartHeight: PropTypes.number
+	    },
+	    render: function render() {
+	        var _props = this.props;
+	        var ticks = _props.ticks;
+	        var scale = _props.scale;
+	        var chartWidth = _props.chartWidth;
+	        var chartHeight = _props.chartHeight;
+	
+	        return ticks.map(function (value, i) {
+	            var x = scale(value);
+	        });
+	    }
+	});
+	
+	var GridLine = _react2.default.createClass({
+	    displayName: 'GridLine',
+	    render: function render(options) {
+	        var letter = options.letter;
+	        var gridLength = options.gridLength;
+	        var orientation = options.orientation;
+	
+	        var className = 'chart-grid chart-grid-' + (letter || '');
+	
+	        var _ref12 = orientation === 'vertical' ? [gridLength, 0] : [0, -gridLength];
+	
+	        var _ref13 = _slicedToArray(_ref12, 2);
+	
+	        var x2 = _ref13[0];
+	        var y2 = _ref13[1];
+	
+	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
 	            __source: {
-	                fileName: '../../../src/v1/LineChart.js',
-	                lineNumber: 243
+	                fileName: '../../../src/charts/XYPlot.js',
+	                lineNumber: 567
 	            }
 	        }));
 	    }
 	});
 	
-	function pointsToPathStr(points) {
-	    // takes array of points in [[x, y], [x, y]... ] format
-	    // returns SVG path string in "M X Y L X Y" format
-	    // https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Line_commands
-	    return _lodash2.default.map(points, function (_ref, i) {
-	        var _ref2 = _slicedToArray(_ref, 2);
+	var XAxisLabel = _react2.default.createClass({
+	    displayName: 'XAxisLabel',
 	
-	        var x = _ref2[0];
-	        var y = _ref2[1];
+	    propTypes: {
+	        label: PropTypes.string,
+	        //letter: PropTypes.string,
+	        margin: PropTypes.object,
+	        scaleWidth: PropTypes.number,
+	        scaleHeight: PropTypes.number,
+	        alignment: PropTypes.shape({
+	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
+	            vertical: PropTypes.oneOf(['top', 'bottom'])
+	        }),
+	        axisLabelPadding: PropTypes.number,
+	        valueLabelPadding: PropTypes.number,
+	        tickLength: PropTypes.number,
+	        // bounding box of the label
+	        labelBox: PropTypes.object
+	    },
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            labelBox: { height: 10, width: 10 },
+	            scaleWidth: 0
+	        };
+	    },
+	    render: function render() {
+	        var _props2 = this.props;
+	        var label = _props2.label;
+	        var labelBox = _props2.labelBox;
+	        var margin = _props2.margin;
+	        var alignment = _props2.alignment;
 	
-	        var command = i === 0 ? 'M' : 'L';
-	        return command + ' ' + x + ' ' + y;
-	    }).join(' ');
+	        var top = labelBox.height;
+	        var left = margin.left;
+	        var x = alignment.horizontal === 'left' ? 0 : alignment.horizontal === 'right' ? this.props.scaleWidth : this.props.scaleWidth / 2;
+	        var textAnchor = alignment.horizontal === 'left' ? 'start' : alignment.horizontal === 'right' ? 'end' : 'middle';
+	
+	        // todo implement vertical alignment
+	
+	        return _react2.default.createElement(
+	            'g',
+	            {
+	                className: 'chart-axis-label chart-axis-label-x',
+	                transform: 'translate(' + left + ',' + top + ')',
+	                __source: {
+	                    fileName: '../../../src/charts/XYPlot.js',
+	                    lineNumber: 610
+	                }
+	            },
+	            _react2.default.createElement(
+	                'text',
+	                _extends({ x: x, style: { textAnchor: textAnchor } }, {
+	                    __source: {
+	                        fileName: '../../../src/charts/XYPlot.js',
+	                        lineNumber: 614
+	                    }
+	                }),
+	                label
+	            )
+	        );
+	    }
+	});
+	
+	var YAxisLabel = _react2.default.createClass({
+	    displayName: 'YAxisLabel',
+	
+	    propTypes: {
+	        label: PropTypes.string,
+	        //letter: PropTypes.string,
+	        margin: PropTypes.object,
+	        scaleWidth: PropTypes.number,
+	        scaleHeight: PropTypes.number,
+	        alignment: PropTypes.shape({
+	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
+	            vertical: PropTypes.oneOf(['top', 'bottom'])
+	        }),
+	        axisLabelPadding: PropTypes.number,
+	        valueLabelPadding: PropTypes.number,
+	        tickLength: PropTypes.number,
+	        showTicks: PropTypes.bool,
+	        // bounding box of the label
+	        labelBox: PropTypes.object
+	    },
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            labelBox: { height: 10, width: 10 },
+	            scaleWidth: 0
+	        };
+	    },
+	    render: function render() {
+	        var _props3 = this.props;
+	        var label = _props3.label;
+	        var labelBox = _props3.labelBox;
+	        var margin = _props3.margin;
+	        var valueLabelPadding = _props3.valueLabelPadding;
+	        var showTicks = _props3.showTicks;
+	        var tickLength = _props3.tickLength;
+	        var alignment = _props3.alignment;
+	
+	        var yTickAndPadSpace = valueLabelPadding + (showTicks ? tickLength : 0);
+	
+	        var top = labelBox.height;
+	        var left = 0;
+	        var x = alignment.horizontal === 'left' ? 0 : alignment.horizontal === 'right' ? margin.left - yTickAndPadSpace : (margin.left - yTickAndPadSpace) / 2;
+	        var textAnchor = alignment.horizontal === 'left' ? 'start' : alignment.horizontal === 'right' ? 'end' : 'middle';
+	
+	        // todo implement vertical alignment
+	
+	        return _react2.default.createElement(
+	            'g',
+	            {
+	                className: 'chart-axis-label chart-axis-label-y',
+	                transform: 'translate(' + left + ',' + top + ')',
+	                __source: {
+	                    fileName: '../../../src/charts/XYPlot.js',
+	                    lineNumber: 660
+	                }
+	            },
+	            _react2.default.createElement(
+	                'text',
+	                _extends({ x: x, style: { textAnchor: textAnchor } }, {
+	                    __source: {
+	                        fileName: '../../../src/charts/XYPlot.js',
+	                        lineNumber: 664
+	                    }
+	                }),
+	                label
+	            )
+	        );
+	    }
+	});
+	
+	var ChartAxis = _react2.default.createClass({
+	    displayName: 'ChartAxis',
+	
+	    propTypes: {
+	        scale: PropTypes.func,
+	        type: PropTypes.string,
+	        orientation: PropTypes.string,
+	        axisTransform: PropTypes.string,
+	        ticks: PropTypes.array,
+	        labels: PropTypes.array,
+	        tickCount: PropTypes.number,
+	        labelFormat: PropTypes.stringFormatter,
+	        emptyLabel: PropTypes.string,
+	        letter: PropTypes.string,
+	
+	        scaleWidth: PropTypes.number,
+	        scaleHeight: PropTypes.number,
+	        padding: PropTypes.object,
+	        labelPadding: PropTypes.number,
+	        tickLength: PropTypes.number,
+	        showLabels: PropTypes.bool,
+	        showTicks: PropTypes.bool,
+	        showGrid: PropTypes.bool,
+	        showZero: PropTypes.bool
+	    },
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            padding: DEFAULTS.spacing,
+	            emptyLabel: DEFAULTS.emptyLabel
+	        };
+	    },
+	    render: function render() {
+	        var _this2 = this;
+	
+	        var _props4 = this.props;
+	        var scale = _props4.scale;
+	        var type = _props4.type;
+	        var orientation = _props4.orientation;
+	        var axisTransform = _props4.axisTransform;
+	        var tickCount = _props4.tickCount;
+	        var letter = _props4.letter;
+	        var labelFormat = _props4.labelFormat;
+	        var emptyLabel = _props4.emptyLabel;
+	        var ticks = _props4.ticks;
+	        var scaleWidth = _props4.scaleWidth;
+	        var scaleHeight = _props4.scaleHeight;
+	        var padding = _props4.padding;
+	        var labelPadding = _props4.labelPadding;
+	        var tickLength = _props4.tickLength;
+	        var showLabels = _props4.showLabels;
+	        var showTicks = _props4.showTicks;
+	        var showGrid = _props4.showGrid;
+	        var showZero = _props4.showZero;
+	
+	        if (!(showLabels || showTicks || showGrid || showZero)) return null;
+	
+	        var labels = _lodash2.default.isArray(this.props.labels) ? this.props.labels : ticks;
+	        var distance = showTicks ? tickLength + labelPadding : labelPadding;
+	
+	        var _ref14 = orientation === 'vertical' ? [function (v) {
+	            return 'translate(0, ' + scale(v) + ')';
+	        }, { x: -distance }, scaleWidth + padding.left + padding.right] : [function (v) {
+	            return 'translate(' + scale(v) + ', 0)';
+	        }, { y: distance }, scaleHeight + padding.top + padding.bottom];
+	
+	        var _ref15 = _slicedToArray(_ref14, 3);
+	
+	        var tickTransform = _ref15[0];
+	        var labelOffset = _ref15[1];
+	        var gridLength = _ref15[2];
+	
+	        var options = { letter: letter, type: type, orientation: orientation, labelOffset: labelOffset, gridLength: gridLength, tickLength: tickLength, labelFormat: labelFormat, emptyLabel: emptyLabel };
+	        return _react2.default.createElement(
+	            'g',
+	            { ref: letter + 'Axis', className: 'chart-axis chart-axis-' + letter, transform: axisTransform, __source: {
+	                    fileName: '../../../src/charts/XYPlot.js',
+	                    lineNumber: 714
+	                }
+	            },
+	            showTicks || showGrid || showLabels && labels === ticks ? _lodash2.default.map(ticks, function (value, i) {
+	                var tickOptions = _lodash2.default.assign({}, options, { value: value });
+	                return _react2.default.createElement(
+	                    'g',
+	                    { transform: tickTransform(value), key: 'tick-' + i, __source: {
+	                            fileName: '../../../src/charts/XYPlot.js',
+	                            lineNumber: 718
+	                        }
+	                    },
+	                    showGrid ? _this2.renderGrid(tickOptions) : null,
+	                    showTicks ? _this2.renderTick(tickOptions) : null,
+	                    showLabels && labels === ticks ? _this2.renderLabel(tickOptions) : null
+	                );
+	            }) : null,
+	            showLabels && labels !== ticks ? // render custom labels (passed in, not same as ticks)
+	            _lodash2.default.map(labels, function (value, i) {
+	                return _react2.default.createElement(
+	                    'g',
+	                    { transform: tickTransform(value), key: 'tick-' + i, __source: {
+	                            fileName: '../../../src/charts/XYPlot.js',
+	                            lineNumber: 728
+	                        }
+	                    },
+	                    _this2.renderLabel(_lodash2.default.assign({}, options, { value: value }))
+	                );
+	            }) : null,
+	            showZero ? _react2.default.createElement(
+	                'g',
+	                { transform: tickTransform(0), __source: {
+	                        fileName: '../../../src/charts/XYPlot.js',
+	                        lineNumber: 735
+	                    }
+	                },
+	                showZero ? this.renderZero(options) : null
+	            ) : null
+	        );
+	    },
+	    renderLabel: function renderLabel(options) {
+	        var letter = options.letter;
+	        var value = options.value;
+	        var type = options.type;
+	        var labelOffset = options.labelOffset;
+	        var labelFormat = options.labelFormat;
+	        var emptyLabel = options.emptyLabel;
+	
+	        var className = 'chart-axis-value-label chart-axis-value-label-' + letter;
+	        // todo generalize dy for all text sizes...?
+	        return _react2.default.createElement(
+	            'text',
+	            _extends({ className: className }, { dy: '0.32em' }, labelOffset, {
+	                __source: {
+	                    fileName: '../../../src/charts/XYPlot.js',
+	                    lineNumber: 746
+	                }
+	            }),
+	            formatAxisLabel(value, type, labelFormat, emptyLabel)
+	        );
+	    },
+	
+	    // todo unify into drawLine
+	    renderTick: function renderTick(options) {
+	        var letter = options.letter;
+	        var tickLength = options.tickLength;
+	        var orientation = options.orientation;
+	
+	        var className = 'chart-tick chart-tick-' + letter;
+	
+	        var _ref16 = orientation === 'vertical' ? [-tickLength, 0] : [0, tickLength];
+	
+	        var _ref17 = _slicedToArray(_ref16, 2);
+	
+	        var x2 = _ref17[0];
+	        var y2 = _ref17[1];
+	
+	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
+	            __source: {
+	                fileName: '../../../src/charts/XYPlot.js',
+	                lineNumber: 755
+	            }
+	        }));
+	    },
+	    renderGrid: function renderGrid(options) {
+	        var letter = options.letter;
+	        var gridLength = options.gridLength;
+	        var orientation = options.orientation;
+	
+	        var className = 'chart-grid chart-grid-' + letter;
+	
+	        var _ref18 = orientation === 'vertical' ? [gridLength, 0] : [0, -gridLength];
+	
+	        var _ref19 = _slicedToArray(_ref18, 2);
+	
+	        var x2 = _ref19[0];
+	        var y2 = _ref19[1];
+	
+	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
+	            __source: {
+	                fileName: '../../../src/charts/XYPlot.js',
+	                lineNumber: 761
+	            }
+	        }));
+	    },
+	    renderZero: function renderZero(options) {
+	        var letter = options.letter;
+	        var gridLength = options.gridLength;
+	        var orientation = options.orientation;
+	
+	        var className = 'chart-zero-line chart-zero-line-' + letter;
+	
+	        var _ref20 = orientation === 'vertical' ? [gridLength, 0] : [0, -gridLength];
+	
+	        var _ref21 = _slicedToArray(_ref20, 2);
+	
+	        var x2 = _ref21[0];
+	        var y2 = _ref21[1];
+	
+	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
+	            __source: {
+	                fileName: '../../../src/charts/XYPlot.js',
+	                lineNumber: 767
+	            }
+	        }));
+	    }
+	});
+	
+	function closestNumberInList(number, list) {
+	    return list.reduce(function (closest, current) {
+	        return Math.abs(current - number) < Math.abs(closest - number) ? current : closest;
+	    });
+	}
+	function indexOfClosestNumberInList(number, list) {
+	    return list.reduce(function (closestI, current, i) {
+	        return Math.abs(current - number) < Math.abs(list[closestI] - number) ? i : closestI;
+	    }, 0);
 	}
 	
-	exports.default = TimeseriesLineChart;
+	function childIsXYChart(child) {
+	    return !!(child && _lodash2.default.has(child, 'type.implementsInterface') && child.type.implementsInterface('XYChart'));
+	}
+	
+	function isNullOrUndefined(d) {
+	    return _lodash2.default.isNull(d) || _lodash2.default.isUndefined(d);
+	}
+	
+	function makeScale(domains, range, axisType, isNice, tickCount) {
+	    var domain = defaultDomain(_lodash2.default.flatten(domains), null, axisType);
+	    var scale = initScale(axisType).domain(domain);
+	    axisType === 'ordinal' ? scale.rangePoints(range) : scale.range(range);
+	    if (isNice && axisType !== 'ordinal') scale.nice(tickCount);
+	    return scale;
+	}
+	
+	function defaultDomain(data, getter, scaleType) {
+	    switch (scaleType) {
+	        // extent for number & time scales, coerce dates to numbers
+	        case 'number':
+	        case 'time':
+	            return _d2.default.extent(data, function (d) {
+	                return +(0, _util.accessor)(getter)(d);
+	            });
+	        // all unique values for ordinal scale
+	        case 'ordinal':
+	            return _lodash2.default.uniq(data.map((0, _util.accessor)(getter)));
+	    }
+	    return [];
+	}
+	
+	function initScale(type) {
+	    switch (type) {
+	        case 'number':
+	            return _d2.default.scale.linear();
+	        case 'ordinal':
+	            return _d2.default.scale.ordinal();
+	        case 'time':
+	            return _d2.default.time.scale();
+	    }
+	}
+	
+	function formatAxisLabel(value, type, format, emptyLabel) {
+	    return _lodash2.default.isNull(value) || _lodash2.default.isUndefined(value) ? emptyLabel : _lodash2.default.isFunction(format) ? format(value) : type === 'number' ? (0, _numeral2.default)(value).format(format) : type === 'time' ? (0, _moment2.default)(value).format(format) : value;
+	}
+	
+	function measureAxisLabels(xProps, yProps, xAxisLabelProps, yAxisLabelProps) {
+	    // hacky... pre-measure the bounding boxes of all axis labels,
+	    // by rendering axis HTML to the DOM, measuring them with getBoundingClientRect, then deleting them.
+	    xProps = _lodash2.default.assign({}, xProps, { showTicks: false, showGrid: false });
+	    yProps = _lodash2.default.assign({}, yProps, { showTicks: false, showGrid: false });
+	    var xAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, _extends({}, xProps, {
+	        __source: {
+	            fileName: '../../../src/charts/XYPlot.js',
+	            lineNumber: 829
+	        }
+	    })));
+	    var yAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, _extends({}, yProps, {
+	        __source: {
+	            fileName: '../../../src/charts/XYPlot.js',
+	            lineNumber: 830
+	        }
+	    })));
+	    var xLabelHtml = xAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(XAxisLabel, _extends({}, xAxisLabelProps, {
+	        __source: {
+	            fileName: '../../../src/charts/XYPlot.js',
+	            lineNumber: 831
+	        }
+	    }))) : '';
+	    var yLabelHtml = yAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(YAxisLabel, _extends({}, yAxisLabelProps, {
+	        __source: {
+	            fileName: '../../../src/charts/XYPlot.js',
+	            lineNumber: 832
+	        }
+	    }))) : '';
+	
+	    var testSvg = document.createElement('div');
+	    testSvg.innerHTML = '<svg class="xy-plot"><g class="chart-inner">        ' + xAxisHtml + yAxisHtml + xLabelHtml + yLabelHtml + '\n    </g></svg>';
+	    document.body.appendChild(testSvg);
+	
+	    var getRect = function getRect(el) {
+	        return el.getBoundingClientRect();
+	    }; // get rekt
+	    var labelBoxes = {
+	        xVal: xProps.showLabels ? _lodash2.default.map(testSvg.querySelectorAll('.chart-axis-value-label-x'), getRect) : [],
+	        yVal: yProps.showLabels ? _lodash2.default.map(testSvg.querySelectorAll('.chart-axis-value-label-y'), getRect) : [],
+	        xAxis: xAxisLabelProps ? testSvg.querySelectorAll('.chart-axis-label-x text')[0].getBoundingClientRect() : null,
+	        yAxis: yAxisLabelProps ? testSvg.querySelectorAll('.chart-axis-label-y text')[0].getBoundingClientRect() : null
+	    };
+	    document.body.removeChild(testSvg);
+	    //console.log(labelBoxes);
+	
+	    return labelBoxes;
+	}
+	
+	exports.default = XYPlot;
 
 /***/ },
 /* 169 */
@@ -44721,6 +45393,64 @@
 /* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.AccessorPropType = undefined;
+	exports.accessor = accessor;
+	exports.InterfaceMixin = InterfaceMixin;
+	exports.methodIfFuncProp = methodIfFuncProp;
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(169);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var PropTypes = _react2.default.PropTypes;
+	var AccessorPropType = exports.AccessorPropType = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.func]);
+	
+	function accessor(key) {
+	    return _lodash2.default.isFunction(key) ? key : // pass an accessor function...
+	    _lodash2.default.isNull(key) || _lodash2.default.isUndefined(key) ? _lodash2.default.identity : // or null/undefined to just return the item itself...
+	    _lodash2.default.property(key); // or an array index or object key
+	}
+	
+	// InterfaceMixin takes a list of string "interfaces"
+	// and adds a static called implementsInterface to the component that simply checks if an interface is in the list
+	// This way, a parent component can pass particular props only to children which implement the relevant interface
+	// by checking child.type.implementsInterface('SomeInterface')
+	// usage:
+	// mixins: [InterfaceMixin('SomeInterface')] // or...
+	// mixins: [InterfaceMixin(['SomeInterface', 'AnotherInterface'])]
+	
+	function InterfaceMixin(interfaces) {
+	    interfaces = _lodash2.default.isString(interfaces) ? [interfaces] : interfaces;
+	    return {
+	        statics: {
+	            implementsInterface: function implementsInterface(name) {
+	                return interfaces.indexOf(name) > -1;
+	            }
+	        }
+	    };
+	}
+	
+	// convenience function for event callbacks... we often want to say
+	// "if this.props.onThing is a function, call this.onThing(e) (which will do stuff, then call this.props.onThing)"
+	function methodIfFuncProp(propName, props, context) {
+	    return _lodash2.default.isFunction(props[propName]) && _lodash2.default.isFunction(context[propName]) ? context[propName] : null;
+	}
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
 	//! version : 2.10.6
 	//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -44989,7 +45719,7 @@
 	                module && module.exports) {
 	            try {
 	                oldLocale = globalLocale._abbr;
-	                __webpack_require__(173)("./" + name);
+	                __webpack_require__(174)("./" + name);
 	                // because defineLocale currently also sets the global locale, we
 	                // want to undo that for lazy loaded locales
 	                locale_locales__getSetGlobalLocale(oldLocale);
@@ -47919,180 +48649,180 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(170)(module)))
 
 /***/ },
-/* 173 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./af": 174,
-		"./af.js": 174,
-		"./ar": 175,
-		"./ar-ma": 176,
-		"./ar-ma.js": 176,
-		"./ar-sa": 177,
-		"./ar-sa.js": 177,
-		"./ar-tn": 178,
-		"./ar-tn.js": 178,
-		"./ar.js": 175,
-		"./az": 179,
-		"./az.js": 179,
-		"./be": 180,
-		"./be.js": 180,
-		"./bg": 181,
-		"./bg.js": 181,
-		"./bn": 182,
-		"./bn.js": 182,
-		"./bo": 183,
-		"./bo.js": 183,
-		"./br": 184,
-		"./br.js": 184,
-		"./bs": 185,
-		"./bs.js": 185,
-		"./ca": 186,
-		"./ca.js": 186,
-		"./cs": 187,
-		"./cs.js": 187,
-		"./cv": 188,
-		"./cv.js": 188,
-		"./cy": 189,
-		"./cy.js": 189,
-		"./da": 190,
-		"./da.js": 190,
-		"./de": 191,
-		"./de-at": 192,
-		"./de-at.js": 192,
-		"./de.js": 191,
-		"./el": 193,
-		"./el.js": 193,
-		"./en-au": 194,
-		"./en-au.js": 194,
-		"./en-ca": 195,
-		"./en-ca.js": 195,
-		"./en-gb": 196,
-		"./en-gb.js": 196,
-		"./eo": 197,
-		"./eo.js": 197,
-		"./es": 198,
-		"./es.js": 198,
-		"./et": 199,
-		"./et.js": 199,
-		"./eu": 200,
-		"./eu.js": 200,
-		"./fa": 201,
-		"./fa.js": 201,
-		"./fi": 202,
-		"./fi.js": 202,
-		"./fo": 203,
-		"./fo.js": 203,
-		"./fr": 204,
-		"./fr-ca": 205,
-		"./fr-ca.js": 205,
-		"./fr.js": 204,
-		"./fy": 206,
-		"./fy.js": 206,
-		"./gl": 207,
-		"./gl.js": 207,
-		"./he": 208,
-		"./he.js": 208,
-		"./hi": 209,
-		"./hi.js": 209,
-		"./hr": 210,
-		"./hr.js": 210,
-		"./hu": 211,
-		"./hu.js": 211,
-		"./hy-am": 212,
-		"./hy-am.js": 212,
-		"./id": 213,
-		"./id.js": 213,
-		"./is": 214,
-		"./is.js": 214,
-		"./it": 215,
-		"./it.js": 215,
-		"./ja": 216,
-		"./ja.js": 216,
-		"./jv": 217,
-		"./jv.js": 217,
-		"./ka": 218,
-		"./ka.js": 218,
-		"./km": 219,
-		"./km.js": 219,
-		"./ko": 220,
-		"./ko.js": 220,
-		"./lb": 221,
-		"./lb.js": 221,
-		"./lt": 222,
-		"./lt.js": 222,
-		"./lv": 223,
-		"./lv.js": 223,
-		"./me": 224,
-		"./me.js": 224,
-		"./mk": 225,
-		"./mk.js": 225,
-		"./ml": 226,
-		"./ml.js": 226,
-		"./mr": 227,
-		"./mr.js": 227,
-		"./ms": 228,
-		"./ms-my": 229,
-		"./ms-my.js": 229,
-		"./ms.js": 228,
-		"./my": 230,
-		"./my.js": 230,
-		"./nb": 231,
-		"./nb.js": 231,
-		"./ne": 232,
-		"./ne.js": 232,
-		"./nl": 233,
-		"./nl.js": 233,
-		"./nn": 234,
-		"./nn.js": 234,
-		"./pl": 235,
-		"./pl.js": 235,
-		"./pt": 236,
-		"./pt-br": 237,
-		"./pt-br.js": 237,
-		"./pt.js": 236,
-		"./ro": 238,
-		"./ro.js": 238,
-		"./ru": 239,
-		"./ru.js": 239,
-		"./si": 240,
-		"./si.js": 240,
-		"./sk": 241,
-		"./sk.js": 241,
-		"./sl": 242,
-		"./sl.js": 242,
-		"./sq": 243,
-		"./sq.js": 243,
-		"./sr": 244,
-		"./sr-cyrl": 245,
-		"./sr-cyrl.js": 245,
-		"./sr.js": 244,
-		"./sv": 246,
-		"./sv.js": 246,
-		"./ta": 247,
-		"./ta.js": 247,
-		"./th": 248,
-		"./th.js": 248,
-		"./tl-ph": 249,
-		"./tl-ph.js": 249,
-		"./tr": 250,
-		"./tr.js": 250,
-		"./tzl": 251,
-		"./tzl.js": 251,
-		"./tzm": 252,
-		"./tzm-latn": 253,
-		"./tzm-latn.js": 253,
-		"./tzm.js": 252,
-		"./uk": 254,
-		"./uk.js": 254,
-		"./uz": 255,
-		"./uz.js": 255,
-		"./vi": 256,
-		"./vi.js": 256,
-		"./zh-cn": 257,
-		"./zh-cn.js": 257,
-		"./zh-tw": 258,
-		"./zh-tw.js": 258
+		"./af": 175,
+		"./af.js": 175,
+		"./ar": 176,
+		"./ar-ma": 177,
+		"./ar-ma.js": 177,
+		"./ar-sa": 178,
+		"./ar-sa.js": 178,
+		"./ar-tn": 179,
+		"./ar-tn.js": 179,
+		"./ar.js": 176,
+		"./az": 180,
+		"./az.js": 180,
+		"./be": 181,
+		"./be.js": 181,
+		"./bg": 182,
+		"./bg.js": 182,
+		"./bn": 183,
+		"./bn.js": 183,
+		"./bo": 184,
+		"./bo.js": 184,
+		"./br": 185,
+		"./br.js": 185,
+		"./bs": 186,
+		"./bs.js": 186,
+		"./ca": 187,
+		"./ca.js": 187,
+		"./cs": 188,
+		"./cs.js": 188,
+		"./cv": 189,
+		"./cv.js": 189,
+		"./cy": 190,
+		"./cy.js": 190,
+		"./da": 191,
+		"./da.js": 191,
+		"./de": 192,
+		"./de-at": 193,
+		"./de-at.js": 193,
+		"./de.js": 192,
+		"./el": 194,
+		"./el.js": 194,
+		"./en-au": 195,
+		"./en-au.js": 195,
+		"./en-ca": 196,
+		"./en-ca.js": 196,
+		"./en-gb": 197,
+		"./en-gb.js": 197,
+		"./eo": 198,
+		"./eo.js": 198,
+		"./es": 199,
+		"./es.js": 199,
+		"./et": 200,
+		"./et.js": 200,
+		"./eu": 201,
+		"./eu.js": 201,
+		"./fa": 202,
+		"./fa.js": 202,
+		"./fi": 203,
+		"./fi.js": 203,
+		"./fo": 204,
+		"./fo.js": 204,
+		"./fr": 205,
+		"./fr-ca": 206,
+		"./fr-ca.js": 206,
+		"./fr.js": 205,
+		"./fy": 207,
+		"./fy.js": 207,
+		"./gl": 208,
+		"./gl.js": 208,
+		"./he": 209,
+		"./he.js": 209,
+		"./hi": 210,
+		"./hi.js": 210,
+		"./hr": 211,
+		"./hr.js": 211,
+		"./hu": 212,
+		"./hu.js": 212,
+		"./hy-am": 213,
+		"./hy-am.js": 213,
+		"./id": 214,
+		"./id.js": 214,
+		"./is": 215,
+		"./is.js": 215,
+		"./it": 216,
+		"./it.js": 216,
+		"./ja": 217,
+		"./ja.js": 217,
+		"./jv": 218,
+		"./jv.js": 218,
+		"./ka": 219,
+		"./ka.js": 219,
+		"./km": 220,
+		"./km.js": 220,
+		"./ko": 221,
+		"./ko.js": 221,
+		"./lb": 222,
+		"./lb.js": 222,
+		"./lt": 223,
+		"./lt.js": 223,
+		"./lv": 224,
+		"./lv.js": 224,
+		"./me": 225,
+		"./me.js": 225,
+		"./mk": 226,
+		"./mk.js": 226,
+		"./ml": 227,
+		"./ml.js": 227,
+		"./mr": 228,
+		"./mr.js": 228,
+		"./ms": 229,
+		"./ms-my": 230,
+		"./ms-my.js": 230,
+		"./ms.js": 229,
+		"./my": 231,
+		"./my.js": 231,
+		"./nb": 232,
+		"./nb.js": 232,
+		"./ne": 233,
+		"./ne.js": 233,
+		"./nl": 234,
+		"./nl.js": 234,
+		"./nn": 235,
+		"./nn.js": 235,
+		"./pl": 236,
+		"./pl.js": 236,
+		"./pt": 237,
+		"./pt-br": 238,
+		"./pt-br.js": 238,
+		"./pt.js": 237,
+		"./ro": 239,
+		"./ro.js": 239,
+		"./ru": 240,
+		"./ru.js": 240,
+		"./si": 241,
+		"./si.js": 241,
+		"./sk": 242,
+		"./sk.js": 242,
+		"./sl": 243,
+		"./sl.js": 243,
+		"./sq": 244,
+		"./sq.js": 244,
+		"./sr": 245,
+		"./sr-cyrl": 246,
+		"./sr-cyrl.js": 246,
+		"./sr.js": 245,
+		"./sv": 247,
+		"./sv.js": 247,
+		"./ta": 248,
+		"./ta.js": 248,
+		"./th": 249,
+		"./th.js": 249,
+		"./tl-ph": 250,
+		"./tl-ph.js": 250,
+		"./tr": 251,
+		"./tr.js": 251,
+		"./tzl": 252,
+		"./tzl.js": 252,
+		"./tzm": 253,
+		"./tzm-latn": 254,
+		"./tzm-latn.js": 254,
+		"./tzm.js": 253,
+		"./uk": 255,
+		"./uk.js": 255,
+		"./uz": 256,
+		"./uz.js": 256,
+		"./vi": 257,
+		"./vi.js": 257,
+		"./zh-cn": 258,
+		"./zh-cn.js": 258,
+		"./zh-tw": 259,
+		"./zh-tw.js": 259
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -48105,11 +48835,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 173;
+	webpackContext.id = 174;
 
 
 /***/ },
-/* 174 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48117,7 +48847,7 @@
 	//! author : Werner Mollentze : https://github.com/wernerm
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48186,7 +48916,7 @@
 	}));
 
 /***/ },
-/* 175 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48196,7 +48926,7 @@
 	//! Native plural forms: forabi https://github.com/forabi
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48326,7 +49056,7 @@
 	}));
 
 /***/ },
-/* 176 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48335,7 +49065,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48389,7 +49119,7 @@
 	}));
 
 /***/ },
-/* 177 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48397,7 +49127,7 @@
 	//! author : Suhail Alkowaileet : https://github.com/xsoh
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48496,14 +49226,14 @@
 	}));
 
 /***/ },
-/* 178 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale  : Tunisian Arabic (ar-tn)
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48557,7 +49287,7 @@
 	}));
 
 /***/ },
-/* 179 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48565,7 +49295,7 @@
 	//! author : topchiyev : https://github.com/topchiyev
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48665,7 +49395,7 @@
 	}));
 
 /***/ },
-/* 180 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48675,7 +49405,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48816,7 +49546,7 @@
 	}));
 
 /***/ },
-/* 181 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48824,7 +49554,7 @@
 	//! author : Krasen Borisov : https://github.com/kraz
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -48910,7 +49640,7 @@
 	}));
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48918,7 +49648,7 @@
 	//! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49027,7 +49757,7 @@
 	}));
 
 /***/ },
-/* 183 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49035,7 +49765,7 @@
 	//! author : Thupten N. Chakrishar : https://github.com/vajradog
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49141,7 +49871,7 @@
 	}));
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49149,7 +49879,7 @@
 	//! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49252,7 +49982,7 @@
 	}));
 
 /***/ },
-/* 185 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49261,7 +49991,7 @@
 	//! based on (hr) translation by Bojan Marković
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49397,7 +50127,7 @@
 	}));
 
 /***/ },
-/* 186 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49405,7 +50135,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49480,7 +50210,7 @@
 	}));
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49488,7 +50218,7 @@
 	//! author : petrbela : https://github.com/petrbela
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49641,7 +50371,7 @@
 	}));
 
 /***/ },
-/* 188 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49649,7 +50379,7 @@
 	//! author : Anatoly Mironov : https://github.com/mirontoli
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49708,7 +50438,7 @@
 	}));
 
 /***/ },
-/* 189 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49716,7 +50446,7 @@
 	//! author : Robert Allen
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49791,7 +50521,7 @@
 	}));
 
 /***/ },
-/* 190 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49799,7 +50529,7 @@
 	//! author : Ulrik Nielsen : https://github.com/mrbase
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49855,7 +50585,7 @@
 	}));
 
 /***/ },
-/* 191 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49864,7 +50594,7 @@
 	//! author: Menelion Elensúle: https://github.com/Oire
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -49934,7 +50664,7 @@
 	}));
 
 /***/ },
-/* 192 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49944,7 +50674,7 @@
 	//! author : Martin Groller : https://github.com/MadMG
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50014,7 +50744,7 @@
 	}));
 
 /***/ },
-/* 193 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50022,7 +50752,7 @@
 	//! author : Aggelos Karalias : https://github.com/mehiel
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50112,14 +50842,14 @@
 	}));
 
 /***/ },
-/* 194 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : australian english (en-au)
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50182,7 +50912,7 @@
 	}));
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50190,7 +50920,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50249,7 +50979,7 @@
 	}));
 
 /***/ },
-/* 196 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50257,7 +50987,7 @@
 	//! author : Chris Gedrim : https://github.com/chrisgedrim
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50320,7 +51050,7 @@
 	}));
 
 /***/ },
-/* 197 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50330,7 +51060,7 @@
 	//!          Se ne, bonvolu korekti kaj avizi min por ke mi povas lerni!
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50397,7 +51127,7 @@
 	}));
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50405,7 +51135,7 @@
 	//! author : Julio Napurí : https://github.com/julionc
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50480,7 +51210,7 @@
 	}));
 
 /***/ },
-/* 199 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50489,7 +51219,7 @@
 	//! improvements : Illimar Tambek : https://github.com/ragulka
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50564,7 +51294,7 @@
 	}));
 
 /***/ },
-/* 200 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50572,7 +51302,7 @@
 	//! author : Eneko Illarramendi : https://github.com/eillarra
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50632,7 +51362,7 @@
 	}));
 
 /***/ },
-/* 201 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50640,7 +51370,7 @@
 	//! author : Ebrahim Byagowi : https://github.com/ebraminio
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50741,7 +51471,7 @@
 	}));
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50749,7 +51479,7 @@
 	//! author : Tarmo Aidantausta : https://github.com/bleadof
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50852,7 +51582,7 @@
 	}));
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50860,7 +51590,7 @@
 	//! author : Ragnar Johannesen : https://github.com/ragnar123
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50916,7 +51646,7 @@
 	}));
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50924,7 +51654,7 @@
 	//! author : John Fischer : https://github.com/jfroffice
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50982,7 +51712,7 @@
 	}));
 
 /***/ },
-/* 205 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50990,7 +51720,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51044,7 +51774,7 @@
 	}));
 
 /***/ },
-/* 206 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51052,7 +51782,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51119,7 +51849,7 @@
 	}));
 
 /***/ },
-/* 207 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51127,7 +51857,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51198,7 +51928,7 @@
 	}));
 
 /***/ },
-/* 208 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51208,7 +51938,7 @@
 	//! author : Tal Ater : https://github.com/TalAter
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51284,7 +52014,7 @@
 	}));
 
 /***/ },
-/* 209 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51292,7 +52022,7 @@
 	//! author : Mayank Singhal : https://github.com/mayanksinghal
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51411,7 +52141,7 @@
 	}));
 
 /***/ },
-/* 210 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51419,7 +52149,7 @@
 	//! author : Bojan Marković : https://github.com/bmarkovic
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51555,7 +52285,7 @@
 	}));
 
 /***/ },
-/* 211 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51563,7 +52293,7 @@
 	//! author : Adam Brunner : https://github.com/adambrunner
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51668,7 +52398,7 @@
 	}));
 
 /***/ },
-/* 212 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51676,7 +52406,7 @@
 	//! author : Armendarabyan : https://github.com/armendarabyan
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51783,7 +52513,7 @@
 	}));
 
 /***/ },
-/* 213 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51792,7 +52522,7 @@
 	//! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51870,7 +52600,7 @@
 	}));
 
 /***/ },
-/* 214 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51878,7 +52608,7 @@
 	//! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52001,7 +52731,7 @@
 	}));
 
 /***/ },
-/* 215 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52010,7 +52740,7 @@
 	//! author: Mattia Larentis: https://github.com/nostalgiaz
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52075,7 +52805,7 @@
 	}));
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52083,7 +52813,7 @@
 	//! author : LI Long : https://github.com/baryon
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52144,7 +52874,7 @@
 	}));
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52153,7 +52883,7 @@
 	//! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52231,7 +52961,7 @@
 	}));
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52239,7 +52969,7 @@
 	//! author : Irakli Janiashvili : https://github.com/irakli-janiashvili
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52338,7 +53068,7 @@
 	}));
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52346,7 +53076,7 @@
 	//! author : Kruy Vanna : https://github.com/kruyvanna
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52400,7 +53130,7 @@
 	}));
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52412,7 +53142,7 @@
 	//! - Jeeeyul Lee <jeeeyul@gmail.com>
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52472,7 +53202,7 @@
 	}));
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52480,7 +53210,7 @@
 	//! author : mweimerskirch : https://github.com/mweimerskirch, David Raison : https://github.com/kwisatz
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52610,7 +53340,7 @@
 	}));
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52618,7 +53348,7 @@
 	//! author : Mindaugas Mozūras : https://github.com/mmozuras
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52739,7 +53469,7 @@
 	}));
 
 /***/ },
-/* 223 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52748,7 +53478,7 @@
 	//! author : Jānis Elmeris : https://github.com/JanisE
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52839,7 +53569,7 @@
 	}));
 
 /***/ },
-/* 224 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52847,7 +53577,7 @@
 	//! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52952,7 +53682,7 @@
 	}));
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52960,7 +53690,7 @@
 	//! author : Borislav Mickov : https://github.com/B0k0
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53046,7 +53776,7 @@
 	}));
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53054,7 +53784,7 @@
 	//! author : Floyd Pink : https://github.com/floydpink
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53121,7 +53851,7 @@
 	}));
 
 /***/ },
-/* 227 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53129,7 +53859,7 @@
 	//! author : Harshad Kale : https://github.com/kalehv
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53246,7 +53976,7 @@
 	}));
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53254,7 +53984,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53332,7 +54062,7 @@
 	}));
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53340,7 +54070,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53418,7 +54148,7 @@
 	}));
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53426,7 +54156,7 @@
 	//! author : Squar team, mysquar.com
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53515,7 +54245,7 @@
 	}));
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53524,7 +54254,7 @@
 	//!           Sigurd Gartmann : https://github.com/sigurdga
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53580,7 +54310,7 @@
 	}));
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53588,7 +54318,7 @@
 	//! author : suvash : https://github.com/suvash
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53707,7 +54437,7 @@
 	}));
 
 /***/ },
-/* 233 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53715,7 +54445,7 @@
 	//! author : Joris Röling : https://github.com/jjupiter
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53782,7 +54512,7 @@
 	}));
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53790,7 +54520,7 @@
 	//! author : https://github.com/mechuwind
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53846,7 +54576,7 @@
 	}));
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53854,7 +54584,7 @@
 	//! author : Rafal Hirsz : https://github.com/evoL
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53955,7 +54685,7 @@
 	}));
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53963,7 +54693,7 @@
 	//! author : Jefferson : https://github.com/jalex79
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54023,7 +54753,7 @@
 	}));
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54031,7 +54761,7 @@
 	//! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54087,7 +54817,7 @@
 	}));
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54096,7 +54826,7 @@
 	//! author : Valentin Agachi : https://github.com/avaly
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54165,7 +54895,7 @@
 	}));
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54174,7 +54904,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54333,7 +55063,7 @@
 	}));
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54341,7 +55071,7 @@
 	//! author : Sampath Sitinamaluwa : https://github.com/sampathsris
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54402,7 +55132,7 @@
 	}));
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54411,7 +55141,7 @@
 	//! based on work of petrbela : https://github.com/petrbela
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54564,7 +55294,7 @@
 	}));
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54572,7 +55302,7 @@
 	//! author : Robert Sedovšek : https://github.com/sedovsek
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54728,7 +55458,7 @@
 	}));
 
 /***/ },
-/* 243 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54738,7 +55468,7 @@
 	//! author : Oerd Cukalla : https://github.com/oerd (fixes)
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54801,7 +55531,7 @@
 	}));
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54809,7 +55539,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54913,7 +55643,7 @@
 	}));
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54921,7 +55651,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55025,7 +55755,7 @@
 	}));
 
 /***/ },
-/* 246 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55033,7 +55763,7 @@
 	//! author : Jens Alm : https://github.com/ulmus
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55096,7 +55826,7 @@
 	}));
 
 /***/ },
-/* 247 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55104,7 +55834,7 @@
 	//! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55195,7 +55925,7 @@
 	}));
 
 /***/ },
-/* 248 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55203,7 +55933,7 @@
 	//! author : Kridsada Thanabulpong : https://github.com/sirn
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55264,7 +55994,7 @@
 	}));
 
 /***/ },
-/* 249 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55272,7 +56002,7 @@
 	//! author : Dan Hagman
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55330,7 +56060,7 @@
 	}));
 
 /***/ },
-/* 250 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55339,7 +56069,7 @@
 	//!           Burak Yiğit Kaya: https://github.com/BYK
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55424,7 +56154,7 @@
 	}));
 
 /***/ },
-/* 251 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55432,7 +56162,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v with the help of Iustì Canun
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55513,7 +56243,7 @@
 	}));
 
 /***/ },
-/* 252 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55521,7 +56251,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55575,7 +56305,7 @@
 	}));
 
 /***/ },
-/* 253 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55583,7 +56313,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55637,7 +56367,7 @@
 	}));
 
 /***/ },
-/* 254 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55646,7 +56376,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55794,7 +56524,7 @@
 	}));
 
 /***/ },
-/* 255 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55802,7 +56532,7 @@
 	//! author : Sardor Muminov : https://github.com/muminoff
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55856,7 +56586,7 @@
 	}));
 
 /***/ },
-/* 256 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55864,7 +56594,7 @@
 	//! author : Bang Nguyen : https://github.com/bangnk
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55926,7 +56656,7 @@
 	}));
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55935,7 +56665,7 @@
 	//! author : Zeno Zeng : https://github.com/zenozeng
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56057,7 +56787,7 @@
 	}));
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56065,7 +56795,7 @@
 	//! author : Ben : https://github.com/ben-lin
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(172)) :
+	    true ? factory(__webpack_require__(173)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56162,1413 +56892,7 @@
 	}));
 
 /***/ },
-/* 259 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _react = __webpack_require__(6);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _lodash = __webpack_require__(169);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	var _d2 = __webpack_require__(171);
-	
-	var _d3 = _interopRequireDefault(_d2);
-	
-	var _util = __webpack_require__(260);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var PropTypes = _react2.default.PropTypes;
-	
-	var DEFAULT_PROPS = {
-	    getValue: null,
-	    margin: { top: 0, bottom: 0, left: 0, right: 0 },
-	    markerLineClass: 'marker-line',
-	    markerLineOverhangInner: 2,
-	    markerLineOverhangOuter: 2
-	};
-	
-	// default height/width, used only if height & width & radius are all undefined
-	var DEFAULT_SIZE = 150;
-	
-	var PieChart = _react2.default.createClass({
-	    displayName: 'PieChart',
-	
-	    propTypes: {
-	        // array of data to plot with pie chart
-	        data: PropTypes.array.isRequired,
-	        // (optional) accessor for getting the values plotted on the pie chart
-	        // if not provided, just uses the value itself at given index
-	        getValue: _util.AccessorPropType,
-	        // (optional) total expected sum of all the pie slice values
-	        // if provided && slices don't add up to total, an "empty" slice will be rendered for the rest
-	        // if not provided, will be the sum of all values (ie. all values will always add up to 100%)
-	        total: PropTypes.number,
-	        // (optional) height and width of the SVG
-	        // if only one is passed, same # is used for both (ie. width=100 means height=100 also)
-	        // if neither is passed, but radius is, radius+margins is used
-	        // if neither is passed, and radius isn't either, DEFAULTS.size is used
-	        width: PropTypes.number,
-	        height: PropTypes.number,
-	        // (optional) main radius of the pie chart, inferred from margin/width/height if not provided
-	        radius: PropTypes.number,
-	        // (optional) margins (between svg edges and pie circle), inferred from radius/width/height if not provided
-	        // can either be a single number (to make all margins equal), or {top, bottom, left, right} object
-	        margin: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
-	        // (optional) radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
-	        holeRadius: PropTypes.number,
-	        // (optional) label text to display in the middle of the pie/donut
-	        centerLabel: PropTypes.string,
-	
-	        markerLineValue: PropTypes.number,
-	        markerLineClass: PropTypes.string,
-	        markerLineOverhangInner: PropTypes.number,
-	        markerLineOverhangOuter: PropTypes.number
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return DEFAULT_PROPS;
-	    },
-	    onMouseEnterSlice: function onMouseEnterSlice(e, d) {
-	        this.props.onMouseEnterSlice(e, d);
-	    },
-	    onMouseMoveSlice: function onMouseMoveSlice(e, d) {
-	        this.props.onMouseMoveSlice(e, d);
-	    },
-	    onMouseLeaveSlice: function onMouseLeaveSlice(e, d) {
-	        this.props.onMouseLeaveSlice(e, d);
-	    },
-	    render: function render() {
-	        var _this = this;
-	
-	        var margin = _lodash2.default.isNumber(this.props.margin) ? { top: this.props.margin, bottom: this.props.margin, left: this.props.margin, right: this.props.margin } : _lodash2.default.defaults({}, this.props.margin, DEFAULT_PROPS.margin);
-	        // sizes fallback based on provided info: given dimension -> radius + margin -> other dimension -> default
-	        var width = this.props.width || (this.props.radius ? this.props.radius * 2 + margin.left + margin.right : this.props.height) || DEFAULT_SIZE;
-	        var height = this.props.height || (this.props.radius ? this.props.radius * 2 + margin.top + margin.bottom : this.props.width) || DEFAULT_SIZE;
-	        var radius = this.props.radius || Math.min((width - (margin.left + margin.right)) / 2, (height - (margin.top + margin.bottom)) / 2);
-	        var holeRadius = this.props.holeRadius;
-	
-	        var center = { x: margin.left + radius, y: margin.top + radius };
-	
-	        var _props = this.props;
-	        var markerLineValue = _props.markerLineValue;
-	        var markerLineClass = _props.markerLineClass;
-	        var markerLineOverhangInner = _props.markerLineOverhangInner;
-	        var markerLineOverhangOuter = _props.markerLineOverhangOuter;
-	
-	        var valueAccessor = (0, _util.accessor)(this.props.getValue);
-	        var sum = _lodash2.default.sum(this.props.data, valueAccessor);
-	        var total = this.props.total || sum;
-	        var markerLinePercent = _lodash2.default.isFinite(markerLineValue) ? markerLineValue / total : null;
-	
-	        var startPercent = 0;
-	        return _react2.default.createElement(
-	            'svg',
-	            _extends({ className: 'pie-chart' }, { width: width, height: height }, {
-	                __source: {
-	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 86
-	                }
-	            }),
-	            this.props.data.map(function (d, i) {
-	                var _map = ['onMouseEnterSlice', 'onMouseMoveSlice', 'onMouseLeaveSlice'].map(function (eventName) {
-	                    // partially apply this bar's data point as 2nd callback argument
-	                    var callback = (0, _util.methodIfFuncProp)(eventName, _this.props, _this);
-	                    return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
-	                });
-	
-	                var _map2 = _slicedToArray(_map, 3);
-	
-	                var onMouseEnter = _map2[0];
-	                var onMouseMove = _map2[1];
-	                var onMouseLeave = _map2[2];
-	
-	                var className = 'pie-slice pie-slice-' + i;
-	                var slicePercent = valueAccessor(d) / total;
-	                var endPercent = startPercent + slicePercent;
-	                var pathStr = pieSlicePath(startPercent, endPercent, center, radius, holeRadius);
-	                startPercent += slicePercent;
-	                var key = 'pie-slice-' + i;
-	
-	                return _react2.default.createElement('path', _extends({ className: className, d: pathStr, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave, key: key }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/PieChart.js',
-	                        lineNumber: 102
-	                    }
-	                }));
-	            }),
-	            sum < total ? // draw empty slice if the sum of slices is less than expected total
-	            _react2.default.createElement('path', {
-	                className: 'pie-slice pie-slice-empty',
-	                d: pieSlicePath(startPercent, 1, center, radius, holeRadius),
-	                key: 'pie-slice-empty',
-	                __source: {
-	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 106
-	                }
-	            }) : null,
-	            _lodash2.default.isFinite(markerLinePercent) ? _react2.default.createElement('path', {
-	                className: markerLineClass,
-	                d: markerLine(markerLinePercent, center, radius, holeRadius, markerLineOverhangOuter, markerLineOverhangInner),
-	                key: 'pie-slice-marker-line',
-	                __source: {
-	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 114
-	                }
-	            }) : null,
-	            this.props.centerLabel ? this.renderCenterLabel(center) : null
-	        );
-	    },
-	    renderCenterLabel: function renderCenterLabel(center) {
-	        var x = center.x;
-	        var y = center.y;
-	
-	        var style = { textAnchor: 'middle', dominantBaseline: 'central' };
-	        return _react2.default.createElement(
-	            'text',
-	            _extends({ className: 'pie-label-center' }, { x: x, y: y, style: style }, {
-	                __source: {
-	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 128
-	                }
-	            }),
-	            this.props.centerLabel
-	        );
-	    }
-	});
-	
-	function markerLine(percentValue, center, radius) {
-	    var holeRadius = arguments.length <= 3 || arguments[3] === undefined ? 0 : arguments[3];
-	    var overhangOuter = arguments.length <= 4 || arguments[4] === undefined ? 0 : arguments[4];
-	    var overhangInner = arguments.length <= 5 || arguments[5] === undefined ? 0 : arguments[5];
-	
-	    if (percentValue == 1) endPercent = .9999999; // arc cannot be a full circle
-	    var startX = Math.sin(2 * Math.PI / (1 / percentValue));
-	    var startY = Math.cos(2 * Math.PI / (1 / percentValue));
-	    var c = center;
-	    var r = radius;
-	    var rH = holeRadius;
-	    var x0 = startX;
-	    var y0 = startY;
-	    var r0 = Math.max(rH - overhangInner, 0);
-	    var r1 = r + overhangOuter;
-	
-	    return [// construct a string representing the marker line
-	    'M ' + (c.x + x0 * r0) + ',' + (c.y - y0 * r0), // start at edge of inner (hole) circle, or center if no hole
-	    'L ' + (c.x + x0 * r1) + ',' + (c.y - y0 * r1) + ' z' // straight line to outer circle, along radius
-	    ].join(' ');
-	}
-	
-	function pieSlicePath(startPercent, endPercent, center, radius) {
-	    var holeRadius = arguments.length <= 4 || arguments[4] === undefined ? 0 : arguments[4];
-	
-	    if (endPercent == 1) endPercent = .9999999; // arc cannot be a full circle
-	    var startX = Math.sin(2 * Math.PI / (1 / startPercent));
-	    var startY = Math.cos(2 * Math.PI / (1 / startPercent));
-	    var endX = Math.sin(2 * Math.PI / (1 / endPercent));
-	    var endY = Math.cos(2 * Math.PI / (1 / endPercent));
-	    var largeArc = endPercent - startPercent <= 0.5 ? 0 : 1;
-	    var c = center;
-	    var r = radius;
-	    var rH = holeRadius;
-	    var x0 = startX;
-	    var x1 = endX;
-	    var y0 = startY;
-	    var y1 = endY;
-	
-	    return [// construct a string representing the pie slice path
-	    'M ' + (c.x + x0 * rH) + ',' + (c.y - y0 * rH), // start at edge of inner (hole) circle, or center if no hole
-	    'L ' + (c.x + x0 * r) + ',' + (c.y - y0 * r), // straight line to outer circle, along radius
-	    'A ' + r + ',' + r + ' 0 ' + largeArc + ' 1 ' + (c.x + x1 * r) + ',' + (c.y - y1 * r) // outer arc
-	    ].concat(holeRadius ? [// if we have an inner (donut) hole, draw an inner arc too, otherwise we're done
-	    'L ' + (c.x + x1 * rH) + ',' + (c.y - y1 * rH), // straight line to inner (hole) circle, along radius
-	    'A ' + rH + ',' + rH + ' 0 ' + largeArc + ' 0 ' + (c.x + x0 * rH) + ',' + (c.y - y0 * rH) + ' z' // inner arc
-	    ] : 'z').join(' ');
-	}
-	
-	exports.default = PieChart;
-
-/***/ },
 /* 260 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.AccessorPropType = undefined;
-	exports.accessor = accessor;
-	exports.InterfaceMixin = InterfaceMixin;
-	exports.methodIfFuncProp = methodIfFuncProp;
-	
-	var _react = __webpack_require__(6);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _lodash = __webpack_require__(169);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var PropTypes = _react2.default.PropTypes;
-	var AccessorPropType = exports.AccessorPropType = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.func]);
-	
-	function accessor(key) {
-	    return _lodash2.default.isFunction(key) ? key : // pass an accessor function...
-	    _lodash2.default.isNull(key) || _lodash2.default.isUndefined(key) ? _lodash2.default.identity : // or null/undefined to just return the item itself...
-	    _lodash2.default.property(key); // or an array index or object key
-	}
-	
-	// InterfaceMixin takes a list of string "interfaces"
-	// and adds a static called implementsInterface to the component that simply checks if an interface is in the list
-	// This way, a parent component can pass particular props only to children which implement the relevant interface
-	// by checking child.type.implementsInterface('SomeInterface')
-	// usage:
-	// mixins: [InterfaceMixin('SomeInterface')] // or...
-	// mixins: [InterfaceMixin(['SomeInterface', 'AnotherInterface'])]
-	
-	function InterfaceMixin(interfaces) {
-	    interfaces = _lodash2.default.isString(interfaces) ? [interfaces] : interfaces;
-	    return {
-	        statics: {
-	            implementsInterface: function implementsInterface(name) {
-	                return interfaces.indexOf(name) > -1;
-	            }
-	        }
-	    };
-	}
-	
-	// convenience function for event callbacks... we often want to say
-	// "if this.props.onThing is a function, call this.onThing(e) (which will do stuff, then call this.props.onThing)"
-	function methodIfFuncProp(propName, props, context) {
-	    return _lodash2.default.isFunction(props[propName]) && _lodash2.default.isFunction(context[propName]) ? context[propName] : null;
-	}
-
-/***/ },
-/* 261 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _react = __webpack_require__(6);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _lodash = __webpack_require__(169);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	var _d = __webpack_require__(171);
-	
-	var _d2 = _interopRequireDefault(_d);
-	
-	var _util = __webpack_require__(260);
-	
-	var _moment = __webpack_require__(172);
-	
-	var _moment2 = _interopRequireDefault(_moment);
-	
-	var _numeral = __webpack_require__(166);
-	
-	var _numeral2 = _interopRequireDefault(_numeral);
-	
-	var _server = __webpack_require__(262);
-	
-	var _server2 = _interopRequireDefault(_server);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	//const {PropTypes} = React;
-	
-	var PropTypes = _react2.default.PropTypes;
-	PropTypes = _lodash2.default.assign({}, PropTypes, {
-	    // all props that can apply to both axes take the form {x: val, y: val}
-	    xyObjectOf: function xyObjectOf(type) {
-	        return PropTypes.oneOfType([type, PropTypes.shape({ x: type, y: type })]);
-	    },
-	    axisType: PropTypes.oneOf(['number', 'time', 'ordinal']),
-	    //DomainType: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
-	    dataArray: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
-	    fourDirections: PropTypes.shape({
-	        top: PropTypes.number,
-	        bottom: PropTypes.number,
-	        left: PropTypes.number,
-	        right: PropTypes.number
-	    }),
-	    stringFormatter: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
-	});
-	
-	var DEFAULTS = {
-	    axisType: { x: 'number', y: 'number' },
-	    nice: { x: true, y: true },
-	    invertAxis: { x: false, y: false },
-	    tickCount: { x: 10, y: 10 },
-	    tickLength: { x: 6, y: 6 },
-	    labelPadding: { x: 6, y: 6 },
-	    emptyLabel: "Unknown",
-	    showLabels: { x: true, y: true },
-	    showGrid: { x: true, y: true },
-	    showTicks: { x: true, y: true },
-	    showZero: { x: false, y: false },
-	    axisLabelPadding: { x: 10, y: 10 },
-	    axisLabelAlign: {
-	        x: { horizontal: 'left', vertical: 'top' },
-	        y: { horizontal: 'right', vertical: 'top' }
-	    },
-	
-	    // these values are inferred from data if not provided, therefore empty defaults
-	    margin: {}, padding: {}, spacing: {}, domain: {},
-	    ticks: {}, labelValues: {}, labelFormat: {}, axisLabel: {}
-	};
-	
-	var XYPlot = _react2.default.createClass({
-	    displayName: 'XYPlot',
-	
-	    propTypes: {
-	        // (outer) width and height of the chart
-	        width: PropTypes.number.isRequired,
-	        height: PropTypes.number.isRequired,
-	
-	        // chart margins (space around edges where axis labels live)
-	        margin: PropTypes.fourDirections,
-	        // internal chart padding (space between scale ends and edge of inner chart background)
-	        padding: PropTypes.fourDirections,
-	        // the max extra spacing required by the plot elements, if they were on the edge of the chart
-	        // eg. if a 10px radius dot is plotted at the end of one axis,
-	        // it needs 10px of spacing so it doesn't hang over the edge of the chart
-	        // spacing is the max possible necessary padding, and will == padding if plot elements are on scale extrema
-	        spacing: PropTypes.fourDirections,
-	
-	        // axis types - number, time or ordinal
-	        axisType: PropTypes.xyObjectOf(PropTypes.axisType),
-	        // scale domains may be provided, otherwise will be inferred from data
-	        domain: PropTypes.xyObjectOf(PropTypes.dataArray),
-	        // whether or not to extend the scales to end on nice values (see docs for d3 scale.linear.nice())
-	        nice: PropTypes.xyObjectOf(PropTypes.bool),
-	        // whether or not to invert the axis (ie. put largest numbers on bottom for Y axis, or on left for X)
-	        invertAxis: PropTypes.xyObjectOf(PropTypes.bool),
-	
-	        // approximate # of ticks to include on each axis - 10 is default
-	        // (actual # may be slightly different, to get nicest intervals)
-	        tickCount: PropTypes.xyObjectOf(PropTypes.number),
-	        // or alternatively, you can pass an array of the exact tick values to use on each axis
-	        ticks: PropTypes.xyObjectOf(PropTypes.dataArray),
-	        // size of axis ticks
-	        tickLength: PropTypes.xyObjectOf(PropTypes.number),
-	
-	        // axis value labels will be created for each tick, unless you specify a different list of values to label
-	        labelValues: PropTypes.xyObjectOf(PropTypes.dataArray),
-	        // format to use for the axis value labels. can be a function or a string.
-	        // if function, called on each label.
-	        // if string, interpreted as momentjs formats for time axes, or numeraljs formats for number axes
-	        labelFormat: PropTypes.xyObjectOf(PropTypes.stringFormatter),
-	        // padding between axis value labels and the axis/ticks
-	        labelPadding: PropTypes.xyObjectOf(PropTypes.number),
-	        // label to show for null/undefined values
-	        emptyLabel: PropTypes.string,
-	
-	        // should we draw axis value labels
-	        showLabels: PropTypes.xyObjectOf(PropTypes.bool),
-	        // should we draw the grid lines in the main chart space
-	        showGrid: PropTypes.xyObjectOf(PropTypes.bool),
-	        // should we draw the little tick lines along the axis
-	        showTicks: PropTypes.xyObjectOf(PropTypes.bool),
-	        // should we draw a line showing where zero is
-	        showZero: PropTypes.xyObjectOf(PropTypes.bool),
-	
-	        // label for entire axis, not value labels
-	        axisLabel: PropTypes.xyObjectOf(PropTypes.string),
-	        axisLabelAlign: PropTypes.xyObjectOf(PropTypes.shape({
-	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
-	            vertical: PropTypes.oneOf(['top', 'bottom'])
-	        })),
-	        axisLabelPadding: PropTypes.xyObjectOf(PropTypes.number),
-	
-	        // todo more interaction
-	        onMouseMove: PropTypes.func,
-	        onMouseEnter: PropTypes.func,
-	        onMouseLeave: PropTypes.func
-	
-	        // todo: minMargin - margin will be at least X, or more if necessary
-	        // todo: extraMargin - margin to add to calculated necessary margin
-	        // todo: minPadding, extraPadding ?
-	        // todo: minSpacing, extraSpacing ?
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            width: 400,
-	            height: 250
-	        };
-	    },
-	    getInitialState: function getInitialState() {
-	        return {};
-	    },
-	    componentWillMount: function componentWillMount() {
-	        this.trueProps = this.initProps(this.props);
-	        this.initLabelFormats(this.trueProps);
-	        this.initDomains(this.trueProps);
-	        this.initScale(this.trueProps);
-	    },
-	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
-	        this.trueProps = this.initProps(newProps);
-	        this.initLabelFormats(this.trueProps);
-	        this.initDomains(this.trueProps);
-	        this.initScale(this.trueProps);
-	    },
-	    initProps: function initProps(props) {
-	        // this is a bit hacky, but we can't use getDefaultProps for most of the defaults,
-	        // because the user can pass in eg. {x: 'ordinal'} and we still want to default y to number
-	        var xyKeys = ['axisType', 'domain', 'nice', 'invertAxis', 'tickCount', 'ticks', 'tickLength', 'labelValues', 'labelFormat', 'labelPadding', 'showLabels', 'showGrid', 'showTicks', 'showZero', 'axisLabel', 'axisLabelAlign', 'axisLabelPadding'];
-	        var dirKeys = ['margin', 'padding', 'spacing'];
-	        var directions = ['top', 'bottom', 'left', 'right'];
-	
-	        function resolvePropObj(propKey, expectedKeys) {
-	            // resolves a passed prop key into the true object we use
-	            // by filling in defaults and converting single-passed values into the right format
-	            var val = props[propKey];
-	            return _lodash2.default.has(props, propKey) ?
-	            // check for the keys we expect to be in the object
-	            _lodash2.default.any(expectedKeys, function (k) {
-	                return _lodash2.default.has(val, k);
-	            }) ?
-	            // if some are present, fill in the rest with defaults
-	            _lodash2.default.defaults({}, val, DEFAULTS[propKey]) :
-	            // otherwise, user has passed in a single value, so set it as the value for all keys
-	            _lodash2.default.object(expectedKeys.map(function (k) {
-	                return [k, val];
-	            })) :
-	            // user didn't pass in anything, so use default
-	            _lodash2.default.clone(DEFAULTS[propKey]);
-	        }
-	
-	        var xyProps = _lodash2.default.assign.apply(this, xyKeys.map(function (k) {
-	            return _defineProperty({}, k, resolvePropObj(k, ['x', 'y']));
-	        }));
-	        var dirProps = _lodash2.default.assign.apply(this, dirKeys.map(function (k) {
-	            return _defineProperty({}, k, resolvePropObj(k, directions));
-	        }));
-	        var otherProps = _lodash2.default.omit(props, xyKeys.concat(dirKeys));
-	        //console.log(xyProps, dirProps, otherProps);
-	
-	        return _lodash2.default.assign({}, xyProps, dirProps, otherProps);
-	    },
-	    initDomains: function initDomains(props) {
-	        var axisType = props.axisType;
-	        var ticks = props.ticks;
-	        var labelValues = props.labelValues;
-	
-	        // figure out the domains for each axis (ie. data extents)
-	        // unless both domains are given, ask each child chart for it's desired domain, & flatten them into one domain.
-	        // this is so that charts can plot their own modified version of the data (ie. a histogram),
-	        // even if it has a different domain than the original data
-	        // todo: only do this when necessary
-	
-	        var allChartOptions = [];
-	        _react2.default.Children.forEach(props.children, function (child) {
-	            if (!childIsXYChart(child)) return; // only get options for children which identify themselves as XYCharts
-	
-	            var childProps = _lodash2.default.assign({}, { axisType: axisType }, child.props);
-	
-	            var _ref3 = _lodash2.default.isFunction(child.type.getOptions) ? child.type.getOptions(childProps) : {};
-	
-	            var domain = _ref3.domain;
-	            var spacing = _ref3.spacing;
-	
-	            domain = domain || {};
-	            ['x', 'y'].forEach(function (k) {
-	                if (isNullOrUndefined(domain[k])) domain[k] = defaultDomain(child.props.data, child.props.getValue[k], axisType[k]);
-	            });
-	            spacing = isNullOrUndefined(spacing) ? _lodash2.default.clone(DEFAULTS.spacing) : _lodash2.default.defaults({}, spacing, DEFAULTS.spacing);
-	
-	            allChartOptions.push({ domain: domain, spacing: spacing });
-	        });
-	
-	        // use domain from props if provided, else calculated domains from children
-	        var domains = _lodash2.default.object(_lodash2.default.map(['x', 'y'], function (k) {
-	            return [k, props.domain[k] || _lodash2.default.compact(_lodash2.default.pluck(allChartOptions, 'domain.' + k))];
-	        }));
-	        // if user has passed in custom ticks or label values, extend the domain to ensure they are all are included
-	        ['x', 'y'].forEach(function (k) {
-	            var isOrdinal = axisType[k] === 'ordinal';
-	            [ticks[k], labelValues[k]].forEach(function (values) {
-	                if (values) domains[k].push(isOrdinal ? values : _d2.default.extent(values));
-	            });
-	        });
-	        // use spacing from props if provided, else calculated spacings from children
-	        var spacings = _lodash2.default.pluck(allChartOptions, 'spacing').map(function (spacing) {
-	            return _lodash2.default.defaults({}, spacing, props.spacing);
-	        });
-	
-	        _lodash2.default.assign(this, { domains: domains, spacings: spacings });
-	    },
-	    initLabelFormats: function initLabelFormats(props) {
-	        this.labelFormat = _lodash2.default.object(_lodash2.default.map(['x', 'y'], function (k) {
-	            var axisType = props.axisType[k];
-	            // use given format if provided
-	            return _lodash2.default.isObject(props.labelFormat) && _lodash2.default.has(props.labelFormat, k) ? [k, props.labelFormat[k]] :
-	            // otherwise determine appropriate format for axis type
-	            axisType == 'number' ? [k, '0.[000000]a'] :
-	            // todo determine most appropriate date format for this domain
-	            axisType === 'time' ? [k, 'MM-DD'] : [k, undefined];
-	        }));
-	    },
-	    initScale: function initScale(props) {
-	        var _this = this;
-	
-	        // create the X and Y scales shared by charts
-	        // calculate the inner width and height based on margins
-	        var width = props.width;
-	        var height = props.height;
-	        var axisType = props.axisType;
-	        var tickCount = props.tickCount;
-	        var nice = props.nice;
-	        var axisLabel = props.axisLabel;
-	        var axisLabelPadding = props.axisLabelPadding;
-	        var labelPadding = props.labelPadding;
-	        var tickLength = props.tickLength;
-	        var showTicks = props.showTicks;
-	        var domains = this.domains;
-	        var spacings = this.spacings;
-	        var labelFormat = this.labelFormat;
-	
-	        var origMargin = props.margin;
-	        var origPadding = props.padding;
-	
-	        // todo fix
-	        var shouldMeasureLabels = true;
-	        if (shouldMeasureLabels) {
-	            (function () {
-	                // several inferred variables depend on each other in a complicated/circular way:
-	                // the axis scales, margin, padding, ticks and labels.
-	                // eg. scale width depends on margin, which depends on the axis labels, which depend on the scale
-	                // so we set some sane initial values and iterate until it settles down (or we get tired of waiting)
-	
-	                // start with a margin of 10 pixels for all unknown margins
-	                //let margin = _.transform(origMargin, (result, m, key) => result[key] = isNullOrUndefined(m) ? 10 : m);
-	                var margin = _lodash2.default.defaults({}, origMargin, { top: 10, bottom: 10, left: 10, right: 10 });
-	                // and padding equal to the first chart's spacing for unknown paddings
-	                //let padding = _.transform(origPadding, (res, p, key) => res[key] = _.isNull(p) ? spacings[0][key] : p);
-	                var padding = _lodash2.default.defaults({}, origPadding, { top: 0, bottom: 0, left: 0, right: 0 });
-	                // make scales using margin, measure labels, make new margins
-	                // repeat until we converge on a margin that works
-	                var scaleWidth = undefined,
-	                    scaleHeight = undefined,
-	                    labelBoxes = undefined;
-	                var scale = {};
-	                var ticks = {};
-	
-	                var isDone = false,
-	                    i = 0,
-	                    limit = 5; // don't loop forever
-	
-	                var _loop = function _loop() {
-	                    i++;
-	                    // calculate scale width based on previous margin
-	                    scaleWidth = width - (margin.left + margin.right + padding.left + padding.right);
-	                    scaleHeight = height - (margin.top + margin.bottom + padding.top + padding.bottom);
-	                    var range = {
-	                        x: [padding.left, scaleWidth + padding.left],
-	                        y: [scaleHeight + padding.top, padding.top]
-	                    };
-	
-	                    ['x', 'y'].forEach(function (k) {
-	                        scale[k] = makeScale(domains[k], range[k], axisType[k], nice[k], tickCount[k]);
-	                        if (props.invertAxis[k]) scale[k].domain(scale[k].domain().reverse());
-	                        ticks[k] = props.ticks[k] || (axisType[k] === 'ordinal' ? scale[k].domain() : scale[k].ticks(tickCount[k]));
-	                    });
-	
-	                    labelBoxes = measureAxisLabels(_this.getXAxisProps({ scaleWidth: scaleWidth, scaleHeight: scaleHeight, scale: scale.x, ticks: ticks.x }), _this.getYAxisProps({ scaleWidth: scaleWidth, scaleHeight: scaleHeight, scale: scale.y, ticks: ticks.y }), axisLabel.x ? _this.getXAxisLabelProps({ margin: margin }) : null, axisLabel.y ? _this.getYAxisLabelProps({ margin: margin }) : null);
-	
-	                    // calculate padding based on spacings and domains
-	                    // spacing is the amount of outer space ('margin') required by the outermost elements of each chart,
-	                    // so that they still fit within the chart boundaries, defined by chartWidth and chartHeight.
-	                    // padding is the actual amount of extra space required, after taking into account the scales.
-	                    // if the outermost chart elements are on the scale extrema, padding = spacing,
-	                    // but the scale may extend beyond the last element anyway, so we may not need the extra padding.
-	                    // NOTE: temporarily set as padding = max spacing, todo: implement real padding
-	                    padding = _lodash2.default.defaults(origPadding, _lodash2.default.reduce(spacings, function (newPadding, spacing) {
-	                        return _lodash2.default.transform(spacing, function (result, space, dir) {
-	                            result[dir] = Math.max(newPadding[dir] || space);
-	                        });
-	                    }, {}), { top: 0, bottom: 0, left: 0, right: 0 });
-	
-	                    // todo: modify to handle all possible label alignments
-	                    // todo: handle case of labels not shown (ie if !this.props.showYLabels)
-	                    var hasXAxisLabel = axisLabel.x && labelBoxes.xAxis;
-	                    var hasYAxisLabel = axisLabel.y && labelBoxes.yAxis;
-	                    var hasXValLabels = !!labelBoxes.xVal.length;
-	                    var hasYValLabels = !!labelBoxes.yVal.length;
-	
-	                    var xRange = scale.x.range();
-	                    var yRange = scale.y.range();
-	
-	                    // find # of pixels by which the top- and bottom-most y axis labels overhang the top/bottom chart edges
-	
-	                    var topYTick = _lodash2.default.min(ticks.y, scale.y);
-	
-	                    var bottomYTick = _lodash2.default.max(ticks.y, scale.y);
-	
-	                    var topYTickFromTop = Math.abs(scale.y(topYTick) - _lodash2.default.min(yRange));
-	                    var bottomYTickFromBottom = Math.abs(scale.y(bottomYTick) - _lodash2.default.max(yRange));
-	
-	                    var _ref4 = hasYValLabels ? [_lodash2.default.min(labelBoxes.yVal, (0, _util.accessor)('top')), _lodash2.default.max(labelBoxes.yVal, (0, _util.accessor)('top'))] : [null, null];
-	
-	                    var _ref5 = _slicedToArray(_ref4, 2);
-	
-	                    var topYValBox = _ref5[0];
-	                    var bottomYValBox = _ref5[1];
-	
-	                    var _ref6 = hasYValLabels ? [Math.ceil(Math.max(0.5 * topYValBox.height - (topYTickFromTop + padding.top), 0)), Math.ceil(Math.max(0.5 * bottomYValBox.height - (bottomYTickFromBottom + padding.bottom), 0))] : [0, 0];
-	
-	                    var _ref7 = _slicedToArray(_ref6, 2);
-	
-	                    var topYValOverhang = _ref7[0];
-	                    var bottomYValOverhang = _ref7[1];
-	
-	                    // find # of pixels by which the left- and right-most x axis labels overhang the left/right chart edges
-	
-	                    var leftXTick = _lodash2.default.min(ticks.x, scale.x);
-	
-	                    var rightXTick = _lodash2.default.max(ticks.x, scale.x);
-	
-	                    var leftXTickFromLeft = Math.abs(scale.x(leftXTick) - _lodash2.default.min(xRange));
-	                    var rightXTickFromRight = Math.abs(scale.x(rightXTick) - _lodash2.default.max(xRange));
-	
-	                    var _ref8 = hasXValLabels ? [_lodash2.default.min(labelBoxes.xVal, (0, _util.accessor)('left')), _lodash2.default.max(labelBoxes.xVal, (0, _util.accessor)('right'))] : [null, null];
-	
-	                    var _ref9 = _slicedToArray(_ref8, 2);
-	
-	                    var leftXValBox = _ref9[0];
-	                    var rightXValBox = _ref9[1];
-	
-	                    var _ref10 = hasXValLabels ? [Math.ceil(Math.max(0.5 * leftXValBox.width - (leftXTickFromLeft + padding.left), 0)), Math.ceil(Math.max(0.5 * rightXValBox.width - (rightXTickFromRight + padding.right), 0))] : [0, 0];
-	
-	                    var _ref11 = _slicedToArray(_ref10, 2);
-	
-	                    var leftXValOverhang = _ref11[0];
-	                    var rightXValOverhang = _ref11[1];
-	
-	                    // todo: fix all of this... sigh...
-	                    //
-	
-	                    var xAxisLabelOuterHeight = hasXAxisLabel ? Math.ceil(labelBoxes.xAxis.height + axisLabelPadding.x) : 0;
-	                    var yAxisLabelOuterHeight = hasYAxisLabel ? Math.ceil(labelBoxes.yAxis.height + axisLabelPadding.y) : 0;
-	
-	                    var topMargin = _lodash2.default.has(origMargin, 'top') ? origMargin.top : Math.max(topYValOverhang, xAxisLabelOuterHeight, yAxisLabelOuterHeight);
-	
-	                    var yTickAndPadSpace = (hasYValLabels || hasYAxisLabel ? labelPadding.y : 0) + (showTicks.y ? tickLength.y : 0);
-	
-	                    var maxYValWidth = (hasYValLabels ? Math.ceil(_d2.default.max(labelBoxes.yVal, (0, _util.accessor)('width'))) : 0) + yTickAndPadSpace;
-	                    var yAxisLabelOuterWidth = hasYAxisLabel ? Math.ceil(labelBoxes.yAxis.width) + yTickAndPadSpace : 0;
-	                    //console.log(maxYValWidth, yAxisLabelOuterWidth);
-	
-	                    var leftMargin = _lodash2.default.has(origMargin, 'left') ? origMargin.left : Math.max(leftXValOverhang, maxYValWidth, yAxisLabelOuterWidth);
-	
-	                    var xTickAndPadSpace = (hasXValLabels || hasXAxisLabel ? labelPadding.x : 0) + (showTicks.x ? tickLength.x : 0);
-	
-	                    var maxXValHeight = (hasXValLabels ? Math.ceil(_d2.default.max(labelBoxes.xVal, (0, _util.accessor)('height'))) : 0) + xTickAndPadSpace;
-	
-	                    var requiredMargin = {
-	                        top: topMargin,
-	                        bottom: maxXValHeight,
-	                        left: leftMargin,
-	                        right: rightXValOverhang
-	                    };
-	
-	                    var newMargin = (0, _lodash2.default)(requiredMargin).map(function (v, k) {
-	                        return [k, _lodash2.default.has(origMargin, k) ? origMargin[k] : v];
-	                    }).object().value();
-	
-	                    isDone = _lodash2.default.all(_lodash2.default.keys(margin), function (k) {
-	                        return margin[k] === newMargin[k];
-	                    });
-	                    //console.log('calculated margin', newMargin);
-	                    margin = newMargin;
-	                    scaleWidth = width - (margin.left + margin.right + padding.left + padding.right);
-	                    scaleHeight = height - (margin.top + margin.bottom + padding.top + padding.bottom);
-	                };
-	
-	                while (!isDone && i < limit) {
-	                    _loop();
-	                }
-	                //console.log('padding', padding);
-	                //console.log({scaleWidth, scaleHeight});
-	                _lodash2.default.assign(_this, { scale: scale, ticks: ticks, margin: margin, padding: padding, scaleWidth: scaleWidth, scaleHeight: scaleHeight, labelBoxes: labelBoxes });
-	            })();
-	        } else {
-	            // margins are all pre-defined, just make the scales
-	            // todo still need to determine padding??
-	            //const scaleWidth = width - (props.margin.left + props.margin.right);
-	            //const scaleHeight = height - (props.margin.top + props.margin.bottom);
-	            //const xScale = makeScale(this.xDomains, [0, scaleWidth], xType);
-	            //const yScale = makeScale(this.yDomains, [scaleHeight, 0], yType);
-	            //_.assign(this, {margin: props.margin, scaleWidth, scaleHeight, xScale, yScale});
-	        }
-	    },
-	    onMouseMove: function onMouseMove(e) {
-	        var _trueProps = this.trueProps;
-	        var axisType = _trueProps.axisType;
-	        var height = _trueProps.height;
-	        var width = _trueProps.width;
-	        var margin = this.margin;
-	        var padding = this.padding;
-	        var scale = this.scale;
-	        var scaleWidth = this.scaleWidth;
-	        var scaleHeight = this.scaleHeight;
-	        // todo faster method than getBoundingClientRect on every mouseover?
-	
-	        var chartBB = e.currentTarget.getBoundingClientRect();
-	        var chartX = Math.round(e.clientX - chartBB.left - margin.left);
-	        var chartY = Math.round(e.clientY - chartBB.top - margin.top);
-	
-	        var chartXVal = !_lodash2.default.inRange(chartX, 0, scaleWidth + padding.left + padding.right) ? null : axisType.x === 'ordinal' ? scale.x.domain()[indexOfClosestNumberInList(chartX, scale.x.range())] : scale.x.invert(chartX);
-	        var chartYVal = !_lodash2.default.inRange(chartY, 0, scaleHeight + padding.top + padding.bottom) ? null : axisType.y === 'ordinal' ? scale.y.domain()[indexOfClosestNumberInList(chartY, scale.y.range())] : scale.y.invert(chartY);
-	
-	        var chart = this.refs['chart-series-0'];
-	        var hovered = chart && _lodash2.default.isFunction(chart.getHovered) ? chart.getHovered(chartXVal) : null;
-	
-	        this.trueProps.onMouseMove(hovered, e, { chartX: chartX, chartY: chartY, chartXVal: chartXVal, chartYVal: chartYVal });
-	    },
-	    onMouseEnter: function onMouseEnter(e) {
-	        this.trueProps.onMouseEnter(e);
-	    },
-	    onMouseLeave: function onMouseLeave(e) {
-	        this.trueProps.onMouseLeave(e);
-	    },
-	    render: function render() {
-	        var _trueProps2 = this.trueProps;
-	        var children = _trueProps2.children;
-	        var width = _trueProps2.width;
-	        var height = _trueProps2.height;
-	        var axisType = _trueProps2.axisType;
-	        var axisLabel = _trueProps2.axisLabel;
-	        var onMouseMove = _trueProps2.onMouseMove;
-	        var onMouseEnter = _trueProps2.onMouseEnter;
-	        var onMouseLeave = _trueProps2.onMouseLeave;
-	        var invertAxis = _trueProps2.invertAxis;
-	        var scale = this.scale;
-	        var margin = this.margin;
-	        var padding = this.padding;
-	        var scaleWidth = this.scaleWidth;
-	        var scaleHeight = this.scaleHeight;
-	
-	        var chartWidth = scaleWidth + padding.left + padding.right;
-	        var chartHeight = scaleHeight + padding.top + padding.bottom;
-	
-	        var propsToPass = {
-	            axisType: axisType, invertAxis: invertAxis, scale: scale, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: width, plotHeight: height,
-	            chartMargin: margin, chartPadding: padding, margin: margin, padding: padding
-	        };
-	
-	        var childrenUnderAxes = _react2.default.Children.map(children, function (child, i) {
-	            if (!child || !child.props || !child.props.underAxes) return null;
-	            // todo fix chart series #
-	            var name = child.props.name || 'chart-series-' + i;
-	            return _react2.default.cloneElement(child, _lodash2.default.assign({ ref: name, name: name }, propsToPass));
-	        });
-	        var childrenAboveAxes = _react2.default.Children.map(children, function (child, i) {
-	            if (!child || child.props && child.props.underAxes) return null;
-	            var name = child.props.name || 'chart-series-' + i;
-	            return _react2.default.cloneElement(child, _lodash2.default.assign({ ref: name, name: name }, propsToPass));
-	        });
-	
-	        return _react2.default.createElement(
-	            'svg',
-	            _extends({ className: 'xy-plot' }, { width: width, height: height }, {
-	                onMouseMove: _lodash2.default.isFunction(onMouseMove) ? this.onMouseMove : null,
-	                onMouseEnter: _lodash2.default.isFunction(onMouseEnter) ? this.onMouseEnter : null,
-	                onMouseLeave: _lodash2.default.isFunction(onMouseLeave) ? this.onMouseLeave : null,
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 447
-	                }
-	            }),
-	            _react2.default.createElement(
-	                'g',
-	                { className: 'chart-inner',
-	                    transform: 'translate(' + margin.left + ', ' + margin.top + ')',
-	                    __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 452
-	                    }
-	                },
-	                _react2.default.createElement('rect', { className: 'chart-background', width: chartWidth, height: chartHeight, __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 455
-	                    }
-	                }),
-	                childrenUnderAxes,
-	                _react2.default.createElement(ChartAxis, _extends({}, this.getXAxisProps(), {
-	                    __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 459
-	                    }
-	                })),
-	                _react2.default.createElement(ChartAxis, _extends({}, this.getYAxisProps(), {
-	                    __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 460
-	                    }
-	                })),
-	                childrenAboveAxes
-	            ),
-	            axisLabel.x ? _react2.default.createElement(XAxisLabel, _extends({}, this.getXAxisLabelProps(), {
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 466
-	                }
-	            })) : null,
-	            axisLabel.y ? _react2.default.createElement(YAxisLabel, _extends({}, this.getYAxisLabelProps(), {
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 470
-	                }
-	            })) : null
-	        );
-	    },
-	    getXAxisProps: function getXAxisProps() {
-	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	
-	        var scaleHeight = options.scaleHeight || this.scaleHeight;
-	        var padding = options.padding || this.padding || {};
-	        return this.getAxisProps(_lodash2.default.assign({
-	            letter: 'x',
-	            orientation: 'horizontal',
-	            axisTransform: 'translate(0, ' + (scaleHeight + (padding.top || 0) + (padding.bottom || 0)) + ')'
-	        }, options));
-	    },
-	    getYAxisProps: function getYAxisProps() {
-	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	
-	        return this.getAxisProps(_lodash2.default.assign({
-	            letter: 'y',
-	            orientation: 'vertical'
-	        }, options));
-	    },
-	    getAxisProps: function getAxisProps(options) {
-	        var props = this.trueProps;
-	        var k = options.letter;
-	
-	        return _lodash2.default.defaults({}, options, {
-	            scale: _lodash2.default.get(this.scale, k),
-	            padding: this.padding,
-	            scaleHeight: this.scaleHeight,
-	            scaleWidth: this.scaleWidth,
-	            labelFormat: this.labelFormat[k],
-	            type: props.axisType[k],
-	            tickCount: props.tickCount[k],
-	            ticks: _lodash2.default.get(this.ticks, k) || [],
-	            labels: props.labelValues[k],
-	            labelPadding: props.labelPadding[k],
-	            emptyLabel: props.emptyLabel,
-	            tickLength: props.tickLength[k],
-	            showLabels: props.showLabels[k],
-	            showTicks: props.showTicks[k],
-	            showGrid: props.showGrid[k],
-	            showZero: props.showZero[k]
-	        });
-	    },
-	    getXAxisLabelProps: function getXAxisLabelProps() {
-	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	
-	        return this.getAxisLabelProps('x', options);
-	    },
-	    getYAxisLabelProps: function getYAxisLabelProps() {
-	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	
-	        return this.getAxisLabelProps('y', options);
-	    },
-	    getAxisLabelProps: function getAxisLabelProps(k) {
-	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	
-	        var props = this.trueProps;
-	        var labelBoxes = this.labelBoxes;
-	        var margin = this.margin;
-	        var scaleWidth = this.scaleWidth;
-	        var scaleHeight = this.scaleHeight;
-	
-	        return _lodash2.default.defaults({}, options, {
-	            margin: margin, scaleWidth: scaleWidth, scaleHeight: scaleHeight,
-	            label: _lodash2.default.get(props.axisLabel, k),
-	            alignment: _lodash2.default.get(props.axisLabelAlign, k),
-	            axisLabelPadding: _lodash2.default.get(props.axisLabelPadding, k),
-	            valueLabelPadding: _lodash2.default.get(props.labelPadding, k),
-	            tickLength: _lodash2.default.get(props.tickLength, k),
-	            showTicks: _lodash2.default.get(props.showTicks, k),
-	            labelBox: labelBoxes && labelBoxes[k + 'Axis'] ? labelBoxes[k + 'Axis'] : { width: 10, height: 10 }
-	        });
-	    }
-	});
-	
-	var XAxisLabel = _react2.default.createClass({
-	    displayName: 'XAxisLabel',
-	
-	    propTypes: {
-	        label: PropTypes.string,
-	        //letter: PropTypes.string,
-	        margin: PropTypes.object,
-	        scaleWidth: PropTypes.number,
-	        scaleHeight: PropTypes.number,
-	        alignment: PropTypes.shape({
-	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
-	            vertical: PropTypes.oneOf(['top', 'bottom'])
-	        }),
-	        axisLabelPadding: PropTypes.number,
-	        valueLabelPadding: PropTypes.number,
-	        tickLength: PropTypes.number,
-	        // bounding box of the label
-	        labelBox: PropTypes.object
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            labelBox: { height: 10, width: 10 },
-	            scaleWidth: 0
-	        };
-	    },
-	    render: function render() {
-	        var _props = this.props;
-	        var label = _props.label;
-	        var labelBox = _props.labelBox;
-	        var margin = _props.margin;
-	        var alignment = _props.alignment;
-	
-	        var top = labelBox.height;
-	        var left = margin.left;
-	        var x = alignment.horizontal === 'left' ? 0 : alignment.horizontal === 'right' ? this.props.scaleWidth : this.props.scaleWidth / 2;
-	        var textAnchor = alignment.horizontal === 'left' ? 'start' : alignment.horizontal === 'right' ? 'end' : 'middle';
-	
-	        // todo implement vertical alignment
-	
-	        return _react2.default.createElement(
-	            'g',
-	            {
-	                className: 'chart-axis-label chart-axis-label-x',
-	                transform: 'translate(' + left + ',' + top + ')',
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 578
-	                }
-	            },
-	            _react2.default.createElement(
-	                'text',
-	                _extends({ x: x, style: { textAnchor: textAnchor } }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 582
-	                    }
-	                }),
-	                label
-	            )
-	        );
-	    }
-	});
-	
-	var YAxisLabel = _react2.default.createClass({
-	    displayName: 'YAxisLabel',
-	
-	    propTypes: {
-	        label: PropTypes.string,
-	        //letter: PropTypes.string,
-	        margin: PropTypes.object,
-	        scaleWidth: PropTypes.number,
-	        scaleHeight: PropTypes.number,
-	        alignment: PropTypes.shape({
-	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
-	            vertical: PropTypes.oneOf(['top', 'bottom'])
-	        }),
-	        axisLabelPadding: PropTypes.number,
-	        valueLabelPadding: PropTypes.number,
-	        tickLength: PropTypes.number,
-	        showTicks: PropTypes.bool,
-	        // bounding box of the label
-	        labelBox: PropTypes.object
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            labelBox: { height: 10, width: 10 },
-	            scaleWidth: 0
-	        };
-	    },
-	    render: function render() {
-	        var _props2 = this.props;
-	        var label = _props2.label;
-	        var labelBox = _props2.labelBox;
-	        var margin = _props2.margin;
-	        var valueLabelPadding = _props2.valueLabelPadding;
-	        var showTicks = _props2.showTicks;
-	        var tickLength = _props2.tickLength;
-	        var alignment = _props2.alignment;
-	
-	        var yTickAndPadSpace = valueLabelPadding + (showTicks ? tickLength : 0);
-	
-	        var top = labelBox.height;
-	        var left = 0;
-	        var x = alignment.horizontal === 'left' ? 0 : alignment.horizontal === 'right' ? margin.left - yTickAndPadSpace : (margin.left - yTickAndPadSpace) / 2;
-	        var textAnchor = alignment.horizontal === 'left' ? 'start' : alignment.horizontal === 'right' ? 'end' : 'middle';
-	
-	        // todo implement vertical alignment
-	
-	        return _react2.default.createElement(
-	            'g',
-	            {
-	                className: 'chart-axis-label chart-axis-label-y',
-	                transform: 'translate(' + left + ',' + top + ')',
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 628
-	                }
-	            },
-	            _react2.default.createElement(
-	                'text',
-	                _extends({ x: x, style: { textAnchor: textAnchor } }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 632
-	                    }
-	                }),
-	                label
-	            )
-	        );
-	    }
-	});
-	
-	var ChartAxis = _react2.default.createClass({
-	    displayName: 'ChartAxis',
-	
-	    propTypes: {
-	        scale: PropTypes.func,
-	        type: PropTypes.string,
-	        orientation: PropTypes.string,
-	        axisTransform: PropTypes.string,
-	        ticks: PropTypes.array,
-	        labels: PropTypes.array,
-	        tickCount: PropTypes.number,
-	        labelFormat: PropTypes.stringFormatter,
-	        emptyLabel: PropTypes.string,
-	        letter: PropTypes.string,
-	
-	        scaleWidth: PropTypes.number,
-	        scaleHeight: PropTypes.number,
-	        padding: PropTypes.object,
-	        labelPadding: PropTypes.number,
-	        tickLength: PropTypes.number,
-	        showLabels: PropTypes.bool,
-	        showTicks: PropTypes.bool,
-	        showGrid: PropTypes.bool,
-	        showZero: PropTypes.bool
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            padding: DEFAULTS.spacing,
-	            emptyLabel: DEFAULTS.emptyLabel
-	        };
-	    },
-	    render: function render() {
-	        var _this2 = this;
-	
-	        var _props3 = this.props;
-	        var scale = _props3.scale;
-	        var type = _props3.type;
-	        var orientation = _props3.orientation;
-	        var axisTransform = _props3.axisTransform;
-	        var tickCount = _props3.tickCount;
-	        var letter = _props3.letter;
-	        var labelFormat = _props3.labelFormat;
-	        var emptyLabel = _props3.emptyLabel;
-	        var ticks = _props3.ticks;
-	        var scaleWidth = _props3.scaleWidth;
-	        var scaleHeight = _props3.scaleHeight;
-	        var padding = _props3.padding;
-	        var labelPadding = _props3.labelPadding;
-	        var tickLength = _props3.tickLength;
-	        var showLabels = _props3.showLabels;
-	        var showTicks = _props3.showTicks;
-	        var showGrid = _props3.showGrid;
-	        var showZero = _props3.showZero;
-	
-	        if (!(showLabels || showTicks || showGrid || showZero)) return null;
-	
-	        var labels = _lodash2.default.isArray(this.props.labels) ? this.props.labels : ticks;
-	        var distance = showTicks ? tickLength + labelPadding : labelPadding;
-	
-	        var _ref12 = orientation === 'vertical' ? [function (v) {
-	            return 'translate(0, ' + scale(v) + ')';
-	        }, { x: -distance }, scaleWidth + padding.left + padding.right] : [function (v) {
-	            return 'translate(' + scale(v) + ', 0)';
-	        }, { y: distance }, scaleHeight + padding.top + padding.bottom];
-	
-	        var _ref13 = _slicedToArray(_ref12, 3);
-	
-	        var tickTransform = _ref13[0];
-	        var labelOffset = _ref13[1];
-	        var gridLength = _ref13[2];
-	
-	        var options = { letter: letter, type: type, orientation: orientation, labelOffset: labelOffset, gridLength: gridLength, tickLength: tickLength, labelFormat: labelFormat, emptyLabel: emptyLabel };
-	        return _react2.default.createElement(
-	            'g',
-	            { ref: letter + 'Axis', className: 'chart-axis chart-axis-' + letter, transform: axisTransform, __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 682
-	                }
-	            },
-	            showTicks || showGrid || showLabels && labels === ticks ? _lodash2.default.map(ticks, function (value, i) {
-	                var tickOptions = _lodash2.default.assign({}, options, { value: value });
-	                return _react2.default.createElement(
-	                    'g',
-	                    { transform: tickTransform(value), key: 'tick-' + i, __source: {
-	                            fileName: '../../../src/charts/XYPlot.js',
-	                            lineNumber: 686
-	                        }
-	                    },
-	                    showGrid ? _this2.renderGrid(tickOptions) : null,
-	                    showTicks ? _this2.renderTick(tickOptions) : null,
-	                    showLabels && labels === ticks ? _this2.renderLabel(tickOptions) : null
-	                );
-	            }) : null,
-	            showLabels && labels !== ticks ? // render custom labels (passed in, not same as ticks)
-	            _lodash2.default.map(labels, function (value, i) {
-	                return _react2.default.createElement(
-	                    'g',
-	                    { transform: tickTransform(value), key: 'tick-' + i, __source: {
-	                            fileName: '../../../src/charts/XYPlot.js',
-	                            lineNumber: 696
-	                        }
-	                    },
-	                    _this2.renderLabel(_lodash2.default.assign({}, options, { value: value }))
-	                );
-	            }) : null,
-	            showZero ? _react2.default.createElement(
-	                'g',
-	                { transform: tickTransform(0), __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 703
-	                    }
-	                },
-	                showZero ? this.renderZero(options) : null
-	            ) : null
-	        );
-	    },
-	    renderLabel: function renderLabel(options) {
-	        var letter = options.letter;
-	        var value = options.value;
-	        var type = options.type;
-	        var labelOffset = options.labelOffset;
-	        var labelFormat = options.labelFormat;
-	        var emptyLabel = options.emptyLabel;
-	
-	        var className = 'chart-axis-value-label chart-axis-value-label-' + letter;
-	        // todo generalize dy for all text sizes...?
-	        return _react2.default.createElement(
-	            'text',
-	            _extends({ className: className }, { dy: '0.32em' }, labelOffset, {
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 714
-	                }
-	            }),
-	            formatAxisLabel(value, type, labelFormat, emptyLabel)
-	        );
-	    },
-	
-	    // todo unify into drawLine
-	    renderTick: function renderTick(options) {
-	        var letter = options.letter;
-	        var tickLength = options.tickLength;
-	        var orientation = options.orientation;
-	
-	        var className = 'chart-tick chart-tick-' + letter;
-	
-	        var _ref14 = orientation === 'vertical' ? [-tickLength, 0] : [0, tickLength];
-	
-	        var _ref15 = _slicedToArray(_ref14, 2);
-	
-	        var x2 = _ref15[0];
-	        var y2 = _ref15[1];
-	
-	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
-	            __source: {
-	                fileName: '../../../src/charts/XYPlot.js',
-	                lineNumber: 723
-	            }
-	        }));
-	    },
-	    renderGrid: function renderGrid(options) {
-	        var letter = options.letter;
-	        var gridLength = options.gridLength;
-	        var orientation = options.orientation;
-	
-	        var className = 'chart-grid chart-grid-' + letter;
-	
-	        var _ref16 = orientation === 'vertical' ? [gridLength, 0] : [0, -gridLength];
-	
-	        var _ref17 = _slicedToArray(_ref16, 2);
-	
-	        var x2 = _ref17[0];
-	        var y2 = _ref17[1];
-	
-	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
-	            __source: {
-	                fileName: '../../../src/charts/XYPlot.js',
-	                lineNumber: 729
-	            }
-	        }));
-	    },
-	    renderZero: function renderZero(options) {
-	        var letter = options.letter;
-	        var gridLength = options.gridLength;
-	        var orientation = options.orientation;
-	
-	        var className = 'chart-zero-line chart-zero-line-' + letter;
-	
-	        var _ref18 = orientation === 'vertical' ? [gridLength, 0] : [0, -gridLength];
-	
-	        var _ref19 = _slicedToArray(_ref18, 2);
-	
-	        var x2 = _ref19[0];
-	        var y2 = _ref19[1];
-	
-	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
-	            __source: {
-	                fileName: '../../../src/charts/XYPlot.js',
-	                lineNumber: 735
-	            }
-	        }));
-	    }
-	});
-	
-	function closestNumberInList(number, list) {
-	    return list.reduce(function (closest, current) {
-	        return Math.abs(current - number) < Math.abs(closest - number) ? current : closest;
-	    });
-	}
-	function indexOfClosestNumberInList(number, list) {
-	    return list.reduce(function (closestI, current, i) {
-	        return Math.abs(current - number) < Math.abs(list[closestI] - number) ? i : closestI;
-	    }, 0);
-	}
-	
-	function childIsXYChart(child) {
-	    return !!(child && _lodash2.default.has(child, 'type.implementsInterface') && child.type.implementsInterface('XYChart'));
-	}
-	
-	function isNullOrUndefined(d) {
-	    return _lodash2.default.isNull(d) || _lodash2.default.isUndefined(d);
-	}
-	
-	function makeScale(domains, range, axisType, isNice, tickCount) {
-	    var domain = defaultDomain(_lodash2.default.flatten(domains), null, axisType);
-	    var scale = initScale(axisType).domain(domain);
-	    axisType === 'ordinal' ? scale.rangePoints(range) : scale.range(range);
-	    if (isNice && axisType !== 'ordinal') scale.nice(tickCount);
-	    return scale;
-	}
-	
-	function defaultDomain(data, getter, scaleType) {
-	    switch (scaleType) {
-	        // extent for number & time scales, coerce dates to numbers
-	        case 'number':
-	        case 'time':
-	            return _d2.default.extent(data, function (d) {
-	                return +(0, _util.accessor)(getter)(d);
-	            });
-	        // all unique values for ordinal scale
-	        case 'ordinal':
-	            return _lodash2.default.uniq(data.map((0, _util.accessor)(getter)));
-	    }
-	    return [];
-	}
-	
-	function initScale(type) {
-	    switch (type) {
-	        case 'number':
-	            return _d2.default.scale.linear();
-	        case 'ordinal':
-	            return _d2.default.scale.ordinal();
-	        case 'time':
-	            return _d2.default.time.scale();
-	    }
-	}
-	
-	function formatAxisLabel(value, type, format, emptyLabel) {
-	    return _lodash2.default.isNull(value) || _lodash2.default.isUndefined(value) ? emptyLabel : _lodash2.default.isFunction(format) ? format(value) : type === 'number' ? (0, _numeral2.default)(value).format(format) : type === 'time' ? (0, _moment2.default)(value).format(format) : value;
-	}
-	
-	function measureAxisLabels(xProps, yProps, xAxisLabelProps, yAxisLabelProps) {
-	    // hacky... pre-measure the bounding boxes of all axis labels,
-	    // by rendering axis HTML to the DOM, measuring them with getBoundingClientRect, then deleting them.
-	    xProps = _lodash2.default.assign({}, xProps, { showTicks: false, showGrid: false });
-	    yProps = _lodash2.default.assign({}, yProps, { showTicks: false, showGrid: false });
-	    var xAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, _extends({}, xProps, {
-	        __source: {
-	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 797
-	        }
-	    })));
-	    var yAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, _extends({}, yProps, {
-	        __source: {
-	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 798
-	        }
-	    })));
-	    var xLabelHtml = xAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(XAxisLabel, _extends({}, xAxisLabelProps, {
-	        __source: {
-	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 799
-	        }
-	    }))) : '';
-	    var yLabelHtml = yAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(YAxisLabel, _extends({}, yAxisLabelProps, {
-	        __source: {
-	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 800
-	        }
-	    }))) : '';
-	
-	    var testSvg = document.createElement('div');
-	    testSvg.innerHTML = '<svg class="xy-plot"><g class="chart-inner">        ' + xAxisHtml + yAxisHtml + xLabelHtml + yLabelHtml + '\n    </g></svg>';
-	    document.body.appendChild(testSvg);
-	
-	    var getRect = function getRect(el) {
-	        return el.getBoundingClientRect();
-	    }; // get rekt
-	    var labelBoxes = {
-	        xVal: xProps.showLabels ? _lodash2.default.map(testSvg.querySelectorAll('.chart-axis-value-label-x'), getRect) : [],
-	        yVal: yProps.showLabels ? _lodash2.default.map(testSvg.querySelectorAll('.chart-axis-value-label-y'), getRect) : [],
-	        xAxis: xAxisLabelProps ? testSvg.querySelectorAll('.chart-axis-label-x text')[0].getBoundingClientRect() : null,
-	        yAxis: yAxisLabelProps ? testSvg.querySelectorAll('.chart-axis-label-y text')[0].getBoundingClientRect() : null
-	    };
-	    document.body.removeChild(testSvg);
-	    //console.log(labelBoxes);
-	
-	    return labelBoxes;
-	}
-	
-	exports.default = XYPlot;
-
-/***/ },
-/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57577,7 +56901,7 @@
 
 
 /***/ },
-/* 263 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57600,7 +56924,7 @@
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
-	var _util = __webpack_require__(260);
+	var _util = __webpack_require__(172);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -57684,7 +57008,7 @@
 	exports.default = LineChart;
 
 /***/ },
-/* 264 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57709,7 +57033,7 @@
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
-	var _util = __webpack_require__(260);
+	var _util = __webpack_require__(172);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -58151,7 +57475,7 @@
 	exports.default = BarChart;
 
 /***/ },
-/* 265 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58174,7 +57498,7 @@
 	
 	var _d2 = _interopRequireDefault(_d);
 	
-	var _util = __webpack_require__(260);
+	var _util = __webpack_require__(172);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -58338,7 +57662,7 @@
 	exports.default = MarkerLineChart;
 
 /***/ },
-/* 266 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58359,7 +57683,7 @@
 	
 	var _d2 = _interopRequireDefault(_d);
 	
-	var _util = __webpack_require__(260);
+	var _util = __webpack_require__(172);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -58463,7 +57787,7 @@
 	exports.default = ScatterPlot;
 
 /***/ },
-/* 267 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58486,11 +57810,11 @@
 	
 	var _d2 = _interopRequireDefault(_d);
 	
-	var _BarChart = __webpack_require__(264);
+	var _BarChart = __webpack_require__(262);
 	
 	var _BarChart2 = _interopRequireDefault(_BarChart);
 	
-	var _util = __webpack_require__(260);
+	var _util = __webpack_require__(172);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -58573,7 +57897,7 @@
 	exports.default = Histogram;
 
 /***/ },
-/* 268 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58596,13 +57920,13 @@
 	
 	var _d2 = _interopRequireDefault(_d);
 	
-	var _util = __webpack_require__(260);
+	var _util = __webpack_require__(172);
 	
-	var _BarChart = __webpack_require__(264);
+	var _BarChart = __webpack_require__(262);
 	
 	var _BarChart2 = _interopRequireDefault(_BarChart);
 	
-	var _LineChart = __webpack_require__(263);
+	var _LineChart = __webpack_require__(261);
 	
 	var _LineChart2 = _interopRequireDefault(_LineChart);
 	
@@ -58723,7 +58047,7 @@
 	exports.default = KernelDensityEstimation;
 
 /***/ },
-/* 269 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58748,7 +58072,7 @@
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
-	var _util = __webpack_require__(260);
+	var _util = __webpack_require__(172);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -58893,7 +58217,246 @@
 	exports.default = AreaHeatmap;
 
 /***/ },
-/* 270 */
+/* 268 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(169);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d2 = __webpack_require__(171);
+	
+	var _d3 = _interopRequireDefault(_d2);
+	
+	var _util = __webpack_require__(172);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var PropTypes = _react2.default.PropTypes;
+	
+	var DEFAULT_PROPS = {
+	    getValue: null,
+	    margin: { top: 0, bottom: 0, left: 0, right: 0 },
+	    markerLineClass: 'marker-line',
+	    markerLineOverhangInner: 2,
+	    markerLineOverhangOuter: 2
+	};
+	
+	// default height/width, used only if height & width & radius are all undefined
+	var DEFAULT_SIZE = 150;
+	
+	var PieChart = _react2.default.createClass({
+	    displayName: 'PieChart',
+	
+	    propTypes: {
+	        // array of data to plot with pie chart
+	        data: PropTypes.array.isRequired,
+	        // (optional) accessor for getting the values plotted on the pie chart
+	        // if not provided, just uses the value itself at given index
+	        getValue: _util.AccessorPropType,
+	        // (optional) total expected sum of all the pie slice values
+	        // if provided && slices don't add up to total, an "empty" slice will be rendered for the rest
+	        // if not provided, will be the sum of all values (ie. all values will always add up to 100%)
+	        total: PropTypes.number,
+	        // (optional) height and width of the SVG
+	        // if only one is passed, same # is used for both (ie. width=100 means height=100 also)
+	        // if neither is passed, but radius is, radius+margins is used
+	        // if neither is passed, and radius isn't either, DEFAULTS.size is used
+	        width: PropTypes.number,
+	        height: PropTypes.number,
+	        // (optional) main radius of the pie chart, inferred from margin/width/height if not provided
+	        radius: PropTypes.number,
+	        // (optional) margins (between svg edges and pie circle), inferred from radius/width/height if not provided
+	        // can either be a single number (to make all margins equal), or {top, bottom, left, right} object
+	        margin: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+	        // (optional) radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
+	        holeRadius: PropTypes.number,
+	        // (optional) label text to display in the middle of the pie/donut
+	        centerLabel: PropTypes.string,
+	
+	        markerLineValue: PropTypes.number,
+	        markerLineClass: PropTypes.string,
+	        markerLineOverhangInner: PropTypes.number,
+	        markerLineOverhangOuter: PropTypes.number
+	    },
+	    getDefaultProps: function getDefaultProps() {
+	        return DEFAULT_PROPS;
+	    },
+	    onMouseEnterSlice: function onMouseEnterSlice(e, d) {
+	        this.props.onMouseEnterSlice(e, d);
+	    },
+	    onMouseMoveSlice: function onMouseMoveSlice(e, d) {
+	        this.props.onMouseMoveSlice(e, d);
+	    },
+	    onMouseLeaveSlice: function onMouseLeaveSlice(e, d) {
+	        this.props.onMouseLeaveSlice(e, d);
+	    },
+	    render: function render() {
+	        var _this = this;
+	
+	        var margin = _lodash2.default.isNumber(this.props.margin) ? { top: this.props.margin, bottom: this.props.margin, left: this.props.margin, right: this.props.margin } : _lodash2.default.defaults({}, this.props.margin, DEFAULT_PROPS.margin);
+	        // sizes fallback based on provided info: given dimension -> radius + margin -> other dimension -> default
+	        var width = this.props.width || (this.props.radius ? this.props.radius * 2 + margin.left + margin.right : this.props.height) || DEFAULT_SIZE;
+	        var height = this.props.height || (this.props.radius ? this.props.radius * 2 + margin.top + margin.bottom : this.props.width) || DEFAULT_SIZE;
+	        var radius = this.props.radius || Math.min((width - (margin.left + margin.right)) / 2, (height - (margin.top + margin.bottom)) / 2);
+	        var holeRadius = this.props.holeRadius;
+	
+	        var center = { x: margin.left + radius, y: margin.top + radius };
+	
+	        var _props = this.props;
+	        var markerLineValue = _props.markerLineValue;
+	        var markerLineClass = _props.markerLineClass;
+	        var markerLineOverhangInner = _props.markerLineOverhangInner;
+	        var markerLineOverhangOuter = _props.markerLineOverhangOuter;
+	
+	        var valueAccessor = (0, _util.accessor)(this.props.getValue);
+	        var sum = _lodash2.default.sum(this.props.data, valueAccessor);
+	        var total = this.props.total || sum;
+	        var markerLinePercent = _lodash2.default.isFinite(markerLineValue) ? markerLineValue / total : null;
+	
+	        var startPercent = 0;
+	        return _react2.default.createElement(
+	            'svg',
+	            _extends({ className: 'pie-chart' }, { width: width, height: height }, {
+	                __source: {
+	                    fileName: '../../../src/charts/PieChart.js',
+	                    lineNumber: 86
+	                }
+	            }),
+	            this.props.data.map(function (d, i) {
+	                var _map = ['onMouseEnterSlice', 'onMouseMoveSlice', 'onMouseLeaveSlice'].map(function (eventName) {
+	                    // partially apply this bar's data point as 2nd callback argument
+	                    var callback = (0, _util.methodIfFuncProp)(eventName, _this.props, _this);
+	                    return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
+	                });
+	
+	                var _map2 = _slicedToArray(_map, 3);
+	
+	                var onMouseEnter = _map2[0];
+	                var onMouseMove = _map2[1];
+	                var onMouseLeave = _map2[2];
+	
+	                var className = 'pie-slice pie-slice-' + i;
+	                var slicePercent = valueAccessor(d) / total;
+	                var endPercent = startPercent + slicePercent;
+	                var pathStr = pieSlicePath(startPercent, endPercent, center, radius, holeRadius);
+	                startPercent += slicePercent;
+	                var key = 'pie-slice-' + i;
+	
+	                return _react2.default.createElement('path', _extends({ className: className, d: pathStr, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave, key: key }, {
+	                    __source: {
+	                        fileName: '../../../src/charts/PieChart.js',
+	                        lineNumber: 102
+	                    }
+	                }));
+	            }),
+	            sum < total ? // draw empty slice if the sum of slices is less than expected total
+	            _react2.default.createElement('path', {
+	                className: 'pie-slice pie-slice-empty',
+	                d: pieSlicePath(startPercent, 1, center, radius, holeRadius),
+	                key: 'pie-slice-empty',
+	                __source: {
+	                    fileName: '../../../src/charts/PieChart.js',
+	                    lineNumber: 106
+	                }
+	            }) : null,
+	            _lodash2.default.isFinite(markerLinePercent) ? _react2.default.createElement('path', {
+	                className: markerLineClass,
+	                d: markerLine(markerLinePercent, center, radius, holeRadius, markerLineOverhangOuter, markerLineOverhangInner),
+	                key: 'pie-slice-marker-line',
+	                __source: {
+	                    fileName: '../../../src/charts/PieChart.js',
+	                    lineNumber: 114
+	                }
+	            }) : null,
+	            this.props.centerLabel ? this.renderCenterLabel(center) : null
+	        );
+	    },
+	    renderCenterLabel: function renderCenterLabel(center) {
+	        var x = center.x;
+	        var y = center.y;
+	
+	        var style = { textAnchor: 'middle', dominantBaseline: 'central' };
+	        return _react2.default.createElement(
+	            'text',
+	            _extends({ className: 'pie-label-center' }, { x: x, y: y, style: style }, {
+	                __source: {
+	                    fileName: '../../../src/charts/PieChart.js',
+	                    lineNumber: 128
+	                }
+	            }),
+	            this.props.centerLabel
+	        );
+	    }
+	});
+	
+	function markerLine(percentValue, center, radius) {
+	    var holeRadius = arguments.length <= 3 || arguments[3] === undefined ? 0 : arguments[3];
+	    var overhangOuter = arguments.length <= 4 || arguments[4] === undefined ? 0 : arguments[4];
+	    var overhangInner = arguments.length <= 5 || arguments[5] === undefined ? 0 : arguments[5];
+	
+	    if (percentValue == 1) endPercent = .9999999; // arc cannot be a full circle
+	    var startX = Math.sin(2 * Math.PI / (1 / percentValue));
+	    var startY = Math.cos(2 * Math.PI / (1 / percentValue));
+	    var c = center;
+	    var r = radius;
+	    var rH = holeRadius;
+	    var x0 = startX;
+	    var y0 = startY;
+	    var r0 = Math.max(rH - overhangInner, 0);
+	    var r1 = r + overhangOuter;
+	
+	    return [// construct a string representing the marker line
+	    'M ' + (c.x + x0 * r0) + ',' + (c.y - y0 * r0), // start at edge of inner (hole) circle, or center if no hole
+	    'L ' + (c.x + x0 * r1) + ',' + (c.y - y0 * r1) + ' z' // straight line to outer circle, along radius
+	    ].join(' ');
+	}
+	
+	function pieSlicePath(startPercent, endPercent, center, radius) {
+	    var holeRadius = arguments.length <= 4 || arguments[4] === undefined ? 0 : arguments[4];
+	
+	    if (endPercent == 1) endPercent = .9999999; // arc cannot be a full circle
+	    var startX = Math.sin(2 * Math.PI / (1 / startPercent));
+	    var startY = Math.cos(2 * Math.PI / (1 / startPercent));
+	    var endX = Math.sin(2 * Math.PI / (1 / endPercent));
+	    var endY = Math.cos(2 * Math.PI / (1 / endPercent));
+	    var largeArc = endPercent - startPercent <= 0.5 ? 0 : 1;
+	    var c = center;
+	    var r = radius;
+	    var rH = holeRadius;
+	    var x0 = startX;
+	    var x1 = endX;
+	    var y0 = startY;
+	    var y1 = endY;
+	
+	    return [// construct a string representing the pie slice path
+	    'M ' + (c.x + x0 * rH) + ',' + (c.y - y0 * rH), // start at edge of inner (hole) circle, or center if no hole
+	    'L ' + (c.x + x0 * r) + ',' + (c.y - y0 * r), // straight line to outer circle, along radius
+	    'A ' + r + ',' + r + ' 0 ' + largeArc + ' 1 ' + (c.x + x1 * r) + ',' + (c.y - y1 * r) // outer arc
+	    ].concat(holeRadius ? [// if we have an inner (donut) hole, draw an inner arc too, otherwise we're done
+	    'L ' + (c.x + x1 * rH) + ',' + (c.y - y1 * rH), // straight line to inner (hole) circle, along radius
+	    'A ' + rH + ',' + rH + ' 0 ' + largeArc + ' 0 ' + (c.x + x0 * rH) + ',' + (c.y - y0 * rH) + ' z' // inner arc
+	    ] : 'z').join(' ');
+	}
+	
+	exports.default = PieChart;
+
+/***/ },
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58916,7 +58479,7 @@
 	
 	var _d2 = _interopRequireDefault(_d);
 	
-	var _util = __webpack_require__(260);
+	var _util = __webpack_require__(172);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -59152,2466 +58715,7 @@
 	exports.default = TreeMap;
 
 /***/ },
-/* 271 */
-/***/ function(module, exports) {
-
-	module.exports = [
-		{
-			"label": "AL",
-			"a": 310504,
-			"b": 552339,
-			"c": 259034,
-			"d": 450818,
-			"e": 1231572,
-			"f": 1215966,
-			"g": 641667
-		},
-		{
-			"label": "AK",
-			"a": 52083,
-			"b": 85640,
-			"c": 42153,
-			"d": 74257,
-			"e": 198724,
-			"f": 183159,
-			"g": 50277
-		},
-		{
-			"label": "AZ",
-			"a": 515910,
-			"b": 828669,
-			"c": 362642,
-			"d": 601943,
-			"e": 1804762,
-			"f": 1523681,
-			"g": 862573
-		},
-		{
-			"label": "AR",
-			"a": 202070,
-			"b": 343207,
-			"c": 157204,
-			"d": 264160,
-			"e": 754420,
-			"f": 727124,
-			"g": 407205
-		},
-		{
-			"label": "CA",
-			"a": 2704659,
-			"b": 4499890,
-			"c": 2159981,
-			"d": 3853788,
-			"e": 10604510,
-			"f": 8819342,
-			"g": 4114496
-		},
-		{
-			"label": "CO",
-			"a": 358280,
-			"b": 587154,
-			"c": 261701,
-			"d": 466194,
-			"e": 1464939,
-			"f": 1290094,
-			"g": 511094
-		},
-		{
-			"label": "CT",
-			"a": 211637,
-			"b": 403658,
-			"c": 196918,
-			"d": 325110,
-			"e": 916955,
-			"f": 968967,
-			"g": 478007
-		},
-		{
-			"label": "DE",
-			"a": 59319,
-			"b": 99496,
-			"c": 47414,
-			"d": 84464,
-			"e": 230183,
-			"f": 230528,
-			"g": 121688
-		},
-		{
-			"label": "DC",
-			"a": 36352,
-			"b": 50439,
-			"c": 25225,
-			"d": 75569,
-			"e": 193557,
-			"f": 140043,
-			"g": 70648
-		},
-		{
-			"label": "FL",
-			"a": 1140516,
-			"b": 1938695,
-			"c": 925060,
-			"d": 1607297,
-			"e": 4782119,
-			"f": 4746856,
-			"g": 3187797
-		},
-		{
-			"label": "GA",
-			"a": 740521,
-			"b": 1250460,
-			"c": 557860,
-			"d": 919876,
-			"e": 2846985,
-			"f": 2389018,
-			"g": 981024
-		},
-		{
-			"label": "HI",
-			"a": 87207,
-			"b": 134025,
-			"c": 64011,
-			"d": 124834,
-			"e": 356237,
-			"f": 331817,
-			"g": 190067
-		},
-		{
-			"label": "ID",
-			"a": 121746,
-			"b": 201192,
-			"c": 89702,
-			"d": 147606,
-			"e": 406247,
-			"f": 375173,
-			"g": 182150
-		}
-	];
-
-/***/ },
-/* 272 */
-/***/ function(module, exports) {
-
-	module.exports = [
-		{
-			"date": "2011-10-01",
-			"newYork": 63.4,
-			"sanFrancisco": 62.7,
-			"austin": 72.2
-		},
-		{
-			"date": "2011-10-02",
-			"newYork": 58,
-			"sanFrancisco": 59.9,
-			"austin": 67.7
-		},
-		{
-			"date": "2011-10-03",
-			"newYork": 53.3,
-			"sanFrancisco": 59.1,
-			"austin": 69.4
-		},
-		{
-			"date": "2011-10-04",
-			"newYork": 55.7,
-			"sanFrancisco": 58.8,
-			"austin": 68
-		},
-		{
-			"date": "2011-10-05",
-			"newYork": 64.2,
-			"sanFrancisco": 58.7,
-			"austin": 72.4
-		},
-		{
-			"date": "2011-10-06",
-			"newYork": 58.8,
-			"sanFrancisco": 57,
-			"austin": 77
-		},
-		{
-			"date": "2011-10-07",
-			"newYork": 57.9,
-			"sanFrancisco": 56.7,
-			"austin": 82.3
-		},
-		{
-			"date": "2011-10-08",
-			"newYork": 61.8,
-			"sanFrancisco": 56.8,
-			"austin": 78.9
-		},
-		{
-			"date": "2011-10-09",
-			"newYork": 69.3,
-			"sanFrancisco": 56.7,
-			"austin": 68.8
-		},
-		{
-			"date": "2011-10-10",
-			"newYork": 71.2,
-			"sanFrancisco": 60.1,
-			"austin": 68.7
-		},
-		{
-			"date": "2011-10-11",
-			"newYork": 68.7,
-			"sanFrancisco": 61.1,
-			"austin": 70.3
-		},
-		{
-			"date": "2011-10-12",
-			"newYork": 61.8,
-			"sanFrancisco": 61.5,
-			"austin": 75.3
-		},
-		{
-			"date": "2011-10-13",
-			"newYork": 63,
-			"sanFrancisco": 64.3,
-			"austin": 76.6
-		},
-		{
-			"date": "2011-10-14",
-			"newYork": 66.9,
-			"sanFrancisco": 67.1,
-			"austin": 66.6
-		},
-		{
-			"date": "2011-10-15",
-			"newYork": 61.7,
-			"sanFrancisco": 64.6,
-			"austin": 68
-		},
-		{
-			"date": "2011-10-16",
-			"newYork": 61.8,
-			"sanFrancisco": 61.6,
-			"austin": 70.6
-		},
-		{
-			"date": "2011-10-17",
-			"newYork": 62.8,
-			"sanFrancisco": 61.1,
-			"austin": 71.1
-		},
-		{
-			"date": "2011-10-18",
-			"newYork": 60.8,
-			"sanFrancisco": 59.2,
-			"austin": 70
-		},
-		{
-			"date": "2011-10-19",
-			"newYork": 62.1,
-			"sanFrancisco": 58.9,
-			"austin": 61.6
-		},
-		{
-			"date": "2011-10-20",
-			"newYork": 65.1,
-			"sanFrancisco": 57.2,
-			"austin": 57.4
-		},
-		{
-			"date": "2011-10-21",
-			"newYork": 55.6,
-			"sanFrancisco": 56.4,
-			"austin": 64.3
-		},
-		{
-			"date": "2011-10-22",
-			"newYork": 54.4,
-			"sanFrancisco": 60.7,
-			"austin": 72.4
-		},
-		{
-			"date": "2011-10-23",
-			"newYork": 54.4,
-			"sanFrancisco": 65.1,
-			"austin": 72.4
-		},
-		{
-			"date": "2011-10-24",
-			"newYork": 54.8,
-			"sanFrancisco": 60.9,
-			"austin": 72.5
-		},
-		{
-			"date": "2011-10-25",
-			"newYork": 57.9,
-			"sanFrancisco": 56.1,
-			"austin": 72.7
-		},
-		{
-			"date": "2011-10-26",
-			"newYork": 54.6,
-			"sanFrancisco": 54.6,
-			"austin": 73.4
-		},
-		{
-			"date": "2011-10-27",
-			"newYork": 54.4,
-			"sanFrancisco": 56.1,
-			"austin": 70.7
-		},
-		{
-			"date": "2011-10-28",
-			"newYork": 42.5,
-			"sanFrancisco": 58.1,
-			"austin": 56.8
-		},
-		{
-			"date": "2011-10-29",
-			"newYork": 40.9,
-			"sanFrancisco": 57.5,
-			"austin": 51
-		},
-		{
-			"date": "2011-10-30",
-			"newYork": 38.6,
-			"sanFrancisco": 57.7,
-			"austin": 54.9
-		},
-		{
-			"date": "2011-10-31",
-			"newYork": 44.2,
-			"sanFrancisco": 55.1,
-			"austin": 58.8
-		},
-		{
-			"date": "2011-11-01",
-			"newYork": 49.6,
-			"sanFrancisco": 57.9,
-			"austin": 62.6
-		},
-		{
-			"date": "2011-11-02",
-			"newYork": 47.2,
-			"sanFrancisco": 64.6,
-			"austin": 71
-		},
-		{
-			"date": "2011-11-03",
-			"newYork": 50.1,
-			"sanFrancisco": 56.2,
-			"austin": 58.4
-		},
-		{
-			"date": "2011-11-04",
-			"newYork": 50.1,
-			"sanFrancisco": 50.5,
-			"austin": 45.1
-		},
-		{
-			"date": "2011-11-05",
-			"newYork": 43.5,
-			"sanFrancisco": 51.3,
-			"austin": 52.2
-		},
-		{
-			"date": "2011-11-06",
-			"newYork": 43.8,
-			"sanFrancisco": 52.6,
-			"austin": 73
-		},
-		{
-			"date": "2011-11-07",
-			"newYork": 48.9,
-			"sanFrancisco": 51.4,
-			"austin": 75.4
-		},
-		{
-			"date": "2011-11-08",
-			"newYork": 55.5,
-			"sanFrancisco": 50.6,
-			"austin": 72.1
-		},
-		{
-			"date": "2011-11-09",
-			"newYork": 53.7,
-			"sanFrancisco": 54.6,
-			"austin": 56.6
-		},
-		{
-			"date": "2011-11-10",
-			"newYork": 57.7,
-			"sanFrancisco": 55.6,
-			"austin": 55.4
-		},
-		{
-			"date": "2011-11-11",
-			"newYork": 48.5,
-			"sanFrancisco": 53.9,
-			"austin": 46.7
-		},
-		{
-			"date": "2011-11-12",
-			"newYork": 46.8,
-			"sanFrancisco": 54,
-			"austin": 62
-		},
-		{
-			"date": "2011-11-13",
-			"newYork": 51.1,
-			"sanFrancisco": 53.8,
-			"austin": 71.6
-		},
-		{
-			"date": "2011-11-14",
-			"newYork": 56.8,
-			"sanFrancisco": 53.5,
-			"austin": 75.5
-		},
-		{
-			"date": "2011-11-15",
-			"newYork": 59.7,
-			"sanFrancisco": 53.4,
-			"austin": 72.1
-		},
-		{
-			"date": "2011-11-16",
-			"newYork": 56.5,
-			"sanFrancisco": 52.2,
-			"austin": 65.7
-		},
-		{
-			"date": "2011-11-17",
-			"newYork": 49.6,
-			"sanFrancisco": 52.7,
-			"austin": 56.8
-		},
-		{
-			"date": "2011-11-18",
-			"newYork": 41.5,
-			"sanFrancisco": 53.1,
-			"austin": 49.9
-		},
-		{
-			"date": "2011-11-19",
-			"newYork": 44.3,
-			"sanFrancisco": 49,
-			"austin": 71.7
-		},
-		{
-			"date": "2011-11-20",
-			"newYork": 54,
-			"sanFrancisco": 50.4,
-			"austin": 77.7
-		},
-		{
-			"date": "2011-11-21",
-			"newYork": 54.1,
-			"sanFrancisco": 51.1,
-			"austin": 76.4
-		},
-		{
-			"date": "2011-11-22",
-			"newYork": 49.4,
-			"sanFrancisco": 52.3,
-			"austin": 68.8
-		},
-		{
-			"date": "2011-11-23",
-			"newYork": 50,
-			"sanFrancisco": 54.6,
-			"austin": 57
-		},
-		{
-			"date": "2011-11-24",
-			"newYork": 44,
-			"sanFrancisco": 55.1,
-			"austin": 55.5
-		},
-		{
-			"date": "2011-11-25",
-			"newYork": 50.3,
-			"sanFrancisco": 51.5,
-			"austin": 61.6
-		},
-		{
-			"date": "2011-11-26",
-			"newYork": 52.1,
-			"sanFrancisco": 53.6,
-			"austin": 64.1
-		},
-		{
-			"date": "2011-11-27",
-			"newYork": 49.6,
-			"sanFrancisco": 52.3,
-			"austin": 51.1
-		},
-		{
-			"date": "2011-11-28",
-			"newYork": 57.2,
-			"sanFrancisco": 51,
-			"austin": 43
-		},
-		{
-			"date": "2011-11-29",
-			"newYork": 59.1,
-			"sanFrancisco": 49.5,
-			"austin": 46.4
-		},
-		{
-			"date": "2011-11-30",
-			"newYork": 50.6,
-			"sanFrancisco": 49.8,
-			"austin": 48
-		},
-		{
-			"date": "2011-12-01",
-			"newYork": 44.3,
-			"sanFrancisco": 60.4,
-			"austin": 48.1
-		},
-		{
-			"date": "2011-12-02",
-			"newYork": 43.9,
-			"sanFrancisco": 62.2,
-			"austin": 60.6
-		},
-		{
-			"date": "2011-12-03",
-			"newYork": 42.1,
-			"sanFrancisco": 58.3,
-			"austin": 62.6
-		},
-		{
-			"date": "2011-12-04",
-			"newYork": 43.9,
-			"sanFrancisco": 52.7,
-			"austin": 57.1
-		},
-		{
-			"date": "2011-12-05",
-			"newYork": 50.2,
-			"sanFrancisco": 51.5,
-			"austin": 44.2
-		},
-		{
-			"date": "2011-12-06",
-			"newYork": 54.2,
-			"sanFrancisco": 49.9,
-			"austin": 37.4
-		},
-		{
-			"date": "2011-12-07",
-			"newYork": 54.6,
-			"sanFrancisco": 48.6,
-			"austin": 35
-		},
-		{
-			"date": "2011-12-08",
-			"newYork": 43.4,
-			"sanFrancisco": 46.4,
-			"austin": 37
-		},
-		{
-			"date": "2011-12-09",
-			"newYork": 42.2,
-			"sanFrancisco": 49.8,
-			"austin": 45.4
-		},
-		{
-			"date": "2011-12-10",
-			"newYork": 45,
-			"sanFrancisco": 52.1,
-			"austin": 50.7
-		},
-		{
-			"date": "2011-12-11",
-			"newYork": 33.8,
-			"sanFrancisco": 48.8,
-			"austin": 48.6
-		},
-		{
-			"date": "2011-12-12",
-			"newYork": 36.8,
-			"sanFrancisco": 47.4,
-			"austin": 52.2
-		},
-		{
-			"date": "2011-12-13",
-			"newYork": 38.6,
-			"sanFrancisco": 47.2,
-			"austin": 60.8
-		},
-		{
-			"date": "2011-12-14",
-			"newYork": 41.9,
-			"sanFrancisco": 46.1,
-			"austin": 70
-		},
-		{
-			"date": "2011-12-15",
-			"newYork": 49.6,
-			"sanFrancisco": 48.8,
-			"austin": 64.2
-		},
-		{
-			"date": "2011-12-16",
-			"newYork": 50.2,
-			"sanFrancisco": 47.9,
-			"austin": 50.9
-		},
-		{
-			"date": "2011-12-17",
-			"newYork": 40.6,
-			"sanFrancisco": 49.8,
-			"austin": 51.6
-		},
-		{
-			"date": "2011-12-18",
-			"newYork": 29.1,
-			"sanFrancisco": 49.1,
-			"austin": 55.2
-		},
-		{
-			"date": "2011-12-19",
-			"newYork": 33.7,
-			"sanFrancisco": 48.3,
-			"austin": 62.1
-		},
-		{
-			"date": "2011-12-20",
-			"newYork": 45.8,
-			"sanFrancisco": 49.3,
-			"austin": 56.3
-		},
-		{
-			"date": "2011-12-21",
-			"newYork": 47.4,
-			"sanFrancisco": 48.4,
-			"austin": 47.2
-		},
-		{
-			"date": "2011-12-22",
-			"newYork": 54.4,
-			"sanFrancisco": 53.3,
-			"austin": 52.3
-		},
-		{
-			"date": "2011-12-23",
-			"newYork": 47.8,
-			"sanFrancisco": 47.5,
-			"austin": 45.2
-		},
-		{
-			"date": "2011-12-24",
-			"newYork": 34.9,
-			"sanFrancisco": 47.9,
-			"austin": 43.6
-		},
-		{
-			"date": "2011-12-25",
-			"newYork": 35.9,
-			"sanFrancisco": 48.9,
-			"austin": 42.9
-		},
-		{
-			"date": "2011-12-26",
-			"newYork": 43.6,
-			"sanFrancisco": 45.9,
-			"austin": 48.2
-		},
-		{
-			"date": "2011-12-27",
-			"newYork": 42.9,
-			"sanFrancisco": 47.2,
-			"austin": 45.4
-		},
-		{
-			"date": "2011-12-28",
-			"newYork": 46.2,
-			"sanFrancisco": 48.9,
-			"austin": 44.2
-		},
-		{
-			"date": "2011-12-29",
-			"newYork": 30.8,
-			"sanFrancisco": 50.9,
-			"austin": 50.4
-		},
-		{
-			"date": "2011-12-30",
-			"newYork": 40.8,
-			"sanFrancisco": 52.9,
-			"austin": 52.4
-		},
-		{
-			"date": "2011-12-31",
-			"newYork": 49.8,
-			"sanFrancisco": 50.1,
-			"austin": 53.5
-		},
-		{
-			"date": "2012-01-01",
-			"newYork": 46.3,
-			"sanFrancisco": 53.9,
-			"austin": 55.9
-		},
-		{
-			"date": "2012-01-02",
-			"newYork": 43.2,
-			"sanFrancisco": 53.1,
-			"austin": 48.2
-		},
-		{
-			"date": "2012-01-03",
-			"newYork": 30.3,
-			"sanFrancisco": 49.7,
-			"austin": 41
-		},
-		{
-			"date": "2012-01-04",
-			"newYork": 19.2,
-			"sanFrancisco": 52.7,
-			"austin": 48.9
-		},
-		{
-			"date": "2012-01-05",
-			"newYork": 32.1,
-			"sanFrancisco": 52.6,
-			"austin": 54.8
-		},
-		{
-			"date": "2012-01-06",
-			"newYork": 41.2,
-			"sanFrancisco": 49,
-			"austin": 61.2
-		},
-		{
-			"date": "2012-01-07",
-			"newYork": 47,
-			"sanFrancisco": 51,
-			"austin": 59.7
-		},
-		{
-			"date": "2012-01-08",
-			"newYork": 46,
-			"sanFrancisco": 56.8,
-			"austin": 52.5
-		},
-		{
-			"date": "2012-01-09",
-			"newYork": 34.7,
-			"sanFrancisco": 52.3,
-			"austin": 54
-		},
-		{
-			"date": "2012-01-10",
-			"newYork": 39.4,
-			"sanFrancisco": 51.6,
-			"austin": 47.7
-		},
-		{
-			"date": "2012-01-11",
-			"newYork": 40.4,
-			"sanFrancisco": 49.8,
-			"austin": 49.2
-		},
-		{
-			"date": "2012-01-12",
-			"newYork": 45.4,
-			"sanFrancisco": 51.9,
-			"austin": 48.4
-		},
-		{
-			"date": "2012-01-13",
-			"newYork": 40.7,
-			"sanFrancisco": 53.7,
-			"austin": 40.2
-		},
-		{
-			"date": "2012-01-14",
-			"newYork": 30.4,
-			"sanFrancisco": 52.9,
-			"austin": 43.9
-		},
-		{
-			"date": "2012-01-15",
-			"newYork": 23.9,
-			"sanFrancisco": 49.7,
-			"austin": 45.2
-		},
-		{
-			"date": "2012-01-16",
-			"newYork": 22.6,
-			"sanFrancisco": 45.3,
-			"austin": 65
-		},
-		{
-			"date": "2012-01-17",
-			"newYork": 39.8,
-			"sanFrancisco": 43.6,
-			"austin": 68.2
-		},
-		{
-			"date": "2012-01-18",
-			"newYork": 43.2,
-			"sanFrancisco": 45,
-			"austin": 47.5
-		},
-		{
-			"date": "2012-01-19",
-			"newYork": 26.3,
-			"sanFrancisco": 47.3,
-			"austin": 57.1
-		},
-		{
-			"date": "2012-01-20",
-			"newYork": 32.8,
-			"sanFrancisco": 51.4,
-			"austin": 61.9
-		},
-		{
-			"date": "2012-01-21",
-			"newYork": 27.4,
-			"sanFrancisco": 53.7,
-			"austin": 54.6
-		},
-		{
-			"date": "2012-01-22",
-			"newYork": 25,
-			"sanFrancisco": 48.3,
-			"austin": 56.7
-		},
-		{
-			"date": "2012-01-23",
-			"newYork": 39.4,
-			"sanFrancisco": 52.9,
-			"austin": 54.4
-		},
-		{
-			"date": "2012-01-24",
-			"newYork": 48.7,
-			"sanFrancisco": 49.1,
-			"austin": 52.7
-		},
-		{
-			"date": "2012-01-25",
-			"newYork": 43,
-			"sanFrancisco": 52.1,
-			"austin": 61.8
-		},
-		{
-			"date": "2012-01-26",
-			"newYork": 37.1,
-			"sanFrancisco": 53.6,
-			"austin": 55
-		},
-		{
-			"date": "2012-01-27",
-			"newYork": 48.2,
-			"sanFrancisco": 50.4,
-			"austin": 50.7
-		},
-		{
-			"date": "2012-01-28",
-			"newYork": 43.7,
-			"sanFrancisco": 50.3,
-			"austin": 52.9
-		},
-		{
-			"date": "2012-01-29",
-			"newYork": 40.1,
-			"sanFrancisco": 53.8,
-			"austin": 44.4
-		},
-		{
-			"date": "2012-01-30",
-			"newYork": 38,
-			"sanFrancisco": 51.9,
-			"austin": 49.1
-		},
-		{
-			"date": "2012-01-31",
-			"newYork": 43.5,
-			"sanFrancisco": 50,
-			"austin": 62.8
-		},
-		{
-			"date": "2012-02-01",
-			"newYork": 50.4,
-			"sanFrancisco": 50,
-			"austin": 64.6
-		},
-		{
-			"date": "2012-02-02",
-			"newYork": 45.8,
-			"sanFrancisco": 51.3,
-			"austin": 61.1
-		},
-		{
-			"date": "2012-02-03",
-			"newYork": 37.5,
-			"sanFrancisco": 51.5,
-			"austin": 70
-		},
-		{
-			"date": "2012-02-04",
-			"newYork": 40.8,
-			"sanFrancisco": 52,
-			"austin": 61.3
-		},
-		{
-			"date": "2012-02-05",
-			"newYork": 36.5,
-			"sanFrancisco": 53.8,
-			"austin": 48.2
-		},
-		{
-			"date": "2012-02-06",
-			"newYork": 39.1,
-			"sanFrancisco": 54.6,
-			"austin": 44.2
-		},
-		{
-			"date": "2012-02-07",
-			"newYork": 43.2,
-			"sanFrancisco": 54.3,
-			"austin": 51.3
-		},
-		{
-			"date": "2012-02-08",
-			"newYork": 36.5,
-			"sanFrancisco": 51.9,
-			"austin": 49.2
-		},
-		{
-			"date": "2012-02-09",
-			"newYork": 36.5,
-			"sanFrancisco": 53.8,
-			"austin": 45.7
-		},
-		{
-			"date": "2012-02-10",
-			"newYork": 38.3,
-			"sanFrancisco": 53.9,
-			"austin": 54.1
-		},
-		{
-			"date": "2012-02-11",
-			"newYork": 36.9,
-			"sanFrancisco": 52.3,
-			"austin": 44.9
-		},
-		{
-			"date": "2012-02-12",
-			"newYork": 29.7,
-			"sanFrancisco": 50.1,
-			"austin": 36.5
-		},
-		{
-			"date": "2012-02-13",
-			"newYork": 33.1,
-			"sanFrancisco": 49.5,
-			"austin": 44.8
-		},
-		{
-			"date": "2012-02-14",
-			"newYork": 39.6,
-			"sanFrancisco": 48.6,
-			"austin": 52.3
-		},
-		{
-			"date": "2012-02-15",
-			"newYork": 42.3,
-			"sanFrancisco": 49.9,
-			"austin": 68
-		},
-		{
-			"date": "2012-02-16",
-			"newYork": 39.7,
-			"sanFrancisco": 52.4,
-			"austin": 54.6
-		},
-		{
-			"date": "2012-02-17",
-			"newYork": 46,
-			"sanFrancisco": 49.9,
-			"austin": 53.8
-		},
-		{
-			"date": "2012-02-18",
-			"newYork": 41.2,
-			"sanFrancisco": 51.6,
-			"austin": 56.2
-		},
-		{
-			"date": "2012-02-19",
-			"newYork": 39.8,
-			"sanFrancisco": 47.8,
-			"austin": 50.8
-		},
-		{
-			"date": "2012-02-20",
-			"newYork": 38.1,
-			"sanFrancisco": 48.7,
-			"austin": 53
-		},
-		{
-			"date": "2012-02-21",
-			"newYork": 37.1,
-			"sanFrancisco": 49.7,
-			"austin": 61
-		},
-		{
-			"date": "2012-02-22",
-			"newYork": 45.5,
-			"sanFrancisco": 53.4,
-			"austin": 68.8
-		},
-		{
-			"date": "2012-02-23",
-			"newYork": 50.6,
-			"sanFrancisco": 54.1,
-			"austin": 69.4
-		},
-		{
-			"date": "2012-02-24",
-			"newYork": 42.7,
-			"sanFrancisco": 55.9,
-			"austin": 59.3
-		},
-		{
-			"date": "2012-02-25",
-			"newYork": 42.6,
-			"sanFrancisco": 51.7,
-			"austin": 47.2
-		},
-		{
-			"date": "2012-02-26",
-			"newYork": 36.9,
-			"sanFrancisco": 47.7,
-			"austin": 47.7
-		},
-		{
-			"date": "2012-02-27",
-			"newYork": 40.9,
-			"sanFrancisco": 45.4,
-			"austin": 61.9
-		},
-		{
-			"date": "2012-02-28",
-			"newYork": 45.9,
-			"sanFrancisco": 47,
-			"austin": 67.2
-		},
-		{
-			"date": "2012-02-29",
-			"newYork": 40.7,
-			"sanFrancisco": 49.8,
-			"austin": 70.1
-		},
-		{
-			"date": "2012-03-01",
-			"newYork": 41.3,
-			"sanFrancisco": 48.9,
-			"austin": 62.1
-		},
-		{
-			"date": "2012-03-02",
-			"newYork": 36.8,
-			"sanFrancisco": 48.1,
-			"austin": 72.7
-		},
-		{
-			"date": "2012-03-03",
-			"newYork": 47.6,
-			"sanFrancisco": 50.7,
-			"austin": 59
-		},
-		{
-			"date": "2012-03-04",
-			"newYork": 44.2,
-			"sanFrancisco": 55,
-			"austin": 51.8
-		},
-		{
-			"date": "2012-03-05",
-			"newYork": 38.5,
-			"sanFrancisco": 48.8,
-			"austin": 55
-		},
-		{
-			"date": "2012-03-06",
-			"newYork": 32.9,
-			"sanFrancisco": 48.4,
-			"austin": 61.8
-		},
-		{
-			"date": "2012-03-07",
-			"newYork": 43.3,
-			"sanFrancisco": 49.9,
-			"austin": 67.1
-		},
-		{
-			"date": "2012-03-08",
-			"newYork": 51.2,
-			"sanFrancisco": 49.2,
-			"austin": 72
-		},
-		{
-			"date": "2012-03-09",
-			"newYork": 47.8,
-			"sanFrancisco": 51.7,
-			"austin": 46.4
-		},
-		{
-			"date": "2012-03-10",
-			"newYork": 37.2,
-			"sanFrancisco": 49.3,
-			"austin": 46.7
-		},
-		{
-			"date": "2012-03-11",
-			"newYork": 42.9,
-			"sanFrancisco": 50,
-			"austin": 56.9
-		},
-		{
-			"date": "2012-03-12",
-			"newYork": 48.8,
-			"sanFrancisco": 48.6,
-			"austin": 61.9
-		},
-		{
-			"date": "2012-03-13",
-			"newYork": 52.6,
-			"sanFrancisco": 53.9,
-			"austin": 68.8
-		},
-		{
-			"date": "2012-03-14",
-			"newYork": 60.5,
-			"sanFrancisco": 55.2,
-			"austin": 71.9
-		},
-		{
-			"date": "2012-03-15",
-			"newYork": 47.2,
-			"sanFrancisco": 55.9,
-			"austin": 72
-		},
-		{
-			"date": "2012-03-16",
-			"newYork": 44.7,
-			"sanFrancisco": 54.6,
-			"austin": 72.5
-		},
-		{
-			"date": "2012-03-17",
-			"newYork": 48.2,
-			"sanFrancisco": 48.2,
-			"austin": 71.7
-		},
-		{
-			"date": "2012-03-18",
-			"newYork": 48.2,
-			"sanFrancisco": 47.1,
-			"austin": 71.1
-		},
-		{
-			"date": "2012-03-19",
-			"newYork": 53.1,
-			"sanFrancisco": 45.8,
-			"austin": 73
-		},
-		{
-			"date": "2012-03-20",
-			"newYork": 57.8,
-			"sanFrancisco": 49.7,
-			"austin": 63.8
-		},
-		{
-			"date": "2012-03-21",
-			"newYork": 57.5,
-			"sanFrancisco": 51.4,
-			"austin": 60
-		},
-		{
-			"date": "2012-03-22",
-			"newYork": 57.3,
-			"sanFrancisco": 51.4,
-			"austin": 62.3
-		},
-		{
-			"date": "2012-03-23",
-			"newYork": 61.7,
-			"sanFrancisco": 48.4,
-			"austin": 61.1
-		},
-		{
-			"date": "2012-03-24",
-			"newYork": 55.8,
-			"sanFrancisco": 49,
-			"austin": 62
-		},
-		{
-			"date": "2012-03-25",
-			"newYork": 48.4,
-			"sanFrancisco": 46.4,
-			"austin": 64.6
-		},
-		{
-			"date": "2012-03-26",
-			"newYork": 49.8,
-			"sanFrancisco": 49.7,
-			"austin": 66
-		},
-		{
-			"date": "2012-03-27",
-			"newYork": 39.6,
-			"sanFrancisco": 54.1,
-			"austin": 65.8
-		},
-		{
-			"date": "2012-03-28",
-			"newYork": 49.7,
-			"sanFrancisco": 54.6,
-			"austin": 69.2
-		},
-		{
-			"date": "2012-03-29",
-			"newYork": 56.8,
-			"sanFrancisco": 52.3,
-			"austin": 69.5
-		},
-		{
-			"date": "2012-03-30",
-			"newYork": 46.5,
-			"sanFrancisco": 54.5,
-			"austin": 73.5
-		},
-		{
-			"date": "2012-03-31",
-			"newYork": 42.2,
-			"sanFrancisco": 56.2,
-			"austin": 73.9
-		},
-		{
-			"date": "2012-04-01",
-			"newYork": 45.3,
-			"sanFrancisco": 51.1,
-			"austin": 75.3
-		},
-		{
-			"date": "2012-04-02",
-			"newYork": 48.1,
-			"sanFrancisco": 50.5,
-			"austin": 75.4
-		},
-		{
-			"date": "2012-04-03",
-			"newYork": 51.2,
-			"sanFrancisco": 52.2,
-			"austin": 77.3
-		},
-		{
-			"date": "2012-04-04",
-			"newYork": 61,
-			"sanFrancisco": 50.6,
-			"austin": 67
-		},
-		{
-			"date": "2012-04-05",
-			"newYork": 50.7,
-			"sanFrancisco": 47.9,
-			"austin": 71.1
-		},
-		{
-			"date": "2012-04-06",
-			"newYork": 48,
-			"sanFrancisco": 47.4,
-			"austin": 70.4
-		},
-		{
-			"date": "2012-04-07",
-			"newYork": 51.1,
-			"sanFrancisco": 49.4,
-			"austin": 73.6
-		},
-		{
-			"date": "2012-04-08",
-			"newYork": 55.7,
-			"sanFrancisco": 50,
-			"austin": 71.1
-		},
-		{
-			"date": "2012-04-09",
-			"newYork": 58.3,
-			"sanFrancisco": 51.3,
-			"austin": 70
-		},
-		{
-			"date": "2012-04-10",
-			"newYork": 55,
-			"sanFrancisco": 53.8,
-			"austin": 69
-		},
-		{
-			"date": "2012-04-11",
-			"newYork": 49,
-			"sanFrancisco": 52.9,
-			"austin": 69.2
-		},
-		{
-			"date": "2012-04-12",
-			"newYork": 51.7,
-			"sanFrancisco": 53.9,
-			"austin": 74.5
-		},
-		{
-			"date": "2012-04-13",
-			"newYork": 53.1,
-			"sanFrancisco": 50.2,
-			"austin": 73.4
-		},
-		{
-			"date": "2012-04-14",
-			"newYork": 55.2,
-			"sanFrancisco": 50.9,
-			"austin": 76
-		},
-		{
-			"date": "2012-04-15",
-			"newYork": 62.3,
-			"sanFrancisco": 51.5,
-			"austin": 74.5
-		},
-		{
-			"date": "2012-04-16",
-			"newYork": 62.9,
-			"sanFrancisco": 51.9,
-			"austin": 63.6
-		},
-		{
-			"date": "2012-04-17",
-			"newYork": 69.3,
-			"sanFrancisco": 53.2,
-			"austin": 67.3
-		},
-		{
-			"date": "2012-04-18",
-			"newYork": 59,
-			"sanFrancisco": 53,
-			"austin": 65.1
-		},
-		{
-			"date": "2012-04-19",
-			"newYork": 54.1,
-			"sanFrancisco": 55.1,
-			"austin": 67.9
-		},
-		{
-			"date": "2012-04-20",
-			"newYork": 56.5,
-			"sanFrancisco": 55.8,
-			"austin": 68.9
-		},
-		{
-			"date": "2012-04-21",
-			"newYork": 58.2,
-			"sanFrancisco": 58,
-			"austin": 65.1
-		},
-		{
-			"date": "2012-04-22",
-			"newYork": 52.4,
-			"sanFrancisco": 52.8,
-			"austin": 65.4
-		},
-		{
-			"date": "2012-04-23",
-			"newYork": 51.6,
-			"sanFrancisco": 55.1,
-			"austin": 70.1
-		},
-		{
-			"date": "2012-04-24",
-			"newYork": 49.3,
-			"sanFrancisco": 57.9,
-			"austin": 67
-		},
-		{
-			"date": "2012-04-25",
-			"newYork": 52.5,
-			"sanFrancisco": 57.5,
-			"austin": 75.4
-		},
-		{
-			"date": "2012-04-26",
-			"newYork": 50.5,
-			"sanFrancisco": 55.3,
-			"austin": 77.5
-		},
-		{
-			"date": "2012-04-27",
-			"newYork": 51.9,
-			"sanFrancisco": 53.5,
-			"austin": 77
-		},
-		{
-			"date": "2012-04-28",
-			"newYork": 47.4,
-			"sanFrancisco": 54.7,
-			"austin": 77.7
-		},
-		{
-			"date": "2012-04-29",
-			"newYork": 54.1,
-			"sanFrancisco": 54,
-			"austin": 77.7
-		},
-		{
-			"date": "2012-04-30",
-			"newYork": 51.9,
-			"sanFrancisco": 53.4,
-			"austin": 77.7
-		},
-		{
-			"date": "2012-05-01",
-			"newYork": 57.4,
-			"sanFrancisco": 52.7,
-			"austin": 77
-		},
-		{
-			"date": "2012-05-02",
-			"newYork": 53.7,
-			"sanFrancisco": 50.7,
-			"austin": 77.9
-		},
-		{
-			"date": "2012-05-03",
-			"newYork": 53.1,
-			"sanFrancisco": 52.6,
-			"austin": 79.1
-		},
-		{
-			"date": "2012-05-04",
-			"newYork": 57.2,
-			"sanFrancisco": 53.4,
-			"austin": 80.1
-		},
-		{
-			"date": "2012-05-05",
-			"newYork": 57,
-			"sanFrancisco": 53.1,
-			"austin": 82.1
-		},
-		{
-			"date": "2012-05-06",
-			"newYork": 56.6,
-			"sanFrancisco": 56.5,
-			"austin": 79
-		},
-		{
-			"date": "2012-05-07",
-			"newYork": 54.6,
-			"sanFrancisco": 55.3,
-			"austin": 79.8
-		},
-		{
-			"date": "2012-05-08",
-			"newYork": 57.9,
-			"sanFrancisco": 52,
-			"austin": 70
-		},
-		{
-			"date": "2012-05-09",
-			"newYork": 59.2,
-			"sanFrancisco": 52.4,
-			"austin": 69.8
-		},
-		{
-			"date": "2012-05-10",
-			"newYork": 61.1,
-			"sanFrancisco": 53.4,
-			"austin": 71.3
-		},
-		{
-			"date": "2012-05-11",
-			"newYork": 59.7,
-			"sanFrancisco": 53.1,
-			"austin": 69.4
-		},
-		{
-			"date": "2012-05-12",
-			"newYork": 64.1,
-			"sanFrancisco": 49.9,
-			"austin": 72
-		},
-		{
-			"date": "2012-05-13",
-			"newYork": 65.3,
-			"sanFrancisco": 52,
-			"austin": 72.4
-		},
-		{
-			"date": "2012-05-14",
-			"newYork": 64.2,
-			"sanFrancisco": 56,
-			"austin": 72.5
-		},
-		{
-			"date": "2012-05-15",
-			"newYork": 62,
-			"sanFrancisco": 53,
-			"austin": 67.6
-		},
-		{
-			"date": "2012-05-16",
-			"newYork": 63.8,
-			"sanFrancisco": 51,
-			"austin": 69
-		},
-		{
-			"date": "2012-05-17",
-			"newYork": 64.5,
-			"sanFrancisco": 51.4,
-			"austin": 72.7
-		},
-		{
-			"date": "2012-05-18",
-			"newYork": 61,
-			"sanFrancisco": 52.2,
-			"austin": 73.7
-		},
-		{
-			"date": "2012-05-19",
-			"newYork": 62.6,
-			"sanFrancisco": 52.4,
-			"austin": 77.5
-		},
-		{
-			"date": "2012-05-20",
-			"newYork": 66.2,
-			"sanFrancisco": 54.5,
-			"austin": 75.8
-		},
-		{
-			"date": "2012-05-21",
-			"newYork": 62.7,
-			"sanFrancisco": 52.8,
-			"austin": 76.9
-		},
-		{
-			"date": "2012-05-22",
-			"newYork": 63.7,
-			"sanFrancisco": 53.9,
-			"austin": 78.8
-		},
-		{
-			"date": "2012-05-23",
-			"newYork": 66.4,
-			"sanFrancisco": 56.5,
-			"austin": 77.7
-		},
-		{
-			"date": "2012-05-24",
-			"newYork": 64.5,
-			"sanFrancisco": 54.7,
-			"austin": 80.6
-		},
-		{
-			"date": "2012-05-25",
-			"newYork": 65.4,
-			"sanFrancisco": 52.5,
-			"austin": 81.4
-		},
-		{
-			"date": "2012-05-26",
-			"newYork": 69.4,
-			"sanFrancisco": 52.1,
-			"austin": 82.3
-		},
-		{
-			"date": "2012-05-27",
-			"newYork": 71.9,
-			"sanFrancisco": 52.2,
-			"austin": 80.3
-		},
-		{
-			"date": "2012-05-28",
-			"newYork": 74.4,
-			"sanFrancisco": 52.9,
-			"austin": 80.3
-		},
-		{
-			"date": "2012-05-29",
-			"newYork": 75.9,
-			"sanFrancisco": 52.1,
-			"austin": 82.2
-		},
-		{
-			"date": "2012-05-30",
-			"newYork": 72.9,
-			"sanFrancisco": 52.1,
-			"austin": 81.9
-		},
-		{
-			"date": "2012-05-31",
-			"newYork": 72.5,
-			"sanFrancisco": 53.3,
-			"austin": 82.4
-		},
-		{
-			"date": "2012-06-01",
-			"newYork": 67.2,
-			"sanFrancisco": 54.8,
-			"austin": 77.9
-		},
-		{
-			"date": "2012-06-02",
-			"newYork": 68.3,
-			"sanFrancisco": 54,
-			"austin": 81.1
-		},
-		{
-			"date": "2012-06-03",
-			"newYork": 67.7,
-			"sanFrancisco": 52.3,
-			"austin": 82.2
-		},
-		{
-			"date": "2012-06-04",
-			"newYork": 61.9,
-			"sanFrancisco": 55.3,
-			"austin": 81.2
-		},
-		{
-			"date": "2012-06-05",
-			"newYork": 58.3,
-			"sanFrancisco": 53.5,
-			"austin": 83
-		},
-		{
-			"date": "2012-06-06",
-			"newYork": 61.7,
-			"sanFrancisco": 54.1,
-			"austin": 83.2
-		},
-		{
-			"date": "2012-06-07",
-			"newYork": 66.7,
-			"sanFrancisco": 53.9,
-			"austin": 82.1
-		},
-		{
-			"date": "2012-06-08",
-			"newYork": 68.7,
-			"sanFrancisco": 54.4,
-			"austin": 77.5
-		},
-		{
-			"date": "2012-06-09",
-			"newYork": 72.2,
-			"sanFrancisco": 55,
-			"austin": 77.9
-		},
-		{
-			"date": "2012-06-10",
-			"newYork": 72.6,
-			"sanFrancisco": 60,
-			"austin": 82.9
-		},
-		{
-			"date": "2012-06-11",
-			"newYork": 69.2,
-			"sanFrancisco": 57.2,
-			"austin": 86.8
-		},
-		{
-			"date": "2012-06-12",
-			"newYork": 66.9,
-			"sanFrancisco": 55.1,
-			"austin": 85.3
-		},
-		{
-			"date": "2012-06-13",
-			"newYork": 66.7,
-			"sanFrancisco": 53.3,
-			"austin": 76.9
-		},
-		{
-			"date": "2012-06-14",
-			"newYork": 67.7,
-			"sanFrancisco": 53.4,
-			"austin": 84.5
-		},
-		{
-			"date": "2012-06-15",
-			"newYork": 68.5,
-			"sanFrancisco": 54.6,
-			"austin": 84.4
-		},
-		{
-			"date": "2012-06-16",
-			"newYork": 67.5,
-			"sanFrancisco": 57,
-			"austin": 83.8
-		},
-		{
-			"date": "2012-06-17",
-			"newYork": 64.2,
-			"sanFrancisco": 55.6,
-			"austin": 82.5
-		},
-		{
-			"date": "2012-06-18",
-			"newYork": 61.7,
-			"sanFrancisco": 52.5,
-			"austin": 82.9
-		},
-		{
-			"date": "2012-06-19",
-			"newYork": 66.4,
-			"sanFrancisco": 53.9,
-			"austin": 82.5
-		},
-		{
-			"date": "2012-06-20",
-			"newYork": 77.9,
-			"sanFrancisco": 55.3,
-			"austin": 81.3
-		},
-		{
-			"date": "2012-06-21",
-			"newYork": 88.3,
-			"sanFrancisco": 53.3,
-			"austin": 80.8
-		},
-		{
-			"date": "2012-06-22",
-			"newYork": 82.2,
-			"sanFrancisco": 54.1,
-			"austin": 81.7
-		},
-		{
-			"date": "2012-06-23",
-			"newYork": 77,
-			"sanFrancisco": 55.2,
-			"austin": 83.9
-		},
-		{
-			"date": "2012-06-24",
-			"newYork": 75.4,
-			"sanFrancisco": 55.8,
-			"austin": 85.5
-		},
-		{
-			"date": "2012-06-25",
-			"newYork": 70.9,
-			"sanFrancisco": 56.8,
-			"austin": 87.2
-		},
-		{
-			"date": "2012-06-26",
-			"newYork": 65.9,
-			"sanFrancisco": 57.5,
-			"austin": 88
-		},
-		{
-			"date": "2012-06-27",
-			"newYork": 73.5,
-			"sanFrancisco": 57.7,
-			"austin": 89.6
-		},
-		{
-			"date": "2012-06-28",
-			"newYork": 77.4,
-			"sanFrancisco": 56.6,
-			"austin": 86.7
-		},
-		{
-			"date": "2012-06-29",
-			"newYork": 79.6,
-			"sanFrancisco": 56.4,
-			"austin": 85.3
-		},
-		{
-			"date": "2012-06-30",
-			"newYork": 84.2,
-			"sanFrancisco": 58.4,
-			"austin": 81.7
-		},
-		{
-			"date": "2012-07-01",
-			"newYork": 81.8,
-			"sanFrancisco": 58.8,
-			"austin": 78.5
-		},
-		{
-			"date": "2012-07-02",
-			"newYork": 82.5,
-			"sanFrancisco": 56.4,
-			"austin": 83.1
-		},
-		{
-			"date": "2012-07-03",
-			"newYork": 80.2,
-			"sanFrancisco": 56.5,
-			"austin": 83.1
-		},
-		{
-			"date": "2012-07-04",
-			"newYork": 77.8,
-			"sanFrancisco": 55.8,
-			"austin": 84.5
-		},
-		{
-			"date": "2012-07-05",
-			"newYork": 86.1,
-			"sanFrancisco": 54.8,
-			"austin": 84.6
-		},
-		{
-			"date": "2012-07-06",
-			"newYork": 79.9,
-			"sanFrancisco": 54.9,
-			"austin": 84.2
-		},
-		{
-			"date": "2012-07-07",
-			"newYork": 83.5,
-			"sanFrancisco": 54.7,
-			"austin": 86.7
-		},
-		{
-			"date": "2012-07-08",
-			"newYork": 81.5,
-			"sanFrancisco": 52.8,
-			"austin": 84.3
-		},
-		{
-			"date": "2012-07-09",
-			"newYork": 77.8,
-			"sanFrancisco": 53.7,
-			"austin": 83.7
-		},
-		{
-			"date": "2012-07-10",
-			"newYork": 76.1,
-			"sanFrancisco": 53.1,
-			"austin": 77.1
-		},
-		{
-			"date": "2012-07-11",
-			"newYork": 76.3,
-			"sanFrancisco": 52.7,
-			"austin": 77.4
-		},
-		{
-			"date": "2012-07-12",
-			"newYork": 75.8,
-			"sanFrancisco": 52,
-			"austin": 80.6
-		},
-		{
-			"date": "2012-07-13",
-			"newYork": 77.2,
-			"sanFrancisco": 53.4,
-			"austin": 81.4
-		},
-		{
-			"date": "2012-07-14",
-			"newYork": 79.3,
-			"sanFrancisco": 54,
-			"austin": 80.2
-		},
-		{
-			"date": "2012-07-15",
-			"newYork": 78.9,
-			"sanFrancisco": 54,
-			"austin": 81.8
-		},
-		{
-			"date": "2012-07-16",
-			"newYork": 79.6,
-			"sanFrancisco": 54.5,
-			"austin": 77.3
-		},
-		{
-			"date": "2012-07-17",
-			"newYork": 83.3,
-			"sanFrancisco": 56.7,
-			"austin": 80.8
-		},
-		{
-			"date": "2012-07-18",
-			"newYork": 84.3,
-			"sanFrancisco": 57.5,
-			"austin": 81.6
-		},
-		{
-			"date": "2012-07-19",
-			"newYork": 75.1,
-			"sanFrancisco": 57.1,
-			"austin": 80.9
-		},
-		{
-			"date": "2012-07-20",
-			"newYork": 68.4,
-			"sanFrancisco": 58.1,
-			"austin": 83.9
-		},
-		{
-			"date": "2012-07-21",
-			"newYork": 68.4,
-			"sanFrancisco": 57.6,
-			"austin": 85.6
-		},
-		{
-			"date": "2012-07-22",
-			"newYork": 72.2,
-			"sanFrancisco": 56,
-			"austin": 83.6
-		},
-		{
-			"date": "2012-07-23",
-			"newYork": 75.6,
-			"sanFrancisco": 56.6,
-			"austin": 84
-		},
-		{
-			"date": "2012-07-24",
-			"newYork": 82.6,
-			"sanFrancisco": 57.8,
-			"austin": 83
-		},
-		{
-			"date": "2012-07-25",
-			"newYork": 78.4,
-			"sanFrancisco": 57.5,
-			"austin": 84.8
-		},
-		{
-			"date": "2012-07-26",
-			"newYork": 77,
-			"sanFrancisco": 56.4,
-			"austin": 84.4
-		},
-		{
-			"date": "2012-07-27",
-			"newYork": 79.4,
-			"sanFrancisco": 55.3,
-			"austin": 84.3
-		},
-		{
-			"date": "2012-07-28",
-			"newYork": 77.4,
-			"sanFrancisco": 55,
-			"austin": 83.9
-		},
-		{
-			"date": "2012-07-29",
-			"newYork": 72.5,
-			"sanFrancisco": 55.6,
-			"austin": 85
-		},
-		{
-			"date": "2012-07-30",
-			"newYork": 72.9,
-			"sanFrancisco": 55.6,
-			"austin": 84.9
-		},
-		{
-			"date": "2012-07-31",
-			"newYork": 73.6,
-			"sanFrancisco": 55.9,
-			"austin": 86.3
-		},
-		{
-			"date": "2012-08-01",
-			"newYork": 75,
-			"sanFrancisco": 55.4,
-			"austin": 86.5
-		},
-		{
-			"date": "2012-08-02",
-			"newYork": 77.7,
-			"sanFrancisco": 54.4,
-			"austin": 85.8
-		},
-		{
-			"date": "2012-08-03",
-			"newYork": 79.7,
-			"sanFrancisco": 53.7,
-			"austin": 85.3
-		},
-		{
-			"date": "2012-08-04",
-			"newYork": 79.6,
-			"sanFrancisco": 54.1,
-			"austin": 86
-		},
-		{
-			"date": "2012-08-05",
-			"newYork": 81.5,
-			"sanFrancisco": 57.8,
-			"austin": 84.2
-		},
-		{
-			"date": "2012-08-06",
-			"newYork": 80,
-			"sanFrancisco": 58.2,
-			"austin": 81.9
-		},
-		{
-			"date": "2012-08-07",
-			"newYork": 75.7,
-			"sanFrancisco": 58,
-			"austin": 86.5
-		},
-		{
-			"date": "2012-08-08",
-			"newYork": 77.8,
-			"sanFrancisco": 57,
-			"austin": 86.1
-		},
-		{
-			"date": "2012-08-09",
-			"newYork": 78.6,
-			"sanFrancisco": 55,
-			"austin": 86.8
-		},
-		{
-			"date": "2012-08-10",
-			"newYork": 77.8,
-			"sanFrancisco": 54.8,
-			"austin": 88
-		},
-		{
-			"date": "2012-08-11",
-			"newYork": 78.5,
-			"sanFrancisco": 53,
-			"austin": 85.1
-		},
-		{
-			"date": "2012-08-12",
-			"newYork": 78.8,
-			"sanFrancisco": 52.5,
-			"austin": 87.4
-		},
-		{
-			"date": "2012-08-13",
-			"newYork": 78.6,
-			"sanFrancisco": 53.3,
-			"austin": 88
-		},
-		{
-			"date": "2012-08-14",
-			"newYork": 76.8,
-			"sanFrancisco": 53.9,
-			"austin": 88
-		},
-		{
-			"date": "2012-08-15",
-			"newYork": 76.7,
-			"sanFrancisco": 56.2,
-			"austin": 87.2
-		},
-		{
-			"date": "2012-08-16",
-			"newYork": 75.9,
-			"sanFrancisco": 57.1,
-			"austin": 86.1
-		},
-		{
-			"date": "2012-08-17",
-			"newYork": 77.6,
-			"sanFrancisco": 55.3,
-			"austin": 86.8
-		},
-		{
-			"date": "2012-08-18",
-			"newYork": 72.6,
-			"sanFrancisco": 56.2,
-			"austin": 84.9
-		},
-		{
-			"date": "2012-08-19",
-			"newYork": 70.4,
-			"sanFrancisco": 54.3,
-			"austin": 76.8
-		},
-		{
-			"date": "2012-08-20",
-			"newYork": 71.8,
-			"sanFrancisco": 53.1,
-			"austin": 80.6
-		},
-		{
-			"date": "2012-08-21",
-			"newYork": 73.6,
-			"sanFrancisco": 53.4,
-			"austin": 80
-		},
-		{
-			"date": "2012-08-22",
-			"newYork": 74.7,
-			"sanFrancisco": 54.5,
-			"austin": 78.2
-		},
-		{
-			"date": "2012-08-23",
-			"newYork": 74.6,
-			"sanFrancisco": 55.7,
-			"austin": 79.1
-		},
-		{
-			"date": "2012-08-24",
-			"newYork": 76,
-			"sanFrancisco": 54.8,
-			"austin": 81.9
-		},
-		{
-			"date": "2012-08-25",
-			"newYork": 76.2,
-			"sanFrancisco": 53.8,
-			"austin": 84.7
-		},
-		{
-			"date": "2012-08-26",
-			"newYork": 73.4,
-			"sanFrancisco": 56.5,
-			"austin": 83.5
-		},
-		{
-			"date": "2012-08-27",
-			"newYork": 74.6,
-			"sanFrancisco": 58.3,
-			"austin": 82.1
-		},
-		{
-			"date": "2012-08-28",
-			"newYork": 79.4,
-			"sanFrancisco": 58.7,
-			"austin": 84
-		},
-		{
-			"date": "2012-08-29",
-			"newYork": 74.7,
-			"sanFrancisco": 57.5,
-			"austin": 85.7
-		},
-		{
-			"date": "2012-08-30",
-			"newYork": 73.5,
-			"sanFrancisco": 55.9,
-			"austin": 87.2
-		},
-		{
-			"date": "2012-08-31",
-			"newYork": 77.9,
-			"sanFrancisco": 55.4,
-			"austin": 82.9
-		},
-		{
-			"date": "2012-09-01",
-			"newYork": 80.7,
-			"sanFrancisco": 55.7,
-			"austin": 84.8
-		},
-		{
-			"date": "2012-09-02",
-			"newYork": 75.1,
-			"sanFrancisco": 53.1,
-			"austin": 83.9
-		},
-		{
-			"date": "2012-09-03",
-			"newYork": 73.5,
-			"sanFrancisco": 53.5,
-			"austin": 85.5
-		},
-		{
-			"date": "2012-09-04",
-			"newYork": 73.5,
-			"sanFrancisco": 52.5,
-			"austin": 86.4
-		},
-		{
-			"date": "2012-09-05",
-			"newYork": 77.7,
-			"sanFrancisco": 54.5,
-			"austin": 85.8
-		},
-		{
-			"date": "2012-09-06",
-			"newYork": 74.2,
-			"sanFrancisco": 56.3,
-			"austin": 85.4
-		},
-		{
-			"date": "2012-09-07",
-			"newYork": 76,
-			"sanFrancisco": 56.4,
-			"austin": 85.3
-		},
-		{
-			"date": "2012-09-08",
-			"newYork": 77.1,
-			"sanFrancisco": 56.5,
-			"austin": 81.9
-		},
-		{
-			"date": "2012-09-09",
-			"newYork": 69.7,
-			"sanFrancisco": 56.4,
-			"austin": 74.8
-		},
-		{
-			"date": "2012-09-10",
-			"newYork": 67.8,
-			"sanFrancisco": 55.4,
-			"austin": 71.6
-		},
-		{
-			"date": "2012-09-11",
-			"newYork": 64,
-			"sanFrancisco": 56.2,
-			"austin": 75.9
-		},
-		{
-			"date": "2012-09-12",
-			"newYork": 68.1,
-			"sanFrancisco": 55.7,
-			"austin": 82.1
-		},
-		{
-			"date": "2012-09-13",
-			"newYork": 69.3,
-			"sanFrancisco": 54.3,
-			"austin": 80.5
-		},
-		{
-			"date": "2012-09-14",
-			"newYork": 70,
-			"sanFrancisco": 55.2,
-			"austin": 70
-		},
-		{
-			"date": "2012-09-15",
-			"newYork": 69.3,
-			"sanFrancisco": 54.3,
-			"austin": 71.2
-		},
-		{
-			"date": "2012-09-16",
-			"newYork": 66.3,
-			"sanFrancisco": 52.9,
-			"austin": 70.3
-		},
-		{
-			"date": "2012-09-17",
-			"newYork": 67,
-			"sanFrancisco": 54.8,
-			"austin": 72.1
-		},
-		{
-			"date": "2012-09-18",
-			"newYork": 72.8,
-			"sanFrancisco": 54.8,
-			"austin": 73.7
-		},
-		{
-			"date": "2012-09-19",
-			"newYork": 67.2,
-			"sanFrancisco": 56.8,
-			"austin": 72.7
-		},
-		{
-			"date": "2012-09-20",
-			"newYork": 62.1,
-			"sanFrancisco": 55.4,
-			"austin": 71.7
-		},
-		{
-			"date": "2012-09-21",
-			"newYork": 64,
-			"sanFrancisco": 55.8,
-			"austin": 72.9
-		},
-		{
-			"date": "2012-09-22",
-			"newYork": 65.5,
-			"sanFrancisco": 55.9,
-			"austin": 73.1
-		},
-		{
-			"date": "2012-09-23",
-			"newYork": 65.7,
-			"sanFrancisco": 52.8,
-			"austin": 75.6
-		},
-		{
-			"date": "2012-09-24",
-			"newYork": 60.4,
-			"sanFrancisco": 54.5,
-			"austin": 78.3
-		},
-		{
-			"date": "2012-09-25",
-			"newYork": 63.2,
-			"sanFrancisco": 53.3,
-			"austin": 78.3
-		},
-		{
-			"date": "2012-09-26",
-			"newYork": 68.5,
-			"sanFrancisco": 53.6,
-			"austin": 79.6
-		},
-		{
-			"date": "2012-09-27",
-			"newYork": 69.2,
-			"sanFrancisco": 52.1,
-			"austin": 76.4
-		},
-		{
-			"date": "2012-09-28",
-			"newYork": 68.7,
-			"sanFrancisco": 52.6,
-			"austin": 77.2
-		},
-		{
-			"date": "2012-09-29",
-			"newYork": 62.5,
-			"sanFrancisco": 53.9,
-			"austin": 75.2
-		},
-		{
-			"date": "2012-09-30",
-			"newYork": 62.3,
-			"sanFrancisco": 55.1,
-			"austin": 71.9
-		}
-	];
-
-/***/ },
-/* 273 */
-/***/ function(module, exports) {
-
-	module.exports = [
-		{
-			"x": 0,
-			"y": 5,
-			"y0": 14,
-			"y1": 36,
-			"y2": 5
-		},
-		{
-			"x": 1,
-			"y": 8,
-			"y0": 22,
-			"y1": 40,
-			"y2": 14
-		},
-		{
-			"x": 2,
-			"y": 13,
-			"y0": 23,
-			"y1": 47,
-			"y2": 8
-		},
-		{
-			"x": 3,
-			"y": 12,
-			"y0": 18,
-			"y1": 54,
-			"y2": 18
-		},
-		{
-			"x": 4,
-			"y": 16,
-			"y0": 18,
-			"y1": 56,
-			"y2": 11
-		},
-		{
-			"x": 5,
-			"y": 21,
-			"y0": 12,
-			"y1": 62,
-			"y2": 5
-		},
-		{
-			"x": 6,
-			"y": 18,
-			"y0": 15,
-			"y1": 62,
-			"y2": -5
-		},
-		{
-			"x": 7,
-			"y": 23,
-			"y0": 7,
-			"y1": 63,
-			"y2": -11
-		},
-		{
-			"x": 8,
-			"y": 24,
-			"y0": 2,
-			"y1": 68,
-			"y2": -5
-		},
-		{
-			"x": 9,
-			"y": 28,
-			"y0": 5,
-			"y1": 68,
-			"y2": 4
-		},
-		{
-			"x": 10,
-			"y": 35,
-			"y0": -1,
-			"y1": 77,
-			"y2": -5
-		},
-		{
-			"x": 11,
-			"y": 30,
-			"y0": 5,
-			"y1": 83,
-			"y2": 3
-		},
-		{
-			"x": 12,
-			"y": 32,
-			"y0": 13,
-			"y1": 80,
-			"y2": -7
-		},
-		{
-			"x": 13,
-			"y": 36,
-			"y0": 21,
-			"y1": 75,
-			"y2": -3
-		},
-		{
-			"x": 14,
-			"y": 40,
-			"y0": 22,
-			"y1": 73,
-			"y2": -10
-		},
-		{
-			"x": 15,
-			"y": 38,
-			"y0": 32,
-			"y1": 64,
-			"y2": -9
-		}
-	];
-
-/***/ },
-/* 274 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

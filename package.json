@@ -1,8 +1,8 @@
 {
-  "name": "react-charts",
-  "description": "Charts for React",
+  "name": "reactochart",
+  "description": "Reactochart - Charts for React (DEPRECATED)",
   "author": "Dan Delany <dand@spotify.com>",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "main": "lib/index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",
@@ -46,12 +46,9 @@
     "webpack": "^1.10.5",
     "webpack-dev-server": "^1.10.1"
   },
-  "license": "proprietary",
+  "license": "Apache 2.0",
   "repository": {
     "type": "git",
-    "url": "https://ghe.spotify.net/dand/react-charts"
-  },
-  "publishConfig": {
-    "registry": "http://npm-registry.spotify.net"
+    "url": "https://github.com/spotify/reactochart"
   }
 }

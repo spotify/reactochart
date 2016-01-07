@@ -1,5 +1,7 @@
-# react-charts
-Chart library for React
+## WARNING: THIS IS NOT AND WILL NEVER BE PRODUCTION-QUALITY CODE. We have decided to deprecate this project in favor of contributing to [Victory](https://github.com/FormidableLabs/victory), and have released this code as "raw idea material" ONLY. Use at your own risk. If your project requires composable React charts, we recommend using Victory.
+
+# reactochart
+Charting library for React
 
 # Examples
 

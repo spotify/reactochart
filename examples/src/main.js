@@ -17,13 +17,6 @@ import {
     KernelDensityEstimation
 } from '../../src';
 
-// get/make fake data for testing
-import statesData from './data/statesData.json';
-import temperatureData from './data/dailyTemperature.json';
-import simpleXYData from './data/simpleXY.json';
-
-const tempDataClean = temperatureData.map(d => _.assign({}, d, {date: new Date(d.date)}));
-
 import {randomWalk, randomWalkSeries} from './data/util';
 
 // sample ordinal data
