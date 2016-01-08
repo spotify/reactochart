@@ -58524,6 +58524,7 @@
 	        var minLabelWidth = _props.minLabelWidth;
 	        var minLabelHeight = _props.minLabelHeight;
 	        var NodeLabelComponent = _props.NodeLabelComponent;
+	        var parentNames = _props.parentNames;
 	        var x = node.x;
 	        var y = node.y;
 	        var dx = node.dx;
@@ -58531,7 +58532,7 @@
 	        var depth = node.depth;
 	        var parent = node.parent;
 	
-	        var nodeGroupClass = parent ? 'node-group-' + _lodash2.default.kebabCase(parent.name) : '';
+	        var nodeGroupClass = parent ? 'node-group-' + _lodash2.default.kebabCase(parent.name) + ' node-group-i-' + parentNames.indexOf(parent.name) : '';
 	        var className = 'tree-map-node node-depth-' + depth + ' ' + nodeGroupClass;
 	
 	        var style = { position: 'absolute', width: dx, height: dy, top: y, left: x };
@@ -58549,14 +58550,14 @@
 	            _extends({ className: className, style: style }, handlers, {
 	                __source: {
 	                    fileName: '../../../src/charts/TreeMap.js',
-	                    lineNumber: 50
+	                    lineNumber: 52
 	                }
 	            }),
 	            dx > minLabelWidth && dy > minLabelHeight ? // show label if node is big enough
 	            _react2.default.createElement(NodeLabelComponent, _extends({ node: node, getLabel: getLabel, labelStyle: labelStyle }, {
 	                __source: {
 	                    fileName: '../../../src/charts/TreeMap.js',
-	                    lineNumber: 52
+	                    lineNumber: 54
 	                }
 	            })) : null
 	        );
@@ -58592,7 +58593,7 @@
 	            _extends({ className: 'node-label' }, { style: style }, {
 	                __source: {
 	                    fileName: '../../../src/charts/TreeMap.js',
-	                    lineNumber: 75
+	                    lineNumber: 77
 	                }
 	            }),
 	            getLabel(node)
@@ -58688,23 +58689,25 @@
 	
 	        var style = { position: 'relative', width: width, height: height };
 	
+	        var parentNames = _lodash2.default.uniq(_lodash2.default.pluck(nodes, 'parent.name'));
+	
 	        return _react2.default.createElement(
 	            'div',
 	            _extends({ className: 'tree-map' }, { style: style }, {
 	                __source: {
 	                    fileName: '../../../src/charts/TreeMap.js',
-	                    lineNumber: 149
+	                    lineNumber: 153
 	                }
 	            }),
 	            nodes.map(function (node, i) {
 	                return _react2.default.createElement(NodeComponent, _extends({
-	                    node: node, nodeStyle: nodeStyle, minLabelWidth: minLabelWidth, minLabelHeight: minLabelHeight, labelStyle: labelStyle, getLabel: getLabel, NodeLabelComponent: NodeLabelComponent,
-	                    onClickNode: onClickNode, onMouseEnterNode: onMouseEnterNode, onMouseLeaveNode: onMouseLeaveNode, onMouseMoveNode: onMouseMoveNode,
+	                    node: node, nodeStyle: nodeStyle, minLabelWidth: minLabelWidth, minLabelHeight: minLabelHeight, labelStyle: labelStyle, getLabel: getLabel, parentNames: parentNames,
+	                    NodeLabelComponent: NodeLabelComponent, onClickNode: onClickNode, onMouseEnterNode: onMouseEnterNode, onMouseLeaveNode: onMouseLeaveNode, onMouseMoveNode: onMouseMoveNode,
 	                    key: 'node-' + i
 	                }, {
 	                    __source: {
 	                        fileName: '../../../src/charts/TreeMap.js',
-	                        lineNumber: 150
+	                        lineNumber: 154
 	                    }
 	                }));
 	            })

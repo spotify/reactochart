@@ -31,10 +31,12 @@ const TreeMapNode = React.createClass({
         };
     },
     render() {
-        const {node, getLabel, nodeStyle, labelStyle, minLabelWidth, minLabelHeight, NodeLabelComponent} = this.props;
+        const {node, getLabel, nodeStyle, labelStyle, minLabelWidth, minLabelHeight, NodeLabelComponent, parentNames}
+            = this.props;
         const {x, y, dx, dy, depth, parent} = node;
 
-        const nodeGroupClass = parent ? `node-group-${_.kebabCase(parent.name)}` : '';
+        const nodeGroupClass = parent ?
+            `node-group-${_.kebabCase(parent.name)} node-group-i-${parentNames.indexOf(parent.name)}` : '';
         const className = `tree-map-node node-depth-${depth} ${nodeGroupClass}`;
 
         let style = {position: 'absolute', width: dx, height: dy, top: y, left: x};
@@ -146,10 +148,12 @@ const TreeMap = React.createClass({
 
         const style = {position: 'relative', width, height};
 
+        const parentNames = _.uniq(_.pluck(nodes, 'parent.name'));
+
         return <div className="tree-map" {...{style}}>
             {nodes.map((node, i) => <NodeComponent {...{
-                node, nodeStyle, minLabelWidth, minLabelHeight, labelStyle, getLabel, NodeLabelComponent,
-                onClickNode, onMouseEnterNode, onMouseLeaveNode, onMouseMoveNode,
+                node, nodeStyle, minLabelWidth, minLabelHeight, labelStyle, getLabel, parentNames,
+                NodeLabelComponent, onClickNode, onMouseEnterNode, onMouseLeaveNode, onMouseMoveNode,
                 key: `node-${i}`
             }} />)}
         </div>;
