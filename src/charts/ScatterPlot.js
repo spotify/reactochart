@@ -3,7 +3,7 @@ const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
 
-import {accessor, AccessorPropType, InterfaceMixin} from '../util.js';
+import {accessor, AccessorPropType, InterfaceMixin,methodIfFuncProp} from '../util.js';
 
 const ScatterPlot = React.createClass({
     mixins: [InterfaceMixin('XYChart')],
@@ -23,7 +23,11 @@ const ScatterPlot = React.createClass({
         // text or SVG node to use as custom point symbol, or function which returns text/SVG
         pointSymbol: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
         // manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered
-        pointOffset: PropTypes.arrayOf(PropTypes.number)
+        pointOffset: PropTypes.arrayOf(PropTypes.number),
+
+        onMouseEnterPoint: PropTypes.func, 
+        onMouseMovePoint: PropTypes.func,  
+        onMouseLeavePoint: PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -36,17 +40,31 @@ const ScatterPlot = React.createClass({
     // todo: return spacing in statics.getOptions
 
     getHovered() {},
-
+    onMouseEnterPoint(e, d) {
+        this.props.onMouseEnterPoint(e, d);
+    },
+    onMouseMovePoint(e, d) {
+        this.props.onMouseMovePoint(e, d);
+    },
+    onMouseLeavePoint(e, d) {
+        this.props.onMouseLeavePoint(e, d);
+    },
     render() {
-        return <g>
+        return <g className={this.props.name}>
             {this.props.data.map(this.renderPoint)}
         </g>
     },
     renderPoint(d, i) {
+            const [onMouseEnter, onMouseMove, onMouseLeave] =
+        ['onMouseEnterPoint', 'onMouseMovePoint', 'onMouseLeavePoint'].map(eventName => {
+            // partially apply this bar's data point as 2nd callback argument
+            const callback = methodIfFuncProp(eventName, this.props, this);
+            return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+        });
         const {scale, getValue, pointRadius, pointOffset, getClass} = this.props;
         let {pointSymbol} = this.props;
         const className = `chart-scatterplot-point ${getClass ? accessor(getClass)(d) : ''}`;
-        let symbolProps = {className};
+        let symbolProps = {className, onMouseEnter, onMouseMove, onMouseLeave};
 
         // resolve symbol-generating functions into real symbols
         if(_.isFunction(pointSymbol)) pointSymbol = pointSymbol(d, i);

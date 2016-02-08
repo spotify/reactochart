@@ -176,49 +176,28 @@
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 102
-	                }
-	            },
-	            _react2.default.createElement(_src.PieChart, { data: [45, 35, 20], __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 103
-	                }
-	            }),
+	            null,
+	            _react2.default.createElement(_src.PieChart, { data: [45, 35, 20] }),
 	            _react2.default.createElement(_src.PieChart, {
 	                data: [10, 20, 30],
 	                radius: 100,
 	                holeRadius: 50,
 	                margin: 20,
-	                markerLineValue: 20,
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 104
-	                }
+	                markerLineValue: 20
 	            }),
 	            _react2.default.createElement(_src.PieChart, {
 	                data: [42],
 	                total: 100,
 	                radius: 80,
 	                holeRadius: 50,
-	                centerLabel: '42%',
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 111
-	                }
+	                centerLabel: '42%'
 	            }),
 	            _react2.default.createElement(_src.PieChart, {
 	                data: [this.state.sinVal],
 	                total: 2,
 	                radius: 200,
 	                holeRadius: 50,
-	                centerLabel: (this.state.sinVal * 50).toFixed(0),
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 118
-	                }
+	                centerLabel: (this.state.sinVal * 50).toFixed(0)
 	            })
 	        );
 	    }
@@ -227,24 +206,11 @@
 	var ScatterPlotExample = _react2.default.createClass({
 	    displayName: 'ScatterPlotExample',
 	    render: function render() {
-	        var rectangleSymbol = _react2.default.createElement('rect', { width: 5, height: 5, fill: 'rebeccapurple', __source: {
-	                fileName: '../../../examples/src/main.js',
-	                lineNumber: 131
-	            }
-	        });
+	        var rectangleSymbol = _react2.default.createElement('rect', { width: 5, height: 5, fill: 'rebeccapurple' });
 	        var triangleSymbol = _react2.default.createElement(
 	            'svg',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 132
-	                }
-	            },
-	            _react2.default.createElement('polygon', { points: '0,0 8,0 4,8', style: { fill: 'darkgreen' }, __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 132
-	                }
-	            })
+	            null,
+	            _react2.default.createElement('polygon', { points: '0,0 8,0 4,8', style: { fill: 'darkgreen' } })
 	        );
 	        var randomEmoji = function randomEmoji(d, i) {
 	            return _.sample(emojis);
@@ -252,28 +218,15 @@
 	
 	        return _react2.default.createElement(
 	            'div',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 135
-	                }
-	            },
+	            null,
 	            _react2.default.createElement(
 	                _src.XYPlot,
-	                { width: 700, height: 500, axisLabel: { x: "TIME", y: "EMOJI" }, __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 136
-	                    }
-	                },
+	                { width: 700, height: 500, axisLabel: { x: "TIME", y: "EMOJI" } },
 	                _react2.default.createElement(_src.ScatterPlot, {
 	                    data: randomScatter[1],
 	                    getValue: { x: 0, y: 1 },
 	                    pointSymbol: randomEmoji,
-	                    pointOffset: [0, 2],
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 161
-	                    }
+	                    pointOffset: [0, 2]
 	                })
 	            )
 	        );
@@ -285,28 +238,15 @@
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 174
-	                }
-	            },
+	            null,
 	            _react2.default.createElement(
 	                _src.XYPlot,
-	                { width: 700, __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 175
-	                    }
-	                },
+	                { width: 700 },
 	                _react2.default.createElement(_src.LineChart, {
 	                    data: _.range(-10, 10, 0.01),
 	                    getValue: { x: null, y: function y(n) {
 	                            return Math.sin(n);
-	                        } },
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 176
-	                    }
+	                        } }
 	                }),
 	                _react2.default.createElement(_src.LineChart, {
 	                    data: _.range(-10, 10, 0.01),
@@ -315,10 +255,6 @@
 	                        y: function y(n) {
 	                            return Math.sin(Math.pow(Math.abs(n), Math.abs(n * .18))) * Math.cos(n);
 	                        }
-	                    },
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 180
 	                    }
 	                }),
 	                _react2.default.createElement(_src.LineChart, {
@@ -328,10 +264,6 @@
 	                        y: function y(n) {
 	                            return Math.sin(n * 0.5) * Math.cos(n);
 	                        }
-	                    },
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 187
 	                    }
 	                })
 	            )
@@ -354,53 +286,22 @@
 	
 	        return _react2.default.createElement(
 	            'div',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 210
-	                }
-	            },
+	            null,
 	            hoveredXYPlotData ? _react2.default.createElement(
 	                'div',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 212
-	                    }
-	                },
+	                null,
 	                hoveredXYPlotData[0] + ', ' + hoveredXYPlotData[1]
 	            ) : _react2.default.createElement(
 	                'div',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 215
-	                    }
-	                },
+	                null,
 	                'Hover over the chart to show values'
 	            ),
 	            _react2.default.createElement(
 	                _src.XYPlot,
-	                { width: 700, height: 400, onMouseMove: this.onMouseMoveXYPlot, __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 217
-	                    }
-	                },
-	                _react2.default.createElement(_src.LineChart, { data: randomSequences[0], getValue: { x: 0, y: 1 }, __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 218
-	                    }
-	                }),
-	                _react2.default.createElement(_src.LineChart, { data: randomSequences[1], getValue: { x: 0, y: 1 }, __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 219
-	                    }
-	                }),
-	                _react2.default.createElement(_src.LineChart, { data: randomSequences[2], getValue: { x: 0, y: 1 }, __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 220
-	                    }
-	                })
+	                { width: 700, height: 400, onMouseMove: this.onMouseMoveXYPlot },
+	                _react2.default.createElement(_src.LineChart, { data: randomSequences[0], getValue: { x: 0, y: 1 } }),
+	                _react2.default.createElement(_src.LineChart, { data: randomSequences[1], getValue: { x: 0, y: 1 } }),
+	                _react2.default.createElement(_src.LineChart, { data: randomSequences[2], getValue: { x: 0, y: 1 } })
 	            )
 	        );
 	    }
@@ -411,65 +312,30 @@
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 228
-	                }
-	            },
+	            null,
 	            _react2.default.createElement(
 	                'div',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 229
-	                    }
-	                },
+	                null,
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { margin: { left: 40, right: 8 }, width: 700, height: 300, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 230
-	                        }
-	                    },
+	                    { margin: { left: 40, right: 8 }, width: 700, height: 300 },
 	                    _react2.default.createElement(_src.Histogram, {
-	                        data: randomNormal, getValue: { x: null },
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 231
-	                        }
+	                        data: randomNormal, getValue: { x: null }
 	                    }),
 	                    _react2.default.createElement(_src.KernelDensityEstimation, {
-	                        data: randomNormal, getValue: { x: null }, bandwidth: 0.5,
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 234
-	                        }
+	                        data: randomNormal, getValue: { x: null }, bandwidth: 0.5
 	                    }),
 	                    _react2.default.createElement(_src.KernelDensityEstimation, {
-	                        data: randomNormal, getValue: { x: null }, bandwidth: 0.1,
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 237
-	                        }
+	                        data: randomNormal, getValue: { x: null }, bandwidth: 0.1
 	                    }),
 	                    _react2.default.createElement(_src.KernelDensityEstimation, {
-	                        data: randomNormal, getValue: { x: null }, bandwidth: 2,
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 240
-	                        }
+	                        data: randomNormal, getValue: { x: null }, bandwidth: 2
 	                    })
 	                )
 	            ),
 	            _react2.default.createElement(
 	                'div',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 245
-	                    }
-	                },
+	                null,
 	                _react2.default.createElement(
 	                    _src.XYPlot,
 	                    {
@@ -477,11 +343,7 @@
 	                        width: 700, height: 40,
 	                        showGrid: false,
 	                        showLabels: false,
-	                        showTicks: false,
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 246
-	                        }
+	                        showTicks: false
 	                    },
 	                    _react2.default.createElement(_src.ScatterPlot, {
 	                        data: randomNormal,
@@ -491,11 +353,7 @@
 	                                return Math.random();
 	                            }
 	                        },
-	                        pointRadius: 1,
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 253
-	                        }
+	                        pointRadius: 1
 	                    })
 	                )
 	            )
@@ -508,12 +366,7 @@
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 269
-	                }
-	            },
+	            null,
 	            _react2.default.createElement(
 	                _src.XYPlot,
 	                {
@@ -521,17 +374,9 @@
 	                    ticks: {
 	                        x: [0, 1, 2, 4, 8, 16],
 	                        y: [-8000, -3000, 0, 10000, 5000, 40000]
-	                    },
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 270
 	                    }
 	                },
-	                _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 0, y: 1 }, __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 277
-	                    }
-	                })
+	                _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 0, y: 1 } })
 	            )
 	        );
 	    }
@@ -542,12 +387,7 @@
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 285
-	                }
-	            },
+	            null,
 	            _react2.default.createElement(
 	                _src.XYPlot,
 	                {
@@ -560,20 +400,12 @@
 	                        x: [0, 1, 3, 9, 12],
 	                        y: [-5000, -2000, 0, 8000, 3000, 16000]
 	                    },
-	                    showZero: { y: true },
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 286
-	                    }
+	                    showZero: { y: true }
 	                },
 	                _react2.default.createElement(_src.BarChart, {
 	                    data: randomBarData2.numberNumber,
 	                    getValue: { x: 0, y: 1 },
-	                    barThickness: 20,
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 298
-	                    }
+	                    barThickness: 20
 	                })
 	            )
 	        );
@@ -596,12 +428,7 @@
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 320
-	                }
-	            },
+	            null,
 	            _react2.default.createElement(
 	                _src.XYPlot,
 	                {
@@ -612,26 +439,14 @@
 	                    showGrid: { x: false, y: false },
 	                    showLabels: { x: false },
 	                    showXZero: { x: true },
-	                    onMouseMove: this.onMouseMoveChart,
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 321
-	                    }
+	                    onMouseMove: this.onMouseMoveChart
 	                },
-	                _react2.default.createElement(CustomSelectionRect, { underAxes: true, hoveredYVal: this.state.hoveredYVal, __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 331
-	                    }
-	                }),
+	                _react2.default.createElement(CustomSelectionRect, { underAxes: true, hoveredYVal: this.state.hoveredYVal }),
 	                _react2.default.createElement(_src.BarChart, {
 	                    data: randomBarData2.numberOrdinal,
 	                    getValue: { x: 0, y: 1 },
 	                    orientation: 'horizontal',
-	                    barThickness: 20,
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 332
-	                    }
+	                    barThickness: 20
 	                })
 	            )
 	        );
@@ -650,11 +465,7 @@
 	            y: scale.y(hoveredYVal) - 20,
 	            width: '200', height: '40',
 	            underAxes: true,
-	            style: { fill: 'red' },
-	            __source: {
-	                fileName: '../../../examples/src/main.js',
-	                lineNumber: 347
-	            }
+	            style: { fill: 'red' }
 	        }) : null;
 	    }
 	});
@@ -664,37 +475,15 @@
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 359
-	                }
-	            },
+	            null,
 	            _react2.default.createElement(
 	                _src.XYPlot,
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 360
-	                    }
-	                },
-	                _react2.default.createElement(_src.BarChart, { data: randomBars[0], getValue: { x: 0, y: 1 }, __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 361
-	                    }
-	                }),
-	                _react2.default.createElement(_src.LineChart, { data: randomBars[0], getValue: { x: 0, y: 1 }, __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 362
-	                    }
-	                }),
+	                null,
+	                _react2.default.createElement(_src.BarChart, { data: randomBars[0], getValue: { x: 0, y: 1 } }),
+	                _react2.default.createElement(_src.LineChart, { data: randomBars[0], getValue: { x: 0, y: 1 } }),
 	                _react2.default.createElement(_src.ScatterPlot, { data: randomBars[0], getValue: { x: 0, y: 1 }, pointSymbol: function pointSymbol(d, i) {
 	                        return _.sample(emojis);
-	                    }, __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 363
-	                    }
-	                })
+	                    } })
 	            )
 	        );
 	    }
@@ -705,342 +494,143 @@
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 371
-	                }
-	            },
+	            null,
 	            _react2.default.createElement(
 	                'h2',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 372
-	                    }
-	                },
+	                null,
 	                'Vertical'
 	            ),
 	            _react2.default.createElement(
 	                'div',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 374
-	                    }
-	                },
+	                null,
 	                _react2.default.createElement(
 	                    'div',
-	                    {
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 375
-	                        }
-	                    },
+	                    null,
 	                    'Number-Number, Ordinal-Number, Time-Number'
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 376
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 0, y: 1 }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 377
-	                        }
-	                    })
+	                    { width: 300, height: 300 },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 0, y: 1 } })
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'ordinal' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 379
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 1, y: 0 }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 380
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { x: 'ordinal' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 1, y: 0 } })
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'time' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 382
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 1, y: 0 }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 383
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { x: 'time' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 1, y: 0 } })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    {
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 386
-	                        }
-	                    },
+	                    null,
 	                    'Number-Ordinal, Ordinal-Ordinal, Time-Ordinal'
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { y: 'ordinal' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 387
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 0, y: 1 }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 388
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { y: 'ordinal' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 0, y: 1 } })
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'ordinal' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 390
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalOrdinal, getValue: { x: 0, y: 1 }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 391
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'ordinal' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalOrdinal, getValue: { x: 0, y: 1 } })
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'time', y: 'ordinal' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 393
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 1, y: 0 }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 394
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { x: 'time', y: 'ordinal' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 1, y: 0 } })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    {
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 397
-	                        }
-	                    },
+	                    null,
 	                    'Number-Time, Ordinal-Time, Time-Time'
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { y: 'time' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 398
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 0, y: 1 }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 399
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { y: 'time' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 0, y: 1 } })
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'time' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 401
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 0, y: 1 }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 402
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'time' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 0, y: 1 } })
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'time', y: 'time' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 404
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.timeTime, getValue: { x: 0, y: 1 }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 405
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { x: 'time', y: 'time' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.timeTime, getValue: { x: 0, y: 1 } })
 	                )
 	            ),
 	            _react2.default.createElement(
 	                'h2',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 409
-	                    }
-	                },
+	                null,
 	                'Horizontal'
 	            ),
 	            _react2.default.createElement(
 	                'div',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 411
-	                    }
-	                },
+	                null,
 	                _react2.default.createElement(
 	                    'div',
-	                    {
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 412
-	                        }
-	                    },
+	                    null,
 	                    'Number-Number, Ordinal-Number, Date-Number'
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 413
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 414
-	                        }
-	                    })
+	                    { width: 300, height: 300 },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { y: 'ordinal' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 416
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 0, y: 1 }, orientation: 'horizontal', __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 417
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { y: 'ordinal' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 0, y: 1 }, orientation: 'horizontal' })
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { y: 'time' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 419
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 0, y: 1 }, orientation: 'horizontal', __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 420
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { y: 'time' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 0, y: 1 }, orientation: 'horizontal' })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    {
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 423
-	                        }
-	                    },
+	                    null,
 	                    'Number-Ordinal, Ordinal-Ordinal, Date-Ordinal'
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'ordinal' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 424
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 425
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { x: 'ordinal' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'ordinal' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 427
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalOrdinal, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 428
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'ordinal' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalOrdinal, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'time' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 430
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 0, y: 1 }, orientation: 'horizontal', __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 431
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'time' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 0, y: 1 }, orientation: 'horizontal' })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    {
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 434
-	                        }
-	                    },
+	                    null,
 	                    'Number-Time, Ordinal-Time, Time-Time'
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'time' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 435
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 436
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { x: 'time' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'time', y: 'ordinal' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 438
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 439
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { x: 'time', y: 'ordinal' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'time', y: 'time' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 441
-	                        }
-	                    },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.timeTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal', __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 442
-	                        }
-	                    })
+	                    { width: 300, height: 300, axisType: { x: 'time', y: 'time' } },
+	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.timeTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
 	                )
 	            )
 	        );
@@ -1052,37 +642,18 @@
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 451
-	                }
-	            },
+	            null,
 	            _react2.default.createElement(
 	                'h2',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 452
-	                    }
-	                },
+	                null,
 	                'Vertical'
 	            ),
 	            _react2.default.createElement(
 	                'div',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 453
-	                    }
-	                },
+	                null,
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 400, height: 300, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 454
-	                        }
-	                    },
+	                    { width: 400, height: 300 },
 	                    _react2.default.createElement(_src.BarChart, {
 	                        data: rangeValueData.numberNumber,
 	                        getValue: { x: function x(d) {
@@ -1090,39 +661,21 @@
 	                            }, y: 1 },
 	                        getEndValue: { x: function x(d) {
 	                                return d[0][1];
-	                            } },
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 455
-	                        }
+	                            } }
 	                    })
 	                )
 	            ),
 	            _react2.default.createElement(
 	                'h2',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 463
-	                    }
-	                },
+	                null,
 	                'Horizontal'
 	            ),
 	            _react2.default.createElement(
 	                'div',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 464
-	                    }
-	                },
+	                null,
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 400, height: 300, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 465
-	                        }
-	                    },
+	                    { width: 400, height: 300 },
 	                    _react2.default.createElement(_src.BarChart, {
 	                        data: rangeValueData.numberNumber,
 	                        orientation: 'horizontal',
@@ -1131,11 +684,7 @@
 	                            } },
 	                        getEndValue: { y: function y(d) {
 	                                return d[0][1];
-	                            } },
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 466
-	                        }
+	                            } }
 	                    })
 	                )
 	            )
@@ -1148,86 +697,43 @@
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 481
-	                }
-	            },
+	            null,
 	            _react2.default.createElement(
 	                'div',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 482
-	                    }
-	                },
+	                null,
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 400, height: 300, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 483
-	                        }
-	                    },
+	                    { width: 400, height: 300 },
 	                    _react2.default.createElement(_src.BarChart, {
 	                        data: randomBarData2.numberNumber,
-	                        getValue: { x: 0, y: 1 },
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 484
-	                        }
+	                        getValue: { x: 0, y: 1 }
 	                    }),
 	                    _react2.default.createElement(_src.MarkerLineChart, {
 	                        data: barTickData.numberNumber,
 	                        getValue: { x: 0, y: 1 },
-	                        lineLength: 15,
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 488
-	                        }
+	                        lineLength: 15
 	                    })
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 400, height: 300, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 494
-	                        }
-	                    },
+	                    { width: 400, height: 300 },
 	                    _react2.default.createElement(_src.BarChart, {
 	                        data: randomBarData2.numberNumber,
 	                        getValue: { x: 1, y: 0 },
-	                        orientation: 'horizontal', __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 495
-	                        }
-	                    }),
+	                        orientation: 'horizontal' }),
 	                    _react2.default.createElement(_src.MarkerLineChart, {
 	                        data: barTickData.numberNumber,
 	                        getValue: { x: 1, y: 0 },
 	                        lineLength: 15,
-	                        orientation: 'horizontal', __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 499
-	                        }
-	                    })
+	                        orientation: 'horizontal' })
 	                )
 	            ),
 	            _react2.default.createElement(
 	                'div',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 506
-	                    }
-	                },
+	                null,
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 400, height: 300, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 507
-	                        }
-	                    },
+	                    { width: 400, height: 300 },
 	                    _react2.default.createElement(_src.BarChart, {
 	                        data: rangeValueData.numberNumber,
 	                        getValue: { x: function x(d) {
@@ -1235,11 +741,7 @@
 	                            }, y: 1 },
 	                        getEndValue: { x: function x(d) {
 	                                return d[0][1];
-	                            } },
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 508
-	                        }
+	                            } }
 	                    }),
 	                    _react2.default.createElement(_src.MarkerLineChart, {
 	                        data: barTickData.numberRangeNumber,
@@ -1248,20 +750,12 @@
 	                            }, y: 1 },
 	                        getEndValue: { x: function x(d) {
 	                                return d[0][1];
-	                            } },
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 513
-	                        }
+	                            } }
 	                    })
 	                ),
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { width: 400, height: 300, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 519
-	                        }
-	                    },
+	                    { width: 400, height: 300 },
 	                    _react2.default.createElement(_src.BarChart, {
 	                        data: rangeValueData.numberNumber,
 	                        orientation: 'horizontal',
@@ -1270,11 +764,7 @@
 	                            } },
 	                        getEndValue: { y: function y(d) {
 	                                return d[0][1];
-	                            } },
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 520
-	                        }
+	                            } }
 	                    }),
 	                    _react2.default.createElement(_src.MarkerLineChart, {
 	                        data: barTickData.numberRangeNumber,
@@ -1284,11 +774,7 @@
 	                            } },
 	                        getEndValue: { y: function y(d) {
 	                                return d[0][1];
-	                            } },
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 526
-	                        }
+	                            } }
 	                    })
 	                )
 	            )
@@ -1307,53 +793,21 @@
 	        };
 	        return _react2.default.createElement(
 	            'div',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 546
-	                }
-	            },
+	            null,
 	            _react2.default.createElement(
 	                _src.XYPlot,
-	                _extends({}, xyProps, { axisLabel: { x: "Account Age" }, __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 547
-	                    }
-	                }),
-	                _react2.default.createElement(_src.BarChart, _extends({}, barChartProps, {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 548
-	                    }
-	                }))
+	                _extends({}, xyProps, { axisLabel: { x: "Account Age" } }),
+	                _react2.default.createElement(_src.BarChart, barChartProps)
 	            ),
 	            _react2.default.createElement(
 	                _src.XYPlot,
-	                _extends({}, xyProps, { axisLabel: { y: "Active Users" }, __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 550
-	                    }
-	                }),
-	                _react2.default.createElement(_src.BarChart, _extends({}, barChartProps, {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 551
-	                    }
-	                }))
+	                _extends({}, xyProps, { axisLabel: { y: "Active Users" } }),
+	                _react2.default.createElement(_src.BarChart, barChartProps)
 	            ),
 	            _react2.default.createElement(
 	                _src.XYPlot,
-	                _extends({}, xyProps, { axisLabel: { x: "Account Age", y: "Active Users" }, __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 553
-	                    }
-	                }),
-	                _react2.default.createElement(_src.BarChart, _extends({}, barChartProps, {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 554
-	                    }
-	                }))
+	                _extends({}, xyProps, { axisLabel: { x: "Account Age", y: "Active Users" } }),
+	                _react2.default.createElement(_src.BarChart, barChartProps)
 	            )
 	        );
 	    }
@@ -1376,44 +830,21 @@
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
-	            {
-	                __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 591
-	                }
-	            },
+	            null,
 	            _react2.default.createElement(
 	                'h1',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 592
-	                    }
-	                },
+	                null,
 	                'Reactochart Examples'
 	            ),
 	            _react2.default.createElement(
 	                'div',
-	                {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 594
-	                    }
-	                },
+	                null,
 	                _react2.default.createElement(
 	                    _src.XYPlot,
-	                    { axisType: { x: 'ordinal' }, __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 595
-	                        }
-	                    },
+	                    { axisType: { x: 'ordinal' } },
 	                    _react2.default.createElement(_src.LineChart, {
 	                        data: [['a', 0.5], ['b', 1], ['c', 0.25]],
-	                        getValue: getXYArrayValue,
-	                        __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 596
-	                        }
+	                        getValue: getXYArrayValue
 	                    })
 	                )
 	            ),
@@ -1423,11 +854,7 @@
 	    renderExamples: function renderExamples() {
 	        return _react2.default.createElement(
 	            'div',
-	            { className: 'example-sections', __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 642
-	                }
-	            },
+	            { className: 'example-sections' },
 	            examples.map(this.renderExample)
 	        );
 	    },
@@ -1436,56 +863,30 @@
 	        var ExampleComponent = example.Component;
 	        return _react2.default.createElement(
 	            'div',
-	            { className: 'example-section example-section-' + example.id, key: '' + example.id, __source: {
-	                    fileName: '../../../examples/src/main.js',
-	                    lineNumber: 649
-	                }
-	            },
+	            { className: 'example-section example-section-' + example.id, key: '' + example.id },
 	            _react2.default.createElement(
 	                'div',
 	                {
 	                    className: 'example-section-button ' + (isVisible ? 'active' : ''),
-	                    onClick: this.toggleExample.bind(null, example.id),
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 650
-	                    }
+	                    onClick: this.toggleExample.bind(null, example.id)
 	                },
 	                example.title,
 	                _react2.default.createElement(
 	                    'span',
-	                    { className: 'example-arrow', __source: {
-	                            fileName: '../../../examples/src/main.js',
-	                            lineNumber: 655
-	                        }
-	                    },
+	                    { className: 'example-arrow' },
 	                    isVisible ? " ▼" : " ►"
 	                )
 	            ),
 	            isVisible ? _react2.default.createElement(
 	                'div',
-	                { className: 'example-section-content', __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 658
-	                    }
-	                },
-	                _react2.default.createElement(ExampleComponent, {
-	                    __source: {
-	                        fileName: '../../../examples/src/main.js',
-	                        lineNumber: 659
-	                    }
-	                })
+	                { className: 'example-section-content' },
+	                _react2.default.createElement(ExampleComponent, null)
 	            ) : null
 	        );
 	    }
 	});
 	
-	_reactDom2.default.render(_react2.default.createElement(App, {
-	    __source: {
-	        fileName: '../../../examples/src/main.js',
-	        lineNumber: 667
-	    }
-	}), document.getElementById('container'));
+	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('container'));
 	
 	exports.default = App;
 
@@ -1860,6 +1261,7 @@
 	});
 	
 	React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOM;
+	React.__SECRET_DOM_SERVER_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOMServer;
 	
 	module.exports = React;
 
@@ -12210,6 +11612,7 @@
 	    multiple: MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
 	    muted: MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
 	    name: null,
+	    nonce: MUST_USE_ATTRIBUTE,
 	    noValidate: HAS_BOOLEAN_VALUE,
 	    open: HAS_BOOLEAN_VALUE,
 	    optimum: null,
@@ -12221,6 +11624,7 @@
 	    readOnly: MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
 	    rel: null,
 	    required: HAS_BOOLEAN_VALUE,
+	    reversed: HAS_BOOLEAN_VALUE,
 	    role: MUST_USE_ATTRIBUTE,
 	    rows: MUST_USE_ATTRIBUTE | HAS_POSITIVE_NUMERIC_VALUE,
 	    rowSpan: null,
@@ -20423,7 +19827,7 @@
 	
 	'use strict';
 	
-	module.exports = '0.14.2';
+	module.exports = '0.14.3';
 
 /***/ },
 /* 152 */
@@ -22846,53 +22250,21 @@
 	            _extends({ className: 'xy-plot' }, { width: width, height: height }, {
 	                onMouseMove: _lodash2.default.isFunction(onMouseMove) ? this.onMouseMove : null,
 	                onMouseEnter: _lodash2.default.isFunction(onMouseEnter) ? this.onMouseEnter : null,
-	                onMouseLeave: _lodash2.default.isFunction(onMouseLeave) ? this.onMouseLeave : null,
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 453
-	                }
+	                onMouseLeave: _lodash2.default.isFunction(onMouseLeave) ? this.onMouseLeave : null
 	            }),
 	            _react2.default.createElement(
 	                'g',
 	                { className: 'chart-inner',
-	                    transform: 'translate(' + margin.left + ', ' + margin.top + ')',
-	                    __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 458
-	                    }
+	                    transform: 'translate(' + margin.left + ', ' + margin.top + ')'
 	                },
-	                _react2.default.createElement('rect', { className: 'chart-background', width: chartWidth, height: chartHeight, __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 461
-	                    }
-	                }),
+	                _react2.default.createElement('rect', { className: 'chart-background', width: chartWidth, height: chartHeight }),
 	                childrenUnderAxes,
-	                _react2.default.createElement(ChartAxis, _extends({}, this.getXAxisProps(), {
-	                    __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 465
-	                    }
-	                })),
-	                _react2.default.createElement(ChartAxis, _extends({}, this.getYAxisProps(), {
-	                    __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 466
-	                    }
-	                })),
+	                _react2.default.createElement(ChartAxis, this.getXAxisProps()),
+	                _react2.default.createElement(ChartAxis, this.getYAxisProps()),
 	                childrenAboveAxes
 	            ),
-	            axisLabel.x ? _react2.default.createElement(XAxisLabel, _extends({}, this.getXAxisLabelProps(), {
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 472
-	                }
-	            })) : null,
-	            axisLabel.y ? _react2.default.createElement(YAxisLabel, _extends({}, this.getYAxisLabelProps(), {
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 476
-	                }
-	            })) : null
+	            axisLabel.x ? _react2.default.createElement(XAxisLabel, this.getXAxisLabelProps()) : null,
+	            axisLabel.y ? _react2.default.createElement(YAxisLabel, this.getYAxisLabelProps()) : null
 	        );
 	    },
 	    getXAxisProps: function getXAxisProps() {
@@ -23007,12 +22379,7 @@
 	        var x2 = _ref13[0];
 	        var y2 = _ref13[1];
 	
-	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
-	            __source: {
-	                fileName: '../../../src/charts/XYPlot.js',
-	                lineNumber: 567
-	            }
-	        }));
+	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
 	    }
 	});
 	
@@ -23059,20 +22426,11 @@
 	            'g',
 	            {
 	                className: 'chart-axis-label chart-axis-label-x',
-	                transform: 'translate(' + left + ',' + top + ')',
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 610
-	                }
+	                transform: 'translate(' + left + ',' + top + ')'
 	            },
 	            _react2.default.createElement(
 	                'text',
-	                _extends({ x: x, style: { textAnchor: textAnchor } }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 614
-	                    }
-	                }),
+	                { x: x, style: { textAnchor: textAnchor } },
 	                label
 	            )
 	        );
@@ -23128,20 +22486,11 @@
 	            'g',
 	            {
 	                className: 'chart-axis-label chart-axis-label-y',
-	                transform: 'translate(' + left + ',' + top + ')',
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 660
-	                }
+	                transform: 'translate(' + left + ',' + top + ')'
 	            },
 	            _react2.default.createElement(
 	                'text',
-	                _extends({ x: x, style: { textAnchor: textAnchor } }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 664
-	                    }
-	                }),
+	                { x: x, style: { textAnchor: textAnchor } },
 	                label
 	            )
 	        );
@@ -23222,20 +22571,12 @@
 	        var options = { letter: letter, type: type, orientation: orientation, labelOffset: labelOffset, gridLength: gridLength, tickLength: tickLength, labelFormat: labelFormat, emptyLabel: emptyLabel };
 	        return _react2.default.createElement(
 	            'g',
-	            { ref: letter + 'Axis', className: 'chart-axis chart-axis-' + letter, transform: axisTransform, __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 714
-	                }
-	            },
+	            { ref: letter + 'Axis', className: 'chart-axis chart-axis-' + letter, transform: axisTransform },
 	            showTicks || showGrid || showLabels && labels === ticks ? _lodash2.default.map(ticks, function (value, i) {
 	                var tickOptions = _lodash2.default.assign({}, options, { value: value });
 	                return _react2.default.createElement(
 	                    'g',
-	                    { transform: tickTransform(value), key: 'tick-' + i, __source: {
-	                            fileName: '../../../src/charts/XYPlot.js',
-	                            lineNumber: 718
-	                        }
-	                    },
+	                    { transform: tickTransform(value), key: 'tick-' + i },
 	                    showGrid ? _this2.renderGrid(tickOptions) : null,
 	                    showTicks ? _this2.renderTick(tickOptions) : null,
 	                    showLabels && labels === ticks ? _this2.renderLabel(tickOptions) : null
@@ -23245,21 +22586,13 @@
 	            _lodash2.default.map(labels, function (value, i) {
 	                return _react2.default.createElement(
 	                    'g',
-	                    { transform: tickTransform(value), key: 'tick-' + i, __source: {
-	                            fileName: '../../../src/charts/XYPlot.js',
-	                            lineNumber: 728
-	                        }
-	                    },
+	                    { transform: tickTransform(value), key: 'tick-' + i },
 	                    _this2.renderLabel(_lodash2.default.assign({}, options, { value: value }))
 	                );
 	            }) : null,
 	            showZero ? _react2.default.createElement(
 	                'g',
-	                { transform: tickTransform(0), __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 735
-	                    }
-	                },
+	                { transform: tickTransform(0) },
 	                showZero ? this.renderZero(options) : null
 	            ) : null
 	        );
@@ -23276,12 +22609,7 @@
 	        // todo generalize dy for all text sizes...?
 	        return _react2.default.createElement(
 	            'text',
-	            _extends({ className: className }, { dy: '0.32em' }, labelOffset, {
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 746
-	                }
-	            }),
+	            _extends({ className: className }, { dy: '0.32em' }, labelOffset),
 	            formatAxisLabel(value, type, labelFormat, emptyLabel)
 	        );
 	    },
@@ -23301,12 +22629,7 @@
 	        var x2 = _ref17[0];
 	        var y2 = _ref17[1];
 	
-	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
-	            __source: {
-	                fileName: '../../../src/charts/XYPlot.js',
-	                lineNumber: 755
-	            }
-	        }));
+	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
 	    },
 	    renderGrid: function renderGrid(options) {
 	        var letter = options.letter;
@@ -23322,12 +22645,7 @@
 	        var x2 = _ref19[0];
 	        var y2 = _ref19[1];
 	
-	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
-	            __source: {
-	                fileName: '../../../src/charts/XYPlot.js',
-	                lineNumber: 761
-	            }
-	        }));
+	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
 	    },
 	    renderZero: function renderZero(options) {
 	        var letter = options.letter;
@@ -23343,12 +22661,7 @@
 	        var x2 = _ref21[0];
 	        var y2 = _ref21[1];
 	
-	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
-	            __source: {
-	                fileName: '../../../src/charts/XYPlot.js',
-	                lineNumber: 767
-	            }
-	        }));
+	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
 	    }
 	});
 	
@@ -23414,30 +22727,10 @@
 	    // by rendering axis HTML to the DOM, measuring them with getBoundingClientRect, then deleting them.
 	    xProps = _lodash2.default.assign({}, xProps, { showTicks: false, showGrid: false });
 	    yProps = _lodash2.default.assign({}, yProps, { showTicks: false, showGrid: false });
-	    var xAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, _extends({}, xProps, {
-	        __source: {
-	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 829
-	        }
-	    })));
-	    var yAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, _extends({}, yProps, {
-	        __source: {
-	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 830
-	        }
-	    })));
-	    var xLabelHtml = xAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(XAxisLabel, _extends({}, xAxisLabelProps, {
-	        __source: {
-	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 831
-	        }
-	    }))) : '';
-	    var yLabelHtml = yAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(YAxisLabel, _extends({}, yAxisLabelProps, {
-	        __source: {
-	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 832
-	        }
-	    }))) : '';
+	    var xAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, xProps));
+	    var yAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, yProps));
+	    var xLabelHtml = xAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(XAxisLabel, xAxisLabelProps)) : '';
+	    var yLabelHtml = yAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(YAxisLabel, yAxisLabelProps)) : '';
 	
 	    var testSvg = document.createElement('div');
 	    testSvg.innerHTML = '<svg class="xy-plot"><g class="chart-inner">        ' + xAxisHtml + yAxisHtml + xLabelHtml + yLabelHtml + '\n    </g></svg>';
@@ -35840,7 +35133,7 @@
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
 	  var d3 = {
-	    version: "3.5.8"
+	    version: "3.5.11"
 	  };
 	  var d3_arraySlice = [].slice, d3_array = function(list) {
 	    return d3_arraySlice.call(list);
@@ -37072,7 +36365,7 @@
 	        function ended() {
 	          if (!position(parent, dragId)) return;
 	          dragSubject.on(move + dragName, null).on(end + dragName, null);
-	          dragRestore(dragged && d3.event.target === target);
+	          dragRestore(dragged);
 	          dispatch({
 	            type: "dragend"
 	          });
@@ -37310,7 +36603,7 @@
 	      }), center0 = null;
 	    }
 	    function mousedowned() {
-	      var that = this, target = d3.event.target, dispatch = event.of(that, arguments), dragged = 0, subject = d3.select(d3_window(that)).on(mousemove, moved).on(mouseup, ended), location0 = location(d3.mouse(that)), dragRestore = d3_event_dragSuppress(that);
+	      var that = this, dispatch = event.of(that, arguments), dragged = 0, subject = d3.select(d3_window(that)).on(mousemove, moved).on(mouseup, ended), location0 = location(d3.mouse(that)), dragRestore = d3_event_dragSuppress(that);
 	      d3_selection_interrupt.call(that);
 	      zoomstarted(dispatch);
 	      function moved() {
@@ -37320,7 +36613,7 @@
 	      }
 	      function ended() {
 	        subject.on(mousemove, null).on(mouseup, null);
-	        dragRestore(dragged && d3.event.target === target);
+	        dragRestore(dragged);
 	        zoomended(dispatch);
 	      }
 	    }
@@ -41997,7 +41290,7 @@
 	          index: di,
 	          startAngle: x0,
 	          endAngle: x,
-	          value: (x - x0) / k
+	          value: groupSums[di]
 	        };
 	        x += padding;
 	      }
@@ -42207,7 +41500,7 @@
 	          alpha = x;
 	        } else {
 	          timer.c = null, timer.t = NaN, timer = null;
-	          event.start({
+	          event.end({
 	            type: "end",
 	            alpha: alpha = 0
 	          });
@@ -43507,10 +42800,11 @@
 	    scale.tickFormat = function(n, format) {
 	      if (!arguments.length) return d3_scale_logFormat;
 	      if (arguments.length < 2) format = d3_scale_logFormat; else if (typeof format !== "function") format = d3.format(format);
-	      var k = Math.max(.1, n / scale.ticks().length), f = positive ? (e = 1e-12, Math.ceil) : (e = -1e-12, 
-	      Math.floor), e;
+	      var k = Math.max(1, base * n / scale.ticks().length);
 	      return function(d) {
-	        return d / pow(f(log(d) + e)) <= k ? format(d) : "";
+	        var i = d / pow(Math.round(log(d)));
+	        if (i * base < base - .5) i *= base;
+	        return i <= k ? format(d) : "";
 	      };
 	    };
 	    scale.copy = function() {
@@ -44767,6 +44061,14 @@
 	          delete lock[cancelId];
 	        }
 	      }
+	      timer.c = tick;
+	      d3_timer(function() {
+	        if (timer.c && tick(elapsed || 1)) {
+	          timer.c = null;
+	          timer.t = NaN;
+	        }
+	        return 1;
+	      }, 0, time);
 	      lock.active = id;
 	      transition.event && transition.event.start.call(node, node.__data__, i);
 	      tweens = [];
@@ -44777,14 +44079,6 @@
 	      });
 	      ease = transition.ease;
 	      duration = transition.duration;
-	      timer.c = tick;
-	      d3_timer(function() {
-	        if (timer.c && tick(elapsed || 1)) {
-	          timer.c = null;
-	          timer.t = NaN;
-	        }
-	        return 1;
-	      }, 0, time);
 	    }
 	    function tick(elapsed) {
 	      var t = elapsed / duration, e = ease(t), n = tweens.length;
@@ -45386,7 +44680,7 @@
 	  d3.xml = d3_xhrType(function(request) {
 	    return request.responseXML;
 	  });
-	  if (true) !(__WEBPACK_AMD_DEFINE_FACTORY__ = (this.d3 = d3), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); else if (typeof module === "object" && module.exports) module.exports = d3; else this.d3 = d3;
+	  if (true) this.d3 = d3, !(__WEBPACK_AMD_DEFINE_FACTORY__ = (d3), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); else if (typeof module === "object" && module.exports) module.exports = d3; else this.d3 = d3;
 	}();
 
 /***/ },
@@ -56976,16 +56270,8 @@
 	
 	        return _react2.default.createElement(
 	            'g',
-	            { className: this.props.name, __source: {
-	                    fileName: '../../../src/charts/LineChart.js',
-	                    lineNumber: 42
-	                }
-	            },
-	            _react2.default.createElement('path', { d: pathStr, __source: {
-	                    fileName: '../../../src/charts/LineChart.js',
-	                    lineNumber: 43
-	                }
-	            })
+	            { className: this.props.name },
+	            _react2.default.createElement('path', { d: pathStr })
 	        );
 	    }
 	});
@@ -57242,11 +56528,7 @@
 	        var renderer = this['render' + getBarChartType(this.props) + 'Bars'];
 	        return _react2.default.createElement(
 	            'g',
-	            { className: 'bar-chart ' + (this.props.name || ''), __source: {
-	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 198
-	                }
-	            },
+	            { className: 'bar-chart ' + (this.props.name || '') },
 	            renderer()
 	        );
 	    },
@@ -57276,12 +56558,7 @@
 	
 	        return _react2.default.createElement(
 	            'g',
-	            {
-	                __source: {
-	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 209
-	                }
-	            },
+	            null,
 	            data.map(function (d, i) {
 	                var _map3 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
 	                    // partially apply this bar's data point as 2nd callback argument
@@ -57322,12 +56599,7 @@
 	                var key = 'chart-bar-' + i;
 	
 	                if (!_lodash2.default.all([x, y, width, height], _lodash2.default.isFinite)) return null;
-	                return _react2.default.createElement('rect', _extends({ className: className, key: key, x: x, y: y, width: width, height: height, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/BarChart.js',
-	                        lineNumber: 233
-	                    }
-	                }));
+	                return _react2.default.createElement('rect', { className: className, key: key, x: x, y: y, width: width, height: height, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave });
 	            })
 	        );
 	    },
@@ -57355,12 +56627,7 @@
 	
 	        return orientation === 'vertical' ? _react2.default.createElement(
 	            'g',
-	            {
-	                __source: {
-	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 243
-	                }
-	            },
+	            null,
 	            this.props.data.map(function (d, i) {
 	                var _map5 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
 	                    // partially apply this bar's data point as 2nd callback argument
@@ -57389,21 +56656,11 @@
 	                    y: barY,
 	                    width: barThickness,
 	                    height: barLength
-	                }, { className: className, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/BarChart.js',
-	                        lineNumber: 263
-	                    }
-	                }));
+	                }, { className: className, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }));
 	            })
 	        ) : _react2.default.createElement(
 	            'g',
-	            {
-	                __source: {
-	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 272
-	                }
-	            },
+	            null,
 	            this.props.data.map(function (d, i) {
 	                var _map7 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
 	                    // partially apply this bar's data point as 2nd callback argument
@@ -57432,12 +56689,7 @@
 	                    y: barY,
 	                    width: barLength,
 	                    height: barThickness
-	                }, { className: className, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/BarChart.js',
-	                        lineNumber: 292
-	                    }
-	                }));
+	                }, { className: className, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }));
 	            })
 	        );
 	    },
@@ -57454,19 +56706,10 @@
 	
 	    return _react2.default.createElement(
 	        'svg',
-	        { x: 100, y: 100, style: { overflow: 'visible' }, __source: {
-	                fileName: '../../../src/charts/BarChart.js',
-	                lineNumber: 312
-	            }
-	        },
+	        { x: 100, y: 100, style: { overflow: 'visible' } },
 	        _react2.default.createElement(
 	            'text',
-	            {
-	                __source: {
-	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 312
-	                }
-	            },
+	            null,
 	            text
 	        )
 	    );
@@ -57598,11 +56841,7 @@
 	        var tickType = getTickType(this.props);
 	        return _react2.default.createElement(
 	            'g',
-	            { className: 'marker-line-chart', __source: {
-	                    fileName: '../../../src/charts/MarkerLineChart.js',
-	                    lineNumber: 90
-	                }
-	            },
+	            { className: 'marker-line-chart' },
 	            tickType === 'RangeValue' ? this.props.data.map(this.renderRangeValueLine) : this.props.data.map(this.renderValueValueLine)
 	        );
 	    },
@@ -57626,12 +56865,7 @@
 	        var key = 'marker-line-' + i;
 	
 	        if (!_lodash2.default.all([x1, x2, y1, y2], _lodash2.default.isFinite)) return null;
-	        return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2, key: key }, {
-	            __source: {
-	                fileName: '../../../src/charts/MarkerLineChart.js',
-	                lineNumber: 110
-	            }
-	        }));
+	        return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2, key: key }));
 	    },
 	    renderValueValueLine: function renderValueValueLine(d, i) {
 	        var _props2 = this.props;
@@ -57650,12 +56884,7 @@
 	        var key = 'marker-line-' + i;
 	
 	        if (!_lodash2.default.all([x1, x2, y1, y2], _lodash2.default.isFinite)) return null;
-	        return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2, key: key }, {
-	            __source: {
-	                fileName: '../../../src/charts/MarkerLineChart.js',
-	                lineNumber: 124
-	            }
-	        }));
+	        return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2, key: key }));
 	    }
 	});
 	
@@ -57666,6 +56895,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -57679,9 +56910,9 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d = __webpack_require__(171);
+	var _d2 = __webpack_require__(171);
 	
-	var _d2 = _interopRequireDefault(_d);
+	var _d3 = _interopRequireDefault(_d2);
 	
 	var _util = __webpack_require__(172);
 	
@@ -57709,17 +56940,16 @@
 	        // text or SVG node to use as custom point symbol, or function which returns text/SVG
 	        pointSymbol: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 	        // manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered
-	        pointOffset: PropTypes.arrayOf(PropTypes.number)
+	        pointOffset: PropTypes.arrayOf(PropTypes.number),
+	
+	        onMouseEnterPoint: PropTypes.func,
+	        onMouseMovePoint: PropTypes.func,
+	        onMouseLeavePoint: PropTypes.func
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return {
 	            pointRadius: 3,
-	            pointSymbol: _react2.default.createElement('circle', {
-	                __source: {
-	                    fileName: '../../../src/charts/ScatterPlot.js',
-	                    lineNumber: 31
-	                }
-	            }),
+	            pointSymbol: _react2.default.createElement('circle', null),
 	            pointOffset: [0, 0]
 	        };
 	    },
@@ -57727,19 +56957,36 @@
 	    // todo: return spacing in statics.getOptions
 	
 	    getHovered: function getHovered() {},
+	    onMouseEnterPoint: function onMouseEnterPoint(e, d) {
+	        this.props.onMouseEnterPoint(e, d);
+	    },
+	    onMouseMovePoint: function onMouseMovePoint(e, d) {
+	        this.props.onMouseMovePoint(e, d);
+	    },
+	    onMouseLeavePoint: function onMouseLeavePoint(e, d) {
+	        this.props.onMouseLeavePoint(e, d);
+	    },
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'g',
-	            {
-	                __source: {
-	                    fileName: '../../../src/charts/ScatterPlot.js',
-	                    lineNumber: 41
-	                }
-	            },
+	            { className: this.props.name },
 	            this.props.data.map(this.renderPoint)
 	        );
 	    },
 	    renderPoint: function renderPoint(d, i) {
+	        var _this = this;
+	
+	        var _map = ['onMouseEnterPoint', 'onMouseMovePoint', 'onMouseLeavePoint'].map(function (eventName) {
+	            // partially apply this bar's data point as 2nd callback argument
+	            var callback = (0, _util.methodIfFuncProp)(eventName, _this.props, _this);
+	            return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
+	        });
+	
+	        var _map2 = _slicedToArray(_map, 3);
+	
+	        var onMouseEnter = _map2[0];
+	        var onMouseMove = _map2[1];
+	        var onMouseLeave = _map2[2];
 	        var _props = this.props;
 	        var scale = _props.scale;
 	        var getValue = _props.getValue;
@@ -57749,19 +56996,14 @@
 	        var pointSymbol = this.props.pointSymbol;
 	
 	        var className = 'chart-scatterplot-point ' + (getClass ? (0, _util.accessor)(getClass)(d) : '');
-	        var symbolProps = { className: className };
+	        var symbolProps = { className: className, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave };
 	
 	        // resolve symbol-generating functions into real symbols
 	        if (_lodash2.default.isFunction(pointSymbol)) pointSymbol = pointSymbol(d, i);
 	        // wrap string/number symbols in <text> container
 	        if (_lodash2.default.isString(pointSymbol) || _lodash2.default.isNumber(pointSymbol)) pointSymbol = _react2.default.createElement(
 	            'text',
-	            {
-	                __source: {
-	                    fileName: '../../../src/charts/ScatterPlot.js',
-	                    lineNumber: 54
-	                }
-	            },
+	            null,
 	            pointSymbol
 	        );
 	        // use props.pointRadius for circle radius
@@ -57864,12 +57106,7 @@
 	    },
 	    getHovered: function getHovered() {},
 	    render: function render() {
-	        if (!this.state.histogramData) return _react2.default.createElement('g', {
-	            __source: {
-	                fileName: '../../../src/charts/Histogram.js',
-	                lineNumber: 52
-	            }
-	        });
+	        if (!this.state.histogramData) return _react2.default.createElement('g', null);
 	        var _props = this.props;
 	        var name = _props.name;
 	        var scale = _props.scale;
@@ -57885,12 +57122,7 @@
 	            getEndValue: { x: function x(d) {
 	                    return d.x + d.dx;
 	                } }
-	        }, { name: name, scale: scale, axisType: axisType, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: plotWidth, plotHeight: plotHeight }, {
-	            __source: {
-	                fileName: '../../../src/charts/Histogram.js',
-	                lineNumber: 55
-	            }
-	        }));
+	        }, { name: name, scale: scale, axisType: axisType, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: plotWidth, plotHeight: plotHeight }));
 	    }
 	});
 	
@@ -58019,12 +57251,7 @@
 	            getValue: { x: 0, y: function y(d) {
 	                    return d[1] * 500;
 	                } }
-	        }, { name: name, scale: scale, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: plotWidth, plotHeight: plotHeight }, {
-	            __source: {
-	                fileName: '../../../src/charts/KernelDensityEstimation.js',
-	                lineNumber: 80
-	            }
-	        }));
+	        }, { name: name, scale: scale, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: plotWidth, plotHeight: plotHeight }));
 	    }
 	});
 	
@@ -58051,8 +57278,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
 	
@@ -58169,16 +57394,8 @@
 	
 	        return _react2.default.createElement(
 	            'g',
-	            { className: 'area-heatmap-chart', onMouseMove: this.onMouseMove, onMouseLeave: this.onMouseLeave, __source: {
-	                    fileName: '../../../src/charts/AreaHeatmap.js',
-	                    lineNumber: 62
-	                }
-	            },
-	            _react2.default.createElement('rect', { x: '0', y: '0', width: scaleWidth, height: scaleHeight, ref: 'background', fill: 'transparent', __source: {
-	                    fileName: '../../../src/charts/AreaHeatmap.js',
-	                    lineNumber: 63
-	                }
-	            }),
+	            { className: 'area-heatmap-chart', onMouseMove: this.onMouseMove, onMouseLeave: this.onMouseLeave },
+	            _react2.default.createElement('rect', { x: '0', y: '0', width: scaleWidth, height: scaleHeight, ref: 'background', fill: 'transparent' }),
 	            data.map(function (d, i) {
 	                // full width and height of the containing rectangle
 	                var fullWidth = Math.abs(scale.x(xEndAccessor(d)) - scale.x(xAccessor(d)));
@@ -58203,12 +57420,7 @@
 	
 	                if (!_lodash2.default.all([x, y, width, height], _lodash2.default.isFinite)) return null;
 	
-	                return _react2.default.createElement('rect', _extends({ x: x, y: y, width: width, height: height, className: 'area-heatmap-rect', key: 'rect-' + i }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/AreaHeatmap.js',
-	                        lineNumber: 88
-	                    }
-	                }));
+	                return _react2.default.createElement('rect', { x: x, y: y, width: width, height: height, className: 'area-heatmap-rect', key: 'rect-' + i });
 	            })
 	        );
 	    }
@@ -58331,12 +57543,7 @@
 	        var startPercent = 0;
 	        return _react2.default.createElement(
 	            'svg',
-	            _extends({ className: 'pie-chart' }, { width: width, height: height }, {
-	                __source: {
-	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 86
-	                }
-	            }),
+	            _extends({ className: 'pie-chart' }, { width: width, height: height }),
 	            this.props.data.map(function (d, i) {
 	                var _map = ['onMouseEnterSlice', 'onMouseMoveSlice', 'onMouseLeaveSlice'].map(function (eventName) {
 	                    // partially apply this bar's data point as 2nd callback argument
@@ -58357,31 +57564,18 @@
 	                startPercent += slicePercent;
 	                var key = 'pie-slice-' + i;
 	
-	                return _react2.default.createElement('path', _extends({ className: className, d: pathStr, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave, key: key }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/PieChart.js',
-	                        lineNumber: 102
-	                    }
-	                }));
+	                return _react2.default.createElement('path', { className: className, d: pathStr, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave, key: key });
 	            }),
 	            sum < total ? // draw empty slice if the sum of slices is less than expected total
 	            _react2.default.createElement('path', {
 	                className: 'pie-slice pie-slice-empty',
 	                d: pieSlicePath(startPercent, 1, center, radius, holeRadius),
-	                key: 'pie-slice-empty',
-	                __source: {
-	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 106
-	                }
+	                key: 'pie-slice-empty'
 	            }) : null,
 	            _lodash2.default.isFinite(markerLinePercent) ? _react2.default.createElement('path', {
 	                className: markerLineClass,
 	                d: markerLine(markerLinePercent, center, radius, holeRadius, markerLineOverhangOuter, markerLineOverhangInner),
-	                key: 'pie-slice-marker-line',
-	                __source: {
-	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 114
-	                }
+	                key: 'pie-slice-marker-line'
 	            }) : null,
 	            this.props.centerLabel ? this.renderCenterLabel(center) : null
 	        );
@@ -58393,12 +57587,7 @@
 	        var style = { textAnchor: 'middle', dominantBaseline: 'central' };
 	        return _react2.default.createElement(
 	            'text',
-	            _extends({ className: 'pie-label-center' }, { x: x, y: y, style: style }, {
-	                __source: {
-	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 128
-	                }
-	            }),
+	            _extends({ className: 'pie-label-center' }, { x: x, y: y, style: style }),
 	            this.props.centerLabel
 	        );
 	    }
@@ -58547,19 +57736,9 @@
 	
 	        return _react2.default.createElement(
 	            'div',
-	            _extends({ className: className, style: style }, handlers, {
-	                __source: {
-	                    fileName: '../../../src/charts/TreeMap.js',
-	                    lineNumber: 52
-	                }
-	            }),
+	            _extends({ className: className, style: style }, handlers),
 	            dx > minLabelWidth && dy > minLabelHeight ? // show label if node is big enough
-	            _react2.default.createElement(NodeLabelComponent, _extends({ node: node, getLabel: getLabel, labelStyle: labelStyle }, {
-	                __source: {
-	                    fileName: '../../../src/charts/TreeMap.js',
-	                    lineNumber: 54
-	                }
-	            })) : null
+	            _react2.default.createElement(NodeLabelComponent, { node: node, getLabel: getLabel, labelStyle: labelStyle }) : null
 	        );
 	    }
 	});
@@ -58590,12 +57769,7 @@
 	
 	        return _react2.default.createElement(
 	            'div',
-	            _extends({ className: 'node-label' }, { style: style }, {
-	                __source: {
-	                    fileName: '../../../src/charts/TreeMap.js',
-	                    lineNumber: 77
-	                }
-	            }),
+	            _extends({ className: 'node-label' }, { style: style }),
 	            getLabel(node)
 	        );
 	    }
@@ -58693,23 +57867,13 @@
 	
 	        return _react2.default.createElement(
 	            'div',
-	            _extends({ className: 'tree-map' }, { style: style }, {
-	                __source: {
-	                    fileName: '../../../src/charts/TreeMap.js',
-	                    lineNumber: 153
-	                }
-	            }),
+	            _extends({ className: 'tree-map' }, { style: style }),
 	            nodes.map(function (node, i) {
-	                return _react2.default.createElement(NodeComponent, _extends({
+	                return _react2.default.createElement(NodeComponent, {
 	                    node: node, nodeStyle: nodeStyle, minLabelWidth: minLabelWidth, minLabelHeight: minLabelHeight, labelStyle: labelStyle, getLabel: getLabel, parentNames: parentNames,
 	                    NodeLabelComponent: NodeLabelComponent, onClickNode: onClickNode, onMouseEnterNode: onMouseEnterNode, onMouseLeaveNode: onMouseLeaveNode, onMouseMoveNode: onMouseMoveNode,
 	                    key: 'node-' + i
-	                }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/TreeMap.js',
-	                        lineNumber: 154
-	                    }
-	                }));
+	                });
 	            })
 	        );
 	    }
