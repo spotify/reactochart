@@ -71,10 +71,6 @@
 
 	'use strict';
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	//import jsdom from 'mocha-jsdom';
-	
 	var _react = __webpack_require__(3);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -92,6 +88,8 @@
 	var _index = __webpack_require__(203);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	//import jsdom from 'mocha-jsdom';
 	
 	var getXYArrayValue = { // accessors for (X, Y) data from simple arrays that look like [[x, y], [x, y]]
 	    x: function x(d) {
@@ -117,12 +115,7 @@
 	        };
 	
 	        // ensure line is drawn as expected
-	        var chart = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(_index.LineChart, _extends({}, props, {
-	            __source: {
-	                fileName: '../../../tests/spec/LineChart-test.js',
-	                lineNumber: 30
-	            }
-	        })));
+	        var chart = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(_index.LineChart, props));
 	        var path = _reactAddonsTestUtils2.default.findRenderedDOMComponentWithTag(chart, 'path');
 	        var pathData = path.getAttribute('d');
 	        (0, _chai.expect)(pathData).to.equal('M 0 50 L 50 0 L 100 75');
@@ -140,12 +133,7 @@
 	        };
 	
 	        // ensure line is drawn as expected
-	        var chart = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(_index.LineChart, _extends({}, props, {
-	            __source: {
-	                fileName: '../../../tests/spec/LineChart-test.js',
-	                lineNumber: 53
-	            }
-	        })));
+	        var chart = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(_index.LineChart, props));
 	        var path = _reactAddonsTestUtils2.default.findRenderedDOMComponentWithTag(chart, 'path');
 	        var pathData = path.getAttribute('d');
 	        (0, _chai.expect)(pathData).to.equal('M 0 50 L 50 0 L 100 75');
@@ -163,12 +151,7 @@
 	        };
 	
 	        // ensure line is drawn as expected
-	        var chart = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(_index.LineChart, _extends({}, props, {
-	            __source: {
-	                fileName: '../../../tests/spec/LineChart-test.js',
-	                lineNumber: 71
-	            }
-	        })));
+	        var chart = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(_index.LineChart, props));
 	        var path = _reactAddonsTestUtils2.default.findRenderedDOMComponentWithTag(chart, 'path');
 	        var pathData = path.getAttribute('d');
 	        (0, _chai.expect)(pathData).to.equal('M 0 50 L 50 0 L 100 75');
@@ -183,18 +166,8 @@
 	
 	        var chart = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(
 	            _index.XYPlot,
-	            _extends({}, xyProps, {
-	                __source: {
-	                    fileName: '../../../tests/spec/LineChart-test.js',
-	                    lineNumber: 85
-	                }
-	            }),
-	            _react2.default.createElement(_index.LineChart, _extends({}, lineProps, {
-	                __source: {
-	                    fileName: '../../../tests/spec/LineChart-test.js',
-	                    lineNumber: 86
-	                }
-	            }))
+	            xyProps,
+	            _react2.default.createElement(_index.LineChart, lineProps)
 	        ));
 	        var path = _reactAddonsTestUtils2.default.findRenderedDOMComponentWithTag(chart, 'path');
 	        var pathData = path.getAttribute('d');
@@ -251,6 +224,7 @@
 	});
 	
 	React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOM;
+	React.__SECRET_DOM_SERVER_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOMServer;
 	
 	module.exports = React;
 
@@ -10601,6 +10575,7 @@
 	    multiple: MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
 	    muted: MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
 	    name: null,
+	    nonce: MUST_USE_ATTRIBUTE,
 	    noValidate: HAS_BOOLEAN_VALUE,
 	    open: HAS_BOOLEAN_VALUE,
 	    optimum: null,
@@ -10612,6 +10587,7 @@
 	    readOnly: MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
 	    rel: null,
 	    required: HAS_BOOLEAN_VALUE,
+	    reversed: HAS_BOOLEAN_VALUE,
 	    role: MUST_USE_ATTRIBUTE,
 	    rows: MUST_USE_ATTRIBUTE | HAS_POSITIVE_NUMERIC_VALUE,
 	    rowSpan: null,
@@ -18814,7 +18790,7 @@
 	
 	'use strict';
 	
-	module.exports = '0.14.2';
+	module.exports = '0.14.3';
 
 /***/ },
 /* 149 */
@@ -20105,8 +20081,11 @@
 	    this._currentElement = element;
 	  },
 	
-	  unmountComponent: function () {}
+	  unmountComponent: function () {},
 	
+	  getPublicInstance: function () {
+	    return null;
+	  }
 	};
 	
 	var ShallowComponentWrapper = function () {};
@@ -20264,7 +20243,7 @@
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
 	  var d3 = {
-	    version: "3.5.8"
+	    version: "3.5.11"
 	  };
 	  var d3_arraySlice = [].slice, d3_array = function(list) {
 	    return d3_arraySlice.call(list);
@@ -21496,7 +21475,7 @@
 	        function ended() {
 	          if (!position(parent, dragId)) return;
 	          dragSubject.on(move + dragName, null).on(end + dragName, null);
-	          dragRestore(dragged && d3.event.target === target);
+	          dragRestore(dragged);
 	          dispatch({
 	            type: "dragend"
 	          });
@@ -21734,7 +21713,7 @@
 	      }), center0 = null;
 	    }
 	    function mousedowned() {
-	      var that = this, target = d3.event.target, dispatch = event.of(that, arguments), dragged = 0, subject = d3.select(d3_window(that)).on(mousemove, moved).on(mouseup, ended), location0 = location(d3.mouse(that)), dragRestore = d3_event_dragSuppress(that);
+	      var that = this, dispatch = event.of(that, arguments), dragged = 0, subject = d3.select(d3_window(that)).on(mousemove, moved).on(mouseup, ended), location0 = location(d3.mouse(that)), dragRestore = d3_event_dragSuppress(that);
 	      d3_selection_interrupt.call(that);
 	      zoomstarted(dispatch);
 	      function moved() {
@@ -21744,7 +21723,7 @@
 	      }
 	      function ended() {
 	        subject.on(mousemove, null).on(mouseup, null);
-	        dragRestore(dragged && d3.event.target === target);
+	        dragRestore(dragged);
 	        zoomended(dispatch);
 	      }
 	    }
@@ -26421,7 +26400,7 @@
 	          index: di,
 	          startAngle: x0,
 	          endAngle: x,
-	          value: (x - x0) / k
+	          value: groupSums[di]
 	        };
 	        x += padding;
 	      }
@@ -26631,7 +26610,7 @@
 	          alpha = x;
 	        } else {
 	          timer.c = null, timer.t = NaN, timer = null;
-	          event.start({
+	          event.end({
 	            type: "end",
 	            alpha: alpha = 0
 	          });
@@ -27931,10 +27910,11 @@
 	    scale.tickFormat = function(n, format) {
 	      if (!arguments.length) return d3_scale_logFormat;
 	      if (arguments.length < 2) format = d3_scale_logFormat; else if (typeof format !== "function") format = d3.format(format);
-	      var k = Math.max(.1, n / scale.ticks().length), f = positive ? (e = 1e-12, Math.ceil) : (e = -1e-12, 
-	      Math.floor), e;
+	      var k = Math.max(1, base * n / scale.ticks().length);
 	      return function(d) {
-	        return d / pow(f(log(d) + e)) <= k ? format(d) : "";
+	        var i = d / pow(Math.round(log(d)));
+	        if (i * base < base - .5) i *= base;
+	        return i <= k ? format(d) : "";
 	      };
 	    };
 	    scale.copy = function() {
@@ -29191,6 +29171,14 @@
 	          delete lock[cancelId];
 	        }
 	      }
+	      timer.c = tick;
+	      d3_timer(function() {
+	        if (timer.c && tick(elapsed || 1)) {
+	          timer.c = null;
+	          timer.t = NaN;
+	        }
+	        return 1;
+	      }, 0, time);
 	      lock.active = id;
 	      transition.event && transition.event.start.call(node, node.__data__, i);
 	      tweens = [];
@@ -29201,14 +29189,6 @@
 	      });
 	      ease = transition.ease;
 	      duration = transition.duration;
-	      timer.c = tick;
-	      d3_timer(function() {
-	        if (timer.c && tick(elapsed || 1)) {
-	          timer.c = null;
-	          timer.t = NaN;
-	        }
-	        return 1;
-	      }, 0, time);
 	    }
 	    function tick(elapsed) {
 	      var t = elapsed / duration, e = ease(t), n = tweens.length;
@@ -29810,7 +29790,7 @@
 	  d3.xml = d3_xhrType(function(request) {
 	    return request.responseXML;
 	  });
-	  if (true) !(__WEBPACK_AMD_DEFINE_FACTORY__ = (this.d3 = d3), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); else if (typeof module === "object" && module.exports) module.exports = d3; else this.d3 = d3;
+	  if (true) this.d3 = d3, !(__WEBPACK_AMD_DEFINE_FACTORY__ = (d3), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); else if (typeof module === "object" && module.exports) module.exports = d3; else this.d3 = d3;
 	}();
 
 /***/ },
@@ -33016,7 +32996,7 @@
 	      }
 	
 	      // valid surrogate pair
-	      codePoint = leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00 | 0x10000
+	      codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000
 	    } else if (leadSurrogate) {
 	      // valid bmp char, but last char was a lead
 	      if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
@@ -33320,38 +33300,10 @@
 /* 188 */
 /***/ function(module, exports) {
 
+	var toString = {}.toString;
 	
-	/**
-	 * isArray
-	 */
-	
-	var isArray = Array.isArray;
-	
-	/**
-	 * toString
-	 */
-	
-	var str = Object.prototype.toString;
-	
-	/**
-	 * Whether or not the given `val`
-	 * is an array.
-	 *
-	 * example:
-	 *
-	 *        isArray([]);
-	 *        // > true
-	 *        isArray(arguments);
-	 *        // > false
-	 *        isArray('');
-	 *        // > false
-	 *
-	 * @param {mixed} val
-	 * @return {bool}
-	 */
-	
-	module.exports = isArray || function (val) {
-	  return !! val && '[object Array]' == str.call(val);
+	module.exports = Array.isArray || function (arr) {
+	  return toString.call(arr) == '[object Array]';
 	};
 
 
@@ -38287,53 +38239,21 @@
 	            _extends({ className: 'xy-plot' }, { width: width, height: height }, {
 	                onMouseMove: _lodash2.default.isFunction(onMouseMove) ? this.onMouseMove : null,
 	                onMouseEnter: _lodash2.default.isFunction(onMouseEnter) ? this.onMouseEnter : null,
-	                onMouseLeave: _lodash2.default.isFunction(onMouseLeave) ? this.onMouseLeave : null,
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 453
-	                }
+	                onMouseLeave: _lodash2.default.isFunction(onMouseLeave) ? this.onMouseLeave : null
 	            }),
 	            _react2.default.createElement(
 	                'g',
 	                { className: 'chart-inner',
-	                    transform: 'translate(' + margin.left + ', ' + margin.top + ')',
-	                    __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 458
-	                    }
+	                    transform: 'translate(' + margin.left + ', ' + margin.top + ')'
 	                },
-	                _react2.default.createElement('rect', { className: 'chart-background', width: chartWidth, height: chartHeight, __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 461
-	                    }
-	                }),
+	                _react2.default.createElement('rect', { className: 'chart-background', width: chartWidth, height: chartHeight }),
 	                childrenUnderAxes,
-	                _react2.default.createElement(ChartAxis, _extends({}, this.getXAxisProps(), {
-	                    __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 465
-	                    }
-	                })),
-	                _react2.default.createElement(ChartAxis, _extends({}, this.getYAxisProps(), {
-	                    __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 466
-	                    }
-	                })),
+	                _react2.default.createElement(ChartAxis, this.getXAxisProps()),
+	                _react2.default.createElement(ChartAxis, this.getYAxisProps()),
 	                childrenAboveAxes
 	            ),
-	            axisLabel.x ? _react2.default.createElement(XAxisLabel, _extends({}, this.getXAxisLabelProps(), {
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 472
-	                }
-	            })) : null,
-	            axisLabel.y ? _react2.default.createElement(YAxisLabel, _extends({}, this.getYAxisLabelProps(), {
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 476
-	                }
-	            })) : null
+	            axisLabel.x ? _react2.default.createElement(XAxisLabel, this.getXAxisLabelProps()) : null,
+	            axisLabel.y ? _react2.default.createElement(YAxisLabel, this.getYAxisLabelProps()) : null
 	        );
 	    },
 	    getXAxisProps: function getXAxisProps() {
@@ -38448,12 +38368,7 @@
 	        var x2 = _ref13[0];
 	        var y2 = _ref13[1];
 	
-	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
-	            __source: {
-	                fileName: '../../../src/charts/XYPlot.js',
-	                lineNumber: 567
-	            }
-	        }));
+	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
 	    }
 	});
 	
@@ -38500,20 +38415,11 @@
 	            'g',
 	            {
 	                className: 'chart-axis-label chart-axis-label-x',
-	                transform: 'translate(' + left + ',' + top + ')',
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 610
-	                }
+	                transform: 'translate(' + left + ',' + top + ')'
 	            },
 	            _react2.default.createElement(
 	                'text',
-	                _extends({ x: x, style: { textAnchor: textAnchor } }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 614
-	                    }
-	                }),
+	                { x: x, style: { textAnchor: textAnchor } },
 	                label
 	            )
 	        );
@@ -38569,20 +38475,11 @@
 	            'g',
 	            {
 	                className: 'chart-axis-label chart-axis-label-y',
-	                transform: 'translate(' + left + ',' + top + ')',
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 660
-	                }
+	                transform: 'translate(' + left + ',' + top + ')'
 	            },
 	            _react2.default.createElement(
 	                'text',
-	                _extends({ x: x, style: { textAnchor: textAnchor } }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 664
-	                    }
-	                }),
+	                { x: x, style: { textAnchor: textAnchor } },
 	                label
 	            )
 	        );
@@ -38663,20 +38560,12 @@
 	        var options = { letter: letter, type: type, orientation: orientation, labelOffset: labelOffset, gridLength: gridLength, tickLength: tickLength, labelFormat: labelFormat, emptyLabel: emptyLabel };
 	        return _react2.default.createElement(
 	            'g',
-	            { ref: letter + 'Axis', className: 'chart-axis chart-axis-' + letter, transform: axisTransform, __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 714
-	                }
-	            },
+	            { ref: letter + 'Axis', className: 'chart-axis chart-axis-' + letter, transform: axisTransform },
 	            showTicks || showGrid || showLabels && labels === ticks ? _lodash2.default.map(ticks, function (value, i) {
 	                var tickOptions = _lodash2.default.assign({}, options, { value: value });
 	                return _react2.default.createElement(
 	                    'g',
-	                    { transform: tickTransform(value), key: 'tick-' + i, __source: {
-	                            fileName: '../../../src/charts/XYPlot.js',
-	                            lineNumber: 718
-	                        }
-	                    },
+	                    { transform: tickTransform(value), key: 'tick-' + i },
 	                    showGrid ? _this2.renderGrid(tickOptions) : null,
 	                    showTicks ? _this2.renderTick(tickOptions) : null,
 	                    showLabels && labels === ticks ? _this2.renderLabel(tickOptions) : null
@@ -38686,21 +38575,13 @@
 	            _lodash2.default.map(labels, function (value, i) {
 	                return _react2.default.createElement(
 	                    'g',
-	                    { transform: tickTransform(value), key: 'tick-' + i, __source: {
-	                            fileName: '../../../src/charts/XYPlot.js',
-	                            lineNumber: 728
-	                        }
-	                    },
+	                    { transform: tickTransform(value), key: 'tick-' + i },
 	                    _this2.renderLabel(_lodash2.default.assign({}, options, { value: value }))
 	                );
 	            }) : null,
 	            showZero ? _react2.default.createElement(
 	                'g',
-	                { transform: tickTransform(0), __source: {
-	                        fileName: '../../../src/charts/XYPlot.js',
-	                        lineNumber: 735
-	                    }
-	                },
+	                { transform: tickTransform(0) },
 	                showZero ? this.renderZero(options) : null
 	            ) : null
 	        );
@@ -38717,12 +38598,7 @@
 	        // todo generalize dy for all text sizes...?
 	        return _react2.default.createElement(
 	            'text',
-	            _extends({ className: className }, { dy: '0.32em' }, labelOffset, {
-	                __source: {
-	                    fileName: '../../../src/charts/XYPlot.js',
-	                    lineNumber: 746
-	                }
-	            }),
+	            _extends({ className: className }, { dy: '0.32em' }, labelOffset),
 	            formatAxisLabel(value, type, labelFormat, emptyLabel)
 	        );
 	    },
@@ -38742,12 +38618,7 @@
 	        var x2 = _ref17[0];
 	        var y2 = _ref17[1];
 	
-	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
-	            __source: {
-	                fileName: '../../../src/charts/XYPlot.js',
-	                lineNumber: 755
-	            }
-	        }));
+	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
 	    },
 	    renderGrid: function renderGrid(options) {
 	        var letter = options.letter;
@@ -38763,12 +38634,7 @@
 	        var x2 = _ref19[0];
 	        var y2 = _ref19[1];
 	
-	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
-	            __source: {
-	                fileName: '../../../src/charts/XYPlot.js',
-	                lineNumber: 761
-	            }
-	        }));
+	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
 	    },
 	    renderZero: function renderZero(options) {
 	        var letter = options.letter;
@@ -38784,12 +38650,7 @@
 	        var x2 = _ref21[0];
 	        var y2 = _ref21[1];
 	
-	        return _react2.default.createElement('line', _extends({ className: className, x2: x2, y2: y2 }, {
-	            __source: {
-	                fileName: '../../../src/charts/XYPlot.js',
-	                lineNumber: 767
-	            }
-	        }));
+	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
 	    }
 	});
 	
@@ -38855,30 +38716,10 @@
 	    // by rendering axis HTML to the DOM, measuring them with getBoundingClientRect, then deleting them.
 	    xProps = _lodash2.default.assign({}, xProps, { showTicks: false, showGrid: false });
 	    yProps = _lodash2.default.assign({}, yProps, { showTicks: false, showGrid: false });
-	    var xAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, _extends({}, xProps, {
-	        __source: {
-	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 829
-	        }
-	    })));
-	    var yAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, _extends({}, yProps, {
-	        __source: {
-	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 830
-	        }
-	    })));
-	    var xLabelHtml = xAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(XAxisLabel, _extends({}, xAxisLabelProps, {
-	        __source: {
-	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 831
-	        }
-	    }))) : '';
-	    var yLabelHtml = yAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(YAxisLabel, _extends({}, yAxisLabelProps, {
-	        __source: {
-	            fileName: '../../../src/charts/XYPlot.js',
-	            lineNumber: 832
-	        }
-	    }))) : '';
+	    var xAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, xProps));
+	    var yAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, yProps));
+	    var xLabelHtml = xAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(XAxisLabel, xAxisLabelProps)) : '';
+	    var yLabelHtml = yAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(YAxisLabel, yAxisLabelProps)) : '';
 	
 	    var testSvg = document.createElement('div');
 	    testSvg.innerHTML = '<svg class="xy-plot"><g class="chart-inner">        ' + xAxisHtml + yAxisHtml + xLabelHtml + yLabelHtml + '\n    </g></svg>';
@@ -63547,16 +63388,8 @@
 	
 	        return _react2.default.createElement(
 	            'g',
-	            { className: this.props.name, __source: {
-	                    fileName: '../../../src/charts/LineChart.js',
-	                    lineNumber: 42
-	                }
-	            },
-	            _react2.default.createElement('path', { d: pathStr, __source: {
-	                    fileName: '../../../src/charts/LineChart.js',
-	                    lineNumber: 43
-	                }
-	            })
+	            { className: this.props.name },
+	            _react2.default.createElement('path', { d: pathStr })
 	        );
 	    }
 	});
@@ -63813,11 +63646,7 @@
 	        var renderer = this['render' + getBarChartType(this.props) + 'Bars'];
 	        return _react2.default.createElement(
 	            'g',
-	            { className: 'bar-chart ' + (this.props.name || ''), __source: {
-	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 198
-	                }
-	            },
+	            { className: 'bar-chart ' + (this.props.name || '') },
 	            renderer()
 	        );
 	    },
@@ -63847,12 +63676,7 @@
 	
 	        return _react2.default.createElement(
 	            'g',
-	            {
-	                __source: {
-	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 209
-	                }
-	            },
+	            null,
 	            data.map(function (d, i) {
 	                var _map3 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
 	                    // partially apply this bar's data point as 2nd callback argument
@@ -63893,12 +63717,7 @@
 	                var key = 'chart-bar-' + i;
 	
 	                if (!_lodash2.default.all([x, y, width, height], _lodash2.default.isFinite)) return null;
-	                return _react2.default.createElement('rect', _extends({ className: className, key: key, x: x, y: y, width: width, height: height, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/BarChart.js',
-	                        lineNumber: 233
-	                    }
-	                }));
+	                return _react2.default.createElement('rect', { className: className, key: key, x: x, y: y, width: width, height: height, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave });
 	            })
 	        );
 	    },
@@ -63926,12 +63745,7 @@
 	
 	        return orientation === 'vertical' ? _react2.default.createElement(
 	            'g',
-	            {
-	                __source: {
-	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 243
-	                }
-	            },
+	            null,
 	            this.props.data.map(function (d, i) {
 	                var _map5 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
 	                    // partially apply this bar's data point as 2nd callback argument
@@ -63960,21 +63774,11 @@
 	                    y: barY,
 	                    width: barThickness,
 	                    height: barLength
-	                }, { className: className, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/BarChart.js',
-	                        lineNumber: 263
-	                    }
-	                }));
+	                }, { className: className, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }));
 	            })
 	        ) : _react2.default.createElement(
 	            'g',
-	            {
-	                __source: {
-	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 272
-	                }
-	            },
+	            null,
 	            this.props.data.map(function (d, i) {
 	                var _map7 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
 	                    // partially apply this bar's data point as 2nd callback argument
@@ -64003,12 +63807,7 @@
 	                    y: barY,
 	                    width: barLength,
 	                    height: barThickness
-	                }, { className: className, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/BarChart.js',
-	                        lineNumber: 292
-	                    }
-	                }));
+	                }, { className: className, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }));
 	            })
 	        );
 	    },
@@ -64025,19 +63824,10 @@
 	
 	    return _react2.default.createElement(
 	        'svg',
-	        { x: 100, y: 100, style: { overflow: 'visible' }, __source: {
-	                fileName: '../../../src/charts/BarChart.js',
-	                lineNumber: 312
-	            }
-	        },
+	        { x: 100, y: 100, style: { overflow: 'visible' } },
 	        _react2.default.createElement(
 	            'text',
-	            {
-	                __source: {
-	                    fileName: '../../../src/charts/BarChart.js',
-	                    lineNumber: 312
-	                }
-	            },
+	            null,
 	            text
 	        )
 	    );
@@ -64169,11 +63959,7 @@
 	        var tickType = getTickType(this.props);
 	        return _react2.default.createElement(
 	            'g',
-	            { className: 'marker-line-chart', __source: {
-	                    fileName: '../../../src/charts/MarkerLineChart.js',
-	                    lineNumber: 90
-	                }
-	            },
+	            { className: 'marker-line-chart' },
 	            tickType === 'RangeValue' ? this.props.data.map(this.renderRangeValueLine) : this.props.data.map(this.renderValueValueLine)
 	        );
 	    },
@@ -64197,12 +63983,7 @@
 	        var key = 'marker-line-' + i;
 	
 	        if (!_lodash2.default.all([x1, x2, y1, y2], _lodash2.default.isFinite)) return null;
-	        return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2, key: key }, {
-	            __source: {
-	                fileName: '../../../src/charts/MarkerLineChart.js',
-	                lineNumber: 110
-	            }
-	        }));
+	        return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2, key: key }));
 	    },
 	    renderValueValueLine: function renderValueValueLine(d, i) {
 	        var _props2 = this.props;
@@ -64221,12 +64002,7 @@
 	        var key = 'marker-line-' + i;
 	
 	        if (!_lodash2.default.all([x1, x2, y1, y2], _lodash2.default.isFinite)) return null;
-	        return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2, key: key }, {
-	            __source: {
-	                fileName: '../../../src/charts/MarkerLineChart.js',
-	                lineNumber: 124
-	            }
-	        }));
+	        return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2, key: key }));
 	    }
 	});
 	
@@ -64237,6 +64013,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -64250,9 +64028,9 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d = __webpack_require__(162);
+	var _d2 = __webpack_require__(162);
 	
-	var _d2 = _interopRequireDefault(_d);
+	var _d3 = _interopRequireDefault(_d2);
 	
 	var _util = __webpack_require__(207);
 	
@@ -64280,17 +64058,16 @@
 	        // text or SVG node to use as custom point symbol, or function which returns text/SVG
 	        pointSymbol: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 	        // manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered
-	        pointOffset: PropTypes.arrayOf(PropTypes.number)
+	        pointOffset: PropTypes.arrayOf(PropTypes.number),
+	
+	        onMouseEnterPoint: PropTypes.func,
+	        onMouseMovePoint: PropTypes.func,
+	        onMouseLeavePoint: PropTypes.func
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return {
 	            pointRadius: 3,
-	            pointSymbol: _react2.default.createElement('circle', {
-	                __source: {
-	                    fileName: '../../../src/charts/ScatterPlot.js',
-	                    lineNumber: 31
-	                }
-	            }),
+	            pointSymbol: _react2.default.createElement('circle', null),
 	            pointOffset: [0, 0]
 	        };
 	    },
@@ -64298,19 +64075,36 @@
 	    // todo: return spacing in statics.getOptions
 	
 	    getHovered: function getHovered() {},
+	    onMouseEnterPoint: function onMouseEnterPoint(e, d) {
+	        this.props.onMouseEnterPoint(e, d);
+	    },
+	    onMouseMovePoint: function onMouseMovePoint(e, d) {
+	        this.props.onMouseMovePoint(e, d);
+	    },
+	    onMouseLeavePoint: function onMouseLeavePoint(e, d) {
+	        this.props.onMouseLeavePoint(e, d);
+	    },
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'g',
-	            {
-	                __source: {
-	                    fileName: '../../../src/charts/ScatterPlot.js',
-	                    lineNumber: 41
-	                }
-	            },
+	            { className: this.props.name },
 	            this.props.data.map(this.renderPoint)
 	        );
 	    },
 	    renderPoint: function renderPoint(d, i) {
+	        var _this = this;
+	
+	        var _map = ['onMouseEnterPoint', 'onMouseMovePoint', 'onMouseLeavePoint'].map(function (eventName) {
+	            // partially apply this bar's data point as 2nd callback argument
+	            var callback = (0, _util.methodIfFuncProp)(eventName, _this.props, _this);
+	            return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
+	        });
+	
+	        var _map2 = _slicedToArray(_map, 3);
+	
+	        var onMouseEnter = _map2[0];
+	        var onMouseMove = _map2[1];
+	        var onMouseLeave = _map2[2];
 	        var _props = this.props;
 	        var scale = _props.scale;
 	        var getValue = _props.getValue;
@@ -64320,19 +64114,14 @@
 	        var pointSymbol = this.props.pointSymbol;
 	
 	        var className = 'chart-scatterplot-point ' + (getClass ? (0, _util.accessor)(getClass)(d) : '');
-	        var symbolProps = { className: className };
+	        var symbolProps = { className: className, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave };
 	
 	        // resolve symbol-generating functions into real symbols
 	        if (_lodash2.default.isFunction(pointSymbol)) pointSymbol = pointSymbol(d, i);
 	        // wrap string/number symbols in <text> container
 	        if (_lodash2.default.isString(pointSymbol) || _lodash2.default.isNumber(pointSymbol)) pointSymbol = _react2.default.createElement(
 	            'text',
-	            {
-	                __source: {
-	                    fileName: '../../../src/charts/ScatterPlot.js',
-	                    lineNumber: 54
-	                }
-	            },
+	            null,
 	            pointSymbol
 	        );
 	        // use props.pointRadius for circle radius
@@ -64435,12 +64224,7 @@
 	    },
 	    getHovered: function getHovered() {},
 	    render: function render() {
-	        if (!this.state.histogramData) return _react2.default.createElement('g', {
-	            __source: {
-	                fileName: '../../../src/charts/Histogram.js',
-	                lineNumber: 52
-	            }
-	        });
+	        if (!this.state.histogramData) return _react2.default.createElement('g', null);
 	        var _props = this.props;
 	        var name = _props.name;
 	        var scale = _props.scale;
@@ -64456,12 +64240,7 @@
 	            getEndValue: { x: function x(d) {
 	                    return d.x + d.dx;
 	                } }
-	        }, { name: name, scale: scale, axisType: axisType, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: plotWidth, plotHeight: plotHeight }, {
-	            __source: {
-	                fileName: '../../../src/charts/Histogram.js',
-	                lineNumber: 55
-	            }
-	        }));
+	        }, { name: name, scale: scale, axisType: axisType, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: plotWidth, plotHeight: plotHeight }));
 	    }
 	});
 	
@@ -64590,12 +64369,7 @@
 	            getValue: { x: 0, y: function y(d) {
 	                    return d[1] * 500;
 	                } }
-	        }, { name: name, scale: scale, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: plotWidth, plotHeight: plotHeight }, {
-	            __source: {
-	                fileName: '../../../src/charts/KernelDensityEstimation.js',
-	                lineNumber: 80
-	            }
-	        }));
+	        }, { name: name, scale: scale, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: plotWidth, plotHeight: plotHeight }));
 	    }
 	});
 	
@@ -64622,8 +64396,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
 	
@@ -64740,16 +64512,8 @@
 	
 	        return _react2.default.createElement(
 	            'g',
-	            { className: 'area-heatmap-chart', onMouseMove: this.onMouseMove, onMouseLeave: this.onMouseLeave, __source: {
-	                    fileName: '../../../src/charts/AreaHeatmap.js',
-	                    lineNumber: 62
-	                }
-	            },
-	            _react2.default.createElement('rect', { x: '0', y: '0', width: scaleWidth, height: scaleHeight, ref: 'background', fill: 'transparent', __source: {
-	                    fileName: '../../../src/charts/AreaHeatmap.js',
-	                    lineNumber: 63
-	                }
-	            }),
+	            { className: 'area-heatmap-chart', onMouseMove: this.onMouseMove, onMouseLeave: this.onMouseLeave },
+	            _react2.default.createElement('rect', { x: '0', y: '0', width: scaleWidth, height: scaleHeight, ref: 'background', fill: 'transparent' }),
 	            data.map(function (d, i) {
 	                // full width and height of the containing rectangle
 	                var fullWidth = Math.abs(scale.x(xEndAccessor(d)) - scale.x(xAccessor(d)));
@@ -64774,12 +64538,7 @@
 	
 	                if (!_lodash2.default.all([x, y, width, height], _lodash2.default.isFinite)) return null;
 	
-	                return _react2.default.createElement('rect', _extends({ x: x, y: y, width: width, height: height, className: 'area-heatmap-rect', key: 'rect-' + i }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/AreaHeatmap.js',
-	                        lineNumber: 88
-	                    }
-	                }));
+	                return _react2.default.createElement('rect', { x: x, y: y, width: width, height: height, className: 'area-heatmap-rect', key: 'rect-' + i });
 	            })
 	        );
 	    }
@@ -64902,12 +64661,7 @@
 	        var startPercent = 0;
 	        return _react2.default.createElement(
 	            'svg',
-	            _extends({ className: 'pie-chart' }, { width: width, height: height }, {
-	                __source: {
-	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 86
-	                }
-	            }),
+	            _extends({ className: 'pie-chart' }, { width: width, height: height }),
 	            this.props.data.map(function (d, i) {
 	                var _map = ['onMouseEnterSlice', 'onMouseMoveSlice', 'onMouseLeaveSlice'].map(function (eventName) {
 	                    // partially apply this bar's data point as 2nd callback argument
@@ -64928,31 +64682,18 @@
 	                startPercent += slicePercent;
 	                var key = 'pie-slice-' + i;
 	
-	                return _react2.default.createElement('path', _extends({ className: className, d: pathStr, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave, key: key }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/PieChart.js',
-	                        lineNumber: 102
-	                    }
-	                }));
+	                return _react2.default.createElement('path', { className: className, d: pathStr, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave, key: key });
 	            }),
 	            sum < total ? // draw empty slice if the sum of slices is less than expected total
 	            _react2.default.createElement('path', {
 	                className: 'pie-slice pie-slice-empty',
 	                d: pieSlicePath(startPercent, 1, center, radius, holeRadius),
-	                key: 'pie-slice-empty',
-	                __source: {
-	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 106
-	                }
+	                key: 'pie-slice-empty'
 	            }) : null,
 	            _lodash2.default.isFinite(markerLinePercent) ? _react2.default.createElement('path', {
 	                className: markerLineClass,
 	                d: markerLine(markerLinePercent, center, radius, holeRadius, markerLineOverhangOuter, markerLineOverhangInner),
-	                key: 'pie-slice-marker-line',
-	                __source: {
-	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 114
-	                }
+	                key: 'pie-slice-marker-line'
 	            }) : null,
 	            this.props.centerLabel ? this.renderCenterLabel(center) : null
 	        );
@@ -64964,12 +64705,7 @@
 	        var style = { textAnchor: 'middle', dominantBaseline: 'central' };
 	        return _react2.default.createElement(
 	            'text',
-	            _extends({ className: 'pie-label-center' }, { x: x, y: y, style: style }, {
-	                __source: {
-	                    fileName: '../../../src/charts/PieChart.js',
-	                    lineNumber: 128
-	                }
-	            }),
+	            _extends({ className: 'pie-label-center' }, { x: x, y: y, style: style }),
 	            this.props.centerLabel
 	        );
 	    }
@@ -65118,19 +64854,9 @@
 	
 	        return _react2.default.createElement(
 	            'div',
-	            _extends({ className: className, style: style }, handlers, {
-	                __source: {
-	                    fileName: '../../../src/charts/TreeMap.js',
-	                    lineNumber: 52
-	                }
-	            }),
+	            _extends({ className: className, style: style }, handlers),
 	            dx > minLabelWidth && dy > minLabelHeight ? // show label if node is big enough
-	            _react2.default.createElement(NodeLabelComponent, _extends({ node: node, getLabel: getLabel, labelStyle: labelStyle }, {
-	                __source: {
-	                    fileName: '../../../src/charts/TreeMap.js',
-	                    lineNumber: 54
-	                }
-	            })) : null
+	            _react2.default.createElement(NodeLabelComponent, { node: node, getLabel: getLabel, labelStyle: labelStyle }) : null
 	        );
 	    }
 	});
@@ -65161,12 +64887,7 @@
 	
 	        return _react2.default.createElement(
 	            'div',
-	            _extends({ className: 'node-label' }, { style: style }, {
-	                __source: {
-	                    fileName: '../../../src/charts/TreeMap.js',
-	                    lineNumber: 77
-	                }
-	            }),
+	            _extends({ className: 'node-label' }, { style: style }),
 	            getLabel(node)
 	        );
 	    }
@@ -65264,23 +64985,13 @@
 	
 	        return _react2.default.createElement(
 	            'div',
-	            _extends({ className: 'tree-map' }, { style: style }, {
-	                __source: {
-	                    fileName: '../../../src/charts/TreeMap.js',
-	                    lineNumber: 153
-	                }
-	            }),
+	            _extends({ className: 'tree-map' }, { style: style }),
 	            nodes.map(function (node, i) {
-	                return _react2.default.createElement(NodeComponent, _extends({
+	                return _react2.default.createElement(NodeComponent, {
 	                    node: node, nodeStyle: nodeStyle, minLabelWidth: minLabelWidth, minLabelHeight: minLabelHeight, labelStyle: labelStyle, getLabel: getLabel, parentNames: parentNames,
 	                    NodeLabelComponent: NodeLabelComponent, onClickNode: onClickNode, onMouseEnterNode: onMouseEnterNode, onMouseLeaveNode: onMouseLeaveNode, onMouseMoveNode: onMouseMoveNode,
 	                    key: 'node-' + i
-	                }, {
-	                    __source: {
-	                        fileName: '../../../src/charts/TreeMap.js',
-	                        lineNumber: 154
-	                    }
-	                }));
+	                });
 	            })
 	        );
 	    }
@@ -65325,22 +65036,13 @@
 	    //jsdom();
 	
 	    it('renders SVG with given width & height (or a default)', function () {
-	        var chart = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(_index.XYPlot, { width: 600, height: 800, __source: {
-	                fileName: '../../../tests/spec/XYPlot-test.js',
-	                lineNumber: 20
-	            }
-	        }));
+	        var chart = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(_index.XYPlot, { width: 600, height: 800 }));
 	        var node = chart.getDOMNode();
 	        (0, _chai.expect)(node.tagName.toLowerCase()).to.equal('svg');
 	        (0, _chai.expect)(node.getAttribute('width')).to.equal('600');
 	        (0, _chai.expect)(node.getAttribute('height')).to.equal('800');
 	
-	        var chart2 = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(_index.XYPlot, {
-	            __source: {
-	                fileName: '../../../tests/spec/XYPlot-test.js',
-	                lineNumber: 26
-	            }
-	        }));
+	        var chart2 = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(_index.XYPlot, null));
 	        var node2 = chart2.getDOMNode();
 	        (0, _chai.expect)(node2.tagName.toLowerCase()).to.equal('svg');
 	        (0, _chai.expect)(parseInt(node2.getAttribute('width'))).to.be.a('number').and.to.be.above(0);
@@ -65350,11 +65052,7 @@
 	    it('renders inner chart area with given margin', function () {
 	        var size = 400;
 	        var margin = { top: 10, bottom: 20, left: 30, right: 40 };
-	        var chart = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(_index.XYPlot, { width: size, height: size, margin: margin, __source: {
-	                fileName: '../../../tests/spec/XYPlot-test.js',
-	                lineNumber: 36
-	            }
-	        }));
+	        var chart = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(_index.XYPlot, { width: size, height: size, margin: margin }));
 	        var inner = _reactAddonsTestUtils2.default.findRenderedDOMComponentWithClass(chart, 'chart-inner');
 	        var bg = _reactAddonsTestUtils2.default.findRenderedDOMComponentWithClass(chart, 'chart-background');
 	        (0, _chai.expect)(inner.getAttribute('transform').replace(/\s/, '')).to.contain('translate(' + margin.left + ',' + margin.top + ')');
@@ -65365,11 +65063,7 @@
 	    it('creates a top/bottom/left/right object from single value, if object is not given for directional props', function () {
 	        var size = 400;
 	        var margin = 50;
-	        var chart = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(_index.XYPlot, { width: size, height: size, margin: margin, __source: {
-	                fileName: '../../../tests/spec/XYPlot-test.js',
-	                lineNumber: 48
-	            }
-	        }));
+	        var chart = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(_index.XYPlot, { width: size, height: size, margin: margin }));
 	        var inner = _reactAddonsTestUtils2.default.findRenderedDOMComponentWithClass(chart, 'chart-inner');
 	        var bg = _reactAddonsTestUtils2.default.findRenderedDOMComponentWithClass(chart, 'chart-background');
 	        (0, _chai.expect)(inner.getAttribute('transform').replace(/\s/, '')).to.contain('translate(' + margin + ',' + margin + ')');
