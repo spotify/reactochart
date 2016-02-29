@@ -3,7 +3,7 @@ const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
 
-import {accessor, AccessorPropType, InterfaceMixin} from '../util.js';
+import {accessor, AccessorPropType, InterfaceMixin, methodIfFuncProp} from '../util.js';
 
 // MarkerLine is similar to a bar chart,
 // except that it just draws a line at the data value, rather than a full bar
@@ -52,6 +52,10 @@ const MarkerLineChart = React.createClass({
         // x & y scale types
         axisType: PropTypes.object,
         scale: PropTypes.object,
+
+        onMouseEnterLine: PropTypes.func,
+        onMouseMoveLine: PropTypes.func,
+        onMouseLeaveLine: PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -85,6 +89,15 @@ const MarkerLineChart = React.createClass({
             return options;
         }
     },
+    onMouseEnterLine(e, d) {
+        this.props.onMouseEnterLine(e, d);
+    },
+    onMouseMoveLine(e, d) {
+        this.props.onMouseMoveLine(e, d);
+    },
+    onMouseLeaveLine(e, d) {
+        this.props.onMouseLeaveLine(e, d);
+    },
     render() {
         const tickType = getTickType(this.props);
         return <g className="marker-line-chart">
@@ -95,6 +108,13 @@ const MarkerLineChart = React.createClass({
         </g>
     },
     renderRangeValueLine(d, i) {
+        const [onMouseEnter, onMouseMove, onMouseLeave] =
+            ['onMouseEnterLine', 'onMouseMoveLine', 'onMouseLeaveLine'].map(eventName => {
+                // partially apply this bar's data point as 2nd callback argument
+                const callback = methodIfFuncProp(eventName, this.props, this);
+                return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+            });
+
         const {getValue, getEndValue, orientation, scale} = this.props;
         const isVertical = (orientation === 'vertical');
         const xVal = scale.x(accessor(getValue.x)(d));
@@ -107,9 +127,16 @@ const MarkerLineChart = React.createClass({
         const key = `marker-line-${i}`;
 
         if(!_.all([x1, x2, y1, y2], _.isFinite)) return null;
-        return <line className="marker-line" {...{x1, x2, y1, y2, key}} />
+        return <line className="marker-line" {...{x1, x2, y1, y2, key, onMouseEnter, onMouseMove, onMouseLeave}} />
     },
     renderValueValueLine(d, i) {
+        const [onMouseEnter, onMouseMove, onMouseLeave] =
+            ['onMouseEnterLine', 'onMouseMoveLine', 'onMouseLeaveLine'].map(eventName => {
+                // partially apply this bar's data point as 2nd callback argument
+                const callback = methodIfFuncProp(eventName, this.props, this);
+                return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+            });
+
         const {getValue, orientation, lineLength, scale} = this.props;
         const isVertical = (orientation === 'vertical');
         const xVal = scale.x(accessor(getValue.x)(d));
@@ -121,7 +148,7 @@ const MarkerLineChart = React.createClass({
         const key = `marker-line-${i}`;
 
         if(!_.all([x1, x2, y1, y2], _.isFinite)) return null;
-        return <line className="marker-line" {...{x1, x2, y1, y2, key}} />;
+        return <line className="marker-line" {...{x1, x2, y1, y2, key, onMouseEnter, onMouseMove, onMouseLeave}} />;
     }
 });
 
