@@ -117,7 +117,9 @@ const XYPlot = React.createClass({
         // todo more interaction
         onMouseMove: PropTypes.func,
         onMouseEnter: PropTypes.func,
-        onMouseLeave: PropTypes.func
+        onMouseLeave: PropTypes.func,
+        onMouseDown: PropTypes.func,
+        onMouseUp: PropTypes.func
 
         // todo: minMargin - margin will be at least X, or more if necessary
         // todo: extraMargin - margin to add to calculated necessary margin
@@ -424,10 +426,18 @@ const XYPlot = React.createClass({
     onMouseLeave(e) {
         this.trueProps.onMouseLeave(e);
     },
+    onMouseDown(e) {
+        this.trueProps.onMouseDown(e);
+    },
+    onMouseUp(e) {
+        this.trueProps.onMouseUp(e);
+    },
 
     render() {
-        const {children, width, height, axisType, axisLabel, onMouseMove, onMouseEnter, onMouseLeave, invertAxis} =
-            this.trueProps;
+        const {
+            children, width, height, axisType, axisLabel, invertAxis,
+            onMouseMove, onMouseEnter, onMouseLeave, onMouseDown, onMouseUp
+        } = this.trueProps;
         const {scale, margin, padding, scaleWidth, scaleHeight, ticks} = this;
         const chartWidth = scaleWidth + padding.left + padding.right;
         const chartHeight = scaleHeight + padding.top + padding.bottom;
@@ -454,6 +464,8 @@ const XYPlot = React.createClass({
                  onMouseMove={_.isFunction(onMouseMove) ? this.onMouseMove : null}
                  onMouseEnter={_.isFunction(onMouseEnter) ? this.onMouseEnter : null}
                  onMouseLeave={_.isFunction(onMouseLeave) ? this.onMouseLeave : null}
+                 onMouseDown={_.isFunction(onMouseDown) ? this.onMouseDown : null}
+                 onMouseUp={_.isFunction(onMouseUp) ? this.onMouseUp : null}
             >
                 <g className="chart-inner"
                    transform={`translate(${margin.left}, ${margin.top})`}

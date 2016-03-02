@@ -21876,7 +21876,9 @@
 	        // todo more interaction
 	        onMouseMove: PropTypes.func,
 	        onMouseEnter: PropTypes.func,
-	        onMouseLeave: PropTypes.func
+	        onMouseLeave: PropTypes.func,
+	        onMouseDown: PropTypes.func,
+	        onMouseUp: PropTypes.func
 	
 	        // todo: minMargin - margin will be at least X, or more if necessary
 	        // todo: extraMargin - margin to add to calculated necessary margin
@@ -22224,6 +22226,12 @@
 	    onMouseLeave: function onMouseLeave(e) {
 	        this.trueProps.onMouseLeave(e);
 	    },
+	    onMouseDown: function onMouseDown(e) {
+	        this.trueProps.onMouseDown(e);
+	    },
+	    onMouseUp: function onMouseUp(e) {
+	        this.trueProps.onMouseUp(e);
+	    },
 	    render: function render() {
 	        var _trueProps2 = this.trueProps;
 	        var children = _trueProps2.children;
@@ -22231,10 +22239,12 @@
 	        var height = _trueProps2.height;
 	        var axisType = _trueProps2.axisType;
 	        var axisLabel = _trueProps2.axisLabel;
+	        var invertAxis = _trueProps2.invertAxis;
 	        var onMouseMove = _trueProps2.onMouseMove;
 	        var onMouseEnter = _trueProps2.onMouseEnter;
 	        var onMouseLeave = _trueProps2.onMouseLeave;
-	        var invertAxis = _trueProps2.invertAxis;
+	        var onMouseDown = _trueProps2.onMouseDown;
+	        var onMouseUp = _trueProps2.onMouseUp;
 	        var scale = this.scale;
 	        var margin = this.margin;
 	        var padding = this.padding;
@@ -22267,7 +22277,9 @@
 	            _extends({ className: 'xy-plot' }, { width: width, height: height }, {
 	                onMouseMove: _lodash2.default.isFunction(onMouseMove) ? this.onMouseMove : null,
 	                onMouseEnter: _lodash2.default.isFunction(onMouseEnter) ? this.onMouseEnter : null,
-	                onMouseLeave: _lodash2.default.isFunction(onMouseLeave) ? this.onMouseLeave : null
+	                onMouseLeave: _lodash2.default.isFunction(onMouseLeave) ? this.onMouseLeave : null,
+	                onMouseDown: _lodash2.default.isFunction(onMouseDown) ? this.onMouseDown : null,
+	                onMouseUp: _lodash2.default.isFunction(onMouseUp) ? this.onMouseUp : null
 	            }),
 	            _react2.default.createElement(
 	                'g',
