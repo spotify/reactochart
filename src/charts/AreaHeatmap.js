@@ -83,7 +83,7 @@ const AreaHeatmap = React.createClass({
                 const x = x0 + ((fullWidth - width) / 2);
                 const y = y0 + ((fullHeight - height) / 2);
 
-                if(!_.all([x, y, width, height], _.isFinite)) return null;
+                if(!_.every([x, y, width, height], _.isFinite)) return null;
 
                 return <rect {...{x, y, width, height, className: 'area-heatmap-rect', key: `rect-${i}`}}/>;
             })}

@@ -557,7 +557,7 @@ const AxisLabelExample = React.createClass({
     }
 });
 
-const examples = [
+export const examples = [
     {id: 'line', title: 'Line Chart', Component: LineChartExample},
     {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
     {id: 'axisLabels', title: 'Axis Labels', Component: AxisLabelExample},
@@ -573,9 +573,7 @@ const examples = [
     {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample}
 ];
 
-
-
-const App = React.createClass({
+export const App = React.createClass({
     getInitialState() {
         return {
             visibleExamples: {},
@@ -592,7 +590,7 @@ const App = React.createClass({
             <h1>Reactochart Examples</h1>
 
             <div>
-                <XYPlot axisType={{x: 'ordinal'}}>
+                <XYPlot axisType={{x: 'ordinal'}} margin={40}>
                     <LineChart
                         data={[['a', 0.5], ['b', 1], ['c', 0.25]]}
                         getValue={getXYArrayValue}
@@ -666,4 +664,4 @@ const App = React.createClass({
 
 ReactDOM.render(<App />, document.getElementById('container'));
 
-export default App;
+//export default App;
