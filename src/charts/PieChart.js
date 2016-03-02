@@ -45,7 +45,11 @@ const PieChart = React.createClass({
         markerLineValue: PropTypes.number,
         markerLineClass: PropTypes.string,
         markerLineOverhangInner: PropTypes.number,
-        markerLineOverhangOuter: PropTypes.number
+        markerLineOverhangOuter: PropTypes.number,
+
+        onMouseEnterLine: PropTypes.func,
+        onMouseMoveLine: PropTypes.func,
+        onMouseLeaveLine: PropTypes.func
     },
     getDefaultProps() { return DEFAULT_PROPS; },
 
@@ -57,6 +61,16 @@ const PieChart = React.createClass({
     },
     onMouseLeaveSlice(e, d) {
         this.props.onMouseLeaveSlice(e, d);
+    },
+
+    onMouseEnterLine(e, d) {
+        this.props.onMouseEnterLine(e, d);
+    },
+    onMouseMoveLine(e, d) {
+        this.props.onMouseMoveLine(e, d);
+    },
+    onMouseLeaveLine(e, d) {
+        this.props.onMouseLeaveLine(e, d);
     },
 
     render() {
@@ -111,17 +125,30 @@ const PieChart = React.createClass({
             }
 
             {_.isFinite(markerLinePercent) ?
-                <path
-                    className={markerLineClass}
-                    d={markerLine(markerLinePercent, center, radius, holeRadius, markerLineOverhangOuter, markerLineOverhangInner)}
-                    key="pie-slice-marker-line"
-                />
+                this.renderMarkerLine(markerLineClass, markerLine(markerLinePercent, center, radius, holeRadius, markerLineOverhangOuter, markerLineOverhangInner), 'pie-slice-marker-line')
                 : null
             }
 
             {this.props.centerLabel ? this.renderCenterLabel(center) : null}
         </svg>
     },
+
+    renderMarkerLine(className, d, key) {
+        const [onMouseEnter, onMouseMove, onMouseLeave] =
+            ['onMouseEnterLine', 'onMouseMoveLine', 'onMouseLeaveLine'].map(eventName => {
+                // partially apply this bar's data point as 2nd callback argument
+                const callback = methodIfFuncProp(eventName, this.props, this);
+                return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+            });
+
+        return <path
+            className={className}
+            d={d}
+            key={key}
+            {...{onMouseEnter, onMouseMove, onMouseLeave}}
+        />
+    },
+
     renderCenterLabel(center) {
         const {x, y} = center;
         const style = {textAnchor: 'middle', dominantBaseline: 'central'};
