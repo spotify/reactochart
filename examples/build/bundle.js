@@ -59043,13 +59043,17 @@
 	            this.props.centerLabel ? this.renderCenterLabel(center) : null
 	        );
 	    },
-	    renderMarkerLine: function renderMarkerLine(className, d, key) {
+	    renderMarkerLine: function renderMarkerLine(className, pathData, key) {
 	        var _this2 = this;
+	
+	        var lineD = {
+	            value: this.props.markerLineValue
+	        };
 	
 	        var _map3 = ['onMouseEnterLine', 'onMouseMoveLine', 'onMouseLeaveLine'].map(function (eventName) {
 	            // partially apply this bar's data point as 2nd callback argument
 	            var callback = (0, _util.methodIfFuncProp)(eventName, _this2.props, _this2);
-	            return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
+	            return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, lineD) : null;
 	        });
 	
 	        var _map4 = _slicedToArray(_map3, 3);
@@ -59061,7 +59065,7 @@
 	
 	        return _react2.default.createElement('path', _extends({
 	            className: className,
-	            d: d,
+	            d: pathData,
 	            key: key
 	        }, { onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }));
 	    },
