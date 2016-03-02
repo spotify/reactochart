@@ -133,17 +133,21 @@ const PieChart = React.createClass({
         </svg>
     },
 
-    renderMarkerLine(className, d, key) {
+    renderMarkerLine(className, pathData, key) {
+        const lineD = {
+            value: this.props.markerLineValue
+        };
+
         const [onMouseEnter, onMouseMove, onMouseLeave] =
             ['onMouseEnterLine', 'onMouseMoveLine', 'onMouseLeaveLine'].map(eventName => {
                 // partially apply this bar's data point as 2nd callback argument
                 const callback = methodIfFuncProp(eventName, this.props, this);
-                return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+                return _.isFunction(callback) ? _.partial(callback, _, lineD) : null;
             });
 
         return <path
             className={className}
-            d={d}
+            d={pathData}
             key={key}
             {...{onMouseEnter, onMouseMove, onMouseLeave}}
         />
