@@ -1,15 +1,9 @@
+import _ from 'lodash';
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
-import d3 from 'd3';
-import _ from 'lodash';
-
-//import jsdom from 'mocha-jsdom';
 import {expect} from 'chai';
 
-import {XYPlot, LineChart} from '../../src/index.js';
-
-import resolveScale from '../../src/resolveScale';
-import resolveObjectProps from '../../src/resolveObjectProps';
+import resolveObjectProps from '../../src/utils/resolveObjectProps';
 
 describe('resolveObjectProps', () => {
   class XYPropTest extends React.Component {

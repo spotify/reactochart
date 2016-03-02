@@ -6,6 +6,7 @@ import {accessor} from '../util.js';
 import moment from 'moment';
 import numeral from 'numeral';
 import ReactDOMServer from 'react-dom/server';
+import resolveObjectProps from 'utils/resolveObjectProps';
 
 let PropTypes = React.PropTypes;
 PropTypes = _.assign({}, PropTypes, {
@@ -24,29 +25,6 @@ PropTypes = _.assign({}, PropTypes, {
     }),
     stringFormatter: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
 });
-
-const DEFAULTS = {
-    axisType: {x: 'number', y: 'number'},
-    nice: {x: true, y: true},
-    invertAxis: {x: false, y: false},
-    tickCount: {x: 10, y: 10},
-    tickLength: {x: 6, y: 6},
-    labelPadding: {x: 6, y: 6},
-    emptyLabel: "Unknown",
-    showLabels: {x: true, y: true},
-    showGrid: {x: true, y: true},
-    showTicks: {x: true, y: true},
-    showZero: {x: false, y: false},
-    axisLabelPadding: {x: 10, y: 10},
-    axisLabelAlign: {
-        x: {horizontal: 'left', vertical: 'top'},
-        y: {horizontal: 'right', vertical: 'top'}
-    },
-
-    // these values are inferred from data if not provided, therefore empty defaults
-    margin: {}, padding: {}, spacing: {}, domain: {},
-    ticks: {}, labelValues: {}, labelFormat: {}, axisLabel: {}
-};
 
 const XYPlot = React.createClass({
     propTypes: {
@@ -129,8 +107,28 @@ const XYPlot = React.createClass({
     getDefaultProps() {
         return {
             width: 400,
-            height: 250
-        }
+            height: 250,
+            axisType: {x: 'number', y: 'number'},
+            nice: {x: true, y: true},
+            invertAxis: {x: false, y: false},
+            tickCount: {x: 10, y: 10},
+            tickLength: {x: 6, y: 6},
+            labelPadding: {x: 6, y: 6},
+            emptyLabel: "Unknown",
+            showLabels: {x: true, y: true},
+            showGrid: {x: true, y: true},
+            showTicks: {x: true, y: true},
+            showZero: {x: false, y: false},
+            axisLabelPadding: {x: 10, y: 10},
+            axisLabelAlign: {
+                x: {horizontal: 'left', vertical: 'top'},
+                y: {horizontal: 'right', vertical: 'top'}
+            },
+
+            // these values are inferred from data if not provided, therefore empty defaults
+            margin: {}, padding: {}, spacing: {}, domain: {},
+            ticks: {}, labelValues: {}, labelFormat: {}, axisLabel: {}
+        };
     },
     getInitialState() {
         return {};
@@ -148,39 +146,9 @@ const XYPlot = React.createClass({
         this.initDomains(this.trueProps);
         this.initScale(this.trueProps);
     },
+
     initProps(props) {
-        // this is a bit hacky, but we can't use getDefaultProps for most of the defaults,
-        // because the user can pass in eg. {x: 'ordinal'} and we still want to default y to number
-        const xyKeys = [
-            'axisType', 'domain', 'nice', 'invertAxis', 'tickCount', 'ticks', 'tickLength',
-            'labelValues', 'labelFormat', 'labelPadding', 'showLabels', 'showGrid', 'showTicks', 'showZero',
-            'axisLabel', 'axisLabelAlign', 'axisLabelPadding'
-        ];
-        const dirKeys = ['margin', 'padding', 'spacing'];
-        const directions = ['top', 'bottom', 'left', 'right'];
-
-        function resolvePropObj(propKey, expectedKeys) {
-            // resolves a passed prop key into the true object we use
-            // by filling in defaults and converting single-passed values into the right format
-            const val = props[propKey];
-            return _.has(props, propKey) ?
-                // check for the keys we expect to be in the object
-                (_.any(expectedKeys, k => _.has(val, k)) ?
-                        // if some are present, fill in the rest with defaults
-                        _.defaults({}, val, DEFAULTS[propKey]) :
-                        // otherwise, user has passed in a single value, so set it as the value for all keys
-                        _.object(expectedKeys.map(k => [k, val]))
-                )
-                // user didn't pass in anything, so use default
-                : _.clone(DEFAULTS[propKey]);
-        }
-
-        const xyProps = _.assign.apply(this, xyKeys.map(k => ({[k]: resolvePropObj(k, ['x', 'y'])})));
-        const dirProps = _.assign.apply(this, dirKeys.map(k => ({[k]: resolvePropObj(k, directions)})));
-        const otherProps = _.omit(props, xyKeys.concat(dirKeys));
-        //console.log(xyProps, dirProps, otherProps);
-
-        return _.assign({}, xyProps, dirProps, otherProps);
+        return _.assign({}, props);
     },
 
     initDomains(props) {
@@ -202,15 +170,13 @@ const XYPlot = React.createClass({
                 if(isNullOrUndefined(domain[k]))
                     domain[k] = defaultDomain(child.props.data, child.props.getValue[k], axisType[k]);
             });
-            spacing = isNullOrUndefined(spacing) ?
-                _.clone(DEFAULTS.spacing) : _.defaults({}, spacing, DEFAULTS.spacing);
 
             allChartOptions.push({domain, spacing});
         });
 
         // use domain from props if provided, else calculated domains from children
-        let domains = _.object(_.map(['x','y'], k => {
-            return [k, props.domain[k] || _.compact(_.pluck(allChartOptions, `domain.${k}`))]
+        let domains = _.fromPairs(_.map(['x','y'], k => {
+            return [k, props.domain[k] || _.compact(_.map(allChartOptions, `domain.${k}`))]
         }));
         // if user has passed in custom ticks or label values, extend the domain to ensure they are all are included
         ['x','y'].forEach(k => {
@@ -220,14 +186,14 @@ const XYPlot = React.createClass({
             });
         });
         // use spacing from props if provided, else calculated spacings from children
-        const spacings = _.pluck(allChartOptions, 'spacing').map(spacing => {
+        const spacings = _.map(allChartOptions, 'spacing').map(spacing => {
             return _.defaults({}, spacing, props.spacing);
         });
 
         _.assign(this, {domains, spacings});
     },
     initLabelFormats(props) {
-        this.labelFormat = _.object(_.map(['x', 'y'], k => {
+        this.labelFormat = _.fromPairs(_.map(['x', 'y'], k => {
             const axisType = props.axisType[k];
             // use given format if provided
             return (_.isObject(props.labelFormat) && _.has(props.labelFormat, k)) ? [k, props.labelFormat[k]] :
@@ -376,9 +342,10 @@ const XYPlot = React.createClass({
 
                 let newMargin = _(requiredMargin)
                     .map((v,k) => [k, _.has(origMargin, k) ? origMargin[k] : v])
-                    .object().value();
+                    .fromPairs()
+                    .value();
 
-                isDone = _.all(_.keys(margin), k => margin[k] === newMargin[k]);
+                isDone = _.every(_.keys(margin), k => margin[k] === newMargin[k]);
                 //console.log('calculated margin', newMargin);
                 margin = newMargin;
                 scaleWidth = width - (margin.left + margin.right + padding.left + padding.right);
@@ -703,8 +670,8 @@ const ChartAxis = React.createClass({
     },
     getDefaultProps() {
         return {
-            padding: DEFAULTS.spacing,
-            emptyLabel: DEFAULTS.emptyLabel
+            padding: {},
+            emptyLabel: "Unknown"
         }
     },
     render() {
@@ -862,4 +829,19 @@ function measureAxisLabels(xProps, yProps, xAxisLabelProps, yAxisLabelProps) {
     return labelBoxes;
 }
 
-export default XYPlot;
+// use resolveObjectProps HOC to resolve partially specified XY-type and direction-type object props
+// into their fully specified forms
+// todo: don't hardcode these - use tcomb?
+const xyKeys = [
+    'axisType', 'domain', 'nice', 'invertAxis', 'tickCount', 'ticks', 'tickLength',
+    'labelValues', 'labelFormat', 'labelPadding', 'showLabels', 'showGrid', 'showTicks', 'showZero',
+    'axisLabel', 'axisLabelAlign', 'axisLabelPadding'
+];
+const dirKeys = ['margin', 'padding', 'spacing'];
+
+const XYPlotResolved = _.flow([
+  _.partial(resolveObjectProps, _, xyKeys, ['x', 'y']),
+  _.partial(resolveObjectProps, _, dirKeys, ['top', 'bottom', 'left', 'right'])
+])(XYPlot);
+
+export default XYPlotResolved;

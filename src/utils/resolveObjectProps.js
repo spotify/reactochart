@@ -61,15 +61,19 @@ function resolveProp(prop, objKeys, defaultProp) {
 
 export default function resolveObjectProps(ComposedComponent, propKeys, objKeys) {
   return class extends React.Component {
-    static defaultProps = ComposedComponent.defaultProps;
+    // attach static reference to default props so that we can compose multiple resolveObjectProps wrappers,
+    // but don't call it defaultProps, to avoid actually triggering the default behavior
+    static _defaultProps = ComposedComponent.defaultProps;
 
     render() {
-      const defaultProps = ComposedComponent.defaultProps || {};
+      const defaultProps = ComposedComponent.defaultProps || ComposedComponent._defaultProps || {};
       
       const resolvedProps = _.fromPairs(propKeys.map(k => {
         // ensure ComposedComponent has good default for this prop
-        invariant(_.has(defaultProps, k), errs.missingDefault(ComposedComponent, k, objKeys));
-        invariant(hasSome(defaultProps[k], objKeys), errs.badDefault(ComposedComponent, k, objKeys));
+        invariant(
+          _.isUndefined(defaultProps[k]) || _.isObject(defaultProps[k]),
+          errs.badDefault(ComposedComponent, k, objKeys)
+        );
 
         const resolved = resolveProp(this.props[k], objKeys, defaultProps[k]);
         return [k, resolved];

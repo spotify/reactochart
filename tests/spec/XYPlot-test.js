@@ -1,9 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import d3 from 'd3';
 
 import {expect} from 'chai';
-
 
 import {XYPlot, LineChart} from '../../src/index.js';
 
@@ -12,19 +12,16 @@ const getXYArrayValue = { // accessors for (X, Y) data from simple arrays that l
     y: d => d[1]
 };
 
-
 describe('XYPlot', () => {
-    //jsdom();
-
     it('renders SVG with given width & height (or a default)', () => {
         const chart = TestUtils.renderIntoDocument(<XYPlot width={600} height={800} />);
-        const node = chart.getDOMNode();
+        const node = TestUtils.findRenderedDOMComponentWithTag(chart, 'svg');
         expect(node.tagName.toLowerCase()).to.equal('svg');
         expect(node.getAttribute('width')).to.equal('600');
         expect(node.getAttribute('height')).to.equal('800');
 
         const chart2 = TestUtils.renderIntoDocument(<XYPlot />);
-        const node2 = chart2.getDOMNode();
+        const node2 = TestUtils.findRenderedDOMComponentWithTag(chart2, 'svg');
         expect(node2.tagName.toLowerCase()).to.equal('svg');
         expect(parseInt(node2.getAttribute('width'))).to.be.a('number').and.to.be.above(0);
         expect(parseInt(node2.getAttribute('height'))).to.be.a('number').and.to.be.above(0);

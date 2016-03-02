@@ -229,7 +229,7 @@ const BarChart = React.createClass({
                 const [width, height] = isVertical ? [barThickness, barLength] : [barLength, barThickness];
                 const key = `chart-bar-${i}`;
 
-                if(!_.all([x, y, width, height], _.isFinite)) return null;
+                if(!_.every([x, y, width, height], _.isFinite)) return null;
                 return <rect {...{className, key, x, y, width, height, onMouseEnter, onMouseMove, onMouseLeave}} />
             })}
         </g>;
@@ -258,7 +258,7 @@ const BarChart = React.createClass({
                     const barThickness = Math.round(scale.x(xEndAccessor(d))) - barX;
                     const className = `chart-bar chart-bar-${orientation} ${getClass ? classAccessor(d) : ''}`;
                     const key = `chart-bar-${i}`;
-                    if(!_.all([barX, barY, barThickness, barLength], _.isFinite)) return null;
+                    if(!_.every([barX, barY, barThickness, barLength], _.isFinite)) return null;
 
                     return <rect
                         x={barX}
@@ -287,7 +287,7 @@ const BarChart = React.createClass({
                     const barThickness = Math.round(scale.y(yAccessor(d))) - barY;
                     const className = `chart-bar chart-bar-${orientation} ${getClass ? classAccessor(d) : ''}`;
                     const key = `chart-bar-${i}`;
-                    if(!_.all([barX, barY, barThickness, barLength], _.isFinite)) return null;
+                    if(!_.every([barX, barY, barThickness, barLength], _.isFinite)) return null;
 
                     return <rect
                         x={barX}
