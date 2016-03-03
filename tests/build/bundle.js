@@ -131,8 +131,59 @@
 	
 	
 	  var XYResolved = (0, _resolveObjectProps2.default)(XYPropTest, ['domain', 'axisType'], ['x', 'y']);
-	  var XYResolvedBad = (0, _resolveObjectProps2.default)(XYPropTest, ['domain', 'axisType', 'foo'], ['x', 'y']);
-	  var XYResolvedMissing = (0, _resolveObjectProps2.default)(XYPropTest, ['domain', 'axisType', 'missing'], ['x', 'y']);
+	
+	  it('resolves incompletely-specified object props into fully-specified objects using defaultProps', function () {
+	    var props = {
+	      domain: { x: [53, 442] },
+	      axisType: { y: "mimsy" }
+	    };
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYResolved, props));
+	    var resolved = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, XYPropTest);
+	
+	    (0, _chai.expect)(resolved.props.domain.y).to.equal(XYPropTest.defaultProps.domain.y);
+	    (0, _chai.expect)(resolved.props.axisType.x).to.equal(XYPropTest.defaultProps.axisType.x);
+	    (0, _chai.expect)(resolved.props.domain.x).to.equal(props.domain.x);
+	    (0, _chai.expect)(resolved.props.axisType.y).to.equal(props.axisType.y);
+	  });
+	
+	  it('resolves single values into fully-specified objects', function () {
+	    var props = {
+	      domain: 0,
+	      axisType: "uffish"
+	    };
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYResolved, props));
+	    var resolved = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, XYPropTest);
+	
+	    _lodash2.default.forEach(props, function (value, key) {
+	      (0, _chai.expect)(resolved.props[key]).to.deep.equal({ x: value, y: value });
+	    });
+	  });
+	
+	  it('uses defaultProps normally for undefined object props', function () {
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYResolved, null));
+	    var resolved = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, XYPropTest);
+	    var defaultProps = XYPropTest.defaultProps;
+	
+	
+	    _lodash2.default.keys(defaultProps).forEach(function (k) {
+	      (0, _chai.expect)(resolved.props[k]).to.equal(defaultProps[k]);
+	      (0, _chai.expect)(resolved.props[k]).to.deep.equal(defaultProps[k]);
+	    });
+	  });
+	
+	  it('passes fully-specified object props through', function () {
+	    var props = {
+	      domain: { x: [99, 199], y: [88, 188] },
+	      axisType: { x: "brillig", y: "slithy" }
+	    };
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYResolved, props));
+	    var resolved = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, XYPropTest);
+	
+	    _lodash2.default.keys(props).forEach(function (k) {
+	      (0, _chai.expect)(resolved.props[k]).to.equal(props[k]);
+	      (0, _chai.expect)(resolved.props[k]).to.deep.equal(props[k]);
+	    });
+	  });
 	
 	  it('passes other props through', function () {
 	    var props = {
@@ -151,57 +202,11 @@
 	    });
 	  });
 	
-	  it('passes fully-specified object props through', function () {
-	    var props = {
-	      domain: { x: [99, 199], y: [88, 188] },
-	      axisType: { x: "brillig", y: "slithy" }
-	    };
-	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYResolved, props));
-	    var resolved = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, XYPropTest);
-	
-	    _lodash2.default.keys(props).forEach(function (k) {
-	      (0, _chai.expect)(resolved.props[k]).to.equal(props[k]);
-	      (0, _chai.expect)(resolved.props[k]).to.deep.equal(props[k]);
-	    });
-	  });
-	
-	  it('uses defaultProps normally for undefined object props', function () {
-	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYResolved, null));
-	    var resolved = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, XYPropTest);
-	    var defaultProps = XYPropTest.defaultProps;
-	
-	
-	    _lodash2.default.keys(defaultProps).forEach(function (k) {
-	      (0, _chai.expect)(resolved.props[k]).to.be.equal(defaultProps[k]);
-	      (0, _chai.expect)(resolved.props[k]).to.deep.equal(defaultProps[k]);
-	    });
-	  });
-	
-	  it('resolves incompletely-specified object props into fully-specified objects using defaultProps', function () {
-	    var props = {
-	      domain: { x: [53, 442] },
-	      axisType: { y: "mimsy" }
-	    };
-	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYResolved, props));
-	    var resolved = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, XYPropTest);
-	
-	    (0, _chai.expect)(resolved.props.domain.y).to.be.equal(XYPropTest.defaultProps.domain.y);
-	    (0, _chai.expect)(resolved.props.axisType.x).to.be.equal(XYPropTest.defaultProps.axisType.x);
-	    (0, _chai.expect)(resolved.props.domain.x).to.be.equal(props.domain.x);
-	    (0, _chai.expect)(resolved.props.axisType.y).to.be.equal(props.axisType.y);
-	  });
-	
-	  it('resolves single values into fully-specified objects using defaultProps', function () {
-	    var props = {
-	      domain: 0,
-	      axisType: "uffish"
-	    };
-	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYResolved, props));
-	    var resolved = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, XYPropTest);
-	
-	    _lodash2.default.forEach(props, function (value, key) {
-	      (0, _chai.expect)(resolved.props[key]).to.deep.equal({ x: value, y: value });
-	    });
+	  it('throws if a defaultProp is incorrectly shaped', function () {
+	    var XYResolvedBad = (0, _resolveObjectProps2.default)(XYPropTest, ['domain', 'axisType', 'foo'], ['x', 'y']);
+	    (0, _chai.expect)(function () {
+	      _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYResolvedBad, null));
+	    }).to.throw(Error);
 	  });
 	});
 
@@ -43104,9 +43109,6 @@
 	*/
 	
 	var errs = {
-	  missingDefault: function missingDefault(Component, key, objKeys) {
-	    return 'Missing defaultProp in ' + componentName(Component) + ': resolveObjectProps requires that ' + ('all {' + objKeys.join(',') + '}-shaped props have a defaultProp; Prop \'' + key + '\' does not have one');
-	  },
 	  badDefault: function badDefault(Component, key, objKeys) {
 	    return 'Bad defaultProp in ' + componentName(Component) + ': Prop \'' + key + '\' is expected to be a ' + ('{' + objKeys.join(',') + '}-shaped object, but it has a defaultProp which is not this shape.');
 	  }
@@ -43132,8 +43134,9 @@
 	  // for partially specified objects, use default for the other (unspecified) values
 	  if (hasSome(prop, objKeys)) return _lodash2.default.defaults(prop, defaultProp);
 	  // for single values, create an object with the same value for each expected key
+	  return _lodash2.default.isUndefined(prop) ? defaultProp :
 	  // for undefined prop values, return the entire defaultProp
-	  return _lodash2.default.isUndefined(prop) ? defaultProp : _lodash2.default.fromPairs(objKeys.map(function (k) {
+	  _lodash2.default.fromPairs(objKeys.map(function (k) {
 	    return [k, prop];
 	  }));
 	}
@@ -43152,14 +43155,18 @@
 	
 	    _createClass(_class, [{
 	      key: 'render',
+	
+	
+	      // todo: smart shouldComponentUpdate with 1-level deep equality check?
+	
 	      value: function render() {
 	        var _this2 = this;
 	
 	        var defaultProps = ComposedComponent.defaultProps || ComposedComponent._defaultProps || {};
 	
 	        var resolvedProps = _lodash2.default.fromPairs(propKeys.map(function (k) {
-	          // ensure ComposedComponent has good default for this prop
-	          (0, _invariant2.default)(_lodash2.default.isUndefined(defaultProps[k]) || _lodash2.default.isObject(defaultProps[k]), errs.badDefault(ComposedComponent, k, objKeys));
+	          (0, _invariant2.default)( // ensure ComposedComponent has undefined or good default for each prop
+	          _lodash2.default.isUndefined(defaultProps[k]) || _lodash2.default.isObject(defaultProps[k]), errs.badDefault(ComposedComponent, k, objKeys));
 	
 	          var resolved = resolveProp(_this2.props[k], objKeys, defaultProps[k]);
 	          return [k, resolved];

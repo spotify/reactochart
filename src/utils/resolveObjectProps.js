@@ -28,10 +28,6 @@ import invariant from 'invariant';
 */
 
 const errs = {
-  missingDefault: (Component, key, objKeys) => {
-    return `Missing defaultProp in ${componentName(Component)}: resolveObjectProps requires that ` +
-      `all {${objKeys.join(',')}}-shaped props have a defaultProp; Prop '${key}' does not have one`;
-  },
   badDefault: (Component, key, objKeys) => {
     return `Bad defaultProp in ${componentName(Component)}: Prop '${key}' is expected to be a ` +
       `{${objKeys.join(',')}}-shaped object, but it has a defaultProp which is not this shape.`;
@@ -54,8 +50,8 @@ function resolveProp(prop, objKeys, defaultProp) {
   // for partially specified objects, use default for the other (unspecified) values
   if(hasSome(prop, objKeys)) return _.defaults(prop, defaultProp);
   // for single values, create an object with the same value for each expected key
-  // for undefined prop values, return the entire defaultProp
   return _.isUndefined(prop) ? defaultProp :
+    // for undefined prop values, return the entire defaultProp
     _.fromPairs(objKeys.map(k => [k, prop]));
 }
 
@@ -65,12 +61,13 @@ export default function resolveObjectProps(ComposedComponent, propKeys, objKeys)
     // but don't call it defaultProps, to avoid actually triggering the default behavior
     static _defaultProps = ComposedComponent.defaultProps;
 
+    // todo: smart shouldComponentUpdate with 1-level deep equality check?
+
     render() {
       const defaultProps = ComposedComponent.defaultProps || ComposedComponent._defaultProps || {};
       
       const resolvedProps = _.fromPairs(propKeys.map(k => {
-        // ensure ComposedComponent has good default for this prop
-        invariant(
+        invariant( // ensure ComposedComponent has undefined or good default for each prop
           _.isUndefined(defaultProps[k]) || _.isObject(defaultProps[k]),
           errs.badDefault(ComposedComponent, k, objKeys)
         );
