@@ -1,9 +1,10 @@
-require('./spec/resolveObjectProps-test');
+//require('./spec/resolveObjectProps.spec');
+require('./spec/resolveXYScales.spec');
 
-require('./spec/LineChart-test');
-require('./spec/XYPlot-test');
-
-require('./spec/examples-test');
+//require('./spec/LineChart.spec');
+//require('./spec/XYPlot.spec');
+//
+//require('./spec/examples.spec');
 
 // run mocha
 (function() {

@@ -22,10 +22,11 @@ import invariant from 'invariant';
  * // then you can use <BoxThing> with incompletely specified props:
  * render() { return <BoxThing margin={5} padding={top: 10, bottom: 20} />; }
  *
+ * @param {Component} Component - The React Component (class) which should be wrapped by this HOC
  * @param {string[]} propKeys - A list of keys for all the object props it is expected to resolve.
  * @param {string[]} objKeys - A list of keys for which values will be resolved on each object prop (object shape).
  * @returns {Component} - A Component which auto-resolves the specified object props.
-*/
+ */
 
 const errs = {
   badDefault: (Component, key, objKeys) => {
