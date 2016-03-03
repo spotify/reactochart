@@ -3,3 +3,4 @@ node_modules
 *.sublime-*
 .DS_Store
 Thumbs.db
+npm-debug.log

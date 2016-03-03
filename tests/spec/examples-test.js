@@ -3,16 +3,19 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import {expect} from 'chai';
 
-import {examples} from '../../examples/src/main'
-
-//import {XYPlot, LineChart} from '../../src';
-//import resolveObjectProps from '../../src/utils/resolveObjectProps';
+import {examples} from '../../examples/src/Examples.jsx';
 
 describe('examples', () => {
-  it('renders the examples', () => {
-    examples.forEach(example => {
+  it('has examples', () => {
+    expect(examples.length).to.be.at.least(1);
+  });
+
+  examples.forEach(example => {
+    it(`renders the ${example.title} example`, () => {
       const ExampleComponent = example.Component;
       const wrapped = TestUtils.renderIntoDocument(<ExampleComponent />);
-    })
-  });
+      var svg = TestUtils.scryRenderedDOMComponentsWithTag(wrapped, 'svg');
+      expect(svg.length).to.be.at.least(1);
+    });
+  })
 });

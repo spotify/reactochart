@@ -1,7 +1,9 @@
+require('./spec/resolveObjectProps-test');
+
 require('./spec/LineChart-test');
 require('./spec/XYPlot-test');
-require('./spec/resolveObjectProps-test');
-//require('./spec/examples-test');
+
+require('./spec/examples-test');
 
 // run mocha
 (function() {

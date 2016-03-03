@@ -53,14 +53,6 @@
 
 	'use strict';
 	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.App = exports.examples = undefined;
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	//_.extend(window, {Perf, numeral});
-	
 	__webpack_require__(2);
 	
 	var _react = __webpack_require__(6);
@@ -79,817 +71,15 @@
 	
 	var _numeral2 = _interopRequireDefault(_numeral);
 	
-	var _src = __webpack_require__(167);
-	
-	var _util = __webpack_require__(272);
+	var _Examples = __webpack_require__(167);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
-	// sample ordinal data
-	var ordinalData = ['Always', 'Usually', 'Sometimes', 'Rarely', 'Never'];
-	var ordinalData2 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-	
-	var timeData = _.range(ordinalData.length).map(function (i) {
-	    return new Date(+new Date() + i * 24 * 60 * 60 * 1000);
-	});
-	var timeData2 = _.range(ordinalData.length).map(function (i) {
-	    return new Date(+new Date() - i * 2 * 24 * 60 * 60 * 1000);
-	});
-	
-	var randomSequences = [(0, _util.randomWalkSeries)(500, 100, 3), (0, _util.randomWalkSeries)(500), (0, _util.randomWalkSeries)(500, -100, 4)];
-	
-	var randomBars = [(0, _util.randomWalkSeries)(21, 0, 5)];
-	
-	var randomScatter = [_.zip((0, _util.randomWalk)(20, 100), (0, _util.randomWalk)(20, 100)), _.zip((0, _util.randomWalk)(3000, 10000), (0, _util.randomWalk)(3000, 10000)), _.zip((0, _util.randomWalk)(50, 100), (0, _util.randomWalk)(50, 100)), _.zip((0, _util.randomWalk)(100, 100), (0, _util.randomWalk)(100, 100)), _.zip((0, _util.randomWalk)(200, 100), (0, _util.randomWalk)(200, 100))];
-	
-	var randomBarData = {
-	    valueValue: (0, _util.randomWalkSeries)(20, 0, 5)
-	};
-	var randomBarData2 = {
-	    numberNumber: _.zip(_.range(0, 21), (0, _util.randomWalk)(21, 1000, 10000)),
-	    numberOrdinal: _.zip((0, _util.randomWalk)(ordinalData.length, 5), ordinalData),
-	    numberTime: _.zip((0, _util.randomWalk)(timeData.length, 5), timeData),
-	
-	    //ordinalOrdinal: ordinalData.map(d => [d, _.sample(ordinalData2)]),
-	    ordinalOrdinal: _.zip(ordinalData, ordinalData2),
-	    ordinalTime: _.zip(ordinalData, timeData),
-	
-	    timeTime: _.zip(timeData, timeData2)
-	};
-	//console.log(randomBarData2);
-	
-	var variableBins = _.range(0, 12).reduce(function (bins, i) {
-	    var lastBinEnd = bins.length ? _.last(bins)[1] : 0;
-	    //return bins.concat([[lastBinEnd, lastBinEnd + _.random(5, 20)]])
-	    return bins.concat([[lastBinEnd, lastBinEnd + i]]);
-	}, []);
-	
-	var rangeValueData = {
-	    numberNumber: _.zip(variableBins, (0, _util.randomWalk)(variableBins.length, 10000, 10000))
-	};
-	
-	var barTickData = {
-	    numberNumber: randomBarData2.numberNumber.map(function (d) {
-	        return [d[0], d[1] + _.random(-5000, 5000)];
-	    }),
-	    numberRangeNumber: rangeValueData.numberNumber.map(function (d) {
-	        return [d[0], d[1] + _.random(-5000, 5000)];
-	    })
-	};
-	//console.log('rangeValue', rangeValueData);
-	
-	var normalDistribution = d3.random.normal(0);
-	//const randomNormal = _.times(1000, normalDistribution);
-	var randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.random.normal(3, 0.5)));
-	
-	var emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
-	// end fake data
-	
-	var getXYArrayValue = {
-	    // accessors for getting (X, Y) data from simple arrays-of-arrays that look like [[x, y], [x, y]]
-	    x: function x(d) {
-	        return d[0];
-	    },
-	    y: function y(d) {
-	        return d[1];
-	    }
-	};
-	
-	var PieChartExample = _react2.default.createClass({
-	    displayName: 'PieChartExample',
-	    getInitialState: function getInitialState() {
-	        return { sinVal: 0 };
-	    },
-	    componentWillMount: function componentWillMount() {
-	        var _this = this;
-	
-	        this.interval = setInterval(function () {
-	            return _this.setState({ // why? because fun!
-	                sinVal: Math.min(Math.abs(Math.cos(new Date() * .001) * Math.sin(new Date() * .0011) + 1), 2)
-	            });
-	        }, 20);
-	    },
-	    componentWillUnmount: function componentWillUnmount() {
-	        clearInterval(this.interval);
-	    },
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(_src.PieChart, { data: [45, 35, 20] }),
-	            _react2.default.createElement(_src.PieChart, {
-	                data: [10, 20, 30],
-	                radius: 100,
-	                holeRadius: 50,
-	                margin: 20,
-	                markerLineValue: 20
-	            }),
-	            _react2.default.createElement(_src.PieChart, {
-	                data: [42],
-	                total: 100,
-	                radius: 80,
-	                holeRadius: 50,
-	                centerLabel: '42%'
-	            }),
-	            _react2.default.createElement(_src.PieChart, {
-	                data: [this.state.sinVal],
-	                total: 2,
-	                radius: 200,
-	                holeRadius: 50,
-	                centerLabel: (this.state.sinVal * 50).toFixed(0)
-	            })
-	        );
-	    }
-	});
-	
-	var ScatterPlotExample = _react2.default.createClass({
-	    displayName: 'ScatterPlotExample',
-	    render: function render() {
-	        var rectangleSymbol = _react2.default.createElement('rect', { width: 5, height: 5, fill: 'rebeccapurple' });
-	        var triangleSymbol = _react2.default.createElement(
-	            'svg',
-	            null,
-	            _react2.default.createElement('polygon', { points: '0,0 8,0 4,8', style: { fill: 'darkgreen' } })
-	        );
-	        var randomEmoji = function randomEmoji(d, i) {
-	            return _.sample(emojis);
-	        };
-	
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                _src.XYPlot,
-	                { width: 700, height: 500, axisLabel: { x: "TIME", y: "EMOJI" } },
-	                _react2.default.createElement(_src.ScatterPlot, {
-	                    data: randomScatter[1],
-	                    getValue: { x: 0, y: 1 },
-	                    pointSymbol: randomEmoji,
-	                    pointOffset: [0, 2]
-	                })
-	            )
-	        );
-	    }
-	});
-	
-	var LineChartExample = _react2.default.createClass({
-	    displayName: 'LineChartExample',
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                _src.XYPlot,
-	                { width: 700 },
-	                _react2.default.createElement(_src.LineChart, {
-	                    data: _.range(-10, 10, 0.01),
-	                    getValue: { x: null, y: function y(n) {
-	                            return Math.sin(n);
-	                        } }
-	                }),
-	                _react2.default.createElement(_src.LineChart, {
-	                    data: _.range(-10, 10, 0.01),
-	                    getValue: {
-	                        x: null,
-	                        y: function y(n) {
-	                            return Math.sin(Math.pow(Math.abs(n), Math.abs(n * .18))) * Math.cos(n);
-	                        }
-	                    }
-	                }),
-	                _react2.default.createElement(_src.LineChart, {
-	                    data: _.range(-10, 10, 0.01),
-	                    getValue: {
-	                        x: null,
-	                        y: function y(n) {
-	                            return Math.sin(n * 0.5) * Math.cos(n);
-	                        }
-	                    }
-	                })
-	            )
-	        );
-	    }
-	});
-	
-	var InteractiveLineExample = _react2.default.createClass({
-	    displayName: 'InteractiveLineExample',
-	    getInitialState: function getInitialState() {
-	        return {
-	            hoveredXYPlotData: null
-	        };
-	    },
-	    onMouseMoveXYPlot: function onMouseMoveXYPlot(d, event) {
-	        this.setState({ hoveredXYPlotData: d });
-	    },
-	    render: function render() {
-	        var hoveredXYPlotData = this.state.hoveredXYPlotData;
-	
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            hoveredXYPlotData ? _react2.default.createElement(
-	                'div',
-	                null,
-	                hoveredXYPlotData[0] + ', ' + hoveredXYPlotData[1]
-	            ) : _react2.default.createElement(
-	                'div',
-	                null,
-	                'Hover over the chart to show values'
-	            ),
-	            _react2.default.createElement(
-	                _src.XYPlot,
-	                { width: 700, height: 400, onMouseMove: this.onMouseMoveXYPlot },
-	                _react2.default.createElement(_src.LineChart, { data: randomSequences[0], getValue: { x: 0, y: 1 } }),
-	                _react2.default.createElement(_src.LineChart, { data: randomSequences[1], getValue: { x: 0, y: 1 } }),
-	                _react2.default.createElement(_src.LineChart, { data: randomSequences[2], getValue: { x: 0, y: 1 } })
-	            )
-	        );
-	    }
-	});
-	
-	var HistogramExample = _react2.default.createClass({
-	    displayName: 'HistogramExample',
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { margin: { left: 40, right: 8 }, width: 700, height: 300 },
-	                    _react2.default.createElement(_src.Histogram, {
-	                        data: randomNormal, getValue: { x: null }
-	                    }),
-	                    _react2.default.createElement(_src.KernelDensityEstimation, {
-	                        data: randomNormal, getValue: { x: null }, bandwidth: 0.5
-	                    }),
-	                    _react2.default.createElement(_src.KernelDensityEstimation, {
-	                        data: randomNormal, getValue: { x: null }, bandwidth: 0.1
-	                    }),
-	                    _react2.default.createElement(_src.KernelDensityEstimation, {
-	                        data: randomNormal, getValue: { x: null }, bandwidth: 2
-	                    })
-	                )
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    {
-	                        margin: { left: 40, right: 8 },
-	                        width: 700, height: 40,
-	                        showGrid: false,
-	                        showLabels: false,
-	                        showTicks: false
-	                    },
-	                    _react2.default.createElement(_src.ScatterPlot, {
-	                        data: randomNormal,
-	                        getValue: {
-	                            x: null,
-	                            y: function y() {
-	                                return Math.random();
-	                            }
-	                        },
-	                        pointRadius: 1
-	                    })
-	                )
-	            )
-	        );
-	    }
-	});
-	
-	var CustomTicksExample = _react2.default.createClass({
-	    displayName: 'CustomTicksExample',
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                _src.XYPlot,
-	                {
-	                    width: 300, height: 300,
-	                    ticks: {
-	                        x: [0, 1, 2, 4, 8, 16],
-	                        y: [-8000, -3000, 0, 10000, 5000, 40000]
-	                    }
-	                },
-	                _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 0, y: 1 } })
-	            )
-	        );
-	    }
-	});
-	
-	var CustomAxisLabelsExample = _react2.default.createClass({
-	    displayName: 'CustomAxisLabelsExample',
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                _src.XYPlot,
-	                {
-	                    width: 500, height: 300,
-	                    ticks: {
-	                        x: [0, 1, 2, 4, 8, 16],
-	                        y: [-8000, -3000, 0, 10000, 5000, 20000]
-	                    },
-	                    labelValues: {
-	                        x: [0, 1, 3, 9, 12],
-	                        y: [-5000, -2000, 0, 8000, 3000, 16000]
-	                    },
-	                    showZero: { y: true }
-	                },
-	                _react2.default.createElement(_src.BarChart, {
-	                    data: randomBarData2.numberNumber,
-	                    getValue: { x: 0, y: 1 },
-	                    barThickness: 20
-	                })
-	            )
-	        );
-	    }
-	});
-	
-	var CustomChildExample = _react2.default.createClass({
-	    displayName: 'CustomChildExample',
-	    getInitialState: function getInitialState() {
-	        return {
-	            hoveredYVal: null
-	        };
-	    },
-	    onMouseMoveChart: function onMouseMoveChart(hovered, e, options) {
-	        console.log(hovered, e, options);
-	        var chartYVal = options.chartYVal;
-	
-	        this.setState({ hoveredYVal: chartYVal });
-	    },
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                _src.XYPlot,
-	                {
-	                    width: 200, height: 200,
-	                    axisType: { y: 'ordinal' },
-	                    padding: { bottom: 20, top: 20 },
-	                    showTicks: { x: false, y: false },
-	                    showGrid: { x: false, y: false },
-	                    showLabels: { x: false },
-	                    showXZero: { x: true },
-	                    onMouseMove: this.onMouseMoveChart
-	                },
-	                _react2.default.createElement(CustomSelectionRect, { underAxes: true, hoveredYVal: this.state.hoveredYVal }),
-	                _react2.default.createElement(_src.BarChart, {
-	                    data: randomBarData2.numberOrdinal,
-	                    getValue: { x: 0, y: 1 },
-	                    orientation: 'horizontal',
-	                    barThickness: 20
-	                })
-	            )
-	        );
-	    }
-	});
-	
-	var CustomSelectionRect = _react2.default.createClass({
-	    displayName: 'CustomSelectionRect',
-	    render: function render() {
-	        var _props = this.props;
-	        var scale = _props.scale;
-	        var hoveredYVal = _props.hoveredYVal;
-	
-	        return hoveredYVal ? _react2.default.createElement('rect', {
-	            x: '0',
-	            y: scale.y(hoveredYVal) - 20,
-	            width: '200', height: '40',
-	            underAxes: true,
-	            style: { fill: 'red' }
-	        }) : null;
-	    }
-	});
-	
-	var MultipleXYExample = _react2.default.createClass({
-	    displayName: 'MultipleXYExample',
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                _src.XYPlot,
-	                null,
-	                _react2.default.createElement(_src.BarChart, { data: randomBars[0], getValue: { x: 0, y: 1 } }),
-	                _react2.default.createElement(_src.LineChart, { data: randomBars[0], getValue: { x: 0, y: 1 } }),
-	                _react2.default.createElement(_src.ScatterPlot, { data: randomBars[0], getValue: { x: 0, y: 1 }, pointSymbol: function pointSymbol(d, i) {
-	                        return _.sample(emojis);
-	                    } })
-	            )
-	        );
-	    }
-	});
-	
-	var ValueValueBarExample = _react2.default.createClass({
-	    displayName: 'ValueValueBarExample',
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                'h2',
-	                null,
-	                'Vertical'
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    'Number-Number, Ordinal-Number, Time-Number'
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300 },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 0, y: 1 } })
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'ordinal' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 1, y: 0 } })
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'time' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 1, y: 0 } })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    'Number-Ordinal, Ordinal-Ordinal, Time-Ordinal'
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { y: 'ordinal' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 0, y: 1 } })
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'ordinal' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalOrdinal, getValue: { x: 0, y: 1 } })
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'time', y: 'ordinal' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 1, y: 0 } })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    'Number-Time, Ordinal-Time, Time-Time'
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { y: 'time' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 0, y: 1 } })
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'time' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 0, y: 1 } })
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'time', y: 'time' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.timeTime, getValue: { x: 0, y: 1 } })
-	                )
-	            ),
-	            _react2.default.createElement(
-	                'h2',
-	                null,
-	                'Horizontal'
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    'Number-Number, Ordinal-Number, Date-Number'
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300 },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { y: 'ordinal' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 0, y: 1 }, orientation: 'horizontal' })
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { y: 'time' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 0, y: 1 }, orientation: 'horizontal' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    'Number-Ordinal, Ordinal-Ordinal, Date-Ordinal'
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'ordinal' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'ordinal' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalOrdinal, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'ordinal', y: 'time' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 0, y: 1 }, orientation: 'horizontal' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    'Number-Time, Ordinal-Time, Time-Time'
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'time' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'time', y: 'ordinal' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 300, height: 300, axisType: { x: 'time', y: 'time' } },
-	                    _react2.default.createElement(_src.BarChart, { data: randomBarData2.timeTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
-	                )
-	            )
-	        );
-	    }
-	});
-	
-	var RangeValueBarExample = _react2.default.createClass({
-	    displayName: 'RangeValueBarExample',
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                'h2',
-	                null,
-	                'Vertical'
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 400, height: 300 },
-	                    _react2.default.createElement(_src.BarChart, {
-	                        data: rangeValueData.numberNumber,
-	                        getValue: { x: function x(d) {
-	                                return d[0][0];
-	                            }, y: 1 },
-	                        getEndValue: { x: function x(d) {
-	                                return d[0][1];
-	                            } }
-	                    })
-	                )
-	            ),
-	            _react2.default.createElement(
-	                'h2',
-	                null,
-	                'Horizontal'
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 400, height: 300 },
-	                    _react2.default.createElement(_src.BarChart, {
-	                        data: rangeValueData.numberNumber,
-	                        orientation: 'horizontal',
-	                        getValue: { x: 1, y: function y(d) {
-	                                return d[0][0];
-	                            } },
-	                        getEndValue: { y: function y(d) {
-	                                return d[0][1];
-	                            } }
-	                    })
-	                )
-	            )
-	        );
-	    }
-	});
-	
-	var BarMarkerLineExample = _react2.default.createClass({
-	    displayName: 'BarMarkerLineExample',
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 400, height: 300 },
-	                    _react2.default.createElement(_src.BarChart, {
-	                        data: randomBarData2.numberNumber,
-	                        getValue: { x: 0, y: 1 }
-	                    }),
-	                    _react2.default.createElement(_src.MarkerLineChart, {
-	                        data: barTickData.numberNumber,
-	                        getValue: { x: 0, y: 1 },
-	                        lineLength: 15
-	                    })
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 400, height: 300 },
-	                    _react2.default.createElement(_src.BarChart, {
-	                        data: randomBarData2.numberNumber,
-	                        getValue: { x: 1, y: 0 },
-	                        orientation: 'horizontal' }),
-	                    _react2.default.createElement(_src.MarkerLineChart, {
-	                        data: barTickData.numberNumber,
-	                        getValue: { x: 1, y: 0 },
-	                        lineLength: 15,
-	                        orientation: 'horizontal' })
-	                )
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 400, height: 300 },
-	                    _react2.default.createElement(_src.BarChart, {
-	                        data: rangeValueData.numberNumber,
-	                        getValue: { x: function x(d) {
-	                                return d[0][0];
-	                            }, y: 1 },
-	                        getEndValue: { x: function x(d) {
-	                                return d[0][1];
-	                            } }
-	                    }),
-	                    _react2.default.createElement(_src.MarkerLineChart, {
-	                        data: barTickData.numberRangeNumber,
-	                        getValue: { x: function x(d) {
-	                                return d[0][0];
-	                            }, y: 1 },
-	                        getEndValue: { x: function x(d) {
-	                                return d[0][1];
-	                            } }
-	                    })
-	                ),
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { width: 400, height: 300 },
-	                    _react2.default.createElement(_src.BarChart, {
-	                        data: rangeValueData.numberNumber,
-	                        orientation: 'horizontal',
-	                        getValue: { x: 1, y: function y(d) {
-	                                return d[0][0];
-	                            } },
-	                        getEndValue: { y: function y(d) {
-	                                return d[0][1];
-	                            } }
-	                    }),
-	                    _react2.default.createElement(_src.MarkerLineChart, {
-	                        data: barTickData.numberRangeNumber,
-	                        orientation: 'horizontal',
-	                        getValue: { x: 1, y: function y(d) {
-	                                return d[0][0];
-	                            } },
-	                        getEndValue: { y: function y(d) {
-	                                return d[0][1];
-	                            } }
-	                    })
-	                )
-	            )
-	        );
-	    }
-	});
-	
-	var AxisLabelExample = _react2.default.createClass({
-	    displayName: 'AxisLabelExample',
-	    render: function render() {
-	        var xyProps = { width: 400, height: 300, axisType: { y: 'ordinal' } };
-	        var barChartProps = {
-	            data: randomBarData2.numberOrdinal,
-	            getValue: { x: 0, y: 1 },
-	            orientation: 'horizontal'
-	        };
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                _src.XYPlot,
-	                _extends({}, xyProps, { axisLabel: { x: "Account Age" } }),
-	                _react2.default.createElement(_src.BarChart, barChartProps)
-	            ),
-	            _react2.default.createElement(
-	                _src.XYPlot,
-	                _extends({}, xyProps, { axisLabel: { y: "Active Users" } }),
-	                _react2.default.createElement(_src.BarChart, barChartProps)
-	            ),
-	            _react2.default.createElement(
-	                _src.XYPlot,
-	                _extends({}, xyProps, { axisLabel: { x: "Account Age", y: "Active Users" } }),
-	                _react2.default.createElement(_src.BarChart, barChartProps)
-	            )
-	        );
-	    }
-	});
-	
-	var examples = exports.examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'axisLabels', title: 'Axis Labels', Component: AxisLabelExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample }, { id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }];
-	
-	var App = exports.App = _react2.default.createClass({
-	    displayName: 'App',
-	    getInitialState: function getInitialState() {
-	        return {
-	            visibleExamples: {},
-	            hoveredYVal: null
-	        };
-	    },
-	    toggleExample: function toggleExample(id) {
-	        var isVisible = this.state.visibleExamples[id];
-	        this.setState((0, _reactAddonsUpdate2.default)(this.state, { visibleExamples: _defineProperty({}, id, { $set: !isVisible }) }));
-	    },
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                'h1',
-	                null,
-	                'Reactochart Examples'
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    _src.XYPlot,
-	                    { axisType: { x: 'ordinal' }, margin: 40 },
-	                    _react2.default.createElement(_src.LineChart, {
-	                        data: [['a', 0.5], ['b', 1], ['c', 0.25]],
-	                        getValue: getXYArrayValue
-	                    })
-	                )
-	            ),
-	            this.renderExamples()
-	        );
-	    },
-	    renderExamples: function renderExamples() {
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'example-sections' },
-	            examples.map(this.renderExample)
-	        );
-	    },
-	    renderExample: function renderExample(example) {
-	        var isVisible = this.state.visibleExamples[example.id];
-	        var ExampleComponent = example.Component;
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'example-section example-section-' + example.id, key: '' + example.id },
-	            _react2.default.createElement(
-	                'div',
-	                {
-	                    className: 'example-section-button ' + (isVisible ? 'active' : ''),
-	                    onClick: this.toggleExample.bind(null, example.id)
-	                },
-	                example.title,
-	                _react2.default.createElement(
-	                    'span',
-	                    { className: 'example-arrow' },
-	                    isVisible ? " ▼" : " ►"
-	                )
-	            ),
-	            isVisible ? _react2.default.createElement(
-	                'div',
-	                { className: 'example-section-content' },
-	                _react2.default.createElement(ExampleComponent, null)
-	            ) : null
-	        );
-	    }
-	});
-	
-	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('container'));
+	_reactDom2.default.render(_react2.default.createElement(_Examples.App, null), document.getElementById('container'));
 	
 	//export default App;
+
+	//_.extend(window, {Perf, numeral});
 
 /***/ },
 /* 2 */
@@ -21609,8 +20799,843 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.App = exports.examples = undefined;
 	
-	var _XYPlot = __webpack_require__(168);
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactAddonsUpdate = __webpack_require__(164);
+	
+	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
+	
+	var _numeral = __webpack_require__(166);
+	
+	var _numeral2 = _interopRequireDefault(_numeral);
+	
+	var _src = __webpack_require__(168);
+	
+	var _util = __webpack_require__(273);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	// sample ordinal data
+	var ordinalData = ['Always', 'Usually', 'Sometimes', 'Rarely', 'Never'];
+	var ordinalData2 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+	
+	var timeData = _.range(ordinalData.length).map(function (i) {
+	  return new Date(+new Date() + i * 24 * 60 * 60 * 1000);
+	});
+	var timeData2 = _.range(ordinalData.length).map(function (i) {
+	  return new Date(+new Date() - i * 2 * 24 * 60 * 60 * 1000);
+	});
+	
+	var randomSequences = [(0, _util.randomWalkSeries)(500, 100, 3), (0, _util.randomWalkSeries)(500), (0, _util.randomWalkSeries)(500, -100, 4)];
+	
+	var randomBars = [(0, _util.randomWalkSeries)(21, 0, 5)];
+	
+	var randomScatter = [_.zip((0, _util.randomWalk)(20, 100), (0, _util.randomWalk)(20, 100)), _.zip((0, _util.randomWalk)(3000, 10000), (0, _util.randomWalk)(3000, 10000)), _.zip((0, _util.randomWalk)(50, 100), (0, _util.randomWalk)(50, 100)), _.zip((0, _util.randomWalk)(100, 100), (0, _util.randomWalk)(100, 100)), _.zip((0, _util.randomWalk)(200, 100), (0, _util.randomWalk)(200, 100))];
+	
+	var randomBarData = {
+	  valueValue: (0, _util.randomWalkSeries)(20, 0, 5)
+	};
+	var randomBarData2 = {
+	  numberNumber: _.zip(_.range(0, 21), (0, _util.randomWalk)(21, 1000, 10000)),
+	  numberOrdinal: _.zip((0, _util.randomWalk)(ordinalData.length, 5), ordinalData),
+	  numberTime: _.zip((0, _util.randomWalk)(timeData.length, 5), timeData),
+	
+	  //ordinalOrdinal: ordinalData.map(d => [d, _.sample(ordinalData2)]),
+	  ordinalOrdinal: _.zip(ordinalData, ordinalData2),
+	  ordinalTime: _.zip(ordinalData, timeData),
+	
+	  timeTime: _.zip(timeData, timeData2)
+	};
+	//console.log(randomBarData2);
+	
+	var variableBins = _.range(0, 12).reduce(function (bins, i) {
+	  var lastBinEnd = bins.length ? _.last(bins)[1] : 0;
+	  //return bins.concat([[lastBinEnd, lastBinEnd + _.random(5, 20)]])
+	  return bins.concat([[lastBinEnd, lastBinEnd + i]]);
+	}, []);
+	
+	var rangeValueData = {
+	  numberNumber: _.zip(variableBins, (0, _util.randomWalk)(variableBins.length, 10000, 10000))
+	};
+	
+	var barTickData = {
+	  numberNumber: randomBarData2.numberNumber.map(function (d) {
+	    return [d[0], d[1] + _.random(-5000, 5000)];
+	  }),
+	  numberRangeNumber: rangeValueData.numberNumber.map(function (d) {
+	    return [d[0], d[1] + _.random(-5000, 5000)];
+	  })
+	};
+	//console.log('rangeValue', rangeValueData);
+	
+	var normalDistribution = d3.random.normal(0);
+	//const randomNormal = _.times(1000, normalDistribution);
+	var randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.random.normal(3, 0.5)));
+	
+	var emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
+	// end fake data
+	
+	var getXYArrayValue = {
+	  // accessors for getting (X, Y) data from simple arrays-of-arrays that look like [[x, y], [x, y]]
+	  x: function x(d) {
+	    return d[0];
+	  },
+	  y: function y(d) {
+	    return d[1];
+	  }
+	};
+	
+	var PieChartExample = _react2.default.createClass({
+	  displayName: 'PieChartExample',
+	  getInitialState: function getInitialState() {
+	    return { sinVal: 0 };
+	  },
+	  componentWillMount: function componentWillMount() {
+	    var _this = this;
+	
+	    this.interval = setInterval(function () {
+	      return _this.setState({ // why? because fun!
+	        sinVal: Math.min(Math.abs(Math.cos(new Date() * .001) * Math.sin(new Date() * .0011) + 1), 2)
+	      });
+	    }, 20);
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    clearInterval(this.interval);
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(_src.PieChart, { data: [45, 35, 20] }),
+	      _react2.default.createElement(_src.PieChart, {
+	        data: [10, 20, 30],
+	        radius: 100,
+	        holeRadius: 50,
+	        margin: 20,
+	        markerLineValue: 20
+	      }),
+	      _react2.default.createElement(_src.PieChart, {
+	        data: [42],
+	        total: 100,
+	        radius: 80,
+	        holeRadius: 50,
+	        centerLabel: '42%'
+	      }),
+	      _react2.default.createElement(_src.PieChart, {
+	        data: [this.state.sinVal],
+	        total: 2,
+	        radius: 200,
+	        holeRadius: 50,
+	        centerLabel: (this.state.sinVal * 50).toFixed(0)
+	      })
+	    );
+	  }
+	});
+	
+	var ScatterPlotExample = _react2.default.createClass({
+	  displayName: 'ScatterPlotExample',
+	  render: function render() {
+	    var rectangleSymbol = _react2.default.createElement('rect', { width: 5, height: 5, fill: 'rebeccapurple' });
+	    var triangleSymbol = _react2.default.createElement(
+	      'svg',
+	      null,
+	      _react2.default.createElement('polygon', { points: '0,0 8,0 4,8', style: { fill: 'darkgreen' } })
+	    );
+	    var randomEmoji = function randomEmoji(d, i) {
+	      return _.sample(emojis);
+	    };
+	
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        _src.XYPlot,
+	        { width: 700, height: 500, axisLabel: { x: "TIME", y: "EMOJI" } },
+	        _react2.default.createElement(_src.ScatterPlot, {
+	          data: randomScatter[1],
+	          getValue: { x: 0, y: 1 },
+	          pointSymbol: randomEmoji,
+	          pointOffset: [0, 2]
+	        })
+	      )
+	    );
+	  }
+	});
+	
+	var LineChartExample = _react2.default.createClass({
+	  displayName: 'LineChartExample',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        _src.XYPlot,
+	        { width: 700 },
+	        _react2.default.createElement(_src.LineChart, {
+	          data: _.range(-10, 10, 0.01),
+	          getValue: { x: null, y: function y(n) {
+	              return Math.sin(n);
+	            } }
+	        }),
+	        _react2.default.createElement(_src.LineChart, {
+	          data: _.range(-10, 10, 0.01),
+	          getValue: {
+	            x: null,
+	            y: function y(n) {
+	              return Math.sin(Math.pow(Math.abs(n), Math.abs(n * .18))) * Math.cos(n);
+	            }
+	          }
+	        }),
+	        _react2.default.createElement(_src.LineChart, {
+	          data: _.range(-10, 10, 0.01),
+	          getValue: {
+	            x: null,
+	            y: function y(n) {
+	              return Math.sin(n * 0.5) * Math.cos(n);
+	            }
+	          }
+	        })
+	      )
+	    );
+	  }
+	});
+	
+	var InteractiveLineExample = _react2.default.createClass({
+	  displayName: 'InteractiveLineExample',
+	  getInitialState: function getInitialState() {
+	    return {
+	      hoveredXYPlotData: null
+	    };
+	  },
+	  onMouseMoveXYPlot: function onMouseMoveXYPlot(d, event) {
+	    this.setState({ hoveredXYPlotData: d });
+	  },
+	  render: function render() {
+	    var hoveredXYPlotData = this.state.hoveredXYPlotData;
+	
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      hoveredXYPlotData ? _react2.default.createElement(
+	        'div',
+	        null,
+	        hoveredXYPlotData[0] + ', ' + hoveredXYPlotData[1]
+	      ) : _react2.default.createElement(
+	        'div',
+	        null,
+	        'Hover over the chart to show values'
+	      ),
+	      _react2.default.createElement(
+	        _src.XYPlot,
+	        { width: 700, height: 400, onMouseMove: this.onMouseMoveXYPlot },
+	        _react2.default.createElement(_src.LineChart, { data: randomSequences[0], getValue: { x: 0, y: 1 } }),
+	        _react2.default.createElement(_src.LineChart, { data: randomSequences[1], getValue: { x: 0, y: 1 } }),
+	        _react2.default.createElement(_src.LineChart, { data: randomSequences[2], getValue: { x: 0, y: 1 } })
+	      )
+	    );
+	  }
+	});
+	
+	var HistogramExample = _react2.default.createClass({
+	  displayName: 'HistogramExample',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { margin: { left: 40, right: 8 }, width: 700, height: 300 },
+	          _react2.default.createElement(_src.Histogram, {
+	            data: randomNormal, getValue: { x: null }
+	          }),
+	          _react2.default.createElement(_src.KernelDensityEstimation, {
+	            data: randomNormal, getValue: { x: null }, bandwidth: 0.5
+	          }),
+	          _react2.default.createElement(_src.KernelDensityEstimation, {
+	            data: randomNormal, getValue: { x: null }, bandwidth: 0.1
+	          }),
+	          _react2.default.createElement(_src.KernelDensityEstimation, {
+	            data: randomNormal, getValue: { x: null }, bandwidth: 2
+	          })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          {
+	            margin: { left: 40, right: 8 },
+	            width: 700, height: 40,
+	            showGrid: false,
+	            showLabels: false,
+	            showTicks: false
+	          },
+	          _react2.default.createElement(_src.ScatterPlot, {
+	            data: randomNormal,
+	            getValue: {
+	              x: null,
+	              y: function y() {
+	                return Math.random();
+	              }
+	            },
+	            pointRadius: 1
+	          })
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	var CustomTicksExample = _react2.default.createClass({
+	  displayName: 'CustomTicksExample',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        _src.XYPlot,
+	        {
+	          width: 300, height: 300,
+	          ticks: {
+	            x: [0, 1, 2, 4, 8, 16],
+	            y: [-8000, -3000, 0, 10000, 5000, 40000]
+	          }
+	        },
+	        _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 0, y: 1 } })
+	      )
+	    );
+	  }
+	});
+	
+	var CustomAxisLabelsExample = _react2.default.createClass({
+	  displayName: 'CustomAxisLabelsExample',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        _src.XYPlot,
+	        {
+	          width: 500, height: 300,
+	          ticks: {
+	            x: [0, 1, 2, 4, 8, 16],
+	            y: [-8000, -3000, 0, 10000, 5000, 20000]
+	          },
+	          labelValues: {
+	            x: [0, 1, 3, 9, 12],
+	            y: [-5000, -2000, 0, 8000, 3000, 16000]
+	          },
+	          showZero: { y: true }
+	        },
+	        _react2.default.createElement(_src.BarChart, {
+	          data: randomBarData2.numberNumber,
+	          getValue: { x: 0, y: 1 },
+	          barThickness: 20
+	        })
+	      )
+	    );
+	  }
+	});
+	
+	var CustomChildExample = _react2.default.createClass({
+	  displayName: 'CustomChildExample',
+	  getInitialState: function getInitialState() {
+	    return {
+	      hoveredYVal: null
+	    };
+	  },
+	  onMouseMoveChart: function onMouseMoveChart(hovered, e, options) {
+	    console.log(hovered, e, options);
+	    var chartYVal = options.chartYVal;
+	
+	    this.setState({ hoveredYVal: chartYVal });
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        _src.XYPlot,
+	        {
+	          width: 200, height: 200,
+	          axisType: { y: 'ordinal' },
+	          padding: { bottom: 20, top: 20 },
+	          showTicks: { x: false, y: false },
+	          showGrid: { x: false, y: false },
+	          showLabels: { x: false },
+	          showXZero: { x: true },
+	          onMouseMove: this.onMouseMoveChart
+	        },
+	        _react2.default.createElement(CustomSelectionRect, { underAxes: true, hoveredYVal: this.state.hoveredYVal }),
+	        _react2.default.createElement(_src.BarChart, {
+	          data: randomBarData2.numberOrdinal,
+	          getValue: { x: 0, y: 1 },
+	          orientation: 'horizontal',
+	          barThickness: 20
+	        })
+	      )
+	    );
+	  }
+	});
+	
+	var CustomSelectionRect = _react2.default.createClass({
+	  displayName: 'CustomSelectionRect',
+	  render: function render() {
+	    var _props = this.props;
+	    var scale = _props.scale;
+	    var hoveredYVal = _props.hoveredYVal;
+	
+	    return hoveredYVal ? _react2.default.createElement('rect', {
+	      x: '0',
+	      y: scale.y(hoveredYVal) - 20,
+	      width: '200', height: '40',
+	      underAxes: true,
+	      style: { fill: 'red' }
+	    }) : null;
+	  }
+	});
+	
+	var MultipleXYExample = _react2.default.createClass({
+	  displayName: 'MultipleXYExample',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        _src.XYPlot,
+	        null,
+	        _react2.default.createElement(_src.BarChart, { data: randomBars[0], getValue: { x: 0, y: 1 } }),
+	        _react2.default.createElement(_src.LineChart, { data: randomBars[0], getValue: { x: 0, y: 1 } }),
+	        _react2.default.createElement(_src.ScatterPlot, { data: randomBars[0], getValue: { x: 0, y: 1 }, pointSymbol: function pointSymbol(d, i) {
+	            return _.sample(emojis);
+	          } })
+	      )
+	    );
+	  }
+	});
+	
+	var ValueValueBarExample = _react2.default.createClass({
+	  displayName: 'ValueValueBarExample',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        'Vertical'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'Number-Number, Ordinal-Number, Time-Number'
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300 },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 0, y: 1 } })
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { x: 'ordinal' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 1, y: 0 } })
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { x: 'time' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 1, y: 0 } })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'Number-Ordinal, Ordinal-Ordinal, Time-Ordinal'
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { y: 'ordinal' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 0, y: 1 } })
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { x: 'ordinal', y: 'ordinal' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalOrdinal, getValue: { x: 0, y: 1 } })
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { x: 'time', y: 'ordinal' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 1, y: 0 } })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'Number-Time, Ordinal-Time, Time-Time'
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { y: 'time' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 0, y: 1 } })
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { x: 'ordinal', y: 'time' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 0, y: 1 } })
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { x: 'time', y: 'time' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.timeTime, getValue: { x: 0, y: 1 } })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        'Horizontal'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'Number-Number, Ordinal-Number, Date-Number'
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300 },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberNumber, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { y: 'ordinal' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 0, y: 1 }, orientation: 'horizontal' })
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { y: 'time' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 0, y: 1 }, orientation: 'horizontal' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'Number-Ordinal, Ordinal-Ordinal, Date-Ordinal'
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { x: 'ordinal' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberOrdinal, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { x: 'ordinal', y: 'ordinal' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalOrdinal, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { x: 'ordinal', y: 'time' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 0, y: 1 }, orientation: 'horizontal' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          'Number-Time, Ordinal-Time, Time-Time'
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { x: 'time' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.numberTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { x: 'time', y: 'ordinal' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.ordinalTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 300, height: 300, axisType: { x: 'time', y: 'time' } },
+	          _react2.default.createElement(_src.BarChart, { data: randomBarData2.timeTime, getValue: { x: 1, y: 0 }, orientation: 'horizontal' })
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	var RangeValueBarExample = _react2.default.createClass({
+	  displayName: 'RangeValueBarExample',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        'Vertical'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 400, height: 300 },
+	          _react2.default.createElement(_src.BarChart, {
+	            data: rangeValueData.numberNumber,
+	            getValue: { x: function x(d) {
+	                return d[0][0];
+	              }, y: 1 },
+	            getEndValue: { x: function x(d) {
+	                return d[0][1];
+	              } }
+	          })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        'Horizontal'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 400, height: 300 },
+	          _react2.default.createElement(_src.BarChart, {
+	            data: rangeValueData.numberNumber,
+	            orientation: 'horizontal',
+	            getValue: { x: 1, y: function y(d) {
+	                return d[0][0];
+	              } },
+	            getEndValue: { y: function y(d) {
+	                return d[0][1];
+	              } }
+	          })
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	var BarMarkerLineExample = _react2.default.createClass({
+	  displayName: 'BarMarkerLineExample',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 400, height: 300 },
+	          _react2.default.createElement(_src.BarChart, {
+	            data: randomBarData2.numberNumber,
+	            getValue: { x: 0, y: 1 }
+	          }),
+	          _react2.default.createElement(_src.MarkerLineChart, {
+	            data: barTickData.numberNumber,
+	            getValue: { x: 0, y: 1 },
+	            lineLength: 15
+	          })
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 400, height: 300 },
+	          _react2.default.createElement(_src.BarChart, {
+	            data: randomBarData2.numberNumber,
+	            getValue: { x: 1, y: 0 },
+	            orientation: 'horizontal' }),
+	          _react2.default.createElement(_src.MarkerLineChart, {
+	            data: barTickData.numberNumber,
+	            getValue: { x: 1, y: 0 },
+	            lineLength: 15,
+	            orientation: 'horizontal' })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 400, height: 300 },
+	          _react2.default.createElement(_src.BarChart, {
+	            data: rangeValueData.numberNumber,
+	            getValue: { x: function x(d) {
+	                return d[0][0];
+	              }, y: 1 },
+	            getEndValue: { x: function x(d) {
+	                return d[0][1];
+	              } }
+	          }),
+	          _react2.default.createElement(_src.MarkerLineChart, {
+	            data: barTickData.numberRangeNumber,
+	            getValue: { x: function x(d) {
+	                return d[0][0];
+	              }, y: 1 },
+	            getEndValue: { x: function x(d) {
+	                return d[0][1];
+	              } }
+	          })
+	        ),
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { width: 400, height: 300 },
+	          _react2.default.createElement(_src.BarChart, {
+	            data: rangeValueData.numberNumber,
+	            orientation: 'horizontal',
+	            getValue: { x: 1, y: function y(d) {
+	                return d[0][0];
+	              } },
+	            getEndValue: { y: function y(d) {
+	                return d[0][1];
+	              } }
+	          }),
+	          _react2.default.createElement(_src.MarkerLineChart, {
+	            data: barTickData.numberRangeNumber,
+	            orientation: 'horizontal',
+	            getValue: { x: 1, y: function y(d) {
+	                return d[0][0];
+	              } },
+	            getEndValue: { y: function y(d) {
+	                return d[0][1];
+	              } }
+	          })
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	var AxisLabelExample = _react2.default.createClass({
+	  displayName: 'AxisLabelExample',
+	  render: function render() {
+	    var xyProps = { width: 400, height: 300, axisType: { y: 'ordinal' } };
+	    var barChartProps = {
+	      data: randomBarData2.numberOrdinal,
+	      getValue: { x: 0, y: 1 },
+	      orientation: 'horizontal'
+	    };
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        _src.XYPlot,
+	        _extends({}, xyProps, { axisLabel: { x: "Account Age" } }),
+	        _react2.default.createElement(_src.BarChart, barChartProps)
+	      ),
+	      _react2.default.createElement(
+	        _src.XYPlot,
+	        _extends({}, xyProps, { axisLabel: { y: "Active Users" } }),
+	        _react2.default.createElement(_src.BarChart, barChartProps)
+	      ),
+	      _react2.default.createElement(
+	        _src.XYPlot,
+	        _extends({}, xyProps, { axisLabel: { x: "Account Age", y: "Active Users" } }),
+	        _react2.default.createElement(_src.BarChart, barChartProps)
+	      )
+	    );
+	  }
+	});
+	
+	var examples = exports.examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'axisLabels', title: 'Axis Labels', Component: AxisLabelExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample }, { id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }];
+	
+	var App = exports.App = _react2.default.createClass({
+	  displayName: 'App',
+	  getInitialState: function getInitialState() {
+	    return {
+	      visibleExamples: {},
+	      hoveredYVal: null
+	    };
+	  },
+	  toggleExample: function toggleExample(id) {
+	    var isVisible = this.state.visibleExamples[id];
+	    this.setState((0, _reactAddonsUpdate2.default)(this.state, { visibleExamples: _defineProperty({}, id, { $set: !isVisible }) }));
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        'Reactochart Examples'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _src.XYPlot,
+	          { axisType: { x: 'ordinal' }, margin: 40 },
+	          _react2.default.createElement(_src.LineChart, {
+	            data: [['a', 0.5], ['b', 1], ['c', 0.25]],
+	            getValue: getXYArrayValue
+	          })
+	        )
+	      ),
+	      this.renderExamples()
+	    );
+	  },
+	  renderExamples: function renderExamples() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'example-sections' },
+	      examples.map(this.renderExample)
+	    );
+	  },
+	  renderExample: function renderExample(example) {
+	    var isVisible = this.state.visibleExamples[example.id];
+	    var ExampleComponent = example.Component;
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'example-section example-section-' + example.id, key: '' + example.id },
+	      _react2.default.createElement(
+	        'div',
+	        {
+	          className: 'example-section-button ' + (isVisible ? 'active' : ''),
+	          onClick: this.toggleExample.bind(null, example.id)
+	        },
+	        example.title,
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'example-arrow' },
+	          isVisible ? " ▼" : " ►"
+	        )
+	      ),
+	      isVisible ? _react2.default.createElement(
+	        'div',
+	        { className: 'example-section-content' },
+	        _react2.default.createElement(ExampleComponent, null)
+	      ) : null
+	    );
+	  }
+	});
+	
+	//export default App;
+
+/***/ },
+/* 168 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _XYPlot = __webpack_require__(169);
 	
 	Object.defineProperty(exports, 'XYPlot', {
 	  enumerable: true,
@@ -21619,7 +21644,7 @@
 	  }
 	});
 	
-	var _LineChart = __webpack_require__(263);
+	var _LineChart = __webpack_require__(264);
 	
 	Object.defineProperty(exports, 'LineChart', {
 	  enumerable: true,
@@ -21628,7 +21653,7 @@
 	  }
 	});
 	
-	var _BarChart = __webpack_require__(264);
+	var _BarChart = __webpack_require__(265);
 	
 	Object.defineProperty(exports, 'BarChart', {
 	  enumerable: true,
@@ -21637,7 +21662,7 @@
 	  }
 	});
 	
-	var _MarkerLineChart = __webpack_require__(265);
+	var _MarkerLineChart = __webpack_require__(266);
 	
 	Object.defineProperty(exports, 'MarkerLineChart', {
 	  enumerable: true,
@@ -21646,7 +21671,7 @@
 	  }
 	});
 	
-	var _ScatterPlot = __webpack_require__(266);
+	var _ScatterPlot = __webpack_require__(267);
 	
 	Object.defineProperty(exports, 'ScatterPlot', {
 	  enumerable: true,
@@ -21655,7 +21680,7 @@
 	  }
 	});
 	
-	var _Histogram = __webpack_require__(267);
+	var _Histogram = __webpack_require__(268);
 	
 	Object.defineProperty(exports, 'Histogram', {
 	  enumerable: true,
@@ -21664,7 +21689,7 @@
 	  }
 	});
 	
-	var _KernelDensityEstimation = __webpack_require__(268);
+	var _KernelDensityEstimation = __webpack_require__(269);
 	
 	Object.defineProperty(exports, 'KernelDensityEstimation', {
 	  enumerable: true,
@@ -21673,7 +21698,7 @@
 	  }
 	});
 	
-	var _AreaHeatmap = __webpack_require__(269);
+	var _AreaHeatmap = __webpack_require__(270);
 	
 	Object.defineProperty(exports, 'AreaHeatmap', {
 	  enumerable: true,
@@ -21682,7 +21707,7 @@
 	  }
 	});
 	
-	var _PieChart = __webpack_require__(270);
+	var _PieChart = __webpack_require__(271);
 	
 	Object.defineProperty(exports, 'PieChart', {
 	  enumerable: true,
@@ -21691,7 +21716,7 @@
 	  }
 	});
 	
-	var _TreeMap = __webpack_require__(271);
+	var _TreeMap = __webpack_require__(272);
 	
 	Object.defineProperty(exports, 'TreeMap', {
 	  enumerable: true,
@@ -21703,7 +21728,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 168 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21722,17 +21747,17 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(169);
+	var _lodash = __webpack_require__(170);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d2 = __webpack_require__(171);
+	var _d2 = __webpack_require__(172);
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
-	var _util = __webpack_require__(172);
+	var _util = __webpack_require__(173);
 	
-	var _moment = __webpack_require__(173);
+	var _moment = __webpack_require__(174);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -21740,11 +21765,11 @@
 	
 	var _numeral2 = _interopRequireDefault(_numeral);
 	
-	var _server = __webpack_require__(260);
+	var _server = __webpack_require__(261);
 	
 	var _server2 = _interopRequireDefault(_server);
 	
-	var _resolveObjectProps = __webpack_require__(261);
+	var _resolveObjectProps = __webpack_require__(262);
 	
 	var _resolveObjectProps2 = _interopRequireDefault(_resolveObjectProps);
 	
@@ -22744,7 +22769,7 @@
 	exports.default = XYPlotResolved;
 
 /***/ },
-/* 169 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -37681,10 +37706,10 @@
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(170)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(171)(module), (function() { return this; }())))
 
 /***/ },
-/* 170 */
+/* 171 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -37700,7 +37725,7 @@
 
 
 /***/ },
-/* 171 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
@@ -47255,7 +47280,7 @@
 	}();
 
 /***/ },
-/* 172 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47272,7 +47297,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(169);
+	var _lodash = __webpack_require__(170);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -47313,7 +47338,7 @@
 	}
 
 /***/ },
-/* 173 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
@@ -47584,7 +47609,7 @@
 	                module && module.exports) {
 	            try {
 	                oldLocale = globalLocale._abbr;
-	                __webpack_require__(174)("./" + name);
+	                __webpack_require__(175)("./" + name);
 	                // because defineLocale currently also sets the global locale, we
 	                // want to undo that for lazy loaded locales
 	                locale_locales__getSetGlobalLocale(oldLocale);
@@ -50511,183 +50536,183 @@
 	    return _moment;
 	
 	}));
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(170)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(171)(module)))
 
 /***/ },
-/* 174 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./af": 175,
-		"./af.js": 175,
-		"./ar": 176,
-		"./ar-ma": 177,
-		"./ar-ma.js": 177,
-		"./ar-sa": 178,
-		"./ar-sa.js": 178,
-		"./ar-tn": 179,
-		"./ar-tn.js": 179,
-		"./ar.js": 176,
-		"./az": 180,
-		"./az.js": 180,
-		"./be": 181,
-		"./be.js": 181,
-		"./bg": 182,
-		"./bg.js": 182,
-		"./bn": 183,
-		"./bn.js": 183,
-		"./bo": 184,
-		"./bo.js": 184,
-		"./br": 185,
-		"./br.js": 185,
-		"./bs": 186,
-		"./bs.js": 186,
-		"./ca": 187,
-		"./ca.js": 187,
-		"./cs": 188,
-		"./cs.js": 188,
-		"./cv": 189,
-		"./cv.js": 189,
-		"./cy": 190,
-		"./cy.js": 190,
-		"./da": 191,
-		"./da.js": 191,
-		"./de": 192,
-		"./de-at": 193,
-		"./de-at.js": 193,
-		"./de.js": 192,
-		"./el": 194,
-		"./el.js": 194,
-		"./en-au": 195,
-		"./en-au.js": 195,
-		"./en-ca": 196,
-		"./en-ca.js": 196,
-		"./en-gb": 197,
-		"./en-gb.js": 197,
-		"./eo": 198,
-		"./eo.js": 198,
-		"./es": 199,
-		"./es.js": 199,
-		"./et": 200,
-		"./et.js": 200,
-		"./eu": 201,
-		"./eu.js": 201,
-		"./fa": 202,
-		"./fa.js": 202,
-		"./fi": 203,
-		"./fi.js": 203,
-		"./fo": 204,
-		"./fo.js": 204,
-		"./fr": 205,
-		"./fr-ca": 206,
-		"./fr-ca.js": 206,
-		"./fr.js": 205,
-		"./fy": 207,
-		"./fy.js": 207,
-		"./gl": 208,
-		"./gl.js": 208,
-		"./he": 209,
-		"./he.js": 209,
-		"./hi": 210,
-		"./hi.js": 210,
-		"./hr": 211,
-		"./hr.js": 211,
-		"./hu": 212,
-		"./hu.js": 212,
-		"./hy-am": 213,
-		"./hy-am.js": 213,
-		"./id": 214,
-		"./id.js": 214,
-		"./is": 215,
-		"./is.js": 215,
-		"./it": 216,
-		"./it.js": 216,
-		"./ja": 217,
-		"./ja.js": 217,
-		"./jv": 218,
-		"./jv.js": 218,
-		"./ka": 219,
-		"./ka.js": 219,
-		"./km": 220,
-		"./km.js": 220,
-		"./ko": 221,
-		"./ko.js": 221,
-		"./lb": 222,
-		"./lb.js": 222,
-		"./lt": 223,
-		"./lt.js": 223,
-		"./lv": 224,
-		"./lv.js": 224,
-		"./me": 225,
-		"./me.js": 225,
-		"./mk": 226,
-		"./mk.js": 226,
-		"./ml": 227,
-		"./ml.js": 227,
-		"./mr": 228,
-		"./mr.js": 228,
-		"./ms": 229,
-		"./ms-my": 230,
-		"./ms-my.js": 230,
-		"./ms.js": 229,
-		"./my": 231,
-		"./my.js": 231,
-		"./nb": 232,
-		"./nb.js": 232,
-		"./ne": 233,
-		"./ne.js": 233,
-		"./nl": 234,
-		"./nl.js": 234,
-		"./nn": 235,
-		"./nn.js": 235,
-		"./pl": 236,
-		"./pl.js": 236,
-		"./pt": 237,
-		"./pt-br": 238,
-		"./pt-br.js": 238,
-		"./pt.js": 237,
-		"./ro": 239,
-		"./ro.js": 239,
-		"./ru": 240,
-		"./ru.js": 240,
-		"./si": 241,
-		"./si.js": 241,
-		"./sk": 242,
-		"./sk.js": 242,
-		"./sl": 243,
-		"./sl.js": 243,
-		"./sq": 244,
-		"./sq.js": 244,
-		"./sr": 245,
-		"./sr-cyrl": 246,
-		"./sr-cyrl.js": 246,
-		"./sr.js": 245,
-		"./sv": 247,
-		"./sv.js": 247,
-		"./ta": 248,
-		"./ta.js": 248,
-		"./th": 249,
-		"./th.js": 249,
-		"./tl-ph": 250,
-		"./tl-ph.js": 250,
-		"./tr": 251,
-		"./tr.js": 251,
-		"./tzl": 252,
-		"./tzl.js": 252,
-		"./tzm": 253,
-		"./tzm-latn": 254,
-		"./tzm-latn.js": 254,
-		"./tzm.js": 253,
-		"./uk": 255,
-		"./uk.js": 255,
-		"./uz": 256,
-		"./uz.js": 256,
-		"./vi": 257,
-		"./vi.js": 257,
-		"./zh-cn": 258,
-		"./zh-cn.js": 258,
-		"./zh-tw": 259,
-		"./zh-tw.js": 259
+		"./af": 176,
+		"./af.js": 176,
+		"./ar": 177,
+		"./ar-ma": 178,
+		"./ar-ma.js": 178,
+		"./ar-sa": 179,
+		"./ar-sa.js": 179,
+		"./ar-tn": 180,
+		"./ar-tn.js": 180,
+		"./ar.js": 177,
+		"./az": 181,
+		"./az.js": 181,
+		"./be": 182,
+		"./be.js": 182,
+		"./bg": 183,
+		"./bg.js": 183,
+		"./bn": 184,
+		"./bn.js": 184,
+		"./bo": 185,
+		"./bo.js": 185,
+		"./br": 186,
+		"./br.js": 186,
+		"./bs": 187,
+		"./bs.js": 187,
+		"./ca": 188,
+		"./ca.js": 188,
+		"./cs": 189,
+		"./cs.js": 189,
+		"./cv": 190,
+		"./cv.js": 190,
+		"./cy": 191,
+		"./cy.js": 191,
+		"./da": 192,
+		"./da.js": 192,
+		"./de": 193,
+		"./de-at": 194,
+		"./de-at.js": 194,
+		"./de.js": 193,
+		"./el": 195,
+		"./el.js": 195,
+		"./en-au": 196,
+		"./en-au.js": 196,
+		"./en-ca": 197,
+		"./en-ca.js": 197,
+		"./en-gb": 198,
+		"./en-gb.js": 198,
+		"./eo": 199,
+		"./eo.js": 199,
+		"./es": 200,
+		"./es.js": 200,
+		"./et": 201,
+		"./et.js": 201,
+		"./eu": 202,
+		"./eu.js": 202,
+		"./fa": 203,
+		"./fa.js": 203,
+		"./fi": 204,
+		"./fi.js": 204,
+		"./fo": 205,
+		"./fo.js": 205,
+		"./fr": 206,
+		"./fr-ca": 207,
+		"./fr-ca.js": 207,
+		"./fr.js": 206,
+		"./fy": 208,
+		"./fy.js": 208,
+		"./gl": 209,
+		"./gl.js": 209,
+		"./he": 210,
+		"./he.js": 210,
+		"./hi": 211,
+		"./hi.js": 211,
+		"./hr": 212,
+		"./hr.js": 212,
+		"./hu": 213,
+		"./hu.js": 213,
+		"./hy-am": 214,
+		"./hy-am.js": 214,
+		"./id": 215,
+		"./id.js": 215,
+		"./is": 216,
+		"./is.js": 216,
+		"./it": 217,
+		"./it.js": 217,
+		"./ja": 218,
+		"./ja.js": 218,
+		"./jv": 219,
+		"./jv.js": 219,
+		"./ka": 220,
+		"./ka.js": 220,
+		"./km": 221,
+		"./km.js": 221,
+		"./ko": 222,
+		"./ko.js": 222,
+		"./lb": 223,
+		"./lb.js": 223,
+		"./lt": 224,
+		"./lt.js": 224,
+		"./lv": 225,
+		"./lv.js": 225,
+		"./me": 226,
+		"./me.js": 226,
+		"./mk": 227,
+		"./mk.js": 227,
+		"./ml": 228,
+		"./ml.js": 228,
+		"./mr": 229,
+		"./mr.js": 229,
+		"./ms": 230,
+		"./ms-my": 231,
+		"./ms-my.js": 231,
+		"./ms.js": 230,
+		"./my": 232,
+		"./my.js": 232,
+		"./nb": 233,
+		"./nb.js": 233,
+		"./ne": 234,
+		"./ne.js": 234,
+		"./nl": 235,
+		"./nl.js": 235,
+		"./nn": 236,
+		"./nn.js": 236,
+		"./pl": 237,
+		"./pl.js": 237,
+		"./pt": 238,
+		"./pt-br": 239,
+		"./pt-br.js": 239,
+		"./pt.js": 238,
+		"./ro": 240,
+		"./ro.js": 240,
+		"./ru": 241,
+		"./ru.js": 241,
+		"./si": 242,
+		"./si.js": 242,
+		"./sk": 243,
+		"./sk.js": 243,
+		"./sl": 244,
+		"./sl.js": 244,
+		"./sq": 245,
+		"./sq.js": 245,
+		"./sr": 246,
+		"./sr-cyrl": 247,
+		"./sr-cyrl.js": 247,
+		"./sr.js": 246,
+		"./sv": 248,
+		"./sv.js": 248,
+		"./ta": 249,
+		"./ta.js": 249,
+		"./th": 250,
+		"./th.js": 250,
+		"./tl-ph": 251,
+		"./tl-ph.js": 251,
+		"./tr": 252,
+		"./tr.js": 252,
+		"./tzl": 253,
+		"./tzl.js": 253,
+		"./tzm": 254,
+		"./tzm-latn": 255,
+		"./tzm-latn.js": 255,
+		"./tzm.js": 254,
+		"./uk": 256,
+		"./uk.js": 256,
+		"./uz": 257,
+		"./uz.js": 257,
+		"./vi": 258,
+		"./vi.js": 258,
+		"./zh-cn": 259,
+		"./zh-cn.js": 259,
+		"./zh-tw": 260,
+		"./zh-tw.js": 260
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -50700,11 +50725,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 174;
+	webpackContext.id = 175;
 
 
 /***/ },
-/* 175 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50712,7 +50737,7 @@
 	//! author : Werner Mollentze : https://github.com/wernerm
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50781,7 +50806,7 @@
 	}));
 
 /***/ },
-/* 176 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50791,7 +50816,7 @@
 	//! Native plural forms: forabi https://github.com/forabi
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50921,7 +50946,7 @@
 	}));
 
 /***/ },
-/* 177 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50930,7 +50955,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -50984,7 +51009,7 @@
 	}));
 
 /***/ },
-/* 178 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50992,7 +51017,7 @@
 	//! author : Suhail Alkowaileet : https://github.com/xsoh
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51091,14 +51116,14 @@
 	}));
 
 /***/ },
-/* 179 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale  : Tunisian Arabic (ar-tn)
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51152,7 +51177,7 @@
 	}));
 
 /***/ },
-/* 180 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51160,7 +51185,7 @@
 	//! author : topchiyev : https://github.com/topchiyev
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51260,7 +51285,7 @@
 	}));
 
 /***/ },
-/* 181 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51270,7 +51295,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51411,7 +51436,7 @@
 	}));
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51419,7 +51444,7 @@
 	//! author : Krasen Borisov : https://github.com/kraz
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51505,7 +51530,7 @@
 	}));
 
 /***/ },
-/* 183 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51513,7 +51538,7 @@
 	//! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51622,7 +51647,7 @@
 	}));
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51630,7 +51655,7 @@
 	//! author : Thupten N. Chakrishar : https://github.com/vajradog
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51736,7 +51761,7 @@
 	}));
 
 /***/ },
-/* 185 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51744,7 +51769,7 @@
 	//! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51847,7 +51872,7 @@
 	}));
 
 /***/ },
-/* 186 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51856,7 +51881,7 @@
 	//! based on (hr) translation by Bojan Marković
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -51992,7 +52017,7 @@
 	}));
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52000,7 +52025,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52075,7 +52100,7 @@
 	}));
 
 /***/ },
-/* 188 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52083,7 +52108,7 @@
 	//! author : petrbela : https://github.com/petrbela
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52236,7 +52261,7 @@
 	}));
 
 /***/ },
-/* 189 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52244,7 +52269,7 @@
 	//! author : Anatoly Mironov : https://github.com/mirontoli
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52303,7 +52328,7 @@
 	}));
 
 /***/ },
-/* 190 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52311,7 +52336,7 @@
 	//! author : Robert Allen
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52386,7 +52411,7 @@
 	}));
 
 /***/ },
-/* 191 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52394,7 +52419,7 @@
 	//! author : Ulrik Nielsen : https://github.com/mrbase
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52450,7 +52475,7 @@
 	}));
 
 /***/ },
-/* 192 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52459,7 +52484,7 @@
 	//! author: Menelion Elensúle: https://github.com/Oire
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52529,7 +52554,7 @@
 	}));
 
 /***/ },
-/* 193 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52539,7 +52564,7 @@
 	//! author : Martin Groller : https://github.com/MadMG
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52609,7 +52634,7 @@
 	}));
 
 /***/ },
-/* 194 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52617,7 +52642,7 @@
 	//! author : Aggelos Karalias : https://github.com/mehiel
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52707,14 +52732,14 @@
 	}));
 
 /***/ },
-/* 195 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : australian english (en-au)
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52777,7 +52802,7 @@
 	}));
 
 /***/ },
-/* 196 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52785,7 +52810,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52844,7 +52869,7 @@
 	}));
 
 /***/ },
-/* 197 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52852,7 +52877,7 @@
 	//! author : Chris Gedrim : https://github.com/chrisgedrim
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52915,7 +52940,7 @@
 	}));
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52925,7 +52950,7 @@
 	//!          Se ne, bonvolu korekti kaj avizi min por ke mi povas lerni!
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -52992,7 +53017,7 @@
 	}));
 
 /***/ },
-/* 199 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53000,7 +53025,7 @@
 	//! author : Julio Napurí : https://github.com/julionc
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53075,7 +53100,7 @@
 	}));
 
 /***/ },
-/* 200 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53084,7 +53109,7 @@
 	//! improvements : Illimar Tambek : https://github.com/ragulka
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53159,7 +53184,7 @@
 	}));
 
 /***/ },
-/* 201 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53167,7 +53192,7 @@
 	//! author : Eneko Illarramendi : https://github.com/eillarra
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53227,7 +53252,7 @@
 	}));
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53235,7 +53260,7 @@
 	//! author : Ebrahim Byagowi : https://github.com/ebraminio
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53336,7 +53361,7 @@
 	}));
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53344,7 +53369,7 @@
 	//! author : Tarmo Aidantausta : https://github.com/bleadof
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53447,7 +53472,7 @@
 	}));
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53455,7 +53480,7 @@
 	//! author : Ragnar Johannesen : https://github.com/ragnar123
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53511,7 +53536,7 @@
 	}));
 
 /***/ },
-/* 205 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53519,7 +53544,7 @@
 	//! author : John Fischer : https://github.com/jfroffice
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53577,7 +53602,7 @@
 	}));
 
 /***/ },
-/* 206 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53585,7 +53610,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53639,7 +53664,7 @@
 	}));
 
 /***/ },
-/* 207 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53647,7 +53672,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53714,7 +53739,7 @@
 	}));
 
 /***/ },
-/* 208 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53722,7 +53747,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53793,7 +53818,7 @@
 	}));
 
 /***/ },
-/* 209 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53803,7 +53828,7 @@
 	//! author : Tal Ater : https://github.com/TalAter
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -53879,7 +53904,7 @@
 	}));
 
 /***/ },
-/* 210 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53887,7 +53912,7 @@
 	//! author : Mayank Singhal : https://github.com/mayanksinghal
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54006,7 +54031,7 @@
 	}));
 
 /***/ },
-/* 211 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54014,7 +54039,7 @@
 	//! author : Bojan Marković : https://github.com/bmarkovic
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54150,7 +54175,7 @@
 	}));
 
 /***/ },
-/* 212 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54158,7 +54183,7 @@
 	//! author : Adam Brunner : https://github.com/adambrunner
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54263,7 +54288,7 @@
 	}));
 
 /***/ },
-/* 213 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54271,7 +54296,7 @@
 	//! author : Armendarabyan : https://github.com/armendarabyan
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54378,7 +54403,7 @@
 	}));
 
 /***/ },
-/* 214 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54387,7 +54412,7 @@
 	//! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54465,7 +54490,7 @@
 	}));
 
 /***/ },
-/* 215 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54473,7 +54498,7 @@
 	//! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54596,7 +54621,7 @@
 	}));
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54605,7 +54630,7 @@
 	//! author: Mattia Larentis: https://github.com/nostalgiaz
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54670,7 +54695,7 @@
 	}));
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54678,7 +54703,7 @@
 	//! author : LI Long : https://github.com/baryon
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54739,7 +54764,7 @@
 	}));
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54748,7 +54773,7 @@
 	//! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54826,7 +54851,7 @@
 	}));
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54834,7 +54859,7 @@
 	//! author : Irakli Janiashvili : https://github.com/irakli-janiashvili
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54933,7 +54958,7 @@
 	}));
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54941,7 +54966,7 @@
 	//! author : Kruy Vanna : https://github.com/kruyvanna
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -54995,7 +55020,7 @@
 	}));
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55007,7 +55032,7 @@
 	//! - Jeeeyul Lee <jeeeyul@gmail.com>
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55067,7 +55092,7 @@
 	}));
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55075,7 +55100,7 @@
 	//! author : mweimerskirch : https://github.com/mweimerskirch, David Raison : https://github.com/kwisatz
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55205,7 +55230,7 @@
 	}));
 
 /***/ },
-/* 223 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55213,7 +55238,7 @@
 	//! author : Mindaugas Mozūras : https://github.com/mmozuras
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55334,7 +55359,7 @@
 	}));
 
 /***/ },
-/* 224 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55343,7 +55368,7 @@
 	//! author : Jānis Elmeris : https://github.com/JanisE
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55434,7 +55459,7 @@
 	}));
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55442,7 +55467,7 @@
 	//! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55547,7 +55572,7 @@
 	}));
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55555,7 +55580,7 @@
 	//! author : Borislav Mickov : https://github.com/B0k0
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55641,7 +55666,7 @@
 	}));
 
 /***/ },
-/* 227 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55649,7 +55674,7 @@
 	//! author : Floyd Pink : https://github.com/floydpink
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55716,7 +55741,7 @@
 	}));
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55724,7 +55749,7 @@
 	//! author : Harshad Kale : https://github.com/kalehv
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55841,7 +55866,7 @@
 	}));
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55849,7 +55874,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -55927,7 +55952,7 @@
 	}));
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55935,7 +55960,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56013,7 +56038,7 @@
 	}));
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56021,7 +56046,7 @@
 	//! author : Squar team, mysquar.com
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56110,7 +56135,7 @@
 	}));
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56119,7 +56144,7 @@
 	//!           Sigurd Gartmann : https://github.com/sigurdga
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56175,7 +56200,7 @@
 	}));
 
 /***/ },
-/* 233 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56183,7 +56208,7 @@
 	//! author : suvash : https://github.com/suvash
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56302,7 +56327,7 @@
 	}));
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56310,7 +56335,7 @@
 	//! author : Joris Röling : https://github.com/jjupiter
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56377,7 +56402,7 @@
 	}));
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56385,7 +56410,7 @@
 	//! author : https://github.com/mechuwind
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56441,7 +56466,7 @@
 	}));
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56449,7 +56474,7 @@
 	//! author : Rafal Hirsz : https://github.com/evoL
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56550,7 +56575,7 @@
 	}));
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56558,7 +56583,7 @@
 	//! author : Jefferson : https://github.com/jalex79
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56618,7 +56643,7 @@
 	}));
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56626,7 +56651,7 @@
 	//! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56682,7 +56707,7 @@
 	}));
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56691,7 +56716,7 @@
 	//! author : Valentin Agachi : https://github.com/avaly
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56760,7 +56785,7 @@
 	}));
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56769,7 +56794,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56928,7 +56953,7 @@
 	}));
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56936,7 +56961,7 @@
 	//! author : Sampath Sitinamaluwa : https://github.com/sampathsris
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -56997,7 +57022,7 @@
 	}));
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57006,7 +57031,7 @@
 	//! based on work of petrbela : https://github.com/petrbela
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57159,7 +57184,7 @@
 	}));
 
 /***/ },
-/* 243 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57167,7 +57192,7 @@
 	//! author : Robert Sedovšek : https://github.com/sedovsek
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57323,7 +57348,7 @@
 	}));
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57333,7 +57358,7 @@
 	//! author : Oerd Cukalla : https://github.com/oerd (fixes)
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57396,7 +57421,7 @@
 	}));
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57404,7 +57429,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57508,7 +57533,7 @@
 	}));
 
 /***/ },
-/* 246 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57516,7 +57541,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57620,7 +57645,7 @@
 	}));
 
 /***/ },
-/* 247 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57628,7 +57653,7 @@
 	//! author : Jens Alm : https://github.com/ulmus
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57691,7 +57716,7 @@
 	}));
 
 /***/ },
-/* 248 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57699,7 +57724,7 @@
 	//! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57790,7 +57815,7 @@
 	}));
 
 /***/ },
-/* 249 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57798,7 +57823,7 @@
 	//! author : Kridsada Thanabulpong : https://github.com/sirn
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57859,7 +57884,7 @@
 	}));
 
 /***/ },
-/* 250 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57867,7 +57892,7 @@
 	//! author : Dan Hagman
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -57925,7 +57950,7 @@
 	}));
 
 /***/ },
-/* 251 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57934,7 +57959,7 @@
 	//!           Burak Yiğit Kaya: https://github.com/BYK
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -58019,7 +58044,7 @@
 	}));
 
 /***/ },
-/* 252 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58027,7 +58052,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v with the help of Iustì Canun
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -58108,7 +58133,7 @@
 	}));
 
 /***/ },
-/* 253 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58116,7 +58141,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -58170,7 +58195,7 @@
 	}));
 
 /***/ },
-/* 254 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58178,7 +58203,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -58232,7 +58257,7 @@
 	}));
 
 /***/ },
-/* 255 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58241,7 +58266,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -58389,7 +58414,7 @@
 	}));
 
 /***/ },
-/* 256 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58397,7 +58422,7 @@
 	//! author : Sardor Muminov : https://github.com/muminoff
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -58451,7 +58476,7 @@
 	}));
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58459,7 +58484,7 @@
 	//! author : Bang Nguyen : https://github.com/bangnk
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -58521,7 +58546,7 @@
 	}));
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58530,7 +58555,7 @@
 	//! author : Zeno Zeng : https://github.com/zenozeng
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -58652,7 +58677,7 @@
 	}));
 
 /***/ },
-/* 259 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58660,7 +58685,7 @@
 	//! author : Ben : https://github.com/ben-lin
 	
 	(function (global, factory) {
-	    true ? factory(__webpack_require__(173)) :
+	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -58757,7 +58782,7 @@
 	}));
 
 /***/ },
-/* 260 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58766,7 +58791,7 @@
 
 
 /***/ },
-/* 261 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58779,7 +58804,7 @@
 	
 	exports.default = resolveObjectProps;
 	
-	var _lodash = __webpack_require__(169);
+	var _lodash = __webpack_require__(170);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -58787,7 +58812,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _invariant = __webpack_require__(262);
+	var _invariant = __webpack_require__(263);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -58899,7 +58924,7 @@
 	}
 
 /***/ },
-/* 262 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -58957,7 +58982,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58972,15 +58997,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(169);
+	var _lodash = __webpack_require__(170);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d2 = __webpack_require__(171);
+	var _d2 = __webpack_require__(172);
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
-	var _util = __webpack_require__(172);
+	var _util = __webpack_require__(173);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -59057,7 +59082,7 @@
 	exports.default = LineChart;
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59074,15 +59099,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(169);
+	var _lodash = __webpack_require__(170);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d2 = __webpack_require__(171);
+	var _d2 = __webpack_require__(172);
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
-	var _util = __webpack_require__(172);
+	var _util = __webpack_require__(173);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -59486,7 +59511,7 @@
 	exports.default = BarChart;
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59503,15 +59528,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(169);
+	var _lodash = __webpack_require__(170);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d2 = __webpack_require__(171);
+	var _d2 = __webpack_require__(172);
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
-	var _util = __webpack_require__(172);
+	var _util = __webpack_require__(173);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -59701,7 +59726,7 @@
 	exports.default = MarkerLineChart;
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59716,15 +59741,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(169);
+	var _lodash = __webpack_require__(170);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d2 = __webpack_require__(171);
+	var _d2 = __webpack_require__(172);
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
-	var _util = __webpack_require__(172);
+	var _util = __webpack_require__(173);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -59841,7 +59866,7 @@
 	exports.default = ScatterPlot;
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59856,19 +59881,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(169);
+	var _lodash = __webpack_require__(170);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d = __webpack_require__(171);
+	var _d = __webpack_require__(172);
 	
 	var _d2 = _interopRequireDefault(_d);
 	
-	var _BarChart = __webpack_require__(264);
+	var _BarChart = __webpack_require__(265);
 	
 	var _BarChart2 = _interopRequireDefault(_BarChart);
 	
-	var _util = __webpack_require__(172);
+	var _util = __webpack_require__(173);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -59944,7 +59969,7 @@
 	exports.default = Histogram;
 
 /***/ },
-/* 268 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59959,21 +59984,21 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(169);
+	var _lodash = __webpack_require__(170);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d = __webpack_require__(171);
+	var _d = __webpack_require__(172);
 	
 	var _d2 = _interopRequireDefault(_d);
 	
-	var _util = __webpack_require__(172);
+	var _util = __webpack_require__(173);
 	
-	var _BarChart = __webpack_require__(264);
+	var _BarChart = __webpack_require__(265);
 	
 	var _BarChart2 = _interopRequireDefault(_BarChart);
 	
-	var _LineChart = __webpack_require__(263);
+	var _LineChart = __webpack_require__(264);
 	
 	var _LineChart2 = _interopRequireDefault(_LineChart);
 	
@@ -60091,7 +60116,7 @@
 	exports.default = KernelDensityEstimation;
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60106,15 +60131,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(169);
+	var _lodash = __webpack_require__(170);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d2 = __webpack_require__(171);
+	var _d2 = __webpack_require__(172);
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
-	var _util = __webpack_require__(172);
+	var _util = __webpack_require__(173);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -60247,7 +60272,7 @@
 	exports.default = AreaHeatmap;
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60264,15 +60289,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(169);
+	var _lodash = __webpack_require__(170);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d2 = __webpack_require__(171);
+	var _d2 = __webpack_require__(172);
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
-	var _util = __webpack_require__(172);
+	var _util = __webpack_require__(173);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -60503,7 +60528,7 @@
 	exports.default = PieChart;
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60518,15 +60543,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(169);
+	var _lodash = __webpack_require__(170);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d = __webpack_require__(171);
+	var _d = __webpack_require__(172);
 	
 	var _d2 = _interopRequireDefault(_d);
 	
-	var _util = __webpack_require__(172);
+	var _util = __webpack_require__(173);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -60744,7 +60769,7 @@
 	exports.default = TreeMap;
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60755,7 +60780,7 @@
 	exports.randomWalk = randomWalk;
 	exports.randomWalkSeries = randomWalkSeries;
 	
-	var _lodash = __webpack_require__(169);
+	var _lodash = __webpack_require__(170);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
