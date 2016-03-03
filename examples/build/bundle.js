@@ -60322,7 +60322,11 @@
 	        markerLineValue: PropTypes.number,
 	        markerLineClass: PropTypes.string,
 	        markerLineOverhangInner: PropTypes.number,
-	        markerLineOverhangOuter: PropTypes.number
+	        markerLineOverhangOuter: PropTypes.number,
+	
+	        onMouseEnterLine: PropTypes.func,
+	        onMouseMoveLine: PropTypes.func,
+	        onMouseLeaveLine: PropTypes.func
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return DEFAULT_PROPS;
@@ -60335,6 +60339,15 @@
 	    },
 	    onMouseLeaveSlice: function onMouseLeaveSlice(e, d) {
 	        this.props.onMouseLeaveSlice(e, d);
+	    },
+	    onMouseEnterLine: function onMouseEnterLine(e, d) {
+	        this.props.onMouseEnterLine(e, d);
+	    },
+	    onMouseMoveLine: function onMouseMoveLine(e, d) {
+	        this.props.onMouseMoveLine(e, d);
+	    },
+	    onMouseLeaveLine: function onMouseLeaveLine(e, d) {
+	        this.props.onMouseLeaveLine(e, d);
 	    },
 	    render: function render() {
 	        var _this = this;
@@ -60393,13 +60406,35 @@
 	                d: pieSlicePath(startPercent, 1, center, radius, holeRadius),
 	                key: 'pie-slice-empty'
 	            }) : null,
-	            _lodash2.default.isFinite(markerLinePercent) ? _react2.default.createElement('path', {
-	                className: markerLineClass,
-	                d: markerLine(markerLinePercent, center, radius, holeRadius, markerLineOverhangOuter, markerLineOverhangInner),
-	                key: 'pie-slice-marker-line'
-	            }) : null,
+	            _lodash2.default.isFinite(markerLinePercent) ? this.renderMarkerLine(markerLineClass, markerLine(markerLinePercent, center, radius, holeRadius, markerLineOverhangOuter, markerLineOverhangInner), 'pie-slice-marker-line') : null,
 	            this.props.centerLabel ? this.renderCenterLabel(center) : null
 	        );
+	    },
+	    renderMarkerLine: function renderMarkerLine(className, pathData, key) {
+	        var _this2 = this;
+	
+	        var lineD = {
+	            value: this.props.markerLineValue
+	        };
+	
+	        var _map3 = ['onMouseEnterLine', 'onMouseMoveLine', 'onMouseLeaveLine'].map(function (eventName) {
+	            // partially apply this bar's data point as 2nd callback argument
+	            var callback = (0, _util.methodIfFuncProp)(eventName, _this2.props, _this2);
+	            return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, lineD) : null;
+	        });
+	
+	        var _map4 = _slicedToArray(_map3, 3);
+	
+	        var onMouseEnter = _map4[0];
+	        var onMouseMove = _map4[1];
+	        var onMouseLeave = _map4[2];
+	
+	
+	        return _react2.default.createElement('path', _extends({
+	            className: className,
+	            d: pathData,
+	            key: key
+	        }, { onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }));
 	    },
 	    renderCenterLabel: function renderCenterLabel(center) {
 	        var x = center.x;
