@@ -1,4 +1,4 @@
-## WARNING: THIS IS NOT YET PRODUCTION-QUALITY CODE. Docs and Tests are still being written. Use at your own risk. If your project requires composable React charts, we recommend using Victory.
+## WARNING: THIS IS NOT YET PRODUCTION-QUALITY CODE. Docs and Tests are still being written. Use at your own risk. If your project requires composable React charts, we recommend using [Victory](https://github.com/FormidableLabs/victory).
 
 # reactochart
 Charting library for React
