@@ -2,6 +2,18 @@ import _ from 'lodash';
 import React from 'react';
 import invariant from 'invariant';
 
+import {
+  makeAccessor,
+  domainFromDatasets,
+  inferDatasetsType,
+  datasetsFromPropsOrDescendants
+} from 'utils/Data';
+
+import {
+  scaleTypeFromDataType,
+  dataTypeFromScaleType
+} from 'utils/Scale';
+
 /**
  * `resolveXYScales` is a higher-order-component.
  *
@@ -31,8 +43,16 @@ function isValidDomain(domain) {
   return _.isArray(domain) && domain.length;
 }
 function combineDomains(domains) {
+  if(!_.isArray(domains)) return undefined;
   return d3.extent(_.flatten(domains));
 }
+function hasXYDomains(domain) {
+  return _.isObject(domain) && isValidDomain(domain.x) && isValidDomain(domain.y);
+}
+function hasXYScaleTypes(scaleType) {
+  return _.isObject(scaleType) && _.isString(scaleType.x) && _.isString(scaleType.y);
+}
+
 
 function mapStaticOnChildren(children, methodName, args=[]) {
   // returns the result of looping over all children and calling a static method on each one
@@ -61,23 +81,106 @@ function innerRangeY(outerHeight, margin={}) {
 }
 
 
+
+function omitNullUndefined(obj) {
+  return _.omitBy(obj, v => _.isUndefined(v) || _.isNull(v));
+}
+
 export default function resolveXYScales(ComposedComponent) {
   return class extends React.Component {
+    static defaultProps = ComposedComponent.defaultProps;
 
-    _resolveDomain(props) {
-      const propsDomain = props.domain || {};
+    _resolveScaleType(props, Component) {
+      const propsScaleType = props.scaleType || {};
 
-      if(_.every(['x', 'y'], k => isValidDomain(propsDomain[k]))) {
-        // short-circuit if domains provided
-        return propsDomain;
+      // short-circuit if all scale types provided
+      if(hasXYScaleTypes(propsScaleType)) return propsScaleType;
 
-      } else {
-        // call static getDomain on Component to determine remaining domains
-        const childDomain = ComposedComponent.getDomain(props);
-        return _.fromPairs(['x', 'y'].map(k =>
-          [k, isValidDomain(propsDomain[k]) ? propsDomain[k] : childDomain[k]]
-        ));
+      // start with any scale types in props, try to resolve the rest
+      let scaleType = omitNullUndefined(propsScaleType);
+
+      // if Component provides a custom static getScaleType method
+      // use it to determine remaining scale types
+      if(_.isFunction(Component.getScaleType)) {
+        const componentScaleType = omitNullUndefined(Component.getScaleType(props));
+        scaleType = _.assign(componentScaleType, scaleType);
+        if(hasXYScaleTypes(scaleType)) return scaleType;
       }
+
+      // if Component has data or datasets props,
+      // infer the data type, & use that to get scale type
+      if(_.isArray(props.data) || _.isArray(props.datasets)) {
+        const datasets = _.isArray(props.datasets) ? props.datasets : [props.data];
+        const datasetScaleType = _.fromPairs(['x', 'y'].map(k => {
+          // todo if scale type is provided, use it - otherwise will be inferred from data
+          const kAccessor = makeAccessor(_.get(props, `getValue.${k}`));
+          const kDataType = inferDatasetsType(datasets, kAccessor);
+          const kScaleType = scaleTypeFromDataType(kDataType);
+          return [k, kScaleType];
+        }));
+
+        scaleType = _.assign(datasetScaleType, scaleType);
+        return scaleType;
+      }
+
+      // if Component has children,
+      // recurse through descendants to resolve their scale types the same way
+      if(React.Children.count(props.children)) {
+        let childScaleTypes = [];
+        React.Children.forEach(props.children, child => {
+          childScaleTypes = childScaleTypes.concat(this._resolveScaleType(child.props, child.type));
+        });
+
+        return (_.compact(_.uniq(childScaleTypes)).length === 1) ?
+          childScaleTypes[0] : "categorical";
+      }
+    }
+
+    _resolveDomain(props, Component, scaleType) {
+      const propsDomain = props.domain || {};
+      // todo allow passing scale type instead of inferring from data
+
+      // short-circuit if all domains provided
+      if(hasXYDomains(propsDomain)) return propsDomain;
+
+      // start with any domains in props, and try to resolve the rest
+      let domain = omitNullUndefined(propsDomain);
+
+      // if Component provides a custom static getDomain method
+      // use it to determine remaining domains
+      if(_.isFunction(Component.getDomain)) {
+        const componentDomain = omitNullUndefined(Component.getDomain({scaleType, ...props}));
+        domain = _.assign(componentDomain, domain);
+        if(hasXYDomains(domain)) return domain;
+      }
+
+      // if Component has data or datasets props,
+      // use the default domainFromDatasets function to determine a domain from them
+      if(_.isArray(props.data) || _.isArray(props.datasets)) {
+        const datasets = _.isArray(props.datasets) ? props.datasets : [props.data];
+        const datasetDomain = _.fromPairs(['x', 'y'].map(k => {
+          const kAccessor = makeAccessor(_.get(props, `getValue.${k}`));
+          const dataType = dataTypeFromScaleType(scaleType[k]);
+          const kDomain = domainFromDatasets(datasets, kAccessor, dataType);
+          return [k, kDomain];
+        }));
+
+        domain = _.assign(datasetDomain, domain);
+        if(hasXYDomains(domain)) return domain;
+      }
+
+      // if Component has children,
+      // recurse through descendants to resolve their domains the same way,
+      // and combine them into a single domain, if there are multiple
+      if(React.Children.count(props.children)) {
+        let childDomains = [];
+        React.Children.forEach(props.children, child => {
+          childDomains = childDomains.concat(this._resolveDomain(child.props, child.type, scaleType));
+        });
+
+        return combineDomains(_.compact(childDomains));
+      }
+
     }
 
     _resolveMargin(props, scale) {
@@ -104,18 +207,23 @@ export default function resolveXYScales(ComposedComponent) {
       const {props} = this;
       const scaleFromProps = this.props.scale || {};
 
+      // short-circuit if scales provided
+      // todo warn/throw if bad scales are passed
       if(_.every(['x', 'y'], k => isValidScale(scaleFromProps[k])))
-        // short-circuit if scales provided
-        // todo warn/throw if bad scales are passed
         return <ComposedComponent {...this.props} />;
 
       // scales not provided, so we have to resolve them
-      // first resolve the domains
-      const domain = this._resolveDomain(props);
+      // first resolve scale types
+      const scaleType = this._resolveScaleType(props, ComposedComponent);
+      console.log('scaleType', scaleType);
+
+      // then resolve the domains
+      const domain = this._resolveDomain(props, ComposedComponent, scaleType);
       console.log('domain ', domain);
 
       // create a temporary scale with size & domain, which may be used by the Component to calculate the margins
       // (eg. to create and measure labels for the scales)
+      // todo use props margin here if given!!
       const tempRange = {
         x: [0, props.width],
         y: [props.height, 0]
@@ -132,8 +240,6 @@ export default function resolveXYScales(ComposedComponent) {
 
       // margins & size give range
       const range = {
-        //x: [0, this.props.width],
-        //y: [this.props.height, 0]
         x: innerRangeX(props.width, margin),
         y: innerRangeY(props.height, margin)
       };
@@ -147,7 +253,7 @@ export default function resolveXYScales(ComposedComponent) {
       }));
 
       // and pass scales to wrapped component
-      const passedProps = _.assign({scale, margin}, this.props);
+      const passedProps = _.assign({scale, scaleType, margin}, this.props);
       return <ComposedComponent {...passedProps} />;
     }
   }

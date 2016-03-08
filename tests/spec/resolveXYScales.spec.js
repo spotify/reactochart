@@ -12,6 +12,18 @@ class NotImplementedError extends Error {
   }
 }
 
+const innerWidth = (width, margin) => width - ((margin.left || 0) + (margin.right || 0));
+const innerHeight = (height, margin) => height - ((margin.top || 0) + (margin.bottom || 0));
+
+function innerRangeX(outerWidth, margin={}) {
+  const left = margin.left || 0;
+  return [left, left + innerWidth(outerWidth, margin)];
+}
+function innerRangeY(outerHeight, margin={}) {
+  const top = margin.top || 0;
+  return [top + innerHeight(outerHeight, margin), top];
+}
+
 function expectRefAndDeepEqual(a, b) {
   expect(a).to.equal(b);
   expect(a).to.deep.equal(b);
@@ -31,23 +43,56 @@ function expectXYScales(scales) {
   });
 }
 
-const innerWidth = (width, margin) => width - ((margin.left || 0) + (margin.right || 0));
-const innerHeight = (height, margin) => height - ((margin.top || 0) + (margin.bottom || 0));
+function expectXYScaledComponent(rendered, {width, height, scaleType, domain, margin, range}) {
+  // checks that a given rendered component has been created with XY scales/margin
+  // that match the expected domain, range & margin
+  // if range not provided, it should be width/height minus margins
+  range = range || {x: innerRangeX(width, margin), y: innerRangeY(height, margin)};
+  expect(scaleType).to.be.an('object');
 
-function innerRangeX(outerWidth, margin={}) {
-  const left = margin.left || 0;
-  return [left, left + innerWidth(outerWidth, margin)];
-}
-function innerRangeY(outerHeight, margin={}) {
-  const top = margin.top || 0;
-  return [top + innerHeight(outerHeight, margin), top];
+  expect(rendered.props).to.be.an('object');
+  expect(rendered.props.margin).to.deep.equal(margin);
+
+  const renderedScale = rendered.props.scale;
+  expectXYScales(renderedScale);
+  ['x', 'y'].forEach(k => {
+    expect(rendered.props.scaleType[k]).to.equal(scaleType[k]);
+    expect(renderedScale[k].domain()).to.deep.equal(domain[k]);
+    expect(renderedScale[k].range()).to.deep.equal(range[k]);
+  });
 }
 
 describe('resolveXYScales', () => {
+  const testScaleType = {x: 'ordinal', y: 'linear'};
   const testDomain = {x: [-5, 5], y: [0, 10]};
   const testMargin = {top: 10, bottom: 20, left: 30, right: 40};
+  const width = 500;
+  const height = 400;
 
-  class XYChart extends React.Component {
+  // test fixture component classes
+  class ComponentWithChildren extends React.Component {
+    render() { return <div>{this.props.children}</div>; }
+  }
+
+  class XYChart extends ComponentWithChildren {}
+  const ScaledXYChart = resolveXYScales(XYChart);
+
+  class ChartWithCustomScaleType extends ComponentWithChildren {
+    static getScaleType(props) { return testScaleType; }
+  }
+  const ScaledChartWithCustomScaleType = resolveXYScales(ChartWithCustomScaleType);
+
+  class ChartWithCustomDomain extends ComponentWithChildren {
+    static getScaleType(props) { return testDomain; }
+  }
+  const ScaledChartWithCustomDomain = resolveXYScales(ChartWithCustomDomain);
+
+  class ChartWithCustomMargin extends ComponentWithChildren {
+    static getMargin(props) { return testMargin; }
+  }
+  const ScaledChartWithCustomMargin = resolveXYScales(ChartWithCustomMargin);
+
+  class XYPlot extends React.Component {
     static defaultProps = {};
     static getDomain(props) {
       return testDomain;
@@ -56,10 +101,21 @@ describe('resolveXYScales', () => {
       return testMargin;
     }
     render() {
-      return <div></div>;
+      return <div>{this.props.children}</div>;
     }
   }
-  const ScaledXYChart = resolveXYScales(XYChart);
+  const ScaledXYPlot = resolveXYScales(XYPlot);
+
+
+
+  function renderAndGetXYPlot(plotProps, chartProps) {
+    const wrapped = TestUtils.renderIntoDocument(
+      //<ScaledXYChart {...plotProps}><LineChart {...chartProps}/></ScaledXYChart>
+      <ScaledXYPlot {...plotProps} />
+    );
+    return TestUtils.findRenderedComponentWithType(wrapped, XYPlot);
+  }
+
 
   it('passes XY scales and margins through if both are provided', () => {
     const props = {
@@ -69,13 +125,38 @@ describe('resolveXYScales', () => {
       },
       margin: {top: 11, bottom: 21, left: 31, right: 41}
     };
-    const wrapped = TestUtils.renderIntoDocument(<ScaledXYChart {...props} />);
-    const rendered = TestUtils.findRenderedComponentWithType(wrapped, XYChart);
+    const rendered = renderAndGetXYPlot(props);
 
     ['scale', 'margin'].forEach(propKey => {
       expectRefAndDeepEqual(rendered.props[propKey], props[propKey]);
     })
   });
+
+  it('creates scales from scaleType, size, domain & margins', () => {
+    const props = {
+      width, height,
+      scaleType: {x: 'linear', y: 'ordinal'},
+      domain: {x: [-50, 50], y: [-100, 100]},
+      margin: {top: 11, bottom: 22, left: 33, right: 44}
+    };
+    const wrapped = TestUtils.renderIntoDocument(<ScaledXYChart {...props} />);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, XYChart);
+    expectXYScaledComponent(rendered, props);
+  });
+
+  it('infers scaleType from Component.getScaleType, creates scales from size, domain and margins', () => {
+    const props = {
+      width, height,
+      domain: {x: [-50, 50], y: [-100, 100]},
+      margin: {top: 11, bottom: 22, left: 33, right: 44}
+    };
+    const wrapped = TestUtils.renderIntoDocument(<ScaledChartWithCustomScaleType {...props} />);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, ChartWithCustomScaleType);
+    expectXYScaledComponent(rendered, {scaleType: testScaleType, ...props});
+  });
+
+
+
 
   it('resolves XY scales from size, domain and margins', () => {
     const props = {
@@ -84,16 +165,8 @@ describe('resolveXYScales', () => {
       domain: {x: [-50, 50], y: [-100, 100]},
       margin: {top: 11, bottom: 22, left: 33, right: 44}
     };
-    const wrapped = TestUtils.renderIntoDocument(<ScaledXYChart {...props} />);
-    const rendered = TestUtils.findRenderedComponentWithType(wrapped, XYChart);
-
-    expect(rendered.props.margin).to.deep.equal(props.margin);
-    const renderedScale = rendered.props.scale;
-    expectXYScales(renderedScale);
-    expect(renderedScale.x.domain()).to.deep.equal(props.domain.x);
-    expect(renderedScale.y.domain()).to.deep.equal(props.domain.y);
-    expect(renderedScale.x.range()).to.deep.equal(innerRangeX(props.width, props.margin));
-    expect(renderedScale.y.range()).to.deep.equal(innerRangeY(props.height, props.margin));
+    const rendered = renderAndGetXYPlot(props);
+    expectXYScaledComponent(rendered, props);
   });
 
   it('resolves XY scales from size, data and margins', () => {
@@ -104,16 +177,8 @@ describe('resolveXYScales', () => {
       // data doesn't actually matter, since XYChart.getDomain returns a constant
       data: [{x: 10, y: 20}]
     };
-    const wrapped = TestUtils.renderIntoDocument(<ScaledXYChart {...props} />);
-    const rendered = TestUtils.findRenderedComponentWithType(wrapped, XYChart);
-
-    expect(rendered.props.margin).to.equal(props.margin);
-    const renderedScale = rendered.props.scale;
-    expectXYScales(renderedScale);
-    expect(renderedScale.x.domain()).to.deep.equal(testDomain.x);
-    expect(renderedScale.y.domain()).to.deep.equal(testDomain.y);
-    expect(renderedScale.x.range()).to.deep.equal(innerRangeX(props.width, props.margin));
-    expect(renderedScale.y.range()).to.deep.equal(innerRangeY(props.height, props.margin));
+    const rendered = renderAndGetXYPlot(props);
+    expectXYScaledComponent(rendered, {domain: testDomain, ...props});
   });
 
   it('resolves XY scales and margins from data and size', () => {
@@ -123,16 +188,10 @@ describe('resolveXYScales', () => {
       data: [{x: 10, y: 20}]
     };
     const wrapped = TestUtils.renderIntoDocument(<ScaledXYChart {...props} />);
-    const rendered = TestUtils.findRenderedComponentWithType(wrapped, XYChart);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, XYPlot);
 
     expect(rendered.props.margin).to.equal(testMargin);
-    expect(rendered.props.margin).to.deep.equal(testMargin);
-    const renderedScale = rendered.props.scale;
-    expectXYScales(renderedScale);
-    expect(renderedScale.x.domain()).to.deep.equal(testDomain.x);
-    expect(renderedScale.y.domain()).to.deep.equal(testDomain.y);
-    expect(renderedScale.x.range()).to.deep.equal(innerRangeX(props.width, testMargin));
-    expect(renderedScale.y.range()).to.deep.equal(innerRangeY(props.height, testMargin));
+    expectXYScaledComponent(rendered, {margin: testMargin, domain: testDomain, ...props});
   });
 
   it('resolves XY scales and margins from domain and size', () => {
@@ -142,16 +201,10 @@ describe('resolveXYScales', () => {
       domain: {x: [-50, 50], y: [-100, 100]}
     };
     const wrapped = TestUtils.renderIntoDocument(<ScaledXYChart {...props} />);
-    const rendered = TestUtils.findRenderedComponentWithType(wrapped, XYChart);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, XYPlot);
 
     expect(rendered.props.margin).to.equal(testMargin);
-    expect(rendered.props.margin).to.deep.equal(testMargin);
-    const renderedScale = rendered.props.scale;
-    expectXYScales(renderedScale);
-    expect(renderedScale.x.domain()).to.deep.equal(props.domain.x);
-    expect(renderedScale.y.domain()).to.deep.equal(props.domain.y);
-    expect(renderedScale.x.range()).to.deep.equal(innerRangeX(props.width, testMargin));
-    expect(renderedScale.y.range()).to.deep.equal(innerRangeY(props.height, testMargin));
+    expectXYScaledComponent(rendered, {margin: testMargin, ...props});
   });
 
   it('sets margins to zero if they are neither provided nor resolvable', () => {
