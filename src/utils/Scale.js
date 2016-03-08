@@ -18,10 +18,21 @@ export function dataTypeFromScaleType(scaleType) {
   }, scaleType, 'categorical');
 }
 
+export function inferScaleType(scale) {
+  return !(scale.ticks) ? 'ordinal' :
+    _.isDate(scale.domain()[0]) ? 'time' :
+    (scale.base) ? 'log' :
+    (scale.exponent) ? 'pow' :
+    'linear';
+}
+
 export function initScale(type) {
   switch(type) {
     case 'linear': return d3.scale.linear();
     case 'time': return d3.time.scale();
     case 'ordinal': return d3.scale.ordinal();
+    case 'log': return d3.scale.log();
+    case 'pow': return d3.scale.pow();
   }
 }
+
