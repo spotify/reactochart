@@ -2,6 +2,29 @@ import _ from 'lodash';
 import React from 'react';
 
 /**
+ * `makeAccessor` creates an accessor or "getter" function given a variety of options
+ * to be used for retrieving a data value from within an object or array
+ *
+ * If given a function, it is passed through.
+ * If given null or undefined, the getter is the identity function - ie. returns whatever it's passed
+ * If given an array index or deep object key string, the value will be retrieved using _.property
+ *
+ * @example
+ * makeAccessor(null)(4); // 4
+ * makeAccessor(d => d + 1)(4); // 5
+ * makeAccessor(1)(['a', 'b', 'c']); // 'b'
+ * makeAccessor('x.0.y')({x: [{y: 9}]}); // 9
+ *
+ * @param {any} key - Getter, which may be a function, integer, string, null, or undefined;
+ * @returns {function} accessor - Accessor function
+ */
+export function makeAccessor(key) {
+  return _.isFunction(key) ? key :
+    _.isNull(key) || _.isUndefined(key) ? _.identity :
+    _.property(key);
+}
+
+/**
  * `datasetsFromPropsOrDescendants` expects a `props` object which may have `children`.
  * if `props` has `data` or `datasets`, returns it; otherwise recursively searches props.children
  * for components have `data` or `datasets` and combines them into one `datasets` array.
@@ -10,7 +33,6 @@ import React from 'react';
  * @param {Object} props - A React props object, which may have `children` with their own props.
  * @returns {Array.<Array>} datasets - An array of arrays of data objects
  */
-
 export function datasetsFromPropsOrDescendants(props) {
   if(_.isArray(props.datasets)) {
     return props.datasets;
@@ -26,6 +48,7 @@ export function datasetsFromPropsOrDescendants(props) {
   }
   return [];
 }
+
 
 export function inferDataType(data, accessor = _.identity) {
   if(!_.isArray(data))

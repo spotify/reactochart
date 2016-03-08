@@ -6,10 +6,32 @@ import {expect} from 'chai';
 
 
 import {
+  makeAccessor,
   datasetsFromPropsOrDescendants,
   inferDataType,
   inferDatasetsType
 } from '../../src/utils/Data'
+
+describe('makeAccessor', () => {
+  it('passes existing accessor functions through', () => {
+    const getter = (d) => d + 1;
+    expect(makeAccessor(getter)).to.equal(getter);
+  });
+
+  it('returns identity function given null or undefined', () => {
+    const d = {x: 6};
+    expect(makeAccessor(undefined)(d)).to.equal(d);
+    expect(makeAccessor(null)(d)).to.equal(d);
+  });
+
+  it('deeply retrieves object values given array indices and/or key strings', () => {
+    const d = [{x: [{y: 'z'}]}];
+    expect(makeAccessor(0)(d)).to.equal(d[0]);
+    expect(makeAccessor('0.x')(d)).to.equal(d[0].x);
+    expect(makeAccessor('0.x.0.y')(d)).to.equal('z');
+    expect(makeAccessor('x.0.y')(d[0])).to.equal('z');
+  })
+});
 
 describe('datasetsFromPropsOrDescendants', () => {
   it('returns props.datasets', () => {
@@ -80,7 +102,7 @@ describe('inferDatasetsType', () => {
     expect(inferDatasetsType([[new Date()], [new Date(2003, 2, 4)]])).to.equal('time');
     expect(inferDatasetsType([['a'], ['b', 'c']])).to.equal('categorical');
     expect(inferDatasetsType([[42, new Date()]])).to.equal('categorical');
-    
+
     const getD = (d) => d.a;
     expect(inferDatasetsType([[{a: 1}, {a: 1.3}]], getD)).to.equal('number');
     expect(inferDatasetsType([[{a: new Date()}, {a: new Date()}]], getD)).to.equal('time');
