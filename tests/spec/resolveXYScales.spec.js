@@ -71,10 +71,21 @@ describe('resolveXYScales', () => {
 
   // test fixture component classes
   class ComponentWithChildren extends React.Component {
-    render() { return <div>{this.props.children}</div>; }
+    render() {
+      console.log('props', this.props);
+      console.log('scale', this.props.scale.x.domain(), this.props.scale.y.domain());
+      console.log('domain', this.props.domain.x, this.props.domain.y);
+      return <div>{this.props.children}</div>;
+    }
   }
 
-  class XYChart extends ComponentWithChildren {}
+  class XYChart extends React.Component {
+    render() {
+      console.log('props', this.props);
+      console.log('scale', this.props.scale.x.domain(), this.props.scale.y.domain());
+      return <div>{this.props.children}</div>;
+    }
+  }
   const ScaledXYChart = resolveXYScales(XYChart);
 
   class ChartWithCustomScaleType extends ComponentWithChildren {
@@ -91,6 +102,17 @@ describe('resolveXYScales', () => {
     static getMargin(props) { return testMargin; }
   }
   const ScaledChartWithCustomMargin = resolveXYScales(ChartWithCustomMargin);
+
+  class ContainerChart extends React.Component {
+    render() {
+      const {scale, scaleType, margin, domain} = this.props;
+      const newChildren = React.Children.map(this.props.children, (child, i) => {
+        return React.cloneElement(child, {scale, scaleType, margin, domain});
+      });
+      return <div>{newChildren}</div>;
+    }
+  }
+  const ScaledContainerChart = resolveXYScales(ContainerChart);
 
   class XYPlot extends React.Component {
     static defaultProps = {};
@@ -155,6 +177,46 @@ describe('resolveXYScales', () => {
     expectXYScaledComponent(rendered, {scaleType: testScaleType, ...props});
   });
 
+  it('infers scaleType from data, creates scales from size, domain and margins', () => {
+    const props = {
+      width, height,
+      data: [[12, 'a'], [18, 'b'], [22, 'c']],
+      getValue: {x: 0, y: 1},
+      domain: {x: [12, 22], y: ['a', 'b', 'c']},
+      margin: {top: 11, bottom: 22, left: 33, right: 44}
+    };
+    const wrapped = TestUtils.renderIntoDocument(<ScaledXYChart {...props} />);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, XYChart);
+    expectXYScaledComponent(rendered, {scaleType: {x: 'linear', y: 'ordinal'}, ...props});
+  });
+
+  it('infers scaleType from children getScaleType, creates scales from size, domain & margins', () => {
+    const props = {
+      width, height,
+      domain: {x: [12, 22], y: [2, 3]},
+      margin: {top: 11, bottom: 22, left: 33, right: 44}
+    };
+    const tree = <ScaledContainerChart {...props}><ScaledChartWithCustomScaleType a="1"/></ScaledContainerChart>;
+    const wrapped = TestUtils.renderIntoDocument(tree);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, ContainerChart);
+    expectXYScaledComponent(rendered, {scaleType: testScaleType, ...props});
+  });
+
+  it('infers scaleType from children data, creates scales from size, domain & margins', () => {
+    const props = {
+      width, height,
+      domain: {x: [12, 22], y: ['a', 'b', 'c']},
+      margin: {top: 11, bottom: 22, left: 33, right: 44}
+    };
+    const chartProps = {
+      data: [[12, 'a'], [18, 'b'], [22, 'c']],
+      getValue: {x: 0, y: 1}
+    };
+    const tree = <ScaledContainerChart {...props}><ScaledXYChart {...chartProps}/></ScaledContainerChart>;
+    const wrapped = TestUtils.renderIntoDocument(tree);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, ContainerChart);
+    expectXYScaledComponent(rendered, {scaleType: {x: 'linear', y: 'ordinal'}, ...props});
+  });
 
 
 

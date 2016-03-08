@@ -11,7 +11,8 @@ import {
 
 import {
   scaleTypeFromDataType,
-  dataTypeFromScaleType
+  dataTypeFromScaleType,
+  initScale
 } from 'utils/Scale';
 
 /**
@@ -89,6 +90,10 @@ function omitNullUndefined(obj) {
 export default function resolveXYScales(ComposedComponent) {
   return class extends React.Component {
     static defaultProps = ComposedComponent.defaultProps;
+    // todo better way for HOC's to pass statics through?
+    static getScaleType = ComposedComponent.getScaleType;
+    static getDomain = ComposedComponent.getDomain;
+
 
     _resolveScaleType(props, Component) {
       const propsScaleType = props.scaleType || {};
@@ -102,6 +107,7 @@ export default function resolveXYScales(ComposedComponent) {
       // if Component provides a custom static getScaleType method
       // use it to determine remaining scale types
       if(_.isFunction(Component.getScaleType)) {
+        console.log('getscaletype')
         const componentScaleType = omitNullUndefined(Component.getScaleType(props));
         scaleType = _.assign(componentScaleType, scaleType);
         if(hasXYScaleTypes(scaleType)) return scaleType;
@@ -112,7 +118,6 @@ export default function resolveXYScales(ComposedComponent) {
       if(_.isArray(props.data) || _.isArray(props.datasets)) {
         const datasets = _.isArray(props.datasets) ? props.datasets : [props.data];
         const datasetScaleType = _.fromPairs(['x', 'y'].map(k => {
-          // todo if scale type is provided, use it - otherwise will be inferred from data
           const kAccessor = makeAccessor(_.get(props, `getValue.${k}`));
           const kDataType = inferDatasetsType(datasets, kAccessor);
           const kScaleType = scaleTypeFromDataType(kDataType);
@@ -126,13 +131,22 @@ export default function resolveXYScales(ComposedComponent) {
       // if Component has children,
       // recurse through descendants to resolve their scale types the same way
       if(React.Children.count(props.children)) {
+        console.log('get scaletype from children')
         let childScaleTypes = [];
         React.Children.forEach(props.children, child => {
           childScaleTypes = childScaleTypes.concat(this._resolveScaleType(child.props, child.type));
         });
+        console.log('childScaleTypes', childScaleTypes);
 
-        return (_.compact(_.uniq(childScaleTypes)).length === 1) ?
-          childScaleTypes[0] : "categorical";
+        const childScaleType =  _.fromPairs(['x', 'y'].map(k => {
+          // todo warn on multiple scale types, probably not what you want
+          const kScaleType = (_.compact(_.uniq(_.map(childScaleTypes, k))).length === 1) ?
+            childScaleTypes[0][k] : "ordinal";
+          return [k, kScaleType];
+        }));
+
+        scaleType = _.assign(childScaleType, scaleType);
+        return scaleType;
       }
     }
 
@@ -204,6 +218,7 @@ export default function resolveXYScales(ComposedComponent) {
     }
 
     render() {
+      console.log('xyScales Props', this.props);
       const {props} = this;
       const scaleFromProps = this.props.scale || {};
 
@@ -231,7 +246,7 @@ export default function resolveXYScales(ComposedComponent) {
       const tempScale = _.fromPairs(['x', 'y'].map(k =>
         // todo all scale types
         // todo infer scale type from data
-        [k, d3.scale.linear().domain(domain[k]).range(tempRange[k])]
+        [k, initScale(scaleType[k]).domain(domain[k]).range(tempRange[k])]
       ));
 
       //// then resolve the margins
@@ -249,11 +264,11 @@ export default function resolveXYScales(ComposedComponent) {
       const scale = _.fromPairs(['x', 'y'].map(k => {
         return hasScaleFor(scaleFromProps, k) ?
           scaleFromProps[k] :
-          [k, d3.scale.linear().domain(domain[k]).range(range[k])];
+          [k, initScale(scaleType[k]).domain(domain[k]).range(range[k])];
       }));
 
       // and pass scales to wrapped component
-      const passedProps = _.assign({scale, scaleType, margin}, this.props);
+      const passedProps = _.assign({scale, scaleType, margin, domain}, this.props);
       return <ComposedComponent {...passedProps} />;
     }
   }
