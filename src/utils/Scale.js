@@ -13,6 +13,8 @@ export function scaleTypeFromDataType(dataType) {
 export function dataTypeFromScaleType(scaleType) {
   return _.get({
     linear: 'number',
+    log: 'number',
+    pow: 'number',
     time: 'time',
     ordinal: 'categorical'
   }, scaleType, 'categorical');

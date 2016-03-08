@@ -6,7 +6,8 @@ import {
   makeAccessor,
   domainFromDatasets,
   inferDatasetsType,
-  datasetsFromPropsOrDescendants
+  datasetsFromPropsOrDescendants,
+  combineDomains
 } from 'utils/Data';
 
 import {
@@ -43,10 +44,7 @@ function isValidScale(scale) {
 function isValidDomain(domain) {
   return _.isArray(domain) && domain.length;
 }
-function combineDomains(domains) {
-  if(!_.isArray(domains)) return undefined;
-  return d3.extent(_.flatten(domains));
-}
+
 function hasXYDomains(domain) {
   return _.isObject(domain) && isValidDomain(domain.x) && isValidDomain(domain.y);
 }
@@ -152,7 +150,6 @@ export default function resolveXYScales(ComposedComponent) {
 
     _resolveDomain(props, Component, scaleType) {
       const propsDomain = props.domain || {};
-      // todo allow passing scale type instead of inferring from data
 
       // short-circuit if all domains provided
       if(hasXYDomains(propsDomain)) return propsDomain;
@@ -164,6 +161,7 @@ export default function resolveXYScales(ComposedComponent) {
       // use it to determine remaining domains
       if(_.isFunction(Component.getDomain)) {
         const componentDomain = omitNullUndefined(Component.getDomain({scaleType, ...props}));
+        console.log('Component.getDomain', componentDomain);
         domain = _.assign(componentDomain, domain);
         if(hasXYDomains(domain)) return domain;
       }
@@ -187,14 +185,20 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their domains the same way,
       // and combine them into a single domain, if there are multiple
       if(React.Children.count(props.children)) {
+        console.log('get domain from children');
         let childDomains = [];
         React.Children.forEach(props.children, child => {
           childDomains = childDomains.concat(this._resolveDomain(child.props, child.type, scaleType));
         });
 
-        return combineDomains(_.compact(childDomains));
-      }
+        const childDomain =  _.fromPairs(['x', 'y'].map(k => {
+          const kDomain = combineDomains(_.compact(_.map(childDomains, k)), scaleType[k]);
+          return [k, kDomain];
+        }));
 
+        domain = _.assign(childDomain, domain);
+        if(hasXYDomains(domain)) return domain;
+      }
     }
 
     _resolveMargin(props, scale) {

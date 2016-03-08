@@ -49,7 +49,6 @@ export function datasetsFromPropsOrDescendants(props) {
   return [];
 }
 
-
 export function inferDataType(data, accessor = _.identity) {
   if(!_.isArray(data))
     throw new Error('inferDataType expects a data array');
@@ -72,7 +71,6 @@ export function inferDatasetsType(datasets, accessor = _.identity) {
   return (uniqTypes.length === 1) ? uniqTypes[0] : 'categorical';
 }
 
-
 export function domainFromDatasets(datasets, accessor, type) {
   // returns the default domain of a collection of datasets with an accessor function
   // for numeric and date-type datasets, returns the extent (min and max) of the numbers/dates
@@ -88,4 +86,11 @@ export function domainFromData(data, accessor, type) {
   return (type === 'number' || type === 'time') ?
     d3.extent(data.map(accessor)) :
     _.uniq(data.map(accessor));
+}
+
+export function combineDomains(domains, dataType) {
+  if(!_.isArray(domains)) return undefined;
+  return (dataType === 'categorical') ?
+    _.uniq(_.flatten(_.compact(domains))) :
+    d3.extent(_.flatten(domains));
 }
