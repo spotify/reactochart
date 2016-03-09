@@ -4,6 +4,12 @@ import d3 from 'd3';
 import TestUtils from 'react-addons-test-utils';
 import {expect} from 'chai';
 
+import {
+  isValidScale,
+  innerRangeX,
+  innerRangeY
+} from 'utils/Scale';
+
 import resolveXYScales from '../../src/utils/resolveXYScales';
 
 class NotImplementedError extends Error {
@@ -12,34 +18,16 @@ class NotImplementedError extends Error {
   }
 }
 
-const innerWidth = (width, margin) => width - ((margin.left || 0) + (margin.right || 0));
-const innerHeight = (height, margin) => height - ((margin.top || 0) + (margin.bottom || 0));
-
-function innerRangeX(outerWidth, margin={}) {
-  const left = margin.left || 0;
-  return [left, left + innerWidth(outerWidth, margin)];
-}
-function innerRangeY(outerHeight, margin={}) {
-  const top = margin.top || 0;
-  return [top + innerHeight(outerHeight, margin), top];
-}
-
 function expectRefAndDeepEqual(a, b) {
   expect(a).to.equal(b);
   expect(a).to.deep.equal(b);
-}
-
-function expectD3Scale(scale) {
-  expect(scale).to.be.a('function');
-  expect(scale.domain).to.be.a('function');
-  expect(scale.range).to.be.a('function');
 }
 
 function expectXYScales(scales) {
   expect(scales).to.be.an('object');
   ['x', 'y'].forEach(k => {
     expect(scales).to.have.property(k);
-    expectD3Scale(scales[k]);
+    expect(isValidScale(scales[k])).to.equal(true);
   });
 }
 
@@ -333,6 +321,7 @@ describe('resolveXYScales', () => {
   */
 
   // todo test partially specified margins
+  // todo test partially specified scales
   // todo resolve internal chart padding also
   // todo: resolves margins if scales are present?
   // todo: handle resolving different types of scales? use axisType

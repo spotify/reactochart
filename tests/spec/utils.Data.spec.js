@@ -11,7 +11,8 @@ import {
   inferDatasetsType,
   domainFromData,
   domainFromDatasets,
-  combineDomains
+  combineDomains,
+  isValidDomain
 } from '../../src/utils/Data'
 
 const notImplemented = () => {
@@ -190,5 +191,38 @@ describe('Data utils', () => {
       expect(combineDomains(domains, 'categorical')).to.deep.equal(['a', 'b', 'c', 'd', 'e']);
     });
   });
+
+  describe('isValidDomain', () => {
+    it('returns false for non-arrays and empty arrays', () => {
+      expect(isValidDomain(4)).to.equal(false);
+      expect(isValidDomain('abc')).to.equal(false);
+      expect(isValidDomain([])).to.equal(false);
+    });
+
+    it('returns true for any array with items if type is categorical', () => {
+      expect(isValidDomain([4])).to.equal(true);
+      expect(isValidDomain([4], 'categorical')).to.equal(true);
+      expect(isValidDomain(['abc', 'def', 'ghi'])).to.equal(true);
+      expect(isValidDomain(['abc', 'def', 'ghi'], 'categorical')).to.equal(true);
+      expect(isValidDomain([new Date(), new Date()])).to.equal(true);
+      expect(isValidDomain([new Date(), new Date()], 'categorical')).to.equal(true);
+    });
+
+    it('returns true for 2-item number arrays if type is number', () => {
+      expect(isValidDomain([4, 5], 'number')).to.equal(true);
+      expect(isValidDomain([4], 'number')).to.equal(false);
+      expect(isValidDomain([4, 5, 6], 'number')).to.equal(false);
+      expect(isValidDomain([new Date(), new Date()], 'number')).to.equal(false);
+      expect(isValidDomain(['abc', 'def'], 'number')).to.equal(false);
+    });
+
+    it('returns true for 2-item date arrays if type is time', () => {
+      expect(isValidDomain([new Date(), new Date()], 'time')).to.equal(true);
+      expect(isValidDomain([new Date()], 'time')).to.equal(false);
+      expect(isValidDomain([new Date(), new Date(), new Date()], 'time')).to.equal(false);
+      expect(isValidDomain([4, 5], 'time')).to.equal(false);
+      expect(isValidDomain(['abc', 'def'], 'time')).to.equal(false);
+    });
+  })
 });
 

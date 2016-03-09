@@ -93,3 +93,13 @@ export function domainFromDatasets(datasets, accessor = _.identity, type = undef
   const domains = datasets.map(data => domainFromData(data, accessor, type));
   return combineDomains(domains, type);
 }
+
+export function isValidDomain(domain, type = 'categorical') {
+  return _.isArray(domain) && !!domain.length && (
+      // categorical domain can be any array of anything
+      type === 'categorical' ||
+      // number/time domains should look like [min, max]
+      (type === 'number' && domain.length === 2 && _.every(domain, _.isNumber)) ||
+      (type === 'time' && domain.length === 2 && _.every(domain, _.isDate))
+    );
+}
