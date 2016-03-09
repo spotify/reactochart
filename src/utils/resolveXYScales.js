@@ -47,6 +47,10 @@ function hasXYDomains(domain) {
 function hasXYScaleTypes(scaleType) {
   return _.isObject(scaleType) && _.isString(scaleType.x) && _.isString(scaleType.y);
 }
+function hasAllMargins(margin) {
+  const marginKeys = ['top', 'bottom', 'left', 'right'];
+  return _.isObject(margin) && _.every(marginKeys, k => _.has(margin, k));
+}
 
 function mapStaticOnChildren(children, methodName, args=[]) {
   // returns the result of looping over all children and calling a static method on each one
@@ -178,83 +182,46 @@ export default function resolveXYScales(ComposedComponent) {
         console.log('combined domains', childDomain);
 
         domain = _.assign(childDomain, domain);
-        if(hasXYDomains(domain)) return domain;
+        return domain;
       }
     }
 
-    _resolveMargin(props, Component, scaleType) {
-      const propsDomain = props.domain || {};
+    _resolveMargin(props, Component, scaleType, domain, scale) {
+      const propsMargin = props.margin || {};
 
-      // short-circuit if all domains provided
-      if(hasXYDomains(propsDomain)) return propsDomain;
+      // short-circuit if all margins provided
+      if(hasAllMargins(propsMargin)) return propsMargin;
 
-      // start with any domains in props, and try to resolve the rest
-      let domain = omitNullUndefined(propsDomain);
+      // start with any margins in props, and try to resolve the rest
+      let margin = omitNullUndefined(propsMargin);
 
-      // if Component provides a custom static getDomain method
+      // if Component provides a custom static getMargin method
       // use it to determine remaining domains
-      if(_.isFunction(Component.getDomain)) {
-        const componentDomain = omitNullUndefined(Component.getDomain({scaleType, ...props}));
-        console.log('Component.getDomain', componentDomain);
-        domain = _.assign(componentDomain, domain);
-        if(hasXYDomains(domain)) return domain;
-      }
-
-      // if Component has data or datasets props,
-      // use the default domainFromDatasets function to determine a domain from them
-      if(_.isArray(props.data) || _.isArray(props.datasets)) {
-        const datasets = _.isArray(props.datasets) ? props.datasets : [props.data];
-        const datasetDomain = _.fromPairs(['x', 'y'].map(k => {
-          const kAccessor = makeAccessor(_.get(props, `getValue.${k}`));
-          const dataType = dataTypeFromScaleType(scaleType[k]);
-          const kDomain = domainFromDatasets(datasets, kAccessor, dataType);
-          return [k, kDomain];
-        }));
-        console.log('datasetDomain', datasetDomain);
-
-        domain = _.assign(datasetDomain, domain);
-        if(hasXYDomains(domain)) return domain;
+      if(_.isFunction(Component.getMargin)) {
+        const componentMargin = omitNullUndefined(Component.getMargin({scaleType, domain, scale, ...props}));
+        console.log('Component.getMargin', componentMargin);
+        margin = _.assign(componentMargin, margin);
+        if(hasAllMargins(margin)) return margin;
       }
 
       // if Component has children,
-      // recurse through descendants to resolve their domains the same way,
-      // and combine them into a single domain, if there are multiple
+      // recurse through descendants to resolve their margins the same way,
+      // and combine them into a single margin, if there are multiple
       if(React.Children.count(props.children)) {
-        console.log('get domain from children');
-        let childDomains = [];
+        let childMargins = [];
         React.Children.forEach(props.children, child => {
-          childDomains = childDomains.concat(this._resolveDomain(child.props, child.type, scaleType));
+          childMargins = childMargins.concat(this._resolveMargin(child.props, child.type, scaleType, domain, scale));
         });
 
-        console.log('combining domains', childDomains);
-        const childDomain =  _.fromPairs(['x', 'y'].map(k => {
-          const kDomain = combineDomains(_.compact(_.map(childDomains, k)), scaleType[k]);
-          return [k, kDomain];
+        console.log('combining child margins', childMargins);
+        const childMargin = _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
+          // combine margins by taking the max value of each margin direction
+          return [k, _.maxBy(childMargins, k)]
         }));
-        console.log('combined domains', childDomain);
+        console.log('combined margins', childMargin);
 
-        domain = _.assign(childDomain, domain);
-        if(hasXYDomains(domain)) return domain;
-      }
-    }
-
-    _resolveMargin(props, scale) {
-      const marginKeys = ['top', 'bottom', 'left', 'right'];
-      const propsMargin = props.margin || {};
-
-      if(_.every(marginKeys, k => _.has(propsMargin, k))) {
-        // short-circuit if margins provided
-        return propsMargin;
-
-      } else {
-        // get margin from component, passing the scale (used for generating/measuring labels)
-        const childMargin = ComposedComponent.getMargin({scale, ...props});
-
-        return _.some(marginKeys, k => _.has(propsMargin, k)) ?
-          // some margins provided, merge them with those provided by child
-          _.assign({}, childMargin, propsMargin) :
-          // no margin provided at all, just return margin from Component
-          childMargin;
+        margin = _.assign(childMargin, margin);
+        return margin;
       }
     }
 
