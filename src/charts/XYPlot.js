@@ -799,6 +799,9 @@ const ChartAxis = React.createClass({
 
                 {(showLabels && labels !== ticks) ? // render custom labels (passed in, not same as ticks)
                     _.map(labels, (value, i) => {
+                        const onMouseEnterFunc = letter === 'x' ? onMouseEnterXLabel.bind(null, value) : onMouseEnterYLabel.bind(null, value);
+                        const onMouseMoveFunc = letter === 'x' ? onMouseMoveXLabel.bind(null, value) : onMouseMoveYLabel.bind(null, value);
+                        const onMouseLeaveFunc = letter === 'x' ? onMouseLeaveXLabel.bind(null, value) : onMouseLeaveYLabel.bind(null, value);
                         return (
                             <g
                                 transform={tickTransform(value)}
@@ -813,10 +816,7 @@ const ChartAxis = React.createClass({
 
                 {showZero ?
                     <g
-                        transform={tickTransform(0)}
-                        onMouseEnter={onMouseEnterFunc}
-                        onMouseMove={onMouseMoveFunc}
-                        onMouseLeave={onMouseLeaveFunc}>
+                        transform={tickTransform(0)}>
                         {showZero ? this.renderZero(options): null}
                     </g> : null}
             </g>);
