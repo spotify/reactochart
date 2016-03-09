@@ -9,8 +9,15 @@ import {
   datasetsFromPropsOrDescendants,
   inferDataType,
   inferDatasetsType,
+  domainFromData,
+  domainFromDatasets,
   combineDomains
 } from '../../src/utils/Data'
+
+const notImplemented = () => {
+  console.log('* * * TEST NOT YET IMPLEMENTED * * *');
+  throw new Error("not implemented");
+};
 
 describe('Data utils', () => {
   describe('makeAccessor', () => {
@@ -114,16 +121,57 @@ describe('Data utils', () => {
     });
   });
 
-  describe('domainFromDatasets', () => {
-    it('determines domain from datasets', () => {
-      console.log('* * * TEST NOT YET IMPLEMENTED * * *'); // todo
-    })
+  describe('domainFromData', () => {
+    const numberData = [2, 4, 6, -2, 0];
+    const timeData = [new Date(2006, 1, 1), new Date(2013, 1, 1), new Date(2008, 1, 1)];
+    const categoricalData = ['a', 'b', 'c'];
+
+    it('determines domain from data when type is provided', () => {
+      const numberDomain = domainFromData(numberData, _.identity, 'number');
+      expect(numberDomain).to.deep.equal([-2, 6]);
+      const timeDomain = domainFromData(timeData, _.identity, 'time');
+      expect(timeDomain).to.deep.equal([new Date(2006, 1, 1), new Date(2013, 1, 1)]);
+      const categoricalDomain = domainFromData(numberData, _.identity, 'categorical');
+      expect(categoricalDomain).to.deep.equal(numberData);
+    });
+
+    it('infers accessor & type when not provided', () => {
+      const numberDomain = domainFromData(numberData);
+      expect(numberDomain).to.deep.equal([-2, 6]);
+      const timeDomain = domainFromData(timeData);
+      expect(timeDomain).to.deep.equal([new Date(2006, 1, 1), new Date(2013, 1, 1)]);
+      const categoricalDomain = domainFromData(categoricalData);
+      expect(categoricalDomain).to.deep.equal(categoricalData);
+    });
   });
 
-  describe('domainFromData', () => {
-    it('determines domain from data', () => {
-      console.log('* * * TEST NOT YET IMPLEMENTED * * *'); // todo
-    })
+  describe('domainFromDatasets', () => {
+    const numberDatasets = [[8, 7], [4, 5], [3, 1]];
+    const timeDatasets = [
+      [new Date('2007-03-12'), new Date('2002-03-12')],
+      [new Date('2009-01-09'), new Date('2004-04-25')]
+    ];
+    const categoricalDatasets = [['x', 'z'], ['y', 'z']];
+
+    it('determines domain from datasets when accessor & type are provided', () => {
+      const numberDomain = domainFromDatasets(numberDatasets, _.identity, 'number');
+      const timeDomain = domainFromDatasets(timeDatasets, _.identity, 'time');
+      const categoricalDomain = domainFromDatasets(categoricalDatasets, _.identity, 'categorical');
+
+      expect(numberDomain).to.deep.equal([1, 8]);
+      expect(timeDomain).to.deep.equal([new Date('2002-03-12'), new Date('2009-01-09')]);
+      expect(categoricalDomain).to.deep.equal(['x', 'z', 'y']);
+    });
+
+    it('infers accessor & type when not provided', () => {
+      const numberDomain = domainFromDatasets(numberDatasets);
+      const timeDomain = domainFromDatasets(timeDatasets);
+      const categoricalDomain = domainFromDatasets(categoricalDatasets);
+
+      expect(numberDomain).to.deep.equal([1, 8]);
+      expect(timeDomain).to.deep.equal([new Date('2002-03-12'), new Date('2009-01-09')]);
+      expect(categoricalDomain).to.deep.equal(['x', 'z', 'y']);
+    });
   });
 
   describe('combineDomains', () => {

@@ -71,26 +71,25 @@ export function inferDatasetsType(datasets, accessor = _.identity) {
   return (uniqTypes.length === 1) ? uniqTypes[0] : 'categorical';
 }
 
-export function domainFromDatasets(datasets, accessor, type) {
-  // returns the default domain of a collection of datasets with an accessor function
-  // for numeric and date-type datasets, returns the extent (min and max) of the numbers/dates
-  // for categorical datasets, returns the set of distinct category values
-  if(!type) type = inferDatasetsType(datasets, accessor);
-  return (type === 'number' || type === 'time') ?
-    d3.extent(datasets.map(data => domainFromData(data, accessor, type))) :
-    _.uniq(datasets.map(data => domainFromData(data, accessor, type)));
+export function combineDomains(domains, dataType) {
+  if(!_.isArray(domains)) return undefined;
+  return (dataType === 'categorical') ?
+    _.uniq(_.flatten(_.compact(domains))) :
+    d3.extent(_.flatten(domains));
 }
 
-export function domainFromData(data, accessor, type) {
+export function domainFromData(data, accessor = _.identity, type = undefined) {
   if(!type) type = inferDataType(data, accessor);
   return (type === 'number' || type === 'time') ?
     d3.extent(data.map(accessor)) :
     _.uniq(data.map(accessor));
 }
 
-export function combineDomains(domains, dataType) {
-  if(!_.isArray(domains)) return undefined;
-  return (dataType === 'categorical') ?
-    _.uniq(_.flatten(_.compact(domains))) :
-    d3.extent(_.flatten(domains));
+export function domainFromDatasets(datasets, accessor = _.identity, type = undefined) {
+  // returns the default domain of a collection of datasets with an accessor function
+  // for numeric and date-type datasets, returns the extent (min and max) of the numbers/dates
+  // for categorical datasets, returns the set of distinct category values
+  if(!type) type = inferDatasetsType(datasets, accessor);
+  const domains = datasets.map(data => domainFromData(data, accessor, type));
+  return combineDomains(domains, type);
 }

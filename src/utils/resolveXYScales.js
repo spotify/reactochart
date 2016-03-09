@@ -176,6 +176,7 @@ export default function resolveXYScales(ComposedComponent) {
           const kDomain = domainFromDatasets(datasets, kAccessor, dataType);
           return [k, kDomain];
         }));
+        console.log('datasetDomain', datasetDomain);
 
         domain = _.assign(datasetDomain, domain);
         if(hasXYDomains(domain)) return domain;
@@ -191,10 +192,12 @@ export default function resolveXYScales(ComposedComponent) {
           childDomains = childDomains.concat(this._resolveDomain(child.props, child.type, scaleType));
         });
 
+        console.log('combining domains', childDomains);
         const childDomain =  _.fromPairs(['x', 'y'].map(k => {
           const kDomain = combineDomains(_.compact(_.map(childDomains, k)), scaleType[k]);
           return [k, kDomain];
         }));
+        console.log('combined domains', childDomain);
 
         domain = _.assign(childDomain, domain);
         if(hasXYDomains(domain)) return domain;

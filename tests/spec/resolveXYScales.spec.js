@@ -254,6 +254,21 @@ describe('resolveXYScales', () => {
     expectXYScaledComponent(rendered, {domain: testDomain, ...props});
   });
 
+  it('infers domain from children data, creates scales from scaleType, size and margins', () => {
+    const props = {
+      width, height,
+      scaleType: {x: 'linear', y: 'linear'},
+      margin: {top: 11, bottom: 22, left: 33, right: 44}
+    };
+    const tree = <ScaledContainerChart {...props}>
+      <ScaledXYChart data={[[0, 2], [3, 5]]} getValue={{x: 0, y: 1}} />
+      <ScaledXYChart data={[[-2, 0], [2, 4]]} getValue={{x: 0, y: 1}} />
+    </ScaledContainerChart>;
+    const wrapped = TestUtils.renderIntoDocument(tree);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, ContainerChart);
+    expectXYScaledComponent(rendered, {domain: {x: [-2, 3], y: [0, 5]}, ...props});
+  });
+
 
   /*
 

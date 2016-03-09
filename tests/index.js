@@ -3,9 +3,9 @@ require('./spec/utils.Scale.spec');
 require('./spec/resolveObjectProps.spec');
 require('./spec/resolveXYScales.spec');
 
-//require('./spec/LineChart.spec');
-//require('./spec/XYPlot.spec');
-//require('./spec/examples.spec');
+require('./spec/LineChart.spec');
+require('./spec/XYPlot.spec');
+require('./spec/examples.spec');
 
 // run mocha
 (function() {
