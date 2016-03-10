@@ -38513,8 +38513,8 @@
 	    onMouseMoveLabel: function onMouseMoveLabel(e, d) {
 	        this.trueProps.onMouseMoveLabel(e, d);
 	    },
-	    onMouseLeaveLabel: function onMouseLeaveLabel() {
-	        this.trueProps.onMouseLeaveLabel();
+	    onMouseLeaveLabel: function onMouseLeaveLabel(e, d) {
+	        this.trueProps.onMouseLeaveLabel(e, d);
 	    },
 	    render: function render() {
 	        var _trueProps2 = this.trueProps;

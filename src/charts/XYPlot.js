@@ -445,8 +445,8 @@ const XYPlot = React.createClass({
     onMouseMoveLabel(e, d) {
         this.trueProps.onMouseMoveLabel(e, d);
     },
-    onMouseLeaveLabel() {
-        this.trueProps.onMouseLeaveLabel();
+    onMouseLeaveLabel(e, d) {
+        this.trueProps.onMouseLeaveLabel(e, d);
     },
 
     render() {
