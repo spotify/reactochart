@@ -492,14 +492,14 @@ const XYPlot = React.createClass({
                     {childrenUnderAxes}
 
                     <ChartAxis
-                        onMouseEnterLabel={this.onMouseEnterLabel}
-                        onMouseMoveLabel={this.onMouseMoveLabel}
-                        onMouseLeaveLabel={this.onMouseLeaveLabel}
+                        onMouseEnterLabel={_.isFunction(onMouseEnterLabel) ? this.onMouseEnterLabel : null}
+                        onMouseMoveLabel={_.isFunction(onMouseMoveLabel) ? this.onMouseMoveLabel : null}
+                        onMouseLeaveLabel={_.isFunction(onMouseLeaveLabel) ? this.onMouseLeaveLabel : null}
                         {...this.getXAxisProps()} />
                     <ChartAxis
-                        onMouseEnterLabel={this.onMouseEnterLabel}
-                        onMouseMoveLabel={this.onMouseMoveLabel}
-                        onMouseLeaveLabel={this.onMouseLeaveLabel}
+                        onMouseEnterLabel={_.isFunction(onMouseEnterLabel) ? this.onMouseEnterLabel : null}
+                        onMouseMoveLabel={_.isFunction(onMouseMoveLabel) ? this.onMouseMoveLabel : null}
+                        onMouseLeaveLabel={_.isFunction(onMouseLeaveLabel) ? this.onMouseLeaveLabel : null}
                         {...this.getYAxisProps()} />
 
                     {childrenAboveAxes}
