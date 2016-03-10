@@ -2,7 +2,7 @@ import React from 'react';
 //const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
-import {accessor} from '../util.js';
+import {accessor, methodIfFuncProp} from '../util.js';
 import moment from 'moment';
 import numeral from 'numeral';
 import ReactDOMServer from 'react-dom/server';
@@ -127,14 +127,9 @@ const XYPlot = React.createClass({
         // todo: minSpacing, extraSpacing ?
 
         // Label Handling
-        onMouseEnterXLabel: PropTypes.func,
-        onMouseMoveXLabel: PropTypes.func,
-        onMouseLeaveXLabel: PropTypes.func,
-
-        onMouseEnterYLabel: PropTypes.func,
-        onMouseMoveYLabel: PropTypes.func,
-        onMouseLeaveYLabel: PropTypes.func
-
+        onMouseEnterLabel: PropTypes.func,
+        onMouseMoveLabel: PropTypes.func,
+        onMouseLeaveLabel: PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -443,29 +438,22 @@ const XYPlot = React.createClass({
         this.trueProps.onMouseUp(e);
     },
 
-    onMouseEnterXLabel(e) {
-        this.trueProps.onMouseEnterXLabel(e);
+
+    onMouseEnterLabel(e, d) {
+        this.trueProps.onMouseEnterLabel(e, d);
     },
-    onMouseMoveXLabel(e) {
-        this.trueProps.onMouseMoveXLabel(e);
+    onMouseMoveLabel(e, d) {
+        this.trueProps.onMouseMoveLabel(e, d);
     },
-    onMouseLeaveXLabel() {
-        this.trueProps.onMouseMoveXLabel();
-    },
-    onMouseEnterYLabel(e) {
-        this.trueProps.onMouseEnterYLabel(e);
-    },
-    onMouseMoveYLabel(e) {
-        this.trueProps.onMouseMoveYLabel(e);
-    },
-    onMouseLeaveYLabel() {
-        this.trueProps.onMouseLeaveYLabel()
+    onMouseLeaveLabel() {
+        this.trueProps.onMouseLeaveLabel();
     },
 
     render() {
         const {
             children, width, height, axisType, axisLabel, invertAxis,
-            onMouseMove, onMouseEnter, onMouseLeave, onMouseDown, onMouseUp
+            onMouseMove, onMouseEnter, onMouseLeave, onMouseDown, onMouseUp,
+            onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel
         } = this.trueProps;
         const {scale, margin, padding, scaleWidth, scaleHeight, ticks} = this;
         const chartWidth = scaleWidth + padding.left + padding.right;
@@ -504,14 +492,14 @@ const XYPlot = React.createClass({
                     {childrenUnderAxes}
 
                     <ChartAxis
-                        onMouseEnterXLabel={this.trueProps.onMouseEnterXLabel}
-                        onMouseMoveXLabel={this.trueProps.onMouseMoveXLabel}
-                        onMouseLeaveXLabel={this.trueProps.onMouseEnterXLabel}
+                        onMouseEnterLabel={this.onMouseEnterLabel}
+                        onMouseMoveLabel={this.onMouseMoveLabel}
+                        onMouseLeaveLabel={this.onMouseLeaveLabel}
                         {...this.getXAxisProps()} />
                     <ChartAxis
-                        onMouseEnterYLabel={this.trueProps.onMouseEnterYLabel}
-                        onMouseMoveYLabel={this.trueProps.onMouseMoveYLabel}
-                        onMouseLeaveYLabel={this.trueProps.onMouseEnterYLabel}
+                        onMouseEnterLabel={this.onMouseEnterLabel}
+                        onMouseMoveLabel={this.onMouseMoveLabel}
+                        onMouseLeaveLabel={this.onMouseLeaveLabel}
                         {...this.getYAxisProps()} />
 
                     {childrenAboveAxes}
@@ -741,13 +729,7 @@ const ChartAxis = React.createClass({
     getDefaultProps() {
         return {
             padding: DEFAULTS.spacing,
-            emptyLabel: DEFAULTS.emptyLabel,
-            onMouseEnterXLabel: () => null,
-            onMouseMoveXLabel: () => null,
-            onMouseLeaveXLabel: () => null,
-            onMouseEnterYLabel: () => null,
-            onMouseMoveYLabel: () => null,
-            onMouseLeaveYLabel: () => null
+            emptyLabel: DEFAULTS.emptyLabel
         }
     },
     render() {
@@ -755,8 +737,7 @@ const ChartAxis = React.createClass({
             scale, type, orientation, axisTransform, tickCount, letter, labelFormat, emptyLabel, ticks,
             scaleWidth, scaleHeight, padding, labelPadding, tickLength,
             showLabels, showTicks, showGrid, showZero,
-            onMouseEnterXLabel, onMouseMoveXLabel, onMouseLeaveXLabel,
-            onMouseEnterYLabel, onMouseMoveYLabel, onMouseLeaveYLabel
+            onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel
         } = this.props;
 
         if(!(showLabels || showTicks || showGrid || showZero)) return null;
@@ -769,8 +750,6 @@ const ChartAxis = React.createClass({
 
         const options = {letter, type, orientation, labelOffset, gridLength, tickLength, labelFormat, emptyLabel};
 
-
-
         return (
             <g
                 ref={`${letter}Axis`}
@@ -779,17 +758,13 @@ const ChartAxis = React.createClass({
                 {showTicks || showGrid || (showLabels && labels === ticks) ?
                     _.map(ticks, (value, i) => {
                         const tickOptions = _.assign({}, options, {value});
-
-                        const onMouseEnterFunc = letter === 'x' ? onMouseEnterXLabel.bind(null, value) : onMouseEnterYLabel.bind(null, value);
-                        const onMouseMoveFunc = letter === 'x' ? onMouseMoveXLabel.bind(null, value) : onMouseMoveYLabel.bind(null, value);
-                        const onMouseLeaveFunc = letter === 'x' ? onMouseLeaveXLabel.bind(null, value) : onMouseLeaveYLabel.bind(null, value);
                         return (
                             <g
                                 transform={tickTransform(value)}
                                 key={`tick-${i}`}
-                                onMouseEnter={onMouseEnterFunc}
-                                onMouseMove={onMouseMoveFunc}
-                                onMouseLeave={onMouseLeaveFunc}>
+                                onMouseEnter={_.isFunction(onMouseEnterLabel) ? onMouseEnterLabel.bind(null, tickOptions) : null}
+                                onMouseMove={_.isFunction(onMouseMoveLabel) ? onMouseMoveLabel.bind(null, tickOptions) : null}
+                                onMouseLeave={_.isFunction(onMouseLeaveLabel) ? onMouseLeaveLabel.bind(null, tickOptions) : null}>
                                 {showGrid ? this.renderGrid(tickOptions) : null}
                                 {showTicks ? this.renderTick(tickOptions) : null}
                                 {(showLabels && labels === ticks) ? this.renderLabel(tickOptions) : null}
@@ -799,16 +774,13 @@ const ChartAxis = React.createClass({
 
                 {(showLabels && labels !== ticks) ? // render custom labels (passed in, not same as ticks)
                     _.map(labels, (value, i) => {
-                        const onMouseEnterFunc = letter === 'x' ? onMouseEnterXLabel.bind(null, value) : onMouseEnterYLabel.bind(null, value);
-                        const onMouseMoveFunc = letter === 'x' ? onMouseMoveXLabel.bind(null, value) : onMouseMoveYLabel.bind(null, value);
-                        const onMouseLeaveFunc = letter === 'x' ? onMouseLeaveXLabel.bind(null, value) : onMouseLeaveYLabel.bind(null, value);
                         return (
                             <g
                                 transform={tickTransform(value)}
                                 key={`tick-${i}`}
-                                onMouseEnter={onMouseEnterFunc}
-                                onMouseMove={onMouseMoveFunc}
-                                onMouseLeave={onMouseLeaveFunc}>
+                                onMouseEnter={_.isFunction(onMouseEnterLabel) ? onMouseEnterLabel.bind(null, tickOptions) : null}
+                                onMouseMove={_.isFunction(onMouseMoveLabel) ? onMouseMoveLabel.bind(null, tickOptions) : null}
+                                onMouseLeave={_.isFunction(onMouseLeaveLabel) ? onMouseLeaveLabel.bind(null, tickOptions) : null}>
                                 {this.renderLabel(_.assign({}, options, {value}))}
                             </g>
                         )
