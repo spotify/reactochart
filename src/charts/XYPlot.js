@@ -119,12 +119,17 @@ const XYPlot = React.createClass({
         onMouseEnter: PropTypes.func,
         onMouseLeave: PropTypes.func,
         onMouseDown: PropTypes.func,
-        onMouseUp: PropTypes.func
+        onMouseUp: PropTypes.func,
 
         // todo: minMargin - margin will be at least X, or more if necessary
         // todo: extraMargin - margin to add to calculated necessary margin
         // todo: minPadding, extraPadding ?
         // todo: minSpacing, extraSpacing ?
+
+        // Label Handling
+        onMouseEnterLabel: PropTypes.func,
+        onMouseMoveLabel: PropTypes.func,
+        onMouseLeaveLabel: PropTypes.func
     },
     getDefaultProps() {
         return {
@@ -433,10 +438,22 @@ const XYPlot = React.createClass({
         this.trueProps.onMouseUp(e);
     },
 
+
+    onMouseEnterLabel(e, d) {
+        this.trueProps.onMouseEnterLabel(e, d);
+    },
+    onMouseMoveLabel(e, d) {
+        this.trueProps.onMouseMoveLabel(e, d);
+    },
+    onMouseLeaveLabel(e, d) {
+        this.trueProps.onMouseLeaveLabel(e, d);
+    },
+
     render() {
         const {
             children, width, height, axisType, axisLabel, invertAxis,
-            onMouseMove, onMouseEnter, onMouseLeave, onMouseDown, onMouseUp
+            onMouseMove, onMouseEnter, onMouseLeave, onMouseDown, onMouseUp,
+            onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel
         } = this.trueProps;
         const {scale, margin, padding, scaleWidth, scaleHeight, ticks} = this;
         const chartWidth = scaleWidth + padding.left + padding.right;
@@ -474,8 +491,16 @@ const XYPlot = React.createClass({
 
                     {childrenUnderAxes}
 
-                    <ChartAxis {...this.getXAxisProps()} />
-                    <ChartAxis {...this.getYAxisProps()} />
+                    <ChartAxis
+                        onMouseEnterLabel={_.isFunction(onMouseEnterLabel) ? this.onMouseEnterLabel : null}
+                        onMouseMoveLabel={_.isFunction(onMouseMoveLabel) ? this.onMouseMoveLabel : null}
+                        onMouseLeaveLabel={_.isFunction(onMouseLeaveLabel) ? this.onMouseLeaveLabel : null}
+                        {...this.getXAxisProps()} />
+                    <ChartAxis
+                        onMouseEnterLabel={_.isFunction(onMouseEnterLabel) ? this.onMouseEnterLabel : null}
+                        onMouseMoveLabel={_.isFunction(onMouseMoveLabel) ? this.onMouseMoveLabel : null}
+                        onMouseLeaveLabel={_.isFunction(onMouseLeaveLabel) ? this.onMouseLeaveLabel : null}
+                        {...this.getYAxisProps()} />
 
                     {childrenAboveAxes}
                 </g>
@@ -711,7 +736,8 @@ const ChartAxis = React.createClass({
         const {
             scale, type, orientation, axisTransform, tickCount, letter, labelFormat, emptyLabel, ticks,
             scaleWidth, scaleHeight, padding, labelPadding, tickLength,
-            showLabels, showTicks, showGrid, showZero
+            showLabels, showTicks, showGrid, showZero,
+            onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel
         } = this.props;
 
         if(!(showLabels || showTicks || showGrid || showZero)) return null;
@@ -723,33 +749,49 @@ const ChartAxis = React.createClass({
             [v => `translate(${scale(v)}, 0)`, {y: distance}, scaleHeight + padding.top + padding.bottom];
 
         const options = {letter, type, orientation, labelOffset, gridLength, tickLength, labelFormat, emptyLabel};
-        return <g ref={`${letter}Axis`} className={`chart-axis chart-axis-${letter}`} transform={axisTransform}>
-            {showTicks || showGrid || (showLabels && labels === ticks) ?
-                _.map(ticks, (value, i) => {
-                    const tickOptions = _.assign({}, options, {value});
-                    return <g transform={tickTransform(value)} key={`tick-${i}`}>
-                        {showGrid ? this.renderGrid(tickOptions) : null}
-                        {showTicks ? this.renderTick(tickOptions) : null}
-                        {(showLabels && labels === ticks) ? this.renderLabel(tickOptions) : null}
-                    </g>
-                })
-                : null
-            }
-            {(showLabels && labels !== ticks) ? // render custom labels (passed in, not same as ticks)
-                _.map(labels, (value, i) => {
-                    return <g transform={tickTransform(value)} key={`tick-${i}`}>
-                        {this.renderLabel(_.assign({}, options, {value}))}
-                    </g>
-                })
-                : null
-            }
-            {showZero ?
-                <g transform={tickTransform(0)}>
-                    {showZero ? this.renderZero(options): null}
-                </g>
-                : null
-            }
-        </g>
+
+        return (
+            <g
+                ref={`${letter}Axis`}
+                className={`chart-axis chart-axis-${letter}`}
+                transform={axisTransform}>
+                {showTicks || showGrid || (showLabels && labels === ticks) ?
+                    _.map(ticks, (value, i) => {
+                        const tickOptions = _.assign({}, options, {value});
+                        return (
+                            <g
+                                transform={tickTransform(value)}
+                                key={`tick-${i}`}
+                                onMouseEnter={_.isFunction(onMouseEnterLabel) ? onMouseEnterLabel.bind(null, tickOptions) : null}
+                                onMouseMove={_.isFunction(onMouseMoveLabel) ? onMouseMoveLabel.bind(null, tickOptions) : null}
+                                onMouseLeave={_.isFunction(onMouseLeaveLabel) ? onMouseLeaveLabel.bind(null, tickOptions) : null}>
+                                {showGrid ? this.renderGrid(tickOptions) : null}
+                                {showTicks ? this.renderTick(tickOptions) : null}
+                                {(showLabels && labels === ticks) ? this.renderLabel(tickOptions) : null}
+                            </g>
+                        )
+                    }) : null}
+
+                {(showLabels && labels !== ticks) ? // render custom labels (passed in, not same as ticks)
+                    _.map(labels, (value, i) => {
+                        return (
+                            <g
+                                transform={tickTransform(value)}
+                                key={`tick-${i}`}
+                                onMouseEnter={_.isFunction(onMouseEnterLabel) ? onMouseEnterLabel.bind(null, tickOptions) : null}
+                                onMouseMove={_.isFunction(onMouseMoveLabel) ? onMouseMoveLabel.bind(null, tickOptions) : null}
+                                onMouseLeave={_.isFunction(onMouseLeaveLabel) ? onMouseLeaveLabel.bind(null, tickOptions) : null}>
+                                {this.renderLabel(_.assign({}, options, {value}))}
+                            </g>
+                        )
+                    }) : null}
+
+                {showZero ?
+                    <g
+                        transform={tickTransform(0)}>
+                        {showZero ? this.renderZero(options): null}
+                    </g> : null}
+            </g>);
     },
     renderLabel(options) {
         const {letter, value, type, labelOffset, labelFormat, emptyLabel} = options;

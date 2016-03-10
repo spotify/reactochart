@@ -38148,12 +38148,17 @@
 	        onMouseEnter: PropTypes.func,
 	        onMouseLeave: PropTypes.func,
 	        onMouseDown: PropTypes.func,
-	        onMouseUp: PropTypes.func
+	        onMouseUp: PropTypes.func,
 	
 	        // todo: minMargin - margin will be at least X, or more if necessary
 	        // todo: extraMargin - margin to add to calculated necessary margin
 	        // todo: minPadding, extraPadding ?
 	        // todo: minSpacing, extraSpacing ?
+	
+	        // Label Handling
+	        onMouseEnterLabel: PropTypes.func,
+	        onMouseMoveLabel: PropTypes.func,
+	        onMouseLeaveLabel: PropTypes.func
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return {
@@ -38502,6 +38507,15 @@
 	    onMouseUp: function onMouseUp(e) {
 	        this.trueProps.onMouseUp(e);
 	    },
+	    onMouseEnterLabel: function onMouseEnterLabel(e, d) {
+	        this.trueProps.onMouseEnterLabel(e, d);
+	    },
+	    onMouseMoveLabel: function onMouseMoveLabel(e, d) {
+	        this.trueProps.onMouseMoveLabel(e, d);
+	    },
+	    onMouseLeaveLabel: function onMouseLeaveLabel(e, d) {
+	        this.trueProps.onMouseLeaveLabel(e, d);
+	    },
 	    render: function render() {
 	        var _trueProps2 = this.trueProps;
 	        var children = _trueProps2.children;
@@ -38515,6 +38529,9 @@
 	        var onMouseLeave = _trueProps2.onMouseLeave;
 	        var onMouseDown = _trueProps2.onMouseDown;
 	        var onMouseUp = _trueProps2.onMouseUp;
+	        var onMouseEnterLabel = _trueProps2.onMouseEnterLabel;
+	        var onMouseMoveLabel = _trueProps2.onMouseMoveLabel;
+	        var onMouseLeaveLabel = _trueProps2.onMouseLeaveLabel;
 	        var scale = this.scale;
 	        var margin = this.margin;
 	        var padding = this.padding;
@@ -38558,8 +38575,16 @@
 	                },
 	                _react2.default.createElement('rect', { className: 'chart-background', width: chartWidth, height: chartHeight }),
 	                childrenUnderAxes,
-	                _react2.default.createElement(ChartAxis, this.getXAxisProps()),
-	                _react2.default.createElement(ChartAxis, this.getYAxisProps()),
+	                _react2.default.createElement(ChartAxis, _extends({
+	                    onMouseEnterLabel: _lodash2.default.isFunction(onMouseEnterLabel) ? this.onMouseEnterLabel : null,
+	                    onMouseMoveLabel: _lodash2.default.isFunction(onMouseMoveLabel) ? this.onMouseMoveLabel : null,
+	                    onMouseLeaveLabel: _lodash2.default.isFunction(onMouseLeaveLabel) ? this.onMouseLeaveLabel : null
+	                }, this.getXAxisProps())),
+	                _react2.default.createElement(ChartAxis, _extends({
+	                    onMouseEnterLabel: _lodash2.default.isFunction(onMouseEnterLabel) ? this.onMouseEnterLabel : null,
+	                    onMouseMoveLabel: _lodash2.default.isFunction(onMouseMoveLabel) ? this.onMouseMoveLabel : null,
+	                    onMouseLeaveLabel: _lodash2.default.isFunction(onMouseLeaveLabel) ? this.onMouseLeaveLabel : null
+	                }, this.getYAxisProps())),
 	                childrenAboveAxes
 	            ),
 	            axisLabel.x ? _react2.default.createElement(XAxisLabel, this.getXAxisLabelProps()) : null,
@@ -38852,6 +38877,9 @@
 	        var showTicks = _props4.showTicks;
 	        var showGrid = _props4.showGrid;
 	        var showZero = _props4.showZero;
+	        var onMouseEnterLabel = _props4.onMouseEnterLabel;
+	        var onMouseMoveLabel = _props4.onMouseMoveLabel;
+	        var onMouseLeaveLabel = _props4.onMouseLeaveLabel;
 	
 	
 	        if (!(showLabels || showTicks || showGrid || showZero)) return null;
@@ -38873,14 +38901,23 @@
 	
 	
 	        var options = { letter: letter, type: type, orientation: orientation, labelOffset: labelOffset, gridLength: gridLength, tickLength: tickLength, labelFormat: labelFormat, emptyLabel: emptyLabel };
+	
 	        return _react2.default.createElement(
 	            'g',
-	            { ref: letter + 'Axis', className: 'chart-axis chart-axis-' + letter, transform: axisTransform },
+	            {
+	                ref: letter + 'Axis',
+	                className: 'chart-axis chart-axis-' + letter,
+	                transform: axisTransform },
 	            showTicks || showGrid || showLabels && labels === ticks ? _lodash2.default.map(ticks, function (value, i) {
 	                var tickOptions = _lodash2.default.assign({}, options, { value: value });
 	                return _react2.default.createElement(
 	                    'g',
-	                    { transform: tickTransform(value), key: 'tick-' + i },
+	                    {
+	                        transform: tickTransform(value),
+	                        key: 'tick-' + i,
+	                        onMouseEnter: _lodash2.default.isFunction(onMouseEnterLabel) ? onMouseEnterLabel.bind(null, tickOptions) : null,
+	                        onMouseMove: _lodash2.default.isFunction(onMouseMoveLabel) ? onMouseMoveLabel.bind(null, tickOptions) : null,
+	                        onMouseLeave: _lodash2.default.isFunction(onMouseLeaveLabel) ? onMouseLeaveLabel.bind(null, tickOptions) : null },
 	                    showGrid ? _this2.renderGrid(tickOptions) : null,
 	                    showTicks ? _this2.renderTick(tickOptions) : null,
 	                    showLabels && labels === ticks ? _this2.renderLabel(tickOptions) : null
@@ -38890,13 +38927,19 @@
 	            _lodash2.default.map(labels, function (value, i) {
 	                return _react2.default.createElement(
 	                    'g',
-	                    { transform: tickTransform(value), key: 'tick-' + i },
+	                    {
+	                        transform: tickTransform(value),
+	                        key: 'tick-' + i,
+	                        onMouseEnter: _lodash2.default.isFunction(onMouseEnterLabel) ? onMouseEnterLabel.bind(null, tickOptions) : null,
+	                        onMouseMove: _lodash2.default.isFunction(onMouseMoveLabel) ? onMouseMoveLabel.bind(null, tickOptions) : null,
+	                        onMouseLeave: _lodash2.default.isFunction(onMouseLeaveLabel) ? onMouseLeaveLabel.bind(null, tickOptions) : null },
 	                    _this2.renderLabel(_lodash2.default.assign({}, options, { value: value }))
 	                );
 	            }) : null,
 	            showZero ? _react2.default.createElement(
 	                'g',
-	                { transform: tickTransform(0) },
+	                {
+	                    transform: tickTransform(0) },
 	                showZero ? this.renderZero(options) : null
 	            ) : null
 	        );
