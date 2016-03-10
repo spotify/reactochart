@@ -11,6 +11,7 @@ import {
 } from 'utils/Scale';
 
 import resolveXYScales from '../../src/utils/resolveXYScales';
+import resolveObjectProps from '../../src/utils/resolveObjectProps';
 
 class NotImplementedError extends Error {
   constructor(message = "Not Implemented Yet") {
@@ -51,81 +52,58 @@ function expectXYScaledComponent(rendered, {width, height, scaleType, domain, ma
 }
 
 describe('resolveXYScales', () => {
-  const testScaleType = {x: 'ordinal', y: 'linear'};
-  const testDomain = {x: [-5, 5], y: [0, 10]};
-  const testMargin = {top: 10, bottom: 20, left: 30, right: 40};
+  const customScaleType = {x: 'ordinal', y: 'linear'};
+  const customDomain = {x: [-5, 5], y: [0, 10]};
+  const customMargin = {top: 10, bottom: 20, left: 30, right: 40};
   const width = 500;
   const height = 400;
 
   // test fixture component classes
   class ComponentWithChildren extends React.Component {
     render() {
-      console.log('props', this.props);
-      console.log('scale', this.props.scale.x.domain(), this.props.scale.y.domain());
-      console.log('domain', this.props.domain.x, this.props.domain.y);
+      //console.log(this.props.scale.x.range())
       return <div>{this.props.children}</div>;
     }
   }
 
-  class XYChart extends React.Component {
-    render() {
-      console.log('props', this.props);
-      console.log('scale', this.props.scale.x.domain(), this.props.scale.y.domain());
-      return <div>{this.props.children}</div>;
-    }
-  }
-  const ScaledXYChart = resolveXYScales(XYChart);
+  class Chart extends ComponentWithChildren {}
+  const XYChart = resolveXYScales(Chart);
 
   class ChartWithCustomScaleType extends ComponentWithChildren {
-    static getScaleType(props) { return testScaleType; }
+    static getScaleType(props) { return customScaleType; }
   }
-  const ScaledChartWithCustomScaleType = resolveXYScales(ChartWithCustomScaleType);
+  const XYChartWithCustomScaleType = resolveXYScales(ChartWithCustomScaleType);
 
   class ChartWithCustomDomain extends ComponentWithChildren {
-    static getDomain(props) { return testDomain; }
+    static getDomain(props) { return customDomain; }
   }
-  const ScaledChartWithCustomDomain = resolveXYScales(ChartWithCustomDomain);
+  const XYChartWithCustomDomain = resolveXYScales(ChartWithCustomDomain);
 
   class ChartWithCustomMargin extends ComponentWithChildren {
-    static getMargin(props) { return testMargin; }
+    static getMargin(props) { return customMargin; }
   }
-  const ScaledChartWithCustomMargin = resolveXYScales(ChartWithCustomMargin);
+  const XYChartWithCustomMargin = resolveXYScales(ChartWithCustomMargin);
 
   class ContainerChart extends React.Component {
     render() {
-      const {scale, scaleType, margin, domain} = this.props;
+      const {width, height, scale, scaleType, margin, domain} = this.props;
       const newChildren = React.Children.map(this.props.children, (child, i) => {
-        return React.cloneElement(child, {scale, scaleType, margin, domain});
+        return React.cloneElement(child, {width, height, scale, scaleType, margin, domain});
       });
       return <div>{newChildren}</div>;
     }
   }
-  const ScaledContainerChart = resolveXYScales(ContainerChart);
+  const XYContainerChart = resolveXYScales(ContainerChart);
 
-  class XYPlot extends React.Component {
-    static defaultProps = {};
-    static getDomain(props) {
-      return testDomain;
-    }
-    static getMargin(props) {
-      return testMargin;
-    }
-    render() {
-      return <div>{this.props.children}</div>;
-    }
-  }
-  const ScaledXYPlot = resolveXYScales(XYPlot);
-
-
-
-  function renderAndGetXYPlot(plotProps, chartProps) {
-    const wrapped = TestUtils.renderIntoDocument(
-      //<ScaledXYChart {...plotProps}><LineChart {...chartProps}/></ScaledXYChart>
-      <ScaledXYPlot {...plotProps} />
-    );
-    return TestUtils.findRenderedComponentWithType(wrapped, XYPlot);
-  }
-
+  const XYChartWithObjectProps = resolveObjectProps(resolveXYScales(Chart),
+    ['domain', 'scale', 'scaleType'], ['x', 'y']
+  );
+  const XYChartWithCustomMarginAndObjectProps = resolveObjectProps(resolveXYScales(ChartWithCustomMargin),
+    ['domain', 'scale', 'scaleType'], ['x', 'y']
+  );
+  const XYContainerChartWithObjectProps = resolveObjectProps(resolveXYScales(ContainerChart),
+    ['domain', 'scale', 'scaleType'], ['x', 'y']
+  );
 
   it('passes XY scales and margins through if both are provided', () => {
     const props = {
@@ -135,7 +113,8 @@ describe('resolveXYScales', () => {
       },
       margin: {top: 11, bottom: 21, left: 31, right: 41}
     };
-    const rendered = renderAndGetXYPlot(props);
+    const wrapped = TestUtils.renderIntoDocument(<XYChart {...props} />);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, Chart);
 
     ['scale', 'margin'].forEach(propKey => {
       expectRefAndDeepEqual(rendered.props[propKey], props[propKey]);
@@ -149,24 +128,24 @@ describe('resolveXYScales', () => {
       domain: {x: [-50, 50], y: [-100, 100]},
       margin: {top: 11, bottom: 22, left: 33, right: 44}
     };
-    const wrapped = TestUtils.renderIntoDocument(<ScaledXYChart {...props} />);
-    const rendered = TestUtils.findRenderedComponentWithType(wrapped, XYChart);
+    const wrapped = TestUtils.renderIntoDocument(<XYChart {...props} />);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, Chart);
     expectXYScaledComponent(rendered, props);
   });
 
 
-  it('infers scaleType from Component.getScaleType, creates scales from size, domain and margins', () => {
+  it('infers scaleType from Component.getScaleType', () => {
     const props = {
       width, height,
       domain: {x: [-50, 50], y: [-100, 100]},
       margin: {top: 11, bottom: 22, left: 33, right: 44}
     };
-    const wrapped = TestUtils.renderIntoDocument(<ScaledChartWithCustomScaleType {...props} />);
+    const wrapped = TestUtils.renderIntoDocument(<XYChartWithCustomScaleType {...props} />);
     const rendered = TestUtils.findRenderedComponentWithType(wrapped, ChartWithCustomScaleType);
-    expectXYScaledComponent(rendered, {scaleType: testScaleType, ...props});
+    expectXYScaledComponent(rendered, {scaleType: customScaleType, ...props});
   });
 
-  it('infers scaleType from data, creates scales from size, domain and margins', () => {
+  it('infers scaleType from data', () => {
     const props = {
       width, height,
       data: [[12, 'a'], [18, 'b'], [22, 'c']],
@@ -174,24 +153,24 @@ describe('resolveXYScales', () => {
       domain: {x: [12, 22], y: ['a', 'b', 'c']},
       margin: {top: 11, bottom: 22, left: 33, right: 44}
     };
-    const wrapped = TestUtils.renderIntoDocument(<ScaledXYChart {...props} />);
-    const rendered = TestUtils.findRenderedComponentWithType(wrapped, XYChart);
+    const wrapped = TestUtils.renderIntoDocument(<XYChart {...props} />);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, Chart);
     expectXYScaledComponent(rendered, {scaleType: {x: 'linear', y: 'ordinal'}, ...props});
   });
 
-  it('infers scaleType from children getScaleType, creates scales from size, domain & margins', () => {
+  it('infers scaleType from children getScaleType', () => {
     const props = {
       width, height,
       domain: {x: [12, 22], y: [2, 3]},
       margin: {top: 11, bottom: 22, left: 33, right: 44}
     };
-    const tree = <ScaledContainerChart {...props}><ScaledChartWithCustomScaleType a="1"/></ScaledContainerChart>;
+    const tree = <XYContainerChart {...props}><XYChartWithCustomScaleType a="1"/></XYContainerChart>;
     const wrapped = TestUtils.renderIntoDocument(tree);
     const rendered = TestUtils.findRenderedComponentWithType(wrapped, ContainerChart);
-    expectXYScaledComponent(rendered, {scaleType: testScaleType, ...props});
+    expectXYScaledComponent(rendered, {scaleType: customScaleType, ...props});
   });
 
-  it('infers scaleType from children data, creates scales from size, domain & margins', () => {
+  it('infers scaleType from children data', () => {
     const props = {
       width, height,
       domain: {x: [12, 22], y: ['a', 'b', 'c']},
@@ -201,130 +180,146 @@ describe('resolveXYScales', () => {
       data: [[12, 'a'], [18, 'b'], [22, 'c']],
       getValue: {x: 0, y: 1}
     };
-    const tree = <ScaledContainerChart {...props}><ScaledXYChart {...chartProps}/></ScaledContainerChart>;
+    const tree = <XYContainerChart {...props}><XYChart {...chartProps}/></XYContainerChart>;
     const wrapped = TestUtils.renderIntoDocument(tree);
     const rendered = TestUtils.findRenderedComponentWithType(wrapped, ContainerChart);
     expectXYScaledComponent(rendered, {scaleType: {x: 'linear', y: 'ordinal'}, ...props});
   });
 
 
-  it('infers domain from Component.getDomain, creates scales from scaleType, size and margins', () => {
+  it('infers domain from Component.getDomain', () => {
     const props = {
       width, height,
       scaleType: {x: 'linear', y: 'linear'},
       margin: {top: 11, bottom: 22, left: 33, right: 44}
     };
-    const wrapped = TestUtils.renderIntoDocument(<ScaledChartWithCustomDomain {...props} />);
+    const wrapped = TestUtils.renderIntoDocument(<XYChartWithCustomDomain {...props} />);
     const rendered = TestUtils.findRenderedComponentWithType(wrapped, ChartWithCustomDomain);
-    expectXYScaledComponent(rendered, {domain: testDomain, ...props});
+    expectXYScaledComponent(rendered, {domain: customDomain, ...props});
   });
 
-  it('infers domain from data, creates scales from scaleType, size and margins', () => {
+  it('infers domain from data', () => {
     const props = {
       width, height,
-      scaleType: {x: 'linear', y: 'linear'},
+      data: [[12, 'a'], [18, 'b'], [22, 'c']],
+      getValue: {x: 0, y: 1},
+      scaleType: {x: 'linear', y: 'ordinal'},
       margin: {top: 11, bottom: 22, left: 33, right: 44}
     };
-    const wrapped = TestUtils.renderIntoDocument(<ScaledChartWithCustomDomain {...props} />);
-    const rendered = TestUtils.findRenderedComponentWithType(wrapped, ChartWithCustomDomain);
-    expectXYScaledComponent(rendered, {domain: testDomain, ...props});
+    const wrapped = TestUtils.renderIntoDocument(<XYChart {...props} />);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, Chart);
+    expectXYScaledComponent(rendered, {domain: {x: [12, 22], y: ['a', 'b', 'c']}, ...props});
   });
 
-  it('infers domain from children getDomain, creates scales from scaleType, size and margins', () => {
+  it('infers domain from children getDomain', () => {
     const props = {
       width, height,
       scaleType: {x: 'linear', y: 'linear'},
       margin: {top: 11, bottom: 22, left: 33, right: 44}
     };
-    const tree = <ScaledContainerChart {...props}><ScaledChartWithCustomDomain /></ScaledContainerChart>;
+    const tree = <XYContainerChart {...props}><XYChartWithCustomDomain /></XYContainerChart>;
     const wrapped = TestUtils.renderIntoDocument(tree);
     const rendered = TestUtils.findRenderedComponentWithType(wrapped, ContainerChart);
-    expectXYScaledComponent(rendered, {domain: testDomain, ...props});
+    expectXYScaledComponent(rendered, {domain: customDomain, ...props});
   });
 
-  it('infers domain from children data, creates scales from scaleType, size and margins', () => {
+  it('infers domain from children data', () => {
     const props = {
       width, height,
       scaleType: {x: 'linear', y: 'linear'},
       margin: {top: 11, bottom: 22, left: 33, right: 44}
     };
-    const tree = <ScaledContainerChart {...props}>
-      <ScaledXYChart data={[[0, 2], [3, 5]]} getValue={{x: 0, y: 1}} />
-      <ScaledXYChart data={[[-2, 0], [2, 4]]} getValue={{x: 0, y: 1}} />
-    </ScaledContainerChart>;
+    const tree = <XYContainerChart {...props}>
+      <XYChart data={[[0, 2], [3, 5]]} getValue={{x: 0, y: 1}} />
+      <XYChart data={[[-2, 0], [2, 4]]} getValue={{x: 0, y: 1}} />
+    </XYContainerChart>;
     const wrapped = TestUtils.renderIntoDocument(tree);
     const rendered = TestUtils.findRenderedComponentWithType(wrapped, ContainerChart);
     expectXYScaledComponent(rendered, {domain: {x: [-2, 3], y: [0, 5]}, ...props});
   });
 
 
-  /*
-
-  it('resolves XY scales from size, data and margins', () => {
+  it('infers margin from Component.getMargin', () => {
     const props = {
-      width: 500,
-      height: 300,
-      margin: {top: 11, bottom: 22, left: 33, right: 44},
-      // data doesn't actually matter, since XYChart.getDomain returns a constant
-      data: [{x: 10, y: 20}]
-    };
-    const rendered = renderAndGetXYPlot(props);
-    expectXYScaledComponent(rendered, {domain: testDomain, ...props});
-  });
-
-  it('resolves XY scales and margins from data and size', () => {
-    const props = {
-      width: 500,
-      height: 300,
-      data: [{x: 10, y: 20}]
-    };
-    const wrapped = TestUtils.renderIntoDocument(<ScaledXYChart {...props} />);
-    const rendered = TestUtils.findRenderedComponentWithType(wrapped, XYPlot);
-
-    expect(rendered.props.margin).to.equal(testMargin);
-    expectXYScaledComponent(rendered, {margin: testMargin, domain: testDomain, ...props});
-  });
-
-  it('resolves XY scales and margins from domain and size', () => {
-    const props = {
-      width: 500,
-      height: 300,
+      width, height,
+      scaleType: {x: 'linear', y: 'linear'},
       domain: {x: [-50, 50], y: [-100, 100]}
     };
-    const wrapped = TestUtils.renderIntoDocument(<ScaledXYChart {...props} />);
-    const rendered = TestUtils.findRenderedComponentWithType(wrapped, XYPlot);
-
-    expect(rendered.props.margin).to.equal(testMargin);
-    expectXYScaledComponent(rendered, {margin: testMargin, ...props});
+    const wrapped = TestUtils.renderIntoDocument(<XYChartWithCustomMargin {...props} />);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, ChartWithCustomMargin);
+    expectXYScaledComponent(rendered, {margin: customMargin, ...props});
   });
 
-  it('sets margins to zero if they are neither provided nor resolvable', () => {
-    console.log('not implemented');
-    //throw new NotImplementedError();
+  it('infers margin from children getMargin', () => {
+    const props = {
+      width, height,
+      scaleType: {x: 'linear', y: 'linear'},
+      domain: {x: [-50, 50], y: [-100, 100]}
+    };
+    const tree = <XYContainerChart {...props}><XYChartWithCustomMargin /></XYContainerChart>;
+    const wrapped = TestUtils.renderIntoDocument(tree);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, ContainerChart);
+    expectXYScaledComponent(rendered, {margin: customMargin, ...props});
   });
 
-  it('throws if domains are neither provided nor resolvable', () => {
-    //throw new NotImplementedError();
-    console.log('not implemented');
+  it('infers margin from children margin props', () => {
+    const props = {
+      width, height,
+      scaleType: {x: 'linear', y: 'linear'},
+      domain: {x: [-50, 50], y: [-100, 100]}
+    };
+    const tree = <XYContainerChart {...props}>
+      <XYChart margin={{top: 20, left: 10}} />
+      <XYChart margin={{bottom: 40, left: 30, right: 50}} />
+    </XYContainerChart>;
+    const wrapped = TestUtils.renderIntoDocument(tree);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, ContainerChart);
+    expectXYScaledComponent(rendered, {margin: {top: 20, bottom: 40, left: 30, right: 50}, ...props});
   });
 
-  it('throws if neither XY scales nor size are provided', () => {
-    console.log('not implemented');
-    //throw new NotImplementedError();
+
+  it('infers scaleType & domain from data, margin from getMargin', () => {
+    const containerProps = {width, height};
+    const chartProps = {
+      data: [[12, 'a'], [18, 'b'], [22, 'c']],
+      getValue: {x: 0, y: 1}
+    };
+    const tree = <XYContainerChart {...containerProps}>
+      <XYChartWithCustomMargin {...chartProps} />
+    </XYContainerChart>;
+    const wrapped = TestUtils.renderIntoDocument(tree);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, ChartWithCustomMargin);
+    expectXYScaledComponent(rendered, {
+      ...chartProps, ...containerProps,
+      margin: customMargin,
+      scaleType: {x: 'linear', y: 'ordinal'},
+      domain: {x: [12, 22], y: ['a', 'b', 'c']}
+    });
   });
 
-  it('throws if neither XY scales nor (domain or data) are provided', () => {
-    console.log('not implemented');
-    //throw new NotImplementedError();
+  it('works with resolveObjectProps', () => {
+    const containerProps = {
+      width, height,
+      domain: [-12, 12],
+      scaleType: 'linear'
+    };
+    const tree = <XYContainerChartWithObjectProps {...containerProps}>
+      <XYChartWithCustomMarginAndObjectProps />
+    </XYContainerChartWithObjectProps>;
+    const wrapped = TestUtils.renderIntoDocument(tree);
+    const rendered = TestUtils.findRenderedComponentWithType(wrapped, ContainerChart);
+
+    expectXYScaledComponent(rendered, {
+      ...chartProps, ...containerProps,
+      margin: customMargin,
+      scaleType: {x: 'linear', y: 'linear'},
+      domain: {x: [-12, 12], y: [-12, 12]}
+    });
   });
 
-  */
-
+  // todo test combining multiple scaletypes/domains/margins from children
   // todo test partially specified margins
   // todo test partially specified scales
-  // todo resolve internal chart padding also
-  // todo: resolves margins if scales are present?
-  // todo: handle resolving different types of scales? use axisType
   // todo: test with thin layers of components (w/o getDomain) in between?
   // todo: test when one scale or domain is passed but not the other?
 });

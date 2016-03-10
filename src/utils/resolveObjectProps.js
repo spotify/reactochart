@@ -61,6 +61,9 @@ export default function resolveObjectProps(ComposedComponent, propKeys, objKeys)
     // attach static reference to default props so that we can compose multiple resolveObjectProps wrappers,
     // but don't call it defaultProps, to avoid actually triggering the default behavior
     static _defaultProps = ComposedComponent.defaultProps;
+    static getScaleType = ComposedComponent.getScaleType;
+    static getDomain = ComposedComponent.getDomain;
+    static getMargin = ComposedComponent.getMargin;
 
     // todo: smart shouldComponentUpdate with 1-level deep equality check?
 

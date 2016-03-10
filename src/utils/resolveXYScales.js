@@ -69,11 +69,11 @@ function omitNullUndefined(obj) {
 
 export default function resolveXYScales(ComposedComponent) {
   return class extends React.Component {
-    static defaultProps = ComposedComponent.defaultProps;
     // todo better way for HOC's to pass statics through?
+    static defaultProps = ComposedComponent.defaultProps;
     static getScaleType = ComposedComponent.getScaleType;
     static getDomain = ComposedComponent.getDomain;
-
+    static getMargin = ComposedComponent.getMargin;
 
     _resolveScaleType(props, Component) {
       const propsScaleType = props.scaleType || {};
@@ -176,7 +176,9 @@ export default function resolveXYScales(ComposedComponent) {
 
         console.log('combining domains', childDomains);
         const childDomain =  _.fromPairs(['x', 'y'].map(k => {
-          const kDomain = combineDomains(_.compact(_.map(childDomains, k)), scaleType[k]);
+          console.log(_.compact(_.map(childDomains, k)), scaleType[k]);
+          const kDomain = combineDomains(_.compact(_.map(childDomains, k)), dataTypeFromScaleType(scaleType[k]));
+          console.log(kDomain);
           return [k, kDomain];
         }));
         console.log('combined domains', childDomain);
@@ -188,6 +190,7 @@ export default function resolveXYScales(ComposedComponent) {
 
     _resolveMargin(props, Component, scaleType, domain, scale) {
       const propsMargin = props.margin || {};
+      console.log('propsMargin', propsMargin);
 
       // short-circuit if all margins provided
       if(hasAllMargins(propsMargin)) return propsMargin;
@@ -216,13 +219,13 @@ export default function resolveXYScales(ComposedComponent) {
         console.log('combining child margins', childMargins);
         const childMargin = _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
           // combine margins by taking the max value of each margin direction
-          return [k, _.maxBy(childMargins, k)]
+          return [k, _.maxBy(childMargins, k)[k]]
         }));
         console.log('combined margins', childMargin);
 
         margin = _.assign(childMargin, margin);
-        return margin;
       }
+      return margin;
     }
 
     _makeScales({width, height, scaleType={}, domain={}, margin={}, scale={}}) {
@@ -231,6 +234,7 @@ export default function resolveXYScales(ComposedComponent) {
         y: innerRangeY(height, margin)
       };
       // create scales from domains and ranges
+      console.log('range', range);
       return _.fromPairs(['x', 'y'].map(k => [k,
         hasScaleFor(scale, k) ?
           scale[k] : // use existing scales if provided, otherwise create new
@@ -263,20 +267,31 @@ export default function resolveXYScales(ComposedComponent) {
       const tempScale = this._makeScales({width, height, scaleType, domain, margin: props.margin, scale: props.scale});
 
       // then resolve the margins
-      const margin = this._resolveMargin(props, tempScale);
+      const margin = this._resolveMargin(props, ComposedComponent, scaleType, domain, tempScale);
       console.log('margin', margin);
 
+      console.log('making scales', {width, height, scaleType, domain, margin, scale: props.scale})
       // create real scales from resolved margins
       const scale = _.isEqual(margin, props.margin) ?
         tempScale : // don't re-create scales if margin hasn't changed (ie. was passed in props)
         this._makeScales({width, height, scaleType, domain, margin, scale: props.scale});
 
-      console.log('created scale domains', _.mapValues(scale, s => s.domain()));
-      console.log('created scale ranges', _.mapValues(scale, s => s.range()));
+      console.log('range', scale.x.range());
+      console.log('range', scale.y.range());
 
       // and pass scales to wrapped component
-      const passedProps = _.assign({scale, scaleType, margin, domain}, this.props);
+      //const passedProps = _.assign({scale, scaleType, margin, domain}, this.props);
+      const passedProps = _.assign({}, this.props, {scale, scaleType, margin, domain});
+
       return <ComposedComponent {...passedProps} />;
+
+      // todo purerender/shouldcomponentupdate?
+      // todo resolve margins if scales are present
+      // todo use zero for any margins which can't be resolved
+      // todo throw if cannot resolve scaleType
+      // todo throw if cannot resolve domain
+      // todo resolve internal chart padding also
+      // todo check to make sure margins didn't change after scales resolved?
     }
   }
 }
