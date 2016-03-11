@@ -69,8 +69,12 @@ function omitNullUndefined(obj) {
 
 export default function resolveXYScales(ComposedComponent) {
   return class extends React.Component {
+    static defaultProps = _.defaults(ComposedComponent.defaultProps, {
+      nice: {x: true, y: true},
+      tickCount: {x: 10, y: 10}
+    });
+
     // todo better way for HOC's to pass statics through?
-    static defaultProps = ComposedComponent.defaultProps;
     static getScaleType = ComposedComponent.getScaleType;
     static getDomain = ComposedComponent.getDomain;
     static getMargin = ComposedComponent.getMargin;
@@ -228,24 +232,31 @@ export default function resolveXYScales(ComposedComponent) {
       return margin;
     }
 
-    _makeScales({width, height, scaleType={}, domain={}, margin={}, scale={}}) {
+    _makeScales = ({width, height, scaleType={}, domain={}, margin={}, scale={}}) => {
+      const {nice, tickCount} = this.props;
       const range = {
         x: innerRangeX(width, margin),
         y: innerRangeY(height, margin)
       };
+      console.log(height, margin, innerRangeY(height, margin));
       // create scales from domains and ranges
       console.log('range', range);
-      return _.fromPairs(['x', 'y'].map(k => [k,
-        hasScaleFor(scale, k) ?
+      return _.fromPairs(['x', 'y'].map(k => {
+        const rangeMethod = (scaleType[k] === 'ordinal') ? 'rangePoints' : 'range';
+        const kScale = hasScaleFor(scale, k) ?
           scale[k] : // use existing scales if provided, otherwise create new
-          initScale(scaleType[k]).domain(domain[k]).range(range[k])
-      ]));
-    }
+          initScale(scaleType[k]).domain(domain[k])[rangeMethod](range[k]);
+        // set `nice` option to round scale domains to nicer numbers
+        if(nice[k] && _.isFunction(kScale.nice)) console.log('nice');
+        if(nice[k] && _.isFunction(kScale.nice)) kScale.nice(tickCount[k] || 10);
+        return [k, kScale];
+      }));
+    };
 
     render() {
       console.log('xyScales Props', this.props);
       const {props} = this;
-      const {width, height} = props;
+      const {width, height, nice} = props;
       const scaleFromProps = this.props.scale || {};
 
       // short-circuit if scales provided
@@ -270,11 +281,12 @@ export default function resolveXYScales(ComposedComponent) {
       const margin = this._resolveMargin(props, ComposedComponent, scaleType, domain, tempScale);
       console.log('margin', margin);
 
-      console.log('making scales', {width, height, scaleType, domain, margin, scale: props.scale})
       // create real scales from resolved margins
+      const scaleOptions = {scale: props.scale, width, height, scaleType, domain, margin, nice};
+      console.log('making scales', scaleOptions);
       const scale = _.isEqual(margin, props.margin) ?
         tempScale : // don't re-create scales if margin hasn't changed (ie. was passed in props)
-        this._makeScales({width, height, scaleType, domain, margin, scale: props.scale});
+        this._makeScales(scaleOptions);
 
       console.log('range', scale.x.range());
       console.log('range', scale.y.range());
@@ -284,6 +296,14 @@ export default function resolveXYScales(ComposedComponent) {
       const passedProps = _.assign({}, this.props, {scale, scaleType, margin, domain});
 
       return <ComposedComponent {...passedProps} />;
+
+      // todo spacing/padding
+      // todo nice
+      // todo invertScale
+      // todo tickCount?
+      // todo ticks?
+      // todo includeZero?
+
 
       // todo purerender/shouldcomponentupdate?
       // todo resolve margins if scales are present

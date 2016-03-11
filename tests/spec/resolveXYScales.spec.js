@@ -47,7 +47,11 @@ function expectXYScaledComponent(rendered, {width, height, scaleType, domain, ma
   ['x', 'y'].forEach(k => {
     expect(rendered.props.scaleType[k]).to.equal(scaleType[k]);
     expect(renderedScale[k].domain()).to.deep.equal(domain[k]);
-    expect(renderedScale[k].range()).to.deep.equal(range[k]);
+    if(scaleType[k] === 'ordinal')
+      expect(renderedScale[k].range()).to.deep
+        .equal(d3.scale.ordinal().domain(domain[k]).rangePoints(range[k]).range());
+    else
+      expect(renderedScale[k].range()).to.deep.equal(range[k]);
   });
 }
 
@@ -310,16 +314,45 @@ describe('resolveXYScales', () => {
     const rendered = TestUtils.findRenderedComponentWithType(wrapped, ContainerChart);
 
     expectXYScaledComponent(rendered, {
-      ...chartProps, ...containerProps,
+      ...containerProps,
       margin: customMargin,
       scaleType: {x: 'linear', y: 'linear'},
       domain: {x: [-12, 12], y: [-12, 12]}
     });
   });
 
+  function renderAndFindByType(node, Component) {
+    const rendered = TestUtils.renderIntoDocument(node);
+    return TestUtils.findRenderedComponentWithType(rendered, Component);
+  }
+
+  it('rounds domain to nice numbers if `nice` option is true', () => {
+    const props = {
+      width, height,
+      data: [[0.3, 0.8], [9.2, 9.7]],
+      getValue: {x: 0, y: 1},
+      scaleType: {x: 'linear', y: 'linear'},
+      margin: {top: 11, bottom: 22, left: 33, right: 44}
+    };
+
+    const niceXChart = renderAndFindByType(<XYChart {...props} {...{nice: {x: true, y: false}}} />, Chart);
+    expectXYScaledComponent(niceXChart, {domain: {x: [0, 10], y: [0.8, 9.7]}, ...props});
+
+    const niceYChart = renderAndFindByType(<XYChart {...props} {...{nice: {x: false, y: true}}} />, Chart);
+    expectXYScaledComponent(niceYChart, {domain: {x: [0.3, 9.2], y: [0, 10]}, ...props});
+  });
+
+  // todo spacing/padding
+  // todo invertScale
+  // todo tickCount?
+  // todo ticks?
+  // todo includeZero?
+
   // todo test combining multiple scaletypes/domains/margins from children
+  // todo test partially specified scaletype
   // todo test partially specified margins
   // todo test partially specified scales
+  // todo test partially specified domains
   // todo: test with thin layers of components (w/o getDomain) in between?
   // todo: test when one scale or domain is passed but not the other?
 });

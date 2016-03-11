@@ -68,6 +68,7 @@ export default function resolveObjectProps(ComposedComponent, propKeys, objKeys)
     // todo: smart shouldComponentUpdate with 1-level deep equality check?
 
     render() {
+      //console.log('resolveObjectProps', this.props);
       const defaultProps = ComposedComponent.defaultProps || ComposedComponent._defaultProps || {};
       
       const resolvedProps = _.fromPairs(propKeys.map(k => {
@@ -80,6 +81,7 @@ export default function resolveObjectProps(ComposedComponent, propKeys, objKeys)
         return [k, resolved];
       }));
 
+      //console.log('resolved object props', resolvedProps);
       const props = _.assign({}, this.props, resolvedProps);
       return <ComposedComponent {...props} />;
     }
