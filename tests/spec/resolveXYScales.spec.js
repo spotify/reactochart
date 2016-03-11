@@ -38,6 +38,7 @@ function expectXYScaledComponent(rendered, {width, height, scaleType, domain, ma
   // if range not provided, it should be width/height minus margins
   range = range || {x: innerRangeX(width, margin), y: innerRangeY(height, margin)};
   expect(scaleType).to.be.an('object');
+  console.log('expected domains', domain);
 
   expect(rendered.props).to.be.an('object');
   expect(rendered.props.margin).to.deep.equal(margin);
@@ -46,6 +47,8 @@ function expectXYScaledComponent(rendered, {width, height, scaleType, domain, ma
   expectXYScales(renderedScale);
   ['x', 'y'].forEach(k => {
     expect(rendered.props.scaleType[k]).to.equal(scaleType[k]);
+    console.log('domain', renderedScale[k].domain());
+    console.log('expected domain', domain[k]);
     expect(renderedScale[k].domain()).to.deep.equal(domain[k]);
     if(scaleType[k] === 'ordinal')
       expect(renderedScale[k].range()).to.deep
@@ -342,8 +345,39 @@ describe('resolveXYScales', () => {
     expectXYScaledComponent(niceYChart, {domain: {x: [0.3, 9.2], y: [0, 10]}, ...props});
   });
 
+  it('inverts the scale domain if `invertScale` option is true', () => {
+    const props = {
+      width, height,
+      domain: {x: [-3, 3], y: [0, 10]},
+      scaleType: {x: 'linear', y: 'linear'},
+      margin: {top: 11, bottom: 22, left: 33, right: 44}
+    };
+
+    const invertXChart = renderAndFindByType(<XYChart {...props} {...{invertScale: {x: true, y: false}}} />, Chart);
+    expectXYScaledComponent(invertXChart, _.assign({}, props, {domain: {x: [3, -3], y: [0, 10]}}));
+
+    const invertYChart = renderAndFindByType(<XYChart {...props} {...{invertScale: {x: false, y: true}}} />, Chart);
+    expectXYScaledComponent(invertYChart, _.assign({}, props, {domain: {x: [-3, 3], y: [10, 0]}}));
+  });
+
+  it('extends the scale domain if to include custom `ticks` if passed', () => {
+    const props = {
+      width, height,
+      data: [[0, 0], [10, 10]],
+      getValue: {x: 0, y: 1},
+      scaleType: {x: 'linear', y: 'linear'},
+      margin: {top: 11, bottom: 22, left: 33, right: 44}
+    };
+
+    const ticksXChart = renderAndFindByType(<XYChart {...props} {...{ticks: {x: [-5, 0, 5]}}} />, Chart);
+    expectXYScaledComponent(ticksXChart, {domain: {x: [-5, 10], y: [0, 10]}, ...props});
+
+    const ticksYChart = renderAndFindByType(<XYChart {...props} {...{ticks: {y: [10, 20]}}} />, Chart);
+    expectXYScaledComponent(ticksYChart, {domain: {x: [0, 10], y: [0, 20]}, ...props});
+  });
+
+
   // todo spacing/padding
-  // todo invertScale
   // todo tickCount?
   // todo ticks?
   // todo includeZero?

@@ -5,6 +5,7 @@ import invariant from 'invariant';
 import {
   makeAccessor,
   domainFromDatasets,
+  domainFromData,
   inferDatasetsType,
   datasetsFromPropsOrDescendants,
   combineDomains,
@@ -70,8 +71,10 @@ function omitNullUndefined(obj) {
 export default function resolveXYScales(ComposedComponent) {
   return class extends React.Component {
     static defaultProps = _.defaults(ComposedComponent.defaultProps, {
+      invertScale: {x: false, y: false},
       nice: {x: true, y: true},
-      tickCount: {x: 10, y: 10}
+      tickCount: {x: 10, y: 10},
+      ticks: {x: null, y: null}
     });
 
     // todo better way for HOC's to pass statics through?
@@ -233,22 +236,37 @@ export default function resolveXYScales(ComposedComponent) {
     }
 
     _makeScales = ({width, height, scaleType={}, domain={}, margin={}, scale={}}) => {
-      const {nice, tickCount} = this.props;
+      const {invertScale, nice, tickCount, ticks} = this.props;
       const range = {
         x: innerRangeX(width, margin),
         y: innerRangeY(height, margin)
       };
       console.log(height, margin, innerRangeY(height, margin));
-      // create scales from domains and ranges
+
+
       console.log('range', range);
       return _.fromPairs(['x', 'y'].map(k => {
+        // use existing scales if provided, otherwise create new
+        if(hasScaleFor(scale, k)) return [k, scale[k]];
+
+        // create scale from domain/range
         const rangeMethod = (scaleType[k] === 'ordinal') ? 'rangePoints' : 'range';
-        const kScale = hasScaleFor(scale, k) ?
-          scale[k] : // use existing scales if provided, otherwise create new
-          initScale(scaleType[k]).domain(domain[k])[rangeMethod](range[k]);
+        const kScale = initScale(scaleType[k])
+          .domain(domain[k])[rangeMethod](range[k]);
+
         // set `nice` option to round scale domains to nicer numbers
-        if(nice[k] && _.isFunction(kScale.nice)) console.log('nice');
         if(nice[k] && _.isFunction(kScale.nice)) kScale.nice(tickCount[k] || 10);
+
+        // extend scale domain to include custom `ticks` if passed
+        if(ticks[k]) {
+          const dataType = dataTypeFromScaleType(scaleType[k]);
+          const tickDomain = domainFromData(ticks[k], _.identity, dataType);
+          kScale.domain(combineDomains([kScale.domain(), tickDomain]), dataType);
+        }
+
+        // reverse scale domain if `invertScale` is passed
+        if(invertScale[k]) kScale.domain(kScale.domain().reverse());
+
         return [k, kScale];
       }));
     };
@@ -265,12 +283,10 @@ export default function resolveXYScales(ComposedComponent) {
         return <ComposedComponent {...this.props} />;
 
       // scales not provided, so we have to resolve them
-      // first resolve scale types
+      // first resolve scale types and domains
       const scaleType = this._resolveScaleType(props, ComposedComponent);
-      console.log('scaleType', scaleType);
-
-      // then resolve the domains
       const domain = this._resolveDomain(props, ComposedComponent, scaleType);
+      console.log('scaleType', scaleType);
       console.log('domain ', domain);
 
       // create a temporary scale with size & domain, which may be used by the Component to calculate the margins
@@ -298,8 +314,6 @@ export default function resolveXYScales(ComposedComponent) {
       return <ComposedComponent {...passedProps} />;
 
       // todo spacing/padding
-      // todo nice
-      // todo invertScale
       // todo tickCount?
       // todo ticks?
       // todo includeZero?
