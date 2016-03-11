@@ -314,17 +314,12 @@ export default function resolveXYScales(ComposedComponent) {
       return <ComposedComponent {...passedProps} />;
 
       // todo spacing/padding
-      // todo tickCount?
-      // todo ticks?
-      // todo includeZero?
-
-
+      // todo includeZero
       // todo purerender/shouldcomponentupdate?
       // todo resolve margins if scales are present
       // todo use zero for any margins which can't be resolved
       // todo throw if cannot resolve scaleType
       // todo throw if cannot resolve domain
-      // todo resolve internal chart padding also
       // todo check to make sure margins didn't change after scales resolved?
     }
   }

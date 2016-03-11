@@ -3,6 +3,8 @@ const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
 
+import resolveXYScales from 'utils/resolveXYScales';
+import resolveObjectProps from 'utils/resolveObjectProps';
 import {accessor, AccessorPropType, InterfaceMixin} from '../util.js';
 
 const LineChart = React.createClass({
@@ -37,7 +39,14 @@ const LineChart = React.createClass({
         const {data, getValue, scale} = this.props;
         const accessors = _.mapValues(getValue, accessor);
         const points = _.map(data, d => [scale.x(accessors.x(d)), scale.y(accessors.y(d))]);
+        console.log('points', points);
         const pathStr = pointsToPathStr(points);
+
+        return <svg width={this.props.width} height={this.props.height}>
+            <g className={this.props.name}>
+                <path d={pathStr} />
+            </g>
+        </svg>;
 
         return <g className={this.props.name}>
             <path d={pathStr} />
@@ -55,4 +64,20 @@ function pointsToPathStr(points) {
     }).join(' ');
 }
 
-export default LineChart;
+const xyKeys = [
+    'axisType', 'domain', 'nice', 'invertAxis', 'tickCount', 'ticks', 'tickLength',
+    'labelValues', 'labelFormat', 'labelPadding', 'showLabels', 'showGrid', 'showTicks', 'showZero',
+    'axisLabel', 'axisLabelAlign', 'axisLabelPadding'
+];
+const dirKeys = ['margin', 'padding', 'spacing'];
+
+const LineChartResolved = _.flow([
+  resolveXYScales,
+  _.partial(resolveObjectProps, _, xyKeys, ['x', 'y']),
+  _.partial(resolveObjectProps, _, dirKeys, ['top', 'bottom', 'left', 'right'])
+])(LineChart);
+
+export default LineChartResolved;
+
+//export default resolveXYScales(LineChart);
+//export default LineChart;

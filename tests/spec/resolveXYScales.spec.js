@@ -378,8 +378,7 @@ describe('resolveXYScales', () => {
 
 
   // todo spacing/padding
-  // todo tickCount?
-  // todo ticks?
+  // todo test tickCount
   // todo includeZero?
 
   // todo test combining multiple scaletypes/domains/margins from children

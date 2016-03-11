@@ -7,6 +7,7 @@ import moment from 'moment';
 import numeral from 'numeral';
 import ReactDOMServer from 'react-dom/server';
 import resolveObjectProps from 'utils/resolveObjectProps';
+import resolveXYScales from 'utils/resolveXYScales';
 
 let PropTypes = React.PropTypes;
 PropTypes = _.assign({}, PropTypes, {
@@ -43,7 +44,7 @@ const XYPlot = React.createClass({
         spacing: PropTypes.fourDirections,
 
         // axis types - number, time or ordinal
-        axisType: PropTypes.xyObjectOf(PropTypes.axisType),
+        scaleType: PropTypes.xyObjectOf(PropTypes.scaleType),
         // scale domains may be provided, otherwise will be inferred from data
         domain: PropTypes.xyObjectOf(PropTypes.dataArray),
         // whether or not to extend the scales to end on nice values (see docs for d3 scale.linear.nice())
