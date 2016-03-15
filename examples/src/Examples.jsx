@@ -13,6 +13,8 @@ import {
   KernelDensityEstimation
 } from '../../src';
 
+import XYPlot2 from '../../src/charts/XYPlot2';
+
 import {randomWalk, randomWalkSeries} from './data/util';
 
 // sample ordinal data
@@ -569,6 +571,8 @@ export const examples = [
   {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample}
 ];
 
+import XTicks from 'components/XTicks';
+
 export const App = React.createClass({
   getInitialState() {
     return {
@@ -582,19 +586,47 @@ export const App = React.createClass({
   },
 
   render() {
+    const testScale = d3.scale.linear().domain([-5, 5]).range([0, 200]);
+
     return <div>
       <h1>Reactochart Examples</h1>
 
+
+      <svg width={200} height={300}>
+        <g transform="translate(0, 150)">
+          <XTicks xScale={testScale} />
+        </g>
+      </svg>
+
+
+
+      {/*
       <div>
-        <XYPlot axisType={{x: 'ordinal'}} margin={40}>
+        <LineChart
+          margin={10}
+          width={500}
+          height={300}
+          data={[['a', 0.5], ['b', 1], ['c', 0.25]]}
+          data={_.range(20).map(i => [i, i*i])}
+          getValue={getXYArrayValue}
+        />
+
+      </div>
+
+
+      <div>
+        <XYPlot margin={40}>
           <LineChart
             data={[['a', 0.5], ['b', 1], ['c', 0.25]]}
             getValue={getXYArrayValue}
           />
         </XYPlot>
       </div>
+      */}
 
-
+      <div>
+        <XYPlot2 margin={{left: 100}} domain={[0, 100]} scaleType="linear"/>
+      </div>
       {/*
        <div>
        <XYPlot

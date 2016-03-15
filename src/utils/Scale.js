@@ -63,3 +63,10 @@ export function innerRangeY(outerHeight, margin = {}) {
     Math.min(top, outerHeight)
   ];
 }
+
+export function getScaleTicks(scale, scaleType, tickCount=10) {
+  scaleType = scaleType || inferScaleType(scale);
+  return (scaleType === 'ordinal') ?
+    scale.domain() :
+    scale.ticks(tickCount);
+}

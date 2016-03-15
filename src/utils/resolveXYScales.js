@@ -100,6 +100,8 @@ export default function resolveXYScales(ComposedComponent) {
         if(hasXYScaleTypes(scaleType)) return scaleType;
       }
 
+      // todo infer scaleType from domain?
+
       // if Component has data or datasets props,
       // infer the data type, & use that to get scale type
       if(_.isArray(props.data) || _.isArray(props.datasets)) {
