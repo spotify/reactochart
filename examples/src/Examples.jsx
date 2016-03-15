@@ -1,3 +1,5 @@
+import _ from 'lodash';
+import d3 from 'd3';
 import React from 'react';
 import update from 'react-addons-update';
 import numeral from 'numeral';
@@ -586,15 +588,21 @@ export const App = React.createClass({
   },
 
   render() {
-    const testScale = d3.scale.linear().domain([-5, 5]).range([0, 200]);
+    const testScale = d3.scale.linear().domain([-5, 5]).range([0, 300]);
 
     return <div>
       <h1>Reactochart Examples</h1>
 
+      <svg width={400} height={500}>
+        <g transform="translate(50, 50)">
+          <rect fill="lightblue" width="300" height="200" />
 
-      <svg width={200} height={300}>
-        <g transform="translate(0, 150)">
-          <XTicks xScale={testScale} />
+          <XTicks scale={testScale} top style={{stroke: 'orange'}} />
+          <XTicks scale={testScale} top inner style={{stroke: 'green'}} />
+
+          <XTicks scale={testScale} height={200} style={{stroke: 'red'}} />
+          <XTicks scale={testScale} height={200} inner style={{stroke: 'purple'}} />
+
         </g>
       </svg>
 
