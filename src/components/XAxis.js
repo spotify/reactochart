@@ -3,43 +3,40 @@ import _ from 'lodash';
 
 import {inferScaleType, getScaleTicks} from 'utils/Scale';
 
+import XTicks from 'components/XTicks';
 
-class XTicks extends React.Component {
+
+class XAxis extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.object.isRequired
+    scale: React.PropTypes.func.isRequired
   };
-  static defaultProps = {
-    position: 'bottom',
-    inner: false,
-    tickLength: 5,
-    style: null,
-    className: '',
-    tickCount: 10,
-    xScaleType: null,
-    ticks: null
-  };
+
+  static defaultProps = _.assign({},
+    XTicks.defaultProps,
+    {
+      width: 400,
+      height: 250,
+      top: false,
+      inner: false
+    }
+  );
 
   static getMargin(props) {
-    const {inner, tickLength, position} = _.defaults({}, props, XTicks.defaultProps);
-    if(inner) return {};
-    return position === 'top' ? {top: tickLength || 0} : {bottom: tickLength || 0};
+
   }
 
   render() {
-    const {xScale, xScaleType, tickCount, position, inner, tickLength, style, className} = this.props;
-    const ticks = this.props.ticks || getScaleTicks(xScale, xScaleType, tickCount);
-    const trueClassName = `chart-tick ${className}`;
+    const {scale, height, width, tickCount, top, inner, tickLength, tickStyle, tickClassName} = this.props;
+
+    const ticksProps = {scale, height, tickCount, top, inner, tickLength, tickStyle, tickClassName};
+
+    const axisLineY = top ? 0 : height;
 
     return <g>
-      {ticks.map(tick => {
-        const x1 = xScale(tick);
-        const y2 = ((inner && position === 'bottom') || (!inner && position === 'top')) ?
-          tickLength : -tickLength;
-
-        return <line {...{x1, x2: x1, y1: 0, y2, style, className: trueClassName}} />;
-      })}
+      <XTicks {...ticksProps}/>
+      <line x1={0} x2={width} y1={axisLineY} y2={axisLineY} style={{stroke: 'red'}}/>
     </g>;
   }
 }
 
-export default XTicks;
+export default XAxis;

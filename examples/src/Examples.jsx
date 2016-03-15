@@ -573,7 +573,13 @@ export const examples = [
   {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample}
 ];
 
+import XAxis from 'components/XAxis';
 import XTicks from 'components/XTicks';
+import XLine from 'components/XLine';
+import XGrid from 'components/XGrid';
+
+import YLine from 'components/YLine';
+import YGrid from 'components/YGrid';
 
 export const App = React.createClass({
   getInitialState() {
@@ -588,7 +594,13 @@ export const App = React.createClass({
   },
 
   render() {
-    const testScale = d3.scale.linear().domain([-5, 5]).range([0, 300]);
+
+    const width = 300;
+    const height = 200;
+    const testXScale = d3.scale.linear().domain([-5, 5]).range([0, width]);
+    const testYScale = d3.scale.linear().domain([-20, 20]).range([height, 0]);
+
+    const innerSize = {width: 300, height: 200};
 
     return <div>
       <h1>Reactochart Examples</h1>
@@ -597,11 +609,27 @@ export const App = React.createClass({
         <g transform="translate(50, 50)">
           <rect fill="lightblue" width="300" height="200" />
 
-          <XTicks scale={testScale} top style={{stroke: 'orange'}} />
-          <XTicks scale={testScale} top inner style={{stroke: 'green'}} />
+          <XGrid scale={testXScale} lineStyle={{stroke: 'orange'}} {...innerSize} />
 
-          <XTicks scale={testScale} height={200} style={{stroke: 'red'}} />
-          <XTicks scale={testScale} height={200} inner style={{stroke: 'purple'}} />
+          <XAxis top scale={testXScale} tickStyle={{stroke: 'blue'}} {...innerSize} />
+          <XAxis top inner scale={testXScale} tickStyle={{stroke: 'red'}} {...innerSize} />
+
+          <XAxis scale={testXScale} tickLength={8} {...innerSize} />
+          <XAxis inner scale={testXScale} tickStyle={{stroke: 'red'}} {...innerSize} />
+
+          <XLine scale={testXScale} value={0} lineStyle={{stroke: 'gray'}} {...innerSize} />
+          <XLine scale={testXScale} value={2} lineStyle={{stroke: 'gray'}} {...innerSize} />
+          <XLine scale={testXScale} value={-3} lineStyle={{stroke: 'gray'}} {...innerSize} />
+
+          <XLine scale={testXScale} value={0} lineStyle={{stroke: 'gray'}} {...innerSize} />
+          <XLine scale={testXScale} value={2} lineStyle={{stroke: 'gray'}} {...innerSize} />
+          <XLine scale={testXScale} value={-3} lineStyle={{stroke: 'gray'}} {...innerSize} />
+
+          <YGrid scale={testYScale} lineStyle={{stroke: 'blue'}} {...innerSize} />
+
+          <YLine scale={testYScale} value={-5} lineStyle={{stroke: 'purple'}} {...innerSize} />
+          <YLine scale={testYScale} value={10} lineStyle={{stroke: 'purple'}} {...innerSize} />
+          <YLine scale={testYScale} value={0} lineStyle={{stroke: 'purple'}} {...innerSize} />
 
         </g>
       </svg>

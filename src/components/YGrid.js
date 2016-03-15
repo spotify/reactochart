@@ -1,10 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
 
-import XLine from 'components/XLine';
+import YLine from 'components/YLine';
 import {getScaleTicks} from 'utils/Scale';
 
-class XGrid extends React.Component {
+class YGrid extends React.Component {
   static propTypes = {
     scale: React.PropTypes.func.isRequired
   };
@@ -18,14 +18,14 @@ class XGrid extends React.Component {
   };
 
   render() {
-    const {scale, height, tickCount, lineClassName, lineStyle} = this.props;
+    const {scale, width, tickCount, lineClassName, lineStyle} = this.props;
     const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
-    const gridLineClassName = `chart-grid-line chart-grid-line-x ${lineClassName}`;
+    const gridLineClassName = `chart-grid-line chart-grid-line-y ${lineClassName}`;
 
-    return <g className="chart-grid-x">
+    return <g className="chart-grid-y">
       {ticks.map((tick, i) => {
-        return <XLine {...{
-          scale, height, lineStyle,
+        return <YLine {...{
+          scale, width, lineStyle,
           lineClassName: gridLineClassName,
           value: tick,
           key: `grid-line-${i}`
@@ -35,4 +35,4 @@ class XGrid extends React.Component {
   }
 }
 
-export default XGrid;
+export default YGrid;

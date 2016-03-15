@@ -10,13 +10,13 @@ class XTicks extends React.Component {
   };
   static defaultProps = {
     height: 250,
+    top: false,
+    inner: false,
     tickCount: 10,
     ticks: null,
     tickLength: 5,
-    top: false,
-    inner: false,
-    className: '',
-    style: null
+    tickClassName: '',
+    tickStyle: null
   };
 
   static getMargin(props) {
@@ -27,9 +27,9 @@ class XTicks extends React.Component {
   }
 
   render() {
-    const {height, scale, tickCount, top, inner, tickLength, style, className} = this.props;
+    const {height, scale, tickCount, top, inner, tickLength, tickStyle, tickClassName} = this.props;
     const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
-    const trueClassName = `chart-tick chart-tick-x ${className}`;
+    const className = `chart-tick chart-tick-x ${tickClassName}`;
     const transform = top ? '' : `translate(0,${height})`;
 
     return <g className="chart-ticks-x" transform={transform}>
@@ -38,7 +38,12 @@ class XTicks extends React.Component {
         const y2 = ((inner && !top) || (!inner && top)) ?
           -tickLength : tickLength;
 
-        return <line {...{x1, x2: x1, y1: 0, y2, style, className: trueClassName, key: `tick-${i}`}} />;
+        return <line {...{
+          x1, x2: x1, y1: 0, y2,
+          className,
+          style: tickStyle,
+          key: `tick-${i}`
+        }} />;
       })}
     </g>;
   }

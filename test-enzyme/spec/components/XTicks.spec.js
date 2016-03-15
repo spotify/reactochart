@@ -98,13 +98,13 @@ describe('XTicks', () => {
   });
 
   it('passes className to the ticks', () => {
-    let wrapper = expectTicksToExist(shallow(<XTicks scale={linearScale} className={'test-tick-class'} />));
+    let wrapper = expectTicksToExist(shallow(<XTicks scale={linearScale} tickClassName={'test-tick-class'} />));
     expect(wrapper).to.have.descendants('line.test-tick-class');
   });
 
   it('passes style to the ticks', () => {
     const style = {fill: 'red'};
-    let wrapper = expectTicksToExist(shallow(<XTicks scale={linearScale} style={style} />));
+    let wrapper = expectTicksToExist(shallow(<XTicks scale={linearScale} tickStyle={style} />));
     wrapper.find('line.chart-tick-x').forEach(line => expect(line.prop('style')).to.deep.equal(style));
   });
 
