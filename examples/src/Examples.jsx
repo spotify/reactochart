@@ -595,20 +595,20 @@ export const App = React.createClass({
 
   render() {
 
-    const width = 300;
-    const height = 200;
-    const testXScale = d3.scale.linear().domain([-5, 5]).range([0, width]);
-    const testYScale = d3.scale.linear().domain([-20, 20]).range([height, 0]);
+    const innerSize = {width: 500, height: 400};
+    const testXScale = d3.scale.linear().domain([-5, 5]).range([0, innerSize.width]);
+    const testYScale = d3.scale.linear().domain([-20, 20]).range([innerSize.height, 0]);
 
-    const innerSize = {width: 300, height: 200};
+
 
     return <div>
       <h1>Reactochart Examples</h1>
 
-      <svg width={400} height={500}>
+      <svg width={600} height={500}>
         <g transform="translate(50, 50)">
-          <rect fill="lightblue" width="300" height="200" />
+          <rect fill="#dddddd" {...innerSize} />
 
+          <XGrid scale={testXScale} lineStyle={{stroke: 'red'}} tickCount={40} {...innerSize} />
           <XGrid scale={testXScale} lineStyle={{stroke: 'orange'}} {...innerSize} />
 
           <XAxis top scale={testXScale} tickStyle={{stroke: 'blue'}} {...innerSize} />
@@ -617,20 +617,9 @@ export const App = React.createClass({
           <XAxis scale={testXScale} tickLength={8} {...innerSize} />
           <XAxis inner scale={testXScale} tickStyle={{stroke: 'red'}} {...innerSize} />
 
-          <XLine scale={testXScale} value={0} lineStyle={{stroke: 'gray'}} {...innerSize} />
-          <XLine scale={testXScale} value={2} lineStyle={{stroke: 'gray'}} {...innerSize} />
-          <XLine scale={testXScale} value={-3} lineStyle={{stroke: 'gray'}} {...innerSize} />
 
-          <XLine scale={testXScale} value={0} lineStyle={{stroke: 'gray'}} {...innerSize} />
-          <XLine scale={testXScale} value={2} lineStyle={{stroke: 'gray'}} {...innerSize} />
-          <XLine scale={testXScale} value={-3} lineStyle={{stroke: 'gray'}} {...innerSize} />
-
-          <YGrid scale={testYScale} lineStyle={{stroke: 'blue'}} {...innerSize} />
-
-          <YLine scale={testYScale} value={-5} lineStyle={{stroke: 'purple'}} {...innerSize} />
-          <YLine scale={testYScale} value={10} lineStyle={{stroke: 'purple'}} {...innerSize} />
-          <YLine scale={testYScale} value={0} lineStyle={{stroke: 'purple'}} {...innerSize} />
-
+          <YGrid scale={testYScale} lineStyle={{stroke: 'purple'}} tickCount={40} {...innerSize} />
+          <YGrid scale={testYScale} lineStyle={{stroke: 'red'}} {...innerSize} />
         </g>
       </svg>
 
