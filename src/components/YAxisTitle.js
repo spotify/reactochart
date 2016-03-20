@@ -29,6 +29,30 @@ export default class YAxisTitle extends React.Component {
     }
   };
 
+  static getMargin(props) {
+    props = _.defaults({}, props, YAxisTitle.defaultProps);
+    const {distance, position, rotate} = props;
+    const placement = props.placement || ((position === 'left') ? 'before' : 'after');
+    const zeroMargin = {top: 0, bottom: 0, left: 0, right: 0};
+
+    if((position === 'left' && placement === 'after') || (position == 'right' && placement === 'before'))
+      return zeroMargin;
+
+    const title = props.title || props.children;
+    const titleStyle = _.defaults(props.titleStyle, YAxisTitle.defaultProps.titleStyle);
+    const measured = measureText(_.assign({text: title}, titleStyle));
+
+    const marginValue = distance +
+      Math.ceil(rotate ?
+        measured.height.value :
+        measured.width.value
+      );
+
+    return (position === 'left') ?
+    {...zeroMargin, left: marginValue} :
+    {...zeroMargin, right: marginValue};
+  }
+
   render() {
     const {height, width, distance, position, alignment, titleStyle} = this.props;
     const title = this.props.title || this.props.children;

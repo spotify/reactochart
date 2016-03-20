@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import measureText from 'measure-text';
 
-export default class YAxisTitle extends React.Component {
+export default class XAxisTitle extends React.Component {
   static propTypes = {
     height: React.PropTypes.number,
     width: React.PropTypes.number,
@@ -30,7 +30,7 @@ export default class YAxisTitle extends React.Component {
   };
 
   static getMargin(props) {
-    props = _.defaults({}, props, YAxisTitle.defaultProps);
+    props = _.defaults({}, props, XAxisTitle.defaultProps);
     const {distance, position, rotate} = props;
     const placement = props.placement || ((position === 'bottom') ? 'below' : 'above');
     const zeroMargin = {top: 0, bottom: 0, left: 0, right: 0};
@@ -39,7 +39,7 @@ export default class YAxisTitle extends React.Component {
       return zeroMargin;
 
     const title = props.title || props.children;
-    const titleStyle = _.defaults(props.titleStyle, YAxisTitle.defaultProps.titleStyle);
+    const titleStyle = _.defaults(props.titleStyle, XAxisTitle.defaultProps.titleStyle);
     const measured = measureText(_.assign({text: title}, titleStyle));
 
     const marginValue = distance +
@@ -48,13 +48,9 @@ export default class YAxisTitle extends React.Component {
         measured.height.value
       );
 
-    const margin = (position === 'bottom') ?
+    return (position === 'bottom') ?
       {...zeroMargin, bottom: marginValue} :
       {...zeroMargin, top: marginValue};
-
-    console.log('x axis title margin', margin);
-
-    return margin
   }
 
   render() {
