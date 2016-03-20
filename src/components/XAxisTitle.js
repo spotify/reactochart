@@ -29,12 +29,40 @@ export default class YAxisTitle extends React.Component {
     }
   };
 
+  static getMargin(props) {
+    props = _.defaults({}, props, YAxisTitle.defaultProps);
+    const {distance, position, rotate} = props;
+    const placement = props.placement || ((position === 'bottom') ? 'below' : 'above');
+    const zeroMargin = {top: 0, bottom: 0, left: 0, right: 0};
+
+    if((position === 'bottom' && placement === 'above') || (position == 'top' && placement === 'below'))
+      return zeroMargin;
+
+    const title = props.title || props.children;
+    const titleStyle = _.defaults(props.titleStyle, YAxisTitle.defaultProps.titleStyle);
+    const measured = measureText(_.assign({text: title}, titleStyle));
+
+    const marginValue = distance +
+      Math.ceil(rotate ?
+        measured.width.value :
+        measured.height.value
+      );
+
+    const margin = (position === 'bottom') ?
+      {...zeroMargin, bottom: marginValue} :
+      {...zeroMargin, top: marginValue};
+
+    console.log('x axis title margin', margin);
+
+    return margin
+  }
+
   render() {
     const {height, width, distance, position, alignment, titleStyle} = this.props;
     const title = this.props.title || this.props.children;
     const placement = this.props.placement || ((position === 'bottom') ? 'below' : 'above');
-
     const rotate = this.props.rotate ? -90 : 0;
+
     const posY = (position === 'bottom') ? height : 0;
     const translateY = posY +
       ((placement === 'above') ? -distance : distance);
