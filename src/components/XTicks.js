@@ -12,6 +12,8 @@ class XTicks extends React.Component {
     height: 250,
     top: false,
     inner: false,
+    position: 'bottom',
+    placement: undefined,
     tickCount: 10,
     ticks: null,
     tickLength: 5,
@@ -27,15 +29,16 @@ class XTicks extends React.Component {
   }
 
   render() {
-    const {height, scale, tickCount, top, inner, tickLength, tickStyle, tickClassName} = this.props;
+    const {height, scale, tickCount, position, tickLength, tickStyle, tickClassName} = this.props;
     const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
     const className = `chart-tick chart-tick-x ${tickClassName}`;
-    const transform = top ? '' : `translate(0,${height})`;
+    const transform = (position === 'bottom') ? `translate(0,${height})` : '';
+    const placement = this.props.placement || ((position === 'top') ? 'above' : 'below');
 
     return <g className="chart-ticks-x" transform={transform}>
       {ticks.map((tick, i) => {
         const x1 = scale(tick);
-        const y2 = ((inner && !top) || (!inner && top)) ?
+        const y2 = (placement === 'above') ?
           -tickLength : tickLength;
 
         return <line {...{

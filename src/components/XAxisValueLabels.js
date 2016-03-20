@@ -2,8 +2,9 @@ import React from 'react';
 import _ from 'lodash';
 import measureText from 'measure-text';
 import moment from 'moment';
+import numeral from 'numeral';
 
-import {getScaleTicks} from 'utils/Scale';
+import {getScaleTicks, inferScaleType} from 'utils/Scale';
 import resolveObjectProps from 'utils/resolveObjectProps';
 
 function checkRangesOverlap(a, b) {
@@ -19,6 +20,7 @@ function checkRangesOverlap(a, b) {
 function countRangeOverlaps(ranges) {
   // given a list of ranges of the form [[start, end], ...]
   // counts the number of adjacent ranges which touch or overlap each other
+  // todo: instead of counting overlaps, sum the amount by which they overlap & choose least overlap
 
   return _.tail(ranges).reduce((sum, range, i) => {
     const prevRange = ranges[i]; // (not [i-1], _.tail skips first range)
@@ -26,11 +28,8 @@ function countRangeOverlaps(ranges) {
   }, 0)
 }
 
-function getLabelXOverhang(scale, value, width, anchor = 'middle') {
-  const anchorOffsets = {start: 0, middle: -0.5, end: -1};
-  //const labelLeft = scale(value) + ((anchorOffsets[anchor] || 0) * width);
-  //const labelRight = labelLeft + width;
-  const [labelLeft, labelRight] = getLabelXRange(scale, {value, width}, anchor);
+function getLabelXOverhang(scale, label, anchor = 'middle') {
+  const [labelLeft, labelRight] = getLabelXRange(scale, label, anchor);
   const overhangLeft = Math.ceil(Math.max(_.min(scale.range()) - labelLeft, 0));
   const overhangRight = Math.ceil(Math.max(labelRight - _.max(scale.range()), 0));
   return [overhangLeft, overhangRight];
@@ -42,51 +41,69 @@ function getLabelXRange(scale, label, anchor = 'middle') {
   return [x1, x1 + label.width];
 }
 
-function checkLabelsFitX(scale, labels, anchor = 'middle') {
-  // returns true if all of the given labels can fit on the given x scale,
-  // taking into account the fact that they may overhang either edge of the scale
-  // assumes the labels will be distributed uniformly along the axis
-  // todo should work with custom ticks which are not uniformly distributed?
-
-  const labelXRanges = labels.map(label => getLabelXRange(scale, label, anchor));
-  const collisionCount = countRangeOverlaps(labelXRanges);
-  console.log(collisionCount, 'collisions');
-
-  const xOverhangs = labels.map(({value, width}) => getLabelXOverhang(scale, value, width, anchor));
-  const labelsWidthInner = _.sum(_.map(labels, 'width')) - _.sum(_.flatten(xOverhangs));
-  const scaleWidth = _.max(scale.range()) - _.min(scale.range());
-  return (labelsWidthInner < scaleWidth);
-}
-
 function checkLabelsDistinct(labels) {
   // given a set of label objects with text properties,
   // return true iff each label has distinct text (ie. no duplicate label texts)
-
   const labelStrs = _.map(labels, 'text');
   return (_.uniq(labelStrs).length === labelStrs.length);
 }
 
-function resolveXLabelsForValues(scale, values, formats, style) {
+function resolveXLabelsForValues(scale, values, formats, style, force = true) {
   // given a set of values to label, and a list of formatters to try,
   // find the first formatter that produces a set of labels
   // which are A) distinct and B) fit on the axis without colliding with each other
   // returns the formatter and the generated labels
 
-  let labels, areLabelsDistinct, doLabelsFitX;
+  let labels;
+  let attempts = [];
   const goodFormat = _.find(formats, format => {
-    areLabelsDistinct = doLabelsFitX = undefined;
-    labels = values.map(value => MeasuredValueLabel.getSize({value, format, style}));
-    areLabelsDistinct = checkLabelsDistinct(labels);
-    if(!areLabelsDistinct) console.log('labels are not distinct', _.map(labels, 'text'));
-    if(!areLabelsDistinct) return false;
-    doLabelsFitX = checkLabelsFitX(scale, labels, (style.textAnchor || 'middle'));
-    if(!doLabelsFitX) console.log('labels do not fit on X axis', _.map(labels, 'text'));
-    return areLabelsDistinct && doLabelsFitX;
+    const testLabels = values.map(value => MeasuredValueLabel.getLabel({value, format, style}));
+
+    const areLabelsDistinct = checkLabelsDistinct(testLabels);
+    if(!areLabelsDistinct) {
+      console.log('labels are not distinct', _.map(testLabels, 'text'));
+      attempts.push({labels: testLabels, format, areLabelsDistinct});
+      return false;
+    }
+
+    const labelXRanges = testLabels.map(label => getLabelXRange(scale, label, (style.textAnchor || 'middle')));
+    const collisionCount = countRangeOverlaps(labelXRanges);
+    if(collisionCount) {
+      console.log(`labels do not fit on X axis, ${collisionCount} collisions`, _.map(testLabels, 'text'));
+      attempts.push({labels: testLabels, format, areLabelsDistinct, collisionCount});
+      return false;
+    }
+
+    labels = testLabels;
+    return true;
   });
-  const format = _.isUndefined(goodFormat) ? _.last(formats) : goodFormat;
-  const areLabelsGood = areLabelsDistinct && doLabelsFitX;
-  // todo warn if we couldn't find good labels
-  return {labels, format, areLabelsGood, areLabelsDistinct, doLabelsFitX};
+
+  if(!_.isUndefined(goodFormat)) {
+    // found labels which work, return them
+    return {labels, format: goodFormat, areLabelsDistinct: true, collisionCount: 0};
+  } else {
+    // none of the sets of labels are good
+    if(!force) // if we're not forced to decide, return all the labels we tried (let someone else decide)
+      return {attempts};
+
+    // forced to decide, choose the least bad option
+    // todo warn that we couldn't find good labels
+    const distinctAttempts = attempts.filter(attempt => attempt.areLabelsDistinct);
+    return distinctAttempts.length === 0 ?
+      // super bad, we don't have any label sets with distinct labels. return the last attempt.
+      _.last(attempts) :
+      // return the attempt with the fewest collisions between distinct labels
+      _.minBy(distinctAttempts, 'collisionCount');
+  }
+}
+
+function makeFormatters(formatStrs, scaleType) {
+  return formatStrs.map(formatStr => {
+    if(!_.isString(formatStr)) return formatStr;
+    return (scaleType === 'time') ?
+      (v) => moment(v).format(formatStr) :
+      (v) => numeral(v).format(formatStr);
+  })
 }
 
 class XAxisValueLabels extends React.Component {
@@ -97,17 +114,23 @@ class XAxisValueLabels extends React.Component {
     height: 250,
     top: false,
     inner: false,
+    position: 'bottom',
+    placement: undefined,
+    distance: 4,
     tickCount: 10,
     ticks: null,
     labelClassName: '',
     labelStyle: {
       fontFamily: "Helvetica, sans-serif",
-      fontSize: '20px',
+      fontSize: '18px',
       lineHeight: 1,
       textAnchor: 'middle',
       //dominantBaseline: 'text-before-edge'
       //textAnchor: 'left'
-    }
+    },
+    format: undefined,
+    formats: undefined,
+    labels: undefined
   };
 
   static getMargin(props) {
@@ -117,53 +140,71 @@ class XAxisValueLabels extends React.Component {
     //return _.defaults(margin, {top: 0, bottom: 0, left: 0, right: 0});
   }
 
-  render() {
-    const {height, scale, tickCount, top, inner, labelStyle, labelClassName} = this.props;
-    //const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
-    const ticks = scale.ticks();
-    const className = `chart-value-label chart-value-label-x ${labelClassName}`;
-    const transform = top ? '' : `translate(0,${height})`;
+  static getDefaultFormats(scaleType) {
+    const timeFormatStrs = ['YYYY', 'YY', 'MMM YYYY', 'M/YY'];
+    const numberFormatStrs = ["0.[00]a", "0,0", "0.[0]", "0.[00]", "0.[0000]", "0.[000000]"];
 
+    return (scaleType === 'ordinal') ? [_.identity] :
+      (scaleType === 'time') ? timeFormatStrs :
+      numberFormatStrs;
+  }
+
+  static getLabels(props) {
+    const {scale, tickCount, labelStyle} = props;
+    const ticks = props.ticks || getScaleTicks(scale, null, tickCount);
     const style = _.defaults(labelStyle, XAxisValueLabels.defaultProps.labelStyle);
 
-    const formatStrs = ['YYYY', 'YY', 'MMM, YYYY', 'MMMYY', 'M/YY'];
-    const formats = formatStrs.map(formatStr => (v => moment(v).format(formatStr)));
+    const scaleType = inferScaleType(scale);
+    const propsFormats = props.format ? [props.format] : props.formats;
+    const formatStrs = (_.isArray(propsFormats) && propsFormats.length) ?
+      propsFormats : XAxisValueLabels.getDefaultFormats(scaleType);
+    const formats = makeFormatters(formatStrs, scaleType);
 
     // todo resolve ticks also
     // if there are so many ticks that no combination of labels can fit on the axis,
     // nudge down the tickCount and try again
-    // doing this will require communicating the updated tickCount back to the parent element...
+    // doing this will require communicating the updated ticks/tickCount back to the parent element...
 
-    const labels = resolveXLabelsForValues(scale, ticks, formats, style);
+    const {labels} = resolveXLabelsForValues(scale, ticks, formats, style);
     console.log('found labels', labels);
+    return labels;
+  }
 
+  render() {
+    const {height, scale, tickCount, position, distance, labelStyle, labelClassName} = this.props;
+    const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
+    const placement = this.props.placement || ((position === 'top') ? 'above' : 'below');
+    const className = `chart-value-label chart-value-label-x ${labelClassName}`;
+
+
+    // todo: position: 'zero' to position along the zero line
+    const transform = (position === 'bottom') ? `translate(0,${height})` : '';
+
+    const style = _.defaults(labelStyle, XAxisValueLabels.defaultProps.labelStyle);
+
+    const labels = this.props.labels || XAxisValueLabels.getLabels(this.props);
+
+    //console.log('found labels', labels);
 
     return <g className="chart-value-labels-x" transform={transform}>
-      {ticks.map((tick, i) => {
-        const x = scale(tick);
-        const formatLabel = l => moment(l).format('M/YY');
-        const labelStr = formatLabel(tick);
+      {labels.map((label) => {
+        const x = scale(label.value);
+        const y = (placement === 'above') ?
+          -label.height - distance :
+          distance;
 
-        const size = MeasuredValueLabel.getSize({value: tick, format: formatLabel, style: labelStyle});
-        console.log('size', size);
-        console.log('overhangX', getLabelXOverhang(scale, tick, size.width, 'middle'));
-
-        //const labelStr = "why";
-        const measured = measureText(_.assign({text: labelStr}, XAxisValueLabels.defaultProps.labelStyle));
-        //console.log(measured);
         return <g>
           <rect {...{
-            x: x - (measured.width.value / 2),
-            //y: -measured.height.value,
-            y: -20,
-            width: measured.width.value,
-            height: 20,
-            fill: 'lightblue'}}
-          />
-          <text {...{className, dy:"-0.2em", style, x}}>
-            {labelStr}
-            {/* formatAxisLabel(value, type, labelFormat, emptyLabel) */}
-          </text>
+            x: x - (label.width / 2),
+            y: y,
+            width: label.width,
+            height: label.height,
+            fill: 'thistle'
+          }} />
+
+          <MeasuredValueLabel {...{x, y, className, dy:"0.8em", style}}>
+            {label.text}
+          </MeasuredValueLabel>
         </g>;
       })}
     </g>;
@@ -183,18 +224,29 @@ class MeasuredValueLabel extends React.Component {
       textAnchor: 'middle'
     }
   };
-  static getSize(props) {
+  static getLabel(props) {
     const {value, format} = props;
     const style = _.defaults(props.style, MeasuredValueLabel.defaultProps.style);
     const labelStr = format(value);
     const measured = measureText(_.assign({text: labelStr}, style));
-    //console.log('measured', measured);
-    return {height: measured.height.value, width: measured.width.value, value: props.value, text: measured.text};
+
+    return {
+      value: props.value,
+      text: measured.text,
+      height: measured.height.value,
+      width: measured.width.value
+    };
   }
+
   render() {
     const {value, format} = this.props;
+    const passedProps = _.omit(this.props, ['value', 'format']);
 
-    return <text>{format(value)}</text>;
+    return <text {...passedProps}>
+      {React.Children.count(this.props.children) ?
+        this.props.children : format(value)
+      }
+    </text>;
   }
 }
 
