@@ -7,9 +7,9 @@ export default class YAxisTitle extends React.Component {
     height: React.PropTypes.number,
     width: React.PropTypes.number,
     distance: React.PropTypes.number,
-    position: React.PropTypes.oneOf(['left', 'right']),
-    alignment: React.PropTypes.oneOf(['top', 'middle', 'bottom']),
-    placement: React.PropTypes.oneOf(['before', 'after']),
+    position: React.PropTypes.oneOf(['top', 'bottom']),
+    alignment: React.PropTypes.oneOf(['left', 'center', 'right']),
+    placement: React.PropTypes.oneOf(['above', 'below']),
     rotate: React.PropTypes.bool,
     titleStyle: React.PropTypes.object
   };
@@ -17,10 +17,10 @@ export default class YAxisTitle extends React.Component {
     height: 250,
     width: 400,
     distance: 5,
-    position: 'left',
-    alignment: 'middle',
+    position: 'bottom',
+    alignment: 'center',
     placement: undefined,
-    rotate: true,
+    rotate: false,
     titleStyle: {
       fontFamily: "Helvetica, sans-serif",
       fontSize: '24px',
@@ -32,28 +32,30 @@ export default class YAxisTitle extends React.Component {
   render() {
     const {height, width, distance, position, alignment, titleStyle} = this.props;
     const title = this.props.title || this.props.children;
-    const placement = this.props.placement || ((position === 'left') ? 'before' : 'after');
+    const placement = this.props.placement || ((position === 'bottom') ? 'below' : 'above');
 
     const rotate = this.props.rotate ? -90 : 0;
-    const posX = (position === 'right') ? width : 0;
-    const translateX = posX +
-      ((placement === 'before') ? -distance : distance);
-    const translateY =
-      (alignment === 'middle') ? (height / 2) :
-      (alignment === 'bottom') ? (height) :
+    const posY = (position === 'bottom') ? height : 0;
+    const translateY = posY +
+      ((placement === 'above') ? -distance : distance);
+    const translateX =
+      (alignment === 'center') ? (width / 2) :
+      (alignment === 'right') ? (width) :
       0;
+
     const textAnchor =
-      (rotate && alignment === 'top') ? 'end' :
-      (rotate && alignment === 'middle') ? 'middle' :
-      (rotate && alignment === 'bottom') ? 'start' :
-      (placement === 'before') ? 'end' :
-      'start';
+      (rotate && placement === 'above') ? 'start' :
+      (rotate && placement === 'below') ? 'end' :
+      (alignment === 'left') ? 'start' :
+      (alignment === 'right') ? 'end' :
+      'middle';
+
     const dy =
-      (rotate && placement == 'before') ? '-0.2em' :
+      (rotate && alignment === 'right') ? '-0.2em' :
+      (rotate && alignment === 'center') ? '0.3em' :
       (rotate) ? '0.8em' :
-      (alignment === 'top') ? '0.8em' :
-      (alignment === 'middle') ? '0.3em' :
-      null;
+      (placement === 'below') ? '0.8em' :
+      '-0.2em';
 
     return <g transform={`translate(${translateX},${translateY})`}>
       <text style={{...titleStyle, textAnchor}} transform={`rotate(${rotate})`} dy={dy}>

@@ -577,9 +577,99 @@ import XAxis from 'components/XAxis';
 import XTicks from 'components/XTicks';
 import XLine from 'components/XLine';
 import XGrid from 'components/XGrid';
+import XAxisValueLabels from 'components/XAxisValueLabels';
 
 import YLine from 'components/YLine';
 import YGrid from 'components/YGrid';
+
+import YAxisTitle from 'components/YAxisTitle';
+import XAxisTitle from 'components/XAxisTitle';
+
+class YAxisTitleTest extends React.Component {
+  render() {
+    const {width, height} = this.props;
+    const size = {width, height};
+    return <g>
+      <YAxisTitle title="Top I" alignment="top" {...size} />
+      <YAxisTitle title="Mid + Mid" alignment="middle" {...size} />
+      <YAxisTitle title="I Bottom" alignment="bottom" {...size} />
+
+      <YAxisTitle title="Top I" alignment="top" rotate={false} {...size} />
+      <YAxisTitle title="Mid +" alignment="middle" rotate={false} {...size} />
+      <YAxisTitle title="Bottom I" alignment="bottom" rotate={false} {...size} />
+
+
+      <YAxisTitle title="Top I" alignment="top" placement="after" {...size} />
+      <YAxisTitle title="Mid + Mid" alignment="middle" placement="after" {...size} />
+      <YAxisTitle title="I Bottom" alignment="bottom" placement="after" {...size} />
+
+      <YAxisTitle title="I Top" alignment="top" placement="after" rotate={false} {...size} />
+      <YAxisTitle title="+ Mid" alignment="middle" placement="after" rotate={false} {...size} />
+      <YAxisTitle title="I Bottom" alignment="bottom" placement="after" rotate={false} {...size} />
+
+
+      <YAxisTitle title="Top I" alignment="top" position="right" {...size} />
+      <YAxisTitle title="Mid + Mid" alignment="middle" position="right" {...size} />
+      <YAxisTitle title="I Bottom" alignment="bottom" position="right" {...size} />
+
+      <YAxisTitle title="I Top" alignment="top" position="right" rotate={false} {...size} />
+      <YAxisTitle title="+ Mid" alignment="middle" position="right" rotate={false} {...size} />
+      <YAxisTitle title="I Bottom" alignment="bottom" position="right" rotate={false} {...size} />
+
+
+      <YAxisTitle title="Top I" alignment="top" placement="before" position="right" {...size} />
+      <YAxisTitle title="Mid + Mid" alignment="middle" placement="before" position="right" {...size} />
+      <YAxisTitle title="I Bottom" alignment="bottom" placement="before" position="right" {...size} />
+
+      <YAxisTitle title="Top I" alignment="top" position="right" placement="before" rotate={false} {...size} />
+      <YAxisTitle title="Mid +" alignment="middle" position="right" placement="before" rotate={false} {...size} />
+      <YAxisTitle title="Bottom I" alignment="bottom" position="right" placement="before" rotate={false} {...size} />
+    </g>;
+  }
+}
+
+class XAxisTitleTest extends React.Component {
+  render() {
+    const {width, height} = this.props;
+    const size = {width, height};
+    return <g>
+      <XAxisTitle title="I Left" alignment="left" {...size} />
+      <XAxisTitle title="Center + Center" alignment="center" {...size} />
+      <XAxisTitle title="Right I" alignment="right" {...size} />
+
+      <XAxisTitle title="I Left" alignment="left" placement="above" {...size} />
+      <XAxisTitle title="Center + Center" alignment="center" placement="above" {...size} />
+      <XAxisTitle title="Right I" alignment="right" placement="above" {...size} />
+
+
+      <XAxisTitle title="Left I" alignment="left" rotate={true} {...size} />
+      <XAxisTitle title="Center +" alignment="center" rotate={true} {...size} />
+      <XAxisTitle title="Right I" alignment="right" rotate={true} {...size} />
+
+      <XAxisTitle title="I Left" alignment="left" placement="above" rotate={true} {...size} />
+      <XAxisTitle title="+ Center" alignment="center" placement="above" rotate={true} {...size} />
+      <XAxisTitle title="I Right" alignment="right" placement="above" rotate={true} {...size} />
+
+
+      <XAxisTitle title="I Left " position="top" alignment="left" {...size} />
+      <XAxisTitle title="Center + Center" position="top" alignment="center" {...size} />
+      <XAxisTitle title="Right I" position="top" alignment="right" {...size} />
+
+      <XAxisTitle title="I Left " position="top" alignment="left" placement="below" {...size} />
+      <XAxisTitle title="Center + Center" position="top" alignment="center" placement="below" {...size} />
+      <XAxisTitle title="Right I" position="top" alignment="right" placement="below" {...size} />
+
+
+      <XAxisTitle title="I Left" position="top" alignment="left" rotate={true} {...size} />
+      <XAxisTitle title="+ Center" position="top" alignment="center" rotate={true} {...size} />
+      <XAxisTitle title="I Right" position="top" alignment="right" rotate={true} {...size} />
+
+      <XAxisTitle title="Left I" position="top" alignment="left" placement="below" rotate={true} {...size} />
+      <XAxisTitle title="Center +" position="top" alignment="center" placement="below" rotate={true} {...size} />
+      <XAxisTitle title="Right I" position="top" alignment="right" placement="below" rotate={true} {...size} />
+    </g>;
+  }
+}
 
 export const App = React.createClass({
   getInitialState() {
@@ -595,34 +685,74 @@ export const App = React.createClass({
 
   render() {
 
-    const innerSize = {width: 500, height: 400};
-    const testXScale = d3.scale.linear().domain([-5, 5]).range([0, innerSize.width]);
+    const innerSize = {width: 900, height: 400};
+    const testXScale = d3.time.scale()
+      .domain([new Date(2005, 0, 1), new Date(2015, 0, 1)])
+      .range([0, innerSize.width]);
     const testYScale = d3.scale.linear().domain([-20, 20]).range([innerSize.height, 0]);
 
-
+    const linearXScale = d3.scale.linear().domain([-.05, .05]).range([0, innerSize.width]);
 
     return <div>
       <h1>Reactochart Examples</h1>
 
-      <svg width={600} height={500}>
-        <g transform="translate(50, 50)">
+      <svg width={innerSize.width + 200} height={innerSize.height + 200}>
+        <g transform="translate(100, 100)">
           <rect fill="#dddddd" {...innerSize} />
-
-          <XGrid scale={testXScale} lineStyle={{stroke: 'red'}} tickCount={40} {...innerSize} />
-          <XGrid scale={testXScale} lineStyle={{stroke: 'orange'}} {...innerSize} />
-
-          <XAxis top scale={testXScale} tickStyle={{stroke: 'blue'}} {...innerSize} />
-          <XAxis top inner scale={testXScale} tickStyle={{stroke: 'red'}} {...innerSize} />
-
-          <XAxis scale={testXScale} tickLength={8} {...innerSize} />
-          <XAxis inner scale={testXScale} tickStyle={{stroke: 'red'}} {...innerSize} />
-
-
-          <YGrid scale={testYScale} lineStyle={{stroke: 'purple'}} tickCount={40} {...innerSize} />
-          <YGrid scale={testYScale} lineStyle={{stroke: 'red'}} {...innerSize} />
+          <XGrid scale={testXScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+          <YGrid scale={testYScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+          <XAxisTitleTest {...innerSize} />
         </g>
       </svg>
 
+      <svg width={innerSize.width + 200} height={innerSize.height + 200}>
+        <g transform="translate(100, 100)">
+          <rect fill="#dddddd" {...innerSize} />
+          <XGrid scale={testXScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+          <YGrid scale={testYScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+          <YAxisTitleTest {...innerSize} />
+        </g>
+      </svg>
+
+
+      <svg width={innerSize.width + 200} height={innerSize.height + 200}>
+        <g transform="translate(100, 100)">
+          <rect fill="#dddddd" {...innerSize} />
+
+          <XGrid scale={testXScale} lineStyle={{stroke: '#ccc'}} tickCount={40} {...innerSize} />
+          <YGrid scale={testYScale} lineStyle={{stroke: '#ccc'}} tickCount={40} {...innerSize} />
+          <XGrid scale={testXScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+          <YGrid scale={testYScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+
+          <XAxis scale={testXScale} {...innerSize} />
+          <XAxis position="top" scale={testXScale} tickStyle={{stroke: 'purple'}} {...innerSize} />
+
+          {/*
+          <XAxisValueLabels scale={testXScale} tickCount={6} {...innerSize} />
+          <XAxisValueLabels position="top" scale={testXScale} {...innerSize} />
+           */}
+        </g>
+      </svg>
+
+      <svg width={innerSize.width + 100} height={innerSize.height + 100}>
+        <g transform="translate(50, 50)">
+          <rect fill="#dddddd" {...innerSize} />
+
+          <XAxis top scale={linearXScale} tickStyle={{stroke: 'blue'}} {...innerSize} />
+          <XAxis top inner scale={linearXScale} tickStyle={{stroke: 'red'}} {...innerSize} />
+
+          <XAxis scale={linearXScale} tickLength={8} {...innerSize} />
+          <XAxis inner scale={linearXScale} tickStyle={{stroke: 'red'}} {...innerSize} />
+
+          <XGrid scale={linearXScale} lineStyle={{stroke: '#ccc'}} tickCount={40} {...innerSize} />
+          <YGrid scale={testYScale} lineStyle={{stroke: '#ccc'}} tickCount={40} {...innerSize} />
+          <XGrid scale={linearXScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+          <YGrid scale={testYScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+
+          <XAxisValueLabels scale={linearXScale} tickCount={6} {...innerSize} />
+          <XAxisValueLabels position="top" scale={linearXScale} {...innerSize} />
+        </g>
+      </svg>
 
 
       {/*
