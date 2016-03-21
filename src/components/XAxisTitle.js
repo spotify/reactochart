@@ -8,8 +8,8 @@ export default class XAxisTitle extends React.Component {
     width: React.PropTypes.number,
     distance: React.PropTypes.number,
     position: React.PropTypes.oneOf(['top', 'bottom']),
-    alignment: React.PropTypes.oneOf(['left', 'center', 'right']),
     placement: React.PropTypes.oneOf(['above', 'below']),
+    alignment: React.PropTypes.oneOf(['left', 'center', 'right']),
     rotate: React.PropTypes.bool,
     titleStyle: React.PropTypes.object
   };
@@ -18,8 +18,8 @@ export default class XAxisTitle extends React.Component {
     width: 400,
     distance: 5,
     position: 'bottom',
-    alignment: 'center',
     placement: undefined,
+    alignment: 'center',
     rotate: false,
     titleStyle: {
       fontFamily: "Helvetica, sans-serif",

@@ -10,8 +10,6 @@ class XTicks extends React.Component {
   };
   static defaultProps = {
     height: 250,
-    top: false,
-    inner: false,
     position: 'bottom',
     placement: undefined,
     tickCount: 10,
@@ -22,10 +20,17 @@ class XTicks extends React.Component {
   };
 
   static getMargin(props) {
-    const {inner, tickLength, top} = _.defaults({}, props, XTicks.defaultProps);
-    const margin = inner ? {} :
-      top ? {top: tickLength || 0} : {bottom: tickLength || 0};
-    return _.defaults(margin, {top: 0, bottom: 0, left: 0, right: 0});
+    const {tickLength, top, position} = _.defaults({}, props, XTicks.defaultProps);
+    const placement = props.placement || ((position === 'top') ? 'above' : 'below');
+    const zeroMargin = {top: 0, bottom: 0, left: 0, right: 0};
+
+    if((position === 'bottom' && placement === 'above') || (position == 'top' && placement === 'below'))
+      return zeroMargin;
+
+    const margin = (position === 'top') ?
+      {top: tickLength || 0} : {bottom: tickLength || 0};
+
+    return _.defaults(margin, zeroMargin);
   }
 
   render() {

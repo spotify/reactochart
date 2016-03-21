@@ -16,10 +16,10 @@ import {
   scaleTypeFromDataType,
   dataTypeFromScaleType,
   initScale,
-  isValidScale,
-  innerRangeX,
-  innerRangeY
+  isValidScale
 } from 'utils/Scale';
+
+import {innerRangeX, innerRangeY} from 'utils/Margin';
 
 /**
  * `resolveXYScales` is a higher-order-component.

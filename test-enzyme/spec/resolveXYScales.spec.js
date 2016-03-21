@@ -4,11 +4,8 @@ import d3 from 'd3';
 import TestUtils from 'react-addons-test-utils';
 import {expect} from 'chai';
 
-import {
-  isValidScale,
-  innerRangeX,
-  innerRangeY
-} from 'utils/Scale';
+import {isValidScale} from '../../src/utils/Scale';
+import {innerRangeX, innerRangeY} from '../../src/utils/Margin';
 
 import resolveXYScales from '../../src/utils/resolveXYScales';
 import resolveObjectProps from '../../src/utils/resolveObjectProps';

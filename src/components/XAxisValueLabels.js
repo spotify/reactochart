@@ -35,6 +35,13 @@ function getLabelXOverhang(scale, label, anchor = 'middle') {
   return [overhangLeft, overhangRight];
 }
 
+function getLabelsXOverhang(scale, labels, anchor = 'middle') {
+  return _.reduce(labels, ([left, right], label) => {
+    const [thisLeft, thisRight] = getLabelXOverhang(scale, label, anchor);
+    return [Math.max(left, thisLeft), Math.max(right, thisRight)];
+  }, [0, 0]);
+}
+
 function getLabelXRange(scale, label, anchor = 'middle') {
   const anchorOffsets = {start: 0, middle: -0.5, end: -1};
   const x1 = scale(label.value) + ((anchorOffsets[anchor] || 0) * label.width);
@@ -112,8 +119,6 @@ class XAxisValueLabels extends React.Component {
   };
   static defaultProps = {
     height: 250,
-    top: false,
-    inner: false,
     position: 'bottom',
     placement: undefined,
     distance: 4,
@@ -124,9 +129,7 @@ class XAxisValueLabels extends React.Component {
       fontFamily: "Helvetica, sans-serif",
       fontSize: '18px',
       lineHeight: 1,
-      textAnchor: 'middle',
-      //dominantBaseline: 'text-before-edge'
-      //textAnchor: 'left'
+      textAnchor: 'middle'
     },
     format: undefined,
     formats: undefined,
@@ -134,10 +137,22 @@ class XAxisValueLabels extends React.Component {
   };
 
   static getMargin(props) {
-    //const {inner, tickLength, top} = _.defaults({}, props, XTicks.defaultProps);
-    //const margin = inner ? {} :
-    //  top ? {top: tickLength || 0} : {bottom: tickLength || 0};
-    //return _.defaults(margin, {top: 0, bottom: 0, left: 0, right: 0});
+    props = _.defaults({}, props, XAxisValueLabels.defaultProps);
+    const {position, placement, distance, scale, tickCount, labelStyle} = props;
+    const labels = props.labels || XAxisValueLabels.getLabels(props);
+    const zeroMargin = {top: 0, bottom: 0, left: 0, right: 0};
+
+    if((position === 'bottom' && placement === 'above') || (position == 'top' && placement === 'below'))
+      return zeroMargin;
+
+    const marginY = _.max(labels.map(label => Math.ceil(distance + label.height)));
+    const [marginLeft, marginRight] = getLabelsXOverhang(scale, labels, labelStyle.textAnchor || 'middle');
+
+    return _.defaults({
+      [position] : marginY,
+      left: marginLeft,
+      right: marginRight
+    }, zeroMargin);
   }
 
   static getDefaultFormats(scaleType) {
@@ -150,7 +165,7 @@ class XAxisValueLabels extends React.Component {
   }
 
   static getLabels(props) {
-    const {scale, tickCount, labelStyle} = props;
+    const {scale, tickCount, labelStyle} = _.defaults(props, {}, XAxisValueLabels.defaultProps);
     const ticks = props.ticks || getScaleTicks(scale, null, tickCount);
     const style = _.defaults(labelStyle, XAxisValueLabels.defaultProps.labelStyle);
 
@@ -194,6 +209,7 @@ class XAxisValueLabels extends React.Component {
           distance;
 
         return <g>
+          {/*
           <rect {...{
             x: x - (label.width / 2),
             y: y,
@@ -201,6 +217,7 @@ class XAxisValueLabels extends React.Component {
             height: label.height,
             fill: 'thistle'
           }} />
+           */}
 
           <MeasuredValueLabel {...{x, y, className, dy:"0.8em", style}}>
             {label.text}

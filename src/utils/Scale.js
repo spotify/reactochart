@@ -42,27 +42,6 @@ export function isValidScale(scale) {
   return _.isFunction(scale) && _.isFunction(scale.domain) && _.isFunction(scale.range);
 }
 
-export function innerWidth(width, margin = {}) {
-  return Math.max(width - ((margin.left || 0) + (margin.right || 0)), 0);
-}
-export function innerHeight(height, margin = {}) {
-  return Math.max(height - ((margin.top || 0) + (margin.bottom || 0)), 0);
-}
-
-export function innerRangeX(outerWidth, margin = {}) {
-  const left = margin.left || 0;
-  return [
-    Math.min(left, outerWidth),
-    Math.min(left + innerWidth(outerWidth, margin), outerWidth)
-  ];
-}
-export function innerRangeY(outerHeight, margin = {}) {
-  const top = margin.top || 0;
-  return [
-    Math.min(top + innerHeight(outerHeight, margin), outerHeight),
-    Math.min(top, outerHeight)
-  ];
-}
 
 export function getScaleTicks(scale, scaleType, tickCount=10) {
   scaleType = scaleType || inferScaleType(scale);

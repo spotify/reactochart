@@ -671,6 +671,43 @@ class XAxisTitleTest extends React.Component {
   }
 }
 
+import {innerWidth, innerHeight} from 'utils/Margin';
+import {maxMargins} from 'utils/Margin';
+
+class CombinedChildMargins extends React.Component {
+  render() {
+    const {width, height, children, domain} = this.props;
+    const zeroMargin = {top: 0, bottom: 0, left: 0, right: 0};
+
+    const testXScale = d3.time.scale().domain(domain).range([0, width]);
+
+    const childMargins = React.Children.count(children) ?
+      React.Children.map(children, child => {
+        const childProps = _.defaults({}, child.props, {scale: testXScale});
+        return _.isFunction(child.type.getMargin) ?
+          _.defaults({}, child.type.getMargin(childProps), zeroMargin) :
+          zeroMargin
+      }) :
+      [zeroMargin];
+
+    const margin = maxMargins(childMargins);
+    const innerSize = {width: innerWidth(width, margin), height: innerHeight(height, margin)};
+
+    const xScale = d3.time.scale().domain(domain).range([0, innerSize.width]);
+
+    return <svg {...{width, height}}>
+      <rect fill="lightcoral" {...{width, height}} />
+      <g transform={`translate(${margin.left}, ${margin.top})`}>
+        <rect fill="#dddddd" {...innerSize} />
+        {React.Children.map(children, child => {
+          const passProps = {...innerSize, scale: xScale};
+          return React.cloneElement(child, passProps);
+        })}
+      </g>
+    </svg>
+  }
+}
+
 export const App = React.createClass({
   getInitialState() {
     return {
@@ -684,17 +721,36 @@ export const App = React.createClass({
   },
 
   render() {
-
     const innerSize = {width: 900, height: 400};
-    const testXScale = d3.time.scale()
-      .domain([new Date(2005, 0, 1), new Date(2015, 0, 1)])
-      .range([0, innerSize.width]);
+    const dateDomain = [new Date(2005, 0, 1), new Date(2015, 0, 1)];
+    const testXScale = d3.time.scale().domain(dateDomain).range([0, innerSize.width]);
     const testYScale = d3.scale.linear().domain([-20, 20]).range([innerSize.height, 0]);
 
     const linearXScale = d3.scale.linear().domain([-.05, .05]).range([0, innerSize.width]);
 
+
     return <div>
       <h1>Reactochart Examples</h1>
+
+      <CombinedChildMargins {...{width: 500, height: 300, domain: dateDomain}}>
+        <XAxisTitle {...{title: "X Title syzygy"}} />
+        <XAxisTitle {...{title: "X Top", position: 'top', rotate: true}} />
+        <YAxisTitle {...{title: "Y Title syzygy"}} />
+        <YAxisTitle {...{title: "Y Title Right", position: 'right', rotate: false}} />
+      </CombinedChildMargins>
+
+      <CombinedChildMargins {...{width: 500, height: 300, domain: dateDomain}}>
+        <XTicks scale={testXScale} tickLength={10} />
+        <XTicks scale={testXScale} tickLength={20} position="top" />
+        <YAxisTitle {...{title: "Y Title Right", position: 'right'}} />
+      </CombinedChildMargins>
+
+      <CombinedChildMargins {...{width: 500, height: 300, domain: dateDomain}}>
+        <XAxis title="X Title syzygy" tickLength={10} gridLineStyle={{stroke: '#666'}}/>
+        <XAxis scale={testXScale} title="X Title syzygy" position="top" tickLength={18} />
+        <YAxisTitle {...{title: "Y Title Right"}} />
+        <YAxisTitle {...{title: "Y Title Right", position: 'right'}} />
+      </CombinedChildMargins>
 
       <svg width={innerSize.width + 200} height={innerSize.height + 200}>
         <g transform="translate(100, 100)">
@@ -715,6 +771,7 @@ export const App = React.createClass({
       </svg>
 
 
+
       <svg width={innerSize.width + 200} height={innerSize.height + 200}>
         <g transform="translate(100, 100)">
           <rect fill="#dddddd" {...innerSize} />
@@ -724,8 +781,11 @@ export const App = React.createClass({
           <XGrid scale={testXScale} lineStyle={{stroke: '#666'}} {...innerSize} />
           <YGrid scale={testYScale} lineStyle={{stroke: '#666'}} {...innerSize} />
 
-          <XAxis scale={testXScale} {...innerSize} />
-          <XAxis position="top" scale={testXScale} tickStyle={{stroke: 'purple'}} {...innerSize} />
+          <XAxis title="Bottom Date" scale={testXScale} {...innerSize} />
+          <XAxis position="top" title="Top Date" scale={testXScale} tickStyle={{stroke: 'purple'}} {...innerSize} />
+
+          <YAxisTitle title="Left Value" {...innerSize} />
+          <YAxisTitle title="Right Value" position="right" {...innerSize} />
 
           {/*
           <XAxisValueLabels scale={testXScale} tickCount={6} {...innerSize} />
