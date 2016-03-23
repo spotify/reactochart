@@ -39,6 +39,7 @@ class XYPlot2 extends React.Component {
     const chartSize = innerSize({width, height}, margin);
 
     const propsToPass = {...this.props, ...chartSize};
+    console.log('margin', margin);
 
     return <svg {...{width, height}}>
       <rect fill="thistle" {...{width, height}} />
@@ -53,7 +54,7 @@ class XYPlot2 extends React.Component {
 }
 
 
-const xyKeys = ['scaleType', 'nice', 'invertScale', 'domain'];
+const xyKeys = ['scaleType', 'domain', 'invertScale'];
 const dirKeys = ['margin', 'padding', 'spacing'];
 
 const XYPlot2Resolved = _.flow([

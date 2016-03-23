@@ -172,6 +172,29 @@ const ScatterPlotExample = React.createClass({
 const LineChartExample = React.createClass({
   render() {
     return <div>
+      <XYPlot2 width={700}>
+        <XAxis />
+        <LineChart
+          data={_.range(-10,10,0.01)}
+          getValue={{x: null, y: (n) => Math.sin(n)}}
+        />
+        <LineChart
+          data={_.range(-10,10,0.01)}
+          getValue={{
+            x: null,
+            y: (n) => Math.sin(Math.pow(Math.abs(n), Math.abs(n*.18))) * Math.cos(n)
+          }}
+        />
+        <LineChart
+          data={_.range(-10,10,0.01)}
+          getValue={{
+            x: null,
+            y: (n) => Math.sin(n*0.5) * Math.cos(n)
+          }}
+        />
+      </XYPlot2>
+
+      {/*
       <XYPlot width={700}>
         <LineChart
           data={_.range(-10,10,0.01)}
@@ -192,6 +215,7 @@ const LineChartExample = React.createClass({
           }}
         />
       </XYPlot>
+      */}
     </div>
   }
 });
@@ -733,21 +757,41 @@ export const App = React.createClass({
 
     const customDateTicks = [new Date(2009, 0, 1), new Date(2014, 7, 1), new Date(2017, 0, 1)];
 
+    const smallSize = {width: 300, height: 200};
 
     return <div>
       <h1>Reactochart Examples</h1>
 
       <div>
-        <XYPlot2 scaleType="linear">
+        <XYPlot2 scaleType="linear" {...smallSize}>
           <XAxis
-            title="Hey Buddy"
+            title="Sine wave"
             position="top"
             tickLength={15} tickCount={50}
             showLabels={false} showTicks={true}
           />
-          <XAxis />
-          <LineChart data={_.range(50)} getValue={{y: d => Math.sin(d*.1)}} />
+          <XAxis gridLineStyle={{stroke: '#777'}} />
+          <LineChart data={_.range(100)} getValue={{y: d => Math.sin(d*.1)}} />
         </XYPlot2>
+
+        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
+          <XTicks />
+          <XTicks position="top" tickCount={120} tickLength={15} tickStyle={{stroke: 'red'}} />
+          <XTicks position="top" placement="below" tickCount={50} tickLength={10} />
+          <XTicks position="top" placement="below" tickCount={5} tickLength={18} />
+        </XYPlot2>
+
+
+        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
+          <XGrid tickCount={50} />
+          <XGrid tickCount={5} lineStyle={{stroke: 'blue', strokewidth: 2}} />
+        </XYPlot2>
+
+        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
+          <XAxisValueLabels tickCount={5}/>
+          <XAxisValueLabels position="top" distance={2} labelStyle={{fontSize: '10px'}} />
+        </XYPlot2>
+
       </div>
 
       {/*
