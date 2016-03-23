@@ -11,7 +11,7 @@ export default class XAxisTitle extends React.Component {
     placement: React.PropTypes.oneOf(['above', 'below']),
     alignment: React.PropTypes.oneOf(['left', 'center', 'right']),
     rotate: React.PropTypes.bool,
-    titleStyle: React.PropTypes.object
+    style: React.PropTypes.object
   };
   static defaultProps = {
     height: 250,
@@ -21,7 +21,7 @@ export default class XAxisTitle extends React.Component {
     placement: undefined,
     alignment: 'center',
     rotate: false,
-    titleStyle: {
+    style: {
       fontFamily: "Helvetica, sans-serif",
       fontSize: '24px',
       fontWeight: 'bold',
@@ -39,8 +39,8 @@ export default class XAxisTitle extends React.Component {
       return zeroMargin;
 
     const title = props.title || props.children;
-    const titleStyle = _.defaults(props.titleStyle, XAxisTitle.defaultProps.titleStyle);
-    const measured = measureText(_.assign({text: title}, titleStyle));
+    const style = _.defaults(props.style, XAxisTitle.defaultProps.style);
+    const measured = measureText(_.assign({text: title}, style));
 
     const marginValue = distance +
       Math.ceil(rotate ?
@@ -54,7 +54,7 @@ export default class XAxisTitle extends React.Component {
   }
 
   render() {
-    const {height, width, distance, position, alignment, titleStyle} = this.props;
+    const {height, width, distance, position, alignment, style} = this.props;
     const title = this.props.title || this.props.children;
     const placement = this.props.placement || ((position === 'bottom') ? 'below' : 'above');
     const rotate = this.props.rotate ? -90 : 0;
@@ -82,7 +82,7 @@ export default class XAxisTitle extends React.Component {
       '-0.2em';
 
     return <g transform={`translate(${translateX},${translateY})`}>
-      <text style={{...titleStyle, textAnchor}} transform={`rotate(${rotate})`} dy={dy}>
+      <text style={{...style, textAnchor}} transform={`rotate(${rotate})`} dy={dy}>
         {title}
       </text>
     </g>;

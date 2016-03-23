@@ -769,33 +769,44 @@ export const App = React.createClass({
       <h1>Reactochart Examples</h1>
 
       <div>
-        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
+        <XYPlot2 scaleType="linear" {...{width: 600, height: 350}}>
           <YTicks />
-          <YTicks placement="after" tickLength={10} tickCount={4} />
-          <YTicks position="right" tickCount={30} tickLength={15} tickStyle={{stroke: 'red'}} />
-          <YTicks position="right" placement="before" tickCount={5} tickLength={18} />
-        </XYPlot2>
-      </div>
-
-      <div>
-        <XYPlot2 scaleType="linear" {...smallSize}>
+          <YGrid />
+          <YAxisTitle title="Intensity" distance={10} />
           <XAxis
             title="Sine wave"
             position="top"
             tickLength={15} tickCount={50}
             showLabels={false} showTicks={true}
           />
-          <XAxis gridLineStyle={{stroke: '#777'}} />
+          <XAxis title="Phase" gridLineStyle={{stroke: '#777'}} />
+
           <LineChart data={_.range(100)} getValue={{y: d => Math.sin(d*.1)}} />
+          <LineChart data={_.range(100)} getValue={{y: d => Math.cos(d*.1)}} />
+        </XYPlot2>
+      </div>
+
+      <div>
+        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
+          <YTicks />
+          <YTicks placement="after" tickLength={10} tickCount={4} />
+          <YTicks position="right" tickCount={30} tickLength={15} tickStyle={{stroke: 'red'}} />
+          <YTicks position="right" placement="before" tickCount={5} tickLength={18} />
         </XYPlot2>
 
+        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
+          <YGrid tickCount={50} />
+          <YGrid tickCount={5} lineStyle={{stroke: 'blue', strokewidth: 2}} />
+        </XYPlot2>
+      </div>
+
+      <div>
         <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
           <XTicks />
           <XTicks position="top" tickCount={120} tickLength={15} tickStyle={{stroke: 'red'}} />
           <XTicks position="top" placement="below" tickCount={50} tickLength={10} />
           <XTicks position="top" placement="below" tickCount={5} tickLength={18} />
         </XYPlot2>
-
 
         <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
           <XGrid tickCount={50} />
@@ -805,6 +816,11 @@ export const App = React.createClass({
         <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
           <XAxisLabels tickCount={5}/>
           <XAxisLabels position="top" distance={2} labelStyle={{fontSize: '10px'}} />
+        </XYPlot2>
+
+        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
+          <XAxisTitle title="Hip Hip" position="top" style={{fontSize: '12px'}} />
+          <XAxisTitle title="Hooray" />
         </XYPlot2>
       </div>
 

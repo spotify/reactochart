@@ -1,21 +1,18 @@
 import React from 'react';
-import _ from 'lodash';
 
-class YLine extends React.Component {
+export default class YLine extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.func.isRequired,
+    scale: React.PropTypes.shape({y: React.PropTypes.func.isRequired}),
     value: React.PropTypes.any.isRequired
   };
   static defaultProps = {
-    height: 250,
-    width: 400,
-    lineClassName: '',
-    lineStyle: {}
+    style: {}
   };
 
   render() {
-    const {scale, value, width, lineClassName, lineStyle} = this.props;
-    const className = `chart-line-y ${lineClassName}`;
+    const {value, width, style} = this.props;
+    const scale = this.props.scale.y;
+    const className = `chart-line-y ${this.props.className || ''}`;
     const lineY = scale(value);
 
     return <line {...{
@@ -23,10 +20,7 @@ class YLine extends React.Component {
       x2: width,
       y1: lineY,
       y2: lineY,
-      className,
-      style: lineStyle
+      className, style
     }} />;
   }
 }
-
-export default YLine;

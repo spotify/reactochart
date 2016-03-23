@@ -1,22 +1,18 @@
 import React from 'react';
-import _ from 'lodash';
 
-class XLine extends React.Component {
+export default class XLine extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.func.isRequired,
+    scale: React.PropTypes.shape({x: React.PropTypes.func.isRequired}),
     value: React.PropTypes.any.isRequired
   };
   static defaultProps = {
-    height: 250,
-    width: 400,
-    lineClassName: '',
-    lineStyle: {}
+    style: {}
   };
 
   render() {
-    const {value, height, lineClassName, lineStyle} = this.props;
+    const {value, height, style} = this.props;
     const scale = this.props.scale.x;
-    const className = `chart-line-x ${lineClassName}`;
+    const className = `chart-line-x ${this.props.className || ''}`;
     const lineX = scale(value);
 
     return <line {...{
@@ -24,10 +20,7 @@ class XLine extends React.Component {
       x2: lineX,
       y1: 0,
       y2: height,
-      className,
-      style: lineStyle
+      className, style
     }} />;
   }
 }
-
-export default XLine;

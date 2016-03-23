@@ -2,37 +2,47 @@ import React from 'react';
 import _ from 'lodash';
 
 import YLine from 'YLine';
-import {getScaleTicks} from 'utils/Scale';
+import {getScaleTicks, getTickDomain} from 'utils/Scale';
 
-class YGrid extends React.Component {
+export default class YGrid extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.func.isRequired
+    scale: React.PropTypes.shape({y: React.PropTypes.func.isRequired}),
+    width: React.PropTypes.number,
+    height: React.PropTypes.number,
+    nice: React.PropTypes.bool,
+    ticks: React.PropTypes.array,
+    tickCount: React.PropTypes.number,
+    lineClassName: React.PropTypes.string,
+    lineStyle: React.PropTypes.object
   };
   static defaultProps = {
-    height: 250,
-    width: 400,
-    tickCount: 10,
-    ticks: null,
-    lineClassName: '',
+    nice: true,
     lineStyle: {}
   };
 
+  static getTickDomain(props) {
+    if(!_.get(props, 'scale.y')) return;
+    props = _.defaults({}, props, YGrid.defaultProps);
+    return {y: getTickDomain(props.scale.y, props)};
+  }
+
   render() {
-    const {scale, width, tickCount, lineClassName, lineStyle} = this.props;
+    const {width, tickCount, lineClassName, lineStyle} = this.props;
+    const scale = this.props.scale.y;
     const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
-    const gridLineClassName = `chart-grid-line chart-grid-line-y ${lineClassName}`;
+    const className = `chart-grid-line chart-grid-line-y ${lineClassName || ''}`;
 
     return <g className="chart-grid-y">
       {ticks.map((tick, i) => {
         return <YLine {...{
-          scale, width, lineStyle,
-          lineClassName: gridLineClassName,
+          scale: this.props.scale,
           value: tick,
-          key: `grid-line-${i}`
+          width,
+          className,
+          style: lineStyle,
+          key: `grid-y-line-${i}`
         }} />;
       })}
     </g>;
   }
 }
-
-export default YGrid;

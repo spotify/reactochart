@@ -9,24 +9,24 @@ export function getAxisChildProps(props) {
   } = props;
 
   const ticksProps = {
-    scale, ticks, tickCount,
-    height, position, placement, tickLength, tickStyle, tickClassName
+    width, height, scale, ticks, tickCount,
+    position, placement, tickLength, tickStyle, tickClassName
   };
 
   const gridProps = {
-    scale, ticks, tickCount,
-    width, height, lineClassName: gridLineClassName, lineStyle: gridLineStyle
+    width, height, scale, ticks, tickCount,
+    lineClassName: gridLineClassName, lineStyle: gridLineStyle
   };
 
   const labelsProps = {
-    scale, ticks, tickCount,
-    height, position, placement, labels,
+    width, height, scale, ticks, tickCount,
+    position, placement, labels,
     labelClassName, labelStyle, distance: labelDistance, format: labelFormat, formats: labelFormats
   };
 
   const titleProps = {
     width, height, position, placement, title,
-    titleStyle, distance: titleDistance, alignment: titleAlign, rotate: titleRotate
+    style: titleStyle, distance: titleDistance, alignment: titleAlign, rotate: titleRotate
   };
 
   return {ticksProps, gridProps, labelsProps, titleProps};

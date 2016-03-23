@@ -4,17 +4,19 @@ import _ from 'lodash';
 import XLine from 'XLine';
 import {getScaleTicks, getTickDomain} from 'utils/Scale';
 
-class XGrid extends React.Component {
+export default class XGrid extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.object
+    scale: React.PropTypes.shape({x: React.PropTypes.func.isRequired}),
+    width: React.PropTypes.number,
+    height: React.PropTypes.number,
+    nice: React.PropTypes.bool,
+    ticks: React.PropTypes.array,
+    tickCount: React.PropTypes.number,
+    lineClassName: React.PropTypes.string,
+    lineStyle: React.PropTypes.object
   };
   static defaultProps = {
-    height: 250,
-    width: 400,
     nice: true,
-    tickCount: 10,
-    ticks: null,
-    lineClassName: '',
     lineStyle: {}
   };
 
@@ -28,19 +30,19 @@ class XGrid extends React.Component {
     const {height, tickCount, lineClassName, lineStyle} = this.props;
     const scale = this.props.scale.x;
     const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
-    const gridLineClassName = `chart-grid-line chart-grid-line-x ${lineClassName}`;
+    const className = `chart-grid-line chart-grid-line-x ${lineClassName || ''}`;
 
     return <g className="chart-grid-x">
       {ticks.map((tick, i) => {
         return <XLine {...{
-          scale: this.props.scale, height, lineStyle,
-          lineClassName: gridLineClassName,
+          scale: this.props.scale,
           value: tick,
-          key: `grid-line-${i}`
+          height,
+          className,
+          style: lineStyle,
+          key: `grid-x-line-${i}`
         }} />;
       })}
     </g>;
   }
 }
-
-export default XGrid;
