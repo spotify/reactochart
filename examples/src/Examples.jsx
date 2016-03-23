@@ -17,6 +17,22 @@ import {
 
 import XYPlot2 from '../../src/charts/XYPlot2';
 
+import XAxis from '../../src/XAxis';
+import XTicks from '../../src/XTicks';
+import XLine from '../../src/XLine';
+import XGrid from '../../src/XGrid';
+import XAxisLabels from '../../src/XAxisLabels';
+
+
+import YTicks from '../../src/YTicks';
+import YLine from '../../src/YLine';
+import YGrid from '../../src/YGrid';
+
+import YAxisTitle from '../../src/YAxisTitle';
+import XAxisTitle from '../../src/XAxisTitle';
+
+
+
 import {randomWalk, randomWalkSeries} from './data/util';
 
 // sample ordinal data
@@ -168,6 +184,7 @@ const ScatterPlotExample = React.createClass({
     </div>
   }
 });
+
 
 const LineChartExample = React.createClass({
   render() {
@@ -597,17 +614,6 @@ export const examples = [
   {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample}
 ];
 
-import XAxis from 'components/XAxis';
-import XTicks from 'components/XTicks';
-import XLine from 'components/XLine';
-import XGrid from 'components/XGrid';
-import XAxisValueLabels from 'components/XAxisValueLabels';
-
-import YLine from 'components/YLine';
-import YGrid from 'components/YGrid';
-
-import YAxisTitle from 'components/YAxisTitle';
-import XAxisTitle from 'components/XAxisTitle';
 
 
 class YAxisTitleTest extends React.Component {
@@ -757,10 +763,19 @@ export const App = React.createClass({
 
     const customDateTicks = [new Date(2009, 0, 1), new Date(2014, 7, 1), new Date(2017, 0, 1)];
 
-    const smallSize = {width: 300, height: 200};
+    const smallSize = {width: 300, height: 210};
 
     return <div>
       <h1>Reactochart Examples</h1>
+
+      <div>
+        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
+          <YTicks />
+          <YTicks placement="after" tickLength={10} tickCount={4} />
+          <YTicks position="right" tickCount={30} tickLength={15} tickStyle={{stroke: 'red'}} />
+          <YTicks position="right" placement="before" tickCount={5} tickLength={18} />
+        </XYPlot2>
+      </div>
 
       <div>
         <XYPlot2 scaleType="linear" {...smallSize}>
@@ -788,10 +803,9 @@ export const App = React.createClass({
         </XYPlot2>
 
         <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
-          <XAxisValueLabels tickCount={5}/>
-          <XAxisValueLabels position="top" distance={2} labelStyle={{fontSize: '10px'}} />
+          <XAxisLabels tickCount={5}/>
+          <XAxisLabels position="top" distance={2} labelStyle={{fontSize: '10px'}} />
         </XYPlot2>
-
       </div>
 
       {/*
@@ -870,8 +884,8 @@ export const App = React.createClass({
        <XGrid scale={linearXScale} lineStyle={{stroke: '#666'}} {...innerSize} />
        <YGrid scale={testYScale} lineStyle={{stroke: '#666'}} {...innerSize} />
 
-       <XAxisValueLabels scale={linearXScale} tickCount={6} {...innerSize} />
-       <XAxisValueLabels position="top" scale={linearXScale} {...innerSize} />
+       <XAxisLabels scale={linearXScale} tickCount={6} {...innerSize} />
+       <XAxisLabels position="top" scale={linearXScale} {...innerSize} />
        </g>
        </svg>
        */}

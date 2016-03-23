@@ -5,51 +5,46 @@ import {getScaleTicks, getTickDomain} from 'utils/Scale';
 
 export default class YTicks extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.object
+    scale: React.PropTypes.shape({y: React.PropTypes.func.isRequired})
   };
   static defaultProps = {
-    height: 250,
-    position: 'bottom',
+    position: 'left',
     nice: true,
     tickLength: 5
   };
 
   static getTickDomain(props) {
-    if(!_.get(props, 'scale.x')) return;
+    if(!_.get(props, 'scale.y')) return;
     props = _.defaults({}, props, YTicks.defaultProps);
-    return {x: getTickDomain(props.scale.x, props)};
+    return {y: getTickDomain(props.scale.y, props)};
   }
 
   static getMargin(props) {
-    const {tickLength, top, position} = _.defaults({}, props, YTicks.defaultProps);
-    const placement = props.placement || ((position === 'top') ? 'above' : 'below');
+    const {tickLength, position} = _.defaults({}, props, YTicks.defaultProps);
+    const placement = props.placement || ((position === 'left') ? 'before' : 'after');
     const zeroMargin = {top: 0, bottom: 0, left: 0, right: 0};
 
-    if((position === 'bottom' && placement === 'above') || (position == 'top' && placement === 'below'))
+    if((position === 'left' && placement === 'after') || (position == 'right' && placement === 'before'))
       return zeroMargin;
 
-    const margin = (position === 'top') ?
-      {top: tickLength || 0} : {bottom: tickLength || 0};
-
-    return _.defaults(margin, zeroMargin);
+    return _.defaults({[position]: tickLength || 0}, zeroMargin);
   }
 
   render() {
-    const {height, tickCount, position, tickLength, tickStyle, tickClassName} = this.props;
-    const scale = this.props.scale.x;
+    const {width, tickCount, position, tickLength, tickStyle, tickClassName} = this.props;
+    const scale = this.props.scale.y;
+    const placement = this.props.placement || ((position === 'left') ? 'before' : 'after');
     const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
-    const className = `chart-tick chart-tick-x ${tickClassName}`;
-    const transform = (position === 'bottom') ? `translate(0,${height})` : '';
-    const placement = this.props.placement || ((position === 'top') ? 'above' : 'below');
+    const className = `chart-tick chart-tick-y ${tickClassName}`;
+    const transform = (position === 'right') ? `translate(${width}, 0)` : '';
 
-    return <g className="chart-ticks-x" transform={transform}>
+    return <g className="chart-ticks-y" transform={transform}>
       {ticks.map((tick, i) => {
-        const x1 = scale(tick);
-        const y2 = (placement === 'above') ?
-          -tickLength : tickLength;
+        const y1 = scale(tick);
+        const x2 = (placement === 'before') ?  -tickLength : tickLength;
 
         return <line {...{
-          x1, x2: x1, y1: 0, y2,
+          x1: 0, x2, y1, y2: y1,
           className,
           style: tickStyle,
           key: `tick-${i}`
