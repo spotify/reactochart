@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import YLine from 'components/YLine';
+import YLine from 'YLine';
 import {getScaleTicks} from 'utils/Scale';
 
 class YGrid extends React.Component {

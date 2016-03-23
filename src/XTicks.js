@@ -1,23 +1,17 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {inferScaleType, getScaleTicks, getTickDomain} from 'utils/Scale';
-import resolveObjectProps from 'utils/resolveObjectProps';
+import {getScaleTicks, getTickDomain} from 'utils/Scale';
 
-class XTicks extends React.Component {
+export default class XTicks extends React.Component {
   static propTypes = {
     scale: React.PropTypes.object
   };
   static defaultProps = {
     height: 250,
     position: 'bottom',
-    placement: undefined,
     nice: true,
-    tickCount: 10,
-    ticks: null,
-    tickLength: 5,
-    tickClassName: '',
-    tickStyle: null
+    tickLength: 5
   };
 
   static getTickDomain(props) {
@@ -64,5 +58,3 @@ class XTicks extends React.Component {
     </g>;
   }
 }
-
-export default XTicks;

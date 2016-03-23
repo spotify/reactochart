@@ -3,50 +3,15 @@ import _ from 'lodash';
 
 import {getTickDomain} from 'utils/Scale';
 import {sumMargins} from 'utils/Margin';
+import {getAxisChildProps} from 'utils/Axis'
 
-import XTicks from 'components/XTicks';
-import XGrid from 'components/XGrid';
-import XAxisValueLabels from 'components/XAxisValueLabels';
-import XAxisTitle from 'components/XAxisTitle';
+import XTicks from 'XTicks';
+import XGrid from 'XGrid';
+import XAxisLabels from 'XAxisLabels';
+import XAxisTitle from 'XAxisTitle';
 
-function getAxisChildProps(props) {
-  const {
-    scale, width, height, position, placement,
-    ticks, tickCount, tickLength, tickClassName, tickStyle,
-    title, titleDistance, titleAlign, titleRotate, titleStyle,
-    labelDistance, labelClassName, labelStyle, labelFormat, labelFormats, labels,
-    gridLineClassName, gridLineStyle,
-    showTitle, showLabels, showTicks, showGrid
-  } = props;
-
-  const ticksProps = {
-    scale, ticks, tickCount,
-    height, position, placement, tickLength, tickStyle, tickClassName
-  };
-
-  const gridProps = {
-    scale, ticks, tickCount,
-    width, height, lineClassName: gridLineClassName, lineStyle: gridLineStyle
-  };
-
-  const labelsProps = {
-    scale, ticks, tickCount,
-    height, position, placement, labels,
-    labelClassName, labelStyle, distance: labelDistance, format: labelFormat, formats: labelFormats
-  };
-
-  const titleProps = {
-    width, height, position, placement, title,
-    titleStyle, distance: titleDistance, alignment: titleAlign, rotate: titleRotate
-  };
-
-  return {ticksProps, gridProps, labelsProps, titleProps};
-}
-
-
-class XAxis extends React.Component {
+export default class XAxis extends React.Component {
   static propTypes = {
-    // scale: React.PropTypes.func.isRequired
     scale: React.PropTypes.shape({x: React.PropTypes.func.isRequired}),
 
     width: React.PropTypes.number,
@@ -83,26 +48,19 @@ class XAxis extends React.Component {
     gridLineStyle: React.PropTypes.object
   };
 
-  static defaultProps = _.assign({},
-    XTicks.defaultProps,
-    {
-      width: 400,
-      height: 250,
-      showTitle: true,
-      showLabels: true,
-      showTicks: true,
-      showGrid: true,
-      position: 'bottom',
-      placement: undefined,
-
-      titleDistance: 5,
-      labelDistance: 3,
-
-      ticks: undefined,
-      tickCount: undefined,
-      nice: true
-    }
-  );
+  static defaultProps = {
+    width: 400,
+    height: 250,
+    position: 'bottom',
+    nice: true,
+    showTitle: true,
+    showLabels: true,
+    showTicks: true,
+    showGrid: true,
+    tickLength: 5,
+    labelDistance: 3,
+    titleDistance: 5
+  };
 
   static getTickDomain(props) {
     if(!_.get(props, 'scale.x')) return;
@@ -122,7 +80,7 @@ class XAxis extends React.Component {
       margins.push(XAxisTitle.getMargin(titleProps));
 
     if(props.showLabels)
-      margins.push(XAxisValueLabels.getMargin(labelsProps));
+      margins.push(XAxisLabels.getMargin(labelsProps));
 
     return sumMargins(margins);
   }
@@ -139,7 +97,7 @@ class XAxis extends React.Component {
 
     if(showTitle && showLabels) {
       // todo optimize so we don't generate labels twice
-      const labelsMargin = XAxisValueLabels.getMargin(labelsProps);
+      const labelsMargin = XAxisLabels.getMargin(labelsProps);
       titleProps.distance = titleDistance + labelsMargin[position];
     } else if(showTitle && showTicks) {
       titleProps.distance = titleDistance + tickLength;
@@ -152,7 +110,7 @@ class XAxis extends React.Component {
 
       {showTicks ? <XTicks {...ticksProps}/> : null}
 
-      {showLabels ? <XAxisValueLabels {...labelsProps} /> : null}
+      {showLabels ? <XAxisLabels {...labelsProps} /> : null}
 
       {showTitle ? <XAxisTitle {...titleProps} /> : null}
 
@@ -160,5 +118,3 @@ class XAxis extends React.Component {
     </g>;
   }
 }
-
-export default XAxis;

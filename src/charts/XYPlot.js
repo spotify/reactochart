@@ -138,14 +138,14 @@ const XYPlot = React.createClass({
     componentWillMount() {
         this.trueProps = this.initProps(this.props);
         this.initLabelFormats(this.trueProps);
-        this.initDomains(this.trueProps);
-        this.initScale(this.trueProps);
+        //this.initDomains(this.trueProps);
+        //this.initScale(this.trueProps);
     },
     componentWillReceiveProps(newProps) {
         this.trueProps = this.initProps(newProps);
         this.initLabelFormats(this.trueProps);
-        this.initDomains(this.trueProps);
-        this.initScale(this.trueProps);
+        //this.initDomains(this.trueProps);
+        //this.initScale(this.trueProps);
     },
 
     initProps(props) {
@@ -155,43 +155,47 @@ const XYPlot = React.createClass({
     initDomains(props) {
         const {axisType, ticks, labelValues} = props;
 
-        // figure out the domains for each axis (ie. data extents)
-        // unless both domains are given, ask each child chart for it's desired domain, & flatten them into one domain.
-        // this is so that charts can plot their own modified version of the data (ie. a histogram),
-        // even if it has a different domain than the original data
-        // todo: only do this when necessary
-        let allChartOptions = [];
-        React.Children.forEach(props.children, child => {
-            if(!childIsXYChart(child)) return; // only get options for children which identify themselves as XYCharts
+        _.assign(this, {domains: props.domain, spacings: {}});
 
-            const childProps = _.assign({}, {axisType}, child.props);
-            let {domain, spacing} = _.isFunction(child.type.getOptions) ? child.type.getOptions(childProps) : {};
-            domain = domain || {};
-            ['x','y'].forEach(k => {
-                if(isNullOrUndefined(domain[k]))
-                    domain[k] = defaultDomain(child.props.data, child.props.getValue[k], axisType[k]);
-            });
+        //// figure out the domains for each axis (ie. data extents)
+        //// unless both domains are given, ask each child chart for it's desired domain, & flatten them into one domain.
+        //// this is so that charts can plot their own modified version of the data (ie. a histogram),
+        //// even if it has a different domain than the original data
+        //// todo: only do this when necessary
+        //let allChartOptions = [];
+        //React.Children.forEach(props.children, child => {
+        //    if(!childIsXYChart(child)) return; // only get options for children which identify themselves as XYCharts
+        //
+        //    const childProps = _.assign({}, {axisType}, child.props);
+        //    let {domain, spacing} = _.isFunction(child.type.getOptions) ? child.type.getOptions(childProps) : {};
+        //    domain = domain || {};
+        //    ['x','y'].forEach(k => {
+        //        if(isNullOrUndefined(domain[k]))
+        //            domain[k] = defaultDomain(child.props.data, child.props.getValue[k], axisType[k]);
+        //    });
+        //
+        //    allChartOptions.push({domain, spacing});
+        //});
+        //
+        //// use domain from props if provided, else calculated domains from children
+        //let domains = _.fromPairs(_.map(['x','y'], k => {
+        //    return [k, props.domain[k] || _.compact(_.map(allChartOptions, `domain.${k}`))]
+        //}));
+        //// if user has passed in custom ticks or label values, extend the domain to ensure they are all are included
+        //['x','y'].forEach(k => {
+        //    const isOrdinal = axisType[k] === 'ordinal';
+        //    [ticks[k], labelValues[k]].forEach(values => {
+        //        if(values) domains[k].push(isOrdinal ? values : d3.extent(values));
+        //    });
+        //});
+        //// use spacing from props if provided, else calculated spacings from children
+        //const spacings = _.map(allChartOptions, 'spacing').map(spacing => {
+        //    return _.defaults({}, spacing, props.spacing);
+        //});
+        //
+        //_.assign(this, {domains, spacings});
 
-            allChartOptions.push({domain, spacing});
-        });
 
-        // use domain from props if provided, else calculated domains from children
-        let domains = _.fromPairs(_.map(['x','y'], k => {
-            return [k, props.domain[k] || _.compact(_.map(allChartOptions, `domain.${k}`))]
-        }));
-        // if user has passed in custom ticks or label values, extend the domain to ensure they are all are included
-        ['x','y'].forEach(k => {
-            const isOrdinal = axisType[k] === 'ordinal';
-            [ticks[k], labelValues[k]].forEach(values => {
-                if(values) domains[k].push(isOrdinal ? values : d3.extent(values));
-            });
-        });
-        // use spacing from props if provided, else calculated spacings from children
-        const spacings = _.map(allChartOptions, 'spacing').map(spacing => {
-            return _.defaults({}, spacing, props.spacing);
-        });
-
-        _.assign(this, {domains, spacings});
     },
     initLabelFormats(props) {
         this.labelFormat = _.fromPairs(_.map(['x', 'y'], k => {
@@ -403,15 +407,19 @@ const XYPlot = React.createClass({
 
     render() {
         const {
-            children, width, height, axisType, axisLabel, invertAxis,
-            onMouseMove, onMouseEnter, onMouseLeave, onMouseDown, onMouseUp
+            children, width, height, scaleType, axisLabel, invertScale,
+            onMouseMove, onMouseEnter, onMouseLeave, onMouseDown, onMouseUp,
+            scale, margin, padding
         } = this.trueProps;
-        const {scale, margin, padding, scaleWidth, scaleHeight, ticks} = this;
+        const scaleWidth = width - (margin.left + margin.right);
+        const scaleHeight = width - (margin.top + margin.bottom);
+        const ticks = [];
+        //const {scale, margin, padding, scaleWidth, scaleHeight, ticks} = this;
         const chartWidth = scaleWidth + padding.left + padding.right;
         const chartHeight = scaleHeight + padding.top + padding.bottom;
 
         const propsToPass = {
-            axisType, invertAxis, scale, scaleWidth, scaleHeight, plotWidth: width, plotHeight: height,
+            scaleType, invertScale, scale, scaleWidth, scaleHeight, plotWidth: width, plotHeight: height,
             chartMargin: margin, chartPadding: padding, margin, padding, ticks
         };
 
@@ -841,6 +849,7 @@ const xyKeys = [
 const dirKeys = ['margin', 'padding', 'spacing'];
 
 const XYPlotResolved = _.flow([
+  resolveXYScales,
   _.partial(resolveObjectProps, _, xyKeys, ['x', 'y']),
   _.partial(resolveObjectProps, _, dirKeys, ['top', 'bottom', 'left', 'right'])
 ])(XYPlot);

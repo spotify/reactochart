@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import XLine from 'components/XLine';
+import XLine from 'XLine';
 import {getScaleTicks, getTickDomain} from 'utils/Scale';
 
 class XGrid extends React.Component {
