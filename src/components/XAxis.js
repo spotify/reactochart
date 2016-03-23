@@ -10,9 +10,6 @@ import XGrid from 'components/XGrid';
 import XAxisValueLabels from 'components/XAxisValueLabels';
 import XAxisTitle from 'components/XAxisTitle';
 
-import d3Scale from 'd3-scale';
-window.d3Scale = d3Scale;
-
 function getAxisChildProps(props) {
   const {
     scale, width, height, position, placement,

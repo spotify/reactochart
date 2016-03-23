@@ -37,16 +37,17 @@ const LineChart = React.createClass({
 
     render() {
         const {data, getValue, scale} = this.props;
-        const accessors = _.mapValues(getValue, accessor);
+        // const accessors = _.mapValues(getValue, accessor);
+        const accessors = _.fromPairs(['x', 'y'].map(k => [k, accessor((getValue || {})[k])]))
         const points = _.map(data, d => [scale.x(accessors.x(d)), scale.y(accessors.y(d))]);
         console.log('points', points);
         const pathStr = pointsToPathStr(points);
 
-        return <svg width={this.props.width} height={this.props.height}>
-            <g className={this.props.name}>
-                <path d={pathStr} />
-            </g>
-        </svg>;
+        // return <svg width={this.props.width} height={this.props.height}>
+        //     <g className={this.props.name}>
+        //         <path d={pathStr} />
+        //     </g>
+        // </svg>;
 
         return <g className={this.props.name}>
             <path d={pathStr} />

@@ -585,6 +585,7 @@ import YGrid from 'components/YGrid';
 import YAxisTitle from 'components/YAxisTitle';
 import XAxisTitle from 'components/XAxisTitle';
 
+
 class YAxisTitleTest extends React.Component {
   render() {
     const {width, height} = this.props;
@@ -723,125 +724,140 @@ export const App = React.createClass({
   render() {
     const innerSize = {width: 900, height: 400};
     const dateDomain = [new Date(2005, 0, 1), new Date(2015, 0, 1)];
+    const numberDomain = [-20, 20];
     const testXScale = d3.time.scale().domain(dateDomain).range([0, innerSize.width]);
     const testYScale = d3.scale.linear().domain([-20, 20]).range([innerSize.height, 0]);
 
     const linearXScale = d3.scale.linear().domain([-.05, .05]).range([0, innerSize.width]);
 
 
+    const customDateTicks = [new Date(2009, 0, 1), new Date(2014, 7, 1), new Date(2017, 0, 1)];
+
+
     return <div>
       <h1>Reactochart Examples</h1>
 
-      <CombinedChildMargins {...{width: 500, height: 300, domain: dateDomain}}>
-        <XAxisTitle {...{title: "X Title syzygy"}} />
-        <XAxisTitle {...{title: "X Top", position: 'top', rotate: true}} />
-        <YAxisTitle {...{title: "Y Title syzygy"}} />
-        <YAxisTitle {...{title: "Y Title Right", position: 'right', rotate: false}} />
-      </CombinedChildMargins>
+      <div>
+        <XYPlot2 scaleType="linear">
+          <XAxis
+            title="Hey Buddy"
+            position="top"
+            tickLength={15} tickCount={50}
+            showLabels={false} showTicks={true}
+          />
+          <XAxis />
+          <LineChart data={_.range(50)} getValue={{y: d => Math.sin(d*.1)}} />
+        </XYPlot2>
+      </div>
 
-      <CombinedChildMargins {...{width: 500, height: 300, domain: dateDomain}}>
-        <XTicks scale={testXScale} tickLength={10} />
-        <XTicks scale={testXScale} tickLength={20} position="top" />
-        <YAxisTitle {...{title: "Y Title Right", position: 'right'}} />
-      </CombinedChildMargins>
+      {/*
 
-      <CombinedChildMargins {...{width: 500, height: 300, domain: dateDomain}}>
-        <XAxis title="X Title syzygy" tickLength={10} gridLineStyle={{stroke: '#666'}}/>
-        <XAxis scale={testXScale} title="X Title syzygy" position="top" tickLength={18} />
-        <YAxisTitle {...{title: "Y Title Right"}} />
-        <YAxisTitle {...{title: "Y Title Right", position: 'right'}} />
-      </CombinedChildMargins>
+       <CombinedChildMargins {...{width: 500, height: 300, domain: dateDomain}}>
+       <XAxisTitle {...{title: "X Title syzygy"}} />
+       <XAxisTitle {...{title: "X Top", position: 'top', rotate: true}} />
+       <YAxisTitle {...{title: "Y Title syzygy"}} />
+       <YAxisTitle {...{title: "Y Title Right", position: 'right', rotate: false}} />
+       </CombinedChildMargins>
 
-      <svg width={innerSize.width + 200} height={innerSize.height + 200}>
-        <g transform="translate(100, 100)">
-          <rect fill="#dddddd" {...innerSize} />
-          <XGrid scale={testXScale} lineStyle={{stroke: '#666'}} {...innerSize} />
-          <YGrid scale={testYScale} lineStyle={{stroke: '#666'}} {...innerSize} />
-          <XAxisTitleTest {...innerSize} />
-        </g>
-      </svg>
+       <CombinedChildMargins {...{width: 500, height: 300, domain: dateDomain}}>
+       <XTicks scale={testXScale} tickLength={10} />
+       <XTicks scale={testXScale} tickLength={20} position="top" />
+       <YAxisTitle {...{title: "Y Title Right", position: 'right'}} />
+       </CombinedChildMargins>
 
-      <svg width={innerSize.width + 200} height={innerSize.height + 200}>
-        <g transform="translate(100, 100)">
-          <rect fill="#dddddd" {...innerSize} />
-          <XGrid scale={testXScale} lineStyle={{stroke: '#666'}} {...innerSize} />
-          <YGrid scale={testYScale} lineStyle={{stroke: '#666'}} {...innerSize} />
-          <YAxisTitleTest {...innerSize} />
-        </g>
-      </svg>
+       <CombinedChildMargins {...{width: 800, height: 400, domain: dateDomain}}>
+       <XAxis title="X Title syzygy" tickLength={10} gridLineStyle={{stroke: '#666'}}/>
+       <XAxis title="X Title syzygy" position="top" tickLength={18} />
+       <YAxisTitle {...{title: "Y Title Right"}} />
+       <YAxisTitle {...{title: "Y Title Right", position: 'right'}} />
+       <YGrid lineStyle={{stroke: '#666'}} />
+       </CombinedChildMargins>
 
 
+       <svg width={innerSize.width + 200} height={innerSize.height + 200}>
+       <g transform="translate(100, 100)">
+       <rect fill="#dddddd" {...innerSize} />
+       <XGrid scale={testXScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+       <YGrid scale={testYScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+       <XAxisTitleTest {...innerSize} />
+       </g>
+       </svg>
 
-      <svg width={innerSize.width + 200} height={innerSize.height + 200}>
-        <g transform="translate(100, 100)">
-          <rect fill="#dddddd" {...innerSize} />
+       <svg width={innerSize.width + 200} height={innerSize.height + 200}>
+       <g transform="translate(100, 100)">
+       <rect fill="#dddddd" {...innerSize} />
+       <XGrid scale={testXScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+       <YGrid scale={testYScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+       <YAxisTitleTest {...innerSize} />
+       </g>
+       </svg>
 
-          <XGrid scale={testXScale} lineStyle={{stroke: '#ccc'}} tickCount={40} {...innerSize} />
-          <YGrid scale={testYScale} lineStyle={{stroke: '#ccc'}} tickCount={40} {...innerSize} />
-          <XGrid scale={testXScale} lineStyle={{stroke: '#666'}} {...innerSize} />
-          <YGrid scale={testYScale} lineStyle={{stroke: '#666'}} {...innerSize} />
 
-          <XAxis title="Bottom Date" scale={testXScale} {...innerSize} />
-          <XAxis position="top" title="Top Date" scale={testXScale} tickStyle={{stroke: 'purple'}} {...innerSize} />
+       <svg width={innerSize.width + 200} height={innerSize.height + 200}>
+       <g transform="translate(100, 100)">
+       <rect fill="#dddddd" {...innerSize} />
 
-          <YAxisTitle title="Left Value" {...innerSize} />
-          <YAxisTitle title="Right Value" position="right" {...innerSize} />
+       <XGrid scale={testXScale} lineStyle={{stroke: '#ccc'}} tickCount={40} {...innerSize} />
+       <YGrid scale={testYScale} lineStyle={{stroke: '#ccc'}} tickCount={40} {...innerSize} />
+       <XGrid scale={testXScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+       <YGrid scale={testYScale} lineStyle={{stroke: '#666'}} {...innerSize} />
 
-          {/*
-          <XAxisValueLabels scale={testXScale} tickCount={6} {...innerSize} />
-          <XAxisValueLabels position="top" scale={testXScale} {...innerSize} />
-           */}
-        </g>
-      </svg>
+       <XAxis title="Bottom Date" scale={testXScale} {...innerSize} />
+       <XAxis position="top" title="Top Date" scale={testXScale} tickStyle={{stroke: 'purple'}} {...innerSize} />
 
-      <svg width={innerSize.width + 100} height={innerSize.height + 100}>
-        <g transform="translate(50, 50)">
-          <rect fill="#dddddd" {...innerSize} />
+       <YAxisTitle title="Left Value" {...innerSize} />
+       <YAxisTitle title="Right Value" position="right" {...innerSize} />
 
-          <XAxis top scale={linearXScale} tickStyle={{stroke: 'blue'}} {...innerSize} />
-          <XAxis top inner scale={linearXScale} tickStyle={{stroke: 'red'}} {...innerSize} />
+       </g>
+       </svg>
 
-          <XAxis scale={linearXScale} tickLength={8} {...innerSize} />
-          <XAxis inner scale={linearXScale} tickStyle={{stroke: 'red'}} {...innerSize} />
+       <svg width={innerSize.width + 100} height={innerSize.height + 100}>
+       <g transform="translate(50, 50)">
+       <rect fill="#dddddd" {...innerSize} />
 
-          <XGrid scale={linearXScale} lineStyle={{stroke: '#ccc'}} tickCount={40} {...innerSize} />
-          <YGrid scale={testYScale} lineStyle={{stroke: '#ccc'}} tickCount={40} {...innerSize} />
-          <XGrid scale={linearXScale} lineStyle={{stroke: '#666'}} {...innerSize} />
-          <YGrid scale={testYScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+       <XAxis top scale={linearXScale} tickStyle={{stroke: 'blue'}} {...innerSize} />
+       <XAxis top inner scale={linearXScale} tickStyle={{stroke: 'red'}} {...innerSize} />
 
-          <XAxisValueLabels scale={linearXScale} tickCount={6} {...innerSize} />
-          <XAxisValueLabels position="top" scale={linearXScale} {...innerSize} />
-        </g>
-      </svg>
+       <XAxis scale={linearXScale} tickLength={8} {...innerSize} />
+       <XAxis inner scale={linearXScale} tickStyle={{stroke: 'red'}} {...innerSize} />
+
+       <XGrid scale={linearXScale} lineStyle={{stroke: '#ccc'}} tickCount={40} {...innerSize} />
+       <YGrid scale={testYScale} lineStyle={{stroke: '#ccc'}} tickCount={40} {...innerSize} />
+       <XGrid scale={linearXScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+       <YGrid scale={testYScale} lineStyle={{stroke: '#666'}} {...innerSize} />
+
+       <XAxisValueLabels scale={linearXScale} tickCount={6} {...innerSize} />
+       <XAxisValueLabels position="top" scale={linearXScale} {...innerSize} />
+       </g>
+       </svg>
+       */}
+
 
 
       {/*
-      <div>
-        <LineChart
-          margin={10}
-          width={500}
-          height={300}
-          data={[['a', 0.5], ['b', 1], ['c', 0.25]]}
-          data={_.range(20).map(i => [i, i*i])}
-          getValue={getXYArrayValue}
-        />
+       <div>
+       <LineChart
+       margin={10}
+       width={500}
+       height={300}
+       data={[['a', 0.5], ['b', 1], ['c', 0.25]]}
+       data={_.range(20).map(i => [i, i*i])}
+       getValue={getXYArrayValue}
+       />
 
-      </div>
+       </div>
 
 
-      <div>
-        <XYPlot margin={40}>
-          <LineChart
-            data={[['a', 0.5], ['b', 1], ['c', 0.25]]}
-            getValue={getXYArrayValue}
-          />
-        </XYPlot>
-      </div>
-      */}
+       <div>
+       <XYPlot margin={40}>
+       <LineChart
+       data={[['a', 0.5], ['b', 1], ['c', 0.25]]}
+       getValue={getXYArrayValue}
+       />
+       </XYPlot>
+       </div>
+       */}
 
-      <div>
-        <XYPlot2 margin={{left: 100}} domain={[0, 100]} scaleType="linear"/>
-      </div>
       {/*
        <div>
        <XYPlot

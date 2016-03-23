@@ -357,7 +357,7 @@ describe('resolveXYScales', () => {
     expectXYScaledComponent(invertYChart, _.assign({}, props, {domain: {x: [-3, 3], y: [10, 0]}}));
   });
 
-  it('extends the scale domain if to include custom `ticks` if passed', () => {
+  it('extends the scale domain to include custom `ticks` if passed', () => {
     const props = {
       width, height,
       data: [[0, 0], [10, 10]],
@@ -373,6 +373,7 @@ describe('resolveXYScales', () => {
     expectXYScaledComponent(ticksYChart, {domain: {x: [0, 10], y: [0, 20]}, ...props});
   });
 
+  // todo test resolving scaleType from domains
 
   // todo spacing/padding
   // todo test tickCount
