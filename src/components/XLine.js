@@ -14,7 +14,8 @@ class XLine extends React.Component {
   };
 
   render() {
-    const {scale, value, height, lineClassName, lineStyle} = this.props;
+    const {value, height, lineClassName, lineStyle} = this.props;
+    const scale = this.props.scale.x;
     const className = `chart-line-x ${lineClassName}`;
     const lineX = scale(value);
 

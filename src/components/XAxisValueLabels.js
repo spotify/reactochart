@@ -4,7 +4,7 @@ import measureText from 'measure-text';
 import moment from 'moment';
 import numeral from 'numeral';
 
-import {getScaleTicks, inferScaleType} from 'utils/Scale';
+import {getScaleTicks, inferScaleType, getTickDomain} from 'utils/Scale';
 import resolveObjectProps from 'utils/resolveObjectProps';
 
 function checkRangesOverlap(a, b) {
@@ -115,19 +115,20 @@ function makeFormatters(formatStrs, scaleType) {
 
 class XAxisValueLabels extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.func.isRequired
+    scale: React.PropTypes.object
   };
   static defaultProps = {
     height: 250,
     position: 'bottom',
     placement: undefined,
     distance: 4,
+    nice: true,
     tickCount: 10,
     ticks: null,
     labelClassName: '',
     labelStyle: {
       fontFamily: "Helvetica, sans-serif",
-      fontSize: '18px',
+      fontSize: '14px',
       lineHeight: 1,
       textAnchor: 'middle'
     },
@@ -136,9 +137,16 @@ class XAxisValueLabels extends React.Component {
     labels: undefined
   };
 
+  static getTickDomain(props) {
+    if(!_.get(props, 'scale.x')) return;
+    props = _.defaults({}, props, XAxisValueLabels.defaultProps);
+    return {x: getTickDomain(props.scale.x, props)};
+  }
+
   static getMargin(props) {
     props = _.defaults({}, props, XAxisValueLabels.defaultProps);
-    const {position, placement, distance, scale, tickCount, labelStyle} = props;
+    const {position, placement, distance, tickCount, labelStyle} = props;
+    const scale = props.scale.x;
     const labels = props.labels || XAxisValueLabels.getLabels(props);
     const zeroMargin = {top: 0, bottom: 0, left: 0, right: 0};
 
@@ -165,7 +173,8 @@ class XAxisValueLabels extends React.Component {
   }
 
   static getLabels(props) {
-    const {scale, tickCount, labelStyle} = _.defaults(props, {}, XAxisValueLabels.defaultProps);
+    const {tickCount, labelStyle} = _.defaults(props, {}, XAxisValueLabels.defaultProps);
+    const scale = props.scale.x;
     const ticks = props.ticks || getScaleTicks(scale, null, tickCount);
     const style = _.defaults(labelStyle, XAxisValueLabels.defaultProps.labelStyle);
 
@@ -186,7 +195,8 @@ class XAxisValueLabels extends React.Component {
   }
 
   render() {
-    const {height, scale, tickCount, position, distance, labelStyle, labelClassName} = this.props;
+    const {height, tickCount, position, distance, labelStyle, labelClassName} = this.props;
+    const scale = this.props.scale.x;
     const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
     const placement = this.props.placement || ((position === 'top') ? 'above' : 'below');
     const className = `chart-value-label chart-value-label-x ${labelClassName}`;

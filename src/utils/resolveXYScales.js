@@ -188,14 +188,15 @@ export default function resolveXYScales(ComposedComponent) {
         console.log('get scaletype from children')
         let childScaleTypes = [];
         React.Children.forEach(props.children, child => {
-          childScaleTypes = childScaleTypes.concat(this._resolveScaleType(child.props, child.type));
+          childScaleTypes.push(this._resolveScaleType(child.props, child.type));
         });
         console.log('childScaleTypes', childScaleTypes);
 
+
         const childScaleType =  _.fromPairs(['x', 'y'].map(k => {
           // todo warn on multiple scale types, probably not what you want
-          const kScaleType = (_.compact(_.uniq(_.map(childScaleTypes, k))).length === 1) ?
-            childScaleTypes[0][k] : "ordinal";
+          const kScaleTypes = _.compact(_.uniq(_.map(childScaleTypes, k)));
+          const kScaleType = (kScaleTypes.length === 1) ? kScaleTypes[0] : "ordinal";
           return [k, kScaleType];
         }));
 
@@ -227,7 +228,7 @@ export default function resolveXYScales(ComposedComponent) {
       // use it to determine remaining domains
       if(_.isFunction(Component.getDomain)) {
         const componentDomain = omitNullUndefined(Component.getDomain({scaleType, ...props}));
-        console.log('Component.getDomain', componentDomain);
+        // console.log('Component.getDomain', componentDomain);
         domain = _.assign(componentDomain, domain);
         if(hasXYDomains(domain)) return domain;
       }
@@ -242,7 +243,7 @@ export default function resolveXYScales(ComposedComponent) {
           const kDomain = domainFromDatasets(datasets, kAccessor, dataType);
           return [k, kDomain];
         }));
-        console.log('datasetDomain', datasetDomain);
+        // console.log('datasetDomain', datasetDomain);
 
         domain = _.assign(datasetDomain, domain);
         if(hasXYDomains(domain)) return domain;
@@ -252,20 +253,17 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their domains the same way,
       // and combine them into a single domain, if there are multiple
       if(React.Children.count(props.children)) {
-        console.log('get domain from children');
         let childDomains = [];
         React.Children.forEach(props.children, child => {
           childDomains = childDomains.concat(this._resolveDomain(child.props, child.type, scaleType));
         });
 
-        console.log('combining domains', childDomains);
+        // console.log('combining domains', childDomains);
         const childDomain =  _.fromPairs(['x', 'y'].map(k => {
-          console.log(_.compact(_.map(childDomains, k)), scaleType[k]);
           const kDomain = combineDomains(_.compact(_.map(childDomains, k)), dataTypeFromScaleType(scaleType[k]));
-          console.log(kDomain);
           return [k, kDomain];
         }));
-        console.log('combined domains', childDomain);
+        // console.log('combined domains', childDomain);
 
         domain = _.assign(childDomain, domain);
         return domain;
@@ -300,7 +298,6 @@ export default function resolveXYScales(ComposedComponent) {
 
     _resolveMargin(props, Component, scaleType, domain, scale) {
       const propsMargin = props.margin || {};
-      console.log('propsMargin', propsMargin);
 
       // short-circuit if all margins provided
       if(hasAllMargins(propsMargin)) return propsMargin;
@@ -312,7 +309,7 @@ export default function resolveXYScales(ComposedComponent) {
       // use it to determine remaining domains
       if(_.isFunction(Component.getMargin)) {
         const componentMargin = omitNullUndefined(Component.getMargin({scaleType, domain, scale, ...props}));
-        console.log('Component.getMargin', componentMargin);
+        // console.log('Component.getMargin', componentMargin);
         margin = _.assign(componentMargin, margin);
         if(hasAllMargins(margin)) return margin;
       }
@@ -326,12 +323,12 @@ export default function resolveXYScales(ComposedComponent) {
           childMargins = childMargins.concat(this._resolveMargin(child.props, child.type, scaleType, domain, scale));
         });
 
-        console.log('combining child margins', childMargins);
+        // console.log('combining child margins', childMargins);
         const childMargin = _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
           // combine margins by taking the max value of each margin direction
           return [k, _.get(_.maxBy(childMargins, k), k)];
         }));
-        console.log('combined margins', childMargin);
+        // console.log('combined margins', childMargin);
 
         margin = _.assign(childMargin, margin);
       }
@@ -344,10 +341,10 @@ export default function resolveXYScales(ComposedComponent) {
         x: innerRangeX(width, margin).map(v => v - (margin.left || 0)),
         y: innerRangeY(height, margin).map(v => v - (margin.top || 0))
       };
-      console.log(height, margin, innerRangeY(height, margin));
+      // console.log(height, margin, innerRangeY(height, margin));
 
 
-      console.log('range', range);
+      // console.log('range', range);
       return _.fromPairs(['x', 'y'].map(k => {
         // use existing scales if provided, otherwise create new
         if(hasScaleFor(scale, k)) return [k, scale[k]];
@@ -381,7 +378,7 @@ export default function resolveXYScales(ComposedComponent) {
     };
 
     render() {
-      console.log('xyScales Props', this.props);
+      // console.log('xyScales Props', this.props);
       const {props} = this;
       const {width, height, nice} = props;
       const scaleFromProps = this.props.scale || {};
@@ -395,8 +392,8 @@ export default function resolveXYScales(ComposedComponent) {
       // first resolve scale types and domains
       const scaleType = this._resolveScaleType(props, ComposedComponent);
       const domain = this._resolveDomain(props, ComposedComponent, scaleType);
-      console.log('scaleType', scaleType);
-      console.log('domain ', domain);
+      // console.log('scaleType', scaleType);
+      // console.log('domain ', domain);
 
       // create a temporary scale with size & domain, which may be used by the Component to calculate margin/tickDomain
       // (eg. to create and measure labels for the scales)
@@ -416,23 +413,22 @@ export default function resolveXYScales(ComposedComponent) {
       tempScale = this._makeScales({width, height, scaleType, domain, margin: props.margin, scale: props.scale});
 
       // then resolve the margins
-      const margin = this._resolveMargin(props, ComposedComponent, scaleType, domain, tempScale);
-      console.log('margin', margin);
+      const margin = _.defaults(
+        this._resolveMargin(props, ComposedComponent, scaleType, domain, tempScale),
+        {top: 0, bottom: 0, left: 0, right: 0}
+      );
+      // console.log('margin', margin);
 
       // create real scales from resolved margins
       const scaleOptions = {scale: props.scale, width, height, scaleType, domain, margin, nice};
-      console.log('making scales', scaleOptions);
+      // console.log('making scales', scaleOptions);
       const scale = _.isEqual(margin, props.margin) ?
         tempScale : // don't re-create scales if margin hasn't changed (ie. was passed in props)
         this._makeScales(scaleOptions);
 
-      console.log('range', scale.x.range());
-      console.log('range', scale.y.range());
 
       // and pass scales to wrapped component
-      //const passedProps = _.assign({scale, scaleType, margin, domain}, this.props);
       const passedProps = _.assign({}, this.props, {scale, scaleType, margin, domain});
-
       return <ComposedComponent {...passedProps} />;
 
       // todo spacing/padding

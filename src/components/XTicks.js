@@ -1,23 +1,30 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {inferScaleType, getScaleTicks} from 'utils/Scale';
+import {inferScaleType, getScaleTicks, getTickDomain} from 'utils/Scale';
 import resolveObjectProps from 'utils/resolveObjectProps';
 
 class XTicks extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.func.isRequired
+    scale: React.PropTypes.object
   };
   static defaultProps = {
     height: 250,
     position: 'bottom',
     placement: undefined,
+    nice: true,
     tickCount: 10,
     ticks: null,
     tickLength: 5,
     tickClassName: '',
     tickStyle: null
   };
+
+  static getTickDomain(props) {
+    if(!_.get(props, 'scale.x')) return;
+    props = _.defaults({}, props, XTicks.defaultProps);
+    return {x: getTickDomain(props.scale.x, props)};
+  }
 
   static getMargin(props) {
     const {tickLength, top, position} = _.defaults({}, props, XTicks.defaultProps);
@@ -34,7 +41,8 @@ class XTicks extends React.Component {
   }
 
   render() {
-    const {height, scale, tickCount, position, tickLength, tickStyle, tickClassName} = this.props;
+    const {height, tickCount, position, tickLength, tickStyle, tickClassName} = this.props;
+    const scale = this.props.scale.x;
     const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
     const className = `chart-tick chart-tick-x ${tickClassName}`;
     const transform = (position === 'bottom') ? `translate(0,${height})` : '';

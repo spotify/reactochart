@@ -1,8 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {domainFromData} from 'utils/Data';
-import {inferScaleType, getScaleTicks, isValidScale, dataTypeFromScaleType, initScale} from 'utils/Scale';
+import {getTickDomain} from 'utils/Scale';
 import {sumMargins} from 'utils/Margin';
 
 import XTicks from 'components/XTicks';
@@ -21,17 +20,17 @@ function getAxisChildProps(props) {
   } = props;
 
   const ticksProps = {
-    scale: _.get(scale, 'x'), ticks, tickCount: _.get(tickCount, 'x'),
+    scale, ticks, tickCount,
     height, position, placement, tickLength, tickStyle, tickClassName
   };
 
   const gridProps = {
-    scale: _.get(scale, 'x'), ticks, tickCount,
+    scale, ticks, tickCount,
     width, height, lineClassName: gridLineClassName, lineStyle: gridLineStyle
   };
 
   const labelsProps = {
-    scale: _.get(scale, 'x'), ticks, tickCount,
+    scale, ticks, tickCount,
     height, position, placement, labels,
     labelClassName, labelStyle, distance: labelDistance, format: labelFormat, formats: labelFormats
   };
@@ -45,11 +44,43 @@ function getAxisChildProps(props) {
 }
 
 
-
 class XAxis extends React.Component {
   static propTypes = {
     // scale: React.PropTypes.func.isRequired
-    scale: React.PropTypes.object.isRequired
+    scale: React.PropTypes.shape({x: React.PropTypes.func.isRequired}),
+
+    width: React.PropTypes.number,
+    height: React.PropTypes.number,
+    position: React.PropTypes.string,
+    placement: React.PropTypes.string,
+    nice: React.PropTypes.bool,
+    ticks: React.PropTypes.array,
+    tickCount: React.PropTypes.number,
+
+    showTitle: React.PropTypes.bool,
+    showLabels: React.PropTypes.bool,
+    showTicks: React.PropTypes.bool,
+    showGrid: React.PropTypes.bool,
+
+    title: React.PropTypes.string,
+    titleDistance: React.PropTypes.number,
+    titleAlign: React.PropTypes.string,
+    titleRotate: React.PropTypes.bool,
+    titleStyle: React.PropTypes.object,
+
+    labelDistance: React.PropTypes.number,
+    labelClassName: React.PropTypes.string,
+    labelStyle: React.PropTypes.object,
+    labelFormat: React.PropTypes.object,
+    labelFormats: React.PropTypes.array,
+    labels: React.PropTypes.array,
+
+    tickLength: React.PropTypes.number,
+    tickClassName: React.PropTypes.string,
+    tickStyle: React.PropTypes.object,
+
+    gridLineClassName: React.PropTypes.string,
+    gridLineStyle: React.PropTypes.object
   };
 
   static defaultProps = _.assign({},
@@ -67,38 +98,22 @@ class XAxis extends React.Component {
       titleDistance: 5,
       labelDistance: 3,
 
-
       ticks: undefined,
       tickCount: undefined,
       nice: true
     }
   );
-  
-  static getDomain(props) {
-    
-  }
 
   static getTickDomain(props) {
-    if(!_.get(props, 'scaleType.x') || !isValidScale(_.get(props, 'scale.x'))) return;
+    if(!_.get(props, 'scale.x')) return;
     props = _.defaults({}, props, XAxis.defaultProps);
-    const {ticks, tickCount, nice, scaleType, scale} = props;
-
-    if(_.isArray(ticks) && _.isString(_.get(scaleType, 'x')))
-      return {x: domainFromData(ticks, _.identity, dataTypeFromScaleType(scaleType.x))};
-    else if(nice && isValidScale(_.get(scale, 'x')) && _.isString(_.get(scaleType, 'x'))) {
-      // bug - d3 linearScale.copy().nice() modifies original scale, so we must create tempScale instead of copy()ing
-      // todo replace this with d3-scale from d3 v4.0
-      const tempScale = initScale(scaleType.x).domain(scale.x.domain());
-      return {x: tempScale.nice(tickCount || 10).domain()};
-    }
+    return {x: getTickDomain(props.scale.x, props)};
   }
 
   static getMargin(props) {
     // todo figure out margin if labels change after margin?
-
-    let margins = [];
-
     const {ticksProps, labelsProps, titleProps} = getAxisChildProps(props);
+    let margins = [];
 
     if(props.showTicks)
       margins.push(XTicks.getMargin(ticksProps));
@@ -109,8 +124,6 @@ class XAxis extends React.Component {
     if(props.showLabels)
       margins.push(XAxisValueLabels.getMargin(labelsProps));
 
-    console.log('axis margins', margins);
-    console.log('axis margins sum', sumMargins(margins));
     return sumMargins(margins);
   }
 
@@ -134,19 +147,16 @@ class XAxis extends React.Component {
 
     const axisLineY = (position === 'bottom') ? height : 0;
 
-    return <g>
+    return <g className="chart-axis chart-axis-x">
       {showGrid ? <XGrid {...gridProps} /> : null}
 
       {showTicks ? <XTicks {...ticksProps}/> : null}
 
-      {showLabels ?
-        <XAxisValueLabels {...labelsProps} />
-        : null
-      }
+      {showLabels ? <XAxisValueLabels {...labelsProps} /> : null}
 
       {showTitle ? <XAxisTitle {...titleProps} /> : null}
 
-      <line x1={0} x2={width} y1={axisLineY} y2={axisLineY} style={{stroke: 'blue'}}/>
+      <line className="chart-axis-line chart-axis-line-x" x1={0} x2={width} y1={axisLineY} y2={axisLineY} />
     </g>;
   }
 }

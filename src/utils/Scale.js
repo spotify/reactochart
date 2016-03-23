@@ -52,10 +52,21 @@ export function isValidScale(scale) {
   return _.isFunction(scale) && _.isFunction(scale.domain) && _.isFunction(scale.range);
 }
 
-
 export function getScaleTicks(scale, scaleType, tickCount=10) {
   scaleType = scaleType || inferScaleType(scale);
   return (scaleType === 'ordinal') ?
     scale.domain() :
     scale.ticks(tickCount);
+}
+
+export function getTickDomain(scale, {ticks, tickCount, nice} = {}) {
+  const scaleType = inferScaleType(scale);
+  // bug - d3 linearScale.copy().nice() modifies original scale, so we must create a new scale instead of copy()ing
+  // todo replace this with d3-scale from d3 v4.0
+  if(nice) scale = initScale(scaleType).domain(scale.domain()).nice(tickCount || 10);
+
+  if(_.isArray(ticks))
+    return combineDomains([scale.domain(), domainFromData(ticks, _.identity, dataTypeFromScaleType(scaleType))]);
+  else if(nice) return scale.domain();
+  // return undefined by default, if we have no options pertaining to ticks
 }
