@@ -20,6 +20,16 @@ export function dataTypeFromScaleType(scaleType) {
   }, scaleType, 'categorical');
 }
 
+export function inferDataTypeFromDomain(domain) {
+  if(!_.isArray(domain))
+    throw new Error('invalid domain, inferDataTypeFromDomain cannot infer data type');
+
+  return (domain.length !== 2) ? 'categorical':
+    (_.every(domain, _.isNumber)) ? 'number':
+    (_.every(domain, _.isDate)) ? 'time':
+    'categorical';
+}
+
 export function inferScaleType(scale) {
   return !(scale.ticks) ? 'ordinal' :
     _.isDate(scale.domain()[0]) ? 'time' :

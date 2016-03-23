@@ -15,6 +15,7 @@ import {
 import {
   scaleTypeFromDataType,
   dataTypeFromScaleType,
+  inferDataTypeFromDomain,
   initScale,
   isValidScale
 } from 'utils/Scale';
@@ -53,13 +54,16 @@ function hasAllMargins(margin) {
   return _.isObject(margin) && _.every(marginKeys, k => _.has(margin, k));
 }
 
-function mapStaticOnChildren(children, methodName, args=[]) {
+function hasGoodXY(obj, isValid = (v => !_.isUndefined(v))) {
+  return _.isObject(obj) && isValid(obj.x)
+}
+
+function mapStaticOnChildren(children, methodName, passProps = {}) {
   // returns the result of looping over all children and calling a static method on each one
-  // by convention, this passes the child's props as the first argument, followed by any arguments provided
   return _.compact(React.Children.map(children, child => {
     console.log(_.keys(child.type));
     return _.isFunction(child.type[methodName]) ?
-      child.type[methodName].apply(this, [child.props].concat(args)) : null;
+      child.type[methodName]({...child.props, ...passProps}) : null;
   }));
 }
 
@@ -68,13 +72,61 @@ function omitNullUndefined(obj) {
   return _.omitBy(obj, v => _.isUndefined(v) || _.isNull(v));
 }
 
+function resolveXYPropsOnComponentOrChildren(propKeys, props, reducers = {}, validators = {}, result = {}) {
+  const isDone = (o) => (_.every(propKeys, k => _.isObject(o[k]) && _.every(['x', 'y'], xy => _.has(o[k][xy]))));
+  result = _.pick({...props, ...result}, propKeys);
+
+  let resolved = {};
+  _.forEach(propKeys, propKey => {
+    _.forEach(['x', 'y'], k => {
+      const isValid = validators[propKey] || (() => true);
+      if(_.isObject(props[propKey]) && _.has(props[propKey], k) && isValid(props[propKey][k])) {
+        if(!_.has(result, propKey)) result[propKey] = {};
+        result[propKey][k] = props[propKey][k];
+      }
+    });
+  });
+
+  if(isDone(result)) return result;
+
+  if(React.Children.count(props.children)) {
+    let childProps = [];
+    React.Children.forEach(props.children, child => {
+      childProps.push(resolveXYPropsOnComponentOrChildren(propKeys, child.props, result));
+    });
+
+    // let childDomains = [];
+    // React.Children.forEach(props.children, child => {
+    //   childDomains = childDomains.concat(this._resolveDomain(child.props, child.type, scaleType));
+    // });
+    //
+    // console.log('combining domains', childDomains);
+    // const childDomain =  _.fromPairs(['x', 'y'].map(k => {
+    //   console.log(_.compact(_.map(childDomains, k)), scaleType[k]);
+    //   const kDomain = combineDomains(_.compact(_.map(childDomains, k)), dataTypeFromScaleType(scaleType[k]));
+    //   console.log(kDomain);
+    //   return [k, kDomain];
+    // }));
+    // console.log('combined domains', childDomain);
+    //
+    // domain = _.assign(childDomain, domain);
+    // return domain;
+  }
+
+  propKeys.forEach(k => {
+    result[propKeys] = props
+  })
+}
+
+
+
 export default function resolveXYScales(ComposedComponent) {
   return class extends React.Component {
     static defaultProps = _.defaults(ComposedComponent.defaultProps, {
       invertScale: {x: false, y: false},
-      nice: {x: true, y: true},
-      tickCount: {x: 10, y: 10},
-      ticks: {x: null, y: null}
+      // nice: {x: true, y: true},
+      // tickCount: {x: 10, y: 10},
+      // ticks: {x: null, y: null}
     });
 
     // todo better way for HOC's to pass statics through?
@@ -101,6 +153,19 @@ export default function resolveXYScales(ComposedComponent) {
       }
 
       // todo infer scaleType from domain?
+      // if component has domain props,
+      // infer the data type, & use that to get scale type
+      if(_.isObject(props.domain) && (isValidDomain(props.domain.x) || isValidDomain(props.domain.y))) {
+        console.log('inferring scale type from domain');
+        const domainScaleType = _.fromPairs(['x', 'y'].map(k => {
+          const domain = props.domain[k];
+          return isValidDomain(domain) ?
+            [k, scaleTypeFromDataType(inferDataTypeFromDomain(domain))] :
+            [k, undefined];
+        }));
+        scaleType = _.assign(domainScaleType, scaleType);
+        if(hasXYScaleTypes(scaleType)) return scaleType;
+      }
 
       // if Component has data or datasets props,
       // infer the data type, & use that to get scale type
@@ -138,6 +203,16 @@ export default function resolveXYScales(ComposedComponent) {
         return scaleType;
       }
     }
+
+    // _resolveTicks(props, Component) {
+    //   const propsTicks = props.ticks || {};
+    //   const hasTicksOrTickCount = (v, k) =>
+    //     (_.isArray(_.get(v, `ticks.${k}`)) || _.isFinite(_.get(v, `tickCount.${k}`)));
+    //   if(_.every(['x', 'y'], k => hasTicksOrTickCount(props)))
+    //     return _.pick(props, ['tick', 'tickCount'])
+    //
+    // }
+
 
     _resolveDomain(props, Component, scaleType) {
       const propsDomain = props.domain || {};
@@ -197,6 +272,32 @@ export default function resolveXYScales(ComposedComponent) {
       }
     }
 
+    _resolveTickDomain(props, Component, scaleType, domain, scale) {
+      // todo resolve directly from ticks/tickCount props?
+      if(_.isFunction(Component.getTickDomain)) {
+        return omitNullUndefined(Component.getTickDomain({scaleType, domain, scale, ...props}));
+      }
+
+      if(React.Children.count(props.children)) {
+        let childTickDomains = [];
+        React.Children.forEach(props.children, child => {
+          childTickDomains.push(this._resolveTickDomain(child.props, child.type, scaleType, domain, scale));
+        });
+
+        const tickDomain = _.fromPairs(['x', 'y'].map(k => {
+          const kChildTickDomains = _.compact(childTickDomains.map(v => _.get(v, k)));
+          const kTickDomain = kChildTickDomains.length ?
+            combineDomains(kChildTickDomains, dataTypeFromScaleType(scaleType[k])) : undefined;
+          return [k, kTickDomain];
+        }));
+        return omitNullUndefined(tickDomain);
+      }
+    }
+
+    _resolveLabels(props) {
+
+    }
+
     _resolveMargin(props, Component, scaleType, domain, scale) {
       const propsMargin = props.margin || {};
       console.log('propsMargin', propsMargin);
@@ -228,7 +329,7 @@ export default function resolveXYScales(ComposedComponent) {
         console.log('combining child margins', childMargins);
         const childMargin = _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
           // combine margins by taking the max value of each margin direction
-          return [k, _.maxBy(childMargins, k)[k]]
+          return [k, _.get(_.maxBy(childMargins, k), k)];
         }));
         console.log('combined margins', childMargin);
 
@@ -240,8 +341,8 @@ export default function resolveXYScales(ComposedComponent) {
     _makeScales = ({width, height, scaleType={}, domain={}, margin={}, scale={}}) => {
       const {invertScale, nice, tickCount, ticks} = this.props;
       const range = {
-        x: innerRangeX(width, margin),
-        y: innerRangeY(height, margin)
+        x: innerRangeX(width, margin).map(v => v - (margin.left || 0)),
+        y: innerRangeY(height, margin).map(v => v - (margin.top || 0))
       };
       console.log(height, margin, innerRangeY(height, margin));
 
@@ -256,15 +357,21 @@ export default function resolveXYScales(ComposedComponent) {
         const kScale = initScale(scaleType[k])
           .domain(domain[k])[rangeMethod](range[k]);
 
+
+
+
+        // todo - ticks, nice and getDomain should be an axis prop instead, and axis should have getDomain
+
         // set `nice` option to round scale domains to nicer numbers
-        if(nice[k] && _.isFunction(kScale.nice)) kScale.nice(tickCount[k] || 10);
+        // if(nice[k] && _.isFunction(kScale.nice)) kScale.nice(tickCount[k] || 10);
 
         // extend scale domain to include custom `ticks` if passed
-        if(ticks[k]) {
-          const dataType = dataTypeFromScaleType(scaleType[k]);
-          const tickDomain = domainFromData(ticks[k], _.identity, dataType);
-          kScale.domain(combineDomains([kScale.domain(), tickDomain]), dataType);
-        }
+        //
+        // if(ticks[k]) {
+        //   const dataType = dataTypeFromScaleType(scaleType[k]);
+        //   const tickDomain = domainFromData(ticks[k], _.identity, dataType);
+        //   kScale.domain(combineDomains([kScale.domain(), tickDomain]), dataType);
+        // }
 
         // reverse scale domain if `invertScale` is passed
         if(invertScale[k]) kScale.domain(kScale.domain().reverse());
@@ -291,9 +398,22 @@ export default function resolveXYScales(ComposedComponent) {
       console.log('scaleType', scaleType);
       console.log('domain ', domain);
 
-      // create a temporary scale with size & domain, which may be used by the Component to calculate the margins
+      // create a temporary scale with size & domain, which may be used by the Component to calculate margin/tickDomain
       // (eg. to create and measure labels for the scales)
-      const tempScale = this._makeScales({width, height, scaleType, domain, margin: props.margin, scale: props.scale});
+      let tempScale = this._makeScales({width, height, scaleType, domain, margin: props.margin, scale: props.scale});
+
+      // getTickDomain gives children the opportunity to modify the domain to include their scale ticks
+      // (can't happen in getDomain, because it can't be done until the base domain/tempScale has been created)
+      const tickDomain = this._resolveTickDomain(props, ComposedComponent, scaleType, domain, tempScale);
+      if(_.isObject(tickDomain)) {
+        ['x', 'y'].forEach(k => {
+          const dataType = dataTypeFromScaleType(scaleType[k]);
+          if(isValidDomain(tickDomain[k], dataType))
+            domain[k] = combineDomains([domain[k], tickDomain[k]], dataType);
+        })
+      }
+      // update tempScale to use new domain before creating margins
+      tempScale = this._makeScales({width, height, scaleType, domain, margin: props.margin, scale: props.scale});
 
       // then resolve the margins
       const margin = this._resolveMargin(props, ComposedComponent, scaleType, domain, tempScale);

@@ -1,13 +1,17 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {inferScaleType, getScaleTicks} from 'utils/Scale';
+import {domainFromData} from 'utils/Data';
+import {inferScaleType, getScaleTicks, isValidScale, dataTypeFromScaleType, initScale} from 'utils/Scale';
 import {sumMargins} from 'utils/Margin';
 
 import XTicks from 'components/XTicks';
 import XGrid from 'components/XGrid';
 import XAxisValueLabels from 'components/XAxisValueLabels';
 import XAxisTitle from 'components/XAxisTitle';
+
+import d3Scale from 'd3-scale';
+window.d3Scale = d3Scale;
 
 function getAxisChildProps(props) {
   const {
@@ -19,14 +23,19 @@ function getAxisChildProps(props) {
     showTitle, showLabels, showTicks, showGrid
   } = props;
 
-  const ticksProps = {scale, height, position, placement, ticks, tickCount, tickLength, tickStyle, tickClassName};
+  const ticksProps = {
+    scale: _.get(scale, 'x'), ticks, tickCount: _.get(tickCount, 'x'),
+    height, position, placement, tickLength, tickStyle, tickClassName
+  };
 
   const gridProps = {
-    scale, width, height, ticks, tickCount, lineClassName: gridLineClassName, lineStyle: gridLineStyle
+    scale: _.get(scale, 'x'), ticks, tickCount,
+    width, height, lineClassName: gridLineClassName, lineStyle: gridLineStyle
   };
 
   const labelsProps = {
-    scale, height, position, placement, ticks, tickCount, labels,
+    scale: _.get(scale, 'x'), ticks, tickCount,
+    height, position, placement, labels,
     labelClassName, labelStyle, distance: labelDistance, format: labelFormat, formats: labelFormats
   };
 
@@ -38,9 +47,12 @@ function getAxisChildProps(props) {
   return {ticksProps, gridProps, labelsProps, titleProps};
 }
 
+
+
 class XAxis extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.func.isRequired
+    // scale: React.PropTypes.func.isRequired
+    scale: React.PropTypes.object.isRequired
   };
 
   static defaultProps = _.assign({},
@@ -57,8 +69,32 @@ class XAxis extends React.Component {
 
       titleDistance: 5,
       labelDistance: 3,
+
+
+      ticks: undefined,
+      tickCount: undefined,
+      nice: true
     }
   );
+  
+  static getDomain(props) {
+    
+  }
+
+  static getTickDomain(props) {
+    if(!_.get(props, 'scaleType.x') || !isValidScale(_.get(props, 'scale.x'))) return;
+    props = _.defaults({}, props, XAxis.defaultProps);
+    const {ticks, tickCount, nice, scaleType, scale} = props;
+
+    if(_.isArray(ticks) && _.isString(_.get(scaleType, 'x')))
+      return {x: domainFromData(ticks, _.identity, dataTypeFromScaleType(scaleType.x))};
+    else if(nice && isValidScale(_.get(scale, 'x')) && _.isString(_.get(scaleType, 'x'))) {
+      // bug - d3 linearScale.copy().nice() modifies original scale, so we must create tempScale instead of copy()ing
+      // todo replace this with d3-scale from d3 v4.0
+      const tempScale = initScale(scaleType.x).domain(scale.x.domain());
+      return {x: tempScale.nice(tickCount || 10).domain()};
+    }
+  }
 
   static getMargin(props) {
     // todo figure out margin if labels change after margin?
@@ -91,13 +127,15 @@ class XAxis extends React.Component {
 
     labelsProps.distance = labelDistance + (showTicks ? tickLength : 0);
 
-    if(showLabels) {
-      // todo optimize
+    if(showTitle && showLabels) {
+      // todo optimize so we don't generate labels twice
       const labelsMargin = XAxisValueLabels.getMargin(labelsProps);
       titleProps.distance = titleDistance + labelsMargin[position];
+    } else if(showTitle && showTicks) {
+      titleProps.distance = titleDistance + tickLength;
     }
 
-    const axisLineY = (position === 'bottom') ? 0 : height;
+    const axisLineY = (position === 'bottom') ? height : 0;
 
     return <g>
       {showGrid ? <XGrid {...gridProps} /> : null}
