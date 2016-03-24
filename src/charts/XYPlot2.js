@@ -1,47 +1,97 @@
 import React from 'react';
-const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
+
 import resolveObjectProps from 'utils/resolveObjectProps';
 import resolveXYScales from 'utils/resolveXYScales';
-
 import {innerSize} from 'utils/Margin';
+
+
+function closestNumberInList(number, list) {
+  return list.reduce((closest, current) => {
+    return Math.abs(current - number) < Math.abs(closest - number) ? current : closest;
+  });
+}
+function indexOfClosestNumberInList(number, list) {
+  return list.reduce((closestI, current, i) => {
+    return Math.abs(current - number) < Math.abs(list[closestI] - number) ? i : closestI;
+  }, 0);
+}
 
 class XYPlot2 extends React.Component {
   static propTypes = {
+    width: React.PropTypes.number,
+    height: React.PropTypes.number,
+    scale: React.PropTypes.object,
+    scaleType: React.PropTypes.object,
+    domain: React.PropTypes.object,
+    margin: React.PropTypes.object,
+    // todo spacing & padding...
+    nice: React.PropTypes.object,
+    invertScale: React.PropTypes.object,
 
+    onMouseMove: React.PropTypes.func,
+    onMouseEnter: React.PropTypes.func,
+    onMouseLeave: React.PropTypes.func,
+    onMouseDown: React.PropTypes.func,
+    onMouseUp: React.PropTypes.func
   };
   static defaultProps = {
     width: 400,
     height: 250,
-    // scaleType: {x: 'number', y: 'number'},
-    nice: {x: true, y: true},
+    // nice: {x: true, y: true},
     invertScale: {x: false, y: false},
-    // tickCount: {x: 10, y: 10},
     // emptyLabel: "Unknown",
 
     // these values are inferred from data if not provided, therefore empty defaults
-    scaleType: {},
-    domain: {}, /* ticks: {}, */
-    margin: {},
-    padding: {},
-    spacing: {}
+    // scaleType: {},
+    // domain: {},
+    // margin: {},
+    // spacing: {}
   };
 
-  // static getMargin() {
-  //   return {top: 20, bottom: 20, left: 20, right: 20};
-  // }
+  onMouseMove = (e) => {
+    if(!this.props.onMouseMove) return;
+
+    const {scale, scaleType, height, width, margin} = this.props;
+
+    // todo padding
+    // to return:
+    // {event, isInMargin, outerX, outerY, innerX, innerY, xValue, yValue}
+
+    // todo faster method than getBoundingClientRect on every mouseover?
+    const chartBB = e.currentTarget.getBoundingClientRect();
+    const outerX = Math.round(e.clientX - chartBB.left);
+    const outerY = Math.round(e.clientY - chartBB.top);
+    const innerX = (outerX - margin.left);
+    const innerY = (outerY - margin.top);
+
+    const chartSize = innerSize({width, height}, margin);
+
+    const xValue = (!_.inRange(innerX, 0, chartSize.width /* + padding.left + padding.right */)) ? null :
+      (scaleType.x === 'ordinal') ?
+        scale.x.domain()[indexOfClosestNumberInList(innerX, scale.x.range())] :
+        scale.x.invert(innerX);
+    const yValue = (!_.inRange(innerY, 0, chartSize.height /* + padding.top + padding.bottom */)) ? null :
+      (scaleType.y === 'ordinal') ?
+        scale.y.domain()[indexOfClosestNumberInList(innerY, scale.y.range())] :
+        scale.y.invert(innerY);
+
+    // const chart = this.refs['chart-series-0'];
+    // const hovered = (chart && _.isFunction(chart.getHovered)) ? chart.getHovered(chartXVal) : null;
+
+    this.props.onMouseMove({event: e, outerX, outerY, innerX, innerY, xValue, yValue});
+
+    // this.trueProps.onMouseMove(hovered, e, {chartX, chartY, chartXVal, chartYVal});
+  };
 
   render() {
     console.log('xyplot2 props', this.props);
     const {width, height, margin} = this.props;
-
     const chartSize = innerSize({width, height}, margin);
-
     const propsToPass = {...this.props, ...chartSize};
-    console.log('margin', margin);
-
-    return <svg {...{width, height}}>
+    
+    return <svg {...{width, height, onMouseMove: this.onMouseMove}}>
       <rect fill="thistle" {...{width, height}} />
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         <rect fill="#dddddd" {...chartSize} />
