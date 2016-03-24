@@ -774,6 +774,7 @@ export const App = React.createClass({
         <XYPlot2 scaleType="linear" {...{width: 600, height: 350}}>
           <XAxis title="Phase" gridLineStyle={{stroke: '#777'}} />
           <YAxis title="Intensity" gridLineStyle={{stroke: '#777'}} />
+          <YAxis title="Intensity" position="right" showGrid={false} labelStyle={{fontSize: '12px'}} />
 
           <LineChart data={_.range(100)} getValue={{y: d => Math.sin(d*.1)}} />
           <LineChart data={_.range(100)} getValue={{y: d => Math.cos(d*.1)}} />
@@ -795,6 +796,7 @@ export const App = React.createClass({
 
         <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
           <YAxisLabels tickCount={10}/>
+          <YAxisLabels position="right" tickCount={10} />
           <YGrid />
         </XYPlot2>
 
