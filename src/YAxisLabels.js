@@ -139,7 +139,7 @@ class YAxisValueLabels extends React.Component {
         const x = (placement === 'before') ? -distance : distance;
 
         return <g>
-          <YAxisLabelDebugRect {...{x, y, label, style}}/>
+          {/* <YAxisLabelDebugRect {...{x, y, label, style}}/> */}
           <MeasuredValueLabel {...{x, y, className, dy:"0.35em", style}}>
             {label.text}
           </MeasuredValueLabel>

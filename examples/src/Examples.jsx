@@ -24,9 +24,11 @@ import XGrid from '../../src/XGrid';
 import XAxisLabels from '../../src/XAxisLabels';
 
 
+import YAxis from '../../src/YAxis';
 import YTicks from '../../src/YTicks';
 import YLine from '../../src/YLine';
 import YGrid from '../../src/YGrid';
+import YAxisLabels from '../../src/YAxisLabels';
 
 import YAxisTitle from '../../src/YAxisTitle';
 import XAxisTitle from '../../src/XAxisTitle';
@@ -770,16 +772,8 @@ export const App = React.createClass({
 
       <div>
         <XYPlot2 scaleType="linear" {...{width: 600, height: 350}}>
-          <YTicks />
-          <YGrid />
-          <YAxisTitle title="Intensity" distance={10} />
-          <XAxis
-            title="Sine wave"
-            position="top"
-            tickLength={15} tickCount={50}
-            showLabels={false} showTicks={true}
-          />
           <XAxis title="Phase" gridLineStyle={{stroke: '#777'}} />
+          <YAxis title="Intensity" gridLineStyle={{stroke: '#777'}} />
 
           <LineChart data={_.range(100)} getValue={{y: d => Math.sin(d*.1)}} />
           <LineChart data={_.range(100)} getValue={{y: d => Math.cos(d*.1)}} />
@@ -797,6 +791,16 @@ export const App = React.createClass({
         <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
           <YGrid tickCount={50} />
           <YGrid tickCount={5} lineStyle={{stroke: 'blue', strokewidth: 2}} />
+        </XYPlot2>
+
+        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
+          <YAxisLabels tickCount={10}/>
+          <YGrid />
+        </XYPlot2>
+
+        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
+          <YAxisTitle title="Hip Hip" position="right" style={{fontSize: '12px'}} />
+          <YAxisTitle title="Hooray" />
         </XYPlot2>
       </div>
 
