@@ -1,59 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
-import measureText from 'measure-text';
-import moment from 'moment';
-import numeral from 'numeral';
 
+import MeasuredValueLabel from 'MeasuredValueLabel';
 import {getScaleTicks, inferScaleType, getTickDomain} from 'utils/Scale';
-import resolveObjectProps from 'utils/resolveObjectProps';
-
-function checkRangesOverlap(a, b) {
-  // given two number or date ranges of the form [start, end],
-  // returns true if the ranges overlap
-
-  if(!_.every([a, b], r => _.isArray(r) && r.length === 2 && _.every(r, _.isFinite) && r[0] <= r[1]))
-    throw new Error('checkRangesOverlap expects 2 range arrays with 2 numbers each, first <= second');
-
-  return a[0] <= b[1] && b[0] <= a[1];
-}
-
-function countRangeOverlaps(ranges) {
-  // given a list of ranges of the form [[start, end], ...]
-  // counts the number of adjacent ranges which touch or overlap each other
-  // todo: instead of counting overlaps, sum the amount by which they overlap & choose least overlap
-
-  return _.tail(ranges).reduce((sum, range, i) => {
-    const prevRange = ranges[i]; // (not [i-1], _.tail skips first range)
-    return checkRangesOverlap(prevRange, range) ? sum + 1 : sum;
-  }, 0)
-}
-
-function getLabelXOverhang(scale, label, anchor = 'middle') {
-  const [labelLeft, labelRight] = getLabelXRange(scale, label, anchor);
-  const overhangLeft = Math.ceil(Math.max(_.min(scale.range()) - labelLeft, 0));
-  const overhangRight = Math.ceil(Math.max(labelRight - _.max(scale.range()), 0));
-  return [overhangLeft, overhangRight];
-}
-
-function getLabelsXOverhang(scale, labels, anchor = 'middle') {
-  return _.reduce(labels, ([left, right], label) => {
-    const [thisLeft, thisRight] = getLabelXOverhang(scale, label, anchor);
-    return [Math.max(left, thisLeft), Math.max(right, thisRight)];
-  }, [0, 0]);
-}
-
-function getLabelXRange(scale, label, anchor = 'middle') {
-  const anchorOffsets = {start: 0, middle: -0.5, end: -1};
-  const x1 = scale(label.value) + ((anchorOffsets[anchor] || 0) * label.width);
-  return [x1, x1 + label.width];
-}
-
-function checkLabelsDistinct(labels) {
-  // given a set of label objects with text properties,
-  // return true iff each label has distinct text (ie. no duplicate label texts)
-  const labelStrs = _.map(labels, 'text');
-  return (_.uniq(labelStrs).length === labelStrs.length);
-}
+import {checkLabelsDistinct, countRangeOverlaps, makeLabelFormatters, getLabelXRange, getLabelsXOverhang}
+  from 'utils/Label';
 
 function resolveXLabelsForValues(scale, values, formats, style, force = true) {
   // given a set of values to label, and a list of formatters to try,
@@ -104,15 +55,6 @@ function resolveXLabelsForValues(scale, values, formats, style, force = true) {
   }
 }
 
-function makeFormatters(formatStrs, scaleType) {
-  return formatStrs.map(formatStr => {
-    if(!_.isString(formatStr)) return formatStr;
-    return (scaleType === 'time') ?
-      (v) => moment(v).format(formatStr) :
-      (v) => numeral(v).format(formatStr);
-  })
-}
-
 class XAxisValueLabels extends React.Component {
   static propTypes = {
     scale: React.PropTypes.object
@@ -154,13 +96,9 @@ class XAxisValueLabels extends React.Component {
       return zeroMargin;
 
     const marginY = _.max(labels.map(label => Math.ceil(distance + label.height)));
-    const [marginLeft, marginRight] = getLabelsXOverhang(scale, labels, labelStyle.textAnchor || 'middle');
+    const [left, right] = getLabelsXOverhang(scale, labels, labelStyle.textAnchor || 'middle');
 
-    return _.defaults({
-      [position] : marginY,
-      left: marginLeft,
-      right: marginRight
-    }, zeroMargin);
+    return _.defaults({[position] : marginY, left, right}, zeroMargin);
   }
 
   static getDefaultFormats(scaleType) {
@@ -182,7 +120,7 @@ class XAxisValueLabels extends React.Component {
     const propsFormats = props.format ? [props.format] : props.formats;
     const formatStrs = (_.isArray(propsFormats) && propsFormats.length) ?
       propsFormats : XAxisValueLabels.getDefaultFormats(scaleType);
-    const formats = makeFormatters(formatStrs, scaleType);
+    const formats = makeLabelFormatters(formatStrs, scaleType);
 
     // todo resolve ticks also
     // if there are so many ticks that no combination of labels can fit on the axis,
@@ -197,10 +135,8 @@ class XAxisValueLabels extends React.Component {
   render() {
     const {height, tickCount, position, distance, labelStyle, labelClassName} = this.props;
     const scale = this.props.scale.x;
-    const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
     const placement = this.props.placement || ((position === 'top') ? 'above' : 'below');
     const className = `chart-value-label chart-value-label-x ${labelClassName}`;
-
 
     // todo: position: 'zero' to position along the zero line
     const transform = (position === 'bottom') ? `translate(0,${height})` : '';
@@ -219,16 +155,7 @@ class XAxisValueLabels extends React.Component {
           distance;
 
         return <g>
-          {/*
-          <rect {...{
-            x: x - (label.width / 2),
-            y: y,
-            width: label.width,
-            height: label.height,
-            fill: 'thistle'
-          }} />
-           */}
-
+          {/* <XAxisLabelDebugRect {...{x, y, label}}/> */}
           <MeasuredValueLabel {...{x, y, className, dy:"0.8em", style}}>
             {label.text}
           </MeasuredValueLabel>
@@ -238,42 +165,16 @@ class XAxisValueLabels extends React.Component {
   }
 }
 
-class MeasuredValueLabel extends React.Component {
-  static propTypes = {
-    value: React.PropTypes.any.isRequired
-  };
-  static defaultProps = {
-    format: _.identity,
-    style: {
-      fontFamily: "Helvetica, sans-serif",
-      fontSize: '20px',
-      lineHeight: 1,
-      textAnchor: 'middle'
-    }
-  };
-  static getLabel(props) {
-    const {value, format} = props;
-    const style = _.defaults(props.style, MeasuredValueLabel.defaultProps.style);
-    const labelStr = format(value);
-    const measured = measureText(_.assign({text: labelStr}, style));
-
-    return {
-      value: props.value,
-      text: measured.text,
-      height: measured.height.value,
-      width: measured.width.value
-    };
-  }
-
+class XAxisLabelDebugRect extends React.Component {
   render() {
-    const {value, format} = this.props;
-    const passedProps = _.omit(this.props, ['value', 'format']);
-
-    return <text {...passedProps}>
-      {React.Children.count(this.props.children) ?
-        this.props.children : format(value)
-      }
-    </text>;
+    const {x, y, label} = this.props;
+    return <rect {...{
+      x: x - (label.width / 2),
+      y: y,
+      width: label.width,
+      height: label.height,
+      fill: 'orange'
+    }} />;
   }
 }
 
