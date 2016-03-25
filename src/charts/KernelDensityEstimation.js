@@ -5,7 +5,7 @@ import d3 from 'd3';
 
 import {accessor, AccessorPropType, InterfaceMixin} from '../util.js';
 import BarChart from './BarChart.js';
-import LineChart from './LineChart.js';
+import LineChart from './../LineChart.js';
 
 const KernelDensityEstimation = React.createClass({
     mixins: [InterfaceMixin('XYChart')],

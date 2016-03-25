@@ -116,7 +116,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.line-chart,\n.xy-plot {\n  margin-right: 6px;\n}\n.line-chart .chart-background,\n.xy-plot .chart-background {\n  fill: #e0e0e0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-tick,\n.xy-plot .chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.line-chart .chart-grid,\n.xy-plot .chart-grid {\n  stroke: #ccc;\n}\n.line-chart .chart-zero-line,\n.xy-plot .chart-zero-line {\n  stroke: #888;\n  stroke-width: 1.5px;\n}\n.line-chart .chart-axis-value-label,\n.xy-plot .chart-axis-value-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-value-label-x,\n.xy-plot .chart-axis-value-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-value-label-y,\n.xy-plot .chart-axis-value-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 16pt;\n  font-weight: bold;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.marker-line-chart line {\n  stroke: black;\n  stroke-width: 2px;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\n.pie-chart .pie-label-center {\n  font-size: 26pt;\n}\n.pie-chart .marker-line {\n  stroke: black;\n  stroke-width: 2px;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
+	exports.push([module.id, "body {\n  font-family: \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  background: #f0f0f0;\n  color: #0f0f0f;\n}\nbody #container {\n  margin: 10px;\n}\n.example-section {\n  margin: 10px 0;\n}\n.example-section .example-section-button {\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  display: inline-block;\n  padding: 10px 20px;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.chart-grid-line {\n  stroke: #b9b9b9;\n  stroke-width: 1px;\n}\n.line-chart,\n.xy-plot {\n  margin-right: 6px;\n}\n.line-chart .chart-background,\n.xy-plot .chart-background {\n  fill: #e0e0e0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-zero-line,\n.xy-plot .chart-zero-line {\n  stroke: #888;\n  stroke-width: 1.5px;\n}\n.line-chart .chart-axis-value-label,\n.xy-plot .chart-axis-value-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-value-label-x,\n.xy-plot .chart-axis-value-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-value-label-y,\n.xy-plot .chart-axis-value-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 16pt;\n  font-weight: bold;\n}\n.bar-chart {\n  background: #f0f0f0;\n}\n.bar-chart .chart-bar {\n  fill: steelblue;\n}\n.marker-line-chart line {\n  stroke: black;\n  stroke-width: 2px;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\n.pie-chart .pie-label-center {\n  font-size: 26pt;\n}\n.pie-chart .marker-line {\n  stroke: black;\n  stroke-width: 2px;\n}\npath {\n  fill: none;\n  stroke: steelblue;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
 	
 	// exports
 
@@ -452,6 +452,7 @@
 	});
 	
 	React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOM;
+	React.__SECRET_DOM_SERVER_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOMServer;
 	
 	module.exports = React;
 
@@ -1416,7 +1417,7 @@
 	 * will remain to ensure logic does not differ in production.
 	 */
 	
-	var invariant = function (condition, format, a, b, c, d, e, f) {
+	function invariant(condition, format, a, b, c, d, e, f) {
 	  if (process.env.NODE_ENV !== 'production') {
 	    if (format === undefined) {
 	      throw new Error('invariant requires an error message argument');
@@ -1430,15 +1431,16 @@
 	    } else {
 	      var args = [a, b, c, d, e, f];
 	      var argIndex = 0;
-	      error = new Error('Invariant Violation: ' + format.replace(/%s/g, function () {
+	      error = new Error(format.replace(/%s/g, function () {
 	        return args[argIndex++];
 	      }));
+	      error.name = 'Invariant Violation';
 	    }
 	
 	    error.framesToPop = 1; // we don't care about invariant's own frame
 	    throw error;
 	  }
-	};
+	}
 	
 	module.exports = invariant;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
@@ -9657,6 +9659,7 @@
 	 */
 	var EventInterface = {
 	  type: null,
+	  target: null,
 	  // currentTarget is set when dispatching; no use in copying it here
 	  currentTarget: emptyFunction.thatReturnsNull,
 	  eventPhase: null,
@@ -9690,8 +9693,6 @@
 	  this.dispatchConfig = dispatchConfig;
 	  this.dispatchMarker = dispatchMarker;
 	  this.nativeEvent = nativeEvent;
-	  this.target = nativeEventTarget;
-	  this.currentTarget = nativeEventTarget;
 	
 	  var Interface = this.constructor.Interface;
 	  for (var propName in Interface) {
@@ -9702,7 +9703,11 @@
 	    if (normalize) {
 	      this[propName] = normalize(nativeEvent);
 	    } else {
-	      this[propName] = nativeEvent[propName];
+	      if (propName === 'target') {
+	        this.target = nativeEventTarget;
+	      } else {
+	        this[propName] = nativeEvent[propName];
+	      }
 	    }
 	  }
 	
@@ -10802,6 +10807,7 @@
 	    multiple: MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
 	    muted: MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
 	    name: null,
+	    nonce: MUST_USE_ATTRIBUTE,
 	    noValidate: HAS_BOOLEAN_VALUE,
 	    open: HAS_BOOLEAN_VALUE,
 	    optimum: null,
@@ -10813,6 +10819,7 @@
 	    readOnly: MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
 	    rel: null,
 	    required: HAS_BOOLEAN_VALUE,
+	    reversed: HAS_BOOLEAN_VALUE,
 	    role: MUST_USE_ATTRIBUTE,
 	    rows: MUST_USE_ATTRIBUTE | HAS_POSITIVE_NUMERIC_VALUE,
 	    rowSpan: null,
@@ -10863,8 +10870,8 @@
 	     */
 	    // autoCapitalize and autoCorrect are supported in Mobile Safari for
 	    // keyboard hints.
-	    autoCapitalize: null,
-	    autoCorrect: null,
+	    autoCapitalize: MUST_USE_ATTRIBUTE,
+	    autoCorrect: MUST_USE_ATTRIBUTE,
 	    // autoSave allows WebKit/Blink to persist values of input fields on page reloads
 	    autoSave: null,
 	    // color is for Safari mask-icon link
@@ -10895,9 +10902,7 @@
 	    httpEquiv: 'http-equiv'
 	  },
 	  DOMPropertyNames: {
-	    autoCapitalize: 'autocapitalize',
 	    autoComplete: 'autocomplete',
-	    autoCorrect: 'autocorrect',
 	    autoFocus: 'autofocus',
 	    autoPlay: 'autoplay',
 	    autoSave: 'autosave',
@@ -13551,7 +13556,10 @@
 	      }
 	    });
 	
-	    nativeProps.children = content;
+	    if (content) {
+	      nativeProps.children = content;
+	    }
+	
 	    return nativeProps;
 	  }
 	
@@ -13976,7 +13984,7 @@
 	    var value = LinkedValueUtils.getValue(props);
 	
 	    if (value != null) {
-	      updateOptions(this, props, value);
+	      updateOptions(this, Boolean(props.multiple), value);
 	    }
 	  }
 	}
@@ -17011,11 +17019,14 @@
 	 * @typechecks
 	 */
 	
+	/* eslint-disable fb-www/typeof-undefined */
+	
 	/**
 	 * Same as document.activeElement but wraps in a try-catch block. In IE it is
 	 * not safe to call document.activeElement if there is nothing focused.
 	 *
-	 * The activeElement will be null only if the document or document body is not yet defined.
+	 * The activeElement will be null only if the document or document body is not
+	 * yet defined.
 	 */
 	'use strict';
 	
@@ -17023,7 +17034,6 @@
 	  if (typeof document === 'undefined') {
 	    return null;
 	  }
-	
 	  try {
 	    return document.activeElement || document.body;
 	  } catch (e) {
@@ -18763,7 +18773,9 @@
 	  'setValueForProperty': 'update attribute',
 	  'setValueForAttribute': 'update attribute',
 	  'deleteValueForProperty': 'remove attribute',
-	  'dangerouslyReplaceNodeWithMarkupByID': 'replace'
+	  'setValueForStyles': 'update styles',
+	  'replaceNodeWithMarkup': 'replace',
+	  'updateTextContent': 'set textContent'
 	};
 	
 	function getTotalTime(measurements) {
@@ -18955,18 +18967,23 @@
 	'use strict';
 	
 	var performance = __webpack_require__(150);
-	var curPerformance = performance;
+	
+	var performanceNow;
 	
 	/**
 	 * Detect if we can use `window.performance.now()` and gracefully fallback to
 	 * `Date.now()` if it doesn't exist. We need to support Firefox < 15 for now
 	 * because of Facebook's testing infrastructure.
 	 */
-	if (!curPerformance || !curPerformance.now) {
-	  curPerformance = Date;
+	if (performance.now) {
+	  performanceNow = function () {
+	    return performance.now();
+	  };
+	} else {
+	  performanceNow = function () {
+	    return Date.now();
+	  };
 	}
-	
-	var performanceNow = curPerformance.now.bind(curPerformance);
 	
 	module.exports = performanceNow;
 
@@ -19015,7 +19032,7 @@
 	
 	'use strict';
 	
-	module.exports = '0.14.2';
+	module.exports = '0.14.7';
 
 /***/ },
 /* 152 */
@@ -20801,7 +20818,17 @@
 	});
 	exports.App = exports.examples = undefined;
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d = __webpack_require__(170);
+	
+	var _d2 = _interopRequireDefault(_d);
 	
 	var _react = __webpack_require__(6);
 	
@@ -20815,22 +20842,80 @@
 	
 	var _numeral2 = _interopRequireDefault(_numeral);
 	
-	var _src = __webpack_require__(168);
+	var _src = __webpack_require__(171);
 	
-	var _util = __webpack_require__(273);
+	var _XYPlot = __webpack_require__(313);
+	
+	var _XYPlot2 = _interopRequireDefault(_XYPlot);
+	
+	var _XAxis = __webpack_require__(288);
+	
+	var _XAxis2 = _interopRequireDefault(_XAxis);
+	
+	var _XTicks = __webpack_require__(290);
+	
+	var _XTicks2 = _interopRequireDefault(_XTicks);
+	
+	var _XLine = __webpack_require__(292);
+	
+	var _XLine2 = _interopRequireDefault(_XLine);
+	
+	var _XGrid = __webpack_require__(291);
+	
+	var _XGrid2 = _interopRequireDefault(_XGrid);
+	
+	var _XAxisLabels = __webpack_require__(293);
+	
+	var _XAxisLabels2 = _interopRequireDefault(_XAxisLabels);
+	
+	var _YAxis = __webpack_require__(307);
+	
+	var _YAxis2 = _interopRequireDefault(_YAxis);
+	
+	var _YTicks = __webpack_require__(308);
+	
+	var _YTicks2 = _interopRequireDefault(_YTicks);
+	
+	var _YLine = __webpack_require__(310);
+	
+	var _YLine2 = _interopRequireDefault(_YLine);
+	
+	var _YGrid = __webpack_require__(309);
+	
+	var _YGrid2 = _interopRequireDefault(_YGrid);
+	
+	var _YAxisLabels = __webpack_require__(311);
+	
+	var _YAxisLabels2 = _interopRequireDefault(_YAxisLabels);
+	
+	var _YAxisTitle = __webpack_require__(312);
+	
+	var _YAxisTitle2 = _interopRequireDefault(_YAxisTitle);
+	
+	var _XAxisTitle = __webpack_require__(306);
+	
+	var _XAxisTitle2 = _interopRequireDefault(_XAxisTitle);
+	
+	var _util = __webpack_require__(314);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
 	// sample ordinal data
 	var ordinalData = ['Always', 'Usually', 'Sometimes', 'Rarely', 'Never'];
 	var ordinalData2 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 	
-	var timeData = _.range(ordinalData.length).map(function (i) {
+	var timeData = _lodash2.default.range(ordinalData.length).map(function (i) {
 	  return new Date(+new Date() + i * 24 * 60 * 60 * 1000);
 	});
-	var timeData2 = _.range(ordinalData.length).map(function (i) {
+	var timeData2 = _lodash2.default.range(ordinalData.length).map(function (i) {
 	  return new Date(+new Date() - i * 2 * 24 * 60 * 60 * 1000);
 	});
 	
@@ -20838,47 +20923,47 @@
 	
 	var randomBars = [(0, _util.randomWalkSeries)(21, 0, 5)];
 	
-	var randomScatter = [_.zip((0, _util.randomWalk)(20, 100), (0, _util.randomWalk)(20, 100)), _.zip((0, _util.randomWalk)(3000, 10000), (0, _util.randomWalk)(3000, 10000)), _.zip((0, _util.randomWalk)(50, 100), (0, _util.randomWalk)(50, 100)), _.zip((0, _util.randomWalk)(100, 100), (0, _util.randomWalk)(100, 100)), _.zip((0, _util.randomWalk)(200, 100), (0, _util.randomWalk)(200, 100))];
+	var randomScatter = [_lodash2.default.zip((0, _util.randomWalk)(20, 100), (0, _util.randomWalk)(20, 100)), _lodash2.default.zip((0, _util.randomWalk)(3000, 10000), (0, _util.randomWalk)(3000, 10000)), _lodash2.default.zip((0, _util.randomWalk)(50, 100), (0, _util.randomWalk)(50, 100)), _lodash2.default.zip((0, _util.randomWalk)(100, 100), (0, _util.randomWalk)(100, 100)), _lodash2.default.zip((0, _util.randomWalk)(200, 100), (0, _util.randomWalk)(200, 100))];
 	
 	var randomBarData = {
 	  valueValue: (0, _util.randomWalkSeries)(20, 0, 5)
 	};
 	var randomBarData2 = {
-	  numberNumber: _.zip(_.range(0, 21), (0, _util.randomWalk)(21, 1000, 10000)),
-	  numberOrdinal: _.zip((0, _util.randomWalk)(ordinalData.length, 5), ordinalData),
-	  numberTime: _.zip((0, _util.randomWalk)(timeData.length, 5), timeData),
+	  numberNumber: _lodash2.default.zip(_lodash2.default.range(0, 21), (0, _util.randomWalk)(21, 1000, 10000)),
+	  numberOrdinal: _lodash2.default.zip((0, _util.randomWalk)(ordinalData.length, 5), ordinalData),
+	  numberTime: _lodash2.default.zip((0, _util.randomWalk)(timeData.length, 5), timeData),
 	
 	  //ordinalOrdinal: ordinalData.map(d => [d, _.sample(ordinalData2)]),
-	  ordinalOrdinal: _.zip(ordinalData, ordinalData2),
-	  ordinalTime: _.zip(ordinalData, timeData),
+	  ordinalOrdinal: _lodash2.default.zip(ordinalData, ordinalData2),
+	  ordinalTime: _lodash2.default.zip(ordinalData, timeData),
 	
-	  timeTime: _.zip(timeData, timeData2)
+	  timeTime: _lodash2.default.zip(timeData, timeData2)
 	};
 	//console.log(randomBarData2);
 	
-	var variableBins = _.range(0, 12).reduce(function (bins, i) {
-	  var lastBinEnd = bins.length ? _.last(bins)[1] : 0;
+	var variableBins = _lodash2.default.range(0, 12).reduce(function (bins, i) {
+	  var lastBinEnd = bins.length ? _lodash2.default.last(bins)[1] : 0;
 	  //return bins.concat([[lastBinEnd, lastBinEnd + _.random(5, 20)]])
 	  return bins.concat([[lastBinEnd, lastBinEnd + i]]);
 	}, []);
 	
 	var rangeValueData = {
-	  numberNumber: _.zip(variableBins, (0, _util.randomWalk)(variableBins.length, 10000, 10000))
+	  numberNumber: _lodash2.default.zip(variableBins, (0, _util.randomWalk)(variableBins.length, 10000, 10000))
 	};
 	
 	var barTickData = {
 	  numberNumber: randomBarData2.numberNumber.map(function (d) {
-	    return [d[0], d[1] + _.random(-5000, 5000)];
+	    return [d[0], d[1] + _lodash2.default.random(-5000, 5000)];
 	  }),
 	  numberRangeNumber: rangeValueData.numberNumber.map(function (d) {
-	    return [d[0], d[1] + _.random(-5000, 5000)];
+	    return [d[0], d[1] + _lodash2.default.random(-5000, 5000)];
 	  })
 	};
 	//console.log('rangeValue', rangeValueData);
 	
-	var normalDistribution = d3.random.normal(0);
+	var normalDistribution = _d2.default.random.normal(0);
 	//const randomNormal = _.times(1000, normalDistribution);
-	var randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.random.normal(3, 0.5)));
+	var randomNormal = _lodash2.default.times(1000, normalDistribution).concat(_lodash2.default.times(1000, _d2.default.random.normal(3, 0.5)));
 	
 	var emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 	// end fake data
@@ -20950,7 +21035,7 @@
 	      _react2.default.createElement('polygon', { points: '0,0 8,0 4,8', style: { fill: 'darkgreen' } })
 	    );
 	    var randomEmoji = function randomEmoji(d, i) {
-	      return _.sample(emojis);
+	      return _lodash2.default.sample(emojis);
 	    };
 	
 	    return _react2.default.createElement(
@@ -20977,16 +21062,17 @@
 	      'div',
 	      null,
 	      _react2.default.createElement(
-	        _src.XYPlot,
+	        _XYPlot2.default,
 	        { width: 700 },
+	        _react2.default.createElement(_XAxis2.default, null),
 	        _react2.default.createElement(_src.LineChart, {
-	          data: _.range(-10, 10, 0.01),
+	          data: _lodash2.default.range(-10, 10, 0.01),
 	          getValue: { x: null, y: function y(n) {
 	              return Math.sin(n);
 	            } }
 	        }),
 	        _react2.default.createElement(_src.LineChart, {
-	          data: _.range(-10, 10, 0.01),
+	          data: _lodash2.default.range(-10, 10, 0.01),
 	          getValue: {
 	            x: null,
 	            y: function y(n) {
@@ -20995,7 +21081,7 @@
 	          }
 	        }),
 	        _react2.default.createElement(_src.LineChart, {
-	          data: _.range(-10, 10, 0.01),
+	          data: _lodash2.default.range(-10, 10, 0.01),
 	          getValue: {
 	            x: null,
 	            y: function y(n) {
@@ -21008,37 +21094,54 @@
 	  }
 	});
 	
+	var xyArrGetter = { x: 0, y: 1 };
 	var InteractiveLineExample = _react2.default.createClass({
 	  displayName: 'InteractiveLineExample',
 	  getInitialState: function getInitialState() {
 	    return {
-	      hoveredXYPlotData: null
+	      hoveredXYPlotData: null,
+	      activeXValue: null
 	    };
 	  },
-	  onMouseMoveXYPlot: function onMouseMoveXYPlot(d, event) {
-	    this.setState({ hoveredXYPlotData: d });
+	  onMouseMoveXYPlot: function onMouseMoveXYPlot(_ref) {
+	    var xValue = _ref.xValue;
+	    var yValue = _ref.yValue;
+	
+	    this.setState({ activeXValue: xValue, activeYValue: yValue });
+	  },
+	  onClick: function onClick(_ref2) {
+	    var yValue = _ref2.yValue;
+	
+	    this.setState({ clickedY: yValue });
 	  },
 	  render: function render() {
-	    var hoveredXYPlotData = this.state.hoveredXYPlotData;
+	    var _state = this.state;
+	    var activeXValue = _state.activeXValue;
+	    var activeYValue = _state.activeYValue;
 	
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      hoveredXYPlotData ? _react2.default.createElement(
+	      activeXValue && activeYValue ? _react2.default.createElement(
 	        'div',
 	        null,
-	        hoveredXYPlotData[0] + ', ' + hoveredXYPlotData[1]
+	        activeXValue.toFixed(2) + ', ' + activeYValue.toFixed(2)
 	      ) : _react2.default.createElement(
 	        'div',
 	        null,
 	        'Hover over the chart to show values'
 	      ),
 	      _react2.default.createElement(
-	        _src.XYPlot,
-	        { width: 700, height: 400, onMouseMove: this.onMouseMoveXYPlot },
-	        _react2.default.createElement(_src.LineChart, { data: randomSequences[0], getValue: { x: 0, y: 1 } }),
-	        _react2.default.createElement(_src.LineChart, { data: randomSequences[1], getValue: { x: 0, y: 1 } }),
-	        _react2.default.createElement(_src.LineChart, { data: randomSequences[2], getValue: { x: 0, y: 1 } })
+	        _XYPlot2.default,
+	        { width: 700, height: 400, onMouseMove: this.onMouseMoveXYPlot, onClick: this.onClick },
+	        _react2.default.createElement(_XAxis2.default, { title: 'Days' }),
+	        _react2.default.createElement(_YAxis2.default, { title: 'Price' }),
+	        _react2.default.createElement(_src.LineChart, { data: randomSequences[0], getValue: xyArrGetter }),
+	        _react2.default.createElement(_src.LineChart, { data: randomSequences[1], getValue: xyArrGetter }),
+	        _react2.default.createElement(_src.LineChart, { data: randomSequences[2], getValue: xyArrGetter }),
+	        activeXValue ? _react2.default.createElement(_XLine2.default, { value: activeXValue, style: { stroke: 'red' } }) : null,
+	        activeYValue ? _react2.default.createElement(_YLine2.default, { value: activeYValue, style: { stroke: 'red' } }) : null,
+	        this.state.clickedY ? _react2.default.createElement(_YLine2.default, { value: this.state.clickedY, style: { stroke: 'orange' } }) : null
 	      )
 	    );
 	  }
@@ -21219,7 +21322,7 @@
 	        _react2.default.createElement(_src.BarChart, { data: randomBars[0], getValue: { x: 0, y: 1 } }),
 	        _react2.default.createElement(_src.LineChart, { data: randomBars[0], getValue: { x: 0, y: 1 } }),
 	        _react2.default.createElement(_src.ScatterPlot, { data: randomBars[0], getValue: { x: 0, y: 1 }, pointSymbol: function pointSymbol(d, i) {
-	            return _.sample(emojis);
+	            return _lodash2.default.sample(emojis);
 	          } })
 	      )
 	    );
@@ -21552,6 +21655,108 @@
 	
 	var examples = exports.examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'axisLabels', title: 'Axis Labels', Component: AxisLabelExample }, { id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample }, { id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'histogram', title: 'Histogram', Component: HistogramExample }, { id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample }, { id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }];
 	
+	var YAxisTitleTest = function (_React$Component) {
+	  _inherits(YAxisTitleTest, _React$Component);
+	
+	  function YAxisTitleTest() {
+	    _classCallCheck(this, YAxisTitleTest);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(YAxisTitleTest).apply(this, arguments));
+	  }
+	
+	  _createClass(YAxisTitleTest, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props2 = this.props;
+	      var width = _props2.width;
+	      var height = _props2.height;
+	
+	      var size = { width: width, height: height };
+	      return _react2.default.createElement(
+	        'g',
+	        null,
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'Top I', alignment: 'top' }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'Mid + Mid', alignment: 'middle' }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'I Bottom', alignment: 'bottom' }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'Top I', alignment: 'top', rotate: false }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'Mid +', alignment: 'middle', rotate: false }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'Bottom I', alignment: 'bottom', rotate: false }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'Top I', alignment: 'top', placement: 'after' }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'Mid + Mid', alignment: 'middle', placement: 'after' }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'I Bottom', alignment: 'bottom', placement: 'after' }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'I Top', alignment: 'top', placement: 'after', rotate: false }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: '+ Mid', alignment: 'middle', placement: 'after', rotate: false }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'I Bottom', alignment: 'bottom', placement: 'after', rotate: false }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'Top I', alignment: 'top', position: 'right' }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'Mid + Mid', alignment: 'middle', position: 'right' }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'I Bottom', alignment: 'bottom', position: 'right' }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'I Top', alignment: 'top', position: 'right', rotate: false }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: '+ Mid', alignment: 'middle', position: 'right', rotate: false }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'I Bottom', alignment: 'bottom', position: 'right', rotate: false }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'Top I', alignment: 'top', placement: 'before', position: 'right' }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'Mid + Mid', alignment: 'middle', placement: 'before', position: 'right' }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'I Bottom', alignment: 'bottom', placement: 'before', position: 'right' }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'Top I', alignment: 'top', position: 'right', placement: 'before', rotate: false }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'Mid +', alignment: 'middle', position: 'right', placement: 'before', rotate: false }, size)),
+	        _react2.default.createElement(_YAxisTitle2.default, _extends({ title: 'Bottom I', alignment: 'bottom', position: 'right', placement: 'before', rotate: false }, size))
+	      );
+	    }
+	  }]);
+	
+	  return YAxisTitleTest;
+	}(_react2.default.Component);
+	
+	var XAxisTitleTest = function (_React$Component2) {
+	  _inherits(XAxisTitleTest, _React$Component2);
+	
+	  function XAxisTitleTest() {
+	    _classCallCheck(this, XAxisTitleTest);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(XAxisTitleTest).apply(this, arguments));
+	  }
+	
+	  _createClass(XAxisTitleTest, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props3 = this.props;
+	      var width = _props3.width;
+	      var height = _props3.height;
+	
+	      var size = { width: width, height: height };
+	      return _react2.default.createElement(
+	        'g',
+	        null,
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'I Left', alignment: 'left' }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'Center + Center', alignment: 'center' }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'Right I', alignment: 'right' }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'I Left', alignment: 'left', placement: 'above' }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'Center + Center', alignment: 'center', placement: 'above' }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'Right I', alignment: 'right', placement: 'above' }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'Left I', alignment: 'left', rotate: true }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'Center +', alignment: 'center', rotate: true }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'Right I', alignment: 'right', rotate: true }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'I Left', alignment: 'left', placement: 'above', rotate: true }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: '+ Center', alignment: 'center', placement: 'above', rotate: true }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'I Right', alignment: 'right', placement: 'above', rotate: true }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'I Left ', position: 'top', alignment: 'left' }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'Center + Center', position: 'top', alignment: 'center' }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'Right I', position: 'top', alignment: 'right' }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'I Left ', position: 'top', alignment: 'left', placement: 'below' }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'Center + Center', position: 'top', alignment: 'center', placement: 'below' }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'Right I', position: 'top', alignment: 'right', placement: 'below' }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'I Left', position: 'top', alignment: 'left', rotate: true }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: '+ Center', position: 'top', alignment: 'center', rotate: true }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'I Right', position: 'top', alignment: 'right', rotate: true }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'Left I', position: 'top', alignment: 'left', placement: 'below', rotate: true }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'Center +', position: 'top', alignment: 'center', placement: 'below', rotate: true }, size)),
+	        _react2.default.createElement(_XAxisTitle2.default, _extends({ title: 'Right I', position: 'top', alignment: 'right', placement: 'below', rotate: true }, size))
+	      );
+	    }
+	  }]);
+	
+	  return XAxisTitleTest;
+	}(_react2.default.Component);
+	
 	var App = exports.App = _react2.default.createClass({
 	  displayName: 'App',
 	  getInitialState: function getInitialState() {
@@ -21565,6 +21770,18 @@
 	    this.setState((0, _reactAddonsUpdate2.default)(this.state, { visibleExamples: _defineProperty({}, id, { $set: !isVisible }) }));
 	  },
 	  render: function render() {
+	    var innerSize = { width: 900, height: 400 };
+	    var dateDomain = [new Date(2005, 0, 1), new Date(2015, 0, 1)];
+	    var numberDomain = [-20, 20];
+	    var testXScale = _d2.default.time.scale().domain(dateDomain).range([0, innerSize.width]);
+	    var testYScale = _d2.default.scale.linear().domain([-20, 20]).range([innerSize.height, 0]);
+	
+	    var linearXScale = _d2.default.scale.linear().domain([-.05, .05]).range([0, innerSize.width]);
+	
+	    var customDateTicks = [new Date(2009, 0, 1), new Date(2014, 7, 1), new Date(2017, 0, 1)];
+	
+	    var smallSize = { width: 300, height: 210 };
+	
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -21577,12 +21794,78 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	          _src.XYPlot,
-	          { axisType: { x: 'ordinal' }, margin: 40 },
-	          _react2.default.createElement(_src.LineChart, {
-	            data: [['a', 0.5], ['b', 1], ['c', 0.25]],
-	            getValue: getXYArrayValue
-	          })
+	          _XYPlot2.default,
+	          _extends({ scaleType: 'linear' }, { width: 600, height: 350 }),
+	          _react2.default.createElement(_XAxis2.default, { title: 'Phase', gridLineStyle: { stroke: '#777' } }),
+	          _react2.default.createElement(_YAxis2.default, { title: 'Intensity', titleRotate: false, gridLineStyle: { stroke: '#777' } }),
+	          _react2.default.createElement(_YAxis2.default, { title: 'Intensity', position: 'right', showGrid: false, labelStyle: { fontSize: '12px' } }),
+	          _react2.default.createElement(_src.LineChart, { data: _lodash2.default.range(100), getValue: { y: function y(d) {
+	                return Math.sin(d * .1);
+	              } } }),
+	          _react2.default.createElement(_src.LineChart, { data: _lodash2.default.range(100), getValue: { y: function y(d) {
+	                return Math.cos(d * .1);
+	              } } })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _XYPlot2.default,
+	          _extends({ scaleType: 'linear', domain: [0.34, 4.7] }, smallSize),
+	          _react2.default.createElement(_YTicks2.default, null),
+	          _react2.default.createElement(_YTicks2.default, { placement: 'after', tickLength: 10, tickCount: 4 }),
+	          _react2.default.createElement(_YTicks2.default, { position: 'right', tickCount: 30, tickLength: 15, tickStyle: { stroke: 'red' } }),
+	          _react2.default.createElement(_YTicks2.default, { position: 'right', placement: 'before', tickCount: 5, tickLength: 18 })
+	        ),
+	        _react2.default.createElement(
+	          _XYPlot2.default,
+	          _extends({ scaleType: 'linear', domain: [0.34, 4.7] }, smallSize),
+	          _react2.default.createElement(_YGrid2.default, { tickCount: 50 }),
+	          _react2.default.createElement(_YGrid2.default, { tickCount: 5, lineStyle: { stroke: 'blue', strokewidth: 2 } })
+	        ),
+	        _react2.default.createElement(
+	          _XYPlot2.default,
+	          _extends({ scaleType: 'linear', domain: [0.34, 4.7] }, smallSize),
+	          _react2.default.createElement(_YAxisLabels2.default, { tickCount: 10 }),
+	          _react2.default.createElement(_YAxisLabels2.default, { position: 'right', tickCount: 10 }),
+	          _react2.default.createElement(_YGrid2.default, null)
+	        ),
+	        _react2.default.createElement(
+	          _XYPlot2.default,
+	          _extends({ scaleType: 'linear', domain: [0.34, 4.7] }, smallSize),
+	          _react2.default.createElement(_YAxisTitle2.default, { title: 'Hip Hip', position: 'right', style: { fontSize: '12px' } }),
+	          _react2.default.createElement(_YAxisTitle2.default, { title: 'Hooray' })
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _XYPlot2.default,
+	          _extends({ scaleType: 'linear', domain: [0.34, 4.7] }, smallSize),
+	          _react2.default.createElement(_XTicks2.default, null),
+	          _react2.default.createElement(_XTicks2.default, { position: 'top', tickCount: 120, tickLength: 15, tickStyle: { stroke: 'red' } }),
+	          _react2.default.createElement(_XTicks2.default, { position: 'top', placement: 'below', tickCount: 50, tickLength: 10 }),
+	          _react2.default.createElement(_XTicks2.default, { position: 'top', placement: 'below', tickCount: 5, tickLength: 18 })
+	        ),
+	        _react2.default.createElement(
+	          _XYPlot2.default,
+	          _extends({ scaleType: 'linear', domain: [0.34, 4.7] }, smallSize),
+	          _react2.default.createElement(_XGrid2.default, { tickCount: 50 }),
+	          _react2.default.createElement(_XGrid2.default, { tickCount: 5, lineStyle: { stroke: 'blue', strokewidth: 2 } })
+	        ),
+	        _react2.default.createElement(
+	          _XYPlot2.default,
+	          _extends({ scaleType: 'linear', domain: [0.34, 4.7] }, smallSize),
+	          _react2.default.createElement(_XAxisLabels2.default, { tickCount: 5 }),
+	          _react2.default.createElement(_XAxisLabels2.default, { position: 'top', distance: 2, labelStyle: { fontSize: '10px' } })
+	        ),
+	        _react2.default.createElement(
+	          _XYPlot2.default,
+	          _extends({ scaleType: 'linear', domain: [0.34, 4.7] }, smallSize),
+	          _react2.default.createElement(_XAxisTitle2.default, { title: 'Hip Hip', position: 'top', style: { fontSize: '12px' } }),
+	          _react2.default.createElement(_XAxisTitle2.default, { title: 'Hooray' })
 	        )
 	      ),
 	      this.renderExamples()
@@ -21629,1152 +21912,9 @@
 /* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _XYPlot = __webpack_require__(169);
-	
-	Object.defineProperty(exports, 'XYPlot', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_XYPlot).default;
-	  }
-	});
-	
-	var _LineChart = __webpack_require__(264);
-	
-	Object.defineProperty(exports, 'LineChart', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_LineChart).default;
-	  }
-	});
-	
-	var _BarChart = __webpack_require__(265);
-	
-	Object.defineProperty(exports, 'BarChart', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_BarChart).default;
-	  }
-	});
-	
-	var _MarkerLineChart = __webpack_require__(266);
-	
-	Object.defineProperty(exports, 'MarkerLineChart', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_MarkerLineChart).default;
-	  }
-	});
-	
-	var _ScatterPlot = __webpack_require__(267);
-	
-	Object.defineProperty(exports, 'ScatterPlot', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_ScatterPlot).default;
-	  }
-	});
-	
-	var _Histogram = __webpack_require__(268);
-	
-	Object.defineProperty(exports, 'Histogram', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_Histogram).default;
-	  }
-	});
-	
-	var _KernelDensityEstimation = __webpack_require__(269);
-	
-	Object.defineProperty(exports, 'KernelDensityEstimation', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_KernelDensityEstimation).default;
-	  }
-	});
-	
-	var _AreaHeatmap = __webpack_require__(270);
-	
-	Object.defineProperty(exports, 'AreaHeatmap', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_AreaHeatmap).default;
-	  }
-	});
-	
-	var _PieChart = __webpack_require__(271);
-	
-	Object.defineProperty(exports, 'PieChart', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_PieChart).default;
-	  }
-	});
-	
-	var _TreeMap = __webpack_require__(272);
-	
-	Object.defineProperty(exports, 'TreeMap', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_TreeMap).default;
-	  }
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ },
-/* 169 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-	//const {PropTypes} = React;
-	
-	
-	var _react = __webpack_require__(6);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _lodash = __webpack_require__(170);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	var _d2 = __webpack_require__(172);
-	
-	var _d3 = _interopRequireDefault(_d2);
-	
-	var _util = __webpack_require__(173);
-	
-	var _moment = __webpack_require__(174);
-	
-	var _moment2 = _interopRequireDefault(_moment);
-	
-	var _numeral = __webpack_require__(166);
-	
-	var _numeral2 = _interopRequireDefault(_numeral);
-	
-	var _server = __webpack_require__(261);
-	
-	var _server2 = _interopRequireDefault(_server);
-	
-	var _resolveObjectProps = __webpack_require__(262);
-	
-	var _resolveObjectProps2 = _interopRequireDefault(_resolveObjectProps);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var PropTypes = _react2.default.PropTypes;
-	PropTypes = _lodash2.default.assign({}, PropTypes, {
-	    // all props that can apply to both axes take the form {x: val, y: val}
-	    xyObjectOf: function xyObjectOf(type) {
-	        return PropTypes.oneOfType([type, PropTypes.shape({ x: type, y: type })]);
-	    },
-	    axisType: PropTypes.oneOf(['number', 'time', 'ordinal']),
-	    //DomainType: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
-	    dataArray: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
-	    fourDirections: PropTypes.shape({
-	        top: PropTypes.number,
-	        bottom: PropTypes.number,
-	        left: PropTypes.number,
-	        right: PropTypes.number
-	    }),
-	    stringFormatter: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
-	});
-	
-	var XYPlot = _react2.default.createClass({
-	    displayName: 'XYPlot',
-	
-	    propTypes: {
-	        // (outer) width and height of the chart
-	        width: PropTypes.number.isRequired,
-	        height: PropTypes.number.isRequired,
-	
-	        // chart margins (space around edges where axis labels live)
-	        margin: PropTypes.fourDirections,
-	        // internal chart padding (space between scale ends and edge of inner chart background)
-	        padding: PropTypes.fourDirections,
-	        // the max extra spacing required by the plot elements, if they were on the edge of the chart
-	        // eg. if a 10px radius dot is plotted at the end of one axis,
-	        // it needs 10px of spacing so it doesn't hang over the edge of the chart
-	        // spacing is the max possible necessary padding, and will == padding if plot elements are on scale extrema
-	        spacing: PropTypes.fourDirections,
-	
-	        // axis types - number, time or ordinal
-	        axisType: PropTypes.xyObjectOf(PropTypes.axisType),
-	        // scale domains may be provided, otherwise will be inferred from data
-	        domain: PropTypes.xyObjectOf(PropTypes.dataArray),
-	        // whether or not to extend the scales to end on nice values (see docs for d3 scale.linear.nice())
-	        nice: PropTypes.xyObjectOf(PropTypes.bool),
-	        // whether or not to invert the axis (ie. put largest numbers on bottom for Y axis, or on left for X)
-	        invertAxis: PropTypes.xyObjectOf(PropTypes.bool),
-	        // placement of the axis labels/ticks on the chart
-	        axisPosition: PropTypes.shape({
-	            x: PropTypes.oneOf(['top', 'bottom']),
-	            y: PropTypes.oneOf(['left', 'right'])
-	        }),
-	
-	        // approximate # of ticks to include on each axis - 10 is default
-	        // (actual # may be slightly different, to get nicest intervals)
-	        tickCount: PropTypes.xyObjectOf(PropTypes.number),
-	        // or alternatively, you can pass an array of the exact tick values to use on each axis
-	        ticks: PropTypes.xyObjectOf(PropTypes.dataArray),
-	        // size of axis ticks
-	        tickLength: PropTypes.xyObjectOf(PropTypes.number),
-	
-	        // axis value labels will be created for each tick, unless you specify a different list of values to label
-	        labelValues: PropTypes.xyObjectOf(PropTypes.dataArray),
-	        // format to use for the axis value labels. can be a function or a string.
-	        // if function, called on each label.
-	        // if string, interpreted as momentjs formats for time axes, or numeraljs formats for number axes
-	        labelFormat: PropTypes.xyObjectOf(PropTypes.stringFormatter),
-	        // padding between axis value labels and the axis/ticks
-	        labelPadding: PropTypes.xyObjectOf(PropTypes.number),
-	        // label to show for null/undefined values
-	        emptyLabel: PropTypes.string,
-	
-	        // should we draw axis value labels
-	        showLabels: PropTypes.xyObjectOf(PropTypes.bool),
-	        // should we draw the grid lines in the main chart space
-	        showGrid: PropTypes.xyObjectOf(PropTypes.bool),
-	        // should we draw the little tick lines along the axis
-	        showTicks: PropTypes.xyObjectOf(PropTypes.bool),
-	        // should we draw a line showing where zero is
-	        showZero: PropTypes.xyObjectOf(PropTypes.bool),
-	
-	        // label for entire axis, not value labels
-	        axisLabel: PropTypes.xyObjectOf(PropTypes.string),
-	        axisLabelAlign: PropTypes.xyObjectOf(PropTypes.shape({
-	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
-	            vertical: PropTypes.oneOf(['top', 'bottom'])
-	        })),
-	        axisLabelPadding: PropTypes.xyObjectOf(PropTypes.number),
-	
-	        // todo more interaction
-	        onMouseMove: PropTypes.func,
-	        onMouseEnter: PropTypes.func,
-	        onMouseLeave: PropTypes.func,
-	        onMouseDown: PropTypes.func,
-	        onMouseUp: PropTypes.func
-	
-	        // todo: minMargin - margin will be at least X, or more if necessary
-	        // todo: extraMargin - margin to add to calculated necessary margin
-	        // todo: minPadding, extraPadding ?
-	        // todo: minSpacing, extraSpacing ?
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            width: 400,
-	            height: 250,
-	            axisType: { x: 'number', y: 'number' },
-	            nice: { x: true, y: true },
-	            invertAxis: { x: false, y: false },
-	            tickCount: { x: 10, y: 10 },
-	            tickLength: { x: 6, y: 6 },
-	            labelPadding: { x: 6, y: 6 },
-	            emptyLabel: "Unknown",
-	            showLabels: { x: true, y: true },
-	            showGrid: { x: true, y: true },
-	            showTicks: { x: true, y: true },
-	            showZero: { x: false, y: false },
-	            axisLabelPadding: { x: 10, y: 10 },
-	            axisLabelAlign: {
-	                x: { horizontal: 'left', vertical: 'top' },
-	                y: { horizontal: 'right', vertical: 'top' }
-	            },
-	
-	            // these values are inferred from data if not provided, therefore empty defaults
-	            margin: {}, padding: {}, spacing: {}, domain: {},
-	            ticks: {}, labelValues: {}, labelFormat: {}, axisLabel: {}
-	        };
-	    },
-	    getInitialState: function getInitialState() {
-	        return {};
-	    },
-	    componentWillMount: function componentWillMount() {
-	        this.trueProps = this.initProps(this.props);
-	        this.initLabelFormats(this.trueProps);
-	        this.initDomains(this.trueProps);
-	        this.initScale(this.trueProps);
-	    },
-	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
-	        this.trueProps = this.initProps(newProps);
-	        this.initLabelFormats(this.trueProps);
-	        this.initDomains(this.trueProps);
-	        this.initScale(this.trueProps);
-	    },
-	    initProps: function initProps(props) {
-	        return _lodash2.default.assign({}, props);
-	    },
-	    initDomains: function initDomains(props) {
-	        var axisType = props.axisType;
-	        var ticks = props.ticks;
-	        var labelValues = props.labelValues;
-	
-	        // figure out the domains for each axis (ie. data extents)
-	        // unless both domains are given, ask each child chart for it's desired domain, & flatten them into one domain.
-	        // this is so that charts can plot their own modified version of the data (ie. a histogram),
-	        // even if it has a different domain than the original data
-	        // todo: only do this when necessary
-	
-	        var allChartOptions = [];
-	        _react2.default.Children.forEach(props.children, function (child) {
-	            if (!childIsXYChart(child)) return; // only get options for children which identify themselves as XYCharts
-	
-	            var childProps = _lodash2.default.assign({}, { axisType: axisType }, child.props);
-	
-	            var _ref = _lodash2.default.isFunction(child.type.getOptions) ? child.type.getOptions(childProps) : {};
-	
-	            var domain = _ref.domain;
-	            var spacing = _ref.spacing;
-	
-	            domain = domain || {};
-	            ['x', 'y'].forEach(function (k) {
-	                if (isNullOrUndefined(domain[k])) domain[k] = defaultDomain(child.props.data, child.props.getValue[k], axisType[k]);
-	            });
-	
-	            allChartOptions.push({ domain: domain, spacing: spacing });
-	        });
-	
-	        // use domain from props if provided, else calculated domains from children
-	        var domains = _lodash2.default.fromPairs(_lodash2.default.map(['x', 'y'], function (k) {
-	            return [k, props.domain[k] || _lodash2.default.compact(_lodash2.default.map(allChartOptions, 'domain.' + k))];
-	        }));
-	        // if user has passed in custom ticks or label values, extend the domain to ensure they are all are included
-	        ['x', 'y'].forEach(function (k) {
-	            var isOrdinal = axisType[k] === 'ordinal';
-	            [ticks[k], labelValues[k]].forEach(function (values) {
-	                if (values) domains[k].push(isOrdinal ? values : _d3.default.extent(values));
-	            });
-	        });
-	        // use spacing from props if provided, else calculated spacings from children
-	        var spacings = _lodash2.default.map(allChartOptions, 'spacing').map(function (spacing) {
-	            return _lodash2.default.defaults({}, spacing, props.spacing);
-	        });
-	
-	        _lodash2.default.assign(this, { domains: domains, spacings: spacings });
-	    },
-	    initLabelFormats: function initLabelFormats(props) {
-	        this.labelFormat = _lodash2.default.fromPairs(_lodash2.default.map(['x', 'y'], function (k) {
-	            var axisType = props.axisType[k];
-	            // use given format if provided
-	            return _lodash2.default.isObject(props.labelFormat) && _lodash2.default.has(props.labelFormat, k) ? [k, props.labelFormat[k]] :
-	            // otherwise determine appropriate format for axis type
-	            axisType == 'number' ? [k, '0.[000000]a'] :
-	            // todo determine most appropriate date format for this domain
-	            axisType === 'time' ? [k, 'MM-DD'] : [k, undefined];
-	        }));
-	    },
-	    initScale: function initScale(props) {
-	        var _this = this;
-	
-	        // create the X and Y scales shared by charts
-	        // calculate the inner width and height based on margins
-	        var width = props.width;
-	        var height = props.height;
-	        var axisType = props.axisType;
-	        var tickCount = props.tickCount;
-	        var nice = props.nice;
-	        var axisLabel = props.axisLabel;
-	        var axisLabelPadding = props.axisLabelPadding;
-	        var labelPadding = props.labelPadding;
-	        var tickLength = props.tickLength;
-	        var showTicks = props.showTicks;
-	        var domains = this.domains;
-	        var spacings = this.spacings;
-	        var labelFormat = this.labelFormat;
-	
-	        var origMargin = props.margin;
-	        var origPadding = props.padding;
-	
-	        // todo fix
-	        var shouldMeasureLabels = true;
-	        if (shouldMeasureLabels) {
-	            (function () {
-	                // several inferred variables depend on each other in a complicated/circular way:
-	                // the axis scales, margin, padding, ticks and labels.
-	                // eg. scale width depends on margin, which depends on the axis labels, which depend on the scale
-	                // so we set some sane initial values and iterate until it settles down (or we get tired of waiting)
-	
-	                // start with a margin of 10 pixels for all unknown margins
-	                //let margin = _.transform(origMargin, (result, m, key) => result[key] = isNullOrUndefined(m) ? 10 : m);
-	                var margin = _lodash2.default.defaults({}, origMargin, { top: 10, bottom: 10, left: 10, right: 10 });
-	                // and padding equal to the first chart's spacing for unknown paddings
-	                //let padding = _.transform(origPadding, (res, p, key) => res[key] = _.isNull(p) ? spacings[0][key] : p);
-	                var padding = _lodash2.default.defaults({}, origPadding, { top: 0, bottom: 0, left: 0, right: 0 });
-	                // make scales using margin, measure labels, make new margins
-	                // repeat until we converge on a margin that works
-	                var scaleWidth = undefined,
-	                    scaleHeight = undefined,
-	                    labelBoxes = undefined;
-	                var scale = {};
-	                var ticks = {};
-	
-	                var isDone = false,
-	                    i = 0,
-	                    limit = 5; // don't loop forever
-	
-	                var _loop = function _loop() {
-	                    i++;
-	                    // calculate scale width based on previous margin
-	                    scaleWidth = width - (margin.left + margin.right + padding.left + padding.right);
-	                    scaleHeight = height - (margin.top + margin.bottom + padding.top + padding.bottom);
-	                    var range = {
-	                        x: [padding.left, scaleWidth + padding.left],
-	                        y: [scaleHeight + padding.top, padding.top]
-	                    };
-	
-	                    ['x', 'y'].forEach(function (k) {
-	                        scale[k] = makeScale(domains[k], range[k], axisType[k], nice[k], tickCount[k]);
-	                        if (props.invertAxis[k]) scale[k].domain(scale[k].domain().reverse());
-	                        ticks[k] = props.ticks[k] || (axisType[k] === 'ordinal' ? scale[k].domain() : scale[k].ticks(tickCount[k]));
-	                    });
-	
-	                    labelBoxes = measureAxisLabels(_this.getXAxisProps({ scaleWidth: scaleWidth, scaleHeight: scaleHeight, scale: scale.x, ticks: ticks.x }), _this.getYAxisProps({ scaleWidth: scaleWidth, scaleHeight: scaleHeight, scale: scale.y, ticks: ticks.y }), axisLabel.x ? _this.getXAxisLabelProps({ margin: margin }) : null, axisLabel.y ? _this.getYAxisLabelProps({ margin: margin }) : null);
-	
-	                    // calculate padding based on spacings and domains
-	                    // spacing is the amount of outer space ('margin') required by the outermost elements of each chart,
-	                    // so that they still fit within the chart boundaries, defined by chartWidth and chartHeight.
-	                    // padding is the actual amount of extra space required, after taking into account the scales.
-	                    // if the outermost chart elements are on the scale extrema, padding = spacing,
-	                    // but the scale may extend beyond the last element anyway, so we may not need the extra padding.
-	                    // NOTE: temporarily set as padding = max spacing, todo: implement real padding
-	                    padding = _lodash2.default.defaults(origPadding, _lodash2.default.reduce(spacings, function (newPadding, spacing) {
-	                        return _lodash2.default.transform(spacing, function (result, space, dir) {
-	                            result[dir] = Math.max(newPadding[dir] || space);
-	                        });
-	                    }, {}), { top: 0, bottom: 0, left: 0, right: 0 });
-	
-	                    // todo: modify to handle all possible label alignments
-	                    // todo: handle case of labels not shown (ie if !this.props.showYLabels)
-	                    var hasXAxisLabel = axisLabel.x && labelBoxes.xAxis;
-	                    var hasYAxisLabel = axisLabel.y && labelBoxes.yAxis;
-	                    var hasXValLabels = !!labelBoxes.xVal.length;
-	                    var hasYValLabels = !!labelBoxes.yVal.length;
-	
-	                    var xRange = scale.x.range();
-	                    var yRange = scale.y.range();
-	
-	                    // find # of pixels by which the top- and bottom-most y axis labels overhang the top/bottom chart edges
-	
-	                    var topYTick = _lodash2.default.min(ticks.y, scale.y);
-	
-	                    var bottomYTick = _lodash2.default.max(ticks.y, scale.y);
-	
-	                    var topYTickFromTop = Math.abs(scale.y(topYTick) - _lodash2.default.min(yRange));
-	                    var bottomYTickFromBottom = Math.abs(scale.y(bottomYTick) - _lodash2.default.max(yRange));
-	
-	                    var _ref2 = hasYValLabels ? [_lodash2.default.min(labelBoxes.yVal, (0, _util.accessor)('top')), _lodash2.default.max(labelBoxes.yVal, (0, _util.accessor)('top'))] : [null, null];
-	
-	                    var _ref3 = _slicedToArray(_ref2, 2);
-	
-	                    var topYValBox = _ref3[0];
-	                    var bottomYValBox = _ref3[1];
-	
-	                    var _ref4 = hasYValLabels ? [Math.ceil(Math.max(0.5 * topYValBox.height - (topYTickFromTop + padding.top), 0)), Math.ceil(Math.max(0.5 * bottomYValBox.height - (bottomYTickFromBottom + padding.bottom), 0))] : [0, 0];
-	
-	                    var _ref5 = _slicedToArray(_ref4, 2);
-	
-	                    var topYValOverhang = _ref5[0];
-	                    var bottomYValOverhang = _ref5[1];
-	
-	                    // find # of pixels by which the left- and right-most x axis labels overhang the left/right chart edges
-	
-	                    var leftXTick = _lodash2.default.min(ticks.x, scale.x);
-	
-	                    var rightXTick = _lodash2.default.max(ticks.x, scale.x);
-	
-	                    var leftXTickFromLeft = Math.abs(scale.x(leftXTick) - _lodash2.default.min(xRange));
-	                    var rightXTickFromRight = Math.abs(scale.x(rightXTick) - _lodash2.default.max(xRange));
-	
-	                    var _ref6 = hasXValLabels ? [_lodash2.default.min(labelBoxes.xVal, (0, _util.accessor)('left')), _lodash2.default.max(labelBoxes.xVal, (0, _util.accessor)('right'))] : [null, null];
-	
-	                    var _ref7 = _slicedToArray(_ref6, 2);
-	
-	                    var leftXValBox = _ref7[0];
-	                    var rightXValBox = _ref7[1];
-	
-	                    var _ref8 = hasXValLabels ? [Math.ceil(Math.max(0.5 * leftXValBox.width - (leftXTickFromLeft + padding.left), 0)), Math.ceil(Math.max(0.5 * rightXValBox.width - (rightXTickFromRight + padding.right), 0))] : [0, 0];
-	
-	                    var _ref9 = _slicedToArray(_ref8, 2);
-	
-	                    var leftXValOverhang = _ref9[0];
-	                    var rightXValOverhang = _ref9[1];
-	
-	                    // todo: fix all of this... sigh...
-	                    //
-	
-	                    var xAxisLabelOuterHeight = hasXAxisLabel ? Math.ceil(labelBoxes.xAxis.height + axisLabelPadding.x) : 0;
-	                    var yAxisLabelOuterHeight = hasYAxisLabel ? Math.ceil(labelBoxes.yAxis.height + axisLabelPadding.y) : 0;
-	
-	                    var topMargin = _lodash2.default.has(origMargin, 'top') ? origMargin.top : Math.max(topYValOverhang, xAxisLabelOuterHeight, yAxisLabelOuterHeight);
-	
-	                    var yTickAndPadSpace = (hasYValLabels || hasYAxisLabel ? labelPadding.y : 0) + (showTicks.y ? tickLength.y : 0);
-	
-	                    var maxYValWidth = (hasYValLabels ? Math.ceil(_d3.default.max(labelBoxes.yVal, (0, _util.accessor)('width'))) : 0) + yTickAndPadSpace;
-	                    var yAxisLabelOuterWidth = hasYAxisLabel ? Math.ceil(labelBoxes.yAxis.width) + yTickAndPadSpace : 0;
-	                    //console.log(maxYValWidth, yAxisLabelOuterWidth);
-	
-	                    var leftMargin = _lodash2.default.has(origMargin, 'left') ? origMargin.left : Math.max(leftXValOverhang, maxYValWidth, yAxisLabelOuterWidth);
-	
-	                    var xTickAndPadSpace = (hasXValLabels || hasXAxisLabel ? labelPadding.x : 0) + (showTicks.x ? tickLength.x : 0);
-	
-	                    var maxXValHeight = (hasXValLabels ? Math.ceil(_d3.default.max(labelBoxes.xVal, (0, _util.accessor)('height'))) : 0) + xTickAndPadSpace;
-	
-	                    var requiredMargin = {
-	                        top: topMargin,
-	                        bottom: maxXValHeight,
-	                        left: leftMargin,
-	                        right: rightXValOverhang
-	                    };
-	
-	                    var newMargin = (0, _lodash2.default)(requiredMargin).map(function (v, k) {
-	                        return [k, _lodash2.default.has(origMargin, k) ? origMargin[k] : v];
-	                    }).fromPairs().value();
-	
-	                    isDone = _lodash2.default.every(_lodash2.default.keys(margin), function (k) {
-	                        return margin[k] === newMargin[k];
-	                    });
-	                    //console.log('calculated margin', newMargin);
-	                    margin = newMargin;
-	                    scaleWidth = width - (margin.left + margin.right + padding.left + padding.right);
-	                    scaleHeight = height - (margin.top + margin.bottom + padding.top + padding.bottom);
-	                };
-	
-	                while (!isDone && i < limit) {
-	                    _loop();
-	                }
-	                //console.log('padding', padding);
-	                //console.log({scaleWidth, scaleHeight});
-	                _lodash2.default.assign(_this, { scale: scale, ticks: ticks, margin: margin, padding: padding, scaleWidth: scaleWidth, scaleHeight: scaleHeight, labelBoxes: labelBoxes });
-	            })();
-	        } else {
-	            // margins are all pre-defined, just make the scales
-	            // todo still need to determine padding??
-	            //const scaleWidth = width - (props.margin.left + props.margin.right);
-	            //const scaleHeight = height - (props.margin.top + props.margin.bottom);
-	            //const xScale = makeScale(this.xDomains, [0, scaleWidth], xType);
-	            //const yScale = makeScale(this.yDomains, [scaleHeight, 0], yType);
-	            //_.assign(this, {margin: props.margin, scaleWidth, scaleHeight, xScale, yScale});
-	        }
-	    },
-	    onMouseMove: function onMouseMove(e) {
-	        var _trueProps = this.trueProps;
-	        var axisType = _trueProps.axisType;
-	        var height = _trueProps.height;
-	        var width = _trueProps.width;
-	        var margin = this.margin;
-	        var padding = this.padding;
-	        var scale = this.scale;
-	        var scaleWidth = this.scaleWidth;
-	        var scaleHeight = this.scaleHeight;
-	        // todo faster method than getBoundingClientRect on every mouseover?
-	
-	        var chartBB = e.currentTarget.getBoundingClientRect();
-	        var chartX = Math.round(e.clientX - chartBB.left - margin.left);
-	        var chartY = Math.round(e.clientY - chartBB.top - margin.top);
-	
-	        var chartXVal = !_lodash2.default.inRange(chartX, 0, scaleWidth + padding.left + padding.right) ? null : axisType.x === 'ordinal' ? scale.x.domain()[indexOfClosestNumberInList(chartX, scale.x.range())] : scale.x.invert(chartX);
-	        var chartYVal = !_lodash2.default.inRange(chartY, 0, scaleHeight + padding.top + padding.bottom) ? null : axisType.y === 'ordinal' ? scale.y.domain()[indexOfClosestNumberInList(chartY, scale.y.range())] : scale.y.invert(chartY);
-	
-	        var chart = this.refs['chart-series-0'];
-	        var hovered = chart && _lodash2.default.isFunction(chart.getHovered) ? chart.getHovered(chartXVal) : null;
-	
-	        this.trueProps.onMouseMove(hovered, e, { chartX: chartX, chartY: chartY, chartXVal: chartXVal, chartYVal: chartYVal });
-	    },
-	    onMouseEnter: function onMouseEnter(e) {
-	        this.trueProps.onMouseEnter(e);
-	    },
-	    onMouseLeave: function onMouseLeave(e) {
-	        this.trueProps.onMouseLeave(e);
-	    },
-	    onMouseDown: function onMouseDown(e) {
-	        this.trueProps.onMouseDown(e);
-	    },
-	    onMouseUp: function onMouseUp(e) {
-	        this.trueProps.onMouseUp(e);
-	    },
-	    render: function render() {
-	        var _trueProps2 = this.trueProps;
-	        var children = _trueProps2.children;
-	        var width = _trueProps2.width;
-	        var height = _trueProps2.height;
-	        var axisType = _trueProps2.axisType;
-	        var axisLabel = _trueProps2.axisLabel;
-	        var invertAxis = _trueProps2.invertAxis;
-	        var onMouseMove = _trueProps2.onMouseMove;
-	        var onMouseEnter = _trueProps2.onMouseEnter;
-	        var onMouseLeave = _trueProps2.onMouseLeave;
-	        var onMouseDown = _trueProps2.onMouseDown;
-	        var onMouseUp = _trueProps2.onMouseUp;
-	        var scale = this.scale;
-	        var margin = this.margin;
-	        var padding = this.padding;
-	        var scaleWidth = this.scaleWidth;
-	        var scaleHeight = this.scaleHeight;
-	        var ticks = this.ticks;
-	
-	        var chartWidth = scaleWidth + padding.left + padding.right;
-	        var chartHeight = scaleHeight + padding.top + padding.bottom;
-	
-	        var propsToPass = {
-	            axisType: axisType, invertAxis: invertAxis, scale: scale, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: width, plotHeight: height,
-	            chartMargin: margin, chartPadding: padding, margin: margin, padding: padding, ticks: ticks
-	        };
-	
-	        var childrenUnderAxes = _react2.default.Children.map(children, function (child, i) {
-	            if (!child || !child.props || !child.props.underAxes) return null;
-	            // todo fix chart series #
-	            var name = child.props.name || 'chart-series-' + i;
-	            return _react2.default.cloneElement(child, _lodash2.default.assign({ ref: name, name: name }, propsToPass));
-	        });
-	        var childrenAboveAxes = _react2.default.Children.map(children, function (child, i) {
-	            if (!child || child.props && child.props.underAxes) return null;
-	            var name = child.props.name || 'chart-series-' + i;
-	            return _react2.default.cloneElement(child, _lodash2.default.assign({ ref: name, name: name }, propsToPass));
-	        });
-	
-	        return _react2.default.createElement(
-	            'svg',
-	            _extends({ className: 'xy-plot' }, { width: width, height: height }, {
-	                onMouseMove: _lodash2.default.isFunction(onMouseMove) ? this.onMouseMove : null,
-	                onMouseEnter: _lodash2.default.isFunction(onMouseEnter) ? this.onMouseEnter : null,
-	                onMouseLeave: _lodash2.default.isFunction(onMouseLeave) ? this.onMouseLeave : null,
-	                onMouseDown: _lodash2.default.isFunction(onMouseDown) ? this.onMouseDown : null,
-	                onMouseUp: _lodash2.default.isFunction(onMouseUp) ? this.onMouseUp : null
-	            }),
-	            _react2.default.createElement(
-	                'g',
-	                { className: 'chart-inner',
-	                    transform: 'translate(' + margin.left + ', ' + margin.top + ')'
-	                },
-	                _react2.default.createElement('rect', { className: 'chart-background', width: chartWidth, height: chartHeight }),
-	                childrenUnderAxes,
-	                _react2.default.createElement(ChartAxis, this.getXAxisProps()),
-	                _react2.default.createElement(ChartAxis, this.getYAxisProps()),
-	                childrenAboveAxes
-	            ),
-	            axisLabel.x ? _react2.default.createElement(XAxisLabel, this.getXAxisLabelProps()) : null,
-	            axisLabel.y ? _react2.default.createElement(YAxisLabel, this.getYAxisLabelProps()) : null
-	        );
-	    },
-	    getXAxisProps: function getXAxisProps() {
-	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	
-	        var scaleHeight = options.scaleHeight || this.scaleHeight;
-	        var padding = options.padding || this.padding || {};
-	        return this.getAxisProps(_lodash2.default.assign({
-	            letter: 'x',
-	            orientation: 'horizontal',
-	            axisTransform: 'translate(0, ' + (scaleHeight + (padding.top || 0) + (padding.bottom || 0)) + ')'
-	        }, options));
-	    },
-	    getYAxisProps: function getYAxisProps() {
-	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	
-	        return this.getAxisProps(_lodash2.default.assign({
-	            letter: 'y',
-	            orientation: 'vertical'
-	        }, options));
-	    },
-	    getAxisProps: function getAxisProps(options) {
-	        var props = this.trueProps;
-	        var k = options.letter;
-	
-	        return _lodash2.default.defaults({}, options, {
-	            scale: _lodash2.default.get(this.scale, k),
-	            padding: this.padding,
-	            scaleHeight: this.scaleHeight,
-	            scaleWidth: this.scaleWidth,
-	            labelFormat: this.labelFormat[k],
-	            type: props.axisType[k],
-	            tickCount: props.tickCount[k],
-	            ticks: _lodash2.default.get(this.ticks, k) || [],
-	            labels: props.labelValues[k],
-	            labelPadding: props.labelPadding[k],
-	            emptyLabel: props.emptyLabel,
-	            tickLength: props.tickLength[k],
-	            showLabels: props.showLabels[k],
-	            showTicks: props.showTicks[k],
-	            showGrid: props.showGrid[k],
-	            showZero: props.showZero[k]
-	        });
-	    },
-	    getXAxisLabelProps: function getXAxisLabelProps() {
-	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	
-	        return this.getAxisLabelProps('x', options);
-	    },
-	    getYAxisLabelProps: function getYAxisLabelProps() {
-	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	
-	        return this.getAxisLabelProps('y', options);
-	    },
-	    getAxisLabelProps: function getAxisLabelProps(k) {
-	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	
-	        var props = this.trueProps;
-	        var labelBoxes = this.labelBoxes;
-	        var margin = this.margin;
-	        var scaleWidth = this.scaleWidth;
-	        var scaleHeight = this.scaleHeight;
-	
-	
-	        return _lodash2.default.defaults({}, options, {
-	            margin: margin, scaleWidth: scaleWidth, scaleHeight: scaleHeight,
-	            label: _lodash2.default.get(props.axisLabel, k),
-	            alignment: _lodash2.default.get(props.axisLabelAlign, k),
-	            axisLabelPadding: _lodash2.default.get(props.axisLabelPadding, k),
-	            valueLabelPadding: _lodash2.default.get(props.labelPadding, k),
-	            tickLength: _lodash2.default.get(props.tickLength, k),
-	            showTicks: _lodash2.default.get(props.showTicks, k),
-	            labelBox: labelBoxes && labelBoxes[k + 'Axis'] ? labelBoxes[k + 'Axis'] : { width: 10, height: 10 }
-	        });
-	    }
-	});
-	
-	var XGrid = _react2.default.createClass({
-	    displayName: 'XGrid',
-	
-	    propTypes: {
-	        ticks: PropTypes.array,
-	        scale: PropTypes.array,
-	        chartWidth: PropTypes.number,
-	        chartHeight: PropTypes.number
-	    },
-	    render: function render() {
-	        var _props = this.props;
-	        var ticks = _props.ticks;
-	        var scale = _props.scale;
-	        var chartWidth = _props.chartWidth;
-	        var chartHeight = _props.chartHeight;
-	
-	
-	        return ticks.map(function (value, i) {
-	            var x = scale(value);
-	        });
-	    }
-	});
-	
-	var GridLine = _react2.default.createClass({
-	    displayName: 'GridLine',
-	    render: function render(options) {
-	        var letter = options.letter;
-	        var gridLength = options.gridLength;
-	        var orientation = options.orientation;
-	
-	        var className = 'chart-grid chart-grid-' + (letter || '');
-	
-	        var _ref10 = orientation === 'vertical' ? [gridLength, 0] : [0, -gridLength];
-	
-	        var _ref11 = _slicedToArray(_ref10, 2);
-	
-	        var x2 = _ref11[0];
-	        var y2 = _ref11[1];
-	
-	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
-	    }
-	});
-	
-	var XAxisLabel = _react2.default.createClass({
-	    displayName: 'XAxisLabel',
-	
-	    propTypes: {
-	        label: PropTypes.string,
-	        //letter: PropTypes.string,
-	        margin: PropTypes.object,
-	        scaleWidth: PropTypes.number,
-	        scaleHeight: PropTypes.number,
-	        alignment: PropTypes.shape({
-	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
-	            vertical: PropTypes.oneOf(['top', 'bottom'])
-	        }),
-	        axisLabelPadding: PropTypes.number,
-	        valueLabelPadding: PropTypes.number,
-	        tickLength: PropTypes.number,
-	        // bounding box of the label
-	        labelBox: PropTypes.object
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            labelBox: { height: 10, width: 10 },
-	            scaleWidth: 0
-	        };
-	    },
-	    render: function render() {
-	        var _props2 = this.props;
-	        var label = _props2.label;
-	        var labelBox = _props2.labelBox;
-	        var margin = _props2.margin;
-	        var alignment = _props2.alignment;
-	
-	
-	        var top = labelBox.height;
-	        var left = margin.left;
-	        var x = alignment.horizontal === 'left' ? 0 : alignment.horizontal === 'right' ? this.props.scaleWidth : this.props.scaleWidth / 2;
-	        var textAnchor = alignment.horizontal === 'left' ? 'start' : alignment.horizontal === 'right' ? 'end' : 'middle';
-	
-	        // todo implement vertical alignment
-	
-	        return _react2.default.createElement(
-	            'g',
-	            {
-	                className: 'chart-axis-label chart-axis-label-x',
-	                transform: 'translate(' + left + ',' + top + ')'
-	            },
-	            _react2.default.createElement(
-	                'text',
-	                { x: x, style: { textAnchor: textAnchor } },
-	                label
-	            )
-	        );
-	    }
-	});
-	
-	var YAxisLabel = _react2.default.createClass({
-	    displayName: 'YAxisLabel',
-	
-	    propTypes: {
-	        label: PropTypes.string,
-	        //letter: PropTypes.string,
-	        margin: PropTypes.object,
-	        scaleWidth: PropTypes.number,
-	        scaleHeight: PropTypes.number,
-	        alignment: PropTypes.shape({
-	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
-	            vertical: PropTypes.oneOf(['top', 'bottom'])
-	        }),
-	        axisLabelPadding: PropTypes.number,
-	        valueLabelPadding: PropTypes.number,
-	        tickLength: PropTypes.number,
-	        showTicks: PropTypes.bool,
-	        // bounding box of the label
-	        labelBox: PropTypes.object
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            labelBox: { height: 10, width: 10 },
-	            scaleWidth: 0
-	        };
-	    },
-	    render: function render() {
-	        var _props3 = this.props;
-	        var label = _props3.label;
-	        var labelBox = _props3.labelBox;
-	        var margin = _props3.margin;
-	        var valueLabelPadding = _props3.valueLabelPadding;
-	        var showTicks = _props3.showTicks;
-	        var tickLength = _props3.tickLength;
-	        var alignment = _props3.alignment;
-	
-	        var yTickAndPadSpace = valueLabelPadding + (showTicks ? tickLength : 0);
-	
-	        var top = labelBox.height;
-	        var left = 0;
-	        var x = alignment.horizontal === 'left' ? 0 : alignment.horizontal === 'right' ? margin.left - yTickAndPadSpace : (margin.left - yTickAndPadSpace) / 2;
-	        var textAnchor = alignment.horizontal === 'left' ? 'start' : alignment.horizontal === 'right' ? 'end' : 'middle';
-	
-	        // todo implement vertical alignment
-	
-	        return _react2.default.createElement(
-	            'g',
-	            {
-	                className: 'chart-axis-label chart-axis-label-y',
-	                transform: 'translate(' + left + ',' + top + ')'
-	            },
-	            _react2.default.createElement(
-	                'text',
-	                { x: x, style: { textAnchor: textAnchor } },
-	                label
-	            )
-	        );
-	    }
-	});
-	
-	var ChartAxis = _react2.default.createClass({
-	    displayName: 'ChartAxis',
-	
-	    propTypes: {
-	        scale: PropTypes.func,
-	        type: PropTypes.string,
-	        orientation: PropTypes.string,
-	        axisTransform: PropTypes.string,
-	        ticks: PropTypes.array,
-	        labels: PropTypes.array,
-	        tickCount: PropTypes.number,
-	        labelFormat: PropTypes.stringFormatter,
-	        emptyLabel: PropTypes.string,
-	        letter: PropTypes.string,
-	
-	        scaleWidth: PropTypes.number,
-	        scaleHeight: PropTypes.number,
-	        padding: PropTypes.object,
-	        labelPadding: PropTypes.number,
-	        tickLength: PropTypes.number,
-	        showLabels: PropTypes.bool,
-	        showTicks: PropTypes.bool,
-	        showGrid: PropTypes.bool,
-	        showZero: PropTypes.bool
-	    },
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            padding: {},
-	            emptyLabel: "Unknown"
-	        };
-	    },
-	    render: function render() {
-	        var _this2 = this;
-	
-	        var _props4 = this.props;
-	        var scale = _props4.scale;
-	        var type = _props4.type;
-	        var orientation = _props4.orientation;
-	        var axisTransform = _props4.axisTransform;
-	        var tickCount = _props4.tickCount;
-	        var letter = _props4.letter;
-	        var labelFormat = _props4.labelFormat;
-	        var emptyLabel = _props4.emptyLabel;
-	        var ticks = _props4.ticks;
-	        var scaleWidth = _props4.scaleWidth;
-	        var scaleHeight = _props4.scaleHeight;
-	        var padding = _props4.padding;
-	        var labelPadding = _props4.labelPadding;
-	        var tickLength = _props4.tickLength;
-	        var showLabels = _props4.showLabels;
-	        var showTicks = _props4.showTicks;
-	        var showGrid = _props4.showGrid;
-	        var showZero = _props4.showZero;
-	
-	
-	        if (!(showLabels || showTicks || showGrid || showZero)) return null;
-	
-	        var labels = _lodash2.default.isArray(this.props.labels) ? this.props.labels : ticks;
-	        var distance = showTicks ? tickLength + labelPadding : labelPadding;
-	
-	        var _ref12 = orientation === 'vertical' ? [function (v) {
-	            return 'translate(0, ' + scale(v) + ')';
-	        }, { x: -distance }, scaleWidth + padding.left + padding.right] : [function (v) {
-	            return 'translate(' + scale(v) + ', 0)';
-	        }, { y: distance }, scaleHeight + padding.top + padding.bottom];
-	
-	        var _ref13 = _slicedToArray(_ref12, 3);
-	
-	        var tickTransform = _ref13[0];
-	        var labelOffset = _ref13[1];
-	        var gridLength = _ref13[2];
-	
-	
-	        var options = { letter: letter, type: type, orientation: orientation, labelOffset: labelOffset, gridLength: gridLength, tickLength: tickLength, labelFormat: labelFormat, emptyLabel: emptyLabel };
-	        return _react2.default.createElement(
-	            'g',
-	            { ref: letter + 'Axis', className: 'chart-axis chart-axis-' + letter, transform: axisTransform },
-	            showTicks || showGrid || showLabels && labels === ticks ? _lodash2.default.map(ticks, function (value, i) {
-	                var tickOptions = _lodash2.default.assign({}, options, { value: value });
-	                return _react2.default.createElement(
-	                    'g',
-	                    { transform: tickTransform(value), key: 'tick-' + i },
-	                    showGrid ? _this2.renderGrid(tickOptions) : null,
-	                    showTicks ? _this2.renderTick(tickOptions) : null,
-	                    showLabels && labels === ticks ? _this2.renderLabel(tickOptions) : null
-	                );
-	            }) : null,
-	            showLabels && labels !== ticks ? // render custom labels (passed in, not same as ticks)
-	            _lodash2.default.map(labels, function (value, i) {
-	                return _react2.default.createElement(
-	                    'g',
-	                    { transform: tickTransform(value), key: 'tick-' + i },
-	                    _this2.renderLabel(_lodash2.default.assign({}, options, { value: value }))
-	                );
-	            }) : null,
-	            showZero ? _react2.default.createElement(
-	                'g',
-	                { transform: tickTransform(0) },
-	                showZero ? this.renderZero(options) : null
-	            ) : null
-	        );
-	    },
-	    renderLabel: function renderLabel(options) {
-	        var letter = options.letter;
-	        var value = options.value;
-	        var type = options.type;
-	        var labelOffset = options.labelOffset;
-	        var labelFormat = options.labelFormat;
-	        var emptyLabel = options.emptyLabel;
-	
-	        var className = 'chart-axis-value-label chart-axis-value-label-' + letter;
-	        // todo generalize dy for all text sizes...?
-	        return _react2.default.createElement(
-	            'text',
-	            _extends({ className: className }, { dy: '0.32em' }, labelOffset),
-	            formatAxisLabel(value, type, labelFormat, emptyLabel)
-	        );
-	    },
-	
-	    // todo unify into drawLine
-	    renderTick: function renderTick(options) {
-	        var letter = options.letter;
-	        var tickLength = options.tickLength;
-	        var orientation = options.orientation;
-	
-	        var className = 'chart-tick chart-tick-' + letter;
-	
-	        var _ref14 = orientation === 'vertical' ? [-tickLength, 0] : [0, tickLength];
-	
-	        var _ref15 = _slicedToArray(_ref14, 2);
-	
-	        var x2 = _ref15[0];
-	        var y2 = _ref15[1];
-	
-	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
-	    },
-	    renderGrid: function renderGrid(options) {
-	        var letter = options.letter;
-	        var gridLength = options.gridLength;
-	        var orientation = options.orientation;
-	
-	        var className = 'chart-grid chart-grid-' + letter;
-	
-	        var _ref16 = orientation === 'vertical' ? [gridLength, 0] : [0, -gridLength];
-	
-	        var _ref17 = _slicedToArray(_ref16, 2);
-	
-	        var x2 = _ref17[0];
-	        var y2 = _ref17[1];
-	
-	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
-	    },
-	    renderZero: function renderZero(options) {
-	        var letter = options.letter;
-	        var gridLength = options.gridLength;
-	        var orientation = options.orientation;
-	
-	        var className = 'chart-zero-line chart-zero-line-' + letter;
-	
-	        var _ref18 = orientation === 'vertical' ? [gridLength, 0] : [0, -gridLength];
-	
-	        var _ref19 = _slicedToArray(_ref18, 2);
-	
-	        var x2 = _ref19[0];
-	        var y2 = _ref19[1];
-	
-	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
-	    }
-	});
-	
-	function closestNumberInList(number, list) {
-	    return list.reduce(function (closest, current) {
-	        return Math.abs(current - number) < Math.abs(closest - number) ? current : closest;
-	    });
-	}
-	function indexOfClosestNumberInList(number, list) {
-	    return list.reduce(function (closestI, current, i) {
-	        return Math.abs(current - number) < Math.abs(list[closestI] - number) ? i : closestI;
-	    }, 0);
-	}
-	
-	function childIsXYChart(child) {
-	    return !!(child && _lodash2.default.has(child, 'type.implementsInterface') && child.type.implementsInterface('XYChart'));
-	}
-	
-	function isNullOrUndefined(d) {
-	    return _lodash2.default.isNull(d) || _lodash2.default.isUndefined(d);
-	}
-	
-	function makeScale(domains, range, axisType, isNice, tickCount) {
-	    var domain = defaultDomain(_lodash2.default.flatten(domains), null, axisType);
-	    var scale = initScale(axisType).domain(domain);
-	    axisType === 'ordinal' ? scale.rangePoints(range) : scale.range(range);
-	    if (isNice && axisType !== 'ordinal') scale.nice(tickCount);
-	    return scale;
-	}
-	
-	function defaultDomain(data, getter, scaleType) {
-	    switch (scaleType) {
-	        // extent for number & time scales, coerce dates to numbers
-	        case 'number':
-	        case 'time':
-	            return _d3.default.extent(data, function (d) {
-	                return +(0, _util.accessor)(getter)(d);
-	            });
-	        // all unique values for ordinal scale
-	        case 'ordinal':
-	            return _lodash2.default.uniq(data.map((0, _util.accessor)(getter)));
-	    }
-	    return [];
-	}
-	
-	function initScale(type) {
-	    switch (type) {
-	        case 'number':
-	            return _d3.default.scale.linear();
-	        case 'ordinal':
-	            return _d3.default.scale.ordinal();
-	        case 'time':
-	            return _d3.default.time.scale();
-	    }
-	}
-	
-	function formatAxisLabel(value, type, format, emptyLabel) {
-	    return _lodash2.default.isNull(value) || _lodash2.default.isUndefined(value) ? emptyLabel : _lodash2.default.isFunction(format) ? format(value) : type === 'number' ? (0, _numeral2.default)(value).format(format) : type === 'time' ? (0, _moment2.default)(value).format(format) : value;
-	}
-	
-	function measureAxisLabels(xProps, yProps, xAxisLabelProps, yAxisLabelProps) {
-	    // hacky... pre-measure the bounding boxes of all axis labels,
-	    // by rendering axis HTML to the DOM, measuring them with getBoundingClientRect, then deleting them.
-	    xProps = _lodash2.default.assign({}, xProps, { showTicks: false, showGrid: false });
-	    yProps = _lodash2.default.assign({}, yProps, { showTicks: false, showGrid: false });
-	    var xAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, xProps));
-	    var yAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, yProps));
-	    var xLabelHtml = xAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(XAxisLabel, xAxisLabelProps)) : '';
-	    var yLabelHtml = yAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(YAxisLabel, yAxisLabelProps)) : '';
-	
-	    var testSvg = document.createElement('div');
-	    testSvg.innerHTML = '<svg class="xy-plot"><g class="chart-inner">        ' + xAxisHtml + yAxisHtml + xLabelHtml + yLabelHtml + '\n    </g></svg>';
-	    document.body.appendChild(testSvg);
-	
-	    var getRect = function getRect(el) {
-	        return el.getBoundingClientRect();
-	    }; // get rekt
-	    var labelBoxes = {
-	        xVal: xProps.showLabels ? _lodash2.default.map(testSvg.querySelectorAll('.chart-axis-value-label-x'), getRect) : [],
-	        yVal: yProps.showLabels ? _lodash2.default.map(testSvg.querySelectorAll('.chart-axis-value-label-y'), getRect) : [],
-	        xAxis: xAxisLabelProps ? testSvg.querySelectorAll('.chart-axis-label-x text')[0].getBoundingClientRect() : null,
-	        yAxis: yAxisLabelProps ? testSvg.querySelectorAll('.chart-axis-label-y text')[0].getBoundingClientRect() : null
-	    };
-	    document.body.removeChild(testSvg);
-	    //console.log(labelBoxes);
-	
-	    return labelBoxes;
-	}
-	
-	// use resolveObjectProps HOC to resolve partially specified XY-type and direction-type object props
-	// into their fully specified forms
-	// todo: don't hardcode these - use tcomb?
-	var xyKeys = ['axisType', 'domain', 'nice', 'invertAxis', 'tickCount', 'ticks', 'tickLength', 'labelValues', 'labelFormat', 'labelPadding', 'showLabels', 'showGrid', 'showTicks', 'showZero', 'axisLabel', 'axisLabelAlign', 'axisLabelPadding'];
-	var dirKeys = ['margin', 'padding', 'spacing'];
-	
-	var XYPlotResolved = _lodash2.default.flow([_lodash2.default.partial(_resolveObjectProps2.default, _lodash2.default, xyKeys, ['x', 'y']), _lodash2.default.partial(_resolveObjectProps2.default, _lodash2.default, dirKeys, ['top', 'bottom', 'left', 'right'])])(XYPlot);
-	
-	exports.default = XYPlotResolved;
-
-/***/ },
-/* 170 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
 	 * @license
-	 * lodash 4.5.1 (Custom Build) <https://lodash.com/>
+	 * lodash 4.6.1 (Custom Build) <https://lodash.com/>
 	 * Build: `lodash -d -o ./foo/lodash.js`
 	 * Copyright 2012-2016 The Dojo Foundation <http://dojofoundation.org/>
 	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
@@ -22787,7 +21927,19 @@
 	  var undefined;
 	
 	  /** Used as the semantic version number. */
-	  var VERSION = '4.5.1';
+	  var VERSION = '4.6.1';
+	
+	  /** Used as the size to enable large array optimizations. */
+	  var LARGE_ARRAY_SIZE = 200;
+	
+	  /** Used as the `TypeError` message for "Functions" methods. */
+	  var FUNC_ERROR_TEXT = 'Expected a function';
+	
+	  /** Used to stand-in for `undefined` hash values. */
+	  var HASH_UNDEFINED = '__lodash_hash_undefined__';
+	
+	  /** Used as the internal argument placeholder. */
+	  var PLACEHOLDER = '__lodash_placeholder__';
 	
 	  /** Used to compose bitmasks for wrapper metadata. */
 	  var BIND_FLAG = 1,
@@ -22813,19 +21965,10 @@
 	  var HOT_COUNT = 150,
 	      HOT_SPAN = 16;
 	
-	  /** Used as the size to enable large array optimizations. */
-	  var LARGE_ARRAY_SIZE = 200;
-	
 	  /** Used to indicate the type of lazy iteratees. */
 	  var LAZY_FILTER_FLAG = 1,
 	      LAZY_MAP_FLAG = 2,
 	      LAZY_WHILE_FLAG = 3;
-	
-	  /** Used as the `TypeError` message for "Functions" methods. */
-	  var FUNC_ERROR_TEXT = 'Expected a function';
-	
-	  /** Used to stand-in for `undefined` hash values. */
-	  var HASH_UNDEFINED = '__lodash_hash_undefined__';
 	
 	  /** Used as references for various `Number` constants. */
 	  var INFINITY = 1 / 0,
@@ -22837,9 +21980,6 @@
 	  var MAX_ARRAY_LENGTH = 4294967295,
 	      MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1,
 	      HALF_MAX_ARRAY_LENGTH = MAX_ARRAY_LENGTH >>> 1;
-	
-	  /** Used as the internal argument placeholder. */
-	  var PLACEHOLDER = '__lodash_placeholder__';
 	
 	  /** `Object#toString` result references. */
 	  var argsTag = '[object Arguments]',
@@ -23156,6 +22296,7 @@
 	   * @returns {Object} Returns `map`.
 	   */
 	  function addMapEntry(map, pair) {
+	    // Don't return `Map#set` because it doesn't return the map instance in IE 11.
 	    map.set(pair[0], pair[1]);
 	    return map;
 	  }
@@ -23313,13 +22454,13 @@
 	  function arrayFilter(array, predicate) {
 	    var index = -1,
 	        length = array.length,
-	        resIndex = -1,
+	        resIndex = 0,
 	        result = [];
 	
 	    while (++index < length) {
 	      var value = array[index];
 	      if (predicate(value, index, array)) {
-	        result[++resIndex] = value;
+	        result[resIndex++] = value;
 	      }
 	    }
 	    return result;
@@ -23339,8 +22480,7 @@
 	  }
 	
 	  /**
-	   * A specialized version of `_.includesWith` for arrays without support for
-	   * specifying an index to search from.
+	   * This function is like `arrayIncludes` except that it accepts a comparator.
 	   *
 	   * @private
 	   * @param {Array} array The array to search.
@@ -23565,6 +22705,28 @@
 	  }
 	
 	  /**
+	   * This function is like `baseIndexOf` except that it accepts a comparator.
+	   *
+	   * @private
+	   * @param {Array} array The array to search.
+	   * @param {*} value The value to search for.
+	   * @param {number} fromIndex The index to search from.
+	   * @param {Function} comparator The comparator invoked per element.
+	   * @returns {number} Returns the index of the matched value, else `-1`.
+	   */
+	  function baseIndexOfWith(array, value, fromIndex, comparator) {
+	    var index = fromIndex - 1,
+	        length = array.length;
+	
+	    while (++index < length) {
+	      if (comparator(array[index], value)) {
+	        return index;
+	      }
+	    }
+	    return -1;
+	  }
+	
+	  /**
 	   * The base implementation of `_.reduce` and `_.reduceRight`, without support
 	   * for iteratee shorthands, which iterates over `collection` using `eachFunc`.
 	   *
@@ -23586,9 +22748,9 @@
 	  }
 	
 	  /**
-	   * The base implementation of `_.sortBy` which uses `comparer` to define
-	   * the sort order of `array` and replaces criteria objects with their
-	   * corresponding values.
+	   * The base implementation of `_.sortBy` which uses `comparer` to define the
+	   * sort order of `array` and replaces criteria objects with their corresponding
+	   * values.
 	   *
 	   * @private
 	   * @param {Array} array The array to sort.
@@ -23961,14 +23123,14 @@
 	  function replaceHolders(array, placeholder) {
 	    var index = -1,
 	        length = array.length,
-	        resIndex = -1,
+	        resIndex = 0,
 	        result = [];
 	
 	    while (++index < length) {
 	      var value = array[index];
 	      if (value === placeholder || value === PLACEHOLDER) {
 	        array[index] = PLACEHOLDER;
-	        result[++resIndex] = index;
+	        result[resIndex++] = index;
 	      }
 	    }
 	    return result;
@@ -24145,6 +23307,12 @@
 	    /** Used to store function metadata. */
 	    var metaMap = WeakMap && new WeakMap;
 	
+	    /** Detect if properties shadowing those on `Object.prototype` are non-enumerable. */
+	    var nonEnumShadows = !propertyIsEnumerable.call({ 'valueOf': 1 }, 'valueOf');
+	
+	    /** Used to lookup unminified function names. */
+	    var realNames = {};
+	
 	    /** Used to detect maps, sets, and weakmaps. */
 	    var mapCtorString = Map ? funcToString.call(Map) : '',
 	        setCtorString = Set ? funcToString.call(Set) : '',
@@ -24152,11 +23320,8 @@
 	
 	    /** Used to convert symbols to primitives and strings. */
 	    var symbolProto = Symbol ? Symbol.prototype : undefined,
-	        symbolValueOf = Symbol ? symbolProto.valueOf : undefined,
-	        symbolToString = Symbol ? symbolProto.toString : undefined;
-	
-	    /** Used to lookup unminified function names. */
-	    var realNames = {};
+	        symbolValueOf = symbolProto ? symbolProto.valueOf : undefined,
+	        symbolToString = symbolProto ? symbolProto.toString : undefined;
 	
 	    /*------------------------------------------------------------------------*/
 	
@@ -24202,46 +23367,48 @@
 	     * `after`, `ary`, `assign`, `assignIn`, `assignInWith`, `assignWith`, `at`,
 	     * `before`, `bind`, `bindAll`, `bindKey`, `castArray`, `chain`, `chunk`,
 	     * `commit`, `compact`, `concat`, `conforms`, `constant`, `countBy`, `create`,
-	     * `curry`, `debounce`, `defaults`, `defaultsDeep`, `defer`, `delay`, `difference`,
-	     * `differenceBy`, `differenceWith`, `drop`, `dropRight`, `dropRightWhile`,
-	     * `dropWhile`, `fill`, `filter`, `flatten`, `flattenDeep`, `flattenDepth`,
-	     * `flip`, `flow`, `flowRight`, `fromPairs`, `functions`, `functionsIn`,
-	     * `groupBy`, `initial`, `intersection`, `intersectionBy`, `intersectionWith`,
-	     * `invert`, `invertBy`, `invokeMap`, `iteratee`, `keyBy`, `keys`, `keysIn`,
-	     * `map`, `mapKeys`, `mapValues`, `matches`, `matchesProperty`, `memoize`,
-	     * `merge`, `mergeWith`, `method`, `methodOf`, `mixin`, `negate`, `nthArg`,
-	     * `omit`, `omitBy`, `once`, `orderBy`, `over`, `overArgs`, `overEvery`,
-	     * `overSome`, `partial`, `partialRight`, `partition`, `pick`, `pickBy`, `plant`,
-	     * `property`, `propertyOf`, `pull`, `pullAll`, `pullAllBy`, `pullAt`, `push`,
-	     * `range`, `rangeRight`, `rearg`, `reject`, `remove`, `rest`, `reverse`,
-	     * `sampleSize`, `set`, `setWith`, `shuffle`, `slice`, `sort`, `sortBy`,
-	     * `splice`, `spread`, `tail`, `take`, `takeRight`, `takeRightWhile`,
-	     * `takeWhile`, `tap`, `throttle`, `thru`, `toArray`, `toPairs`, `toPairsIn`,
-	     * `toPath`, `toPlainObject`, `transform`, `unary`, `union`, `unionBy`,
-	     * `unionWith`, `uniq`, `uniqBy`, `uniqWith`, `unset`, `unshift`, `unzip`,
-	     * `unzipWith`, `values`, `valuesIn`, `without`, `wrap`, `xor`, `xorBy`,
-	     * `xorWith`, `zip`, `zipObject`, `zipObjectDeep`, and `zipWith`
+	     * `curry`, `debounce`, `defaults`, `defaultsDeep`, `defer`, `delay`,
+	     * `difference`, `differenceBy`, `differenceWith`, `drop`, `dropRight`,
+	     * `dropRightWhile`, `dropWhile`, `extend`, `extendWith`, `fill`, `filter`,
+	     * `flatten`, `flattenDeep`, `flattenDepth`, `flip`, `flow`, `flowRight`,
+	     * `fromPairs`, `functions`, `functionsIn`, `groupBy`, `initial`, `intersection`,
+	     * `intersectionBy`, `intersectionWith`, `invert`, `invertBy`, `invokeMap`,
+	     * `iteratee`, `keyBy`, `keys`, `keysIn`, `map`, `mapKeys`, `mapValues`,
+	     * `matches`, `matchesProperty`, `memoize`, `merge`, `mergeWith`, `method`,
+	     * `methodOf`, `mixin`, `negate`, `nthArg`, `omit`, `omitBy`, `once`, `orderBy`,
+	     * `over`, `overArgs`, `overEvery`, `overSome`, `partial`, `partialRight`,
+	     * `partition`, `pick`, `pickBy`, `plant`, `property`, `propertyOf`, `pull`,
+	     * `pullAll`, `pullAllBy`, `pullAllWith`, `pullAt`, `push`, `range`,
+	     * `rangeRight`, `rearg`, `reject`, `remove`, `rest`, `reverse`, `sampleSize`,
+	     * `set`, `setWith`, `shuffle`, `slice`, `sort`, `sortBy`, `splice`, `spread`,
+	     * `tail`, `take`, `takeRight`, `takeRightWhile`, `takeWhile`, `tap`, `throttle`,
+	     * `thru`, `toArray`, `toPairs`, `toPairsIn`, `toPath`, `toPlainObject`,
+	     * `transform`, `unary`, `union`, `unionBy`, `unionWith`, `uniq`, `uniqBy`,
+	     * `uniqWith`, `unset`, `unshift`, `unzip`, `unzipWith`, `update`, `values`,
+	     * `valuesIn`, `without`, `wrap`, `xor`, `xorBy`, `xorWith`, `zip`, `zipObject`,
+	     * `zipObjectDeep`, and `zipWith`
 	     *
 	     * The wrapper methods that are **not** chainable by default are:
 	     * `add`, `attempt`, `camelCase`, `capitalize`, `ceil`, `clamp`, `clone`,
-	     * `cloneDeep`, `cloneDeepWith`, `cloneWith`, `deburr`, `endsWith`, `eq`,
-	     * `escape`, `escapeRegExp`, `every`, `find`, `findIndex`, `findKey`, `findLast`,
-	     * `findLastIndex`, `findLastKey`, `floor`, `forEach`, `forEachRight`, `forIn`,
-	     * `forInRight`, `forOwn`, `forOwnRight`, `get`, `gt`, `gte`, `has`, `hasIn`,
-	     * `head`, `identity`, `includes`, `indexOf`, `inRange`, `invoke`, `isArguments`,
-	     * `isArray`, `isArrayBuffer`, `isArrayLike`, `isArrayLikeObject`, `isBoolean`,
-	     * `isBuffer`, `isDate`, `isElement`, `isEmpty`, `isEqual`, `isEqualWith`,
-	     * `isError`, `isFinite`, `isFunction`, `isInteger`, `isLength`, `isMap`,
-	     * `isMatch`, `isMatchWith`, `isNaN`, `isNative`, `isNil`, `isNull`, `isNumber`,
-	     * `isObject`, `isObjectLike`, `isPlainObject`, `isRegExp`, `isSafeInteger`,
-	     * `isSet`, `isString`, `isUndefined`, `isTypedArray`, `isWeakMap`, `isWeakSet`,
-	     * `join`, `kebabCase`, `last`, `lastIndexOf`, `lowerCase`, `lowerFirst`,
-	     * `lt`, `lte`, `max`, `maxBy`, `mean`, `min`, `minBy`, `noConflict`, `noop`,
-	     * `now`, `pad`, `padEnd`, `padStart`, `parseInt`, `pop`, `random`, `reduce`,
-	     * `reduceRight`, `repeat`, `result`, `round`, `runInContext`, `sample`,
-	     * `shift`, `size`, `snakeCase`, `some`, `sortedIndex`, `sortedIndexBy`,
-	     * `sortedLastIndex`, `sortedLastIndexBy`, `startCase`, `startsWith`, `subtract`,
-	     * `sum`, `sumBy`, `template`, `times`, `toLower`, `toInteger`, `toLength`,
+	     * `cloneDeep`, `cloneDeepWith`, `cloneWith`, `deburr`, `each`, `eachRight`,
+	     * `endsWith`, `eq`, `escape`, `escapeRegExp`, `every`, `find`, `findIndex`,
+	     * `findKey`, `findLast`, `findLastIndex`, `findLastKey`, `first`, `floor`,
+	     * `forEach`, `forEachRight`, `forIn`, `forInRight`, `forOwn`, `forOwnRight`,
+	     * `get`, `gt`, `gte`, `has`, `hasIn`, `head`, `identity`, `includes`,
+	     * `indexOf`, `inRange`, `invoke`, `isArguments`, `isArray`, `isArrayBuffer`,
+	     * `isArrayLike`, `isArrayLikeObject`, `isBoolean`, `isBuffer`, `isDate`,
+	     * `isElement`, `isEmpty`, `isEqual`, `isEqualWith`, `isError`, `isFinite`,
+	     * `isFunction`, `isInteger`, `isLength`, `isMap`, `isMatch`, `isMatchWith`,
+	     * `isNaN`, `isNative`, `isNil`, `isNull`, `isNumber`, `isObject`, `isObjectLike`,
+	     * `isPlainObject`, `isRegExp`, `isSafeInteger`, `isSet`, `isString`,
+	     * `isUndefined`, `isTypedArray`, `isWeakMap`, `isWeakSet`, `join`, `kebabCase`,
+	     * `last`, `lastIndexOf`, `lowerCase`, `lowerFirst`, `lt`, `lte`, `max`,
+	     * `maxBy`, `mean`, `min`, `minBy`, `noConflict`, `noop`, `now`, `pad`,
+	     * `padEnd`, `padStart`, `parseInt`, `pop`, `random`, `reduce`, `reduceRight`,
+	     * `repeat`, `result`, `round`, `runInContext`, `sample`, `shift`, `size`,
+	     * `snakeCase`, `some`, `sortedIndex`, `sortedIndexBy`, `sortedLastIndex`,
+	     * `sortedLastIndexBy`, `startCase`, `startsWith`, `subtract`, `sum`, `sumBy`,
+	     * `template`, `times`, `toInteger`, `toJSON`, `toLength`, `toLower`,
 	     * `toNumber`, `toSafeInteger`, `toString`, `toUpper`, `trim`, `trimEnd`,
 	     * `trimStart`, `truncate`, `unescape`, `uniqueId`, `upperCase`, `upperFirst`,
 	     * `value`, and `words`
@@ -24930,7 +24097,8 @@
 	    }
 	
 	    /**
-	     * This function is like `assignValue` except that it doesn't assign `undefined` values.
+	     * This function is like `assignValue` except that it doesn't assign
+	     * `undefined` values.
 	     *
 	     * @private
 	     * @param {Object} object The object to modify.
@@ -25074,13 +24242,14 @@
 	     * @private
 	     * @param {*} value The value to clone.
 	     * @param {boolean} [isDeep] Specify a deep clone.
+	     * @param {boolean} [isFull] Specify a clone including symbols.
 	     * @param {Function} [customizer] The function to customize cloning.
 	     * @param {string} [key] The key of `value`.
 	     * @param {Object} [object] The parent object of `value`.
 	     * @param {Object} [stack] Tracks traversed objects and their clone counterparts.
 	     * @returns {*} Returns the cloned value.
 	     */
-	    function baseClone(value, isDeep, customizer, key, object, stack) {
+	    function baseClone(value, isDeep, isFull, customizer, key, object, stack) {
 	      var result;
 	      if (customizer) {
 	        result = object ? customizer(value, key, object, stack) : customizer(value);
@@ -25110,7 +24279,8 @@
 	          }
 	          result = initCloneObject(isFunc ? {} : value);
 	          if (!isDeep) {
-	            return copySymbols(value, baseAssign(result, value));
+	            result = baseAssign(result, value);
+	            return isFull ? copySymbols(value, result) : result;
 	          }
 	        } else {
 	          if (!cloneableTags[tag]) {
@@ -25129,9 +24299,9 @@
 	
 	      // Recursively populate clone (susceptible to call stack limits).
 	      (isArr ? arrayEach : baseForOwn)(value, function(subValue, key) {
-	        assignValue(result, key, baseClone(subValue, isDeep, customizer, key, value, stack));
+	        assignValue(result, key, baseClone(subValue, isDeep, isFull, customizer, key, value, stack));
 	      });
-	      return isArr ? result : copySymbols(value, result);
+	      return (isFull && !isArr) ? copySymbols(value, result) : result;
 	    }
 	
 	    /**
@@ -25513,9 +24683,11 @@
 	     */
 	    function baseIntersection(arrays, iteratee, comparator) {
 	      var includes = comparator ? arrayIncludesWith : arrayIncludes,
+	          length = arrays[0].length,
 	          othLength = arrays.length,
 	          othIndex = othLength,
 	          caches = Array(othLength),
+	          maxLength = Infinity,
 	          result = [];
 	
 	      while (othIndex--) {
@@ -25523,18 +24695,18 @@
 	        if (othIndex && iteratee) {
 	          array = arrayMap(array, baseUnary(iteratee));
 	        }
-	        caches[othIndex] = !comparator && (iteratee || array.length >= 120)
+	        maxLength = nativeMin(array.length, maxLength);
+	        caches[othIndex] = !comparator && (iteratee || (length >= 120 && array.length >= 120))
 	          ? new SetCache(othIndex && array)
 	          : undefined;
 	      }
 	      array = arrays[0];
 	
 	      var index = -1,
-	          length = array.length,
 	          seen = caches[0];
 	
 	      outer:
-	      while (++index < length) {
+	      while (++index < length && result.length < maxLength) {
 	        var value = array[index],
 	            computed = iteratee ? iteratee(value) : value;
 	
@@ -25542,7 +24714,7 @@
 	              ? cacheHas(seen, computed)
 	              : includes(result, computed, comparator)
 	            )) {
-	          var othIndex = othLength;
+	          othIndex = othLength;
 	          while (--othIndex) {
 	            var cache = caches[othIndex];
 	            if (!(cache
@@ -25646,33 +24818,28 @@
 	
 	      if (!objIsArr) {
 	        objTag = getTag(object);
-	        if (objTag == argsTag) {
-	          objTag = objectTag;
-	        } else if (objTag != objectTag) {
-	          objIsArr = isTypedArray(object);
-	        }
+	        objTag = objTag == argsTag ? objectTag : objTag;
 	      }
 	      if (!othIsArr) {
 	        othTag = getTag(other);
-	        if (othTag == argsTag) {
-	          othTag = objectTag;
-	        } else if (othTag != objectTag) {
-	          othIsArr = isTypedArray(other);
-	        }
+	        othTag = othTag == argsTag ? objectTag : othTag;
 	      }
 	      var objIsObj = objTag == objectTag && !isHostObject(object),
 	          othIsObj = othTag == objectTag && !isHostObject(other),
 	          isSameTag = objTag == othTag;
 	
-	      if (isSameTag && !(objIsArr || objIsObj)) {
-	        return equalByTag(object, other, objTag, equalFunc, customizer, bitmask);
+	      if (isSameTag && !objIsObj) {
+	        stack || (stack = new Stack);
+	        return (objIsArr || isTypedArray(object))
+	          ? equalArrays(object, other, equalFunc, customizer, bitmask, stack)
+	          : equalByTag(object, other, objTag, equalFunc, customizer, bitmask, stack);
 	      }
-	      var isPartial = bitmask & PARTIAL_COMPARE_FLAG;
-	      if (!isPartial) {
+	      if (!(bitmask & PARTIAL_COMPARE_FLAG)) {
 	        var objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'),
 	            othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
 	
 	        if (objIsWrapped || othIsWrapped) {
+	          stack || (stack = new Stack);
 	          return equalFunc(objIsWrapped ? object.value() : object, othIsWrapped ? other.value() : other, customizer, bitmask, stack);
 	        }
 	      }
@@ -25680,7 +24847,7 @@
 	        return false;
 	      }
 	      stack || (stack = new Stack);
-	      return (objIsArr ? equalArrays : equalObjects)(object, other, equalFunc, customizer, bitmask, stack);
+	      return equalObjects(object, other, equalFunc, customizer, bitmask, stack);
 	    }
 	
 	    /**
@@ -25937,7 +25104,7 @@
 	          }
 	          else {
 	            isCommon = false;
-	            newValue = baseClone(srcValue, true);
+	            newValue = baseClone(srcValue, !customizer);
 	          }
 	        }
 	        else if (isPlainObject(srcValue) || isArguments(srcValue)) {
@@ -25946,7 +25113,7 @@
 	          }
 	          else if (!isObject(objValue) || (srcIndex && isFunction(objValue))) {
 	            isCommon = false;
-	            newValue = baseClone(srcValue, true);
+	            newValue = baseClone(srcValue, !customizer);
 	          }
 	          else {
 	            newValue = objValue;
@@ -25962,6 +25129,7 @@
 	        // Recursively merge objects and arrays (susceptible to call stack limits).
 	        mergeFunc(newValue, srcValue, srcIndex, customizer, stack);
 	      }
+	      stack['delete'](srcValue);
 	      assignMergeValue(object, key, newValue);
 	    }
 	
@@ -25975,12 +25143,8 @@
 	     * @returns {Array} Returns the new sorted array.
 	     */
 	    function baseOrderBy(collection, iteratees, orders) {
-	      var index = -1,
-	          toIteratee = getIteratee();
-	
-	      iteratees = arrayMap(iteratees.length ? iteratees : Array(1), function(iteratee) {
-	        return toIteratee(iteratee);
-	      });
+	      var index = -1;
+	      iteratees = arrayMap(iteratees.length ? iteratees : Array(1), getIteratee());
 	
 	      var result = baseMap(collection, function(value, key, collection) {
 	        var criteria = arrayMap(iteratees, function(iteratee) {
@@ -26058,18 +25222,6 @@
 	    }
 	
 	    /**
-	     * The base implementation of `_.pullAll`.
-	     *
-	     * @private
-	     * @param {Array} array The array to modify.
-	     * @param {Array} values The values to remove.
-	     * @returns {Array} Returns `array`.
-	     */
-	    function basePullAll(array, values) {
-	      return basePullAllBy(array, values);
-	    }
-	
-	    /**
 	     * The base implementation of `_.pullAllBy` without support for iteratee
 	     * shorthands.
 	     *
@@ -26077,22 +25229,24 @@
 	     * @param {Array} array The array to modify.
 	     * @param {Array} values The values to remove.
 	     * @param {Function} [iteratee] The iteratee invoked per element.
+	     * @param {Function} [comparator] The comparator invoked per element.
 	     * @returns {Array} Returns `array`.
 	     */
-	    function basePullAllBy(array, values, iteratee) {
-	      var index = -1,
+	    function basePullAll(array, values, iteratee, comparator) {
+	      var indexOf = comparator ? baseIndexOfWith : baseIndexOf,
+	          index = -1,
 	          length = values.length,
 	          seen = array;
 	
 	      if (iteratee) {
-	        seen = arrayMap(array, function(value) { return iteratee(value); });
+	        seen = arrayMap(array, baseUnary(iteratee));
 	      }
 	      while (++index < length) {
 	        var fromIndex = 0,
 	            value = values[index],
 	            computed = iteratee ? iteratee(value) : value;
 	
-	        while ((fromIndex = baseIndexOf(seen, computed, fromIndex)) > -1) {
+	        while ((fromIndex = indexOf(seen, computed, fromIndex, comparator)) > -1) {
 	          if (seen !== array) {
 	            splice.call(seen, fromIndex, 1);
 	          }
@@ -26378,7 +25532,7 @@
 	          value = array[0],
 	          computed = iteratee ? iteratee(value) : value,
 	          seen = computed,
-	          resIndex = 0,
+	          resIndex = 1,
 	          result = [value];
 	
 	      while (++index < length) {
@@ -26387,7 +25541,7 @@
 	
 	        if (!eq(computed, seen)) {
 	          seen = computed;
-	          result[++resIndex] = value;
+	          result[resIndex++] = value;
 	        }
 	      }
 	      return result;
@@ -26466,6 +25620,20 @@
 	      object = parent(object, path);
 	      var key = last(path);
 	      return (object != null && has(object, key)) ? delete object[key] : true;
+	    }
+	
+	    /**
+	     * The base implementation of `_.update`.
+	     *
+	     * @private
+	     * @param {Object} object The object to query.
+	     * @param {Array|string} path The path of the property to update.
+	     * @param {Function} updater The function to produce the updated value.
+	     * @param {Function} [customizer] The function to customize path creation.
+	     * @returns {Object} Returns `object`.
+	     */
+	    function baseUpdate(object, path, updater, customizer) {
+	      return baseSet(object, path, updater(baseGet(object, path)), customizer);
 	    }
 	
 	    /**
@@ -26569,9 +25737,7 @@
 	      if (isDeep) {
 	        return buffer.slice();
 	      }
-	      var Ctor = buffer.constructor,
-	          result = new Ctor(buffer.length);
-	
+	      var result = new buffer.constructor(buffer.length);
 	      buffer.copy(result);
 	      return result;
 	    }
@@ -26584,11 +25750,8 @@
 	     * @returns {ArrayBuffer} Returns the cloned array buffer.
 	     */
 	    function cloneArrayBuffer(arrayBuffer) {
-	      var Ctor = arrayBuffer.constructor,
-	          result = new Ctor(arrayBuffer.byteLength),
-	          view = new Uint8Array(result);
-	
-	      view.set(new Uint8Array(arrayBuffer));
+	      var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
+	      new Uint8Array(result).set(new Uint8Array(arrayBuffer));
 	      return result;
 	    }
 	
@@ -26600,8 +25763,7 @@
 	     * @returns {Object} Returns the cloned map.
 	     */
 	    function cloneMap(map) {
-	      var Ctor = map.constructor;
-	      return arrayReduce(mapToArray(map), addMapEntry, new Ctor);
+	      return arrayReduce(mapToArray(map), addMapEntry, new map.constructor);
 	    }
 	
 	    /**
@@ -26612,9 +25774,7 @@
 	     * @returns {Object} Returns the cloned regexp.
 	     */
 	    function cloneRegExp(regexp) {
-	      var Ctor = regexp.constructor,
-	          result = new Ctor(regexp.source, reFlags.exec(regexp));
-	
+	      var result = new regexp.constructor(regexp.source, reFlags.exec(regexp));
 	      result.lastIndex = regexp.lastIndex;
 	      return result;
 	    }
@@ -26627,8 +25787,7 @@
 	     * @returns {Object} Returns the cloned set.
 	     */
 	    function cloneSet(set) {
-	      var Ctor = set.constructor;
-	      return arrayReduce(setToArray(set), addSetEntry, new Ctor);
+	      return arrayReduce(setToArray(set), addSetEntry, new set.constructor);
 	    }
 	
 	    /**
@@ -26639,7 +25798,7 @@
 	     * @returns {Object} Returns the cloned symbol object.
 	     */
 	    function cloneSymbol(symbol) {
-	      return Symbol ? Object(symbolValueOf.call(symbol)) : {};
+	      return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
 	    }
 	
 	    /**
@@ -26651,11 +25810,8 @@
 	     * @returns {Object} Returns the cloned typed array.
 	     */
 	    function cloneTypedArray(typedArray, isDeep) {
-	      var arrayBuffer = typedArray.buffer,
-	          buffer = isDeep ? cloneArrayBuffer(arrayBuffer) : arrayBuffer,
-	          Ctor = typedArray.constructor;
-	
-	      return new Ctor(buffer, typedArray.byteOffset, typedArray.length);
+	      var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
+	      return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
 	    }
 	
 	    /**
@@ -27452,9 +26608,9 @@
 	     * @param {Array} array The array to compare.
 	     * @param {Array} other The other array to compare.
 	     * @param {Function} equalFunc The function to determine equivalents of values.
-	     * @param {Function} [customizer] The function to customize comparisons.
-	     * @param {number} [bitmask] The bitmask of comparison flags. See `baseIsEqual` for more details.
-	     * @param {Object} [stack] Tracks traversed `array` and `other` objects.
+	     * @param {Function} customizer The function to customize comparisons.
+	     * @param {number} bitmask The bitmask of comparison flags. See `baseIsEqual` for more details.
+	     * @param {Object} stack Tracks traversed `array` and `other` objects.
 	     * @returns {boolean} Returns `true` if the arrays are equivalent, else `false`.
 	     */
 	    function equalArrays(array, other, equalFunc, customizer, bitmask, stack) {
@@ -27521,11 +26677,12 @@
 	     * @param {Object} other The other object to compare.
 	     * @param {string} tag The `toStringTag` of the objects to compare.
 	     * @param {Function} equalFunc The function to determine equivalents of values.
-	     * @param {Function} [customizer] The function to customize comparisons.
-	     * @param {number} [bitmask] The bitmask of comparison flags. See `baseIsEqual` for more details.
+	     * @param {Function} customizer The function to customize comparisons.
+	     * @param {number} bitmask The bitmask of comparison flags. See `baseIsEqual` for more details.
+	     * @param {Object} stack Tracks traversed `object` and `other` objects.
 	     * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
 	     */
-	    function equalByTag(object, other, tag, equalFunc, customizer, bitmask) {
+	    function equalByTag(object, other, tag, equalFunc, customizer, bitmask, stack) {
 	      switch (tag) {
 	        case arrayBufferTag:
 	          if ((object.byteLength != other.byteLength) ||
@@ -27560,12 +26717,21 @@
 	          var isPartial = bitmask & PARTIAL_COMPARE_FLAG;
 	          convert || (convert = setToArray);
 	
+	          if (object.size != other.size && !isPartial) {
+	            return false;
+	          }
+	          // Assume cyclic values are equal.
+	          var stacked = stack.get(object);
+	          if (stacked) {
+	            return stacked == other;
+	          }
 	          // Recursively compare objects (susceptible to call stack limits).
-	          return (isPartial || object.size == other.size) &&
-	            equalFunc(convert(object), convert(other), customizer, bitmask | UNORDERED_COMPARE_FLAG);
+	          return equalArrays(convert(object), convert(other), equalFunc, customizer, bitmask | UNORDERED_COMPARE_FLAG, stack.set(object, other));
 	
 	        case symbolTag:
-	          return !!Symbol && (symbolValueOf.call(object) == symbolValueOf.call(other));
+	          if (symbolValueOf) {
+	            return symbolValueOf.call(object) == symbolValueOf.call(other);
+	          }
 	      }
 	      return false;
 	    }
@@ -27578,9 +26744,9 @@
 	     * @param {Object} object The object to compare.
 	     * @param {Object} other The other object to compare.
 	     * @param {Function} equalFunc The function to determine equivalents of values.
-	     * @param {Function} [customizer] The function to customize comparisons.
-	     * @param {number} [bitmask] The bitmask of comparison flags. See `baseIsEqual` for more details.
-	     * @param {Object} [stack] Tracks traversed `object` and `other` objects.
+	     * @param {Function} customizer The function to customize comparisons.
+	     * @param {number} bitmask The bitmask of comparison flags. See `baseIsEqual` for more details.
+	     * @param {Object} stack Tracks traversed `object` and `other` objects.
 	     * @returns {boolean} Returns `true` if the objects are equivalent, else `false`.
 	     */
 	    function equalObjects(object, other, equalFunc, customizer, bitmask, stack) {
@@ -27733,7 +26899,7 @@
 	     * @returns {*} Returns the function if it's native, else `undefined`.
 	     */
 	    function getNative(object, key) {
-	      var value = object == null ? undefined : object[key];
+	      var value = object[key];
 	      return isNative(value) ? value : undefined;
 	    }
 	
@@ -27875,7 +27041,7 @@
 	     * @returns {Object} Returns the initialized clone.
 	     */
 	    function initCloneObject(object) {
-	      return (isFunction(object.constructor) && !isPrototype(object))
+	      return (typeof object.constructor == 'function' && !isPrototype(object))
 	        ? baseCreate(getPrototypeOf(object))
 	        : {};
 	    }
@@ -28024,7 +27190,7 @@
 	     */
 	    function isPrototype(value) {
 	      var Ctor = value && value.constructor,
-	          proto = (isFunction(Ctor) && Ctor.prototype) || objectProto;
+	          proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
 	
 	      return value === proto;
 	    }
@@ -28125,8 +27291,7 @@
 	     */
 	    function mergeDefaults(objValue, srcValue, key, object, source, stack) {
 	      if (isObject(objValue) && isObject(srcValue)) {
-	        stack.set(srcValue, objValue);
-	        baseMerge(objValue, srcValue, undefined, mergeDefaults, stack);
+	        baseMerge(objValue, srcValue, undefined, mergeDefaults, stack.set(srcValue, objValue));
 	      }
 	      return objValue;
 	    }
@@ -28260,11 +27425,11 @@
 	        return [];
 	      }
 	      var index = 0,
-	          resIndex = -1,
+	          resIndex = 0,
 	          result = Array(nativeCeil(length / size));
 	
 	      while (index < length) {
-	        result[++resIndex] = baseSlice(array, index, (index += size));
+	        result[resIndex++] = baseSlice(array, index, (index += size));
 	      }
 	      return result;
 	    }
@@ -28286,13 +27451,13 @@
 	    function compact(array) {
 	      var index = -1,
 	          length = array ? array.length : 0,
-	          resIndex = -1,
+	          resIndex = 0,
 	          result = [];
 	
 	      while (++index < length) {
 	        var value = array[index];
 	        if (value) {
-	          result[++resIndex] = value;
+	          result[resIndex++] = value;
 	        }
 	      }
 	      return result;
@@ -28330,7 +27495,8 @@
 	    /**
 	     * Creates an array of unique `array` values not included in the other
 	     * given arrays using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
-	     * for equality comparisons.
+	     * for equality comparisons. The order of result values is determined by the
+	     * order they occur in the first array.
 	     *
 	     * @static
 	     * @memberOf _
@@ -28352,7 +27518,8 @@
 	    /**
 	     * This method is like `_.difference` except that it accepts `iteratee` which
 	     * is invoked for each element of `array` and `values` to generate the criterion
-	     * by which uniqueness is computed. The iteratee is invoked with one argument: (value).
+	     * by which they're compared. Result values are chosen from the first array.
+	     * The iteratee is invoked with one argument: (value).
 	     *
 	     * @static
 	     * @memberOf _
@@ -28382,8 +27549,9 @@
 	
 	    /**
 	     * This method is like `_.difference` except that it accepts `comparator`
-	     * which is invoked to compare elements of `array` to `values`. The comparator
-	     * is invoked with two arguments: (arrVal, othVal).
+	     * which is invoked to compare elements of `array` to `values`. Result values
+	     * are chosen from the first array. The comparator is invoked with two arguments:
+	     * (arrVal, othVal).
 	     *
 	     * @static
 	     * @memberOf _
@@ -28839,13 +28007,14 @@
 	    /**
 	     * Creates an array of unique values that are included in all given arrays
 	     * using [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
-	     * for equality comparisons.
+	     * for equality comparisons. The order of result values is determined by the
+	     * order they occur in the first array.
 	     *
 	     * @static
 	     * @memberOf _
 	     * @category Array
 	     * @param {...Array} [arrays] The arrays to inspect.
-	     * @returns {Array} Returns the new array of shared values.
+	     * @returns {Array} Returns the new array of intersecting values.
 	     * @example
 	     *
 	     * _.intersection([2, 1], [4, 2], [1, 2]);
@@ -28861,14 +28030,15 @@
 	    /**
 	     * This method is like `_.intersection` except that it accepts `iteratee`
 	     * which is invoked for each element of each `arrays` to generate the criterion
-	     * by which uniqueness is computed. The iteratee is invoked with one argument: (value).
+	     * by which they're compared. Result values are chosen from the first array.
+	     * The iteratee is invoked with one argument: (value).
 	     *
 	     * @static
 	     * @memberOf _
 	     * @category Array
 	     * @param {...Array} [arrays] The arrays to inspect.
 	     * @param {Function|Object|string} [iteratee=_.identity] The iteratee invoked per element.
-	     * @returns {Array} Returns the new array of shared values.
+	     * @returns {Array} Returns the new array of intersecting values.
 	     * @example
 	     *
 	     * _.intersectionBy([2.1, 1.2], [4.3, 2.4], Math.floor);
@@ -28894,15 +28064,16 @@
 	
 	    /**
 	     * This method is like `_.intersection` except that it accepts `comparator`
-	     * which is invoked to compare elements of `arrays`. The comparator is invoked
-	     * with two arguments: (arrVal, othVal).
+	     * which is invoked to compare elements of `arrays`. Result values are chosen
+	     * from the first array. The comparator is invoked with two arguments:
+	     * (arrVal, othVal).
 	     *
 	     * @static
 	     * @memberOf _
 	     * @category Array
 	     * @param {...Array} [arrays] The arrays to inspect.
 	     * @param {Function} [comparator] The comparator invoked per element.
-	     * @returns {Array} Returns the new array of shared values.
+	     * @returns {Array} Returns the new array of intersecting values.
 	     * @example
 	     *
 	     * var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
@@ -29054,7 +28225,7 @@
 	    /**
 	     * This method is like `_.pullAll` except that it accepts `iteratee` which is
 	     * invoked for each element of `array` and `values` to generate the criterion
-	     * by which uniqueness is computed. The iteratee is invoked with one argument: (value).
+	     * by which they're compared. The iteratee is invoked with one argument: (value).
 	     *
 	     * **Note:** Unlike `_.differenceBy`, this method mutates `array`.
 	     *
@@ -29075,7 +28246,35 @@
 	     */
 	    function pullAllBy(array, values, iteratee) {
 	      return (array && array.length && values && values.length)
-	        ? basePullAllBy(array, values, getIteratee(iteratee))
+	        ? basePullAll(array, values, getIteratee(iteratee))
+	        : array;
+	    }
+	
+	    /**
+	     * This method is like `_.pullAll` except that it accepts `comparator` which
+	     * is invoked to compare elements of `array` to `values`. The comparator is
+	     * invoked with two arguments: (arrVal, othVal).
+	     *
+	     * **Note:** Unlike `_.differenceWith`, this method mutates `array`.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @category Array
+	     * @param {Array} array The array to modify.
+	     * @param {Array} values The values to remove.
+	     * @param {Function} [comparator] The comparator invoked per element.
+	     * @returns {Array} Returns `array`.
+	     * @example
+	     *
+	     * var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
+	     *
+	     * _.pullAllWith(array, [{ 'x': 3, 'y': 4 }], _.isEqual);
+	     * console.log(array);
+	     * // => [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
+	     */
+	    function pullAllWith(array, values, comparator) {
+	      return (array && array.length && values && values.length)
+	        ? basePullAll(array, values, undefined, comparator)
 	        : array;
 	    }
 	
@@ -29797,7 +28996,8 @@
 	
 	    /**
 	     * Creates an array of unique values that is the [symmetric difference](https://en.wikipedia.org/wiki/Symmetric_difference)
-	     * of the given arrays.
+	     * of the given arrays. The order of result values is determined by the order
+	     * they occur in the arrays.
 	     *
 	     * @static
 	     * @memberOf _
@@ -29816,7 +29016,7 @@
 	    /**
 	     * This method is like `_.xor` except that it accepts `iteratee` which is
 	     * invoked for each element of each `arrays` to generate the criterion by which
-	     * uniqueness is computed. The iteratee is invoked with one argument: (value).
+	     * by which they're compared. The iteratee is invoked with one argument: (value).
 	     *
 	     * @static
 	     * @memberOf _
@@ -32183,7 +31383,7 @@
 	     * // => true
 	     */
 	    function clone(value) {
-	      return baseClone(value);
+	      return baseClone(value, false, true);
 	    }
 	
 	    /**
@@ -32216,7 +31416,7 @@
 	     * // => 0
 	     */
 	    function cloneWith(value, customizer) {
-	      return baseClone(value, false, customizer);
+	      return baseClone(value, false, true, customizer);
 	    }
 	
 	    /**
@@ -32236,7 +31436,7 @@
 	     * // => false
 	     */
 	    function cloneDeep(value) {
-	      return baseClone(value, true);
+	      return baseClone(value, true, true);
 	    }
 	
 	    /**
@@ -32266,7 +31466,7 @@
 	     * // => 20
 	     */
 	    function cloneDeepWith(value, customizer) {
-	      return baseClone(value, true, customizer);
+	      return baseClone(value, true, true, customizer);
 	    }
 	
 	    /**
@@ -32443,8 +31643,7 @@
 	     * // => false
 	     */
 	    function isArrayLike(value) {
-	      return value != null &&
-	        !(typeof value == 'function' && isFunction(value)) && isLength(getLength(value));
+	      return value != null && isLength(getLength(value)) && !isFunction(value);
 	    }
 	
 	    /**
@@ -32556,14 +31755,14 @@
 	    }
 	
 	    /**
-	     * Checks if `value` is empty. A value is considered empty unless it's an
-	     * `arguments` object, array, string, or jQuery-like collection with a length
-	     * greater than `0` or an object with own enumerable properties.
+	     * Checks if `value` is an empty collection or object. A value is considered
+	     * empty if it's an `arguments` object, array, string, or jQuery-like collection
+	     * with a length of `0` or has no own enumerable properties.
 	     *
 	     * @static
 	     * @memberOf _
 	     * @category Lang
-	     * @param {Array|Object|string} value The value to inspect.
+	     * @param {*} value The value to check.
 	     * @returns {boolean} Returns `true` if `value` is empty, else `false`.
 	     * @example
 	     *
@@ -32735,8 +31934,8 @@
 	     */
 	    function isFunction(value) {
 	      // The use of `Object#toString` avoids issues with the `typeof` operator
-	      // in Safari 8 which returns 'object' for typed array constructors, and
-	      // PhantomJS 1.9 which returns 'function' for `NodeList` instances.
+	      // in Safari 8 which returns 'object' for typed array and weak map constructors,
+	      // and PhantomJS 1.9 which returns 'function' for `NodeList` instances.
 	      var tag = isObject(value) ? objectToString.call(value) : '';
 	      return tag == funcTag || tag == genTag;
 	    }
@@ -33572,7 +32771,7 @@
 	        return '';
 	      }
 	      if (isSymbol(value)) {
-	        return Symbol ? symbolToString.call(value) : '';
+	        return symbolToString ? symbolToString.call(value) : '';
 	      }
 	      var result = (value + '');
 	      return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
@@ -33611,7 +32810,15 @@
 	     * // => { 'a': 1, 'c': 3, 'e': 5 }
 	     */
 	    var assign = createAssigner(function(object, source) {
-	      copyObject(source, keys(source), object);
+	      if (nonEnumShadows || isPrototype(source) || isArrayLike(source)) {
+	        copyObject(source, keys(source), object);
+	        return;
+	      }
+	      for (var key in source) {
+	        if (hasOwnProperty.call(source, key)) {
+	          assignValue(object, key, source[key]);
+	        }
+	      }
 	    });
 	
 	    /**
@@ -33644,7 +32851,13 @@
 	     * // => { 'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5 }
 	     */
 	    var assignIn = createAssigner(function(object, source) {
-	      copyObject(source, keysIn(source), object);
+	      if (nonEnumShadows || isPrototype(source) || isArrayLike(source)) {
+	        copyObject(source, keysIn(source), object);
+	        return;
+	      }
+	      for (var key in source) {
+	        assignValue(object, key, source[key]);
+	      }
 	    });
 	
 	    /**
@@ -34375,12 +33588,13 @@
 	    }
 	
 	    /**
-	     * Recursively merges own and inherited enumerable properties of source objects
-	     * into the destination object. Source properties that resolve to `undefined`
-	     * are skipped if a destination value exists. Array and plain object properties
-	     * are merged recursively. Other objects and value types are overridden by
-	     * assignment. Source objects are applied from left to right. Subsequent
-	     * sources overwrite property assignments of previous sources.
+	     * This method is like `_.assign` except that it recursively merges own and
+	     * inherited enumerable properties of source objects into the destination
+	     * object. Source properties that resolve to `undefined` are skipped if a
+	     * destination value exists. Array and plain object properties are merged
+	     * recursively.Other objects and value types are overridden by assignment.
+	     * Source objects are applied from left to right. Subsequent sources
+	     * overwrite property assignments of previous sources.
 	     *
 	     * **Note:** This method mutates `object`.
 	     *
@@ -34633,8 +33847,10 @@
 	     * @returns {Object} Returns `object`.
 	     * @example
 	     *
-	     * _.setWith({ '0': { 'length': 2 } }, '[0][1][2]', 3, Object);
-	     * // => { '0': { '1': { '2': 3 }, 'length': 2 } }
+	     * var object = {};
+	     *
+	     * _.setWith(object, '[0][1]', 'a', Object);
+	     * // => { '0': { '1': 'a' } }
 	     */
 	    function setWith(object, path, value, customizer) {
 	      customizer = typeof customizer == 'function' ? customizer : undefined;
@@ -34769,6 +33985,64 @@
 	     */
 	    function unset(object, path) {
 	      return object == null ? true : baseUnset(object, path);
+	    }
+	
+	    /**
+	     * This method is like `_.set` except that accepts `updater` to produce the
+	     * value to set. Use `_.updateWith` to customize `path` creation. The `updater`
+	     * is invoked with one argument: (value).
+	     *
+	     * **Note:** This method mutates `object`.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @category Object
+	     * @param {Object} object The object to modify.
+	     * @param {Array|string} path The path of the property to set.
+	     * @param {Function} updater The function to produce the updated value.
+	     * @returns {Object} Returns `object`.
+	     * @example
+	     *
+	     * var object = { 'a': [{ 'b': { 'c': 3 } }] };
+	     *
+	     * _.update(object, 'a[0].b.c', function(n) { return n * n; });
+	     * console.log(object.a[0].b.c);
+	     * // => 9
+	     *
+	     * _.update(object, 'x[0].y.z', function(n) { return n ? n + 1 : 0; });
+	     * console.log(object.x[0].y.z);
+	     * // => 0
+	     */
+	    function update(object, path, updater) {
+	      return object == null ? object : baseUpdate(object, path, baseCastFunction(updater));
+	    }
+	
+	    /**
+	     * This method is like `_.update` except that it accepts `customizer` which is
+	     * invoked to produce the objects of `path`.  If `customizer` returns `undefined`
+	     * path creation is handled by the method instead. The `customizer` is invoked
+	     * with three arguments: (nsValue, key, nsObject).
+	     *
+	     * **Note:** This method mutates `object`.
+	     *
+	     * @static
+	     * @memberOf _
+	     * @category Object
+	     * @param {Object} object The object to modify.
+	     * @param {Array|string} path The path of the property to set.
+	     * @param {Function} updater The function to produce the updated value.
+	     * @param {Function} [customizer] The function to customize assigned values.
+	     * @returns {Object} Returns `object`.
+	     * @example
+	     *
+	     * var object = {};
+	     *
+	     * _.updateWith(object, '[0][1]', _.constant('a'), Object);
+	     * // => { '0': { '1': 'a' } }
+	     */
+	    function updateWith(object, path, updater, customizer) {
+	      customizer = typeof customizer == 'function' ? customizer : undefined;
+	      return object == null ? object : baseUpdate(object, path, baseCastFunction(updater), customizer);
 	    }
 	
 	    /**
@@ -35707,7 +34981,8 @@
 	    }
 	
 	    /**
-	     * Converts `string`, as a whole, to lower case.
+	     * Converts `string`, as a whole, to lower case just like
+	     * [String#toLowerCase](https://mdn.io/toLowerCase).
 	     *
 	     * @static
 	     * @memberOf _
@@ -35730,7 +35005,8 @@
 	    }
 	
 	    /**
-	     * Converts `string`, as a whole, to upper case.
+	     * Converts `string`, as a whole, to upper case just like
+	     * [String#toUpperCase](https://mdn.io/toUpperCase).
 	     *
 	     * @static
 	     * @memberOf _
@@ -37104,6 +36380,7 @@
 	
 	    // Ensure wrappers are instances of `baseLodash`.
 	    lodash.prototype = baseLodash.prototype;
+	    lodash.prototype.constructor = lodash;
 	
 	    LodashWrapper.prototype = baseCreate(baseLodash.prototype);
 	    LodashWrapper.prototype.constructor = LodashWrapper;
@@ -37225,6 +36502,7 @@
 	    lodash.pull = pull;
 	    lodash.pullAll = pullAll;
 	    lodash.pullAllBy = pullAllBy;
+	    lodash.pullAllWith = pullAllWith;
 	    lodash.pullAt = pullAt;
 	    lodash.range = range;
 	    lodash.rangeRight = rangeRight;
@@ -37267,6 +36545,8 @@
 	    lodash.unset = unset;
 	    lodash.unzip = unzip;
 	    lodash.unzipWith = unzipWith;
+	    lodash.update = update;
+	    lodash.updateWith = updateWith;
 	    lodash.values = values;
 	    lodash.valuesIn = valuesIn;
 	    lodash.without = without;
@@ -37706,10 +36986,10 @@
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(171)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(169)(module), (function() { return this; }())))
 
 /***/ },
-/* 171 */
+/* 169 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -37725,12 +37005,12 @@
 
 
 /***/ },
-/* 172 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
 	  var d3 = {
-	    version: "3.5.8"
+	    version: "3.5.16"
 	  };
 	  var d3_arraySlice = [].slice, d3_array = function(list) {
 	    return d3_arraySlice.call(list);
@@ -37950,20 +37230,20 @@
 	    while (i < n) pairs[i] = [ p0 = p1, p1 = array[++i] ];
 	    return pairs;
 	  };
-	  d3.zip = function() {
-	    if (!(n = arguments.length)) return [];
-	    for (var i = -1, m = d3.min(arguments, d3_zipLength), zips = new Array(m); ++i < m; ) {
-	      for (var j = -1, n, zip = zips[i] = new Array(n); ++j < n; ) {
-	        zip[j] = arguments[j][i];
+	  d3.transpose = function(matrix) {
+	    if (!(n = matrix.length)) return [];
+	    for (var i = -1, m = d3.min(matrix, d3_transposeLength), transpose = new Array(m); ++i < m; ) {
+	      for (var j = -1, n, row = transpose[i] = new Array(n); ++j < n; ) {
+	        row[j] = matrix[j][i];
 	      }
 	    }
-	    return zips;
+	    return transpose;
 	  };
-	  function d3_zipLength(d) {
+	  function d3_transposeLength(d) {
 	    return d.length;
 	  }
-	  d3.transpose = function(matrix) {
-	    return d3.zip.apply(d3, matrix);
+	  d3.zip = function() {
+	    return d3.transpose(arguments);
 	  };
 	  d3.keys = function(map) {
 	    var keys = [];
@@ -38350,9 +37630,10 @@
 	      return d3_selectAll(selector, this);
 	    };
 	  }
+	  var d3_nsXhtml = "http://www.w3.org/1999/xhtml";
 	  var d3_nsPrefix = {
 	    svg: "http://www.w3.org/2000/svg",
-	    xhtml: "http://www.w3.org/1999/xhtml",
+	    xhtml: d3_nsXhtml,
 	    xlink: "http://www.w3.org/1999/xlink",
 	    xml: "http://www.w3.org/XML/1998/namespace",
 	    xmlns: "http://www.w3.org/2000/xmlns/"
@@ -38535,7 +37816,7 @@
 	  function d3_selection_creator(name) {
 	    function create() {
 	      var document = this.ownerDocument, namespace = this.namespaceURI;
-	      return namespace ? document.createElementNS(namespace, name) : document.createElement(name);
+	      return namespace === d3_nsXhtml && document.documentElement.namespaceURI === d3_nsXhtml ? document.createElement(name) : document.createElementNS(namespace, name);
 	    }
 	    function createNS() {
 	      return this.ownerDocument.createElementNS(name.space, name.local);
@@ -38934,7 +38215,7 @@
 	    }
 	    function dragstart(id, position, subject, move, end) {
 	      return function() {
-	        var that = this, target = d3.event.target, parent = that.parentNode, dispatch = event.of(that, arguments), dragged = 0, dragId = id(), dragName = ".drag" + (dragId == null ? "" : "-" + dragId), dragOffset, dragSubject = d3.select(subject(target)).on(move + dragName, moved).on(end + dragName, ended), dragRestore = d3_event_dragSuppress(target), position0 = position(parent, dragId);
+	        var that = this, target = d3.event.target.correspondingElement || d3.event.target, parent = that.parentNode, dispatch = event.of(that, arguments), dragged = 0, dragId = id(), dragName = ".drag" + (dragId == null ? "" : "-" + dragId), dragOffset, dragSubject = d3.select(subject(target)).on(move + dragName, moved).on(end + dragName, ended), dragRestore = d3_event_dragSuppress(target), position0 = position(parent, dragId);
 	        if (origin) {
 	          dragOffset = origin.apply(that, arguments);
 	          dragOffset = [ dragOffset.x - position0[0], dragOffset.y - position0[1] ];
@@ -38962,7 +38243,7 @@
 	        function ended() {
 	          if (!position(parent, dragId)) return;
 	          dragSubject.on(move + dragName, null).on(end + dragName, null);
-	          dragRestore(dragged && d3.event.target === target);
+	          dragRestore(dragged);
 	          dispatch({
 	            type: "dragend"
 	          });
@@ -39200,7 +38481,7 @@
 	      }), center0 = null;
 	    }
 	    function mousedowned() {
-	      var that = this, target = d3.event.target, dispatch = event.of(that, arguments), dragged = 0, subject = d3.select(d3_window(that)).on(mousemove, moved).on(mouseup, ended), location0 = location(d3.mouse(that)), dragRestore = d3_event_dragSuppress(that);
+	      var that = this, dispatch = event.of(that, arguments), dragged = 0, subject = d3.select(d3_window(that)).on(mousemove, moved).on(mouseup, ended), location0 = location(d3.mouse(that)), dragRestore = d3_event_dragSuppress(that);
 	      d3_selection_interrupt.call(that);
 	      zoomstarted(dispatch);
 	      function moved() {
@@ -39210,7 +38491,7 @@
 	      }
 	      function ended() {
 	        subject.on(mousemove, null).on(mouseup, null);
-	        dragRestore(dragged && d3.event.target === target);
+	        dragRestore(dragged);
 	        zoomended(dispatch);
 	      }
 	    }
@@ -43887,7 +43168,7 @@
 	          index: di,
 	          startAngle: x0,
 	          endAngle: x,
-	          value: (x - x0) / k
+	          value: groupSums[di]
 	        };
 	        x += padding;
 	      }
@@ -44097,7 +43378,7 @@
 	          alpha = x;
 	        } else {
 	          timer.c = null, timer.t = NaN, timer = null;
-	          event.start({
+	          event.end({
 	            type: "end",
 	            alpha: alpha = 0
 	          });
@@ -45295,7 +44576,9 @@
 	    return d3.rebind(scale, linear, "range", "rangeRound", "interpolate", "clamp");
 	  }
 	  function d3_scale_linearNice(domain, m) {
-	    return d3_scale_nice(domain, d3_scale_niceStep(d3_scale_linearTickRange(domain, m)[2]));
+	    d3_scale_nice(domain, d3_scale_niceStep(d3_scale_linearTickRange(domain, m)[2]));
+	    d3_scale_nice(domain, d3_scale_niceStep(d3_scale_linearTickRange(domain, m)[2]));
+	    return domain;
 	  }
 	  function d3_scale_linearTickRange(domain, m) {
 	    if (m == null) m = 10;
@@ -45397,10 +44680,11 @@
 	    scale.tickFormat = function(n, format) {
 	      if (!arguments.length) return d3_scale_logFormat;
 	      if (arguments.length < 2) format = d3_scale_logFormat; else if (typeof format !== "function") format = d3.format(format);
-	      var k = Math.max(.1, n / scale.ticks().length), f = positive ? (e = 1e-12, Math.ceil) : (e = -1e-12, 
-	      Math.floor), e;
+	      var k = Math.max(1, base * n / scale.ticks().length);
 	      return function(d) {
-	        return d / pow(f(log(d) + e)) <= k ? format(d) : "";
+	        var i = d / pow(Math.round(log(d)));
+	        if (i * base < base - .5) i *= base;
+	        return i <= k ? format(d) : "";
 	      };
 	    };
 	    scale.copy = function() {
@@ -46657,6 +45941,14 @@
 	          delete lock[cancelId];
 	        }
 	      }
+	      timer.c = tick;
+	      d3_timer(function() {
+	        if (timer.c && tick(elapsed || 1)) {
+	          timer.c = null;
+	          timer.t = NaN;
+	        }
+	        return 1;
+	      }, 0, time);
 	      lock.active = id;
 	      transition.event && transition.event.start.call(node, node.__data__, i);
 	      tweens = [];
@@ -46667,14 +45959,6 @@
 	      });
 	      ease = transition.ease;
 	      duration = transition.duration;
-	      timer.c = tick;
-	      d3_timer(function() {
-	        if (timer.c && tick(elapsed || 1)) {
-	          timer.c = null;
-	          timer.t = NaN;
-	        }
-	        return 1;
-	      }, 0, time);
 	    }
 	    function tick(elapsed) {
 	      var t = elapsed / duration, e = ease(t), n = tweens.length;
@@ -47276,8 +46560,1262 @@
 	  d3.xml = d3_xhrType(function(request) {
 	    return request.responseXML;
 	  });
-	  if (true) !(__WEBPACK_AMD_DEFINE_FACTORY__ = (this.d3 = d3), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); else if (typeof module === "object" && module.exports) module.exports = d3; else this.d3 = d3;
+	  if (true) this.d3 = d3, !(__WEBPACK_AMD_DEFINE_FACTORY__ = (d3), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); else if (typeof module === "object" && module.exports) module.exports = d3; else this.d3 = d3;
 	}();
+
+/***/ },
+/* 171 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _XYPlot = __webpack_require__(172);
+	
+	Object.defineProperty(exports, 'XYPlot', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_XYPlot).default;
+	  }
+	});
+	
+	var _LineChart = __webpack_require__(279);
+	
+	Object.defineProperty(exports, 'LineChart', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_LineChart).default;
+	  }
+	});
+	
+	var _BarChart = __webpack_require__(280);
+	
+	Object.defineProperty(exports, 'BarChart', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_BarChart).default;
+	  }
+	});
+	
+	var _MarkerLineChart = __webpack_require__(281);
+	
+	Object.defineProperty(exports, 'MarkerLineChart', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_MarkerLineChart).default;
+	  }
+	});
+	
+	var _ScatterPlot = __webpack_require__(282);
+	
+	Object.defineProperty(exports, 'ScatterPlot', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_ScatterPlot).default;
+	  }
+	});
+	
+	var _Histogram = __webpack_require__(283);
+	
+	Object.defineProperty(exports, 'Histogram', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_Histogram).default;
+	  }
+	});
+	
+	var _KernelDensityEstimation = __webpack_require__(284);
+	
+	Object.defineProperty(exports, 'KernelDensityEstimation', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_KernelDensityEstimation).default;
+	  }
+	});
+	
+	var _AreaHeatmap = __webpack_require__(285);
+	
+	Object.defineProperty(exports, 'AreaHeatmap', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_AreaHeatmap).default;
+	  }
+	});
+	
+	var _PieChart = __webpack_require__(286);
+	
+	Object.defineProperty(exports, 'PieChart', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_PieChart).default;
+	  }
+	});
+	
+	var _TreeMap = __webpack_require__(287);
+	
+	Object.defineProperty(exports, 'TreeMap', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_TreeMap).default;
+	  }
+	});
+	
+	var _XAxis = __webpack_require__(288);
+	
+	Object.defineProperty(exports, 'XAxis', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_XAxis).default;
+	  }
+	});
+	
+	var _XAxisLabels = __webpack_require__(293);
+	
+	Object.defineProperty(exports, 'XAxisLabels', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_XAxisLabels).default;
+	  }
+	});
+	
+	var _XAxisTitle = __webpack_require__(306);
+	
+	Object.defineProperty(exports, 'XAxisTitle', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_XAxisTitle).default;
+	  }
+	});
+	
+	var _XGrid = __webpack_require__(291);
+	
+	Object.defineProperty(exports, 'XGrid', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_XGrid).default;
+	  }
+	});
+	
+	var _XLine = __webpack_require__(292);
+	
+	Object.defineProperty(exports, 'XLine', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_XLine).default;
+	  }
+	});
+	
+	var _XTicks = __webpack_require__(290);
+	
+	Object.defineProperty(exports, 'XTicks', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_XTicks).default;
+	  }
+	});
+	
+	var _YAxis = __webpack_require__(307);
+	
+	Object.defineProperty(exports, 'YAxis', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_YAxis).default;
+	  }
+	});
+	
+	var _YAxisLabels = __webpack_require__(311);
+	
+	Object.defineProperty(exports, 'YAxisLabels', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_YAxisLabels).default;
+	  }
+	});
+	
+	var _YAxisTitle = __webpack_require__(312);
+	
+	Object.defineProperty(exports, 'YAxisTitle', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_YAxisTitle).default;
+	  }
+	});
+	
+	var _YGrid = __webpack_require__(309);
+	
+	Object.defineProperty(exports, 'YGrid', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_YGrid).default;
+	  }
+	});
+	
+	var _YLine = __webpack_require__(310);
+	
+	Object.defineProperty(exports, 'YLine', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_YLine).default;
+	  }
+	});
+	
+	var _YTicks = __webpack_require__(308);
+	
+	Object.defineProperty(exports, 'YTicks', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_YTicks).default;
+	  }
+	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	//const {PropTypes} = React;
+	
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d2 = __webpack_require__(170);
+	
+	var _d3 = _interopRequireDefault(_d2);
+	
+	var _util = __webpack_require__(173);
+	
+	var _moment = __webpack_require__(174);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	var _numeral = __webpack_require__(166);
+	
+	var _numeral2 = _interopRequireDefault(_numeral);
+	
+	var _server = __webpack_require__(272);
+	
+	var _server2 = _interopRequireDefault(_server);
+	
+	var _resolveObjectProps = __webpack_require__(273);
+	
+	var _resolveObjectProps2 = _interopRequireDefault(_resolveObjectProps);
+	
+	var _resolveXYScales = __webpack_require__(275);
+	
+	var _resolveXYScales2 = _interopRequireDefault(_resolveXYScales);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var PropTypes = _react2.default.PropTypes;
+	PropTypes = _lodash2.default.assign({}, PropTypes, {
+	    // all props that can apply to both axes take the form {x: val, y: val}
+	    xyObjectOf: function xyObjectOf(type) {
+	        return PropTypes.oneOfType([type, PropTypes.shape({ x: type, y: type })]);
+	    },
+	    axisType: PropTypes.oneOf(['number', 'time', 'ordinal']),
+	    //DomainType: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
+	    dataArray: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)])),
+	    fourDirections: PropTypes.shape({
+	        top: PropTypes.number,
+	        bottom: PropTypes.number,
+	        left: PropTypes.number,
+	        right: PropTypes.number
+	    }),
+	    stringFormatter: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+	});
+	
+	var XYPlot = _react2.default.createClass({
+	    displayName: 'XYPlot',
+	
+	    propTypes: {
+	        // (outer) width and height of the chart
+	        width: PropTypes.number.isRequired,
+	        height: PropTypes.number.isRequired,
+	
+	        // chart margins (space around edges where axis labels live)
+	        margin: PropTypes.fourDirections,
+	        // internal chart padding (space between scale ends and edge of inner chart background)
+	        padding: PropTypes.fourDirections,
+	        // the max extra spacing required by the plot elements, if they were on the edge of the chart
+	        // eg. if a 10px radius dot is plotted at the end of one axis,
+	        // it needs 10px of spacing so it doesn't hang over the edge of the chart
+	        // spacing is the max possible necessary padding, and will == padding if plot elements are on scale extrema
+	        spacing: PropTypes.fourDirections,
+	
+	        // axis types - number, time or ordinal
+	        scaleType: PropTypes.xyObjectOf(PropTypes.scaleType),
+	        // scale domains may be provided, otherwise will be inferred from data
+	        domain: PropTypes.xyObjectOf(PropTypes.dataArray),
+	        // whether or not to extend the scales to end on nice values (see docs for d3 scale.linear.nice())
+	        nice: PropTypes.xyObjectOf(PropTypes.bool),
+	        // whether or not to invert the axis (ie. put largest numbers on bottom for Y axis, or on left for X)
+	        invertAxis: PropTypes.xyObjectOf(PropTypes.bool),
+	        // placement of the axis labels/ticks on the chart
+	        axisPosition: PropTypes.shape({
+	            x: PropTypes.oneOf(['top', 'bottom']),
+	            y: PropTypes.oneOf(['left', 'right'])
+	        }),
+	
+	        // approximate # of ticks to include on each axis - 10 is default
+	        // (actual # may be slightly different, to get nicest intervals)
+	        tickCount: PropTypes.xyObjectOf(PropTypes.number),
+	        // or alternatively, you can pass an array of the exact tick values to use on each axis
+	        ticks: PropTypes.xyObjectOf(PropTypes.dataArray),
+	        // size of axis ticks
+	        tickLength: PropTypes.xyObjectOf(PropTypes.number),
+	
+	        // axis value labels will be created for each tick, unless you specify a different list of values to label
+	        labelValues: PropTypes.xyObjectOf(PropTypes.dataArray),
+	        // format to use for the axis value labels. can be a function or a string.
+	        // if function, called on each label.
+	        // if string, interpreted as momentjs formats for time axes, or numeraljs formats for number axes
+	        labelFormat: PropTypes.xyObjectOf(PropTypes.stringFormatter),
+	        // padding between axis value labels and the axis/ticks
+	        labelPadding: PropTypes.xyObjectOf(PropTypes.number),
+	        // label to show for null/undefined values
+	        emptyLabel: PropTypes.string,
+	
+	        // should we draw axis value labels
+	        showLabels: PropTypes.xyObjectOf(PropTypes.bool),
+	        // should we draw the grid lines in the main chart space
+	        showGrid: PropTypes.xyObjectOf(PropTypes.bool),
+	        // should we draw the little tick lines along the axis
+	        showTicks: PropTypes.xyObjectOf(PropTypes.bool),
+	        // should we draw a line showing where zero is
+	        showZero: PropTypes.xyObjectOf(PropTypes.bool),
+	
+	        // label for entire axis, not value labels
+	        axisLabel: PropTypes.xyObjectOf(PropTypes.string),
+	        axisLabelAlign: PropTypes.xyObjectOf(PropTypes.shape({
+	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
+	            vertical: PropTypes.oneOf(['top', 'bottom'])
+	        })),
+	        axisLabelPadding: PropTypes.xyObjectOf(PropTypes.number),
+	
+	        // todo more interaction
+	        onMouseMove: PropTypes.func,
+	        onMouseEnter: PropTypes.func,
+	        onMouseLeave: PropTypes.func,
+	        onMouseDown: PropTypes.func,
+	        onMouseUp: PropTypes.func
+	
+	        // todo: minMargin - margin will be at least X, or more if necessary
+	        // todo: extraMargin - margin to add to calculated necessary margin
+	        // todo: minPadding, extraPadding ?
+	        // todo: minSpacing, extraSpacing ?
+	    },
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            width: 400,
+	            height: 250,
+	            axisType: { x: 'number', y: 'number' },
+	            nice: { x: true, y: true },
+	            invertAxis: { x: false, y: false },
+	            tickCount: { x: 10, y: 10 },
+	            tickLength: { x: 6, y: 6 },
+	            labelPadding: { x: 6, y: 6 },
+	            emptyLabel: "Unknown",
+	            showLabels: { x: true, y: true },
+	            showGrid: { x: true, y: true },
+	            showTicks: { x: true, y: true },
+	            showZero: { x: false, y: false },
+	            axisLabelPadding: { x: 10, y: 10 },
+	            axisLabelAlign: {
+	                x: { horizontal: 'left', vertical: 'top' },
+	                y: { horizontal: 'right', vertical: 'top' }
+	            },
+	
+	            // these values are inferred from data if not provided, therefore empty defaults
+	            margin: {}, padding: {}, spacing: {}, domain: {},
+	            ticks: {}, labelValues: {}, labelFormat: {}, axisLabel: {}
+	        };
+	    },
+	    getInitialState: function getInitialState() {
+	        return {};
+	    },
+	    componentWillMount: function componentWillMount() {
+	        this.trueProps = this.initProps(this.props);
+	        this.initLabelFormats(this.trueProps);
+	        //this.initDomains(this.trueProps);
+	        //this.initScale(this.trueProps);
+	    },
+	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+	        this.trueProps = this.initProps(newProps);
+	        this.initLabelFormats(this.trueProps);
+	        //this.initDomains(this.trueProps);
+	        //this.initScale(this.trueProps);
+	    },
+	    initProps: function initProps(props) {
+	        return _lodash2.default.assign({}, props);
+	    },
+	    initDomains: function initDomains(props) {
+	        var axisType = props.axisType;
+	        var ticks = props.ticks;
+	        var labelValues = props.labelValues;
+	
+	
+	        _lodash2.default.assign(this, { domains: props.domain, spacings: {} });
+	
+	        //// figure out the domains for each axis (ie. data extents)
+	        //// unless both domains are given, ask each child chart for it's desired domain, & flatten them into one domain.
+	        //// this is so that charts can plot their own modified version of the data (ie. a histogram),
+	        //// even if it has a different domain than the original data
+	        //// todo: only do this when necessary
+	        //let allChartOptions = [];
+	        //React.Children.forEach(props.children, child => {
+	        //    if(!childIsXYChart(child)) return; // only get options for children which identify themselves as XYCharts
+	        //
+	        //    const childProps = _.assign({}, {axisType}, child.props);
+	        //    let {domain, spacing} = _.isFunction(child.type.getOptions) ? child.type.getOptions(childProps) : {};
+	        //    domain = domain || {};
+	        //    ['x','y'].forEach(k => {
+	        //        if(isNullOrUndefined(domain[k]))
+	        //            domain[k] = defaultDomain(child.props.data, child.props.getValue[k], axisType[k]);
+	        //    });
+	        //
+	        //    allChartOptions.push({domain, spacing});
+	        //});
+	        //
+	        //// use domain from props if provided, else calculated domains from children
+	        //let domains = _.fromPairs(_.map(['x','y'], k => {
+	        //    return [k, props.domain[k] || _.compact(_.map(allChartOptions, `domain.${k}`))]
+	        //}));
+	        //// if user has passed in custom ticks or label values, extend the domain to ensure they are all are included
+	        //['x','y'].forEach(k => {
+	        //    const isOrdinal = axisType[k] === 'ordinal';
+	        //    [ticks[k], labelValues[k]].forEach(values => {
+	        //        if(values) domains[k].push(isOrdinal ? values : d3.extent(values));
+	        //    });
+	        //});
+	        //// use spacing from props if provided, else calculated spacings from children
+	        //const spacings = _.map(allChartOptions, 'spacing').map(spacing => {
+	        //    return _.defaults({}, spacing, props.spacing);
+	        //});
+	        //
+	        //_.assign(this, {domains, spacings});
+	    },
+	    initLabelFormats: function initLabelFormats(props) {
+	        this.labelFormat = _lodash2.default.fromPairs(_lodash2.default.map(['x', 'y'], function (k) {
+	            var axisType = props.axisType[k];
+	            // use given format if provided
+	            return _lodash2.default.isObject(props.labelFormat) && _lodash2.default.has(props.labelFormat, k) ? [k, props.labelFormat[k]] :
+	            // otherwise determine appropriate format for axis type
+	            axisType == 'number' ? [k, '0.[000000]a'] :
+	            // todo determine most appropriate date format for this domain
+	            axisType === 'time' ? [k, 'MM-DD'] : [k, undefined];
+	        }));
+	    },
+	    initScale: function initScale(props) {
+	        var _this = this;
+	
+	        // create the X and Y scales shared by charts
+	        // calculate the inner width and height based on margins
+	        var width = props.width;
+	        var height = props.height;
+	        var axisType = props.axisType;
+	        var tickCount = props.tickCount;
+	        var nice = props.nice;
+	        var axisLabel = props.axisLabel;
+	        var axisLabelPadding = props.axisLabelPadding;
+	        var labelPadding = props.labelPadding;
+	        var tickLength = props.tickLength;
+	        var showTicks = props.showTicks;
+	        var domains = this.domains;
+	        var spacings = this.spacings;
+	        var labelFormat = this.labelFormat;
+	
+	        var origMargin = props.margin;
+	        var origPadding = props.padding;
+	
+	        // todo fix
+	        var shouldMeasureLabels = true;
+	        if (shouldMeasureLabels) {
+	            (function () {
+	                // several inferred variables depend on each other in a complicated/circular way:
+	                // the axis scales, margin, padding, ticks and labels.
+	                // eg. scale width depends on margin, which depends on the axis labels, which depend on the scale
+	                // so we set some sane initial values and iterate until it settles down (or we get tired of waiting)
+	
+	                // start with a margin of 10 pixels for all unknown margins
+	                //let margin = _.transform(origMargin, (result, m, key) => result[key] = isNullOrUndefined(m) ? 10 : m);
+	                var margin = _lodash2.default.defaults({}, origMargin, { top: 10, bottom: 10, left: 10, right: 10 });
+	                // and padding equal to the first chart's spacing for unknown paddings
+	                //let padding = _.transform(origPadding, (res, p, key) => res[key] = _.isNull(p) ? spacings[0][key] : p);
+	                var padding = _lodash2.default.defaults({}, origPadding, { top: 0, bottom: 0, left: 0, right: 0 });
+	                // make scales using margin, measure labels, make new margins
+	                // repeat until we converge on a margin that works
+	                var scaleWidth = undefined,
+	                    scaleHeight = undefined,
+	                    labelBoxes = undefined;
+	                var scale = {};
+	                var ticks = {};
+	
+	                var isDone = false,
+	                    i = 0,
+	                    limit = 5; // don't loop forever
+	
+	                var _loop = function _loop() {
+	                    i++;
+	                    // calculate scale width based on previous margin
+	                    scaleWidth = width - (margin.left + margin.right + padding.left + padding.right);
+	                    scaleHeight = height - (margin.top + margin.bottom + padding.top + padding.bottom);
+	                    var range = {
+	                        x: [padding.left, scaleWidth + padding.left],
+	                        y: [scaleHeight + padding.top, padding.top]
+	                    };
+	
+	                    ['x', 'y'].forEach(function (k) {
+	                        scale[k] = makeScale(domains[k], range[k], axisType[k], nice[k], tickCount[k]);
+	                        if (props.invertAxis[k]) scale[k].domain(scale[k].domain().reverse());
+	                        ticks[k] = props.ticks[k] || (axisType[k] === 'ordinal' ? scale[k].domain() : scale[k].ticks(tickCount[k]));
+	                    });
+	
+	                    labelBoxes = measureAxisLabels(_this.getXAxisProps({ scaleWidth: scaleWidth, scaleHeight: scaleHeight, scale: scale.x, ticks: ticks.x }), _this.getYAxisProps({ scaleWidth: scaleWidth, scaleHeight: scaleHeight, scale: scale.y, ticks: ticks.y }), axisLabel.x ? _this.getXAxisLabelProps({ margin: margin }) : null, axisLabel.y ? _this.getYAxisLabelProps({ margin: margin }) : null);
+	
+	                    // calculate padding based on spacings and domains
+	                    // spacing is the amount of outer space ('margin') required by the outermost elements of each chart,
+	                    // so that they still fit within the chart boundaries, defined by chartWidth and chartHeight.
+	                    // padding is the actual amount of extra space required, after taking into account the scales.
+	                    // if the outermost chart elements are on the scale extrema, padding = spacing,
+	                    // but the scale may extend beyond the last element anyway, so we may not need the extra padding.
+	                    // NOTE: temporarily set as padding = max spacing, todo: implement real padding
+	                    padding = _lodash2.default.defaults(origPadding, _lodash2.default.reduce(spacings, function (newPadding, spacing) {
+	                        return _lodash2.default.transform(spacing, function (result, space, dir) {
+	                            result[dir] = Math.max(newPadding[dir] || space);
+	                        });
+	                    }, {}), { top: 0, bottom: 0, left: 0, right: 0 });
+	
+	                    // todo: modify to handle all possible label alignments
+	                    // todo: handle case of labels not shown (ie if !this.props.showYLabels)
+	                    var hasXAxisLabel = axisLabel.x && labelBoxes.xAxis;
+	                    var hasYAxisLabel = axisLabel.y && labelBoxes.yAxis;
+	                    var hasXValLabels = !!labelBoxes.xVal.length;
+	                    var hasYValLabels = !!labelBoxes.yVal.length;
+	
+	                    var xRange = scale.x.range();
+	                    var yRange = scale.y.range();
+	
+	                    // find # of pixels by which the top- and bottom-most y axis labels overhang the top/bottom chart edges
+	
+	                    var topYTick = _lodash2.default.min(ticks.y, scale.y);
+	
+	                    var bottomYTick = _lodash2.default.max(ticks.y, scale.y);
+	
+	                    var topYTickFromTop = Math.abs(scale.y(topYTick) - _lodash2.default.min(yRange));
+	                    var bottomYTickFromBottom = Math.abs(scale.y(bottomYTick) - _lodash2.default.max(yRange));
+	
+	                    var _ref = hasYValLabels ? [_lodash2.default.min(labelBoxes.yVal, (0, _util.accessor)('top')), _lodash2.default.max(labelBoxes.yVal, (0, _util.accessor)('top'))] : [null, null];
+	
+	                    var _ref2 = _slicedToArray(_ref, 2);
+	
+	                    var topYValBox = _ref2[0];
+	                    var bottomYValBox = _ref2[1];
+	
+	                    var _ref3 = hasYValLabels ? [Math.ceil(Math.max(0.5 * topYValBox.height - (topYTickFromTop + padding.top), 0)), Math.ceil(Math.max(0.5 * bottomYValBox.height - (bottomYTickFromBottom + padding.bottom), 0))] : [0, 0];
+	
+	                    var _ref4 = _slicedToArray(_ref3, 2);
+	
+	                    var topYValOverhang = _ref4[0];
+	                    var bottomYValOverhang = _ref4[1];
+	
+	                    // find # of pixels by which the left- and right-most x axis labels overhang the left/right chart edges
+	
+	                    var leftXTick = _lodash2.default.min(ticks.x, scale.x);
+	
+	                    var rightXTick = _lodash2.default.max(ticks.x, scale.x);
+	
+	                    var leftXTickFromLeft = Math.abs(scale.x(leftXTick) - _lodash2.default.min(xRange));
+	                    var rightXTickFromRight = Math.abs(scale.x(rightXTick) - _lodash2.default.max(xRange));
+	
+	                    var _ref5 = hasXValLabels ? [_lodash2.default.min(labelBoxes.xVal, (0, _util.accessor)('left')), _lodash2.default.max(labelBoxes.xVal, (0, _util.accessor)('right'))] : [null, null];
+	
+	                    var _ref6 = _slicedToArray(_ref5, 2);
+	
+	                    var leftXValBox = _ref6[0];
+	                    var rightXValBox = _ref6[1];
+	
+	                    var _ref7 = hasXValLabels ? [Math.ceil(Math.max(0.5 * leftXValBox.width - (leftXTickFromLeft + padding.left), 0)), Math.ceil(Math.max(0.5 * rightXValBox.width - (rightXTickFromRight + padding.right), 0))] : [0, 0];
+	
+	                    var _ref8 = _slicedToArray(_ref7, 2);
+	
+	                    var leftXValOverhang = _ref8[0];
+	                    var rightXValOverhang = _ref8[1];
+	
+	                    // todo: fix all of this... sigh...
+	                    //
+	
+	                    var xAxisLabelOuterHeight = hasXAxisLabel ? Math.ceil(labelBoxes.xAxis.height + axisLabelPadding.x) : 0;
+	                    var yAxisLabelOuterHeight = hasYAxisLabel ? Math.ceil(labelBoxes.yAxis.height + axisLabelPadding.y) : 0;
+	
+	                    var topMargin = _lodash2.default.has(origMargin, 'top') ? origMargin.top : Math.max(topYValOverhang, xAxisLabelOuterHeight, yAxisLabelOuterHeight);
+	
+	                    var yTickAndPadSpace = (hasYValLabels || hasYAxisLabel ? labelPadding.y : 0) + (showTicks.y ? tickLength.y : 0);
+	
+	                    var maxYValWidth = (hasYValLabels ? Math.ceil(_d3.default.max(labelBoxes.yVal, (0, _util.accessor)('width'))) : 0) + yTickAndPadSpace;
+	                    var yAxisLabelOuterWidth = hasYAxisLabel ? Math.ceil(labelBoxes.yAxis.width) + yTickAndPadSpace : 0;
+	                    //console.log(maxYValWidth, yAxisLabelOuterWidth);
+	
+	                    var leftMargin = _lodash2.default.has(origMargin, 'left') ? origMargin.left : Math.max(leftXValOverhang, maxYValWidth, yAxisLabelOuterWidth);
+	
+	                    var xTickAndPadSpace = (hasXValLabels || hasXAxisLabel ? labelPadding.x : 0) + (showTicks.x ? tickLength.x : 0);
+	
+	                    var maxXValHeight = (hasXValLabels ? Math.ceil(_d3.default.max(labelBoxes.xVal, (0, _util.accessor)('height'))) : 0) + xTickAndPadSpace;
+	
+	                    var requiredMargin = {
+	                        top: topMargin,
+	                        bottom: maxXValHeight,
+	                        left: leftMargin,
+	                        right: rightXValOverhang
+	                    };
+	
+	                    var newMargin = (0, _lodash2.default)(requiredMargin).map(function (v, k) {
+	                        return [k, _lodash2.default.has(origMargin, k) ? origMargin[k] : v];
+	                    }).fromPairs().value();
+	
+	                    isDone = _lodash2.default.every(_lodash2.default.keys(margin), function (k) {
+	                        return margin[k] === newMargin[k];
+	                    });
+	                    //console.log('calculated margin', newMargin);
+	                    margin = newMargin;
+	                    scaleWidth = width - (margin.left + margin.right + padding.left + padding.right);
+	                    scaleHeight = height - (margin.top + margin.bottom + padding.top + padding.bottom);
+	                };
+	
+	                while (!isDone && i < limit) {
+	                    _loop();
+	                }
+	                //console.log('padding', padding);
+	                //console.log({scaleWidth, scaleHeight});
+	                _lodash2.default.assign(_this, { scale: scale, ticks: ticks, margin: margin, padding: padding, scaleWidth: scaleWidth, scaleHeight: scaleHeight, labelBoxes: labelBoxes });
+	            })();
+	        } else {
+	            // margins are all pre-defined, just make the scales
+	            // todo still need to determine padding??
+	            //const scaleWidth = width - (props.margin.left + props.margin.right);
+	            //const scaleHeight = height - (props.margin.top + props.margin.bottom);
+	            //const xScale = makeScale(this.xDomains, [0, scaleWidth], xType);
+	            //const yScale = makeScale(this.yDomains, [scaleHeight, 0], yType);
+	            //_.assign(this, {margin: props.margin, scaleWidth, scaleHeight, xScale, yScale});
+	        }
+	    },
+	    onMouseMove: function onMouseMove(e) {
+	        var _trueProps = this.trueProps;
+	        var axisType = _trueProps.axisType;
+	        var height = _trueProps.height;
+	        var width = _trueProps.width;
+	        var margin = this.margin;
+	        var padding = this.padding;
+	        var scale = this.scale;
+	        var scaleWidth = this.scaleWidth;
+	        var scaleHeight = this.scaleHeight;
+	        // todo faster method than getBoundingClientRect on every mouseover?
+	
+	        var chartBB = e.currentTarget.getBoundingClientRect();
+	        var chartX = Math.round(e.clientX - chartBB.left - margin.left);
+	        var chartY = Math.round(e.clientY - chartBB.top - margin.top);
+	
+	        var chartXVal = !_lodash2.default.inRange(chartX, 0, scaleWidth + padding.left + padding.right) ? null : axisType.x === 'ordinal' ? scale.x.domain()[indexOfClosestNumberInList(chartX, scale.x.range())] : scale.x.invert(chartX);
+	        var chartYVal = !_lodash2.default.inRange(chartY, 0, scaleHeight + padding.top + padding.bottom) ? null : axisType.y === 'ordinal' ? scale.y.domain()[indexOfClosestNumberInList(chartY, scale.y.range())] : scale.y.invert(chartY);
+	
+	        var chart = this.refs['chart-series-0'];
+	        var hovered = chart && _lodash2.default.isFunction(chart.getHovered) ? chart.getHovered(chartXVal) : null;
+	
+	        this.trueProps.onMouseMove(hovered, e, { chartX: chartX, chartY: chartY, chartXVal: chartXVal, chartYVal: chartYVal });
+	    },
+	    onMouseEnter: function onMouseEnter(e) {
+	        this.trueProps.onMouseEnter(e);
+	    },
+	    onMouseLeave: function onMouseLeave(e) {
+	        this.trueProps.onMouseLeave(e);
+	    },
+	    onMouseDown: function onMouseDown(e) {
+	        this.trueProps.onMouseDown(e);
+	    },
+	    onMouseUp: function onMouseUp(e) {
+	        this.trueProps.onMouseUp(e);
+	    },
+	    render: function render() {
+	        var _trueProps2 = this.trueProps;
+	        var children = _trueProps2.children;
+	        var width = _trueProps2.width;
+	        var height = _trueProps2.height;
+	        var scaleType = _trueProps2.scaleType;
+	        var axisLabel = _trueProps2.axisLabel;
+	        var invertScale = _trueProps2.invertScale;
+	        var onMouseMove = _trueProps2.onMouseMove;
+	        var onMouseEnter = _trueProps2.onMouseEnter;
+	        var onMouseLeave = _trueProps2.onMouseLeave;
+	        var onMouseDown = _trueProps2.onMouseDown;
+	        var onMouseUp = _trueProps2.onMouseUp;
+	        var scale = _trueProps2.scale;
+	        var margin = _trueProps2.margin;
+	        var padding = _trueProps2.padding;
+	
+	        var scaleWidth = width - (margin.left + margin.right);
+	        var scaleHeight = width - (margin.top + margin.bottom);
+	        var ticks = [];
+	        //const {scale, margin, padding, scaleWidth, scaleHeight, ticks} = this;
+	        var chartWidth = scaleWidth + padding.left + padding.right;
+	        var chartHeight = scaleHeight + padding.top + padding.bottom;
+	
+	        var propsToPass = {
+	            scaleType: scaleType, invertScale: invertScale, scale: scale, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: width, plotHeight: height,
+	            chartMargin: margin, chartPadding: padding, margin: margin, padding: padding, ticks: ticks
+	        };
+	
+	        var childrenUnderAxes = _react2.default.Children.map(children, function (child, i) {
+	            if (!child || !child.props || !child.props.underAxes) return null;
+	            // todo fix chart series #
+	            var name = child.props.name || 'chart-series-' + i;
+	            return _react2.default.cloneElement(child, _lodash2.default.assign({ ref: name, name: name }, propsToPass));
+	        });
+	        var childrenAboveAxes = _react2.default.Children.map(children, function (child, i) {
+	            if (!child || child.props && child.props.underAxes) return null;
+	            var name = child.props.name || 'chart-series-' + i;
+	            return _react2.default.cloneElement(child, _lodash2.default.assign({ ref: name, name: name }, propsToPass));
+	        });
+	
+	        return _react2.default.createElement(
+	            'svg',
+	            _extends({ className: 'xy-plot' }, { width: width, height: height }, {
+	                onMouseMove: _lodash2.default.isFunction(onMouseMove) ? this.onMouseMove : null,
+	                onMouseEnter: _lodash2.default.isFunction(onMouseEnter) ? this.onMouseEnter : null,
+	                onMouseLeave: _lodash2.default.isFunction(onMouseLeave) ? this.onMouseLeave : null,
+	                onMouseDown: _lodash2.default.isFunction(onMouseDown) ? this.onMouseDown : null,
+	                onMouseUp: _lodash2.default.isFunction(onMouseUp) ? this.onMouseUp : null
+	            }),
+	            _react2.default.createElement(
+	                'g',
+	                { className: 'chart-inner',
+	                    transform: 'translate(' + margin.left + ', ' + margin.top + ')'
+	                },
+	                _react2.default.createElement('rect', { className: 'chart-background', width: chartWidth, height: chartHeight }),
+	                childrenUnderAxes,
+	                _react2.default.createElement(ChartAxis, this.getXAxisProps()),
+	                _react2.default.createElement(ChartAxis, this.getYAxisProps()),
+	                childrenAboveAxes
+	            ),
+	            axisLabel.x ? _react2.default.createElement(XAxisLabel, this.getXAxisLabelProps()) : null,
+	            axisLabel.y ? _react2.default.createElement(YAxisLabel, this.getYAxisLabelProps()) : null
+	        );
+	    },
+	    getXAxisProps: function getXAxisProps() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	
+	        var scaleHeight = options.scaleHeight || this.scaleHeight;
+	        var padding = options.padding || this.padding || {};
+	        return this.getAxisProps(_lodash2.default.assign({
+	            letter: 'x',
+	            orientation: 'horizontal',
+	            axisTransform: 'translate(0, ' + (scaleHeight + (padding.top || 0) + (padding.bottom || 0)) + ')'
+	        }, options));
+	    },
+	    getYAxisProps: function getYAxisProps() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	
+	        return this.getAxisProps(_lodash2.default.assign({
+	            letter: 'y',
+	            orientation: 'vertical'
+	        }, options));
+	    },
+	    getAxisProps: function getAxisProps(options) {
+	        var props = this.trueProps;
+	        var k = options.letter;
+	
+	        return _lodash2.default.defaults({}, options, {
+	            scale: _lodash2.default.get(this.scale, k),
+	            padding: this.padding,
+	            scaleHeight: this.scaleHeight,
+	            scaleWidth: this.scaleWidth,
+	            labelFormat: this.labelFormat[k],
+	            type: props.axisType[k],
+	            tickCount: props.tickCount[k],
+	            ticks: _lodash2.default.get(this.ticks, k) || [],
+	            labels: props.labelValues[k],
+	            labelPadding: props.labelPadding[k],
+	            emptyLabel: props.emptyLabel,
+	            tickLength: props.tickLength[k],
+	            showLabels: props.showLabels[k],
+	            showTicks: props.showTicks[k],
+	            showGrid: props.showGrid[k],
+	            showZero: props.showZero[k]
+	        });
+	    },
+	    getXAxisLabelProps: function getXAxisLabelProps() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	
+	        return this.getAxisLabelProps('x', options);
+	    },
+	    getYAxisLabelProps: function getYAxisLabelProps() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	
+	        return this.getAxisLabelProps('y', options);
+	    },
+	    getAxisLabelProps: function getAxisLabelProps(k) {
+	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	        var props = this.trueProps;
+	        var labelBoxes = this.labelBoxes;
+	        var margin = this.margin;
+	        var scaleWidth = this.scaleWidth;
+	        var scaleHeight = this.scaleHeight;
+	
+	
+	        return _lodash2.default.defaults({}, options, {
+	            margin: margin, scaleWidth: scaleWidth, scaleHeight: scaleHeight,
+	            label: _lodash2.default.get(props.axisLabel, k),
+	            alignment: _lodash2.default.get(props.axisLabelAlign, k),
+	            axisLabelPadding: _lodash2.default.get(props.axisLabelPadding, k),
+	            valueLabelPadding: _lodash2.default.get(props.labelPadding, k),
+	            tickLength: _lodash2.default.get(props.tickLength, k),
+	            showTicks: _lodash2.default.get(props.showTicks, k),
+	            labelBox: labelBoxes && labelBoxes[k + 'Axis'] ? labelBoxes[k + 'Axis'] : { width: 10, height: 10 }
+	        });
+	    }
+	});
+	
+	var XGrid = _react2.default.createClass({
+	    displayName: 'XGrid',
+	
+	    propTypes: {
+	        ticks: PropTypes.array,
+	        scale: PropTypes.array,
+	        chartWidth: PropTypes.number,
+	        chartHeight: PropTypes.number
+	    },
+	    render: function render() {
+	        var _props = this.props;
+	        var ticks = _props.ticks;
+	        var scale = _props.scale;
+	        var chartWidth = _props.chartWidth;
+	        var chartHeight = _props.chartHeight;
+	
+	
+	        return ticks.map(function (value, i) {
+	            var x = scale(value);
+	        });
+	    }
+	});
+	
+	var GridLine = _react2.default.createClass({
+	    displayName: 'GridLine',
+	    render: function render(options) {
+	        var letter = options.letter;
+	        var gridLength = options.gridLength;
+	        var orientation = options.orientation;
+	
+	        var className = 'chart-grid chart-grid-' + (letter || '');
+	
+	        var _ref9 = orientation === 'vertical' ? [gridLength, 0] : [0, -gridLength];
+	
+	        var _ref10 = _slicedToArray(_ref9, 2);
+	
+	        var x2 = _ref10[0];
+	        var y2 = _ref10[1];
+	
+	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
+	    }
+	});
+	
+	var XAxisLabel = _react2.default.createClass({
+	    displayName: 'XAxisLabel',
+	
+	    propTypes: {
+	        label: PropTypes.string,
+	        //letter: PropTypes.string,
+	        margin: PropTypes.object,
+	        scaleWidth: PropTypes.number,
+	        scaleHeight: PropTypes.number,
+	        alignment: PropTypes.shape({
+	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
+	            vertical: PropTypes.oneOf(['top', 'bottom'])
+	        }),
+	        axisLabelPadding: PropTypes.number,
+	        valueLabelPadding: PropTypes.number,
+	        tickLength: PropTypes.number,
+	        // bounding box of the label
+	        labelBox: PropTypes.object
+	    },
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            labelBox: { height: 10, width: 10 },
+	            scaleWidth: 0
+	        };
+	    },
+	    render: function render() {
+	        var _props2 = this.props;
+	        var label = _props2.label;
+	        var labelBox = _props2.labelBox;
+	        var margin = _props2.margin;
+	        var alignment = _props2.alignment;
+	
+	
+	        var top = labelBox.height;
+	        var left = margin.left;
+	        var x = alignment.horizontal === 'left' ? 0 : alignment.horizontal === 'right' ? this.props.scaleWidth : this.props.scaleWidth / 2;
+	        var textAnchor = alignment.horizontal === 'left' ? 'start' : alignment.horizontal === 'right' ? 'end' : 'middle';
+	
+	        // todo implement vertical alignment
+	
+	        return _react2.default.createElement(
+	            'g',
+	            {
+	                className: 'chart-axis-label chart-axis-label-x',
+	                transform: 'translate(' + left + ',' + top + ')'
+	            },
+	            _react2.default.createElement(
+	                'text',
+	                { x: x, style: { textAnchor: textAnchor } },
+	                label
+	            )
+	        );
+	    }
+	});
+	
+	var YAxisLabel = _react2.default.createClass({
+	    displayName: 'YAxisLabel',
+	
+	    propTypes: {
+	        label: PropTypes.string,
+	        //letter: PropTypes.string,
+	        margin: PropTypes.object,
+	        scaleWidth: PropTypes.number,
+	        scaleHeight: PropTypes.number,
+	        alignment: PropTypes.shape({
+	            horizontal: PropTypes.oneOf(['left', 'center', 'right']),
+	            vertical: PropTypes.oneOf(['top', 'bottom'])
+	        }),
+	        axisLabelPadding: PropTypes.number,
+	        valueLabelPadding: PropTypes.number,
+	        tickLength: PropTypes.number,
+	        showTicks: PropTypes.bool,
+	        // bounding box of the label
+	        labelBox: PropTypes.object
+	    },
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            labelBox: { height: 10, width: 10 },
+	            scaleWidth: 0
+	        };
+	    },
+	    render: function render() {
+	        var _props3 = this.props;
+	        var label = _props3.label;
+	        var labelBox = _props3.labelBox;
+	        var margin = _props3.margin;
+	        var valueLabelPadding = _props3.valueLabelPadding;
+	        var showTicks = _props3.showTicks;
+	        var tickLength = _props3.tickLength;
+	        var alignment = _props3.alignment;
+	
+	        var yTickAndPadSpace = valueLabelPadding + (showTicks ? tickLength : 0);
+	
+	        var top = labelBox.height;
+	        var left = 0;
+	        var x = alignment.horizontal === 'left' ? 0 : alignment.horizontal === 'right' ? margin.left - yTickAndPadSpace : (margin.left - yTickAndPadSpace) / 2;
+	        var textAnchor = alignment.horizontal === 'left' ? 'start' : alignment.horizontal === 'right' ? 'end' : 'middle';
+	
+	        // todo implement vertical alignment
+	
+	        return _react2.default.createElement(
+	            'g',
+	            {
+	                className: 'chart-axis-label chart-axis-label-y',
+	                transform: 'translate(' + left + ',' + top + ')'
+	            },
+	            _react2.default.createElement(
+	                'text',
+	                { x: x, style: { textAnchor: textAnchor } },
+	                label
+	            )
+	        );
+	    }
+	});
+	
+	var ChartAxis = _react2.default.createClass({
+	    displayName: 'ChartAxis',
+	
+	    propTypes: {
+	        scale: PropTypes.func,
+	        type: PropTypes.string,
+	        orientation: PropTypes.string,
+	        axisTransform: PropTypes.string,
+	        ticks: PropTypes.array,
+	        labels: PropTypes.array,
+	        tickCount: PropTypes.number,
+	        labelFormat: PropTypes.stringFormatter,
+	        emptyLabel: PropTypes.string,
+	        letter: PropTypes.string,
+	
+	        scaleWidth: PropTypes.number,
+	        scaleHeight: PropTypes.number,
+	        padding: PropTypes.object,
+	        labelPadding: PropTypes.number,
+	        tickLength: PropTypes.number,
+	        showLabels: PropTypes.bool,
+	        showTicks: PropTypes.bool,
+	        showGrid: PropTypes.bool,
+	        showZero: PropTypes.bool
+	    },
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            padding: {},
+	            emptyLabel: "Unknown"
+	        };
+	    },
+	    render: function render() {
+	        var _this2 = this;
+	
+	        var _props4 = this.props;
+	        var scale = _props4.scale;
+	        var type = _props4.type;
+	        var orientation = _props4.orientation;
+	        var axisTransform = _props4.axisTransform;
+	        var tickCount = _props4.tickCount;
+	        var letter = _props4.letter;
+	        var labelFormat = _props4.labelFormat;
+	        var emptyLabel = _props4.emptyLabel;
+	        var ticks = _props4.ticks;
+	        var scaleWidth = _props4.scaleWidth;
+	        var scaleHeight = _props4.scaleHeight;
+	        var padding = _props4.padding;
+	        var labelPadding = _props4.labelPadding;
+	        var tickLength = _props4.tickLength;
+	        var showLabels = _props4.showLabels;
+	        var showTicks = _props4.showTicks;
+	        var showGrid = _props4.showGrid;
+	        var showZero = _props4.showZero;
+	
+	
+	        if (!(showLabels || showTicks || showGrid || showZero)) return null;
+	
+	        var labels = _lodash2.default.isArray(this.props.labels) ? this.props.labels : ticks;
+	        var distance = showTicks ? tickLength + labelPadding : labelPadding;
+	
+	        var _ref11 = orientation === 'vertical' ? [function (v) {
+	            return 'translate(0, ' + scale(v) + ')';
+	        }, { x: -distance }, scaleWidth + padding.left + padding.right] : [function (v) {
+	            return 'translate(' + scale(v) + ', 0)';
+	        }, { y: distance }, scaleHeight + padding.top + padding.bottom];
+	
+	        var _ref12 = _slicedToArray(_ref11, 3);
+	
+	        var tickTransform = _ref12[0];
+	        var labelOffset = _ref12[1];
+	        var gridLength = _ref12[2];
+	
+	
+	        var options = { letter: letter, type: type, orientation: orientation, labelOffset: labelOffset, gridLength: gridLength, tickLength: tickLength, labelFormat: labelFormat, emptyLabel: emptyLabel };
+	        return _react2.default.createElement(
+	            'g',
+	            { ref: letter + 'Axis', className: 'chart-axis chart-axis-' + letter, transform: axisTransform },
+	            showTicks || showGrid || showLabels && labels === ticks ? _lodash2.default.map(ticks, function (value, i) {
+	                var tickOptions = _lodash2.default.assign({}, options, { value: value });
+	                return _react2.default.createElement(
+	                    'g',
+	                    { transform: tickTransform(value), key: 'tick-' + i },
+	                    showGrid ? _this2.renderGrid(tickOptions) : null,
+	                    showTicks ? _this2.renderTick(tickOptions) : null,
+	                    showLabels && labels === ticks ? _this2.renderLabel(tickOptions) : null
+	                );
+	            }) : null,
+	            showLabels && labels !== ticks ? // render custom labels (passed in, not same as ticks)
+	            _lodash2.default.map(labels, function (value, i) {
+	                return _react2.default.createElement(
+	                    'g',
+	                    { transform: tickTransform(value), key: 'tick-' + i },
+	                    _this2.renderLabel(_lodash2.default.assign({}, options, { value: value }))
+	                );
+	            }) : null,
+	            showZero ? _react2.default.createElement(
+	                'g',
+	                { transform: tickTransform(0) },
+	                showZero ? this.renderZero(options) : null
+	            ) : null
+	        );
+	    },
+	    renderLabel: function renderLabel(options) {
+	        var letter = options.letter;
+	        var value = options.value;
+	        var type = options.type;
+	        var labelOffset = options.labelOffset;
+	        var labelFormat = options.labelFormat;
+	        var emptyLabel = options.emptyLabel;
+	
+	        var className = 'chart-axis-value-label chart-axis-value-label-' + letter;
+	        // todo generalize dy for all text sizes...?
+	        return _react2.default.createElement(
+	            'text',
+	            _extends({ className: className }, { dy: '0.32em' }, labelOffset),
+	            formatAxisLabel(value, type, labelFormat, emptyLabel)
+	        );
+	    },
+	
+	    // todo unify into drawLine
+	    renderTick: function renderTick(options) {
+	        var letter = options.letter;
+	        var tickLength = options.tickLength;
+	        var orientation = options.orientation;
+	
+	        var className = 'chart-tick chart-tick-' + letter;
+	
+	        var _ref13 = orientation === 'vertical' ? [-tickLength, 0] : [0, tickLength];
+	
+	        var _ref14 = _slicedToArray(_ref13, 2);
+	
+	        var x2 = _ref14[0];
+	        var y2 = _ref14[1];
+	
+	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
+	    },
+	    renderGrid: function renderGrid(options) {
+	        var letter = options.letter;
+	        var gridLength = options.gridLength;
+	        var orientation = options.orientation;
+	
+	        var className = 'chart-grid chart-grid-' + letter;
+	
+	        var _ref15 = orientation === 'vertical' ? [gridLength, 0] : [0, -gridLength];
+	
+	        var _ref16 = _slicedToArray(_ref15, 2);
+	
+	        var x2 = _ref16[0];
+	        var y2 = _ref16[1];
+	
+	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
+	    },
+	    renderZero: function renderZero(options) {
+	        var letter = options.letter;
+	        var gridLength = options.gridLength;
+	        var orientation = options.orientation;
+	
+	        var className = 'chart-zero-line chart-zero-line-' + letter;
+	
+	        var _ref17 = orientation === 'vertical' ? [gridLength, 0] : [0, -gridLength];
+	
+	        var _ref18 = _slicedToArray(_ref17, 2);
+	
+	        var x2 = _ref18[0];
+	        var y2 = _ref18[1];
+	
+	        return _react2.default.createElement('line', { className: className, x2: x2, y2: y2 });
+	    }
+	});
+	
+	function closestNumberInList(number, list) {
+	    return list.reduce(function (closest, current) {
+	        return Math.abs(current - number) < Math.abs(closest - number) ? current : closest;
+	    });
+	}
+	function indexOfClosestNumberInList(number, list) {
+	    return list.reduce(function (closestI, current, i) {
+	        return Math.abs(current - number) < Math.abs(list[closestI] - number) ? i : closestI;
+	    }, 0);
+	}
+	
+	function childIsXYChart(child) {
+	    return !!(child && _lodash2.default.has(child, 'type.implementsInterface') && child.type.implementsInterface('XYChart'));
+	}
+	
+	function isNullOrUndefined(d) {
+	    return _lodash2.default.isNull(d) || _lodash2.default.isUndefined(d);
+	}
+	
+	function makeScale(domains, range, axisType, isNice, tickCount) {
+	    var domain = defaultDomain(_lodash2.default.flatten(domains), null, axisType);
+	    var scale = initScale(axisType).domain(domain);
+	    axisType === 'ordinal' ? scale.rangePoints(range) : scale.range(range);
+	    if (isNice && axisType !== 'ordinal') scale.nice(tickCount);
+	    return scale;
+	}
+	
+	function defaultDomain(data, getter, scaleType) {
+	    switch (scaleType) {
+	        // extent for number & time scales, coerce dates to numbers
+	        case 'number':
+	        case 'time':
+	            return _d3.default.extent(data, function (d) {
+	                return +(0, _util.accessor)(getter)(d);
+	            });
+	        // all unique values for ordinal scale
+	        case 'ordinal':
+	            return _lodash2.default.uniq(data.map((0, _util.accessor)(getter)));
+	    }
+	    return [];
+	}
+	
+	function initScale(type) {
+	    switch (type) {
+	        case 'number':
+	            return _d3.default.scale.linear();
+	        case 'ordinal':
+	            return _d3.default.scale.ordinal();
+	        case 'time':
+	            return _d3.default.time.scale();
+	    }
+	}
+	
+	function formatAxisLabel(value, type, format, emptyLabel) {
+	    return _lodash2.default.isNull(value) || _lodash2.default.isUndefined(value) ? emptyLabel : _lodash2.default.isFunction(format) ? format(value) : type === 'number' ? (0, _numeral2.default)(value).format(format) : type === 'time' ? (0, _moment2.default)(value).format(format) : value;
+	}
+	
+	function measureAxisLabels(xProps, yProps, xAxisLabelProps, yAxisLabelProps) {
+	    // hacky... pre-measure the bounding boxes of all axis labels,
+	    // by rendering axis HTML to the DOM, measuring them with getBoundingClientRect, then deleting them.
+	    xProps = _lodash2.default.assign({}, xProps, { showTicks: false, showGrid: false });
+	    yProps = _lodash2.default.assign({}, yProps, { showTicks: false, showGrid: false });
+	    var xAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, xProps));
+	    var yAxisHtml = _server2.default.renderToStaticMarkup(_react2.default.createElement(ChartAxis, yProps));
+	    var xLabelHtml = xAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(XAxisLabel, xAxisLabelProps)) : '';
+	    var yLabelHtml = yAxisLabelProps ? _server2.default.renderToStaticMarkup(_react2.default.createElement(YAxisLabel, yAxisLabelProps)) : '';
+	
+	    var testSvg = document.createElement('div');
+	    testSvg.innerHTML = '<svg class="xy-plot"><g class="chart-inner">        ' + xAxisHtml + yAxisHtml + xLabelHtml + yLabelHtml + '\n    </g></svg>';
+	    document.body.appendChild(testSvg);
+	
+	    var getRect = function getRect(el) {
+	        return el.getBoundingClientRect();
+	    }; // get rekt
+	    var labelBoxes = {
+	        xVal: xProps.showLabels ? _lodash2.default.map(testSvg.querySelectorAll('.chart-axis-value-label-x'), getRect) : [],
+	        yVal: yProps.showLabels ? _lodash2.default.map(testSvg.querySelectorAll('.chart-axis-value-label-y'), getRect) : [],
+	        xAxis: xAxisLabelProps ? testSvg.querySelectorAll('.chart-axis-label-x text')[0].getBoundingClientRect() : null,
+	        yAxis: yAxisLabelProps ? testSvg.querySelectorAll('.chart-axis-label-y text')[0].getBoundingClientRect() : null
+	    };
+	    document.body.removeChild(testSvg);
+	    //console.log(labelBoxes);
+	
+	    return labelBoxes;
+	}
+	
+	// use resolveObjectProps HOC to resolve partially specified XY-type and direction-type object props
+	// into their fully specified forms
+	// todo: don't hardcode these - use tcomb?
+	var xyKeys = ['axisType', 'domain', 'nice', 'invertAxis', 'tickCount', 'ticks', 'tickLength', 'labelValues', 'labelFormat', 'labelPadding', 'showLabels', 'showGrid', 'showTicks', 'showZero', 'axisLabel', 'axisLabelAlign', 'axisLabelPadding'];
+	var dirKeys = ['margin', 'padding', 'spacing'];
+	
+	var XYPlotResolved = _lodash2.default.flow([_resolveXYScales2.default, _lodash2.default.partial(_resolveObjectProps2.default, _lodash2.default, xyKeys, ['x', 'y']), _lodash2.default.partial(_resolveObjectProps2.default, _lodash2.default, dirKeys, ['top', 'bottom', 'left', 'right'])])(XYPlot);
+	
+	exports.default = XYPlotResolved;
 
 /***/ },
 /* 173 */
@@ -47297,7 +47835,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(170);
+	var _lodash = __webpack_require__(168);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -47342,12 +47880,12 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
-	//! version : 2.10.6
+	//! version : 2.11.2
 	//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 	//! license : MIT
 	//! momentjs.com
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	     true ? module.exports = factory() :
 	    typeof define === 'function' && define.amd ? define(factory) :
 	    global.moment = factory()
@@ -47464,39 +48002,45 @@
 	        return m;
 	    }
 	
+	    function isUndefined(input) {
+	        return input === void 0;
+	    }
+	
+	    // Plugins that add properties should also add the key here (null value),
+	    // so we can properly clone ourselves.
 	    var momentProperties = utils_hooks__hooks.momentProperties = [];
 	
 	    function copyConfig(to, from) {
 	        var i, prop, val;
 	
-	        if (typeof from._isAMomentObject !== 'undefined') {
+	        if (!isUndefined(from._isAMomentObject)) {
 	            to._isAMomentObject = from._isAMomentObject;
 	        }
-	        if (typeof from._i !== 'undefined') {
+	        if (!isUndefined(from._i)) {
 	            to._i = from._i;
 	        }
-	        if (typeof from._f !== 'undefined') {
+	        if (!isUndefined(from._f)) {
 	            to._f = from._f;
 	        }
-	        if (typeof from._l !== 'undefined') {
+	        if (!isUndefined(from._l)) {
 	            to._l = from._l;
 	        }
-	        if (typeof from._strict !== 'undefined') {
+	        if (!isUndefined(from._strict)) {
 	            to._strict = from._strict;
 	        }
-	        if (typeof from._tzm !== 'undefined') {
+	        if (!isUndefined(from._tzm)) {
 	            to._tzm = from._tzm;
 	        }
-	        if (typeof from._isUTC !== 'undefined') {
+	        if (!isUndefined(from._isUTC)) {
 	            to._isUTC = from._isUTC;
 	        }
-	        if (typeof from._offset !== 'undefined') {
+	        if (!isUndefined(from._offset)) {
 	            to._offset = from._offset;
 	        }
-	        if (typeof from._pf !== 'undefined') {
+	        if (!isUndefined(from._pf)) {
 	            to._pf = getParsingFlags(from);
 	        }
-	        if (typeof from._locale !== 'undefined') {
+	        if (!isUndefined(from._locale)) {
 	            to._locale = from._locale;
 	        }
 	
@@ -47504,7 +48048,7 @@
 	            for (i in momentProperties) {
 	                prop = momentProperties[i];
 	                val = from[prop];
-	                if (typeof val !== 'undefined') {
+	                if (!isUndefined(val)) {
 	                    to[prop] = val;
 	                }
 	            }
@@ -47551,6 +48095,7 @@
 	        return value;
 	    }
 	
+	    // compare two arrays, return the number of differences
 	    function compareArrays(array1, array2, dontConvert) {
 	        var len = Math.min(array1.length, array2.length),
 	            lengthDiff = Math.abs(array1.length - array2.length),
@@ -47568,6 +48113,7 @@
 	    function Locale() {
 	    }
 	
+	    // internal storage for locale config files
 	    var locales = {};
 	    var globalLocale;
 	
@@ -47605,7 +48151,7 @@
 	    function loadLocale(name) {
 	        var oldLocale = null;
 	        // TODO: Find a better way to register and load all the locales in Node
-	        if (!locales[name] && typeof module !== 'undefined' &&
+	        if (!locales[name] && (typeof module !== 'undefined') &&
 	                module && module.exports) {
 	            try {
 	                oldLocale = globalLocale._abbr;
@@ -47624,7 +48170,7 @@
 	    function locale_locales__getSetGlobalLocale (key, values) {
 	        var data;
 	        if (key) {
-	            if (typeof values === 'undefined') {
+	            if (isUndefined(values)) {
 	                data = locale_locales__getLocale(key);
 	            }
 	            else {
@@ -47709,6 +48255,10 @@
 	        return normalizedInput;
 	    }
 	
+	    function isFunction(input) {
+	        return input instanceof Function || Object.prototype.toString.call(input) === '[object Function]';
+	    }
+	
 	    function makeGetSet (unit, keepTime) {
 	        return function (value) {
 	            if (value != null) {
@@ -47722,11 +48272,14 @@
 	    }
 	
 	    function get_set__get (mom, unit) {
-	        return mom._d['get' + (mom._isUTC ? 'UTC' : '') + unit]();
+	        return mom.isValid() ?
+	            mom._d['get' + (mom._isUTC ? 'UTC' : '') + unit]() : NaN;
 	    }
 	
 	    function get_set__set (mom, unit, value) {
-	        return mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value);
+	        if (mom.isValid()) {
+	            mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value);
+	        }
 	    }
 	
 	    // MOMENTS
@@ -47739,7 +48292,7 @@
 	            }
 	        } else {
 	            units = normalizeUnits(units);
-	            if (typeof this[units] === 'function') {
+	            if (isFunction(this[units])) {
 	                return this[units](value);
 	            }
 	        }
@@ -47754,7 +48307,7 @@
 	            Math.pow(10, Math.max(0, zerosToFill)).toString().substr(1) + absNumber;
 	    }
 	
-	    var formattingTokens = /(\[[^\[]*\])|(\\)?(Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Q|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g;
+	    var formattingTokens = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g;
 	
 	    var localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g;
 	
@@ -47850,6 +48403,8 @@
 	    var match4         = /\d{4}/;         //    0000 - 9999
 	    var match6         = /[+-]?\d{6}/;    // -999999 - 999999
 	    var match1to2      = /\d\d?/;         //       0 - 99
+	    var match3to4      = /\d\d\d\d?/;     //     999 - 9999
+	    var match5to6      = /\d\d\d\d\d\d?/; //   99999 - 999999
 	    var match1to3      = /\d{1,3}/;       //       0 - 999
 	    var match1to4      = /\d{1,4}/;       //       0 - 9999
 	    var match1to6      = /[+-]?\d{1,6}/;  // -999999 - 999999
@@ -47858,23 +48413,19 @@
 	    var matchSigned    = /[+-]?\d+/;      //    -inf - inf
 	
 	    var matchOffset    = /Z|[+-]\d\d:?\d\d/gi; // +00:00 -00:00 +0000 -0000 or Z
+	    var matchShortOffset = /Z|[+-]\d\d(?::?\d\d)?/gi; // +00 -00 +00:00 -00:00 +0000 -0000 or Z
 	
 	    var matchTimestamp = /[+-]?\d+(\.\d{1,3})?/; // 123456789 123456789.123
 	
 	    // any word (or two) characters or numbers including two/three word month in arabic.
+	    // includes scottish gaelic two word and hyphenated months
 	    var matchWord = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i;
+	
 	
 	    var regexes = {};
 	
-	    function isFunction (sth) {
-	        // https://github.com/moment/moment/issues/2325
-	        return typeof sth === 'function' &&
-	            Object.prototype.toString.call(sth) === '[object Function]';
-	    }
-	
-	
 	    function addRegexToken (token, regex, strictRegex) {
-	        regexes[token] = isFunction(regex) ? regex : function (isStrict) {
+	        regexes[token] = isFunction(regex) ? regex : function (isStrict, localeData) {
 	            return (isStrict && strictRegex) ? strictRegex : regex;
 	        };
 	    }
@@ -47889,9 +48440,13 @@
 	
 	    // Code from http://stackoverflow.com/questions/3561493/is-there-a-regexp-escape-function-in-javascript
 	    function unescapeFormat(s) {
-	        return s.replace('\\', '').replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g, function (matched, p1, p2, p3, p4) {
+	        return regexEscape(s.replace('\\', '').replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g, function (matched, p1, p2, p3, p4) {
 	            return p1 || p2 || p3 || p4;
-	        }).replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+	        }));
+	    }
+	
+	    function regexEscape(s) {
+	        return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 	    }
 	
 	    var tokens = {};
@@ -47931,6 +48486,8 @@
 	    var MINUTE = 4;
 	    var SECOND = 5;
 	    var MILLISECOND = 6;
+	    var WEEK = 7;
+	    var WEEKDAY = 8;
 	
 	    function daysInMonth(year, month) {
 	        return new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
@@ -47958,8 +48515,12 @@
 	
 	    addRegexToken('M',    match1to2);
 	    addRegexToken('MM',   match1to2, match2);
-	    addRegexToken('MMM',  matchWord);
-	    addRegexToken('MMMM', matchWord);
+	    addRegexToken('MMM',  function (isStrict, locale) {
+	        return locale.monthsShortRegex(isStrict);
+	    });
+	    addRegexToken('MMMM', function (isStrict, locale) {
+	        return locale.monthsRegex(isStrict);
+	    });
 	
 	    addParseToken(['M', 'MM'], function (input, array) {
 	        array[MONTH] = toInt(input) - 1;
@@ -47977,14 +48538,17 @@
 	
 	    // LOCALES
 	
+	    var MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s+)+MMMM?/;
 	    var defaultLocaleMonths = 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_');
-	    function localeMonths (m) {
-	        return this._months[m.month()];
+	    function localeMonths (m, format) {
+	        return isArray(this._months) ? this._months[m.month()] :
+	            this._months[MONTHS_IN_FORMAT.test(format) ? 'format' : 'standalone'][m.month()];
 	    }
 	
 	    var defaultLocaleMonthsShort = 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_');
-	    function localeMonthsShort (m) {
-	        return this._monthsShort[m.month()];
+	    function localeMonthsShort (m, format) {
+	        return isArray(this._monthsShort) ? this._monthsShort[m.month()] :
+	            this._monthsShort[MONTHS_IN_FORMAT.test(format) ? 'format' : 'standalone'][m.month()];
 	    }
 	
 	    function localeMonthsParse (monthName, format, strict) {
@@ -48023,6 +48587,11 @@
 	    function setMonth (mom, value) {
 	        var dayOfMonth;
 	
+	        if (!mom.isValid()) {
+	            // No op
+	            return mom;
+	        }
+	
 	        // TODO: Move this out of here!
 	        if (typeof value === 'string') {
 	            value = mom.localeData().monthsParse(value);
@@ -48051,6 +48620,72 @@
 	        return daysInMonth(this.year(), this.month());
 	    }
 	
+	    var defaultMonthsShortRegex = matchWord;
+	    function monthsShortRegex (isStrict) {
+	        if (this._monthsParseExact) {
+	            if (!hasOwnProp(this, '_monthsRegex')) {
+	                computeMonthsParse.call(this);
+	            }
+	            if (isStrict) {
+	                return this._monthsShortStrictRegex;
+	            } else {
+	                return this._monthsShortRegex;
+	            }
+	        } else {
+	            return this._monthsShortStrictRegex && isStrict ?
+	                this._monthsShortStrictRegex : this._monthsShortRegex;
+	        }
+	    }
+	
+	    var defaultMonthsRegex = matchWord;
+	    function monthsRegex (isStrict) {
+	        if (this._monthsParseExact) {
+	            if (!hasOwnProp(this, '_monthsRegex')) {
+	                computeMonthsParse.call(this);
+	            }
+	            if (isStrict) {
+	                return this._monthsStrictRegex;
+	            } else {
+	                return this._monthsRegex;
+	            }
+	        } else {
+	            return this._monthsStrictRegex && isStrict ?
+	                this._monthsStrictRegex : this._monthsRegex;
+	        }
+	    }
+	
+	    function computeMonthsParse () {
+	        function cmpLenRev(a, b) {
+	            return b.length - a.length;
+	        }
+	
+	        var shortPieces = [], longPieces = [], mixedPieces = [],
+	            i, mom;
+	        for (i = 0; i < 12; i++) {
+	            // make the regex if we don't have it already
+	            mom = create_utc__createUTC([2000, i]);
+	            shortPieces.push(this.monthsShort(mom, ''));
+	            longPieces.push(this.months(mom, ''));
+	            mixedPieces.push(this.months(mom, ''));
+	            mixedPieces.push(this.monthsShort(mom, ''));
+	        }
+	        // Sorting makes sure if one month (or abbr) is a prefix of another it
+	        // will match the longer piece.
+	        shortPieces.sort(cmpLenRev);
+	        longPieces.sort(cmpLenRev);
+	        mixedPieces.sort(cmpLenRev);
+	        for (i = 0; i < 12; i++) {
+	            shortPieces[i] = regexEscape(shortPieces[i]);
+	            longPieces[i] = regexEscape(longPieces[i]);
+	            mixedPieces[i] = regexEscape(mixedPieces[i]);
+	        }
+	
+	        this._monthsRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
+	        this._monthsShortRegex = this._monthsRegex;
+	        this._monthsStrictRegex = new RegExp('^(' + longPieces.join('|') + ')$', 'i');
+	        this._monthsShortStrictRegex = new RegExp('^(' + shortPieces.join('|') + ')$', 'i');
+	    }
+	
 	    function checkOverflow (m) {
 	        var overflow;
 	        var a = m._a;
@@ -48068,6 +48703,12 @@
 	            if (getParsingFlags(m)._overflowDayOfYear && (overflow < YEAR || overflow > DATE)) {
 	                overflow = DATE;
 	            }
+	            if (getParsingFlags(m)._overflowWeeks && overflow === -1) {
+	                overflow = WEEK;
+	            }
+	            if (getParsingFlags(m)._overflowWeekday && overflow === -1) {
+	                overflow = WEEKDAY;
+	            }
 	
 	            getParsingFlags(m).overflow = overflow;
 	        }
@@ -48076,7 +48717,8 @@
 	    }
 	
 	    function warn(msg) {
-	        if (utils_hooks__hooks.suppressDeprecationWarnings === false && typeof console !== 'undefined' && console.warn) {
+	        if (utils_hooks__hooks.suppressDeprecationWarnings === false &&
+	                (typeof console !==  'undefined') && console.warn) {
 	            console.warn('Deprecation warning: ' + msg);
 	        }
 	    }
@@ -48086,7 +48728,7 @@
 	
 	        return extend(function () {
 	            if (firstTime) {
-	                warn(msg + '\n' + (new Error()).stack);
+	                warn(msg + '\nArguments: ' + Array.prototype.slice.call(arguments).join(', ') + '\n' + (new Error()).stack);
 	                firstTime = false;
 	            }
 	            return fn.apply(this, arguments);
@@ -48104,22 +48746,39 @@
 	
 	    utils_hooks__hooks.suppressDeprecationWarnings = false;
 	
-	    var from_string__isoRegex = /^\s*(?:[+-]\d{6}|\d{4})-(?:(\d\d-\d\d)|(W\d\d$)|(W\d\d-\d)|(\d\d\d))((T| )(\d\d(:\d\d(:\d\d(\.\d+)?)?)?)?([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/;
+	    // iso 8601 regex
+	    // 0000-00-00 0000-W00 or 0000-W00-0 + T + 00 or 00:00 or 00:00:00 or 00:00:00.000 + +00:00 or +0000 or +00)
+	    var extendedIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?/;
+	    var basicIsoRegex = /^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?/;
+	
+	    var tzRegex = /Z|[+-]\d\d(?::?\d\d)?/;
 	
 	    var isoDates = [
-	        ['YYYYYY-MM-DD', /[+-]\d{6}-\d{2}-\d{2}/],
-	        ['YYYY-MM-DD', /\d{4}-\d{2}-\d{2}/],
-	        ['GGGG-[W]WW-E', /\d{4}-W\d{2}-\d/],
-	        ['GGGG-[W]WW', /\d{4}-W\d{2}/],
-	        ['YYYY-DDD', /\d{4}-\d{3}/]
+	        ['YYYYYY-MM-DD', /[+-]\d{6}-\d\d-\d\d/],
+	        ['YYYY-MM-DD', /\d{4}-\d\d-\d\d/],
+	        ['GGGG-[W]WW-E', /\d{4}-W\d\d-\d/],
+	        ['GGGG-[W]WW', /\d{4}-W\d\d/, false],
+	        ['YYYY-DDD', /\d{4}-\d{3}/],
+	        ['YYYY-MM', /\d{4}-\d\d/, false],
+	        ['YYYYYYMMDD', /[+-]\d{10}/],
+	        ['YYYYMMDD', /\d{8}/],
+	        // YYYYMM is NOT allowed by the standard
+	        ['GGGG[W]WWE', /\d{4}W\d{3}/],
+	        ['GGGG[W]WW', /\d{4}W\d{2}/, false],
+	        ['YYYYDDD', /\d{7}/]
 	    ];
 	
 	    // iso time formats and regexes
 	    var isoTimes = [
-	        ['HH:mm:ss.SSSS', /(T| )\d\d:\d\d:\d\d\.\d+/],
-	        ['HH:mm:ss', /(T| )\d\d:\d\d:\d\d/],
-	        ['HH:mm', /(T| )\d\d:\d\d/],
-	        ['HH', /(T| )\d\d/]
+	        ['HH:mm:ss.SSSS', /\d\d:\d\d:\d\d\.\d+/],
+	        ['HH:mm:ss,SSSS', /\d\d:\d\d:\d\d,\d+/],
+	        ['HH:mm:ss', /\d\d:\d\d:\d\d/],
+	        ['HH:mm', /\d\d:\d\d/],
+	        ['HHmmss.SSSS', /\d\d\d\d\d\d\.\d+/],
+	        ['HHmmss,SSSS', /\d\d\d\d\d\d,\d+/],
+	        ['HHmmss', /\d\d\d\d\d\d/],
+	        ['HHmm', /\d\d\d\d/],
+	        ['HH', /\d\d/]
 	    ];
 	
 	    var aspNetJsonRegex = /^\/?Date\((\-?\d+)/i;
@@ -48128,26 +48787,49 @@
 	    function configFromISO(config) {
 	        var i, l,
 	            string = config._i,
-	            match = from_string__isoRegex.exec(string);
+	            match = extendedIsoRegex.exec(string) || basicIsoRegex.exec(string),
+	            allowTime, dateFormat, timeFormat, tzFormat;
 	
 	        if (match) {
 	            getParsingFlags(config).iso = true;
+	
 	            for (i = 0, l = isoDates.length; i < l; i++) {
-	                if (isoDates[i][1].exec(string)) {
-	                    config._f = isoDates[i][0];
+	                if (isoDates[i][1].exec(match[1])) {
+	                    dateFormat = isoDates[i][0];
+	                    allowTime = isoDates[i][2] !== false;
 	                    break;
 	                }
 	            }
-	            for (i = 0, l = isoTimes.length; i < l; i++) {
-	                if (isoTimes[i][1].exec(string)) {
-	                    // match[6] should be 'T' or space
-	                    config._f += (match[6] || ' ') + isoTimes[i][0];
-	                    break;
+	            if (dateFormat == null) {
+	                config._isValid = false;
+	                return;
+	            }
+	            if (match[3]) {
+	                for (i = 0, l = isoTimes.length; i < l; i++) {
+	                    if (isoTimes[i][1].exec(match[3])) {
+	                        // match[2] should be 'T' or space
+	                        timeFormat = (match[2] || ' ') + isoTimes[i][0];
+	                        break;
+	                    }
+	                }
+	                if (timeFormat == null) {
+	                    config._isValid = false;
+	                    return;
 	                }
 	            }
-	            if (string.match(matchOffset)) {
-	                config._f += 'Z';
+	            if (!allowTime && timeFormat != null) {
+	                config._isValid = false;
+	                return;
 	            }
+	            if (match[4]) {
+	                if (tzRegex.exec(match[4])) {
+	                    tzFormat = 'Z';
+	                } else {
+	                    config._isValid = false;
+	                    return;
+	                }
+	            }
+	            config._f = dateFormat + (timeFormat || '') + (tzFormat || '');
 	            configFromStringAndFormat(config);
 	        } else {
 	            config._isValid = false;
@@ -48185,8 +48867,8 @@
 	        //http://stackoverflow.com/questions/181348/instantiating-a-javascript-object-by-calling-prototype-constructor-apply
 	        var date = new Date(y, m, d, h, M, s, ms);
 	
-	        //the date constructor doesn't accept years < 1970
-	        if (y < 1970) {
+	        //the date constructor remaps years 0-99 to 1900-1999
+	        if (y < 100 && y >= 0 && isFinite(date.getFullYear())) {
 	            date.setFullYear(y);
 	        }
 	        return date;
@@ -48194,11 +48876,20 @@
 	
 	    function createUTCDate (y) {
 	        var date = new Date(Date.UTC.apply(null, arguments));
-	        if (y < 1970) {
+	
+	        //the Date.UTC function remaps years 0-99 to 1900-1999
+	        if (y < 100 && y >= 0 && isFinite(date.getUTCFullYear())) {
 	            date.setUTCFullYear(y);
 	        }
 	        return date;
 	    }
+	
+	    // FORMATTING
+	
+	    addFormatToken('Y', 0, 0, function () {
+	        var y = this.year();
+	        return y <= 9999 ? '' + y : '+' + y;
+	    });
 	
 	    addFormatToken(0, ['YY', 2], 0, function () {
 	        return this.year() % 100;
@@ -48227,6 +48918,9 @@
 	    addParseToken('YY', function (input, array) {
 	        array[YEAR] = utils_hooks__hooks.parseTwoDigitYear(input);
 	    });
+	    addParseToken('Y', function (input, array) {
+	        array[YEAR] = parseInt(input, 10);
+	    });
 	
 	    // HELPERS
 	
@@ -48252,124 +48946,66 @@
 	        return isLeapYear(this.year());
 	    }
 	
-	    addFormatToken('w', ['ww', 2], 'wo', 'week');
-	    addFormatToken('W', ['WW', 2], 'Wo', 'isoWeek');
+	    // start-of-first-week - start-of-year
+	    function firstWeekOffset(year, dow, doy) {
+	        var // first-week day -- which january is always in the first week (4 for iso, 1 for other)
+	            fwd = 7 + dow - doy,
+	            // first-week day local weekday -- which local weekday is fwd
+	            fwdlw = (7 + createUTCDate(year, 0, fwd).getUTCDay() - dow) % 7;
 	
-	    // ALIASES
-	
-	    addUnitAlias('week', 'w');
-	    addUnitAlias('isoWeek', 'W');
-	
-	    // PARSING
-	
-	    addRegexToken('w',  match1to2);
-	    addRegexToken('ww', match1to2, match2);
-	    addRegexToken('W',  match1to2);
-	    addRegexToken('WW', match1to2, match2);
-	
-	    addWeekParseToken(['w', 'ww', 'W', 'WW'], function (input, week, config, token) {
-	        week[token.substr(0, 1)] = toInt(input);
-	    });
-	
-	    // HELPERS
-	
-	    // firstDayOfWeek       0 = sun, 6 = sat
-	    //                      the day of the week that starts the week
-	    //                      (usually sunday or monday)
-	    // firstDayOfWeekOfYear 0 = sun, 6 = sat
-	    //                      the first week is the week that contains the first
-	    //                      of this day of the week
-	    //                      (eg. ISO weeks use thursday (4))
-	    function weekOfYear(mom, firstDayOfWeek, firstDayOfWeekOfYear) {
-	        var end = firstDayOfWeekOfYear - firstDayOfWeek,
-	            daysToDayOfWeek = firstDayOfWeekOfYear - mom.day(),
-	            adjustedMoment;
-	
-	
-	        if (daysToDayOfWeek > end) {
-	            daysToDayOfWeek -= 7;
-	        }
-	
-	        if (daysToDayOfWeek < end - 7) {
-	            daysToDayOfWeek += 7;
-	        }
-	
-	        adjustedMoment = local__createLocal(mom).add(daysToDayOfWeek, 'd');
-	        return {
-	            week: Math.ceil(adjustedMoment.dayOfYear() / 7),
-	            year: adjustedMoment.year()
-	        };
+	        return -fwdlw + fwd - 1;
 	    }
-	
-	    // LOCALES
-	
-	    function localeWeek (mom) {
-	        return weekOfYear(mom, this._week.dow, this._week.doy).week;
-	    }
-	
-	    var defaultLocaleWeek = {
-	        dow : 0, // Sunday is the first day of the week.
-	        doy : 6  // The week that contains Jan 1st is the first week of the year.
-	    };
-	
-	    function localeFirstDayOfWeek () {
-	        return this._week.dow;
-	    }
-	
-	    function localeFirstDayOfYear () {
-	        return this._week.doy;
-	    }
-	
-	    // MOMENTS
-	
-	    function getSetWeek (input) {
-	        var week = this.localeData().week(this);
-	        return input == null ? week : this.add((input - week) * 7, 'd');
-	    }
-	
-	    function getSetISOWeek (input) {
-	        var week = weekOfYear(this, 1, 4).week;
-	        return input == null ? week : this.add((input - week) * 7, 'd');
-	    }
-	
-	    addFormatToken('DDD', ['DDDD', 3], 'DDDo', 'dayOfYear');
-	
-	    // ALIASES
-	
-	    addUnitAlias('dayOfYear', 'DDD');
-	
-	    // PARSING
-	
-	    addRegexToken('DDD',  match1to3);
-	    addRegexToken('DDDD', match3);
-	    addParseToken(['DDD', 'DDDD'], function (input, array, config) {
-	        config._dayOfYear = toInt(input);
-	    });
-	
-	    // HELPERS
 	
 	    //http://en.wikipedia.org/wiki/ISO_week_date#Calculating_a_date_given_the_year.2C_week_number_and_weekday
-	    function dayOfYearFromWeeks(year, week, weekday, firstDayOfWeekOfYear, firstDayOfWeek) {
-	        var week1Jan = 6 + firstDayOfWeek - firstDayOfWeekOfYear, janX = createUTCDate(year, 0, 1 + week1Jan), d = janX.getUTCDay(), dayOfYear;
-	        if (d < firstDayOfWeek) {
-	            d += 7;
+	    function dayOfYearFromWeeks(year, week, weekday, dow, doy) {
+	        var localWeekday = (7 + weekday - dow) % 7,
+	            weekOffset = firstWeekOffset(year, dow, doy),
+	            dayOfYear = 1 + 7 * (week - 1) + localWeekday + weekOffset,
+	            resYear, resDayOfYear;
+	
+	        if (dayOfYear <= 0) {
+	            resYear = year - 1;
+	            resDayOfYear = daysInYear(resYear) + dayOfYear;
+	        } else if (dayOfYear > daysInYear(year)) {
+	            resYear = year + 1;
+	            resDayOfYear = dayOfYear - daysInYear(year);
+	        } else {
+	            resYear = year;
+	            resDayOfYear = dayOfYear;
 	        }
 	
-	        weekday = weekday != null ? 1 * weekday : firstDayOfWeek;
-	
-	        dayOfYear = 1 + week1Jan + 7 * (week - 1) - d + weekday;
-	
 	        return {
-	            year: dayOfYear > 0 ? year : year - 1,
-	            dayOfYear: dayOfYear > 0 ?  dayOfYear : daysInYear(year - 1) + dayOfYear
+	            year: resYear,
+	            dayOfYear: resDayOfYear
 	        };
 	    }
 	
-	    // MOMENTS
+	    function weekOfYear(mom, dow, doy) {
+	        var weekOffset = firstWeekOffset(mom.year(), dow, doy),
+	            week = Math.floor((mom.dayOfYear() - weekOffset - 1) / 7) + 1,
+	            resWeek, resYear;
 	
-	    function getSetDayOfYear (input) {
-	        var dayOfYear = Math.round((this.clone().startOf('day') - this.clone().startOf('year')) / 864e5) + 1;
-	        return input == null ? dayOfYear : this.add((input - dayOfYear), 'd');
+	        if (week < 1) {
+	            resYear = mom.year() - 1;
+	            resWeek = week + weeksInYear(resYear, dow, doy);
+	        } else if (week > weeksInYear(mom.year(), dow, doy)) {
+	            resWeek = week - weeksInYear(mom.year(), dow, doy);
+	            resYear = mom.year() + 1;
+	        } else {
+	            resYear = mom.year();
+	            resWeek = week;
+	        }
+	
+	        return {
+	            week: resWeek,
+	            year: resYear
+	        };
+	    }
+	
+	    function weeksInYear(year, dow, doy) {
+	        var weekOffset = firstWeekOffset(year, dow, doy),
+	            weekOffsetNext = firstWeekOffset(year + 1, dow, doy);
+	        return (daysInYear(year) - weekOffset + weekOffsetNext) / 7;
 	    }
 	
 	    // Pick the first defined of two or three arguments.
@@ -48384,11 +49020,12 @@
 	    }
 	
 	    function currentDateArray(config) {
-	        var now = new Date();
+	        // hooks is actually the exported moment object
+	        var nowValue = new Date(utils_hooks__hooks.now());
 	        if (config._useUTC) {
-	            return [now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()];
+	            return [nowValue.getUTCFullYear(), nowValue.getUTCMonth(), nowValue.getUTCDate()];
 	        }
-	        return [now.getFullYear(), now.getMonth(), now.getDate()];
+	        return [nowValue.getFullYear(), nowValue.getMonth(), nowValue.getDate()];
 	    }
 	
 	    // convert an array to a date.
@@ -48458,7 +49095,7 @@
 	    }
 	
 	    function dayOfYearFromWeekInfo(config) {
-	        var w, weekYear, week, weekday, dow, doy, temp;
+	        var w, weekYear, week, weekday, dow, doy, temp, weekdayOverflow;
 	
 	        w = config._w;
 	        if (w.GG != null || w.W != null || w.E != null) {
@@ -48472,6 +49109,9 @@
 	            weekYear = defaults(w.GG, config._a[YEAR], weekOfYear(local__createLocal(), 1, 4).year);
 	            week = defaults(w.W, 1);
 	            weekday = defaults(w.E, 1);
+	            if (weekday < 1 || weekday > 7) {
+	                weekdayOverflow = true;
+	            }
 	        } else {
 	            dow = config._locale._week.dow;
 	            doy = config._locale._week.doy;
@@ -48482,23 +49122,32 @@
 	            if (w.d != null) {
 	                // weekday -- low day numbers are considered next week
 	                weekday = w.d;
-	                if (weekday < dow) {
-	                    ++week;
+	                if (weekday < 0 || weekday > 6) {
+	                    weekdayOverflow = true;
 	                }
 	            } else if (w.e != null) {
 	                // local weekday -- counting starts from begining of week
 	                weekday = w.e + dow;
+	                if (w.e < 0 || w.e > 6) {
+	                    weekdayOverflow = true;
+	                }
 	            } else {
 	                // default to begining of week
 	                weekday = dow;
 	            }
 	        }
-	        temp = dayOfYearFromWeeks(weekYear, week, weekday, doy, dow);
-	
-	        config._a[YEAR] = temp.year;
-	        config._dayOfYear = temp.dayOfYear;
+	        if (week < 1 || week > weeksInYear(weekYear, dow, doy)) {
+	            getParsingFlags(config)._overflowWeeks = true;
+	        } else if (weekdayOverflow != null) {
+	            getParsingFlags(config)._overflowWeekday = true;
+	        } else {
+	            temp = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy);
+	            config._a[YEAR] = temp.year;
+	            config._dayOfYear = temp.dayOfYear;
+	        }
 	    }
 	
+	    // constant that refers to the ISO standard
 	    utils_hooks__hooks.ISO_8601 = function () {};
 	
 	    // date from string and format string
@@ -48523,6 +49172,8 @@
 	        for (i = 0; i < tokens.length; i++) {
 	            token = tokens[i];
 	            parsedInput = (string.match(getParseRegexForToken(token, config)) || [])[0];
+	            // console.log('token', token, 'parsedInput', parsedInput,
+	            //         'regex', getParseRegexForToken(token, config));
 	            if (parsedInput) {
 	                skipped = string.substr(0, string.indexOf(parsedInput));
 	                if (skipped.length > 0) {
@@ -48591,6 +49242,7 @@
 	        }
 	    }
 	
+	    // date from string and array of format strings
 	    function configFromStringAndArray(config) {
 	        var tempConfig,
 	            bestMoment,
@@ -48641,7 +49293,9 @@
 	        }
 	
 	        var i = normalizeObjectUnits(config._i);
-	        config._a = [i.year, i.month, i.day || i.date, i.hour, i.minute, i.second, i.millisecond];
+	        config._a = map([i.year, i.month, i.day || i.date, i.hour, i.minute, i.second, i.millisecond], function (obj) {
+	            return obj && parseInt(obj, 10);
+	        });
 	
 	        configFromArray(config);
 	    }
@@ -48683,13 +49337,17 @@
 	            configFromInput(config);
 	        }
 	
+	        if (!valid__isValid(config)) {
+	            config._d = null;
+	        }
+	
 	        return config;
 	    }
 	
 	    function configFromInput(config) {
 	        var input = config._i;
 	        if (input === undefined) {
-	            config._d = new Date();
+	            config._d = new Date(utils_hooks__hooks.now());
 	        } else if (isDate(input)) {
 	            config._d = new Date(+input);
 	        } else if (typeof input === 'string') {
@@ -48736,7 +49394,11 @@
 	         'moment().min is deprecated, use moment.min instead. https://github.com/moment/moment/issues/1548',
 	         function () {
 	             var other = local__createLocal.apply(null, arguments);
-	             return other < this ? this : other;
+	             if (this.isValid() && other.isValid()) {
+	                 return other < this ? this : other;
+	             } else {
+	                 return valid__createInvalid();
+	             }
 	         }
 	     );
 	
@@ -48744,7 +49406,11 @@
 	        'moment().max is deprecated, use moment.max instead. https://github.com/moment/moment/issues/1548',
 	        function () {
 	            var other = local__createLocal.apply(null, arguments);
-	            return other > this ? this : other;
+	            if (this.isValid() && other.isValid()) {
+	                return other > this ? this : other;
+	            } else {
+	                return valid__createInvalid();
+	            }
 	        }
 	    );
 	
@@ -48782,6 +49448,10 @@
 	
 	        return pickBy('isAfter', args);
 	    }
+	
+	    var now = function () {
+	        return Date.now ? Date.now() : +(new Date());
+	    };
 	
 	    function Duration (duration) {
 	        var normalizedInput = normalizeObjectUnits(duration),
@@ -48822,6 +49492,8 @@
 	        return obj instanceof Duration;
 	    }
 	
+	    // FORMATTING
+	
 	    function offset (token, separator) {
 	        addFormatToken(token, 0, 0, function () {
 	            var offset = this.utcOffset();
@@ -48839,11 +49511,11 @@
 	
 	    // PARSING
 	
-	    addRegexToken('Z',  matchOffset);
-	    addRegexToken('ZZ', matchOffset);
+	    addRegexToken('Z',  matchShortOffset);
+	    addRegexToken('ZZ', matchShortOffset);
 	    addParseToken(['Z', 'ZZ'], function (input, array, config) {
 	        config._useUTC = true;
-	        config._tzm = offsetFromString(input);
+	        config._tzm = offsetFromString(matchShortOffset, input);
 	    });
 	
 	    // HELPERS
@@ -48853,8 +49525,8 @@
 	    // '-1530'  > ['-15', '30']
 	    var chunkOffset = /([\+\-]|\d\d)/gi;
 	
-	    function offsetFromString(string) {
-	        var matches = ((string || '').match(matchOffset) || []);
+	    function offsetFromString(matcher, string) {
+	        var matches = ((string || '').match(matcher) || []);
 	        var chunk   = matches[matches.length - 1] || [];
 	        var parts   = (chunk + '').match(chunkOffset) || ['-', 0, 0];
 	        var minutes = +(parts[1] * 60) + toInt(parts[2]);
@@ -48904,11 +49576,13 @@
 	    function getSetOffset (input, keepLocalTime) {
 	        var offset = this._offset || 0,
 	            localAdjust;
+	        if (!this.isValid()) {
+	            return input != null ? this : NaN;
+	        }
 	        if (input != null) {
 	            if (typeof input === 'string') {
-	                input = offsetFromString(input);
-	            }
-	            if (Math.abs(input) < 16) {
+	                input = offsetFromString(matchShortOffset, input);
+	            } else if (Math.abs(input) < 16) {
 	                input = input * 60;
 	            }
 	            if (!this._isUTC && keepLocalTime) {
@@ -48968,12 +49642,15 @@
 	        if (this._tzm) {
 	            this.utcOffset(this._tzm);
 	        } else if (typeof this._i === 'string') {
-	            this.utcOffset(offsetFromString(this._i));
+	            this.utcOffset(offsetFromString(matchOffset, this._i));
 	        }
 	        return this;
 	    }
 	
 	    function hasAlignedHourOffset (input) {
+	        if (!this.isValid()) {
+	            return false;
+	        }
 	        input = input ? local__createLocal(input).utcOffset() : 0;
 	
 	        return (this.utcOffset() - input) % 60 === 0;
@@ -48987,7 +49664,7 @@
 	    }
 	
 	    function isDaylightSavingTimeShifted () {
-	        if (typeof this._isDSTShifted !== 'undefined') {
+	        if (!isUndefined(this._isDSTShifted)) {
 	            return this._isDSTShifted;
 	        }
 	
@@ -49008,22 +49685,23 @@
 	    }
 	
 	    function isLocal () {
-	        return !this._isUTC;
+	        return this.isValid() ? !this._isUTC : false;
 	    }
 	
 	    function isUtcOffset () {
-	        return this._isUTC;
+	        return this.isValid() ? this._isUTC : false;
 	    }
 	
 	    function isUtc () {
-	        return this._isUTC && this._offset === 0;
+	        return this.isValid() ? this._isUTC && this._offset === 0 : false;
 	    }
 	
-	    var aspNetRegex = /(\-)?(?:(\d*)\.)?(\d+)\:(\d+)(?:\:(\d+)\.?(\d{3})?)?/;
+	    // ASP.NET json date format regex
+	    var aspNetRegex = /^(\-)?(?:(\d*)[. ])?(\d+)\:(\d+)(?:\:(\d+)\.?(\d{3})?\d*)?$/;
 	
 	    // from http://docs.closure-library.googlecode.com/git/closure_goog_date_date.js.source.html
 	    // somewhat more in line with 4.4.3.2 2004 spec, but allows decimal anywhere
-	    var create__isoRegex = /^(-)?P(?:(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?|([0-9,.]*)W)$/;
+	    var isoRegex = /^(-)?P(?:(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?|([0-9,.]*)W)$/;
 	
 	    function create__createDuration (input, key) {
 	        var duration = input,
@@ -49056,7 +49734,7 @@
 	                s  : toInt(match[SECOND])      * sign,
 	                ms : toInt(match[MILLISECOND]) * sign
 	            };
-	        } else if (!!(match = create__isoRegex.exec(input))) {
+	        } else if (!!(match = isoRegex.exec(input))) {
 	            sign = (match[1] === '-') ? -1 : 1;
 	            duration = {
 	                y : parseIso(match[2], sign),
@@ -49113,6 +49791,10 @@
 	
 	    function momentsDifference(base, other) {
 	        var res;
+	        if (!(base.isValid() && other.isValid())) {
+	            return {milliseconds: 0, months: 0};
+	        }
+	
 	        other = cloneWithOffset(other, base);
 	        if (base.isBefore(other)) {
 	            res = positiveMomentsDifference(base, other);
@@ -49125,6 +49807,7 @@
 	        return res;
 	    }
 	
+	    // TODO: remove 'name' arg after deprecation is removed
 	    function createAdder(direction, name) {
 	        return function (val, period) {
 	            var dur, tmp;
@@ -49145,6 +49828,12 @@
 	        var milliseconds = duration._milliseconds,
 	            days = duration._days,
 	            months = duration._months;
+	
+	        if (!mom.isValid()) {
+	            // No op
+	            return;
+	        }
+	
 	        updateOffset = updateOffset == null ? true : updateOffset;
 	
 	        if (milliseconds) {
@@ -49176,7 +49865,10 @@
 	                diff < 1 ? 'sameDay' :
 	                diff < 2 ? 'nextDay' :
 	                diff < 7 ? 'nextWeek' : 'sameElse';
-	        return this.format(formats && formats[format] || this.localeData().calendar(format, this, local__createLocal(now)));
+	
+	        var output = formats && (isFunction(formats[format]) ? formats[format]() : formats[format]);
+	
+	        return this.format(output || this.localeData().calendar(format, this, local__createLocal(now)));
 	    }
 	
 	    function clone () {
@@ -49184,26 +49876,28 @@
 	    }
 	
 	    function isAfter (input, units) {
-	        var inputMs;
-	        units = normalizeUnits(typeof units !== 'undefined' ? units : 'millisecond');
+	        var localInput = isMoment(input) ? input : local__createLocal(input);
+	        if (!(this.isValid() && localInput.isValid())) {
+	            return false;
+	        }
+	        units = normalizeUnits(!isUndefined(units) ? units : 'millisecond');
 	        if (units === 'millisecond') {
-	            input = isMoment(input) ? input : local__createLocal(input);
-	            return +this > +input;
+	            return +this > +localInput;
 	        } else {
-	            inputMs = isMoment(input) ? +input : +local__createLocal(input);
-	            return inputMs < +this.clone().startOf(units);
+	            return +localInput < +this.clone().startOf(units);
 	        }
 	    }
 	
 	    function isBefore (input, units) {
-	        var inputMs;
-	        units = normalizeUnits(typeof units !== 'undefined' ? units : 'millisecond');
+	        var localInput = isMoment(input) ? input : local__createLocal(input);
+	        if (!(this.isValid() && localInput.isValid())) {
+	            return false;
+	        }
+	        units = normalizeUnits(!isUndefined(units) ? units : 'millisecond');
 	        if (units === 'millisecond') {
-	            input = isMoment(input) ? input : local__createLocal(input);
-	            return +this < +input;
+	            return +this < +localInput;
 	        } else {
-	            inputMs = isMoment(input) ? +input : +local__createLocal(input);
-	            return +this.clone().endOf(units) < inputMs;
+	            return +this.clone().endOf(units) < +localInput;
 	        }
 	    }
 	
@@ -49212,21 +49906,44 @@
 	    }
 	
 	    function isSame (input, units) {
-	        var inputMs;
+	        var localInput = isMoment(input) ? input : local__createLocal(input),
+	            inputMs;
+	        if (!(this.isValid() && localInput.isValid())) {
+	            return false;
+	        }
 	        units = normalizeUnits(units || 'millisecond');
 	        if (units === 'millisecond') {
-	            input = isMoment(input) ? input : local__createLocal(input);
-	            return +this === +input;
+	            return +this === +localInput;
 	        } else {
-	            inputMs = +local__createLocal(input);
+	            inputMs = +localInput;
 	            return +(this.clone().startOf(units)) <= inputMs && inputMs <= +(this.clone().endOf(units));
 	        }
 	    }
 	
+	    function isSameOrAfter (input, units) {
+	        return this.isSame(input, units) || this.isAfter(input,units);
+	    }
+	
+	    function isSameOrBefore (input, units) {
+	        return this.isSame(input, units) || this.isBefore(input,units);
+	    }
+	
 	    function diff (input, units, asFloat) {
-	        var that = cloneWithOffset(input, this),
-	            zoneDelta = (that.utcOffset() - this.utcOffset()) * 6e4,
+	        var that,
+	            zoneDelta,
 	            delta, output;
+	
+	        if (!this.isValid()) {
+	            return NaN;
+	        }
+	
+	        that = cloneWithOffset(input, this);
+	
+	        if (!that.isValid()) {
+	            return NaN;
+	        }
+	
+	        zoneDelta = (that.utcOffset() - this.utcOffset()) * 6e4;
 	
 	        units = normalizeUnits(units);
 	
@@ -49278,7 +49995,7 @@
 	    function moment_format__toISOString () {
 	        var m = this.clone().utc();
 	        if (0 < m.year() && m.year() <= 9999) {
-	            if ('function' === typeof Date.prototype.toISOString) {
+	            if (isFunction(Date.prototype.toISOString)) {
 	                // native implementation is ~50x faster, use it when we can
 	                return this.toDate().toISOString();
 	            } else {
@@ -49295,10 +50012,13 @@
 	    }
 	
 	    function from (time, withoutSuffix) {
-	        if (!this.isValid()) {
+	        if (this.isValid() &&
+	                ((isMoment(time) && time.isValid()) ||
+	                 local__createLocal(time).isValid())) {
+	            return create__createDuration({to: this, from: time}).locale(this.locale()).humanize(!withoutSuffix);
+	        } else {
 	            return this.localeData().invalidDate();
 	        }
-	        return create__createDuration({to: this, from: time}).locale(this.locale()).humanize(!withoutSuffix);
 	    }
 	
 	    function fromNow (withoutSuffix) {
@@ -49306,16 +50026,22 @@
 	    }
 	
 	    function to (time, withoutSuffix) {
-	        if (!this.isValid()) {
+	        if (this.isValid() &&
+	                ((isMoment(time) && time.isValid()) ||
+	                 local__createLocal(time).isValid())) {
+	            return create__createDuration({from: this, to: time}).locale(this.locale()).humanize(!withoutSuffix);
+	        } else {
 	            return this.localeData().invalidDate();
 	        }
-	        return create__createDuration({from: this, to: time}).locale(this.locale()).humanize(!withoutSuffix);
 	    }
 	
 	    function toNow (withoutSuffix) {
 	        return this.to(local__createLocal(), withoutSuffix);
 	    }
 	
+	    // If passed a locale key, it will set the locale for this
+	    // instance.  Otherwise, it will return the locale configuration
+	    // variables for this instance.
 	    function locale (key) {
 	        var newLocaleData;
 	
@@ -49426,6 +50152,11 @@
 	        };
 	    }
 	
+	    function toJSON () {
+	        // JSON.stringify(new Date(NaN)) === 'null'
+	        return this.isValid() ? this.toISOString() : 'null';
+	    }
+	
 	    function moment_valid__isValid () {
 	        return valid__isValid(this);
 	    }
@@ -49437,6 +50168,18 @@
 	    function invalidAt () {
 	        return getParsingFlags(this).overflow;
 	    }
+	
+	    function creationData() {
+	        return {
+	            input: this._i,
+	            format: this._f,
+	            locale: this._locale,
+	            isUTC: this._isUTC,
+	            strict: this._strict
+	        };
+	    }
+	
+	    // FORMATTING
 	
 	    addFormatToken(0, ['gg', 2], 0, function () {
 	        return this.weekYear() % 100;
@@ -49479,22 +50222,20 @@
 	        week[token] = utils_hooks__hooks.parseTwoDigitYear(input);
 	    });
 	
-	    // HELPERS
-	
-	    function weeksInYear(year, dow, doy) {
-	        return weekOfYear(local__createLocal([year, 11, 31 + dow - doy]), dow, doy).week;
-	    }
-	
 	    // MOMENTS
 	
 	    function getSetWeekYear (input) {
-	        var year = weekOfYear(this, this.localeData()._week.dow, this.localeData()._week.doy).year;
-	        return input == null ? year : this.add((input - year), 'y');
+	        return getSetWeekYearHelper.call(this,
+	                input,
+	                this.week(),
+	                this.weekday(),
+	                this.localeData()._week.dow,
+	                this.localeData()._week.doy);
 	    }
 	
 	    function getSetISOWeekYear (input) {
-	        var year = weekOfYear(this, 1, 4).year;
-	        return input == null ? year : this.add((input - year), 'y');
+	        return getSetWeekYearHelper.call(this,
+	                input, this.isoWeek(), this.isoWeekday(), 1, 4);
 	    }
 	
 	    function getISOWeeksInYear () {
@@ -49506,7 +50247,33 @@
 	        return weeksInYear(this.year(), weekInfo.dow, weekInfo.doy);
 	    }
 	
-	    addFormatToken('Q', 0, 0, 'quarter');
+	    function getSetWeekYearHelper(input, week, weekday, dow, doy) {
+	        var weeksTarget;
+	        if (input == null) {
+	            return weekOfYear(this, dow, doy).year;
+	        } else {
+	            weeksTarget = weeksInYear(input, dow, doy);
+	            if (week > weeksTarget) {
+	                week = weeksTarget;
+	            }
+	            return setWeekAll.call(this, input, week, weekday, dow, doy);
+	        }
+	    }
+	
+	    function setWeekAll(weekYear, week, weekday, dow, doy) {
+	        var dayOfYearData = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy),
+	            date = createUTCDate(dayOfYearData.year, 0, dayOfYearData.dayOfYear);
+	
+	        // console.log("got", weekYear, week, weekday, "set", date.toISOString());
+	        this.year(date.getUTCFullYear());
+	        this.month(date.getUTCMonth());
+	        this.date(date.getUTCDate());
+	        return this;
+	    }
+	
+	    // FORMATTING
+	
+	    addFormatToken('Q', 0, 'Qo', 'quarter');
 	
 	    // ALIASES
 	
@@ -49524,6 +50291,62 @@
 	    function getSetQuarter (input) {
 	        return input == null ? Math.ceil((this.month() + 1) / 3) : this.month((input - 1) * 3 + this.month() % 3);
 	    }
+	
+	    // FORMATTING
+	
+	    addFormatToken('w', ['ww', 2], 'wo', 'week');
+	    addFormatToken('W', ['WW', 2], 'Wo', 'isoWeek');
+	
+	    // ALIASES
+	
+	    addUnitAlias('week', 'w');
+	    addUnitAlias('isoWeek', 'W');
+	
+	    // PARSING
+	
+	    addRegexToken('w',  match1to2);
+	    addRegexToken('ww', match1to2, match2);
+	    addRegexToken('W',  match1to2);
+	    addRegexToken('WW', match1to2, match2);
+	
+	    addWeekParseToken(['w', 'ww', 'W', 'WW'], function (input, week, config, token) {
+	        week[token.substr(0, 1)] = toInt(input);
+	    });
+	
+	    // HELPERS
+	
+	    // LOCALES
+	
+	    function localeWeek (mom) {
+	        return weekOfYear(mom, this._week.dow, this._week.doy).week;
+	    }
+	
+	    var defaultLocaleWeek = {
+	        dow : 0, // Sunday is the first day of the week.
+	        doy : 6  // The week that contains Jan 1st is the first week of the year.
+	    };
+	
+	    function localeFirstDayOfWeek () {
+	        return this._week.dow;
+	    }
+	
+	    function localeFirstDayOfYear () {
+	        return this._week.doy;
+	    }
+	
+	    // MOMENTS
+	
+	    function getSetWeek (input) {
+	        var week = this.localeData().week(this);
+	        return input == null ? week : this.add((input - week) * 7, 'd');
+	    }
+	
+	    function getSetISOWeek (input) {
+	        var week = weekOfYear(this, 1, 4).week;
+	        return input == null ? week : this.add((input - week) * 7, 'd');
+	    }
+	
+	    // FORMATTING
 	
 	    addFormatToken('D', ['DD', 2], 'Do', 'date');
 	
@@ -49547,6 +50370,8 @@
 	    // MOMENTS
 	
 	    var getSetDayOfMonth = makeGetSet('Date', true);
+	
+	    // FORMATTING
 	
 	    addFormatToken('d', 0, 'do', 'day');
 	
@@ -49580,8 +50405,8 @@
 	    addRegexToken('ddd',  matchWord);
 	    addRegexToken('dddd', matchWord);
 	
-	    addWeekParseToken(['dd', 'ddd', 'dddd'], function (input, week, config) {
-	        var weekday = config._locale.weekdaysParse(input);
+	    addWeekParseToken(['dd', 'ddd', 'dddd'], function (input, week, config, token) {
+	        var weekday = config._locale.weekdaysParse(input, token, config._strict);
 	        // if we didn't get a weekday name, mark the date as invalid
 	        if (weekday != null) {
 	            week.d = weekday;
@@ -49616,8 +50441,9 @@
 	    // LOCALES
 	
 	    var defaultLocaleWeekdays = 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_');
-	    function localeWeekdays (m) {
-	        return this._weekdays[m.day()];
+	    function localeWeekdays (m, format) {
+	        return isArray(this._weekdays) ? this._weekdays[m.day()] :
+	            this._weekdays[this._weekdays.isFormat.test(format) ? 'format' : 'standalone'][m.day()];
 	    }
 	
 	    var defaultLocaleWeekdaysShort = 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_');
@@ -49630,20 +50456,37 @@
 	        return this._weekdaysMin[m.day()];
 	    }
 	
-	    function localeWeekdaysParse (weekdayName) {
+	    function localeWeekdaysParse (weekdayName, format, strict) {
 	        var i, mom, regex;
 	
-	        this._weekdaysParse = this._weekdaysParse || [];
+	        if (!this._weekdaysParse) {
+	            this._weekdaysParse = [];
+	            this._minWeekdaysParse = [];
+	            this._shortWeekdaysParse = [];
+	            this._fullWeekdaysParse = [];
+	        }
 	
 	        for (i = 0; i < 7; i++) {
 	            // make the regex if we don't have it already
+	
+	            mom = local__createLocal([2000, 1]).day(i);
+	            if (strict && !this._fullWeekdaysParse[i]) {
+	                this._fullWeekdaysParse[i] = new RegExp('^' + this.weekdays(mom, '').replace('.', '\.?') + '$', 'i');
+	                this._shortWeekdaysParse[i] = new RegExp('^' + this.weekdaysShort(mom, '').replace('.', '\.?') + '$', 'i');
+	                this._minWeekdaysParse[i] = new RegExp('^' + this.weekdaysMin(mom, '').replace('.', '\.?') + '$', 'i');
+	            }
 	            if (!this._weekdaysParse[i]) {
-	                mom = local__createLocal([2000, 1]).day(i);
 	                regex = '^' + this.weekdays(mom, '') + '|^' + this.weekdaysShort(mom, '') + '|^' + this.weekdaysMin(mom, '');
 	                this._weekdaysParse[i] = new RegExp(regex.replace('.', ''), 'i');
 	            }
 	            // test the regex
-	            if (this._weekdaysParse[i].test(weekdayName)) {
+	            if (strict && format === 'dddd' && this._fullWeekdaysParse[i].test(weekdayName)) {
+	                return i;
+	            } else if (strict && format === 'ddd' && this._shortWeekdaysParse[i].test(weekdayName)) {
+	                return i;
+	            } else if (strict && format === 'dd' && this._minWeekdaysParse[i].test(weekdayName)) {
+	                return i;
+	            } else if (!strict && this._weekdaysParse[i].test(weekdayName)) {
 	                return i;
 	            }
 	        }
@@ -49652,6 +50495,9 @@
 	    // MOMENTS
 	
 	    function getSetDayOfWeek (input) {
+	        if (!this.isValid()) {
+	            return input != null ? this : NaN;
+	        }
 	        var day = this._isUTC ? this._d.getUTCDay() : this._d.getDay();
 	        if (input != null) {
 	            input = parseWeekday(input, this.localeData());
@@ -49662,20 +50508,73 @@
 	    }
 	
 	    function getSetLocaleDayOfWeek (input) {
+	        if (!this.isValid()) {
+	            return input != null ? this : NaN;
+	        }
 	        var weekday = (this.day() + 7 - this.localeData()._week.dow) % 7;
 	        return input == null ? weekday : this.add(input - weekday, 'd');
 	    }
 	
 	    function getSetISODayOfWeek (input) {
+	        if (!this.isValid()) {
+	            return input != null ? this : NaN;
+	        }
 	        // behaves the same as moment#day except
 	        // as a getter, returns 7 instead of 0 (1-7 range instead of 0-6)
 	        // as a setter, sunday should belong to the previous week.
 	        return input == null ? this.day() || 7 : this.day(this.day() % 7 ? input : input - 7);
 	    }
 	
-	    addFormatToken('H', ['HH', 2], 0, 'hour');
-	    addFormatToken('h', ['hh', 2], 0, function () {
+	    // FORMATTING
+	
+	    addFormatToken('DDD', ['DDDD', 3], 'DDDo', 'dayOfYear');
+	
+	    // ALIASES
+	
+	    addUnitAlias('dayOfYear', 'DDD');
+	
+	    // PARSING
+	
+	    addRegexToken('DDD',  match1to3);
+	    addRegexToken('DDDD', match3);
+	    addParseToken(['DDD', 'DDDD'], function (input, array, config) {
+	        config._dayOfYear = toInt(input);
+	    });
+	
+	    // HELPERS
+	
+	    // MOMENTS
+	
+	    function getSetDayOfYear (input) {
+	        var dayOfYear = Math.round((this.clone().startOf('day') - this.clone().startOf('year')) / 864e5) + 1;
+	        return input == null ? dayOfYear : this.add((input - dayOfYear), 'd');
+	    }
+	
+	    // FORMATTING
+	
+	    function hFormat() {
 	        return this.hours() % 12 || 12;
+	    }
+	
+	    addFormatToken('H', ['HH', 2], 0, 'hour');
+	    addFormatToken('h', ['hh', 2], 0, hFormat);
+	
+	    addFormatToken('hmm', 0, 0, function () {
+	        return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2);
+	    });
+	
+	    addFormatToken('hmmss', 0, 0, function () {
+	        return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2) +
+	            zeroFill(this.seconds(), 2);
+	    });
+	
+	    addFormatToken('Hmm', 0, 0, function () {
+	        return '' + this.hours() + zeroFill(this.minutes(), 2);
+	    });
+	
+	    addFormatToken('Hmmss', 0, 0, function () {
+	        return '' + this.hours() + zeroFill(this.minutes(), 2) +
+	            zeroFill(this.seconds(), 2);
 	    });
 	
 	    function meridiem (token, lowercase) {
@@ -49704,6 +50603,11 @@
 	    addRegexToken('HH', match1to2, match2);
 	    addRegexToken('hh', match1to2, match2);
 	
+	    addRegexToken('hmm', match3to4);
+	    addRegexToken('hmmss', match5to6);
+	    addRegexToken('Hmm', match3to4);
+	    addRegexToken('Hmmss', match5to6);
+	
 	    addParseToken(['H', 'HH'], HOUR);
 	    addParseToken(['a', 'A'], function (input, array, config) {
 	        config._isPm = config._locale.isPM(input);
@@ -49712,6 +50616,32 @@
 	    addParseToken(['h', 'hh'], function (input, array, config) {
 	        array[HOUR] = toInt(input);
 	        getParsingFlags(config).bigHour = true;
+	    });
+	    addParseToken('hmm', function (input, array, config) {
+	        var pos = input.length - 2;
+	        array[HOUR] = toInt(input.substr(0, pos));
+	        array[MINUTE] = toInt(input.substr(pos));
+	        getParsingFlags(config).bigHour = true;
+	    });
+	    addParseToken('hmmss', function (input, array, config) {
+	        var pos1 = input.length - 4;
+	        var pos2 = input.length - 2;
+	        array[HOUR] = toInt(input.substr(0, pos1));
+	        array[MINUTE] = toInt(input.substr(pos1, 2));
+	        array[SECOND] = toInt(input.substr(pos2));
+	        getParsingFlags(config).bigHour = true;
+	    });
+	    addParseToken('Hmm', function (input, array, config) {
+	        var pos = input.length - 2;
+	        array[HOUR] = toInt(input.substr(0, pos));
+	        array[MINUTE] = toInt(input.substr(pos));
+	    });
+	    addParseToken('Hmmss', function (input, array, config) {
+	        var pos1 = input.length - 4;
+	        var pos2 = input.length - 2;
+	        array[HOUR] = toInt(input.substr(0, pos1));
+	        array[MINUTE] = toInt(input.substr(pos1, 2));
+	        array[SECOND] = toInt(input.substr(pos2));
 	    });
 	
 	    // LOCALES
@@ -49740,6 +50670,8 @@
 	    // this rule.
 	    var getSetHour = makeGetSet('Hours', true);
 	
+	    // FORMATTING
+	
 	    addFormatToken('m', ['mm', 2], 0, 'minute');
 	
 	    // ALIASES
@@ -49756,6 +50688,8 @@
 	
 	    var getSetMinute = makeGetSet('Minutes', false);
 	
+	    // FORMATTING
+	
 	    addFormatToken('s', ['ss', 2], 0, 'second');
 	
 	    // ALIASES
@@ -49771,6 +50705,8 @@
 	    // MOMENTS
 	
 	    var getSetSecond = makeGetSet('Seconds', false);
+	
+	    // FORMATTING
 	
 	    addFormatToken('S', 0, 0, function () {
 	        return ~~(this.millisecond() / 100);
@@ -49827,6 +50763,8 @@
 	
 	    var getSetMillisecond = makeGetSet('Milliseconds', false);
 	
+	    // FORMATTING
+	
 	    addFormatToken('z',  0, 0, 'zoneAbbr');
 	    addFormatToken('zz', 0, 0, 'zoneName');
 	
@@ -49842,40 +50780,43 @@
 	
 	    var momentPrototype__proto = Moment.prototype;
 	
-	    momentPrototype__proto.add          = add_subtract__add;
-	    momentPrototype__proto.calendar     = moment_calendar__calendar;
-	    momentPrototype__proto.clone        = clone;
-	    momentPrototype__proto.diff         = diff;
-	    momentPrototype__proto.endOf        = endOf;
-	    momentPrototype__proto.format       = format;
-	    momentPrototype__proto.from         = from;
-	    momentPrototype__proto.fromNow      = fromNow;
-	    momentPrototype__proto.to           = to;
-	    momentPrototype__proto.toNow        = toNow;
-	    momentPrototype__proto.get          = getSet;
-	    momentPrototype__proto.invalidAt    = invalidAt;
-	    momentPrototype__proto.isAfter      = isAfter;
-	    momentPrototype__proto.isBefore     = isBefore;
-	    momentPrototype__proto.isBetween    = isBetween;
-	    momentPrototype__proto.isSame       = isSame;
-	    momentPrototype__proto.isValid      = moment_valid__isValid;
-	    momentPrototype__proto.lang         = lang;
-	    momentPrototype__proto.locale       = locale;
-	    momentPrototype__proto.localeData   = localeData;
-	    momentPrototype__proto.max          = prototypeMax;
-	    momentPrototype__proto.min          = prototypeMin;
-	    momentPrototype__proto.parsingFlags = parsingFlags;
-	    momentPrototype__proto.set          = getSet;
-	    momentPrototype__proto.startOf      = startOf;
-	    momentPrototype__proto.subtract     = add_subtract__subtract;
-	    momentPrototype__proto.toArray      = toArray;
-	    momentPrototype__proto.toObject     = toObject;
-	    momentPrototype__proto.toDate       = toDate;
-	    momentPrototype__proto.toISOString  = moment_format__toISOString;
-	    momentPrototype__proto.toJSON       = moment_format__toISOString;
-	    momentPrototype__proto.toString     = toString;
-	    momentPrototype__proto.unix         = unix;
-	    momentPrototype__proto.valueOf      = to_type__valueOf;
+	    momentPrototype__proto.add               = add_subtract__add;
+	    momentPrototype__proto.calendar          = moment_calendar__calendar;
+	    momentPrototype__proto.clone             = clone;
+	    momentPrototype__proto.diff              = diff;
+	    momentPrototype__proto.endOf             = endOf;
+	    momentPrototype__proto.format            = format;
+	    momentPrototype__proto.from              = from;
+	    momentPrototype__proto.fromNow           = fromNow;
+	    momentPrototype__proto.to                = to;
+	    momentPrototype__proto.toNow             = toNow;
+	    momentPrototype__proto.get               = getSet;
+	    momentPrototype__proto.invalidAt         = invalidAt;
+	    momentPrototype__proto.isAfter           = isAfter;
+	    momentPrototype__proto.isBefore          = isBefore;
+	    momentPrototype__proto.isBetween         = isBetween;
+	    momentPrototype__proto.isSame            = isSame;
+	    momentPrototype__proto.isSameOrAfter     = isSameOrAfter;
+	    momentPrototype__proto.isSameOrBefore    = isSameOrBefore;
+	    momentPrototype__proto.isValid           = moment_valid__isValid;
+	    momentPrototype__proto.lang              = lang;
+	    momentPrototype__proto.locale            = locale;
+	    momentPrototype__proto.localeData        = localeData;
+	    momentPrototype__proto.max               = prototypeMax;
+	    momentPrototype__proto.min               = prototypeMin;
+	    momentPrototype__proto.parsingFlags      = parsingFlags;
+	    momentPrototype__proto.set               = getSet;
+	    momentPrototype__proto.startOf           = startOf;
+	    momentPrototype__proto.subtract          = add_subtract__subtract;
+	    momentPrototype__proto.toArray           = toArray;
+	    momentPrototype__proto.toObject          = toObject;
+	    momentPrototype__proto.toDate            = toDate;
+	    momentPrototype__proto.toISOString       = moment_format__toISOString;
+	    momentPrototype__proto.toJSON            = toJSON;
+	    momentPrototype__proto.toString          = toString;
+	    momentPrototype__proto.unix              = unix;
+	    momentPrototype__proto.valueOf           = to_type__valueOf;
+	    momentPrototype__proto.creationData      = creationData;
 	
 	    // Year
 	    momentPrototype__proto.year       = getSetYear;
@@ -49961,7 +50902,7 @@
 	
 	    function locale_calendar__calendar (key, mom, now) {
 	        var output = this._calendar[key];
-	        return typeof output === 'function' ? output.call(mom, now) : output;
+	        return isFunction(output) ? output.call(mom, now) : output;
 	    }
 	
 	    var defaultLongDateFormat = {
@@ -50023,21 +50964,21 @@
 	
 	    function relative__relativeTime (number, withoutSuffix, string, isFuture) {
 	        var output = this._relativeTime[string];
-	        return (typeof output === 'function') ?
+	        return (isFunction(output)) ?
 	            output(number, withoutSuffix, string, isFuture) :
 	            output.replace(/%d/i, number);
 	    }
 	
 	    function pastFuture (diff, output) {
 	        var format = this._relativeTime[diff > 0 ? 'future' : 'past'];
-	        return typeof format === 'function' ? format(output) : format.replace(/%s/i, output);
+	        return isFunction(format) ? format(output) : format.replace(/%s/i, output);
 	    }
 	
 	    function locale_set__set (config) {
 	        var prop, i;
 	        for (i in config) {
 	            prop = config[i];
-	            if (typeof prop === 'function') {
+	            if (isFunction(prop)) {
 	                this[i] = prop;
 	            } else {
 	                this['_' + i] = prop;
@@ -50067,11 +51008,15 @@
 	    prototype__proto.set             = locale_set__set;
 	
 	    // Month
-	    prototype__proto.months       =        localeMonths;
-	    prototype__proto._months      = defaultLocaleMonths;
-	    prototype__proto.monthsShort  =        localeMonthsShort;
-	    prototype__proto._monthsShort = defaultLocaleMonthsShort;
-	    prototype__proto.monthsParse  =        localeMonthsParse;
+	    prototype__proto.months            =        localeMonths;
+	    prototype__proto._months           = defaultLocaleMonths;
+	    prototype__proto.monthsShort       =        localeMonthsShort;
+	    prototype__proto._monthsShort      = defaultLocaleMonthsShort;
+	    prototype__proto.monthsParse       =        localeMonthsParse;
+	    prototype__proto._monthsRegex      = defaultMonthsRegex;
+	    prototype__proto.monthsRegex       = monthsRegex;
+	    prototype__proto._monthsShortRegex = defaultMonthsShortRegex;
+	    prototype__proto.monthsShortRegex  = monthsShortRegex;
 	
 	    // Week
 	    prototype__proto.week = localeWeek;
@@ -50359,15 +51304,15 @@
 	        var years    = round(duration.as('y'));
 	
 	        var a = seconds < thresholds.s && ['s', seconds]  ||
-	                minutes === 1          && ['m']           ||
+	                minutes <= 1           && ['m']           ||
 	                minutes < thresholds.m && ['mm', minutes] ||
-	                hours   === 1          && ['h']           ||
+	                hours   <= 1           && ['h']           ||
 	                hours   < thresholds.h && ['hh', hours]   ||
-	                days    === 1          && ['d']           ||
+	                days    <= 1           && ['d']           ||
 	                days    < thresholds.d && ['dd', days]    ||
-	                months  === 1          && ['M']           ||
+	                months  <= 1           && ['M']           ||
 	                months  < thresholds.M && ['MM', months]  ||
-	                years   === 1          && ['y']           || ['yy', years];
+	                years   <= 1           && ['y']           || ['yy', years];
 	
 	        a[2] = withoutSuffix;
 	        a[3] = +posNegDuration > 0;
@@ -50488,6 +51433,8 @@
 	
 	    // Side effect imports
 	
+	    // FORMATTING
+	
 	    addFormatToken('X', 0, 0, 'unix');
 	    addFormatToken('x', 0, 0, 'valueOf');
 	
@@ -50505,13 +51452,14 @@
 	    // Side effect imports
 	
 	
-	    utils_hooks__hooks.version = '2.10.6';
+	    utils_hooks__hooks.version = '2.11.2';
 	
 	    setHookCallback(local__createLocal);
 	
 	    utils_hooks__hooks.fn                    = momentPrototype;
 	    utils_hooks__hooks.min                   = min;
 	    utils_hooks__hooks.max                   = max;
+	    utils_hooks__hooks.now                   = now;
 	    utils_hooks__hooks.utc                   = create_utc__createUTC;
 	    utils_hooks__hooks.unix                  = moment__createUnix;
 	    utils_hooks__hooks.months                = lists__listMonths;
@@ -50530,13 +51478,14 @@
 	    utils_hooks__hooks.weekdaysShort         = lists__listWeekdaysShort;
 	    utils_hooks__hooks.normalizeUnits        = normalizeUnits;
 	    utils_hooks__hooks.relativeTimeThreshold = duration_humanize__getSetRelativeTimeThreshold;
+	    utils_hooks__hooks.prototype             = momentPrototype;
 	
 	    var _moment = utils_hooks__hooks;
 	
 	    return _moment;
 	
 	}));
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(171)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(169)(module)))
 
 /***/ },
 /* 175 */
@@ -50581,138 +51530,160 @@
 		"./de-at": 194,
 		"./de-at.js": 194,
 		"./de.js": 193,
-		"./el": 195,
-		"./el.js": 195,
-		"./en-au": 196,
-		"./en-au.js": 196,
-		"./en-ca": 197,
-		"./en-ca.js": 197,
-		"./en-gb": 198,
-		"./en-gb.js": 198,
-		"./eo": 199,
-		"./eo.js": 199,
-		"./es": 200,
-		"./es.js": 200,
-		"./et": 201,
-		"./et.js": 201,
-		"./eu": 202,
-		"./eu.js": 202,
-		"./fa": 203,
-		"./fa.js": 203,
-		"./fi": 204,
-		"./fi.js": 204,
-		"./fo": 205,
-		"./fo.js": 205,
-		"./fr": 206,
-		"./fr-ca": 207,
-		"./fr-ca.js": 207,
-		"./fr.js": 206,
-		"./fy": 208,
-		"./fy.js": 208,
-		"./gl": 209,
-		"./gl.js": 209,
-		"./he": 210,
-		"./he.js": 210,
-		"./hi": 211,
-		"./hi.js": 211,
-		"./hr": 212,
-		"./hr.js": 212,
-		"./hu": 213,
-		"./hu.js": 213,
-		"./hy-am": 214,
-		"./hy-am.js": 214,
-		"./id": 215,
-		"./id.js": 215,
-		"./is": 216,
-		"./is.js": 216,
-		"./it": 217,
-		"./it.js": 217,
-		"./ja": 218,
-		"./ja.js": 218,
-		"./jv": 219,
-		"./jv.js": 219,
-		"./ka": 220,
-		"./ka.js": 220,
-		"./km": 221,
-		"./km.js": 221,
-		"./ko": 222,
-		"./ko.js": 222,
-		"./lb": 223,
-		"./lb.js": 223,
-		"./lt": 224,
-		"./lt.js": 224,
-		"./lv": 225,
-		"./lv.js": 225,
-		"./me": 226,
-		"./me.js": 226,
-		"./mk": 227,
-		"./mk.js": 227,
-		"./ml": 228,
-		"./ml.js": 228,
-		"./mr": 229,
-		"./mr.js": 229,
-		"./ms": 230,
-		"./ms-my": 231,
-		"./ms-my.js": 231,
-		"./ms.js": 230,
-		"./my": 232,
-		"./my.js": 232,
-		"./nb": 233,
-		"./nb.js": 233,
-		"./ne": 234,
-		"./ne.js": 234,
-		"./nl": 235,
-		"./nl.js": 235,
-		"./nn": 236,
-		"./nn.js": 236,
-		"./pl": 237,
-		"./pl.js": 237,
-		"./pt": 238,
-		"./pt-br": 239,
-		"./pt-br.js": 239,
-		"./pt.js": 238,
-		"./ro": 240,
-		"./ro.js": 240,
-		"./ru": 241,
-		"./ru.js": 241,
-		"./si": 242,
-		"./si.js": 242,
-		"./sk": 243,
-		"./sk.js": 243,
-		"./sl": 244,
-		"./sl.js": 244,
-		"./sq": 245,
-		"./sq.js": 245,
-		"./sr": 246,
-		"./sr-cyrl": 247,
-		"./sr-cyrl.js": 247,
-		"./sr.js": 246,
-		"./sv": 248,
-		"./sv.js": 248,
-		"./ta": 249,
-		"./ta.js": 249,
-		"./th": 250,
-		"./th.js": 250,
-		"./tl-ph": 251,
-		"./tl-ph.js": 251,
-		"./tr": 252,
-		"./tr.js": 252,
-		"./tzl": 253,
-		"./tzl.js": 253,
-		"./tzm": 254,
-		"./tzm-latn": 255,
-		"./tzm-latn.js": 255,
-		"./tzm.js": 254,
-		"./uk": 256,
-		"./uk.js": 256,
-		"./uz": 257,
-		"./uz.js": 257,
-		"./vi": 258,
-		"./vi.js": 258,
-		"./zh-cn": 259,
-		"./zh-cn.js": 259,
-		"./zh-tw": 260,
-		"./zh-tw.js": 260
+		"./dv": 195,
+		"./dv.js": 195,
+		"./el": 196,
+		"./el.js": 196,
+		"./en-au": 197,
+		"./en-au.js": 197,
+		"./en-ca": 198,
+		"./en-ca.js": 198,
+		"./en-gb": 199,
+		"./en-gb.js": 199,
+		"./en-ie": 200,
+		"./en-ie.js": 200,
+		"./en-nz": 201,
+		"./en-nz.js": 201,
+		"./eo": 202,
+		"./eo.js": 202,
+		"./es": 203,
+		"./es.js": 203,
+		"./et": 204,
+		"./et.js": 204,
+		"./eu": 205,
+		"./eu.js": 205,
+		"./fa": 206,
+		"./fa.js": 206,
+		"./fi": 207,
+		"./fi.js": 207,
+		"./fo": 208,
+		"./fo.js": 208,
+		"./fr": 209,
+		"./fr-ca": 210,
+		"./fr-ca.js": 210,
+		"./fr-ch": 211,
+		"./fr-ch.js": 211,
+		"./fr.js": 209,
+		"./fy": 212,
+		"./fy.js": 212,
+		"./gd": 213,
+		"./gd.js": 213,
+		"./gl": 214,
+		"./gl.js": 214,
+		"./he": 215,
+		"./he.js": 215,
+		"./hi": 216,
+		"./hi.js": 216,
+		"./hr": 217,
+		"./hr.js": 217,
+		"./hu": 218,
+		"./hu.js": 218,
+		"./hy-am": 219,
+		"./hy-am.js": 219,
+		"./id": 220,
+		"./id.js": 220,
+		"./is": 221,
+		"./is.js": 221,
+		"./it": 222,
+		"./it.js": 222,
+		"./ja": 223,
+		"./ja.js": 223,
+		"./jv": 224,
+		"./jv.js": 224,
+		"./ka": 225,
+		"./ka.js": 225,
+		"./kk": 226,
+		"./kk.js": 226,
+		"./km": 227,
+		"./km.js": 227,
+		"./ko": 228,
+		"./ko.js": 228,
+		"./lb": 229,
+		"./lb.js": 229,
+		"./lo": 230,
+		"./lo.js": 230,
+		"./lt": 231,
+		"./lt.js": 231,
+		"./lv": 232,
+		"./lv.js": 232,
+		"./me": 233,
+		"./me.js": 233,
+		"./mk": 234,
+		"./mk.js": 234,
+		"./ml": 235,
+		"./ml.js": 235,
+		"./mr": 236,
+		"./mr.js": 236,
+		"./ms": 237,
+		"./ms-my": 238,
+		"./ms-my.js": 238,
+		"./ms.js": 237,
+		"./my": 239,
+		"./my.js": 239,
+		"./nb": 240,
+		"./nb.js": 240,
+		"./ne": 241,
+		"./ne.js": 241,
+		"./nl": 242,
+		"./nl.js": 242,
+		"./nn": 243,
+		"./nn.js": 243,
+		"./pl": 244,
+		"./pl.js": 244,
+		"./pt": 245,
+		"./pt-br": 246,
+		"./pt-br.js": 246,
+		"./pt.js": 245,
+		"./ro": 247,
+		"./ro.js": 247,
+		"./ru": 248,
+		"./ru.js": 248,
+		"./se": 249,
+		"./se.js": 249,
+		"./si": 250,
+		"./si.js": 250,
+		"./sk": 251,
+		"./sk.js": 251,
+		"./sl": 252,
+		"./sl.js": 252,
+		"./sq": 253,
+		"./sq.js": 253,
+		"./sr": 254,
+		"./sr-cyrl": 255,
+		"./sr-cyrl.js": 255,
+		"./sr.js": 254,
+		"./sv": 256,
+		"./sv.js": 256,
+		"./sw": 257,
+		"./sw.js": 257,
+		"./ta": 258,
+		"./ta.js": 258,
+		"./te": 259,
+		"./te.js": 259,
+		"./th": 260,
+		"./th.js": 260,
+		"./tl-ph": 261,
+		"./tl-ph.js": 261,
+		"./tlh": 262,
+		"./tlh.js": 262,
+		"./tr": 263,
+		"./tr.js": 263,
+		"./tzl": 264,
+		"./tzl.js": 264,
+		"./tzm": 265,
+		"./tzm-latn": 266,
+		"./tzm-latn.js": 266,
+		"./tzm.js": 265,
+		"./uk": 267,
+		"./uk.js": 267,
+		"./uz": 268,
+		"./uz.js": 268,
+		"./vi": 269,
+		"./vi.js": 269,
+		"./zh-cn": 270,
+		"./zh-cn.js": 270,
+		"./zh-tw": 271,
+		"./zh-tw.js": 271
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -50736,7 +51707,7 @@
 	//! locale : afrikaans (af)
 	//! author : Werner Mollentze : https://github.com/wernerm
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -50815,7 +51786,7 @@
 	//! Changes in months, weekdays: Ahmed Elkhatib
 	//! Native plural forms: forabi https://github.com/forabi
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -50954,7 +51925,7 @@
 	//! author : ElFadili Yassine : https://github.com/ElFadiliY
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -51016,7 +51987,7 @@
 	//! locale : Arabic Saudi Arabia (ar-sa)
 	//! author : Suhail Alkowaileet : https://github.com/xsoh
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -51122,7 +52093,7 @@
 	//! moment.js locale configuration
 	//! locale  : Tunisian Arabic (ar-tn)
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -51184,7 +52155,7 @@
 	//! locale : azerbaijani (az)
 	//! author : topchiyev : https://github.com/topchiyev
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -51294,7 +52265,7 @@
 	//! author: Praleska: http://praleska.pro/
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -51323,31 +52294,18 @@
 	            return number + ' ' + plural(format[key], +number);
 	        }
 	    }
-	    function monthsCaseReplace(m, format) {
-	        var months = {
-	            'nominative': 'студзень_люты_сакавік_красавік_травень_чэрвень_ліпень_жнівень_верасень_кастрычнік_лістапад_снежань'.split('_'),
-	            'accusative': 'студзеня_лютага_сакавіка_красавіка_траўня_чэрвеня_ліпеня_жніўня_верасня_кастрычніка_лістапада_снежня'.split('_')
-	        },
-	        nounCase = (/D[oD]?(\[[^\[\]]*\]|\s+)+MMMM?/).test(format) ?
-	            'accusative' :
-	            'nominative';
-	        return months[nounCase][m.month()];
-	    }
-	    function weekdaysCaseReplace(m, format) {
-	        var weekdays = {
-	            'nominative': 'нядзеля_панядзелак_аўторак_серада_чацвер_пятніца_субота'.split('_'),
-	            'accusative': 'нядзелю_панядзелак_аўторак_сераду_чацвер_пятніцу_суботу'.split('_')
-	        },
-	        nounCase = (/\[ ?[Вв] ?(?:мінулую|наступную)? ?\] ?dddd/).test(format) ?
-	            'accusative' :
-	            'nominative';
-	        return weekdays[nounCase][m.day()];
-	    }
 	
 	    var be = moment.defineLocale('be', {
-	        months : monthsCaseReplace,
+	        months : {
+	            format: 'студзеня_лютага_сакавіка_красавіка_траўня_чэрвеня_ліпеня_жніўня_верасня_кастрычніка_лістапада_снежня'.split('_'),
+	            standalone: 'студзень_люты_сакавік_красавік_травень_чэрвень_ліпень_жнівень_верасень_кастрычнік_лістапад_снежань'.split('_')
+	        },
 	        monthsShort : 'студ_лют_сак_крас_трав_чэрв_ліп_жнів_вер_каст_ліст_снеж'.split('_'),
-	        weekdays : weekdaysCaseReplace,
+	        weekdays : {
+	            format: 'нядзелю_панядзелак_аўторак_сераду_чацвер_пятніцу_суботу'.split('_'),
+	            standalone: 'нядзеля_панядзелак_аўторак_серада_чацвер_пятніца_субота'.split('_'),
+	            isFormat: /\[ ?[Вв] ?(?:мінулую|наступную)? ?\] ?dddd/
+	        },
 	        weekdaysShort : 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
 	        weekdaysMin : 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
 	        longDateFormat : {
@@ -51443,7 +52401,7 @@
 	//! locale : bulgarian (bg)
 	//! author : Krasen Borisov : https://github.com/kraz
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -51537,7 +52495,7 @@
 	//! locale : Bengali (bn)
 	//! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -51572,8 +52530,8 @@
 	    var bn = moment.defineLocale('bn', {
 	        months : 'জানুয়ারী_ফেবুয়ারী_মার্চ_এপ্রিল_মে_জুন_জুলাই_অগাস্ট_সেপ্টেম্বর_অক্টোবর_নভেম্বর_ডিসেম্বর'.split('_'),
 	        monthsShort : 'জানু_ফেব_মার্চ_এপর_মে_জুন_জুল_অগ_সেপ্ট_অক্টো_নভ_ডিসেম্'.split('_'),
-	        weekdays : 'রবিবার_সোমবার_মঙ্গলবার_বুধবার_বৃহস্পত্তিবার_শুক্রুবার_শনিবার'.split('_'),
-	        weekdaysShort : 'রবি_সোম_মঙ্গল_বুধ_বৃহস্পত্তি_শুক্রু_শনি'.split('_'),
+	        weekdays : 'রবিবার_সোমবার_মঙ্গলবার_বুধবার_বৃহস্পত্তিবার_শুক্রবার_শনিবার'.split('_'),
+	        weekdaysShort : 'রবি_সোম_মঙ্গল_বুধ_বৃহস্পত্তি_শুক্র_শনি'.split('_'),
 	        weekdaysMin : 'রব_সম_মঙ্গ_বু_ব্রিহ_শু_শনি'.split('_'),
 	        longDateFormat : {
 	            LT : 'A h:mm সময়',
@@ -51594,7 +52552,7 @@
 	        relativeTime : {
 	            future : '%s পরে',
 	            past : '%s আগে',
-	            s : 'কএক সেকেন্ড',
+	            s : 'কয়েক সেকেন্ড',
 	            m : 'এক মিনিট',
 	            mm : '%d মিনিট',
 	            h : 'এক ঘন্টা',
@@ -51616,9 +52574,9 @@
 	                return symbolMap[match];
 	            });
 	        },
-	        meridiemParse: /রাত|সকাল|দুপুর|বিকেল|রাত/,
+	        meridiemParse: /রাত|সকাল|দুপুর|বিকাল|রাত/,
 	        isPM: function (input) {
-	            return /^(দুপুর|বিকেল|রাত)$/.test(input);
+	            return /^(দুপুর|বিকাল|রাত)$/.test(input);
 	        },
 	        //Bengali is a vast language its spoken
 	        //in different forms in various parts of the world.
@@ -51631,7 +52589,7 @@
 	            } else if (hour < 17) {
 	                return 'দুপুর';
 	            } else if (hour < 20) {
-	                return 'বিকেল';
+	                return 'বিকাল';
 	            } else {
 	                return 'রাত';
 	            }
@@ -51654,7 +52612,7 @@
 	//! locale : tibetan (bo)
 	//! author : Thupten N. Chakrishar : https://github.com/vajradog
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -51768,7 +52726,7 @@
 	//! locale : breton (br)
 	//! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -51880,7 +52838,7 @@
 	//! author : Nedim Cholich : https://github.com/frontyard
 	//! based on (hr) translation by Bojan Marković
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -52024,7 +52982,7 @@
 	//! locale : catalan (ca)
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -52039,7 +52997,7 @@
 	        weekdaysMin : 'Dg_Dl_Dt_Dc_Dj_Dv_Ds'.split('_'),
 	        longDateFormat : {
 	            LT : 'H:mm',
-	            LTS : 'LT:ss',
+	            LTS : 'H:mm:ss',
 	            L : 'DD/MM/YYYY',
 	            LL : 'D MMMM YYYY',
 	            LLL : 'D MMMM YYYY H:mm',
@@ -52107,7 +53065,7 @@
 	//! locale : czech (cs)
 	//! author : petrbela : https://github.com/petrbela
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -52183,6 +53141,20 @@
 	            }
 	            return _monthsParse;
 	        }(months, monthsShort)),
+	        shortMonthsParse : (function (monthsShort) {
+	            var i, _shortMonthsParse = [];
+	            for (i = 0; i < 12; i++) {
+	                _shortMonthsParse[i] = new RegExp('^' + monthsShort[i] + '$', 'i');
+	            }
+	            return _shortMonthsParse;
+	        }(monthsShort)),
+	        longMonthsParse : (function (months) {
+	            var i, _longMonthsParse = [];
+	            for (i = 0; i < 12; i++) {
+	                _longMonthsParse[i] = new RegExp('^' + months[i] + '$', 'i');
+	            }
+	            return _longMonthsParse;
+	        }(months)),
 	        weekdays : 'neděle_pondělí_úterý_středa_čtvrtek_pátek_sobota'.split('_'),
 	        weekdaysShort : 'ne_po_út_st_čt_pá_so'.split('_'),
 	        weekdaysMin : 'ne_po_út_st_čt_pá_so'.split('_'),
@@ -52268,7 +53240,7 @@
 	//! locale : chuvash (cv)
 	//! author : Anatoly Mironov : https://github.com/mirontoli
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -52335,7 +53307,7 @@
 	//! locale : Welsh (cy)
 	//! author : Robert Allen
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -52418,7 +53390,7 @@
 	//! locale : danish (da)
 	//! author : Ulrik Nielsen : https://github.com/mrbase
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -52482,8 +53454,9 @@
 	//! locale : german (de)
 	//! author : lluchs : https://github.com/lluchs
 	//! author: Menelion Elensúle: https://github.com/Oire
+	//! author : Mikolaj Dadela : https://github.com/mik01aj
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -52519,11 +53492,11 @@
 	            LLLL : 'dddd, D. MMMM YYYY HH:mm'
 	        },
 	        calendar : {
-	            sameDay: '[Heute um] LT [Uhr]',
+	            sameDay: '[heute um] LT [Uhr]',
 	            sameElse: 'L',
-	            nextDay: '[Morgen um] LT [Uhr]',
+	            nextDay: '[morgen um] LT [Uhr]',
 	            nextWeek: 'dddd [um] LT [Uhr]',
-	            lastDay: '[Gestern um] LT [Uhr]',
+	            lastDay: '[gestern um] LT [Uhr]',
 	            lastWeek: '[letzten] dddd [um] LT [Uhr]'
 	        },
 	        relativeTime : {
@@ -52562,8 +53535,9 @@
 	//! author : lluchs : https://github.com/lluchs
 	//! author: Menelion Elensúle: https://github.com/Oire
 	//! author : Martin Groller : https://github.com/MadMG
+	//! author : Mikolaj Dadela : https://github.com/mik01aj
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -52599,11 +53573,11 @@
 	            LLLL : 'dddd, D. MMMM YYYY HH:mm'
 	        },
 	        calendar : {
-	            sameDay: '[Heute um] LT [Uhr]',
+	            sameDay: '[heute um] LT [Uhr]',
 	            sameElse: 'L',
-	            nextDay: '[Morgen um] LT [Uhr]',
+	            nextDay: '[morgen um] LT [Uhr]',
 	            nextWeek: 'dddd [um] LT [Uhr]',
-	            lastDay: '[Gestern um] LT [Uhr]',
+	            lastDay: '[gestern um] LT [Uhr]',
 	            lastWeek: '[letzten] dddd [um] LT [Uhr]'
 	        },
 	        relativeTime : {
@@ -52638,14 +53612,121 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
-	//! locale : modern greek (el)
-	//! author : Aggelos Karalias : https://github.com/mehiel
+	//! locale : dhivehi (dv)
+	//! author : Jawish Hameed : https://github.com/jawish
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
+	
+	
+	    var months = [
+	        'ޖެނުއަރީ',
+	        'ފެބްރުއަރީ',
+	        'މާރިޗު',
+	        'އޭޕްރީލު',
+	        'މޭ',
+	        'ޖޫން',
+	        'ޖުލައި',
+	        'އޯގަސްޓު',
+	        'ސެޕްޓެމްބަރު',
+	        'އޮކްޓޯބަރު',
+	        'ނޮވެމްބަރު',
+	        'ޑިސެމްބަރު'
+	    ], weekdays = [
+	        'އާދިއްތަ',
+	        'ހޯމަ',
+	        'އަންގާރަ',
+	        'ބުދަ',
+	        'ބުރާސްފަތި',
+	        'ހުކުރު',
+	        'ހޮނިހިރު'
+	    ];
+	
+	    var dv = moment.defineLocale('dv', {
+	        months : months,
+	        monthsShort : months,
+	        weekdays : weekdays,
+	        weekdaysShort : weekdays,
+	        weekdaysMin : 'އާދި_ހޯމަ_އަން_ބުދަ_ބުރާ_ހުކު_ހޮނި'.split('_'),
+	        longDateFormat : {
+	
+	            LT : 'HH:mm',
+	            LTS : 'HH:mm:ss',
+	            L : 'D/M/YYYY',
+	            LL : 'D MMMM YYYY',
+	            LLL : 'D MMMM YYYY HH:mm',
+	            LLLL : 'dddd D MMMM YYYY HH:mm'
+	        },
+	        meridiemParse: /މކ|މފ/,
+	        isPM : function (input) {
+	            return '' === input;
+	        },
+	        meridiem : function (hour, minute, isLower) {
+	            if (hour < 12) {
+	                return 'މކ';
+	            } else {
+	                return 'މފ';
+	            }
+	        },
+	        calendar : {
+	            sameDay : '[މިއަދު] LT',
+	            nextDay : '[މާދަމާ] LT',
+	            nextWeek : 'dddd LT',
+	            lastDay : '[އިއްޔެ] LT',
+	            lastWeek : '[ފާއިތުވި] dddd LT',
+	            sameElse : 'L'
+	        },
+	        relativeTime : {
+	            future : 'ތެރޭގައި %s',
+	            past : 'ކުރިން %s',
+	            s : 'ސިކުންތުކޮޅެއް',
+	            m : 'މިނިޓެއް',
+	            mm : 'މިނިޓު %d',
+	            h : 'ގަޑިއިރެއް',
+	            hh : 'ގަޑިއިރު %d',
+	            d : 'ދުވަހެއް',
+	            dd : 'ދުވަސް %d',
+	            M : 'މަހެއް',
+	            MM : 'މަސް %d',
+	            y : 'އަހަރެއް',
+	            yy : 'އަހަރު %d'
+	        },
+	        preparse: function (string) {
+	            return string.replace(/،/g, ',');
+	        },
+	        postformat: function (string) {
+	            return string.replace(/,/g, '،');
+	        },
+	        week : {
+	            dow : 7,  // Sunday is the first day of the week.
+	            doy : 12  // The week that contains Jan 1st is the first week of the year.
+	        }
+	    });
+	
+	    return dv;
+	
+	}));
+
+/***/ },
+/* 196 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//! moment.js locale configuration
+	//! locale : modern greek (el)
+	//! author : Aggelos Karalias : https://github.com/mehiel
+	
+	;(function (global, factory) {
+	    true ? factory(__webpack_require__(174)) :
+	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+	   factory(global.moment)
+	}(this, function (moment) { 'use strict';
+	
+	    function isFunction(input) {
+	        return input instanceof Function || Object.prototype.toString.call(input) === '[object Function]';
+	    }
 	
 	
 	    var el = moment.defineLocale('el', {
@@ -52699,7 +53780,7 @@
 	        calendar : function (key, mom) {
 	            var output = this._calendarEl[key],
 	                hours = mom && mom.hours();
-	            if (typeof output === 'function') {
+	            if (isFunction(output)) {
 	                output = output.apply(mom);
 	            }
 	            return output.replace('{}', (hours % 12 === 1 ? 'στη' : 'στις'));
@@ -52732,13 +53813,13 @@
 	}));
 
 /***/ },
-/* 196 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : australian english (en-au)
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -52802,14 +53883,14 @@
 	}));
 
 /***/ },
-/* 197 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : canadian english (en-ca)
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -52869,14 +53950,14 @@
 	}));
 
 /***/ },
-/* 198 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : great britain english (en-gb)
 	//! author : Chris Gedrim : https://github.com/chrisgedrim
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -52940,7 +54021,148 @@
 	}));
 
 /***/ },
-/* 199 */
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//! moment.js locale configuration
+	//! locale : Irish english (en-ie)
+	//! author : Chris Cartlidge : https://github.com/chriscartlidge
+	
+	;(function (global, factory) {
+	    true ? factory(__webpack_require__(174)) :
+	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+	   factory(global.moment)
+	}(this, function (moment) { 'use strict';
+	
+	
+	    var en_ie = moment.defineLocale('en-ie', {
+	        months : 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_'),
+	        monthsShort : 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
+	        weekdays : 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
+	        weekdaysShort : 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+	        weekdaysMin : 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+	        longDateFormat : {
+	            LT : 'HH:mm',
+	            LTS : 'HH:mm:ss',
+	            L : 'DD-MM-YYYY',
+	            LL : 'D MMMM YYYY',
+	            LLL : 'D MMMM YYYY HH:mm',
+	            LLLL : 'dddd D MMMM YYYY HH:mm'
+	        },
+	        calendar : {
+	            sameDay : '[Today at] LT',
+	            nextDay : '[Tomorrow at] LT',
+	            nextWeek : 'dddd [at] LT',
+	            lastDay : '[Yesterday at] LT',
+	            lastWeek : '[Last] dddd [at] LT',
+	            sameElse : 'L'
+	        },
+	        relativeTime : {
+	            future : 'in %s',
+	            past : '%s ago',
+	            s : 'a few seconds',
+	            m : 'a minute',
+	            mm : '%d minutes',
+	            h : 'an hour',
+	            hh : '%d hours',
+	            d : 'a day',
+	            dd : '%d days',
+	            M : 'a month',
+	            MM : '%d months',
+	            y : 'a year',
+	            yy : '%d years'
+	        },
+	        ordinalParse: /\d{1,2}(st|nd|rd|th)/,
+	        ordinal : function (number) {
+	            var b = number % 10,
+	                output = (~~(number % 100 / 10) === 1) ? 'th' :
+	                (b === 1) ? 'st' :
+	                (b === 2) ? 'nd' :
+	                (b === 3) ? 'rd' : 'th';
+	            return number + output;
+	        },
+	        week : {
+	            dow : 1, // Monday is the first day of the week.
+	            doy : 4  // The week that contains Jan 4th is the first week of the year.
+	        }
+	    });
+	
+	    return en_ie;
+	
+	}));
+
+/***/ },
+/* 201 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//! moment.js locale configuration
+	//! locale : New Zealand english (en-nz)
+	
+	;(function (global, factory) {
+	    true ? factory(__webpack_require__(174)) :
+	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+	   factory(global.moment)
+	}(this, function (moment) { 'use strict';
+	
+	
+	    var en_nz = moment.defineLocale('en-nz', {
+	        months : 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_'),
+	        monthsShort : 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
+	        weekdays : 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
+	        weekdaysShort : 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
+	        weekdaysMin : 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
+	        longDateFormat : {
+	            LT : 'h:mm A',
+	            LTS : 'h:mm:ss A',
+	            L : 'DD/MM/YYYY',
+	            LL : 'D MMMM YYYY',
+	            LLL : 'D MMMM YYYY h:mm A',
+	            LLLL : 'dddd, D MMMM YYYY h:mm A'
+	        },
+	        calendar : {
+	            sameDay : '[Today at] LT',
+	            nextDay : '[Tomorrow at] LT',
+	            nextWeek : 'dddd [at] LT',
+	            lastDay : '[Yesterday at] LT',
+	            lastWeek : '[Last] dddd [at] LT',
+	            sameElse : 'L'
+	        },
+	        relativeTime : {
+	            future : 'in %s',
+	            past : '%s ago',
+	            s : 'a few seconds',
+	            m : 'a minute',
+	            mm : '%d minutes',
+	            h : 'an hour',
+	            hh : '%d hours',
+	            d : 'a day',
+	            dd : '%d days',
+	            M : 'a month',
+	            MM : '%d months',
+	            y : 'a year',
+	            yy : '%d years'
+	        },
+	        ordinalParse: /\d{1,2}(st|nd|rd|th)/,
+	        ordinal : function (number) {
+	            var b = number % 10,
+	                output = (~~(number % 100 / 10) === 1) ? 'th' :
+	                (b === 1) ? 'st' :
+	                (b === 2) ? 'nd' :
+	                (b === 3) ? 'rd' : 'th';
+	            return number + output;
+	        },
+	        week : {
+	            dow : 1, // Monday is the first day of the week.
+	            doy : 4  // The week that contains Jan 4th is the first week of the year.
+	        }
+	    });
+	
+	    return en_nz;
+	
+	}));
+
+/***/ },
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52949,7 +54171,7 @@
 	//! komento: Mi estas malcerta se mi korekte traktis akuzativojn en tiu traduko.
 	//!          Se ne, bonvolu korekti kaj avizi min por ke mi povas lerni!
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -53017,25 +54239,25 @@
 	}));
 
 /***/ },
-/* 200 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : spanish (es)
 	//! author : Julio Napurí : https://github.com/julionc
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
 	
 	
-	    var monthsShortDot = 'Ene._Feb._Mar._Abr._May._Jun._Jul._Ago._Sep._Oct._Nov._Dic.'.split('_'),
-	        monthsShort = 'Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic'.split('_');
+	    var monthsShortDot = 'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split('_'),
+	        monthsShort = 'ene_feb_mar_abr_may_jun_jul_ago_sep_oct_nov_dic'.split('_');
 	
 	    var es = moment.defineLocale('es', {
-	        months : 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
+	        months : 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre'.split('_'),
 	        monthsShort : function (m, format) {
 	            if (/-MMM-/.test(format)) {
 	                return monthsShort[m.month()];
@@ -53043,9 +54265,9 @@
 	                return monthsShortDot[m.month()];
 	            }
 	        },
-	        weekdays : 'Domingo_Lunes_Martes_Miércoles_Jueves_Viernes_Sábado'.split('_'),
-	        weekdaysShort : 'Dom._Lun._Mar._Mié._Jue._Vie._Sáb.'.split('_'),
-	        weekdaysMin : 'Do_Lu_Ma_Mi_Ju_Vi_Sá'.split('_'),
+	        weekdays : 'domingo_lunes_martes_miércoles_jueves_viernes_sábado'.split('_'),
+	        weekdaysShort : 'dom._lun._mar._mié._jue._vie._sáb.'.split('_'),
+	        weekdaysMin : 'do_lu_ma_mi_ju_vi_sá'.split('_'),
 	        longDateFormat : {
 	            LT : 'H:mm',
 	            LTS : 'H:mm:ss',
@@ -53100,7 +54322,7 @@
 	}));
 
 /***/ },
-/* 201 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53108,7 +54330,7 @@
 	//! author : Henry Kehlmann : https://github.com/madhenry
 	//! improvements : Illimar Tambek : https://github.com/ragulka
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -53184,14 +54406,14 @@
 	}));
 
 /***/ },
-/* 202 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : euskara (eu)
 	//! author : Eneko Illarramendi : https://github.com/eillarra
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -53252,14 +54474,14 @@
 	}));
 
 /***/ },
-/* 203 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Persian (fa)
 	//! author : Ebrahim Byagowi : https://github.com/ebraminio
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -53361,14 +54583,14 @@
 	}));
 
 /***/ },
-/* 204 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : finnish (fi)
 	//! author : Tarmo Aidantausta : https://github.com/bleadof
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -53472,14 +54694,14 @@
 	}));
 
 /***/ },
-/* 205 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : faroese (fo)
 	//! author : Ragnar Johannesen : https://github.com/ragnar123
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -53536,14 +54758,14 @@
 	}));
 
 /***/ },
-/* 206 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : french (fr)
 	//! author : John Fischer : https://github.com/jfroffice
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -53602,14 +54824,14 @@
 	}));
 
 /***/ },
-/* 207 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : canadian french (fr-ca)
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -53664,14 +54886,80 @@
 	}));
 
 /***/ },
-/* 208 */
+/* 211 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//! moment.js locale configuration
+	//! locale : swiss french (fr)
+	//! author : Gaspard Bucher : https://github.com/gaspard
+	
+	;(function (global, factory) {
+	    true ? factory(__webpack_require__(174)) :
+	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+	   factory(global.moment)
+	}(this, function (moment) { 'use strict';
+	
+	
+	    var fr_ch = moment.defineLocale('fr-ch', {
+	        months : 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split('_'),
+	        monthsShort : 'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'.split('_'),
+	        weekdays : 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split('_'),
+	        weekdaysShort : 'dim._lun._mar._mer._jeu._ven._sam.'.split('_'),
+	        weekdaysMin : 'Di_Lu_Ma_Me_Je_Ve_Sa'.split('_'),
+	        longDateFormat : {
+	            LT : 'HH:mm',
+	            LTS : 'HH:mm:ss',
+	            L : 'DD.MM.YYYY',
+	            LL : 'D MMMM YYYY',
+	            LLL : 'D MMMM YYYY HH:mm',
+	            LLLL : 'dddd D MMMM YYYY HH:mm'
+	        },
+	        calendar : {
+	            sameDay: '[Aujourd\'hui à] LT',
+	            nextDay: '[Demain à] LT',
+	            nextWeek: 'dddd [à] LT',
+	            lastDay: '[Hier à] LT',
+	            lastWeek: 'dddd [dernier à] LT',
+	            sameElse: 'L'
+	        },
+	        relativeTime : {
+	            future : 'dans %s',
+	            past : 'il y a %s',
+	            s : 'quelques secondes',
+	            m : 'une minute',
+	            mm : '%d minutes',
+	            h : 'une heure',
+	            hh : '%d heures',
+	            d : 'un jour',
+	            dd : '%d jours',
+	            M : 'un mois',
+	            MM : '%d mois',
+	            y : 'un an',
+	            yy : '%d ans'
+	        },
+	        ordinalParse: /\d{1,2}(er|e)/,
+	        ordinal : function (number) {
+	            return number + (number === 1 ? 'er' : 'e');
+	        },
+	        week : {
+	            dow : 1, // Monday is the first day of the week.
+	            doy : 4  // The week that contains Jan 4th is the first week of the year.
+	        }
+	    });
+	
+	    return fr_ch;
+	
+	}));
+
+/***/ },
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : frisian (fy)
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -53739,14 +55027,94 @@
 	}));
 
 /***/ },
-/* 209 */
+/* 213 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//! moment.js locale configuration
+	//! locale : great britain scottish gealic (gd)
+	//! author : Jon Ashdown : https://github.com/jonashdown
+	
+	;(function (global, factory) {
+	    true ? factory(__webpack_require__(174)) :
+	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+	   factory(global.moment)
+	}(this, function (moment) { 'use strict';
+	
+	
+	    var months = [
+	        'Am Faoilleach', 'An Gearran', 'Am Màrt', 'An Giblean', 'An Cèitean', 'An t-Ògmhios', 'An t-Iuchar', 'An Lùnastal', 'An t-Sultain', 'An Dàmhair', 'An t-Samhain', 'An Dùbhlachd'
+	    ];
+	
+	    var monthsShort = ['Faoi', 'Gear', 'Màrt', 'Gibl', 'Cèit', 'Ògmh', 'Iuch', 'Lùn', 'Sult', 'Dàmh', 'Samh', 'Dùbh'];
+	
+	    var weekdays = ['Didòmhnaich', 'Diluain', 'Dimàirt', 'Diciadain', 'Diardaoin', 'Dihaoine', 'Disathairne'];
+	
+	    var weekdaysShort = ['Did', 'Dil', 'Dim', 'Dic', 'Dia', 'Dih', 'Dis'];
+	
+	    var weekdaysMin = ['Dò', 'Lu', 'Mà', 'Ci', 'Ar', 'Ha', 'Sa'];
+	
+	    var gd = moment.defineLocale('gd', {
+	        months : months,
+	        monthsShort : monthsShort,
+	        monthsParseExact : true,
+	        weekdays : weekdays,
+	        weekdaysShort : weekdaysShort,
+	        weekdaysMin : weekdaysMin,
+	        longDateFormat : {
+	            LT : 'HH:mm',
+	            LTS : 'HH:mm:ss',
+	            L : 'DD/MM/YYYY',
+	            LL : 'D MMMM YYYY',
+	            LLL : 'D MMMM YYYY HH:mm',
+	            LLLL : 'dddd, D MMMM YYYY HH:mm'
+	        },
+	        calendar : {
+	            sameDay : '[An-diugh aig] LT',
+	            nextDay : '[A-màireach aig] LT',
+	            nextWeek : 'dddd [aig] LT',
+	            lastDay : '[An-dè aig] LT',
+	            lastWeek : 'dddd [seo chaidh] [aig] LT',
+	            sameElse : 'L'
+	        },
+	        relativeTime : {
+	            future : 'ann an %s',
+	            past : 'bho chionn %s',
+	            s : 'beagan diogan',
+	            m : 'mionaid',
+	            mm : '%d mionaidean',
+	            h : 'uair',
+	            hh : '%d uairean',
+	            d : 'latha',
+	            dd : '%d latha',
+	            M : 'mìos',
+	            MM : '%d mìosan',
+	            y : 'bliadhna',
+	            yy : '%d bliadhna'
+	        },
+	        ordinalParse : /\d{1,2}(d|na|mh)/,
+	        ordinal : function (number) {
+	            var output = number === 1 ? 'd' : number % 10 === 2 ? 'na' : 'mh';
+	            return number + output;
+	        },
+	        week : {
+	            dow : 1, // Monday is the first day of the week.
+	            doy : 4  // The week that contains Jan 4th is the first week of the year.
+	        }
+	    });
+	
+	    return gd;
+	
+	}));
+
+/***/ },
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : galician (gl)
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -53818,7 +55186,7 @@
 	}));
 
 /***/ },
-/* 210 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53827,7 +55195,7 @@
 	//! author : Moshe Simantov : https://github.com/DevelopmentIL
 	//! author : Tal Ater : https://github.com/TalAter
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -53904,14 +55272,14 @@
 	}));
 
 /***/ },
-/* 211 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : hindi (hi)
 	//! author : Mayank Singhal : https://github.com/mayanksinghal
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -54031,14 +55399,14 @@
 	}));
 
 /***/ },
-/* 212 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : hrvatski (hr)
 	//! author : Bojan Marković : https://github.com/bmarkovic
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -54099,7 +55467,10 @@
 	    }
 	
 	    var hr = moment.defineLocale('hr', {
-	        months : 'siječanj_veljača_ožujak_travanj_svibanj_lipanj_srpanj_kolovoz_rujan_listopad_studeni_prosinac'.split('_'),
+	        months : {
+	            format: 'siječnja_veljače_ožujka_travnja_svibnja_lipnja_srpnja_kolovoza_rujna_listopada_studenoga_prosinca'.split('_'),
+	            standalone: 'siječanj_veljača_ožujak_travanj_svibanj_lipanj_srpanj_kolovoz_rujan_listopad_studeni_prosinac'.split('_')
+	        },
 	        monthsShort : 'sij._velj._ožu._tra._svi._lip._srp._kol._ruj._lis._stu._pro.'.split('_'),
 	        weekdays : 'nedjelja_ponedjeljak_utorak_srijeda_četvrtak_petak_subota'.split('_'),
 	        weekdaysShort : 'ned._pon._uto._sri._čet._pet._sub.'.split('_'),
@@ -54175,14 +55546,14 @@
 	}));
 
 /***/ },
-/* 213 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : hungarian (hu)
 	//! author : Adam Brunner : https://github.com/adambrunner
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -54288,43 +55659,27 @@
 	}));
 
 /***/ },
-/* 214 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Armenian (hy-am)
 	//! author : Armendarabyan : https://github.com/armendarabyan
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
 	
 	
-	    function monthsCaseReplace(m, format) {
-	        var months = {
-	            'nominative': 'հունվար_փետրվար_մարտ_ապրիլ_մայիս_հունիս_հուլիս_օգոստոս_սեպտեմբեր_հոկտեմբեր_նոյեմբեր_դեկտեմբեր'.split('_'),
-	            'accusative': 'հունվարի_փետրվարի_մարտի_ապրիլի_մայիսի_հունիսի_հուլիսի_օգոստոսի_սեպտեմբերի_հոկտեմբերի_նոյեմբերի_դեկտեմբերի'.split('_')
-	        },
-	        nounCase = (/D[oD]?(\[[^\[\]]*\]|\s+)+MMMM?/).test(format) ?
-	            'accusative' :
-	            'nominative';
-	        return months[nounCase][m.month()];
-	    }
-	    function monthsShortCaseReplace(m, format) {
-	        var monthsShort = 'հնվ_փտր_մրտ_ապր_մյս_հնս_հլս_օգս_սպտ_հկտ_նմբ_դկտ'.split('_');
-	        return monthsShort[m.month()];
-	    }
-	    function weekdaysCaseReplace(m, format) {
-	        var weekdays = 'կիրակի_երկուշաբթի_երեքշաբթի_չորեքշաբթի_հինգշաբթի_ուրբաթ_շաբաթ'.split('_');
-	        return weekdays[m.day()];
-	    }
-	
 	    var hy_am = moment.defineLocale('hy-am', {
-	        months : monthsCaseReplace,
-	        monthsShort : monthsShortCaseReplace,
-	        weekdays : weekdaysCaseReplace,
+	        months : {
+	            format: 'հունվարի_փետրվարի_մարտի_ապրիլի_մայիսի_հունիսի_հուլիսի_օգոստոսի_սեպտեմբերի_հոկտեմբերի_նոյեմբերի_դեկտեմբերի'.split('_'),
+	            standalone: 'հունվար_փետրվար_մարտ_ապրիլ_մայիս_հունիս_հուլիս_օգոստոս_սեպտեմբեր_հոկտեմբեր_նոյեմբեր_դեկտեմբեր'.split('_')
+	        },
+	        monthsShort : 'հնվ_փտր_մրտ_ապր_մյս_հնս_հլս_օգս_սպտ_հկտ_նմբ_դկտ'.split('_'),
+	        weekdays : 'կիրակի_երկուշաբթի_երեքշաբթի_չորեքշաբթի_հինգշաբթի_ուրբաթ_շաբաթ'.split('_'),
 	        weekdaysShort : 'կրկ_երկ_երք_չրք_հնգ_ուրբ_շբթ'.split('_'),
 	        weekdaysMin : 'կրկ_երկ_երք_չրք_հնգ_ուրբ_շբթ'.split('_'),
 	        longDateFormat : {
@@ -54403,7 +55758,7 @@
 	}));
 
 /***/ },
-/* 215 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54411,7 +55766,7 @@
 	//! author : Mohammad Satrio Utomo : https://github.com/tyok
 	//! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -54490,14 +55845,14 @@
 	}));
 
 /***/ },
-/* 216 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : icelandic (is)
 	//! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -54621,7 +55976,7 @@
 	}));
 
 /***/ },
-/* 217 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54629,7 +55984,7 @@
 	//! author : Lorenzo : https://github.com/aliem
 	//! author: Mattia Larentis: https://github.com/nostalgiaz
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -54641,7 +55996,7 @@
 	        monthsShort : 'gen_feb_mar_apr_mag_giu_lug_ago_set_ott_nov_dic'.split('_'),
 	        weekdays : 'Domenica_Lunedì_Martedì_Mercoledì_Giovedì_Venerdì_Sabato'.split('_'),
 	        weekdaysShort : 'Dom_Lun_Mar_Mer_Gio_Ven_Sab'.split('_'),
-	        weekdaysMin : 'D_L_Ma_Me_G_V_S'.split('_'),
+	        weekdaysMin : 'Do_Lu_Ma_Me_Gi_Ve_Sa'.split('_'),
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -54695,14 +56050,14 @@
 	}));
 
 /***/ },
-/* 218 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : japanese (ja)
 	//! author : LI Long : https://github.com/baryon
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -54764,7 +56119,7 @@
 	}));
 
 /***/ },
-/* 219 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54772,7 +56127,7 @@
 	//! author : Rony Lantip : https://github.com/lantip
 	//! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -54851,45 +56206,31 @@
 	}));
 
 /***/ },
-/* 220 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Georgian (ka)
 	//! author : Irakli Janiashvili : https://github.com/irakli-janiashvili
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
 	
 	
-	    function monthsCaseReplace(m, format) {
-	        var months = {
-	            'nominative': 'იანვარი_თებერვალი_მარტი_აპრილი_მაისი_ივნისი_ივლისი_აგვისტო_სექტემბერი_ოქტომბერი_ნოემბერი_დეკემბერი'.split('_'),
-	            'accusative': 'იანვარს_თებერვალს_მარტს_აპრილის_მაისს_ივნისს_ივლისს_აგვისტს_სექტემბერს_ოქტომბერს_ნოემბერს_დეკემბერს'.split('_')
-	        },
-	        nounCase = (/D[oD] *MMMM?/).test(format) ?
-	            'accusative' :
-	            'nominative';
-	        return months[nounCase][m.month()];
-	    }
-	    function weekdaysCaseReplace(m, format) {
-	        var weekdays = {
-	            'nominative': 'კვირა_ორშაბათი_სამშაბათი_ოთხშაბათი_ხუთშაბათი_პარასკევი_შაბათი'.split('_'),
-	            'accusative': 'კვირას_ორშაბათს_სამშაბათს_ოთხშაბათს_ხუთშაბათს_პარასკევს_შაბათს'.split('_')
-	        },
-	        nounCase = (/(წინა|შემდეგ)/).test(format) ?
-	            'accusative' :
-	            'nominative';
-	        return weekdays[nounCase][m.day()];
-	    }
-	
 	    var ka = moment.defineLocale('ka', {
-	        months : monthsCaseReplace,
+	        months : {
+	            standalone: 'იანვარი_თებერვალი_მარტი_აპრილი_მაისი_ივნისი_ივლისი_აგვისტო_სექტემბერი_ოქტომბერი_ნოემბერი_დეკემბერი'.split('_'),
+	            format: 'იანვარს_თებერვალს_მარტს_აპრილის_მაისს_ივნისს_ივლისს_აგვისტს_სექტემბერს_ოქტომბერს_ნოემბერს_დეკემბერს'.split('_')
+	        },
 	        monthsShort : 'იან_თებ_მარ_აპრ_მაი_ივნ_ივლ_აგვ_სექ_ოქტ_ნოე_დეკ'.split('_'),
-	        weekdays : weekdaysCaseReplace,
+	        weekdays : {
+	            standalone: 'კვირა_ორშაბათი_სამშაბათი_ოთხშაბათი_ხუთშაბათი_პარასკევი_შაბათი'.split('_'),
+	            format: 'კვირას_ორშაბათს_სამშაბათს_ოთხშაბათს_ხუთშაბათს_პარასკევს_შაბათს'.split('_'),
+	            isFormat: /(წინა|შემდეგ)/
+	        },
 	        weekdaysShort : 'კვი_ორშ_სამ_ოთხ_ხუთ_პარ_შაბ'.split('_'),
 	        weekdaysMin : 'კვ_ორ_სა_ოთ_ხუ_პა_შა'.split('_'),
 	        longDateFormat : {
@@ -54958,14 +56299,105 @@
 	}));
 
 /***/ },
-/* 221 */
+/* 226 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//! moment.js locale configuration
+	//! locale : kazakh (kk)
+	//! authors : Nurlan Rakhimzhanov : https://github.com/nurlan
+	
+	;(function (global, factory) {
+	    true ? factory(__webpack_require__(174)) :
+	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+	   factory(global.moment)
+	}(this, function (moment) { 'use strict';
+	
+	
+	    var suffixes = {
+	        0: '-ші',
+	        1: '-ші',
+	        2: '-ші',
+	        3: '-ші',
+	        4: '-ші',
+	        5: '-ші',
+	        6: '-шы',
+	        7: '-ші',
+	        8: '-ші',
+	        9: '-шы',
+	        10: '-шы',
+	        20: '-шы',
+	        30: '-шы',
+	        40: '-шы',
+	        50: '-ші',
+	        60: '-шы',
+	        70: '-ші',
+	        80: '-ші',
+	        90: '-шы',
+	        100: '-ші'
+	    };
+	
+	    var kk = moment.defineLocale('kk', {
+	        months : 'Қаңтар_Ақпан_Наурыз_Сәуір_Мамыр_Маусым_Шілде_Тамыз_Қыркүйек_Қазан_Қараша_Желтоқсан'.split('_'),
+	        monthsShort : 'Қаң_Ақп_Нау_Сәу_Мам_Мау_Шіл_Там_Қыр_Қаз_Қар_Жел'.split('_'),
+	        weekdays : 'Жексенбі_Дүйсенбі_Сейсенбі_Сәрсенбі_Бейсенбі_Жұма_Сенбі'.split('_'),
+	        weekdaysShort : 'Жек_Дүй_Сей_Сәр_Бей_Жұм_Сен'.split('_'),
+	        weekdaysMin : 'Жк_Дй_Сй_Ср_Бй_Жм_Сн'.split('_'),
+	        longDateFormat : {
+	            LT : 'HH:mm',
+	            LTS : 'HH:mm:ss',
+	            L : 'DD.MM.YYYY',
+	            LL : 'D MMMM YYYY',
+	            LLL : 'D MMMM YYYY HH:mm',
+	            LLLL : 'dddd, D MMMM YYYY HH:mm'
+	        },
+	        calendar : {
+	            sameDay : '[Бүгін сағат] LT',
+	            nextDay : '[Ертең сағат] LT',
+	            nextWeek : 'dddd [сағат] LT',
+	            lastDay : '[Кеше сағат] LT',
+	            lastWeek : '[Өткен аптаның] dddd [сағат] LT',
+	            sameElse : 'L'
+	        },
+	        relativeTime : {
+	            future : '%s ішінде',
+	            past : '%s бұрын',
+	            s : 'бірнеше секунд',
+	            m : 'бір минут',
+	            mm : '%d минут',
+	            h : 'бір сағат',
+	            hh : '%d сағат',
+	            d : 'бір күн',
+	            dd : '%d күн',
+	            M : 'бір ай',
+	            MM : '%d ай',
+	            y : 'бір жыл',
+	            yy : '%d жыл'
+	        },
+	        ordinalParse: /\d{1,2}-(ші|шы)/,
+	        ordinal : function (number) {
+	            var a = number % 10,
+	                b = number >= 100 ? 100 : null;
+	            return number + (suffixes[number] || suffixes[a] || suffixes[b]);
+	        },
+	        week : {
+	            dow : 1, // Monday is the first day of the week.
+	            doy : 7  // The week that contains Jan 1st is the first week of the year.
+	        }
+	    });
+	
+	    return kk;
+	
+	}));
+
+/***/ },
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : khmer (km)
 	//! author : Kruy Vanna : https://github.com/kruyvanna
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -54987,7 +56419,7 @@
 	            LLLL: 'dddd, D MMMM YYYY HH:mm'
 	        },
 	        calendar: {
-	            sameDay: '[ថ្ងៃនៈ ម៉ោង] LT',
+	            sameDay: '[ថ្ងៃនេះ ម៉ោង] LT',
 	            nextDay: '[ស្អែក ម៉ោង] LT',
 	            nextWeek: 'dddd [ម៉ោង] LT',
 	            lastDay: '[ម្សិលមិញ ម៉ោង] LT',
@@ -55020,7 +56452,7 @@
 	}));
 
 /***/ },
-/* 222 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55031,7 +56463,7 @@
 	//! - Kyungwook, Park : https://github.com/kyungw00k
 	//! - Jeeeyul Lee <jeeeyul@gmail.com>
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -55092,14 +56524,14 @@
 	}));
 
 /***/ },
-/* 223 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Luxembourgish (lb)
 	//! author : mweimerskirch : https://github.com/mweimerskirch, David Raison : https://github.com/kwisatz
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -55230,14 +56662,87 @@
 	}));
 
 /***/ },
-/* 224 */
+/* 230 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//! moment.js locale configuration
+	//! locale : lao (lo)
+	//! author : Ryan Hart : https://github.com/ryanhart2
+	
+	;(function (global, factory) {
+	    true ? factory(__webpack_require__(174)) :
+	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+	   factory(global.moment)
+	}(this, function (moment) { 'use strict';
+	
+	
+	    var lo = moment.defineLocale('lo', {
+	        months : 'ມັງກອນ_ກຸມພາ_ມີນາ_ເມສາ_ພຶດສະພາ_ມິຖຸນາ_ກໍລະກົດ_ສິງຫາ_ກັນຍາ_ຕຸລາ_ພະຈິກ_ທັນວາ'.split('_'),
+	        monthsShort : 'ມັງກອນ_ກຸມພາ_ມີນາ_ເມສາ_ພຶດສະພາ_ມິຖຸນາ_ກໍລະກົດ_ສິງຫາ_ກັນຍາ_ຕຸລາ_ພະຈິກ_ທັນວາ'.split('_'),
+	        weekdays : 'ອາທິດ_ຈັນ_ອັງຄານ_ພຸດ_ພະຫັດ_ສຸກ_ເສົາ'.split('_'),
+	        weekdaysShort : 'ທິດ_ຈັນ_ອັງຄານ_ພຸດ_ພະຫັດ_ສຸກ_ເສົາ'.split('_'),
+	        weekdaysMin : 'ທ_ຈ_ອຄ_ພ_ພຫ_ສກ_ສ'.split('_'),
+	        longDateFormat : {
+	            LT : 'HH:mm',
+	            LTS : 'HH:mm:ss',
+	            L : 'DD/MM/YYYY',
+	            LL : 'D MMMM YYYY',
+	            LLL : 'D MMMM YYYY HH:mm',
+	            LLLL : 'ວັນdddd D MMMM YYYY HH:mm'
+	        },
+	        meridiemParse: /ຕອນເຊົ້າ|ຕອນແລງ/,
+	        isPM: function (input) {
+	            return input === 'ຕອນແລງ';
+	        },
+	        meridiem : function (hour, minute, isLower) {
+	            if (hour < 12) {
+	                return 'ຕອນເຊົ້າ';
+	            } else {
+	                return 'ຕອນແລງ';
+	            }
+	        },
+	        calendar : {
+	            sameDay : '[ມື້ນີ້ເວລາ] LT',
+	            nextDay : '[ມື້ອື່ນເວລາ] LT',
+	            nextWeek : '[ວັນ]dddd[ໜ້າເວລາ] LT',
+	            lastDay : '[ມື້ວານນີ້ເວລາ] LT',
+	            lastWeek : '[ວັນ]dddd[ແລ້ວນີ້ເວລາ] LT',
+	            sameElse : 'L'
+	        },
+	        relativeTime : {
+	            future : 'ອີກ %s',
+	            past : '%sຜ່ານມາ',
+	            s : 'ບໍ່ເທົ່າໃດວິນາທີ',
+	            m : '1 ນາທີ',
+	            mm : '%d ນາທີ',
+	            h : '1 ຊົ່ວໂມງ',
+	            hh : '%d ຊົ່ວໂມງ',
+	            d : '1 ມື້',
+	            dd : '%d ມື້',
+	            M : '1 ເດືອນ',
+	            MM : '%d ເດືອນ',
+	            y : '1 ປີ',
+	            yy : '%d ປີ'
+	        },
+	        ordinalParse: /(ທີ່)\d{1,2}/,
+	        ordinal : function (number) {
+	            return 'ທີ່' + number;
+	        }
+	    });
+	
+	    return lo;
+	
+	}));
+
+/***/ },
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Lithuanian (lt)
 	//! author : Mindaugas Mozūras : https://github.com/mmozuras
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -55255,24 +56760,13 @@
 	        'MM': 'mėnesiai_mėnesių_mėnesius',
 	        'y' : 'metai_metų_metus',
 	        'yy': 'metai_metų_metus'
-	    },
-	    weekDays = 'sekmadienis_pirmadienis_antradienis_trečiadienis_ketvirtadienis_penktadienis_šeštadienis'.split('_');
+	    };
 	    function translateSeconds(number, withoutSuffix, key, isFuture) {
 	        if (withoutSuffix) {
 	            return 'kelios sekundės';
 	        } else {
 	            return isFuture ? 'kelių sekundžių' : 'kelias sekundes';
 	        }
-	    }
-	    function monthsCaseReplace(m, format) {
-	        var months = {
-	                'nominative': 'sausis_vasaris_kovas_balandis_gegužė_birželis_liepa_rugpjūtis_rugsėjis_spalis_lapkritis_gruodis'.split('_'),
-	                'accusative': 'sausio_vasario_kovo_balandžio_gegužės_birželio_liepos_rugpjūčio_rugsėjo_spalio_lapkričio_gruodžio'.split('_')
-	            },
-	            nounCase = (/D[oD]?(\[[^\[\]]*\]|\s+)+MMMM?/).test(format) ?
-	                'accusative' :
-	                'nominative';
-	        return months[nounCase][m.month()];
 	    }
 	    function translateSingular(number, withoutSuffix, key, isFuture) {
 	        return withoutSuffix ? forms(key)[0] : (isFuture ? forms(key)[1] : forms(key)[2]);
@@ -55297,16 +56791,17 @@
 	            }
 	        }
 	    }
-	    function relativeWeekDay(moment, format) {
-	        var nominative = format.indexOf('dddd HH:mm') === -1,
-	            weekDay = weekDays[moment.day()];
-	        return nominative ? weekDay : weekDay.substring(0, weekDay.length - 2) + 'į';
-	    }
-	
 	    var lt = moment.defineLocale('lt', {
-	        months : monthsCaseReplace,
+	        months : {
+	            format: 'sausio_vasario_kovo_balandžio_gegužės_birželio_liepos_rugpjūčio_rugsėjo_spalio_lapkričio_gruodžio'.split('_'),
+	            standalone: 'sausis_vasaris_kovas_balandis_gegužė_birželis_liepa_rugpjūtis_rugsėjis_spalis_lapkritis_gruodis'.split('_')
+	        },
 	        monthsShort : 'sau_vas_kov_bal_geg_bir_lie_rgp_rgs_spa_lap_grd'.split('_'),
-	        weekdays : relativeWeekDay,
+	        weekdays : {
+	            format: 'sekmadienį_pirmadienį_antradienį_trečiadienį_ketvirtadienį_penktadienį_šeštadienį'.split('_'),
+	            standalone: 'sekmadienis_pirmadienis_antradienis_trečiadienis_ketvirtadienis_penktadienis_šeštadienis'.split('_'),
+	            isFormat: /dddd HH:mm/
+	        },
 	        weekdaysShort : 'Sek_Pir_Ant_Tre_Ket_Pen_Šeš'.split('_'),
 	        weekdaysMin : 'S_P_A_T_K_Pn_Š'.split('_'),
 	        longDateFormat : {
@@ -55359,7 +56854,7 @@
 	}));
 
 /***/ },
-/* 225 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55367,7 +56862,7 @@
 	//! author : Kristaps Karlsons : https://github.com/skakri
 	//! author : Jānis Elmeris : https://github.com/JanisE
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -55459,14 +56954,14 @@
 	}));
 
 /***/ },
-/* 226 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Montenegrin (me)
 	//! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -55572,14 +57067,14 @@
 	}));
 
 /***/ },
-/* 227 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : macedonian (mk)
 	//! author : Borislav Mickov : https://github.com/B0k0
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -55603,19 +57098,19 @@
 	        calendar : {
 	            sameDay : '[Денес во] LT',
 	            nextDay : '[Утре во] LT',
-	            nextWeek : 'dddd [во] LT',
+	            nextWeek : '[Во] dddd [во] LT',
 	            lastDay : '[Вчера во] LT',
 	            lastWeek : function () {
 	                switch (this.day()) {
 	                case 0:
 	                case 3:
 	                case 6:
-	                    return '[Во изминатата] dddd [во] LT';
+	                    return '[Изминатата] dddd [во] LT';
 	                case 1:
 	                case 2:
 	                case 4:
 	                case 5:
-	                    return '[Во изминатиот] dddd [во] LT';
+	                    return '[Изминатиот] dddd [во] LT';
 	                }
 	            },
 	            sameElse : 'L'
@@ -55666,14 +57161,14 @@
 	}));
 
 /***/ },
-/* 228 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : malayalam (ml)
 	//! author : Floyd Pink : https://github.com/floydpink
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -55741,14 +57236,15 @@
 	}));
 
 /***/ },
-/* 229 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Marathi (mr)
 	//! author : Harshad Kale : https://github.com/kalehv
+	//! author : Vivek Athalye : https://github.com/vnathalye
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -55780,6 +57276,42 @@
 	        '०': '0'
 	    };
 	
+	    function relativeTimeMr(number, withoutSuffix, string, isFuture)
+	    {
+	        var output = '';
+	        if (withoutSuffix) {
+	            switch (string) {
+	                case 's': output = 'काही सेकंद'; break;
+	                case 'm': output = 'एक मिनिट'; break;
+	                case 'mm': output = '%d मिनिटे'; break;
+	                case 'h': output = 'एक तास'; break;
+	                case 'hh': output = '%d तास'; break;
+	                case 'd': output = 'एक दिवस'; break;
+	                case 'dd': output = '%d दिवस'; break;
+	                case 'M': output = 'एक महिना'; break;
+	                case 'MM': output = '%d महिने'; break;
+	                case 'y': output = 'एक वर्ष'; break;
+	                case 'yy': output = '%d वर्षे'; break;
+	            }
+	        }
+	        else {
+	            switch (string) {
+	                case 's': output = 'काही सेकंदां'; break;
+	                case 'm': output = 'एका मिनिटा'; break;
+	                case 'mm': output = '%d मिनिटां'; break;
+	                case 'h': output = 'एका तासा'; break;
+	                case 'hh': output = '%d तासां'; break;
+	                case 'd': output = 'एका दिवसा'; break;
+	                case 'dd': output = '%d दिवसां'; break;
+	                case 'M': output = 'एका महिन्या'; break;
+	                case 'MM': output = '%d महिन्यां'; break;
+	                case 'y': output = 'एका वर्षा'; break;
+	                case 'yy': output = '%d वर्षां'; break;
+	            }
+	        }
+	        return output.replace(/%d/i, number);
+	    }
+	
 	    var mr = moment.defineLocale('mr', {
 	        months : 'जानेवारी_फेब्रुवारी_मार्च_एप्रिल_मे_जून_जुलै_ऑगस्ट_सप्टेंबर_ऑक्टोबर_नोव्हेंबर_डिसेंबर'.split('_'),
 	        monthsShort: 'जाने._फेब्रु._मार्च._एप्रि._मे._जून._जुलै._ऑग._सप्टें._ऑक्टो._नोव्हें._डिसें.'.split('_'),
@@ -55803,19 +57335,19 @@
 	            sameElse : 'L'
 	        },
 	        relativeTime : {
-	            future : '%s नंतर',
-	            past : '%s पूर्वी',
-	            s : 'सेकंद',
-	            m: 'एक मिनिट',
-	            mm: '%d मिनिटे',
-	            h : 'एक तास',
-	            hh : '%d तास',
-	            d : 'एक दिवस',
-	            dd : '%d दिवस',
-	            M : 'एक महिना',
-	            MM : '%d महिने',
-	            y : 'एक वर्ष',
-	            yy : '%d वर्षे'
+	            future: '%sमध्ये',
+	            past: '%sपूर्वी',
+	            s: relativeTimeMr,
+	            m: relativeTimeMr,
+	            mm: relativeTimeMr,
+	            h: relativeTimeMr,
+	            hh: relativeTimeMr,
+	            d: relativeTimeMr,
+	            dd: relativeTimeMr,
+	            M: relativeTimeMr,
+	            MM: relativeTimeMr,
+	            y: relativeTimeMr,
+	            yy: relativeTimeMr
 	        },
 	        preparse: function (string) {
 	            return string.replace(/[१२३४५६७८९०]/g, function (match) {
@@ -55866,14 +57398,14 @@
 	}));
 
 /***/ },
-/* 230 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Bahasa Malaysia (ms-MY)
 	//! author : Weldan Jamili : https://github.com/weldan
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -55952,14 +57484,14 @@
 	}));
 
 /***/ },
-/* 231 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Bahasa Malaysia (ms-MY)
 	//! author : Weldan Jamili : https://github.com/weldan
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -56038,14 +57570,14 @@
 	}));
 
 /***/ },
-/* 232 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Burmese (my)
 	//! author : Squar team, mysquar.com
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -56135,7 +57667,7 @@
 	}));
 
 /***/ },
-/* 233 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56143,7 +57675,7 @@
 	//! authors : Espen Hovlandsdal : https://github.com/rexxars
 	//!           Sigurd Gartmann : https://github.com/sigurdga
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -56152,17 +57684,17 @@
 	
 	    var nb = moment.defineLocale('nb', {
 	        months : 'januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember'.split('_'),
-	        monthsShort : 'jan_feb_mar_apr_mai_jun_jul_aug_sep_okt_nov_des'.split('_'),
+	        monthsShort : 'jan._feb._mars_april_mai_juni_juli_aug._sep._okt._nov._des.'.split('_'),
 	        weekdays : 'søndag_mandag_tirsdag_onsdag_torsdag_fredag_lørdag'.split('_'),
-	        weekdaysShort : 'søn_man_tirs_ons_tors_fre_lør'.split('_'),
+	        weekdaysShort : 'sø._ma._ti._on._to._fr._lø.'.split('_'),
 	        weekdaysMin : 'sø_ma_ti_on_to_fr_lø'.split('_'),
 	        longDateFormat : {
-	            LT : 'H.mm',
-	            LTS : 'H.mm.ss',
+	            LT : 'HH:mm',
+	            LTS : 'HH:mm:ss',
 	            L : 'DD.MM.YYYY',
 	            LL : 'D. MMMM YYYY',
-	            LLL : 'D. MMMM YYYY [kl.] H.mm',
-	            LLLL : 'dddd D. MMMM YYYY [kl.] H.mm'
+	            LLL : 'D. MMMM YYYY [kl.] HH:mm',
+	            LLLL : 'dddd D. MMMM YYYY [kl.] HH:mm'
 	        },
 	        calendar : {
 	            sameDay: '[i dag kl.] LT',
@@ -56200,14 +57732,14 @@
 	}));
 
 /***/ },
-/* 234 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : nepali/nepalese
 	//! author : suvash : https://github.com/suvash
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -56244,7 +57776,7 @@
 	        monthsShort : 'जन._फेब्रु._मार्च_अप्रि._मई_जुन_जुलाई._अग._सेप्ट._अक्टो._नोभे._डिसे.'.split('_'),
 	        weekdays : 'आइतबार_सोमबार_मङ्गलबार_बुधबार_बिहिबार_शुक्रबार_शनिबार'.split('_'),
 	        weekdaysShort : 'आइत._सोम._मङ्गल._बुध._बिहि._शुक्र._शनि.'.split('_'),
-	        weekdaysMin : 'आइ._सो._मङ्_बु._बि._शु._श.'.split('_'),
+	        weekdaysMin : 'आ._सो._मं._बु._बि._शु._श.'.split('_'),
 	        longDateFormat : {
 	            LT : 'Aको h:mm बजे',
 	            LTS : 'Aको h:mm:ss बजे',
@@ -56263,39 +57795,37 @@
 	                return symbolMap[match];
 	            });
 	        },
-	        meridiemParse: /राती|बिहान|दिउँसो|बेलुका|साँझ|राती/,
+	        meridiemParse: /राति|बिहान|दिउँसो|साँझ/,
 	        meridiemHour : function (hour, meridiem) {
 	            if (hour === 12) {
 	                hour = 0;
 	            }
-	            if (meridiem === 'राती') {
-	                return hour < 3 ? hour : hour + 12;
+	            if (meridiem === 'राति') {
+	                return hour < 4 ? hour : hour + 12;
 	            } else if (meridiem === 'बिहान') {
 	                return hour;
 	            } else if (meridiem === 'दिउँसो') {
 	                return hour >= 10 ? hour : hour + 12;
-	            } else if (meridiem === 'बेलुका' || meridiem === 'साँझ') {
+	            } else if (meridiem === 'साँझ') {
 	                return hour + 12;
 	            }
 	        },
 	        meridiem : function (hour, minute, isLower) {
 	            if (hour < 3) {
-	                return 'राती';
-	            } else if (hour < 10) {
+	                return 'राति';
+	            } else if (hour < 12) {
 	                return 'बिहान';
-	            } else if (hour < 15) {
+	            } else if (hour < 16) {
 	                return 'दिउँसो';
-	            } else if (hour < 18) {
-	                return 'बेलुका';
 	            } else if (hour < 20) {
 	                return 'साँझ';
 	            } else {
-	                return 'राती';
+	                return 'राति';
 	            }
 	        },
 	        calendar : {
 	            sameDay : '[आज] LT',
-	            nextDay : '[भोली] LT',
+	            nextDay : '[भोलि] LT',
 	            nextWeek : '[आउँदो] dddd[,] LT',
 	            lastDay : '[हिजो] LT',
 	            lastWeek : '[गएको] dddd[,] LT',
@@ -56303,8 +57833,8 @@
 	        },
 	        relativeTime : {
 	            future : '%sमा',
-	            past : '%s अगाडी',
-	            s : 'केही समय',
+	            past : '%s अगाडि',
+	            s : 'केही क्षण',
 	            m : 'एक मिनेट',
 	            mm : '%d मिनेट',
 	            h : 'एक घण्टा',
@@ -56317,8 +57847,8 @@
 	            yy : '%d बर्ष'
 	        },
 	        week : {
-	            dow : 1, // Monday is the first day of the week.
-	            doy : 7  // The week that contains Jan 1st is the first week of the year.
+	            dow : 0, // Sunday is the first day of the week.
+	            doy : 6  // The week that contains Jan 1st is the first week of the year.
 	        }
 	    });
 	
@@ -56327,14 +57857,14 @@
 	}));
 
 /***/ },
-/* 235 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : dutch (nl)
 	//! author : Joris Röling : https://github.com/jjupiter
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -56402,14 +57932,14 @@
 	}));
 
 /***/ },
-/* 236 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : norwegian nynorsk (nn)
 	//! author : https://github.com/mechuwind
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -56426,9 +57956,9 @@
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
 	            L : 'DD.MM.YYYY',
-	            LL : 'D MMMM YYYY',
-	            LLL : 'D MMMM YYYY HH:mm',
-	            LLLL : 'dddd D MMMM YYYY HH:mm'
+	            LL : 'D. MMMM YYYY',
+	            LLL : 'D. MMMM YYYY [kl.] H:mm',
+	            LLLL : 'dddd D. MMMM YYYY [kl.] HH:mm'
 	        },
 	        calendar : {
 	            sameDay: '[I dag klokka] LT',
@@ -56466,14 +57996,14 @@
 	}));
 
 /***/ },
-/* 237 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : polish (pl)
 	//! author : Rafal Hirsz : https://github.com/evoL
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -56519,7 +58049,7 @@
 	        monthsShort : 'sty_lut_mar_kwi_maj_cze_lip_sie_wrz_paź_lis_gru'.split('_'),
 	        weekdays : 'niedziela_poniedziałek_wtorek_środa_czwartek_piątek_sobota'.split('_'),
 	        weekdaysShort : 'nie_pon_wt_śr_czw_pt_sb'.split('_'),
-	        weekdaysMin : 'N_Pn_Wt_Śr_Cz_Pt_So'.split('_'),
+	        weekdaysMin : 'Nd_Pn_Wt_Śr_Cz_Pt_So'.split('_'),
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -56575,14 +58105,14 @@
 	}));
 
 /***/ },
-/* 238 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : portuguese (pt)
 	//! author : Jefferson : https://github.com/jalex79
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -56643,14 +58173,14 @@
 	}));
 
 /***/ },
-/* 239 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : brazilian portuguese (pt-br)
 	//! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -56707,7 +58237,7 @@
 	}));
 
 /***/ },
-/* 240 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56715,7 +58245,7 @@
 	//! author : Vlad Gurdiga : https://github.com/gurdiga
 	//! author : Valentin Agachi : https://github.com/avaly
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -56785,7 +58315,7 @@
 	}));
 
 /***/ },
-/* 241 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56793,7 +58323,7 @@
 	//! author : Viktorminator : https://github.com/Viktorminator
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -56819,44 +58349,27 @@
 	            return number + ' ' + plural(format[key], +number);
 	        }
 	    }
-	    function monthsCaseReplace(m, format) {
-	        var months = {
-	            'nominative': 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split('_'),
-	            'accusative': 'января_февраля_марта_апреля_мая_июня_июля_августа_сентября_октября_ноября_декабря'.split('_')
-	        },
-	        nounCase = (/D[oD]?(\[[^\[\]]*\]|\s+)+MMMM?/).test(format) ?
-	            'accusative' :
-	            'nominative';
-	        return months[nounCase][m.month()];
-	    }
-	    function monthsShortCaseReplace(m, format) {
-	        var monthsShort = {
-	            'nominative': 'янв_фев_март_апр_май_июнь_июль_авг_сен_окт_ноя_дек'.split('_'),
-	            'accusative': 'янв_фев_мар_апр_мая_июня_июля_авг_сен_окт_ноя_дек'.split('_')
-	        },
-	        nounCase = (/D[oD]?(\[[^\[\]]*\]|\s+)+MMMM?/).test(format) ?
-	            'accusative' :
-	            'nominative';
-	        return monthsShort[nounCase][m.month()];
-	    }
-	    function weekdaysCaseReplace(m, format) {
-	        var weekdays = {
-	            'nominative': 'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split('_'),
-	            'accusative': 'воскресенье_понедельник_вторник_среду_четверг_пятницу_субботу'.split('_')
-	        },
-	        nounCase = (/\[ ?[Вв] ?(?:прошлую|следующую|эту)? ?\] ?dddd/).test(format) ?
-	            'accusative' :
-	            'nominative';
-	        return weekdays[nounCase][m.day()];
-	    }
+	    var monthsParse = [/^янв/i, /^фев/i, /^мар/i, /^апр/i, /^ма[й|я]/i, /^июн/i, /^июл/i, /^авг/i, /^сен/i, /^окт/i, /^ноя/i, /^дек/i];
 	
 	    var ru = moment.defineLocale('ru', {
-	        months : monthsCaseReplace,
-	        monthsShort : monthsShortCaseReplace,
-	        weekdays : weekdaysCaseReplace,
-	        weekdaysShort : 'вс_пн_вт_ср_чт_пт_сб'.split('_'),
-	        weekdaysMin : 'вс_пн_вт_ср_чт_пт_сб'.split('_'),
-	        monthsParse : [/^янв/i, /^фев/i, /^мар/i, /^апр/i, /^ма[й|я]/i, /^июн/i, /^июл/i, /^авг/i, /^сен/i, /^окт/i, /^ноя/i, /^дек/i],
+	        months : {
+	            format: 'Января_Февраля_Марта_Апреля_Мая_Июня_Июля_Августа_Сентября_Октября_Ноября_Декабря'.split('_'),
+	            standalone: 'Январь_Февраль_Март_Апрель_Май_Июнь_Июль_Август_Сентябрь_Октябрь_Ноябрь_Декабрь'.split('_')
+	        },
+	        monthsShort : {
+	            format: 'янв_фев_мар_апр_мая_июня_июля_авг_сен_окт_ноя_дек'.split('_'),
+	            standalone: 'янв_фев_март_апр_май_июнь_июль_авг_сен_окт_ноя_дек'.split('_')
+	        },
+	        weekdays : {
+	            standalone: 'Воскресенье_Понедельник_Вторник_Среда_Четверг_Пятница_Суббота'.split('_'),
+	            format: 'Воскресенье_Понедельник_Вторник_Среду_Четверг_Пятницу_Субботу'.split('_'),
+	            isFormat: /\[ ?[Вв] ?(?:прошлую|следующую|эту)? ?\] ?dddd/
+	        },
+	        weekdaysShort : 'Вс_Пн_Вт_Ср_Чт_Пт_Сб'.split('_'),
+	        weekdaysMin : 'Вс_Пн_Вт_Ср_Чт_Пт_Сб'.split('_'),
+	        monthsParse : monthsParse,
+	        longMonthsParse : monthsParse,
+	        shortMonthsParse : monthsParse,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -56869,8 +58382,27 @@
 	            sameDay: '[Сегодня в] LT',
 	            nextDay: '[Завтра в] LT',
 	            lastDay: '[Вчера в] LT',
-	            nextWeek: function () {
-	                return this.day() === 2 ? '[Во] dddd [в] LT' : '[В] dddd [в] LT';
+	            nextWeek: function (now) {
+	                if (now.week() !== this.week()) {
+	                    switch (this.day()) {
+	                    case 0:
+	                        return '[В следующее] dddd [в] LT';
+	                    case 1:
+	                    case 2:
+	                    case 4:
+	                        return '[В следующий] dddd [в] LT';
+	                    case 3:
+	                    case 5:
+	                    case 6:
+	                        return '[В следующую] dddd [в] LT';
+	                    }
+	                } else {
+	                    if (this.day() === 2) {
+	                        return '[Во] dddd [в] LT';
+	                    } else {
+	                        return '[В] dddd [в] LT';
+	                    }
+	                }
 	            },
 	            lastWeek: function (now) {
 	                if (now.week() !== this.week()) {
@@ -56953,20 +58485,86 @@
 	}));
 
 /***/ },
-/* 242 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
-	//! locale : Sinhalese (si)
-	//! author : Sampath Sitinamaluwa : https://github.com/sampathsris
+	//! locale : Northern Sami (se)
+	//! authors : Bård Rolstad Henriksen : https://github.com/karamell
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
 	
 	
+	
+	    var se = moment.defineLocale('se', {
+	        months : 'ođđajagemánnu_guovvamánnu_njukčamánnu_cuoŋománnu_miessemánnu_geassemánnu_suoidnemánnu_borgemánnu_čakčamánnu_golggotmánnu_skábmamánnu_juovlamánnu'.split('_'),
+	        monthsShort : 'ođđj_guov_njuk_cuo_mies_geas_suoi_borg_čakč_golg_skáb_juov'.split('_'),
+	        weekdays : 'sotnabeaivi_vuossárga_maŋŋebárga_gaskavahkku_duorastat_bearjadat_lávvardat'.split('_'),
+	        weekdaysShort : 'sotn_vuos_maŋ_gask_duor_bear_láv'.split('_'),
+	        weekdaysMin : 's_v_m_g_d_b_L'.split('_'),
+	        longDateFormat : {
+	            LT : 'HH:mm',
+	            LTS : 'HH:mm:ss',
+	            L : 'DD.MM.YYYY',
+	            LL : 'MMMM D. [b.] YYYY',
+	            LLL : 'MMMM D. [b.] YYYY [ti.] HH:mm',
+	            LLLL : 'dddd, MMMM D. [b.] YYYY [ti.] HH:mm'
+	        },
+	        calendar : {
+	            sameDay: '[otne ti] LT',
+	            nextDay: '[ihttin ti] LT',
+	            nextWeek: 'dddd [ti] LT',
+	            lastDay: '[ikte ti] LT',
+	            lastWeek: '[ovddit] dddd [ti] LT',
+	            sameElse: 'L'
+	        },
+	        relativeTime : {
+	            future : '%s geažes',
+	            past : 'maŋit %s',
+	            s : 'moadde sekunddat',
+	            m : 'okta minuhta',
+	            mm : '%d minuhtat',
+	            h : 'okta diimmu',
+	            hh : '%d diimmut',
+	            d : 'okta beaivi',
+	            dd : '%d beaivvit',
+	            M : 'okta mánnu',
+	            MM : '%d mánut',
+	            y : 'okta jahki',
+	            yy : '%d jagit'
+	        },
+	        ordinalParse: /\d{1,2}\./,
+	        ordinal : '%d.',
+	        week : {
+	            dow : 1, // Monday is the first day of the week.
+	            doy : 4  // The week that contains Jan 4th is the first week of the year.
+	        }
+	    });
+	
+	    return se;
+	
+	}));
+
+/***/ },
+/* 250 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//! moment.js locale configuration
+	//! locale : Sinhalese (si)
+	//! author : Sampath Sitinamaluwa : https://github.com/sampathsris
+	
+	;(function (global, factory) {
+	    true ? factory(__webpack_require__(174)) :
+	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+	   factory(global.moment)
+	}(this, function (moment) { 'use strict';
+	
+	
+	    /*jshint -W100*/
 	    var si = moment.defineLocale('si', {
 	        months : 'ජනවාරි_පෙබරවාරි_මාර්තු_අප්‍රේල්_මැයි_ජූනි_ජූලි_අගෝස්තු_සැප්තැම්බර්_ඔක්තෝබර්_නොවැම්බර්_දෙසැම්බර්'.split('_'),
 	        monthsShort : 'ජන_පෙබ_මාර්_අප්_මැයි_ජූනි_ජූලි_අගෝ_සැප්_ඔක්_නොවැ_දෙසැ'.split('_'),
@@ -57022,7 +58620,7 @@
 	}));
 
 /***/ },
-/* 243 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57030,7 +58628,7 @@
 	//! author : Martin Minka : https://github.com/k2s
 	//! based on work of petrbela : https://github.com/petrbela
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -57098,14 +58696,6 @@
 	    var sk = moment.defineLocale('sk', {
 	        months : months,
 	        monthsShort : monthsShort,
-	        monthsParse : (function (months, monthsShort) {
-	            var i, _monthsParse = [];
-	            for (i = 0; i < 12; i++) {
-	                // use custom parser to solve problem with July (červenec)
-	                _monthsParse[i] = new RegExp('^' + months[i] + '$|^' + monthsShort[i] + '$', 'i');
-	            }
-	            return _monthsParse;
-	        }(months, monthsShort)),
 	        weekdays : 'nedeľa_pondelok_utorok_streda_štvrtok_piatok_sobota'.split('_'),
 	        weekdaysShort : 'ne_po_ut_st_št_pi_so'.split('_'),
 	        weekdaysMin : 'ne_po_ut_st_št_pi_so'.split('_'),
@@ -57184,14 +58774,14 @@
 	}));
 
 /***/ },
-/* 244 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : slovenian (sl)
 	//! author : Robert Sedovšek : https://github.com/sedovsek
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -57348,7 +58938,7 @@
 	}));
 
 /***/ },
-/* 245 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57357,7 +58947,7 @@
 	//! author: Menelion Elensúle: https://github.com/Oire (tests)
 	//! author : Oerd Cukalla : https://github.com/oerd (fixes)
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -57421,14 +59011,14 @@
 	}));
 
 /***/ },
-/* 246 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Serbian-latin (sr)
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -57533,14 +59123,14 @@
 	}));
 
 /***/ },
-/* 247 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Serbian-cyrillic (sr-cyrl)
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -57645,14 +59235,14 @@
 	}));
 
 /***/ },
-/* 248 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : swedish (sv)
 	//! author : Jens Alm : https://github.com/ulmus
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -57716,19 +59306,105 @@
 	}));
 
 /***/ },
-/* 249 */
+/* 257 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//! moment.js locale configuration
+	//! locale : swahili (sw)
+	//! author : Fahad Kassim : https://github.com/fadsel
+	
+	;(function (global, factory) {
+	    true ? factory(__webpack_require__(174)) :
+	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+	   factory(global.moment)
+	}(this, function (moment) { 'use strict';
+	
+	
+	    var sw = moment.defineLocale('sw', {
+	        months : 'Januari_Februari_Machi_Aprili_Mei_Juni_Julai_Agosti_Septemba_Oktoba_Novemba_Desemba'.split('_'),
+	        monthsShort : 'Jan_Feb_Mac_Apr_Mei_Jun_Jul_Ago_Sep_Okt_Nov_Des'.split('_'),
+	        weekdays : 'Jumapili_Jumatatu_Jumanne_Jumatano_Alhamisi_Ijumaa_Jumamosi'.split('_'),
+	        weekdaysShort : 'Jpl_Jtat_Jnne_Jtan_Alh_Ijm_Jmos'.split('_'),
+	        weekdaysMin : 'J2_J3_J4_J5_Al_Ij_J1'.split('_'),
+	        longDateFormat : {
+	            LT : 'HH:mm',
+	            LTS : 'HH:mm:ss',
+	            L : 'DD.MM.YYYY',
+	            LL : 'D MMMM YYYY',
+	            LLL : 'D MMMM YYYY HH:mm',
+	            LLLL : 'dddd, D MMMM YYYY HH:mm'
+	        },
+	        calendar : {
+	            sameDay : '[leo saa] LT',
+	            nextDay : '[kesho saa] LT',
+	            nextWeek : '[wiki ijayo] dddd [saat] LT',
+	            lastDay : '[jana] LT',
+	            lastWeek : '[wiki iliyopita] dddd [saat] LT',
+	            sameElse : 'L'
+	        },
+	        relativeTime : {
+	            future : '%s baadaye',
+	            past : 'tokea %s',
+	            s : 'hivi punde',
+	            m : 'dakika moja',
+	            mm : 'dakika %d',
+	            h : 'saa limoja',
+	            hh : 'masaa %d',
+	            d : 'siku moja',
+	            dd : 'masiku %d',
+	            M : 'mwezi mmoja',
+	            MM : 'miezi %d',
+	            y : 'mwaka mmoja',
+	            yy : 'miaka %d'
+	        },
+	        week : {
+	            dow : 1, // Monday is the first day of the week.
+	            doy : 7  // The week that contains Jan 1st is the first week of the year.
+	        }
+	    });
+	
+	    return sw;
+	
+	}));
+
+/***/ },
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : tamil (ta)
 	//! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
 	
+	
+	    var symbolMap = {
+	        '1': '௧',
+	        '2': '௨',
+	        '3': '௩',
+	        '4': '௪',
+	        '5': '௫',
+	        '6': '௬',
+	        '7': '௭',
+	        '8': '௮',
+	        '9': '௯',
+	        '0': '௦'
+	    }, numberMap = {
+	        '௧': '1',
+	        '௨': '2',
+	        '௩': '3',
+	        '௪': '4',
+	        '௫': '5',
+	        '௬': '6',
+	        '௭': '7',
+	        '௮': '8',
+	        '௯': '9',
+	        '௦': '0'
+	    };
 	
 	    var ta = moment.defineLocale('ta', {
 	        months : 'ஜனவரி_பிப்ரவரி_மார்ச்_ஏப்ரல்_மே_ஜூன்_ஜூலை_ஆகஸ்ட்_செப்டெம்பர்_அக்டோபர்_நவம்பர்_டிசம்பர்'.split('_'),
@@ -57770,6 +59446,16 @@
 	        ordinalParse: /\d{1,2}வது/,
 	        ordinal : function (number) {
 	            return number + 'வது';
+	        },
+	        preparse: function (string) {
+	            return string.replace(/[௧௨௩௪௫௬௭௮௯௦]/g, function (match) {
+	                return numberMap[match];
+	            });
+	        },
+	        postformat: function (string) {
+	            return string.replace(/\d/g, function (match) {
+	                return symbolMap[match];
+	            });
 	        },
 	        // refer http://ta.wikipedia.org/s/1er1
 	        meridiemParse: /யாமம்|வைகறை|காலை|நண்பகல்|எற்பாடு|மாலை/,
@@ -57815,14 +59501,106 @@
 	}));
 
 /***/ },
-/* 250 */
+/* 259 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//! moment.js locale configuration
+	//! locale : telugu (te)
+	//! author : Krishna Chaitanya Thota : https://github.com/kcthota
+	
+	;(function (global, factory) {
+	    true ? factory(__webpack_require__(174)) :
+	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+	   factory(global.moment)
+	}(this, function (moment) { 'use strict';
+	
+	
+	    var te = moment.defineLocale('te', {
+	        months : 'జనవరి_ఫిబ్రవరి_మార్చి_ఏప్రిల్_మే_జూన్_జూలై_ఆగస్టు_సెప్టెంబర్_అక్టోబర్_నవంబర్_డిసెంబర్'.split('_'),
+	        monthsShort : 'జన._ఫిబ్ర._మార్చి_ఏప్రి._మే_జూన్_జూలై_ఆగ._సెప్._అక్టో._నవ._డిసె.'.split('_'),
+	        weekdays : 'ఆదివారం_సోమవారం_మంగళవారం_బుధవారం_గురువారం_శుక్రవారం_శనివారం'.split('_'),
+	        weekdaysShort : 'ఆది_సోమ_మంగళ_బుధ_గురు_శుక్ర_శని'.split('_'),
+	        weekdaysMin : 'ఆ_సో_మం_బు_గు_శు_శ'.split('_'),
+	        longDateFormat : {
+	            LT : 'A h:mm',
+	            LTS : 'A h:mm:ss',
+	            L : 'DD/MM/YYYY',
+	            LL : 'D MMMM YYYY',
+	            LLL : 'D MMMM YYYY, A h:mm',
+	            LLLL : 'dddd, D MMMM YYYY, A h:mm'
+	        },
+	        calendar : {
+	            sameDay : '[నేడు] LT',
+	            nextDay : '[రేపు] LT',
+	            nextWeek : 'dddd, LT',
+	            lastDay : '[నిన్న] LT',
+	            lastWeek : '[గత] dddd, LT',
+	            sameElse : 'L'
+	        },
+	        relativeTime : {
+	            future : '%s లో',
+	            past : '%s క్రితం',
+	            s : 'కొన్ని క్షణాలు',
+	            m : 'ఒక నిమిషం',
+	            mm : '%d నిమిషాలు',
+	            h : 'ఒక గంట',
+	            hh : '%d గంటలు',
+	            d : 'ఒక రోజు',
+	            dd : '%d రోజులు',
+	            M : 'ఒక నెల',
+	            MM : '%d నెలలు',
+	            y : 'ఒక సంవత్సరం',
+	            yy : '%d సంవత్సరాలు'
+	        },
+	        ordinalParse : /\d{1,2}వ/,
+	        ordinal : '%dవ',
+	        meridiemParse: /రాత్రి|ఉదయం|మధ్యాహ్నం|సాయంత్రం/,
+	        meridiemHour : function (hour, meridiem) {
+	            if (hour === 12) {
+	                hour = 0;
+	            }
+	            if (meridiem === 'రాత్రి') {
+	                return hour < 4 ? hour : hour + 12;
+	            } else if (meridiem === 'ఉదయం') {
+	                return hour;
+	            } else if (meridiem === 'మధ్యాహ్నం') {
+	                return hour >= 10 ? hour : hour + 12;
+	            } else if (meridiem === 'సాయంత్రం') {
+	                return hour + 12;
+	            }
+	        },
+	        meridiem : function (hour, minute, isLower) {
+	            if (hour < 4) {
+	                return 'రాత్రి';
+	            } else if (hour < 10) {
+	                return 'ఉదయం';
+	            } else if (hour < 17) {
+	                return 'మధ్యాహ్నం';
+	            } else if (hour < 20) {
+	                return 'సాయంత్రం';
+	            } else {
+	                return 'రాత్రి';
+	            }
+	        },
+	        week : {
+	            dow : 0, // Sunday is the first day of the week.
+	            doy : 6  // The week that contains Jan 1st is the first week of the year.
+	        }
+	    });
+	
+	    return te;
+	
+	}));
+
+/***/ },
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : thai (th)
 	//! author : Kridsada Thanabulpong : https://github.com/sirn
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -57884,14 +59662,14 @@
 	}));
 
 /***/ },
-/* 251 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Tagalog/Filipino (tl-ph)
 	//! author : Dan Hagman
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -57950,7 +59728,130 @@
 	}));
 
 /***/ },
-/* 252 */
+/* 262 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//! moment.js locale configuration
+	//! locale : Klingon (tlh)
+	//! author : Dominika Kruk : https://github.com/amaranthrose
+	
+	;(function (global, factory) {
+	    true ? factory(__webpack_require__(174)) :
+	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+	   factory(global.moment)
+	}(this, function (moment) { 'use strict';
+	
+	
+	    var numbersNouns = 'pagh_wa’_cha’_wej_loS_vagh_jav_Soch_chorgh_Hut'.split('_');
+	
+	    function translateFuture(output) {
+	        var time = output;
+	        time = (output.indexOf('jaj') !== -1) ?
+	    	time.slice(0, -3) + 'leS' :
+	    	(output.indexOf('jar') !== -1) ?
+	    	time.slice(0, -3) + 'waQ' :
+	    	(output.indexOf('DIS') !== -1) ?
+	    	time.slice(0, -3) + 'nem' :
+	    	time + ' pIq';
+	        return time;
+	    }
+	
+	    function translatePast(output) {
+	        var time = output;
+	        time = (output.indexOf('jaj') !== -1) ?
+	    	time.slice(0, -3) + 'Hu’' :
+	    	(output.indexOf('jar') !== -1) ?
+	    	time.slice(0, -3) + 'wen' :
+	    	(output.indexOf('DIS') !== -1) ?
+	    	time.slice(0, -3) + 'ben' :
+	    	time + ' ret';
+	        return time;
+	    }
+	
+	    function translate(number, withoutSuffix, string, isFuture) {
+	        var numberNoun = numberAsNoun(number);
+	        switch (string) {
+	            case 'mm':
+	                return numberNoun + ' tup';
+	            case 'hh':
+	                return numberNoun + ' rep';
+	            case 'dd':
+	                return numberNoun + ' jaj';
+	            case 'MM':
+	                return numberNoun + ' jar';
+	            case 'yy':
+	                return numberNoun + ' DIS';
+	        }
+	    }
+	
+	    function numberAsNoun(number) {
+	        var hundred = Math.floor((number % 1000) / 100),
+	    	ten = Math.floor((number % 100) / 10),
+	    	one = number % 10,
+	    	word = '';
+	        if (hundred > 0) {
+	            word += numbersNouns[hundred] + 'vatlh';
+	        }
+	        if (ten > 0) {
+	            word += ((word !== '') ? ' ' : '') + numbersNouns[ten] + 'maH';
+	        }
+	        if (one > 0) {
+	            word += ((word !== '') ? ' ' : '') + numbersNouns[one];
+	        }
+	        return (word === '') ? 'pagh' : word;
+	    }
+	
+	    var tlh = moment.defineLocale('tlh', {
+	        months : 'tera’ jar wa’_tera’ jar cha’_tera’ jar wej_tera’ jar loS_tera’ jar vagh_tera’ jar jav_tera’ jar Soch_tera’ jar chorgh_tera’ jar Hut_tera’ jar wa’maH_tera’ jar wa’maH wa’_tera’ jar wa’maH cha’'.split('_'),
+	        monthsShort : 'jar wa’_jar cha’_jar wej_jar loS_jar vagh_jar jav_jar Soch_jar chorgh_jar Hut_jar wa’maH_jar wa’maH wa’_jar wa’maH cha’'.split('_'),
+	        weekdays : 'lojmItjaj_DaSjaj_povjaj_ghItlhjaj_loghjaj_buqjaj_ghInjaj'.split('_'),
+	        weekdaysShort : 'lojmItjaj_DaSjaj_povjaj_ghItlhjaj_loghjaj_buqjaj_ghInjaj'.split('_'),
+	        weekdaysMin : 'lojmItjaj_DaSjaj_povjaj_ghItlhjaj_loghjaj_buqjaj_ghInjaj'.split('_'),
+	        longDateFormat : {
+	            LT : 'HH:mm',
+	            LTS : 'HH:mm:ss',
+	            L : 'DD.MM.YYYY',
+	            LL : 'D MMMM YYYY',
+	            LLL : 'D MMMM YYYY HH:mm',
+	            LLLL : 'dddd, D MMMM YYYY HH:mm'
+	        },
+	        calendar : {
+	            sameDay: '[DaHjaj] LT',
+	            nextDay: '[wa’leS] LT',
+	            nextWeek: 'LLL',
+	            lastDay: '[wa’Hu’] LT',
+	            lastWeek: 'LLL',
+	            sameElse: 'L'
+	        },
+	        relativeTime : {
+	            future : translateFuture,
+	            past : translatePast,
+	            s : 'puS lup',
+	            m : 'wa’ tup',
+	            mm : translate,
+	            h : 'wa’ rep',
+	            hh : translate,
+	            d : 'wa’ jaj',
+	            dd : translate,
+	            M : 'wa’ jar',
+	            MM : translate,
+	            y : 'wa’ DIS',
+	            yy : translate
+	        },
+	        ordinalParse: /\d{1,2}\./,
+	        ordinal : '%d.',
+	        week : {
+	            dow : 1, // Monday is the first day of the week.
+	            doy : 4  // The week that contains Jan 4th is the first week of the year.
+	        }
+	    });
+	
+	    return tlh;
+	
+	}));
+
+/***/ },
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57958,7 +59859,7 @@
 	//! authors : Erhan Gundogan : https://github.com/erhangundogan,
 	//!           Burak Yiğit Kaya: https://github.com/BYK
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -58044,14 +59945,14 @@
 	}));
 
 /***/ },
-/* 253 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : talossan (tzl)
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v with the help of Iustì Canun
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -58059,6 +59960,8 @@
 	
 	
 	
+	    // After the year there should be a slash and the amount of years since December 26, 1979 in Roman numerals.
+	    // This is currently too difficult (maybe even impossible) to add.
 	    var tzl = moment.defineLocale('tzl', {
 	        months : 'Januar_Fevraglh_Març_Avrïu_Mai_Gün_Julia_Guscht_Setemvar_Listopäts_Noemvar_Zecemvar'.split('_'),
 	        monthsShort : 'Jan_Fev_Mar_Avr_Mai_Gün_Jul_Gus_Set_Lis_Noe_Zec'.split('_'),
@@ -58067,11 +59970,11 @@
 	        weekdaysMin : 'Sú_Lú_Ma_Má_Xh_Vi_Sá'.split('_'),
 	        longDateFormat : {
 	            LT : 'HH.mm',
-	            LTS : 'LT.ss',
+	            LTS : 'HH.mm.ss',
 	            L : 'DD.MM.YYYY',
 	            LL : 'D. MMMM [dallas] YYYY',
-	            LLL : 'D. MMMM [dallas] YYYY LT',
-	            LLLL : 'dddd, [li] D. MMMM [dallas] YYYY LT'
+	            LLL : 'D. MMMM [dallas] YYYY HH.mm',
+	            LLLL : 'dddd, [li] D. MMMM [dallas] YYYY HH.mm'
 	        },
 	        meridiem : function (hours, minutes, isLower) {
 	            if (hours > 11) {
@@ -58115,17 +60018,17 @@
 	        var format = {
 	            's': ['viensas secunds', '\'iensas secunds'],
 	            'm': ['\'n míut', '\'iens míut'],
-	            'mm': [number + ' míuts', ' ' + number + ' míuts'],
+	            'mm': [number + ' míuts', '' + number + ' míuts'],
 	            'h': ['\'n þora', '\'iensa þora'],
-	            'hh': [number + ' þoras', ' ' + number + ' þoras'],
+	            'hh': [number + ' þoras', '' + number + ' þoras'],
 	            'd': ['\'n ziua', '\'iensa ziua'],
-	            'dd': [number + ' ziuas', ' ' + number + ' ziuas'],
+	            'dd': [number + ' ziuas', '' + number + ' ziuas'],
 	            'M': ['\'n mes', '\'iens mes'],
-	            'MM': [number + ' mesen', ' ' + number + ' mesen'],
+	            'MM': [number + ' mesen', '' + number + ' mesen'],
 	            'y': ['\'n ar', '\'iens ar'],
-	            'yy': [number + ' ars', ' ' + number + ' ars']
+	            'yy': [number + ' ars', '' + number + ' ars']
 	        };
-	        return isFuture ? format[key][0] : (withoutSuffix ? format[key][0] : format[key][1].trim());
+	        return isFuture ? format[key][0] : (withoutSuffix ? format[key][0] : format[key][1]);
 	    }
 	
 	    return tzl;
@@ -58133,14 +60036,14 @@
 	}));
 
 /***/ },
-/* 254 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Morocco Central Atlas Tamaziɣt (tzm)
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -58195,14 +60098,14 @@
 	}));
 
 /***/ },
-/* 255 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Morocco Central Atlas Tamaziɣt in Latin (tzm-latn)
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -58257,7 +60160,7 @@
 	}));
 
 /***/ },
-/* 256 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58265,7 +60168,7 @@
 	//! author : zemlanin : https://github.com/zemlanin
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -58278,8 +60181,8 @@
 	    }
 	    function relativeTimeWithPlural(number, withoutSuffix, key) {
 	        var format = {
-	            'mm': 'хвилина_хвилини_хвилин',
-	            'hh': 'година_години_годин',
+	            'mm': withoutSuffix ? 'хвилина_хвилини_хвилин' : 'хвилину_хвилини_хвилин',
+	            'hh': withoutSuffix ? 'година_години_годин' : 'годину_години_годин',
 	            'dd': 'день_дні_днів',
 	            'MM': 'місяць_місяці_місяців',
 	            'yy': 'рік_роки_років'
@@ -58293,16 +60196,6 @@
 	        else {
 	            return number + ' ' + plural(format[key], +number);
 	        }
-	    }
-	    function monthsCaseReplace(m, format) {
-	        var months = {
-	            'nominative': 'січень_лютий_березень_квітень_травень_червень_липень_серпень_вересень_жовтень_листопад_грудень'.split('_'),
-	            'accusative': 'січня_лютого_березня_квітня_травня_червня_липня_серпня_вересня_жовтня_листопада_грудня'.split('_')
-	        },
-	        nounCase = (/D[oD]? *MMMM?/).test(format) ?
-	            'accusative' :
-	            'nominative';
-	        return months[nounCase][m.month()];
 	    }
 	    function weekdaysCaseReplace(m, format) {
 	        var weekdays = {
@@ -58324,7 +60217,10 @@
 	    }
 	
 	    var uk = moment.defineLocale('uk', {
-	        months : monthsCaseReplace,
+	        months : {
+	            'format': 'січня_лютого_березня_квітня_травня_червня_липня_серпня_вересня_жовтня_листопада_грудня'.split('_'),
+	            'standalone': 'січень_лютий_березень_квітень_травень_червень_липень_серпень_вересень_жовтень_листопад_грудень'.split('_')
+	        },
 	        monthsShort : 'січ_лют_бер_квіт_трав_черв_лип_серп_вер_жовт_лист_груд'.split('_'),
 	        weekdays : weekdaysCaseReplace,
 	        weekdaysShort : 'нд_пн_вт_ср_чт_пт_сб'.split('_'),
@@ -58414,14 +60310,14 @@
 	}));
 
 /***/ },
-/* 257 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : uzbek (uz)
 	//! author : Sardor Muminov : https://github.com/muminoff
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -58429,7 +60325,7 @@
 	
 	
 	    var uz = moment.defineLocale('uz', {
-	        months : 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split('_'),
+	        months : 'январ_феврал_март_апрел_май_июн_июл_август_сентябр_октябр_ноябр_декабр'.split('_'),
 	        monthsShort : 'янв_фев_мар_апр_май_июн_июл_авг_сен_окт_ноя_дек'.split('_'),
 	        weekdays : 'Якшанба_Душанба_Сешанба_Чоршанба_Пайшанба_Жума_Шанба'.split('_'),
 	        weekdaysShort : 'Якш_Душ_Сеш_Чор_Пай_Жум_Шан'.split('_'),
@@ -58476,14 +60372,14 @@
 	}));
 
 /***/ },
-/* 258 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : vietnamese (vi)
 	//! author : Bang Nguyen : https://github.com/bangnk
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -58546,7 +60442,7 @@
 	}));
 
 /***/ },
-/* 259 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58554,7 +60450,7 @@
 	//! author : suupic : https://github.com/suupic
 	//! author : Zeno Zeng : https://github.com/zenozeng
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -58677,14 +60573,14 @@
 	}));
 
 /***/ },
-/* 260 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : traditional chinese (zh-tw)
 	//! author : Ben : https://github.com/ben-lin
 	
-	(function (global, factory) {
+	;(function (global, factory) {
 	    true ? factory(__webpack_require__(174)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
@@ -58782,7 +60678,7 @@
 	}));
 
 /***/ },
-/* 261 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58791,7 +60687,7 @@
 
 
 /***/ },
-/* 262 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58804,7 +60700,7 @@
 	
 	exports.default = resolveObjectProps;
 	
-	var _lodash = __webpack_require__(170);
+	var _lodash = __webpack_require__(168);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -58812,7 +60708,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _invariant = __webpack_require__(263);
+	var _invariant = __webpack_require__(274);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -58844,15 +60740,13 @@
 	 * // then you can use <BoxThing> with incompletely specified props:
 	 * render() { return <BoxThing margin={5} padding={top: 10, bottom: 20} />; }
 	 *
+	 * @param {Component} Component - The React Component (class) which should be wrapped by this HOC
 	 * @param {string[]} propKeys - A list of keys for all the object props it is expected to resolve.
 	 * @param {string[]} objKeys - A list of keys for which values will be resolved on each object prop (object shape).
 	 * @returns {Component} - A Component which auto-resolves the specified object props.
-	*/
+	 */
 	
 	var errs = {
-	  missingDefault: function missingDefault(Component, key, objKeys) {
-	    return 'Missing defaultProp in ' + componentName(Component) + ': resolveObjectProps requires that ' + ('all {' + objKeys.join(',') + '}-shaped props have a defaultProp; Prop \'' + key + '\' does not have one');
-	  },
 	  badDefault: function badDefault(Component, key, objKeys) {
 	    return 'Bad defaultProp in ' + componentName(Component) + ': Prop \'' + key + '\' is expected to be a ' + ('{' + objKeys.join(',') + '}-shaped object, but it has a defaultProp which is not this shape.');
 	  }
@@ -58878,8 +60772,9 @@
 	  // for partially specified objects, use default for the other (unspecified) values
 	  if (hasSome(prop, objKeys)) return _lodash2.default.defaults(prop, defaultProp);
 	  // for single values, create an object with the same value for each expected key
+	  return _lodash2.default.isUndefined(prop) ? defaultProp :
 	  // for undefined prop values, return the entire defaultProp
-	  return _lodash2.default.isUndefined(prop) ? defaultProp : _lodash2.default.fromPairs(objKeys.map(function (k) {
+	  _lodash2.default.fromPairs(objKeys.map(function (k) {
 	    return [k, prop];
 	  }));
 	}
@@ -58898,33 +60793,38 @@
 	
 	    _createClass(_class, [{
 	      key: 'render',
+	
+	
+	      // todo: smart shouldComponentUpdate with 1-level deep equality check?
+	
+	      // attach static reference to default props so that we can compose multiple resolveObjectProps wrappers,
+	      // but don't call it defaultProps, to avoid actually triggering the default behavior
 	      value: function render() {
 	        var _this2 = this;
 	
+	        //console.log('resolveObjectProps', this.props);
 	        var defaultProps = ComposedComponent.defaultProps || ComposedComponent._defaultProps || {};
 	
 	        var resolvedProps = _lodash2.default.fromPairs(propKeys.map(function (k) {
-	          // ensure ComposedComponent has good default for this prop
-	          (0, _invariant2.default)(_lodash2.default.isUndefined(defaultProps[k]) || _lodash2.default.isObject(defaultProps[k]), errs.badDefault(ComposedComponent, k, objKeys));
+	          (0, _invariant2.default)( // ensure ComposedComponent has undefined or good default for each prop
+	          _lodash2.default.isUndefined(defaultProps[k]) || _lodash2.default.isObject(defaultProps[k]), errs.badDefault(ComposedComponent, k, objKeys));
 	
 	          var resolved = resolveProp(_this2.props[k], objKeys, defaultProps[k]);
 	          return [k, resolved];
 	        }));
 	
+	        //console.log('resolved object props', resolvedProps);
 	        var props = _lodash2.default.assign({}, this.props, resolvedProps);
 	        return _react2.default.createElement(ComposedComponent, props);
 	      }
-	      // attach static reference to default props so that we can compose multiple resolveObjectProps wrappers,
-	      // but don't call it defaultProps, to avoid actually triggering the default behavior
-	
 	    }]);
 	
 	    return _class;
-	  }(_react2.default.Component), _class._defaultProps = ComposedComponent.defaultProps, _temp;
+	  }(_react2.default.Component), _class._defaultProps = ComposedComponent.defaultProps, _class.getScaleType = ComposedComponent.getScaleType, _class.getDomain = ComposedComponent.getDomain, _class.getMargin = ComposedComponent.getMargin, _temp;
 	}
 
 /***/ },
-/* 263 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -58982,13 +60882,906 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ },
-/* 264 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
+	});
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	exports.default = resolveXYScales;
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _invariant = __webpack_require__(274);
+	
+	var _invariant2 = _interopRequireDefault(_invariant);
+	
+	var _Data = __webpack_require__(276);
+	
+	var _Scale = __webpack_require__(277);
+	
+	var _Margin = __webpack_require__(278);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	/**
+	 * `resolveXYScales` is a higher-order-component.
+	 *
+	 * @param {Component} Component - The React Component (class) which should be wrapped by this HOC
+	 * @returns {Component} - A Component which auto-resolves XY scales from given props
+	*/
+	
+	var errs = {
+	  getDomain: function getDomain(C) {
+	    return 'Components enhanced by resolveXYScales must have a static getDomain method, ' + componentName(C) + ' does not have one';
+	  }
+	};
+	function componentName(Component) {
+	  return Component.displayName || "Component wrapped by resolveXYScales";
+	}
+	
+	function hasScaleFor(scalesObj, key) {
+	  return _lodash2.default.isObject(scalesObj) && (0, _Scale.isValidScale)(scalesObj[key]);
+	}
+	function hasXYScales(scale) {
+	  return _lodash2.default.isObject(scale) && (0, _Scale.isValidScale)(scale.x) && (0, _Scale.isValidScale)(scale.y);
+	}
+	function hasXYDomains(domain) {
+	  return _lodash2.default.isObject(domain) && (0, _Data.isValidDomain)(domain.x) && (0, _Data.isValidDomain)(domain.y);
+	}
+	function hasXYScaleTypes(scaleType) {
+	  return _lodash2.default.isObject(scaleType) && _lodash2.default.isString(scaleType.x) && _lodash2.default.isString(scaleType.y);
+	}
+	function hasAllMargins(margin) {
+	  var marginKeys = ['top', 'bottom', 'left', 'right'];
+	  return _lodash2.default.isObject(margin) && _lodash2.default.every(marginKeys, function (k) {
+	    return _lodash2.default.has(margin, k);
+	  });
+	}
+	
+	function hasGoodXY(obj) {
+	  var isValid = arguments.length <= 1 || arguments[1] === undefined ? function (v) {
+	    return !_lodash2.default.isUndefined(v);
+	  } : arguments[1];
+	
+	  return _lodash2.default.isObject(obj) && isValid(obj.x);
+	}
+	
+	function mapStaticOnChildren(children, methodName) {
+	  var passProps = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	
+	  // returns the result of looping over all children and calling a static method on each one
+	  return _lodash2.default.compact(_react2.default.Children.map(children, function (child) {
+	    console.log(_lodash2.default.keys(child.type));
+	    return _lodash2.default.isFunction(child.type[methodName]) ? child.type[methodName](_extends({}, child.props, passProps)) : null;
+	  }));
+	}
+	
+	function omitNullUndefined(obj) {
+	  return _lodash2.default.omitBy(obj, function (v) {
+	    return _lodash2.default.isUndefined(v) || _lodash2.default.isNull(v);
+	  });
+	}
+	
+	function resolveXYPropsOnComponentOrChildren(propKeys, props) {
+	  var reducers = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	  var validators = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+	  var result = arguments.length <= 4 || arguments[4] === undefined ? {} : arguments[4];
+	
+	  var isDone = function isDone(o) {
+	    return _lodash2.default.every(propKeys, function (k) {
+	      return _lodash2.default.isObject(o[k]) && _lodash2.default.every(['x', 'y'], function (xy) {
+	        return _lodash2.default.has(o[k][xy]);
+	      });
+	    });
+	  };
+	  result = _lodash2.default.pick(_extends({}, props, result), propKeys);
+	
+	  var resolved = {};
+	  _lodash2.default.forEach(propKeys, function (propKey) {
+	    _lodash2.default.forEach(['x', 'y'], function (k) {
+	      var isValid = validators[propKey] || function () {
+	        return true;
+	      };
+	      if (_lodash2.default.isObject(props[propKey]) && _lodash2.default.has(props[propKey], k) && isValid(props[propKey][k])) {
+	        if (!_lodash2.default.has(result, propKey)) result[propKey] = {};
+	        result[propKey][k] = props[propKey][k];
+	      }
+	    });
+	  });
+	
+	  if (isDone(result)) return result;
+	
+	  if (_react2.default.Children.count(props.children)) {
+	    (function () {
+	      var childProps = [];
+	      _react2.default.Children.forEach(props.children, function (child) {
+	        if (!child) return;
+	        childProps.push(resolveXYPropsOnComponentOrChildren(propKeys, child.props, result));
+	      });
+	
+	      // let childDomains = [];
+	      // React.Children.forEach(props.children, child => {
+	      //   childDomains = childDomains.concat(this._resolveDomain(child.props, child.type, scaleType));
+	      // });
+	      //
+	      // console.log('combining domains', childDomains);
+	      // const childDomain =  _.fromPairs(['x', 'y'].map(k => {
+	      //   console.log(_.compact(_.map(childDomains, k)), scaleType[k]);
+	      //   const kDomain = combineDomains(_.compact(_.map(childDomains, k)), dataTypeFromScaleType(scaleType[k]));
+	      //   console.log(kDomain);
+	      //   return [k, kDomain];
+	      // }));
+	      // console.log('combined domains', childDomain);
+	      //
+	      // domain = _.assign(childDomain, domain);
+	      // return domain;
+	    })();
+	  }
+	
+	  propKeys.forEach(function (k) {
+	    result[propKeys] = props;
+	  });
+	}
+	
+	function resolveXYScales(ComposedComponent) {
+	  var _class, _temp2;
+	
+	  return _temp2 = _class = function (_React$Component) {
+	    _inherits(_class, _React$Component);
+	
+	    function _class() {
+	      var _Object$getPrototypeO;
+	
+	      var _temp, _this, _ret2;
+	
+	      _classCallCheck(this, _class);
+	
+	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	        args[_key] = arguments[_key];
+	      }
+	
+	      return _ret2 = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(_class)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this._makeScales = function (_ref) {
+	        var width = _ref.width;
+	        var height = _ref.height;
+	        var _ref$scaleType = _ref.scaleType;
+	        var scaleType = _ref$scaleType === undefined ? {} : _ref$scaleType;
+	        var _ref$domain = _ref.domain;
+	        var domain = _ref$domain === undefined ? {} : _ref$domain;
+	        var _ref$margin = _ref.margin;
+	        var margin = _ref$margin === undefined ? {} : _ref$margin;
+	        var _ref$scale = _ref.scale;
+	        var scale = _ref$scale === undefined ? {} : _ref$scale;
+	        var _this$props = _this.props;
+	        var invertScale = _this$props.invertScale;
+	        var nice = _this$props.nice;
+	        var tickCount = _this$props.tickCount;
+	        var ticks = _this$props.ticks;
+	
+	        var range = {
+	          x: (0, _Margin.innerRangeX)(width, margin).map(function (v) {
+	            return v - (margin.left || 0);
+	          }),
+	          y: (0, _Margin.innerRangeY)(height, margin).map(function (v) {
+	            return v - (margin.top || 0);
+	          })
+	        };
+	        // console.log(height, margin, innerRangeY(height, margin));
+	
+	        // console.log('range', range);
+	        return _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
+	          // use existing scales if provided, otherwise create new
+	          if (hasScaleFor(scale, k)) return [k, scale[k]];
+	
+	          // create scale from domain/range
+	          var rangeMethod = scaleType[k] === 'ordinal' ? 'rangePoints' : 'range';
+	          var kScale = (0, _Scale.initScale)(scaleType[k]).domain(domain[k])[rangeMethod](range[k]);
+	
+	          // todo - ticks, nice and getDomain should be an axis prop instead, and axis should have getDomain
+	
+	          // set `nice` option to round scale domains to nicer numbers
+	          // if(nice[k] && _.isFunction(kScale.nice)) kScale.nice(tickCount[k] || 10);
+	
+	          // extend scale domain to include custom `ticks` if passed
+	          //
+	          // if(ticks[k]) {
+	          //   const dataType = dataTypeFromScaleType(scaleType[k]);
+	          //   const tickDomain = domainFromData(ticks[k], _.identity, dataType);
+	          //   kScale.domain(combineDomains([kScale.domain(), tickDomain]), dataType);
+	          // }
+	
+	          // reverse scale domain if `invertScale` is passed
+	          if (invertScale[k]) kScale.domain(kScale.domain().reverse());
+	
+	          return [k, kScale];
+	        }));
+	      }, _temp), _possibleConstructorReturn(_this, _ret2);
+	    }
+	    // nice: {x: true, y: true},
+	    // tickCount: {x: 10, y: 10},
+	    // ticks: {x: null, y: null}
+	
+	
+	    // todo better way for HOC's to pass statics through?
+	
+	
+	    _createClass(_class, [{
+	      key: '_resolveScaleType',
+	      value: function _resolveScaleType(props, Component) {
+	        var _this2 = this;
+	
+	        var propsScaleType = props.scaleType || {};
+	
+	        // short-circuit if all scale types provided
+	        if (hasXYScaleTypes(propsScaleType)) return propsScaleType;
+	
+	        // start with any scale types in props, try to resolve the rest
+	        var scaleType = omitNullUndefined(propsScaleType);
+	
+	        // if Component provides a custom static getScaleType method
+	        // use it to determine remaining scale types
+	        if (_lodash2.default.isFunction(Component.getScaleType)) {
+	          var componentScaleType = omitNullUndefined(Component.getScaleType(props));
+	          scaleType = _lodash2.default.assign(componentScaleType, scaleType);
+	          if (hasXYScaleTypes(scaleType)) return scaleType;
+	        }
+	
+	        // todo infer scaleType from domain?
+	        // if component has domain props,
+	        // infer the data type, & use that to get scale type
+	        if (_lodash2.default.isObject(props.domain) && ((0, _Data.isValidDomain)(props.domain.x) || (0, _Data.isValidDomain)(props.domain.y))) {
+	          // console.log('inferring scale type from domain');
+	          var domainScaleType = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
+	            var domain = props.domain[k];
+	            return (0, _Data.isValidDomain)(domain) ? [k, (0, _Scale.scaleTypeFromDataType)((0, _Scale.inferDataTypeFromDomain)(domain))] : [k, undefined];
+	          }));
+	          scaleType = _lodash2.default.assign(domainScaleType, scaleType);
+	          if (hasXYScaleTypes(scaleType)) return scaleType;
+	        }
+	
+	        // if Component has data or datasets props,
+	        // infer the data type, & use that to get scale type
+	        if (_lodash2.default.isArray(props.data) || _lodash2.default.isArray(props.datasets)) {
+	          var _ret3 = function () {
+	            var datasets = _lodash2.default.isArray(props.datasets) ? props.datasets : [props.data];
+	            var datasetScaleType = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
+	              var kAccessor = (0, _Data.makeAccessor)(_lodash2.default.get(props, 'getValue.' + k));
+	              var kDataType = (0, _Data.inferDatasetsType)(datasets, kAccessor);
+	              var kScaleType = (0, _Scale.scaleTypeFromDataType)(kDataType);
+	              return [k, kScaleType];
+	            }));
+	
+	            scaleType = _lodash2.default.assign(datasetScaleType, scaleType);
+	            return {
+	              v: scaleType
+	            };
+	          }();
+	
+	          if ((typeof _ret3 === 'undefined' ? 'undefined' : _typeof(_ret3)) === "object") return _ret3.v;
+	        }
+	
+	        // if Component has children,
+	        // recurse through descendants to resolve their scale types the same way
+	        if (_react2.default.Children.count(props.children)) {
+	          var _ret4 = function () {
+	            // console.log('get scaletype from children')
+	            var childScaleTypes = [];
+	            _react2.default.Children.forEach(props.children, function (child) {
+	              if (!child) return;
+	              childScaleTypes.push(_this2._resolveScaleType(child.props, child.type));
+	            });
+	            // console.log('childScaleTypes', childScaleTypes);
+	
+	            var childScaleType = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
+	              // todo warn on multiple scale types, probably not what you want
+	              var kScaleTypes = _lodash2.default.compact(_lodash2.default.uniq(_lodash2.default.map(childScaleTypes, k)));
+	              var kScaleType = kScaleTypes.length === 1 ? kScaleTypes[0] : "ordinal";
+	              return [k, kScaleType];
+	            }));
+	
+	            scaleType = _lodash2.default.assign(childScaleType, scaleType);
+	            return {
+	              v: scaleType
+	            };
+	          }();
+	
+	          if ((typeof _ret4 === 'undefined' ? 'undefined' : _typeof(_ret4)) === "object") return _ret4.v;
+	        }
+	      }
+	
+	      // _resolveTicks(props, Component) {
+	      //   const propsTicks = props.ticks || {};
+	      //   const hasTicksOrTickCount = (v, k) =>
+	      //     (_.isArray(_.get(v, `ticks.${k}`)) || _.isFinite(_.get(v, `tickCount.${k}`)));
+	      //   if(_.every(['x', 'y'], k => hasTicksOrTickCount(props)))
+	      //     return _.pick(props, ['tick', 'tickCount'])
+	      //
+	      // }
+	
+	    }, {
+	      key: '_resolveDomain',
+	      value: function _resolveDomain(props, Component, scaleType) {
+	        var _this3 = this;
+	
+	        var propsDomain = props.domain || {};
+	
+	        // short-circuit if all domains provided
+	        if (hasXYDomains(propsDomain)) return propsDomain;
+	
+	        // start with any domains in props, and try to resolve the rest
+	        var domain = omitNullUndefined(propsDomain);
+	
+	        // if Component provides a custom static getDomain method
+	        // use it to determine remaining domains
+	        if (_lodash2.default.isFunction(Component.getDomain)) {
+	          var componentDomain = omitNullUndefined(Component.getDomain(_extends({ scaleType: scaleType }, props)));
+	          // console.log('Component.getDomain', componentDomain);
+	          domain = _lodash2.default.assign(componentDomain, domain);
+	          if (hasXYDomains(domain)) return domain;
+	        }
+	
+	        // if Component has data or datasets props,
+	        // use the default domainFromDatasets function to determine a domain from them
+	        if (_lodash2.default.isArray(props.data) || _lodash2.default.isArray(props.datasets)) {
+	          var _ret5 = function () {
+	            var datasets = _lodash2.default.isArray(props.datasets) ? props.datasets : [props.data];
+	            var datasetDomain = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
+	              var kAccessor = (0, _Data.makeAccessor)(_lodash2.default.get(props, 'getValue.' + k));
+	              var dataType = (0, _Scale.dataTypeFromScaleType)(scaleType[k]);
+	              var kDomain = (0, _Data.domainFromDatasets)(datasets, kAccessor, dataType);
+	              return [k, kDomain];
+	            }));
+	            // console.log('datasetDomain', datasetDomain);
+	
+	            domain = _lodash2.default.assign(datasetDomain, domain);
+	            if (hasXYDomains(domain)) return {
+	                v: domain
+	              };
+	          }();
+	
+	          if ((typeof _ret5 === 'undefined' ? 'undefined' : _typeof(_ret5)) === "object") return _ret5.v;
+	        }
+	
+	        // if Component has children,
+	        // recurse through descendants to resolve their domains the same way,
+	        // and combine them into a single domain, if there are multiple
+	        if (_react2.default.Children.count(props.children)) {
+	          var _ret6 = function () {
+	            var childDomains = [];
+	            _react2.default.Children.forEach(props.children, function (child) {
+	              if (!child) return;
+	              childDomains = childDomains.concat(_this3._resolveDomain(child.props, child.type, scaleType));
+	            });
+	
+	            // console.log('combining domains', childDomains);
+	            var childDomain = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
+	              var kDomain = (0, _Data.combineDomains)(_lodash2.default.compact(_lodash2.default.map(childDomains, k)), (0, _Scale.dataTypeFromScaleType)(scaleType[k]));
+	              return [k, kDomain];
+	            }));
+	            // console.log('combined domains', childDomain);
+	
+	            domain = _lodash2.default.assign(childDomain, domain);
+	            return {
+	              v: domain
+	            };
+	          }();
+	
+	          if ((typeof _ret6 === 'undefined' ? 'undefined' : _typeof(_ret6)) === "object") return _ret6.v;
+	        }
+	      }
+	    }, {
+	      key: '_resolveTickDomain',
+	      value: function _resolveTickDomain(props, Component, scaleType, domain, scale) {
+	        var _this4 = this;
+	
+	        // todo resolve directly from ticks/tickCount props?
+	        if (_lodash2.default.isFunction(Component.getTickDomain)) {
+	          return omitNullUndefined(Component.getTickDomain(_extends({ scaleType: scaleType, domain: domain, scale: scale }, props)));
+	        }
+	
+	        if (_react2.default.Children.count(props.children)) {
+	          var _ret7 = function () {
+	            var childTickDomains = [];
+	            _react2.default.Children.forEach(props.children, function (child) {
+	              if (!child) return;
+	              childTickDomains.push(_this4._resolveTickDomain(child.props, child.type, scaleType, domain, scale));
+	            });
+	
+	            var tickDomain = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
+	              var kChildTickDomains = _lodash2.default.compact(childTickDomains.map(function (v) {
+	                return _lodash2.default.get(v, k);
+	              }));
+	              var kTickDomain = kChildTickDomains.length ? (0, _Data.combineDomains)(kChildTickDomains, (0, _Scale.dataTypeFromScaleType)(scaleType[k])) : undefined;
+	              return [k, kTickDomain];
+	            }));
+	            return {
+	              v: omitNullUndefined(tickDomain)
+	            };
+	          }();
+	
+	          if ((typeof _ret7 === 'undefined' ? 'undefined' : _typeof(_ret7)) === "object") return _ret7.v;
+	        }
+	      }
+	    }, {
+	      key: '_resolveLabels',
+	      value: function _resolveLabels(props) {}
+	    }, {
+	      key: '_resolveMargin',
+	      value: function _resolveMargin(props, Component, scaleType, domain, scale) {
+	        var _this5 = this;
+	
+	        var propsMargin = props.margin || {};
+	
+	        // short-circuit if all margins provided
+	        if (hasAllMargins(propsMargin)) return propsMargin;
+	
+	        // start with any margins in props, and try to resolve the rest
+	        var margin = omitNullUndefined(propsMargin);
+	
+	        // if Component provides a custom static getMargin method
+	        // use it to determine remaining domains
+	        if (_lodash2.default.isFunction(Component.getMargin)) {
+	          var componentMargin = omitNullUndefined(Component.getMargin(_extends({ scaleType: scaleType, domain: domain, scale: scale }, props)));
+	          // console.log('Component.getMargin', componentMargin);
+	          margin = _lodash2.default.assign(componentMargin, margin);
+	          if (hasAllMargins(margin)) return margin;
+	        }
+	
+	        // if Component has children,
+	        // recurse through descendants to resolve their margins the same way,
+	        // and combine them into a single margin, if there are multiple
+	        if (_react2.default.Children.count(props.children)) {
+	          (function () {
+	            var childMargins = [];
+	            _react2.default.Children.forEach(props.children, function (child) {
+	              if (!child) return;
+	              childMargins = childMargins.concat(_this5._resolveMargin(child.props, child.type, scaleType, domain, scale));
+	            });
+	
+	            // console.log('combining child margins', childMargins);
+	            var childMargin = _lodash2.default.fromPairs(['top', 'bottom', 'left', 'right'].map(function (k) {
+	              // combine margins by taking the max value of each margin direction
+	              return [k, _lodash2.default.get(_lodash2.default.maxBy(childMargins, k), k)];
+	            }));
+	            // console.log('combined margins', childMargin);
+	
+	            margin = _lodash2.default.assign(childMargin, margin);
+	          })();
+	        }
+	        return margin;
+	      }
+	    }, {
+	      key: 'render',
+	      value: function render() {
+	        // console.log('xyScales Props', this.props);
+	        var props = this.props;
+	        var width = props.width;
+	        var height = props.height;
+	        var nice = props.nice;
+	
+	        var scaleFromProps = this.props.scale || {};
+	
+	        // short-circuit if scales provided
+	        // todo warn/throw if bad scales are passed
+	        if (hasXYScales(scaleFromProps)) return _react2.default.createElement(ComposedComponent, this.props);
+	
+	        // scales not provided, so we have to resolve them
+	        // first resolve scale types and domains
+	        var scaleType = this._resolveScaleType(props, ComposedComponent);
+	        var domain = this._resolveDomain(props, ComposedComponent, scaleType);
+	        // console.log('scaleType', scaleType);
+	        // console.log('domain ', domain);
+	
+	        // create a temporary scale with size & domain, which may be used by the Component to calculate margin/tickDomain
+	        // (eg. to create and measure labels for the scales)
+	        var tempScale = this._makeScales({ width: width, height: height, scaleType: scaleType, domain: domain, margin: props.margin, scale: props.scale });
+	
+	        // getTickDomain gives children the opportunity to modify the domain to include their scale ticks
+	        // (can't happen in getDomain, because it can't be done until the base domain/tempScale has been created)
+	        var tickDomain = this._resolveTickDomain(props, ComposedComponent, scaleType, domain, tempScale);
+	        if (_lodash2.default.isObject(tickDomain)) {
+	          ['x', 'y'].forEach(function (k) {
+	            var dataType = (0, _Scale.dataTypeFromScaleType)(scaleType[k]);
+	            if ((0, _Data.isValidDomain)(tickDomain[k], dataType)) domain[k] = (0, _Data.combineDomains)([domain[k], tickDomain[k]], dataType);
+	          });
+	        }
+	        // update tempScale to use new domain before creating margins
+	        tempScale = this._makeScales({ width: width, height: height, scaleType: scaleType, domain: domain, margin: props.margin, scale: props.scale });
+	
+	        // then resolve the margins
+	        var margin = _lodash2.default.defaults(this._resolveMargin(props, ComposedComponent, scaleType, domain, tempScale), { top: 0, bottom: 0, left: 0, right: 0 });
+	        // console.log('margin', margin);
+	
+	        // create real scales from resolved margins
+	        var scaleOptions = { scale: props.scale, width: width, height: height, scaleType: scaleType, domain: domain, margin: margin, nice: nice };
+	        // console.log('making scales', scaleOptions);
+	        var scale = _lodash2.default.isEqual(margin, props.margin) ? tempScale : // don't re-create scales if margin hasn't changed (ie. was passed in props)
+	        this._makeScales(scaleOptions);
+	
+	        // and pass scales to wrapped component
+	        var passedProps = _lodash2.default.assign({}, this.props, { scale: scale, scaleType: scaleType, margin: margin, domain: domain });
+	        return _react2.default.createElement(ComposedComponent, passedProps);
+	
+	        // todo spacing/padding
+	        // todo includeZero
+	        // todo purerender/shouldcomponentupdate?
+	        // todo resolve margins if scales are present
+	        // todo use zero for any margins which can't be resolved
+	        // todo throw if cannot resolve scaleType
+	        // todo throw if cannot resolve domain
+	        // todo check to make sure margins didn't change after scales resolved?
+	      }
+	    }]);
+	
+	    return _class;
+	  }(_react2.default.Component), _class.defaultProps = _lodash2.default.defaults(ComposedComponent.defaultProps, {
+	    invertScale: { x: false, y: false } }), _class.getScaleType = ComposedComponent.getScaleType, _class.getDomain = ComposedComponent.getDomain, _class.getMargin = ComposedComponent.getMargin, _temp2;
+	}
+
+/***/ },
+/* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
+	exports.makeAccessor = makeAccessor;
+	exports.datasetsFromPropsOrDescendants = datasetsFromPropsOrDescendants;
+	exports.inferDataType = inferDataType;
+	exports.inferDatasetsType = inferDatasetsType;
+	exports.combineDomains = combineDomains;
+	exports.domainFromData = domainFromData;
+	exports.domainFromDatasets = domainFromDatasets;
+	exports.isValidDomain = isValidDomain;
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d = __webpack_require__(170);
+	
+	var _d2 = _interopRequireDefault(_d);
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	/**
+	 * `makeAccessor` creates an accessor or "getter" function given a variety of options
+	 * to be used for retrieving a data value from within an object or array
+	 *
+	 * If given a function, it is passed through.
+	 * If given null or undefined, the getter is the identity function - ie. returns whatever it's passed
+	 * If given an array index or deep object key string, the value will be retrieved using _.property
+	 *
+	 * @example
+	 * makeAccessor(null)(4); // 4
+	 * makeAccessor(d => d + 1)(4); // 5
+	 * makeAccessor(1)(['a', 'b', 'c']); // 'b'
+	 * makeAccessor('x.0.y')({x: [{y: 9}]}); // 9
+	 *
+	 * @param {any} key - Getter, which may be a function, integer, string, null, or undefined;
+	 * @returns {function} accessor - Accessor function
+	 */
+	function makeAccessor(key) {
+	  return _lodash2.default.isFunction(key) ? key : _lodash2.default.isNull(key) || _lodash2.default.isUndefined(key) ? _lodash2.default.identity : _lodash2.default.property(key);
+	}
+	
+	/**
+	 * `datasetsFromPropsOrDescendants` expects a `props` object which may have `children`.
+	 * if `props` has `data` or `datasets`, returns it; otherwise recursively searches props.children
+	 * for components have `data` or `datasets` and combines them into one `datasets` array.
+	 * `props.data` is wrapped in array because this returns `datasets` (multiple arrays of `data`)
+	 *
+	 * @param {Object} props - A React props object, which may have `children` with their own props.
+	 * @returns {Array.<Array>} datasets - An array of arrays of data objects
+	 */
+	function datasetsFromPropsOrDescendants(props) {
+	  if (_lodash2.default.isArray(props.datasets)) {
+	    return props.datasets;
+	  } else if (_lodash2.default.isArray(props.data)) {
+	    return [props.data];
+	  } else if (_react2.default.Children.count(props.children)) {
+	    var _ret = function () {
+	      var datasets = [];
+	      // use Children.forEach instead of map, because Children.map flattens the arrays
+	      _react2.default.Children.forEach(props.children, function (child) {
+	        datasets = datasets.concat(datasetsFromPropsOrDescendants(child.props));
+	      });
+	      return {
+	        v: datasets
+	      };
+	    }();
+	
+	    if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	  }
+	  return [];
+	}
+	
+	function inferDataType(data) {
+	  var accessor = arguments.length <= 1 || arguments[1] === undefined ? _lodash2.default.identity : arguments[1];
+	
+	  if (!_lodash2.default.isArray(data)) throw new Error('inferDataType expects a data array');else if (_lodash2.default.every(data, function (d) {
+	    return _lodash2.default.isUndefined(accessor(d));
+	  })) return 'categorical'; // should this be allowed?
+	  else if (_lodash2.default.every(data, function (d) {
+	      return _lodash2.default.isNumber(accessor(d)) || _lodash2.default.isUndefined(accessor(d));
+	    })) return 'number';else if (_lodash2.default.every(data, function (d) {
+	      return _lodash2.default.isDate(accessor(d)) || _lodash2.default.isUndefined(accessor(d));
+	    })) return 'time';else return 'categorical';
+	}
+	
+	function inferDatasetsType(datasets) {
+	  var accessor = arguments.length <= 1 || arguments[1] === undefined ? _lodash2.default.identity : arguments[1];
+	
+	  if (!_lodash2.default.isArray(datasets)) throw new Error('inferDatasetsType expects a datasets array');
+	
+	  var types = datasets.map(function (data) {
+	    return inferDataType(data, accessor);
+	  });
+	  var uniqTypes = _lodash2.default.uniq(types);
+	  return uniqTypes.length === 1 ? uniqTypes[0] : 'categorical';
+	}
+	
+	function combineDomains(domains, dataType) {
+	  if (!_lodash2.default.isArray(domains)) return undefined;
+	  return dataType === 'categorical' ? _lodash2.default.uniq(_lodash2.default.flatten(_lodash2.default.compact(domains))) : _d2.default.extent(_lodash2.default.flatten(domains));
+	}
+	
+	function domainFromData(data) {
+	  var accessor = arguments.length <= 1 || arguments[1] === undefined ? _lodash2.default.identity : arguments[1];
+	  var type = arguments.length <= 2 || arguments[2] === undefined ? undefined : arguments[2];
+	
+	  if (!type) type = inferDataType(data, accessor);
+	  return type === 'number' || type === 'time' ? _d2.default.extent(data.map(accessor)) : _lodash2.default.uniq(data.map(accessor));
+	}
+	
+	function domainFromDatasets(datasets) {
+	  var accessor = arguments.length <= 1 || arguments[1] === undefined ? _lodash2.default.identity : arguments[1];
+	  var type = arguments.length <= 2 || arguments[2] === undefined ? undefined : arguments[2];
+	
+	  // returns the default domain of a collection of datasets with an accessor function
+	  // for numeric and date-type datasets, returns the extent (min and max) of the numbers/dates
+	  // for categorical datasets, returns the set of distinct category values
+	  if (!type) type = inferDatasetsType(datasets, accessor);
+	  var domains = datasets.map(function (data) {
+	    return domainFromData(data, accessor, type);
+	  });
+	  return combineDomains(domains, type);
+	}
+	
+	function isValidDomain(domain) {
+	  var type = arguments.length <= 1 || arguments[1] === undefined ? 'categorical' : arguments[1];
+	
+	  return _lodash2.default.isArray(domain) && !!domain.length && (
+	  // categorical domain can be any array of anything
+	  type === 'categorical' ||
+	  // number/time domains should look like [min, max]
+	  type === 'number' && domain.length === 2 && _lodash2.default.every(domain, _lodash2.default.isNumber) || type === 'time' && domain.length === 2 && _lodash2.default.every(domain, _lodash2.default.isDate));
+	}
+
+/***/ },
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.scaleTypeFromDataType = scaleTypeFromDataType;
+	exports.dataTypeFromScaleType = dataTypeFromScaleType;
+	exports.inferDataTypeFromDomain = inferDataTypeFromDomain;
+	exports.inferScaleType = inferScaleType;
+	exports.initScale = initScale;
+	exports.isValidScale = isValidScale;
+	exports.getScaleTicks = getScaleTicks;
+	exports.getTickDomain = getTickDomain;
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _d = __webpack_require__(170);
+	
+	var _d2 = _interopRequireDefault(_d);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function scaleTypeFromDataType(dataType) {
+	  return _lodash2.default.get({
+	    number: 'linear',
+	    time: 'time',
+	    categorical: 'ordinal'
+	  }, dataType, 'ordinal');
+	}
+	
+	function dataTypeFromScaleType(scaleType) {
+	  return _lodash2.default.get({
+	    linear: 'number',
+	    log: 'number',
+	    pow: 'number',
+	    time: 'time',
+	    ordinal: 'categorical'
+	  }, scaleType, 'categorical');
+	}
+	
+	function inferDataTypeFromDomain(domain) {
+	  if (!_lodash2.default.isArray(domain)) throw new Error('invalid domain, inferDataTypeFromDomain cannot infer data type');
+	
+	  return domain.length !== 2 ? 'categorical' : _lodash2.default.every(domain, _lodash2.default.isNumber) ? 'number' : _lodash2.default.every(domain, _lodash2.default.isDate) ? 'time' : 'categorical';
+	}
+	
+	function inferScaleType(scale) {
+	  return !scale.ticks ? 'ordinal' : _lodash2.default.isDate(scale.domain()[0]) ? 'time' : scale.base ? 'log' : scale.exponent ? 'pow' : 'linear';
+	}
+	
+	function initScale(scaleType) {
+	  switch (scaleType) {
+	    case 'linear':
+	      return _d2.default.scale.linear();
+	    case 'time':
+	      return _d2.default.time.scale();
+	    case 'ordinal':
+	      return _d2.default.scale.ordinal();
+	    case 'log':
+	      return _d2.default.scale.log();
+	    case 'pow':
+	      return _d2.default.scale.pow();
+	  }
+	}
+	
+	function isValidScale(scale) {
+	  return _lodash2.default.isFunction(scale) && _lodash2.default.isFunction(scale.domain) && _lodash2.default.isFunction(scale.range);
+	}
+	
+	function getScaleTicks(scale, scaleType) {
+	  var tickCount = arguments.length <= 2 || arguments[2] === undefined ? 10 : arguments[2];
+	
+	  scaleType = scaleType || inferScaleType(scale);
+	  return scaleType === 'ordinal' ? scale.domain() : scale.ticks(tickCount);
+	}
+	
+	function getTickDomain(scale) {
+	  var _ref = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	  var ticks = _ref.ticks;
+	  var tickCount = _ref.tickCount;
+	  var nice = _ref.nice;
+	
+	  var scaleType = inferScaleType(scale);
+	  // bug - d3 linearScale.copy().nice() modifies original scale, so we must create a new scale instead of copy()ing
+	  // todo replace this with d3-scale from d3 v4.0
+	  if (nice) scale = initScale(scaleType).domain(scale.domain()).nice(tickCount || 10);
+	
+	  if (_lodash2.default.isArray(ticks)) return combineDomains([scale.domain(), domainFromData(ticks, _lodash2.default.identity, dataTypeFromScaleType(scaleType))]);else if (nice) return scale.domain();
+	  // return undefined by default, if we have no options pertaining to ticks
+	}
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.zeroMargin = undefined;
+	exports.innerWidth = innerWidth;
+	exports.innerHeight = innerHeight;
+	exports.innerSize = innerSize;
+	exports.innerRangeX = innerRangeX;
+	exports.innerRangeY = innerRangeY;
+	exports.maxMargins = maxMargins;
+	exports.sumMargins = sumMargins;
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d = __webpack_require__(170);
+	
+	var _d2 = _interopRequireDefault(_d);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var zeroMargin = exports.zeroMargin = { top: 0, bottom: 0, left: 0, right: 0 };
+	
+	function innerWidth(width) {
+	  var margin = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	  return Math.max(width - ((margin.left || 0) + (margin.right || 0)), 0);
+	}
+	function innerHeight(height) {
+	  var margin = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	  return Math.max(height - ((margin.top || 0) + (margin.bottom || 0)), 0);
+	}
+	
+	function innerSize() {
+	  var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	
+	  var width = _ref.width;
+	  var height = _ref.height;
+	  var margin = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	  return { width: innerWidth(width, margin), height: innerHeight(height, margin) };
+	}
+	
+	function innerRangeX(outerWidth) {
+	  var margin = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	  var left = margin.left || 0;
+	  return [Math.min(left, outerWidth), Math.min(left + innerWidth(outerWidth, margin), outerWidth)];
+	}
+	function innerRangeY(outerHeight) {
+	  var margin = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	  var top = margin.top || 0;
+	  return [Math.min(top + innerHeight(outerHeight, margin), outerHeight), Math.min(top, outerHeight)];
+	}
+	
+	function maxMargins() {
+	  var margins = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	
+	  return margins.reduce(function (result, margin) {
+	    return _lodash2.default.mapValues(result, function (value, key) {
+	      return Math.max(margin[key] || 0, result[key] || 0);
+	    });
+	  }, _lodash2.default.clone(zeroMargin));
+	}
+	
+	function sumMargins() {
+	  var margins = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	
+	  return margins.reduce(function (result, margin) {
+	    return _lodash2.default.mapValues(result, function (value, key) {
+	      return (result[key] || 0) + (margin[key] || 0);
+	    });
+	  }, _lodash2.default.clone(zeroMargin));
+	}
+
+/***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
 	});
 	
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -58997,11 +61790,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(170);
+	var _lodash = __webpack_require__(168);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d2 = __webpack_require__(172);
+	var _d2 = __webpack_require__(170);
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
@@ -59009,80 +61802,121 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// import shallowCompare from 'react-addons-shallow-compare';
+	// import PureRenderDebug from 'react-pure-render-debug';
 	var PropTypes = _react2.default.PropTypes;
 	
+	// import resolveXYScales from './utils/resolveXYScales';
+	// import resolveObjectProps from './utils/resolveObjectProps';
+	
+	// import shallowEqual from 'recompose/shallowEqual';
 	
 	var LineChart = _react2.default.createClass({
-	    displayName: 'LineChart',
+	  displayName: 'LineChart',
 	
-	    mixins: [(0, _util.InterfaceMixin)('XYChart')],
-	    propTypes: {
-	        // the array of data objects
-	        data: PropTypes.array.isRequired,
-	        // accessor for X & Y coordinates
-	        getValue: PropTypes.object,
+	  mixins: [(0, _util.InterfaceMixin)('XYChart')],
+	  propTypes: {
+	    // the array of data objects
+	    data: PropTypes.array.isRequired,
+	    // accessor for X & Y coordinates
+	    getValue: PropTypes.object,
 	
-	        // props from XYPlot
-	        scale: PropTypes.object
-	    },
+	    // props from XYPlot
+	    scale: PropTypes.object
+	  },
 	
-	    componentWillMount: function componentWillMount() {
-	        this.initBisector(this.props);
-	    },
-	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
-	        this.initBisector(newProps);
-	    },
-	    initBisector: function initBisector(props) {
-	        var _this = this;
+	  componentWillMount: function componentWillMount() {
+	    this.initBisector(this.props);
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+	    this.initBisector(newProps);
+	  },
 	
-	        this.setState({ bisectX: _d3.default.bisector(function (d) {
-	                return (0, _util.accessor)(_this.props.getValue.x)(d);
-	            }).left });
-	    },
-	    getHovered: function getHovered(x, y) {
-	        var closestDataIndex = this.state.bisectX(this.props.data, x);
-	        //console.log(closestDataIndex, this.props.data[closestDataIndex]);
-	        return this.props.data[closestDataIndex];
-	    },
-	    render: function render() {
-	        var _props = this.props;
-	        var data = _props.data;
-	        var getValue = _props.getValue;
-	        var scale = _props.scale;
+	  // shouldComponentUpdate(nextProps, nextState) {
+	  //   const shallowKeys = ['data', 'getValue'];
+	  //   const [shallowProps, shallowNextProps] = [this.props, nextProps].map(p => _.pick(p, shallowKeys));
+	  //   const isShallowEqual = shallowEqual(shallowProps, shallowNextProps);
+	  //
+	  //   const deeperKeys = ['scale'];
+	  //   const [deeperProps, deeperNextProps] = [this.props, nextProps].map(p => _.pick(p, deeperKeys));
+	  //   const isDeeperEqual = _.every(deeperKeys, k => shallowEqual(this.props[k], nextProps[k]));
+	  //
+	  //   const shouldUpdate = isShallowEqual && isDeeperEqual;
+	  //   // const shouldUpdate = PureRenderDebug.shouldComponentUpdate.call(this, nextProps, nextState);
+	  //   console.log('shouldUpdate', isShallowEqual, isDeeperEqual, shouldUpdate);
+	  //   return shouldUpdate;
+	  // },
 	
-	        var accessors = _lodash2.default.mapValues(getValue, _util.accessor);
-	        var points = _lodash2.default.map(data, function (d) {
-	            return [scale.x(accessors.x(d)), scale.y(accessors.y(d))];
-	        });
-	        var pathStr = pointsToPathStr(points);
+	  initBisector: function initBisector(props) {
+	    var _this = this;
 	
-	        return _react2.default.createElement(
-	            'g',
-	            { className: this.props.name },
-	            _react2.default.createElement('path', { d: pathStr })
-	        );
-	    }
+	    this.setState({ bisectX: _d3.default.bisector(function (d) {
+	        return (0, _util.accessor)(_this.props.getValue.x)(d);
+	      }).left });
+	  },
+	  getHovered: function getHovered(x, y) {
+	    var closestDataIndex = this.state.bisectX(this.props.data, x);
+	    //console.log(closestDataIndex, this.props.data[closestDataIndex]);
+	    return this.props.data[closestDataIndex];
+	  },
+	  render: function render() {
+	    var _props = this.props;
+	    var data = _props.data;
+	    var getValue = _props.getValue;
+	    var scale = _props.scale;
+	
+	    var accessors = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
+	      return [k, (0, _util.accessor)((getValue || {})[k])];
+	    }));
+	    var points = _lodash2.default.map(data, function (d) {
+	      return [scale.x(accessors.x(d)), scale.y(accessors.y(d))];
+	    });
+	    var pathStr = pointsToPathStr(points);
+	
+	    return _react2.default.createElement(
+	      'g',
+	      { className: this.props.name },
+	      _react2.default.createElement('path', { d: pathStr })
+	    );
+	  }
 	});
 	
 	function pointsToPathStr(points) {
-	    // takes array of points in [[x, y], [x, y]... ] format
-	    // returns SVG path string in "M X Y L X Y" format
-	    // https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Line_commands
-	    return _lodash2.default.map(points, function (_ref, i) {
-	        var _ref2 = _slicedToArray(_ref, 2);
+	  // takes array of points in [[x, y], [x, y]... ] format
+	  // returns SVG path string in "M X Y L X Y" format
+	  // https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Line_commands
+	  return _lodash2.default.map(points, function (_ref, i) {
+	    var _ref2 = _slicedToArray(_ref, 2);
 	
-	        var x = _ref2[0];
-	        var y = _ref2[1];
+	    var x = _ref2[0];
+	    var y = _ref2[1];
 	
-	        var command = i === 0 ? 'M' : 'L';
-	        return command + ' ' + x + ' ' + y;
-	    }).join(' ');
+	    var command = i === 0 ? 'M' : 'L';
+	    return command + ' ' + x + ' ' + y;
+	  }).join(' ');
 	}
 	
+	var xyKeys = ['domain', 'nice', 'invertAxis', 'tickCount', 'ticks', 'tickLength', 'labelValues', 'labelFormat', 'labelPadding', 'showLabels', 'showGrid', 'showTicks', 'showZero', 'axisLabel', 'axisLabelAlign', 'axisLabelPadding'];
+	var dirKeys = ['margin', 'padding', 'spacing'];
+	//
+	// const LineChartResolved = _.flow([
+	//   resolveXYScales,
+	//   _.partial(resolveObjectProps, _, xyKeys, ['x', 'y']),
+	//   _.partial(resolveObjectProps, _, dirKeys, ['top', 'bottom', 'left', 'right'])
+	// ])(LineChart);
+	
+	// export default LineChartResolved;
+	
+	//export default resolveXYScales(LineChart);
+	
+	// import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
+	//
+	// export default onlyUpdateForKeys(['data', 'getValue'], LineChart);
+	//
 	exports.default = LineChart;
 
 /***/ },
-/* 265 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59099,11 +61933,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(170);
+	var _lodash = __webpack_require__(168);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d2 = __webpack_require__(172);
+	var _d2 = __webpack_require__(170);
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
@@ -59511,7 +62345,7 @@
 	exports.default = BarChart;
 
 /***/ },
-/* 266 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59528,11 +62362,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(170);
+	var _lodash = __webpack_require__(168);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d2 = __webpack_require__(172);
+	var _d2 = __webpack_require__(170);
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
@@ -59726,7 +62560,7 @@
 	exports.default = MarkerLineChart;
 
 /***/ },
-/* 267 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59741,11 +62575,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(170);
+	var _lodash = __webpack_require__(168);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d2 = __webpack_require__(172);
+	var _d2 = __webpack_require__(170);
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
@@ -59866,7 +62700,7 @@
 	exports.default = ScatterPlot;
 
 /***/ },
-/* 268 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59881,15 +62715,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(170);
+	var _lodash = __webpack_require__(168);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d = __webpack_require__(172);
+	var _d = __webpack_require__(170);
 	
 	var _d2 = _interopRequireDefault(_d);
 	
-	var _BarChart = __webpack_require__(265);
+	var _BarChart = __webpack_require__(280);
 	
 	var _BarChart2 = _interopRequireDefault(_BarChart);
 	
@@ -59969,7 +62803,7 @@
 	exports.default = Histogram;
 
 /***/ },
-/* 269 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59984,21 +62818,21 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(170);
+	var _lodash = __webpack_require__(168);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d = __webpack_require__(172);
+	var _d = __webpack_require__(170);
 	
 	var _d2 = _interopRequireDefault(_d);
 	
 	var _util = __webpack_require__(173);
 	
-	var _BarChart = __webpack_require__(265);
+	var _BarChart = __webpack_require__(280);
 	
 	var _BarChart2 = _interopRequireDefault(_BarChart);
 	
-	var _LineChart = __webpack_require__(264);
+	var _LineChart = __webpack_require__(279);
 	
 	var _LineChart2 = _interopRequireDefault(_LineChart);
 	
@@ -60116,7 +62950,7 @@
 	exports.default = KernelDensityEstimation;
 
 /***/ },
-/* 270 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60131,11 +62965,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(170);
+	var _lodash = __webpack_require__(168);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d2 = __webpack_require__(172);
+	var _d2 = __webpack_require__(170);
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
@@ -60272,7 +63106,7 @@
 	exports.default = AreaHeatmap;
 
 /***/ },
-/* 271 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60289,11 +63123,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(170);
+	var _lodash = __webpack_require__(168);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d2 = __webpack_require__(172);
+	var _d2 = __webpack_require__(170);
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
@@ -60528,7 +63362,7 @@
 	exports.default = PieChart;
 
 /***/ },
-/* 272 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60543,11 +63377,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _lodash = __webpack_require__(170);
+	var _lodash = __webpack_require__(168);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d = __webpack_require__(172);
+	var _d = __webpack_require__(170);
 	
 	var _d2 = _interopRequireDefault(_d);
 	
@@ -60769,7 +63603,3007 @@
 	exports.default = TreeMap;
 
 /***/ },
-/* 273 */
+/* 288 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _Scale = __webpack_require__(277);
+	
+	var _Margin = __webpack_require__(278);
+	
+	var _Axis = __webpack_require__(289);
+	
+	var _XTicks = __webpack_require__(290);
+	
+	var _XTicks2 = _interopRequireDefault(_XTicks);
+	
+	var _XGrid = __webpack_require__(291);
+	
+	var _XGrid2 = _interopRequireDefault(_XGrid);
+	
+	var _XAxisLabels = __webpack_require__(293);
+	
+	var _XAxisLabels2 = _interopRequireDefault(_XAxisLabels);
+	
+	var _XAxisTitle = __webpack_require__(306);
+	
+	var _XAxisTitle2 = _interopRequireDefault(_XAxisTitle);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var XAxis = function (_React$Component) {
+	  _inherits(XAxis, _React$Component);
+	
+	  function XAxis() {
+	    _classCallCheck(this, XAxis);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(XAxis).apply(this, arguments));
+	  }
+	
+	  _createClass(XAxis, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var width = _props.width;
+	      var height = _props.height;
+	      var position = _props.position;
+	      var tickLength = _props.tickLength;
+	      var titleDistance = _props.titleDistance;
+	      var labelDistance = _props.labelDistance;
+	      var showTitle = _props.showTitle;
+	      var showLabels = _props.showLabels;
+	      var showTicks = _props.showTicks;
+	      var showGrid = _props.showGrid;
+	
+	      var _getAxisChildProps = (0, _Axis.getAxisChildProps)(this.props);
+	
+	      var ticksProps = _getAxisChildProps.ticksProps;
+	      var gridProps = _getAxisChildProps.gridProps;
+	      var labelsProps = _getAxisChildProps.labelsProps;
+	      var titleProps = _getAxisChildProps.titleProps;
+	
+	
+	      labelsProps.distance = labelDistance + (showTicks ? tickLength : 0);
+	
+	      if (showTitle && showLabels) {
+	        // todo optimize so we don't generate labels twice
+	        var labelsMargin = _XAxisLabels2.default.getMargin(labelsProps);
+	        titleProps.distance = titleDistance + labelsMargin[position];
+	      } else if (showTitle && showTicks) {
+	        titleProps.distance = titleDistance + tickLength;
+	      }
+	
+	      var axisLineY = position === 'bottom' ? height : 0;
+	
+	      return _react2.default.createElement(
+	        'g',
+	        { className: 'chart-axis chart-axis-x' },
+	        showGrid ? _react2.default.createElement(_XGrid2.default, gridProps) : null,
+	        showTicks ? _react2.default.createElement(_XTicks2.default, ticksProps) : null,
+	        showLabels ? _react2.default.createElement(_XAxisLabels2.default, labelsProps) : null,
+	        showTitle ? _react2.default.createElement(_XAxisTitle2.default, titleProps) : null,
+	        _react2.default.createElement('line', { className: 'chart-axis-line chart-axis-line-x', x1: 0, x2: width, y1: axisLineY, y2: axisLineY })
+	      );
+	    }
+	  }], [{
+	    key: 'getTickDomain',
+	    value: function getTickDomain(props) {
+	      if (!_lodash2.default.get(props, 'scale.x')) return;
+	      props = _lodash2.default.defaults({}, props, XAxis.defaultProps);
+	      return { x: (0, _Scale.getTickDomain)(props.scale.x, props) };
+	    }
+	  }, {
+	    key: 'getMargin',
+	    value: function getMargin(props) {
+	      // todo figure out margin if labels change after margin?
+	
+	      var _getAxisChildProps2 = (0, _Axis.getAxisChildProps)(props);
+	
+	      var ticksProps = _getAxisChildProps2.ticksProps;
+	      var labelsProps = _getAxisChildProps2.labelsProps;
+	      var titleProps = _getAxisChildProps2.titleProps;
+	
+	      var margins = [];
+	
+	      if (props.showTicks) margins.push(_XTicks2.default.getMargin(ticksProps));
+	
+	      if (props.showTitle && props.title) margins.push(_XAxisTitle2.default.getMargin(titleProps));
+	
+	      if (props.showLabels) margins.push(_XAxisLabels2.default.getMargin(labelsProps));
+	
+	      return (0, _Margin.sumMargins)(margins);
+	    }
+	  }]);
+	
+	  return XAxis;
+	}(_react2.default.Component);
+	
+	XAxis.propTypes = {
+	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired }),
+	
+	  width: _react2.default.PropTypes.number,
+	  height: _react2.default.PropTypes.number,
+	  position: _react2.default.PropTypes.string,
+	  placement: _react2.default.PropTypes.string,
+	  nice: _react2.default.PropTypes.bool,
+	  ticks: _react2.default.PropTypes.array,
+	  tickCount: _react2.default.PropTypes.number,
+	
+	  showTitle: _react2.default.PropTypes.bool,
+	  showLabels: _react2.default.PropTypes.bool,
+	  showTicks: _react2.default.PropTypes.bool,
+	  showGrid: _react2.default.PropTypes.bool,
+	
+	  title: _react2.default.PropTypes.string,
+	  titleDistance: _react2.default.PropTypes.number,
+	  titleAlign: _react2.default.PropTypes.string,
+	  titleRotate: _react2.default.PropTypes.bool,
+	  titleStyle: _react2.default.PropTypes.object,
+	
+	  labelDistance: _react2.default.PropTypes.number,
+	  labelClassName: _react2.default.PropTypes.string,
+	  labelStyle: _react2.default.PropTypes.object,
+	  labelFormat: _react2.default.PropTypes.object,
+	  labelFormats: _react2.default.PropTypes.array,
+	  labels: _react2.default.PropTypes.array,
+	
+	  tickLength: _react2.default.PropTypes.number,
+	  tickClassName: _react2.default.PropTypes.string,
+	  tickStyle: _react2.default.PropTypes.object,
+	
+	  gridLineClassName: _react2.default.PropTypes.string,
+	  gridLineStyle: _react2.default.PropTypes.object
+	};
+	XAxis.defaultProps = {
+	  width: 400,
+	  height: 250,
+	  position: 'bottom',
+	  nice: true,
+	  showTitle: true,
+	  showLabels: true,
+	  showTicks: true,
+	  showGrid: true,
+	  tickLength: 5,
+	  labelDistance: 3,
+	  titleDistance: 5
+	};
+	exports.default = XAxis;
+
+/***/ },
+/* 289 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.getAxisChildProps = getAxisChildProps;
+	function getAxisChildProps(props) {
+	  var scale = props.scale;
+	  var width = props.width;
+	  var height = props.height;
+	  var position = props.position;
+	  var placement = props.placement;
+	  var ticks = props.ticks;
+	  var tickCount = props.tickCount;
+	  var tickLength = props.tickLength;
+	  var tickClassName = props.tickClassName;
+	  var tickStyle = props.tickStyle;
+	  var title = props.title;
+	  var titleDistance = props.titleDistance;
+	  var titleAlign = props.titleAlign;
+	  var titleRotate = props.titleRotate;
+	  var titleStyle = props.titleStyle;
+	  var labelDistance = props.labelDistance;
+	  var labelClassName = props.labelClassName;
+	  var labelStyle = props.labelStyle;
+	  var labelFormat = props.labelFormat;
+	  var labelFormats = props.labelFormats;
+	  var labels = props.labels;
+	  var gridLineClassName = props.gridLineClassName;
+	  var gridLineStyle = props.gridLineStyle;
+	
+	
+	  var ticksProps = {
+	    width: width, height: height, scale: scale, ticks: ticks, tickCount: tickCount,
+	    position: position, placement: placement, tickLength: tickLength, tickStyle: tickStyle, tickClassName: tickClassName
+	  };
+	
+	  var gridProps = {
+	    width: width, height: height, scale: scale, ticks: ticks, tickCount: tickCount,
+	    lineClassName: gridLineClassName, lineStyle: gridLineStyle
+	  };
+	
+	  var labelsProps = {
+	    width: width, height: height, scale: scale, ticks: ticks, tickCount: tickCount,
+	    position: position, placement: placement, labels: labels,
+	    labelClassName: labelClassName, labelStyle: labelStyle, distance: labelDistance, format: labelFormat, formats: labelFormats
+	  };
+	
+	  var titleProps = {
+	    width: width, height: height, position: position, placement: placement, title: title,
+	    style: titleStyle, distance: titleDistance, alignment: titleAlign, rotate: titleRotate
+	  };
+	
+	  return { ticksProps: ticksProps, gridProps: gridProps, labelsProps: labelsProps, titleProps: titleProps };
+	}
+
+/***/ },
+/* 290 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _Scale = __webpack_require__(277);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var XTicks = function (_React$Component) {
+	  _inherits(XTicks, _React$Component);
+	
+	  function XTicks() {
+	    _classCallCheck(this, XTicks);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(XTicks).apply(this, arguments));
+	  }
+	
+	  _createClass(XTicks, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var height = _props.height;
+	      var tickCount = _props.tickCount;
+	      var position = _props.position;
+	      var tickLength = _props.tickLength;
+	      var tickStyle = _props.tickStyle;
+	      var tickClassName = _props.tickClassName;
+	
+	      var scale = this.props.scale.x;
+	      var placement = this.props.placement || (position === 'top' ? 'above' : 'below');
+	      var ticks = this.props.ticks || (0, _Scale.getScaleTicks)(scale, null, tickCount);
+	      var className = 'chart-tick chart-tick-x ' + (tickClassName || '');
+	      var transform = position === 'bottom' ? 'translate(0,' + height + ')' : '';
+	
+	      return _react2.default.createElement(
+	        'g',
+	        { className: 'chart-ticks-x', transform: transform },
+	        ticks.map(function (tick, i) {
+	          var x1 = scale(tick);
+	          var y2 = placement === 'above' ? -tickLength : tickLength;
+	
+	          return _react2.default.createElement('line', {
+	            x1: x1, x2: x1, y1: 0, y2: y2,
+	            className: className,
+	            style: tickStyle,
+	            key: 'tick-' + i
+	          });
+	        })
+	      );
+	    }
+	  }], [{
+	    key: 'getTickDomain',
+	    value: function getTickDomain(props) {
+	      if (!_lodash2.default.get(props, 'scale.x')) return;
+	      props = _lodash2.default.defaults({}, props, XTicks.defaultProps);
+	      return { x: (0, _Scale.getTickDomain)(props.scale.x, props) };
+	    }
+	  }, {
+	    key: 'getMargin',
+	    value: function getMargin(props) {
+	      var _$defaults = _lodash2.default.defaults({}, props, XTicks.defaultProps);
+	
+	      var tickLength = _$defaults.tickLength;
+	      var position = _$defaults.position;
+	
+	      var placement = props.placement || (position === 'top' ? 'above' : 'below');
+	      var zeroMargin = { top: 0, bottom: 0, left: 0, right: 0 };
+	
+	      if (position === 'bottom' && placement === 'above' || position == 'top' && placement === 'below') return zeroMargin;
+	
+	      return _lodash2.default.defaults(_defineProperty({}, position, tickLength || 0), zeroMargin);
+	    }
+	  }]);
+	
+	  return XTicks;
+	}(_react2.default.Component);
+	
+	XTicks.propTypes = {
+	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired })
+	};
+	XTicks.defaultProps = {
+	  position: 'bottom',
+	  nice: true,
+	  tickLength: 5,
+	  tickStyle: {}
+	};
+	exports.default = XTicks;
+
+/***/ },
+/* 291 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _Scale = __webpack_require__(277);
+	
+	var _XLine = __webpack_require__(292);
+	
+	var _XLine2 = _interopRequireDefault(_XLine);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var XGrid = function (_React$Component) {
+	  _inherits(XGrid, _React$Component);
+	
+	  function XGrid() {
+	    _classCallCheck(this, XGrid);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(XGrid).apply(this, arguments));
+	  }
+	
+	  _createClass(XGrid, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      var _props = this.props;
+	      var height = _props.height;
+	      var tickCount = _props.tickCount;
+	      var lineClassName = _props.lineClassName;
+	      var lineStyle = _props.lineStyle;
+	
+	      var scale = this.props.scale.x;
+	      var ticks = this.props.ticks || (0, _Scale.getScaleTicks)(scale, null, tickCount);
+	      var className = 'chart-grid-line chart-grid-line-x ' + (lineClassName || '');
+	
+	      return _react2.default.createElement(
+	        'g',
+	        { className: 'chart-grid-x' },
+	        ticks.map(function (tick, i) {
+	          return _react2.default.createElement(_XLine2.default, {
+	            scale: _this2.props.scale,
+	            value: tick,
+	            height: height,
+	            className: className,
+	            style: lineStyle,
+	            key: 'grid-x-line-' + i
+	          });
+	        })
+	      );
+	    }
+	  }], [{
+	    key: 'getTickDomain',
+	    value: function getTickDomain(props) {
+	      if (!_lodash2.default.get(props, 'scale.x')) return;
+	      props = _lodash2.default.defaults({}, props, XGrid.defaultProps);
+	      return { x: (0, _Scale.getTickDomain)(props.scale.x, props) };
+	    }
+	  }]);
+	
+	  return XGrid;
+	}(_react2.default.Component);
+	
+	XGrid.propTypes = {
+	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired }),
+	  width: _react2.default.PropTypes.number,
+	  height: _react2.default.PropTypes.number,
+	  nice: _react2.default.PropTypes.bool,
+	  ticks: _react2.default.PropTypes.array,
+	  tickCount: _react2.default.PropTypes.number,
+	  lineClassName: _react2.default.PropTypes.string,
+	  lineStyle: _react2.default.PropTypes.object
+	};
+	XGrid.defaultProps = {
+	  nice: true,
+	  lineStyle: {}
+	};
+	exports.default = XGrid;
+
+/***/ },
+/* 292 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var XLine = function (_React$Component) {
+	  _inherits(XLine, _React$Component);
+	
+	  function XLine() {
+	    _classCallCheck(this, XLine);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(XLine).apply(this, arguments));
+	  }
+	
+	  _createClass(XLine, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var value = _props.value;
+	      var height = _props.height;
+	      var style = _props.style;
+	
+	      var scale = this.props.scale.x;
+	      var className = 'chart-line-x ' + (this.props.className || '');
+	      var lineX = scale(value);
+	
+	      return _react2.default.createElement('line', {
+	        x1: lineX,
+	        x2: lineX,
+	        y1: 0,
+	        y2: height,
+	        className: className, style: style
+	      });
+	    }
+	  }]);
+	
+	  return XLine;
+	}(_react2.default.Component);
+	
+	XLine.propTypes = {
+	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired }),
+	  value: _react2.default.PropTypes.any.isRequired
+	};
+	XLine.defaultProps = {
+	  style: {}
+	};
+	exports.default = XLine;
+
+/***/ },
+/* 293 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _MeasuredValueLabel = __webpack_require__(294);
+	
+	var _MeasuredValueLabel2 = _interopRequireDefault(_MeasuredValueLabel);
+	
+	var _Scale = __webpack_require__(277);
+	
+	var _Label = __webpack_require__(305);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	function resolveXLabelsForValues(scale, values, formats, style) {
+	  var force = arguments.length <= 4 || arguments[4] === undefined ? true : arguments[4];
+	
+	  // given a set of values to label, and a list of formatters to try,
+	  // find the first formatter that produces a set of labels
+	  // which are A) distinct and B) fit on the axis without colliding with each other
+	  // returns the formatter and the generated labels
+	
+	  var labels = undefined;
+	  var attempts = [];
+	  var goodFormat = _lodash2.default.find(formats, function (format) {
+	    var testLabels = values.map(function (value) {
+	      return _MeasuredValueLabel2.default.getLabel({ value: value, format: format, style: style });
+	    });
+	
+	    var areLabelsDistinct = (0, _Label.checkLabelsDistinct)(testLabels);
+	    if (!areLabelsDistinct) {
+	      // console.log('labels are not distinct', _.map(testLabels, 'text'));
+	      attempts.push({ labels: testLabels, format: format, areLabelsDistinct: areLabelsDistinct });
+	      return false;
+	    }
+	
+	    var labelXRanges = testLabels.map(function (label) {
+	      return (0, _Label.getLabelXRange)(scale, label, style.textAnchor || 'middle');
+	    });
+	    var collisionCount = (0, _Label.countRangeOverlaps)(labelXRanges);
+	    if (collisionCount) {
+	      // console.log(`labels do not fit on X axis, ${collisionCount} collisions`, _.map(testLabels, 'text'));
+	      attempts.push({ labels: testLabels, format: format, areLabelsDistinct: areLabelsDistinct, collisionCount: collisionCount });
+	      return false;
+	    }
+	
+	    labels = testLabels;
+	    return true;
+	  });
+	
+	  if (!_lodash2.default.isUndefined(goodFormat)) {
+	    // found labels which work, return them
+	    return { labels: labels, format: goodFormat, areLabelsDistinct: true, collisionCount: 0 };
+	  } else {
+	    // none of the sets of labels are good
+	    if (!force) // if we're not forced to decide, return all the labels we tried (let someone else decide)
+	      return { attempts: attempts };
+	
+	    // forced to decide, choose the least bad option
+	    // todo warn that we couldn't find good labels
+	    var distinctAttempts = attempts.filter(function (attempt) {
+	      return attempt.areLabelsDistinct;
+	    });
+	    return distinctAttempts.length === 0 ?
+	    // super bad, we don't have any label sets with distinct labels. return the last attempt.
+	    _lodash2.default.last(attempts) :
+	    // return the attempt with the fewest collisions between distinct labels
+	    _lodash2.default.minBy(distinctAttempts, 'collisionCount');
+	  }
+	}
+	
+	var XAxisValueLabels = function (_React$Component) {
+	  _inherits(XAxisValueLabels, _React$Component);
+	
+	  function XAxisValueLabels() {
+	    _classCallCheck(this, XAxisValueLabels);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(XAxisValueLabels).apply(this, arguments));
+	  }
+	
+	  _createClass(XAxisValueLabels, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var height = _props.height;
+	      var position = _props.position;
+	      var distance = _props.distance;
+	      var labelStyle = _props.labelStyle;
+	      var labelClassName = _props.labelClassName;
+	
+	      var scale = this.props.scale.x;
+	      var labels = this.props.labels || XAxisValueLabels.getLabels(this.props);
+	      var placement = this.props.placement || (position === 'top' ? 'above' : 'below');
+	      var style = _lodash2.default.defaults(labelStyle, XAxisValueLabels.defaultProps.labelStyle);
+	      var className = 'chart-value-label chart-value-label-x ' + labelClassName;
+	      var transform = position === 'bottom' ? 'translate(0,' + height + ')' : '';
+	      // todo: position: 'zero' to position along the zero line
+	
+	      return _react2.default.createElement(
+	        'g',
+	        { className: 'chart-value-labels-x', transform: transform },
+	        labels.map(function (label) {
+	          var x = scale(label.value);
+	          var y = placement === 'above' ? -label.height - distance : distance;
+	
+	          return _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement(
+	              _MeasuredValueLabel2.default,
+	              { x: x, y: y, className: className, dy: "0.8em", style: style },
+	              label.text
+	            )
+	          );
+	        })
+	      );
+	    }
+	  }], [{
+	    key: 'getTickDomain',
+	    value: function getTickDomain(props) {
+	      if (!_lodash2.default.get(props, 'scale.x')) return;
+	      props = _lodash2.default.defaults({}, props, XAxisValueLabels.defaultProps);
+	      return { x: (0, _Scale.getTickDomain)(props.scale.x, props) };
+	    }
+	  }, {
+	    key: 'getMargin',
+	    value: function getMargin(props) {
+	      var _$defaults;
+	
+	      props = _lodash2.default.defaults({}, props, XAxisValueLabels.defaultProps);
+	      var _props2 = props;
+	      var position = _props2.position;
+	      var placement = _props2.placement;
+	      var distance = _props2.distance;
+	      var tickCount = _props2.tickCount;
+	      var labelStyle = _props2.labelStyle;
+	
+	      var scale = props.scale.x;
+	      var labels = props.labels || XAxisValueLabels.getLabels(props);
+	      var zeroMargin = { top: 0, bottom: 0, left: 0, right: 0 };
+	
+	      if (position === 'bottom' && placement === 'above' || position == 'top' && placement === 'below') return zeroMargin;
+	
+	      var marginY = _lodash2.default.max(labels.map(function (label) {
+	        return Math.ceil(distance + label.height);
+	      }));
+	
+	      var _getLabelsXOverhang = (0, _Label.getLabelsXOverhang)(scale, labels, labelStyle.textAnchor || 'middle');
+	
+	      var _getLabelsXOverhang2 = _slicedToArray(_getLabelsXOverhang, 2);
+	
+	      var left = _getLabelsXOverhang2[0];
+	      var right = _getLabelsXOverhang2[1];
+	
+	
+	      return _lodash2.default.defaults((_$defaults = {}, _defineProperty(_$defaults, position, marginY), _defineProperty(_$defaults, 'left', left), _defineProperty(_$defaults, 'right', right), _$defaults), zeroMargin);
+	    }
+	  }, {
+	    key: 'getDefaultFormats',
+	    value: function getDefaultFormats(scaleType) {
+	      var timeFormatStrs = ['YYYY', 'YY', 'MMM YYYY', 'M/YY'];
+	      var numberFormatStrs = ["0.[00]a", "0,0", "0.[0]", "0.[00]", "0.[0000]", "0.[000000]"];
+	
+	      return scaleType === 'ordinal' ? [_lodash2.default.identity] : scaleType === 'time' ? timeFormatStrs : numberFormatStrs;
+	    }
+	  }, {
+	    key: 'getLabels',
+	    value: function getLabels(props) {
+	      var _$defaults2 = _lodash2.default.defaults(props, {}, XAxisValueLabels.defaultProps);
+	
+	      var tickCount = _$defaults2.tickCount;
+	      var labelStyle = _$defaults2.labelStyle;
+	
+	      var scale = props.scale.x;
+	      var ticks = props.ticks || (0, _Scale.getScaleTicks)(scale, null, tickCount);
+	      var style = _lodash2.default.defaults(labelStyle, XAxisValueLabels.defaultProps.labelStyle);
+	
+	      var scaleType = (0, _Scale.inferScaleType)(scale);
+	      var propsFormats = props.format ? [props.format] : props.formats;
+	      var formatStrs = _lodash2.default.isArray(propsFormats) && propsFormats.length ? propsFormats : XAxisValueLabels.getDefaultFormats(scaleType);
+	      var formats = (0, _Label.makeLabelFormatters)(formatStrs, scaleType);
+	
+	      // todo resolve ticks also
+	      // if there are so many ticks that no combination of labels can fit on the axis,
+	      // nudge down the tickCount and try again
+	      // doing this will require communicating the updated ticks/tickCount back to the parent element...
+	
+	      var _resolveXLabelsForVal = resolveXLabelsForValues(scale, ticks, formats, style);
+	
+	      var labels = _resolveXLabelsForVal.labels;
+	      // console.log('found labels', labels);
+	
+	      return labels;
+	    }
+	  }]);
+	
+	  return XAxisValueLabels;
+	}(_react2.default.Component);
+	
+	XAxisValueLabels.propTypes = {
+	  scale: _react2.default.PropTypes.object
+	};
+	XAxisValueLabels.defaultProps = {
+	  height: 250,
+	  position: 'bottom',
+	  placement: undefined,
+	  distance: 4,
+	  nice: true,
+	  tickCount: 10,
+	  ticks: null,
+	  labelClassName: '',
+	  labelStyle: {
+	    fontFamily: "Helvetica, sans-serif",
+	    fontSize: '14px',
+	    lineHeight: 1,
+	    textAnchor: 'middle'
+	  },
+	  format: undefined,
+	  formats: undefined,
+	  labels: undefined
+	};
+	
+	var XAxisLabelDebugRect = function (_React$Component2) {
+	  _inherits(XAxisLabelDebugRect, _React$Component2);
+	
+	  function XAxisLabelDebugRect() {
+	    _classCallCheck(this, XAxisLabelDebugRect);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(XAxisLabelDebugRect).apply(this, arguments));
+	  }
+	
+	  _createClass(XAxisLabelDebugRect, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props3 = this.props;
+	      var x = _props3.x;
+	      var y = _props3.y;
+	      var label = _props3.label;
+	
+	      return _react2.default.createElement('rect', {
+	        x: x - label.width / 2,
+	        y: y,
+	        width: label.width,
+	        height: label.height,
+	        fill: 'orange'
+	      });
+	    }
+	  }]);
+	
+	  return XAxisLabelDebugRect;
+	}(_react2.default.Component);
+	
+	exports.default = XAxisValueLabels;
+
+/***/ },
+/* 294 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _measureText = __webpack_require__(295);
+	
+	var _measureText2 = _interopRequireDefault(_measureText);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var MeasuredValueLabel = function (_React$Component) {
+	  _inherits(MeasuredValueLabel, _React$Component);
+	
+	  function MeasuredValueLabel() {
+	    _classCallCheck(this, MeasuredValueLabel);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(MeasuredValueLabel).apply(this, arguments));
+	  }
+	
+	  _createClass(MeasuredValueLabel, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var value = _props.value;
+	      var format = _props.format;
+	
+	      var passedProps = _lodash2.default.omit(this.props, ['value', 'format']);
+	
+	      return _react2.default.createElement(
+	        'text',
+	        passedProps,
+	        _react2.default.Children.count(this.props.children) ? this.props.children : format(value)
+	      );
+	    }
+	  }], [{
+	    key: 'getLabel',
+	    value: function getLabel(props) {
+	      var value = props.value;
+	      var format = props.format;
+	
+	      var style = _lodash2.default.defaults(props.style, MeasuredValueLabel.defaultProps.style);
+	      var labelStr = format(value);
+	      var measured = (0, _measureText2.default)(_lodash2.default.assign({ text: labelStr }, style));
+	
+	      return {
+	        value: props.value,
+	        text: measured.text,
+	        height: measured.height.value,
+	        width: measured.width.value
+	      };
+	    }
+	  }]);
+	
+	  return MeasuredValueLabel;
+	}(_react2.default.Component);
+	
+	MeasuredValueLabel.propTypes = {
+	  value: _react2.default.PropTypes.any.isRequired
+	};
+	MeasuredValueLabel.defaultProps = {
+	  format: _lodash2.default.identity,
+	  style: {
+	    fontFamily: "Helvetica, sans-serif",
+	    fontSize: '20px',
+	    lineHeight: 1,
+	    textAnchor: 'middle'
+	  }
+	};
+	exports.default = MeasuredValueLabel;
+
+/***/ },
+/* 295 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _unitsCss = __webpack_require__(296);
+	
+	var _unitsCss2 = _interopRequireDefault(_unitsCss);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var DEFAULT_CANVAS = document.createElement("canvas"); /* eslint-env browser */
+	
+	var DEFAULT_FONT_WEIGHT = 400;
+	var DEFAULT_FONT_STYLE = "normal";
+	
+	var measureHeight = function measureHeight(size, lineHeight) {
+	  // If the line-height is unitless,
+	  // multiply it by the font size.
+	  if (!lineHeight.unit) {
+	    return _unitsCss2.default.parse("" + size.value * lineHeight.value + size.unit);
+	  }
+	
+	  // units-css requires the user to provide
+	  // DOM nodes for these units. We don't want
+	  // to pollute our API with that for the time being.
+	  var unitBlacklist = ["%", "ch", "cm", "em", "ex"];
+	  if (unitBlacklist.indexOf(lineHeight.unit) !== -1) {
+	    // eslint-disable-line no-magic-numbers
+	    throw new Error("We do not currently support the unit " + lineHeight.unit + "\n      from the provided line-height " + lineHeight.value + ".\n      Unsupported units include " + unitBlacklist.join(", ") + ".");
+	  }
+	
+	  // Otherwise, the height is equivalent
+	  // to the provided line height.
+	  // Non-px units need conversion.
+	  if (lineHeight.unit === "px") {
+	    return lineHeight;
+	  }
+	  return _unitsCss2.default.parse(_unitsCss2.default.convert(lineHeight, "px"));
+	};
+	
+	var measureText = function measureText(_ref) {
+	  var text = _ref.text;
+	  var fontFamily = _ref.fontFamily;
+	  var fontSize = _ref.fontSize;
+	  var lineHeight = _ref.lineHeight;
+	  var _ref$fontWeight = _ref.fontWeight;
+	  var fontWeight = _ref$fontWeight === undefined ? DEFAULT_FONT_WEIGHT : _ref$fontWeight;
+	  var _ref$fontStyle = _ref.fontStyle;
+	  var fontStyle = _ref$fontStyle === undefined ? DEFAULT_FONT_STYLE : _ref$fontStyle;
+	  var _ref$canvas = _ref.canvas;
+	  var canvas = _ref$canvas === undefined ? DEFAULT_CANVAS : _ref$canvas;
+	
+	  var ctx = canvas.getContext("2d");
+	  ctx.font = fontWeight + " " + fontStyle + " " + fontSize + " " + fontFamily;
+	
+	  var measure = function measure(line) {
+	    return {
+	      text: line,
+	      width: _unitsCss2.default.parse(ctx.measureText(line).width + "px"),
+	      height: measureHeight(_unitsCss2.default.parse(fontSize), _unitsCss2.default.parse(lineHeight))
+	    };
+	  };
+	
+	  // If multiline, measure the bounds
+	  // of all of the lines combined
+	  if (Array.isArray(text)) {
+	    return text.map(measure).reduce(function (prev, curr) {
+	      var width = curr.width.value > prev.width.value ? curr.width : prev.width;
+	      var height = _unitsCss2.default.parse("" + (prev.height.value + curr.height.value) + curr.height.unit);
+	      var longest = curr.text.length > prev.text.length ? curr.text : prev.text;
+	      return { width: width, height: height, text: longest };
+	    });
+	  }
+	
+	  return measure(text);
+	};
+	
+	exports.default = measureText;
+
+/***/ },
+/* 296 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* eslint-env browser, node */
+	
+	'use strict';
+	
+	module.exports = __webpack_require__(297);
+
+
+/***/ },
+/* 297 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* eslint-env browser, node */
+	
+	'use strict';
+	
+	// Imports
+	var conversions = __webpack_require__(298);
+	var isNumeric = __webpack_require__(304);
+	
+	var units = {};
+	
+	
+	// Expose conversion functions
+	//------------------------------------------------------------------------------
+	
+	units.conversions = conversions;
+	
+	
+	// Properties with non default unit/value
+	//------------------------------------------------------------------------------
+	
+	var properties = units.properties = {};
+	
+	properties.lineHeight =
+	properties.opacity =
+	properties.scale =
+	properties.scale3d =
+	properties.scaleX =
+	properties.scaleY =
+	properties.scaleZ = {
+	  'defaultUnit': '',
+	  'defaultValue': 1
+	};
+	
+	properties.rotate =
+	properties.rotate3d =
+	properties.rotateX =
+	properties.rotateY =
+	properties.rotateZ =
+	properties.skew =
+	properties.skewX =
+	properties.skewY = {
+	  'defaultUnit': 'deg'
+	};
+	
+	properties.resolution = {
+	  'defaultUnit': 'dpi',
+	  'defaultValue': 96
+	};
+	
+	
+	// Public interface
+	//------------------------------------------------------------------------------
+	
+	units.convert = function(to, value, element, property) {
+	  var parts = units.parse(value, property);
+	
+	  if (to === '_default') {
+	    to = units.getDefaultUnit(property);
+	  }
+	
+	  return to === parts.unit
+	    ? parts.value
+	    : units.processConversion(parts.unit, to, parts.value, element, property);
+	};
+	
+	units.parse = function(value, property) {
+	  var parts = {};
+	  var matches;
+	
+	  if (isNumeric(value)) {
+	    parts.value = value;
+	    parts.unit = property
+	      ? units.getDefaultUnit(property)
+	      : '';
+	  } else {
+	    matches = value.toString().trim().match(/^(-?[\d+\.\-]+)([a-z]+|%)$/i);
+	
+	    if (matches !== null) {
+	      parts.value = matches[1];
+	      parts.unit = matches[2];
+	    } else {
+	      parts.unit = value;
+	      parts.value = property
+	        ? units.getDefaultValue(property)
+	        : 0;
+	    }
+	  }
+	
+	  parts.value = parseFloat(parts.value);
+	
+	  return parts;
+	};
+	
+	units.getDefaultValue = function(property) {
+	  return typeof properties[property] !== 'undefined' && typeof properties[property].defaultValue !== 'undefined'
+	    ? properties[property].defaultValue
+	    : 0;
+	};
+	
+	units.getDefaultUnit = function(property) {
+	  return typeof properties[property] !== 'undefined' && typeof properties[property].defaultUnit !== 'undefined'
+	    ? properties[property].defaultUnit
+	    : 'px';
+	};
+	
+	
+	// Protected methods
+	//------------------------------------------------------------------------------
+	
+	units.processConversion = function(fromUnits, toUnits, value, element, property) {
+	  var type = units.getConversionType(fromUnits);
+	  var method;
+	
+	  if (typeof type[fromUnits][toUnits] === 'function') {
+	    method = type[fromUnits][toUnits];
+	  } else {
+	    method = type[type._default][toUnits];
+	    value = type[fromUnits][type._default](value, element, property); // Use default unit conversion as an interstitial step
+	  }
+	
+	  return method(value, element, property);
+	};
+	
+	units.getConversionType = function(fromUnits) {
+	  var property;
+	  var type = null;
+	
+	  for (property in conversions) {
+	    /* istanbul ignore else */
+	    if (conversions.hasOwnProperty(property) && typeof conversions[property][fromUnits] !== 'undefined') {
+	      type = conversions[property];
+	      break;
+	    }
+	  }
+	
+	  return type;
+	};
+	
+	// Exports
+	module.exports = units;
+
+
+/***/ },
+/* 298 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* eslint-env browser, node */
+	
+	'use strict';
+	
+	// Exports
+	module.exports = {
+	  'angle': __webpack_require__(299),
+	  'length': __webpack_require__(300),
+	  'resolution': __webpack_require__(303)
+	};
+
+
+/***/ },
+/* 299 */
+/***/ function(module, exports) {
+
+	/* eslint-env browser, node */
+	
+	'use strict';
+	
+	var angle = {'_default': 'deg'};
+	
+	// Supported units:
+	// deg, grad, rad, turn
+	
+	angle.deg = {
+	  'grad': function(value) {
+	    return value / 0.9;
+	  },
+	
+	  'rad': function(value) {
+	    return value * (Math.PI / 180);
+	  },
+	
+	  'turn': function(value) {
+	    return value / 360;
+	  }
+	};
+	
+	angle.grad = {
+	  'deg': function(value) {
+	    return value * 0.9;
+	  }
+	};
+	
+	angle.rad = {
+	  'deg': function(value) {
+	    return value / (Math.PI / 180);
+	  }
+	};
+	
+	angle.turn = {
+	  'deg': function(value) {
+	    return value * 360;
+	  }
+	};
+	
+	// Exports
+	module.exports = angle;
+
+
+/***/ },
+/* 300 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* eslint-env browser, node */
+	
+	'use strict';
+	
+	// Imports
+	var utilities = __webpack_require__(301);
+	var viewport = __webpack_require__(302);
+	
+	var length = {'_default': 'px'};
+	
+	// Supported units:
+	// %, ch, cm, em, ex, in, mm, pc, pt, px, rem, vh, vmax, vmin, vw
+	
+	length[''] = {
+	  'px': function(value, element) {
+	    return parseFloat(getComputedStyle(element, '').fontSize) * value;
+	  }
+	};
+	
+	length['%'] = {
+	  'px': function(value, element, property) {
+	    return (value * utilities.getRelativeElementDimension(element, property)) / 100;
+	  }
+	};
+	
+	length.ch = {
+	  'px': function(value, element) {
+	    return value * utilities.ifZeroThenOne(utilities.getCreatedElementWidth(element, null, '0'));
+	  }
+	};
+	
+	length.cm = {
+	  'px': function(value) {
+	    return value / 2.54 * utilities.ifZeroThenOne(utilities.DPI);
+	  }
+	};
+	
+	length.em = {
+	  'px': function(value, element) {
+	    return value * utilities.getElementFontSize(element);
+	  }
+	};
+	
+	length.ex = {
+	  'px': function(value, element) {
+	    return value * utilities.getCreatedElementHeight(element, null, 'x');
+	  }
+	};
+	
+	length['in'] = {
+	  'px': function(value) {
+	    return value * utilities.DPI;
+	  }
+	};
+	
+	length.mm = {
+	  'px': function(value) {
+	    return value / 2.54 * utilities.ifZeroThenOne(utilities.DPI) / 10;
+	  }
+	};
+	
+	length.pc = {
+	  'px': function(value) {
+	    return value * ((utilities.DPI / 72) * 12);
+	  }
+	};
+	
+	length.pt = {
+	  'px': function(value) {
+	    return value * utilities.DPI / 72;
+	  }
+	};
+	
+	length.px = {
+	  '': function(value, element) {
+	    return value / parseFloat(getComputedStyle(element, '').fontSize);
+	  },
+	
+	  '%': function(value, element, property) {
+	    return (value / utilities.ifZeroThenOne(utilities.getRelativeElementDimension(element, property))) * 100;
+	  },
+	
+	  'ch': function(value, element) {
+	    return value / utilities.ifZeroThenOne(utilities.getCreatedElementWidth(element, null, '0'));
+	  },
+	
+	  'cm': function(value) {
+	    return value / utilities.ifZeroThenOne(utilities.DPI) * 2.54;
+	  },
+	
+	  'em': function(value, element) {
+	    return value / utilities.ifZeroThenOne(utilities.getElementFontSize(element));
+	  },
+	
+	  'ex': function(value, element) {
+	    return value / utilities.ifZeroThenOne(utilities.getCreatedElementHeight(element, null, 'x'));
+	  },
+	
+	  'in': function(value) {
+	    return value / utilities.ifZeroThenOne(utilities.DPI);
+	  },
+	
+	  'mm': function(value) {
+	    return value * 2.54 / utilities.ifZeroThenOne(utilities.DPI) * 10;
+	  },
+	
+	  'pc': function(value) {
+	    return value / ((utilities.DPI / 72) * 12);
+	  },
+	
+	  'pt': function(value) {
+	    return value * 72 / utilities.DPI;
+	  },
+	
+	  'rem': function(value) {
+	    return value / utilities.ifZeroThenOne(utilities.getElementFontSize(document.documentElement));
+	  },
+	
+	  'vh': function(value) {
+	    return value / utilities.ifZeroThenOne((viewport.height() / 100));
+	  },
+	
+	  'vmax': function(value) {
+	    return value / utilities.ifZeroThenOne((viewport.max() / 100));
+	  },
+	
+	  'vmin': function(value) {
+	    return value / utilities.ifZeroThenOne((viewport.min() / 100));
+	  },
+	
+	  'vw': function(value) {
+	    return value / utilities.ifZeroThenOne((viewport.width() / 100));
+	  }
+	};
+	
+	length.rem = {
+	  'px': function(value) {
+	    return value * utilities.getElementFontSize(document.documentElement);
+	  }
+	};
+	
+	length.vh = {
+	  'px': function(value) {
+	    return value * (viewport.height() / 100);
+	  }
+	};
+	
+	length.vmax = {
+	  'px': function(value) {
+	    return value * (viewport.max() / 100);
+	  }
+	};
+	
+	length.vmin = {
+	  'px': function(value) {
+	    return value * (viewport.min() / 100);
+	  }
+	};
+	
+	length.vw = {
+	  'px': function(value) {
+	    return value * (viewport.width() / 100);
+	  }
+	};
+	
+	// Exports
+	module.exports = length;
+
+
+/***/ },
+/* 301 */
+/***/ function(module, exports) {
+
+	/* eslint-env browser, node */
+	
+	'use strict';
+	
+	var utilities = {};
+	
+	utilities.getElementFontSize = function(element) {
+	  return typeof getComputedStyle !== 'undefined'
+	    ? parseFloat(getComputedStyle(element, '').fontSize)
+	    : 16; // Default browser font-size
+	};
+	
+	utilities.getCreatedElementDimensions = function(parent, properties, content) {
+	  var element = document.createElement('div');
+	  var style = element.style;
+	  var dimensions;
+	  var property;
+	
+	  style.position = 'absolute';
+	  style.zIndex = -2147483648;
+	  style.left = 0;
+	  style.top = 0;
+	  style.visibility = 'hidden';
+	
+	  if (properties) {
+	    for (property in properties) {
+	      /* istanbul ignore else */
+	      if (properties.hasOwnProperty(property)) {
+	        style[property] = properties[property];
+	      }
+	    }
+	  }
+	
+	  if (content) {
+	    element.innerHTML = content;
+	  }
+	
+	  parent.appendChild(element);
+	
+	  dimensions = [
+	    element.offsetWidth,
+	    element.offsetHeight
+	  ];
+	
+	  parent.removeChild(element);
+	
+	  return dimensions;
+	};
+	
+	utilities.getCreatedElementWidth = function(parent, properties, content) {
+	  return utilities.getCreatedElementDimensions(parent, properties, content)[0];
+	};
+	
+	utilities.getCreatedElementHeight = function(parent, properties, content) {
+	  return utilities.getCreatedElementDimensions(parent, properties, content)[1];
+	};
+	
+	var selfReferenceTriggers = [
+	  'perspective',
+	  'translate',
+	  'translate3d',
+	  'translateX',
+	  'translateY',
+	  'translateZ',
+	  'transformOrigin'
+	];
+	
+	var layoutYTriggers = [
+	  'height',
+	  'top',
+	  'translateY'
+	];
+	
+	var positionTriggers = ['absolute', 'fixed'];
+	
+	utilities.getRelativeElementDimension = function(element, property) {
+	  var reference;
+	  var dimension;
+	  var referenceComputed;
+	  var useY = layoutYTriggers.indexOf(property) > -1;
+	  var useSelf = selfReferenceTriggers.indexOf(property) > -1;
+	  var positioned = positionTriggers.indexOf(getComputedStyle(element, '').position) > -1;
+	
+	  if (useSelf) {
+	    reference = element;
+	  } else {
+	    reference = positioned
+	      ? element.offsetParent
+	      : element.parentNode;
+	  }
+	
+	  dimension = useY
+	    ? reference.offsetHeight
+	    : reference.offsetWidth;
+	
+	  if (!useSelf && positioned) {
+	    referenceComputed = getComputedStyle(reference, '');
+	
+	    dimension -= useY
+	      ? parseFloat(referenceComputed.paddingTop) + parseFloat(referenceComputed.paddingBottom)
+	      : parseFloat(referenceComputed.paddingRight) + parseFloat(referenceComputed.paddingLeft);
+	  }
+	
+	  return dimension;
+	};
+	
+	utilities.DPI = (function () {
+	  // Preserve dpi-reliant conversion functionality when not running in browser environment
+	  /* istanbul ignore next */
+	  if (typeof window === 'undefined') {
+	    return 96;
+	  }
+	
+	  return utilities.getCreatedElementWidth(document.body, {
+	    'width': '1in'
+	  });
+	}());
+	
+	/**
+	 * Return value if non-zero, else return one (to avoid division by zero in calling code).
+	 *
+	 * @param {number} value Number to return, converting to one if zero.
+	 * @returns {number} Non-zero value.
+	 */
+	utilities.ifZeroThenOne = function(value) {
+	  return value === 0
+	    ? 1
+	    : value;
+	};
+	
+	// Exports
+	module.exports = utilities;
+
+
+/***/ },
+/* 302 */
+/***/ function(module, exports) {
+
+	/* eslint-env browser, node */
+	
+	'use strict';
+	
+	var viewport = {};
+	var width = -1;
+	var height = -1;
+	
+	
+	// Public interface
+	//------------------------------------------------------------------------------
+	
+	/**
+	 * Get browser viewport width.
+	 *
+	 * @returns {number} Internal reference to browser viewport width.
+	 */
+	viewport.width = function() {
+	  return width;
+	};
+	
+	/**
+	 * Get browser viewport height.
+	 *
+	 * @returns {number} Internal reference to browser viewport height.
+	 */
+	viewport.height = function() {
+	  return height;
+	};
+	
+	/**
+	 * Get maximum browser viewport dimension (width or height).
+	 *
+	 * @returns {number} Internal reference to maximum browser viewport dimension.
+	 */
+	viewport.max = function() {
+	  return Math.max(width, height);
+	};
+	
+	/**
+	 * Get minimum browser viewport dimension (width or height).
+	 *
+	 * @returns {number} Internal reference to minimum browser viewport dimension.
+	 */
+	viewport.min = function() {
+	  return Math.min(width, height);
+	};
+	
+	
+	/**
+	 * Set internal dimension references to current browser viewport width and height.
+	 * Called by viewport#onWindowResize on resize and orientationchange.
+	 */
+	viewport.setDimensions = function() {
+	  /* istanbul ignore else */
+	  if (typeof document !== 'undefined') {
+	    width = document.documentElement.clientWidth;
+	    height = document.documentElement.clientHeight;
+	  }
+	};
+	
+	
+	// Protected methods
+	//------------------------------------------------------------------------------
+	
+	/**
+	 * Handler for window resize and orientationchange events. Calls viewport#setDimensions.
+	 *
+	 * @private
+	 */
+	viewport.onWindowResize = function() {
+	  viewport.setDimensions();
+	};
+	
+	/* istanbul ignore else */
+	if (typeof window !== 'undefined') {
+	  window.addEventListener('resize', viewport.onWindowResize, false);
+	  window.addEventListener('orientationchange', viewport.onWindowResize, false);
+	
+	  viewport.setDimensions();
+	}
+	
+	// Exports
+	module.exports = viewport;
+
+
+/***/ },
+/* 303 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* eslint-env browser, node */
+	
+	'use strict';
+	
+	// Imports
+	var utilities = __webpack_require__(301);
+	
+	var resolution = {'_default': 'dpi'};
+	
+	// Supported units:
+	// dpi, dpcm, dppx
+	
+	resolution.dpi = {
+	  'dpcm': function(value) {
+	    return value / 2.54;
+	  },
+	
+	  'dppx': function(value) {
+	    return value / utilities.DPI;
+	  }
+	};
+	
+	resolution.dpcm = {
+	  'dpi': function(value) {
+	    return value * 2.54;
+	  }
+	};
+	
+	resolution.dppx = {
+	  'dpi': function(value) {
+	    return value * utilities.DPI;
+	  }
+	};
+	
+	// Exports
+	module.exports = resolution;
+
+
+/***/ },
+/* 304 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isNumeric = function (obj) {
+	    obj = typeof(obj) === "string" ? obj.replace(/,/g, "") : obj;
+	    return !isNaN(parseFloat(obj)) && isFinite(obj) && Object.prototype.toString.call(obj).toLowerCase() !== "[object array]";
+	};
+	
+	if (true) {
+	    if (typeof (module) !== "undefined" && module.exports) {
+	        exports = module.exports = isNumeric;
+	    }
+	    exports.isNumeric = isNumeric;
+	}
+
+
+/***/ },
+/* 305 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	
+	exports.makeLabelFormatters = makeLabelFormatters;
+	exports.checkLabelsDistinct = checkLabelsDistinct;
+	exports.checkRangesOverlap = checkRangesOverlap;
+	exports.countRangeOverlaps = countRangeOverlaps;
+	exports.getLabelXRange = getLabelXRange;
+	exports.getLabelYRange = getLabelYRange;
+	exports.getLabelXOverhang = getLabelXOverhang;
+	exports.getLabelsXOverhang = getLabelsXOverhang;
+	exports.getLabelsYOverhang = getLabelsYOverhang;
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _moment = __webpack_require__(174);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	var _numeral = __webpack_require__(166);
+	
+	var _numeral2 = _interopRequireDefault(_numeral);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function makeLabelFormatters(formatStrs, scaleType) {
+	  return formatStrs.map(function (formatStr) {
+	    if (!_lodash2.default.isString(formatStr)) return formatStr;
+	    return scaleType === 'time' ? function (v) {
+	      return (0, _moment2.default)(v).format(formatStr);
+	    } : function (v) {
+	      return (0, _numeral2.default)(v).format(formatStr);
+	    };
+	  });
+	}
+	
+	function checkLabelsDistinct(labels) {
+	  // given a set of label objects with text properties,
+	  // return true iff each label has distinct text (ie. no duplicate label texts)
+	  var labelStrs = _lodash2.default.map(labels, 'text');
+	  return _lodash2.default.uniq(labelStrs).length === labelStrs.length;
+	}
+	
+	function checkRangesOverlap(a, b) {
+	  // given two number or date ranges of the form [start, end],
+	  // returns true if the ranges overlap
+	  if (!_lodash2.default.every([a, b], function (r) {
+	    return _lodash2.default.isArray(r) && r.length === 2 && _lodash2.default.every(r, _lodash2.default.isFinite) && r[0] <= r[1];
+	  })) throw new Error('checkRangesOverlap expects 2 range arrays with 2 numbers each, first <= second');
+	
+	  return a[0] <= b[1] && b[0] <= a[1];
+	}
+	
+	function countRangeOverlaps(ranges) {
+	  // given a list of ranges of the form [[start, end], ...]
+	  // counts the number of adjacent ranges which touch or overlap each other
+	  // todo: instead of counting overlaps, sum the amount by which they overlap & choose least overlap
+	
+	  return _lodash2.default.tail(ranges).reduce(function (sum, range, i) {
+	    var prevRange = ranges[i]; // (not [i-1], _.tail skips first range)
+	    return checkRangesOverlap(prevRange, range) ? sum + 1 : sum;
+	  }, 0);
+	}
+	
+	function getLabelXRange(scale, label) {
+	  var anchor = arguments.length <= 2 || arguments[2] === undefined ? 'middle' : arguments[2];
+	
+	  var anchorOffsets = { start: 0, middle: -0.5, end: -1 };
+	  var x1 = scale(label.value) + (anchorOffsets[anchor] || 0) * label.width;
+	  return [x1, x1 + label.width];
+	}
+	
+	function getLabelYRange(scale, label) {
+	  var anchor = arguments.length <= 2 || arguments[2] === undefined ? 'middle' : arguments[2];
+	
+	  var anchorOffsets = { top: 0, middle: -0.5, bottom: -1 };
+	  var y1 = scale(label.value) + (anchorOffsets[anchor] || 0) * label.height;
+	  return [y1, y1 + label.height];
+	}
+	
+	function getLabelXOverhang(scale, label) {
+	  var anchor = arguments.length <= 2 || arguments[2] === undefined ? 'middle' : arguments[2];
+	
+	  var _getLabelXRange = getLabelXRange(scale, label, anchor);
+	
+	  var _getLabelXRange2 = _slicedToArray(_getLabelXRange, 2);
+	
+	  var labelLeft = _getLabelXRange2[0];
+	  var labelRight = _getLabelXRange2[1];
+	
+	  var overhangLeft = Math.ceil(Math.max(_lodash2.default.min(scale.range()) - labelLeft, 0));
+	  var overhangRight = Math.ceil(Math.max(labelRight - _lodash2.default.max(scale.range()), 0));
+	  return [overhangLeft, overhangRight];
+	}
+	
+	function getLabelYOverhang(scale, label) {
+	  var anchor = arguments.length <= 2 || arguments[2] === undefined ? 'middle' : arguments[2];
+	
+	  var _getLabelYRange = getLabelYRange(scale, label, anchor);
+	
+	  var _getLabelYRange2 = _slicedToArray(_getLabelYRange, 2);
+	
+	  var labelTop = _getLabelYRange2[0];
+	  var labelBottom = _getLabelYRange2[1];
+	
+	  var overhangTop = Math.ceil(Math.max(_lodash2.default.min(scale.range()) - labelTop, 0));
+	  var overhangBottom = Math.ceil(Math.max(labelBottom - _lodash2.default.max(scale.range()), 0));
+	  return [overhangTop, overhangBottom];
+	}
+	
+	function getLabelsXOverhang(scale, labels) {
+	  var anchor = arguments.length <= 2 || arguments[2] === undefined ? 'middle' : arguments[2];
+	
+	  return _lodash2.default.reduce(labels, function (_ref, label) {
+	    var _ref2 = _slicedToArray(_ref, 2);
+	
+	    var left = _ref2[0];
+	    var right = _ref2[1];
+	
+	    var _getLabelXOverhang = getLabelXOverhang(scale, label, anchor);
+	
+	    var _getLabelXOverhang2 = _slicedToArray(_getLabelXOverhang, 2);
+	
+	    var thisLeft = _getLabelXOverhang2[0];
+	    var thisRight = _getLabelXOverhang2[1];
+	
+	    return [Math.max(left, thisLeft), Math.max(right, thisRight)];
+	  }, [0, 0]);
+	}
+	
+	function getLabelsYOverhang(scale, labels) {
+	  var anchor = arguments.length <= 2 || arguments[2] === undefined ? 'middle' : arguments[2];
+	
+	  return _lodash2.default.reduce(labels, function (_ref3, label) {
+	    var _ref4 = _slicedToArray(_ref3, 2);
+	
+	    var top = _ref4[0];
+	    var bottom = _ref4[1];
+	
+	    var _getLabelYOverhang = getLabelYOverhang(scale, label, anchor);
+	
+	    var _getLabelYOverhang2 = _slicedToArray(_getLabelYOverhang, 2);
+	
+	    var thisTop = _getLabelYOverhang2[0];
+	    var thisBottom = _getLabelYOverhang2[1];
+	
+	    return [Math.max(top, thisTop), Math.max(bottom, thisBottom)];
+	  }, [0, 0]);
+	}
+
+/***/ },
+/* 306 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _measureText = __webpack_require__(295);
+	
+	var _measureText2 = _interopRequireDefault(_measureText);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var XAxisTitle = function (_React$Component) {
+	  _inherits(XAxisTitle, _React$Component);
+	
+	  function XAxisTitle() {
+	    _classCallCheck(this, XAxisTitle);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(XAxisTitle).apply(this, arguments));
+	  }
+	
+	  _createClass(XAxisTitle, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var height = _props.height;
+	      var width = _props.width;
+	      var distance = _props.distance;
+	      var position = _props.position;
+	      var alignment = _props.alignment;
+	      var style = _props.style;
+	
+	      var title = this.props.title || this.props.children;
+	      var placement = this.props.placement || (position === 'bottom' ? 'below' : 'above');
+	      var rotate = this.props.rotate ? -90 : 0;
+	
+	      var posY = position === 'bottom' ? height : 0;
+	      var translateY = posY + (placement === 'above' ? -distance : distance);
+	      var translateX = alignment === 'center' ? width / 2 : alignment === 'right' ? width : 0;
+	
+	      var textAnchor = rotate && placement === 'above' ? 'start' : rotate && placement === 'below' ? 'end' : alignment === 'left' ? 'start' : alignment === 'right' ? 'end' : 'middle';
+	
+	      var dy = rotate && alignment === 'right' ? '-0.2em' : rotate && alignment === 'center' ? '0.3em' : rotate ? '0.8em' : placement === 'below' ? '0.8em' : '-0.2em';
+	
+	      return _react2.default.createElement(
+	        'g',
+	        { transform: 'translate(' + translateX + ',' + translateY + ')' },
+	        _react2.default.createElement(
+	          'text',
+	          { style: _extends({}, style, { textAnchor: textAnchor }), transform: 'rotate(' + rotate + ')', dy: dy },
+	          title
+	        )
+	      );
+	    }
+	  }], [{
+	    key: 'getMargin',
+	    value: function getMargin(props) {
+	      props = _lodash2.default.defaults({}, props, XAxisTitle.defaultProps);
+	      var _props2 = props;
+	      var distance = _props2.distance;
+	      var position = _props2.position;
+	      var rotate = _props2.rotate;
+	
+	      var placement = props.placement || (position === 'bottom' ? 'below' : 'above');
+	      var zeroMargin = { top: 0, bottom: 0, left: 0, right: 0 };
+	
+	      if (position === 'bottom' && placement === 'above' || position == 'top' && placement === 'below') return zeroMargin;
+	
+	      var title = props.title || props.children;
+	      var style = _lodash2.default.defaults(props.style, XAxisTitle.defaultProps.style);
+	      var measured = (0, _measureText2.default)(_lodash2.default.assign({ text: title }, style));
+	
+	      var marginValue = distance + Math.ceil(rotate ? measured.width.value : measured.height.value);
+	
+	      return position === 'bottom' ? _extends({}, zeroMargin, { bottom: marginValue }) : _extends({}, zeroMargin, { top: marginValue });
+	    }
+	  }]);
+	
+	  return XAxisTitle;
+	}(_react2.default.Component);
+	
+	XAxisTitle.propTypes = {
+	  height: _react2.default.PropTypes.number,
+	  width: _react2.default.PropTypes.number,
+	  distance: _react2.default.PropTypes.number,
+	  position: _react2.default.PropTypes.oneOf(['top', 'bottom']),
+	  placement: _react2.default.PropTypes.oneOf(['above', 'below']),
+	  alignment: _react2.default.PropTypes.oneOf(['left', 'center', 'right']),
+	  rotate: _react2.default.PropTypes.bool,
+	  style: _react2.default.PropTypes.object
+	};
+	XAxisTitle.defaultProps = {
+	  height: 250,
+	  width: 400,
+	  distance: 5,
+	  position: 'bottom',
+	  placement: undefined,
+	  alignment: 'center',
+	  rotate: false,
+	  style: {
+	    fontFamily: "Helvetica, sans-serif",
+	    fontSize: '24px',
+	    fontWeight: 'bold',
+	    lineHeight: 1
+	  }
+	};
+	exports.default = XAxisTitle;
+
+/***/ },
+/* 307 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _Scale = __webpack_require__(277);
+	
+	var _Margin = __webpack_require__(278);
+	
+	var _Axis = __webpack_require__(289);
+	
+	var _YTicks = __webpack_require__(308);
+	
+	var _YTicks2 = _interopRequireDefault(_YTicks);
+	
+	var _YGrid = __webpack_require__(309);
+	
+	var _YGrid2 = _interopRequireDefault(_YGrid);
+	
+	var _YAxisLabels = __webpack_require__(311);
+	
+	var _YAxisLabels2 = _interopRequireDefault(_YAxisLabels);
+	
+	var _YAxisTitle = __webpack_require__(312);
+	
+	var _YAxisTitle2 = _interopRequireDefault(_YAxisTitle);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var YAxis = function (_React$Component) {
+	  _inherits(YAxis, _React$Component);
+	
+	  function YAxis() {
+	    _classCallCheck(this, YAxis);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(YAxis).apply(this, arguments));
+	  }
+	
+	  _createClass(YAxis, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var width = _props.width;
+	      var height = _props.height;
+	      var position = _props.position;
+	      var tickLength = _props.tickLength;
+	      var titleDistance = _props.titleDistance;
+	      var labelDistance = _props.labelDistance;
+	      var showTitle = _props.showTitle;
+	      var showLabels = _props.showLabels;
+	      var showTicks = _props.showTicks;
+	      var showGrid = _props.showGrid;
+	
+	      var _getAxisChildProps = (0, _Axis.getAxisChildProps)(this.props);
+	
+	      var ticksProps = _getAxisChildProps.ticksProps;
+	      var gridProps = _getAxisChildProps.gridProps;
+	      var labelsProps = _getAxisChildProps.labelsProps;
+	      var titleProps = _getAxisChildProps.titleProps;
+	
+	
+	      labelsProps.distance = labelDistance + (showTicks ? tickLength : 0);
+	
+	      if (showTitle && showLabels) {
+	        // todo optimize so we don't generate labels twice
+	        var labelsMargin = _YAxisLabels2.default.getMargin(labelsProps);
+	        titleProps.distance = titleDistance + labelsMargin[position];
+	      } else if (showTitle && showTicks) {
+	        titleProps.distance = titleDistance + tickLength;
+	      }
+	
+	      var axisLineX = position === 'left' ? 0 : width;
+	
+	      return _react2.default.createElement(
+	        'g',
+	        { className: 'chart-axis chart-axis-y' },
+	        showGrid ? _react2.default.createElement(_YGrid2.default, gridProps) : null,
+	        showTicks ? _react2.default.createElement(_YTicks2.default, ticksProps) : null,
+	        showLabels ? _react2.default.createElement(_YAxisLabels2.default, labelsProps) : null,
+	        showTitle ? _react2.default.createElement(_YAxisTitle2.default, titleProps) : null,
+	        _react2.default.createElement('line', { className: 'chart-axis-line chart-axis-line-y', x1: axisLineX, x2: axisLineX, y1: 0, y2: height })
+	      );
+	    }
+	  }], [{
+	    key: 'getTickDomain',
+	    value: function getTickDomain(props) {
+	      if (!_lodash2.default.get(props, 'scale.y')) return;
+	      props = _lodash2.default.defaults({}, props, YAxis.defaultProps);
+	      return { y: (0, _Scale.getTickDomain)(props.scale.y, props) };
+	    }
+	  }, {
+	    key: 'getMargin',
+	    value: function getMargin(props) {
+	      // todo figure out margin if labels change after margin?
+	
+	      var _getAxisChildProps2 = (0, _Axis.getAxisChildProps)(props);
+	
+	      var ticksProps = _getAxisChildProps2.ticksProps;
+	      var labelsProps = _getAxisChildProps2.labelsProps;
+	      var titleProps = _getAxisChildProps2.titleProps;
+	
+	      var margins = [];
+	
+	      if (props.showTicks) margins.push(_YTicks2.default.getMargin(ticksProps));
+	
+	      if (props.showTitle && props.title) margins.push(_YAxisTitle2.default.getMargin(titleProps));
+	
+	      if (props.showLabels) margins.push(_YAxisLabels2.default.getMargin(labelsProps));
+	
+	      return (0, _Margin.sumMargins)(margins);
+	    }
+	  }]);
+	
+	  return YAxis;
+	}(_react2.default.Component);
+	
+	YAxis.propTypes = {
+	  scale: _react2.default.PropTypes.shape({ y: _react2.default.PropTypes.func.isRequired }),
+	
+	  width: _react2.default.PropTypes.number,
+	  height: _react2.default.PropTypes.number,
+	  position: _react2.default.PropTypes.string,
+	  placement: _react2.default.PropTypes.string,
+	  nice: _react2.default.PropTypes.bool,
+	  ticks: _react2.default.PropTypes.array,
+	  tickCount: _react2.default.PropTypes.number,
+	
+	  showTitle: _react2.default.PropTypes.bool,
+	  showLabels: _react2.default.PropTypes.bool,
+	  showTicks: _react2.default.PropTypes.bool,
+	  showGrid: _react2.default.PropTypes.bool,
+	
+	  title: _react2.default.PropTypes.string,
+	  titleDistance: _react2.default.PropTypes.number,
+	  titleAlign: _react2.default.PropTypes.string,
+	  titleRotate: _react2.default.PropTypes.bool,
+	  titleStyle: _react2.default.PropTypes.object,
+	
+	  labelDistance: _react2.default.PropTypes.number,
+	  labelClassName: _react2.default.PropTypes.string,
+	  labelStyle: _react2.default.PropTypes.object,
+	  labelFormat: _react2.default.PropTypes.object,
+	  labelFormats: _react2.default.PropTypes.array,
+	  labels: _react2.default.PropTypes.array,
+	
+	  tickLength: _react2.default.PropTypes.number,
+	  tickClassName: _react2.default.PropTypes.string,
+	  tickStyle: _react2.default.PropTypes.object,
+	
+	  gridLineClassName: _react2.default.PropTypes.string,
+	  gridLineStyle: _react2.default.PropTypes.object
+	};
+	YAxis.defaultProps = {
+	  width: 400,
+	  height: 250,
+	  position: 'left',
+	  nice: true,
+	  showTitle: true,
+	  showLabels: true,
+	  showTicks: true,
+	  showGrid: true,
+	  tickLength: 5,
+	  labelDistance: 3,
+	  titleDistance: 5
+	};
+	exports.default = YAxis;
+
+/***/ },
+/* 308 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _Scale = __webpack_require__(277);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var YTicks = function (_React$Component) {
+	  _inherits(YTicks, _React$Component);
+	
+	  function YTicks() {
+	    _classCallCheck(this, YTicks);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(YTicks).apply(this, arguments));
+	  }
+	
+	  _createClass(YTicks, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var width = _props.width;
+	      var tickCount = _props.tickCount;
+	      var position = _props.position;
+	      var tickLength = _props.tickLength;
+	      var tickStyle = _props.tickStyle;
+	      var tickClassName = _props.tickClassName;
+	
+	      var scale = this.props.scale.y;
+	      var placement = this.props.placement || (position === 'left' ? 'before' : 'after');
+	      var ticks = this.props.ticks || (0, _Scale.getScaleTicks)(scale, null, tickCount);
+	      var className = 'chart-tick chart-tick-y ' + (tickClassName || '');
+	      var transform = position === 'right' ? 'translate(' + width + ', 0)' : '';
+	
+	      return _react2.default.createElement(
+	        'g',
+	        { className: 'chart-ticks-y', transform: transform },
+	        ticks.map(function (tick, i) {
+	          var y1 = scale(tick);
+	          var x2 = placement === 'before' ? -tickLength : tickLength;
+	
+	          return _react2.default.createElement('line', {
+	            x1: 0, x2: x2, y1: y1, y2: y1,
+	            className: className,
+	            style: tickStyle,
+	            key: 'tick-' + i
+	          });
+	        })
+	      );
+	    }
+	  }], [{
+	    key: 'getTickDomain',
+	    value: function getTickDomain(props) {
+	      if (!_lodash2.default.get(props, 'scale.y')) return;
+	      props = _lodash2.default.defaults({}, props, YTicks.defaultProps);
+	      return { y: (0, _Scale.getTickDomain)(props.scale.y, props) };
+	    }
+	  }, {
+	    key: 'getMargin',
+	    value: function getMargin(props) {
+	      var _$defaults = _lodash2.default.defaults({}, props, YTicks.defaultProps);
+	
+	      var tickLength = _$defaults.tickLength;
+	      var position = _$defaults.position;
+	
+	      var placement = props.placement || (position === 'left' ? 'before' : 'after');
+	      var zeroMargin = { top: 0, bottom: 0, left: 0, right: 0 };
+	
+	      if (position === 'left' && placement === 'after' || position == 'right' && placement === 'before') return zeroMargin;
+	
+	      return _lodash2.default.defaults(_defineProperty({}, position, tickLength || 0), zeroMargin);
+	    }
+	  }]);
+	
+	  return YTicks;
+	}(_react2.default.Component);
+	
+	YTicks.propTypes = {
+	  scale: _react2.default.PropTypes.shape({ y: _react2.default.PropTypes.func.isRequired })
+	};
+	YTicks.defaultProps = {
+	  position: 'left',
+	  nice: true,
+	  tickLength: 5,
+	  tickStyle: {}
+	};
+	exports.default = YTicks;
+
+/***/ },
+/* 309 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _YLine = __webpack_require__(310);
+	
+	var _YLine2 = _interopRequireDefault(_YLine);
+	
+	var _Scale = __webpack_require__(277);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var YGrid = function (_React$Component) {
+	  _inherits(YGrid, _React$Component);
+	
+	  function YGrid() {
+	    _classCallCheck(this, YGrid);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(YGrid).apply(this, arguments));
+	  }
+	
+	  _createClass(YGrid, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      var _props = this.props;
+	      var width = _props.width;
+	      var tickCount = _props.tickCount;
+	      var lineClassName = _props.lineClassName;
+	      var lineStyle = _props.lineStyle;
+	
+	      var scale = this.props.scale.y;
+	      var ticks = this.props.ticks || (0, _Scale.getScaleTicks)(scale, null, tickCount);
+	      var className = 'chart-grid-line chart-grid-line-y ' + (lineClassName || '');
+	
+	      return _react2.default.createElement(
+	        'g',
+	        { className: 'chart-grid-y' },
+	        ticks.map(function (tick, i) {
+	          return _react2.default.createElement(_YLine2.default, {
+	            scale: _this2.props.scale,
+	            value: tick,
+	            width: width,
+	            className: className,
+	            style: lineStyle,
+	            key: 'grid-y-line-' + i
+	          });
+	        })
+	      );
+	    }
+	  }], [{
+	    key: 'getTickDomain',
+	    value: function getTickDomain(props) {
+	      if (!_lodash2.default.get(props, 'scale.y')) return;
+	      props = _lodash2.default.defaults({}, props, YGrid.defaultProps);
+	      return { y: (0, _Scale.getTickDomain)(props.scale.y, props) };
+	    }
+	  }]);
+	
+	  return YGrid;
+	}(_react2.default.Component);
+	
+	YGrid.propTypes = {
+	  scale: _react2.default.PropTypes.shape({ y: _react2.default.PropTypes.func.isRequired }),
+	  width: _react2.default.PropTypes.number,
+	  height: _react2.default.PropTypes.number,
+	  nice: _react2.default.PropTypes.bool,
+	  ticks: _react2.default.PropTypes.array,
+	  tickCount: _react2.default.PropTypes.number,
+	  lineClassName: _react2.default.PropTypes.string,
+	  lineStyle: _react2.default.PropTypes.object
+	};
+	YGrid.defaultProps = {
+	  nice: true,
+	  lineStyle: {}
+	};
+	exports.default = YGrid;
+
+/***/ },
+/* 310 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var YLine = function (_React$Component) {
+	  _inherits(YLine, _React$Component);
+	
+	  function YLine() {
+	    _classCallCheck(this, YLine);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(YLine).apply(this, arguments));
+	  }
+	
+	  _createClass(YLine, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var value = _props.value;
+	      var width = _props.width;
+	      var style = _props.style;
+	
+	      var scale = this.props.scale.y;
+	      var className = 'chart-line-y ' + (this.props.className || '');
+	      var lineY = scale(value);
+	
+	      return _react2.default.createElement('line', {
+	        x1: 0,
+	        x2: width,
+	        y1: lineY,
+	        y2: lineY,
+	        className: className, style: style
+	      });
+	    }
+	  }]);
+	
+	  return YLine;
+	}(_react2.default.Component);
+	
+	YLine.propTypes = {
+	  scale: _react2.default.PropTypes.shape({ y: _react2.default.PropTypes.func.isRequired }),
+	  value: _react2.default.PropTypes.any.isRequired
+	};
+	YLine.defaultProps = {
+	  style: {}
+	};
+	exports.default = YLine;
+
+/***/ },
+/* 311 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _MeasuredValueLabel = __webpack_require__(294);
+	
+	var _MeasuredValueLabel2 = _interopRequireDefault(_MeasuredValueLabel);
+	
+	var _Scale = __webpack_require__(277);
+	
+	var _Label = __webpack_require__(305);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	function resolveYLabelsForValues(scale, values, formats, style) {
+	  var force = arguments.length <= 4 || arguments[4] === undefined ? true : arguments[4];
+	
+	  // given a set of Y-values to label, and a list of formatters to try,
+	  // find the first formatter that produces a set of labels which are distinct
+	  // since we currently do not support rotated axis value labels,
+	  // we do not check if they fit on the axis (unlike X labels), since all Y labels will have the same height
+	  // returns the formatter and the generated labels
+	
+	  var labels = undefined;
+	  var attempts = [];
+	  var goodFormat = _lodash2.default.find(formats, function (format) {
+	    var testLabels = values.map(function (value) {
+	      return _MeasuredValueLabel2.default.getLabel({ value: value, format: format, style: style });
+	    });
+	
+	    var areLabelsDistinct = (0, _Label.checkLabelsDistinct)(testLabels);
+	    if (!areLabelsDistinct) {
+	      // console.log('labels are not distinct', _.map(testLabels, 'text'));
+	      attempts.push({ labels: testLabels, format: format, areLabelsDistinct: areLabelsDistinct });
+	      return false;
+	    }
+	
+	    labels = testLabels;
+	    return true;
+	  });
+	
+	  if (!_lodash2.default.isUndefined(goodFormat)) {
+	    // found labels which work, return them
+	    return { labels: labels, format: goodFormat, areLabelsDistinct: true, collisionCount: 0 };
+	  } else {
+	    // none of the sets of labels are good
+	    // if we're not forced to decide, return all the labels we tried (let someone else decide)
+	    if (!force) return { attempts: attempts };
+	
+	    // forced to decide, choose the least bad option
+	    // super bad, we don't have any label sets with distinct labels. return the last attempt.
+	    return _lodash2.default.last(attempts);
+	  }
+	}
+	
+	var YAxisValueLabels = function (_React$Component) {
+	  _inherits(YAxisValueLabels, _React$Component);
+	
+	  function YAxisValueLabels() {
+	    _classCallCheck(this, YAxisValueLabels);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(YAxisValueLabels).apply(this, arguments));
+	  }
+	
+	  _createClass(YAxisValueLabels, [{
+	    key: 'render',
+	    value: function render() {
+	      // todo: position: 'zero' prop to position along the zero line
+	      var _props = this.props;
+	      var width = _props.width;
+	      var position = _props.position;
+	      var distance = _props.distance;
+	      var labelStyle = _props.labelStyle;
+	      var labelClassName = _props.labelClassName;
+	
+	      var scale = this.props.scale.y;
+	      var placement = this.props.placement || (position === 'left' ? 'before' : 'after');
+	      var className = 'chart-value-label chart-value-label-y ' + labelClassName;
+	      var textAnchor = placement === 'before' ? 'end' : 'start';
+	      var style = _lodash2.default.defaults({ textAnchor: textAnchor }, labelStyle, YAxisValueLabels.defaultProps.labelStyle);
+	
+	      var labels = this.props.labels || YAxisValueLabels.getLabels(this.props);
+	
+	      var transform = position === 'left' ? '' : 'translate(' + width + ',0)';
+	      return _react2.default.createElement(
+	        'g',
+	        { className: 'chart-value-labels-y', transform: transform },
+	        labels.map(function (label) {
+	          var y = scale(label.value);
+	          var x = placement === 'before' ? -distance : distance;
+	
+	          return _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement(
+	              _MeasuredValueLabel2.default,
+	              { x: x, y: y, className: className, dy: "0.35em", style: style },
+	              label.text
+	            )
+	          );
+	        })
+	      );
+	    }
+	  }], [{
+	    key: 'getTickDomain',
+	    value: function getTickDomain(props) {
+	      if (!_lodash2.default.get(props, 'scale.y')) return;
+	      props = _lodash2.default.defaults({}, props, YAxisValueLabels.defaultProps);
+	      return { y: (0, _Scale.getTickDomain)(props.scale.y, props) };
+	    }
+	    // placement: undefined,
+	    // format: undefined,
+	    // formats: undefined,
+	    // labels: undefined
+	
+	  }, {
+	    key: 'getMargin',
+	    value: function getMargin(props) {
+	      var _$defaults;
+	
+	      props = _lodash2.default.defaults({}, props, YAxisValueLabels.defaultProps);
+	      var _props2 = props;
+	      var position = _props2.position;
+	      var placement = _props2.placement;
+	      var distance = _props2.distance;
+	      var labelStyle = _props2.labelStyle;
+	
+	      var scale = props.scale.y;
+	      var labels = props.labels || YAxisValueLabels.getLabels(props);
+	      var zeroMargin = { top: 0, bottom: 0, left: 0, right: 0 };
+	
+	      if (position === 'left' && placement === 'after' || position == 'right' && placement === 'before') return zeroMargin;
+	
+	      var marginX = _lodash2.default.max(labels.map(function (label) {
+	        return Math.ceil(distance + label.width);
+	      }));
+	
+	      var _getLabelsYOverhang = (0, _Label.getLabelsYOverhang)(scale, labels, 'middle');
+	
+	      var _getLabelsYOverhang2 = _slicedToArray(_getLabelsYOverhang, 2);
+	
+	      var top = _getLabelsYOverhang2[0];
+	      var bottom = _getLabelsYOverhang2[1];
+	
+	
+	      return _lodash2.default.defaults((_$defaults = {}, _defineProperty(_$defaults, position, marginX), _defineProperty(_$defaults, 'top', top), _defineProperty(_$defaults, 'bottom', bottom), _$defaults), zeroMargin);
+	    }
+	  }, {
+	    key: 'getDefaultFormats',
+	    value: function getDefaultFormats(scaleType) {
+	      var timeFormatStrs = ['YYYY', 'YY', 'MMM YYYY', 'M/YY'];
+	      var numberFormatStrs = ["0.[00]a", "0,0", "0.[0]", "0.[00]", "0.[0000]", "0.[000000]"];
+	
+	      return scaleType === 'ordinal' ? [_lodash2.default.identity] : scaleType === 'time' ? timeFormatStrs : numberFormatStrs;
+	    }
+	  }, {
+	    key: 'getLabels',
+	    value: function getLabels(props) {
+	      var _$defaults2 = _lodash2.default.defaults(props, {}, YAxisValueLabels.defaultProps);
+	
+	      var tickCount = _$defaults2.tickCount;
+	      var labelStyle = _$defaults2.labelStyle;
+	
+	      var scale = props.scale.y;
+	      var ticks = props.ticks || (0, _Scale.getScaleTicks)(scale, null, tickCount);
+	      var style = _lodash2.default.defaults(labelStyle, YAxisValueLabels.defaultProps.labelStyle);
+	
+	      var scaleType = (0, _Scale.inferScaleType)(scale);
+	      var propsFormats = props.format ? [props.format] : props.formats;
+	      var formatStrs = _lodash2.default.isArray(propsFormats) && propsFormats.length ? propsFormats : YAxisValueLabels.getDefaultFormats(scaleType);
+	      var formats = (0, _Label.makeLabelFormatters)(formatStrs, scaleType);
+	
+	      // todo resolve ticks also
+	      // if there are so many ticks that no combination of labels can fit on the axis,
+	      // nudge down the tickCount and try again
+	      // doing this will require communicating the updated ticks/tickCount back to the parent element...
+	
+	      var _resolveYLabelsForVal = resolveYLabelsForValues(scale, ticks, formats, style);
+	
+	      var labels = _resolveYLabelsForVal.labels;
+	      // console.log('found labels', labels);
+	
+	      return labels;
+	    }
+	  }]);
+	
+	  return YAxisValueLabels;
+	}(_react2.default.Component);
+	
+	YAxisValueLabels.propTypes = {
+	  scale: _react2.default.PropTypes.object };
+	YAxisValueLabels.defaultProps = {
+	  height: 250,
+	  width: 400,
+	  position: 'left',
+	  distance: 4,
+	  nice: true,
+	  tickCount: 10,
+	  ticks: null,
+	  labelClassName: '',
+	  labelStyle: {
+	    fontFamily: "Helvetica, sans-serif",
+	    fontSize: '14px',
+	    lineHeight: 1,
+	    textAnchor: 'end'
+	  }
+	};
+	
+	var YAxisLabelDebugRect = function (_React$Component2) {
+	  _inherits(YAxisLabelDebugRect, _React$Component2);
+	
+	  function YAxisLabelDebugRect() {
+	    _classCallCheck(this, YAxisLabelDebugRect);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(YAxisLabelDebugRect).apply(this, arguments));
+	  }
+	
+	  _createClass(YAxisLabelDebugRect, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props3 = this.props;
+	      var x = _props3.x;
+	      var y = _props3.y;
+	      var label = _props3.label;
+	      var style = _props3.style;
+	
+	      var xAdj = style.textAnchor === 'end' ? x - label.width : x;
+	      return _react2.default.createElement('rect', {
+	        x: xAdj,
+	        y: y - label.height / 2,
+	        width: label.width,
+	        height: label.height,
+	        fill: 'orange'
+	      });
+	    }
+	  }]);
+	
+	  return YAxisLabelDebugRect;
+	}(_react2.default.Component);
+	
+	exports.default = YAxisValueLabels;
+
+/***/ },
+/* 312 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _measureText = __webpack_require__(295);
+	
+	var _measureText2 = _interopRequireDefault(_measureText);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var YAxisTitle = function (_React$Component) {
+	  _inherits(YAxisTitle, _React$Component);
+	
+	  function YAxisTitle() {
+	    _classCallCheck(this, YAxisTitle);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(YAxisTitle).apply(this, arguments));
+	  }
+	
+	  _createClass(YAxisTitle, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var height = _props.height;
+	      var width = _props.width;
+	      var distance = _props.distance;
+	      var position = _props.position;
+	      var alignment = _props.alignment;
+	      var style = _props.style;
+	
+	      var title = this.props.title || this.props.children;
+	      var placement = this.props.placement || (position === 'left' ? 'before' : 'after');
+	
+	      var rotate = this.props.rotate ? -90 : 0;
+	      var posX = position === 'right' ? width : 0;
+	      var translateX = posX + (placement === 'before' ? -distance : distance);
+	      var translateY = alignment === 'middle' ? height / 2 : alignment === 'bottom' ? height : 0;
+	      var textAnchor = rotate && alignment === 'top' ? 'end' : rotate && alignment === 'middle' ? 'middle' : rotate && alignment === 'bottom' ? 'start' : placement === 'before' ? 'end' : 'start';
+	      var dy = rotate && placement == 'before' ? '-0.2em' : rotate ? '0.8em' : alignment === 'top' ? '0.8em' : alignment === 'middle' ? '0.3em' : null;
+	
+	      return _react2.default.createElement(
+	        'g',
+	        { transform: 'translate(' + translateX + ',' + translateY + ')' },
+	        _react2.default.createElement(
+	          'text',
+	          { style: _extends({}, style, { textAnchor: textAnchor }), transform: 'rotate(' + rotate + ')', dy: dy },
+	          title
+	        )
+	      );
+	    }
+	  }], [{
+	    key: 'getMargin',
+	    value: function getMargin(props) {
+	      props = _lodash2.default.defaults({}, props, YAxisTitle.defaultProps);
+	      var _props2 = props;
+	      var distance = _props2.distance;
+	      var position = _props2.position;
+	      var rotate = _props2.rotate;
+	
+	      var placement = props.placement || (position === 'left' ? 'before' : 'after');
+	      var zeroMargin = { top: 0, bottom: 0, left: 0, right: 0 };
+	
+	      if (position === 'left' && placement === 'after' || position == 'right' && placement === 'before') return zeroMargin;
+	
+	      var title = props.title || props.children;
+	      var style = _lodash2.default.defaults(props.style, YAxisTitle.defaultProps.style);
+	      var measured = (0, _measureText2.default)(_lodash2.default.assign({ text: title }, style));
+	
+	      var marginValue = distance + Math.ceil(rotate ? measured.height.value : measured.width.value);
+	
+	      return position === 'left' ? _extends({}, zeroMargin, { left: marginValue }) : _extends({}, zeroMargin, { right: marginValue });
+	    }
+	  }]);
+	
+	  return YAxisTitle;
+	}(_react2.default.Component);
+	
+	YAxisTitle.propTypes = {
+	  height: _react2.default.PropTypes.number,
+	  width: _react2.default.PropTypes.number,
+	  distance: _react2.default.PropTypes.number,
+	  position: _react2.default.PropTypes.oneOf(['left', 'right']),
+	  alignment: _react2.default.PropTypes.oneOf(['top', 'middle', 'bottom']),
+	  placement: _react2.default.PropTypes.oneOf(['before', 'after']),
+	  rotate: _react2.default.PropTypes.bool,
+	  style: _react2.default.PropTypes.object
+	};
+	YAxisTitle.defaultProps = {
+	  height: 250,
+	  width: 400,
+	  distance: 5,
+	  position: 'left',
+	  alignment: 'middle',
+	  placement: undefined,
+	  rotate: true,
+	  style: {
+	    fontFamily: "Helvetica, sans-serif",
+	    fontSize: '24px',
+	    fontWeight: 'bold',
+	    lineHeight: 1
+	  }
+	};
+	exports.default = YAxisTitle;
+
+/***/ },
+/* 313 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(168);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d = __webpack_require__(170);
+	
+	var _d2 = _interopRequireDefault(_d);
+	
+	var _resolveObjectProps = __webpack_require__(273);
+	
+	var _resolveObjectProps2 = _interopRequireDefault(_resolveObjectProps);
+	
+	var _resolveXYScales = __webpack_require__(275);
+	
+	var _resolveXYScales2 = _interopRequireDefault(_resolveXYScales);
+	
+	var _Margin = __webpack_require__(278);
+	
+	var _Scale = __webpack_require__(277);
+	
+	var _util = __webpack_require__(173);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	function indexOfClosestNumberInList(number, list) {
+	  return list.reduce(function (closestI, current, i) {
+	    return Math.abs(current - number) < Math.abs(list[closestI] - number) ? i : closestI;
+	  }, 0);
+	}
+	
+	function getMouseOptions(event, _ref) {
+	  var scale = _ref.scale;
+	  var height = _ref.height;
+	  var width = _ref.width;
+	  var margin = _ref.margin;
+	
+	  var chartBB = event.currentTarget.getBoundingClientRect();
+	  var outerX = Math.round(event.clientX - chartBB.left);
+	  var outerY = Math.round(event.clientY - chartBB.top);
+	  var innerX = outerX - (margin.left || 0);
+	  var innerY = outerY - (margin.top || 0);
+	  var chartSize = (0, _Margin.innerSize)({ width: width, height: height }, margin);
+	  var scaleType = { x: (0, _Scale.inferScaleType)(scale.x), y: (0, _Scale.inferScaleType)(scale.y) };
+	
+	  var xValue = !_lodash2.default.inRange(innerX, 0, chartSize.width /* + padding.left + padding.right */) ? null : scaleType.x === 'ordinal' ? scale.x.domain()[indexOfClosestNumberInList(innerX, scale.x.range())] : scale.x.invert(innerX);
+	  var yValue = !_lodash2.default.inRange(innerY, 0, chartSize.height /* + padding.top + padding.bottom */) ? null : scaleType.y === 'ordinal' ? scale.y.domain()[indexOfClosestNumberInList(innerY, scale.y.range())] : scale.y.invert(innerY);
+	
+	  return { event: event, outerX: outerX, outerY: outerY, innerX: innerX, innerY: innerY, xValue: xValue, yValue: yValue, scale: scale, margin: margin };
+	}
+	
+	var XYPlot2 = function (_React$Component) {
+	  _inherits(XYPlot2, _React$Component);
+	
+	  function XYPlot2() {
+	    var _Object$getPrototypeO;
+	
+	    var _temp, _this, _ret;
+	
+	    _classCallCheck(this, XYPlot2);
+	
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(XYPlot2)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.onXYMouseEvent = function (callbackKey, event) {
+	      var callback = _this.props[callbackKey];
+	      if (!_lodash2.default.isFunction(callback)) return;
+	      var options = getMouseOptions(event, _this.props);
+	      callback(options);
+	    }, _this.onMouseMove = _lodash2.default.partial(_this.onXYMouseEvent, 'onMouseMove'), _this.onMouseDown = _lodash2.default.partial(_this.onXYMouseEvent, 'onMouseDown'), _this.onMouseUp = _lodash2.default.partial(_this.onXYMouseEvent, 'onMouseUp'), _this.onClick = _lodash2.default.partial(_this.onXYMouseEvent, 'onClick'), _this.onMouseEnter = function (event) {
+	      return _this.props.onMouseEnter({ event: event });
+	    }, _this.onMouseLeave = function (event) {
+	      return _this.props.onMouseLeave({ event: event });
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+	  // emptyLabel: "Unknown",
+	
+	  // these values are inferred from data if not provided, therefore empty defaults
+	  // scaleType: {},
+	  // domain: {},
+	  // margin: {},
+	  // spacing: {}
+	
+	
+	  _createClass(XYPlot2, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      // console.log('xyplot2 props', this.props);
+	      var _props = this.props;
+	      var width = _props.width;
+	      var height = _props.height;
+	      var margin = _props.margin;
+	
+	      var chartSize = (0, _Margin.innerSize)({ width: width, height: height }, margin);
+	
+	      var handlerNames = ['onMouseMove', 'onMouseEnter', 'onMouseLeave', 'onMouseDown', 'onMouseUp', 'onClick'];
+	      var handlers = _lodash2.default.fromPairs(handlerNames.map(function (n) {
+	        return [n, (0, _util.methodIfFuncProp)(n, _this2.props, _this2)];
+	      }));
+	
+	      var propsToPass = _extends({}, _lodash2.default.omit(this.props, ['children']), chartSize);
+	
+	      return _react2.default.createElement(
+	        'svg',
+	        _extends({ width: width, height: height, onMouseMove: this.onMouseMove }, handlers),
+	        _react2.default.createElement('rect', _extends({ fill: 'thistle' }, { width: width, height: height })),
+	        _react2.default.createElement(
+	          'g',
+	          { transform: 'translate(' + margin.left + ', ' + margin.top + ')' },
+	          _react2.default.createElement('rect', _extends({ fill: '#dddddd' }, chartSize)),
+	          _react2.default.Children.map(this.props.children, function (child) {
+	            return _lodash2.default.isNull(child) || _lodash2.default.isUndefined(child) ? null : _react2.default.cloneElement(child, propsToPass);
+	          })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return XYPlot2;
+	}(_react2.default.Component);
+	
+	XYPlot2.propTypes = {
+	  width: _react2.default.PropTypes.number,
+	  height: _react2.default.PropTypes.number,
+	  scale: _react2.default.PropTypes.object,
+	  scaleType: _react2.default.PropTypes.object,
+	  domain: _react2.default.PropTypes.object,
+	  margin: _react2.default.PropTypes.object,
+	  // todo spacing & padding...
+	  nice: _react2.default.PropTypes.object,
+	  invertScale: _react2.default.PropTypes.object,
+	
+	  onMouseMove: _react2.default.PropTypes.func,
+	  onMouseEnter: _react2.default.PropTypes.func,
+	  onMouseLeave: _react2.default.PropTypes.func,
+	  onMouseDown: _react2.default.PropTypes.func,
+	  onMouseUp: _react2.default.PropTypes.func
+	};
+	XYPlot2.defaultProps = {
+	  width: 400,
+	  height: 250,
+	  // nice: {x: true, y: true},
+	  invertScale: { x: false, y: false } };
+	
+	
+	var xyKeys = ['scaleType', 'domain', 'invertScale'];
+	var dirKeys = ['margin', 'padding', 'spacing'];
+	
+	var XYPlot2Resolved = _lodash2.default.flow([_resolveXYScales2.default, _lodash2.default.partial(_resolveObjectProps2.default, _lodash2.default, xyKeys, ['x', 'y']), _lodash2.default.partial(_resolveObjectProps2.default, _lodash2.default, dirKeys, ['top', 'bottom', 'left', 'right'])])(XYPlot2);
+	
+	exports.default = XYPlot2Resolved;
+
+/***/ },
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60780,7 +66614,7 @@
 	exports.randomWalk = randomWalk;
 	exports.randomWalkSeries = randomWalkSeries;
 	
-	var _lodash = __webpack_require__(170);
+	var _lodash = __webpack_require__(168);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	

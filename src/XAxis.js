@@ -1,14 +1,14 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {getTickDomain} from 'utils/Scale';
-import {sumMargins} from 'utils/Margin';
-import {getAxisChildProps} from 'utils/Axis'
+import {getTickDomain} from './utils/Scale';
+import {sumMargins} from './utils/Margin';
+import {getAxisChildProps} from './utils/Axis';
 
-import XTicks from 'XTicks';
-import XGrid from 'XGrid';
-import XAxisLabels from 'XAxisLabels';
-import XAxisTitle from 'XAxisTitle';
+import XTicks from './XTicks';
+import XGrid from './XGrid';
+import XAxisLabels from './XAxisLabels';
+import XAxisTitle from './XAxisTitle';
 
 export default class XAxis extends React.Component {
   static propTypes = {

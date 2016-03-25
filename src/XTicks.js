@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {getScaleTicks, getTickDomain} from 'utils/Scale';
+import {getScaleTicks, getTickDomain} from './utils/Scale';
 
 export default class XTicks extends React.Component {
   static propTypes = {

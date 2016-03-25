@@ -1,14 +1,14 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {getTickDomain} from 'utils/Scale';
-import {sumMargins} from 'utils/Margin';
-import {getAxisChildProps} from 'utils/Axis'
+import {getTickDomain} from './utils/Scale';
+import {sumMargins} from './utils/Margin';
+import {getAxisChildProps} from './utils/Axis'
 
-import YTicks from 'YTicks';
-import YGrid from 'YGrid';
-import YAxisLabels from 'YAxisLabels';
-import YAxisTitle from 'YAxisTitle';
+import YTicks from './YTicks';
+import YGrid from './YGrid';
+import YAxisLabels from './YAxisLabels';
+import YAxisTitle from './YAxisTitle';
 
 export default class YAxis extends React.Component {
   static propTypes = {

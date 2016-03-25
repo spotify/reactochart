@@ -1,10 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
 
-import MeasuredValueLabel from 'MeasuredValueLabel';
-import {getScaleTicks, inferScaleType, getTickDomain} from 'utils/Scale';
+import MeasuredValueLabel from './MeasuredValueLabel';
+import {getScaleTicks, inferScaleType, getTickDomain} from './utils/Scale';
 import {checkLabelsDistinct, countRangeOverlaps, makeLabelFormatters, getLabelXRange, getLabelsXOverhang}
-  from 'utils/Label';
+  from './utils/Label';
 
 function resolveXLabelsForValues(scale, values, formats, style, force = true) {
   // given a set of values to label, and a list of formatters to try,

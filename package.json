@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",
     "build-lib": "rm -rf lib/ && babel src --out-dir lib",
-    "build-examples": "webpack --config webpack.config.base.js",
+    "build-examples": "BABEL_ENV=production webpack --config webpack.config.base.js",
     "build-tests": "webpack --config webpack.config.test.js",
     "build": "npm run build-lib && npm run build-examples && npm run build-tests",
     "serve": "python -m SimpleHTTPServer",
@@ -21,7 +21,9 @@
     "lodash": "^4.5.1",
     "measure-text": "0.0.4",
     "moment": "^2.10.6",
-    "numeral": "^1.5.3"
+    "numeral": "^1.5.3",
+    "react-addons-shallow-compare": "^0.14.7",
+    "recompose": "^0.15.1"
   },
   "peerDependencies": {
     "react": "^0.14.2",
@@ -49,6 +51,7 @@
     "react-addons-update": "^0.14.2",
     "react-dom": "^0.14.2",
     "react-hot-loader": "^1.2.8",
+    "react-pure-render-debug": "^1.1.1",
     "style-loader": "^0.12.3",
     "webpack": "^1.10.5",
     "webpack-dev-server": "^1.10.1"

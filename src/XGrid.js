@@ -1,8 +1,9 @@
 import React from 'react';
 import _ from 'lodash';
 
-import XLine from 'XLine';
-import {getScaleTicks, getTickDomain} from 'utils/Scale';
+import {getScaleTicks, getTickDomain} from './utils/Scale';
+import XLine from './XLine';
+
 
 export default class XGrid extends React.Component {
   static propTypes = {

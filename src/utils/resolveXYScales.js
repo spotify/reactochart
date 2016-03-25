@@ -10,7 +10,7 @@ import {
   datasetsFromPropsOrDescendants,
   combineDomains,
   isValidDomain
-} from 'utils/Data';
+} from './Data';
 
 import {
   scaleTypeFromDataType,
@@ -18,9 +18,9 @@ import {
   inferDataTypeFromDomain,
   initScale,
   isValidScale
-} from 'utils/Scale';
+} from './Scale';
 
-import {innerRangeX, innerRangeY} from 'utils/Margin';
+import {innerRangeX, innerRangeY} from './Margin';
 
 /**
  * `resolveXYScales` is a higher-order-component.

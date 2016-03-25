@@ -15,7 +15,7 @@ import {
   KernelDensityEstimation
 } from '../../src';
 
-import XYPlot2 from '../../src/charts/XYPlot2';
+import XYPlot2 from '../../src/XYPlot2';
 
 import XAxis from '../../src/XAxis';
 import XTicks from '../../src/XTicks';
@@ -239,6 +239,7 @@ const LineChartExample = React.createClass({
   }
 });
 
+const xyArrGetter = {x: 0, y: 1};
 const InteractiveLineExample = React.createClass({
   getInitialState() {
     return {
@@ -249,6 +250,9 @@ const InteractiveLineExample = React.createClass({
   onMouseMoveXYPlot({xValue, yValue}) {
     this.setState({activeXValue: xValue, activeYValue: yValue});
   },
+  onClick({yValue}) {
+    this.setState({clickedY: yValue})
+  },
   render() {
     const {activeXValue, activeYValue} = this.state;
     return <div>
@@ -258,17 +262,22 @@ const InteractiveLineExample = React.createClass({
         </div> :
         <div>Hover over the chart to show values</div>
       }
-      <XYPlot2 width={700} height={400} onMouseMove={this.onMouseMoveXYPlot}>
-        <XAxis /><YAxis />
-        <LineChart data={randomSequences[0]} getValue={{x: 0, y: 1}} />
-        <LineChart data={randomSequences[1]} getValue={{x: 0, y: 1}} />
-        <LineChart data={randomSequences[2]} getValue={{x: 0, y: 1}} />
+      <XYPlot2 width={700} height={400} onMouseMove={this.onMouseMoveXYPlot} onClick={this.onClick}>
+        <XAxis title="Days" />
+        <YAxis title="Price" />
+        <LineChart data={randomSequences[0]} getValue={xyArrGetter} />
+        <LineChart data={randomSequences[1]} getValue={xyArrGetter} />
+        <LineChart data={randomSequences[2]} getValue={xyArrGetter} />
         {activeXValue ?
           <XLine value={activeXValue} style={{stroke: 'red'}} /> :
           null
         }
         {activeYValue ?
           <YLine value={activeYValue} style={{stroke: 'red'}} /> :
+          null
+        }
+        {this.state.clickedY ?
+          <YLine value={this.state.clickedY} style={{stroke: 'orange'}} /> :
           null
         }
       </XYPlot2>
@@ -711,43 +720,6 @@ class XAxisTitleTest extends React.Component {
       <XAxisTitle title="Center +" position="top" alignment="center" placement="below" rotate={true} {...size} />
       <XAxisTitle title="Right I" position="top" alignment="right" placement="below" rotate={true} {...size} />
     </g>;
-  }
-}
-
-import {innerWidth, innerHeight} from 'utils/Margin';
-import {maxMargins} from 'utils/Margin';
-
-class CombinedChildMargins extends React.Component {
-  render() {
-    const {width, height, children, domain} = this.props;
-    const zeroMargin = {top: 0, bottom: 0, left: 0, right: 0};
-
-    const testXScale = d3.time.scale().domain(domain).range([0, width]);
-
-    const childMargins = React.Children.count(children) ?
-      React.Children.map(children, child => {
-        const childProps = _.defaults({}, child.props, {scale: testXScale});
-        return _.isFunction(child.type.getMargin) ?
-          _.defaults({}, child.type.getMargin(childProps), zeroMargin) :
-          zeroMargin
-      }) :
-      [zeroMargin];
-
-    const margin = maxMargins(childMargins);
-    const innerSize = {width: innerWidth(width, margin), height: innerHeight(height, margin)};
-
-    const xScale = d3.time.scale().domain(domain).range([0, innerSize.width]);
-
-    return <svg {...{width, height}}>
-      <rect fill="lightcoral" {...{width, height}} />
-      <g transform={`translate(${margin.left}, ${margin.top})`}>
-        <rect fill="#dddddd" {...innerSize} />
-        {React.Children.map(children, child => {
-          const passProps = {...innerSize, scale: xScale};
-          return React.cloneElement(child, passProps);
-        })}
-      </g>
-    </svg>
   }
 }
 

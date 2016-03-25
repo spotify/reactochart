@@ -2,7 +2,6 @@ import React from 'react';
 import _ from 'lodash';
 import measureText from 'measure-text';
 
-
 export default class MeasuredValueLabel extends React.Component {
   static propTypes = {
     value: React.PropTypes.any.isRequired

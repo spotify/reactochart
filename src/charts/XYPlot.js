@@ -6,8 +6,8 @@ import {accessor} from '../util.js';
 import moment from 'moment';
 import numeral from 'numeral';
 import ReactDOMServer from 'react-dom/server';
-import resolveObjectProps from 'utils/resolveObjectProps';
-import resolveXYScales from 'utils/resolveXYScales';
+import resolveObjectProps from '../utils/resolveObjectProps';
+import resolveXYScales from '../utils/resolveXYScales';
 
 let PropTypes = React.PropTypes;
 PropTypes = _.assign({}, PropTypes, {

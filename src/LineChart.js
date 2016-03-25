@@ -1,15 +1,15 @@
 import React from 'react';
-import shallowCompare from 'react-addons-shallow-compare';
-import PureRenderDebug from 'react-pure-render-debug';
+// import shallowCompare from 'react-addons-shallow-compare';
+// import PureRenderDebug from 'react-pure-render-debug';
 const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
 
-import resolveXYScales from 'utils/resolveXYScales';
-import resolveObjectProps from 'utils/resolveObjectProps';
-import {accessor, AccessorPropType, InterfaceMixin} from '../util.js';
+// import resolveXYScales from './utils/resolveXYScales';
+// import resolveObjectProps from './utils/resolveObjectProps';
+import {accessor, AccessorPropType, InterfaceMixin} from './util.js';
 
-import shallowEqual from 'recompose/shallowEqual';
+// import shallowEqual from 'recompose/shallowEqual';
 
 const LineChart = React.createClass({
   mixins: [InterfaceMixin('XYChart')],
@@ -83,12 +83,12 @@ const xyKeys = [
   'axisLabel', 'axisLabelAlign', 'axisLabelPadding'
 ];
 const dirKeys = ['margin', 'padding', 'spacing'];
-
-const LineChartResolved = _.flow([
-  resolveXYScales,
-  _.partial(resolveObjectProps, _, xyKeys, ['x', 'y']),
-  _.partial(resolveObjectProps, _, dirKeys, ['top', 'bottom', 'left', 'right'])
-])(LineChart);
+//
+// const LineChartResolved = _.flow([
+//   resolveXYScales,
+//   _.partial(resolveObjectProps, _, xyKeys, ['x', 'y']),
+//   _.partial(resolveObjectProps, _, dirKeys, ['top', 'bottom', 'left', 'right'])
+// ])(LineChart);
 
 // export default LineChartResolved;
 

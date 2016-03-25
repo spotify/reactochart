@@ -1,8 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 
-import YLine from 'YLine';
-import {getScaleTicks, getTickDomain} from 'utils/Scale';
+import YLine from './YLine';
+import {getScaleTicks, getTickDomain} from './utils/Scale';
 
 export default class YGrid extends React.Component {
   static propTypes = {

@@ -2,11 +2,11 @@ import React from 'react';
 import _ from 'lodash';
 import d3 from 'd3';
 
-import resolveObjectProps from 'utils/resolveObjectProps';
-import resolveXYScales from 'utils/resolveXYScales';
-import {innerSize} from 'utils/Margin';
-import {inferScaleType} from 'utils/Scale';
-import {methodIfFuncProp} from 'util';
+import resolveObjectProps from './utils/resolveObjectProps';
+import resolveXYScales from './utils/resolveXYScales';
+import {innerSize} from './utils/Margin';
+import {inferScaleType} from './utils/Scale';
+import {methodIfFuncProp} from './util';
 
 function indexOfClosestNumberInList(number, list) {
   return list.reduce((closestI, current, i) => {
