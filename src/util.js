@@ -35,3 +35,4 @@ export function methodIfFuncProp(propName, props, context) {
     return _.isFunction(props[propName]) && _.isFunction(context[propName]) ?
         context[propName] : null;
 }
+

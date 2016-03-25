@@ -92,6 +92,7 @@ function resolveXYPropsOnComponentOrChildren(propKeys, props, reducers = {}, val
   if(React.Children.count(props.children)) {
     let childProps = [];
     React.Children.forEach(props.children, child => {
+      if(!child) return;
       childProps.push(resolveXYPropsOnComponentOrChildren(propKeys, child.props, result));
     });
 
@@ -188,6 +189,7 @@ export default function resolveXYScales(ComposedComponent) {
         console.log('get scaletype from children')
         let childScaleTypes = [];
         React.Children.forEach(props.children, child => {
+          if(!child) return;
           childScaleTypes.push(this._resolveScaleType(child.props, child.type));
         });
         console.log('childScaleTypes', childScaleTypes);
@@ -255,6 +257,7 @@ export default function resolveXYScales(ComposedComponent) {
       if(React.Children.count(props.children)) {
         let childDomains = [];
         React.Children.forEach(props.children, child => {
+          if(!child) return;
           childDomains = childDomains.concat(this._resolveDomain(child.props, child.type, scaleType));
         });
 
@@ -279,6 +282,7 @@ export default function resolveXYScales(ComposedComponent) {
       if(React.Children.count(props.children)) {
         let childTickDomains = [];
         React.Children.forEach(props.children, child => {
+          if(!child) return;
           childTickDomains.push(this._resolveTickDomain(child.props, child.type, scaleType, domain, scale));
         });
 
@@ -320,6 +324,7 @@ export default function resolveXYScales(ComposedComponent) {
       if(React.Children.count(props.children)) {
         let childMargins = [];
         React.Children.forEach(props.children, child => {
+          if(!child) return;
           childMargins = childMargins.concat(this._resolveMargin(child.props, child.type, scaleType, domain, scale));
         });
 

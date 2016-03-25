@@ -7,7 +7,7 @@ import chai from 'chai';
 chai.use(chaiEnzyme());
 const {expect} = chai;
 
-import XTicks from '../../../src/components/XTicks';
+import XTicks from '../../../src/XTicks';
 
 function expectTicksToExist(wrapper) {
   const ticksGroup = wrapper.find('g.chart-ticks-x');

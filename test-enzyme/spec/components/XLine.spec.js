@@ -7,7 +7,7 @@ import chai from 'chai';
 chai.use(chaiEnzyme());
 const {expect} = chai;
 
-import XLine from '../../../src/components/XLine';
+import XLine from '../../../src/XLine';
 
 function findLine(wrapper) {
   return wrapper.find('line.chart-line-x').first();

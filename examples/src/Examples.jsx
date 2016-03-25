@@ -242,26 +242,36 @@ const LineChartExample = React.createClass({
 const InteractiveLineExample = React.createClass({
   getInitialState() {
     return {
-      hoveredXYPlotData: null
+      hoveredXYPlotData: null,
+      activeXValue: null
     }
   },
-  onMouseMoveXYPlot(d, event) {
-    this.setState({hoveredXYPlotData: d})
+  onMouseMoveXYPlot({xValue, yValue}) {
+    this.setState({activeXValue: xValue, activeYValue: yValue});
   },
   render() {
-    const {hoveredXYPlotData} = this.state;
+    const {activeXValue, activeYValue} = this.state;
     return <div>
-      {hoveredXYPlotData ?
+      {activeXValue && activeYValue ?
         <div>
-          {hoveredXYPlotData[0] + ', ' + hoveredXYPlotData[1]}
+          {activeXValue.toFixed(2) + ', ' + activeYValue.toFixed(2)}
         </div> :
         <div>Hover over the chart to show values</div>
       }
-      <XYPlot width={700} height={400} onMouseMove={this.onMouseMoveXYPlot}>
+      <XYPlot2 width={700} height={400} onMouseMove={this.onMouseMoveXYPlot}>
+        <XAxis /><YAxis />
         <LineChart data={randomSequences[0]} getValue={{x: 0, y: 1}} />
         <LineChart data={randomSequences[1]} getValue={{x: 0, y: 1}} />
         <LineChart data={randomSequences[2]} getValue={{x: 0, y: 1}} />
-      </XYPlot>
+        {activeXValue ?
+          <XLine value={activeXValue} style={{stroke: 'red'}} /> :
+          null
+        }
+        {activeYValue ?
+          <YLine value={activeYValue} style={{stroke: 'red'}} /> :
+          null
+        }
+      </XYPlot2>
     </div>
   }
 });
@@ -773,7 +783,7 @@ export const App = React.createClass({
       <div>
         <XYPlot2 scaleType="linear" {...{width: 600, height: 350}}>
           <XAxis title="Phase" gridLineStyle={{stroke: '#777'}} />
-          <YAxis title="Intensity" gridLineStyle={{stroke: '#777'}} />
+          <YAxis title="Intensity" titleRotate={false} gridLineStyle={{stroke: '#777'}} />
           <YAxis title="Intensity" position="right" showGrid={false} labelStyle={{fontSize: '12px'}} />
 
           <LineChart data={_.range(100)} getValue={{y: d => Math.sin(d*.1)}} />

@@ -45,7 +45,6 @@
     "less-loader": "^2.2.0",
     "mocha": "^2.3.3",
     "mocha-phantomjs": "^4.0.1",
-    "react": "^0.14.2",
     "react-addons-test-utils": "^0.14.2",
     "react-addons-update": "^0.14.2",
     "react-dom": "^0.14.2",

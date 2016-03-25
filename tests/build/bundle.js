@@ -107,6 +107,11 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var notImplemented = function notImplemented() {
+	  console.log('* * * TEST NOT YET IMPLEMENTED * * *');
+	  throw new Error("not implemented");
+	};
+	
 	describe('Data utils', function () {
 	  describe('makeAccessor', function () {
 	    it('passes existing accessor functions through', function () {
@@ -241,15 +246,53 @@
 	    });
 	  });
 	
-	  describe('domainFromDatasets', function () {
-	    it('determines domain from datasets', function () {
-	      console.log('* * * TEST NOT YET IMPLEMENTED * * *'); // todo
+	  describe('domainFromData', function () {
+	    var numberData = [2, 4, 6, -2, 0];
+	    var timeData = [new Date(2006, 1, 1), new Date(2013, 1, 1), new Date(2008, 1, 1)];
+	    var categoricalData = ['a', 'b', 'c'];
+	
+	    it('determines domain from data when type is provided', function () {
+	      var numberDomain = (0, _Data.domainFromData)(numberData, _lodash2.default.identity, 'number');
+	      (0, _chai.expect)(numberDomain).to.deep.equal([-2, 6]);
+	      var timeDomain = (0, _Data.domainFromData)(timeData, _lodash2.default.identity, 'time');
+	      (0, _chai.expect)(timeDomain).to.deep.equal([new Date(2006, 1, 1), new Date(2013, 1, 1)]);
+	      var categoricalDomain = (0, _Data.domainFromData)(numberData, _lodash2.default.identity, 'categorical');
+	      (0, _chai.expect)(categoricalDomain).to.deep.equal(numberData);
+	    });
+	
+	    it('infers accessor & type when not provided', function () {
+	      var numberDomain = (0, _Data.domainFromData)(numberData);
+	      (0, _chai.expect)(numberDomain).to.deep.equal([-2, 6]);
+	      var timeDomain = (0, _Data.domainFromData)(timeData);
+	      (0, _chai.expect)(timeDomain).to.deep.equal([new Date(2006, 1, 1), new Date(2013, 1, 1)]);
+	      var categoricalDomain = (0, _Data.domainFromData)(categoricalData);
+	      (0, _chai.expect)(categoricalDomain).to.deep.equal(categoricalData);
 	    });
 	  });
 	
-	  describe('domainFromData', function () {
-	    it('determines domain from data', function () {
-	      console.log('* * * TEST NOT YET IMPLEMENTED * * *'); // todo
+	  describe('domainFromDatasets', function () {
+	    var numberDatasets = [[8, 7], [4, 5], [3, 1]];
+	    var timeDatasets = [[new Date('2007-03-12'), new Date('2002-03-12')], [new Date('2009-01-09'), new Date('2004-04-25')]];
+	    var categoricalDatasets = [['x', 'z'], ['y', 'z']];
+	
+	    it('determines domain from datasets when accessor & type are provided', function () {
+	      var numberDomain = (0, _Data.domainFromDatasets)(numberDatasets, _lodash2.default.identity, 'number');
+	      var timeDomain = (0, _Data.domainFromDatasets)(timeDatasets, _lodash2.default.identity, 'time');
+	      var categoricalDomain = (0, _Data.domainFromDatasets)(categoricalDatasets, _lodash2.default.identity, 'categorical');
+	
+	      (0, _chai.expect)(numberDomain).to.deep.equal([1, 8]);
+	      (0, _chai.expect)(timeDomain).to.deep.equal([new Date('2002-03-12'), new Date('2009-01-09')]);
+	      (0, _chai.expect)(categoricalDomain).to.deep.equal(['x', 'z', 'y']);
+	    });
+	
+	    it('infers accessor & type when not provided', function () {
+	      var numberDomain = (0, _Data.domainFromDatasets)(numberDatasets);
+	      var timeDomain = (0, _Data.domainFromDatasets)(timeDatasets);
+	      var categoricalDomain = (0, _Data.domainFromDatasets)(categoricalDatasets);
+	
+	      (0, _chai.expect)(numberDomain).to.deep.equal([1, 8]);
+	      (0, _chai.expect)(timeDomain).to.deep.equal([new Date('2002-03-12'), new Date('2009-01-09')]);
+	      (0, _chai.expect)(categoricalDomain).to.deep.equal(['x', 'z', 'y']);
 	    });
 	  });
 	
@@ -267,6 +310,39 @@
 	    it('returns all unique domain values for categorical-type data', function () {
 	      var domains = [['a', 'b', 'c'], ['b', 'd', 'c', 'e']];
 	      (0, _chai.expect)((0, _Data.combineDomains)(domains, 'categorical')).to.deep.equal(['a', 'b', 'c', 'd', 'e']);
+	    });
+	  });
+	
+	  describe('isValidDomain', function () {
+	    it('returns false for non-arrays and empty arrays', function () {
+	      (0, _chai.expect)((0, _Data.isValidDomain)(4)).to.equal(false);
+	      (0, _chai.expect)((0, _Data.isValidDomain)('abc')).to.equal(false);
+	      (0, _chai.expect)((0, _Data.isValidDomain)([])).to.equal(false);
+	    });
+	
+	    it('returns true for any array with items if type is categorical', function () {
+	      (0, _chai.expect)((0, _Data.isValidDomain)([4])).to.equal(true);
+	      (0, _chai.expect)((0, _Data.isValidDomain)([4], 'categorical')).to.equal(true);
+	      (0, _chai.expect)((0, _Data.isValidDomain)(['abc', 'def', 'ghi'])).to.equal(true);
+	      (0, _chai.expect)((0, _Data.isValidDomain)(['abc', 'def', 'ghi'], 'categorical')).to.equal(true);
+	      (0, _chai.expect)((0, _Data.isValidDomain)([new Date(), new Date()])).to.equal(true);
+	      (0, _chai.expect)((0, _Data.isValidDomain)([new Date(), new Date()], 'categorical')).to.equal(true);
+	    });
+	
+	    it('returns true for 2-item number arrays if type is number', function () {
+	      (0, _chai.expect)((0, _Data.isValidDomain)([4, 5], 'number')).to.equal(true);
+	      (0, _chai.expect)((0, _Data.isValidDomain)([4], 'number')).to.equal(false);
+	      (0, _chai.expect)((0, _Data.isValidDomain)([4, 5, 6], 'number')).to.equal(false);
+	      (0, _chai.expect)((0, _Data.isValidDomain)([new Date(), new Date()], 'number')).to.equal(false);
+	      (0, _chai.expect)((0, _Data.isValidDomain)(['abc', 'def'], 'number')).to.equal(false);
+	    });
+	
+	    it('returns true for 2-item date arrays if type is time', function () {
+	      (0, _chai.expect)((0, _Data.isValidDomain)([new Date(), new Date()], 'time')).to.equal(true);
+	      (0, _chai.expect)((0, _Data.isValidDomain)([new Date()], 'time')).to.equal(false);
+	      (0, _chai.expect)((0, _Data.isValidDomain)([new Date(), new Date(), new Date()], 'time')).to.equal(false);
+	      (0, _chai.expect)((0, _Data.isValidDomain)([4, 5], 'time')).to.equal(false);
+	      (0, _chai.expect)((0, _Data.isValidDomain)(['abc', 'def'], 'time')).to.equal(false);
 	    });
 	  });
 	});
@@ -53094,9 +53170,10 @@
 	exports.datasetsFromPropsOrDescendants = datasetsFromPropsOrDescendants;
 	exports.inferDataType = inferDataType;
 	exports.inferDatasetsType = inferDatasetsType;
-	exports.domainFromDatasets = domainFromDatasets;
-	exports.domainFromData = domainFromData;
 	exports.combineDomains = combineDomains;
+	exports.domainFromData = domainFromData;
+	exports.domainFromDatasets = domainFromDatasets;
+	exports.isValidDomain = isValidDomain;
 	
 	var _lodash = __webpack_require__(3);
 	
@@ -53185,26 +53262,41 @@
 	  return uniqTypes.length === 1 ? uniqTypes[0] : 'categorical';
 	}
 	
-	function domainFromDatasets(datasets, accessor, type) {
-	  // returns the default domain of a collection of datasets with an accessor function
-	  // for numeric and date-type datasets, returns the extent (min and max) of the numbers/dates
-	  // for categorical datasets, returns the set of distinct category values
-	  if (!type) type = inferDatasetsType(datasets, accessor);
-	  return type === 'number' || type === 'time' ? d3.extent(datasets.map(function (data) {
-	    return domainFromData(data, accessor, type);
-	  })) : _lodash2.default.uniq(datasets.map(function (data) {
-	    return domainFromData(data, accessor, type);
-	  }));
+	function combineDomains(domains, dataType) {
+	  if (!_lodash2.default.isArray(domains)) return undefined;
+	  return dataType === 'categorical' ? _lodash2.default.uniq(_lodash2.default.flatten(_lodash2.default.compact(domains))) : d3.extent(_lodash2.default.flatten(domains));
 	}
 	
-	function domainFromData(data, accessor, type) {
+	function domainFromData(data) {
+	  var accessor = arguments.length <= 1 || arguments[1] === undefined ? _lodash2.default.identity : arguments[1];
+	  var type = arguments.length <= 2 || arguments[2] === undefined ? undefined : arguments[2];
+	
 	  if (!type) type = inferDataType(data, accessor);
 	  return type === 'number' || type === 'time' ? d3.extent(data.map(accessor)) : _lodash2.default.uniq(data.map(accessor));
 	}
 	
-	function combineDomains(domains, dataType) {
-	  if (!_lodash2.default.isArray(domains)) return undefined;
-	  return dataType === 'categorical' ? _lodash2.default.uniq(_lodash2.default.flatten(_lodash2.default.compact(domains))) : d3.extent(_lodash2.default.flatten(domains));
+	function domainFromDatasets(datasets) {
+	  var accessor = arguments.length <= 1 || arguments[1] === undefined ? _lodash2.default.identity : arguments[1];
+	  var type = arguments.length <= 2 || arguments[2] === undefined ? undefined : arguments[2];
+	
+	  // returns the default domain of a collection of datasets with an accessor function
+	  // for numeric and date-type datasets, returns the extent (min and max) of the numbers/dates
+	  // for categorical datasets, returns the set of distinct category values
+	  if (!type) type = inferDatasetsType(datasets, accessor);
+	  var domains = datasets.map(function (data) {
+	    return domainFromData(data, accessor, type);
+	  });
+	  return combineDomains(domains, type);
+	}
+	
+	function isValidDomain(domain) {
+	  var type = arguments.length <= 1 || arguments[1] === undefined ? 'categorical' : arguments[1];
+	
+	  return _lodash2.default.isArray(domain) && !!domain.length && (
+	  // categorical domain can be any array of anything
+	  type === 'categorical' ||
+	  // number/time domains should look like [min, max]
+	  type === 'number' && domain.length === 2 && _lodash2.default.every(domain, _lodash2.default.isNumber) || type === 'time' && domain.length === 2 && _lodash2.default.every(domain, _lodash2.default.isDate));
 	}
 
 /***/ },
@@ -53284,6 +53376,64 @@
 	      (0, _chai.expect)((0, _Scale.inferScaleType)((0, _Scale.initScale)('pow'))).to.equal('pow');
 	    });
 	  });
+	
+	  describe('isValidScale', function () {
+	    it('returns true for all known scale types', function () {
+	      (0, _chai.expect)((0, _Scale.isValidScale)(_d2.default.scale.linear())).to.equal(true);
+	      (0, _chai.expect)((0, _Scale.isValidScale)(_d2.default.time.scale())).to.equal(true);
+	      (0, _chai.expect)((0, _Scale.isValidScale)(_d2.default.scale.ordinal())).to.equal(true);
+	      (0, _chai.expect)((0, _Scale.isValidScale)(_d2.default.scale.log())).to.equal(true);
+	      (0, _chai.expect)((0, _Scale.isValidScale)(_d2.default.scale.pow())).to.equal(true);
+	    });
+	    it('returns false for non-scale things', function () {
+	      (0, _chai.expect)((0, _Scale.isValidScale)(9)).to.equal(false);
+	      (0, _chai.expect)((0, _Scale.isValidScale)(true)).to.equal(false);
+	      (0, _chai.expect)((0, _Scale.isValidScale)([4, 5])).to.equal(false);
+	      (0, _chai.expect)((0, _Scale.isValidScale)({ range: [0, 100], domain: [500, 1000] })).to.equal(false);
+	    });
+	  });
+	
+	  describe('innerWidth', function () {
+	    it('returns inner width value, given outer width and a margin object', function () {
+	      (0, _chai.expect)((0, _Scale.innerWidth)(500)).to.equal(500);
+	      (0, _chai.expect)((0, _Scale.innerWidth)(500, {})).to.equal(500);
+	      (0, _chai.expect)((0, _Scale.innerWidth)(500, { top: 100, bottom: 50 })).to.equal(500);
+	      (0, _chai.expect)((0, _Scale.innerWidth)(500, { left: 100, right: 50 })).to.equal(350);
+	      (0, _chai.expect)((0, _Scale.innerWidth)(10, { left: 100, right: 50 })).to.equal(0);
+	    });
+	  });
+	
+	  describe('innerWidth', function () {
+	    it('returns inner height value, given outer height and a margin object', function () {
+	      (0, _chai.expect)((0, _Scale.innerHeight)(500)).to.equal(500);
+	      (0, _chai.expect)((0, _Scale.innerHeight)(500, {})).to.equal(500);
+	      (0, _chai.expect)((0, _Scale.innerHeight)(500, { left: 100, right: 50 })).to.equal(500);
+	      (0, _chai.expect)((0, _Scale.innerHeight)(500, { top: 100, bottom: 50 })).to.equal(350);
+	      (0, _chai.expect)((0, _Scale.innerHeight)(10, { top: 100, bottom: 50 })).to.equal(0);
+	    });
+	  });
+	
+	  describe('innerRangeX', function () {
+	    it('returns inner X-range array, given outer width and a margin object', function () {
+	      (0, _chai.expect)((0, _Scale.innerRangeX)(500)).to.deep.equal([0, 500]);
+	      (0, _chai.expect)((0, _Scale.innerRangeX)(500, {})).to.deep.equal([0, 500]);
+	      (0, _chai.expect)((0, _Scale.innerRangeX)(500, { top: 100, bottom: 50 })).to.deep.equal([0, 500]);
+	      (0, _chai.expect)((0, _Scale.innerRangeX)(500, { left: 100, right: 50 })).to.deep.equal([100, 450]);
+	      (0, _chai.expect)((0, _Scale.innerRangeX)(10, { left: 100, right: 50 })).to.deep.equal([10, 10]);
+	      (0, _chai.expect)((0, _Scale.innerRangeX)(120, { left: 100, right: 50 })).to.deep.equal([100, 100]);
+	    });
+	  });
+	
+	  describe('innerRangeY', function () {
+	    it('returns inner Y-range array, given outer width and a margin object', function () {
+	      (0, _chai.expect)((0, _Scale.innerRangeY)(500)).to.deep.equal([500, 0]);
+	      (0, _chai.expect)((0, _Scale.innerRangeY)(500, {})).to.deep.equal([500, 0]);
+	      (0, _chai.expect)((0, _Scale.innerRangeY)(500, { left: 100, right: 50 })).to.deep.equal([500, 0]);
+	      (0, _chai.expect)((0, _Scale.innerRangeY)(500, { top: 100, bottom: 50 })).to.deep.equal([450, 100]);
+	      (0, _chai.expect)((0, _Scale.innerRangeY)(10, { top: 100, bottom: 50 })).to.deep.equal([10, 10]);
+	      (0, _chai.expect)((0, _Scale.innerRangeY)(120, { top: 100, bottom: 50 })).to.deep.equal([100, 100]);
+	    });
+	  });
 	});
 
 /***/ },
@@ -53299,6 +53449,11 @@
 	exports.dataTypeFromScaleType = dataTypeFromScaleType;
 	exports.inferScaleType = inferScaleType;
 	exports.initScale = initScale;
+	exports.isValidScale = isValidScale;
+	exports.innerWidth = innerWidth;
+	exports.innerHeight = innerHeight;
+	exports.innerRangeX = innerRangeX;
+	exports.innerRangeY = innerRangeY;
 	
 	var _lodash = __webpack_require__(3);
 	
@@ -53336,8 +53491,8 @@
 	  return !scale.ticks ? 'ordinal' : _lodash2.default.isDate(scale.domain()[0]) ? 'time' : scale.base ? 'log' : scale.exponent ? 'pow' : 'linear';
 	}
 	
-	function initScale(type) {
-	  switch (type) {
+	function initScale(scaleType) {
+	  switch (scaleType) {
 	    case 'linear':
 	      return _d2.default.scale.linear();
 	    case 'time':
@@ -53349,6 +53504,34 @@
 	    case 'pow':
 	      return _d2.default.scale.pow();
 	  }
+	}
+	
+	function isValidScale(scale) {
+	  return _lodash2.default.isFunction(scale) && _lodash2.default.isFunction(scale.domain) && _lodash2.default.isFunction(scale.range);
+	}
+	
+	function innerWidth(width) {
+	  var margin = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	  return Math.max(width - ((margin.left || 0) + (margin.right || 0)), 0);
+	}
+	function innerHeight(height) {
+	  var margin = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	  return Math.max(height - ((margin.top || 0) + (margin.bottom || 0)), 0);
+	}
+	
+	function innerRangeX(outerWidth) {
+	  var margin = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	  var left = margin.left || 0;
+	  return [Math.min(left, outerWidth), Math.min(left + innerWidth(outerWidth, margin), outerWidth)];
+	}
+	function innerRangeY(outerHeight) {
+	  var margin = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	  var top = margin.top || 0;
+	  return [Math.min(top + innerHeight(outerHeight, margin), outerHeight), Math.min(top, outerHeight)];
 	}
 
 /***/ },
@@ -53603,9 +53786,12 @@
 	
 	      // todo: smart shouldComponentUpdate with 1-level deep equality check?
 	
+	      // attach static reference to default props so that we can compose multiple resolveObjectProps wrappers,
+	      // but don't call it defaultProps, to avoid actually triggering the default behavior
 	      value: function render() {
 	        var _this2 = this;
 	
+	        //console.log('resolveObjectProps', this.props);
 	        var defaultProps = ComposedComponent.defaultProps || ComposedComponent._defaultProps || {};
 	
 	        var resolvedProps = _lodash2.default.fromPairs(propKeys.map(function (k) {
@@ -53616,16 +53802,14 @@
 	          return [k, resolved];
 	        }));
 	
+	        //console.log('resolved object props', resolvedProps);
 	        var props = _lodash2.default.assign({}, this.props, resolvedProps);
 	        return _react2.default.createElement(ComposedComponent, props);
 	      }
-	      // attach static reference to default props so that we can compose multiple resolveObjectProps wrappers,
-	      // but don't call it defaultProps, to avoid actually triggering the default behavior
-	
 	    }]);
 	
 	    return _class;
-	  }(_react2.default.Component), _class._defaultProps = ComposedComponent.defaultProps, _temp;
+	  }(_react2.default.Component), _class._defaultProps = ComposedComponent.defaultProps, _class.getScaleType = ComposedComponent.getScaleType, _class.getDomain = ComposedComponent.getDomain, _class.getMargin = ComposedComponent.getMargin, _temp;
 	}
 
 /***/ },
@@ -53714,9 +53898,15 @@
 	
 	var _chai = __webpack_require__(165);
 	
+	var _Scale = __webpack_require__(207);
+	
 	var _resolveXYScales = __webpack_require__(212);
 	
 	var _resolveXYScales2 = _interopRequireDefault(_resolveXYScales);
+	
+	var _resolveObjectProps = __webpack_require__(209);
+	
+	var _resolveObjectProps2 = _interopRequireDefault(_resolveObjectProps);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -53740,42 +53930,16 @@
 	  return NotImplementedError;
 	}(Error);
 	
-	var innerWidth = function innerWidth(width, margin) {
-	  return width - ((margin.left || 0) + (margin.right || 0));
-	};
-	var innerHeight = function innerHeight(height, margin) {
-	  return height - ((margin.top || 0) + (margin.bottom || 0));
-	};
-	
-	function innerRangeX(outerWidth) {
-	  var margin = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	
-	  var left = margin.left || 0;
-	  return [left, left + innerWidth(outerWidth, margin)];
-	}
-	function innerRangeY(outerHeight) {
-	  var margin = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	
-	  var top = margin.top || 0;
-	  return [top + innerHeight(outerHeight, margin), top];
-	}
-	
 	function expectRefAndDeepEqual(a, b) {
 	  (0, _chai.expect)(a).to.equal(b);
 	  (0, _chai.expect)(a).to.deep.equal(b);
-	}
-	
-	function expectD3Scale(scale) {
-	  (0, _chai.expect)(scale).to.be.a('function');
-	  (0, _chai.expect)(scale.domain).to.be.a('function');
-	  (0, _chai.expect)(scale.range).to.be.a('function');
 	}
 	
 	function expectXYScales(scales) {
 	  (0, _chai.expect)(scales).to.be.an('object');
 	  ['x', 'y'].forEach(function (k) {
 	    (0, _chai.expect)(scales).to.have.property(k);
-	    expectD3Scale(scales[k]);
+	    (0, _chai.expect)((0, _Scale.isValidScale)(scales[k])).to.equal(true);
 	  });
 	}
 	
@@ -53790,8 +53954,9 @@
 	  // checks that a given rendered component has been created with XY scales/margin
 	  // that match the expected domain, range & margin
 	  // if range not provided, it should be width/height minus margins
-	  range = range || { x: innerRangeX(width, margin), y: innerRangeY(height, margin) };
+	  range = range || { x: (0, _Scale.innerRangeX)(width, margin), y: (0, _Scale.innerRangeY)(height, margin) };
 	  (0, _chai.expect)(scaleType).to.be.an('object');
+	  console.log('expected domains', domain);
 	
 	  (0, _chai.expect)(rendered.props).to.be.an('object');
 	  (0, _chai.expect)(rendered.props.margin).to.deep.equal(margin);
@@ -53800,15 +53965,17 @@
 	  expectXYScales(renderedScale);
 	  ['x', 'y'].forEach(function (k) {
 	    (0, _chai.expect)(rendered.props.scaleType[k]).to.equal(scaleType[k]);
+	    console.log('domain', renderedScale[k].domain());
+	    console.log('expected domain', domain[k]);
 	    (0, _chai.expect)(renderedScale[k].domain()).to.deep.equal(domain[k]);
-	    (0, _chai.expect)(renderedScale[k].range()).to.deep.equal(range[k]);
+	    if (scaleType[k] === 'ordinal') (0, _chai.expect)(renderedScale[k].range()).to.deep.equal(_d2.default.scale.ordinal().domain(domain[k]).rangePoints(range[k]).range());else (0, _chai.expect)(renderedScale[k].range()).to.deep.equal(range[k]);
 	  });
 	}
 	
 	describe('resolveXYScales', function () {
-	  var testScaleType = { x: 'ordinal', y: 'linear' };
-	  var testDomain = { x: [-5, 5], y: [0, 10] };
-	  var testMargin = { top: 10, bottom: 20, left: 30, right: 40 };
+	  var customScaleType = { x: 'ordinal', y: 'linear' };
+	  var customDomain = { x: [-5, 5], y: [0, 10] };
+	  var customMargin = { top: 10, bottom: 20, left: 30, right: 40 };
 	  var width = 500;
 	  var height = 400;
 	
@@ -53826,9 +53993,7 @@
 	    _createClass(ComponentWithChildren, [{
 	      key: 'render',
 	      value: function render() {
-	        console.log('props', this.props);
-	        console.log('scale', this.props.scale.x.domain(), this.props.scale.y.domain());
-	        console.log('domain', this.props.domain.x, this.props.domain.y);
+	        //console.log(this.props.scale.x.range())
 	        return _react2.default.createElement(
 	          'div',
 	          null,
@@ -53840,35 +54005,22 @@
 	    return ComponentWithChildren;
 	  }(_react2.default.Component);
 	
-	  var XYChart = function (_React$Component2) {
-	    _inherits(XYChart, _React$Component2);
+	  var Chart = function (_ComponentWithChildre) {
+	    _inherits(Chart, _ComponentWithChildre);
 	
-	    function XYChart() {
-	      _classCallCheck(this, XYChart);
+	    function Chart() {
+	      _classCallCheck(this, Chart);
 	
-	      return _possibleConstructorReturn(this, Object.getPrototypeOf(XYChart).apply(this, arguments));
+	      return _possibleConstructorReturn(this, Object.getPrototypeOf(Chart).apply(this, arguments));
 	    }
 	
-	    _createClass(XYChart, [{
-	      key: 'render',
-	      value: function render() {
-	        console.log('props', this.props);
-	        console.log('scale', this.props.scale.x.domain(), this.props.scale.y.domain());
-	        return _react2.default.createElement(
-	          'div',
-	          null,
-	          this.props.children
-	        );
-	      }
-	    }]);
+	    return Chart;
+	  }(ComponentWithChildren);
 	
-	    return XYChart;
-	  }(_react2.default.Component);
+	  var XYChart = (0, _resolveXYScales2.default)(Chart);
 	
-	  var ScaledXYChart = (0, _resolveXYScales2.default)(XYChart);
-	
-	  var ChartWithCustomScaleType = function (_ComponentWithChildre) {
-	    _inherits(ChartWithCustomScaleType, _ComponentWithChildre);
+	  var ChartWithCustomScaleType = function (_ComponentWithChildre2) {
+	    _inherits(ChartWithCustomScaleType, _ComponentWithChildre2);
 	
 	    function ChartWithCustomScaleType() {
 	      _classCallCheck(this, ChartWithCustomScaleType);
@@ -53879,17 +54031,17 @@
 	    _createClass(ChartWithCustomScaleType, null, [{
 	      key: 'getScaleType',
 	      value: function getScaleType(props) {
-	        return testScaleType;
+	        return customScaleType;
 	      }
 	    }]);
 	
 	    return ChartWithCustomScaleType;
 	  }(ComponentWithChildren);
 	
-	  var ScaledChartWithCustomScaleType = (0, _resolveXYScales2.default)(ChartWithCustomScaleType);
+	  var XYChartWithCustomScaleType = (0, _resolveXYScales2.default)(ChartWithCustomScaleType);
 	
-	  var ChartWithCustomDomain = function (_ComponentWithChildre2) {
-	    _inherits(ChartWithCustomDomain, _ComponentWithChildre2);
+	  var ChartWithCustomDomain = function (_ComponentWithChildre3) {
+	    _inherits(ChartWithCustomDomain, _ComponentWithChildre3);
 	
 	    function ChartWithCustomDomain() {
 	      _classCallCheck(this, ChartWithCustomDomain);
@@ -53900,17 +54052,17 @@
 	    _createClass(ChartWithCustomDomain, null, [{
 	      key: 'getDomain',
 	      value: function getDomain(props) {
-	        return testDomain;
+	        return customDomain;
 	      }
 	    }]);
 	
 	    return ChartWithCustomDomain;
 	  }(ComponentWithChildren);
 	
-	  var ScaledChartWithCustomDomain = (0, _resolveXYScales2.default)(ChartWithCustomDomain);
+	  var XYChartWithCustomDomain = (0, _resolveXYScales2.default)(ChartWithCustomDomain);
 	
-	  var ChartWithCustomMargin = function (_ComponentWithChildre3) {
-	    _inherits(ChartWithCustomMargin, _ComponentWithChildre3);
+	  var ChartWithCustomMargin = function (_ComponentWithChildre4) {
+	    _inherits(ChartWithCustomMargin, _ComponentWithChildre4);
 	
 	    function ChartWithCustomMargin() {
 	      _classCallCheck(this, ChartWithCustomMargin);
@@ -53921,17 +54073,17 @@
 	    _createClass(ChartWithCustomMargin, null, [{
 	      key: 'getMargin',
 	      value: function getMargin(props) {
-	        return testMargin;
+	        return customMargin;
 	      }
 	    }]);
 	
 	    return ChartWithCustomMargin;
 	  }(ComponentWithChildren);
 	
-	  var ScaledChartWithCustomMargin = (0, _resolveXYScales2.default)(ChartWithCustomMargin);
+	  var XYChartWithCustomMargin = (0, _resolveXYScales2.default)(ChartWithCustomMargin);
 	
-	  var ContainerChart = function (_React$Component3) {
-	    _inherits(ContainerChart, _React$Component3);
+	  var ContainerChart = function (_React$Component2) {
+	    _inherits(ContainerChart, _React$Component2);
 	
 	    function ContainerChart() {
 	      _classCallCheck(this, ContainerChart);
@@ -53943,13 +54095,15 @@
 	      key: 'render',
 	      value: function render() {
 	        var _props = this.props;
+	        var width = _props.width;
+	        var height = _props.height;
 	        var scale = _props.scale;
 	        var scaleType = _props.scaleType;
 	        var margin = _props.margin;
 	        var domain = _props.domain;
 	
 	        var newChildren = _react2.default.Children.map(this.props.children, function (child, i) {
-	          return _react2.default.cloneElement(child, { scale: scale, scaleType: scaleType, margin: margin, domain: domain });
+	          return _react2.default.cloneElement(child, { width: width, height: height, scale: scale, scaleType: scaleType, margin: margin, domain: domain });
 	        });
 	        return _react2.default.createElement(
 	          'div',
@@ -53962,51 +54116,11 @@
 	    return ContainerChart;
 	  }(_react2.default.Component);
 	
-	  var ScaledContainerChart = (0, _resolveXYScales2.default)(ContainerChart);
+	  var XYContainerChart = (0, _resolveXYScales2.default)(ContainerChart);
 	
-	  var XYPlot = function (_React$Component4) {
-	    _inherits(XYPlot, _React$Component4);
-	
-	    function XYPlot() {
-	      _classCallCheck(this, XYPlot);
-	
-	      return _possibleConstructorReturn(this, Object.getPrototypeOf(XYPlot).apply(this, arguments));
-	    }
-	
-	    _createClass(XYPlot, [{
-	      key: 'render',
-	      value: function render() {
-	        return _react2.default.createElement(
-	          'div',
-	          null,
-	          this.props.children
-	        );
-	      }
-	    }], [{
-	      key: 'getDomain',
-	      value: function getDomain(props) {
-	        return testDomain;
-	      }
-	    }, {
-	      key: 'getMargin',
-	      value: function getMargin(props) {
-	        return testMargin;
-	      }
-	    }]);
-	
-	    return XYPlot;
-	  }(_react2.default.Component);
-	
-	  XYPlot.defaultProps = {};
-	
-	  var ScaledXYPlot = (0, _resolveXYScales2.default)(XYPlot);
-	
-	  function renderAndGetXYPlot(plotProps, chartProps) {
-	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(
-	    //<ScaledXYChart {...plotProps}><LineChart {...chartProps}/></ScaledXYChart>
-	    _react2.default.createElement(ScaledXYPlot, plotProps));
-	    return _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, XYPlot);
-	  }
+	  var XYChartWithObjectProps = (0, _resolveObjectProps2.default)((0, _resolveXYScales2.default)(Chart), ['domain', 'scale', 'scaleType'], ['x', 'y']);
+	  var XYChartWithCustomMarginAndObjectProps = (0, _resolveObjectProps2.default)((0, _resolveXYScales2.default)(ChartWithCustomMargin), ['domain', 'scale', 'scaleType'], ['x', 'y']);
+	  var XYContainerChartWithObjectProps = (0, _resolveObjectProps2.default)((0, _resolveXYScales2.default)(ContainerChart), ['domain', 'scale', 'scaleType'], ['x', 'y']);
 	
 	  it('passes XY scales and margins through if both are provided', function () {
 	    var props = {
@@ -54016,7 +54130,8 @@
 	      },
 	      margin: { top: 11, bottom: 21, left: 31, right: 41 }
 	    };
-	    var rendered = renderAndGetXYPlot(props);
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYChart, props));
+	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, Chart);
 	
 	    ['scale', 'margin'].forEach(function (propKey) {
 	      expectRefAndDeepEqual(rendered.props[propKey], props[propKey]);
@@ -54030,23 +54145,23 @@
 	      domain: { x: [-50, 50], y: [-100, 100] },
 	      margin: { top: 11, bottom: 22, left: 33, right: 44 }
 	    };
-	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(ScaledXYChart, props));
-	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, XYChart);
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYChart, props));
+	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, Chart);
 	    expectXYScaledComponent(rendered, props);
 	  });
 	
-	  it('infers scaleType from Component.getScaleType, creates scales from size, domain and margins', function () {
+	  it('infers scaleType from Component.getScaleType', function () {
 	    var props = {
 	      width: width, height: height,
 	      domain: { x: [-50, 50], y: [-100, 100] },
 	      margin: { top: 11, bottom: 22, left: 33, right: 44 }
 	    };
-	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(ScaledChartWithCustomScaleType, props));
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYChartWithCustomScaleType, props));
 	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, ChartWithCustomScaleType);
-	    expectXYScaledComponent(rendered, _extends({ scaleType: testScaleType }, props));
+	    expectXYScaledComponent(rendered, _extends({ scaleType: customScaleType }, props));
 	  });
 	
-	  it('infers scaleType from data, creates scales from size, domain and margins', function () {
+	  it('infers scaleType from data', function () {
 	    var props = {
 	      width: width, height: height,
 	      data: [[12, 'a'], [18, 'b'], [22, 'c']],
@@ -54054,28 +54169,28 @@
 	      domain: { x: [12, 22], y: ['a', 'b', 'c'] },
 	      margin: { top: 11, bottom: 22, left: 33, right: 44 }
 	    };
-	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(ScaledXYChart, props));
-	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, XYChart);
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYChart, props));
+	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, Chart);
 	    expectXYScaledComponent(rendered, _extends({ scaleType: { x: 'linear', y: 'ordinal' } }, props));
 	  });
 	
-	  it('infers scaleType from children getScaleType, creates scales from size, domain & margins', function () {
+	  it('infers scaleType from children getScaleType', function () {
 	    var props = {
 	      width: width, height: height,
 	      domain: { x: [12, 22], y: [2, 3] },
 	      margin: { top: 11, bottom: 22, left: 33, right: 44 }
 	    };
 	    var tree = _react2.default.createElement(
-	      ScaledContainerChart,
+	      XYContainerChart,
 	      props,
-	      _react2.default.createElement(ScaledChartWithCustomScaleType, { a: '1' })
+	      _react2.default.createElement(XYChartWithCustomScaleType, { a: '1' })
 	    );
 	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(tree);
 	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, ContainerChart);
-	    expectXYScaledComponent(rendered, _extends({ scaleType: testScaleType }, props));
+	    expectXYScaledComponent(rendered, _extends({ scaleType: customScaleType }, props));
 	  });
 	
-	  it('infers scaleType from children data, creates scales from size, domain & margins', function () {
+	  it('infers scaleType from children data', function () {
 	    var props = {
 	      width: width, height: height,
 	      domain: { x: [12, 22], y: ['a', 'b', 'c'] },
@@ -54086,109 +54201,218 @@
 	      getValue: { x: 0, y: 1 }
 	    };
 	    var tree = _react2.default.createElement(
-	      ScaledContainerChart,
+	      XYContainerChart,
 	      props,
-	      _react2.default.createElement(ScaledXYChart, chartProps)
+	      _react2.default.createElement(XYChart, chartProps)
 	    );
 	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(tree);
 	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, ContainerChart);
 	    expectXYScaledComponent(rendered, _extends({ scaleType: { x: 'linear', y: 'ordinal' } }, props));
 	  });
 	
-	  it('infers domain from Component.getDomain, creates scales from scaleType, size and margins', function () {
+	  it('infers domain from Component.getDomain', function () {
 	    var props = {
 	      width: width, height: height,
 	      scaleType: { x: 'linear', y: 'linear' },
 	      margin: { top: 11, bottom: 22, left: 33, right: 44 }
 	    };
-	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(ScaledChartWithCustomDomain, props));
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYChartWithCustomDomain, props));
 	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, ChartWithCustomDomain);
-	    expectXYScaledComponent(rendered, _extends({ domain: testDomain }, props));
+	    expectXYScaledComponent(rendered, _extends({ domain: customDomain }, props));
 	  });
 	
-	  it('infers domain from data, creates scales from scaleType, size and margins', function () {
+	  it('infers domain from data', function () {
 	    var props = {
 	      width: width, height: height,
-	      scaleType: { x: 'linear', y: 'linear' },
+	      data: [[12, 'a'], [18, 'b'], [22, 'c']],
+	      getValue: { x: 0, y: 1 },
+	      scaleType: { x: 'linear', y: 'ordinal' },
 	      margin: { top: 11, bottom: 22, left: 33, right: 44 }
 	    };
-	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(ScaledChartWithCustomDomain, props));
-	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, ChartWithCustomDomain);
-	    expectXYScaledComponent(rendered, _extends({ domain: testDomain }, props));
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYChart, props));
+	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, Chart);
+	    expectXYScaledComponent(rendered, _extends({ domain: { x: [12, 22], y: ['a', 'b', 'c'] } }, props));
 	  });
 	
-	  it('infers domain from children getDomain, creates scales from scaleType, size and margins', function () {
+	  it('infers domain from children getDomain', function () {
 	    var props = {
 	      width: width, height: height,
 	      scaleType: { x: 'linear', y: 'linear' },
 	      margin: { top: 11, bottom: 22, left: 33, right: 44 }
 	    };
 	    var tree = _react2.default.createElement(
-	      ScaledContainerChart,
+	      XYContainerChart,
 	      props,
-	      _react2.default.createElement(ScaledChartWithCustomDomain, null)
+	      _react2.default.createElement(XYChartWithCustomDomain, null)
 	    );
 	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(tree);
 	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, ContainerChart);
-	    expectXYScaledComponent(rendered, _extends({ domain: testDomain }, props));
+	    expectXYScaledComponent(rendered, _extends({ domain: customDomain }, props));
 	  });
 	
-	  /*
-	   it('resolves XY scales from size, data and margins', () => {
-	    const props = {
-	      width: 500,
-	      height: 300,
-	      margin: {top: 11, bottom: 22, left: 33, right: 44},
-	      // data doesn't actually matter, since XYChart.getDomain returns a constant
-	      data: [{x: 10, y: 20}]
+	  it('infers domain from children data', function () {
+	    var props = {
+	      width: width, height: height,
+	      scaleType: { x: 'linear', y: 'linear' },
+	      margin: { top: 11, bottom: 22, left: 33, right: 44 }
 	    };
-	    const rendered = renderAndGetXYPlot(props);
-	    expectXYScaledComponent(rendered, {domain: testDomain, ...props});
+	    var tree = _react2.default.createElement(
+	      XYContainerChart,
+	      props,
+	      _react2.default.createElement(XYChart, { data: [[0, 2], [3, 5]], getValue: { x: 0, y: 1 } }),
+	      _react2.default.createElement(XYChart, { data: [[-2, 0], [2, 4]], getValue: { x: 0, y: 1 } })
+	    );
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(tree);
+	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, ContainerChart);
+	    expectXYScaledComponent(rendered, _extends({ domain: { x: [-2, 3], y: [0, 5] } }, props));
 	  });
-	   it('resolves XY scales and margins from data and size', () => {
-	    const props = {
-	      width: 500,
-	      height: 300,
-	      data: [{x: 10, y: 20}]
-	    };
-	    const wrapped = TestUtils.renderIntoDocument(<ScaledXYChart {...props} />);
-	    const rendered = TestUtils.findRenderedComponentWithType(wrapped, XYPlot);
-	     expect(rendered.props.margin).to.equal(testMargin);
-	    expectXYScaledComponent(rendered, {margin: testMargin, domain: testDomain, ...props});
-	  });
-	   it('resolves XY scales and margins from domain and size', () => {
-	    const props = {
-	      width: 500,
-	      height: 300,
-	      domain: {x: [-50, 50], y: [-100, 100]}
-	    };
-	    const wrapped = TestUtils.renderIntoDocument(<ScaledXYChart {...props} />);
-	    const rendered = TestUtils.findRenderedComponentWithType(wrapped, XYPlot);
-	     expect(rendered.props.margin).to.equal(testMargin);
-	    expectXYScaledComponent(rendered, {margin: testMargin, ...props});
-	  });
-	   it('sets margins to zero if they are neither provided nor resolvable', () => {
-	    console.log('not implemented');
-	    //throw new NotImplementedError();
-	  });
-	   it('throws if domains are neither provided nor resolvable', () => {
-	    //throw new NotImplementedError();
-	    console.log('not implemented');
-	  });
-	   it('throws if neither XY scales nor size are provided', () => {
-	    console.log('not implemented');
-	    //throw new NotImplementedError();
-	  });
-	   it('throws if neither XY scales nor (domain or data) are provided', () => {
-	    console.log('not implemented');
-	    //throw new NotImplementedError();
-	  });
-	   */
 	
+	  it('infers margin from Component.getMargin', function () {
+	    var props = {
+	      width: width, height: height,
+	      scaleType: { x: 'linear', y: 'linear' },
+	      domain: { x: [-50, 50], y: [-100, 100] }
+	    };
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(XYChartWithCustomMargin, props));
+	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, ChartWithCustomMargin);
+	    expectXYScaledComponent(rendered, _extends({ margin: customMargin }, props));
+	  });
+	
+	  it('infers margin from children getMargin', function () {
+	    var props = {
+	      width: width, height: height,
+	      scaleType: { x: 'linear', y: 'linear' },
+	      domain: { x: [-50, 50], y: [-100, 100] }
+	    };
+	    var tree = _react2.default.createElement(
+	      XYContainerChart,
+	      props,
+	      _react2.default.createElement(XYChartWithCustomMargin, null)
+	    );
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(tree);
+	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, ContainerChart);
+	    expectXYScaledComponent(rendered, _extends({ margin: customMargin }, props));
+	  });
+	
+	  it('infers margin from children margin props', function () {
+	    var props = {
+	      width: width, height: height,
+	      scaleType: { x: 'linear', y: 'linear' },
+	      domain: { x: [-50, 50], y: [-100, 100] }
+	    };
+	    var tree = _react2.default.createElement(
+	      XYContainerChart,
+	      props,
+	      _react2.default.createElement(XYChart, { margin: { top: 20, left: 10 } }),
+	      _react2.default.createElement(XYChart, { margin: { bottom: 40, left: 30, right: 50 } })
+	    );
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(tree);
+	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, ContainerChart);
+	    expectXYScaledComponent(rendered, _extends({ margin: { top: 20, bottom: 40, left: 30, right: 50 } }, props));
+	  });
+	
+	  it('infers scaleType & domain from data, margin from getMargin', function () {
+	    var containerProps = { width: width, height: height };
+	    var chartProps = {
+	      data: [[12, 'a'], [18, 'b'], [22, 'c']],
+	      getValue: { x: 0, y: 1 }
+	    };
+	    var tree = _react2.default.createElement(
+	      XYContainerChart,
+	      containerProps,
+	      _react2.default.createElement(XYChartWithCustomMargin, chartProps)
+	    );
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(tree);
+	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, ChartWithCustomMargin);
+	    expectXYScaledComponent(rendered, _extends({}, chartProps, containerProps, {
+	      margin: customMargin,
+	      scaleType: { x: 'linear', y: 'ordinal' },
+	      domain: { x: [12, 22], y: ['a', 'b', 'c'] }
+	    }));
+	  });
+	
+	  it('works with resolveObjectProps', function () {
+	    var containerProps = {
+	      width: width, height: height,
+	      domain: [-12, 12],
+	      scaleType: 'linear'
+	    };
+	    var tree = _react2.default.createElement(
+	      XYContainerChartWithObjectProps,
+	      containerProps,
+	      _react2.default.createElement(XYChartWithCustomMarginAndObjectProps, null)
+	    );
+	    var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(tree);
+	    var rendered = _reactAddonsTestUtils2.default.findRenderedComponentWithType(wrapped, ContainerChart);
+	
+	    expectXYScaledComponent(rendered, _extends({}, containerProps, {
+	      margin: customMargin,
+	      scaleType: { x: 'linear', y: 'linear' },
+	      domain: { x: [-12, 12], y: [-12, 12] }
+	    }));
+	  });
+	
+	  function renderAndFindByType(node, Component) {
+	    var rendered = _reactAddonsTestUtils2.default.renderIntoDocument(node);
+	    return _reactAddonsTestUtils2.default.findRenderedComponentWithType(rendered, Component);
+	  }
+	
+	  it('rounds domain to nice numbers if `nice` option is true', function () {
+	    var props = {
+	      width: width, height: height,
+	      data: [[0.3, 0.8], [9.2, 9.7]],
+	      getValue: { x: 0, y: 1 },
+	      scaleType: { x: 'linear', y: 'linear' },
+	      margin: { top: 11, bottom: 22, left: 33, right: 44 }
+	    };
+	
+	    var niceXChart = renderAndFindByType(_react2.default.createElement(XYChart, _extends({}, props, { nice: { x: true, y: false } })), Chart);
+	    expectXYScaledComponent(niceXChart, _extends({ domain: { x: [0, 10], y: [0.8, 9.7] } }, props));
+	
+	    var niceYChart = renderAndFindByType(_react2.default.createElement(XYChart, _extends({}, props, { nice: { x: false, y: true } })), Chart);
+	    expectXYScaledComponent(niceYChart, _extends({ domain: { x: [0.3, 9.2], y: [0, 10] } }, props));
+	  });
+	
+	  it('inverts the scale domain if `invertScale` option is true', function () {
+	    var props = {
+	      width: width, height: height,
+	      domain: { x: [-3, 3], y: [0, 10] },
+	      scaleType: { x: 'linear', y: 'linear' },
+	      margin: { top: 11, bottom: 22, left: 33, right: 44 }
+	    };
+	
+	    var invertXChart = renderAndFindByType(_react2.default.createElement(XYChart, _extends({}, props, { invertScale: { x: true, y: false } })), Chart);
+	    expectXYScaledComponent(invertXChart, _lodash2.default.assign({}, props, { domain: { x: [3, -3], y: [0, 10] } }));
+	
+	    var invertYChart = renderAndFindByType(_react2.default.createElement(XYChart, _extends({}, props, { invertScale: { x: false, y: true } })), Chart);
+	    expectXYScaledComponent(invertYChart, _lodash2.default.assign({}, props, { domain: { x: [-3, 3], y: [10, 0] } }));
+	  });
+	
+	  it('extends the scale domain if to include custom `ticks` if passed', function () {
+	    var props = {
+	      width: width, height: height,
+	      data: [[0, 0], [10, 10]],
+	      getValue: { x: 0, y: 1 },
+	      scaleType: { x: 'linear', y: 'linear' },
+	      margin: { top: 11, bottom: 22, left: 33, right: 44 }
+	    };
+	
+	    var ticksXChart = renderAndFindByType(_react2.default.createElement(XYChart, _extends({}, props, { ticks: { x: [-5, 0, 5] } })), Chart);
+	    expectXYScaledComponent(ticksXChart, _extends({ domain: { x: [-5, 10], y: [0, 10] } }, props));
+	
+	    var ticksYChart = renderAndFindByType(_react2.default.createElement(XYChart, _extends({}, props, { ticks: { y: [10, 20] } })), Chart);
+	    expectXYScaledComponent(ticksYChart, _extends({ domain: { x: [0, 10], y: [0, 20] } }, props));
+	  });
+	
+	  // todo spacing/padding
+	  // todo test tickCount
+	  // todo includeZero?
+	
+	  // todo test combining multiple scaletypes/domains/margins from children
+	  // todo test partially specified scaletype
 	  // todo test partially specified margins
-	  // todo resolve internal chart padding also
-	  // todo: resolves margins if scales are present?
-	  // todo: handle resolving different types of scales? use axisType
+	  // todo test partially specified scales
+	  // todo test partially specified domains
 	  // todo: test with thin layers of components (w/o getDomain) in between?
 	  // todo: test when one scale or domain is passed but not the other?
 	});
@@ -54251,27 +54475,23 @@
 	  return Component.displayName || "Component wrapped by resolveXYScales";
 	}
 	
-	function hasXYScales(props) {
-	  return _lodash2.default.every(['x', 'y'], function (k) {
-	    return hasScaleFor(props.scale, k);
-	  });
-	}
 	function hasScaleFor(scalesObj, key) {
-	  return _lodash2.default.isObject(scalesObj) && isValidScale(scalesObj[key]);
+	  return _lodash2.default.isObject(scalesObj) && (0, _Scale.isValidScale)(scalesObj[key]);
 	}
-	function isValidScale(scale) {
-	  return _lodash2.default.isFunction(scale) && _lodash2.default.isFunction(scale.domain) && _lodash2.default.isFunction(scale.range);
+	function hasXYScales(scale) {
+	  return _lodash2.default.isObject(scale) && (0, _Scale.isValidScale)(scale.x) && (0, _Scale.isValidScale)(scale.y);
 	}
-	
-	function isValidDomain(domain) {
-	  return _lodash2.default.isArray(domain) && domain.length;
-	}
-	
 	function hasXYDomains(domain) {
-	  return _lodash2.default.isObject(domain) && isValidDomain(domain.x) && isValidDomain(domain.y);
+	  return _lodash2.default.isObject(domain) && (0, _Data.isValidDomain)(domain.x) && (0, _Data.isValidDomain)(domain.y);
 	}
 	function hasXYScaleTypes(scaleType) {
 	  return _lodash2.default.isObject(scaleType) && _lodash2.default.isString(scaleType.x) && _lodash2.default.isString(scaleType.y);
+	}
+	function hasAllMargins(margin) {
+	  var marginKeys = ['top', 'bottom', 'left', 'right'];
+	  return _lodash2.default.isObject(margin) && _lodash2.default.every(marginKeys, function (k) {
+	    return _lodash2.default.has(margin, k);
+	  });
 	}
 	
 	function mapStaticOnChildren(children, methodName) {
@@ -54287,30 +54507,6 @@
 	  }));
 	}
 	
-	function resolveScale() {}
-	
-	var innerWidth = function innerWidth(width) {
-	  var margin = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	  return width - ((margin.left || 0) + (margin.right || 0));
-	};
-	var innerHeight = function innerHeight(height) {
-	  var margin = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	  return height - ((margin.top || 0) + (margin.bottom || 0));
-	};
-	
-	function innerRangeX(outerWidth) {
-	  var margin = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	
-	  var left = margin.left || 0;
-	  return [left, left + innerWidth(outerWidth, margin)];
-	}
-	function innerRangeY(outerHeight) {
-	  var margin = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	
-	  var top = margin.top || 0;
-	  return [top + innerHeight(outerHeight, margin), top];
-	}
-	
 	function omitNullUndefined(obj) {
 	  return _lodash2.default.omitBy(obj, function (v) {
 	    return _lodash2.default.isUndefined(v) || _lodash2.default.isNull(v);
@@ -54318,21 +54514,77 @@
 	}
 	
 	function resolveXYScales(ComposedComponent) {
-	  var _class, _temp;
+	  var _class, _temp2;
 	
-	  return _temp = _class = function (_React$Component) {
+	  return _temp2 = _class = function (_React$Component) {
 	    _inherits(_class, _React$Component);
 	
 	    function _class() {
+	      var _Object$getPrototypeO;
+	
+	      var _temp, _this2, _ret;
+	
 	      _classCallCheck(this, _class);
 	
-	      return _possibleConstructorReturn(this, Object.getPrototypeOf(_class).apply(this, arguments));
+	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	        args[_key] = arguments[_key];
+	      }
+	
+	      return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(_class)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this2), _this2._makeScales = function (_ref) {
+	        var width = _ref.width;
+	        var height = _ref.height;
+	        var _ref$scaleType = _ref.scaleType;
+	        var scaleType = _ref$scaleType === undefined ? {} : _ref$scaleType;
+	        var _ref$domain = _ref.domain;
+	        var domain = _ref$domain === undefined ? {} : _ref$domain;
+	        var _ref$margin = _ref.margin;
+	        var margin = _ref$margin === undefined ? {} : _ref$margin;
+	        var _ref$scale = _ref.scale;
+	        var scale = _ref$scale === undefined ? {} : _ref$scale;
+	        var _this2$props = _this2.props;
+	        var invertScale = _this2$props.invertScale;
+	        var nice = _this2$props.nice;
+	        var tickCount = _this2$props.tickCount;
+	        var ticks = _this2$props.ticks;
+	
+	        var range = {
+	          x: (0, _Scale.innerRangeX)(width, margin),
+	          y: (0, _Scale.innerRangeY)(height, margin)
+	        };
+	        console.log(height, margin, (0, _Scale.innerRangeY)(height, margin));
+	
+	        console.log('range', range);
+	        return _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
+	          // use existing scales if provided, otherwise create new
+	          if (hasScaleFor(scale, k)) return [k, scale[k]];
+	
+	          // create scale from domain/range
+	          var rangeMethod = scaleType[k] === 'ordinal' ? 'rangePoints' : 'range';
+	          var kScale = (0, _Scale.initScale)(scaleType[k]).domain(domain[k])[rangeMethod](range[k]);
+	
+	          // set `nice` option to round scale domains to nicer numbers
+	          if (nice[k] && _lodash2.default.isFunction(kScale.nice)) kScale.nice(tickCount[k] || 10);
+	
+	          // extend scale domain to include custom `ticks` if passed
+	          if (ticks[k]) {
+	            var dataType = (0, _Scale.dataTypeFromScaleType)(scaleType[k]);
+	            var tickDomain = (0, _Data.domainFromData)(ticks[k], _lodash2.default.identity, dataType);
+	            kScale.domain((0, _Data.combineDomains)([kScale.domain(), tickDomain]), dataType);
+	          }
+	
+	          // reverse scale domain if `invertScale` is passed
+	          if (invertScale[k]) kScale.domain(kScale.domain().reverse());
+	
+	          return [k, kScale];
+	        }));
+	      }, _temp), _possibleConstructorReturn(_this2, _ret);
 	    }
+	
+	    // todo better way for HOC's to pass statics through?
+	
 	
 	    _createClass(_class, [{
 	      key: '_resolveScaleType',
-	
-	      // todo better way for HOC's to pass statics through?
 	      value: function _resolveScaleType(props, Component) {
 	        var _this3 = this;
 	
@@ -54356,7 +54608,7 @@
 	        // if Component has data or datasets props,
 	        // infer the data type, & use that to get scale type
 	        if (_lodash2.default.isArray(props.data) || _lodash2.default.isArray(props.datasets)) {
-	          var _ret = function () {
+	          var _ret2 = function () {
 	            var datasets = _lodash2.default.isArray(props.datasets) ? props.datasets : [props.data];
 	            var datasetScaleType = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
 	              var kAccessor = (0, _Data.makeAccessor)(_lodash2.default.get(props, 'getValue.' + k));
@@ -54371,13 +54623,13 @@
 	            };
 	          }();
 	
-	          if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	          if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
 	        }
 	
 	        // if Component has children,
 	        // recurse through descendants to resolve their scale types the same way
 	        if (_react2.default.Children.count(props.children)) {
-	          var _ret2 = function () {
+	          var _ret3 = function () {
 	            console.log('get scaletype from children');
 	            var childScaleTypes = [];
 	            _react2.default.Children.forEach(props.children, function (child) {
@@ -54397,7 +54649,7 @@
 	            };
 	          }();
 	
-	          if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
+	          if ((typeof _ret3 === 'undefined' ? 'undefined' : _typeof(_ret3)) === "object") return _ret3.v;
 	        }
 	      }
 	    }, {
@@ -54425,7 +54677,7 @@
 	        // if Component has data or datasets props,
 	        // use the default domainFromDatasets function to determine a domain from them
 	        if (_lodash2.default.isArray(props.data) || _lodash2.default.isArray(props.datasets)) {
-	          var _ret3 = function () {
+	          var _ret4 = function () {
 	            var datasets = _lodash2.default.isArray(props.datasets) ? props.datasets : [props.data];
 	            var datasetDomain = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
 	              var kAccessor = (0, _Data.makeAccessor)(_lodash2.default.get(props, 'getValue.' + k));
@@ -54433,6 +54685,7 @@
 	              var kDomain = (0, _Data.domainFromDatasets)(datasets, kAccessor, dataType);
 	              return [k, kDomain];
 	            }));
+	            console.log('datasetDomain', datasetDomain);
 	
 	            domain = _lodash2.default.assign(datasetDomain, domain);
 	            if (hasXYDomains(domain)) return {
@@ -54440,120 +54693,146 @@
 	              };
 	          }();
 	
-	          if ((typeof _ret3 === 'undefined' ? 'undefined' : _typeof(_ret3)) === "object") return _ret3.v;
+	          if ((typeof _ret4 === 'undefined' ? 'undefined' : _typeof(_ret4)) === "object") return _ret4.v;
 	        }
 	
 	        // if Component has children,
 	        // recurse through descendants to resolve their domains the same way,
 	        // and combine them into a single domain, if there are multiple
 	        if (_react2.default.Children.count(props.children)) {
-	          var _ret4 = function () {
+	          var _ret5 = function () {
 	            console.log('get domain from children');
 	            var childDomains = [];
 	            _react2.default.Children.forEach(props.children, function (child) {
 	              childDomains = childDomains.concat(_this4._resolveDomain(child.props, child.type, scaleType));
 	            });
 	
+	            console.log('combining domains', childDomains);
 	            var childDomain = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
-	              var kDomain = (0, _Data.combineDomains)(_lodash2.default.compact(_lodash2.default.map(childDomains, k)), scaleType[k]);
+	              console.log(_lodash2.default.compact(_lodash2.default.map(childDomains, k)), scaleType[k]);
+	              var kDomain = (0, _Data.combineDomains)(_lodash2.default.compact(_lodash2.default.map(childDomains, k)), (0, _Scale.dataTypeFromScaleType)(scaleType[k]));
+	              console.log(kDomain);
 	              return [k, kDomain];
 	            }));
+	            console.log('combined domains', childDomain);
 	
 	            domain = _lodash2.default.assign(childDomain, domain);
-	            if (hasXYDomains(domain)) return {
-	                v: domain
-	              };
+	            return {
+	              v: domain
+	            };
 	          }();
 	
-	          if ((typeof _ret4 === 'undefined' ? 'undefined' : _typeof(_ret4)) === "object") return _ret4.v;
+	          if ((typeof _ret5 === 'undefined' ? 'undefined' : _typeof(_ret5)) === "object") return _ret5.v;
 	        }
 	      }
 	    }, {
 	      key: '_resolveMargin',
-	      value: function _resolveMargin(props, scale) {
-	        var marginKeys = ['top', 'bottom', 'left', 'right'];
+	      value: function _resolveMargin(props, Component, scaleType, domain, scale) {
+	        var _this5 = this;
+	
 	        var propsMargin = props.margin || {};
+	        console.log('propsMargin', propsMargin);
 	
-	        if (_lodash2.default.every(marginKeys, function (k) {
-	          return _lodash2.default.has(propsMargin, k);
-	        })) {
-	          // short-circuit if margins provided
-	          return propsMargin;
-	        } else {
-	          // get margin from component, passing the scale (used for generating/measuring labels)
-	          var childMargin = ComposedComponent.getMargin(_extends({ scale: scale }, props));
+	        // short-circuit if all margins provided
+	        if (hasAllMargins(propsMargin)) return propsMargin;
 	
-	          return _lodash2.default.some(marginKeys, function (k) {
-	            return _lodash2.default.has(propsMargin, k);
-	          }) ?
-	          // some margins provided, merge them with those provided by child
-	          _lodash2.default.assign({}, childMargin, propsMargin) :
-	          // no margin provided at all, just return margin from Component
-	          childMargin;
+	        // start with any margins in props, and try to resolve the rest
+	        var margin = omitNullUndefined(propsMargin);
+	
+	        // if Component provides a custom static getMargin method
+	        // use it to determine remaining domains
+	        if (_lodash2.default.isFunction(Component.getMargin)) {
+	          var componentMargin = omitNullUndefined(Component.getMargin(_extends({ scaleType: scaleType, domain: domain, scale: scale }, props)));
+	          console.log('Component.getMargin', componentMargin);
+	          margin = _lodash2.default.assign(componentMargin, margin);
+	          if (hasAllMargins(margin)) return margin;
 	        }
+	
+	        // if Component has children,
+	        // recurse through descendants to resolve their margins the same way,
+	        // and combine them into a single margin, if there are multiple
+	        if (_react2.default.Children.count(props.children)) {
+	          (function () {
+	            var childMargins = [];
+	            _react2.default.Children.forEach(props.children, function (child) {
+	              childMargins = childMargins.concat(_this5._resolveMargin(child.props, child.type, scaleType, domain, scale));
+	            });
+	
+	            console.log('combining child margins', childMargins);
+	            var childMargin = _lodash2.default.fromPairs(['top', 'bottom', 'left', 'right'].map(function (k) {
+	              // combine margins by taking the max value of each margin direction
+	              return [k, _lodash2.default.maxBy(childMargins, k)[k]];
+	            }));
+	            console.log('combined margins', childMargin);
+	
+	            margin = _lodash2.default.assign(childMargin, margin);
+	          })();
+	        }
+	        return margin;
 	      }
 	    }, {
 	      key: 'render',
 	      value: function render() {
 	        console.log('xyScales Props', this.props);
 	        var props = this.props;
+	        var width = props.width;
+	        var height = props.height;
+	        var nice = props.nice;
 	
 	        var scaleFromProps = this.props.scale || {};
 	
 	        // short-circuit if scales provided
 	        // todo warn/throw if bad scales are passed
-	        if (_lodash2.default.every(['x', 'y'], function (k) {
-	          return isValidScale(scaleFromProps[k]);
-	        })) return _react2.default.createElement(ComposedComponent, this.props);
+	        if (hasXYScales(scaleFromProps)) return _react2.default.createElement(ComposedComponent, this.props);
 	
 	        // scales not provided, so we have to resolve them
-	        // first resolve scale types
+	        // first resolve scale types and domains
 	        var scaleType = this._resolveScaleType(props, ComposedComponent);
-	        console.log('scaleType', scaleType);
-	
-	        // then resolve the domains
 	        var domain = this._resolveDomain(props, ComposedComponent, scaleType);
+	        console.log('scaleType', scaleType);
 	        console.log('domain ', domain);
 	
 	        // create a temporary scale with size & domain, which may be used by the Component to calculate the margins
 	        // (eg. to create and measure labels for the scales)
-	        // todo use props margin here if given!!
-	        var tempRange = {
-	          x: [0, props.width],
-	          y: [props.height, 0]
-	        };
-	        var tempScale = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
-	          return(
-	            // todo all scale types
-	            // todo infer scale type from data
-	            [k, (0, _Scale.initScale)(scaleType[k]).domain(domain[k]).range(tempRange[k])]
-	          );
-	        }));
+	        var tempScale = this._makeScales({ width: width, height: height, scaleType: scaleType, domain: domain, margin: props.margin, scale: props.scale });
 	
-	        //// then resolve the margins
-	        var margin = this._resolveMargin(props, tempScale);
+	        // then resolve the margins
+	        var margin = this._resolveMargin(props, ComposedComponent, scaleType, domain, tempScale);
 	        console.log('margin', margin);
 	
-	        // margins & size give range
-	        var range = {
-	          x: innerRangeX(props.width, margin),
-	          y: innerRangeY(props.height, margin)
-	        };
-	        console.log('range', range);
+	        // create real scales from resolved margins
+	        var scaleOptions = { scale: props.scale, width: width, height: height, scaleType: scaleType, domain: domain, margin: margin, nice: nice };
+	        console.log('making scales', scaleOptions);
+	        var scale = _lodash2.default.isEqual(margin, props.margin) ? tempScale : // don't re-create scales if margin hasn't changed (ie. was passed in props)
+	        this._makeScales(scaleOptions);
 	
-	        // create scales from domains and ranges
-	        var scale = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
-	          return hasScaleFor(scaleFromProps, k) ? scaleFromProps[k] : [k, (0, _Scale.initScale)(scaleType[k]).domain(domain[k]).range(range[k])];
-	        }));
+	        console.log('range', scale.x.range());
+	        console.log('range', scale.y.range());
 	
 	        // and pass scales to wrapped component
-	        var passedProps = _lodash2.default.assign({ scale: scale, scaleType: scaleType, margin: margin, domain: domain }, this.props);
+	        //const passedProps = _.assign({scale, scaleType, margin, domain}, this.props);
+	        var passedProps = _lodash2.default.assign({}, this.props, { scale: scale, scaleType: scaleType, margin: margin, domain: domain });
+	
 	        return _react2.default.createElement(ComposedComponent, passedProps);
+	
+	        // todo spacing/padding
+	        // todo includeZero
+	        // todo purerender/shouldcomponentupdate?
+	        // todo resolve margins if scales are present
+	        // todo use zero for any margins which can't be resolved
+	        // todo throw if cannot resolve scaleType
+	        // todo throw if cannot resolve domain
+	        // todo check to make sure margins didn't change after scales resolved?
 	      }
 	    }]);
 	
 	    return _class;
-	  }(_react2.default.Component), _class.defaultProps = ComposedComponent.defaultProps, _class.getScaleType = ComposedComponent.getScaleType, _class.getDomain = ComposedComponent.getDomain, _temp;
+	  }(_react2.default.Component), _class.defaultProps = _lodash2.default.defaults(ComposedComponent.defaultProps, {
+	    invertScale: { x: false, y: false },
+	    nice: { x: true, y: true },
+	    tickCount: { x: 10, y: 10 },
+	    ticks: { x: null, y: null }
+	  }), _class.getScaleType = ComposedComponent.getScaleType, _class.getDomain = ComposedComponent.getDomain, _class.getMargin = ComposedComponent.getMargin, _temp2;
 	}
 
 /***/ },
@@ -54814,6 +55093,10 @@
 	
 	var _resolveObjectProps2 = _interopRequireDefault(_resolveObjectProps);
 	
+	var _resolveXYScales = __webpack_require__(212);
+	
+	var _resolveXYScales2 = _interopRequireDefault(_resolveXYScales);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var PropTypes = _react2.default.PropTypes;
@@ -54853,7 +55136,7 @@
 	        spacing: PropTypes.fourDirections,
 	
 	        // axis types - number, time or ordinal
-	        axisType: PropTypes.xyObjectOf(PropTypes.axisType),
+	        scaleType: PropTypes.xyObjectOf(PropTypes.scaleType),
 	        // scale domains may be provided, otherwise will be inferred from data
 	        domain: PropTypes.xyObjectOf(PropTypes.dataArray),
 	        // whether or not to extend the scales to end on nice values (see docs for d3 scale.linear.nice())
@@ -69387,6 +69670,14 @@
 	
 	var _d3 = _interopRequireDefault(_d2);
 	
+	var _resolveXYScales = __webpack_require__(212);
+	
+	var _resolveXYScales2 = _interopRequireDefault(_resolveXYScales);
+	
+	var _resolveObjectProps = __webpack_require__(209);
+	
+	var _resolveObjectProps2 = _interopRequireDefault(_resolveObjectProps);
+	
 	var _util = __webpack_require__(216);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -69436,7 +69727,18 @@
 	        var points = _lodash2.default.map(data, function (d) {
 	            return [scale.x(accessors.x(d)), scale.y(accessors.y(d))];
 	        });
+	        console.log('points', points);
 	        var pathStr = pointsToPathStr(points);
+	
+	        return _react2.default.createElement(
+	            'svg',
+	            { width: this.props.width, height: this.props.height },
+	            _react2.default.createElement(
+	                'g',
+	                { className: this.props.name },
+	                _react2.default.createElement('path', { d: pathStr })
+	            )
+	        );
 	
 	        return _react2.default.createElement(
 	            'g',
@@ -69461,7 +69763,15 @@
 	    }).join(' ');
 	}
 	
-	exports.default = LineChart;
+	var xyKeys = ['axisType', 'domain', 'nice', 'invertAxis', 'tickCount', 'ticks', 'tickLength', 'labelValues', 'labelFormat', 'labelPadding', 'showLabels', 'showGrid', 'showTicks', 'showZero', 'axisLabel', 'axisLabelAlign', 'axisLabelPadding'];
+	var dirKeys = ['margin', 'padding', 'spacing'];
+	
+	var LineChartResolved = _lodash2.default.flow([_resolveXYScales2.default, _lodash2.default.partial(_resolveObjectProps2.default, _lodash2.default, xyKeys, ['x', 'y']), _lodash2.default.partial(_resolveObjectProps2.default, _lodash2.default, dirKeys, ['top', 'bottom', 'left', 'right'])])(LineChart);
+	
+	exports.default = LineChartResolved;
+	
+	//export default resolveXYScales(LineChart);
+	//export default LineChart;
 
 /***/ },
 /* 318 */
@@ -71309,9 +71619,17 @@
 	
 	  _Examples.examples.forEach(function (example) {
 	    it('renders the ' + example.title + ' example', function () {
-	      var ExampleComponent = example.Component;
-	      var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(ExampleComponent, null));
-	      var svg = _reactAddonsTestUtils2.default.scryRenderedDOMComponentsWithTag(wrapped, 'svg');
+	      var ok = true;
+	      var svg = undefined;
+	      try {
+	        var ExampleComponent = example.Component;
+	        var wrapped = _reactAddonsTestUtils2.default.renderIntoDocument(_react2.default.createElement(ExampleComponent, null));
+	        svg = _reactAddonsTestUtils2.default.scryRenderedDOMComponentsWithTag(wrapped, 'svg');
+	      } catch (e) {
+	        ok = false;
+	      }
+	
+	      (0, _chai.expect)(ok).to.equal(true);
 	      (0, _chai.expect)(svg.length).to.be.at.least(1);
 	    });
 	  });
@@ -72103,14 +72421,13 @@
 	      _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(
-	          _src.XYPlot,
-	          { axisType: { x: 'ordinal' }, margin: 40 },
-	          _react2.default.createElement(_src.LineChart, {
-	            data: [['a', 0.5], ['b', 1], ['c', 0.25]],
-	            getValue: getXYArrayValue
-	          })
-	        )
+	        _react2.default.createElement(_src.LineChart, {
+	          margin: 10,
+	          width: 500,
+	          height: 300,
+	          data: [['a', 0.5], ['b', 1], ['c', 0.25]],
+	          getValue: getXYArrayValue
+	        })
 	      ),
 	      this.renderExamples()
 	    );

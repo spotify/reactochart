@@ -90,13 +90,14 @@ class XYPlot2 extends React.Component {
     const {width, height, margin} = this.props;
     const chartSize = innerSize({width, height}, margin);
     const propsToPass = {...this.props, ...chartSize};
-    
+
     return <svg {...{width, height, onMouseMove: this.onMouseMove}}>
       <rect fill="thistle" {...{width, height}} />
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         <rect fill="#dddddd" {...chartSize} />
         {React.Children.map(this.props.children, child => {
-          return React.cloneElement(child, propsToPass);
+          return (_.isNull(child) || _.isUndefined(child)) ? null :
+            React.cloneElement(child, propsToPass);
         })}
       </g>
     </svg>
