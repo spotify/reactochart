@@ -19,7 +19,7 @@ function resolveXLabelsForValues(scale, values, formats, style, force = true) {
 
     const areLabelsDistinct = checkLabelsDistinct(testLabels);
     if(!areLabelsDistinct) {
-      console.log('labels are not distinct', _.map(testLabels, 'text'));
+      // console.log('labels are not distinct', _.map(testLabels, 'text'));
       attempts.push({labels: testLabels, format, areLabelsDistinct});
       return false;
     }
@@ -27,7 +27,7 @@ function resolveXLabelsForValues(scale, values, formats, style, force = true) {
     const labelXRanges = testLabels.map(label => getLabelXRange(scale, label, (style.textAnchor || 'middle')));
     const collisionCount = countRangeOverlaps(labelXRanges);
     if(collisionCount) {
-      console.log(`labels do not fit on X axis, ${collisionCount} collisions`, _.map(testLabels, 'text'));
+      // console.log(`labels do not fit on X axis, ${collisionCount} collisions`, _.map(testLabels, 'text'));
       attempts.push({labels: testLabels, format, areLabelsDistinct, collisionCount});
       return false;
     }
@@ -128,24 +128,19 @@ class XAxisValueLabels extends React.Component {
     // doing this will require communicating the updated ticks/tickCount back to the parent element...
 
     const {labels} = resolveXLabelsForValues(scale, ticks, formats, style);
-    console.log('found labels', labels);
+    // console.log('found labels', labels);
     return labels;
   }
 
   render() {
-    const {height, tickCount, position, distance, labelStyle, labelClassName} = this.props;
+    const {height, position, distance, labelStyle, labelClassName} = this.props;
     const scale = this.props.scale.x;
-    const placement = this.props.placement || ((position === 'top') ? 'above' : 'below');
-    const className = `chart-value-label chart-value-label-x ${labelClassName}`;
-
-    // todo: position: 'zero' to position along the zero line
-    const transform = (position === 'bottom') ? `translate(0,${height})` : '';
-
-    const style = _.defaults(labelStyle, XAxisValueLabels.defaultProps.labelStyle);
-
     const labels = this.props.labels || XAxisValueLabels.getLabels(this.props);
-
-    //console.log('found labels', labels);
+    const placement = this.props.placement || ((position === 'top') ? 'above' : 'below');
+    const style = _.defaults(labelStyle, XAxisValueLabels.defaultProps.labelStyle);
+    const className = `chart-value-label chart-value-label-x ${labelClassName}`;
+    const transform = (position === 'bottom') ? `translate(0,${height})` : '';
+    // todo: position: 'zero' to position along the zero line
 
     return <g className="chart-value-labels-x" transform={transform}>
       {labels.map((label) => {

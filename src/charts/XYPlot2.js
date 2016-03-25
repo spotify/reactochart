@@ -5,17 +5,34 @@ import d3 from 'd3';
 import resolveObjectProps from 'utils/resolveObjectProps';
 import resolveXYScales from 'utils/resolveXYScales';
 import {innerSize} from 'utils/Margin';
+import {inferScaleType} from 'utils/Scale';
+import {methodIfFuncProp} from 'util';
 
-
-function closestNumberInList(number, list) {
-  return list.reduce((closest, current) => {
-    return Math.abs(current - number) < Math.abs(closest - number) ? current : closest;
-  });
-}
 function indexOfClosestNumberInList(number, list) {
   return list.reduce((closestI, current, i) => {
     return Math.abs(current - number) < Math.abs(list[closestI] - number) ? i : closestI;
   }, 0);
+}
+
+function getMouseOptions(event, {scale, height, width, margin}) {
+  const chartBB = event.currentTarget.getBoundingClientRect();
+  const outerX = Math.round(event.clientX - chartBB.left);
+  const outerY = Math.round(event.clientY - chartBB.top);
+  const innerX = (outerX - (margin.left || 0));
+  const innerY = (outerY -(margin.top || 0));
+  const chartSize = innerSize({width, height}, margin);
+  const scaleType = {x: inferScaleType(scale.x), y: inferScaleType(scale.y)};
+
+  const xValue = (!_.inRange(innerX, 0, chartSize.width /* + padding.left + padding.right */)) ? null :
+    (scaleType.x === 'ordinal') ?
+      scale.x.domain()[indexOfClosestNumberInList(innerX, scale.x.range())] :
+      scale.x.invert(innerX);
+  const yValue = (!_.inRange(innerY, 0, chartSize.height /* + padding.top + padding.bottom */)) ? null :
+    (scaleType.y === 'ordinal') ?
+      scale.y.domain()[indexOfClosestNumberInList(innerY, scale.y.range())] :
+      scale.y.invert(innerY);
+
+  return {event, outerX, outerY, innerX, innerY, xValue, yValue, scale, margin};
 }
 
 class XYPlot2 extends React.Component {
@@ -50,48 +67,35 @@ class XYPlot2 extends React.Component {
     // spacing: {}
   };
 
-  onMouseMove = (e) => {
-    if(!this.props.onMouseMove) return;
 
-    const {scale, scaleType, height, width, margin} = this.props;
 
-    // todo padding
-    // to return:
-    // {event, isInMargin, outerX, outerY, innerX, innerY, xValue, yValue}
-
-    // todo faster method than getBoundingClientRect on every mouseover?
-    const chartBB = e.currentTarget.getBoundingClientRect();
-    const outerX = Math.round(e.clientX - chartBB.left);
-    const outerY = Math.round(e.clientY - chartBB.top);
-    const innerX = (outerX - margin.left);
-    const innerY = (outerY - margin.top);
-
-    const chartSize = innerSize({width, height}, margin);
-
-    const xValue = (!_.inRange(innerX, 0, chartSize.width /* + padding.left + padding.right */)) ? null :
-      (scaleType.x === 'ordinal') ?
-        scale.x.domain()[indexOfClosestNumberInList(innerX, scale.x.range())] :
-        scale.x.invert(innerX);
-    const yValue = (!_.inRange(innerY, 0, chartSize.height /* + padding.top + padding.bottom */)) ? null :
-      (scaleType.y === 'ordinal') ?
-        scale.y.domain()[indexOfClosestNumberInList(innerY, scale.y.range())] :
-        scale.y.invert(innerY);
-
-    // const chart = this.refs['chart-series-0'];
-    // const hovered = (chart && _.isFunction(chart.getHovered)) ? chart.getHovered(chartXVal) : null;
-
-    this.props.onMouseMove({event: e, outerX, outerY, innerX, innerY, xValue, yValue});
-
-    // this.trueProps.onMouseMove(hovered, e, {chartX, chartY, chartXVal, chartYVal});
+  onXYMouseEvent = (callbackKey, event) => {
+    const callback = this.props[callbackKey];
+    if(!_.isFunction(callback)) return;
+    const options = getMouseOptions(event, this.props);
+    callback(options);
   };
+  onMouseMove = _.partial(this.onXYMouseEvent, 'onMouseMove');
+  onMouseDown = _.partial(this.onXYMouseEvent, 'onMouseDown');
+  onMouseUp = _.partial(this.onXYMouseEvent, 'onMouseUp');
+  onClick = _.partial(this.onXYMouseEvent, 'onClick');
+  onMouseEnter = (event) => this.props.onMouseEnter({event});
+  onMouseLeave = (event) => this.props.onMouseLeave({event});
 
   render() {
-    console.log('xyplot2 props', this.props);
+    // console.log('xyplot2 props', this.props);
     const {width, height, margin} = this.props;
     const chartSize = innerSize({width, height}, margin);
-    const propsToPass = {...this.props, ...chartSize};
 
-    return <svg {...{width, height, onMouseMove: this.onMouseMove}}>
+    const handlerNames = ['onMouseMove', 'onMouseEnter', 'onMouseLeave', 'onMouseDown', 'onMouseUp', 'onClick'];
+    const handlers = _.fromPairs(handlerNames.map(n => [n, methodIfFuncProp(n, this.props, this)]));
+
+    const propsToPass = {
+      ..._.omit(this.props, ['children']),
+      ...chartSize
+    };
+
+    return <svg {...{width, height, onMouseMove: this.onMouseMove}} {...handlers}>
       <rect fill="thistle" {...{width, height}} />
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         <rect fill="#dddddd" {...chartSize} />

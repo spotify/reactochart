@@ -20,7 +20,7 @@ function resolveYLabelsForValues(scale, values, formats, style, force = true) {
 
     const areLabelsDistinct = checkLabelsDistinct(testLabels);
     if(!areLabelsDistinct) {
-      console.log('labels are not distinct', _.map(testLabels, 'text'));
+      // console.log('labels are not distinct', _.map(testLabels, 'text'));
       attempts.push({labels: testLabels, format, areLabelsDistinct});
       return false;
     }
@@ -117,7 +117,7 @@ class YAxisValueLabels extends React.Component {
     // doing this will require communicating the updated ticks/tickCount back to the parent element...
 
     const {labels} = resolveYLabelsForValues(scale, ticks, formats, style);
-    console.log('found labels', labels);
+    // console.log('found labels', labels);
     return labels;
   }
 

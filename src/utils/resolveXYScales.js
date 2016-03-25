@@ -147,7 +147,6 @@ export default function resolveXYScales(ComposedComponent) {
       // if Component provides a custom static getScaleType method
       // use it to determine remaining scale types
       if(_.isFunction(Component.getScaleType)) {
-        console.log('getscaletype')
         const componentScaleType = omitNullUndefined(Component.getScaleType(props));
         scaleType = _.assign(componentScaleType, scaleType);
         if(hasXYScaleTypes(scaleType)) return scaleType;
@@ -157,7 +156,7 @@ export default function resolveXYScales(ComposedComponent) {
       // if component has domain props,
       // infer the data type, & use that to get scale type
       if(_.isObject(props.domain) && (isValidDomain(props.domain.x) || isValidDomain(props.domain.y))) {
-        console.log('inferring scale type from domain');
+        // console.log('inferring scale type from domain');
         const domainScaleType = _.fromPairs(['x', 'y'].map(k => {
           const domain = props.domain[k];
           return isValidDomain(domain) ?
@@ -186,13 +185,13 @@ export default function resolveXYScales(ComposedComponent) {
       // if Component has children,
       // recurse through descendants to resolve their scale types the same way
       if(React.Children.count(props.children)) {
-        console.log('get scaletype from children')
+        // console.log('get scaletype from children')
         let childScaleTypes = [];
         React.Children.forEach(props.children, child => {
           if(!child) return;
           childScaleTypes.push(this._resolveScaleType(child.props, child.type));
         });
-        console.log('childScaleTypes', childScaleTypes);
+        // console.log('childScaleTypes', childScaleTypes);
 
 
         const childScaleType =  _.fromPairs(['x', 'y'].map(k => {
