@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",
     "build-lib": "rm -rf lib/ && babel src --out-dir lib",
-    "build-examples": "BABEL_ENV=production webpack --config webpack.config.base.js",
+    "build-examples": "BABEL_ENV=production webpack --config webpack.config.build.js",
     "build-tests": "webpack --config webpack.config.test.js",
     "build": "npm run build-lib && npm run build-examples && npm run build-tests",
     "serve": "python -m SimpleHTTPServer",
