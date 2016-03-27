@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import invariant from 'invariant';
+import depthEqual from './depthEqual';
 
 /**
  * `resolveObjectProps` is a higher-order-component.
@@ -56,6 +57,7 @@ function resolveProp(prop, objKeys, defaultProp) {
     _.fromPairs(objKeys.map(k => [k, prop]));
 }
 
+
 export default function resolveObjectProps(ComposedComponent, propKeys, objKeys) {
   return class extends React.Component {
     // attach static reference to default props so that we can compose multiple resolveObjectProps wrappers,
@@ -65,10 +67,17 @@ export default function resolveObjectProps(ComposedComponent, propKeys, objKeys)
     static getDomain = ComposedComponent.getDomain;
     static getMargin = ComposedComponent.getMargin;
 
-    // todo: smart shouldComponentUpdate with 1-level deep equality check?
+    shouldComponentUpdate(nextProps) {
+      // 2-level-deep object compare for props which we expect to be objects
+      // so that parent can pass object literals efficiently
+      // shallow compare for all other props
+      return !(
+        depthEqual(_.omit(this.props, propKeys), _.omit(this.props, propKeys), 1) &&
+        depthEqual(_.pick(this.props, propKeys), _.pick(nextProps, propKeys), 2)
+      );
+    }
 
     render() {
-      //console.log('resolveObjectProps', this.props);
       const defaultProps = ComposedComponent.defaultProps || ComposedComponent._defaultProps || {};
       
       const resolvedProps = _.fromPairs(propKeys.map(k => {
@@ -81,7 +90,6 @@ export default function resolveObjectProps(ComposedComponent, propKeys, objKeys)
         return [k, resolved];
       }));
 
-      //console.log('resolved object props', resolvedProps);
       const props = _.assign({}, this.props, resolvedProps);
       return <ComposedComponent {...props} />;
     }

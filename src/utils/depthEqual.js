@@ -10,6 +10,7 @@ export default function depthEqual(objA, objB, depth = 1) {
   if (depth === 0 ||
       typeof objA !== 'object' || objA === null ||
       typeof objB !== 'object' || objB === null) {
+    // console.log('different obj', objA, objB);
     return false
   }
 
@@ -27,6 +28,7 @@ export default function depthEqual(objA, objB, depth = 1) {
     if (!bHasOwnProperty(aKey) ||
         // recursively call depthEqual at the next level; depth 0 is === check
         !depthEqual(objA[aKey], objB[aKey], depth - 1)) {
+      // console.log('different key', aKey, objA, objB);
       return false
     }
   }
