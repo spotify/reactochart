@@ -1,36 +1,6 @@
 import depthEqual from '../../src/utils/depthEqual';
 import { expect } from 'chai' ;
 
-describe('depthEqual', () => {
-  const a1 = {a: 1};
-  const b1 = {a: 1};
-  const a2 = {a: {b: 1, c: 2}, d: {e: 4, f: 5}};
-  const b2 = {a: {b: 1, c: 2}, d: {e: 4, f: 5}};
-
-  it('performs === check if depth is 0', () => {
-    const a0 = 'a';
-    const b0 = 'a';
-    const c0 = 'b';
-    expect(depthEqual(a0, b0, 0)).to.equal(true);
-    expect(depthEqual(a0, c0, 0)).to.equal(false);
-
-    const a1 = {a: 1};
-    expect(depthEqual(a1, a1, 0)).to.equal(true);
-  });
-
-  it('performs shallow equality check if depth is 1', () => {
-    const a0 = 'a';
-    const b0 = 'a';
-    const c0 = 'b';
-    expect(depthEqual(a0, b0, 0)).to.equal(true);
-    expect(depthEqual(a0, c0, 0)).to.equal(false);
-
-    const a1 = {a: 1};
-    expect(depthEqual(a1, a1, 0)).to.equal(true);
-  });
-});
-
-
 // Adapted from https://github.com/rackt/react-redux/blob/master/test/utils/shallowEqual.spec.js
 describe('depthEqual()', () => {
   it('returns true if arguments are equal', () => {
