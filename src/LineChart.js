@@ -17,7 +17,8 @@ const LineChart = React.createClass({
     // the array of data objects
     data: PropTypes.array.isRequired,
     // accessor for X & Y coordinates
-    getValue: PropTypes.object,
+    getX: PropTypes.any,
+    getY: PropTypes.any,
 
     // props from XYPlot
     scale: PropTypes.object
@@ -46,7 +47,8 @@ const LineChart = React.createClass({
   // },
 
   initBisector(props) {
-    this.setState({bisectX: d3.bisector(d => accessor(this.props.getValue.x)(d)).left});
+    // this.setState({bisectX: d3.bisector(d => accessor(this.props.getValue.x)(d)).left});
+    this.setState({bisectX: d3.bisector(d => accessor(this.props.getX)(d)).left});
   },
 
   getHovered(x, y) {
@@ -56,8 +58,9 @@ const LineChart = React.createClass({
   },
 
   render() {
-    const {data, getValue, scale} = this.props;
-    const accessors = _.fromPairs(['x', 'y'].map(k => [k, accessor((getValue || {})[k])]));
+    const {data, scale, getX, getY} = this.props;
+    const accessors = {x: accessor(getX), y: accessor(getY)};
+    // const accessors = _.fromPairs(['x', 'y'].map(k => [k, accessor((getValue || {})[k])]));
     const points = _.map(data, d => [scale.x(accessors.x(d)), scale.y(accessors.y(d))]);
     const pathStr = pointsToPathStr(points);
 

@@ -172,7 +172,8 @@ export default function resolveXYScales(ComposedComponent) {
       if(_.isArray(props.data) || _.isArray(props.datasets)) {
         const datasets = _.isArray(props.datasets) ? props.datasets : [props.data];
         const datasetScaleType = _.fromPairs(['x', 'y'].map(k => {
-          const kAccessor = makeAccessor(_.get(props, `getValue.${k}`));
+          // const kAccessor = makeAccessor(_.get(props, `getValue.${k}`));
+          const kAccessor = makeAccessor(_.get(props, `get${k.toUpperCase()}`));
           const kDataType = inferDatasetsType(datasets, kAccessor);
           const kScaleType = scaleTypeFromDataType(kDataType);
           return [k, kScaleType];
@@ -239,7 +240,8 @@ export default function resolveXYScales(ComposedComponent) {
       if(_.isArray(props.data) || _.isArray(props.datasets)) {
         const datasets = _.isArray(props.datasets) ? props.datasets : [props.data];
         const datasetDomain = _.fromPairs(['x', 'y'].map(k => {
-          const kAccessor = makeAccessor(_.get(props, `getValue.${k}`));
+          // const kAccessor = makeAccessor(_.get(props, `getValue.${k}`));
+          const kAccessor = makeAccessor(_.get(props, `get${k.toUpperCase()}`));
           const dataType = dataTypeFromScaleType(scaleType[k]);
           const kDomain = domainFromDatasets(datasets, kAccessor, dataType);
           return [k, kDomain];
