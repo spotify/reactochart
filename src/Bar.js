@@ -26,7 +26,7 @@ export default class Bar extends React.Component {
   render() {
     //  x/yValue are values in the *data* domain, not pixel domain
     const {scale, xValue, xEndValue, yValue, yEndValue, thickness, style} = this.props;
-    console.log('bar', this.props);
+    // console.log('bar', this.props);
 
     invariant(hasXYScales(this.props.scale), `Bar.props.scale.x and scale.y must both be valid d3 scales`);
     invariant(hasOneOfTwo(xEndValue, yEndValue), `Bar expects an xEnd *or* yEnd prop, but not both.`);

@@ -102,7 +102,7 @@ class XAxisValueLabels extends React.Component {
   }
 
   static getDefaultFormats(scaleType) {
-    const timeFormatStrs = ['YYYY', 'YY', 'MMM YYYY', 'M/YY'];
+    const timeFormatStrs = ['YYYY', "'YY", 'MMM YYYY', 'M/YY'];
     const numberFormatStrs = ["0.[00]a", "0,0", "0.[0]", "0.[00]", "0.[0000]", "0.[000000]"];
 
     return (scaleType === 'ordinal') ? [_.identity] :
