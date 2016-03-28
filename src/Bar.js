@@ -1,10 +1,8 @@
 import React from 'react';
 import invariant from 'invariant';
-import some from 'lodash/some';
 import isUndefined from 'lodash/isUndefined';
+import {hasOneOfTwo} from './util';
 import {hasXYScales} from './utils/Scale';
-
-const hasOneOfTwo = (a, b) => some([a, b], isUndefined) && some([a, b], v => !isUndefined(v));
 
 export default class Bar extends React.Component {
   static propTypes = {
@@ -28,6 +26,7 @@ export default class Bar extends React.Component {
   render() {
     //  x/yValue are values in the *data* domain, not pixel domain
     const {scale, xValue, xEndValue, yValue, yEndValue, thickness, style} = this.props;
+    console.log('bar', this.props);
 
     invariant(hasXYScales(this.props.scale), `Bar.props.scale.x and scale.y must both be valid d3 scales`);
     invariant(hasOneOfTwo(xEndValue, yEndValue), `Bar expects an xEnd *or* yEnd prop, but not both.`);
@@ -38,16 +37,18 @@ export default class Bar extends React.Component {
     let x, y, width, height;
     if(orientation === 'horizontal') {
       y = scale.y(yValue) - (thickness / 2);
-      x = scale.x(Math.min(xValue, xEndValue));
-      const x1 = scale.x(Math.max(xValue, xEndValue));
-      width = x1 - x;
+      const x0 = scale.x(xValue);
+      const x1 = scale.x(xEndValue);
+      x = Math.min(x0, x1);
+      width = Math.abs(x1 - x0);
       height = thickness;
 
     } else { // vertical
       x = scale.x(xValue) - (thickness / 2);
-      y = scale.y(Math.min(yValue, yEndValue));
-      const y1 = scale.y(Math.max(yValue, yEndValue));
-      height = y1 - y;
+      const y0 = scale.y(yValue);
+      const y1 = scale.y(yEndValue);
+      y = Math.min(y0, y1);
+      height = Math.abs(y1 - y0);
       width = thickness;
     }
 

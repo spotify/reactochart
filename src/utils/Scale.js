@@ -52,6 +52,10 @@ export function isValidScale(scale) {
   return _.isFunction(scale) && _.isFunction(scale.domain) && _.isFunction(scale.range);
 }
 
+export function hasXYScales(scale) {
+  return _.isObject(scale) && isValidScale(scale.x) && isValidScale(scale.y);
+}
+
 export function getScaleTicks(scale, scaleType, tickCount=10) {
   scaleType = scaleType || inferScaleType(scale);
   return (scaleType === 'ordinal') ?

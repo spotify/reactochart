@@ -36,3 +36,6 @@ export function methodIfFuncProp(propName, props, context) {
         context[propName] : null;
 }
 
+export function hasOneOfTwo(a, b) {
+    return _.some([a, b], _.isUndefined) && _.some([a, b], v => !_.isUndefined(v));
+}
