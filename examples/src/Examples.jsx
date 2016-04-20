@@ -33,6 +33,12 @@ import YAxisLabels from '../../src/YAxisLabels';
 import YAxisTitle from '../../src/YAxisTitle';
 import XAxisTitle from '../../src/XAxisTitle';
 
+import BarChart2 from '../../src/BarChart';
+import Bar from '../../src/Bar';
+import RangeBarChart from '../../src/RangeBarChart';
+
+import AreaHeatmap from '../../src/AreaHeatmap';
+
 
 
 import {randomWalk, randomWalkSeries} from './data/util';
@@ -619,8 +625,229 @@ const AxisLabelExample = React.createClass({
   }
 });
 
+const dateDomain = [new Date(1992, 0, 1), new Date(2001, 0, 1)];
+const numberDomain = [-20, 20];
+
+const XYAxisExample = (props) => {
+  const domain = {x: dateDomain, y: numberDomain};
+
+  const smallSize = {width: 230, height: 180};
+  const bigSize = {width: 550, height: 300};
+
+  return <div>
+    <div>
+      <XYPlot2 domain={domain} {...bigSize}>
+        <YAxis title="Hip Hop"/>
+        <XAxis title="Hooray"/>
+      </XYPlot2>
+    </div>
+    <div>
+      <XYPlot2 domain={domain} {...smallSize}>
+        <YAxis title="Hip Hop"/>
+      </XYPlot2>
+
+      <XYPlot2 domain={domain} {...smallSize}>
+        <YTicks />
+        <YTicks placement="after" tickLength={10} tickCount={4} />
+        <YTicks position="right" tickCount={30} tickLength={15} tickStyle={{stroke: 'red'}} />
+        <YTicks position="right" placement="before" tickCount={5} tickLength={18} />
+      </XYPlot2>
+
+      <XYPlot2 domain={domain} {...smallSize}>
+        <YGrid tickCount={50} />
+        <YGrid tickCount={5} lineStyle={{stroke: 'blue', strokewidth: 2}} />
+      </XYPlot2>
+
+      <XYPlot2 domain={domain} {...smallSize}>
+        <YAxisLabels tickCount={10}/>
+        <YAxisLabels position="right" tickCount={10} />
+        <YGrid />
+      </XYPlot2>
+
+      <XYPlot2 domain={domain} {...smallSize}>
+        <YAxisTitle title="Hip Hip" position="right" style={{fontSize: '12px'}} />
+        <YAxisTitle title="Hooray" />
+      </XYPlot2>
+    </div>
+
+    <div>
+      <XYPlot2 domain={domain} {...smallSize}>
+        <XAxis title="Hooray"/>
+      </XYPlot2>
+
+      <XYPlot2 domain={domain} {...smallSize}>
+        <XTicks />
+        <XTicks position="top" tickCount={120} tickLength={15} tickStyle={{stroke: 'red'}} />
+        <XTicks position="top" placement="below" tickCount={50} tickLength={10} />
+        <XTicks position="top" placement="below" tickCount={5} tickLength={18} />
+      </XYPlot2>
+
+      <XYPlot2 domain={domain} {...smallSize}>
+        <XGrid tickCount={50} />
+        <XGrid tickCount={5} lineStyle={{stroke: 'blue', strokewidth: 2}} />
+      </XYPlot2>
+
+      <XYPlot2 domain={domain} {...smallSize}>
+        <XAxisLabels tickCount={5}/>
+        <XAxisLabels position="top" distance={2} labelStyle={{fontSize: '10px'}} />
+      </XYPlot2>
+
+      <XYPlot2  domain={domain} {...smallSize}>
+        <XAxisTitle title="Hip Hip" position="top" style={{fontSize: '12px'}} />
+        <XAxisTitle title="Hooray" />
+      </XYPlot2>
+    </div>
+  </div>
+}
+
+
+const RangeBarChartExample = (props) => {
+  const count = 30;
+  const dateDomain = [new Date(1992, 0, 1), new Date(2001, 0, 1)];
+  const numberDomain = [-2, 2];
+  const ordinalDomain = _.range(count).map(n => String.fromCharCode(97 + n));
+
+  const dates = _.range(30).map(n => new Date(+(dateDomain[0]) + (n * 1000 * 60 * 60 * 24 * 100)));
+
+  const addDays = (date, n) => new Date(+(date) + (1000 * 60 * 60 * 24 * n));
+
+  const numberRanges =
+    _.range(30).map(n => [Math.sin(n/5), Math.sin(n/8) + Math.cos(n/5)].sort((a, b) => (a - b)));
+  const dateRanges =
+    _.range(30).map(n => [dates[n], addDays(dates[n], (Math.sin(n/8) * 100))].sort((a, b) => (a - b)));
+
+  const numberNumberRangeData = _.zip(_.range(30), numberRanges);
+  const dateNumberRangeData = _.zip(dates, numberRanges);
+  const ordinalNumberRangeData = _.zip(ordinalDomain, numberRanges);
+
+  const numberDateRangeData = _.zip(_.range(30), dateRanges);
+  const dateDateRangeData = _.zip(dates, dateRanges);
+  const ordinalDateRangeData = _.zip(ordinalDomain, dateRanges);
+
+
+  return <div>
+
+    {[true, false].map(horizontal => {
+      const title = horizontal ? "Horizontal" : "Vertical";
+      const getters = horizontal ?
+        {getY: 0, getX: '1.0', getXEnd: '1.1'} :
+        {getX: 0, getY: '1.0', getYEnd: '1.1'};
+
+      const dep = horizontal ? 'x' : 'y';
+      const indep = horizontal ? 'y' : 'x';
+
+      return <div>
+        <h2>{title}</h2>
+
+        <div>
+          <XYPlot2 domain={{[dep]: numberDomain, [indep]: [0, count]}} scaleType="linear" {...{width: 300, height: 350}}>
+            <XAxis/><YAxis/>
+            <RangeBarChart
+              horizontal={horizontal}
+              data={numberNumberRangeData}
+              {...getters}
+            />
+          </XYPlot2>
+
+          <XYPlot2 domain={{[dep]: numberDomain, [indep]: dateDomain}} {...{width: 300, height: 350}}>
+            <XAxis/><YAxis/>
+            <RangeBarChart
+              horizontal={horizontal}
+              data={dateNumberRangeData}
+              {...getters}
+            />
+          </XYPlot2>
+
+          <XYPlot2 domain={{[dep]: numberDomain, [indep]: ordinalDomain}} {...{width: 300, height: 350}}>
+            <XAxis/><YAxis/>
+            <RangeBarChart
+              horizontal={horizontal}
+              data={ordinalNumberRangeData}
+              {...getters}
+            />
+          </XYPlot2>
+        </div>
+
+        <div>
+          <XYPlot2 domain={{[dep]: dateDomain, [indep]: [0, count]}} {...{width: 300, height: 350}}>
+            <XAxis/><YAxis/>
+            <RangeBarChart
+              horizontal={horizontal}
+              data={numberDateRangeData}
+              {...getters}
+            />
+          </XYPlot2>
+
+          <XYPlot2 domain={{[dep]: dateDomain, [indep]: dateDomain}} {...{width: 300, height: 350}}>
+            <XAxis/><YAxis/>
+            <RangeBarChart
+              horizontal={horizontal}
+              data={dateDateRangeData}
+              {...getters}
+            />
+          </XYPlot2>
+
+          <XYPlot2 domain={{[dep]: dateDomain, [indep]: ordinalDomain}} {...{width: 300, height: 350}}>
+            <XAxis/><YAxis/>
+            <RangeBarChart
+              horizontal={horizontal}
+              data={ordinalDateRangeData}
+              {...getters}
+            />
+          </XYPlot2>
+        </div>
+      </div>
+    })}
+
+
+
+
+    <XYPlot2 domain={{y: [-1, 1], x: [-1, 1]}} scaleType="linear" {...{width: 300, height: 350}}>
+      <XAxis/><YAxis/>
+      <RangeBarChart
+        data={_.range(-1, 1, .1)}
+        getX={null}
+        getY={d => Math.sin(d*2)}
+        getYEnd={d => Math.sin(d*2) * Math.cos(d*2)}
+        barThickness={6}
+      />
+    </XYPlot2>
+  </div>
+};
+
+const AreaHeatmapExample = (props) => {
+  const gridData = _.range(30).map(m => {
+    return _.range(30).map(n => {
+      return {
+        x: n, xEnd: n + 1,
+        y: m, yEnd: m + 1,
+        area: Math.sin(m / 2) * Math.sin(n / 3)
+      };
+    });
+  });
+
+  return <div>
+    <XYPlot2 scaleType="linear" {...{width: 500, height: 500}}>
+      <XAxis title="Phase" />
+      <YAxis title="Intensity" />
+
+      <AreaHeatmap
+        data={_.flatten(gridData)}
+        getArea="area"
+        getX="x"
+        getXEnd="xEnd"
+        getY="y"
+        getYEnd="yEnd"
+      />
+    </XYPlot2>
+  </div>;
+};
+
 export const examples = [
+  {id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample},
+  {id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample},
   {id: 'line', title: 'Line Chart', Component: LineChartExample},
+  {id: 'areaHeatmap', title: 'Area Heatmap', Component: AreaHeatmapExample},
   {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
   {id: 'axisLabels', title: 'Axis Labels', Component: AxisLabelExample},
   {id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample},
@@ -723,6 +950,8 @@ class XAxisTitleTest extends React.Component {
   }
 }
 
+
+
 export const App = React.createClass({
   getInitialState() {
     return {
@@ -749,68 +978,55 @@ export const App = React.createClass({
 
     const smallSize = {width: 300, height: 210};
 
+
+
     return <div>
       <h1>Reactochart Examples</h1>
+
+
+
+      <div>
+        {/*
+        <XYPlot2 domain={{x: [0, 100], y: [-1, 1]}} scaleType="linear" {...{width: 600, height: 350}}>
+          <XAxis title="Phase" gridLineStyle={{stroke: '#777'}} />
+          <YAxis title="Intensity" titleRotate={false} gridLineStyle={{stroke: '#777'}} />
+          <YAxis title="Intensity" position="right" showGrid={false} labelStyle={{fontSize: '12px'}} />
+
+          <RangeBarChart data={_.range(100)} getX={null} getY={() => 0} getYEnd={d => Math.sin(d*.1)} />
+        </XYPlot2>
+        */}
+
+        <XYPlot2 domain={{y: [-1, 1], x: [-1, 1]}} scaleType="linear" {...{width: 900, height: 350}}>
+          <XAxis title="Phase" />
+          <YAxis title="Intensity" />
+
+          <RangeBarChart
+            data={_.range(-1, 1, .005)}
+            getX={null}
+            getY={d => Math.sin(d*6)}
+            getYEnd={d => Math.sin(d*6) * Math.cos(d*6)}
+            barThickness={2}
+          />
+
+          {/*
+          <RangeBarChart horizontal data={_.range(-1, 1, .05)} getY={null} getX={() => 0} getXEnd={d => Math.cos(d*3)} />
+          <RangeBarChart data={_.range(-1, 1, .05)} getX={null} getY={() => 0} getYEnd={d => Math.cos(d*3)} />
+           */}
+        </XYPlot2>
+      </div>
 
       <div>
         <XYPlot2 scaleType="linear" {...{width: 600, height: 350}}>
           <XAxis title="Phase" gridLineStyle={{stroke: '#777'}} />
           <YAxis title="Intensity" titleRotate={false} gridLineStyle={{stroke: '#777'}} />
-          <YAxis title="Intensity" position="right" showGrid={false} labelStyle={{fontSize: '12px'}} />
+          <YAxis title="Intensity" position="right" labelStyle={{fontSize: '12px'}} />
 
-          <LineChart data={_.range(100)} getValue={{y: d => Math.sin(d*.1)}} />
-          <LineChart data={_.range(100)} getValue={{y: d => Math.cos(d*.1)}} />
+          <LineChart data={_.range(100)} getY={d => Math.sin(d*.1)} />
+          <LineChart data={_.range(100)} getY={d => Math.cos(d*.1)} />
         </XYPlot2>
       </div>
 
-      <div>
-        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
-          <YTicks />
-          <YTicks placement="after" tickLength={10} tickCount={4} />
-          <YTicks position="right" tickCount={30} tickLength={15} tickStyle={{stroke: 'red'}} />
-          <YTicks position="right" placement="before" tickCount={5} tickLength={18} />
-        </XYPlot2>
 
-        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
-          <YGrid tickCount={50} />
-          <YGrid tickCount={5} lineStyle={{stroke: 'blue', strokewidth: 2}} />
-        </XYPlot2>
-
-        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
-          <YAxisLabels tickCount={10}/>
-          <YAxisLabels position="right" tickCount={10} />
-          <YGrid />
-        </XYPlot2>
-
-        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
-          <YAxisTitle title="Hip Hip" position="right" style={{fontSize: '12px'}} />
-          <YAxisTitle title="Hooray" />
-        </XYPlot2>
-      </div>
-
-      <div>
-        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
-          <XTicks />
-          <XTicks position="top" tickCount={120} tickLength={15} tickStyle={{stroke: 'red'}} />
-          <XTicks position="top" placement="below" tickCount={50} tickLength={10} />
-          <XTicks position="top" placement="below" tickCount={5} tickLength={18} />
-        </XYPlot2>
-
-        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
-          <XGrid tickCount={50} />
-          <XGrid tickCount={5} lineStyle={{stroke: 'blue', strokewidth: 2}} />
-        </XYPlot2>
-
-        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
-          <XAxisLabels tickCount={5}/>
-          <XAxisLabels position="top" distance={2} labelStyle={{fontSize: '10px'}} />
-        </XYPlot2>
-
-        <XYPlot2 scaleType="linear" domain={[0.34, 4.7]} {...smallSize}>
-          <XAxisTitle title="Hip Hip" position="top" style={{fontSize: '12px'}} />
-          <XAxisTitle title="Hooray" />
-        </XYPlot2>
-      </div>
 
       {/*
 
