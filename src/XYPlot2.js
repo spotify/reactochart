@@ -83,7 +83,6 @@ class XYPlot2 extends React.Component {
   onMouseLeave = (event) => this.props.onMouseLeave({event});
 
   render() {
-    // console.log('xyplot2 props', this.props);
     const {width, height, margin} = this.props;
     const chartSize = innerSize({width, height}, margin);
 

@@ -71,10 +71,18 @@ export default function resolveObjectProps(ComposedComponent, propKeys, objKeys)
       // 2-level-deep object compare for props which we expect to be objects
       // so that parent can pass object literals efficiently
       // shallow compare for all other props
-      return !(
+
+
+      // todo fix this????
+      // broken for InteractiveLineExample, maybe for anything with children?
+      return true;
+
+      const shouldUpdate = !(
         depthEqual(_.omit(this.props, propKeys), _.omit(this.props, propKeys), 1) &&
         depthEqual(_.pick(this.props, propKeys), _.pick(nextProps, propKeys), 2)
       );
+      console.log('resolveObjectProps shouldComponentUpdate', shouldUpdate);
+      return shouldUpdate;
     }
 
     render() {
