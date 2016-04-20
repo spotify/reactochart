@@ -7,9 +7,9 @@ import numeral from 'numeral';
 import {
   PieChart,
   XYPlot,
-  LineChart,
+  // LineChart,
   BarChart,
-  MarkerLineChart,
+  // MarkerLineChart,
   ScatterPlot,
   Histogram,
   KernelDensityEstimation
@@ -37,7 +37,10 @@ import BarChart2 from '../../src/BarChart';
 import Bar from '../../src/Bar';
 import RangeBarChart from '../../src/RangeBarChart';
 
+import LineChart from '../../src/LineChart';
 import AreaHeatmap from '../../src/AreaHeatmap';
+
+import MarkerLineChart from '../../src/MarkerLineChart';
 
 
 
@@ -843,11 +846,65 @@ const AreaHeatmapExample = (props) => {
   </div>;
 };
 
+const MarkerLineExample = (props) => {
+  return <div>
+    <div>
+      <h4>Value/Value</h4>
+
+      <XYPlot2 scaleType="linear" {...{width: 500, height: 500}}>
+        <XAxis title="Phase" />
+        <YAxis title="Intensity" />
+        <MarkerLineChart
+          data={_.range(30)}
+          getY={d => Math.sin(d / (Math.PI))}
+        />
+      </XYPlot2>
+
+      <XYPlot2 scaleType="linear" {...{width: 500, height: 500}}>
+        <XAxis title="Phase" />
+        <YAxis title="Intensity" />
+        <MarkerLineChart
+          data={_.range(30)}
+          getX={d => Math.sin(d / (Math.PI))}
+          orientation="horizontal"
+        />
+      </XYPlot2>
+    </div>
+
+    <div>
+      <XYPlot2 scaleType="linear" {...{width: 500, height: 500}}>
+        <XAxis title="Phase" />
+        <YAxis title="Intensity" />
+        <MarkerLineChart
+          data={_.range(15)}
+          getX={d => Math.sin(d / 10) * 10}
+          getXEnd={d => Math.sin((d + 1) / 10) * 10}
+          getY={d => Math.sin(d / (Math.PI))}
+        />
+      </XYPlot2>
+
+      <XYPlot2 scaleType="linear" {...{width: 500, height: 500}}>
+        <XAxis title="Phase" />
+        <YAxis title="Intensity" />
+        <MarkerLineChart
+          data={_.range(15)}
+          getX={d => Math.sin(d / (Math.PI))}
+          getY={d => Math.sin(d / 10) * 10}
+          getYEnd={d => Math.sin((d + 1) / 10) * 10}
+          orientation="horizontal"
+        />
+      </XYPlot2>
+    </div>
+  </div>;
+};
+
+
 export const examples = [
   {id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample},
   {id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample},
   {id: 'line', title: 'Line Chart', Component: LineChartExample},
-  {id: 'areaHeatmap', title: 'Area Heatmap', Component: AreaHeatmapExample},
+  {id: 'areaHeatmap', title: 'Area Heatmap Chart', Component: AreaHeatmapExample},
+  {id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample},
   {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
   {id: 'axisLabels', title: 'Axis Labels', Component: AxisLabelExample},
   {id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample},
