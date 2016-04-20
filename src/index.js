@@ -1,11 +1,12 @@
 export { default as XYPlot } from './charts/XYPlot';
 
 export { default as LineChart } from './LineChart';
+export { default as ScatterPlot } from './ScatterPlot';
 export { default as AreaHeatmap } from './AreaHeatmap';
 export { default as MarkerLineChart } from './MarkerLineChart';
 
 export { default as BarChart } from './charts/BarChart';
-export { default as ScatterPlot } from './charts/ScatterPlot';
+
 export { default as Histogram } from './charts/Histogram';
 export { default as KernelDensityEstimation } from './charts/KernelDensityEstimation';
 
