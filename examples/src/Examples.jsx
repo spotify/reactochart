@@ -10,7 +10,7 @@ import {
   // LineChart,
   BarChart,
   // MarkerLineChart,
-  ScatterPlot,
+  // ScatterPlot,
   Histogram,
   KernelDensityEstimation
 } from '../../src';
@@ -39,6 +39,7 @@ import RangeBarChart from '../../src/RangeBarChart';
 
 import LineChart from '../../src/LineChart';
 import AreaHeatmap from '../../src/AreaHeatmap';
+import ScatterPlot from '../../src/ScatterPlot';
 
 import MarkerLineChart from '../../src/MarkerLineChart';
 
@@ -160,38 +161,42 @@ const ScatterPlotExample = React.createClass({
     const randomEmoji = (d, i) => _.sample(emojis);
 
     return <div>
-      <XYPlot width={700} height={500} axisLabel={{x: "TIME", y: "EMOJI"}}>
-        {/*
-         <ScatterPlot
-         data={randomScatter[3]}
-         getValue={{x: 0, y: 1}}
-         pointSymbol={rectangleSymbol}
-         />
-         <ScatterPlot
-         data={randomScatter[4]}
-         getValue={{x: 0, y: 1}}
-         pointRadius={2}
-         />
+      <XYPlot2 width={700} height={500}>
+        <XAxis title="Phase" />
+        <YAxis title="Intensity" />
 
-         <ScatterPlot
-         data={randomScatter[0]}
-         getValue={{x: 0, y: 1}}
-         pointSymbol={(d, i) => i}
-         />
-         <ScatterPlot
-         data={randomScatter[2]}
-         getValue={{x: 0, y: 1}}
-         pointSymbol={triangleSymbol}
-         pointOffset={[-4, -3]}
-         />
-         */}
         <ScatterPlot
-          data={randomScatter[1]}
-          getValue={{x: 0, y: 1}}
+          data={randomScatter[3]}
+          getX={0} getY={1}
+          pointSymbol={rectangleSymbol}
+        />
+        <ScatterPlot
+          data={randomScatter[4]}
+          getX={0} getY={1}
           pointSymbol={randomEmoji}
           pointOffset={[0, 2]}
         />
-      </XYPlot>
+
+        <ScatterPlot
+          data={randomScatter[0]}
+          getX={0} getY={1}
+          pointSymbol={(d, i) => i}
+        />
+        <ScatterPlot
+          data={randomScatter[2]}
+          getX={0} getY={1}
+          pointSymbol={triangleSymbol}
+          pointOffset={[-4, -3]}
+        />
+        {/*
+        <ScatterPlot
+          data={randomScatter[1]}
+          getX={0} getY={1}
+          pointSymbol={randomEmoji}
+          pointOffset={[0, 2]}
+        />
+        */}
+      </XYPlot2>
     </div>
   }
 });
@@ -701,8 +706,7 @@ const XYAxisExample = (props) => {
       </XYPlot2>
     </div>
   </div>
-}
-
+};
 
 const RangeBarChartExample = (props) => {
   const count = 30;
