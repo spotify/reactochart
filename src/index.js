@@ -6,9 +6,8 @@ export { default as AreaHeatmap } from './AreaHeatmap';
 export { default as MarkerLineChart } from './MarkerLineChart';
 
 export { default as BarChart } from './charts/BarChart';
-
 export { default as Histogram } from './charts/Histogram';
-export { default as KernelDensityEstimation } from './charts/KernelDensityEstimation';
+export { default as KernelDensityEstimation } from './KernelDensityEstimation';
 
 export { default as PieChart } from './charts/PieChart';
 export { default as TreeMap } from './charts/TreeMap';
