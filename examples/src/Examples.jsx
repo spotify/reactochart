@@ -5,14 +5,9 @@ import update from 'react-addons-update';
 import numeral from 'numeral';
 
 import {
-  PieChart,
   XYPlot,
-  // LineChart,
   BarChart,
-  // MarkerLineChart,
-  // ScatterPlot,
   Histogram,
-  KernelDensityEstimation
 } from '../../src';
 
 import XYPlot2 from '../../src/XYPlot2';
@@ -22,16 +17,14 @@ import XTicks from '../../src/XTicks';
 import XLine from '../../src/XLine';
 import XGrid from '../../src/XGrid';
 import XAxisLabels from '../../src/XAxisLabels';
-
+import XAxisTitle from '../../src/XAxisTitle';
 
 import YAxis from '../../src/YAxis';
 import YTicks from '../../src/YTicks';
 import YLine from '../../src/YLine';
 import YGrid from '../../src/YGrid';
 import YAxisLabels from '../../src/YAxisLabels';
-
 import YAxisTitle from '../../src/YAxisTitle';
-import XAxisTitle from '../../src/XAxisTitle';
 
 import BarChart2 from '../../src/BarChart';
 import Bar from '../../src/Bar';
@@ -40,9 +33,10 @@ import RangeBarChart from '../../src/RangeBarChart';
 import LineChart from '../../src/LineChart';
 import AreaHeatmap from '../../src/AreaHeatmap';
 import ScatterPlot from '../../src/ScatterPlot';
+import PieChart from '../../src/PieChart';
 
 import MarkerLineChart from '../../src/MarkerLineChart';
-
+import KernelDensityEstimation from '../../src/KernelDensityEstimation';
 
 
 import {randomWalk, randomWalkSeries} from './data/util';
@@ -201,7 +195,6 @@ const ScatterPlotExample = React.createClass({
   }
 });
 
-
 const LineChartExample = React.createClass({
   render() {
     return <div>
@@ -209,46 +202,20 @@ const LineChartExample = React.createClass({
         <XAxis />
         <LineChart
           data={_.range(-10,10,0.01)}
-          getValue={{x: null, y: (n) => Math.sin(n)}}
+          getX={null}
+          getY={(n) => Math.sin(n)}
         />
         <LineChart
           data={_.range(-10,10,0.01)}
-          getValue={{
-            x: null,
-            y: (n) => Math.sin(Math.pow(Math.abs(n), Math.abs(n*.18))) * Math.cos(n)
-          }}
+          getX={null}
+          getY={(n) => Math.sin(Math.pow(Math.abs(n), Math.abs(n*.18))) * Math.cos(n)}
         />
         <LineChart
           data={_.range(-10,10,0.01)}
-          getValue={{
-            x: null,
-            y: (n) => Math.sin(n*0.5) * Math.cos(n)
-          }}
+          getX={null}
+          getY={(n) => Math.sin(n*0.5) * Math.cos(n)}
         />
       </XYPlot2>
-
-      {/*
-      <XYPlot width={700}>
-        <LineChart
-          data={_.range(-10,10,0.01)}
-          getValue={{x: null, y: (n) => Math.sin(n)}}
-        />
-        <LineChart
-          data={_.range(-10,10,0.01)}
-          getValue={{
-            x: null,
-            y: (n) => Math.sin(Math.pow(Math.abs(n), Math.abs(n*.18))) * Math.cos(n)
-          }}
-        />
-        <LineChart
-          data={_.range(-10,10,0.01)}
-          getValue={{
-            x: null,
-            y: (n) => Math.sin(n*0.5) * Math.cos(n)
-          }}
-        />
-      </XYPlot>
-      */}
     </div>
   }
 });
@@ -269,6 +236,8 @@ const InteractiveLineExample = React.createClass({
   },
   render() {
     const {activeXValue, activeYValue} = this.state;
+    const getters = {getX: 0, getY: 1};
+
     return <div>
       {activeXValue && activeYValue ?
         <div>
@@ -279,9 +248,9 @@ const InteractiveLineExample = React.createClass({
       <XYPlot2 width={700} height={400} onMouseMove={this.onMouseMoveXYPlot} onClick={this.onClick}>
         <XAxis title="Days" />
         <YAxis title="Price" />
-        <LineChart data={randomSequences[0]} getValue={xyArrGetter} />
-        <LineChart data={randomSequences[1]} getValue={xyArrGetter} />
-        <LineChart data={randomSequences[2]} getValue={xyArrGetter} />
+        <LineChart data={randomSequences[0]} {...getters} />
+        <LineChart data={randomSequences[1]} {...getters} />
+        <LineChart data={randomSequences[2]} {...getters} />
         {activeXValue ?
           <XLine value={activeXValue} style={{stroke: 'red'}} /> :
           null
@@ -902,6 +871,31 @@ const MarkerLineExample = (props) => {
   </div>;
 };
 
+const KDEExample = (props) => {
+  const xyProps = {
+    domain: {x: [-4, 6], y: [0, 220]},
+    scaleType: "linear"
+  };
+
+  return <div>
+    <div>
+      <XYPlot2 width={700} height={300} {...xyProps}>
+        <XAxis title="Value" />
+        <YAxis title="Count" />
+
+        <KernelDensityEstimation
+          data={randomNormal} getValue={{x: null}} bandwidth={0.5}
+        />
+        <KernelDensityEstimation
+          data={randomNormal} getValue={{x: null}} bandwidth={0.1}
+        />
+        <KernelDensityEstimation
+          data={randomNormal} getValue={{x: null}} bandwidth={2}
+        />
+      </XYPlot2>
+    </div>
+  </div>;
+};
 
 export const examples = [
   {id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample},
@@ -909,6 +903,7 @@ export const examples = [
   {id: 'line', title: 'Line Chart', Component: LineChartExample},
   {id: 'areaHeatmap', title: 'Area Heatmap Chart', Component: AreaHeatmapExample},
   {id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample},
+  {id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample},
   {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
   {id: 'axisLabels', title: 'Axis Labels', Component: AxisLabelExample},
   {id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample},
@@ -922,7 +917,6 @@ export const examples = [
   {id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample},
   {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample}
 ];
-
 
 
 class YAxisTitleTest extends React.Component {
@@ -1012,7 +1006,6 @@ class XAxisTitleTest extends React.Component {
 }
 
 
-
 export const App = React.createClass({
   getInitialState() {
     return {
@@ -1031,20 +1024,12 @@ export const App = React.createClass({
     const numberDomain = [-20, 20];
     const testXScale = d3.time.scale().domain(dateDomain).range([0, innerSize.width]);
     const testYScale = d3.scale.linear().domain([-20, 20]).range([innerSize.height, 0]);
-
     const linearXScale = d3.scale.linear().domain([-.05, .05]).range([0, innerSize.width]);
-
-
     const customDateTicks = [new Date(2009, 0, 1), new Date(2014, 7, 1), new Date(2017, 0, 1)];
-
     const smallSize = {width: 300, height: 210};
-
-
 
     return <div>
       <h1>Reactochart Examples</h1>
-
-
 
       <div>
         {/*

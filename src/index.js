@@ -4,12 +4,13 @@ export { default as LineChart } from './LineChart';
 export { default as ScatterPlot } from './ScatterPlot';
 export { default as AreaHeatmap } from './AreaHeatmap';
 export { default as MarkerLineChart } from './MarkerLineChart';
+export { default as KernelDensityEstimation } from './KernelDensityEstimation';
+
+export { default as PieChart } from './PieChart';
 
 export { default as BarChart } from './charts/BarChart';
 export { default as Histogram } from './charts/Histogram';
-export { default as KernelDensityEstimation } from './KernelDensityEstimation';
 
-export { default as PieChart } from './charts/PieChart';
 export { default as TreeMap } from './charts/TreeMap';
 
 export { default as XAxis } from './XAxis';
