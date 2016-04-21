@@ -7,11 +7,12 @@ export { default as MarkerLineChart } from './MarkerLineChart';
 export { default as KernelDensityEstimation } from './KernelDensityEstimation';
 
 export { default as PieChart } from './PieChart';
+export { default as TreeMap } from './TreeMap';
 
 export { default as BarChart } from './charts/BarChart';
 export { default as Histogram } from './charts/Histogram';
 
-export { default as TreeMap } from './charts/TreeMap';
+
 
 export { default as XAxis } from './XAxis';
 export { default as XAxisLabels } from './XAxisLabels';

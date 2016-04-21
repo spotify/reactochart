@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import d3 from 'd3';
 
-import {accessor, AccessorPropType, InterfaceMixin, methodIfFuncProp} from './util.js';
+import {accessor, AccessorPropType, methodIfFuncProp} from './util.js';
 
 class AreaHeatmap extends React.Component {
   static propTypes = {
