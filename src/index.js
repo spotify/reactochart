@@ -9,7 +9,7 @@ export { default as KernelDensityEstimation } from './KernelDensityEstimation';
 export { default as PieChart } from './PieChart';
 export { default as TreeMap } from './TreeMap';
 
-export { default as BarChart } from './charts/BarChart';
+export { default as BarChart } from './BarChart';
 export { default as Histogram } from './charts/Histogram';
 
 
