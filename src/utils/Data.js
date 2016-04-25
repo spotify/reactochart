@@ -72,6 +72,16 @@ export function inferDatasetsType(datasets, accessor = _.identity) {
   return (uniqTypes.length === 1) ? uniqTypes[0] : 'categorical';
 }
 
+export function isValidDomain(domain, type = 'categorical') {
+  return _.isArray(domain) && !!domain.length && (
+      // categorical domain can be any array of anything
+      type === 'categorical' ||
+      // number/time domains should look like [min, max]
+      (type === 'number' && domain.length === 2 && _.every(domain, _.isNumber)) ||
+      (type === 'time' && domain.length === 2 && _.every(domain, _.isDate))
+    );
+}
+
 export function combineDomains(domains, dataType) {
   if(!_.isArray(domains)) return undefined;
   return (dataType === 'categorical') ?
@@ -95,12 +105,21 @@ export function domainFromDatasets(datasets, accessor = _.identity, type = undef
   return combineDomains(domains, type);
 }
 
-export function isValidDomain(domain, type = 'categorical') {
-  return _.isArray(domain) && !!domain.length && (
-      // categorical domain can be any array of anything
-      type === 'categorical' ||
-      // number/time domains should look like [min, max]
-      (type === 'number' && domain.length === 2 && _.every(domain, _.isNumber)) ||
-      (type === 'time' && domain.length === 2 && _.every(domain, _.isDate))
-    );
+export function domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, dataType) {
+  // returns the domain of dataset for which each datum represents a range of values
+  // ie. has a start and end value rather than a single value
+  // for example, time ranges
+
+  if(!dataType) dataType = inferDataType(data, rangeStartAccessor);
+  switch(dataType) {
+    case 'number':
+    case 'time':
+      return d3.extent(_.flatten([
+        d3.extent(data, (d) => +rangeStartAccessor(d)),
+        d3.extent(data, (d) => +rangeEndAccessor(d))
+      ]));
+    case 'categorical':
+      return _.uniq(_.flatten([data.map(rangeStartAccessor), data.map(rangeEndAccessor)]));
+  }
+  return [];
 }

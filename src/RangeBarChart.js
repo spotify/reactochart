@@ -2,9 +2,10 @@ import React from 'react';
 import invariant from 'invariant';
 
 import * as CustomPropTypes from './utils/CustomPropTypes';
-import Bar from './Bar';
 import {accessor, hasOneOfTwo} from './util';
-import {hasXYScales} from './utils/Scale';
+import {hasXYScales, dataTypeFromScaleType} from './utils/Scale';
+import {makeAccessor, domainFromData, domainFromRangeData} from './utils/Data';
+import Bar from './Bar';
 
 
 export default class RangeBarChart extends React.Component {
@@ -28,15 +29,29 @@ export default class RangeBarChart extends React.Component {
     barThickness: 8,
     barClassName: '',
     barStyle: {}
-
   };
+
+  static getDomain(props) {
+    const {scaleType, horizontal, data, getX, getXEnd, getY, getYEnd} = props;
+
+    // only have to specify range axis domain, other axis uses default domainFromData
+    const rangeAxis = horizontal ? 'x' : 'y';
+    const rangeStartAccessor = horizontal ? makeAccessor(getX) : makeAccessor(getY);
+    const rangeEndAccessor = horizontal ? makeAccessor(getXEnd) : makeAccessor(getYEnd);
+    const rangeDataType = dataTypeFromScaleType(scaleType[rangeAxis]);
+
+    return {
+      [rangeAxis]: domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, rangeDataType)
+    };
+  }
+
   render() {
     const {scale, data, horizontal, getX, getXEnd, getY, getYEnd, barThickness, barClassName, barStyle} = this.props;
     invariant(hasXYScales(scale), `RangeBarChart.props.scale.x and scale.y must both be valid d3 scales`);
     // invariant(hasOneOfTwo(getXEnd, getYEnd), `RangeBarChart expects a getXEnd *or* getYEnd prop, but not both.`);
 
-    const accessors = {x: accessor(getX), y: accessor(getY)};
-    const endAccessors = {x: accessor(getXEnd), y: accessor(getYEnd)};
+    const accessors = {x: makeAccessor(getX), y: makeAccessor(getY)};
+    const endAccessors = {x: makeAccessor(getXEnd), y: makeAccessor(getYEnd)};
     const barProps = {
       scale,
       thickness: barThickness,

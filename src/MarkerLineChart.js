@@ -6,6 +6,7 @@ import d3 from 'd3';
 import {accessor, methodIfFuncProp} from './util.js';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {dataTypeFromScaleType} from './utils/Scale';
+import {makeAccessor, domainFromRangeData} from './utils/Data';
 
 // MarkerLine is similar to a bar chart,
 // except that it just draws a line at the data value, rather than a full bar
@@ -26,22 +27,8 @@ function getTickType(props) {
   return "ValueValue";
 }
 
-function rangeAxisDomain(data, rangeStartAccessor, rangeEndAccessor, scaleType) {
-  const dataType = dataTypeFromScaleType(scaleType);
-  switch(dataType) {
-    case 'number':
-    case 'time':
-      return d3.extent(_.flatten([
-        d3.extent(data, (d) => +rangeStartAccessor(d)),
-        d3.extent(data, (d) => +rangeEndAccessor(d))
-      ]));
-    case 'categorical':
-      return _.uniq(_.flatten([data.map(rangeStartAccessor), data.map(rangeEndAccessor)]));
-  }
-  return [];
-}
 
-class MarkerLineChart extends React.Component {
+export default class MarkerLineChart extends React.Component {
   static propTypes = {
     // the array of data objects
     data: PropTypes.array.isRequired,
@@ -94,16 +81,20 @@ class MarkerLineChart extends React.Component {
   */
 
   static getDomain(props) {
-    const {data, getX, getXEnd, getY, getYEnd, scaleType, orientation} = props;
-    const tickType = getTickType(props);
-    const isVertical = (orientation === 'vertical');
-    const accessors = {x: accessor(getX), y: accessor(getY)};
-    const endAccessors = {x: accessor(getXEnd), y: accessor(getYEnd)};
+    if(getTickType(props) === 'RangeValue') { // set range domain for range type
+      const {data, getX, getXEnd, getY, getYEnd, scaleType, orientation} = props;
+      const horizontal = (orientation !== 'vertical');
 
-    if(tickType === 'RangeValue') { // set range domain for range type
-      let rangeAxis = isVertical ? 'x' : 'y';
-      const domain = rangeAxisDomain(data, accessors[rangeAxis], endAccessors[rangeAxis], scaleType[rangeAxis]);
-      return {[rangeAxis]: domain};
+      // only have to specify range axis domain, other axis uses default domainFromData
+      // in this chart type, the range axis, if there is one, is always the *independent* variable
+      const rangeAxis = horizontal ? 'y' : 'x';
+      const rangeStartAccessor = horizontal ? makeAccessor(getY) : makeAccessor(getX);
+      const rangeEndAccessor = horizontal ? makeAccessor(getYEnd) : makeAccessor(getXEnd);
+      const rangeDataType = dataTypeFromScaleType(scaleType[rangeAxis]);
+
+      return {
+        [rangeAxis]: domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, rangeDataType)
+      };
     }
   }
 
@@ -172,5 +163,3 @@ class MarkerLineChart extends React.Component {
     return <line className="marker-line" {...{x1, x2, y1, y2, key, onMouseEnter, onMouseMove, onMouseLeave}} />;
   };
 }
-
-export default MarkerLineChart;

@@ -15,6 +15,21 @@ import {hasXYScales} from './utils/Scale';
 
 // For other bar chart types, see RangeBarChart and AreaBarChart
 
+function makeRangeBarChartProps(barChartProps) {
+  // this component is a simple wrapper around RangeBarChart,
+  // passing accessors to make range bars which span from zero to the data value
+  const {horizontal, getX, getY} = barChartProps;
+  const getZero = _.constant(0);
+
+  return {
+    ...barChartProps,
+    getX: horizontal ? getZero : getX,
+    getY: horizontal ? getY : getZero,
+    getXEnd: horizontal ? getX : undefined,
+    getYEnd: horizontal ? undefined : getY
+  };
+}
+
 export default class BarChart extends React.Component {
   static propTypes = {
     scale: CustomPropTypes.xyObjectOf(React.PropTypes.func.isRequired),
@@ -35,20 +50,15 @@ export default class BarChart extends React.Component {
     barStyle: {}
   };
 
-  render() {
-    const {scale, horizontal, getX, getY} = this.props;
-    invariant(hasXYScales(scale), `BarChart.props.scale.x and scale.y must both be valid d3 scales`);
+  // todo: static getDomain
+  static getDomain(props) {
+    return RangeBarChart.getDomain(makeRangeBarChartProps(props));
+  }
 
-    // this component is a simple wrapper around RangeBarChart,
-    // passing accessors to make range bars which span from zero to the data value
-    const getZero = _.constant(0);
-    const rangeBarChartProps = {
-      ...this.props,
-      getX: horizontal ? getZero : getX,
-      getY: horizontal ? getY : getZero,
-      getXEnd: horizontal ? getX : undefined,
-      getYEnd: horizontal ? undefined : getY
-    };
+  render() {
+    invariant(hasXYScales(this.props.scale), `BarChart.props.scale.x and scale.y must both be valid d3 scales`);
+
+    const rangeBarChartProps = makeRangeBarChartProps(this.props);
 
     return <RangeBarChart {...rangeBarChartProps} />;
   }
