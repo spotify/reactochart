@@ -3,6 +3,49 @@
 # reactochart
 Charting library for React
 
+# API
+
+### Non-XY charts
+* PieChart
+* TreeMap
+
+### XYPlot & XY charts
+* XYPlot
+* BarChart
+* RangeBarChart
+* LineChart
+* ScatterPlot
+* MarkerLineChart
+* AreaHeatmap
+* Histogram
+* KernelDensityEstimation
+* *planned: AreaChart, StackedBarChart, GroupedBarChart*
+
+### XY Axis Components
+* XAxis, YAxis
+* XAxisTitle, YAxisTitle
+* XAxisLabels, YAxisLabels
+* XTicks, YTicks
+* XGrid, YGrid
+
+### XY datum components (used by charts/axes)
+* Bar 
+* XLine, YLine
+* *planned: RangeRect, AreaRect?, AreaCircle?*
+
+### Higher-order components
+* resolveObjectProps
+* resolveXYScales
+
+### Utilities
+* Data
+* Scale
+* Axis
+* Label
+* Margin
+* depthEqual
+
+
 # Examples
 
 If you just want to run the examples locally:
