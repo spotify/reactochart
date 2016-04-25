@@ -11,14 +11,23 @@ body {
 }
 
 .example-section {
+  display: inline-block;
+  margin: 10px;
+
+  &.example-section-visible {
+    display: block;
+  }
+
   .example-section-button {
+    display: inline-block;
+    //margin: 10px;
+    padding: 10px 20px;
     font-size: 20pt;
     font-weight: bold;
     background: #cccccc;
-    display: inline-block;
-    padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
+
     .example-arrow {
       color: #888;
     }
@@ -29,7 +38,7 @@ body {
       }
     }
   }
-  margin: 10px 0;
+
   .example-section-content {
     margin: 10px 20px;
   }

@@ -6,7 +6,6 @@ import numeral from 'numeral';
 
 import {
   XYPlot,
-  BarChart,
   Histogram,
 } from '../../src';
 
@@ -26,14 +25,17 @@ import YGrid from '../../src/YGrid';
 import YAxisLabels from '../../src/YAxisLabels';
 import YAxisTitle from '../../src/YAxisTitle';
 
-import BarChart2 from '../../src/BarChart';
+import BarChart2 from '../../src/BarChart-old';
 import Bar from '../../src/Bar';
 import RangeBarChart from '../../src/RangeBarChart';
 
+import BarChart from '../../src/BarChart';
 import LineChart from '../../src/LineChart';
 import AreaHeatmap from '../../src/AreaHeatmap';
 import ScatterPlot from '../../src/ScatterPlot';
 import PieChart from '../../src/PieChart';
+import TreeMap from '../../src/TreeMap';
+
 
 import MarkerLineChart from '../../src/MarkerLineChart';
 import KernelDensityEstimation from '../../src/KernelDensityEstimation';
@@ -105,11 +107,6 @@ const randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.r
 const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 // end fake data
 
-const getXYArrayValue = {
-  // accessors for getting (X, Y) data from simple arrays-of-arrays that look like [[x, y], [x, y]]
-  x: d => d[0],
-  y: d => d[1]
-};
 
 const PieChartExample = React.createClass({
   getInitialState() { return {sinVal: 0}; },
@@ -220,7 +217,7 @@ const LineChartExample = React.createClass({
   }
 });
 
-const xyArrGetter = {x: 0, y: 1};
+
 const InteractiveLineExample = React.createClass({
   getInitialState() {
     return {
@@ -580,28 +577,6 @@ const BarMarkerLineExample = React.createClass({
   }
 });
 
-const AxisLabelExample = React.createClass({
-  render() {
-    const xyProps = {width: 400, height: 300, axisType: {y: 'ordinal'}};
-    const barChartProps = {
-      data: randomBarData2.numberOrdinal,
-      getValue: {x: 0, y: 1},
-      orientation: 'horizontal'
-    };
-    return <div>
-      <XYPlot {...xyProps} axisLabel={{x: "Account Age"}}>
-        <BarChart {...barChartProps} />
-      </XYPlot>
-      <XYPlot {...xyProps} axisLabel={{y: "Active Users"}}>
-        <BarChart {...barChartProps} />
-      </XYPlot>
-      <XYPlot {...xyProps} axisLabel={{x: "Account Age", y: "Active Users"}}>
-        <BarChart {...barChartProps} />
-      </XYPlot>
-    </div>
-  }
-});
-
 const dateDomain = [new Date(1992, 0, 1), new Date(2001, 0, 1)];
 const numberDomain = [-20, 20];
 
@@ -699,7 +674,6 @@ const RangeBarChartExample = (props) => {
   const numberDateRangeData = _.zip(_.range(30), dateRanges);
   const dateDateRangeData = _.zip(dates, dateRanges);
   const ordinalDateRangeData = _.zip(ordinalDomain, dateRanges);
-
 
   return <div>
 
@@ -897,15 +871,170 @@ const KDEExample = (props) => {
   </div>;
 };
 
+const TreeMapExample = (props) => {
+  const data = {
+    children: _.range(1, 5).map(n => ({
+      children: _.times(n * n, m => ({
+        size: n * (m + 1)
+      }))
+    }))
+  };
+
+  const colorScale = d3.scale.linear()
+    .domain([0, 65])
+    .range(['#6b6ecf', '#8ca252'])
+    .interpolate(d3.interpolateHcl);
+
+  return <div>
+    <TreeMap
+      data={data}
+      getValue="size"
+      getLabel="size"
+      nodeStyle={(node) => ({
+        backgroundColor: colorScale(parseInt(node.size)),
+        border: '1px solid #333'
+      })}
+      width={800}
+      height={500}
+    />
+  </div>
+};
+
+const YAxisTitleTest = (props) => {
+  const xyProps = {
+    width: 500, height: 360,
+    domain: {x: [0, 100], y: [0, 100]}
+  };
+
+  return <XYPlot2 {...xyProps}>
+    <YAxisTitle title="Top I" alignment="top"  />
+    <YAxisTitle title="Mid + Mid" alignment="middle" />
+    <YAxisTitle title="I Bottom" alignment="bottom" />
+
+    <YAxisTitle title="Top I" alignment="top" rotate={false} />
+    <YAxisTitle title="Mid +" alignment="middle" rotate={false} />
+    <YAxisTitle title="Bottom I" alignment="bottom" rotate={false} />
+
+
+    <YAxisTitle title="Top I" alignment="top" placement="after" />
+    <YAxisTitle title="Mid + Mid" alignment="middle" placement="after" />
+    <YAxisTitle title="I Bottom" alignment="bottom" placement="after" />
+
+    <YAxisTitle title="I Top" alignment="top" placement="after" rotate={false} />
+    <YAxisTitle title="+ Mid" alignment="middle" placement="after" rotate={false} />
+    <YAxisTitle title="I Bottom" alignment="bottom" placement="after" rotate={false} />
+
+
+    <YAxisTitle title="Top I" alignment="top" position="right" />
+    <YAxisTitle title="Mid + Mid" alignment="middle" position="right" />
+    <YAxisTitle title="I Bottom" alignment="bottom" position="right" />
+
+    <YAxisTitle title="I Top" alignment="top" position="right" rotate={false} />
+    <YAxisTitle title="+ Mid" alignment="middle" position="right" rotate={false} />
+    <YAxisTitle title="I Bottom" alignment="bottom" position="right" rotate={false} />
+
+
+    <YAxisTitle title="Top I" alignment="top" placement="before" position="right" />
+    <YAxisTitle title="Mid + Mid" alignment="middle" placement="before" position="right" />
+    <YAxisTitle title="I Bottom" alignment="bottom" placement="before" position="right" />
+
+    <YAxisTitle title="Top I" alignment="top" position="right" placement="before" rotate={false} />
+    <YAxisTitle title="Mid +" alignment="middle" position="right" placement="before" rotate={false} />
+    <YAxisTitle title="Bottom I" alignment="bottom" position="right" placement="before" rotate={false} />
+  </XYPlot2>;
+};
+
+const XAxisTitleTest = (props) => {
+  const xyProps = {
+    width: 500, height: 360,
+    domain: {x: [0, 100], y: [0, 100]}
+  };
+
+  return <XYPlot2 {...xyProps}>
+    <XAxisTitle title="I Left" alignment="left" />
+    <XAxisTitle title="Center + Center" alignment="center" />
+    <XAxisTitle title="Right I" alignment="right" />
+
+    <XAxisTitle title="I Left" alignment="left" placement="above" />
+    <XAxisTitle title="Center + Center" alignment="center" placement="above" />
+    <XAxisTitle title="Right I" alignment="right" placement="above" />
+
+
+    <XAxisTitle title="Left I" alignment="left" rotate={true} />
+    <XAxisTitle title="Center +" alignment="center" rotate={true} />
+    <XAxisTitle title="Right I" alignment="right" rotate={true} />
+
+    <XAxisTitle title="I Left" alignment="left" placement="above" rotate={true} />
+    <XAxisTitle title="+ Center" alignment="center" placement="above" rotate={true} />
+    <XAxisTitle title="I Right" alignment="right" placement="above" rotate={true} />
+
+
+    <XAxisTitle title="I Left " position="top" alignment="left" />
+    <XAxisTitle title="Center + Center" position="top" alignment="center" />
+    <XAxisTitle title="Right I" position="top" alignment="right" />
+
+    <XAxisTitle title="I Left " position="top" alignment="left" placement="below" />
+    <XAxisTitle title="Center + Center" position="top" alignment="center" placement="below" />
+    <XAxisTitle title="Right I" position="top" alignment="right" placement="below" />
+
+
+    <XAxisTitle title="I Left" position="top" alignment="left" rotate={true} />
+    <XAxisTitle title="+ Center" position="top" alignment="center" rotate={true} />
+    <XAxisTitle title="I Right" position="top" alignment="right" rotate={true} />
+
+    <XAxisTitle title="Left I" position="top" alignment="left" placement="below" rotate={true} />
+    <XAxisTitle title="Center +" position="top" alignment="center" placement="below" rotate={true} />
+    <XAxisTitle title="Right I" position="top" alignment="right" placement="below" rotate={true} />
+  </XYPlot2>;
+};
+
+const BarChartExample = (props) => {
+  const count = 30;
+  const startDate = new Date(1992, 0, 1);
+
+  const numbers = _.range(count);
+  const letters = _.times(count, n => String.fromCharCode(97 + n));
+  const dates = _.times(count, n => new Date(+(startDate) + (n * 1000 * 60 * 60 * 24 * 100)));
+
+  const getNumberValue = (d) => 2 + Math.cos(d / 10);
+  const getDateValue = (d) => getNumberValue(d.getFullYear() + (d.getMonth() / 12));
+  const getLetterValue = (d) => getNumberValue(d.charCodeAt(0));
+
+  const chartDefs = _.zip([numbers, letters, dates], [getNumberValue, getLetterValue, getDateValue]);
+
+  return <div>
+    {([true, false]).map(horizontal => {
+      return <div>
+        <h4>{horizontal ? "Horizontal" : "Vertical"}</h4>
+
+        {chartDefs.map(([data, getValue]) => {
+          return <XYPlot2 width={320} height={320}>
+            <XAxis /><YAxis />
+            <BarChart
+              data={data}
+              horizontal={horizontal}
+              getX={horizontal ? getValue : null}
+              getY={horizontal ? null : getValue}
+            />
+          </XYPlot2>;
+        })}
+      </div>;
+    })}
+  </div>
+};
+
 export const examples = [
+  {id: 'barChart', title: 'Bar Chart', Component: BarChartExample},
+  {id: 'treeMap', title: 'TreeMap', Component: TreeMapExample},
   {id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample},
   {id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample},
+  {id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest},
+  {id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest},
   {id: 'line', title: 'Line Chart', Component: LineChartExample},
   {id: 'areaHeatmap', title: 'Area Heatmap Chart', Component: AreaHeatmapExample},
   {id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample},
   {id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample},
   {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
-  {id: 'axisLabels', title: 'Axis Labels', Component: AxisLabelExample},
   {id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample},
   {id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample},
   {id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample},
@@ -918,92 +1047,6 @@ export const examples = [
   {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample}
 ];
 
-
-class YAxisTitleTest extends React.Component {
-  render() {
-    const {width, height} = this.props;
-    const size = {width, height};
-    return <g>
-      <YAxisTitle title="Top I" alignment="top" {...size} />
-      <YAxisTitle title="Mid + Mid" alignment="middle" {...size} />
-      <YAxisTitle title="I Bottom" alignment="bottom" {...size} />
-
-      <YAxisTitle title="Top I" alignment="top" rotate={false} {...size} />
-      <YAxisTitle title="Mid +" alignment="middle" rotate={false} {...size} />
-      <YAxisTitle title="Bottom I" alignment="bottom" rotate={false} {...size} />
-
-
-      <YAxisTitle title="Top I" alignment="top" placement="after" {...size} />
-      <YAxisTitle title="Mid + Mid" alignment="middle" placement="after" {...size} />
-      <YAxisTitle title="I Bottom" alignment="bottom" placement="after" {...size} />
-
-      <YAxisTitle title="I Top" alignment="top" placement="after" rotate={false} {...size} />
-      <YAxisTitle title="+ Mid" alignment="middle" placement="after" rotate={false} {...size} />
-      <YAxisTitle title="I Bottom" alignment="bottom" placement="after" rotate={false} {...size} />
-
-
-      <YAxisTitle title="Top I" alignment="top" position="right" {...size} />
-      <YAxisTitle title="Mid + Mid" alignment="middle" position="right" {...size} />
-      <YAxisTitle title="I Bottom" alignment="bottom" position="right" {...size} />
-
-      <YAxisTitle title="I Top" alignment="top" position="right" rotate={false} {...size} />
-      <YAxisTitle title="+ Mid" alignment="middle" position="right" rotate={false} {...size} />
-      <YAxisTitle title="I Bottom" alignment="bottom" position="right" rotate={false} {...size} />
-
-
-      <YAxisTitle title="Top I" alignment="top" placement="before" position="right" {...size} />
-      <YAxisTitle title="Mid + Mid" alignment="middle" placement="before" position="right" {...size} />
-      <YAxisTitle title="I Bottom" alignment="bottom" placement="before" position="right" {...size} />
-
-      <YAxisTitle title="Top I" alignment="top" position="right" placement="before" rotate={false} {...size} />
-      <YAxisTitle title="Mid +" alignment="middle" position="right" placement="before" rotate={false} {...size} />
-      <YAxisTitle title="Bottom I" alignment="bottom" position="right" placement="before" rotate={false} {...size} />
-    </g>;
-  }
-}
-
-class XAxisTitleTest extends React.Component {
-  render() {
-    const {width, height} = this.props;
-    const size = {width, height};
-    return <g>
-      <XAxisTitle title="I Left" alignment="left" {...size} />
-      <XAxisTitle title="Center + Center" alignment="center" {...size} />
-      <XAxisTitle title="Right I" alignment="right" {...size} />
-
-      <XAxisTitle title="I Left" alignment="left" placement="above" {...size} />
-      <XAxisTitle title="Center + Center" alignment="center" placement="above" {...size} />
-      <XAxisTitle title="Right I" alignment="right" placement="above" {...size} />
-
-
-      <XAxisTitle title="Left I" alignment="left" rotate={true} {...size} />
-      <XAxisTitle title="Center +" alignment="center" rotate={true} {...size} />
-      <XAxisTitle title="Right I" alignment="right" rotate={true} {...size} />
-
-      <XAxisTitle title="I Left" alignment="left" placement="above" rotate={true} {...size} />
-      <XAxisTitle title="+ Center" alignment="center" placement="above" rotate={true} {...size} />
-      <XAxisTitle title="I Right" alignment="right" placement="above" rotate={true} {...size} />
-
-
-      <XAxisTitle title="I Left " position="top" alignment="left" {...size} />
-      <XAxisTitle title="Center + Center" position="top" alignment="center" {...size} />
-      <XAxisTitle title="Right I" position="top" alignment="right" {...size} />
-
-      <XAxisTitle title="I Left " position="top" alignment="left" placement="below" {...size} />
-      <XAxisTitle title="Center + Center" position="top" alignment="center" placement="below" {...size} />
-      <XAxisTitle title="Right I" position="top" alignment="right" placement="below" {...size} />
-
-
-      <XAxisTitle title="I Left" position="top" alignment="left" rotate={true} {...size} />
-      <XAxisTitle title="+ Center" position="top" alignment="center" rotate={true} {...size} />
-      <XAxisTitle title="I Right" position="top" alignment="right" rotate={true} {...size} />
-
-      <XAxisTitle title="Left I" position="top" alignment="left" placement="below" rotate={true} {...size} />
-      <XAxisTitle title="Center +" position="top" alignment="center" placement="below" rotate={true} {...size} />
-      <XAxisTitle title="Right I" position="top" alignment="right" placement="below" rotate={true} {...size} />
-    </g>;
-  }
-}
 
 
 export const App = React.createClass({
@@ -1227,7 +1270,9 @@ export const App = React.createClass({
   renderExample(example) {
     const isVisible = this.state.visibleExamples[example.id];
     const ExampleComponent = example.Component;
-    return <div className={`example-section example-section-${example.id}`} key={`${example.id}`}>
+    const className = `example-section example-section-${example.id} ${isVisible ? 'example-section-visible' : ''}`;
+
+    return <div className={className} key={`${example.id}`}>
       <div
         className={`example-section-button ${isVisible ? 'active' : ''}`}
         onClick={this.toggleExample.bind(null, example.id)}
