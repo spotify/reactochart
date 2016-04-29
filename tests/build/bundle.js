@@ -56315,11 +56315,11 @@
 	
 	      return _react2.default.createElement(
 	        'svg',
-	        _extends({ width: width, height: height, onMouseMove: this.onMouseMove }, handlers),
-	        _react2.default.createElement('rect', _extends({ fill: '#fff' }, { width: width, height: height })),
+	        _extends({ width: width, height: height, className: 'xy-plot', onMouseMove: this.onMouseMove }, handlers),
+	        _react2.default.createElement('rect', _extends({ fill: '#fff' }, { width: width, height: height }, { className: 'chart-bg' })),
 	        _react2.default.createElement(
 	          'g',
-	          { transform: 'translate(' + margin.left + ', ' + margin.top + ')' },
+	          { transform: 'translate(' + margin.left + ', ' + margin.top + ')', className: 'chart-inner' },
 	          _react2.default.createElement('rect', _extends({ fill: '#dddddd' }, chartSize)),
 	          _react2.default.Children.map(this.props.children, function (child) {
 	            return _lodash2.default.isNull(child) || _lodash2.default.isUndefined(child) ? null : _react2.default.cloneElement(child, propsToPass);

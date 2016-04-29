@@ -93,9 +93,9 @@ class XYPlot extends React.Component {
       ...chartSize
     };
 
-    return <svg {...{width, height, onMouseMove: this.onMouseMove}} {...handlers}>
-      <rect fill="#fff" {...{width, height}} />
-      <g transform={`translate(${margin.left}, ${margin.top})`}>
+    return <svg {...{width, height, className: 'xy-plot', onMouseMove: this.onMouseMove}} {...handlers}>
+      <rect fill="#fff" {...{width, height}} className="chart-bg" />
+      <g transform={`translate(${margin.left}, ${margin.top})`} className="chart-inner">
         <rect fill="#dddddd" {...chartSize} />
         {React.Children.map(this.props.children, child => {
           return (_.isNull(child) || _.isUndefined(child)) ? null :
