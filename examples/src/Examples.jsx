@@ -28,8 +28,10 @@ import YAxisTitle from '../../src/YAxisTitle';
 import BarChart2 from '../../src/BarChart-old';
 import Bar from '../../src/Bar';
 import RangeBarChart from '../../src/RangeBarChart';
+import RangeRect from '../../src/RangeRect';
 
 import BarChart from '../../src/BarChart';
+import AreaBarChart from '../../src/AreaBarChart';
 import LineChart from '../../src/LineChart';
 import AreaHeatmap from '../../src/AreaHeatmap';
 import ScatterPlot from '../../src/ScatterPlot';
@@ -866,6 +868,12 @@ const KDEExample = (props) => {
         <KernelDensityEstimation
           data={randomNormal} getValue={{x: null}} bandwidth={2}
         />
+        <ScatterPlot
+          data={randomNormal}
+          getX={null}
+          getY={d => Math.abs(d) * 10000 % 200}
+          pointRadius={1}
+        />
       </XYPlot2>
     </div>
   </div>;
@@ -1023,22 +1031,67 @@ const BarChartExample = (props) => {
   </div>
 };
 
+const AreaBarChartExample = (props) => {
+  return <div>
+    <XYPlot2 width={500} height={320}>
+      <XAxis /><YAxis />
+      <AreaBarChart
+        data={_.range(15)}
+        getX={d => Math.sin(d / 10) * 10}
+        getXEnd={d => Math.sin((d + 1) / 10) * 10}
+        getY={d => Math.cos(d / (Math.PI))}
+      />
+    </XYPlot2>;
+    <XYPlot2 width={320} height={500}>
+      <XAxis /><YAxis />
+      <AreaBarChart
+        horizontal
+        data={_.range(15)}
+        getX={d => Math.cos(d / (Math.PI))}
+        getY={d => Math.sin(d / 10) * 10}
+        getYEnd={d => Math.sin((d + 1) / 10) * 10}
+      />
+    </XYPlot2>;
+  </div>
+};
+
+
+const RangeRectExample = (props) => {
+  return <div>
+    <XYPlot2 width={500} height={320} domain={{x: [0, 100], y: [0, 100]}}>
+      <XAxis /><YAxis />
+      <RangeRect
+        datum={[10, 40, 50, 80]} getX={0}
+        getXEnd={1} getY={2} getYEnd={3}
+        style={{fill: 'rebeccapurple'}}
+      />
+      <RangeRect
+        datum={[65, 85, 15, 95]}
+        getX={0} getXEnd={1} getY={2} getYEnd={3}
+        style={{fill: 'coral'}}
+      />
+    </XYPlot2>
+  </div>;
+};
+
 export const examples = [
+  {id: 'line', title: 'Line Chart', Component: LineChartExample},
+  {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
   {id: 'barChart', title: 'Bar Chart', Component: BarChartExample},
-  {id: 'treeMap', title: 'TreeMap', Component: TreeMapExample},
+  {id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample},
   {id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample},
+  {id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample},
+  {id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample},
+  {id: 'treeMap', title: 'TreeMap', Component: TreeMapExample},
   {id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample},
   {id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest},
   {id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest},
-  {id: 'line', title: 'Line Chart', Component: LineChartExample},
   {id: 'areaHeatmap', title: 'Area Heatmap Chart', Component: AreaHeatmapExample},
   {id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample},
   {id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample},
-  {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
   {id: 'valueValueBar', title: 'Value-Value Bar Charts', Component: ValueValueBarExample},
   {id: 'rangeValueBar', title: 'Range-Value Bar Charts', Component: RangeValueBarExample},
   {id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample},
-  {id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample},
   {id: 'histogram', title: 'Histogram', Component: HistogramExample},
   {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
   {id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample},
