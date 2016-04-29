@@ -96,3 +96,41 @@ describe('resolveObjectProps', () => {
     }).to.throw(Error);
   });
 });
+
+/*
+todo test shouldComponentUpdate
+
+ class TestComponent extends React.Component {
+ render() {
+ return <div>
+ <div>domain.x: {_.get(this.props, 'domain.x').join()}</div>
+ <div>domain.y: {_.get(this.props, 'domain.y').join()}</div>
+ </div>
+ }
+ }
+ const ResolvedTestComponent = resolveObjectProps(TestComponent, ['domain'], ['x', 'y']);
+
+ class ObjectPropsShouldUpdateTest extends React.Component {
+ static makeDomain = () => ({domain: {x: [_.random(10), _.random(10)], y: [_.random(10), _.random(10)]}});
+ state = ObjectPropsShouldUpdateTest.makeDomain();
+
+ onClickChange = () => {
+ this.setState(ObjectPropsShouldUpdateTest.makeDomain());
+ }
+ onClickShallow = () => {
+ this.setState({domain: {x: this.state.domain.x, y: this.state.domain.y}});
+ }
+ render() {
+ return <div>
+ <ResolvedTestComponent domain={this.state.domain} /><br />
+ <ResolvedTestComponent domain={{x: this.state.domain.x, y: this.state.domain.y}} /><br />
+ <ResolvedTestComponent domain={this.state.domain.x} /><br />
+ <ResolvedTestComponent domain={this.state.domain.y} /><br />
+
+ <div><button onClick={this.onClickChange}>change</button></div>
+ <div><button onClick={this.onClickShallow}>change shallow</button></div>
+ </div>
+ }
+ }
+
+ */
