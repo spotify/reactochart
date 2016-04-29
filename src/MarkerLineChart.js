@@ -3,7 +3,7 @@ const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
 
-import {accessor, methodIfFuncProp} from './util.js';
+import {methodIfFuncProp} from './util.js';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {dataTypeFromScaleType} from './utils/Scale';
 import {makeAccessor, domainFromRangeData} from './utils/Data';
@@ -60,8 +60,8 @@ export default class MarkerLineChart extends React.Component {
     const {data, getX, getXEnd, getY, getYEnd, scaleType, orientation, lineLength} = props;
     const tickType = getTickType(props);
     const isVertical = (orientation === 'vertical');
-    const accessors = {x: accessor(getX), y: accessor(getY)};
-    const endAccessors = {x: accessor(getXEnd), y: accessor(getYEnd)};
+    const accessors = {x: makeAccessor(getX), y: makeAccessor(getY)};
+    const endAccessors = {x: makeAccessor(getXEnd), y: makeAccessor(getYEnd)};
 
     let options = {domain: {}, spacing: {}};
 
@@ -128,10 +128,10 @@ export default class MarkerLineChart extends React.Component {
 
     const {getX, getXEnd, getY, getYEnd, orientation, scale} = this.props;
     const isVertical = (orientation === 'vertical');
-    const xVal = scale.x(accessor(getX)(d));
-    const yVal = scale.y(accessor(getY)(d));
-    const xEndVal = _.isUndefined(getXEnd) ? 0 : scale.x(accessor(getXEnd)(d));
-    const yEndVal = _.isUndefined(getYEnd) ? 0 : scale.y(accessor(getYEnd)(d));
+    const xVal = scale.x(makeAccessor(getX)(d));
+    const yVal = scale.y(makeAccessor(getY)(d));
+    const xEndVal = _.isUndefined(getXEnd) ? 0 : scale.x(makeAccessor(getXEnd)(d));
+    const yEndVal = _.isUndefined(getYEnd) ? 0 : scale.y(makeAccessor(getYEnd)(d));
     const [x1, y1] = [xVal, yVal];
     const x2 = isVertical ? xEndVal : xVal;
     const y2 = isVertical ? yVal : yEndVal;
@@ -151,8 +151,8 @@ export default class MarkerLineChart extends React.Component {
 
     const {getX, getY, orientation, lineLength, scale} = this.props;
     const isVertical = (orientation === 'vertical');
-    const xVal = scale.x(accessor(getX)(d));
-    const yVal = scale.y(accessor(getY)(d));
+    const xVal = scale.x(makeAccessor(getX)(d));
+    const yVal = scale.y(makeAccessor(getY)(d));
     const x1 = isVertical ? xVal - (lineLength / 2) : xVal;
     const x2 = isVertical ? xVal + (lineLength / 2) : xVal;
     const y1 = isVertical ? yVal : yVal - (lineLength / 2);

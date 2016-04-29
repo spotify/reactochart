@@ -4,7 +4,6 @@ import invariant from 'invariant';
 
 import RangeBarChart from './RangeBarChart';
 import * as CustomPropTypes from './utils/CustomPropTypes';
-import {accessor} from './util';
 import {hasXYScales} from './utils/Scale';
 
 // BarChart represents a basic "Value/Value" bar chart,

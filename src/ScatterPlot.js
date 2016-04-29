@@ -2,10 +2,11 @@ import React from 'react';
 const {PropTypes} = React;
 import _ from 'lodash';
 
-import {accessor, InterfaceMixin, methodIfFuncProp} from './util.js';
+import {makeAccessor} from './utils/Data';
+import {methodIfFuncProp} from './util.js';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 
-class ScatterPlot extends React.Component {
+export default class ScatterPlot extends React.Component {
   static propTypes = {
     // the array of data objects
     data: PropTypes.array.isRequired,
@@ -61,7 +62,7 @@ class ScatterPlot extends React.Component {
       });
     const {scale, getX, getY, pointRadius, pointOffset, getClass} = this.props;
     let {pointSymbol} = this.props;
-    const className = `chart-scatterplot-point ${getClass ? accessor(getClass)(d) : ''}`;
+    const className = `chart-scatterplot-point ${getClass ? makeAccessor(getClass)(d) : ''}`;
     let symbolProps = {className, onMouseEnter, onMouseMove, onMouseLeave};
 
     // resolve symbol-generating functions into real symbols
@@ -72,8 +73,8 @@ class ScatterPlot extends React.Component {
     if(pointSymbol.type === 'circle' && _.isUndefined(pointSymbol.props.r)) symbolProps.r = pointRadius;
 
     // x,y coords of center of symbol
-    const cx = scale.x(accessor(getX)(d)) + pointOffset[0];
-    const cy = scale.y(accessor(getY)(d)) + pointOffset[1];
+    const cx = scale.x(makeAccessor(getX)(d)) + pointOffset[0];
+    const cy = scale.y(makeAccessor(getY)(d)) + pointOffset[1];
 
     // set positioning attributes based on symbol type
     if(pointSymbol.type === 'circle' || pointSymbol.type === 'ellipse') {
@@ -87,5 +88,3 @@ class ScatterPlot extends React.Component {
     return React.cloneElement(pointSymbol, symbolProps);
   }
 }
-
-export default ScatterPlot;

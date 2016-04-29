@@ -3,7 +3,7 @@ const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
 
-import {accessor} from './util.js';
+import {makeAccessor} from './utils/Data';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 
 class TreeMapNode extends React.Component {
@@ -77,7 +77,7 @@ class TreeMapNodeLabel extends React.Component {
     _.assign(style, customStyle);
 
     return <div className="node-label" {...{style}}>
-      {accessor(getLabel)(node)}
+      {makeAccessor(getLabel)(node)}
     </div>
   }
 }
@@ -157,9 +157,9 @@ function initTreemapLayout(options) {
 
   const treemap = d3.layout.treemap()
     .size([width, height])
-    .value(accessor(getValue));
+    .value(makeAccessor(getValue));
 
-  if(!_.isUndefined(getChildren)) treemap.children(accessor(getChildren));
+  if(!_.isUndefined(getChildren)) treemap.children(makeAccessor(getChildren));
   if(!_.isUndefined(sort)) treemap.sort(sort);
   if(!_.isUndefined(padding)) treemap.padding(padding);
   if(!_.isUndefined(round)) treemap.round(round);

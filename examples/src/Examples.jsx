@@ -20,7 +20,6 @@ import YGrid from '../../src/YGrid';
 import YAxisLabels from '../../src/YAxisLabels';
 import YAxisTitle from '../../src/YAxisTitle';
 
-import BarChart2 from '../../src/BarChart-old';
 import Bar from '../../src/Bar';
 import RangeBarChart from '../../src/RangeBarChart';
 import RangeRect from '../../src/RangeRect';
@@ -37,7 +36,6 @@ import Histogram from '../../src/Histogram';
 
 import MarkerLineChart from '../../src/MarkerLineChart';
 import KernelDensityEstimation from '../../src/KernelDensityEstimation';
-
 
 import {randomWalk, randomWalkSeries} from './data/util';
 

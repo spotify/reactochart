@@ -3,7 +3,8 @@ const {PropTypes} = React;
 import _ from 'lodash';
 import d3 from 'd3';
 
-import {accessor, methodIfFuncProp} from './util.js';
+import {methodIfFuncProp} from './util.js';
+import {makeAccessor} from './utils/Data';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 
 const DEFAULT_PROPS = {
@@ -93,7 +94,7 @@ class PieChart extends React.Component {
 
     const {markerLineValue, markerLineClass, markerLineOverhangInner, markerLineOverhangOuter} = this.props;
 
-    const valueAccessor = accessor(this.props.getValue);
+    const valueAccessor = makeAccessor(this.props.getValue);
     const sum = _.sumBy(this.props.data, valueAccessor);
     const total = this.props.total || sum;
     const markerLinePercent = _.isFinite(markerLineValue) ? markerLineValue / total : null;

@@ -2,9 +2,10 @@ import React from 'react';
 import _ from 'lodash';
 import d3 from 'd3';
 
-import {accessor, AccessorPropType, methodIfFuncProp} from './util.js';
+import {methodIfFuncProp} from './util.js';
+import {makeAccessor} from './utils/Data';
 
-class AreaHeatmap extends React.Component {
+export default class AreaHeatmap extends React.Component {
   static propTypes = {
     unitsPerPixel: React.PropTypes.number
   };
@@ -12,8 +13,8 @@ class AreaHeatmap extends React.Component {
   static getDomain(props) {
     const {data, getX, getXEnd, getY, getYEnd} = props;
     return {
-      x: d3.extent(_.flatten([data.map(accessor(getX)), data.map(accessor(getXEnd))])),
-      y: d3.extent(_.flatten([data.map(accessor(getY)), data.map(accessor(getYEnd))]))
+      x: d3.extent(_.flatten([data.map(makeAccessor(getX)), data.map(makeAccessor(getXEnd))])),
+      y: d3.extent(_.flatten([data.map(makeAccessor(getY)), data.map(makeAccessor(getYEnd))]))
     };
   }
 
@@ -26,8 +27,8 @@ class AreaHeatmap extends React.Component {
   onMouseMove = (e) => {
     const {scale, data, getArea, getX, getXEnd, getY, getYEnd, onMouseMove} = this.props;
     if(!_.isFunction(onMouseMove)) return;
-    const [xAccessor, xEndAccessor, yAccessor, yEndAccessor] =
-      [getArea, getX, getXEnd, getY, getYEnd].map(accessor);
+    // const [xAccessor, xEndAccessor, yAccessor, yEndAccessor] =
+    //   [getArea, getX, getXEnd, getY, getYEnd].map(makeAccessor);
 
     const boundBox = this.refs.background.getBoundingClientRect();
     if(!boundBox) return;
@@ -47,7 +48,7 @@ class AreaHeatmap extends React.Component {
   render() {
     const {data, getArea, getX, getXEnd, getY, getYEnd, scale, scaleWidth, scaleHeight} = this.props;
     const [areaAccessor, xAccessor, xEndAccessor, yAccessor, yEndAccessor] =
-      [getArea, getX, getXEnd, getY, getYEnd].map(accessor);
+      [getArea, getX, getXEnd, getY, getYEnd].map(makeAccessor);
 
     // to determine how many data units are represented by 1 square pixel of area,
     // find the bin that would require the highest unit-per-pixel scale if its rectangle filled the whole container
@@ -94,5 +95,3 @@ class AreaHeatmap extends React.Component {
     </g>;
   }
 }
-
-export default AreaHeatmap;

@@ -2,11 +2,9 @@ import React from 'react';
 import invariant from 'invariant';
 
 import * as CustomPropTypes from './utils/CustomPropTypes';
-import {accessor, hasOneOfTwo} from './util';
 import {hasXYScales, dataTypeFromScaleType} from './utils/Scale';
-import {makeAccessor, domainFromData, domainFromRangeData} from './utils/Data';
+import {makeAccessor, domainFromRangeData} from './utils/Data';
 import Bar from './Bar';
-
 
 export default class RangeBarChart extends React.Component {
   static propTypes = {
