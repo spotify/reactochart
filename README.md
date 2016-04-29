@@ -1,4 +1,4 @@
-## WARNING: THIS IS NOT AND WILL NEVER BE PRODUCTION-QUALITY CODE. We have decided to deprecate this project in favor of contributing to [Victory](https://github.com/FormidableLabs/victory), and have released this code as "raw idea material" ONLY. Use at your own risk. If your project requires composable React charts, we recommend using Victory.
+## WARNING: THIS IS NOT YET PRODUCTION-QUALITY CODE. Docs and Tests are still being written. Use at your own risk. If your project requires composable React charts, we recommend using [Victory](https://github.com/FormidableLabs/victory).
 
 # reactochart
 Charting library for React
@@ -30,8 +30,9 @@ Charting library for React
 
 ### XY datum components (used by charts/axes)
 * Bar 
+* RangeRect
 * XLine, YLine
-* *planned: RangeRect, AreaRect?, AreaCircle?*
+* *planned: AreaRect?, AreaCircle?*
 
 ### Higher-order components
 * resolveObjectProps
