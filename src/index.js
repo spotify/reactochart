@@ -10,7 +10,7 @@ export { default as PieChart } from './PieChart';
 export { default as TreeMap } from './TreeMap';
 
 export { default as BarChart } from './BarChart';
-export { default as Histogram } from './charts/Histogram';
+export { default as Histogram } from './Histogram';
 
 
 
