@@ -1,4 +1,4 @@
-export { default as XYPlot } from './charts/XYPlot';
+export { default as XYPlot } from './XYPlot';
 
 export { default as LineChart } from './LineChart';
 export { default as ScatterPlot } from './ScatterPlot';

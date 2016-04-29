@@ -35,7 +35,7 @@ function getMouseOptions(event, {scale, height, width, margin}) {
   return {event, outerX, outerY, innerX, innerY, xValue, yValue, scale, margin};
 }
 
-class XYPlot2 extends React.Component {
+class XYPlot extends React.Component {
   static propTypes = {
     width: React.PropTypes.number,
     height: React.PropTypes.number,
@@ -53,6 +53,7 @@ class XYPlot2 extends React.Component {
     onMouseDown: React.PropTypes.func,
     onMouseUp: React.PropTypes.func
   };
+
   static defaultProps = {
     width: 400,
     height: 250,
@@ -66,8 +67,6 @@ class XYPlot2 extends React.Component {
     // margin: {},
     // spacing: {}
   };
-
-
 
   onXYMouseEvent = (callbackKey, event) => {
     const callback = this.props[callbackKey];
@@ -107,14 +106,13 @@ class XYPlot2 extends React.Component {
   }
 }
 
-
 const xyKeys = ['scaleType', 'domain', 'invertScale'];
 const dirKeys = ['margin', 'padding', 'spacing'];
 
-const XYPlot2Resolved = _.flow([
+const XYPlotResolved = _.flow([
   resolveXYScales,
   _.partial(resolveObjectProps, _, xyKeys, ['x', 'y']),
   _.partial(resolveObjectProps, _, dirKeys, ['top', 'bottom', 'left', 'right'])
-])(XYPlot2);
+])(XYPlot);
 
-export default XYPlot2Resolved;
+export default XYPlotResolved;
