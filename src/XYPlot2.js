@@ -95,7 +95,7 @@ class XYPlot2 extends React.Component {
     };
 
     return <svg {...{width, height, onMouseMove: this.onMouseMove}} {...handlers}>
-      <rect fill="thistle" {...{width, height}} />
+      <rect fill="#fff" {...{width, height}} />
       <g transform={`translate(${margin.left}, ${margin.top})`}>
         <rect fill="#dddddd" {...chartSize} />
         {React.Children.map(this.props.children, child => {
