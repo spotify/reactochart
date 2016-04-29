@@ -55282,61 +55282,7 @@
 	  value: true
 	});
 	
-	var _XYPlot = __webpack_require__(217);
-	
-	Object.defineProperty(exports, 'XYPlot', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_XYPlot).default;
-	  }
-	});
-	
-	var _LineChart = __webpack_require__(219);
-	
-	Object.defineProperty(exports, 'LineChart', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_LineChart).default;
-	  }
-	});
-	
-	var _ScatterPlot = __webpack_require__(220);
-	
-	Object.defineProperty(exports, 'ScatterPlot', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_ScatterPlot).default;
-	  }
-	});
-	
-	var _AreaHeatmap = __webpack_require__(222);
-	
-	Object.defineProperty(exports, 'AreaHeatmap', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_AreaHeatmap).default;
-	  }
-	});
-	
-	var _MarkerLineChart = __webpack_require__(223);
-	
-	Object.defineProperty(exports, 'MarkerLineChart', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_MarkerLineChart).default;
-	  }
-	});
-	
-	var _KernelDensityEstimation = __webpack_require__(224);
-	
-	Object.defineProperty(exports, 'KernelDensityEstimation', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_KernelDensityEstimation).default;
-	  }
-	});
-	
-	var _PieChart = __webpack_require__(225);
+	var _PieChart = __webpack_require__(217);
 	
 	Object.defineProperty(exports, 'PieChart', {
 	  enumerable: true,
@@ -55345,7 +55291,7 @@
 	  }
 	});
 	
-	var _TreeMap = __webpack_require__(226);
+	var _TreeMap = __webpack_require__(220);
 	
 	Object.defineProperty(exports, 'TreeMap', {
 	  enumerable: true,
@@ -55354,7 +55300,34 @@
 	  }
 	});
 	
-	var _BarChart = __webpack_require__(227);
+	var _XYPlot = __webpack_require__(221);
+	
+	Object.defineProperty(exports, 'XYPlot', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_XYPlot).default;
+	  }
+	});
+	
+	var _LineChart = __webpack_require__(222);
+	
+	Object.defineProperty(exports, 'LineChart', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_LineChart).default;
+	  }
+	});
+	
+	var _ScatterPlot = __webpack_require__(223);
+	
+	Object.defineProperty(exports, 'ScatterPlot', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_ScatterPlot).default;
+	  }
+	});
+	
+	var _BarChart = __webpack_require__(224);
 	
 	Object.defineProperty(exports, 'BarChart', {
 	  enumerable: true,
@@ -55363,7 +55336,43 @@
 	  }
 	});
 	
-	var _Histogram = __webpack_require__(231);
+	var _RangeBarChart = __webpack_require__(225);
+	
+	Object.defineProperty(exports, 'RangeBarChart', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_RangeBarChart).default;
+	  }
+	});
+	
+	var _AreaBarChart = __webpack_require__(228);
+	
+	Object.defineProperty(exports, 'AreaBarChart', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_AreaBarChart).default;
+	  }
+	});
+	
+	var _MarkerLineChart = __webpack_require__(230);
+	
+	Object.defineProperty(exports, 'MarkerLineChart', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_MarkerLineChart).default;
+	  }
+	});
+	
+	var _AreaHeatmap = __webpack_require__(231);
+	
+	Object.defineProperty(exports, 'AreaHeatmap', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_AreaHeatmap).default;
+	  }
+	});
+	
+	var _Histogram = __webpack_require__(232);
 	
 	Object.defineProperty(exports, 'Histogram', {
 	  enumerable: true,
@@ -55372,43 +55381,34 @@
 	  }
 	});
 	
-	var _XAxis = __webpack_require__(234);
+	var _KernelDensityEstimation = __webpack_require__(233);
 	
-	Object.defineProperty(exports, 'XAxis', {
+	Object.defineProperty(exports, 'KernelDensityEstimation', {
 	  enumerable: true,
 	  get: function get() {
-	    return _interopRequireDefault(_XAxis).default;
+	    return _interopRequireDefault(_KernelDensityEstimation).default;
 	  }
 	});
 	
-	var _XAxisLabels = __webpack_require__(239);
+	var _Bar = __webpack_require__(226);
 	
-	Object.defineProperty(exports, 'XAxisLabels', {
+	Object.defineProperty(exports, 'Bar', {
 	  enumerable: true,
 	  get: function get() {
-	    return _interopRequireDefault(_XAxisLabels).default;
+	    return _interopRequireDefault(_Bar).default;
 	  }
 	});
 	
-	var _XAxisTitle = __webpack_require__(351);
+	var _RangeRect = __webpack_require__(229);
 	
-	Object.defineProperty(exports, 'XAxisTitle', {
+	Object.defineProperty(exports, 'RangeRect', {
 	  enumerable: true,
 	  get: function get() {
-	    return _interopRequireDefault(_XAxisTitle).default;
+	    return _interopRequireDefault(_RangeRect).default;
 	  }
 	});
 	
-	var _XGrid = __webpack_require__(237);
-	
-	Object.defineProperty(exports, 'XGrid', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_XGrid).default;
-	  }
-	});
-	
-	var _XLine = __webpack_require__(238);
+	var _XLine = __webpack_require__(234);
 	
 	Object.defineProperty(exports, 'XLine', {
 	  enumerable: true,
@@ -55417,7 +55417,52 @@
 	  }
 	});
 	
-	var _XTicks = __webpack_require__(236);
+	var _YLine = __webpack_require__(235);
+	
+	Object.defineProperty(exports, 'YLine', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_YLine).default;
+	  }
+	});
+	
+	var _XAxis = __webpack_require__(236);
+	
+	Object.defineProperty(exports, 'XAxis', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_XAxis).default;
+	  }
+	});
+	
+	var _XAxisLabels = __webpack_require__(240);
+	
+	Object.defineProperty(exports, 'XAxisLabels', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_XAxisLabels).default;
+	  }
+	});
+	
+	var _XAxisTitle = __webpack_require__(352);
+	
+	Object.defineProperty(exports, 'XAxisTitle', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_XAxisTitle).default;
+	  }
+	});
+	
+	var _XGrid = __webpack_require__(239);
+	
+	Object.defineProperty(exports, 'XGrid', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_XGrid).default;
+	  }
+	});
+	
+	var _XTicks = __webpack_require__(238);
 	
 	Object.defineProperty(exports, 'XTicks', {
 	  enumerable: true,
@@ -55426,7 +55471,7 @@
 	  }
 	});
 	
-	var _YAxis = __webpack_require__(352);
+	var _YAxis = __webpack_require__(353);
 	
 	Object.defineProperty(exports, 'YAxis', {
 	  enumerable: true,
@@ -55453,7 +55498,7 @@
 	  }
 	});
 	
-	var _YGrid = __webpack_require__(354);
+	var _YGrid = __webpack_require__(355);
 	
 	Object.defineProperty(exports, 'YGrid', {
 	  enumerable: true,
@@ -55462,21 +55507,30 @@
 	  }
 	});
 	
-	var _YLine = __webpack_require__(355);
-	
-	Object.defineProperty(exports, 'YLine', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_YLine).default;
-	  }
-	});
-	
-	var _YTicks = __webpack_require__(353);
+	var _YTicks = __webpack_require__(354);
 	
 	Object.defineProperty(exports, 'YTicks', {
 	  enumerable: true,
 	  get: function get() {
 	    return _interopRequireDefault(_YTicks).default;
+	  }
+	});
+	
+	var _resolveObjectProps = __webpack_require__(209);
+	
+	Object.defineProperty(exports, 'resolveObjectProps', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_resolveObjectProps).default;
+	  }
+	});
+	
+	var _resolveXYScales = __webpack_require__(214);
+	
+	Object.defineProperty(exports, 'resolveXYScales', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_resolveXYScales).default;
 	  }
 	});
 
@@ -55494,584 +55548,6 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(5);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _lodash = __webpack_require__(3);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	var _d = __webpack_require__(162);
-	
-	var _d2 = _interopRequireDefault(_d);
-	
-	var _resolveObjectProps = __webpack_require__(209);
-	
-	var _resolveObjectProps2 = _interopRequireDefault(_resolveObjectProps);
-	
-	var _resolveXYScales = __webpack_require__(214);
-	
-	var _resolveXYScales2 = _interopRequireDefault(_resolveXYScales);
-	
-	var _Margin = __webpack_require__(213);
-	
-	var _Scale = __webpack_require__(207);
-	
-	var _util = __webpack_require__(218);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	function indexOfClosestNumberInList(number, list) {
-	  return list.reduce(function (closestI, current, i) {
-	    return Math.abs(current - number) < Math.abs(list[closestI] - number) ? i : closestI;
-	  }, 0);
-	}
-	
-	function getMouseOptions(event, _ref) {
-	  var scale = _ref.scale;
-	  var height = _ref.height;
-	  var width = _ref.width;
-	  var margin = _ref.margin;
-	
-	  var chartBB = event.currentTarget.getBoundingClientRect();
-	  var outerX = Math.round(event.clientX - chartBB.left);
-	  var outerY = Math.round(event.clientY - chartBB.top);
-	  var innerX = outerX - (margin.left || 0);
-	  var innerY = outerY - (margin.top || 0);
-	  var chartSize = (0, _Margin.innerSize)({ width: width, height: height }, margin);
-	  var scaleType = { x: (0, _Scale.inferScaleType)(scale.x), y: (0, _Scale.inferScaleType)(scale.y) };
-	
-	  var xValue = !_lodash2.default.inRange(innerX, 0, chartSize.width /* + padding.left + padding.right */) ? null : scaleType.x === 'ordinal' ? scale.x.domain()[indexOfClosestNumberInList(innerX, scale.x.range())] : scale.x.invert(innerX);
-	  var yValue = !_lodash2.default.inRange(innerY, 0, chartSize.height /* + padding.top + padding.bottom */) ? null : scaleType.y === 'ordinal' ? scale.y.domain()[indexOfClosestNumberInList(innerY, scale.y.range())] : scale.y.invert(innerY);
-	
-	  return { event: event, outerX: outerX, outerY: outerY, innerX: innerX, innerY: innerY, xValue: xValue, yValue: yValue, scale: scale, margin: margin };
-	}
-	
-	var XYPlot = function (_React$Component) {
-	  _inherits(XYPlot, _React$Component);
-	
-	  function XYPlot() {
-	    var _Object$getPrototypeO;
-	
-	    var _temp, _this, _ret;
-	
-	    _classCallCheck(this, XYPlot);
-	
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-	
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(XYPlot)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.onXYMouseEvent = function (callbackKey, event) {
-	      var callback = _this.props[callbackKey];
-	      if (!_lodash2.default.isFunction(callback)) return;
-	      var options = getMouseOptions(event, _this.props);
-	      callback(options);
-	    }, _this.onMouseMove = _lodash2.default.partial(_this.onXYMouseEvent, 'onMouseMove'), _this.onMouseDown = _lodash2.default.partial(_this.onXYMouseEvent, 'onMouseDown'), _this.onMouseUp = _lodash2.default.partial(_this.onXYMouseEvent, 'onMouseUp'), _this.onClick = _lodash2.default.partial(_this.onXYMouseEvent, 'onClick'), _this.onMouseEnter = function (event) {
-	      return _this.props.onMouseEnter({ event: event });
-	    }, _this.onMouseLeave = function (event) {
-	      return _this.props.onMouseLeave({ event: event });
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-	  // emptyLabel: "Unknown",
-	
-	  // these values are inferred from data if not provided, therefore empty defaults
-	  // scaleType: {},
-	  // domain: {},
-	  // margin: {},
-	  // spacing: {}
-	
-	
-	  _createClass(XYPlot, [{
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-	
-	      var _props = this.props;
-	      var width = _props.width;
-	      var height = _props.height;
-	      var margin = _props.margin;
-	
-	      var chartSize = (0, _Margin.innerSize)({ width: width, height: height }, margin);
-	
-	      var handlerNames = ['onMouseMove', 'onMouseEnter', 'onMouseLeave', 'onMouseDown', 'onMouseUp', 'onClick'];
-	      var handlers = _lodash2.default.fromPairs(handlerNames.map(function (n) {
-	        return [n, (0, _util.methodIfFuncProp)(n, _this2.props, _this2)];
-	      }));
-	
-	      var propsToPass = _extends({}, _lodash2.default.omit(this.props, ['children']), chartSize);
-	
-	      return _react2.default.createElement(
-	        'svg',
-	        _extends({ width: width, height: height, onMouseMove: this.onMouseMove }, handlers),
-	        _react2.default.createElement('rect', _extends({ fill: '#fff' }, { width: width, height: height })),
-	        _react2.default.createElement(
-	          'g',
-	          { transform: 'translate(' + margin.left + ', ' + margin.top + ')' },
-	          _react2.default.createElement('rect', _extends({ fill: '#dddddd' }, chartSize)),
-	          _react2.default.Children.map(this.props.children, function (child) {
-	            return _lodash2.default.isNull(child) || _lodash2.default.isUndefined(child) ? null : _react2.default.cloneElement(child, propsToPass);
-	          })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return XYPlot;
-	}(_react2.default.Component);
-	
-	XYPlot.propTypes = {
-	  width: _react2.default.PropTypes.number,
-	  height: _react2.default.PropTypes.number,
-	  scale: _react2.default.PropTypes.object,
-	  scaleType: _react2.default.PropTypes.object,
-	  domain: _react2.default.PropTypes.object,
-	  margin: _react2.default.PropTypes.object,
-	  // todo spacing & padding...
-	  nice: _react2.default.PropTypes.object,
-	  invertScale: _react2.default.PropTypes.object,
-	
-	  onMouseMove: _react2.default.PropTypes.func,
-	  onMouseEnter: _react2.default.PropTypes.func,
-	  onMouseLeave: _react2.default.PropTypes.func,
-	  onMouseDown: _react2.default.PropTypes.func,
-	  onMouseUp: _react2.default.PropTypes.func
-	};
-	XYPlot.defaultProps = {
-	  width: 400,
-	  height: 250,
-	  // nice: {x: true, y: true},
-	  invertScale: { x: false, y: false } };
-	
-	
-	var xyKeys = ['scaleType', 'domain', 'invertScale'];
-	var dirKeys = ['margin', 'padding', 'spacing'];
-	
-	var XYPlotResolved = _lodash2.default.flow([_resolveXYScales2.default, _lodash2.default.partial(_resolveObjectProps2.default, _lodash2.default, xyKeys, ['x', 'y']), _lodash2.default.partial(_resolveObjectProps2.default, _lodash2.default, dirKeys, ['top', 'bottom', 'left', 'right'])])(XYPlot);
-	
-	exports.default = XYPlotResolved;
-
-/***/ },
-/* 218 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.AccessorPropType = undefined;
-	exports.accessor = accessor;
-	exports.InterfaceMixin = InterfaceMixin;
-	exports.methodIfFuncProp = methodIfFuncProp;
-	exports.hasOneOfTwo = hasOneOfTwo;
-	
-	var _react = __webpack_require__(5);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _lodash = __webpack_require__(3);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var PropTypes = _react2.default.PropTypes;
-	var AccessorPropType = exports.AccessorPropType = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.func]);
-	
-	function accessor(key) {
-	    return _lodash2.default.isFunction(key) ? key : // pass an accessor function...
-	    _lodash2.default.isNull(key) || _lodash2.default.isUndefined(key) ? _lodash2.default.identity : // or null/undefined to just return the item itself...
-	    _lodash2.default.property(key); // or an array index or object key
-	}
-	
-	// InterfaceMixin takes a list of string "interfaces"
-	// and adds a static called implementsInterface to the component that simply checks if an interface is in the list
-	// This way, a parent component can pass particular props only to children which implement the relevant interface
-	// by checking child.type.implementsInterface('SomeInterface')
-	// usage:
-	// mixins: [InterfaceMixin('SomeInterface')] // or...
-	// mixins: [InterfaceMixin(['SomeInterface', 'AnotherInterface'])]
-	
-	function InterfaceMixin(interfaces) {
-	    interfaces = _lodash2.default.isString(interfaces) ? [interfaces] : interfaces;
-	    return {
-	        statics: {
-	            implementsInterface: function implementsInterface(name) {
-	                return interfaces.indexOf(name) > -1;
-	            }
-	        }
-	    };
-	}
-	
-	// convenience function for event callbacks... we often want to say
-	// "if this.props.onThing is a function, call this.onThing(e) (which will do stuff, then call this.props.onThing)"
-	function methodIfFuncProp(propName, props, context) {
-	    return _lodash2.default.isFunction(props[propName]) && _lodash2.default.isFunction(context[propName]) ? context[propName] : null;
-	}
-	
-	function hasOneOfTwo(a, b) {
-	    return _lodash2.default.some([a, b], _lodash2.default.isUndefined) && _lodash2.default.some([a, b], function (v) {
-	        return !_lodash2.default.isUndefined(v);
-	    });
-	}
-
-/***/ },
-/* 219 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-	
-	var _react = __webpack_require__(5);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _lodash = __webpack_require__(3);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	var _d2 = __webpack_require__(162);
-	
-	var _d3 = _interopRequireDefault(_d2);
-	
-	var _util = __webpack_require__(218);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	// import shallowCompare from 'react-addons-shallow-compare';
-	// import PureRenderDebug from 'react-pure-render-debug';
-	var PropTypes = _react2.default.PropTypes;
-	
-	// import resolveXYScales from './utils/resolveXYScales';
-	// import resolveObjectProps from './utils/resolveObjectProps';
-	
-	// import shallowEqual from 'recompose/shallowEqual';
-	
-	var LineChart = _react2.default.createClass({
-	  displayName: 'LineChart',
-	
-	  mixins: [(0, _util.InterfaceMixin)('XYChart')],
-	  propTypes: {
-	    // the array of data objects
-	    data: PropTypes.array.isRequired,
-	    // accessor for X & Y coordinates
-	    getX: PropTypes.any,
-	    getY: PropTypes.any,
-	
-	    // props from XYPlot
-	    scale: PropTypes.object
-	  },
-	
-	  componentWillMount: function componentWillMount() {
-	    this.initBisector(this.props);
-	  },
-	  componentWillReceiveProps: function componentWillReceiveProps(newProps) {
-	    this.initBisector(newProps);
-	  },
-	
-	  // shouldComponentUpdate(nextProps, nextState) {
-	  //   const shallowKeys = ['data', 'getValue'];
-	  //   const [shallowProps, shallowNextProps] = [this.props, nextProps].map(p => _.pick(p, shallowKeys));
-	  //   const isShallowEqual = shallowEqual(shallowProps, shallowNextProps);
-	  //
-	  //   const deeperKeys = ['scale'];
-	  //   const [deeperProps, deeperNextProps] = [this.props, nextProps].map(p => _.pick(p, deeperKeys));
-	  //   const isDeeperEqual = _.every(deeperKeys, k => shallowEqual(this.props[k], nextProps[k]));
-	  //
-	  //   const shouldUpdate = isShallowEqual && isDeeperEqual;
-	  //   // const shouldUpdate = PureRenderDebug.shouldComponentUpdate.call(this, nextProps, nextState);
-	  //   console.log('shouldUpdate', isShallowEqual, isDeeperEqual, shouldUpdate);
-	  //   return shouldUpdate;
-	  // },
-	
-	  initBisector: function initBisector(props) {
-	    var _this = this;
-	
-	    // this.setState({bisectX: d3.bisector(d => accessor(this.props.getValue.x)(d)).left});
-	    this.setState({ bisectX: _d3.default.bisector(function (d) {
-	        return (0, _util.accessor)(_this.props.getX)(d);
-	      }).left });
-	  },
-	  getHovered: function getHovered(x, y) {
-	    var closestDataIndex = this.state.bisectX(this.props.data, x);
-	    //console.log(closestDataIndex, this.props.data[closestDataIndex]);
-	    return this.props.data[closestDataIndex];
-	  },
-	  render: function render() {
-	    var _props = this.props;
-	    var data = _props.data;
-	    var scale = _props.scale;
-	    var getX = _props.getX;
-	    var getY = _props.getY;
-	
-	    var accessors = { x: (0, _util.accessor)(getX), y: (0, _util.accessor)(getY) };
-	    // const accessors = _.fromPairs(['x', 'y'].map(k => [k, accessor((getValue || {})[k])]));
-	    var points = _lodash2.default.map(data, function (d) {
-	      return [scale.x(accessors.x(d)), scale.y(accessors.y(d))];
-	    });
-	    var pathStr = pointsToPathStr(points);
-	
-	    return _react2.default.createElement(
-	      'g',
-	      { className: this.props.name },
-	      _react2.default.createElement('path', { d: pathStr })
-	    );
-	  }
-	});
-	
-	function pointsToPathStr(points) {
-	  // takes array of points in [[x, y], [x, y]... ] format
-	  // returns SVG path string in "M X Y L X Y" format
-	  // https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Line_commands
-	  return _lodash2.default.map(points, function (_ref, i) {
-	    var _ref2 = _slicedToArray(_ref, 2);
-	
-	    var x = _ref2[0];
-	    var y = _ref2[1];
-	
-	    var command = i === 0 ? 'M' : 'L';
-	    return command + ' ' + x + ' ' + y;
-	  }).join(' ');
-	}
-	
-	var xyKeys = ['domain', 'nice', 'invertAxis', 'tickCount', 'ticks', 'tickLength', 'labelValues', 'labelFormat', 'labelPadding', 'showLabels', 'showGrid', 'showTicks', 'showZero', 'axisLabel', 'axisLabelAlign', 'axisLabelPadding'];
-	var dirKeys = ['margin', 'padding', 'spacing'];
-	//
-	// const LineChartResolved = _.flow([
-	//   resolveXYScales,
-	//   _.partial(resolveObjectProps, _, xyKeys, ['x', 'y']),
-	//   _.partial(resolveObjectProps, _, dirKeys, ['top', 'bottom', 'left', 'right'])
-	// ])(LineChart);
-	
-	// export default LineChartResolved;
-	
-	//export default resolveXYScales(LineChart);
-	
-	// import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
-	//
-	// export default onlyUpdateForKeys(['data', 'getValue'], LineChart);
-	//
-	exports.default = LineChart;
-
-/***/ },
-/* 220 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(5);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _lodash = __webpack_require__(3);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	var _util = __webpack_require__(218);
-	
-	var _CustomPropTypes = __webpack_require__(221);
-	
-	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PropTypes = _react2.default.PropTypes;
-	
-	var ScatterPlot = function (_React$Component) {
-	  _inherits(ScatterPlot, _React$Component);
-	
-	  function ScatterPlot() {
-	    var _Object$getPrototypeO;
-	
-	    var _temp, _this, _ret;
-	
-	    _classCallCheck(this, ScatterPlot);
-	
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-	
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(ScatterPlot)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.onMouseEnterPoint = function (e, d) {
-	      _this.props.onMouseEnterPoint(e, d);
-	    }, _this.onMouseMovePoint = function (e, d) {
-	      _this.props.onMouseMovePoint(e, d);
-	    }, _this.onMouseLeavePoint = function (e, d) {
-	      _this.props.onMouseLeavePoint(e, d);
-	    }, _this.renderPoint = function (d, i) {
-	      var _map = ['onMouseEnterPoint', 'onMouseMovePoint', 'onMouseLeavePoint'].map(function (eventName) {
-	        // partially apply this bar's data point as 2nd callback argument
-	        var callback = (0, _util.methodIfFuncProp)(eventName, _this.props, _this);
-	        return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
-	      });
-	
-	      var _map2 = _slicedToArray(_map, 3);
-	
-	      var onMouseEnter = _map2[0];
-	      var onMouseMove = _map2[1];
-	      var onMouseLeave = _map2[2];
-	      var _this$props = _this.props;
-	      var scale = _this$props.scale;
-	      var getX = _this$props.getX;
-	      var getY = _this$props.getY;
-	      var pointRadius = _this$props.pointRadius;
-	      var pointOffset = _this$props.pointOffset;
-	      var getClass = _this$props.getClass;
-	      var pointSymbol = _this.props.pointSymbol;
-	
-	      var className = 'chart-scatterplot-point ' + (getClass ? (0, _util.accessor)(getClass)(d) : '');
-	      var symbolProps = { className: className, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave };
-	
-	      // resolve symbol-generating functions into real symbols
-	      if (_lodash2.default.isFunction(pointSymbol)) pointSymbol = pointSymbol(d, i);
-	      // wrap string/number symbols in <text> container
-	      if (_lodash2.default.isString(pointSymbol) || _lodash2.default.isNumber(pointSymbol)) pointSymbol = _react2.default.createElement(
-	        'text',
-	        null,
-	        pointSymbol
-	      );
-	      // use props.pointRadius for circle radius
-	      if (pointSymbol.type === 'circle' && _lodash2.default.isUndefined(pointSymbol.props.r)) symbolProps.r = pointRadius;
-	
-	      // x,y coords of center of symbol
-	      var cx = scale.x((0, _util.accessor)(getX)(d)) + pointOffset[0];
-	      var cy = scale.y((0, _util.accessor)(getY)(d)) + pointOffset[1];
-	
-	      // set positioning attributes based on symbol type
-	      if (pointSymbol.type === 'circle' || pointSymbol.type === 'ellipse') {
-	        _lodash2.default.assign(symbolProps, { cx: cx, cy: cy });
-	      } else if (pointSymbol.type === 'text') {
-	        _lodash2.default.assign(symbolProps, { x: cx, y: cy, style: { textAnchor: 'middle', dominantBaseline: 'central' } });
-	      } else {
-	        _lodash2.default.assign(symbolProps, { x: cx, y: cy, style: { transform: "translate(-50%, -50%)" } });
-	      }
-	
-	      return _react2.default.cloneElement(pointSymbol, symbolProps);
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-	
-	  // todo: implement getSpacing or getPadding static
-	
-	  _createClass(ScatterPlot, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'g',
-	        { className: this.props.name },
-	        this.props.data.map(this.renderPoint)
-	      );
-	    }
-	  }]);
-	
-	  return ScatterPlot;
-	}(_react2.default.Component);
-	
-	ScatterPlot.propTypes = {
-	  // the array of data objects
-	  data: PropTypes.array.isRequired,
-	  // accessors for X & Y coordinates
-	  getX: CustomPropTypes.getter,
-	  getY: CustomPropTypes.getter,
-	  // allow user to pass an accessor for setting the class of a point
-	  getClass: CustomPropTypes.getter,
-	
-	  scaleType: PropTypes.object,
-	  scale: PropTypes.object,
-	
-	  // used with the default point symbol (circle), defines the circle radius
-	  pointRadius: PropTypes.number,
-	  // text or SVG node to use as custom point symbol, or function which returns text/SVG
-	  pointSymbol: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-	  // manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered
-	  pointOffset: PropTypes.arrayOf(PropTypes.number),
-	
-	  onMouseEnterPoint: PropTypes.func,
-	  onMouseMovePoint: PropTypes.func,
-	  onMouseLeavePoint: PropTypes.func
-	};
-	ScatterPlot.defaultProps = {
-	  pointRadius: 3,
-	  pointSymbol: _react2.default.createElement('circle', null),
-	  pointOffset: [0, 0]
-	};
-	exports.default = ScatterPlot;
-
-/***/ },
-/* 221 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.scaleType = exports.getter = exports.fourDirectionsOf = exports.xyObjectOf = undefined;
-	
-	var _react = __webpack_require__(5);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var PropTypes = _react2.default.PropTypes;
-	var xyObjectOf = exports.xyObjectOf = function xyObjectOf(type) {
-	  return PropTypes.shape({ x: type, y: type });
-	};
-	
-	var fourDirectionsOf = exports.fourDirectionsOf = function fourDirectionsOf(type) {
-	  return PropTypes.shape({
-	    top: type,
-	    bottom: type,
-	    left: type,
-	    right: type
-	  });
-	};
-	
-	var getter = exports.getter = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.func]);
-	
-	var scaleType = exports.scaleType = PropTypes.oneOf(['linear', 'time', 'ordinal', 'log', 'pow']);
-
-/***/ },
-/* 222 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -56089,624 +55565,10 @@
 	var _d3 = _interopRequireDefault(_d2);
 	
 	var _util = __webpack_require__(218);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var AreaHeatmap = function (_React$Component) {
-	  _inherits(AreaHeatmap, _React$Component);
-	
-	  function AreaHeatmap() {
-	    var _Object$getPrototypeO;
-	
-	    var _temp, _this, _ret;
-	
-	    _classCallCheck(this, AreaHeatmap);
-	
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-	
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(AreaHeatmap)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.onMouseEnter = function (e) {
-	      _this.props.onMouseEnter(e);
-	    }, _this.onMouseLeave = function (e) {
-	      _this.props.onMouseLeave(e);
-	    }, _this.onMouseMove = function (e) {
-	      var _this$props = _this.props;
-	      var scale = _this$props.scale;
-	      var data = _this$props.data;
-	      var getArea = _this$props.getArea;
-	      var getX = _this$props.getX;
-	      var getXEnd = _this$props.getXEnd;
-	      var getY = _this$props.getY;
-	      var getYEnd = _this$props.getYEnd;
-	      var onMouseMove = _this$props.onMouseMove;
-	
-	      if (!_lodash2.default.isFunction(onMouseMove)) return;
-	
-	      var _map = [getArea, getX, getXEnd, getY, getYEnd].map(_util.accessor);
-	
-	      var _map2 = _slicedToArray(_map, 4);
-	
-	      var xAccessor = _map2[0];
-	      var xEndAccessor = _map2[1];
-	      var yAccessor = _map2[2];
-	      var yEndAccessor = _map2[3];
-	
-	
-	      var boundBox = _this.refs.background.getBoundingClientRect();
-	      if (!boundBox) return;
-	      var x = e.clientX - (boundBox.left || 0);
-	      var y = e.clientY - (boundBox.top || 0);
-	      var xVal = scale.x.invert(x);
-	      var yVal = scale.y.invert(y);
-	      //const xD = _.find(data, d => xVal >= xAccessor(d) && xVal < xEndAccessor(d));
-	      //const yD = _.find(data, d => yVal >= yAccessor(d) && yVal < yEndAccessor(d));
-	      //const d = _.find(data,
-	      //    d => xVal >= xAccessor(d) && xVal < xEndAccessor(d) && yVal >= yAccessor(d) && yVal < yEndAccessor(d));
-	      //const xBin = [xAccessor(xD), xEndAccessor(xD)];
-	      //const yBin = [yAccessor(yD), yEndAccessor(yD)];
-	
-	      //onMouseMove(e, {xVal, yVal, d, xD, yD, xBin, yBin});
-	
-	      onMouseMove(e, { xVal: xVal, yVal: yVal });
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-	
-	  _createClass(AreaHeatmap, [{
-	    key: 'render',
-	    value: function render() {
-	      var _props = this.props;
-	      var data = _props.data;
-	      var getArea = _props.getArea;
-	      var getX = _props.getX;
-	      var getXEnd = _props.getXEnd;
-	      var getY = _props.getY;
-	      var getYEnd = _props.getYEnd;
-	      var scale = _props.scale;
-	      var scaleWidth = _props.scaleWidth;
-	      var scaleHeight = _props.scaleHeight;
-	
-	      var _map3 = [getArea, getX, getXEnd, getY, getYEnd].map(_util.accessor);
-	
-	      var _map4 = _slicedToArray(_map3, 5);
-	
-	      var areaAccessor = _map4[0];
-	      var xAccessor = _map4[1];
-	      var xEndAccessor = _map4[2];
-	      var yAccessor = _map4[3];
-	      var yEndAccessor = _map4[4];
-	
-	      // to determine how many data units are represented by 1 square pixel of area,
-	      // find the bin that would require the highest unit-per-pixel scale if its rectangle filled the whole container
-	
-	      var unitsPerPixel = this.props.unitsPerPixel || Math.max.apply(this, data.map(function (d) {
-	        return areaAccessor(d) / Math.abs(
-	        // area of entire containing rectangle
-	        (scale.x(xEndAccessor(d)) - scale.x(xAccessor(d))) * (scale.y(yEndAccessor(d)) - scale.y(yAccessor(d))));
-	      }));
-	
-	      var handlers = {
-	        onMouseMove: (0, _util.methodIfFuncProp)('onMouseMove', this.props, this),
-	        onMouseEnter: (0, _util.methodIfFuncProp)('onMouseEnter', this.props, this),
-	        onMouseLeave: (0, _util.methodIfFuncProp)('onMouseLeave', this.props, this)
-	      };
-	
-	      return _react2.default.createElement(
-	        'g',
-	        _extends({ className: 'area-heatmap-chart' }, handlers),
-	        _react2.default.createElement('rect', { x: '0', y: '0', width: scaleWidth, height: scaleHeight, ref: 'background', fill: 'transparent' }),
-	        data.map(function (d, i) {
-	          // full width and height of the containing rectangle
-	          var fullWidth = Math.abs(scale.x(xEndAccessor(d)) - scale.x(xAccessor(d)));
-	          var fullHeight = Math.abs(scale.y(yEndAccessor(d)) - scale.y(yAccessor(d)));
-	          // x / y position of top left of the containing rectangle
-	          var x0 = Math.min(scale.x(xEndAccessor(d)), scale.x(xAccessor(d)));
-	          var y0 = Math.min(scale.y(yEndAccessor(d)), scale.y(yAccessor(d)));
-	
-	          // we know two facts:
-	          // 1. the (pixel) area of the rect will be the data value divided by the # of data units per pixel
-	          //    ie. area = height * width = areaAccessor(d) / unitsPerPixel
-	          // 2. all rectangles, regardless of size, have the same shape (are congruent), so the ratio
-	          //    of the rect's width to the full width is equal to the ratio of its height to the full height.
-	          //    ie. (height / fullHeight) = (width / fullWidth)
-	          // solve for height and width to get...
-	          var width = Math.sqrt(areaAccessor(d) / unitsPerPixel * (fullWidth / fullHeight));
-	          var height = Math.sqrt(areaAccessor(d) / unitsPerPixel * (fullHeight / fullWidth));
-	
-	          // center the data rect in the containing rectangle
-	          var x = x0 + (fullWidth - width) / 2;
-	          var y = y0 + (fullHeight - height) / 2;
-	
-	          if (!_lodash2.default.every([x, y, width, height], _lodash2.default.isFinite)) return null;
-	
-	          return _react2.default.createElement('rect', { x: x, y: y, width: width, height: height, className: 'area-heatmap-rect', key: 'rect-' + i });
-	        })
-	      );
-	    }
-	  }], [{
-	    key: 'getDomain',
-	    value: function getDomain(props) {
-	      var data = props.data;
-	      var getX = props.getX;
-	      var getXEnd = props.getXEnd;
-	      var getY = props.getY;
-	      var getYEnd = props.getYEnd;
-	
-	      return {
-	        x: _d3.default.extent(_lodash2.default.flatten([data.map((0, _util.accessor)(getX)), data.map((0, _util.accessor)(getXEnd))])),
-	        y: _d3.default.extent(_lodash2.default.flatten([data.map((0, _util.accessor)(getY)), data.map((0, _util.accessor)(getYEnd))]))
-	      };
-	    }
-	  }]);
-	
-	  return AreaHeatmap;
-	}(_react2.default.Component);
-	
-	AreaHeatmap.propTypes = {
-	  unitsPerPixel: _react2.default.PropTypes.number
-	};
-	exports.default = AreaHeatmap;
-
-/***/ },
-/* 223 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(5);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _lodash = __webpack_require__(3);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	var _d2 = __webpack_require__(162);
-	
-	var _d3 = _interopRequireDefault(_d2);
-	
-	var _util = __webpack_require__(218);
-	
-	var _CustomPropTypes = __webpack_require__(221);
-	
-	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
-	
-	var _Scale = __webpack_require__(207);
 	
 	var _Data = __webpack_require__(205);
 	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PropTypes = _react2.default.PropTypes;
-	
-	
-	// MarkerLine is similar to a bar chart,
-	// except that it just draws a line at the data value, rather than a full bar
-	// If the independent variable is a range, the length of the line will represent that range
-	// Otherwise all lines will be the same length.
-	// The dependent variable must be a single value, not a range.
-	
-	function getTickType(props) {
-	  var getXEnd = props.getXEnd;
-	  var getYEnd = props.getYEnd;
-	  var orientation = props.orientation;
-	
-	  var isVertical = orientation === 'vertical';
-	  // warn if a range is passed for the dependent variable, which is expected to be a value
-	  if (isVertical && !_lodash2.default.isUndefined(getYEnd) || !isVertical && !_lodash2.default.isUndefined(getXEnd)) console.warn("Warning: MarkerLineChart can only show the independent variable as a range, not the dependent variable.");
-	
-	  if (isVertical && !_lodash2.default.isUndefined(getXEnd) || !isVertical && !_lodash2.default.isUndefined(getYEnd)) return "RangeValue";
-	
-	  return "ValueValue";
-	}
-	
-	var MarkerLineChart = function (_React$Component) {
-	  _inherits(MarkerLineChart, _React$Component);
-	
-	  function MarkerLineChart() {
-	    var _Object$getPrototypeO;
-	
-	    var _temp, _this, _ret;
-	
-	    _classCallCheck(this, MarkerLineChart);
-	
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-	
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(MarkerLineChart)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.onMouseEnterLine = function (e, d) {
-	      _this.props.onMouseEnterLine(e, d);
-	    }, _this.onMouseMoveLine = function (e, d) {
-	      _this.props.onMouseMoveLine(e, d);
-	    }, _this.onMouseLeaveLine = function (e, d) {
-	      _this.props.onMouseLeaveLine(e, d);
-	    }, _this.renderRangeValueLine = function (d, i) {
-	      var _map = ['onMouseEnterLine', 'onMouseMoveLine', 'onMouseLeaveLine'].map(function (eventName) {
-	        // partially apply this bar's data point as 2nd callback argument
-	        var callback = (0, _util.methodIfFuncProp)(eventName, _this.props, _this);
-	        return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
-	      });
-	
-	      var _map2 = _slicedToArray(_map, 3);
-	
-	      var onMouseEnter = _map2[0];
-	      var onMouseMove = _map2[1];
-	      var onMouseLeave = _map2[2];
-	      var _this$props = _this.props;
-	      var getX = _this$props.getX;
-	      var getXEnd = _this$props.getXEnd;
-	      var getY = _this$props.getY;
-	      var getYEnd = _this$props.getYEnd;
-	      var orientation = _this$props.orientation;
-	      var scale = _this$props.scale;
-	
-	      var isVertical = orientation === 'vertical';
-	      var xVal = scale.x((0, _util.accessor)(getX)(d));
-	      var yVal = scale.y((0, _util.accessor)(getY)(d));
-	      var xEndVal = _lodash2.default.isUndefined(getXEnd) ? 0 : scale.x((0, _util.accessor)(getXEnd)(d));
-	      var yEndVal = _lodash2.default.isUndefined(getYEnd) ? 0 : scale.y((0, _util.accessor)(getYEnd)(d));
-	      var x1 = xVal;
-	      var y1 = yVal;
-	
-	      var x2 = isVertical ? xEndVal : xVal;
-	      var y2 = isVertical ? yVal : yEndVal;
-	      var key = 'marker-line-' + i;
-	
-	      if (!_lodash2.default.every([x1, x2, y1, y2], _lodash2.default.isFinite)) return null;
-	      return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }));
-	    }, _this.renderValueValueLine = function (d, i) {
-	      var _map3 = ['onMouseEnterLine', 'onMouseMoveLine', 'onMouseLeaveLine'].map(function (eventName) {
-	        // partially apply this bar's data point as 2nd callback argument
-	        var callback = (0, _util.methodIfFuncProp)(eventName, _this.props, _this);
-	        return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
-	      });
-	
-	      var _map4 = _slicedToArray(_map3, 3);
-	
-	      var onMouseEnter = _map4[0];
-	      var onMouseMove = _map4[1];
-	      var onMouseLeave = _map4[2];
-	      var _this$props2 = _this.props;
-	      var getX = _this$props2.getX;
-	      var getY = _this$props2.getY;
-	      var orientation = _this$props2.orientation;
-	      var lineLength = _this$props2.lineLength;
-	      var scale = _this$props2.scale;
-	
-	      var isVertical = orientation === 'vertical';
-	      var xVal = scale.x((0, _util.accessor)(getX)(d));
-	      var yVal = scale.y((0, _util.accessor)(getY)(d));
-	      var x1 = isVertical ? xVal - lineLength / 2 : xVal;
-	      var x2 = isVertical ? xVal + lineLength / 2 : xVal;
-	      var y1 = isVertical ? yVal : yVal - lineLength / 2;
-	      var y2 = isVertical ? yVal : yVal + lineLength / 2;
-	      var key = 'marker-line-' + i;
-	
-	      if (!_lodash2.default.every([x1, x2, y1, y2], _lodash2.default.isFinite)) return null;
-	      return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }));
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-	
-	  _createClass(MarkerLineChart, [{
-	    key: 'render',
-	    value: function render() {
-	      var tickType = getTickType(this.props);
-	      return _react2.default.createElement(
-	        'g',
-	        { className: 'marker-line-chart' },
-	        tickType === 'RangeValue' ? this.props.data.map(this.renderRangeValueLine) : this.props.data.map(this.renderValueValueLine)
-	      );
-	    }
-	  }], [{
-	    key: 'getDomain',
-	
-	
-	    // todo reimplement padding/spacing
-	    /*
-	    static getOptions(props) {
-	      const {data, getX, getXEnd, getY, getYEnd, scaleType, orientation, lineLength} = props;
-	      const tickType = getTickType(props);
-	      const isVertical = (orientation === 'vertical');
-	      const accessors = {x: accessor(getX), y: accessor(getY)};
-	      const endAccessors = {x: accessor(getXEnd), y: accessor(getYEnd)};
-	       let options = {domain: {}, spacing: {}};
-	       if(tickType === 'RangeValue') { // set range domain for range type
-	        let rangeAxis = isVertical ? 'x' : 'y';
-	        options.domain[rangeAxis] =
-	          rangeAxisDomain(data, accessors[rangeAxis], endAccessors[rangeAxis], scaleType[rangeAxis]);
-	      } else {
-	        // the value, and therefore the center of the marker line, may fall exactly on the axis min or max,
-	        // therefore marker lines need (0.5*lineLength) spacing so they don't hang over the edge of the chart
-	        const halfLine = Math.ceil(0.5 * lineLength);
-	        options.spacing = isVertical ? {left: halfLine, right: halfLine} : {top: halfLine, bottom: halfLine};
-	      }
-	       return options;
-	    }
-	    */
-	
-	    value: function getDomain(props) {
-	      if (getTickType(props) === 'RangeValue') {
-	        // set range domain for range type
-	        var data = props.data;
-	        var getX = props.getX;
-	        var getXEnd = props.getXEnd;
-	        var getY = props.getY;
-	        var getYEnd = props.getYEnd;
-	        var scaleType = props.scaleType;
-	        var orientation = props.orientation;
-	
-	        var horizontal = orientation !== 'vertical';
-	
-	        // only have to specify range axis domain, other axis uses default domainFromData
-	        // in this chart type, the range axis, if there is one, is always the *independent* variable
-	        var rangeAxis = horizontal ? 'y' : 'x';
-	        var rangeStartAccessor = horizontal ? (0, _Data.makeAccessor)(getY) : (0, _Data.makeAccessor)(getX);
-	        var rangeEndAccessor = horizontal ? (0, _Data.makeAccessor)(getYEnd) : (0, _Data.makeAccessor)(getXEnd);
-	        var rangeDataType = (0, _Scale.dataTypeFromScaleType)(scaleType[rangeAxis]);
-	
-	        return _defineProperty({}, rangeAxis, (0, _Data.domainFromRangeData)(data, rangeStartAccessor, rangeEndAccessor, rangeDataType));
-	      }
-	    }
-	  }]);
-	
-	  return MarkerLineChart;
-	}(_react2.default.Component);
-	
-	MarkerLineChart.propTypes = {
-	  // the array of data objects
-	  data: PropTypes.array.isRequired,
-	  // accessor for X & Y coordinates
-	  getX: CustomPropTypes.getter,
-	  getY: CustomPropTypes.getter,
-	  getXEnd: CustomPropTypes.getter,
-	  getYEnd: CustomPropTypes.getter,
-	
-	  orientation: PropTypes.oneOf(['vertical', 'horizontal']),
-	  lineLength: PropTypes.number,
-	
-	  // x & y scale types
-	  scaleType: PropTypes.object,
-	  scale: PropTypes.object,
-	
-	  onMouseEnterLine: PropTypes.func,
-	  onMouseMoveLine: PropTypes.func,
-	  onMouseLeaveLine: PropTypes.func
-	};
-	MarkerLineChart.defaultProps = {
-	  orientation: 'vertical',
-	  lineLength: 10
-	};
-	exports.default = MarkerLineChart;
-
-/***/ },
-/* 224 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(5);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _lodash = __webpack_require__(3);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	var _d = __webpack_require__(162);
-	
-	var _d2 = _interopRequireDefault(_d);
-	
-	var _util = __webpack_require__(218);
-	
-	var _CustomPropTypes = __webpack_require__(221);
-	
-	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
-	
-	var _LineChart = __webpack_require__(219);
-	
-	var _LineChart2 = _interopRequireDefault(_LineChart);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PropTypes = _react2.default.PropTypes;
-	
-	var KernelDensityEstimation = function (_React$Component) {
-	  _inherits(KernelDensityEstimation, _React$Component);
-	
-	  function KernelDensityEstimation() {
-	    var _Object$getPrototypeO;
-	
-	    var _temp, _this, _ret;
-	
-	    _classCallCheck(this, KernelDensityEstimation);
-	
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-	
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(KernelDensityEstimation)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
-	      kdeData: null
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-	
-	  _createClass(KernelDensityEstimation, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.initKDE(this.props);
-	    }
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(newProps) {
-	      this.initKDE(newProps);
-	    }
-	  }, {
-	    key: 'initKDE',
-	    value: function initKDE(props) {
-	      var data = props.data;
-	      var bandwidth = props.bandwidth;
-	      var sampleCount = props.sampleCount;
-	      var scale = props.scale;
-	      var width = props.width;
-	
-	      var kernel = epanechnikovKernel(bandwidth);
-	      var samples = scale.x.ticks(sampleCount || Math.ceil(width / 2));
-	      this.setState({ kdeData: kernelDensityEstimator(kernel, samples)(data) });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _props = this.props;
-	      var name = _props.name;
-	      var scale = _props.scale;
-	      var width = _props.width;
-	      var height = _props.height;
-	      var plotWidth = _props.plotWidth;
-	      var plotHeight = _props.plotHeight;
-	      var kdeData = this.state.kdeData;
-	
-	
-	      return _react2.default.createElement(_LineChart2.default, _extends({
-	        data: kdeData,
-	        getX: 0,
-	        getY: function getY(d) {
-	          return d[1] * 500;
-	        }
-	      }, { name: name, scale: scale, width: width, height: height, plotWidth: plotWidth, plotHeight: plotHeight }));
-	    }
-	  }], [{
-	    key: 'getDomain',
-	    value: function getDomain() {
-	      // todo implement real static getDomain method
-	      return {
-	        x: null,
-	        y: [0, 200]
-	      };
-	    }
-	  }]);
-	
-	  return KernelDensityEstimation;
-	}(_react2.default.Component);
-	
-	KernelDensityEstimation.propTypes = {
-	  // the array of data objects
-	  data: PropTypes.array.isRequired,
-	
-	  // kernel bandwidth for kernel density estimator
-	  // https://en.wikipedia.org/wiki/Kernel_density_estimation#Bandwidth_selection
-	  // high bandwidth => oversmoothing & underfitting; low bandwidth => undersmoothing & overfitting
-	  bandwidth: PropTypes.number,
-	  // number of samples to take from the KDE
-	  // ie. the resolution/smoothness of the KDE line - more samples => higher resolution, smooth line
-	  sampleCount: PropTypes.number,
-	
-	  // common props from XYPlot
-	  // accessor for data values
-	  getX: CustomPropTypes.getter,
-	  getY: CustomPropTypes.getter,
-	  name: PropTypes.string,
-	  scale: PropTypes.object,
-	  axisType: PropTypes.object,
-	  scaleWidth: PropTypes.number,
-	  scaleHeight: PropTypes.number
-	};
-	KernelDensityEstimation.defaultProps = {
-	  bandwidth: 0.5,
-	  sampleCount: null, // null = auto-determined based on width
-	  name: ''
-	};
-	
-	
-	function kernelDensityEstimator(kernel, x) {
-	  return function (sample) {
-	    return x.map(function (x) {
-	      return [x, _d2.default.mean(sample, function (v) {
-	        return kernel(x - v);
-	      })];
-	    });
-	  };
-	}
-	
-	function epanechnikovKernel(scale) {
-	  return function (u) {
-	    return Math.abs(u /= scale) <= 1 ? .75 * (1 - u * u) / scale : 0;
-	  };
-	}
-	
-	exports.default = KernelDensityEstimation;
-
-/***/ },
-/* 225 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(5);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _lodash = __webpack_require__(3);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	var _d2 = __webpack_require__(162);
-	
-	var _d3 = _interopRequireDefault(_d2);
-	
-	var _util = __webpack_require__(218);
-	
-	var _CustomPropTypes = __webpack_require__(221);
+	var _CustomPropTypes = __webpack_require__(219);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -56784,7 +55646,7 @@
 	      var markerLineOverhangOuter = _props.markerLineOverhangOuter;
 	
 	
-	      var valueAccessor = (0, _util.accessor)(this.props.getValue);
+	      var valueAccessor = (0, _Data.makeAccessor)(this.props.getValue);
 	      var sum = _lodash2.default.sumBy(this.props.data, valueAccessor);
 	      var total = this.props.total || sum;
 	      var markerLinePercent = _lodash2.default.isFinite(markerLineValue) ? markerLineValue / total : null;
@@ -56964,7 +55826,72 @@
 	exports.default = PieChart;
 
 /***/ },
-/* 226 */
+/* 218 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.methodIfFuncProp = methodIfFuncProp;
+	exports.hasOneOfTwo = hasOneOfTwo;
+	
+	var _lodash = __webpack_require__(3);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// convenience function for event callbacks... we often want to say
+	// "if this.props.onThing is a function, call this.onThing(e) (which will do stuff, then call this.props.onThing)"
+	function methodIfFuncProp(propName, props, context) {
+	    return _lodash2.default.isFunction(props[propName]) && _lodash2.default.isFunction(context[propName]) ? context[propName] : null;
+	}
+	
+	function hasOneOfTwo(a, b) {
+	    return _lodash2.default.some([a, b], _lodash2.default.isUndefined) && _lodash2.default.some([a, b], function (v) {
+	        return !_lodash2.default.isUndefined(v);
+	    });
+	}
+
+/***/ },
+/* 219 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.scaleType = exports.getter = exports.fourDirectionsOf = exports.xyObjectOf = undefined;
+	
+	var _react = __webpack_require__(5);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var PropTypes = _react2.default.PropTypes;
+	var xyObjectOf = exports.xyObjectOf = function xyObjectOf(type) {
+	  return PropTypes.shape({ x: type, y: type });
+	};
+	
+	var fourDirectionsOf = exports.fourDirectionsOf = function fourDirectionsOf(type) {
+	  return PropTypes.shape({
+	    top: type,
+	    bottom: type,
+	    left: type,
+	    right: type
+	  });
+	};
+	
+	var getter = exports.getter = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.func]);
+	
+	var scaleType = exports.scaleType = PropTypes.oneOf(['linear', 'time', 'ordinal', 'log', 'pow']);
+
+/***/ },
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56989,9 +55916,9 @@
 	
 	var _d2 = _interopRequireDefault(_d);
 	
-	var _util = __webpack_require__(218);
+	var _Data = __webpack_require__(205);
 	
-	var _CustomPropTypes = __webpack_require__(221);
+	var _CustomPropTypes = __webpack_require__(219);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -57116,7 +56043,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        _extends({ className: 'node-label' }, { style: style }),
-	        (0, _util.accessor)(getLabel)(node)
+	        (0, _Data.makeAccessor)(getLabel)(node)
 	      );
 	    }
 	  }]);
@@ -57244,9 +56171,9 @@
 	  var ratio = options.ratio;
 	
 	
-	  var treemap = _d2.default.layout.treemap().size([width, height]).value((0, _util.accessor)(getValue));
+	  var treemap = _d2.default.layout.treemap().size([width, height]).value((0, _Data.makeAccessor)(getValue));
 	
-	  if (!_lodash2.default.isUndefined(getChildren)) treemap.children((0, _util.accessor)(getChildren));
+	  if (!_lodash2.default.isUndefined(getChildren)) treemap.children((0, _Data.makeAccessor)(getChildren));
 	  if (!_lodash2.default.isUndefined(sort)) treemap.sort(sort);
 	  if (!_lodash2.default.isUndefined(padding)) treemap.padding(padding);
 	  if (!_lodash2.default.isUndefined(round)) treemap.round(round);
@@ -57260,7 +56187,471 @@
 	exports.default = TreeMap;
 
 /***/ },
-/* 227 */
+/* 221 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(5);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(3);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d = __webpack_require__(162);
+	
+	var _d2 = _interopRequireDefault(_d);
+	
+	var _resolveObjectProps = __webpack_require__(209);
+	
+	var _resolveObjectProps2 = _interopRequireDefault(_resolveObjectProps);
+	
+	var _resolveXYScales = __webpack_require__(214);
+	
+	var _resolveXYScales2 = _interopRequireDefault(_resolveXYScales);
+	
+	var _Margin = __webpack_require__(213);
+	
+	var _Scale = __webpack_require__(207);
+	
+	var _util = __webpack_require__(218);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	function indexOfClosestNumberInList(number, list) {
+	  return list.reduce(function (closestI, current, i) {
+	    return Math.abs(current - number) < Math.abs(list[closestI] - number) ? i : closestI;
+	  }, 0);
+	}
+	
+	function getMouseOptions(event, _ref) {
+	  var scale = _ref.scale;
+	  var height = _ref.height;
+	  var width = _ref.width;
+	  var margin = _ref.margin;
+	
+	  var chartBB = event.currentTarget.getBoundingClientRect();
+	  var outerX = Math.round(event.clientX - chartBB.left);
+	  var outerY = Math.round(event.clientY - chartBB.top);
+	  var innerX = outerX - (margin.left || 0);
+	  var innerY = outerY - (margin.top || 0);
+	  var chartSize = (0, _Margin.innerSize)({ width: width, height: height }, margin);
+	  var scaleType = { x: (0, _Scale.inferScaleType)(scale.x), y: (0, _Scale.inferScaleType)(scale.y) };
+	
+	  var xValue = !_lodash2.default.inRange(innerX, 0, chartSize.width /* + padding.left + padding.right */) ? null : scaleType.x === 'ordinal' ? scale.x.domain()[indexOfClosestNumberInList(innerX, scale.x.range())] : scale.x.invert(innerX);
+	  var yValue = !_lodash2.default.inRange(innerY, 0, chartSize.height /* + padding.top + padding.bottom */) ? null : scaleType.y === 'ordinal' ? scale.y.domain()[indexOfClosestNumberInList(innerY, scale.y.range())] : scale.y.invert(innerY);
+	
+	  return { event: event, outerX: outerX, outerY: outerY, innerX: innerX, innerY: innerY, xValue: xValue, yValue: yValue, scale: scale, margin: margin };
+	}
+	
+	var XYPlot = function (_React$Component) {
+	  _inherits(XYPlot, _React$Component);
+	
+	  function XYPlot() {
+	    var _Object$getPrototypeO;
+	
+	    var _temp, _this, _ret;
+	
+	    _classCallCheck(this, XYPlot);
+	
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(XYPlot)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.onXYMouseEvent = function (callbackKey, event) {
+	      var callback = _this.props[callbackKey];
+	      if (!_lodash2.default.isFunction(callback)) return;
+	      var options = getMouseOptions(event, _this.props);
+	      callback(options);
+	    }, _this.onMouseMove = _lodash2.default.partial(_this.onXYMouseEvent, 'onMouseMove'), _this.onMouseDown = _lodash2.default.partial(_this.onXYMouseEvent, 'onMouseDown'), _this.onMouseUp = _lodash2.default.partial(_this.onXYMouseEvent, 'onMouseUp'), _this.onClick = _lodash2.default.partial(_this.onXYMouseEvent, 'onClick'), _this.onMouseEnter = function (event) {
+	      return _this.props.onMouseEnter({ event: event });
+	    }, _this.onMouseLeave = function (event) {
+	      return _this.props.onMouseLeave({ event: event });
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+	  // emptyLabel: "Unknown",
+	
+	  // these values are inferred from data if not provided, therefore empty defaults
+	  // scaleType: {},
+	  // domain: {},
+	  // margin: {},
+	  // spacing: {}
+	
+	
+	  _createClass(XYPlot, [{
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      var _props = this.props;
+	      var width = _props.width;
+	      var height = _props.height;
+	      var margin = _props.margin;
+	
+	      var chartSize = (0, _Margin.innerSize)({ width: width, height: height }, margin);
+	
+	      var handlerNames = ['onMouseMove', 'onMouseEnter', 'onMouseLeave', 'onMouseDown', 'onMouseUp', 'onClick'];
+	      var handlers = _lodash2.default.fromPairs(handlerNames.map(function (n) {
+	        return [n, (0, _util.methodIfFuncProp)(n, _this2.props, _this2)];
+	      }));
+	
+	      var propsToPass = _extends({}, _lodash2.default.omit(this.props, ['children']), chartSize);
+	
+	      return _react2.default.createElement(
+	        'svg',
+	        _extends({ width: width, height: height, onMouseMove: this.onMouseMove }, handlers),
+	        _react2.default.createElement('rect', _extends({ fill: '#fff' }, { width: width, height: height })),
+	        _react2.default.createElement(
+	          'g',
+	          { transform: 'translate(' + margin.left + ', ' + margin.top + ')' },
+	          _react2.default.createElement('rect', _extends({ fill: '#dddddd' }, chartSize)),
+	          _react2.default.Children.map(this.props.children, function (child) {
+	            return _lodash2.default.isNull(child) || _lodash2.default.isUndefined(child) ? null : _react2.default.cloneElement(child, propsToPass);
+	          })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return XYPlot;
+	}(_react2.default.Component);
+	
+	XYPlot.propTypes = {
+	  width: _react2.default.PropTypes.number,
+	  height: _react2.default.PropTypes.number,
+	  scale: _react2.default.PropTypes.object,
+	  scaleType: _react2.default.PropTypes.object,
+	  domain: _react2.default.PropTypes.object,
+	  margin: _react2.default.PropTypes.object,
+	  // todo spacing & padding...
+	  nice: _react2.default.PropTypes.object,
+	  invertScale: _react2.default.PropTypes.object,
+	
+	  onMouseMove: _react2.default.PropTypes.func,
+	  onMouseEnter: _react2.default.PropTypes.func,
+	  onMouseLeave: _react2.default.PropTypes.func,
+	  onMouseDown: _react2.default.PropTypes.func,
+	  onMouseUp: _react2.default.PropTypes.func
+	};
+	XYPlot.defaultProps = {
+	  width: 400,
+	  height: 250,
+	  // nice: {x: true, y: true},
+	  invertScale: { x: false, y: false } };
+	
+	
+	var xyKeys = ['scaleType', 'domain', 'invertScale'];
+	var dirKeys = ['margin', 'padding', 'spacing'];
+	
+	var XYPlotResolved = _lodash2.default.flow([_resolveXYScales2.default, _lodash2.default.partial(_resolveObjectProps2.default, _lodash2.default, xyKeys, ['x', 'y']), _lodash2.default.partial(_resolveObjectProps2.default, _lodash2.default, dirKeys, ['top', 'bottom', 'left', 'right'])])(XYPlot);
+	
+	exports.default = XYPlotResolved;
+
+/***/ },
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(5);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(3);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d2 = __webpack_require__(162);
+	
+	var _d3 = _interopRequireDefault(_d2);
+	
+	var _Data = __webpack_require__(205);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var LineChart = function (_React$Component) {
+	  _inherits(LineChart, _React$Component);
+	
+	  function LineChart() {
+	    var _Object$getPrototypeO;
+	
+	    var _temp, _this, _ret;
+	
+	    _classCallCheck(this, LineChart);
+	
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(LineChart)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.getHovered = function (x, y) {
+	      var closestDataIndex = _this.state.bisectX(_this.props.data, x);
+	      //console.log(closestDataIndex, this.props.data[closestDataIndex]);
+	      return _this.props.data[closestDataIndex];
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+	
+	  _createClass(LineChart, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.initBisector(this.props);
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(newProps) {
+	      this.initBisector(newProps);
+	    }
+	  }, {
+	    key: 'initBisector',
+	    value: function initBisector(props) {
+	      this.setState({ bisectX: _d3.default.bisector(function (d) {
+	          return (0, _Data.makeAccessor)(props.getX)(d);
+	        }).left });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var data = _props.data;
+	      var scale = _props.scale;
+	      var getX = _props.getX;
+	      var getY = _props.getY;
+	
+	      var accessors = { x: (0, _Data.makeAccessor)(getX), y: (0, _Data.makeAccessor)(getY) };
+	      var points = _lodash2.default.map(data, function (d) {
+	        return [scale.x(accessors.x(d)), scale.y(accessors.y(d))];
+	      });
+	      var pathStr = pointsToPathStr(points);
+	
+	      return _react2.default.createElement(
+	        'g',
+	        { className: this.props.name },
+	        _react2.default.createElement('path', { d: pathStr })
+	      );
+	    }
+	  }]);
+	
+	  return LineChart;
+	}(_react2.default.Component);
+	
+	LineChart.propTypes = {
+	  // the array of data objects
+	  data: _react2.default.PropTypes.array.isRequired,
+	  // accessor for X & Y coordinates
+	  getX: _react2.default.PropTypes.any,
+	  getY: _react2.default.PropTypes.any,
+	  // props from XYPlot
+	  scale: _react2.default.PropTypes.object
+	};
+	exports.default = LineChart;
+	
+	
+	function pointsToPathStr(points) {
+	  // takes array of points in [[x, y], [x, y]... ] format
+	  // returns SVG path string in "M X Y L X Y" format
+	  // https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Line_commands
+	  return _lodash2.default.map(points, function (_ref, i) {
+	    var _ref2 = _slicedToArray(_ref, 2);
+	
+	    var x = _ref2[0];
+	    var y = _ref2[1];
+	
+	    var command = i === 0 ? 'M' : 'L';
+	    return command + ' ' + x + ' ' + y;
+	  }).join(' ');
+	}
+
+/***/ },
+/* 223 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(5);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(3);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _Data = __webpack_require__(205);
+	
+	var _util = __webpack_require__(218);
+	
+	var _CustomPropTypes = __webpack_require__(219);
+	
+	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PropTypes = _react2.default.PropTypes;
+	
+	var ScatterPlot = function (_React$Component) {
+	  _inherits(ScatterPlot, _React$Component);
+	
+	  function ScatterPlot() {
+	    var _Object$getPrototypeO;
+	
+	    var _temp, _this, _ret;
+	
+	    _classCallCheck(this, ScatterPlot);
+	
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(ScatterPlot)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.onMouseEnterPoint = function (e, d) {
+	      _this.props.onMouseEnterPoint(e, d);
+	    }, _this.onMouseMovePoint = function (e, d) {
+	      _this.props.onMouseMovePoint(e, d);
+	    }, _this.onMouseLeavePoint = function (e, d) {
+	      _this.props.onMouseLeavePoint(e, d);
+	    }, _this.renderPoint = function (d, i) {
+	      var _map = ['onMouseEnterPoint', 'onMouseMovePoint', 'onMouseLeavePoint'].map(function (eventName) {
+	        // partially apply this bar's data point as 2nd callback argument
+	        var callback = (0, _util.methodIfFuncProp)(eventName, _this.props, _this);
+	        return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
+	      });
+	
+	      var _map2 = _slicedToArray(_map, 3);
+	
+	      var onMouseEnter = _map2[0];
+	      var onMouseMove = _map2[1];
+	      var onMouseLeave = _map2[2];
+	      var _this$props = _this.props;
+	      var scale = _this$props.scale;
+	      var getX = _this$props.getX;
+	      var getY = _this$props.getY;
+	      var pointRadius = _this$props.pointRadius;
+	      var pointOffset = _this$props.pointOffset;
+	      var getClass = _this$props.getClass;
+	      var pointSymbol = _this.props.pointSymbol;
+	
+	      var className = 'chart-scatterplot-point ' + (getClass ? (0, _Data.makeAccessor)(getClass)(d) : '');
+	      var symbolProps = { className: className, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave };
+	
+	      // resolve symbol-generating functions into real symbols
+	      if (_lodash2.default.isFunction(pointSymbol)) pointSymbol = pointSymbol(d, i);
+	      // wrap string/number symbols in <text> container
+	      if (_lodash2.default.isString(pointSymbol) || _lodash2.default.isNumber(pointSymbol)) pointSymbol = _react2.default.createElement(
+	        'text',
+	        null,
+	        pointSymbol
+	      );
+	      // use props.pointRadius for circle radius
+	      if (pointSymbol.type === 'circle' && _lodash2.default.isUndefined(pointSymbol.props.r)) symbolProps.r = pointRadius;
+	
+	      // x,y coords of center of symbol
+	      var cx = scale.x((0, _Data.makeAccessor)(getX)(d)) + pointOffset[0];
+	      var cy = scale.y((0, _Data.makeAccessor)(getY)(d)) + pointOffset[1];
+	
+	      // set positioning attributes based on symbol type
+	      if (pointSymbol.type === 'circle' || pointSymbol.type === 'ellipse') {
+	        _lodash2.default.assign(symbolProps, { cx: cx, cy: cy });
+	      } else if (pointSymbol.type === 'text') {
+	        _lodash2.default.assign(symbolProps, { x: cx, y: cy, style: { textAnchor: 'middle', dominantBaseline: 'central' } });
+	      } else {
+	        _lodash2.default.assign(symbolProps, { x: cx, y: cy, style: { transform: "translate(-50%, -50%)" } });
+	      }
+	
+	      return _react2.default.cloneElement(pointSymbol, symbolProps);
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+	
+	  // todo: implement getSpacing or getPadding static
+	
+	  _createClass(ScatterPlot, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'g',
+	        { className: this.props.name },
+	        this.props.data.map(this.renderPoint)
+	      );
+	    }
+	  }]);
+	
+	  return ScatterPlot;
+	}(_react2.default.Component);
+	
+	ScatterPlot.propTypes = {
+	  // the array of data objects
+	  data: PropTypes.array.isRequired,
+	  // accessors for X & Y coordinates
+	  getX: CustomPropTypes.getter,
+	  getY: CustomPropTypes.getter,
+	  // allow user to pass an accessor for setting the class of a point
+	  getClass: CustomPropTypes.getter,
+	
+	  scaleType: PropTypes.object,
+	  scale: PropTypes.object,
+	
+	  // used with the default point symbol (circle), defines the circle radius
+	  pointRadius: PropTypes.number,
+	  // text or SVG node to use as custom point symbol, or function which returns text/SVG
+	  pointSymbol: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+	  // manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered
+	  pointOffset: PropTypes.arrayOf(PropTypes.number),
+	
+	  onMouseEnterPoint: PropTypes.func,
+	  onMouseMovePoint: PropTypes.func,
+	  onMouseLeavePoint: PropTypes.func
+	};
+	ScatterPlot.defaultProps = {
+	  pointRadius: 3,
+	  pointSymbol: _react2.default.createElement('circle', null),
+	  pointOffset: [0, 0]
+	};
+	exports.default = ScatterPlot;
+
+/***/ },
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57285,15 +56676,13 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _RangeBarChart = __webpack_require__(228);
+	var _RangeBarChart = __webpack_require__(225);
 	
 	var _RangeBarChart2 = _interopRequireDefault(_RangeBarChart);
 	
-	var _CustomPropTypes = __webpack_require__(221);
+	var _CustomPropTypes = __webpack_require__(219);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
-	
-	var _util = __webpack_require__(218);
 	
 	var _Scale = __webpack_require__(207);
 	
@@ -57384,7 +56773,7 @@
 	exports.default = BarChart;
 
 /***/ },
-/* 228 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57405,17 +56794,15 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _CustomPropTypes = __webpack_require__(221);
+	var _CustomPropTypes = __webpack_require__(219);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
-	
-	var _util = __webpack_require__(218);
 	
 	var _Scale = __webpack_require__(207);
 	
 	var _Data = __webpack_require__(205);
 	
-	var _Bar = __webpack_require__(229);
+	var _Bar = __webpack_require__(226);
 	
 	var _Bar2 = _interopRequireDefault(_Bar);
 	
@@ -57530,7 +56917,7 @@
 	exports.default = RangeBarChart;
 
 /***/ },
-/* 229 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57549,7 +56936,7 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _isUndefined = __webpack_require__(230);
+	var _isUndefined = __webpack_require__(227);
 	
 	var _isUndefined2 = _interopRequireDefault(_isUndefined);
 	
@@ -57652,7 +57039,7 @@
 	exports.default = Bar;
 
 /***/ },
-/* 230 */
+/* 227 */
 /***/ function(module, exports) {
 
 	/**
@@ -57679,115 +57066,7 @@
 
 
 /***/ },
-/* 231 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(5);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _lodash = __webpack_require__(3);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	var _d = __webpack_require__(162);
-	
-	var _d2 = _interopRequireDefault(_d);
-	
-	var _AreaBarChart = __webpack_require__(232);
-	
-	var _AreaBarChart2 = _interopRequireDefault(_AreaBarChart);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Histogram = function (_React$Component) {
-	  _inherits(Histogram, _React$Component);
-	
-	  function Histogram() {
-	    var _Object$getPrototypeO;
-	
-	    var _temp, _this, _ret;
-	
-	    _classCallCheck(this, Histogram);
-	
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-	
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Histogram)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
-	      histogramData: null
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-	
-	  _createClass(Histogram, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      var histogramData = _d2.default.layout.histogram().bins(30)(this.props.data);
-	      //console.log('histogram', this.props.data, histogramData);
-	      this.setState({ histogramData: histogramData });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      if (!this.state.histogramData) return _react2.default.createElement('g', null);
-	      var _props = this.props;
-	      var name = _props.name;
-	      var scale = _props.scale;
-	      var axisType = _props.axisType;
-	      var scaleWidth = _props.scaleWidth;
-	      var scaleHeight = _props.scaleHeight;
-	      var plotWidth = _props.plotWidth;
-	      var plotHeight = _props.plotHeight;
-	
-	
-	      return _react2.default.createElement(_AreaBarChart2.default, _extends({
-	        data: this.state.histogramData,
-	        getX: 'x',
-	        getXEnd: function getXEnd(d) {
-	          return d.x + d.dx;
-	        },
-	        getY: 'y'
-	      }, { name: name, scale: scale, axisType: axisType, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: plotWidth, plotHeight: plotHeight }));
-	    }
-	  }], [{
-	    key: 'getDomain',
-	    value: function getDomain() {
-	      // todo implement for real
-	      return { y: 200 };
-	    }
-	  }]);
-	
-	  return Histogram;
-	}(_react2.default.Component);
-	
-	Histogram.propTypes = {
-	  // the array of data objects
-	  data: _react2.default.PropTypes.array.isRequired,
-	  // accessor for X & Y coordinates
-	  getValue: _react2.default.PropTypes.object,
-	  axisType: _react2.default.PropTypes.object,
-	  scale: _react2.default.PropTypes.object
-	};
-	exports.default = Histogram;
-
-/***/ },
-/* 232 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57812,7 +57091,7 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _CustomPropTypes = __webpack_require__(221);
+	var _CustomPropTypes = __webpack_require__(219);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -57820,7 +57099,7 @@
 	
 	var _Data = __webpack_require__(205);
 	
-	var _RangeRect = __webpack_require__(233);
+	var _RangeRect = __webpack_require__(229);
 	
 	var _RangeRect2 = _interopRequireDefault(_RangeRect);
 	
@@ -57929,7 +57208,7 @@
 	exports.default = AreaBarChart;
 
 /***/ },
-/* 233 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57948,11 +57227,11 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _isUndefined = __webpack_require__(230);
+	var _isUndefined = __webpack_require__(227);
 	
 	var _isUndefined2 = _interopRequireDefault(_isUndefined);
 	
-	var _CustomPropTypes = __webpack_require__(221);
+	var _CustomPropTypes = __webpack_require__(219);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -58036,7 +57315,855 @@
 	exports.default = RangeRect;
 
 /***/ },
+/* 230 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(5);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(3);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d2 = __webpack_require__(162);
+	
+	var _d3 = _interopRequireDefault(_d2);
+	
+	var _util = __webpack_require__(218);
+	
+	var _CustomPropTypes = __webpack_require__(219);
+	
+	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
+	
+	var _Scale = __webpack_require__(207);
+	
+	var _Data = __webpack_require__(205);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PropTypes = _react2.default.PropTypes;
+	
+	
+	// MarkerLine is similar to a bar chart,
+	// except that it just draws a line at the data value, rather than a full bar
+	// If the independent variable is a range, the length of the line will represent that range
+	// Otherwise all lines will be the same length.
+	// The dependent variable must be a single value, not a range.
+	
+	function getTickType(props) {
+	  var getXEnd = props.getXEnd;
+	  var getYEnd = props.getYEnd;
+	  var orientation = props.orientation;
+	
+	  var isVertical = orientation === 'vertical';
+	  // warn if a range is passed for the dependent variable, which is expected to be a value
+	  if (isVertical && !_lodash2.default.isUndefined(getYEnd) || !isVertical && !_lodash2.default.isUndefined(getXEnd)) console.warn("Warning: MarkerLineChart can only show the independent variable as a range, not the dependent variable.");
+	
+	  if (isVertical && !_lodash2.default.isUndefined(getXEnd) || !isVertical && !_lodash2.default.isUndefined(getYEnd)) return "RangeValue";
+	
+	  return "ValueValue";
+	}
+	
+	var MarkerLineChart = function (_React$Component) {
+	  _inherits(MarkerLineChart, _React$Component);
+	
+	  function MarkerLineChart() {
+	    var _Object$getPrototypeO;
+	
+	    var _temp, _this, _ret;
+	
+	    _classCallCheck(this, MarkerLineChart);
+	
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(MarkerLineChart)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.onMouseEnterLine = function (e, d) {
+	      _this.props.onMouseEnterLine(e, d);
+	    }, _this.onMouseMoveLine = function (e, d) {
+	      _this.props.onMouseMoveLine(e, d);
+	    }, _this.onMouseLeaveLine = function (e, d) {
+	      _this.props.onMouseLeaveLine(e, d);
+	    }, _this.renderRangeValueLine = function (d, i) {
+	      var _map = ['onMouseEnterLine', 'onMouseMoveLine', 'onMouseLeaveLine'].map(function (eventName) {
+	        // partially apply this bar's data point as 2nd callback argument
+	        var callback = (0, _util.methodIfFuncProp)(eventName, _this.props, _this);
+	        return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
+	      });
+	
+	      var _map2 = _slicedToArray(_map, 3);
+	
+	      var onMouseEnter = _map2[0];
+	      var onMouseMove = _map2[1];
+	      var onMouseLeave = _map2[2];
+	      var _this$props = _this.props;
+	      var getX = _this$props.getX;
+	      var getXEnd = _this$props.getXEnd;
+	      var getY = _this$props.getY;
+	      var getYEnd = _this$props.getYEnd;
+	      var orientation = _this$props.orientation;
+	      var scale = _this$props.scale;
+	
+	      var isVertical = orientation === 'vertical';
+	      var xVal = scale.x((0, _Data.makeAccessor)(getX)(d));
+	      var yVal = scale.y((0, _Data.makeAccessor)(getY)(d));
+	      var xEndVal = _lodash2.default.isUndefined(getXEnd) ? 0 : scale.x((0, _Data.makeAccessor)(getXEnd)(d));
+	      var yEndVal = _lodash2.default.isUndefined(getYEnd) ? 0 : scale.y((0, _Data.makeAccessor)(getYEnd)(d));
+	      var x1 = xVal;
+	      var y1 = yVal;
+	
+	      var x2 = isVertical ? xEndVal : xVal;
+	      var y2 = isVertical ? yVal : yEndVal;
+	      var key = 'marker-line-' + i;
+	
+	      if (!_lodash2.default.every([x1, x2, y1, y2], _lodash2.default.isFinite)) return null;
+	      return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }));
+	    }, _this.renderValueValueLine = function (d, i) {
+	      var _map3 = ['onMouseEnterLine', 'onMouseMoveLine', 'onMouseLeaveLine'].map(function (eventName) {
+	        // partially apply this bar's data point as 2nd callback argument
+	        var callback = (0, _util.methodIfFuncProp)(eventName, _this.props, _this);
+	        return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
+	      });
+	
+	      var _map4 = _slicedToArray(_map3, 3);
+	
+	      var onMouseEnter = _map4[0];
+	      var onMouseMove = _map4[1];
+	      var onMouseLeave = _map4[2];
+	      var _this$props2 = _this.props;
+	      var getX = _this$props2.getX;
+	      var getY = _this$props2.getY;
+	      var orientation = _this$props2.orientation;
+	      var lineLength = _this$props2.lineLength;
+	      var scale = _this$props2.scale;
+	
+	      var isVertical = orientation === 'vertical';
+	      var xVal = scale.x((0, _Data.makeAccessor)(getX)(d));
+	      var yVal = scale.y((0, _Data.makeAccessor)(getY)(d));
+	      var x1 = isVertical ? xVal - lineLength / 2 : xVal;
+	      var x2 = isVertical ? xVal + lineLength / 2 : xVal;
+	      var y1 = isVertical ? yVal : yVal - lineLength / 2;
+	      var y2 = isVertical ? yVal : yVal + lineLength / 2;
+	      var key = 'marker-line-' + i;
+	
+	      if (!_lodash2.default.every([x1, x2, y1, y2], _lodash2.default.isFinite)) return null;
+	      return _react2.default.createElement('line', _extends({ className: 'marker-line' }, { x1: x1, x2: x2, y1: y1, y2: y2, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }));
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+	
+	  _createClass(MarkerLineChart, [{
+	    key: 'render',
+	    value: function render() {
+	      var tickType = getTickType(this.props);
+	      return _react2.default.createElement(
+	        'g',
+	        { className: 'marker-line-chart' },
+	        tickType === 'RangeValue' ? this.props.data.map(this.renderRangeValueLine) : this.props.data.map(this.renderValueValueLine)
+	      );
+	    }
+	  }], [{
+	    key: 'getDomain',
+	
+	
+	    // todo reimplement padding/spacing
+	    /*
+	    static getOptions(props) {
+	      const {data, getX, getXEnd, getY, getYEnd, scaleType, orientation, lineLength} = props;
+	      const tickType = getTickType(props);
+	      const isVertical = (orientation === 'vertical');
+	      const accessors = {x: makeAccessor(getX), y: makeAccessor(getY)};
+	      const endAccessors = {x: makeAccessor(getXEnd), y: makeAccessor(getYEnd)};
+	       let options = {domain: {}, spacing: {}};
+	       if(tickType === 'RangeValue') { // set range domain for range type
+	        let rangeAxis = isVertical ? 'x' : 'y';
+	        options.domain[rangeAxis] =
+	          rangeAxisDomain(data, accessors[rangeAxis], endAccessors[rangeAxis], scaleType[rangeAxis]);
+	      } else {
+	        // the value, and therefore the center of the marker line, may fall exactly on the axis min or max,
+	        // therefore marker lines need (0.5*lineLength) spacing so they don't hang over the edge of the chart
+	        const halfLine = Math.ceil(0.5 * lineLength);
+	        options.spacing = isVertical ? {left: halfLine, right: halfLine} : {top: halfLine, bottom: halfLine};
+	      }
+	       return options;
+	    }
+	    */
+	
+	    value: function getDomain(props) {
+	      if (getTickType(props) === 'RangeValue') {
+	        // set range domain for range type
+	        var data = props.data;
+	        var getX = props.getX;
+	        var getXEnd = props.getXEnd;
+	        var getY = props.getY;
+	        var getYEnd = props.getYEnd;
+	        var scaleType = props.scaleType;
+	        var orientation = props.orientation;
+	
+	        var horizontal = orientation !== 'vertical';
+	
+	        // only have to specify range axis domain, other axis uses default domainFromData
+	        // in this chart type, the range axis, if there is one, is always the *independent* variable
+	        var rangeAxis = horizontal ? 'y' : 'x';
+	        var rangeStartAccessor = horizontal ? (0, _Data.makeAccessor)(getY) : (0, _Data.makeAccessor)(getX);
+	        var rangeEndAccessor = horizontal ? (0, _Data.makeAccessor)(getYEnd) : (0, _Data.makeAccessor)(getXEnd);
+	        var rangeDataType = (0, _Scale.dataTypeFromScaleType)(scaleType[rangeAxis]);
+	
+	        return _defineProperty({}, rangeAxis, (0, _Data.domainFromRangeData)(data, rangeStartAccessor, rangeEndAccessor, rangeDataType));
+	      }
+	    }
+	  }]);
+	
+	  return MarkerLineChart;
+	}(_react2.default.Component);
+	
+	MarkerLineChart.propTypes = {
+	  // the array of data objects
+	  data: PropTypes.array.isRequired,
+	  // accessor for X & Y coordinates
+	  getX: CustomPropTypes.getter,
+	  getY: CustomPropTypes.getter,
+	  getXEnd: CustomPropTypes.getter,
+	  getYEnd: CustomPropTypes.getter,
+	
+	  orientation: PropTypes.oneOf(['vertical', 'horizontal']),
+	  lineLength: PropTypes.number,
+	
+	  // x & y scale types
+	  scaleType: PropTypes.object,
+	  scale: PropTypes.object,
+	
+	  onMouseEnterLine: PropTypes.func,
+	  onMouseMoveLine: PropTypes.func,
+	  onMouseLeaveLine: PropTypes.func
+	};
+	MarkerLineChart.defaultProps = {
+	  orientation: 'vertical',
+	  lineLength: 10
+	};
+	exports.default = MarkerLineChart;
+
+/***/ },
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(5);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(3);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d2 = __webpack_require__(162);
+	
+	var _d3 = _interopRequireDefault(_d2);
+	
+	var _util = __webpack_require__(218);
+	
+	var _Data = __webpack_require__(205);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var AreaHeatmap = function (_React$Component) {
+	  _inherits(AreaHeatmap, _React$Component);
+	
+	  function AreaHeatmap() {
+	    var _Object$getPrototypeO;
+	
+	    var _temp, _this, _ret;
+	
+	    _classCallCheck(this, AreaHeatmap);
+	
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(AreaHeatmap)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.onMouseEnter = function (e) {
+	      _this.props.onMouseEnter(e);
+	    }, _this.onMouseLeave = function (e) {
+	      _this.props.onMouseLeave(e);
+	    }, _this.onMouseMove = function (e) {
+	      var _this$props = _this.props;
+	      var scale = _this$props.scale;
+	      var data = _this$props.data;
+	      var getArea = _this$props.getArea;
+	      var getX = _this$props.getX;
+	      var getXEnd = _this$props.getXEnd;
+	      var getY = _this$props.getY;
+	      var getYEnd = _this$props.getYEnd;
+	      var onMouseMove = _this$props.onMouseMove;
+	
+	      if (!_lodash2.default.isFunction(onMouseMove)) return;
+	      // const [xAccessor, xEndAccessor, yAccessor, yEndAccessor] =
+	      //   [getArea, getX, getXEnd, getY, getYEnd].map(makeAccessor);
+	
+	      var boundBox = _this.refs.background.getBoundingClientRect();
+	      if (!boundBox) return;
+	      var x = e.clientX - (boundBox.left || 0);
+	      var y = e.clientY - (boundBox.top || 0);
+	      var xVal = scale.x.invert(x);
+	      var yVal = scale.y.invert(y);
+	      //const xD = _.find(data, d => xVal >= xAccessor(d) && xVal < xEndAccessor(d));
+	      //const yD = _.find(data, d => yVal >= yAccessor(d) && yVal < yEndAccessor(d));
+	      //const d = _.find(data,
+	      //    d => xVal >= xAccessor(d) && xVal < xEndAccessor(d) && yVal >= yAccessor(d) && yVal < yEndAccessor(d));
+	      //const xBin = [xAccessor(xD), xEndAccessor(xD)];
+	      //const yBin = [yAccessor(yD), yEndAccessor(yD)];
+	
+	      //onMouseMove(e, {xVal, yVal, d, xD, yD, xBin, yBin});
+	
+	      onMouseMove(e, { xVal: xVal, yVal: yVal });
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+	
+	  _createClass(AreaHeatmap, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var data = _props.data;
+	      var getArea = _props.getArea;
+	      var getX = _props.getX;
+	      var getXEnd = _props.getXEnd;
+	      var getY = _props.getY;
+	      var getYEnd = _props.getYEnd;
+	      var scale = _props.scale;
+	      var scaleWidth = _props.scaleWidth;
+	      var scaleHeight = _props.scaleHeight;
+	
+	      var _map = [getArea, getX, getXEnd, getY, getYEnd].map(_Data.makeAccessor);
+	
+	      var _map2 = _slicedToArray(_map, 5);
+	
+	      var areaAccessor = _map2[0];
+	      var xAccessor = _map2[1];
+	      var xEndAccessor = _map2[2];
+	      var yAccessor = _map2[3];
+	      var yEndAccessor = _map2[4];
+	
+	      // to determine how many data units are represented by 1 square pixel of area,
+	      // find the bin that would require the highest unit-per-pixel scale if its rectangle filled the whole container
+	
+	      var unitsPerPixel = this.props.unitsPerPixel || Math.max.apply(this, data.map(function (d) {
+	        return areaAccessor(d) / Math.abs(
+	        // area of entire containing rectangle
+	        (scale.x(xEndAccessor(d)) - scale.x(xAccessor(d))) * (scale.y(yEndAccessor(d)) - scale.y(yAccessor(d))));
+	      }));
+	
+	      var handlers = {
+	        onMouseMove: (0, _util.methodIfFuncProp)('onMouseMove', this.props, this),
+	        onMouseEnter: (0, _util.methodIfFuncProp)('onMouseEnter', this.props, this),
+	        onMouseLeave: (0, _util.methodIfFuncProp)('onMouseLeave', this.props, this)
+	      };
+	
+	      return _react2.default.createElement(
+	        'g',
+	        _extends({ className: 'area-heatmap-chart' }, handlers),
+	        _react2.default.createElement('rect', { x: '0', y: '0', width: scaleWidth, height: scaleHeight, ref: 'background', fill: 'transparent' }),
+	        data.map(function (d, i) {
+	          // full width and height of the containing rectangle
+	          var fullWidth = Math.abs(scale.x(xEndAccessor(d)) - scale.x(xAccessor(d)));
+	          var fullHeight = Math.abs(scale.y(yEndAccessor(d)) - scale.y(yAccessor(d)));
+	          // x / y position of top left of the containing rectangle
+	          var x0 = Math.min(scale.x(xEndAccessor(d)), scale.x(xAccessor(d)));
+	          var y0 = Math.min(scale.y(yEndAccessor(d)), scale.y(yAccessor(d)));
+	
+	          // we know two facts:
+	          // 1. the (pixel) area of the rect will be the data value divided by the # of data units per pixel
+	          //    ie. area = height * width = areaAccessor(d) / unitsPerPixel
+	          // 2. all rectangles, regardless of size, have the same shape (are congruent), so the ratio
+	          //    of the rect's width to the full width is equal to the ratio of its height to the full height.
+	          //    ie. (height / fullHeight) = (width / fullWidth)
+	          // solve for height and width to get...
+	          var width = Math.sqrt(areaAccessor(d) / unitsPerPixel * (fullWidth / fullHeight));
+	          var height = Math.sqrt(areaAccessor(d) / unitsPerPixel * (fullHeight / fullWidth));
+	
+	          // center the data rect in the containing rectangle
+	          var x = x0 + (fullWidth - width) / 2;
+	          var y = y0 + (fullHeight - height) / 2;
+	
+	          if (!_lodash2.default.every([x, y, width, height], _lodash2.default.isFinite)) return null;
+	
+	          return _react2.default.createElement('rect', { x: x, y: y, width: width, height: height, className: 'area-heatmap-rect', key: 'rect-' + i });
+	        })
+	      );
+	    }
+	  }], [{
+	    key: 'getDomain',
+	    value: function getDomain(props) {
+	      var data = props.data;
+	      var getX = props.getX;
+	      var getXEnd = props.getXEnd;
+	      var getY = props.getY;
+	      var getYEnd = props.getYEnd;
+	
+	      return {
+	        x: _d3.default.extent(_lodash2.default.flatten([data.map((0, _Data.makeAccessor)(getX)), data.map((0, _Data.makeAccessor)(getXEnd))])),
+	        y: _d3.default.extent(_lodash2.default.flatten([data.map((0, _Data.makeAccessor)(getY)), data.map((0, _Data.makeAccessor)(getYEnd))]))
+	      };
+	    }
+	  }]);
+	
+	  return AreaHeatmap;
+	}(_react2.default.Component);
+	
+	AreaHeatmap.propTypes = {
+	  unitsPerPixel: _react2.default.PropTypes.number
+	};
+	exports.default = AreaHeatmap;
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(5);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(3);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d = __webpack_require__(162);
+	
+	var _d2 = _interopRequireDefault(_d);
+	
+	var _AreaBarChart = __webpack_require__(228);
+	
+	var _AreaBarChart2 = _interopRequireDefault(_AreaBarChart);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Histogram = function (_React$Component) {
+	  _inherits(Histogram, _React$Component);
+	
+	  function Histogram() {
+	    var _Object$getPrototypeO;
+	
+	    var _temp, _this, _ret;
+	
+	    _classCallCheck(this, Histogram);
+	
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Histogram)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+	      histogramData: null
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+	
+	  _createClass(Histogram, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var histogramData = _d2.default.layout.histogram().bins(30)(this.props.data);
+	      //console.log('histogram', this.props.data, histogramData);
+	      this.setState({ histogramData: histogramData });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (!this.state.histogramData) return _react2.default.createElement('g', null);
+	      var _props = this.props;
+	      var name = _props.name;
+	      var scale = _props.scale;
+	      var axisType = _props.axisType;
+	      var scaleWidth = _props.scaleWidth;
+	      var scaleHeight = _props.scaleHeight;
+	      var plotWidth = _props.plotWidth;
+	      var plotHeight = _props.plotHeight;
+	
+	
+	      return _react2.default.createElement(_AreaBarChart2.default, _extends({
+	        data: this.state.histogramData,
+	        getX: 'x',
+	        getXEnd: function getXEnd(d) {
+	          return d.x + d.dx;
+	        },
+	        getY: 'y'
+	      }, { name: name, scale: scale, axisType: axisType, scaleWidth: scaleWidth, scaleHeight: scaleHeight, plotWidth: plotWidth, plotHeight: plotHeight }));
+	    }
+	  }], [{
+	    key: 'getDomain',
+	    value: function getDomain() {
+	      // todo implement for real
+	      return { y: 200 };
+	    }
+	  }]);
+	
+	  return Histogram;
+	}(_react2.default.Component);
+	
+	Histogram.propTypes = {
+	  // the array of data objects
+	  data: _react2.default.PropTypes.array.isRequired,
+	  // accessor for X & Y coordinates
+	  getValue: _react2.default.PropTypes.object,
+	  axisType: _react2.default.PropTypes.object,
+	  scale: _react2.default.PropTypes.object
+	};
+	exports.default = Histogram;
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(5);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(3);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d = __webpack_require__(162);
+	
+	var _d2 = _interopRequireDefault(_d);
+	
+	var _CustomPropTypes = __webpack_require__(219);
+	
+	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
+	
+	var _LineChart = __webpack_require__(222);
+	
+	var _LineChart2 = _interopRequireDefault(_LineChart);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var KernelDensityEstimation = function (_React$Component) {
+	  _inherits(KernelDensityEstimation, _React$Component);
+	
+	  function KernelDensityEstimation() {
+	    var _Object$getPrototypeO;
+	
+	    var _temp, _this, _ret;
+	
+	    _classCallCheck(this, KernelDensityEstimation);
+	
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(KernelDensityEstimation)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+	      kdeData: null
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+	
+	  _createClass(KernelDensityEstimation, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.initKDE(this.props);
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(newProps) {
+	      this.initKDE(newProps);
+	    }
+	  }, {
+	    key: 'initKDE',
+	    value: function initKDE(props) {
+	      var data = props.data;
+	      var bandwidth = props.bandwidth;
+	      var sampleCount = props.sampleCount;
+	      var scale = props.scale;
+	      var width = props.width;
+	
+	      var kernel = epanechnikovKernel(bandwidth);
+	      var samples = scale.x.ticks(sampleCount || Math.ceil(width / 2));
+	      this.setState({ kdeData: kernelDensityEstimator(kernel, samples)(data) });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var name = _props.name;
+	      var scale = _props.scale;
+	      var width = _props.width;
+	      var height = _props.height;
+	      var plotWidth = _props.plotWidth;
+	      var plotHeight = _props.plotHeight;
+	      var kdeData = this.state.kdeData;
+	
+	
+	      return _react2.default.createElement(_LineChart2.default, _extends({
+	        data: kdeData,
+	        getX: 0,
+	        getY: function getY(d) {
+	          return d[1] * 500;
+	        }
+	      }, { name: name, scale: scale, width: width, height: height, plotWidth: plotWidth, plotHeight: plotHeight }));
+	    }
+	  }], [{
+	    key: 'getDomain',
+	    value: function getDomain() {
+	      // todo implement real static getDomain method
+	      return {
+	        x: null,
+	        y: [0, 200]
+	      };
+	    }
+	  }]);
+	
+	  return KernelDensityEstimation;
+	}(_react2.default.Component);
+	
+	KernelDensityEstimation.propTypes = {
+	  // the array of data objects
+	  data: _react2.default.PropTypes.array.isRequired,
+	
+	  // kernel bandwidth for kernel density estimator
+	  // https://en.wikipedia.org/wiki/Kernel_density_estimation#Bandwidth_selection
+	  // high bandwidth => oversmoothing & underfitting; low bandwidth => undersmoothing & overfitting
+	  bandwidth: _react2.default.PropTypes.number,
+	  // number of samples to take from the KDE
+	  // ie. the resolution/smoothness of the KDE line - more samples => higher resolution, smooth line
+	  sampleCount: _react2.default.PropTypes.number,
+	
+	  // common props from XYPlot
+	  // accessor for data values
+	  getX: CustomPropTypes.getter,
+	  getY: CustomPropTypes.getter,
+	  name: _react2.default.PropTypes.string,
+	  scale: _react2.default.PropTypes.object,
+	  axisType: _react2.default.PropTypes.object,
+	  scaleWidth: _react2.default.PropTypes.number,
+	  scaleHeight: _react2.default.PropTypes.number
+	};
+	KernelDensityEstimation.defaultProps = {
+	  bandwidth: 0.5,
+	  sampleCount: null, // null = auto-determined based on width
+	  name: ''
+	};
+	
+	
+	function kernelDensityEstimator(kernel, x) {
+	  return function (sample) {
+	    return x.map(function (x) {
+	      return [x, _d2.default.mean(sample, function (v) {
+	        return kernel(x - v);
+	      })];
+	    });
+	  };
+	}
+	
+	function epanechnikovKernel(scale) {
+	  return function (u) {
+	    return Math.abs(u /= scale) <= 1 ? .75 * (1 - u * u) / scale : 0;
+	  };
+	}
+	
+	exports.default = KernelDensityEstimation;
+
+/***/ },
 /* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(5);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var XLine = function (_React$Component) {
+	  _inherits(XLine, _React$Component);
+	
+	  function XLine() {
+	    _classCallCheck(this, XLine);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(XLine).apply(this, arguments));
+	  }
+	
+	  _createClass(XLine, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var value = _props.value;
+	      var height = _props.height;
+	      var style = _props.style;
+	
+	      var scale = this.props.scale.x;
+	      var className = 'chart-line-x ' + (this.props.className || '');
+	      var lineX = scale(value);
+	
+	      return _react2.default.createElement('line', {
+	        x1: lineX,
+	        x2: lineX,
+	        y1: 0,
+	        y2: height,
+	        className: className, style: style
+	      });
+	    }
+	  }]);
+	
+	  return XLine;
+	}(_react2.default.Component);
+	
+	XLine.propTypes = {
+	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired }),
+	  value: _react2.default.PropTypes.any.isRequired
+	};
+	XLine.defaultProps = {
+	  style: {}
+	};
+	exports.default = XLine;
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(5);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var YLine = function (_React$Component) {
+	  _inherits(YLine, _React$Component);
+	
+	  function YLine() {
+	    _classCallCheck(this, YLine);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(YLine).apply(this, arguments));
+	  }
+	
+	  _createClass(YLine, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var value = _props.value;
+	      var width = _props.width;
+	      var style = _props.style;
+	
+	      var scale = this.props.scale.y;
+	      var className = 'chart-line-y ' + (this.props.className || '');
+	      var lineY = scale(value);
+	
+	      return _react2.default.createElement('line', {
+	        x1: 0,
+	        x2: width,
+	        y1: lineY,
+	        y2: lineY,
+	        className: className, style: style
+	      });
+	    }
+	  }]);
+	
+	  return YLine;
+	}(_react2.default.Component);
+	
+	YLine.propTypes = {
+	  scale: _react2.default.PropTypes.shape({ y: _react2.default.PropTypes.func.isRequired }),
+	  value: _react2.default.PropTypes.any.isRequired
+	};
+	YLine.defaultProps = {
+	  style: {}
+	};
+	exports.default = YLine;
+
+/***/ },
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58059,21 +58186,21 @@
 	
 	var _Margin = __webpack_require__(213);
 	
-	var _Axis = __webpack_require__(235);
+	var _Axis = __webpack_require__(237);
 	
-	var _XTicks = __webpack_require__(236);
+	var _XTicks = __webpack_require__(238);
 	
 	var _XTicks2 = _interopRequireDefault(_XTicks);
 	
-	var _XGrid = __webpack_require__(237);
+	var _XGrid = __webpack_require__(239);
 	
 	var _XGrid2 = _interopRequireDefault(_XGrid);
 	
-	var _XAxisLabels = __webpack_require__(239);
+	var _XAxisLabels = __webpack_require__(240);
 	
 	var _XAxisLabels2 = _interopRequireDefault(_XAxisLabels);
 	
-	var _XAxisTitle = __webpack_require__(351);
+	var _XAxisTitle = __webpack_require__(352);
 	
 	var _XAxisTitle2 = _interopRequireDefault(_XAxisTitle);
 	
@@ -58224,7 +58351,7 @@
 	exports.default = XAxis;
 
 /***/ },
-/* 235 */
+/* 237 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -58284,7 +58411,7 @@
 	}
 
 /***/ },
-/* 236 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58396,7 +58523,7 @@
 	exports.default = XTicks;
 
 /***/ },
-/* 237 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58417,7 +58544,7 @@
 	
 	var _Scale = __webpack_require__(207);
 	
-	var _XLine = __webpack_require__(238);
+	var _XLine = __webpack_require__(234);
 	
 	var _XLine2 = _interopRequireDefault(_XLine);
 	
@@ -58497,74 +58624,7 @@
 	exports.default = XGrid;
 
 /***/ },
-/* 238 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(5);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var XLine = function (_React$Component) {
-	  _inherits(XLine, _React$Component);
-	
-	  function XLine() {
-	    _classCallCheck(this, XLine);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(XLine).apply(this, arguments));
-	  }
-	
-	  _createClass(XLine, [{
-	    key: 'render',
-	    value: function render() {
-	      var _props = this.props;
-	      var value = _props.value;
-	      var height = _props.height;
-	      var style = _props.style;
-	
-	      var scale = this.props.scale.x;
-	      var className = 'chart-line-x ' + (this.props.className || '');
-	      var lineX = scale(value);
-	
-	      return _react2.default.createElement('line', {
-	        x1: lineX,
-	        x2: lineX,
-	        y1: 0,
-	        y2: height,
-	        className: className, style: style
-	      });
-	    }
-	  }]);
-	
-	  return XLine;
-	}(_react2.default.Component);
-	
-	XLine.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired }),
-	  value: _react2.default.PropTypes.any.isRequired
-	};
-	XLine.defaultProps = {
-	  style: {}
-	};
-	exports.default = XLine;
-
-/***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58585,13 +58645,13 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _MeasuredValueLabel = __webpack_require__(240);
+	var _MeasuredValueLabel = __webpack_require__(241);
 	
 	var _MeasuredValueLabel2 = _interopRequireDefault(_MeasuredValueLabel);
 	
 	var _Scale = __webpack_require__(207);
 	
-	var _Label = __webpack_require__(251);
+	var _Label = __webpack_require__(252);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -58844,7 +58904,7 @@
 	exports.default = XAxisValueLabels;
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58863,7 +58923,7 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _measureText = __webpack_require__(241);
+	var _measureText = __webpack_require__(242);
 	
 	var _measureText2 = _interopRequireDefault(_measureText);
 	
@@ -58936,7 +58996,7 @@
 	exports.default = MeasuredValueLabel;
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -58945,7 +59005,7 @@
 	  value: true
 	});
 	
-	var _unitsCss = __webpack_require__(242);
+	var _unitsCss = __webpack_require__(243);
 	
 	var _unitsCss2 = _interopRequireDefault(_unitsCss);
 	
@@ -59021,17 +59081,6 @@
 	exports.default = measureText;
 
 /***/ },
-/* 242 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* eslint-env browser, node */
-	
-	'use strict';
-	
-	module.exports = __webpack_require__(243);
-
-
-/***/ },
 /* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -59039,9 +59088,20 @@
 	
 	'use strict';
 	
+	module.exports = __webpack_require__(244);
+
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* eslint-env browser, node */
+	
+	'use strict';
+	
 	// Imports
-	var conversions = __webpack_require__(244);
-	var isNumeric = __webpack_require__(250);
+	var conversions = __webpack_require__(245);
+	var isNumeric = __webpack_require__(251);
 	
 	var units = {};
 	
@@ -59178,7 +59238,7 @@
 
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* eslint-env browser, node */
@@ -59187,14 +59247,14 @@
 	
 	// Exports
 	module.exports = {
-	  'angle': __webpack_require__(245),
-	  'length': __webpack_require__(246),
-	  'resolution': __webpack_require__(249)
+	  'angle': __webpack_require__(246),
+	  'length': __webpack_require__(247),
+	  'resolution': __webpack_require__(250)
 	};
 
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports) {
 
 	/* eslint-env browser, node */
@@ -59243,7 +59303,7 @@
 
 
 /***/ },
-/* 246 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* eslint-env browser, node */
@@ -59251,8 +59311,8 @@
 	'use strict';
 	
 	// Imports
-	var utilities = __webpack_require__(247);
-	var viewport = __webpack_require__(248);
+	var utilities = __webpack_require__(248);
+	var viewport = __webpack_require__(249);
 	
 	var length = {'_default': 'px'};
 	
@@ -59416,7 +59476,7 @@
 
 
 /***/ },
-/* 247 */
+/* 248 */
 /***/ function(module, exports) {
 
 	/* eslint-env browser, node */
@@ -59554,7 +59614,7 @@
 
 
 /***/ },
-/* 248 */
+/* 249 */
 /***/ function(module, exports) {
 
 	/* eslint-env browser, node */
@@ -59644,7 +59704,7 @@
 
 
 /***/ },
-/* 249 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* eslint-env browser, node */
@@ -59652,7 +59712,7 @@
 	'use strict';
 	
 	// Imports
-	var utilities = __webpack_require__(247);
+	var utilities = __webpack_require__(248);
 	
 	var resolution = {'_default': 'dpi'};
 	
@@ -59686,7 +59746,7 @@
 
 
 /***/ },
-/* 250 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var isNumeric = function (obj) {
@@ -59703,7 +59763,7 @@
 
 
 /***/ },
-/* 251 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -59728,11 +59788,11 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _moment = __webpack_require__(252);
+	var _moment = __webpack_require__(253);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _numeral = __webpack_require__(350);
+	var _numeral = __webpack_require__(351);
 	
 	var _numeral2 = _interopRequireDefault(_numeral);
 	
@@ -59864,7 +59924,7 @@
 	}
 
 /***/ },
-/* 252 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
@@ -60143,7 +60203,7 @@
 	                module && module.exports) {
 	            try {
 	                oldLocale = globalLocale._abbr;
-	                __webpack_require__(253)("./" + name);
+	                __webpack_require__(254)("./" + name);
 	                // because defineLocale currently also sets the global locale, we
 	                // want to undo that for lazy loaded locales
 	                locale_locales__getSetGlobalLocale(oldLocale);
@@ -63476,202 +63536,202 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ },
-/* 253 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./af": 254,
-		"./af.js": 254,
-		"./ar": 255,
-		"./ar-ma": 256,
-		"./ar-ma.js": 256,
-		"./ar-sa": 257,
-		"./ar-sa.js": 257,
-		"./ar-tn": 258,
-		"./ar-tn.js": 258,
-		"./ar.js": 255,
-		"./az": 259,
-		"./az.js": 259,
-		"./be": 260,
-		"./be.js": 260,
-		"./bg": 261,
-		"./bg.js": 261,
-		"./bn": 262,
-		"./bn.js": 262,
-		"./bo": 263,
-		"./bo.js": 263,
-		"./br": 264,
-		"./br.js": 264,
-		"./bs": 265,
-		"./bs.js": 265,
-		"./ca": 266,
-		"./ca.js": 266,
-		"./cs": 267,
-		"./cs.js": 267,
-		"./cv": 268,
-		"./cv.js": 268,
-		"./cy": 269,
-		"./cy.js": 269,
-		"./da": 270,
-		"./da.js": 270,
-		"./de": 271,
-		"./de-at": 272,
-		"./de-at.js": 272,
-		"./de.js": 271,
-		"./dv": 273,
-		"./dv.js": 273,
-		"./el": 274,
-		"./el.js": 274,
-		"./en-au": 275,
-		"./en-au.js": 275,
-		"./en-ca": 276,
-		"./en-ca.js": 276,
-		"./en-gb": 277,
-		"./en-gb.js": 277,
-		"./en-ie": 278,
-		"./en-ie.js": 278,
-		"./en-nz": 279,
-		"./en-nz.js": 279,
-		"./eo": 280,
-		"./eo.js": 280,
-		"./es": 281,
-		"./es.js": 281,
-		"./et": 282,
-		"./et.js": 282,
-		"./eu": 283,
-		"./eu.js": 283,
-		"./fa": 284,
-		"./fa.js": 284,
-		"./fi": 285,
-		"./fi.js": 285,
-		"./fo": 286,
-		"./fo.js": 286,
-		"./fr": 287,
-		"./fr-ca": 288,
-		"./fr-ca.js": 288,
-		"./fr-ch": 289,
-		"./fr-ch.js": 289,
-		"./fr.js": 287,
-		"./fy": 290,
-		"./fy.js": 290,
-		"./gd": 291,
-		"./gd.js": 291,
-		"./gl": 292,
-		"./gl.js": 292,
-		"./he": 293,
-		"./he.js": 293,
-		"./hi": 294,
-		"./hi.js": 294,
-		"./hr": 295,
-		"./hr.js": 295,
-		"./hu": 296,
-		"./hu.js": 296,
-		"./hy-am": 297,
-		"./hy-am.js": 297,
-		"./id": 298,
-		"./id.js": 298,
-		"./is": 299,
-		"./is.js": 299,
-		"./it": 300,
-		"./it.js": 300,
-		"./ja": 301,
-		"./ja.js": 301,
-		"./jv": 302,
-		"./jv.js": 302,
-		"./ka": 303,
-		"./ka.js": 303,
-		"./kk": 304,
-		"./kk.js": 304,
-		"./km": 305,
-		"./km.js": 305,
-		"./ko": 306,
-		"./ko.js": 306,
-		"./lb": 307,
-		"./lb.js": 307,
-		"./lo": 308,
-		"./lo.js": 308,
-		"./lt": 309,
-		"./lt.js": 309,
-		"./lv": 310,
-		"./lv.js": 310,
-		"./me": 311,
-		"./me.js": 311,
-		"./mk": 312,
-		"./mk.js": 312,
-		"./ml": 313,
-		"./ml.js": 313,
-		"./mr": 314,
-		"./mr.js": 314,
-		"./ms": 315,
-		"./ms-my": 316,
-		"./ms-my.js": 316,
-		"./ms.js": 315,
-		"./my": 317,
-		"./my.js": 317,
-		"./nb": 318,
-		"./nb.js": 318,
-		"./ne": 319,
-		"./ne.js": 319,
-		"./nl": 320,
-		"./nl.js": 320,
-		"./nn": 321,
-		"./nn.js": 321,
-		"./pl": 322,
-		"./pl.js": 322,
-		"./pt": 323,
-		"./pt-br": 324,
-		"./pt-br.js": 324,
-		"./pt.js": 323,
-		"./ro": 325,
-		"./ro.js": 325,
-		"./ru": 326,
-		"./ru.js": 326,
-		"./se": 327,
-		"./se.js": 327,
-		"./si": 328,
-		"./si.js": 328,
-		"./sk": 329,
-		"./sk.js": 329,
-		"./sl": 330,
-		"./sl.js": 330,
-		"./sq": 331,
-		"./sq.js": 331,
-		"./sr": 332,
-		"./sr-cyrl": 333,
-		"./sr-cyrl.js": 333,
-		"./sr.js": 332,
-		"./sv": 334,
-		"./sv.js": 334,
-		"./sw": 335,
-		"./sw.js": 335,
-		"./ta": 336,
-		"./ta.js": 336,
-		"./te": 337,
-		"./te.js": 337,
-		"./th": 338,
-		"./th.js": 338,
-		"./tl-ph": 339,
-		"./tl-ph.js": 339,
-		"./tlh": 340,
-		"./tlh.js": 340,
-		"./tr": 341,
-		"./tr.js": 341,
-		"./tzl": 342,
-		"./tzl.js": 342,
-		"./tzm": 343,
-		"./tzm-latn": 344,
-		"./tzm-latn.js": 344,
-		"./tzm.js": 343,
-		"./uk": 345,
-		"./uk.js": 345,
-		"./uz": 346,
-		"./uz.js": 346,
-		"./vi": 347,
-		"./vi.js": 347,
-		"./zh-cn": 348,
-		"./zh-cn.js": 348,
-		"./zh-tw": 349,
-		"./zh-tw.js": 349
+		"./af": 255,
+		"./af.js": 255,
+		"./ar": 256,
+		"./ar-ma": 257,
+		"./ar-ma.js": 257,
+		"./ar-sa": 258,
+		"./ar-sa.js": 258,
+		"./ar-tn": 259,
+		"./ar-tn.js": 259,
+		"./ar.js": 256,
+		"./az": 260,
+		"./az.js": 260,
+		"./be": 261,
+		"./be.js": 261,
+		"./bg": 262,
+		"./bg.js": 262,
+		"./bn": 263,
+		"./bn.js": 263,
+		"./bo": 264,
+		"./bo.js": 264,
+		"./br": 265,
+		"./br.js": 265,
+		"./bs": 266,
+		"./bs.js": 266,
+		"./ca": 267,
+		"./ca.js": 267,
+		"./cs": 268,
+		"./cs.js": 268,
+		"./cv": 269,
+		"./cv.js": 269,
+		"./cy": 270,
+		"./cy.js": 270,
+		"./da": 271,
+		"./da.js": 271,
+		"./de": 272,
+		"./de-at": 273,
+		"./de-at.js": 273,
+		"./de.js": 272,
+		"./dv": 274,
+		"./dv.js": 274,
+		"./el": 275,
+		"./el.js": 275,
+		"./en-au": 276,
+		"./en-au.js": 276,
+		"./en-ca": 277,
+		"./en-ca.js": 277,
+		"./en-gb": 278,
+		"./en-gb.js": 278,
+		"./en-ie": 279,
+		"./en-ie.js": 279,
+		"./en-nz": 280,
+		"./en-nz.js": 280,
+		"./eo": 281,
+		"./eo.js": 281,
+		"./es": 282,
+		"./es.js": 282,
+		"./et": 283,
+		"./et.js": 283,
+		"./eu": 284,
+		"./eu.js": 284,
+		"./fa": 285,
+		"./fa.js": 285,
+		"./fi": 286,
+		"./fi.js": 286,
+		"./fo": 287,
+		"./fo.js": 287,
+		"./fr": 288,
+		"./fr-ca": 289,
+		"./fr-ca.js": 289,
+		"./fr-ch": 290,
+		"./fr-ch.js": 290,
+		"./fr.js": 288,
+		"./fy": 291,
+		"./fy.js": 291,
+		"./gd": 292,
+		"./gd.js": 292,
+		"./gl": 293,
+		"./gl.js": 293,
+		"./he": 294,
+		"./he.js": 294,
+		"./hi": 295,
+		"./hi.js": 295,
+		"./hr": 296,
+		"./hr.js": 296,
+		"./hu": 297,
+		"./hu.js": 297,
+		"./hy-am": 298,
+		"./hy-am.js": 298,
+		"./id": 299,
+		"./id.js": 299,
+		"./is": 300,
+		"./is.js": 300,
+		"./it": 301,
+		"./it.js": 301,
+		"./ja": 302,
+		"./ja.js": 302,
+		"./jv": 303,
+		"./jv.js": 303,
+		"./ka": 304,
+		"./ka.js": 304,
+		"./kk": 305,
+		"./kk.js": 305,
+		"./km": 306,
+		"./km.js": 306,
+		"./ko": 307,
+		"./ko.js": 307,
+		"./lb": 308,
+		"./lb.js": 308,
+		"./lo": 309,
+		"./lo.js": 309,
+		"./lt": 310,
+		"./lt.js": 310,
+		"./lv": 311,
+		"./lv.js": 311,
+		"./me": 312,
+		"./me.js": 312,
+		"./mk": 313,
+		"./mk.js": 313,
+		"./ml": 314,
+		"./ml.js": 314,
+		"./mr": 315,
+		"./mr.js": 315,
+		"./ms": 316,
+		"./ms-my": 317,
+		"./ms-my.js": 317,
+		"./ms.js": 316,
+		"./my": 318,
+		"./my.js": 318,
+		"./nb": 319,
+		"./nb.js": 319,
+		"./ne": 320,
+		"./ne.js": 320,
+		"./nl": 321,
+		"./nl.js": 321,
+		"./nn": 322,
+		"./nn.js": 322,
+		"./pl": 323,
+		"./pl.js": 323,
+		"./pt": 324,
+		"./pt-br": 325,
+		"./pt-br.js": 325,
+		"./pt.js": 324,
+		"./ro": 326,
+		"./ro.js": 326,
+		"./ru": 327,
+		"./ru.js": 327,
+		"./se": 328,
+		"./se.js": 328,
+		"./si": 329,
+		"./si.js": 329,
+		"./sk": 330,
+		"./sk.js": 330,
+		"./sl": 331,
+		"./sl.js": 331,
+		"./sq": 332,
+		"./sq.js": 332,
+		"./sr": 333,
+		"./sr-cyrl": 334,
+		"./sr-cyrl.js": 334,
+		"./sr.js": 333,
+		"./sv": 335,
+		"./sv.js": 335,
+		"./sw": 336,
+		"./sw.js": 336,
+		"./ta": 337,
+		"./ta.js": 337,
+		"./te": 338,
+		"./te.js": 338,
+		"./th": 339,
+		"./th.js": 339,
+		"./tl-ph": 340,
+		"./tl-ph.js": 340,
+		"./tlh": 341,
+		"./tlh.js": 341,
+		"./tr": 342,
+		"./tr.js": 342,
+		"./tzl": 343,
+		"./tzl.js": 343,
+		"./tzm": 344,
+		"./tzm-latn": 345,
+		"./tzm-latn.js": 345,
+		"./tzm.js": 344,
+		"./uk": 346,
+		"./uk.js": 346,
+		"./uz": 347,
+		"./uz.js": 347,
+		"./vi": 348,
+		"./vi.js": 348,
+		"./zh-cn": 349,
+		"./zh-cn.js": 349,
+		"./zh-tw": 350,
+		"./zh-tw.js": 350
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -63684,11 +63744,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 253;
+	webpackContext.id = 254;
 
 
 /***/ },
-/* 254 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -63696,7 +63756,7 @@
 	//! author : Werner Mollentze : https://github.com/wernerm
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -63765,7 +63825,7 @@
 	}));
 
 /***/ },
-/* 255 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -63775,7 +63835,7 @@
 	//! Native plural forms: forabi https://github.com/forabi
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -63905,7 +63965,7 @@
 	}));
 
 /***/ },
-/* 256 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -63914,7 +63974,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -63968,7 +64028,7 @@
 	}));
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -63976,7 +64036,7 @@
 	//! author : Suhail Alkowaileet : https://github.com/xsoh
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -64075,14 +64135,14 @@
 	}));
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale  : Tunisian Arabic (ar-tn)
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -64136,7 +64196,7 @@
 	}));
 
 /***/ },
-/* 259 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -64144,7 +64204,7 @@
 	//! author : topchiyev : https://github.com/topchiyev
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -64244,7 +64304,7 @@
 	}));
 
 /***/ },
-/* 260 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -64254,7 +64314,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -64382,7 +64442,7 @@
 	}));
 
 /***/ },
-/* 261 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -64390,7 +64450,7 @@
 	//! author : Krasen Borisov : https://github.com/kraz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -64476,7 +64536,7 @@
 	}));
 
 /***/ },
-/* 262 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -64484,7 +64544,7 @@
 	//! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -64593,7 +64653,7 @@
 	}));
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -64601,7 +64661,7 @@
 	//! author : Thupten N. Chakrishar : https://github.com/vajradog
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -64707,7 +64767,7 @@
 	}));
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -64715,7 +64775,7 @@
 	//! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -64818,7 +64878,7 @@
 	}));
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -64827,7 +64887,7 @@
 	//! based on (hr) translation by Bojan Marković
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -64963,7 +65023,7 @@
 	}));
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -64971,7 +65031,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -65046,7 +65106,7 @@
 	}));
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -65054,7 +65114,7 @@
 	//! author : petrbela : https://github.com/petrbela
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -65221,7 +65281,7 @@
 	}));
 
 /***/ },
-/* 268 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -65229,7 +65289,7 @@
 	//! author : Anatoly Mironov : https://github.com/mirontoli
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -65288,7 +65348,7 @@
 	}));
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -65296,7 +65356,7 @@
 	//! author : Robert Allen
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -65371,7 +65431,7 @@
 	}));
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -65379,7 +65439,7 @@
 	//! author : Ulrik Nielsen : https://github.com/mrbase
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -65435,7 +65495,7 @@
 	}));
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -65445,7 +65505,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -65515,7 +65575,7 @@
 	}));
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -65526,7 +65586,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -65596,7 +65656,7 @@
 	}));
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -65604,7 +65664,7 @@
 	//! author : Jawish Hameed : https://github.com/jawish
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -65699,7 +65759,7 @@
 	}));
 
 /***/ },
-/* 274 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -65707,7 +65767,7 @@
 	//! author : Aggelos Karalias : https://github.com/mehiel
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -65801,14 +65861,14 @@
 	}));
 
 /***/ },
-/* 275 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : australian english (en-au)
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -65871,7 +65931,7 @@
 	}));
 
 /***/ },
-/* 276 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -65879,7 +65939,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -65938,7 +65998,7 @@
 	}));
 
 /***/ },
-/* 277 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -65946,7 +66006,7 @@
 	//! author : Chris Gedrim : https://github.com/chrisgedrim
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -66009,7 +66069,7 @@
 	}));
 
 /***/ },
-/* 278 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -66017,7 +66077,7 @@
 	//! author : Chris Cartlidge : https://github.com/chriscartlidge
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -66080,14 +66140,14 @@
 	}));
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : New Zealand english (en-nz)
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -66150,7 +66210,7 @@
 	}));
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -66160,7 +66220,7 @@
 	//!          Se ne, bonvolu korekti kaj avizi min por ke mi povas lerni!
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -66227,7 +66287,7 @@
 	}));
 
 /***/ },
-/* 281 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -66235,7 +66295,7 @@
 	//! author : Julio Napurí : https://github.com/julionc
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -66310,7 +66370,7 @@
 	}));
 
 /***/ },
-/* 282 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -66319,7 +66379,7 @@
 	//! improvements : Illimar Tambek : https://github.com/ragulka
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -66394,7 +66454,7 @@
 	}));
 
 /***/ },
-/* 283 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -66402,7 +66462,7 @@
 	//! author : Eneko Illarramendi : https://github.com/eillarra
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -66462,7 +66522,7 @@
 	}));
 
 /***/ },
-/* 284 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -66470,7 +66530,7 @@
 	//! author : Ebrahim Byagowi : https://github.com/ebraminio
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -66571,7 +66631,7 @@
 	}));
 
 /***/ },
-/* 285 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -66579,7 +66639,7 @@
 	//! author : Tarmo Aidantausta : https://github.com/bleadof
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -66682,7 +66742,7 @@
 	}));
 
 /***/ },
-/* 286 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -66690,7 +66750,7 @@
 	//! author : Ragnar Johannesen : https://github.com/ragnar123
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -66746,7 +66806,7 @@
 	}));
 
 /***/ },
-/* 287 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -66754,7 +66814,7 @@
 	//! author : John Fischer : https://github.com/jfroffice
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -66812,7 +66872,7 @@
 	}));
 
 /***/ },
-/* 288 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -66820,7 +66880,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -66874,7 +66934,7 @@
 	}));
 
 /***/ },
-/* 289 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -66882,7 +66942,7 @@
 	//! author : Gaspard Bucher : https://github.com/gaspard
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -66940,7 +67000,7 @@
 	}));
 
 /***/ },
-/* 290 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -66948,7 +67008,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -67015,7 +67075,7 @@
 	}));
 
 /***/ },
-/* 291 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -67023,7 +67083,7 @@
 	//! author : Jon Ashdown : https://github.com/jonashdown
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -67095,7 +67155,7 @@
 	}));
 
 /***/ },
-/* 292 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -67103,7 +67163,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -67174,7 +67234,7 @@
 	}));
 
 /***/ },
-/* 293 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -67184,7 +67244,7 @@
 	//! author : Tal Ater : https://github.com/TalAter
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -67260,7 +67320,7 @@
 	}));
 
 /***/ },
-/* 294 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -67268,7 +67328,7 @@
 	//! author : Mayank Singhal : https://github.com/mayanksinghal
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -67387,7 +67447,7 @@
 	}));
 
 /***/ },
-/* 295 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -67395,7 +67455,7 @@
 	//! author : Bojan Marković : https://github.com/bmarkovic
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -67534,7 +67594,7 @@
 	}));
 
 /***/ },
-/* 296 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -67542,7 +67602,7 @@
 	//! author : Adam Brunner : https://github.com/adambrunner
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -67647,7 +67707,7 @@
 	}));
 
 /***/ },
-/* 297 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -67655,7 +67715,7 @@
 	//! author : Armendarabyan : https://github.com/armendarabyan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -67746,7 +67806,7 @@
 	}));
 
 /***/ },
-/* 298 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -67755,7 +67815,7 @@
 	//! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -67833,7 +67893,7 @@
 	}));
 
 /***/ },
-/* 299 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -67841,7 +67901,7 @@
 	//! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -67964,7 +68024,7 @@
 	}));
 
 /***/ },
-/* 300 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -67973,7 +68033,7 @@
 	//! author: Mattia Larentis: https://github.com/nostalgiaz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -68038,7 +68098,7 @@
 	}));
 
 /***/ },
-/* 301 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -68046,7 +68106,7 @@
 	//! author : LI Long : https://github.com/baryon
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -68107,7 +68167,7 @@
 	}));
 
 /***/ },
-/* 302 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -68116,7 +68176,7 @@
 	//! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -68194,7 +68254,7 @@
 	}));
 
 /***/ },
-/* 303 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -68202,7 +68262,7 @@
 	//! author : Irakli Janiashvili : https://github.com/irakli-janiashvili
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -68287,7 +68347,7 @@
 	}));
 
 /***/ },
-/* 304 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -68295,7 +68355,7 @@
 	//! authors : Nurlan Rakhimzhanov : https://github.com/nurlan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -68378,7 +68438,7 @@
 	}));
 
 /***/ },
-/* 305 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -68386,7 +68446,7 @@
 	//! author : Kruy Vanna : https://github.com/kruyvanna
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -68440,7 +68500,7 @@
 	}));
 
 /***/ },
-/* 306 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -68452,7 +68512,7 @@
 	//! - Jeeeyul Lee <jeeeyul@gmail.com>
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -68512,7 +68572,7 @@
 	}));
 
 /***/ },
-/* 307 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -68520,7 +68580,7 @@
 	//! author : mweimerskirch : https://github.com/mweimerskirch, David Raison : https://github.com/kwisatz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -68650,7 +68710,7 @@
 	}));
 
 /***/ },
-/* 308 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -68658,7 +68718,7 @@
 	//! author : Ryan Hart : https://github.com/ryanhart2
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -68723,7 +68783,7 @@
 	}));
 
 /***/ },
-/* 309 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -68731,7 +68791,7 @@
 	//! author : Mindaugas Mozūras : https://github.com/mmozuras
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -68842,7 +68902,7 @@
 	}));
 
 /***/ },
-/* 310 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -68851,7 +68911,7 @@
 	//! author : Jānis Elmeris : https://github.com/JanisE
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -68942,7 +69002,7 @@
 	}));
 
 /***/ },
-/* 311 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -68950,7 +69010,7 @@
 	//! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -69055,7 +69115,7 @@
 	}));
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -69063,7 +69123,7 @@
 	//! author : Borislav Mickov : https://github.com/B0k0
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -69149,7 +69209,7 @@
 	}));
 
 /***/ },
-/* 313 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -69157,7 +69217,7 @@
 	//! author : Floyd Pink : https://github.com/floydpink
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -69224,7 +69284,7 @@
 	}));
 
 /***/ },
-/* 314 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -69233,7 +69293,7 @@
 	//! author : Vivek Athalye : https://github.com/vnathalye
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -69386,7 +69446,7 @@
 	}));
 
 /***/ },
-/* 315 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -69394,7 +69454,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -69472,7 +69532,7 @@
 	}));
 
 /***/ },
-/* 316 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -69480,7 +69540,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -69558,7 +69618,7 @@
 	}));
 
 /***/ },
-/* 317 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -69566,7 +69626,7 @@
 	//! author : Squar team, mysquar.com
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -69655,7 +69715,7 @@
 	}));
 
 /***/ },
-/* 318 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -69664,7 +69724,7 @@
 	//!           Sigurd Gartmann : https://github.com/sigurdga
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -69720,7 +69780,7 @@
 	}));
 
 /***/ },
-/* 319 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -69728,7 +69788,7 @@
 	//! author : suvash : https://github.com/suvash
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -69845,7 +69905,7 @@
 	}));
 
 /***/ },
-/* 320 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -69853,7 +69913,7 @@
 	//! author : Joris Röling : https://github.com/jjupiter
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -69920,7 +69980,7 @@
 	}));
 
 /***/ },
-/* 321 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -69928,7 +69988,7 @@
 	//! author : https://github.com/mechuwind
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -69984,7 +70044,7 @@
 	}));
 
 /***/ },
-/* 322 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -69992,7 +70052,7 @@
 	//! author : Rafal Hirsz : https://github.com/evoL
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -70093,7 +70153,7 @@
 	}));
 
 /***/ },
-/* 323 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -70101,7 +70161,7 @@
 	//! author : Jefferson : https://github.com/jalex79
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -70161,7 +70221,7 @@
 	}));
 
 /***/ },
-/* 324 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -70169,7 +70229,7 @@
 	//! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -70225,7 +70285,7 @@
 	}));
 
 /***/ },
-/* 325 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -70234,7 +70294,7 @@
 	//! author : Valentin Agachi : https://github.com/avaly
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -70303,7 +70363,7 @@
 	}));
 
 /***/ },
-/* 326 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -70312,7 +70372,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -70473,7 +70533,7 @@
 	}));
 
 /***/ },
-/* 327 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -70481,7 +70541,7 @@
 	//! authors : Bård Rolstad Henriksen : https://github.com/karamell
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -70538,7 +70598,7 @@
 	}));
 
 /***/ },
-/* 328 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -70546,7 +70606,7 @@
 	//! author : Sampath Sitinamaluwa : https://github.com/sampathsris
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -70608,7 +70668,7 @@
 	}));
 
 /***/ },
-/* 329 */
+/* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -70617,7 +70677,7 @@
 	//! based on work of petrbela : https://github.com/petrbela
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -70762,7 +70822,7 @@
 	}));
 
 /***/ },
-/* 330 */
+/* 331 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -70770,7 +70830,7 @@
 	//! author : Robert Sedovšek : https://github.com/sedovsek
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -70926,7 +70986,7 @@
 	}));
 
 /***/ },
-/* 331 */
+/* 332 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -70936,7 +70996,7 @@
 	//! author : Oerd Cukalla : https://github.com/oerd (fixes)
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -70999,7 +71059,7 @@
 	}));
 
 /***/ },
-/* 332 */
+/* 333 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -71007,7 +71067,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -71111,7 +71171,7 @@
 	}));
 
 /***/ },
-/* 333 */
+/* 334 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -71119,7 +71179,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -71223,7 +71283,7 @@
 	}));
 
 /***/ },
-/* 334 */
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -71231,7 +71291,7 @@
 	//! author : Jens Alm : https://github.com/ulmus
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -71294,7 +71354,7 @@
 	}));
 
 /***/ },
-/* 335 */
+/* 336 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -71302,7 +71362,7 @@
 	//! author : Fahad Kassim : https://github.com/fadsel
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -71356,7 +71416,7 @@
 	}));
 
 /***/ },
-/* 336 */
+/* 337 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -71364,7 +71424,7 @@
 	//! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -71489,7 +71549,7 @@
 	}));
 
 /***/ },
-/* 337 */
+/* 338 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -71497,7 +71557,7 @@
 	//! author : Krishna Chaitanya Thota : https://github.com/kcthota
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -71581,7 +71641,7 @@
 	}));
 
 /***/ },
-/* 338 */
+/* 339 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -71589,7 +71649,7 @@
 	//! author : Kridsada Thanabulpong : https://github.com/sirn
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -71650,7 +71710,7 @@
 	}));
 
 /***/ },
-/* 339 */
+/* 340 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -71658,7 +71718,7 @@
 	//! author : Dan Hagman
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -71716,7 +71776,7 @@
 	}));
 
 /***/ },
-/* 340 */
+/* 341 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -71724,7 +71784,7 @@
 	//! author : Dominika Kruk : https://github.com/amaranthrose
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -71839,7 +71899,7 @@
 	}));
 
 /***/ },
-/* 341 */
+/* 342 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -71848,7 +71908,7 @@
 	//!           Burak Yiğit Kaya: https://github.com/BYK
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -71933,7 +71993,7 @@
 	}));
 
 /***/ },
-/* 342 */
+/* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -71941,7 +72001,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v with the help of Iustì Canun
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -72024,7 +72084,7 @@
 	}));
 
 /***/ },
-/* 343 */
+/* 344 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -72032,7 +72092,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -72086,7 +72146,7 @@
 	}));
 
 /***/ },
-/* 344 */
+/* 345 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -72094,7 +72154,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -72148,7 +72208,7 @@
 	}));
 
 /***/ },
-/* 345 */
+/* 346 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -72157,7 +72217,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -72298,7 +72358,7 @@
 	}));
 
 /***/ },
-/* 346 */
+/* 347 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -72306,7 +72366,7 @@
 	//! author : Sardor Muminov : https://github.com/muminoff
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -72360,7 +72420,7 @@
 	}));
 
 /***/ },
-/* 347 */
+/* 348 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -72368,7 +72428,7 @@
 	//! author : Bang Nguyen : https://github.com/bangnk
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -72430,7 +72490,7 @@
 	}));
 
 /***/ },
-/* 348 */
+/* 349 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -72439,7 +72499,7 @@
 	//! author : Zeno Zeng : https://github.com/zenozeng
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -72561,7 +72621,7 @@
 	}));
 
 /***/ },
-/* 349 */
+/* 350 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -72569,7 +72629,7 @@
 	//! author : Ben : https://github.com/ben-lin
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(252)) :
+	    true ? factory(__webpack_require__(253)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -72666,7 +72726,7 @@
 	}));
 
 /***/ },
-/* 350 */
+/* 351 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -73351,7 +73411,7 @@
 
 
 /***/ },
-/* 351 */
+/* 352 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -73372,7 +73432,7 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _measureText = __webpack_require__(241);
+	var _measureText = __webpack_require__(242);
 	
 	var _measureText2 = _interopRequireDefault(_measureText);
 	
@@ -73481,7 +73541,7 @@
 	exports.default = XAxisTitle;
 
 /***/ },
-/* 352 */
+/* 353 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -73504,13 +73564,13 @@
 	
 	var _Margin = __webpack_require__(213);
 	
-	var _Axis = __webpack_require__(235);
+	var _Axis = __webpack_require__(237);
 	
-	var _YTicks = __webpack_require__(353);
+	var _YTicks = __webpack_require__(354);
 	
 	var _YTicks2 = _interopRequireDefault(_YTicks);
 	
-	var _YGrid = __webpack_require__(354);
+	var _YGrid = __webpack_require__(355);
 	
 	var _YGrid2 = _interopRequireDefault(_YGrid);
 	
@@ -73669,7 +73729,7 @@
 	exports.default = YAxis;
 
 /***/ },
-/* 353 */
+/* 354 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -73781,7 +73841,7 @@
 	exports.default = YTicks;
 
 /***/ },
-/* 354 */
+/* 355 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -73800,7 +73860,7 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _YLine = __webpack_require__(355);
+	var _YLine = __webpack_require__(235);
 	
 	var _YLine2 = _interopRequireDefault(_YLine);
 	
@@ -73882,73 +73942,6 @@
 	exports.default = YGrid;
 
 /***/ },
-/* 355 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(5);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var YLine = function (_React$Component) {
-	  _inherits(YLine, _React$Component);
-	
-	  function YLine() {
-	    _classCallCheck(this, YLine);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(YLine).apply(this, arguments));
-	  }
-	
-	  _createClass(YLine, [{
-	    key: 'render',
-	    value: function render() {
-	      var _props = this.props;
-	      var value = _props.value;
-	      var width = _props.width;
-	      var style = _props.style;
-	
-	      var scale = this.props.scale.y;
-	      var className = 'chart-line-y ' + (this.props.className || '');
-	      var lineY = scale(value);
-	
-	      return _react2.default.createElement('line', {
-	        x1: 0,
-	        x2: width,
-	        y1: lineY,
-	        y2: lineY,
-	        className: className, style: style
-	      });
-	    }
-	  }]);
-	
-	  return YLine;
-	}(_react2.default.Component);
-	
-	YLine.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ y: _react2.default.PropTypes.func.isRequired }),
-	  value: _react2.default.PropTypes.any.isRequired
-	};
-	YLine.defaultProps = {
-	  style: {}
-	};
-	exports.default = YLine;
-
-/***/ },
 /* 356 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -73970,13 +73963,13 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _MeasuredValueLabel = __webpack_require__(240);
+	var _MeasuredValueLabel = __webpack_require__(241);
 	
 	var _MeasuredValueLabel2 = _interopRequireDefault(_MeasuredValueLabel);
 	
 	var _Scale = __webpack_require__(207);
 	
-	var _Label = __webpack_require__(251);
+	var _Label = __webpack_require__(252);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -74238,7 +74231,7 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _measureText = __webpack_require__(241);
+	var _measureText = __webpack_require__(242);
 	
 	var _measureText2 = _interopRequireDefault(_measureText);
 	
@@ -74552,51 +74545,51 @@
 	
 	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 	
-	var _numeral = __webpack_require__(350);
+	var _numeral = __webpack_require__(351);
 	
 	var _numeral2 = _interopRequireDefault(_numeral);
 	
-	var _XYPlot = __webpack_require__(217);
+	var _XYPlot = __webpack_require__(221);
 	
 	var _XYPlot2 = _interopRequireDefault(_XYPlot);
 	
-	var _XAxis = __webpack_require__(234);
+	var _XAxis = __webpack_require__(236);
 	
 	var _XAxis2 = _interopRequireDefault(_XAxis);
 	
-	var _XTicks = __webpack_require__(236);
+	var _XTicks = __webpack_require__(238);
 	
 	var _XTicks2 = _interopRequireDefault(_XTicks);
 	
-	var _XLine = __webpack_require__(238);
+	var _XLine = __webpack_require__(234);
 	
 	var _XLine2 = _interopRequireDefault(_XLine);
 	
-	var _XGrid = __webpack_require__(237);
+	var _XGrid = __webpack_require__(239);
 	
 	var _XGrid2 = _interopRequireDefault(_XGrid);
 	
-	var _XAxisLabels = __webpack_require__(239);
+	var _XAxisLabels = __webpack_require__(240);
 	
 	var _XAxisLabels2 = _interopRequireDefault(_XAxisLabels);
 	
-	var _XAxisTitle = __webpack_require__(351);
+	var _XAxisTitle = __webpack_require__(352);
 	
 	var _XAxisTitle2 = _interopRequireDefault(_XAxisTitle);
 	
-	var _YAxis = __webpack_require__(352);
+	var _YAxis = __webpack_require__(353);
 	
 	var _YAxis2 = _interopRequireDefault(_YAxis);
 	
-	var _YTicks = __webpack_require__(353);
+	var _YTicks = __webpack_require__(354);
 	
 	var _YTicks2 = _interopRequireDefault(_YTicks);
 	
-	var _YLine = __webpack_require__(355);
+	var _YLine = __webpack_require__(235);
 	
 	var _YLine2 = _interopRequireDefault(_YLine);
 	
-	var _YGrid = __webpack_require__(354);
+	var _YGrid = __webpack_require__(355);
 	
 	var _YGrid2 = _interopRequireDefault(_YGrid);
 	
@@ -74608,63 +74601,59 @@
 	
 	var _YAxisTitle2 = _interopRequireDefault(_YAxisTitle);
 	
-	var _BarChartOld = __webpack_require__(364);
-	
-	var _BarChartOld2 = _interopRequireDefault(_BarChartOld);
-	
-	var _Bar = __webpack_require__(229);
+	var _Bar = __webpack_require__(226);
 	
 	var _Bar2 = _interopRequireDefault(_Bar);
 	
-	var _RangeBarChart = __webpack_require__(228);
+	var _RangeBarChart = __webpack_require__(225);
 	
 	var _RangeBarChart2 = _interopRequireDefault(_RangeBarChart);
 	
-	var _RangeRect = __webpack_require__(233);
+	var _RangeRect = __webpack_require__(229);
 	
 	var _RangeRect2 = _interopRequireDefault(_RangeRect);
 	
-	var _BarChart = __webpack_require__(227);
+	var _BarChart = __webpack_require__(224);
 	
 	var _BarChart2 = _interopRequireDefault(_BarChart);
 	
-	var _AreaBarChart = __webpack_require__(232);
+	var _AreaBarChart = __webpack_require__(228);
 	
 	var _AreaBarChart2 = _interopRequireDefault(_AreaBarChart);
 	
-	var _LineChart = __webpack_require__(219);
+	var _LineChart = __webpack_require__(222);
 	
 	var _LineChart2 = _interopRequireDefault(_LineChart);
 	
-	var _AreaHeatmap = __webpack_require__(222);
+	var _AreaHeatmap = __webpack_require__(231);
 	
 	var _AreaHeatmap2 = _interopRequireDefault(_AreaHeatmap);
 	
-	var _ScatterPlot = __webpack_require__(220);
+	var _ScatterPlot = __webpack_require__(223);
 	
 	var _ScatterPlot2 = _interopRequireDefault(_ScatterPlot);
 	
-	var _PieChart = __webpack_require__(225);
+	var _PieChart = __webpack_require__(217);
 	
 	var _PieChart2 = _interopRequireDefault(_PieChart);
 	
-	var _TreeMap = __webpack_require__(226);
+	var _TreeMap = __webpack_require__(220);
 	
 	var _TreeMap2 = _interopRequireDefault(_TreeMap);
 	
-	var _Histogram = __webpack_require__(231);
+	var _Histogram = __webpack_require__(232);
 	
 	var _Histogram2 = _interopRequireDefault(_Histogram);
 	
-	var _MarkerLineChart = __webpack_require__(223);
+	var _MarkerLineChart = __webpack_require__(230);
 	
 	var _MarkerLineChart2 = _interopRequireDefault(_MarkerLineChart);
 	
-	var _KernelDensityEstimation = __webpack_require__(224);
+	var _KernelDensityEstimation = __webpack_require__(233);
 	
 	var _KernelDensityEstimation2 = _interopRequireDefault(_KernelDensityEstimation);
 	
-	var _util = __webpack_require__(365);
+	var _util = __webpack_require__(364);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -76102,441 +76091,6 @@
 
 /***/ },
 /* 364 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-	
-	var _react = __webpack_require__(5);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _lodash = __webpack_require__(3);
-	
-	var _lodash2 = _interopRequireDefault(_lodash);
-	
-	var _d2 = __webpack_require__(162);
-	
-	var _d3 = _interopRequireDefault(_d2);
-	
-	var _util = __webpack_require__(218);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var PropTypes = _react2.default.PropTypes;
-	
-	
-	// on the taxonomy of bar charts:
-	
-	// there are 3 types of bar charts,
-	// distinguished by whether the 2D data points they plot represent values or ranges
-	
-	// 1. Value-Value
-	// typical bar chart, plotting values that look like [[0,5], [1,3], ...]
-	// with bars that are centered horizontally on x-value and extend from 0 to y-value,
-	// (or centered vertically on their y-value and extend from 0 to the x-value, in the case of horizontal chart variant)
-	// eg. http://www.snapsurveys.com/wp-content/uploads/2012/10/bar_2d8.png
-	
-	// 2. Range-Value
-	// instead of a single value, one of the two data points represents a range of values
-	// usually the range is the independent variable and the value is the observation
-	// most commonly used in histogram, where each bar represents a bin (which is a range)
-	// data may look something like [[0, 5], 100], [[5, 15], 300], ...] or [{x: 0, xEnd: 5, y:100}...]
-	// often all bars are the same width, (same range sizes) but not necessarily
-	// bars still from extend from 0 to y-value,
-	// but the x-values of their sides, and therefore their width, is determined by the range
-	// (or vice versa in the case of horizontal variant)
-	// eg. http://labs.physics.dur.ac.uk/skills/skills/images/histogram4.jpg
-	
-	// 3. Value-Range
-	// like Range-Value, one of the two data points represents a range of values
-	// but generally the range is the dependent variable (ie. observation) instead of vice versa in #2
-	// bars are centered over their x-value as in #1,
-	// but their top & bottom y-values, and therefore their length, is determined by the range. they don't extend to 0.
-	// (or vice versa in the case of horizontal variant)
-	// eg. (horizontal) http://6.anychart.com/products/anychart/docs/users-guide/img/Samples/sample-range-bar-chart-y-datetime-axis.png
-	
-	// 4. Range-Range
-	// both of the data points represent ranges
-	// ie. data looks like [{x: 10, xEnd: 20, y: 12, yEnd: 40} ...]
-	// these are simply plotted as floating rectangles whose coordinates, length and width are all determined by the ranges
-	// there is no horizontal or vertical variant
-	// eg... can't find a good example
-	
-	// creating a BarChart component...
-	// x and y values are represented by getValue.x and getValue.y accessors passed in as props
-	// to represent a range instead of a single value, call with both getValue.x and getEndValue.x (or y),
-	// which will be the accessors for the start and end values of the range
-	// to represent horizontal vs. vertical variant, pass in orientation="horizontal" or orientation="vertical"
-	
-	// so to create the types described above:
-	// 1. Value-Value - only pass in getValue.x and getValue.y, + orientation
-	// 2. Range-Value
-	//   a. pass in getValue.x, getEndValue.x and getValue.y with orientation="vertical"
-	//   b. or getValue.x, getValue.y and getEndValue.y with orientation="horizontal"
-	// 3. Value-Range
-	//   a. pass in getValue.x, getValue.y and getEndValue.y with orientation="vertical"
-	//   b. or getValue.x, getEndValue.x and getValue.y with orientation="horizontal"
-	// 4. Range-Range - pass in ALL of getValue.x, getValue.y, getEndValue.x and getEndValue.y. no need for orientation.
-	
-	//const BAR_CHART_TYPES = {
-	//    VALUE_VALUE: 'VALUE_VALUE',
-	//    RANGE_VALUE: 'RANGE_VALUE',
-	//    VALUE_RANGE: 'VALUE_RANGE',
-	//    RANGE_RANGE: 'RANGE_RANGE',
-	//};
-	
-	function getBarChartType(props) {
-	  var getEndValue = props.getEndValue;
-	  var orientation = props.orientation;
-	
-	  var isVertical = orientation === 'vertical';
-	  return _lodash2.default.isUndefined(getEndValue.x) && _lodash2.default.isUndefined(getEndValue.y) ? 'ValueValue' : _lodash2.default.isUndefined(getEndValue.y) && isVertical || _lodash2.default.isUndefined(getEndValue.x) && !isVertical ? 'RangeValue' : _lodash2.default.isUndefined(getEndValue.x) && isVertical || _lodash2.default.isUndefined(getEndValue.y) && !isVertical ? 'ValueRange' : 'RangeRange';
-	}
-	
-	function barZeroValue(data, dAccessor, scaleType) {
-	  switch (scaleType) {
-	    // number bars go from zero to value
-	    case 'number':
-	      return 0;
-	    // time values need a "zero" value to stretch from - the first date minus one day
-	    // todo make this less arbitrary? should be a rare case anyway.
-	    case 'time':
-	      return _d3.default.extent(data, dAccessor)[0] - 24 * 60 * 60 * 1000;
-	    // ordinal values need a "zero" value to stretch from -
-	    // empty string since it's unlikely to be used in real data and won't show a label
-	    case 'ordinal':
-	      return '';
-	  }
-	}
-	
-	function valueAxisDomain(data, dAccessor, scaleType) {
-	  switch (scaleType) {
-	    case 'number':
-	    case 'time':
-	      return _d3.default.extent(_d3.default.extent(data, dAccessor).concat(barZeroValue(data, dAccessor, scaleType)));
-	    case 'ordinal':
-	      return _lodash2.default.uniq([barZeroValue(data, dAccessor, scaleType)].concat(data.map((0, _util.accessor)(dAccessor))));
-	  }
-	  return null;
-	}
-	
-	function rangeAxisDomain(data, rangeStartAccessor, rangeEndAccessor, scaleType) {
-	  switch (scaleType) {
-	    case 'number':
-	    case 'time':
-	      return _d3.default.extent(_lodash2.default.flatten([_d3.default.extent(data, function (d) {
-	        return +rangeStartAccessor(d);
-	      }), _d3.default.extent(data, function (d) {
-	        return +rangeEndAccessor(d);
-	      })]));
-	    case 'ordinal':
-	      return _lodash2.default.uniq(_lodash2.default.flatten([data.map(rangeStartAccessor), data.map(rangeEndAccessor)]));
-	  }
-	  return [];
-	}
-	
-	var BarChart = _react2.default.createClass({
-	  displayName: 'BarChart',
-	
-	  mixins: [(0, _util.InterfaceMixin)('XYChart')],
-	  propTypes: {
-	    // the array of data objects
-	    data: PropTypes.array.isRequired,
-	    // accessor for X & Y coordinates
-	    getValue: PropTypes.object,
-	    getEndValue: PropTypes.object,
-	    getX: _util.AccessorPropType,
-	    getY: _util.AccessorPropType,
-	    getXEnd: _util.AccessorPropType,
-	    getYEnd: _util.AccessorPropType,
-	    // allow user to pass an accessor for setting the class of a bar
-	    getClass: _util.AccessorPropType,
-	    // thickness of value bars, in pixels, (ignored for RangeValue and RangeRange charts)
-	    barThickness: PropTypes.number,
-	
-	    name: PropTypes.string,
-	
-	    // x & y scale types
-	    scaleType: PropTypes.object,
-	    scale: PropTypes.object,
-	
-	    orientation: PropTypes.oneOf(['vertical', 'horizontal']),
-	
-	    onMouseEnterBar: PropTypes.func, // A mouse walks into a bar.
-	    onMouseMoveBar: PropTypes.func, // He is immediately killed by the bartender,
-	    onMouseLeaveBar: PropTypes.func },
-	  // who can't risk another "C" rating from the health department.
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      barThickness: 10,
-	      orientation: 'vertical',
-	      getValue: {},
-	      getEndValue: {}
-	    };
-	  },
-	
-	
-	  statics: {
-	    getOptions: function getOptions(props) {
-	      // todo getDomain, getSpacing
-	      var data = props.data;
-	      var scaleType = props.scaleType;
-	      var getValue = props.getValue;
-	      var getEndValue = props.getEndValue;
-	      var orientation = props.orientation;
-	      var barThickness = props.barThickness;
-	      var xAccessor = (0, _util.accessor)(getValue.x);
-	      var yAccessor = (0, _util.accessor)(getValue.y);
-	
-	      var barType = getBarChartType(props);
-	      var isVertical = orientation === 'vertical';
-	
-	      var accessors = { x: xAccessor, y: yAccessor };
-	      var rangeEndAccessors = { x: (0, _util.accessor)(getEndValue.x), y: (0, _util.accessor)(getEndValue.y) };
-	
-	      var options = { domain: {}, spacing: null };
-	
-	      if (barType === 'ValueValue') {
-	        var valueAxis = isVertical ? 'y' : 'x'; // axis along which the bar's length shows value
-	        options.domain[valueAxis] = valueAxisDomain(data, accessors[valueAxis], scaleType[valueAxis]);
-	        // the value, and therefore the center of the bar, may fall exactly on the axis min or max,
-	        // therefore bars need (0.5*barThickness) spacing so they don't hang over the edge of the chart
-	        var halfBar = Math.ceil(0.5 * barThickness);
-	        options.spacing = isVertical ? { left: halfBar, right: halfBar } : { top: halfBar, bottom: halfBar };
-	      } else if (barType === 'RangeValue') {
-	        // rangeAxis: axis along which the bar's length shows value
-	
-	        var _ref = isVertical ? ['x', 'y'] : ['y', 'x'];
-	
-	        var _ref2 = _slicedToArray(_ref, 2);
-	
-	        var rangeAxis = _ref2[0];
-	        var valueAxis = _ref2[1];
-	
-	        options.domain[valueAxis] = valueAxisDomain(data, accessors[valueAxis], scaleType[valueAxis]);
-	        options.domain[rangeAxis] = rangeAxisDomain(data, accessors[rangeAxis], rangeEndAccessors[rangeAxis], scaleType[rangeAxis]);
-	        // no spacing necessary since bars are drawn *between* values, not on them.
-	      }
-	      return options;
-	    }
-	  },
-	  getHovered: function getHovered() {},
-	  onMouseEnterBar: function onMouseEnterBar(e, d) {
-	    this.props.onMouseEnterBar(e, d);
-	  },
-	  onMouseMoveBar: function onMouseMoveBar(e, d) {
-	    this.props.onMouseMoveBar(e, d);
-	  },
-	  onMouseLeaveBar: function onMouseLeaveBar(e, d) {
-	    this.props.onMouseLeaveBar(e, d);
-	  },
-	  render: function render() {
-	    // const renderer = this[`render${getBarChartType(this.props)}Bars`];
-	    var renderer = this.renderValueValueBars;
-	    return _react2.default.createElement(
-	      'g',
-	      { className: 'bar-chart ' + (this.props.name || '') },
-	      renderer()
-	    );
-	  },
-	  renderValueValueBars: function renderValueValueBars() {
-	    var _this = this;
-	
-	    // typical bar chart, plotting values that look like [[0,5], [1,3], ...]
-	    // ie. both independent and dependent variables are single values
-	    var _props = this.props;
-	    var data = _props.data;
-	    var scale = _props.scale;
-	    var getValue = _props.getValue;
-	    var scaleType = _props.scaleType;
-	    var getClass = _props.getClass;
-	    var barThickness = _props.barThickness;
-	    var orientation = _props.orientation;
-	
-	    var _map = [getValue.x, getValue.y, getClass].map(_util.accessor);
-	
-	    var _map2 = _slicedToArray(_map, 3);
-	
-	    var xAccessor = _map2[0];
-	    var yAccessor = _map2[1];
-	    var classAccessor = _map2[2];
-	
-	    var isVertical = this.props.orientation === 'vertical';
-	
-	    return _react2.default.createElement(
-	      'g',
-	      null,
-	      data.map(function (d, i) {
-	        var _map3 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
-	          // partially apply this bar's data point as 2nd callback argument
-	          var callback = (0, _util.methodIfFuncProp)(eventName, _this.props, _this);
-	          return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
-	        });
-	
-	        var _map4 = _slicedToArray(_map3, 3);
-	
-	        var onMouseEnter = _map4[0];
-	        var onMouseMove = _map4[1];
-	        var onMouseLeave = _map4[2];
-	
-	        // essentially the same process, whether horizontal or vertical bars
-	
-	        var _ref3 = isVertical ? [scale.y, scaleType.y, yAccessor] : [scale.x, scaleType.x, xAccessor];
-	
-	        var _ref4 = _slicedToArray(_ref3, 3);
-	
-	        var valueScale = _ref4[0];
-	        var valueScaleType = _ref4[1];
-	        var valueAccessor = _ref4[2];
-	
-	        var barZero = barZeroValue(data, valueAccessor, valueScaleType);
-	        var value = valueAccessor(d);
-	        var barLength = Math.abs(valueScale(barZero) - valueScale(value));
-	        var className = 'chart-bar chart-bar-' + orientation + ' ' + (getClass ? classAccessor(d) : '');
-	        var x = isVertical ? scale.x(xAccessor(d)) - barThickness / 2 : value >= 0 || scaleType.x === 'ordinal' ? scale.x(barZero) : scale.x(barZero) - barLength;
-	        var y = !isVertical ? scale.y(yAccessor(d)) - barThickness / 2 : value >= 0 || scaleType.y === 'ordinal' ? scale.y(barZero) - barLength : scale.y(barZero);
-	
-	        var _ref5 = isVertical ? [barThickness, barLength] : [barLength, barThickness];
-	
-	        var _ref6 = _slicedToArray(_ref5, 2);
-	
-	        var width = _ref6[0];
-	        var height = _ref6[1];
-	
-	        var key = 'chart-bar-' + i;
-	
-	        if (!_lodash2.default.every([x, y, width, height], _lodash2.default.isFinite)) return null;
-	        return _react2.default.createElement('rect', { className: className, key: key, x: x, y: y, width: width, height: height, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave });
-	      })
-	    );
-	  },
-	  renderRangeValueBars: function renderRangeValueBars() {
-	    var _this2 = this;
-	
-	    var _props2 = this.props;
-	    var data = _props2.data;
-	    var scale = _props2.scale;
-	    var getValue = _props2.getValue;
-	    var getEndValue = _props2.getEndValue;
-	    var scaleType = _props2.scaleType;
-	    var getClass = _props2.getClass;
-	    var orientation = _props2.orientation;
-	
-	    var _$map = _lodash2.default.map([getValue.x, getEndValue.x, getValue.y, getEndValue.y, getClass], _util.accessor);
-	
-	    var _$map2 = _slicedToArray(_$map, 5);
-	
-	    var xAccessor = _$map2[0];
-	    var xEndAccessor = _$map2[1];
-	    var yAccessor = _$map2[2];
-	    var yEndAccessor = _$map2[3];
-	    var classAccessor = _$map2[4];
-	
-	
-	    return orientation === 'vertical' ? _react2.default.createElement(
-	      'g',
-	      null,
-	      this.props.data.map(function (d, i) {
-	        var _map5 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
-	          // partially apply this bar's data point as 2nd callback argument
-	          var callback = (0, _util.methodIfFuncProp)(eventName, _this2.props, _this2);
-	          return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
-	        });
-	
-	        var _map6 = _slicedToArray(_map5, 3);
-	
-	        var onMouseEnter = _map6[0];
-	        var onMouseMove = _map6[1];
-	        var onMouseLeave = _map6[2];
-	
-	
-	        var barZero = barZeroValue(data, yAccessor, scaleType.y);
-	        var yVal = yAccessor(d);
-	        var barLength = Math.abs(scale.y(barZero) - scale.y(yVal));
-	        var barY = yVal >= 0 || scaleType.y === 'ordinal' ? scale.y(barZero) - barLength : scale.y(barZero);
-	        var barX = Math.round(scale.x(xAccessor(d)));
-	        var barThickness = Math.round(scale.x(xEndAccessor(d))) - barX;
-	        var className = 'chart-bar chart-bar-' + orientation + ' ' + (getClass ? classAccessor(d) : '');
-	        var key = 'chart-bar-' + i;
-	        if (!_lodash2.default.every([barX, barY, barThickness, barLength], _lodash2.default.isFinite)) return null;
-	
-	        return _react2.default.createElement('rect', _extends({
-	          x: barX,
-	          y: barY,
-	          width: barThickness,
-	          height: barLength
-	        }, { className: className, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }));
-	      })
-	    ) : _react2.default.createElement(
-	      'g',
-	      null,
-	      this.props.data.map(function (d, i) {
-	        var _map7 = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
-	          // partially apply this bar's data point as 2nd callback argument
-	          var callback = (0, _util.methodIfFuncProp)(eventName, _this2.props, _this2);
-	          return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
-	        });
-	
-	        var _map8 = _slicedToArray(_map7, 3);
-	
-	        var onMouseEnter = _map8[0];
-	        var onMouseMove = _map8[1];
-	        var onMouseLeave = _map8[2];
-	
-	
-	        var barZero = barZeroValue(data, xAccessor, scaleType.x);
-	        var xVal = xAccessor(d);
-	        var barLength = Math.abs(scale.x(barZero) - scale.x(xVal));
-	        var barX = xVal >= 0 || scaleType.x === 'ordinal' ? scale.x(barZero) : scale.x(barZero) - barLength;
-	        var barY = Math.round(scale.y(yEndAccessor(d)));
-	        var barThickness = Math.round(scale.y(yAccessor(d))) - barY;
-	        var className = 'chart-bar chart-bar-' + orientation + ' ' + (getClass ? classAccessor(d) : '');
-	        var key = 'chart-bar-' + i;
-	        if (!_lodash2.default.every([barX, barY, barThickness, barLength], _lodash2.default.isFinite)) return null;
-	
-	        return _react2.default.createElement('rect', _extends({
-	          x: barX,
-	          y: barY,
-	          width: barLength,
-	          height: barThickness
-	        }, { className: className, key: key, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }));
-	      })
-	    );
-	  },
-	  renderValueRangeBars: function renderValueRangeBars() {
-	    return renderNotImplemented();
-	  },
-	  renderRangeRangeBars: function renderRangeRangeBars() {
-	    return renderNotImplemented();
-	  }
-	});
-	
-	function renderNotImplemented() {
-	  var text = arguments.length <= 0 || arguments[0] === undefined ? "not implemented yet" : arguments[0];
-	
-	  return _react2.default.createElement(
-	    'svg',
-	    { x: 100, y: 100, style: { overflow: 'visible' } },
-	    _react2.default.createElement(
-	      'text',
-	      null,
-	      text
-	    )
-	  );
-	}
-	
-	exports.default = BarChart;
-
-/***/ },
-/* 365 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
