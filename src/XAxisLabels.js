@@ -143,13 +143,13 @@ class XAxisValueLabels extends React.Component {
     // todo: position: 'zero' to position along the zero line
 
     return <g className="chart-value-labels-x" transform={transform}>
-      {labels.map((label) => {
+      {labels.map((label, i) => {
         const x = scale(label.value);
         const y = (placement === 'above') ?
           -label.height - distance :
           distance;
 
-        return <g>
+        return <g key={`x-axis-label-${i}`}>
           {/* <XAxisLabelDebugRect {...{x, y, label}}/> */}
           <MeasuredValueLabel {...{x, y, className, dy:"0.8em", style}}>
             {label.text}

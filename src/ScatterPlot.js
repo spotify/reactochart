@@ -63,7 +63,7 @@ export default class ScatterPlot extends React.Component {
     const {scale, getX, getY, pointRadius, pointOffset, getClass} = this.props;
     let {pointSymbol} = this.props;
     const className = `chart-scatterplot-point ${getClass ? makeAccessor(getClass)(d) : ''}`;
-    let symbolProps = {className, onMouseEnter, onMouseMove, onMouseLeave};
+    let symbolProps = {className, onMouseEnter, onMouseMove, onMouseLeave, key: `scatter-point-${i}`};
 
     // resolve symbol-generating functions into real symbols
     if(_.isFunction(pointSymbol)) pointSymbol = pointSymbol(d, i);

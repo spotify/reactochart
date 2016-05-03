@@ -48290,13 +48290,13 @@
 	      return _react2.default.createElement(
 	        'g',
 	        { className: 'chart-value-labels-x', transform: transform },
-	        labels.map(function (label) {
+	        labels.map(function (label, i) {
 	          var x = scale(label.value);
 	          var y = placement === 'above' ? -label.height - distance : distance;
 	
 	          return _react2.default.createElement(
 	            'g',
-	            null,
+	            { key: 'x-axis-label-' + i },
 	            _react2.default.createElement(
 	              _MeasuredValueLabel2.default,
 	              { x: x, y: y, className: className, dy: "0.8em", style: style },
@@ -62976,13 +62976,13 @@
 	      return _react2.default.createElement(
 	        'g',
 	        { className: 'chart-value-labels-y', transform: transform },
-	        labels.map(function (label) {
+	        labels.map(function (label, i) {
 	          var y = scale(label.value);
 	          var x = placement === 'before' ? -distance : distance;
 	
 	          return _react2.default.createElement(
 	            'g',
-	            null,
+	            { key: 'x-axis-label-' + i },
 	            _react2.default.createElement(
 	              _MeasuredValueLabel2.default,
 	              { x: x, y: y, className: className, dy: "0.35em", style: style },
@@ -64356,7 +64356,7 @@
 	      var pointSymbol = _this.props.pointSymbol;
 	
 	      var className = 'chart-scatterplot-point ' + (getClass ? (0, _Data.makeAccessor)(getClass)(d) : '');
-	      var symbolProps = { className: className, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave };
+	      var symbolProps = { className: className, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave, key: 'scatter-point-' + i };
 	
 	      // resolve symbol-generating functions into real symbols
 	      if (_lodash2.default.isFunction(pointSymbol)) pointSymbol = pointSymbol(d, i);

@@ -116,7 +116,9 @@ class YAxisValueLabels extends React.Component {
     // nudge down the tickCount and try again
     // doing this will require communicating the updated ticks/tickCount back to the parent element...
 
+    const start = performance.now();
     const {labels} = resolveYLabelsForValues(scale, ticks, formats, style);
+    console.log('resolveYLabelsForValues took ', performance.now() - start);
     // console.log('found labels', labels);
     return labels;
   }
@@ -134,11 +136,11 @@ class YAxisValueLabels extends React.Component {
 
     const transform = (position === 'left') ? '' : `translate(${width},0)`;
     return <g className="chart-value-labels-y" transform={transform}>
-      {labels.map((label) => {
+      {labels.map((label, i) => {
         const y = scale(label.value);
         const x = (placement === 'before') ? -distance : distance;
 
-        return <g>
+        return <g key={`x-axis-label-${i}`}>
           {/* <YAxisLabelDebugRect {...{x, y, label, style}}/> */}
           <MeasuredValueLabel {...{x, y, className, dy:"0.35em", style}}>
             {label.text}
