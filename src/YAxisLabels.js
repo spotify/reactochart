@@ -118,7 +118,7 @@ class YAxisValueLabels extends React.Component {
 
     const start = performance.now();
     const {labels} = resolveYLabelsForValues(scale, ticks, formats, style);
-    console.log('resolveYLabelsForValues took ', performance.now() - start);
+    // console.log('resolveYLabelsForValues took ', performance.now() - start);
     // console.log('found labels', labels);
     return labels;
   }
