@@ -94,9 +94,9 @@ class XYPlot extends React.Component {
     };
 
     return <svg {...{width, height, className: 'xy-plot', onMouseMove: this.onMouseMove}} {...handlers}>
-      <rect fill="#fff" {...{width, height}} className="chart-bg" />
+      <rect className="chart-background" {...{width, height}} />
       <g transform={`translate(${margin.left}, ${margin.top})`} className="chart-inner">
-        <rect fill="#dddddd" {...chartSize} />
+        <rect className="plot-background" {...chartSize} />
         {React.Children.map(this.props.children, child => {
           return (_.isNull(child) || _.isUndefined(child)) ? null :
             React.cloneElement(child, propsToPass);
