@@ -4,6 +4,8 @@ import _ from 'lodash';
 import {getTickDomain} from './utils/Scale';
 import {sumMargins} from './utils/Margin';
 import {getAxisChildProps} from './utils/Axis'
+import xyPropsEqual from './utils/xyPropsEqual';
+
 
 import YTicks from './YTicks';
 import YGrid from './YGrid';
@@ -61,6 +63,10 @@ export default class YAxis extends React.Component {
     labelDistance: 3,
     titleDistance: 5
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !xyPropsEqual(this.props, nextProps);
+  }
 
   static getTickDomain(props) {
     if(!_.get(props, 'scale.y')) return;

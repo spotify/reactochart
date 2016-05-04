@@ -5,6 +5,8 @@ import MeasuredValueLabel from './MeasuredValueLabel';
 import {getScaleTicks, inferScaleType, getTickDomain} from './utils/Scale';
 import {checkLabelsDistinct, countRangeOverlaps, makeLabelFormatters, getLabelXRange, getLabelsYOverhang}
   from './utils/Label';
+import xyPropsEqual from './utils/xyPropsEqual';
+
 
 function resolveYLabelsForValues(scale, values, formats, style, force = true) {
   // given a set of Y-values to label, and a list of formatters to try,
@@ -67,6 +69,10 @@ class YAxisValueLabels extends React.Component {
       textAnchor: 'end'
     }
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !xyPropsEqual(this.props, nextProps);
+  }
 
   static getTickDomain(props) {
     if(!_.get(props, 'scale.y')) return;

@@ -77,3 +77,15 @@ export function getTickDomain(scale, {ticks, tickCount, nice} = {}) {
   else if(nice && scaleType !== 'ordinal') return scale.domain();
   // return undefined by default, if we have no options pertaining to ticks
 }
+
+export function scaleEqual(scaleA, scaleB) {
+  return (
+    (!isValidScale(scaleA) || !isValidScale(scaleB)) ?
+      scaleA === scaleB : // safe fallback
+      ( // check scale equality
+        _.isEqual(scaleA.domain(), scaleB.domain()) &&
+        _.isEqual(scaleA.range(), scaleB.range()) &&
+        _.isEqual(getScaleTicks(scaleA), getScaleTicks(scaleB)) // todo is this necessary?
+      )
+  );
+}

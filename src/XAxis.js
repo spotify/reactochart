@@ -1,9 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
+import shallowEqual from './utils/shallowEqual';
 
-import {getTickDomain} from './utils/Scale';
+import {getTickDomain, scaleEqual} from './utils/Scale';
 import {sumMargins} from './utils/Margin';
 import {getAxisChildProps} from './utils/Axis';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 import XTicks from './XTicks';
 import XGrid from './XGrid';
@@ -61,6 +63,10 @@ export default class XAxis extends React.Component {
     labelDistance: 3,
     titleDistance: 5
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !xyPropsEqual(this.props, nextProps);
+  }
 
   static getTickDomain(props) {
     if(!_.get(props, 'scale.x')) return;
