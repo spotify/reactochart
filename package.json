@@ -2,7 +2,7 @@
   "name": "reactochart",
   "description": "Reactochart - React Charts, graphs and data visualization (UNSTABLE)",
   "author": "Dan Delany <dand@spotify.com>",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "lib/index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",
