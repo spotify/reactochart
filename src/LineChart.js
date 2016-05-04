@@ -1,8 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
 import d3 from 'd3';
+import shallowEqual from './utils/shallowEqual';
 
 import {makeAccessor} from './utils/Data';
+import {scaleEqual} from './utils/Scale';
+import xyPropsEqual from './utils/xyPropsEqual';
+
 
 export default class LineChart extends React.Component {
   static propTypes = {
@@ -18,9 +22,29 @@ export default class LineChart extends React.Component {
   componentWillMount() {
     this.initBisector(this.props);
   }
-  componentWillReceiveProps(newProps) {
-    this.initBisector(newProps);
+  componentWillReceiveProps(nextProps) {
+    this.initBisector(nextProps);
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !xyPropsEqual(this.props, nextProps);
+  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   // const start = performance.now();
+  //   const deepishProps = ['margin', 'scaleType'];
+  //   const deeperProps = ['domain'];
+  //   const deepProps = deepishProps.concat(deeperProps).concat('scale');
+  //
+  //   const isEqual =
+  //     shallowEqual(_.omit(this.props, deepProps), _.omit(nextProps, deepProps)) &&
+  //     _.every(deepishProps, (key) => shallowEqual(this.props[key], nextProps[key])) &&
+  //     _.every(deeperProps, (key) => _.isEqual(this.props[key], nextProps[key])) &&
+  //     _.every(['x', 'y'], (key) => scaleEqual(this.props.scale[key], nextProps.scale[key]));
+  //
+  //   // console.log('isEqual', isEqual);
+  //   // console.log('took', performance.now() - start);
+  //   return !isEqual;
+  // }
 
   initBisector(props) {
     this.setState({bisectX: d3.bisector(d => makeAccessor(props.getX)(d)).left});

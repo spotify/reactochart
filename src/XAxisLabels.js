@@ -5,6 +5,8 @@ import MeasuredValueLabel from './MeasuredValueLabel';
 import {getScaleTicks, inferScaleType, getTickDomain} from './utils/Scale';
 import {checkLabelsDistinct, countRangeOverlaps, makeLabelFormatters, getLabelXRange, getLabelsXOverhang}
   from './utils/Label';
+import xyPropsEqual from './utils/xyPropsEqual';
+
 
 function resolveXLabelsForValues(scale, values, formats, style, force = true) {
   // given a set of values to label, and a list of formatters to try,
@@ -78,6 +80,10 @@ class XAxisValueLabels extends React.Component {
     formats: undefined,
     labels: undefined
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !xyPropsEqual(this.props, nextProps);
+  }
 
   static getTickDomain(props) {
     if(!_.get(props, 'scale.x')) return;
