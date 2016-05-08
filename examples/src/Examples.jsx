@@ -27,6 +27,7 @@ import RangeRect from '../../src/RangeRect';
 import BarChart from '../../src/BarChart';
 import AreaBarChart from '../../src/AreaBarChart';
 import LineChart from '../../src/LineChart';
+import ColorHeatmap from '../../src/ColorHeatmap';
 import AreaHeatmap from '../../src/AreaHeatmap';
 import ScatterPlot from '../../src/ScatterPlot';
 import PieChart from '../../src/PieChart';
@@ -219,6 +220,55 @@ const LineChartExample = React.createClass({
     </div>
   }
 });
+
+const ColorHeatMapExample = (props) => {
+  const gridData = _.range(30).map(m => {
+    return _.range(30).map(n => {
+      return {
+        x: n,
+        xEnd: n + 1,
+        y: m,
+        yEnd: m + 1,
+        value: Math.sin(m * n * 0.01)
+      };
+    });
+  });
+
+  const data = _.flatten(gridData);
+
+  return <div>
+    <XYPlot width={500} height={500}>
+      <ColorHeatmap
+        data={data}
+        getValue="value"
+        getX="x"
+        getXEnd="xEnd"
+        getY="y"
+        getYEnd="yEnd"
+        colors={['rebeccapurple', 'goldenrod']}
+        interpolator={'lab'}
+      />
+      <XAxis gridLineStyle={{stroke: '#666'}}/>
+      <YAxis gridLineStyle={{stroke: '#666'}}/>
+    </XYPlot>
+
+    <XYPlot width={500} height={500}>
+      <ColorHeatmap
+        data={data}
+        getValue="value"
+        getX="x"
+        getXEnd="xEnd"
+        getY="y"
+        getYEnd="yEnd"
+        valueDomain={[-1, 0, 1]}
+        colors={['Crimson', '#eee', 'ForestGreen']}
+        interpolator={'lab'}
+      />
+      <XAxis gridLineStyle={{stroke: '#666'}}/>
+      <YAxis gridLineStyle={{stroke: '#666'}}/>
+    </XYPlot>
+  </div>;
+};
 
 
 const InteractiveLineExample = React.createClass({
@@ -972,6 +1022,7 @@ export const examples = [
   {id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample},
   {id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample},
   {id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample},
+  {id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample},
   {id: 'treeMap', title: 'TreeMap', Component: TreeMapExample},
   {id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample},
   {id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest},
