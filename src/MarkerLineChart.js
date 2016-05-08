@@ -15,13 +15,12 @@ import {makeAccessor, domainFromRangeData} from './utils/Data';
 // The dependent variable must be a single value, not a range.
 
 function getTickType(props) {
-  const {getXEnd, getYEnd, orientation} = props;
-  const isVertical = (orientation === 'vertical');
+  const {getXEnd, getYEnd, horizontal} = props;
   // warn if a range is passed for the dependent variable, which is expected to be a value
-  if((isVertical && !_.isUndefined(getYEnd)) || (!isVertical && !_.isUndefined(getXEnd)))
+  if((!horizontal && !_.isUndefined(getYEnd)) || (horizontal && !_.isUndefined(getXEnd)))
     console.warn("Warning: MarkerLineChart can only show the independent variable as a range, not the dependent variable.");
 
-  if((isVertical && !_.isUndefined(getXEnd)) || (!isVertical && !_.isUndefined(getYEnd)))
+  if((!horizontal && !_.isUndefined(getXEnd)) || (horizontal && !_.isUndefined(getYEnd)))
     return "RangeValue";
 
   return "ValueValue";
@@ -38,7 +37,7 @@ export default class MarkerLineChart extends React.Component {
     getXEnd: CustomPropTypes.getter,
     getYEnd: CustomPropTypes.getter,
 
-    orientation: PropTypes.oneOf(['vertical', 'horizontal']),
+    horizontal: React.PropTypes.bool,
     lineLength: PropTypes.number,
 
     // x & y scale types
@@ -50,7 +49,7 @@ export default class MarkerLineChart extends React.Component {
     onMouseLeaveLine: PropTypes.func
   };
   static defaultProps = {
-    orientation: 'vertical',
+    horizontal: false,
     lineLength: 10
   };
 
@@ -82,8 +81,7 @@ export default class MarkerLineChart extends React.Component {
 
   static getDomain(props) {
     if(getTickType(props) === 'RangeValue') { // set range domain for range type
-      const {data, getX, getXEnd, getY, getYEnd, scaleType, orientation} = props;
-      const horizontal = (orientation !== 'vertical');
+      const {data, getX, getXEnd, getY, getYEnd, scaleType, horizontal} = props;
 
       // only have to specify range axis domain, other axis uses default domainFromData
       // in this chart type, the range axis, if there is one, is always the *independent* variable
@@ -126,15 +124,14 @@ export default class MarkerLineChart extends React.Component {
         return _.isFunction(callback) ? _.partial(callback, _, d) : null;
       });
 
-    const {getX, getXEnd, getY, getYEnd, orientation, scale} = this.props;
-    const isVertical = (orientation === 'vertical');
+    const {getX, getXEnd, getY, getYEnd, horizontal, scale} = this.props;
     const xVal = scale.x(makeAccessor(getX)(d));
     const yVal = scale.y(makeAccessor(getY)(d));
     const xEndVal = _.isUndefined(getXEnd) ? 0 : scale.x(makeAccessor(getXEnd)(d));
     const yEndVal = _.isUndefined(getYEnd) ? 0 : scale.y(makeAccessor(getYEnd)(d));
     const [x1, y1] = [xVal, yVal];
-    const x2 = isVertical ? xEndVal : xVal;
-    const y2 = isVertical ? yVal : yEndVal;
+    const x2 = horizontal ?  xVal : xEndVal;
+    const y2 = horizontal ? yEndVal : yVal;
     const key = `marker-line-${i}`;
 
     if(!_.every([x1, x2, y1, y2], _.isFinite)) return null;
@@ -149,14 +146,13 @@ export default class MarkerLineChart extends React.Component {
         return _.isFunction(callback) ? _.partial(callback, _, d) : null;
       });
 
-    const {getX, getY, orientation, lineLength, scale} = this.props;
-    const isVertical = (orientation === 'vertical');
+    const {getX, getY, horizontal, lineLength, scale} = this.props;
     const xVal = scale.x(makeAccessor(getX)(d));
     const yVal = scale.y(makeAccessor(getY)(d));
-    const x1 = isVertical ? xVal - (lineLength / 2) : xVal;
-    const x2 = isVertical ? xVal + (lineLength / 2) : xVal;
-    const y1 = isVertical ? yVal : yVal - (lineLength / 2);
-    const y2 = isVertical ? yVal : yVal + (lineLength / 2);
+    const x1 = (!horizontal) ? xVal - (lineLength / 2) : xVal;
+    const x2 = (!horizontal) ? xVal + (lineLength / 2) : xVal;
+    const y1 = (!horizontal) ? yVal : yVal - (lineLength / 2);
+    const y2 = (!horizontal) ? yVal : yVal + (lineLength / 2);
     const key = `marker-line-${i}`;
 
     if(!_.every([x1, x2, y1, y2], _.isFinite)) return null;
