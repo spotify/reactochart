@@ -33,6 +33,9 @@ function makeColorScale(domain, colors, interpolator) {
 
 export default class ColorHeatmap extends React.Component {
   static propTypes = {
+    // passed from xyplot
+    scale: CustomPropTypes.xyObjectOf(React.PropTypes.func.isRequired),
+    
     // data array - should be 1D array of all grid values
     // (if you have a 2D array, _.flatten it)
     data: React.PropTypes.array.isRequired,
@@ -49,10 +52,7 @@ export default class ColorHeatmap extends React.Component {
     // ...or else one will be constructed from colors, colorStops and interpolator
     colors: React.PropTypes.array,
     valueDomain: React.PropTypes.array,
-    interpolator: React.PropTypes.string,
-
-    // passed from xyplot
-    scale: CustomPropTypes.xyObjectOf(React.PropTypes.func.isRequired)
+    interpolator: React.PropTypes.string
   };
   static defaultProps = {
     interpolator: 'lab'
