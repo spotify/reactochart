@@ -20144,9 +20144,9 @@
 	
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _lodash = __webpack_require__(163);
 	
@@ -20244,35 +20244,43 @@
 	
 	var _LineChart2 = _interopRequireDefault(_LineChart);
 	
-	var _AreaHeatmap = __webpack_require__(308);
+	var _ColorHeatmap = __webpack_require__(308);
+	
+	var _ColorHeatmap2 = _interopRequireDefault(_ColorHeatmap);
+	
+	var _AreaHeatmap = __webpack_require__(309);
 	
 	var _AreaHeatmap2 = _interopRequireDefault(_AreaHeatmap);
 	
-	var _ScatterPlot = __webpack_require__(309);
+	var _ScatterPlot = __webpack_require__(310);
 	
 	var _ScatterPlot2 = _interopRequireDefault(_ScatterPlot);
 	
-	var _PieChart = __webpack_require__(310);
+	var _PieChart = __webpack_require__(311);
 	
 	var _PieChart2 = _interopRequireDefault(_PieChart);
 	
-	var _TreeMap = __webpack_require__(311);
+	var _TreeMap = __webpack_require__(312);
 	
 	var _TreeMap2 = _interopRequireDefault(_TreeMap);
 	
-	var _Histogram = __webpack_require__(312);
+	var _Histogram = __webpack_require__(313);
 	
 	var _Histogram2 = _interopRequireDefault(_Histogram);
 	
-	var _MarkerLineChart = __webpack_require__(313);
+	var _FunnelChart = __webpack_require__(314);
+	
+	var _FunnelChart2 = _interopRequireDefault(_FunnelChart);
+	
+	var _MarkerLineChart = __webpack_require__(315);
 	
 	var _MarkerLineChart2 = _interopRequireDefault(_MarkerLineChart);
 	
-	var _KernelDensityEstimation = __webpack_require__(314);
+	var _KernelDensityEstimation = __webpack_require__(316);
 	
 	var _KernelDensityEstimation2 = _interopRequireDefault(_KernelDensityEstimation);
 	
-	var _util = __webpack_require__(315);
+	var _util = __webpack_require__(317);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -20315,7 +20323,6 @@
 	
 	  timeTime: _lodash2.default.zip(timeData, timeData2)
 	};
-	//console.log(randomBarData2);
 	
 	var variableBins = _lodash2.default.range(0, 12).reduce(function (bins, i) {
 	  var lastBinEnd = bins.length ? _lodash2.default.last(bins)[1] : 0;
@@ -20344,70 +20351,181 @@
 	var emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 	// end fake data
 	
-	var PieChartExample = function (_React$Component) {
-	  _inherits(PieChartExample, _React$Component);
+	var LineChartExample = function LineChartExample(props) {
+	  var colors = _d3.default.scale.category10().domain(_lodash2.default.range(10));
 	
-	  function PieChartExample() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      _XYPlot2.default,
+	      _extends({ scaleType: 'linear' }, { width: 600, height: 350, domain: { y: [-2, 2] } }),
+	      _react2.default.createElement(_XAxis2.default, { title: 'Phase' }),
+	      _react2.default.createElement(_YAxis2.default, { title: 'Intensity' }),
+	      _react2.default.createElement(_LineChart2.default, {
+	        data: _lodash2.default.range(100),
+	        getY: function getY(d) {
+	          return Math.sin(d * .1);
+	        },
+	        lineStyle: { stroke: colors(0), strokeWidth: 3 }
+	      }),
+	      _react2.default.createElement(_LineChart2.default, {
+	        data: _lodash2.default.range(100),
+	        getY: function getY(d) {
+	          return Math.cos(d * .1);
+	        },
+	        lineStyle: { stroke: colors(1), strokeWidth: 2 }
+	      }),
+	      _react2.default.createElement(_LineChart2.default, {
+	        data: _lodash2.default.range(100),
+	        getY: function getY(d) {
+	          return Math.sin(d * .2) * 1.5;
+	        },
+	        lineStyle: { stroke: colors(2), strokeWidth: 1 }
+	      })
+	    )
+	  );
+	};
+	
+	var LineChartExample2 = function (_React$Component) {
+	  _inherits(LineChartExample2, _React$Component);
+	
+	  function LineChartExample2() {
 	    var _Object$getPrototypeO;
 	
 	    var _temp, _this, _ret;
 	
-	    _classCallCheck(this, PieChartExample);
+	    _classCallCheck(this, LineChartExample2);
 	
 	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
 	      args[_key] = arguments[_key];
 	    }
 	
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(PieChartExample)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = { sinVal: 0 }, _this._animateValue = function () {
-	      var sinVal = Math.min(Math.abs(Math.cos(new Date() * .001) * Math.sin(new Date() * .0011) + 1), 2);
-	      _this.setState({ sinVal: sinVal });
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(LineChartExample2)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+	      activeX: null
+	    }, _this._onMouseMove = function (_ref) {
+	      var xValue = _ref.xValue;
+	      var yValue = _ref.yValue;
+	
+	      _this.setState({ activeX: xValue });
 	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 	
-	  _createClass(PieChartExample, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this._interval = setInterval(this._animateValue, 20);
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      clearInterval(this._interval);
-	    }
-	  }, {
+	  _createClass(LineChartExample2, [{
 	    key: 'render',
 	    value: function render() {
+	      var activeX = this.state.activeX;
+	
+	      var colors = _d3.default.scale.category10().domain(_lodash2.default.range(10));
+	
+	      var line1 = function line1(d) {
+	        return Math.sin(d * .1);
+	      };
+	      var line2 = function line2(d) {
+	        return Math.cos(d * .1);
+	      };
+	      var line3 = function line3(d) {
+	        return Math.sin(d * .2) * 1.5;
+	      };
+	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_PieChart2.default, { data: [45, 35, 20] }),
-	        _react2.default.createElement(_PieChart2.default, {
-	          data: [10, 20, 30],
-	          radius: 100,
-	          holeRadius: 50,
-	          margin: 20,
-	          markerLineValue: 20
-	        }),
-	        _react2.default.createElement(_PieChart2.default, {
-	          data: [42],
-	          total: 100,
-	          radius: 80,
-	          holeRadius: 50,
-	          centerLabel: '42%'
-	        }),
-	        _react2.default.createElement(_PieChart2.default, {
-	          data: [this.state.sinVal],
-	          total: 2,
-	          radius: 200,
-	          holeRadius: 50,
-	          centerLabel: (this.state.sinVal * 50).toFixed(0)
-	        })
+	        _react2.default.createElement(
+	          _XYPlot2.default,
+	          _extends({ scaleType: 'linear' }, { width: 600, height: 350, domain: { y: [-2, 2] } }, { onMouseMove: this._onMouseMove }),
+	          _react2.default.createElement(_XAxis2.default, { title: 'Phase' }),
+	          _react2.default.createElement(_YAxis2.default, { title: 'Intensity' }),
+	          _react2.default.createElement(_LineChart2.default, {
+	            data: _lodash2.default.range(100),
+	            getY: line1,
+	            lineStyle: { stroke: colors(0), strokeWidth: 3 }
+	          }),
+	          _react2.default.createElement(_LineChart2.default, {
+	            data: _lodash2.default.range(100),
+	            getY: line2,
+	            lineStyle: { stroke: colors(1), strokeWidth: 2 }
+	          }),
+	          _react2.default.createElement(_LineChart2.default, {
+	            data: _lodash2.default.range(100),
+	            getY: line3,
+	            lineStyle: { stroke: colors(2), strokeWidth: 1 }
+	          }),
+	          activeX ? _react2.default.createElement(_ScatterPlot2.default, {
+	            data: [line1, line2, line3].map(function (lineFunc) {
+	              return [activeX, lineFunc(activeX)];
+	            }),
+	            getX: 0,
+	            getY: 1,
+	            pointRadius: 5
+	          }) : null,
+	          activeX ? _react2.default.createElement(_XLine2.default, { value: activeX, style: { stroke: '#666' } }) : null
+	        ),
+	        activeX ? _react2.default.createElement(
+	          'h3',
+	          null,
+	          this.state.activeX.toFixed(3)
+	        ) : null
 	      );
 	    }
 	  }]);
 	
-	  return PieChartExample;
+	  return LineChartExample2;
 	}(_react2.default.Component);
+	
+	var InteractiveLineExample = _react2.default.createClass({
+	  displayName: 'InteractiveLineExample',
+	  getInitialState: function getInitialState() {
+	    return {
+	      hoveredXYPlotData: null,
+	      activeXValue: null
+	    };
+	  },
+	  onMouseMoveXYPlot: function onMouseMoveXYPlot(_ref2) {
+	    var xValue = _ref2.xValue;
+	    var yValue = _ref2.yValue;
+	
+	    this.setState({ activeXValue: xValue, activeYValue: yValue });
+	  },
+	  onClick: function onClick(_ref3) {
+	    var yValue = _ref3.yValue;
+	
+	    this.setState({ clickedY: yValue });
+	  },
+	  render: function render() {
+	    var _state = this.state;
+	    var activeXValue = _state.activeXValue;
+	    var activeYValue = _state.activeYValue;
+	
+	    var getters = { getX: 0, getY: 1 };
+	
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      activeXValue && activeYValue ? _react2.default.createElement(
+	        'div',
+	        null,
+	        activeXValue.toFixed(2) + ', ' + activeYValue.toFixed(2)
+	      ) : _react2.default.createElement(
+	        'div',
+	        null,
+	        'Hover over the chart to show values'
+	      ),
+	      _react2.default.createElement(
+	        _XYPlot2.default,
+	        { width: 700, height: 400, onMouseMove: this.onMouseMoveXYPlot, onClick: this.onClick },
+	        _react2.default.createElement(_XAxis2.default, { title: 'Days' }),
+	        _react2.default.createElement(_YAxis2.default, { title: 'Price' }),
+	        _react2.default.createElement(_LineChart2.default, _extends({ data: randomSequences[0] }, getters)),
+	        _react2.default.createElement(_LineChart2.default, _extends({ data: randomSequences[1] }, getters)),
+	        _react2.default.createElement(_LineChart2.default, _extends({ data: randomSequences[2] }, getters)),
+	        activeXValue ? _react2.default.createElement(_XLine2.default, { value: activeXValue, style: { stroke: 'red' } }) : null,
+	        activeYValue ? _react2.default.createElement(_YLine2.default, { value: activeYValue, style: { stroke: 'red' } }) : null,
+	        this.state.clickedY ? _react2.default.createElement(_YLine2.default, { value: this.state.clickedY, style: { stroke: 'orange' } }) : null
+	      )
+	    );
+	  }
+	});
 	
 	var ScatterPlotExample = _react2.default.createClass({
 	  displayName: 'ScatterPlotExample',
@@ -20459,287 +20577,520 @@
 	  }
 	});
 	
-	var LineChartExample = _react2.default.createClass({
-	  displayName: 'LineChartExample',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        _XYPlot2.default,
-	        { width: 700 },
-	        _react2.default.createElement(_XAxis2.default, null),
-	        _react2.default.createElement(_LineChart2.default, {
-	          data: _lodash2.default.range(-10, 10, 0.01),
-	          getX: null,
-	          getY: function getY(n) {
-	            return Math.sin(n);
-	          }
-	        }),
-	        _react2.default.createElement(_LineChart2.default, {
-	          data: _lodash2.default.range(-10, 10, 0.01),
-	          getX: null,
-	          getY: function getY(n) {
-	            return Math.sin(Math.pow(Math.abs(n), Math.abs(n * .18))) * Math.cos(n);
-	          }
-	        }),
-	        _react2.default.createElement(_LineChart2.default, {
-	          data: _lodash2.default.range(-10, 10, 0.01),
-	          getX: null,
-	          getY: function getY(n) {
-	            return Math.sin(n * 0.5) * Math.cos(n);
-	          }
-	        })
-	      )
-	    );
-	  }
-	});
+	var PieChartExample = function (_React$Component2) {
+	  _inherits(PieChartExample, _React$Component2);
 	
-	var InteractiveLineExample = _react2.default.createClass({
-	  displayName: 'InteractiveLineExample',
-	  getInitialState: function getInitialState() {
-	    return {
-	      hoveredXYPlotData: null,
-	      activeXValue: null
-	    };
-	  },
-	  onMouseMoveXYPlot: function onMouseMoveXYPlot(_ref) {
-	    var xValue = _ref.xValue;
-	    var yValue = _ref.yValue;
-	
-	    this.setState({ activeXValue: xValue, activeYValue: yValue });
-	  },
-	  onClick: function onClick(_ref2) {
-	    var yValue = _ref2.yValue;
-	
-	    this.setState({ clickedY: yValue });
-	  },
-	  render: function render() {
-	    var _state = this.state;
-	    var activeXValue = _state.activeXValue;
-	    var activeYValue = _state.activeYValue;
-	
-	    var getters = { getX: 0, getY: 1 };
-	
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      activeXValue && activeYValue ? _react2.default.createElement(
-	        'div',
-	        null,
-	        activeXValue.toFixed(2) + ', ' + activeYValue.toFixed(2)
-	      ) : _react2.default.createElement(
-	        'div',
-	        null,
-	        'Hover over the chart to show values'
-	      ),
-	      _react2.default.createElement(
-	        _XYPlot2.default,
-	        { width: 700, height: 400, onMouseMove: this.onMouseMoveXYPlot, onClick: this.onClick },
-	        _react2.default.createElement(_XAxis2.default, { title: 'Days' }),
-	        _react2.default.createElement(_YAxis2.default, { title: 'Price' }),
-	        _react2.default.createElement(_LineChart2.default, _extends({ data: randomSequences[0] }, getters)),
-	        _react2.default.createElement(_LineChart2.default, _extends({ data: randomSequences[1] }, getters)),
-	        _react2.default.createElement(_LineChart2.default, _extends({ data: randomSequences[2] }, getters)),
-	        activeXValue ? _react2.default.createElement(_XLine2.default, { value: activeXValue, style: { stroke: 'red' } }) : null,
-	        activeYValue ? _react2.default.createElement(_YLine2.default, { value: activeYValue, style: { stroke: 'red' } }) : null,
-	        this.state.clickedY ? _react2.default.createElement(_YLine2.default, { value: this.state.clickedY, style: { stroke: 'orange' } }) : null
-	      )
-	    );
-	  }
-	});
-	
-	var HistogramKDEExample = _react2.default.createClass({
-	  displayName: 'HistogramKDEExample',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          _XYPlot2.default,
-	          { margin: { left: 40, right: 8 }, width: 700, height: 300 },
-	          _react2.default.createElement(_XAxis2.default, null),
-	          _react2.default.createElement(_YAxis2.default, null),
-	          _react2.default.createElement(_Histogram2.default, {
-	            data: randomNormal, getX: null
-	          }),
-	          _react2.default.createElement(_KernelDensityEstimation2.default, {
-	            data: randomNormal, getX: null, bandwidth: 0.5
-	          }),
-	          _react2.default.createElement(_KernelDensityEstimation2.default, {
-	            data: randomNormal, getX: null, bandwidth: 0.1
-	          }),
-	          _react2.default.createElement(_KernelDensityEstimation2.default, {
-	            data: randomNormal, getX: null, bandwidth: 2
-	          })
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          _XYPlot2.default,
-	          {
-	            margin: { left: 40, right: 8 },
-	            width: 700, height: 40,
-	            showGrid: false,
-	            showLabels: false,
-	            showTicks: false
-	          },
-	          _react2.default.createElement(_ScatterPlot2.default, {
-	            data: randomNormal,
-	            getX: null,
-	            getY: function getY() {
-	              return Math.random();
-	            },
-	            pointRadius: 1
-	          })
-	        )
-	      )
-	    );
-	  }
-	});
-	
-	var CustomTicksExample = _react2.default.createClass({
-	  displayName: 'CustomTicksExample',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        _XYPlot2.default,
-	        {
-	          width: 300, height: 300,
-	          ticks: {
-	            x: [0, 1, 2, 4, 8, 16],
-	            y: [-8000, -3000, 0, 10000, 5000, 40000]
-	          }
-	        },
-	        _react2.default.createElement(_BarChart2.default, { data: randomBarData2.numberNumber, getX: 0, getY: 1 })
-	      )
-	    );
-	  }
-	});
-	
-	var CustomAxisLabelsExample = _react2.default.createClass({
-	  displayName: 'CustomAxisLabelsExample',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        _XYPlot2.default,
-	        {
-	          width: 500, height: 300,
-	          ticks: {
-	            x: [0, 1, 2, 4, 8, 16],
-	            y: [-8000, -3000, 0, 10000, 5000, 20000]
-	          },
-	          labelValues: {
-	            x: [0, 1, 3, 9, 12],
-	            y: [-5000, -2000, 0, 8000, 3000, 16000]
-	          },
-	          showZero: { y: true }
-	        },
-	        _react2.default.createElement(_BarChart2.default, {
-	          data: randomBarData2.numberNumber,
-	          getX: 0, getY: 1,
-	          barThickness: 20
-	        })
-	      )
-	    );
-	  }
-	});
-	
-	var CustomSelectionRect = function (_React$Component2) {
-	  _inherits(CustomSelectionRect, _React$Component2);
-	
-	  function CustomSelectionRect() {
-	    _classCallCheck(this, CustomSelectionRect);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(CustomSelectionRect).apply(this, arguments));
-	  }
-	
-	  _createClass(CustomSelectionRect, [{
-	    key: 'render',
-	    value: function render() {
-	      var _props = this.props;
-	      var scale = _props.scale;
-	      var hoveredYVal = _props.hoveredYVal;
-	
-	      return hoveredYVal ? _react2.default.createElement('rect', {
-	        x: '0',
-	        y: scale.y(hoveredYVal) - 20,
-	        width: '200', height: '40',
-	        style: { fill: 'red' }
-	      }) : null;
-	    }
-	  }]);
-	
-	  return CustomSelectionRect;
-	}(_react2.default.Component);
-	
-	var CustomChildExample = function (_React$Component3) {
-	  _inherits(CustomChildExample, _React$Component3);
-	
-	  function CustomChildExample() {
+	  function PieChartExample() {
 	    var _Object$getPrototypeO2;
 	
-	    var _temp2, _this3, _ret2;
+	    var _temp2, _this2, _ret2;
 	
-	    _classCallCheck(this, CustomChildExample);
+	    _classCallCheck(this, PieChartExample);
 	
 	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
 	      args[_key2] = arguments[_key2];
 	    }
 	
-	    return _ret2 = (_temp2 = (_this3 = _possibleConstructorReturn(this, (_Object$getPrototypeO2 = Object.getPrototypeOf(CustomChildExample)).call.apply(_Object$getPrototypeO2, [this].concat(args))), _this3), _this3.state = {
-	      hoveredYVal: null
-	    }, _this3.onMouseMoveChart = function (_ref3) {
-	      var yValue = _ref3.yValue;
-	
-	      _this3.setState({ hoveredYVal: yValue });
-	    }, _temp2), _possibleConstructorReturn(_this3, _ret2);
+	    return _ret2 = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_Object$getPrototypeO2 = Object.getPrototypeOf(PieChartExample)).call.apply(_Object$getPrototypeO2, [this].concat(args))), _this2), _this2.state = { sinVal: 0 }, _this2._animateValue = function () {
+	      var sinVal = Math.min(Math.abs(Math.cos(new Date() * .001) * Math.sin(new Date() * .0011) + 1), 2);
+	      _this2.setState({ sinVal: sinVal });
+	    }, _temp2), _possibleConstructorReturn(_this2, _ret2);
 	  }
 	
-	  _createClass(CustomChildExample, [{
+	  _createClass(PieChartExample, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this._interval = setInterval(this._animateValue, 20);
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      clearInterval(this._interval);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(
-	          _XYPlot2.default,
-	          {
-	            width: 200, height: 200,
-	            axisType: { y: 'ordinal' },
-	            padding: { bottom: 20, top: 20 },
-	            showTicks: { x: false, y: false },
-	            showGrid: { x: false, y: false },
-	            showLabels: { x: false },
-	            showXZero: { x: true },
-	            onMouseMove: this.onMouseMoveChart
-	          },
-	          _react2.default.createElement(_XAxis2.default, null),
-	          _react2.default.createElement(_YAxis2.default, null),
-	          _react2.default.createElement(CustomSelectionRect, { underAxes: true, hoveredYVal: this.state.hoveredYVal }),
-	          _react2.default.createElement(_BarChart2.default, {
-	            horizontal: true,
-	            data: randomBarData2.numberOrdinal,
-	            getX: 0,
-	            getY: 1,
-	            barThickness: 20
-	          })
-	        )
+	        _react2.default.createElement(_PieChart2.default, { data: [45, 35, 20] }),
+	        _react2.default.createElement(_PieChart2.default, {
+	          data: [10, 20, 30],
+	          radius: 100,
+	          holeRadius: 50,
+	          margin: 20,
+	          markerLineValue: 20
+	        }),
+	        _react2.default.createElement(_PieChart2.default, {
+	          data: [42],
+	          total: 100,
+	          radius: 80,
+	          holeRadius: 50,
+	          centerLabel: '42%'
+	        }),
+	        _react2.default.createElement(_PieChart2.default, {
+	          data: [this.state.sinVal],
+	          total: 2,
+	          radius: 200,
+	          holeRadius: 50,
+	          centerLabel: (this.state.sinVal * 50).toFixed(0)
+	        })
 	      );
 	    }
 	  }]);
 	
-	  return CustomChildExample;
+	  return PieChartExample;
 	}(_react2.default.Component);
+	
+	var BarChartExample = function BarChartExample(props) {
+	  var count = 30;
+	  var startDate = new Date(1992, 0, 1);
+	
+	  var numbers = _lodash2.default.range(count);
+	  var letters = _lodash2.default.times(count, function (n) {
+	    return String.fromCharCode(97 + n);
+	  });
+	  var dates = _lodash2.default.times(count, function (n) {
+	    return new Date(+startDate + n * 1000 * 60 * 60 * 24 * 100);
+	  });
+	
+	  var getNumberValue = function getNumberValue(d) {
+	    return 2 + Math.cos(d / 10);
+	  };
+	  var getDateValue = function getDateValue(d) {
+	    return getNumberValue(d.getFullYear() + d.getMonth() / 12);
+	  };
+	  var getLetterValue = function getLetterValue(d) {
+	    return getNumberValue(d.charCodeAt(0));
+	  };
+	
+	  var chartDefs = _lodash2.default.zip([numbers, letters, dates], [getNumberValue, getLetterValue, getDateValue]);
+	
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    [true, false].map(function (horizontal) {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h4',
+	          null,
+	          horizontal ? "Horizontal" : "Vertical"
+	        ),
+	        chartDefs.map(function (_ref4) {
+	          var _ref5 = _slicedToArray(_ref4, 2);
+	
+	          var data = _ref5[0];
+	          var getValue = _ref5[1];
+	
+	          return _react2.default.createElement(
+	            _XYPlot2.default,
+	            { width: 320, height: 320 },
+	            _react2.default.createElement(_XAxis2.default, null),
+	            _react2.default.createElement(_YAxis2.default, null),
+	            _react2.default.createElement(_BarChart2.default, {
+	              data: data,
+	              horizontal: horizontal,
+	              getX: horizontal ? getValue : null,
+	              getY: horizontal ? null : getValue
+	            })
+	          );
+	        })
+	      );
+	    })
+	  );
+	};
+	
+	var RangeBarChartExample = function RangeBarChartExample(props) {
+	  var count = 30;
+	  var dateDomain = [new Date(1992, 0, 1), new Date(2001, 0, 1)];
+	  var numberDomain = [-2, 2];
+	  var ordinalDomain = _lodash2.default.range(count).map(function (n) {
+	    return String.fromCharCode(97 + n);
+	  });
+	
+	  var dates = _lodash2.default.range(30).map(function (n) {
+	    return new Date(+dateDomain[0] + n * 1000 * 60 * 60 * 24 * 100);
+	  });
+	
+	  var addDays = function addDays(date, n) {
+	    return new Date(+date + 1000 * 60 * 60 * 24 * n);
+	  };
+	
+	  var numberRanges = _lodash2.default.range(30).map(function (n) {
+	    return [Math.sin(n / 5), Math.sin(n / 8) + Math.cos(n / 5)].sort(function (a, b) {
+	      return a - b;
+	    });
+	  });
+	  var dateRanges = _lodash2.default.range(30).map(function (n) {
+	    return [dates[n], addDays(dates[n], Math.sin(n / 8) * 100)].sort(function (a, b) {
+	      return a - b;
+	    });
+	  });
+	
+	  var numberNumberRangeData = _lodash2.default.zip(_lodash2.default.range(30), numberRanges);
+	  var dateNumberRangeData = _lodash2.default.zip(dates, numberRanges);
+	  var ordinalNumberRangeData = _lodash2.default.zip(ordinalDomain, numberRanges);
+	
+	  var numberDateRangeData = _lodash2.default.zip(_lodash2.default.range(30), dateRanges);
+	  var dateDateRangeData = _lodash2.default.zip(dates, dateRanges);
+	  var ordinalDateRangeData = _lodash2.default.zip(ordinalDomain, dateRanges);
+	
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    [true, false].map(function (horizontal) {
+	      var _ref6, _ref7, _ref8, _ref9, _ref10, _ref11;
+	
+	      var title = horizontal ? "Horizontal" : "Vertical";
+	      var getters = horizontal ? { getY: 0, getX: '1.0', getXEnd: '1.1' } : { getX: 0, getY: '1.0', getYEnd: '1.1' };
+	
+	      var dep = horizontal ? 'x' : 'y';
+	      var indep = horizontal ? 'y' : 'x';
+	
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          title
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            _XYPlot2.default,
+	            _extends({ domain: (_ref6 = {}, _defineProperty(_ref6, dep, numberDomain), _defineProperty(_ref6, indep, [0, count]), _ref6), scaleType: 'linear' }, { width: 300, height: 350 }),
+	            _react2.default.createElement(_XAxis2.default, null),
+	            _react2.default.createElement(_YAxis2.default, null),
+	            _react2.default.createElement(_RangeBarChart2.default, _extends({
+	              horizontal: horizontal,
+	              data: numberNumberRangeData
+	            }, getters))
+	          ),
+	          _react2.default.createElement(
+	            _XYPlot2.default,
+	            _extends({ domain: (_ref7 = {}, _defineProperty(_ref7, dep, numberDomain), _defineProperty(_ref7, indep, dateDomain), _ref7) }, { width: 300, height: 350 }),
+	            _react2.default.createElement(_XAxis2.default, null),
+	            _react2.default.createElement(_YAxis2.default, null),
+	            _react2.default.createElement(_RangeBarChart2.default, _extends({
+	              horizontal: horizontal,
+	              data: dateNumberRangeData
+	            }, getters))
+	          ),
+	          _react2.default.createElement(
+	            _XYPlot2.default,
+	            _extends({ domain: (_ref8 = {}, _defineProperty(_ref8, dep, numberDomain), _defineProperty(_ref8, indep, ordinalDomain), _ref8) }, { width: 300, height: 350 }),
+	            _react2.default.createElement(_XAxis2.default, null),
+	            _react2.default.createElement(_YAxis2.default, null),
+	            _react2.default.createElement(_RangeBarChart2.default, _extends({
+	              horizontal: horizontal,
+	              data: ordinalNumberRangeData
+	            }, getters))
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            _XYPlot2.default,
+	            _extends({ domain: (_ref9 = {}, _defineProperty(_ref9, dep, dateDomain), _defineProperty(_ref9, indep, [0, count]), _ref9) }, { width: 300, height: 350 }),
+	            _react2.default.createElement(_XAxis2.default, null),
+	            _react2.default.createElement(_YAxis2.default, null),
+	            _react2.default.createElement(_RangeBarChart2.default, _extends({
+	              horizontal: horizontal,
+	              data: numberDateRangeData
+	            }, getters))
+	          ),
+	          _react2.default.createElement(
+	            _XYPlot2.default,
+	            _extends({ domain: (_ref10 = {}, _defineProperty(_ref10, dep, dateDomain), _defineProperty(_ref10, indep, dateDomain), _ref10) }, { width: 300, height: 350 }),
+	            _react2.default.createElement(_XAxis2.default, null),
+	            _react2.default.createElement(_YAxis2.default, null),
+	            _react2.default.createElement(_RangeBarChart2.default, _extends({
+	              horizontal: horizontal,
+	              data: dateDateRangeData
+	            }, getters))
+	          ),
+	          _react2.default.createElement(
+	            _XYPlot2.default,
+	            _extends({ domain: (_ref11 = {}, _defineProperty(_ref11, dep, dateDomain), _defineProperty(_ref11, indep, ordinalDomain), _ref11) }, { width: 300, height: 350 }),
+	            _react2.default.createElement(_XAxis2.default, null),
+	            _react2.default.createElement(_YAxis2.default, null),
+	            _react2.default.createElement(_RangeBarChart2.default, _extends({
+	              horizontal: horizontal,
+	              data: ordinalDateRangeData
+	            }, getters))
+	          )
+	        )
+	      );
+	    }),
+	    _react2.default.createElement(
+	      _XYPlot2.default,
+	      _extends({ domain: { y: [-1, 1], x: [-1, 1] }, scaleType: 'linear' }, { width: 300, height: 350 }),
+	      _react2.default.createElement(_XAxis2.default, null),
+	      _react2.default.createElement(_YAxis2.default, null),
+	      _react2.default.createElement(_RangeBarChart2.default, {
+	        data: _lodash2.default.range(-1, 1, .1),
+	        getX: null,
+	        getY: function getY(d) {
+	          return Math.sin(d * 2);
+	        },
+	        getYEnd: function getYEnd(d) {
+	          return Math.sin(d * 2) * Math.cos(d * 2);
+	        },
+	        barThickness: 6
+	      })
+	    )
+	  );
+	};
+	
+	var AreaBarChartExample = function AreaBarChartExample(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      _XYPlot2.default,
+	      { width: 500, height: 320 },
+	      _react2.default.createElement(_XAxis2.default, null),
+	      _react2.default.createElement(_YAxis2.default, null),
+	      _react2.default.createElement(_AreaBarChart2.default, {
+	        data: _lodash2.default.range(15),
+	        getX: function getX(d) {
+	          return Math.sin(d / 10) * 10;
+	        },
+	        getXEnd: function getXEnd(d) {
+	          return Math.sin((d + 1) / 10) * 10;
+	        },
+	        getY: function getY(d) {
+	          return Math.cos(d / Math.PI);
+	        }
+	      })
+	    ),
+	    ';',
+	    _react2.default.createElement(
+	      _XYPlot2.default,
+	      { width: 320, height: 500 },
+	      _react2.default.createElement(_XAxis2.default, null),
+	      _react2.default.createElement(_YAxis2.default, null),
+	      _react2.default.createElement(_AreaBarChart2.default, {
+	        horizontal: true,
+	        data: _lodash2.default.range(15),
+	        getX: function getX(d) {
+	          return Math.cos(d / Math.PI);
+	        },
+	        getY: function getY(d) {
+	          return Math.sin(d / 10) * 10;
+	        },
+	        getYEnd: function getYEnd(d) {
+	          return Math.sin((d + 1) / 10) * 10;
+	        }
+	      })
+	    ),
+	    ';'
+	  );
+	};
+	
+	var ColorHeatMapExample = function ColorHeatMapExample(props) {
+	  var gridData = _lodash2.default.range(30).map(function (m) {
+	    return _lodash2.default.range(30).map(function (n) {
+	      return {
+	        x: n,
+	        xEnd: n + 1,
+	        y: m,
+	        yEnd: m + 1,
+	        value: Math.sin(m * n * 0.01)
+	      };
+	    });
+	  });
+	
+	  var data = _lodash2.default.flatten(gridData);
+	
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      _XYPlot2.default,
+	      { width: 500, height: 500 },
+	      _react2.default.createElement(_ColorHeatmap2.default, {
+	        data: data,
+	        getValue: 'value',
+	        getX: 'x',
+	        getXEnd: 'xEnd',
+	        getY: 'y',
+	        getYEnd: 'yEnd',
+	        colors: ['rebeccapurple', 'goldenrod'],
+	        interpolator: 'lab'
+	      }),
+	      _react2.default.createElement(_XAxis2.default, { gridLineStyle: { stroke: '#666' } }),
+	      _react2.default.createElement(_YAxis2.default, { gridLineStyle: { stroke: '#666' } })
+	    ),
+	    _react2.default.createElement(
+	      _XYPlot2.default,
+	      { width: 500, height: 500 },
+	      _react2.default.createElement(_ColorHeatmap2.default, {
+	        data: data,
+	        getValue: 'value',
+	        getX: 'x',
+	        getXEnd: 'xEnd',
+	        getY: 'y',
+	        getYEnd: 'yEnd',
+	        valueDomain: [-1, 0, 1],
+	        colors: ['Crimson', '#eee', 'ForestGreen'],
+	        interpolator: 'lab'
+	      }),
+	      _react2.default.createElement(_XAxis2.default, { gridLineStyle: { stroke: '#666' } }),
+	      _react2.default.createElement(_YAxis2.default, { gridLineStyle: { stroke: '#666' } })
+	    )
+	  );
+	};
+	
+	var AreaHeatmapExample = function AreaHeatmapExample(props) {
+	  var gridData = _lodash2.default.range(30).map(function (m) {
+	    return _lodash2.default.range(30).map(function (n) {
+	      return {
+	        x: n,
+	        xEnd: n + 1,
+	        y: m,
+	        yEnd: m + 1,
+	        value: Math.sin(m * n * 0.01)
+	      };
+	    });
+	  });
+	
+	  var data = _lodash2.default.flatten(gridData);
+	
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      _XYPlot2.default,
+	      { width: 500, height: 500 },
+	      _react2.default.createElement(_XAxis2.default, null),
+	      _react2.default.createElement(_YAxis2.default, null),
+	      _react2.default.createElement(_AreaHeatmap2.default, {
+	        data: data,
+	        getArea: 'value',
+	        getX: 'x',
+	        getXEnd: 'xEnd',
+	        getY: 'y',
+	        getYEnd: 'yEnd',
+	        rectStyle: { fill: 'rebeccapurple' }
+	      })
+	    ),
+	    _react2.default.createElement(
+	      _XYPlot2.default,
+	      { width: 500, height: 500 },
+	      _react2.default.createElement(_XAxis2.default, null),
+	      _react2.default.createElement(_YAxis2.default, null),
+	      _react2.default.createElement(_AreaHeatmap2.default, {
+	        data: data,
+	        getArea: 'value',
+	        getX: 'x',
+	        getXEnd: 'xEnd',
+	        getY: 'y',
+	        getYEnd: 'yEnd',
+	        rectStyle: { fill: '#41ab5d' }
+	      }),
+	      _react2.default.createElement(_AreaHeatmap2.default, {
+	        data: data,
+	        getArea: function getArea(d) {
+	          return d.value * -1;
+	        },
+	        getX: 'x',
+	        getXEnd: 'xEnd',
+	        getY: 'y',
+	        getYEnd: 'yEnd',
+	        rectStyle: { fill: '#fc4e2a' }
+	      })
+	    )
+	  );
+	};
+	
+	var FunnelChartExample = function FunnelChartExample(props) {
+	  var funnelData = [{ observation: 1, value: 100 }, { observation: 2, value: 85 }, { observation: 3, value: 42 }, { observation: 4, value: 37 }, { observation: 5, value: 12 }];
+	
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      _XYPlot2.default,
+	      { width: 500, height: 500 },
+	      _react2.default.createElement(_XAxis2.default, null),
+	      _react2.default.createElement(_YAxis2.default, null),
+	      _react2.default.createElement(_FunnelChart2.default, {
+	        data: funnelData,
+	        getX: 'observation',
+	        getY: 'value'
+	      })
+	    ),
+	    _react2.default.createElement(
+	      _XYPlot2.default,
+	      { width: 500, height: 500, invertScale: { y: true } },
+	      _react2.default.createElement(_XAxis2.default, null),
+	      _react2.default.createElement(_YAxis2.default, null),
+	      _react2.default.createElement(_FunnelChart2.default, {
+	        horizontal: true,
+	        data: funnelData,
+	        getX: 'value',
+	        getY: 'observation'
+	      })
+	    )
+	  );
+	};
+	
+	var HistogramKDEExample = function HistogramKDEExample(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        _XYPlot2.default,
+	        { margin: { left: 40, right: 8 }, width: 700, height: 300 },
+	        _react2.default.createElement(_XAxis2.default, null),
+	        _react2.default.createElement(_YAxis2.default, null),
+	        _react2.default.createElement(_Histogram2.default, {
+	          data: randomNormal, getX: null
+	        }),
+	        _react2.default.createElement(_KernelDensityEstimation2.default, {
+	          data: randomNormal, getX: null, bandwidth: 0.5
+	        }),
+	        _react2.default.createElement(_KernelDensityEstimation2.default, {
+	          data: randomNormal, getX: null, bandwidth: 0.1
+	        }),
+	        _react2.default.createElement(_KernelDensityEstimation2.default, {
+	          data: randomNormal, getX: null, bandwidth: 2
+	        })
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        _XYPlot2.default,
+	        {
+	          margin: { left: 40, right: 8 },
+	          width: 700, height: 40,
+	          showGrid: false,
+	          showLabels: false,
+	          showTicks: false
+	        },
+	        _react2.default.createElement(_ScatterPlot2.default, {
+	          data: randomNormal,
+	          getX: null,
+	          getY: function getY() {
+	            return Math.random();
+	          },
+	          pointRadius: 1
+	        })
+	      )
+	    )
+	  );
+	};
 	
 	var MultipleXYExample = function MultipleXYExample(props) {
 	  return _react2.default.createElement(
@@ -20747,12 +21098,137 @@
 	    null,
 	    _react2.default.createElement(
 	      _XYPlot2.default,
-	      null,
-	      _react2.default.createElement(_BarChart2.default, { data: randomBars[0], getX: 0, getY: 1 }),
-	      _react2.default.createElement(_LineChart2.default, { data: randomBars[0], getX: 0, getY: 1 }),
-	      _react2.default.createElement(_ScatterPlot2.default, { data: randomBars[0], getX: 0, getY: 1, pointSymbol: function pointSymbol(d, i) {
-	          return _lodash2.default.sample(emojis);
-	        } })
+	      _extends({ domain: { y: [-2, 2], x: [-2, 2] }, scaleType: 'linear' }, { width: 600, height: 500 }),
+	      _react2.default.createElement(_XAxis2.default, { title: 'Phase' }),
+	      _react2.default.createElement(_YAxis2.default, { title: 'Intensity' }),
+	      _react2.default.createElement(_RangeBarChart2.default, {
+	        data: _lodash2.default.range(0, 2, .03),
+	        getX: null,
+	        getY: function getY(d) {
+	          return Math.sin(d * 3) * .7 + 1.2;
+	        },
+	        getYEnd: function getYEnd(d) {
+	          return Math.sin(d * 3) * Math.cos(d * 3) * .7 + 1.2;
+	        },
+	        barThickness: 2,
+	        barStyle: { fill: '#3690c0' }
+	      }),
+	      _react2.default.createElement(_LineChart2.default, {
+	        data: _lodash2.default.range(-2, 0, .005),
+	        getY: function getY(d) {
+	          return Math.pow(Math.abs(Math.sin(d * 5)), Math.abs(Math.sin(d * .25))) * 1.8;
+	        },
+	        lineStyle: { stroke: '#02818a', strokeWidth: 3 }
+	      }),
+	      _react2.default.createElement(_ScatterPlot2.default, {
+	        data: _lodash2.default.range(-2, 0, .05),
+	        getY: function getY(d) {
+	          return Math.pow(2, (d + 2) * 1.8) * 0.1;
+	        },
+	        pointSymbol: _react2.default.createElement('rect', { width: 5, height: 5, fill: '#3690c0' })
+	      }),
+	      _react2.default.createElement(_BarChart2.default, {
+	        data: _lodash2.default.range(0, 2, .03),
+	        getY: function getY(d) {
+	          return -Math.abs(Math.sin(d * 4) * Math.cos(d * 3));
+	        },
+	        barThickness: 3,
+	        barStyle: { fill: '#67a9cf' }
+	      }),
+	      _react2.default.createElement(_MarkerLineChart2.default, {
+	        data: _lodash2.default.range(0, 1.5, .1),
+	        getY: function getY(d) {
+	          return Math.cos(d);
+	        },
+	        lineStyle: { stroke: '#ec7014', strokeWidth: 3 }
+	      }),
+	      _react2.default.createElement(_ColorHeatmap2.default, {
+	        data: _lodash2.default.flatten(_lodash2.default.range(-2, 0, .1).map(function (i) {
+	          return _lodash2.default.range(-2, 0, .1).map(function (j) {
+	            return [i, j];
+	          });
+	        })),
+	        getValue: function getValue(_ref12) {
+	          var _ref13 = _slicedToArray(_ref12, 2);
+	
+	          var i = _ref13[0];
+	          var j = _ref13[1];
+	          return Math.sin(i * j * 5);
+	        },
+	        getX: function getX(_ref14) {
+	          var _ref15 = _slicedToArray(_ref14, 2);
+	
+	          var i = _ref15[0];
+	          var j = _ref15[1];
+	          return i;
+	        },
+	        getXEnd: function getXEnd(_ref16) {
+	          var _ref17 = _slicedToArray(_ref16, 2);
+	
+	          var i = _ref17[0];
+	          var j = _ref17[1];
+	          return i + .1;
+	        },
+	        getY: function getY(_ref18) {
+	          var _ref19 = _slicedToArray(_ref18, 2);
+	
+	          var i = _ref19[0];
+	          var j = _ref19[1];
+	          return j;
+	        },
+	        getYEnd: function getYEnd(_ref20) {
+	          var _ref21 = _slicedToArray(_ref20, 2);
+	
+	          var i = _ref21[0];
+	          var j = _ref21[1];
+	          return j + .1;
+	        },
+	        colors: ['#d0d1e6', '#016450'],
+	        interpolator: 'lab'
+	      }),
+	      _react2.default.createElement(_AreaHeatmap2.default, {
+	        data: _lodash2.default.flatten(_lodash2.default.range(0, 2, .1).map(function (i) {
+	          return _lodash2.default.range(-2, -1, .1).map(function (j) {
+	            return [i, j];
+	          });
+	        })),
+	        getArea: function getArea(_ref22) {
+	          var _ref23 = _slicedToArray(_ref22, 2);
+	
+	          var i = _ref23[0];
+	          var j = _ref23[1];
+	          return -Math.sin(i * j * 5);
+	        },
+	        getX: function getX(_ref24) {
+	          var _ref25 = _slicedToArray(_ref24, 2);
+	
+	          var i = _ref25[0];
+	          var j = _ref25[1];
+	          return i;
+	        },
+	        getXEnd: function getXEnd(_ref26) {
+	          var _ref27 = _slicedToArray(_ref26, 2);
+	
+	          var i = _ref27[0];
+	          var j = _ref27[1];
+	          return i + .1;
+	        },
+	        getY: function getY(_ref28) {
+	          var _ref29 = _slicedToArray(_ref28, 2);
+	
+	          var i = _ref29[0];
+	          var j = _ref29[1];
+	          return j;
+	        },
+	        getYEnd: function getYEnd(_ref30) {
+	          var _ref31 = _slicedToArray(_ref30, 2);
+	
+	          var i = _ref31[0];
+	          var j = _ref31[1];
+	          return j + .1;
+	        },
+	        rectStyle: { fill: '#016450' }
+	      })
 	    )
 	  );
 	};
@@ -20762,86 +21238,36 @@
 	    'div',
 	    null,
 	    _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        _XYPlot2.default,
-	        { width: 400, height: 300 },
-	        _react2.default.createElement(_BarChart2.default, {
-	          data: randomBarData2.numberNumber,
-	          getX: 0, getY: 1
-	        }),
-	        _react2.default.createElement(_MarkerLineChart2.default, {
-	          data: barTickData.numberNumber,
-	          getX: 0, getY: 1,
-	          lineLength: 15
-	        })
-	      ),
-	      _react2.default.createElement(
-	        _XYPlot2.default,
-	        { width: 400, height: 300 },
-	        _react2.default.createElement(_BarChart2.default, {
-	          horizontal: true,
-	          data: randomBarData2.numberNumber,
-	          getX: 1, getY: 0
-	        }),
-	        _react2.default.createElement(_MarkerLineChart2.default, {
-	          horizontal: true,
-	          data: barTickData.numberNumber,
-	          getX: 1, getY: 0,
-	          lineLength: 15
-	        })
-	      )
+	      _XYPlot2.default,
+	      { width: 400, height: 300, domain: { x: [-2, 22], y: [-50000, 50000] } },
+	      _react2.default.createElement(_XAxis2.default, null),
+	      _react2.default.createElement(_YAxis2.default, null),
+	      _react2.default.createElement(_BarChart2.default, {
+	        data: randomBarData2.numberNumber,
+	        getX: 0, getY: 1
+	      }),
+	      _react2.default.createElement(_MarkerLineChart2.default, {
+	        data: barTickData.numberNumber,
+	        getX: 0, getY: 1,
+	        lineLength: 15
+	      })
 	    ),
 	    _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(
-	        _XYPlot2.default,
-	        { width: 400, height: 300 },
-	        _react2.default.createElement(_BarChart2.default, {
-	          data: rangeValueData.numberNumber,
-	          getX: function getX(d) {
-	            return d[0][0];
-	          }, getY: 1,
-	          getEndValue: { x: function x(d) {
-	              return d[0][1];
-	            } }
-	        }),
-	        _react2.default.createElement(_MarkerLineChart2.default, {
-	          data: barTickData.numberRangeNumber,
-	          getX: function getX(d) {
-	            return d[0][0];
-	          }, getY: 1,
-	          getEndValue: { x: function x(d) {
-	              return d[0][1];
-	            } }
-	        })
-	      ),
-	      _react2.default.createElement(
-	        _XYPlot2.default,
-	        { width: 400, height: 300 },
-	        _react2.default.createElement(_BarChart2.default, {
-	          data: rangeValueData.numberNumber,
-	          orientation: 'horizontal',
-	          getX: 1, getY: function getY(d) {
-	            return d[0][0];
-	          },
-	          getEndValue: { y: function y(d) {
-	              return d[0][1];
-	            } }
-	        }),
-	        _react2.default.createElement(_MarkerLineChart2.default, {
-	          data: barTickData.numberRangeNumber,
-	          orientation: 'horizontal',
-	          getX: 1, getY: function getY(d) {
-	            return d[0][0];
-	          },
-	          getEndValue: { y: function y(d) {
-	              return d[0][1];
-	            } }
-	        })
-	      )
+	      _XYPlot2.default,
+	      { width: 400, height: 300 },
+	      _react2.default.createElement(_XAxis2.default, null),
+	      _react2.default.createElement(_YAxis2.default, null),
+	      _react2.default.createElement(_BarChart2.default, {
+	        horizontal: true,
+	        data: randomBarData2.numberNumber,
+	        getX: 1, getY: 0
+	      }),
+	      _react2.default.createElement(_MarkerLineChart2.default, {
+	        horizontal: true,
+	        data: barTickData.numberNumber,
+	        getX: 1, getY: 0,
+	        lineLength: 15
+	      })
 	    )
 	  );
 	};
@@ -20942,182 +21368,6 @@
 	  );
 	};
 	
-	var RangeBarChartExample = function RangeBarChartExample(props) {
-	  var count = 30;
-	  var dateDomain = [new Date(1992, 0, 1), new Date(2001, 0, 1)];
-	  var numberDomain = [-2, 2];
-	  var ordinalDomain = _lodash2.default.range(count).map(function (n) {
-	    return String.fromCharCode(97 + n);
-	  });
-	
-	  var dates = _lodash2.default.range(30).map(function (n) {
-	    return new Date(+dateDomain[0] + n * 1000 * 60 * 60 * 24 * 100);
-	  });
-	
-	  var addDays = function addDays(date, n) {
-	    return new Date(+date + 1000 * 60 * 60 * 24 * n);
-	  };
-	
-	  var numberRanges = _lodash2.default.range(30).map(function (n) {
-	    return [Math.sin(n / 5), Math.sin(n / 8) + Math.cos(n / 5)].sort(function (a, b) {
-	      return a - b;
-	    });
-	  });
-	  var dateRanges = _lodash2.default.range(30).map(function (n) {
-	    return [dates[n], addDays(dates[n], Math.sin(n / 8) * 100)].sort(function (a, b) {
-	      return a - b;
-	    });
-	  });
-	
-	  var numberNumberRangeData = _lodash2.default.zip(_lodash2.default.range(30), numberRanges);
-	  var dateNumberRangeData = _lodash2.default.zip(dates, numberRanges);
-	  var ordinalNumberRangeData = _lodash2.default.zip(ordinalDomain, numberRanges);
-	
-	  var numberDateRangeData = _lodash2.default.zip(_lodash2.default.range(30), dateRanges);
-	  var dateDateRangeData = _lodash2.default.zip(dates, dateRanges);
-	  var ordinalDateRangeData = _lodash2.default.zip(ordinalDomain, dateRanges);
-	
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    [true, false].map(function (horizontal) {
-	      var _ref4, _ref5, _ref6, _ref7, _ref8, _ref9;
-	
-	      var title = horizontal ? "Horizontal" : "Vertical";
-	      var getters = horizontal ? { getY: 0, getX: '1.0', getXEnd: '1.1' } : { getX: 0, getY: '1.0', getYEnd: '1.1' };
-	
-	      var dep = horizontal ? 'x' : 'y';
-	      var indep = horizontal ? 'y' : 'x';
-	
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'h2',
-	          null,
-	          title
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            _XYPlot2.default,
-	            _extends({ domain: (_ref4 = {}, _defineProperty(_ref4, dep, numberDomain), _defineProperty(_ref4, indep, [0, count]), _ref4), scaleType: 'linear' }, { width: 300, height: 350 }),
-	            _react2.default.createElement(_XAxis2.default, null),
-	            _react2.default.createElement(_YAxis2.default, null),
-	            _react2.default.createElement(_RangeBarChart2.default, _extends({
-	              horizontal: horizontal,
-	              data: numberNumberRangeData
-	            }, getters))
-	          ),
-	          _react2.default.createElement(
-	            _XYPlot2.default,
-	            _extends({ domain: (_ref5 = {}, _defineProperty(_ref5, dep, numberDomain), _defineProperty(_ref5, indep, dateDomain), _ref5) }, { width: 300, height: 350 }),
-	            _react2.default.createElement(_XAxis2.default, null),
-	            _react2.default.createElement(_YAxis2.default, null),
-	            _react2.default.createElement(_RangeBarChart2.default, _extends({
-	              horizontal: horizontal,
-	              data: dateNumberRangeData
-	            }, getters))
-	          ),
-	          _react2.default.createElement(
-	            _XYPlot2.default,
-	            _extends({ domain: (_ref6 = {}, _defineProperty(_ref6, dep, numberDomain), _defineProperty(_ref6, indep, ordinalDomain), _ref6) }, { width: 300, height: 350 }),
-	            _react2.default.createElement(_XAxis2.default, null),
-	            _react2.default.createElement(_YAxis2.default, null),
-	            _react2.default.createElement(_RangeBarChart2.default, _extends({
-	              horizontal: horizontal,
-	              data: ordinalNumberRangeData
-	            }, getters))
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            _XYPlot2.default,
-	            _extends({ domain: (_ref7 = {}, _defineProperty(_ref7, dep, dateDomain), _defineProperty(_ref7, indep, [0, count]), _ref7) }, { width: 300, height: 350 }),
-	            _react2.default.createElement(_XAxis2.default, null),
-	            _react2.default.createElement(_YAxis2.default, null),
-	            _react2.default.createElement(_RangeBarChart2.default, _extends({
-	              horizontal: horizontal,
-	              data: numberDateRangeData
-	            }, getters))
-	          ),
-	          _react2.default.createElement(
-	            _XYPlot2.default,
-	            _extends({ domain: (_ref8 = {}, _defineProperty(_ref8, dep, dateDomain), _defineProperty(_ref8, indep, dateDomain), _ref8) }, { width: 300, height: 350 }),
-	            _react2.default.createElement(_XAxis2.default, null),
-	            _react2.default.createElement(_YAxis2.default, null),
-	            _react2.default.createElement(_RangeBarChart2.default, _extends({
-	              horizontal: horizontal,
-	              data: dateDateRangeData
-	            }, getters))
-	          ),
-	          _react2.default.createElement(
-	            _XYPlot2.default,
-	            _extends({ domain: (_ref9 = {}, _defineProperty(_ref9, dep, dateDomain), _defineProperty(_ref9, indep, ordinalDomain), _ref9) }, { width: 300, height: 350 }),
-	            _react2.default.createElement(_XAxis2.default, null),
-	            _react2.default.createElement(_YAxis2.default, null),
-	            _react2.default.createElement(_RangeBarChart2.default, _extends({
-	              horizontal: horizontal,
-	              data: ordinalDateRangeData
-	            }, getters))
-	          )
-	        )
-	      );
-	    }),
-	    _react2.default.createElement(
-	      _XYPlot2.default,
-	      _extends({ domain: { y: [-1, 1], x: [-1, 1] }, scaleType: 'linear' }, { width: 300, height: 350 }),
-	      _react2.default.createElement(_XAxis2.default, null),
-	      _react2.default.createElement(_YAxis2.default, null),
-	      _react2.default.createElement(_RangeBarChart2.default, {
-	        data: _lodash2.default.range(-1, 1, .1),
-	        getX: null,
-	        getY: function getY(d) {
-	          return Math.sin(d * 2);
-	        },
-	        getYEnd: function getYEnd(d) {
-	          return Math.sin(d * 2) * Math.cos(d * 2);
-	        },
-	        barThickness: 6
-	      })
-	    )
-	  );
-	};
-	
-	var AreaHeatmapExample = function AreaHeatmapExample(props) {
-	  var gridData = _lodash2.default.range(30).map(function (m) {
-	    return _lodash2.default.range(30).map(function (n) {
-	      return {
-	        x: n, xEnd: n + 1,
-	        y: m, yEnd: m + 1,
-	        area: Math.sin(m / 2) * Math.sin(n / 3)
-	      };
-	    });
-	  });
-	
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      _XYPlot2.default,
-	      _extends({ scaleType: 'linear' }, { width: 500, height: 500 }),
-	      _react2.default.createElement(_XAxis2.default, { title: 'Phase' }),
-	      _react2.default.createElement(_YAxis2.default, { title: 'Intensity' }),
-	      _react2.default.createElement(_AreaHeatmap2.default, {
-	        data: _lodash2.default.flatten(gridData),
-	        getArea: 'area',
-	        getX: 'x',
-	        getXEnd: 'xEnd',
-	        getY: 'y',
-	        getYEnd: 'yEnd'
-	      })
-	    )
-	  );
-	};
-	
 	var MarkerLineExample = function MarkerLineExample(props) {
 	  return _react2.default.createElement(
 	    'div',
@@ -21148,11 +21398,11 @@
 	        _react2.default.createElement(_XAxis2.default, { title: 'Phase' }),
 	        _react2.default.createElement(_YAxis2.default, { title: 'Intensity' }),
 	        _react2.default.createElement(_MarkerLineChart2.default, {
+	          horizontal: true,
 	          data: _lodash2.default.range(30),
 	          getX: function getX(d) {
 	            return Math.sin(d / Math.PI);
-	          },
-	          orientation: 'horizontal'
+	          }
 	        })
 	      )
 	    ),
@@ -21183,6 +21433,7 @@
 	        _react2.default.createElement(_XAxis2.default, { title: 'Phase' }),
 	        _react2.default.createElement(_YAxis2.default, { title: 'Intensity' }),
 	        _react2.default.createElement(_MarkerLineChart2.default, {
+	          horizontal: true,
 	          data: _lodash2.default.range(15),
 	          getX: function getX(d) {
 	            return Math.sin(d / Math.PI);
@@ -21192,8 +21443,7 @@
 	          },
 	          getYEnd: function getYEnd(d) {
 	            return Math.sin((d + 1) / 10) * 10;
-	          },
-	          orientation: 'horizontal'
+	          }
 	        })
 	      )
 	    )
@@ -21345,112 +21595,6 @@
 	  );
 	};
 	
-	var BarChartExample = function BarChartExample(props) {
-	  var count = 30;
-	  var startDate = new Date(1992, 0, 1);
-	
-	  var numbers = _lodash2.default.range(count);
-	  var letters = _lodash2.default.times(count, function (n) {
-	    return String.fromCharCode(97 + n);
-	  });
-	  var dates = _lodash2.default.times(count, function (n) {
-	    return new Date(+startDate + n * 1000 * 60 * 60 * 24 * 100);
-	  });
-	
-	  var getNumberValue = function getNumberValue(d) {
-	    return 2 + Math.cos(d / 10);
-	  };
-	  var getDateValue = function getDateValue(d) {
-	    return getNumberValue(d.getFullYear() + d.getMonth() / 12);
-	  };
-	  var getLetterValue = function getLetterValue(d) {
-	    return getNumberValue(d.charCodeAt(0));
-	  };
-	
-	  var chartDefs = _lodash2.default.zip([numbers, letters, dates], [getNumberValue, getLetterValue, getDateValue]);
-	
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    [true, false].map(function (horizontal) {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'h4',
-	          null,
-	          horizontal ? "Horizontal" : "Vertical"
-	        ),
-	        chartDefs.map(function (_ref10) {
-	          var _ref11 = _slicedToArray(_ref10, 2);
-	
-	          var data = _ref11[0];
-	          var getValue = _ref11[1];
-	
-	          return _react2.default.createElement(
-	            _XYPlot2.default,
-	            { width: 320, height: 320 },
-	            _react2.default.createElement(_XAxis2.default, null),
-	            _react2.default.createElement(_YAxis2.default, null),
-	            _react2.default.createElement(_BarChart2.default, {
-	              data: data,
-	              horizontal: horizontal,
-	              getX: horizontal ? getValue : null,
-	              getY: horizontal ? null : getValue
-	            })
-	          );
-	        })
-	      );
-	    })
-	  );
-	};
-	
-	var AreaBarChartExample = function AreaBarChartExample(props) {
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(
-	      _XYPlot2.default,
-	      { width: 500, height: 320 },
-	      _react2.default.createElement(_XAxis2.default, null),
-	      _react2.default.createElement(_YAxis2.default, null),
-	      _react2.default.createElement(_AreaBarChart2.default, {
-	        data: _lodash2.default.range(15),
-	        getX: function getX(d) {
-	          return Math.sin(d / 10) * 10;
-	        },
-	        getXEnd: function getXEnd(d) {
-	          return Math.sin((d + 1) / 10) * 10;
-	        },
-	        getY: function getY(d) {
-	          return Math.cos(d / Math.PI);
-	        }
-	      })
-	    ),
-	    ';',
-	    _react2.default.createElement(
-	      _XYPlot2.default,
-	      { width: 320, height: 500 },
-	      _react2.default.createElement(_XAxis2.default, null),
-	      _react2.default.createElement(_YAxis2.default, null),
-	      _react2.default.createElement(_AreaBarChart2.default, {
-	        horizontal: true,
-	        data: _lodash2.default.range(15),
-	        getX: function getX(d) {
-	          return Math.cos(d / Math.PI);
-	        },
-	        getY: function getY(d) {
-	          return Math.sin(d / 10) * 10;
-	        },
-	        getYEnd: function getYEnd(d) {
-	          return Math.sin((d + 1) / 10) * 10;
-	        }
-	      })
-	    ),
-	    ';'
-	  );
-	};
-	
 	var RangeRectExample = function RangeRectExample(props) {
 	  return _react2.default.createElement(
 	    'div',
@@ -21474,13 +21618,150 @@
 	  );
 	};
 	
-	var examples = exports.examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'areaHeatmap', title: 'Area Heatmap Chart', Component: AreaHeatmapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types in one XYPlot', Component: MultipleXYExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }
+	var CustomSelectionRect = function (_React$Component3) {
+	  _inherits(CustomSelectionRect, _React$Component3);
+	
+	  function CustomSelectionRect() {
+	    _classCallCheck(this, CustomSelectionRect);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(CustomSelectionRect).apply(this, arguments));
+	  }
+	
+	  _createClass(CustomSelectionRect, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var scale = _props.scale;
+	      var hoveredYVal = _props.hoveredYVal;
+	
+	      return hoveredYVal ? _react2.default.createElement('rect', {
+	        x: '0',
+	        y: scale.y(hoveredYVal) - 20,
+	        width: '500', height: '40',
+	        style: { fill: 'red' }
+	      }) : null;
+	    }
+	  }]);
+	
+	  return CustomSelectionRect;
+	}(_react2.default.Component);
+	
+	;
+	
+	var CustomChildExample = function (_React$Component4) {
+	  _inherits(CustomChildExample, _React$Component4);
+	
+	  function CustomChildExample() {
+	    var _Object$getPrototypeO3;
+	
+	    var _temp3, _this4, _ret3;
+	
+	    _classCallCheck(this, CustomChildExample);
+	
+	    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+	      args[_key3] = arguments[_key3];
+	    }
+	
+	    return _ret3 = (_temp3 = (_this4 = _possibleConstructorReturn(this, (_Object$getPrototypeO3 = Object.getPrototypeOf(CustomChildExample)).call.apply(_Object$getPrototypeO3, [this].concat(args))), _this4), _this4.state = {
+	      hoveredYVal: null
+	    }, _this4.onMouseMoveChart = function (_ref32) {
+	      var yValue = _ref32.yValue;
+	
+	      _this4.setState({ hoveredYVal: yValue });
+	    }, _temp3), _possibleConstructorReturn(_this4, _ret3);
+	  }
+	
+	  _createClass(CustomChildExample, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _XYPlot2.default,
+	          {
+	            width: 500, height: 400,
+	            padding: { bottom: 20, top: 20 },
+	            onMouseMove: this.onMouseMoveChart
+	          },
+	          _react2.default.createElement(_XAxis2.default, null),
+	          _react2.default.createElement(_YAxis2.default, null),
+	          _react2.default.createElement(CustomSelectionRect, { underAxes: true, hoveredYVal: this.state.hoveredYVal }),
+	          _react2.default.createElement(_BarChart2.default, {
+	            horizontal: true,
+	            data: randomBarData2.numberOrdinal,
+	            getX: 0,
+	            getY: 1,
+	            barThickness: 20
+	          })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return CustomChildExample;
+	}(_react2.default.Component);
+	
+	;
+	
+	var CustomTicksExample = _react2.default.createClass({
+	  displayName: 'CustomTicksExample',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        _XYPlot2.default,
+	        {
+	          width: 300, height: 300,
+	          ticks: {
+	            x: [0, 1, 2, 4, 8, 16],
+	            y: [-8000, -3000, 0, 10000, 5000, 40000]
+	          }
+	        },
+	        _react2.default.createElement(_BarChart2.default, { data: randomBarData2.numberNumber, getX: 0, getY: 1 })
+	      )
+	    );
+	  }
+	});
+	
+	var CustomAxisLabelsExample = _react2.default.createClass({
+	  displayName: 'CustomAxisLabelsExample',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        _XYPlot2.default,
+	        {
+	          width: 500, height: 300,
+	          ticks: {
+	            x: [0, 1, 2, 4, 8, 16],
+	            y: [-8000, -3000, 0, 10000, 5000, 20000]
+	          },
+	          labelValues: {
+	            x: [0, 1, 3, 9, 12],
+	            y: [-5000, -2000, 0, 8000, 3000, 16000]
+	          },
+	          showZero: { y: true }
+	        },
+	        _react2.default.createElement(_BarChart2.default, {
+	          data: randomBarData2.numberNumber,
+	          getX: 0, getY: 1,
+	          barThickness: 20
+	        })
+	      )
+	    );
+	  }
+	});
+	
+	var examples = exports.examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2 },
+	// {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
+	{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample }, { id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample }];
 	
 	// todo rewrite these?
 	// {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
 	// {id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample},
-	];
-	
 	var App = exports.App = _react2.default.createClass({
 	  displayName: 'App',
 	  getInitialState: function getInitialState() {
@@ -21494,15 +21775,6 @@
 	    this.setState((0, _reactAddonsUpdate2.default)(this.state, { visibleExamples: _defineProperty({}, id, { $set: !isVisible }) }));
 	  },
 	  render: function render() {
-	    var innerSize = { width: 900, height: 400 };
-	    var dateDomain = [new Date(2005, 0, 1), new Date(2015, 0, 1)];
-	    var numberDomain = [-20, 20];
-	    var testXScale = _d3.default.time.scale().domain(dateDomain).range([0, innerSize.width]);
-	    var testYScale = _d3.default.scale.linear().domain([-20, 20]).range([innerSize.height, 0]);
-	    var linearXScale = _d3.default.scale.linear().domain([-.05, .05]).range([0, innerSize.width]);
-	    var customDateTicks = [new Date(2009, 0, 1), new Date(2014, 7, 1), new Date(2017, 0, 1)];
-	    var smallSize = { width: 300, height: 210 };
-	
 	    return _react2.default.createElement(
 	      'div',
 	      null,
@@ -21511,45 +21783,7 @@
 	        null,
 	        'Reactochart Examples'
 	      ),
-	      this.renderExamples(),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          _XYPlot2.default,
-	          _extends({ domain: { y: [-1, 1], x: [-1, 1] }, scaleType: 'linear' }, { width: 900, height: 350 }),
-	          _react2.default.createElement(_XAxis2.default, { title: 'Phase' }),
-	          _react2.default.createElement(_YAxis2.default, { title: 'Intensity' }),
-	          _react2.default.createElement(_RangeBarChart2.default, {
-	            data: _lodash2.default.range(-1, 1, .005),
-	            getX: null,
-	            getY: function getY(d) {
-	              return Math.sin(d * 6);
-	            },
-	            getYEnd: function getYEnd(d) {
-	              return Math.sin(d * 6) * Math.cos(d * 6);
-	            },
-	            barThickness: 2
-	          })
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          _XYPlot2.default,
-	          _extends({ scaleType: 'linear' }, { width: 600, height: 350 }),
-	          _react2.default.createElement(_XAxis2.default, { title: 'Phase', gridLineStyle: { stroke: '#777' } }),
-	          _react2.default.createElement(_YAxis2.default, { title: 'Intensity', titleRotate: false, gridLineStyle: { stroke: '#777' } }),
-	          _react2.default.createElement(_YAxis2.default, { title: 'Intensity', position: 'right', labelStyle: { fontSize: '12px' } }),
-	          _react2.default.createElement(_LineChart2.default, { data: _lodash2.default.range(100), getY: function getY(d) {
-	              return Math.sin(d * .1);
-	            } }),
-	          _react2.default.createElement(_LineChart2.default, { data: _lodash2.default.range(100), getY: function getY(d) {
-	              return Math.cos(d * .1);
-	            } })
-	        )
-	      )
+	      this.renderExamples()
 	    );
 	  },
 	  renderExamples: function renderExamples() {
@@ -64242,6 +64476,7 @@
 	      var scale = _props.scale;
 	      var getX = _props.getX;
 	      var getY = _props.getY;
+	      var lineStyle = _props.lineStyle;
 	
 	      var accessors = { x: (0, _Data.makeAccessor)(getX), y: (0, _Data.makeAccessor)(getY) };
 	      var points = _lodash2.default.map(data, function (d) {
@@ -64252,7 +64487,7 @@
 	      return _react2.default.createElement(
 	        'g',
 	        { className: this.props.name },
-	        _react2.default.createElement('path', { d: pathStr })
+	        _react2.default.createElement('path', { d: pathStr, style: lineStyle })
 	      );
 	    }
 	  }]);
@@ -64266,8 +64501,13 @@
 	  // accessor for X & Y coordinates
 	  getX: _react2.default.PropTypes.any,
 	  getY: _react2.default.PropTypes.any,
+	  // inline style object to be applied to the path
+	  lineStyle: _react2.default.PropTypes.object,
 	  // props from XYPlot
 	  scale: _react2.default.PropTypes.object
+	};
+	LineChart.defaultProps = {
+	  lineStyle: {}
 	};
 	exports.default = LineChart;
 	
@@ -64289,6 +64529,168 @@
 
 /***/ },
 /* 308 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(163);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d = __webpack_require__(165);
+	
+	var _d2 = _interopRequireDefault(_d);
+	
+	var _invariant = __webpack_require__(168);
+	
+	var _invariant2 = _interopRequireDefault(_invariant);
+	
+	var _CustomPropTypes = __webpack_require__(303);
+	
+	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
+	
+	var _Data = __webpack_require__(171);
+	
+	var _Scale = __webpack_require__(172);
+	
+	var _RangeRect = __webpack_require__(304);
+	
+	var _RangeRect2 = _interopRequireDefault(_RangeRect);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	function interpolatorFromType(type) {
+	  switch (type.toLowerCase()) {
+	    case 'hcl':
+	      return _d2.default.interpolateHcl;
+	    case 'hsl':
+	      return _d2.default.interpolateHsl;
+	    case 'lab':
+	      return _d2.default.interpolateLab;
+	    case 'rgb':
+	      return _d2.default.interpolateRgb;
+	    default:
+	      return _d2.default.interpolateHsl;
+	  }
+	}
+	
+	function makeColorScale(domain, colors, interpolator) {
+	  (0, _invariant2.default)(domain.length == colors.length, 'makeColorScale: domain.length should equal colors.length');
+	
+	  if (_lodash2.default.isString(interpolator)) interpolator = interpolatorFromType(interpolator);
+	
+	  return _d2.default.scale.linear().domain(domain).range(colors).interpolate(interpolator);
+	}
+	
+	var ColorHeatmap = function (_React$Component) {
+	  _inherits(ColorHeatmap, _React$Component);
+	
+	  function ColorHeatmap() {
+	    _classCallCheck(this, ColorHeatmap);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(ColorHeatmap).apply(this, arguments));
+	  }
+	
+	  _createClass(ColorHeatmap, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var data = _props.data;
+	      var scale = _props.scale;
+	      var getValue = _props.getValue;
+	      var getX = _props.getX;
+	      var getXEnd = _props.getXEnd;
+	      var getY = _props.getY;
+	      var getYEnd = _props.getYEnd;
+	      var interpolator = _props.interpolator;
+	
+	      var valueAccessor = (0, _Data.makeAccessor)(getValue);
+	      var colorScale = undefined;
+	
+	      if (this.props.colorScale) colorScale = this.props.colorScale;else {
+	        var valueDomain = this.props.valueDomain || (0, _Data.domainFromData)(data, valueAccessor);
+	        var colors = this.props.colors || (valueDomain.length == 2 ? ['#000000', '#ffffff'] : _lodash2.default.times(valueDomain.length, _d2.default.scale.category10().domain(_lodash2.default.range(10))));
+	        colorScale = makeColorScale(valueDomain, colors, interpolator);
+	      }
+	
+	      return _react2.default.createElement(
+	        'g',
+	        { className: 'color-heatmap-chart' },
+	        data.map(function (datum, i) {
+	          var color = colorScale(valueAccessor(datum));
+	          var style = { fill: color };
+	          var key = 'heatmap-rect-' + i;
+	          return _react2.default.createElement(_RangeRect2.default, { datum: datum, scale: scale, getX: getX, getXEnd: getXEnd, getY: getY, getYEnd: getYEnd, style: style, key: key });
+	        })
+	      );
+	    }
+	  }], [{
+	    key: 'getDomain',
+	    value: function getDomain(props) {
+	      var scaleType = props.scaleType;
+	      var data = props.data;
+	      var getX = props.getX;
+	      var getXEnd = props.getXEnd;
+	      var getY = props.getY;
+	      var getYEnd = props.getYEnd;
+	
+	      return {
+	        x: (0, _Data.domainFromRangeData)(data, (0, _Data.makeAccessor)(getX), (0, _Data.makeAccessor)(getXEnd), (0, _Scale.dataTypeFromScaleType)(scaleType.x)),
+	        y: (0, _Data.domainFromRangeData)(data, (0, _Data.makeAccessor)(getY), (0, _Data.makeAccessor)(getYEnd), (0, _Scale.dataTypeFromScaleType)(scaleType.y))
+	      };
+	    }
+	  }]);
+	
+	  return ColorHeatmap;
+	}(_react2.default.Component);
+	
+	ColorHeatmap.propTypes = {
+	  // passed from xyplot
+	  scale: CustomPropTypes.xyObjectOf(_react2.default.PropTypes.func.isRequired),
+	
+	  // data array - should be 1D array of all grid values
+	  // (if you have a 2D array, _.flatten it)
+	  data: _react2.default.PropTypes.array.isRequired,
+	
+	  // data getters
+	  getValue: CustomPropTypes.getter,
+	  getX: CustomPropTypes.getter,
+	  getXEnd: CustomPropTypes.getter,
+	  getY: CustomPropTypes.getter,
+	  getYEnd: CustomPropTypes.getter,
+	
+	  // a custom d3 color scale may be passed...
+	  colorScale: _react2.default.PropTypes.func,
+	  // ...or else one will be constructed from colors, colorStops and interpolator
+	  colors: _react2.default.PropTypes.array,
+	  valueDomain: _react2.default.PropTypes.array,
+	  interpolator: _react2.default.PropTypes.string
+	};
+	ColorHeatmap.defaultProps = {
+	  interpolator: 'lab'
+	};
+	exports.default = ColorHeatmap;
+
+/***/ },
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64392,6 +64794,8 @@
 	      var scale = _props.scale;
 	      var scaleWidth = _props.scaleWidth;
 	      var scaleHeight = _props.scaleHeight;
+	      var rectClassName = _props.rectClassName;
+	      var rectStyle = _props.rectStyle;
 	
 	      var _map = [getArea, getX, getXEnd, getY, getYEnd].map(_Data.makeAccessor);
 	
@@ -64446,7 +64850,11 @@
 	
 	          if (!_lodash2.default.every([x, y, width, height], _lodash2.default.isFinite)) return null;
 	
-	          return _react2.default.createElement('rect', { x: x, y: y, width: width, height: height, className: 'area-heatmap-rect', key: 'rect-' + i });
+	          var className = 'area-heatmap-rect ' + rectClassName;
+	          var style = rectStyle;
+	          var key = 'rect-' + i;
+	
+	          return _react2.default.createElement('rect', { x: x, y: y, width: width, height: height, className: className, style: style, key: key });
 	        })
 	      );
 	    }
@@ -64470,12 +64878,18 @@
 	}(_react2.default.Component);
 	
 	AreaHeatmap.propTypes = {
-	  unitsPerPixel: _react2.default.PropTypes.number
+	  unitsPerPixel: _react2.default.PropTypes.number,
+	  rectClassName: _react2.default.PropTypes.string,
+	  rectStyle: _react2.default.PropTypes.object
+	};
+	AreaHeatmap.defaultProps = {
+	  rectClassName: '',
+	  rectStyle: {}
 	};
 	exports.default = AreaHeatmap;
 
 /***/ },
-/* 309 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64635,7 +65049,7 @@
 	exports.default = ScatterPlot;
 
 /***/ },
-/* 310 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64924,7 +65338,7 @@
 	exports.default = PieChart;
 
 /***/ },
-/* 311 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65220,7 +65634,7 @@
 	exports.default = TreeMap;
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65328,7 +65742,142 @@
 	exports.default = Histogram;
 
 /***/ },
-/* 313 */
+/* 314 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(163);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d = __webpack_require__(165);
+	
+	var _d2 = _interopRequireDefault(_d);
+	
+	var _invariant = __webpack_require__(168);
+	
+	var _invariant2 = _interopRequireDefault(_invariant);
+	
+	var _CustomPropTypes = __webpack_require__(303);
+	
+	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
+	
+	var _Data = __webpack_require__(171);
+	
+	var _Scale = __webpack_require__(172);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var FunnelChart = function (_React$Component) {
+	  _inherits(FunnelChart, _React$Component);
+	
+	  function FunnelChart() {
+	    _classCallCheck(this, FunnelChart);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(FunnelChart).apply(this, arguments));
+	  }
+	
+	  _createClass(FunnelChart, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var data = _props.data;
+	      var scale = _props.scale;
+	      var getX = _props.getX;
+	      var getY = _props.getY;
+	      var horizontal = _props.horizontal;
+	
+	
+	      var area = _d2.default.svg.area().x(function (d) {
+	        return scale.x((0, _Data.makeAccessor)(getX)(d));
+	      }).y(function (d) {
+	        return scale.y((0, _Data.makeAccessor)(getY)(d));
+	      });
+	
+	      if (horizontal) area.x0(function (d) {
+	        return scale.x(-(0, _Data.makeAccessor)(getX)(d));
+	      });else area.y0(function (d) {
+	        return scale.y(-(0, _Data.makeAccessor)(getY)(d));
+	      });
+	
+	      var colors = _d2.default.scale.category20b().domain(_lodash2.default.range(10));
+	
+	      return _react2.default.createElement(
+	        'g',
+	        { className: 'funnel-chart' },
+	        data.map(function (d, i) {
+	          if (i == 0) return null;
+	          var pathStr = area([data[i - 1], d]);
+	
+	          return _react2.default.createElement('path', { d: pathStr, style: { fill: colors(i - 1), stroke: 'transparent' } });
+	        })
+	      );
+	    }
+	  }], [{
+	    key: 'getDomain',
+	    value: function getDomain(props) {
+	      var data = props.data;
+	      var scale = props.scale;
+	      var scaleType = props.scaleType;
+	      var getX = props.getX;
+	      var getY = props.getY;
+	      var horizontal = props.horizontal;
+	      var xAccessor = (0, _Data.makeAccessor)(getX);
+	      var yAccessor = (0, _Data.makeAccessor)(getY);
+	      var xDataType = (0, _Scale.dataTypeFromScaleType)(scaleType.x);
+	      var yDataType = (0, _Scale.dataTypeFromScaleType)(scaleType.y);
+	
+	
+	      return horizontal ? {
+	        x: (0, _Data.combineDomains)([(0, _Data.domainFromData)(data, xAccessor, xDataType), (0, _Data.domainFromData)(data, function (d) {
+	          return -xAccessor(d);
+	        }, xDataType)]),
+	        y: (0, _Data.domainFromData)(data, yAccessor, yDataType)
+	      } : {
+	        x: (0, _Data.domainFromData)(data, xAccessor, xDataType),
+	        y: (0, _Data.combineDomains)([(0, _Data.domainFromData)(data, yAccessor, yDataType), (0, _Data.domainFromData)(data, function (d) {
+	          return -yAccessor(d);
+	        }, yDataType)])
+	      };
+	    }
+	  }]);
+	
+	  return FunnelChart;
+	}(_react2.default.Component);
+	
+	FunnelChart.propTypes = {
+	  // passed from xyplot
+	  scale: CustomPropTypes.xyObjectOf(_react2.default.PropTypes.func.isRequired),
+	  // data array
+	  data: _react2.default.PropTypes.array.isRequired,
+	  // data getters
+	  getX: CustomPropTypes.getter,
+	  getY: CustomPropTypes.getter
+	};
+	FunnelChart.defaultProps = {};
+	exports.default = FunnelChart;
+
+/***/ },
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65389,13 +65938,12 @@
 	function getTickType(props) {
 	  var getXEnd = props.getXEnd;
 	  var getYEnd = props.getYEnd;
-	  var orientation = props.orientation;
-	
-	  var isVertical = orientation === 'vertical';
+	  var horizontal = props.horizontal;
 	  // warn if a range is passed for the dependent variable, which is expected to be a value
-	  if (isVertical && !_lodash2.default.isUndefined(getYEnd) || !isVertical && !_lodash2.default.isUndefined(getXEnd)) console.warn("Warning: MarkerLineChart can only show the independent variable as a range, not the dependent variable.");
 	
-	  if (isVertical && !_lodash2.default.isUndefined(getXEnd) || !isVertical && !_lodash2.default.isUndefined(getYEnd)) return "RangeValue";
+	  if (!horizontal && !_lodash2.default.isUndefined(getYEnd) || horizontal && !_lodash2.default.isUndefined(getXEnd)) console.warn("Warning: MarkerLineChart can only show the independent variable as a range, not the dependent variable.");
+	
+	  if (!horizontal && !_lodash2.default.isUndefined(getXEnd) || horizontal && !_lodash2.default.isUndefined(getYEnd)) return "RangeValue";
 	
 	  return "ValueValue";
 	}
@@ -65437,10 +65985,9 @@
 	      var getXEnd = _this$props.getXEnd;
 	      var getY = _this$props.getY;
 	      var getYEnd = _this$props.getYEnd;
-	      var orientation = _this$props.orientation;
+	      var horizontal = _this$props.horizontal;
 	      var scale = _this$props.scale;
 	
-	      var isVertical = orientation === 'vertical';
 	      var xVal = scale.x((0, _Data.makeAccessor)(getX)(d));
 	      var yVal = scale.y((0, _Data.makeAccessor)(getY)(d));
 	      var xEndVal = _lodash2.default.isUndefined(getXEnd) ? 0 : scale.x((0, _Data.makeAccessor)(getXEnd)(d));
@@ -65448,8 +65995,8 @@
 	      var x1 = xVal;
 	      var y1 = yVal;
 	
-	      var x2 = isVertical ? xEndVal : xVal;
-	      var y2 = isVertical ? yVal : yEndVal;
+	      var x2 = horizontal ? xVal : xEndVal;
+	      var y2 = horizontal ? yEndVal : yVal;
 	      var key = 'marker-line-' + i;
 	
 	      if (!_lodash2.default.every([x1, x2, y1, y2], _lodash2.default.isFinite)) return null;
@@ -65469,17 +66016,16 @@
 	      var _this$props2 = _this.props;
 	      var getX = _this$props2.getX;
 	      var getY = _this$props2.getY;
-	      var orientation = _this$props2.orientation;
+	      var horizontal = _this$props2.horizontal;
 	      var lineLength = _this$props2.lineLength;
 	      var scale = _this$props2.scale;
 	
-	      var isVertical = orientation === 'vertical';
 	      var xVal = scale.x((0, _Data.makeAccessor)(getX)(d));
 	      var yVal = scale.y((0, _Data.makeAccessor)(getY)(d));
-	      var x1 = isVertical ? xVal - lineLength / 2 : xVal;
-	      var x2 = isVertical ? xVal + lineLength / 2 : xVal;
-	      var y1 = isVertical ? yVal : yVal - lineLength / 2;
-	      var y2 = isVertical ? yVal : yVal + lineLength / 2;
+	      var x1 = !horizontal ? xVal - lineLength / 2 : xVal;
+	      var x2 = !horizontal ? xVal + lineLength / 2 : xVal;
+	      var y1 = !horizontal ? yVal : yVal - lineLength / 2;
+	      var y2 = !horizontal ? yVal : yVal + lineLength / 2;
 	      var key = 'marker-line-' + i;
 	
 	      if (!_lodash2.default.every([x1, x2, y1, y2], _lodash2.default.isFinite)) return null;
@@ -65533,12 +66079,11 @@
 	        var getY = props.getY;
 	        var getYEnd = props.getYEnd;
 	        var scaleType = props.scaleType;
-	        var orientation = props.orientation;
-	
-	        var horizontal = orientation !== 'vertical';
+	        var horizontal = props.horizontal;
 	
 	        // only have to specify range axis domain, other axis uses default domainFromData
 	        // in this chart type, the range axis, if there is one, is always the *independent* variable
+	
 	        var rangeAxis = horizontal ? 'y' : 'x';
 	        var rangeStartAccessor = horizontal ? (0, _Data.makeAccessor)(getY) : (0, _Data.makeAccessor)(getX);
 	        var rangeEndAccessor = horizontal ? (0, _Data.makeAccessor)(getYEnd) : (0, _Data.makeAccessor)(getXEnd);
@@ -65561,7 +66106,7 @@
 	  getXEnd: CustomPropTypes.getter,
 	  getYEnd: CustomPropTypes.getter,
 	
-	  orientation: PropTypes.oneOf(['vertical', 'horizontal']),
+	  horizontal: _react2.default.PropTypes.bool,
 	  lineLength: PropTypes.number,
 	
 	  // x & y scale types
@@ -65573,13 +66118,13 @@
 	  onMouseLeaveLine: PropTypes.func
 	};
 	MarkerLineChart.defaultProps = {
-	  orientation: 'vertical',
+	  horizontal: false,
 	  lineLength: 10
 	};
 	exports.default = MarkerLineChart;
 
 /***/ },
-/* 314 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65747,7 +66292,7 @@
 	exports.default = KernelDensityEstimation;
 
 /***/ },
-/* 315 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
