@@ -134,6 +134,68 @@ const LineChartExample = (props) => {
   </div>
 };
 
+class LineChartExample2 extends React.Component {
+  state = {
+    activeX: null
+  };
+
+  _onMouseMove = ({xValue, yValue}) => {
+    this.setState({activeX: xValue});
+  };
+
+  render() {
+    const {activeX} = this.state;
+    const colors = d3.scale.category10().domain(_.range(10));
+
+    const line1 = d => Math.sin(d*.1);
+    const line2 = d => Math.cos(d*.1);
+    const line3 = d => Math.sin(d*.2) * 1.5;
+
+    return <div>
+      <XYPlot scaleType="linear" {...{width: 600, height: 350, domain: {y: [-2, 2]}}} onMouseMove={this._onMouseMove}>
+        <XAxis title="Phase" />
+        <YAxis title="Intensity" />
+
+        <LineChart
+          data={_.range(100)}
+          getY={line1}
+          lineStyle={{stroke: colors(0), strokeWidth: 3}}
+        />
+        <LineChart
+          data={_.range(100)}
+          getY={line2}
+          lineStyle={{stroke: colors(1), strokeWidth: 2}}
+        />
+        <LineChart
+          data={_.range(100)}
+          getY={line3}
+          lineStyle={{stroke: colors(2), strokeWidth: 1}}
+        />
+
+        {activeX ?
+          <ScatterPlot
+            data={[line1, line2, line3].map(lineFunc => [activeX, lineFunc(activeX)])}
+            getX={0}
+            getY={1}
+            pointRadius={5}
+          /> :
+          null
+        }
+
+        {activeX ?
+          <XLine value={activeX} style={{stroke: '#666'}} /> :
+          null
+        }
+      </XYPlot>
+
+      {activeX ?
+        <h3>{this.state.activeX.toFixed(3)}</h3> :
+        null
+      }
+    </div>
+  }
+}
+
 const InteractiveLineExample = React.createClass({
   getInitialState() {
     return {
@@ -532,7 +594,7 @@ const AreaHeatmapExample = (props) => {
         getXEnd="xEnd"
         getY="y"
         getYEnd="yEnd"
-        rectStyle={{fill: 'ForestGreen'}}
+        rectStyle={{fill: '#41ab5d'}}
       />
       <AreaHeatmap
         data={data}
@@ -541,7 +603,7 @@ const AreaHeatmapExample = (props) => {
         getXEnd="xEnd"
         getY="y"
         getYEnd="yEnd"
-        rectStyle={{fill: 'crimson'}}
+        rectStyle={{fill: '#fc4e2a'}}
       />
     </XYPlot>
   </div>;
@@ -618,163 +680,101 @@ const HistogramKDEExample = (props) => {
   </div>;
 };
 
-const CustomTicksExample = React.createClass({
-  render() {
-    return <div>
-      <XYPlot
-        width={300} height={300}
-        ticks={{
-          x: [0, 1, 2, 4, 8, 16],
-          y: [-8000, -3000, 0, 10000, 5000, 40000]
-        }}
-      >
-        <BarChart data={randomBarData2.numberNumber} getX={0} getY={1} />
-      </XYPlot>
-    </div>
-  }
-});
-
-const CustomAxisLabelsExample = React.createClass({
-  render() {
-    return <div>
-      <XYPlot
-        width={500} height={300}
-        ticks={{
-          x: [0, 1, 2, 4, 8, 16],
-          y: [-8000, -3000, 0, 10000, 5000, 20000]
-        }}
-        labelValues={{
-          x: [0, 1, 3, 9, 12],
-          y: [-5000, -2000, 0, 8000, 3000, 16000]
-        }}
-        showZero={{y: true}}
-      >
-        <BarChart
-          data={randomBarData2.numberNumber}
-          getX={0} getY={1}
-          barThickness={20}
-        />
-      </XYPlot>
-    </div>
-  }
-});
-
-class CustomSelectionRect extends React.Component {
-  render() {
-    const {scale, hoveredYVal} = this.props;
-    return hoveredYVal ?
-      <rect
-        x="0"
-        y={scale.y(hoveredYVal) - 20}
-        width="200" height="40"
-        style={{fill: 'red'}}
-      />
-      : null;
-  }
-}
-
-class CustomChildExample extends React.Component {
-  state = {
-    hoveredYVal: null
-  };
-
-  onMouseMoveChart = ({yValue}) => {
-    this.setState({hoveredYVal: yValue});
-  };
-
-  render() {
-    return <div>
-      <XYPlot
-        width={200} height={200}
-        axisType={{y: 'ordinal'}}
-        padding={{bottom: 20, top: 20}}
-        showTicks={{x: false, y: false}}
-        showGrid={{x: false, y: false}}
-        showLabels={{x: false}}
-        showXZero={{x: true}}
-        onMouseMove={this.onMouseMoveChart}
-      >
-        <XAxis /><YAxis />
-        <CustomSelectionRect underAxes={true} hoveredYVal={this.state.hoveredYVal} />
-        <BarChart
-          horizontal
-          data={randomBarData2.numberOrdinal}
-          getX={0}
-          getY={1}
-          barThickness={20}
-        />
-      </XYPlot>
-    </div>
-  }
-}
-
 const MultipleXYExample = (props) => {
   return <div>
-    <XYPlot>
-      <BarChart data={randomBars[0]} getX={0} getY={1} />
-      <LineChart data={randomBars[0]} getX={0} getY={1} />
-      <ScatterPlot data={randomBars[0]} getX={0} getY={1} pointSymbol={(d, i) => _.sample(emojis)} />
+    <XYPlot domain={{y: [-2, 2], x: [-2, 2]}} scaleType="linear" {...{width: 600, height: 500}}>
+      <XAxis title="Phase" />
+      <YAxis title="Intensity" />
+
+      <RangeBarChart
+        data={_.range(0, 2, .03)}
+        getX={null}
+        getY={d => (Math.sin(d*3) * .7) + 1.2}
+        getYEnd={d => (Math.sin(d*3) * Math.cos(d*3) * .7) + 1.2}
+        barThickness={2}
+        barStyle={{fill: '#3690c0'}}
+      />
+
+      <LineChart
+        data={_.range(-2, 0, .005)}
+        getY={d => Math.pow(Math.abs(Math.sin(d*5)), Math.abs(Math.sin(d*.25))) * 1.8}
+        lineStyle={{stroke: '#02818a', strokeWidth: 3}}
+      />
+
+      <ScatterPlot
+        data={_.range(-2, 0, .05)}
+        getY={d => Math.pow(2, (d + 2) * 1.8) * 0.1}
+        pointSymbol={<rect width={5} height={5} fill="#3690c0" />}
+      />
+
+      <BarChart
+        data={_.range(0, 2, .03)}
+        getY={d => -Math.abs(Math.sin(d*4) * Math.cos(d*3))}
+        barThickness={3}
+        barStyle={{fill: '#67a9cf'}}
+      />
+
+      <MarkerLineChart
+        data={_.range(0, 1.5, .1)}
+        getY={d => Math.cos(d)}
+        lineStyle={{stroke: '#ec7014', strokeWidth: 3}}
+      />
+
+      <ColorHeatmap
+        data={_.flatten(_.range(-2, 0, .1).map(i => _.range(-2, 0, .1).map(j => [i, j])))}
+        getValue={([i, j]) => Math.sin(i * j * 5)}
+        getX={([i, j]) => i}
+        getXEnd={([i, j]) => i + .1}
+        getY={([i, j]) => j}
+        getYEnd={([i, j]) => j + .1}
+        colors={['#d0d1e6', '#016450']}
+        interpolator={'lab'}
+      />
+
+      <AreaHeatmap
+        data={_.flatten(_.range(0, 2, .1).map(i => _.range(-2, -1, .1).map(j => [i, j])))}
+        getArea={([i, j]) => -Math.sin(i * j * 5)}
+        getX={([i, j]) => i}
+        getXEnd={([i, j]) => i + .1}
+        getY={([i, j]) => j}
+        getYEnd={([i, j]) => j + .1}
+        rectStyle={{fill: '#016450'}}
+      />
     </XYPlot>
   </div>;
 };
 
 const BarMarkerLineExample = (props) => {
   return <div>
-    <div>
-      <XYPlot width={400} height={300}>
-        <BarChart
-          data={randomBarData2.numberNumber}
-          getX={0} getY={1}
-        />
-        <MarkerLineChart
-          data={barTickData.numberNumber}
-          getX={0} getY={1}
-          lineLength={15}
-        />
-      </XYPlot>
-      <XYPlot width={400} height={300}>
-        <BarChart
-          horizontal
-          data={randomBarData2.numberNumber}
-          getX={1} getY={0}
-        />
-        <MarkerLineChart
-          horizontal
-          data={barTickData.numberNumber}
-          getX={1} getY={0}
-          lineLength={15}
-        />
-      </XYPlot>
-    </div>
-    <div>
-      <XYPlot width={400} height={300}>
-        <BarChart
-          data={rangeValueData.numberNumber}
-          getX={d => d[0][0]} getY={1}
-          getEndValue={{x: d => d[0][1]}}
-        />
-        <MarkerLineChart
-          data={barTickData.numberRangeNumber}
-          getX={d => d[0][0]} getY={1}
-          getEndValue={{x: d => d[0][1]}}
-        />
-      </XYPlot>
-      <XYPlot width={400} height={300}>
-        <BarChart
-          data={rangeValueData.numberNumber}
-          orientation="horizontal"
-          getX={1} getY={d => d[0][0]}
-          getEndValue={{y: d => d[0][1]}}
-        />
-        <MarkerLineChart
-          data={barTickData.numberRangeNumber}
-          orientation="horizontal"
-          getX={1} getY={d => d[0][0]}
-          getEndValue={{y: d => d[0][1]}}
-        />
-      </XYPlot>
-    </div>
-  </div>
+    <XYPlot width={400} height={300} domain={{x: [-2, 22], y: [-50000, 50000]}}>
+      <XAxis />
+      <YAxis />
+      <BarChart
+        data={randomBarData2.numberNumber}
+        getX={0} getY={1}
+      />
+      <MarkerLineChart
+        data={barTickData.numberNumber}
+        getX={0} getY={1}
+        lineLength={15}
+      />
+    </XYPlot>
+    <XYPlot width={400} height={300}>
+      <XAxis />
+      <YAxis />
+      <BarChart
+        horizontal
+        data={randomBarData2.numberNumber}
+        getX={1} getY={0}
+      />
+      <MarkerLineChart
+        horizontal
+        data={barTickData.numberNumber}
+        getX={1} getY={0}
+        lineLength={15}
+      />
+    </XYPlot>
+  </div>;
 };
 
 const dateDomain = [new Date(1992, 0, 1), new Date(2001, 0, 1)];
@@ -870,9 +870,9 @@ const MarkerLineExample = (props) => {
         <XAxis title="Phase" />
         <YAxis title="Intensity" />
         <MarkerLineChart
+          horizontal
           data={_.range(30)}
           getX={d => Math.sin(d / (Math.PI))}
-          orientation="horizontal"
         />
       </XYPlot>
     </div>
@@ -893,11 +893,11 @@ const MarkerLineExample = (props) => {
         <XAxis title="Phase" />
         <YAxis title="Intensity" />
         <MarkerLineChart
+          horizontal
           data={_.range(15)}
           getX={d => Math.sin(d / (Math.PI))}
           getY={d => Math.sin(d / 10) * 10}
           getYEnd={d => Math.sin((d + 1) / 10) * 10}
-          orientation="horizontal"
         />
       </XYPlot>
     </div>
@@ -1071,9 +1071,95 @@ const RangeRectExample = (props) => {
   </div>;
 };
 
+class CustomSelectionRect extends React.Component {
+  render() {
+    const {scale, hoveredYVal} = this.props;
+    return hoveredYVal ?
+      <rect
+        x="0"
+        y={scale.y(hoveredYVal) - 20}
+        width="500" height="40"
+        style={{fill: 'red'}}
+      />
+      : null;
+  }
+};
+
+class CustomChildExample extends React.Component {
+  state = {
+    hoveredYVal: null
+  };
+
+  onMouseMoveChart = ({yValue}) => {
+    this.setState({hoveredYVal: yValue});
+  };
+
+  render() {
+    return <div>
+      <XYPlot
+        width={500} height={400}
+        padding={{bottom: 20, top: 20}}
+        onMouseMove={this.onMouseMoveChart}
+      >
+        <XAxis /><YAxis />
+        <CustomSelectionRect underAxes={true} hoveredYVal={this.state.hoveredYVal} />
+        <BarChart
+          horizontal
+          data={randomBarData2.numberOrdinal}
+          getX={0}
+          getY={1}
+          barThickness={20}
+        />
+      </XYPlot>
+    </div>
+  }
+};
+
+const CustomTicksExample = React.createClass({
+  render() {
+    return <div>
+      <XYPlot
+        width={300} height={300}
+        ticks={{
+          x: [0, 1, 2, 4, 8, 16],
+          y: [-8000, -3000, 0, 10000, 5000, 40000]
+        }}
+      >
+        <BarChart data={randomBarData2.numberNumber} getX={0} getY={1} />
+      </XYPlot>
+    </div>
+  }
+});
+
+const CustomAxisLabelsExample = React.createClass({
+  render() {
+    return <div>
+      <XYPlot
+        width={500} height={300}
+        ticks={{
+          x: [0, 1, 2, 4, 8, 16],
+          y: [-8000, -3000, 0, 10000, 5000, 20000]
+        }}
+        labelValues={{
+          x: [0, 1, 3, 9, 12],
+          y: [-5000, -2000, 0, 8000, 3000, 16000]
+        }}
+        showZero={{y: true}}
+      >
+        <BarChart
+          data={randomBarData2.numberNumber}
+          getX={0} getY={1}
+          barThickness={20}
+        />
+      </XYPlot>
+    </div>
+  }
+});
+
 export const examples = [
   {id: 'line', title: 'Line Chart', Component: LineChartExample},
-  {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
+  {id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2},
+  // {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
   {id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample},
   {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample},
   {id: 'barChart', title: 'Bar Chart', Component: BarChartExample},
@@ -1118,23 +1204,6 @@ export const App = React.createClass({
       <h1>Reactochart Examples</h1>
 
       {this.renderExamples()}
-
-      <div>
-        <XYPlot domain={{y: [-1, 1], x: [-1, 1]}} scaleType="linear" {...{width: 900, height: 350}}>
-          <XAxis title="Phase" />
-          <YAxis title="Intensity" />
-
-          <RangeBarChart
-            data={_.range(-1, 1, .005)}
-            getX={null}
-            getY={d => Math.sin(d*6)}
-            getYEnd={d => Math.sin(d*6) * Math.cos(d*6)}
-            barThickness={2}
-          />
-        </XYPlot>
-      </div>
-
-
     </div>
   },
   renderExamples() {
