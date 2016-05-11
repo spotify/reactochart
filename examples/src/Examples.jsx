@@ -520,6 +520,35 @@ const ColorHeatMapExample = (props) => {
 
   const data = _.flatten(gridData);
 
+
+  const playTypes = ['www', 'open', 'play', 'other'];
+  const platforms = ['desktop', 'mobile', 'webplayer', 'other'];
+
+  const gridData2 = playTypes.map(function(n, i) {
+    return platforms.map(function(m, j) {
+      return {
+        x: i == 0 ? '' : playTypes[i-1],
+        xEnd: n,
+        y: j == 0 ? '' : platforms[j-1],
+        yEnd: m,
+        value: Math.sin(i * j * 0.1)
+      };
+    })
+  });
+
+  const gridData3 = playTypes.map(function(n, i) {
+    return platforms.map(function(m, j) {
+      return {
+        x: i,
+        xEnd: i + 1,
+        y: j,
+        yEnd: j+1,
+        value: Math.sin(i * j * 0.1)
+      };
+    })
+  });
+
+
   return <div>
     <XYPlot width={500} height={500}>
       <ColorHeatmap
@@ -553,6 +582,53 @@ const ColorHeatMapExample = (props) => {
     </XYPlot>
   </div>;
 };
+
+const CategoricalColorHeatmapExample = (props) => {
+  // sorry, kinda hacky currently!
+  // working on a better solution... -d
+  const playTypes = ['www', 'open', 'play', 'other'];
+  const platforms = ['desktop', 'mobile', 'webplayer', 'other'];
+
+  const gridData = playTypes.map(function(n, i) {
+    return platforms.map(function(m, j) {
+      return {
+        x: i,
+        xEnd: i + 1,
+        y: j,
+        yEnd: j+1,
+        value: Math.sin(i * j * 0.1)
+      };
+    })
+  });
+  const data = _.flatten(gridData);
+
+  return <div>
+    <XYPlot width={400} height={400}>
+      <ColorHeatmap
+        data={data}
+        getValue="value"
+        getX="x"
+        getXEnd="xEnd"
+        getY="y"
+        getYEnd="yEnd"
+        colors={['rebeccapurple', 'goldenrod']}
+        interpolator={'lab'}
+      />
+      <XAxis
+        showGrid={false}
+        ticks={[0.5, 1.5, 2.5, 3.5]}
+        labelFormat={d => playTypes[Math.round(d - 0.5)]}
+      />
+      <YAxis
+        showGrid={false}
+        ticks={[0.5, 1.5, 2.5, 3.5]}
+        labelFormat={d => platforms[Math.round(d - 0.5)]}
+      />
+      <XGrid tickCount={4} />
+      <YGrid tickCount={4} />
+    </XYPlot>
+  </div>
+}
 
 const AreaHeatmapExample = (props) => {
   const gridData = _.range(30).map(m => {
@@ -1166,6 +1242,7 @@ export const examples = [
   {id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample},
   {id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample},
   {id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample},
+  {id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample},
   {id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample},
   {id: 'treeMap', title: 'TreeMap', Component: TreeMapExample},
   {id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample},
