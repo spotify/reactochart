@@ -75574,6 +75574,8 @@
 	};
 	
 	var CategoricalColorHeatmapExample = function CategoricalColorHeatmapExample(props) {
+	  // sorry, kinda hacky currently!
+	  // working on a better solution... -d
 	  var playTypes = ['www', 'open', 'play', 'other'];
 	  var platforms = ['desktop', 'mobile', 'webplayer', 'other'];
 	
@@ -75608,14 +75610,18 @@
 	      }),
 	      _react2.default.createElement(_XAxis2.default, {
 	        showGrid: false,
-	        ticks: [0.5, 1.5, 2.5, 3.5],
+	        ticks: playTypes.map(function (t, i) {
+	          return i + 0.5;
+	        }),
 	        labelFormat: function labelFormat(d) {
 	          return playTypes[Math.round(d - 0.5)];
 	        }
 	      }),
 	      _react2.default.createElement(_YAxis2.default, {
 	        showGrid: false,
-	        ticks: [0.5, 1.5, 2.5, 3.5],
+	        ticks: platforms.map(function (t, i) {
+	          return i + 0.5;
+	        }),
 	        labelFormat: function labelFormat(d) {
 	          return platforms[Math.round(d - 0.5)];
 	        }

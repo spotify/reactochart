@@ -616,19 +616,19 @@ const CategoricalColorHeatmapExample = (props) => {
       />
       <XAxis
         showGrid={false}
-        ticks={[0.5, 1.5, 2.5, 3.5]}
+        ticks={playTypes.map((t, i) => i + 0.5)}
         labelFormat={d => playTypes[Math.round(d - 0.5)]}
       />
       <YAxis
         showGrid={false}
-        ticks={[0.5, 1.5, 2.5, 3.5]}
+        ticks={platforms.map((t, i) => i + 0.5)}
         labelFormat={d => platforms[Math.round(d - 0.5)]}
       />
       <XGrid tickCount={4} />
       <YGrid tickCount={4} />
     </XYPlot>
   </div>
-}
+};
 
 const AreaHeatmapExample = (props) => {
   const gridData = _.range(30).map(m => {
