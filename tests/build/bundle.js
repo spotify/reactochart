@@ -53451,6 +53451,8 @@
 	
 	var _d2 = _interopRequireDefault(_d);
 	
+	var _Data = __webpack_require__(205);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function scaleTypeFromDataType(dataType) {
@@ -53526,7 +53528,7 @@
 	  }
 	
 	  if (_lodash2.default.isArray(ticks)) {
-	    return combineDomains([scale.domain(), domainFromData(ticks, _lodash2.default.identity, dataTypeFromScaleType(scaleType))]);
+	    return (0, _Data.combineDomains)([scale.domain(), (0, _Data.domainFromData)(ticks, _lodash2.default.identity, dataTypeFromScaleType(scaleType))]);
 	  } else if (nice && scaleType !== 'ordinal') return scale.domain();
 	  // return undefined by default, if we have no options pertaining to ticks
 	}
@@ -75505,6 +75507,33 @@
 	
 	  var data = _lodash2.default.flatten(gridData);
 	
+	  var playTypes = ['www', 'open', 'play', 'other'];
+	  var platforms = ['desktop', 'mobile', 'webplayer', 'other'];
+	
+	  var gridData2 = playTypes.map(function (n, i) {
+	    return platforms.map(function (m, j) {
+	      return {
+	        x: i == 0 ? '' : playTypes[i - 1],
+	        xEnd: n,
+	        y: j == 0 ? '' : platforms[j - 1],
+	        yEnd: m,
+	        value: Math.sin(i * j * 0.1)
+	      };
+	    });
+	  });
+	
+	  var gridData3 = playTypes.map(function (n, i) {
+	    return platforms.map(function (m, j) {
+	      return {
+	        x: i,
+	        xEnd: i + 1,
+	        y: j,
+	        yEnd: j + 1,
+	        value: Math.sin(i * j * 0.1)
+	      };
+	    });
+	  });
+	
 	  return _react2.default.createElement(
 	    'div',
 	    null,
@@ -75540,6 +75569,59 @@
 	      }),
 	      _react2.default.createElement(_XAxis2.default, { gridLineStyle: { stroke: '#666' } }),
 	      _react2.default.createElement(_YAxis2.default, { gridLineStyle: { stroke: '#666' } })
+	    )
+	  );
+	};
+	
+	var CategoricalColorHeatmapExample = function CategoricalColorHeatmapExample(props) {
+	  var playTypes = ['www', 'open', 'play', 'other'];
+	  var platforms = ['desktop', 'mobile', 'webplayer', 'other'];
+	
+	  var gridData = playTypes.map(function (n, i) {
+	    return platforms.map(function (m, j) {
+	      return {
+	        x: i,
+	        xEnd: i + 1,
+	        y: j,
+	        yEnd: j + 1,
+	        value: Math.sin(i * j * 0.1)
+	      };
+	    });
+	  });
+	  var data = _lodash2.default.flatten(gridData);
+	
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      _XYPlot2.default,
+	      { width: 400, height: 400 },
+	      _react2.default.createElement(_ColorHeatmap2.default, {
+	        data: data,
+	        getValue: 'value',
+	        getX: 'x',
+	        getXEnd: 'xEnd',
+	        getY: 'y',
+	        getYEnd: 'yEnd',
+	        colors: ['rebeccapurple', 'goldenrod'],
+	        interpolator: 'lab'
+	      }),
+	      _react2.default.createElement(_XAxis2.default, {
+	        showGrid: false,
+	        ticks: [0.5, 1.5, 2.5, 3.5],
+	        labelFormat: function labelFormat(d) {
+	          return playTypes[Math.round(d - 0.5)];
+	        }
+	      }),
+	      _react2.default.createElement(_YAxis2.default, {
+	        showGrid: false,
+	        ticks: [0.5, 1.5, 2.5, 3.5],
+	        labelFormat: function labelFormat(d) {
+	          return platforms[Math.round(d - 0.5)];
+	        }
+	      }),
+	      _react2.default.createElement(_XGrid2.default, { tickCount: 4 }),
+	      _react2.default.createElement(_YGrid2.default, { tickCount: 4 })
 	    )
 	  );
 	};
@@ -76354,7 +76436,7 @@
 	
 	var examples = exports.examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2 },
 	// {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
-	{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample }, { id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample }];
+	{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample }, { id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample }, { id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample }];
 	
 	// todo rewrite these?
 	// {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
