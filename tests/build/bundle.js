@@ -56667,6 +56667,8 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -56737,6 +56739,7 @@
 	      var getY = _this$props.getY;
 	      var pointRadius = _this$props.pointRadius;
 	      var pointOffset = _this$props.pointOffset;
+	      var pointStyle = _this$props.pointStyle;
 	      var getClass = _this$props.getClass;
 	      var pointSymbol = _this.props.pointSymbol;
 	
@@ -56760,11 +56763,11 @@
 	
 	      // set positioning attributes based on symbol type
 	      if (pointSymbol.type === 'circle' || pointSymbol.type === 'ellipse') {
-	        _lodash2.default.assign(symbolProps, { cx: cx, cy: cy });
+	        _lodash2.default.assign(symbolProps, { cx: cx, cy: cy, style: pointStyle });
 	      } else if (pointSymbol.type === 'text') {
-	        _lodash2.default.assign(symbolProps, { x: cx, y: cy, style: { textAnchor: 'middle', dominantBaseline: 'central' } });
+	        _lodash2.default.assign(symbolProps, { x: cx, y: cy, style: _extends({ textAnchor: 'middle', dominantBaseline: 'central' }, pointStyle) });
 	      } else {
-	        _lodash2.default.assign(symbolProps, { x: cx, y: cy, style: { transform: "translate(-50%, -50%)" } });
+	        _lodash2.default.assign(symbolProps, { x: cx, y: cy, style: _extends({ transform: "translate(-50%, -50%)" }, pointStyle) });
 	      }
 	
 	      return _react2.default.cloneElement(pointSymbol, symbolProps);
@@ -56805,6 +56808,8 @@
 	  pointSymbol: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
 	  // manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered
 	  pointOffset: PropTypes.arrayOf(PropTypes.number),
+	  // inline styles for points
+	  pointStyle: PropTypes.object,
 	
 	  onMouseEnterPoint: PropTypes.func,
 	  onMouseMovePoint: PropTypes.func,
@@ -56813,7 +56818,8 @@
 	ScatterPlot.defaultProps = {
 	  pointRadius: 3,
 	  pointSymbol: _react2.default.createElement('circle', null),
-	  pointOffset: [0, 0]
+	  pointOffset: [0, 0],
+	  pointStyle: {}
 	};
 	exports.default = ScatterPlot;
 
