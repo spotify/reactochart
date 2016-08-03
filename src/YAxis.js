@@ -38,7 +38,7 @@ export default class YAxis extends React.Component {
     labelDistance: React.PropTypes.number,
     labelClassName: React.PropTypes.string,
     labelStyle: React.PropTypes.object,
-    labelFormat: React.PropTypes.object,
+    labelFormat: React.PropTypes.string,
     labelFormats: React.PropTypes.array,
     labels: React.PropTypes.array,
 
