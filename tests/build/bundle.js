@@ -73914,7 +73914,7 @@
 	  labelDistance: _react2.default.PropTypes.number,
 	  labelClassName: _react2.default.PropTypes.string,
 	  labelStyle: _react2.default.PropTypes.object,
-	  labelFormat: _react2.default.PropTypes.object,
+	  labelFormat: _react2.default.PropTypes.string,
 	  labelFormats: _react2.default.PropTypes.array,
 	  labels: _react2.default.PropTypes.array,
 	
