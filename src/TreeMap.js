@@ -40,7 +40,7 @@ class TreeMapNode extends React.Component {
       `node-group-${_.kebabCase(parent.name)} node-group-i-${parentNames.indexOf(parent.name)}` : '';
     const className = `tree-map-node node-depth-${depth} ${nodeGroupClass}`;
 
-    let style = {position: 'absolute', width: dx, height: dy, top: y, left: x};
+    let style = {position: 'absolute', width: dx, height: dy, top: y, left: x, transition: "all .2s"};
     const customStyle = _.isFunction(nodeStyle) ? nodeStyle(node) : (_.isObject(nodeStyle) ? nodeStyle : {});
     _.assign(style, customStyle);
 
@@ -122,19 +122,30 @@ class TreeMap extends React.Component {
     NodeComponent: TreeMapNode,
     NodeLabelComponent: TreeMapNodeLabel
   };
+  componentWillMount() {
+    // initialize the layout function
+    this._treemap = initTreemapLayout(this.props);
+    // clone the data because d3 mutates it!
+    this._data = _.cloneDeep(this.props.data);
+  }
+  componentWillReceiveProps(newProps){
+    const {width, height} = this.props;
 
+    //if height or width change, re-initialize the layout function
+    if(width != newProps.width || height != newProps.height)
+    {
+      this._treemap = initTreemapLayout(this.props);
+    }
+  }
   render() {
     const {
       width, height, nodeStyle, labelStyle, getLabel, minLabelWidth, minLabelHeight,
-      onClickNode, onMouseEnterNode, onMouseLeaveNode, onMouseMoveNode, NodeComponent, NodeLabelComponent
+      onClickNode, onMouseEnterNode, onMouseLeaveNode, onMouseMoveNode, NodeComponent, NodeLabelComponent, getValue
     } = this.props;
 
-    // clone the data because d3 mutates it!
-    const data = _.cloneDeep(this.props.data);
-    // initialize the layout function
-    const treemap = initTreemapLayout(this.props);
+    
     // run the layout function with our data to create treemap layout
-    const nodes = treemap.nodes(data);
+    const nodes =  this._treemap.value(makeAccessor(getValue)).nodes(this._data);
 
     const style = {position: 'relative', width, height};
 
@@ -157,7 +168,8 @@ function initTreemapLayout(options) {
 
   const treemap = d3.layout.treemap()
     .size([width, height])
-    .value(makeAccessor(getValue));
+    .value(makeAccessor(getValue))
+    ;
 
   if(!_.isUndefined(getChildren)) treemap.children(makeAccessor(getChildren));
   if(!_.isUndefined(sort)) treemap.sort(sort);

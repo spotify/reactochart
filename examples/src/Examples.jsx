@@ -109,7 +109,7 @@ const LineChartExample = (props) => {
   const colors = d3.scale.category10().domain(_.range(10));
 
   return <div>
-    <XYPlot scaleType="linear" {...{width: 600, height: 350, domain: {y: [-2, 2]}}}>
+    <XYPlot {...{width: 600, height: 350, domain: {y: [-2, 2]}}}>
 
       <XAxis title="Phase" />
       <YAxis title="Intensity" />
@@ -1041,6 +1041,57 @@ const TreeMapExample = (props) => {
   </div>
 };
 
+class AnimatedTreeMapExample extends React.Component {
+  state = {getValue: "size"};
+
+  _animateValue = () => {
+    if(this.state.getValue === "size")
+      this.setState({getValue: "size2"});
+    else
+      this.setState({getValue: "size"});
+  };
+
+  componentWillMount() {
+     this._interval = setInterval(this._animateValue, 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this._interval);
+  }
+
+  render() {
+    const {getValue} = this.state;
+    const data = {
+      children: _.range(1, 5).map(n => ({
+        children: _.times(n * n, m => ({
+          size:  (n +1) * (m + 1) + (100 * Math.random()),
+          size2: (n +1) * (m + 1) + (100 * Math.random())
+        }))
+      }))
+    };
+
+    const colorScale = d3.scale.linear()
+      .domain([0, 65])
+      .range(['#6b6ecf', '#8ca252'])
+      .interpolate(d3.interpolateHcl);
+
+    return <div>
+      <TreeMap
+        data={data}
+        getValue={getValue}
+        getLabel="size"
+        nodeStyle={(node) => ({
+          backgroundColor: colorScale(parseInt(node.size)),
+          border: '1px solid #333'
+        })}
+        sticky
+        width={800}
+        height={500}
+      />
+    </div>
+  }
+}
+
+
 const YAxisTitleTest = (props) => {
   const xyProps = {
     width: 500, height: 360,
@@ -1245,6 +1296,7 @@ export const examples = [
   {id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample},
   {id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample},
   {id: 'treeMap', title: 'TreeMap', Component: TreeMapExample},
+  {id: 'animatedTreeMap', title: 'Animated TreeMap', Component: AnimatedTreeMapExample},
   {id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample},
   {id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample},
   {id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample},
