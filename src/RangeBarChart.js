@@ -4,7 +4,6 @@ import invariant from 'invariant';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {hasXYScales, dataTypeFromScaleType} from './utils/Scale';
 import {makeAccessor, domainFromRangeData} from './utils/Data';
-import {methodIfFuncProp} from './util.js';
 import Bar from './Bar';
 
 export default class RangeBarChart extends React.Component {
