@@ -4,6 +4,7 @@ import invariant from 'invariant';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {hasXYScales, dataTypeFromScaleType} from './utils/Scale';
 import {makeAccessor, domainFromRangeData} from './utils/Data';
+import {methodIfFuncProp} from './util.js';
 import Bar from './Bar';
 
 export default class RangeBarChart extends React.Component {
@@ -19,7 +20,11 @@ export default class RangeBarChart extends React.Component {
 
     barThickness: React.PropTypes.number,
     barClassName: React.PropTypes.string,
-    barStyle: React.PropTypes.object
+    barStyle: React.PropTypes.object,
+
+    onMouseEnterBar: React.PropTypes.func, 
+    onMouseMoveBar: React.PropTypes.func, 
+    onMouseLeaveBar: React.PropTypes.func
   };
   static defaultProps = {
     data: [],
@@ -50,6 +55,9 @@ export default class RangeBarChart extends React.Component {
 
     const accessors = {x: makeAccessor(getX), y: makeAccessor(getY)};
     const endAccessors = {x: makeAccessor(getXEnd), y: makeAccessor(getYEnd)};
+    
+
+
     const barProps = {
       scale,
       thickness: barThickness,
@@ -59,10 +67,22 @@ export default class RangeBarChart extends React.Component {
 
     return <g>
       {data.map((d, i) => {
+
+        const [onMouseEnter, onMouseMove, onMouseLeave] =
+          ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(eventName => {
+
+            // partially apply this bar's data point as 2nd callback argument
+            const callback = _.get(this.props, eventName);
+            return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+        });
+
         const thisBarProps = {
           xValue: accessors.x(d),
           yValue: accessors.y(d),
           key: `chart-bar-${i}`,
+          onMouseEnter, 
+          onMouseMove, 
+          onMouseLeave,
           ...barProps
         };
 
