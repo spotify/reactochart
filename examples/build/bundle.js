@@ -66169,12 +66169,12 @@
 	      var getYEnd = _props.getYEnd;
 	      var barClassName = _props.barClassName;
 	      var barStyle = _props.barStyle;
+	      var getClass = _props.getClass;
 	
 	      (0, _invariant2.default)((0, _Scale.hasXYScales)(scale), 'AreaBarChart.props.scale.x and scale.y must both be valid d3 scales');
 	
 	      var barProps = {
 	        scale: scale,
-	        className: 'chart-area-bar ' + barClassName,
 	        style: barStyle
 	      };
 	      var getZero = _lodash2.default.constant(0);
@@ -66197,6 +66197,7 @@
 	          var onMouseLeave = _map2[2];
 	
 	
+	          barProps.className = 'chart-area-bar ' + (getClass ? (0, _Data.makeAccessor)(getClass)(d) : '') + ' ' + barClassName;
 	          return _react2.default.createElement(_RangeRect2.default, _extends({
 	            datum: d,
 	            getX: horizontal ? getZero : getX,
@@ -66244,6 +66245,7 @@
 	  getXEnd: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
 	  getYEnd: CustomPropTypes.getter,
+	  getClass: CustomPropTypes.getter,
 	
 	  barClassName: _react2.default.PropTypes.string,
 	  barStyle: _react2.default.PropTypes.object,

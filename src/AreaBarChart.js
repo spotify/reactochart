@@ -17,6 +17,7 @@ export default class AreaBarChart extends React.Component {
     getXEnd: CustomPropTypes.getter,
     getY: CustomPropTypes.getter,
     getYEnd: CustomPropTypes.getter,
+    getClass: CustomPropTypes.getter,
 
     barClassName: React.PropTypes.string,
     barStyle: React.PropTypes.object,
@@ -50,12 +51,11 @@ export default class AreaBarChart extends React.Component {
   }
 
   render() {
-    const {scale, data, horizontal, getX, getXEnd, getY, getYEnd, barClassName, barStyle} = this.props;
+    const {scale, data, horizontal, getX, getXEnd, getY, getYEnd, barClassName, barStyle, getClass} = this.props;
     invariant(hasXYScales(scale), `AreaBarChart.props.scale.x and scale.y must both be valid d3 scales`);
 
     const barProps = {
       scale,
-      className: `chart-area-bar ${barClassName}`,
       style: barStyle
     };
     const getZero = _.constant(0);
@@ -70,6 +70,7 @@ export default class AreaBarChart extends React.Component {
             return _.isFunction(callback) ? _.partial(callback, _, d) : null;
         });
 
+        barProps.className = `chart-area-bar ${getClass ? makeAccessor(getClass)(d) : ''} ${barClassName}`; 
         return <RangeRect
           datum={d}
           getX={horizontal ? getZero : getX}
