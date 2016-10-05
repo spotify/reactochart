@@ -134,8 +134,8 @@ class TreeMap extends React.Component {
     //if height, width, or the data changes, or if the treemap is not sticky, re-initialize the layout function
     if(!sticky || width != newProps.width || height != newProps.height || JSON.stringify(data) != JSON.stringify(newProps.data))
     {
-      this._data = _.cloneDeep(this.props.data);
-      this._treemap = initTreemapLayout(this.props);
+      this._data = _.cloneDeep(newProps.data);
+      this._treemap = initTreemapLayout(newProps);
     }
   }
   render() {
