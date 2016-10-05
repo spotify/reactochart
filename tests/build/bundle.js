@@ -57423,11 +57423,14 @@
 	      var _props3 = this.props;
 	      var width = _props3.width;
 	      var height = _props3.height;
+	      var data = _props3.data;
+	      var sticky = _props3.sticky;
 	
-	      //if height or width change, re-initialize the layout function
+	      //if height, width, or the data changes, or if the treemap is not sticky, re-initialize the layout function
 	
-	      if (width != newProps.width || height != newProps.height) {
-	        this._treemap = initTreemapLayout(this.props);
+	      if (!sticky || width != newProps.width || height != newProps.height || JSON.stringify(data) != JSON.stringify(newProps.data)) {
+	        this._data = _lodash2.default.cloneDeep(newProps.data);
+	        this._treemap = initTreemapLayout(newProps);
 	      }
 	    }
 	  }, {
@@ -77992,18 +77995,7 @@
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      this._interval = setInterval(this._animateValue, 1000);
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      clearInterval(this._interval);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var getValue = this.state.getValue;
-	
-	      var data = {
+	      this._data = {
 	        children: _lodash2.default.range(1, 5).map(function (n) {
 	          return {
 	            children: _lodash2.default.times(n * n, function (m) {
@@ -78015,6 +78007,17 @@
 	          };
 	        })
 	      };
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      clearInterval(this._interval);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var getValue = this.state.getValue;
+	
 	
 	      var colorScale = _d3.default.scale.linear().domain([0, 65]).range(['#6b6ecf', '#8ca252']).interpolate(_d3.default.interpolateHcl);
 	
@@ -78022,7 +78025,7 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_TreeMap2.default, {
-	          data: data,
+	          data: this._data,
 	          getValue: getValue,
 	          getLabel: 'size',
 	          nodeStyle: function nodeStyle(node) {
@@ -78276,7 +78279,7 @@
 	
 	var examples = exports.examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2 },
 	// {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
-	{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'interactiveAreaBar', title: 'Interactive Area Bar Chart', Component: InteractiveAreaBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample }, { id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample }, { id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'animatedTreeMap', title: 'Animated TreeMap', Component: AnimatedTreeMapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample }];
+	{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'interactiveAreaBar', title: 'Interactive Area Bar Chart', Component: InteractiveAreaBarChartExample }, { id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample }, { id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample }, { id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'animatedTreeMap', title: 'Animated TreeMap', Component: AnimatedTreeMapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample }];
 	
 	// todo rewrite these?
 	// {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
