@@ -1053,14 +1053,7 @@ class AnimatedTreeMapExample extends React.Component {
 
   componentWillMount() {
      this._interval = setInterval(this._animateValue, 1000);
-  }
-  componentWillUnmount() {
-    clearInterval(this._interval);
-  }
-
-  render() {
-    const {getValue} = this.state;
-    const data = {
+     this._data = {
       children: _.range(1, 5).map(n => ({
         children: _.times(n * n, m => ({
           size:  (n +1) * (m + 1) + (100 * Math.random()),
@@ -1068,6 +1061,13 @@ class AnimatedTreeMapExample extends React.Component {
         }))
       }))
     };
+  }
+  componentWillUnmount() {
+    clearInterval(this._interval);
+  }
+
+  render() {
+    const {getValue} = this.state;
 
     const colorScale = d3.scale.linear()
       .domain([0, 65])
@@ -1076,7 +1076,7 @@ class AnimatedTreeMapExample extends React.Component {
 
     return <div>
       <TreeMap
-        data={data}
+        data={this._data}
         getValue={getValue}
         getLabel="size"
         nodeStyle={(node) => ({

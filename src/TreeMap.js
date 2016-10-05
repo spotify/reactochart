@@ -129,11 +129,12 @@ class TreeMap extends React.Component {
     this._data = _.cloneDeep(this.props.data);
   }
   componentWillReceiveProps(newProps){
-    const {width, height} = this.props;
+    const {width, height, data, sticky} = this.props;
 
-    //if height or width change, re-initialize the layout function
-    if(width != newProps.width || height != newProps.height)
+    //if height, width, or the data changes, or if the treemap is not sticky, re-initialize the layout function
+    if(!sticky || width != newProps.width || height != newProps.height || JSON.stringify(data) != JSON.stringify(newProps.data))
     {
+      this._data = _.cloneDeep(this.props.data);
       this._treemap = initTreemapLayout(this.props);
     }
   }
