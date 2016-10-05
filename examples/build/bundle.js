@@ -20847,59 +20847,6 @@
 	  );
 	};
 	
-	var InteractiveRangeBarChartExample = _react2.default.createClass({
-	  displayName: 'InteractiveRangeBarChartExample',
-	  getInitialState: function getInitialState() {
-	    return {
-	      activeValue: null
-	    };
-	  },
-	  onEnterBar: function onEnterBar(e, d) {
-	    this.setState({ activeValue: d });
-	  },
-	  onLeaveBar: function onLeaveBar(e, d) {
-	    this.setState({ activeValue: null });
-	  },
-	  render: function render() {
-	    var activeValue = this.state.activeValue;
-	
-	    var getters = { getX: 0, getY: 1 };
-	
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      activeValue ? _react2.default.createElement(
-	        'div',
-	        null,
-	        activeValue.toFixed(2)
-	      ) : _react2.default.createElement(
-	        'div',
-	        null,
-	        'Hover over the chart to show values'
-	      ),
-	      _react2.default.createElement(
-	        _XYPlot2.default,
-	        _extends({ domain: { y: [-1, 1], x: [-1, 1] }, scaleType: 'linear' }, { width: 300, height: 350 }),
-	        _react2.default.createElement(_XAxis2.default, null),
-	        _react2.default.createElement(_YAxis2.default, null),
-	        _react2.default.createElement(_RangeBarChart2.default, {
-	          data: _lodash2.default.range(-1, 1, .1),
-	          getX: null,
-	          getY: function getY(d) {
-	            return Math.sin(d * 2);
-	          },
-	          getYEnd: function getYEnd(d) {
-	            return Math.sin(d * 2) * Math.cos(d * 2);
-	          },
-	          barThickness: 6,
-	          onMouseEnterBar: this.onEnterBar,
-	          onMouseLeaveBar: this.onLeaveBar
-	        })
-	      )
-	    );
-	  }
-	});
-	
 	var AreaBarChartExample = function AreaBarChartExample(props) {
 	  return _react2.default.createElement(
 	    'div',
@@ -20945,6 +20892,61 @@
 	    ';'
 	  );
 	};
+	
+	var InteractiveAreaBarChartExample = _react2.default.createClass({
+	  displayName: 'InteractiveAreaBarChartExample',
+	  getInitialState: function getInitialState() {
+	    return {
+	      activeValue: null
+	    };
+	  },
+	  onEnterBar: function onEnterBar(e, d) {
+	    this.setState({ activeValue: d });
+	  },
+	  onLeaveBar: function onLeaveBar(e, d) {
+	    this.setState({ activeValue: null });
+	  },
+	  render: function render() {
+	    var activeValue = this.state.activeValue;
+	
+	    var getters = { getX: 0, getY: 1 };
+	
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      activeValue ? _react2.default.createElement(
+	        'div',
+	        null,
+	        activeValue.toFixed(2)
+	      ) : _react2.default.createElement(
+	        'div',
+	        null,
+	        'Hover over the chart to show values'
+	      ),
+	      _react2.default.createElement(
+	        _XYPlot2.default,
+	        { width: 500, height: 320 },
+	        _react2.default.createElement(_XAxis2.default, null),
+	        _react2.default.createElement(_YAxis2.default, null),
+	        _react2.default.createElement(_AreaBarChart2.default, {
+	          data: _lodash2.default.range(15),
+	          getX: function getX(d) {
+	            return Math.sin(d / 10) * 10;
+	          },
+	          getXEnd: function getXEnd(d) {
+	            return Math.sin((d + 1) / 10) * 10;
+	          },
+	          getY: function getY(d) {
+	            return Math.cos(d / Math.PI);
+	          },
+	          onMouseEnterBar: this.onEnterBar,
+	          onMouseLeaveBar: this.onLeaveBar
+	        })
+	      ),
+	      ';'
+	    );
+	  }
+	});
 	
 	var ColorHeatMapExample = function ColorHeatMapExample(props) {
 	  var gridData = _lodash2.default.range(30).map(function (m) {
@@ -21969,7 +21971,7 @@
 	
 	var examples = exports.examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2 },
 	// {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
-	{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'interactiveRangeBar', title: 'Interactive Range Bar Chart', Component: InteractiveRangeBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample }, { id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample }, { id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'animatedTreeMap', title: 'Animated TreeMap', Component: AnimatedTreeMapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample }];
+	{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'interactiveAreaBar', title: 'Interactive Area Bar Chart', Component: InteractiveAreaBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample }, { id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample }, { id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'animatedTreeMap', title: 'Animated TreeMap', Component: AnimatedTreeMapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample }];
 	
 	// todo rewrite these?
 	// {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
@@ -65679,8 +65681,6 @@
 	
 	var _Data = __webpack_require__(171);
 	
-	var _util = __webpack_require__(174);
-	
 	var _Bar = __webpack_require__(301);
 	
 	var _Bar2 = _interopRequireDefault(_Bar);
@@ -65922,6 +65922,9 @@
 	      var getY = _props.getY;
 	      var getYEnd = _props.getYEnd;
 	      var style = _props.style;
+	      var onMouseEnter = _props.onMouseEnter;
+	      var onMouseMove = _props.onMouseMove;
+	      var onMouseLeave = _props.onMouseLeave;
 	
 	
 	      (0, _invariant2.default)((0, _Scale.hasXYScales)(scale), 'Bar.props.scale.x and scale.y must both be valid d3 scales');
@@ -65938,7 +65941,7 @@
 	      var height = Math.abs(y1 - y0);
 	
 	      // todo onMouseEnter, onMouseMove, onMouseLeave
-	      return _react2.default.createElement('rect', { x: x, y: y, width: width, height: height, className: className, style: style });
+	      return _react2.default.createElement('rect', { x: x, y: y, width: width, height: height, className: className, style: style, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave });
 	    }
 	  }]);
 	
@@ -65953,7 +65956,10 @@
 	  getY: CustomPropTypes.getter,
 	  getYEnd: CustomPropTypes.getter,
 	  className: _react2.default.PropTypes.string,
-	  style: _react2.default.PropTypes.object
+	  style: _react2.default.PropTypes.object,
+	  onMouseEnter: _react2.default.PropTypes.func,
+	  onMouseMove: _react2.default.PropTypes.func,
+	  onMouseLeave: _react2.default.PropTypes.func
 	};
 	RangeRect.defaultProps = {
 	  className: '',
@@ -66099,6 +66105,8 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(6);
@@ -66149,6 +66157,8 @@
 	  _createClass(AreaBarChart, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      var _props = this.props;
 	      var scale = _props.scale;
 	      var data = _props.data;
@@ -66173,13 +66183,30 @@
 	        'g',
 	        null,
 	        data.map(function (d, i) {
+	          var _map = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
+	
+	            // partially apply this bar's data point as 2nd callback argument
+	            var callback = _lodash2.default.get(_this2.props, eventName);
+	            return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
+	          });
+	
+	          var _map2 = _slicedToArray(_map, 3);
+	
+	          var onMouseEnter = _map2[0];
+	          var onMouseMove = _map2[1];
+	          var onMouseLeave = _map2[2];
+	
+	
 	          return _react2.default.createElement(_RangeRect2.default, _extends({
 	            datum: d,
 	            getX: horizontal ? getZero : getX,
 	            getXEnd: horizontal ? getX : getXEnd,
 	            getY: !horizontal ? getZero : getY,
 	            getYEnd: !horizontal ? getY : getYEnd,
-	            key: 'chart-area-bar-' + i
+	            key: 'chart-area-bar-' + i,
+	            onMouseEnter: onMouseEnter,
+	            onMouseMove: onMouseMove,
+	            onMouseLeave: onMouseLeave
 	          }, barProps));
 	        })
 	      );
@@ -66219,7 +66246,11 @@
 	  getYEnd: CustomPropTypes.getter,
 	
 	  barClassName: _react2.default.PropTypes.string,
-	  barStyle: _react2.default.PropTypes.object
+	  barStyle: _react2.default.PropTypes.object,
+	
+	  onMouseEnterBar: _react2.default.PropTypes.func,
+	  onMouseMoveBar: _react2.default.PropTypes.func,
+	  onMouseLeaveBar: _react2.default.PropTypes.func
 	};
 	AreaBarChart.defaultProps = {
 	  data: [],
