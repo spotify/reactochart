@@ -19,7 +19,11 @@ export default class AreaBarChart extends React.Component {
     getYEnd: CustomPropTypes.getter,
 
     barClassName: React.PropTypes.string,
-    barStyle: React.PropTypes.object
+    barStyle: React.PropTypes.object,
+
+    onMouseEnterBar: React.PropTypes.func, 
+    onMouseMoveBar: React.PropTypes.func, 
+    onMouseLeaveBar: React.PropTypes.func
   };
   static defaultProps = {
     data: [],
@@ -58,6 +62,14 @@ export default class AreaBarChart extends React.Component {
 
     return <g>
       {data.map((d, i) => {
+        const [onMouseEnter, onMouseMove, onMouseLeave] =
+          ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(eventName => {
+
+            // partially apply this bar's data point as 2nd callback argument
+            const callback = _.get(this.props, eventName);
+            return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+        });
+
         return <RangeRect
           datum={d}
           getX={horizontal ? getZero : getX}
@@ -65,6 +77,9 @@ export default class AreaBarChart extends React.Component {
           getY={!horizontal ? getZero : getY}
           getYEnd={!horizontal ? getY : getYEnd}
           key={`chart-area-bar-${i}`}
+          onMouseEnter={onMouseEnter} 
+          onMouseMove={onMouseMove} 
+          onMouseLeave={onMouseLeave}
           {...barProps}
         />;
       })}

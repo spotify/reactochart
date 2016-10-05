@@ -481,46 +481,6 @@ const RangeBarChartExample = (props) => {
   </div>
 };
 
-const InteractiveRangeBarChartExample = React.createClass({
-  getInitialState() {
-    return {
-      activeValue: null
-    }
-  },
-  onEnterBar(e, d) {
-    this.setState({activeValue: d});
-  },
-  onLeaveBar(e, d) {
-    this.setState({activeValue: null})
-  },
-  render() {
-    const {activeValue} = this.state;
-    const getters = {getX: 0, getY: 1};
-
-    return <div>
-      {activeValue ?
-        <div>
-          {activeValue.toFixed(2)}
-        </div> :
-        <div>Hover over the chart to show values</div>
-      }
-      <XYPlot domain={{y: [-1, 1], x: [-1, 1]}} scaleType="linear" {...{width: 300, height: 350}}>
-            <XAxis/><YAxis/>
-              <RangeBarChart
-              data={_.range(-1, 1, .1)}
-              getX={null}
-              getY={d => Math.sin(d*2)}
-              getYEnd={d => Math.sin(d*2) * Math.cos(d*2)}
-              barThickness={6}
-              onMouseEnterBar={this.onEnterBar}
-              onMouseLeaveBar={this.onLeaveBar}
-              />
-          </XYPlot>
-    </div>
-  }
-});
-
-
 const AreaBarChartExample = (props) => {
   return <div>
     <XYPlot width={500} height={320}>
@@ -544,6 +504,44 @@ const AreaBarChartExample = (props) => {
     </XYPlot>;
   </div>
 };
+
+const InteractiveAreaBarChartExample = React.createClass({
+  getInitialState() {
+    return {
+      activeValue: null
+    }
+  },
+  onEnterBar(e, d) {
+    this.setState({activeValue: d});
+  },
+  onLeaveBar(e, d) {
+    this.setState({activeValue: null})
+  },
+  render() {
+    const {activeValue} = this.state;
+    const getters = {getX: 0, getY: 1};
+
+    return <div>
+      {activeValue ?
+        <div>
+          {activeValue.toFixed(2)}
+        </div> :
+        <div>Hover over the chart to show values</div>
+      }
+      <XYPlot width={500} height={320}>
+        <XAxis /><YAxis />
+        <AreaBarChart
+          data={_.range(15)}
+          getX={d => Math.sin(d / 10) * 10}
+          getXEnd={d => Math.sin((d + 1) / 10) * 10}
+          getY={d => Math.cos(d / (Math.PI))}
+          onMouseEnterBar={this.onEnterBar}
+          onMouseLeaveBar={this.onLeaveBar}
+        />
+      </XYPlot>;
+    </div>
+  }
+});
 
 const ColorHeatMapExample = (props) => {
   const gridData = _.range(30).map(m => {
@@ -1331,7 +1329,7 @@ export const examples = [
   {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample},
   {id: 'barChart', title: 'Bar Chart', Component: BarChartExample},
   {id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample},
-  {id: 'interactiveRangeBar', title: 'Interactive Range Bar Chart', Component: InteractiveRangeBarChartExample},
+  {id: 'interactiveAreaBar', title: 'Interactive Area Bar Chart', Component: InteractiveAreaBarChartExample},
   {id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample},
   {id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample},
   {id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample},
