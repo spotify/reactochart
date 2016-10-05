@@ -20,7 +20,10 @@ export default class RangeRect extends React.Component {
     getY: CustomPropTypes.getter,
     getYEnd: CustomPropTypes.getter,
     className: React.PropTypes.string,
-    style: React.PropTypes.object
+    style: React.PropTypes.object,
+    onMouseEnter: React.PropTypes.func, 
+    onMouseMove: React.PropTypes.func, 
+    onMouseLeave: React.PropTypes.func
   };
   static defaultProps = {
     className: '',
@@ -28,7 +31,7 @@ export default class RangeRect extends React.Component {
   };
 
   render() {
-    const {scale, datum, getX, getXEnd, getY, getYEnd, style} = this.props;
+    const {scale, datum, getX, getXEnd, getY, getYEnd, style, onMouseEnter, onMouseMove, onMouseLeave} = this.props;
 
     invariant(hasXYScales(scale), `Bar.props.scale.x and scale.y must both be valid d3 scales`);
     // todo warn if getX/Y/etc return bad values
@@ -44,6 +47,6 @@ export default class RangeRect extends React.Component {
     const height = Math.abs(y1 - y0);
 
     // todo onMouseEnter, onMouseMove, onMouseLeave
-    return <rect {...{x, y, width, height, className, style}} />;
+    return <rect {...{x, y, width, height, className, style, onMouseEnter, onMouseMove, onMouseLeave}} />;
   }
 }
