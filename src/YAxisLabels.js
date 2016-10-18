@@ -48,6 +48,10 @@ function resolveYLabelsForValues(scale, values, formats, style, force = true) {
 class YAxisValueLabels extends React.Component {
   static propTypes = {
     scale: React.PropTypes.object,
+    // Label Handling
+    onMouseEnterLabel: React.PropTypes.func,
+    onMouseMoveLabel: React.PropTypes.func,
+    onMouseLeaveLabel: React.PropTypes.func
     // placement: undefined,
     // format: undefined,
     // formats: undefined,
@@ -131,7 +135,7 @@ class YAxisValueLabels extends React.Component {
 
   render() {
     // todo: position: 'zero' prop to position along the zero line
-    const {width, position, distance, labelStyle, labelClassName} = this.props;
+    const {width, position, distance, labelStyle, labelClassName, onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel} = this.props;
     const scale = this.props.scale.y;
     const placement = this.props.placement || ((position === 'left') ? 'before' : 'after');
     const className = `chart-value-label chart-value-label-y ${labelClassName}`;
@@ -145,8 +149,15 @@ class YAxisValueLabels extends React.Component {
       {labels.map((label, i) => {
         const y = scale(label.value);
         const x = (placement === 'before') ? -distance : distance;
+         
+        const [onMouseEnter, onMouseMove, onMouseLeave] =
+          ['onMouseEnterLabel', 'onMouseMoveLabel', 'onMouseLeaveLabel'].map(eventName => {
+            // partially apply this bar's data point as 2nd callback argument
+            const callback = _.get(this.props, eventName);
+            return _.isFunction(callback) ? _.partial(callback, _, label.value) : null;
+        });
 
-        return <g key={`x-axis-label-${i}`}>
+        return <g key={`x-axis-label-${i}`} {...{onMouseEnter, onMouseMove, onMouseLeave}}>
           {/* <YAxisLabelDebugRect {...{x, y, label, style}}/> */}
           <MeasuredValueLabel {...{x, y, className, dy:"0.35em", style}}>
             {label.text}
