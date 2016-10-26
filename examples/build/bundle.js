@@ -50637,8 +50637,7 @@
 	          position = _props.position,
 	          distance = _props.distance,
 	          labelStyle = _props.labelStyle,
-	          labelClassName = _props.labelClassName,
-	          value = _props.value;
+	          labelClassName = _props.labelClassName;
 	
 	      var scale = this.props.scale.x;
 	      var labels = this.props.labels || XAxisValueLabels.getLabels(this.props);
@@ -50654,8 +50653,6 @@
 	        labels.map(function (label, i) {
 	          var x = scale(label.value);
 	          var y = placement === 'above' ? -label.height - distance : distance;
-	
-	          debugger;
 	
 	          return _react2.default.createElement(
 	            'g',
@@ -65326,8 +65323,7 @@
 	          position = _props.position,
 	          distance = _props.distance,
 	          labelStyle = _props.labelStyle,
-	          labelClassName = _props.labelClassName,
-	          value = _props.value;
+	          labelClassName = _props.labelClassName;
 	
 	      var scale = this.props.scale.y;
 	      var placement = this.props.placement || (position === 'left' ? 'before' : 'after');
