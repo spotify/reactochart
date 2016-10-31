@@ -142,6 +142,12 @@ class LineChartExample2 extends React.Component {
   _onMouseMove = ({xValue, yValue}) => {
     this.setState({activeX: xValue});
   };
+  _onMouseEnterLabel = (e, d) => {
+    debugger;
+  };
+  _onMouseLeaveLabel = (e, d) => {
+    debugger;
+  };
 
   render() {
     const {activeX} = this.state;
@@ -153,8 +159,9 @@ class LineChartExample2 extends React.Component {
 
     return <div>
       <XYPlot scaleType="linear" {...{width: 600, height: 350, domain: {y: [-2, 2]}}} onMouseMove={this._onMouseMove}>
-        <XAxis title="Phase" />
-        <YAxis title="Intensity" />
+        <XAxis title="Phase" onMouseEnterLabel={this._onMouseEnterLabel}  onMouseLeaveLabel={this._onMouseLeaveLabel} />
+        <YAxis title="Intensity" onMouseEnterLabel={this._onMouseEnterLabel}  onMouseLeaveLabel={this._onMouseLeaveLabel} />
+
 
         <LineChart
           data={_.range(100)}
@@ -206,6 +213,12 @@ const InteractiveLineExample = React.createClass({
   onMouseMoveXYPlot({xValue, yValue}) {
     this.setState({activeXValue: xValue, activeYValue: yValue});
   },
+  onMouseEnterLabel(e, d){
+    debugger;
+  },
+  onMouseLeaveLabel(e, d){
+    debugger;
+  },
   onClick({yValue}) {
     this.setState({clickedY: yValue})
   },
@@ -221,8 +234,12 @@ const InteractiveLineExample = React.createClass({
         <div>Hover over the chart to show values</div>
       }
       <XYPlot width={700} height={400} onMouseMove={this.onMouseMoveXYPlot} onClick={this.onClick}>
-        <XAxis title="Days" />
-        <YAxis title="Price" />
+        <XAxis title="Days" >
+          <XAxisLabels onMouseEnterLabel={this.onMouseEnterLabel}  onMouseLeaveLabel={this.onMouseLeaveLabel} />
+        </XAxis>
+        <YAxis title="Price" >
+            <YAxisLabels onMouseEnterLabel={this.onMouseEnterLabel}  onMouseLeaveLabel={this.onMouseLeaveLabel}  />
+        </YAxis>
         <LineChart data={randomSequences[0]} {...getters} />
         <LineChart data={randomSequences[1]} {...getters} />
         <LineChart data={randomSequences[2]} {...getters} />
@@ -1346,8 +1363,7 @@ export const examples = [
   {id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest},
   {id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample},
   {id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample},
-  {id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample},
-
+  {id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample}
 
   // todo rewrite these?
   // {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
