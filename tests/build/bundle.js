@@ -58287,6 +58287,7 @@
 	  barThickness: _react2.default.PropTypes.number,
 	  barClassName: _react2.default.PropTypes.string,
 	  barStyle: _react2.default.PropTypes.object,
+	  getClass: CustomPropTypes.getter,
 	
 	  onMouseEnterBar: _react2.default.PropTypes.func,
 	  onMouseMoveBar: _react2.default.PropTypes.func,
@@ -58374,19 +58375,13 @@
 	      var barThickness = _props.barThickness;
 	      var barClassName = _props.barClassName;
 	      var barStyle = _props.barStyle;
+	      var getClass = _props.getClass;
 	
 	      (0, _invariant2.default)((0, _Scale.hasXYScales)(scale), 'RangeBarChart.props.scale.x and scale.y must both be valid d3 scales');
 	      // invariant(hasOneOfTwo(getXEnd, getYEnd), `RangeBarChart expects a getXEnd *or* getYEnd prop, but not both.`);
 	
 	      var accessors = { x: (0, _Data.makeAccessor)(getX), y: (0, _Data.makeAccessor)(getY) };
 	      var endAccessors = { x: (0, _Data.makeAccessor)(getXEnd), y: (0, _Data.makeAccessor)(getYEnd) };
-	
-	      var barProps = {
-	        scale: scale,
-	        thickness: barThickness,
-	        className: 'chart-bar ' + barClassName,
-	        style: barStyle
-	      };
 	
 	      return _react2.default.createElement(
 	        'g',
@@ -58405,6 +58400,13 @@
 	          var onMouseMove = _map2[1];
 	          var onMouseLeave = _map2[2];
 	
+	
+	          var barProps = {
+	            scale: scale,
+	            thickness: barThickness,
+	            className: 'chart-bar ' + barClassName + ' ' + (getClass ? getClass(d) : ''),
+	            style: barStyle
+	          };
 	
 	          var thisBarProps = _extends({
 	            xValue: accessors.x(d),
@@ -58457,6 +58459,7 @@
 	  barThickness: _react2.default.PropTypes.number,
 	  barClassName: _react2.default.PropTypes.string,
 	  barStyle: _react2.default.PropTypes.object,
+	  getClass: CustomPropTypes.getter,
 	
 	  onMouseEnterBar: _react2.default.PropTypes.func,
 	  onMouseMoveBar: _react2.default.PropTypes.func,
