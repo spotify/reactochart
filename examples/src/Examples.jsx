@@ -1339,10 +1339,10 @@ const CustomAxisLabelsExample = React.createClass({
 });
 
 export const examples = [
-//  {id: 'line', title: 'Line Chart', Component: LineChartExample},
+  {id: 'line', title: 'Line Chart', Component: LineChartExample},
   {id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2},
   // {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
- /* {id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample},
+  {id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample},
   {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample},
   {id: 'barChart', title: 'Bar Chart', Component: BarChartExample},
   {id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample},
@@ -1363,8 +1363,7 @@ export const examples = [
   {id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest},
   {id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample},
   {id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample},
-  {id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample}, */
-
+  {id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample}
 
   // todo rewrite these?
   // {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
