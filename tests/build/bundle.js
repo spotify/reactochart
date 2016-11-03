@@ -58287,6 +58287,7 @@
 	  barThickness: _react2.default.PropTypes.number,
 	  barClassName: _react2.default.PropTypes.string,
 	  barStyle: _react2.default.PropTypes.object,
+	  getClass: CustomPropTypes.getter,
 	
 	  onMouseEnterBar: _react2.default.PropTypes.func,
 	  onMouseMoveBar: _react2.default.PropTypes.func,
@@ -58374,19 +58375,13 @@
 	      var barThickness = _props.barThickness;
 	      var barClassName = _props.barClassName;
 	      var barStyle = _props.barStyle;
+	      var getClass = _props.getClass;
 	
 	      (0, _invariant2.default)((0, _Scale.hasXYScales)(scale), 'RangeBarChart.props.scale.x and scale.y must both be valid d3 scales');
 	      // invariant(hasOneOfTwo(getXEnd, getYEnd), `RangeBarChart expects a getXEnd *or* getYEnd prop, but not both.`);
 	
 	      var accessors = { x: (0, _Data.makeAccessor)(getX), y: (0, _Data.makeAccessor)(getY) };
 	      var endAccessors = { x: (0, _Data.makeAccessor)(getXEnd), y: (0, _Data.makeAccessor)(getYEnd) };
-	
-	      var barProps = {
-	        scale: scale,
-	        thickness: barThickness,
-	        className: 'chart-bar ' + barClassName,
-	        style: barStyle
-	      };
 	
 	      return _react2.default.createElement(
 	        'g',
@@ -58405,6 +58400,13 @@
 	          var onMouseMove = _map2[1];
 	          var onMouseLeave = _map2[2];
 	
+	
+	          var barProps = {
+	            scale: scale,
+	            thickness: barThickness,
+	            className: 'chart-bar ' + barClassName + ' ' + (getClass ? getClass(d) : ''),
+	            style: barStyle
+	          };
 	
 	          var thisBarProps = _extends({
 	            xValue: accessors.x(d),
@@ -58457,6 +58459,7 @@
 	  barThickness: _react2.default.PropTypes.number,
 	  barClassName: _react2.default.PropTypes.string,
 	  barStyle: _react2.default.PropTypes.object,
+	  getClass: CustomPropTypes.getter,
 	
 	  onMouseEnterBar: _react2.default.PropTypes.func,
 	  onMouseMoveBar: _react2.default.PropTypes.func,
@@ -59947,7 +59950,11 @@
 	  tickStyle: _react2.default.PropTypes.object,
 	
 	  gridLineClassName: _react2.default.PropTypes.string,
-	  gridLineStyle: _react2.default.PropTypes.object
+	  gridLineStyle: _react2.default.PropTypes.object,
+	
+	  onMouseEnterLabel: _react2.default.PropTypes.func,
+	  onMouseMoveLabel: _react2.default.PropTypes.func,
+	  onMouseLeaveLabel: _react2.default.PropTypes.func
 	};
 	XAxis.defaultProps = {
 	  width: 400,
@@ -59998,6 +60005,9 @@
 	  var labels = props.labels;
 	  var gridLineClassName = props.gridLineClassName;
 	  var gridLineStyle = props.gridLineStyle;
+	  var onMouseEnterLabel = props.onMouseEnterLabel;
+	  var onMouseMoveLabel = props.onMouseMoveLabel;
+	  var onMouseLeaveLabel = props.onMouseLeaveLabel;
 	
 	
 	  var ticksProps = {
@@ -60013,7 +60023,8 @@
 	  var labelsProps = {
 	    width: width, height: height, scale: scale, ticks: ticks, tickCount: tickCount,
 	    position: position, placement: placement, labels: labels,
-	    labelClassName: labelClassName, labelStyle: labelStyle, distance: labelDistance, format: labelFormat, formats: labelFormats
+	    labelClassName: labelClassName, labelStyle: labelStyle, distance: labelDistance, format: labelFormat, formats: labelFormats,
+	    onMouseEnterLabel: onMouseEnterLabel, onMouseMoveLabel: onMouseMoveLabel, onMouseLeaveLabel: onMouseLeaveLabel
 	  };
 	
 	  var titleProps = {
@@ -60247,6 +60258,8 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -60355,12 +60368,17 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      var _props = this.props;
 	      var height = _props.height;
 	      var position = _props.position;
 	      var distance = _props.distance;
 	      var labelStyle = _props.labelStyle;
 	      var labelClassName = _props.labelClassName;
+	      var onMouseEnterLabel = _props.onMouseEnterLabel;
+	      var onMouseMoveLabel = _props.onMouseMoveLabel;
+	      var onMouseLeaveLabel = _props.onMouseLeaveLabel;
 	
 	      var scale = this.props.scale.x;
 	      var labels = this.props.labels || XAxisValueLabels.getLabels(this.props);
@@ -60377,9 +60395,22 @@
 	          var x = scale(label.value);
 	          var y = placement === 'above' ? -label.height - distance : distance;
 	
+	          var _map = ['onMouseEnterLabel', 'onMouseMoveLabel', 'onMouseLeaveLabel'].map(function (eventName) {
+	            // partially apply this bar's data point as 2nd callback argument
+	            var callback = _lodash2.default.get(_this2.props, eventName);
+	            return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, label.value) : null;
+	          });
+	
+	          var _map2 = _slicedToArray(_map, 3);
+	
+	          var onMouseEnter = _map2[0];
+	          var onMouseMove = _map2[1];
+	          var onMouseLeave = _map2[2];
+	
+	
 	          return _react2.default.createElement(
 	            'g',
-	            { key: 'x-axis-label-' + i },
+	            _extends({ key: 'x-axis-label-' + i }, { onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }),
 	            _react2.default.createElement(
 	              _MeasuredValueLabel2.default,
 	              { x: x, y: y, className: className, dy: "0.8em", style: style },
@@ -60472,7 +60503,11 @@
 	}(_react2.default.Component);
 	
 	XAxisValueLabels.propTypes = {
-	  scale: _react2.default.PropTypes.object
+	  scale: _react2.default.PropTypes.object,
+	  // Label Handling
+	  onMouseEnterLabel: _react2.default.PropTypes.func,
+	  onMouseMoveLabel: _react2.default.PropTypes.func,
+	  onMouseLeaveLabel: _react2.default.PropTypes.func
 	};
 	XAxisValueLabels.defaultProps = {
 	  height: 250,
@@ -75628,7 +75663,11 @@
 	  tickStyle: _react2.default.PropTypes.object,
 	
 	  gridLineClassName: _react2.default.PropTypes.string,
-	  gridLineStyle: _react2.default.PropTypes.object
+	  gridLineStyle: _react2.default.PropTypes.object,
+	
+	  onMouseEnterLabel: _react2.default.PropTypes.func,
+	  onMouseMoveLabel: _react2.default.PropTypes.func,
+	  onMouseLeaveLabel: _react2.default.PropTypes.func
 	};
 	YAxis.defaultProps = {
 	  width: 400,
@@ -75868,6 +75907,8 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -75965,6 +76006,8 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      // todo: position: 'zero' prop to position along the zero line
 	      var _props = this.props;
 	      var width = _props.width;
@@ -75972,6 +76015,9 @@
 	      var distance = _props.distance;
 	      var labelStyle = _props.labelStyle;
 	      var labelClassName = _props.labelClassName;
+	      var onMouseEnterLabel = _props.onMouseEnterLabel;
+	      var onMouseMoveLabel = _props.onMouseMoveLabel;
+	      var onMouseLeaveLabel = _props.onMouseLeaveLabel;
 	
 	      var scale = this.props.scale.y;
 	      var placement = this.props.placement || (position === 'left' ? 'before' : 'after');
@@ -75989,9 +76035,22 @@
 	          var y = scale(label.value);
 	          var x = placement === 'before' ? -distance : distance;
 	
+	          var _map = ['onMouseEnterLabel', 'onMouseMoveLabel', 'onMouseLeaveLabel'].map(function (eventName) {
+	            // partially apply this bar's data point as 2nd callback argument
+	            var callback = _lodash2.default.get(_this2.props, eventName);
+	            return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, label.value) : null;
+	          });
+	
+	          var _map2 = _slicedToArray(_map, 3);
+	
+	          var onMouseEnter = _map2[0];
+	          var onMouseMove = _map2[1];
+	          var onMouseLeave = _map2[2];
+	
+	
 	          return _react2.default.createElement(
 	            'g',
-	            { key: 'x-axis-label-' + i },
+	            _extends({ key: 'x-axis-label-' + i }, { onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }),
 	            _react2.default.createElement(
 	              _MeasuredValueLabel2.default,
 	              { x: x, y: y, className: className, dy: "0.35em", style: style },
@@ -76086,7 +76145,11 @@
 	}(_react2.default.Component);
 	
 	YAxisValueLabels.propTypes = {
-	  scale: _react2.default.PropTypes.object };
+	  scale: _react2.default.PropTypes.object,
+	  // Label Handling
+	  onMouseEnterLabel: _react2.default.PropTypes.func,
+	  onMouseMoveLabel: _react2.default.PropTypes.func,
+	  onMouseLeaveLabel: _react2.default.PropTypes.func };
 	YAxisValueLabels.defaultProps = {
 	  height: 250,
 	  width: 400,
@@ -76718,6 +76781,10 @@
 	      var yValue = _ref.yValue;
 	
 	      _this.setState({ activeX: xValue });
+	    }, _this._onMouseEnterLabel = function (e, d) {
+	      debugger;
+	    }, _this._onMouseLeaveLabel = function (e, d) {
+	      debugger;
 	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 	
@@ -76744,8 +76811,8 @@
 	        _react2.default.createElement(
 	          _XYPlot2.default,
 	          _extends({ scaleType: 'linear' }, { width: 600, height: 350, domain: { y: [-2, 2] } }, { onMouseMove: this._onMouseMove }),
-	          _react2.default.createElement(_XAxis2.default, { title: 'Phase' }),
-	          _react2.default.createElement(_YAxis2.default, { title: 'Intensity' }),
+	          _react2.default.createElement(_XAxis2.default, { title: 'Phase', onMouseEnterLabel: this._onMouseEnterLabel, onMouseLeaveLabel: this._onMouseLeaveLabel }),
+	          _react2.default.createElement(_YAxis2.default, { title: 'Intensity', onMouseEnterLabel: this._onMouseEnterLabel, onMouseLeaveLabel: this._onMouseLeaveLabel }),
 	          _react2.default.createElement(_LineChart2.default, {
 	            data: _lodash2.default.range(100),
 	            getY: line1,
@@ -76797,6 +76864,12 @@
 	
 	    this.setState({ activeXValue: xValue, activeYValue: yValue });
 	  },
+	  onMouseEnterLabel: function onMouseEnterLabel(e, d) {
+	    debugger;
+	  },
+	  onMouseLeaveLabel: function onMouseLeaveLabel(e, d) {
+	    debugger;
+	  },
 	  onClick: function onClick(_ref3) {
 	    var yValue = _ref3.yValue;
 	
@@ -76824,8 +76897,16 @@
 	      _react2.default.createElement(
 	        _XYPlot2.default,
 	        { width: 700, height: 400, onMouseMove: this.onMouseMoveXYPlot, onClick: this.onClick },
-	        _react2.default.createElement(_XAxis2.default, { title: 'Days' }),
-	        _react2.default.createElement(_YAxis2.default, { title: 'Price' }),
+	        _react2.default.createElement(
+	          _XAxis2.default,
+	          { title: 'Days' },
+	          _react2.default.createElement(_XAxisLabels2.default, { onMouseEnterLabel: this.onMouseEnterLabel, onMouseLeaveLabel: this.onMouseLeaveLabel })
+	        ),
+	        _react2.default.createElement(
+	          _YAxis2.default,
+	          { title: 'Price' },
+	          _react2.default.createElement(_YAxisLabels2.default, { onMouseEnterLabel: this.onMouseEnterLabel, onMouseLeaveLabel: this.onMouseLeaveLabel })
+	        ),
 	        _react2.default.createElement(_LineChart2.default, _extends({ data: randomSequences[0] }, getters)),
 	        _react2.default.createElement(_LineChart2.default, _extends({ data: randomSequences[1] }, getters)),
 	        _react2.default.createElement(_LineChart2.default, _extends({ data: randomSequences[2] }, getters)),
@@ -78281,11 +78362,13 @@
 	
 	var examples = exports.examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2 },
 	// {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
-	{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'interactiveAreaBar', title: 'Interactive Area Bar Chart', Component: InteractiveAreaBarChartExample }, { id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample }, { id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample }, { id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'animatedTreeMap', title: 'Animated TreeMap', Component: AnimatedTreeMapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample }];
+	{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'interactiveAreaBar', title: 'Interactive Area Bar Chart', Component: InteractiveAreaBarChartExample }, { id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample }, { id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample }, { id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'animatedTreeMap', title: 'Animated TreeMap', Component: AnimatedTreeMapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample }
 	
 	// todo rewrite these?
 	// {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
 	// {id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample},
+	];
+	
 	var App = exports.App = _react2.default.createClass({
 	  displayName: 'App',
 	  getInitialState: function getInitialState() {

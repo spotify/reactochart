@@ -20,6 +20,7 @@ export default class RangeBarChart extends React.Component {
     barThickness: React.PropTypes.number,
     barClassName: React.PropTypes.string,
     barStyle: React.PropTypes.object,
+    getClass: CustomPropTypes.getter,
 
     onMouseEnterBar: React.PropTypes.func, 
     onMouseMoveBar: React.PropTypes.func, 
@@ -48,7 +49,7 @@ export default class RangeBarChart extends React.Component {
   }
 
   render() {
-    const {scale, data, horizontal, getX, getXEnd, getY, getYEnd, barThickness, barClassName, barStyle} = this.props;
+    const {scale, data, horizontal, getX, getXEnd, getY, getYEnd, barThickness, barClassName, barStyle, getClass} = this.props;
     invariant(hasXYScales(scale), `RangeBarChart.props.scale.x and scale.y must both be valid d3 scales`);
     // invariant(hasOneOfTwo(getXEnd, getYEnd), `RangeBarChart expects a getXEnd *or* getYEnd prop, but not both.`);
 
@@ -56,13 +57,6 @@ export default class RangeBarChart extends React.Component {
     const endAccessors = {x: makeAccessor(getXEnd), y: makeAccessor(getYEnd)};
     
 
-
-    const barProps = {
-      scale,
-      thickness: barThickness,
-      className: `chart-bar ${barClassName}`,
-      style: barStyle
-    };
 
     return <g>
       {data.map((d, i) => {
@@ -74,6 +68,13 @@ export default class RangeBarChart extends React.Component {
             const callback = _.get(this.props, eventName);
             return _.isFunction(callback) ? _.partial(callback, _, d) : null;
         });
+
+        const barProps = {
+          scale,
+          thickness: barThickness,
+          className: `chart-bar ${barClassName} ${getClass ? getClass(d) : ''}`,
+          style: barStyle
+        };
 
         const thisBarProps = {
           xValue: accessors.x(d),

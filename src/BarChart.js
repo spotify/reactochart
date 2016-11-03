@@ -40,7 +40,8 @@ export default class BarChart extends React.Component {
     barThickness: React.PropTypes.number,
     barClassName: React.PropTypes.string,
     barStyle: React.PropTypes.object,
-
+    getClass: CustomPropTypes.getter,
+    
     onMouseEnterBar: React.PropTypes.func, 
     onMouseMoveBar: React.PropTypes.func, 
     onMouseLeaveBar: React.PropTypes.func 

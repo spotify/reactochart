@@ -59,7 +59,11 @@ function resolveXLabelsForValues(scale, values, formats, style, force = true) {
 
 class XAxisValueLabels extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.object
+    scale: React.PropTypes.object,
+    // Label Handling
+    onMouseEnterLabel: React.PropTypes.func,
+    onMouseMoveLabel: React.PropTypes.func,
+    onMouseLeaveLabel: React.PropTypes.func
   };
   static defaultProps = {
     height: 250,
@@ -139,7 +143,7 @@ class XAxisValueLabels extends React.Component {
   }
 
   render() {
-    const {height, position, distance, labelStyle, labelClassName} = this.props;
+    const {height, position, distance, labelStyle, labelClassName, onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel} = this.props;
     const scale = this.props.scale.x;
     const labels = this.props.labels || XAxisValueLabels.getLabels(this.props);
     const placement = this.props.placement || ((position === 'top') ? 'above' : 'below');
@@ -154,8 +158,14 @@ class XAxisValueLabels extends React.Component {
         const y = (placement === 'above') ?
           -label.height - distance :
           distance;
+        const [onMouseEnter, onMouseMove, onMouseLeave] =
+          ['onMouseEnterLabel', 'onMouseMoveLabel', 'onMouseLeaveLabel'].map(eventName => {
+            // partially apply this bar's data point as 2nd callback argument
+            const callback = _.get(this.props, eventName);
+            return _.isFunction(callback) ? _.partial(callback, _, label.value) : null;
+        });
 
-        return <g key={`x-axis-label-${i}`}>
+        return <g key={`x-axis-label-${i}`} {...{onMouseEnter, onMouseMove, onMouseLeave}}>
           {/* <XAxisLabelDebugRect {...{x, y, label}}/> */}
           <MeasuredValueLabel {...{x, y, className, dy:"0.8em", style}}>
             {label.text}

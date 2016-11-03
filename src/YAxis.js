@@ -47,7 +47,11 @@ export default class YAxis extends React.Component {
     tickStyle: React.PropTypes.object,
 
     gridLineClassName: React.PropTypes.string,
-    gridLineStyle: React.PropTypes.object
+    gridLineStyle: React.PropTypes.object,
+
+    onMouseEnterLabel: React.PropTypes.func,
+    onMouseMoveLabel: React.PropTypes.func,
+    onMouseLeaveLabel: React.PropTypes.func
   };
 
   static defaultProps = {
