@@ -47678,13 +47678,13 @@
 	function inferDataType(data) {
 	  var accessor = arguments.length <= 1 || arguments[1] === undefined ? _lodash2.default.identity : arguments[1];
 	
-	  if (!_lodash2.default.isArray(data)) throw new Error('inferDataType expects a data array');else if (_lodash2.default.every(data, function (d) {
-	    return _lodash2.default.isUndefined(accessor(d));
+	  if (!_lodash2.default.isArray(data)) throw new Error('inferDataType expects a data array');else if (_lodash2.default.every(data, function (d, i) {
+	    return _lodash2.default.isUndefined(accessor(d, i));
 	  })) return 'categorical'; // should this be allowed?
-	  else if (_lodash2.default.every(data, function (d) {
-	      return _lodash2.default.isNumber(accessor(d)) || _lodash2.default.isUndefined(accessor(d));
-	    })) return 'number';else if (_lodash2.default.every(data, function (d) {
-	      return _lodash2.default.isDate(accessor(d)) || _lodash2.default.isUndefined(accessor(d));
+	  else if (_lodash2.default.every(data, function (d, i) {
+	      return _lodash2.default.isNumber(accessor(d, i)) || _lodash2.default.isUndefined(accessor(d, i));
+	    })) return 'number';else if (_lodash2.default.every(data, function (d, i) {
+	      return _lodash2.default.isDate(accessor(d, i)) || _lodash2.default.isUndefined(accessor(d, i));
 	    })) return 'time';else return 'categorical';
 	}
 	
@@ -47746,10 +47746,10 @@
 	  switch (dataType) {
 	    case 'number':
 	    case 'time':
-	      return _d2.default.extent(_lodash2.default.flatten([_d2.default.extent(data, function (d) {
-	        return +rangeStartAccessor(d);
-	      }), _d2.default.extent(data, function (d) {
-	        return +rangeEndAccessor(d);
+	      return _d2.default.extent(_lodash2.default.flatten([_d2.default.extent(data, function (d, i) {
+	        return +rangeStartAccessor(d, i);
+	      }), _d2.default.extent(data, function (d, i) {
+	        return +rangeEndAccessor(d, i);
 	      })]));
 	    case 'categorical':
 	      return _lodash2.default.uniq(_lodash2.default.flatten([data.map(rangeStartAccessor), data.map(rangeEndAccessor)]));
@@ -66491,12 +66491,12 @@
 	      var accessors = { x: (0, _Data.makeAccessor)(getX), y: (0, _Data.makeAccessor)(getY), yEnd: (0, _Data.makeAccessor)(getYEnd) };
 	
 	      var areaGenerator = _d2.default.svg.area();
-	      areaGenerator.x(function (d) {
-	        return scale.x(accessors.x(d));
-	      }).y0(function (d) {
-	        return scale.y(accessors.y(d));
-	      }).y1(function (d) {
-	        return scale.y(accessors.yEnd(d));
+	      areaGenerator.x(function (d, i) {
+	        return scale.x(accessors.x(d, i));
+	      }).y0(function (d, i) {
+	        return scale.y(accessors.y(d, i));
+	      }).y1(function (d, i) {
+	        return scale.y(accessors.yEnd(d, i));
 	      });
 	
 	      var areaPathStr = areaGenerator(data);
