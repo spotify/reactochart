@@ -157,7 +157,7 @@ class XAxisValueLabels extends React.Component {
 
         return <g key={`x-axis-label-${i}`}>
           {/* <XAxisLabelDebugRect {...{x, y, label}}/> */}
-          <MeasuredValueLabel {...{x, y, className, dy:"0.8em", style}}>
+          <MeasuredValueLabel value={label.value} {...{x, y, className, dy:"0.8em", style}}>
             {label.text}
           </MeasuredValueLabel>
         </g>;
