@@ -116,7 +116,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body #container {\n  margin: 10px;\n}\n.example-section {\n  display: inline-block;\n  margin: 10px;\n}\n.example-section.example-section-visible {\n  display: block;\n}\n.example-section .example-section-button {\n  display: inline-block;\n  padding: 10px 20px;\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.chart-grid-line {\n  stroke: #b9b9b9;\n  stroke-width: 1px;\n}\n.line-chart,\n.xy-plot {\n  margin-right: 6px;\n}\n.line-chart .chart-background,\n.xy-plot .chart-background {\n  fill: none;\n}\n.line-chart .plot-background,\n.xy-plot .plot-background {\n  fill: #e0e0e0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: #090909;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-zero-line,\n.xy-plot .chart-zero-line {\n  stroke: #888;\n  stroke-width: 1.5px;\n}\n.line-chart .chart-axis-value-label,\n.xy-plot .chart-axis-value-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-value-label-x,\n.xy-plot .chart-axis-value-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-value-label-y,\n.xy-plot .chart-axis-value-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 16pt;\n  font-weight: bold;\n}\n.chart-bar,\n.chart-area-bar {\n  fill: steelblue;\n}\n.marker-line-chart line {\n  stroke: black;\n  stroke-width: 2px;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\n.pie-chart .pie-label-center {\n  font-size: 26pt;\n}\n.pie-chart .marker-line {\n  stroke: black;\n  stroke-width: 2px;\n}\npath {\n  fill: none;\n  stroke: #0a0a0a;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n", ""]);
+	exports.push([module.id, "body #container {\n  margin: 10px;\n}\n.example-section {\n  display: inline-block;\n  margin: 10px;\n}\n.example-section.example-section-visible {\n  display: block;\n}\n.example-section .example-section-button {\n  display: inline-block;\n  padding: 10px 20px;\n  font-size: 20pt;\n  font-weight: bold;\n  background: #cccccc;\n  cursor: pointer;\n  border-radius: 5px;\n}\n.example-section .example-section-button .example-arrow {\n  color: #888;\n}\n.example-section .example-section-button.active {\n  background-color: #4cba6f;\n}\n.example-section .example-section-button.active .example-arrow {\n  color: #0f0f0f;\n}\n.example-section .example-section-content {\n  margin: 10px 20px;\n}\n.chart-tick {\n  fill: none;\n  stroke: #666;\n  stroke-width: 1px;\n}\n.chart-grid-line {\n  stroke: #b9b9b9;\n  stroke-width: 1px;\n}\n.line-chart,\n.xy-plot {\n  margin-right: 6px;\n}\n.line-chart .chart-background,\n.xy-plot .chart-background {\n  fill: none;\n}\n.line-chart .plot-background,\n.xy-plot .plot-background {\n  fill: #e0e0e0;\n}\n.line-chart *,\n.xy-plot * {\n  user-select: none;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n}\n.line-chart .chart-line,\n.xy-plot .chart-line {\n  fill: none;\n  stroke: #090909;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.line-chart .chart-zero-line,\n.xy-plot .chart-zero-line {\n  stroke: #888;\n  stroke-width: 1.5px;\n}\n.line-chart .chart-axis-value-label,\n.xy-plot .chart-axis-value-label {\n  font-size: 8pt;\n}\n.line-chart .chart-axis-value-label-x,\n.xy-plot .chart-axis-value-label-x {\n  text-anchor: middle;\n}\n.line-chart .chart-axis-value-label-y,\n.xy-plot .chart-axis-value-label-y {\n  text-anchor: end;\n}\n.line-chart .chart-selected-range,\n.xy-plot .chart-selected-range {\n  fill: #eeeef6;\n}\n.line-chart .chart-axis-label,\n.xy-plot .chart-axis-label {\n  font-size: 16pt;\n  font-weight: bold;\n}\n.chart-bar,\n.chart-area-bar {\n  fill: steelblue;\n}\n.marker-line-chart line {\n  stroke: black;\n  stroke-width: 2px;\n}\n.pie-chart path {\n  stroke: none;\n}\n.pie-chart .pie-slice-0 {\n  fill: steelblue;\n}\n.pie-chart .pie-slice-1 {\n  fill: darkred;\n}\n.pie-chart .pie-slice-2 {\n  fill: orange;\n}\n.pie-chart .pie-slice-empty {\n  fill: #ddd;\n}\n.pie-chart .pie-label-center {\n  font-size: 26pt;\n}\n.pie-chart .marker-line {\n  stroke: black;\n  stroke-width: 2px;\n}\npath {\n  fill: none;\n  stroke: #0a0a0a;\n  stroke-width: 1.5px;\n  stroke-linejoin: bevel;\n}\n.chart-series-0 path {\n  stroke: steelblue;\n}\n.chart-series-1 path {\n  stroke: darkred;\n}\n.chart-series-2 path {\n  stroke: orange;\n}\n.area-chart .area-chart-path {\n  stroke-width: 0;\n  fill: steelblue;\n}\n", ""]);
 	
 	// exports
 
@@ -20280,7 +20280,11 @@
 	
 	var _KernelDensityEstimation2 = _interopRequireDefault(_KernelDensityEstimation);
 	
-	var _util = __webpack_require__(317);
+	var _AreaChart = __webpack_require__(317);
+	
+	var _AreaChart2 = _interopRequireDefault(_AreaChart);
+	
+	var _util = __webpack_require__(318);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -20359,7 +20363,7 @@
 	    null,
 	    _react2.default.createElement(
 	      _XYPlot2.default,
-	      _extends({ scaleType: 'linear' }, { width: 600, height: 350, domain: { y: [-2, 2] } }),
+	      _extends({ scaleType: 'linear' }, { width: 600, height: 350, domain: { x: [-20, 150] } }),
 	      _react2.default.createElement(_XAxis2.default, { title: 'Phase' }),
 	      _react2.default.createElement(_YAxis2.default, { title: 'Intensity' }),
 	      _react2.default.createElement(_LineChart2.default, {
@@ -20970,6 +20974,29 @@
 	      }),
 	      _react2.default.createElement(_XAxis2.default, { gridLineStyle: { stroke: '#666' } }),
 	      _react2.default.createElement(_YAxis2.default, { gridLineStyle: { stroke: '#666' } })
+	    )
+	  );
+	};
+	
+	var AreaChartExample = function AreaChartExample(props) {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      _XYPlot2.default,
+	      { width: 400, height: 400 },
+	      _react2.default.createElement(_XAxis2.default, { gridLineStyle: { stroke: '#666' } }),
+	      _react2.default.createElement(_YAxis2.default, { gridLineStyle: { stroke: '#666' } }),
+	      _react2.default.createElement(_AreaChart2.default, {
+	        data: _lodash2.default.range(41),
+	        getX: undefined,
+	        getY: function getY(d) {
+	          return Math.sin(d / 10) * 10;
+	        },
+	        getYEnd: function getYEnd(d) {
+	          return Math.cos((d + 1) / 10) * 10;
+	        }
+	      })
 	    )
 	  );
 	};
@@ -21843,7 +21870,7 @@
 	
 	var examples = exports.examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2 },
 	// {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
-	{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample }, { id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample }, { id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample }];
+	{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'area', title: 'Area Chart', Component: AreaChartExample }, { id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample }, { id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample }, { id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample }];
 	
 	// todo rewrite these?
 	// {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
@@ -66387,6 +66414,131 @@
 
 /***/ },
 /* 317 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _lodash = __webpack_require__(163);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _d = __webpack_require__(165);
+	
+	var _d2 = _interopRequireDefault(_d);
+	
+	var _Data = __webpack_require__(171);
+	
+	var _CustomPropTypes = __webpack_require__(303);
+	
+	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PropTypes = _react2.default.PropTypes;
+	
+	
+	// AreaChart represents a simple bivariate area chart,
+	// a filled path drawn between two lines (datasets).
+	
+	// todo horizontal prop, for filling area horizontally?
+	// todo support categorical data?
+	// todo support passing 2 data arrays and generating area between them? d3 doesn't seem to support this
+	// todo build StackedAreaChart that composes multiple AreaCharts
+	
+	var AreaChart = function (_React$Component) {
+	  _inherits(AreaChart, _React$Component);
+	
+	  function AreaChart() {
+	    _classCallCheck(this, AreaChart);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(AreaChart).apply(this, arguments));
+	  }
+	
+	  _createClass(AreaChart, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var name = _props.name;
+	      var data = _props.data;
+	      var getX = _props.getX;
+	      var getY = _props.getY;
+	      var getYEnd = _props.getYEnd;
+	      var scale = _props.scale;
+	      var pathStyle = _props.pathStyle;
+	
+	      var accessors = { x: (0, _Data.makeAccessor)(getX), y: (0, _Data.makeAccessor)(getY), yEnd: (0, _Data.makeAccessor)(getYEnd) };
+	
+	      var areaGenerator = _d2.default.svg.area();
+	      areaGenerator.x(function (d) {
+	        return scale.x(accessors.x(d));
+	      }).y0(function (d) {
+	        return scale.y(accessors.y(d));
+	      }).y1(function (d) {
+	        return scale.y(accessors.yEnd(d));
+	      });
+	
+	      var areaPathStr = areaGenerator(data);
+	
+	      return _react2.default.createElement(
+	        'g',
+	        { className: name + ' area-chart' },
+	        _react2.default.createElement('path', { className: 'area-chart-path', d: areaPathStr, style: pathStyle || {} })
+	      );
+	    }
+	  }], [{
+	    key: 'getDomain',
+	    value: function getDomain(props) {
+	      // custom Y domain - the total (union) extent of getY and getYEnd combined
+	      var data = props.data;
+	      var getX = props.getX;
+	      var getY = props.getY;
+	      var getYEnd = props.getYEnd;
+	
+	      var accessors = { x: (0, _Data.makeAccessor)(getX), y: (0, _Data.makeAccessor)(getY), yEnd: (0, _Data.makeAccessor)(getYEnd) };
+	      return {
+	        y: (0, _Data.combineDomains)([(0, _Data.domainFromData)(data, accessors.y), (0, _Data.domainFromData)(data, accessors.yEnd)])
+	      };
+	    }
+	  }]);
+	
+	  return AreaChart;
+	}(_react2.default.Component);
+	
+	AreaChart.propTypes = {
+	  // the array of data objects
+	  data: PropTypes.array.isRequired,
+	  // accessors for X & Y coordinates
+	  getX: CustomPropTypes.getter,
+	  getY: CustomPropTypes.getter,
+	  getYEnd: CustomPropTypes.getter,
+	  // style applied to path element
+	  pathStyle: PropTypes.object,
+	
+	  scaleType: PropTypes.object,
+	  scale: PropTypes.object
+	};
+	exports.default = AreaChart;
+
+/***/ },
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
