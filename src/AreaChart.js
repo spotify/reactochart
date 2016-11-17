@@ -53,8 +53,8 @@ export default class AreaChart extends React.Component {
 
     const areaPathStr = areaGenerator(data);
 
-    return <g className={`${name} area-chart`}>
+    return (<g className={`${name} area-chart`}>
       <path className="area-chart-path" d={areaPathStr} style={pathStyle || {}} />
-    </g>
+    </g>);
   }
 }
