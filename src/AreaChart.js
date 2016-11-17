@@ -47,9 +47,9 @@ export default class AreaChart extends React.Component {
 
     const areaGenerator = d3.svg.area();
     areaGenerator
-      .x(d => scale.x(accessors.x(d)))
-      .y0(d => scale.y(accessors.y(d)))
-      .y1(d => scale.y(accessors.yEnd(d)));
+      .x((d, i) => scale.x(accessors.x(d, i)))
+      .y0((d, i) => scale.y(accessors.y(d, i)))
+      .y1((d, i) => scale.y(accessors.yEnd(d, i)));
 
     const areaPathStr = areaGenerator(data);
 
