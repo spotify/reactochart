@@ -35,9 +35,10 @@ import TreeMap from '../../src/TreeMap';
 import Histogram from '../../src/Histogram';
 import FunnelChart from '../../src/FunnelChart';
 
-
 import MarkerLineChart from '../../src/MarkerLineChart';
 import KernelDensityEstimation from '../../src/KernelDensityEstimation';
+
+import AreaChart from '../../src/AreaChart';
 
 import {randomWalk, randomWalkSeries} from './data/util';
 
@@ -109,7 +110,7 @@ const LineChartExample = (props) => {
   const colors = d3.scale.category10().domain(_.range(10));
 
   return <div>
-    <XYPlot scaleType="linear" {...{width: 600, height: 350, domain: {y: [-2, 2]}}}>
+    <XYPlot scaleType="linear" {...{width: 600, height: 350, domain: {x: [-20, 150]}}}>
 
       <XAxis title="Phase" />
       <YAxis title="Intensity" />
@@ -582,6 +583,21 @@ const ColorHeatMapExample = (props) => {
     </XYPlot>
   </div>;
 };
+
+const AreaChartExample = (props) => {
+  return <div>
+    <XYPlot width={400} height={400}>
+      <XAxis gridLineStyle={{stroke: '#666'}}/>
+      <YAxis gridLineStyle={{stroke: '#666'}}/>
+      <AreaChart
+        data={_.range(41)}
+        getX={undefined}
+        getY={d => Math.sin(d / 10) * 10}
+        getYEnd={d => Math.cos((d + 1) / 10) * 10}
+      />
+    </XYPlot>
+  </div>
+}
 
 const CategoricalColorHeatmapExample = (props) => {
   // sorry, kinda hacky currently!
@@ -1241,6 +1257,7 @@ export const examples = [
   {id: 'barChart', title: 'Bar Chart', Component: BarChartExample},
   {id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample},
   {id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample},
+  {id: 'area', title: 'Area Chart', Component: AreaChartExample},
   {id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample},
   {id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample},
   {id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample},
