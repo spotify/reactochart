@@ -39,6 +39,8 @@ import KernelDensityEstimation from '../../src/KernelDensityEstimation';
 
 import {randomWalk, randomWalkSeries} from './data/util';
 
+import SideNav from './SideNav';
+
 // sample ordinal data
 const ordinalData = ['Always', 'Usually', 'Sometimes', 'Rarely', 'Never'];
 const ordinalData2 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
@@ -1015,10 +1017,15 @@ export const App = React.createClass({
     const smallSize = {width: 300, height: 210};
 
     return <div>
-      <h1>Reactochart Examples</h1>
-
+      <SideNav list={examples}/>
       {this.renderExamples()}
 
+
+    </div>
+  },
+  renderExamples() {
+    return <div className='example-sections'>
+      {examples.map(this.renderExample)}
       <div>
         <XYPlot domain={{y: [-1, 1], x: [-1, 1]}} scaleType="linear" {...{width: 900, height: 350}}>
           <XAxis title="Phase" />
@@ -1044,11 +1051,6 @@ export const App = React.createClass({
           <LineChart data={_.range(100)} getY={d => Math.cos(d*.1)} />
         </XYPlot>
       </div>
-    </div>
-  },
-  renderExamples() {
-    return <div className='example-sections'>
-      {examples.map(this.renderExample)}
     </div>;
   },
   renderExample(example) {
@@ -1057,19 +1059,11 @@ export const App = React.createClass({
     const className = `example-section example-section-${example.id} ${isVisible ? 'example-section-visible' : ''}`;
 
     return <div className={className} key={`${example.id}`}>
-      <div
-        className={`example-section-button ${isVisible ? 'active' : ''}`}
-        onClick={this.toggleExample.bind(null, example.id)}
-      >
-        {example.title}
-        <span className="example-arrow">{isVisible ? " ▼" : " ►"}</span>
-      </div>
-      {isVisible ?
+        <h3 id={example.id}>{example.title}</h3>
         <div className="example-section-content">
           <ExampleComponent />
         </div>
-        : null
-      }
+
     </div>
   }
 });
