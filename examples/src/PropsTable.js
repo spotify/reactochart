@@ -1,0 +1,37 @@
+import React from 'react'
+
+class PropsTable extends React.Component {
+
+    renderTableCells = () => {
+
+    }
+    render() {
+      return (
+        <div>
+          <h4>Props</h4>
+          <table className="props-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.items.map(function(item, index){
+                return(
+                  <tr>
+                    <td><code>{item.name}</code></td>
+                    <td>{item.type}</td>
+                    <td>{item.description}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      )
+    }
+}
+
+export default PropsTable

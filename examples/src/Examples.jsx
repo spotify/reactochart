@@ -33,11 +33,11 @@ import PieChart from '../../src/PieChart';
 import TreeMap from '../../src/TreeMap';
 import Histogram from '../../src/Histogram';
 
-
 import MarkerLineChart from '../../src/MarkerLineChart';
 import KernelDensityEstimation from '../../src/KernelDensityEstimation';
 
 import {randomWalk, randomWalkSeries} from './data/util';
+import PropsTable from './PropsTable';
 
 // sample ordinal data
 const ordinalData = ['Always', 'Usually', 'Sometimes', 'Rarely', 'Never'];
@@ -144,6 +144,15 @@ class PieChartExample extends React.Component {
         holeRadius={50}
         centerLabel={(this.state.sinVal * 50).toFixed(0)}
       />
+      <PropsTable
+        items={[
+          {name: 'data', type:'Number', description: ''},
+          {name: 'total', type: 'Number', description: ''},
+          {name: 'radius', type: 'Number', description: ''},
+          {name: 'holeRadius', type: 'Number', description: ''},
+          {name: 'centerLabel', type: 'Number', description: ''}
+        ]}
+      />
     </div>
   }
 }
@@ -191,6 +200,16 @@ const ScatterPlotExample = React.createClass({
         />
         */}
       </XYPlot>
+
+      <PropsTable
+        items={[
+          {name: 'data', type:'Number', description: ''},
+          {name: 'getX', type: 'Number', description: ''},
+          {name: 'getY', type: 'Number', description: ''},
+          {name: 'pointSymbol', type: 'Number', description: ''},
+          {name: 'pointOffset', type: 'Array', description: ''}
+        ]}
+      />
     </div>
   }
 });
@@ -216,6 +235,14 @@ const LineChartExample = React.createClass({
           getY={(n) => Math.sin(n*0.5) * Math.cos(n)}
         />
       </XYPlot>
+
+      <PropsTable
+        items={[
+          {name: 'data', type:'Array', description: ''},
+          {name: 'getX', type: 'Number', description: ''},
+          {name: 'getY', type: 'Number', description: ''}
+        ]}
+      />
     </div>
   }
 });
@@ -264,6 +291,16 @@ const InteractiveLineExample = React.createClass({
           null
         }
       </XYPlot>
+
+      <PropsTable
+        items={[
+          {name: 'width', type:'Number', description: ''},
+          {name: 'height', type: 'Number', description: ''},
+          {name: 'onMouseMove', type: 'function', description: ''},
+          {name: 'onClick', type: 'function', description: ''},
+          {name: 'centerLabel', type: 'Number', description: ''}
+        ]}
+      />
     </div>
   }
 });
@@ -304,6 +341,16 @@ const HistogramKDEExample = React.createClass({
           />
         </XYPlot>
       </div>
+      <PropsTable
+        items={[
+          {name: 'margin', type:'Object', description: ''},
+          {name: 'width', type: 'Number', description: ''},
+          {name: 'height', type: 'Number', description: ''},
+          {name: 'showGrid', type: 'Boolean', description: ''},
+          {name: 'showLables', type: 'Boolean', description: ''},
+          {name: 'showTicks', type: 'Boolean', description: ''}
+        ]}
+      />
     </div>
   }
 });
@@ -466,6 +513,15 @@ const BarMarkerLineExample = (props) => {
         />
       </XYPlot>
     </div>
+    <PropsTable
+      items={[
+        {name: 'data', type:'Number', description: ''},
+        {name: 'orientation', type: 'String', description: ''},
+        {name: 'getX', type: 'Number', description: ''},
+        {name: 'getY', type: 'Number', description: ''},
+        {name: 'getEndValue', type: 'Number', description: ''}
+      ]}
+    />
   </div>
 };
 
@@ -682,6 +738,17 @@ const AreaHeatmapExample = (props) => {
         getYEnd="yEnd"
       />
     </XYPlot>
+    <PropsTable
+      items={[
+        {name: 'data', type:'Array', description: ''},
+        {name: 'getArea', type: 'Number', description: ''},
+        {name: 'getX', type: 'Number', description: ''},
+        {name: 'getXEnd', type: 'Number', description: ''},
+        {name: 'getY', type: 'Number', description: ''},
+        {name: 'getYEnd', type: 'Number', description: ''}
+      ]}
+    />
+
   </div>;
 };
 
@@ -734,6 +801,16 @@ const MarkerLineExample = (props) => {
         />
       </XYPlot>
     </div>
+    <PropsTable
+      items={[
+        {name: 'data', type:'Number', description: ''},
+        {name: 'orientation', type: 'String', description: ''},
+        {name: 'getX', type: 'Number', description: ''},
+        {name: 'getXEnd', type: 'Number', description: ''},
+        {name: 'getY', type: 'Number', description: ''},
+        {name: 'getYEnd', type: 'Number', description: ''}
+      ]}
+    />
   </div>;
 };
 
@@ -766,6 +843,13 @@ const KDEExample = (props) => {
         />
       </XYPlot>
     </div>
+    <PropsTable
+      items={[
+        {name: 'data', type:'Number', description: ''},
+        {name: 'getValue', type: 'Number', description: ''},
+        {name: 'bandwidth', type: 'Number', description: ''}
+      ]}
+    />
   </div>;
 };
 
@@ -794,6 +878,16 @@ const TreeMapExample = (props) => {
       })}
       width={800}
       height={500}
+    />
+    <PropsTable
+      items={[
+        {name: 'data', type:'Number', description: ''},
+        {name: 'getValue', type: 'String', description: ''},
+        {name: 'getLabel', type: 'Number', description: ''},
+        {name: 'nodeStyle', type: 'Function', description: ''},
+        {name: 'width', type: 'Number', description: ''},
+        {name: 'height', type: 'Number', description: ''}
+      ]}
     />
   </div>
 };
@@ -918,6 +1012,14 @@ const BarChartExample = (props) => {
         })}
       </div>;
     })}
+    <PropsTable
+      items={[
+        {name: 'data', type:'Number', description: ''},
+        {name: 'orientation', type: 'String', description: ''},
+        {name: 'getX', type: 'Number', description: ''},
+        {name: 'getY', type: 'Number', description: ''}
+      ]}
+    />
   </div>
 };
 
@@ -942,6 +1044,15 @@ const AreaBarChartExample = (props) => {
         getYEnd={d => Math.sin((d + 1) / 10) * 10}
       />
     </XYPlot>;
+    <PropsTable
+      items={[
+        {name: 'data', type:'Number', description: ''},
+        {name: 'getX', type: 'Number', description: ''},
+        {name: 'getXEnd', type: 'Number', description: ''},
+        {name: 'getY', type: 'Number', description: ''},
+        {name: 'getYEnd', type: 'Number', description: ''}
+      ]}
+    />
   </div>
 };
 
@@ -961,6 +1072,15 @@ const RangeRectExample = (props) => {
         style={{fill: 'coral'}}
       />
     </XYPlot>
+    <PropsTable
+      items={[
+        {name: 'datum', type:'Number', description: ''},
+        {name: 'getX', type: 'Number', description: ''},
+        {name: 'getXEnd', type: 'Number', description: ''},
+        {name: 'getY', type: 'Number', description: ''},
+        {name: 'getYEnd', type: 'Number', description: ''}
+      ]}
+    />
   </div>;
 };
 
