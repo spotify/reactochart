@@ -3,7 +3,16 @@ import React from 'react'
 class PropsTable extends React.Component {
 
     renderTableCells = () => {
-
+      let tableCells = this.props.items.map(function(item, index){
+        return(
+          <tr>
+            <td><code>{item.name}</code></td>
+            <td>{item.type}</td>
+            <td>{item.description}</td>
+          </tr>
+        )
+      })
+      return tableCells
     }
     render() {
       return (
@@ -18,15 +27,7 @@ class PropsTable extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.items.map(function(item, index){
-                return(
-                  <tr>
-                    <td><code>{item.name}</code></td>
-                    <td>{item.type}</td>
-                    <td>{item.description}</td>
-                  </tr>
-                )
-              })}
+              {this.renderTableCells()}
             </tbody>
           </table>
         </div>

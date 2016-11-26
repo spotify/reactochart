@@ -146,7 +146,7 @@ class PieChartExample extends React.Component {
       />
       <PropsTable
         items={[
-          {name: 'data', type:'Number', description: ''},
+          {name: 'data', type: 'Array', description: ''},
           {name: 'total', type: 'Number', description: ''},
           {name: 'radius', type: 'Number', description: ''},
           {name: 'holeRadius', type: 'Number', description: ''},
@@ -203,7 +203,7 @@ const ScatterPlotExample = React.createClass({
 
       <PropsTable
         items={[
-          {name: 'data', type:'Number', description: ''},
+          {name: 'data', type: 'Array', description: ''},
           {name: 'getX', type: 'Number', description: ''},
           {name: 'getY', type: 'Number', description: ''},
           {name: 'pointSymbol', type: 'Number', description: ''},
@@ -238,9 +238,10 @@ const LineChartExample = React.createClass({
 
       <PropsTable
         items={[
-          {name: 'data', type:'Array', description: ''},
+          {name: 'data', type: 'Array', description: ''},
           {name: 'getX', type: 'Number', description: ''},
-          {name: 'getY', type: 'Number', description: ''}
+          {name: 'getY', type: 'Number', description: ''},
+          {name: 'scale', type: 'Object', description: ''}
         ]}
       />
     </div>
@@ -294,6 +295,7 @@ const InteractiveLineExample = React.createClass({
 
       <PropsTable
         items={[
+          {name: 'data', type: 'Array', description: ''},
           {name: 'width', type:'Number', description: ''},
           {name: 'height', type: 'Number', description: ''},
           {name: 'onMouseMove', type: 'function', description: ''},
@@ -343,12 +345,16 @@ const HistogramKDEExample = React.createClass({
       </div>
       <PropsTable
         items={[
+          {name: 'data', type: 'Array', description: ''},
           {name: 'margin', type:'Object', description: ''},
           {name: 'width', type: 'Number', description: ''},
           {name: 'height', type: 'Number', description: ''},
           {name: 'showGrid', type: 'Boolean', description: ''},
           {name: 'showLables', type: 'Boolean', description: ''},
-          {name: 'showTicks', type: 'Boolean', description: ''}
+          {name: 'showTicks', type: 'Boolean', description: ''},
+          {name: 'getValue', type: 'Object', description: ''},
+          {name: 'axisType', type: 'Object', description: ''},
+          {name: 'scale', type: 'Object', description: ''},
         ]}
       />
     </div>
@@ -515,7 +521,7 @@ const BarMarkerLineExample = (props) => {
     </div>
     <PropsTable
       items={[
-        {name: 'data', type:'Number', description: ''},
+        {name: 'data', type: 'Array', description: ''},
         {name: 'orientation', type: 'String', description: ''},
         {name: 'getX', type: 'Number', description: ''},
         {name: 'getY', type: 'Number', description: ''},
@@ -740,12 +746,16 @@ const AreaHeatmapExample = (props) => {
     </XYPlot>
     <PropsTable
       items={[
-        {name: 'data', type:'Array', description: ''},
-        {name: 'getArea', type: 'Number', description: ''},
+        {name: 'data', type: 'Array', description: ''},
+        {name: 'getArea', type: 'Function', description: ''},
         {name: 'getX', type: 'Number', description: ''},
         {name: 'getXEnd', type: 'Number', description: ''},
         {name: 'getY', type: 'Number', description: ''},
-        {name: 'getYEnd', type: 'Number', description: ''}
+        {name: 'getYEnd', type: 'Number', description: ''},
+        {name: 'scale', type: 'Number', description: ''},
+        {name: 'scaleWidth', type: 'Number', description: ''},
+        {name: 'scaleHeight', type: 'Number', description: ''},
+        {name: 'unitsPerPixel', type: 'Number', description: ''},
       ]}
     />
 
@@ -803,7 +813,7 @@ const MarkerLineExample = (props) => {
     </div>
     <PropsTable
       items={[
-        {name: 'data', type:'Number', description: ''},
+        {name: 'data', type: 'Array', description: ''},
         {name: 'orientation', type: 'String', description: ''},
         {name: 'getX', type: 'Number', description: ''},
         {name: 'getXEnd', type: 'Number', description: ''},
@@ -845,7 +855,7 @@ const KDEExample = (props) => {
     </div>
     <PropsTable
       items={[
-        {name: 'data', type:'Number', description: ''},
+        {name: 'data', type: 'Array', description: ''},
         {name: 'getValue', type: 'Number', description: ''},
         {name: 'bandwidth', type: 'Number', description: ''}
       ]}
@@ -881,7 +891,7 @@ const TreeMapExample = (props) => {
     />
     <PropsTable
       items={[
-        {name: 'data', type:'Number', description: ''},
+        {name: 'data', type: 'Array', description: ''},
         {name: 'getValue', type: 'String', description: ''},
         {name: 'getLabel', type: 'Number', description: ''},
         {name: 'nodeStyle', type: 'Function', description: ''},
@@ -1014,10 +1024,14 @@ const BarChartExample = (props) => {
     })}
     <PropsTable
       items={[
-        {name: 'data', type:'Number', description: ''},
-        {name: 'orientation', type: 'String', description: ''},
-        {name: 'getX', type: 'Number', description: ''},
-        {name: 'getY', type: 'Number', description: ''}
+        {name: 'scale', type: 'Function', description: ''},
+        {name: 'data', type: 'Array', description: ''},
+        {name: 'horizontal', type: 'Boolean', description: ''},
+        {name: 'getX', type: 'Function', description: ''},
+        {name: 'getY', type: 'Function', description: ''},
+        {name: 'barThickness', type: 'Number', description: ''},
+        {name: 'barClassName', type: 'Number', description: ''},
+        {name: 'barStyle', type: 'Object', description: ''},
       ]}
     />
   </div>
@@ -1046,11 +1060,15 @@ const AreaBarChartExample = (props) => {
     </XYPlot>;
     <PropsTable
       items={[
-        {name: 'data', type:'Number', description: ''},
-        {name: 'getX', type: 'Number', description: ''},
-        {name: 'getXEnd', type: 'Number', description: ''},
-        {name: 'getY', type: 'Number', description: ''},
-        {name: 'getYEnd', type: 'Number', description: ''}
+        {name: 'scale', type: 'Function', description: ''},
+        {name: 'data', type: 'Array', description: ''},
+        {name: 'horizontal', type: 'Boolean', description: ''},
+        {name: 'getX', type: 'Function', description: ''},
+        {name: 'getXEnd', type: 'Function', description: ''},
+        {name: 'getY', type: 'Function', description: ''},
+        {name: 'getYEnd', type: 'Function', description: ''},
+        {name: 'barClassName', type: 'String', description: ''},
+        {name: 'barStyle', type: 'Object', description: ''},
       ]}
     />
   </div>
