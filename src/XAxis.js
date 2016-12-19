@@ -115,7 +115,7 @@ export default class XAxis extends React.Component {
 
     return <g
       className="chart-axis chart-axis-x"
-      transform={`translate(${-spacing.left}, ${-spacing.top})`}
+      transform={`translate(0, ${-spacing.top})`}
     >
       {showGrid ? <XGrid {...gridProps} /> : null}
 
@@ -125,7 +125,12 @@ export default class XAxis extends React.Component {
 
       {showTitle ? <XAxisTitle {...titleProps} /> : null}
 
-      <line className="chart-axis-line chart-axis-line-x" x1={0} x2={axisLineWidth} y1={axisLineY} y2={axisLineY} style={{stroke: 'red'}} />
+      <line
+        className="chart-axis-line chart-axis-line-x"
+        x1={-spacing.left} x2={axisLineWidth - spacing.left}
+        y1={axisLineY + spacing.top + spacing.bottom} y2={axisLineY + spacing.top + spacing.bottom}
+        style={{stroke: 'red'}}
+      />
     </g>;
   }
 }

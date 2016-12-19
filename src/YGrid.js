@@ -27,7 +27,7 @@ export default class YGrid extends React.Component {
   }
 
   render() {
-    const {width, tickCount, lineClassName, lineStyle} = this.props;
+    const {width, spacing, tickCount, lineClassName, lineStyle} = this.props;
     const scale = this.props.scale.y;
     const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
     const className = `chart-grid-line chart-grid-line-y ${lineClassName || ''}`;
@@ -37,7 +37,7 @@ export default class YGrid extends React.Component {
         return <YLine {...{
           scale: this.props.scale,
           value: tick,
-          width,
+          width: width + spacing.left + spacing.right,
           className,
           style: lineStyle,
           key: `grid-y-line-${i}`
