@@ -1,7 +1,7 @@
 import React from 'react';
 const {PropTypes} = React;
 import _ from 'lodash';
-import d3 from 'd3';
+import * as d3 from 'd3';
 
 import {makeAccessor, domainFromData, combineDomains} from './utils/Data';
 import * as CustomPropTypes from './utils/CustomPropTypes';

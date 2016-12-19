@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import d3 from 'd3';
+import * as d3 from 'd3';
 import invariant from 'invariant';
 
 import * as CustomPropTypes from './utils/CustomPropTypes';

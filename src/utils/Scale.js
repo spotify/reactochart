@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import d3 from 'd3';
+import * as d3 from 'd3';
 
 import {combineDomains, domainFromData} from './Data';
 

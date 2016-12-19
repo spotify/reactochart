@@ -107,7 +107,8 @@ const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", 
 
 
 const LineChartExample = (props) => {
-  const colors = d3.scale.category10().domain(_.range(10));
+  // const colors = d3.scale.category10().domain(_.range(10));
+  const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
   return <div>
     <XYPlot scaleType="linear" {...{width: 600, height: 350, domain: {x: [-20, 150]}}}>

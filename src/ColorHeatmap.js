@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import d3 from 'd3';
+import * as d3 from 'd3';
 import invariant from 'invariant';
 
 import * as CustomPropTypes from './utils/CustomPropTypes';
@@ -35,7 +35,7 @@ export default class ColorHeatmap extends React.Component {
   static propTypes = {
     // passed from xyplot
     scale: CustomPropTypes.xyObjectOf(React.PropTypes.func.isRequired),
-    
+
     // data array - should be 1D array of all grid values
     // (if you have a 2D array, _.flatten it)
     data: React.PropTypes.array.isRequired,
