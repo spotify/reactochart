@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import d3 from 'd3';
+import * as d3 from 'd3';
 import React from 'react';
 import update from 'react-addons-update';
 import numeral from 'numeral';
@@ -98,9 +98,9 @@ const barTickData = {
 };
 //console.log('rangeValue', rangeValueData);
 
-const normalDistribution = d3.random.normal(0);
+const normalDistribution = d3.randomNormal(0);
 //const randomNormal = _.times(1000, normalDistribution);
-const randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.random.normal(3, 0.5)));
+const randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.randomNormal(3, 0.5)));
 
 const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 // end fake data
