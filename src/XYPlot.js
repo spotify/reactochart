@@ -44,6 +44,7 @@ class XYPlot extends React.Component {
     domain: React.PropTypes.object,
     margin: React.PropTypes.object,
     // todo spacing & padding...
+    padding: React.PropTypes.object,
     nice: React.PropTypes.object,
     invertScale: React.PropTypes.object,
 
