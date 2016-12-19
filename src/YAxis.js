@@ -93,7 +93,7 @@ export default class YAxis extends React.Component {
 
   render() {
     const {
-      width, height, position, tickLength, titleDistance, labelDistance,
+      width, height, position, spacing, tickLength, titleDistance, labelDistance,
       showTitle, showLabels, showTicks, showGrid
     } = this.props;
 
@@ -110,8 +110,13 @@ export default class YAxis extends React.Component {
     }
 
     const axisLineX = (position === 'left') ? 0 : width;
+    // `height` is height of inner chart *not* including spacing - add spacing to figure out where to draw axis line
+    const axisLineHeight = height + spacing.top + spacing.bottom;
 
-    return <g className="chart-axis chart-axis-y">
+    return <g
+      className="chart-axis chart-axis-y"
+      transform={`translate(${-spacing.left}, ${-spacing.top})`}
+    >
       {showGrid ? <YGrid {...gridProps} /> : null}
 
       {showTicks ? <YTicks {...ticksProps}/> : null}
@@ -120,7 +125,7 @@ export default class YAxis extends React.Component {
 
       {showTitle ? <YAxisTitle {...titleProps} /> : null}
 
-      <line className="chart-axis-line chart-axis-line-y" x1={axisLineX} x2={axisLineX} y1={0} y2={height} />
+      <line className="chart-axis-line chart-axis-line-y" x1={axisLineX} x2={axisLineX} y1={0} y2={axisLineHeight} style={{stroke: 'red'}} />
     </g>;
   }
 }

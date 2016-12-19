@@ -1248,7 +1248,23 @@ const CustomAxisLabelsExample = React.createClass({
   }
 });
 
+class SpacingExample extends React.Component {
+  render() {
+    return <XYPlot scaleType="linear" {...{width: 600, height: 350, spacing: {left: 30, top: 23, right: 16, bottom: 9} }}>
+      <XAxis title="Phase" spacing={{left: 30, top: 23, right: 16, bottom: 9}} />
+      <YAxis title="Intensity" spacing={{left: 30, top: 23, right: 16, bottom: 9}} />
+
+      <LineChart
+        spacing={{left: 30, top: 23, right: 16, bottom: 9}}
+        data={_.range(100)}
+        getY={d => Math.sin(d*.1)}
+      />
+    </XYPlot>
+  }
+}
+
 export const examples = [
+  {id: 'spacing', title: 'Spacing', Component: SpacingExample},
   {id: 'line', title: 'Line Chart', Component: LineChartExample},
   {id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2},
   // {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},

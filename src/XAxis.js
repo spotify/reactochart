@@ -93,7 +93,7 @@ export default class XAxis extends React.Component {
 
   render() {
     const {
-      width, height, position, tickLength, titleDistance, labelDistance,
+      width, height, position, spacing, tickLength, titleDistance, labelDistance,
       showTitle, showLabels, showTicks, showGrid
     } = this.props;
 
@@ -110,8 +110,13 @@ export default class XAxis extends React.Component {
     }
 
     const axisLineY = (position === 'bottom') ? height : 0;
+    // `width` is width of inner chart *not* including spacing - add spacing to figure out where to draw line
+    const axisLineWidth = width + spacing.left + spacing.right;
 
-    return <g className="chart-axis chart-axis-x">
+    return <g
+      className="chart-axis chart-axis-x"
+      transform={`translate(${-spacing.left}, ${-spacing.top})`}
+    >
       {showGrid ? <XGrid {...gridProps} /> : null}
 
       {showTicks ? <XTicks {...ticksProps}/> : null}
@@ -120,7 +125,7 @@ export default class XAxis extends React.Component {
 
       {showTitle ? <XAxisTitle {...titleProps} /> : null}
 
-      <line className="chart-axis-line chart-axis-line-x" x1={0} x2={width} y1={axisLineY} y2={axisLineY} />
+      <line className="chart-axis-line chart-axis-line-x" x1={0} x2={axisLineWidth} y1={axisLineY} y2={axisLineY} style={{stroke: 'red'}} />
     </g>;
   }
 }
