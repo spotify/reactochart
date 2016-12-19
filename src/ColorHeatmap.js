@@ -25,7 +25,7 @@ function makeColorScale(domain, colors, interpolator) {
   if(_.isString(interpolator))
     interpolator = interpolatorFromType(interpolator);
 
-  return d3.scale.linear()
+  return d3.scaleLinear()
     .domain(domain)
     .range(colors)
     .interpolate(interpolator);
