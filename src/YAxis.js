@@ -115,7 +115,7 @@ export default class YAxis extends React.Component {
 
     return <g
       className="chart-axis chart-axis-y"
-      transform={`translate(${-spacing.left}, ${-spacing.top})`}
+      transform={`translate(${-spacing.left})`}
     >
       {showGrid ? <YGrid {...gridProps} /> : null}
 

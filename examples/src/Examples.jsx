@@ -338,7 +338,7 @@ const BarChartExample = (props) => {
   const count = 30;
   const startDate = new Date(1992, 0, 1);
 
-  const numbers = _.range(count);
+  const numbers = _.range(3, count);
   const letters = _.times(count, n => String.fromCharCode(97 + n));
   const dates = _.times(count, n => new Date(+(startDate) + (n * 1000 * 60 * 60 * 24 * 100)));
 
@@ -354,13 +354,14 @@ const BarChartExample = (props) => {
         <h4>{horizontal ? "Horizontal" : "Vertical"}</h4>
 
         {chartDefs.map(([data, getValue]) => {
-          return <XYPlot width={320} height={320}>
-            <XAxis /><YAxis />
+          return <XYPlot width={320} height={320} spacing={{bottom: 30, right: 50}} margin={{bottom: 50, left: 55}}>
+            <XAxis /><YAxis nice={false}/>
             <BarChart
               data={data}
               horizontal={horizontal}
               getX={horizontal ? getValue : null}
               getY={horizontal ? null : getValue}
+              barThickness={10}
             />
           </XYPlot>;
         })}
@@ -1250,12 +1251,12 @@ const CustomAxisLabelsExample = React.createClass({
 
 class SpacingExample extends React.Component {
   render() {
-    return <XYPlot scaleType="linear" {...{width: 600, height: 350, spacing: {left: 30, top: 23, right: 16, bottom: 9} }}>
-      <XAxis title="Phase" spacing={{left: 30, top: 23, right: 16, bottom: 9}} />
-      <YAxis title="Intensity" spacing={{left: 30, top: 23, right: 16, bottom: 9}} />
+    return <XYPlot scaleType="linear" {...{width: 600, height: 350, spacing: {left: 30, top: 53, right: 16, bottom: 9} }}>
+      <XAxis title="Phase" spacing={{left: 30, top: 53, right: 16, bottom: 9}} />
+      <YAxis title="Intensity" spacing={{left: 30, top: 53, right: 16, bottom: 9}} />
 
       <LineChart
-        spacing={{left: 30, top: 23, right: 16, bottom: 9}}
+        spacing={{left: 30, top: 53, right: 16, bottom: 9}}
         data={_.range(100)}
         getY={d => Math.sin(d*.1)}
       />
@@ -1289,8 +1290,6 @@ export const examples = [
   {id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample},
   {id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample},
   {id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample},
-
-
   // todo rewrite these?
   // {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
   // {id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample},

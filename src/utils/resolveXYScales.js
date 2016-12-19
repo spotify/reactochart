@@ -40,6 +40,9 @@ function componentName(Component) {
 function hasScaleFor(scalesObj, key) {
   return _.isObject(scalesObj) && isValidScale(scalesObj[key]);
 }
+function hasPaddingFor(paddingObj, key) {
+  return _.isObject(paddingObj) && _.isNumber(paddingObj[key]);
+}
 function hasXYScales(scale) {
   return _.isObject(scale) && isValidScale(scale.x) && isValidScale(scale.y);
 }
@@ -341,14 +344,18 @@ export default function resolveXYScales(ComposedComponent) {
       return margin;
     }
 
-    _makeScales = ({width, height, scaleType={}, domain={}, margin={}, scale={}}) => {
+    _makeScales = ({width, height, scaleType={}, domain={}, margin={}, scale={}, spacing={}}) => {
       const {invertScale, nice, tickCount, ticks} = this.props;
+      
+      const innerMarginWidthX = Math.abs(_.subtract.apply(_, innerRangeX(width, margin)));
+      const innerMarginWidthY = Math.abs(_.subtract.apply(_, innerRangeY(height, margin)));
+
       const range = {
-        x: innerRangeX(width, margin).map(v => v - (margin.left || 0)),
-        y: innerRangeY(height, margin).map(v => v - (margin.top || 0))
+        x: innerRangeX(innerMarginWidthX, spacing).map(v => v - (spacing.left || 0)),
+        y: innerRangeY(innerMarginWidthY, spacing).map(v => v - (spacing.top || 0))
       };
       // console.log(height, margin, innerRangeY(height, margin));
-
+      //innerRange functions produce range (i.e. [5,20]) and map function normalizes to 0 (i.e. [0,15])
 
       // console.log('range', range);
       return _.fromPairs(['x', 'y'].map(k => {
@@ -400,13 +407,14 @@ export default function resolveXYScales(ComposedComponent) {
       const domain = this._resolveDomain(props, ComposedComponent, scaleType);
       // console.log('scaleType', scaleType);
       // console.log('domain ', domain);
-
+      let scaleOptions = {width, height, scaleType, domain, margin: props.margin, scale: props.scale, padding: props.padding, spacing: props.spacing};
       // create a temporary scale with size & domain, which may be used by the Component to calculate margin/tickDomain
       // (eg. to create and measure labels for the scales)
-      let tempScale = this._makeScales({width, height, scaleType, domain, margin: props.margin, scale: props.scale});
+      let tempScale = this._makeScales(scaleOptions);
 
       // getTickDomain gives children the opportunity to modify the domain to include their scale ticks
       // (can't happen in getDomain, because it can't be done until the base domain/tempScale has been created)
+      //nice-ing happens in the getTickDomain function inside of _resolveTickDomain
       const tickDomain = this._resolveTickDomain(props, ComposedComponent, scaleType, domain, tempScale);
       if(_.isObject(tickDomain)) {
         ['x', 'y'].forEach(k => {
@@ -416,7 +424,7 @@ export default function resolveXYScales(ComposedComponent) {
         })
       }
       // update tempScale to use new domain before creating margins
-      tempScale = this._makeScales({width, height, scaleType, domain, margin: props.margin, scale: props.scale});
+      tempScale = this._makeScales(scaleOptions);
 
       // then resolve the margins
       const margin = _.defaults(
@@ -426,7 +434,7 @@ export default function resolveXYScales(ComposedComponent) {
       // console.log('margin', margin);
 
       // create real scales from resolved margins
-      const scaleOptions = {scale: props.scale, width, height, scaleType, domain, margin, nice};
+      scaleOptions = {...scaleOptions, margin};
       // console.log('making scales', scaleOptions);
       const scale = _.isEqual(margin, props.margin) ?
         tempScale : // don't re-create scales if margin hasn't changed (ie. was passed in props)
