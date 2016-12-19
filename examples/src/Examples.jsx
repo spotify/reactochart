@@ -107,7 +107,6 @@ const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", 
 
 
 const LineChartExample = (props) => {
-  // const colors = d3.scale.category10().domain(_.range(10));
   const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
   return <div>
@@ -147,7 +146,7 @@ class LineChartExample2 extends React.Component {
 
   render() {
     const {activeX} = this.state;
-    const colors = d3.scale.category10().domain(_.range(10));
+    const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
     const line1 = d => Math.sin(d*.1);
     const line2 = d => Math.cos(d*.1);
