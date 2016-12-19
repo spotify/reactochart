@@ -1037,7 +1037,7 @@ const TreeMapExample = (props) => {
     }))
   };
 
-  const colorScale = d3.scale.linear()
+  const colorScale = d3.scaleLinear()
     .domain([0, 65])
     .range(['#6b6ecf', '#8ca252'])
     .interpolate(d3.interpolateHcl);
