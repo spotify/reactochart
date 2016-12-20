@@ -26,12 +26,6 @@ function makeColorScale(domain, colors, interpolator) {
   if(_.isString(interpolator))
     interpolator = interpolatorFromType(interpolator);
 
-  // const interp = scaleLinear()
-  //   .domain(domain)
-  //   .range(colors);
-
-  debugger;
-
   return scaleLinear()
     .domain(domain)
     .range(colors)

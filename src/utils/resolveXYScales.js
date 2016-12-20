@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import * as d3 from 'd3';
+import {scalePoint} from 'd3-scale';
 import React from 'react';
 import invariant from 'invariant';
 
@@ -362,7 +362,7 @@ export default function resolveXYScales(ComposedComponent) {
         let kScale;
         const rangeMethod = (scaleType[k] === 'ordinal') ? 'rangePoints' : 'range';
         if (scaleType[k] === 'ordinal') {
-          kScale = d3.scalePoint().domain(domain[k]).range(range[k]);
+          kScale = scalePoint().domain(domain[k]).range(range[k]);
         } else {
           kScale = initScale(scaleType[k]).domain(domain[k])[rangeMethod](range[k]);
         }
