@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import * as d3 from 'd3';
+import {histogram} from 'd3-array';
 
 import AreaBarChart from './AreaBarChart';
 
@@ -24,12 +24,12 @@ export default class Histogram extends React.Component {
   }
 
   componentWillMount() {
-    const histogram = d3.histogram()
+    const histogramGenerator = histogram()
       .domain(this.props.domain.x)
       .thresholds(30);
 
     // why is `histogram` returning an array of length 40+ when it should be exactly 30???
-    const histogramData = histogram(this.props.data);
+    const histogramData = histogramGenerator(this.props.data);
 
     this.setState({histogramData});
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import * as d3 from 'd3';
+import {extent} from 'd3-array';
 
 import {methodIfFuncProp} from './util.js';
 import {makeAccessor} from './utils/Data';
@@ -19,8 +19,8 @@ export default class AreaHeatmap extends React.Component {
   static getDomain(props) {
     const {data, getX, getXEnd, getY, getYEnd} = props;
     return {
-      x: d3.extent(_.flatten([data.map(makeAccessor(getX)), data.map(makeAccessor(getXEnd))])),
-      y: d3.extent(_.flatten([data.map(makeAccessor(getY)), data.map(makeAccessor(getYEnd))]))
+      x: extent(_.flatten([data.map(makeAccessor(getX)), data.map(makeAccessor(getXEnd))])),
+      y: extent(_.flatten([data.map(makeAccessor(getY)), data.map(makeAccessor(getYEnd))]))
     };
   }
 

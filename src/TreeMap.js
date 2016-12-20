@@ -1,7 +1,7 @@
 import React from 'react';
 const {PropTypes} = React;
 import _ from 'lodash';
-import * as d3 from 'd3';
+import {treemap} from 'd3-hierarchy';
 
 import {makeAccessor} from './utils/Data';
 import * as CustomPropTypes from './utils/CustomPropTypes';
@@ -155,19 +155,19 @@ function initTreemapLayout(options) {
   // and configure it with the given options
   const {width, height, getValue, getChildren, sort, padding, round, sticky, mode, ratio} = options;
 
-  const treemap = d3.layout.treemap()
+  const treemapLayout = treemap()
     .size([width, height])
     .value(makeAccessor(getValue));
 
-  if(!_.isUndefined(getChildren)) treemap.children(makeAccessor(getChildren));
-  if(!_.isUndefined(sort)) treemap.sort(sort);
-  if(!_.isUndefined(padding)) treemap.padding(padding);
-  if(!_.isUndefined(round)) treemap.round(round);
-  if(!_.isUndefined(sticky)) treemap.sticky(sticky);
-  if(!_.isUndefined(mode)) treemap.mode(mode);
-  if(!_.isUndefined(ratio)) treemap.ratio(ratio);
+  if(!_.isUndefined(getChildren)) treemapLayout.children(makeAccessor(getChildren));
+  if(!_.isUndefined(sort)) treemapLayout.sort(sort);
+  if(!_.isUndefined(padding)) treemapLayout.padding(padding);
+  if(!_.isUndefined(round)) treemapLayout.round(round);
+  if(!_.isUndefined(sticky)) treemapLayout.sticky(sticky);
+  if(!_.isUndefined(mode)) treemapLayout.mode(mode);
+  if(!_.isUndefined(ratio)) treemapLayout.ratio(ratio);
 
-  return treemap;
+  return treemapLayout;
 }
 
 export default TreeMap;

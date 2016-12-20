@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
-import * as d3 from 'd3';
+import {interpolateHcl, interpolateHsl, interpolateLab, interpolateRgb} from 'd3-interpolate';
+import {scaleLinear} from 'd3-scale';
 import invariant from 'invariant';
 
 import * as CustomPropTypes from './utils/CustomPropTypes';
@@ -11,11 +12,11 @@ import RangeRect from './RangeRect';
 
 function interpolatorFromType(type) {
   switch(type.toLowerCase()) {
-    case 'hcl': return d3.interpolateHcl;
-    case 'hsl': return d3.interpolateHsl;
-    case 'lab': return d3.interpolateLab;
-    case 'rgb': return d3.interpolateRgb;
-    default: return d3.interpolateHsl;
+    case 'hcl': return interpolateHcl;
+    case 'hsl': return interpolateHsl;
+    case 'lab': return interpolateLab;
+    case 'rgb': return interpolateRgb;
+    default: return interpolateHsl;
   }
 }
 
@@ -25,7 +26,13 @@ function makeColorScale(domain, colors, interpolator) {
   if(_.isString(interpolator))
     interpolator = interpolatorFromType(interpolator);
 
-  return d3.scaleLinear()
+  // const interp = scaleLinear()
+  //   .domain(domain)
+  //   .range(colors);
+
+  debugger;
+
+  return scaleLinear()
     .domain(domain)
     .range(colors)
     .interpolate(interpolator);
@@ -77,7 +84,7 @@ export default class ColorHeatmap extends React.Component {
       const colors = this.props.colors || (
         (valueDomain.length == 2) ?
           ['#000000', '#ffffff'] :
-          _.times(valueDomain.length, d3.scale.category10().domain(_.range(10)))
+          _.times(valueDomain.length, scale.schemeCategory10().domain(_.range(10)))
       );
       colorScale = makeColorScale(valueDomain, colors, interpolator);
     }

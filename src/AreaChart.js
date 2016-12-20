@@ -1,7 +1,7 @@
 import React from 'react';
 const {PropTypes} = React;
 import _ from 'lodash';
-import * as d3 from 'd3';
+import {area} from 'd3';
 
 import {makeAccessor, domainFromData, combineDomains} from './utils/Data';
 import * as CustomPropTypes from './utils/CustomPropTypes';
@@ -45,7 +45,7 @@ export default class AreaChart extends React.Component {
     const {name, data, getX, getY, getYEnd, scale, pathStyle} = this.props;
     const accessors = {x: makeAccessor(getX), y: makeAccessor(getY), yEnd: makeAccessor(getYEnd)};
 
-    const areaGenerator = d3.area();
+    const areaGenerator = area();
     areaGenerator
       .x((d, i) => scale.x(accessors.x(d, i)))
       .y0((d, i) => scale.y(accessors.y(d, i)))
