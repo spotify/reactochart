@@ -57,6 +57,11 @@ function hasAllMargins(margin) {
   return _.isObject(margin) && _.every(marginKeys, k => _.has(margin, k));
 }
 
+function hasAllPadding(padding) {
+  const paddingKeys = ['top', 'bottom', 'left', 'right'];
+  return _.isObject(padding) && _.every(paddingKeys, k => _.has(padding, k));
+}
+
 function hasGoodXY(obj, isValid = (v => !_.isUndefined(v))) {
   return _.isObject(obj) && isValid(obj.x)
 }
@@ -135,6 +140,7 @@ export default function resolveXYScales(ComposedComponent) {
 
     // todo better way for HOC's to pass statics through?
     static getScaleType = ComposedComponent.getScaleType;
+    static getPadding = ComposedComponent.getPadding; 
     static getDomain = ComposedComponent.getDomain;
     static getMargin = ComposedComponent.getMargin;
 
@@ -303,7 +309,44 @@ export default function resolveXYScales(ComposedComponent) {
     _resolveLabels(props) {
 
     }
+    _resolvePadding(props, Component, scaleType, domain, scale){
+      const propsPadding = props.padding || {};
 
+      // short-circuit if all paddings provided
+      if(hasAllPadding(propsPadding)) return propsPadding;     
+
+      let padding = omitNullUndefined(propsPadding);
+
+      if(_.isFunction(Component.getPadding)) {
+        const componentPadding = omitNullUndefined(Component.getPadding({scaleType, domain, scale, ...props}));
+        // console.log('Component.getMargin', componentMargin);
+        padding = _.assign(componentPadding, padding);
+        if(hasAllPadding(padding)) return padding;
+      }
+
+      // if Component has children,
+      // recurse through descendants to resolve their paddings the same way,
+      // and combine them into a single padding, if there are multiple
+      if(React.Children.count(props.children)) {
+        let childPaddings = [];
+        React.Children.forEach(props.children, child => {
+          if(!child) return;
+          childPaddings = childPaddings.concat(this._resolvePadding(child.props, child.type, scaleType, domain, scale));
+        });
+
+        // console.log('combining child margins', childMargins);
+        const childPadding = _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
+          // combine margins by taking the max value of each padding direction
+          return [k, _.get(_.maxBy(childPaddings, k), k)];
+        }));
+        // console.log('combined paddings', childPadding);
+
+        padding = _.assign(childPadding, padding);
+      }
+      return padding;
+
+
+    }
     _resolveMargin(props, Component, scaleType, domain, scale) {
       const propsMargin = props.margin || {};
 
@@ -433,13 +476,16 @@ export default function resolveXYScales(ComposedComponent) {
       );
       // console.log('margin', margin);
 
+      const padding = this._resolvePadding(props, ComposedComponent, scaleType, domain, tempScale);
+
       // create real scales from resolved margins
       scaleOptions = {...scaleOptions, margin};
       // console.log('making scales', scaleOptions);
       const scale = _.isEqual(margin, props.margin) ?
         tempScale : // don't re-create scales if margin hasn't changed (ie. was passed in props)
         this._makeScales(scaleOptions);
-
+      //TAKE THE DIFFERENT OF THE DOMAIN AND THE TICKDOMAIN TO FIGURE OUT THE MAGIC PADDING AND CLAMP IT TO THE PASSED
+      //IN PADDING 
 
       // and pass scales to wrapped component
       const passedProps = _.assign({}, this.props, {scale, scaleType, margin, domain});

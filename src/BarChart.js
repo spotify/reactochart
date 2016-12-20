@@ -53,7 +53,9 @@ export default class BarChart extends React.Component {
   static getDomain(props) {
     return RangeBarChart.getDomain(makeRangeBarChartProps(props));
   }
-
+  static getPadding(props) {
+    return RangeBarChart.getPadding(makeRangeBarChartProps(props));
+  }
   render() {
     invariant(hasXYScales(this.props.scale), `BarChart.props.scale.x and scale.y must both be valid d3 scales`);
 

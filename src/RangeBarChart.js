@@ -43,8 +43,9 @@ export default class RangeBarChart extends React.Component {
     };
   }
 
-  static getPadding(){
-    
+  static getPadding(props){
+     const domain = RangeBarChart.getDomain(props);
+     debugger
   }
 
   render() {
