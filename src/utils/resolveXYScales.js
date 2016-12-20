@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {scalePoint} from 'd3-scale';
+import {scalePoint} from 'd3';
 import React from 'react';
 import invariant from 'invariant';
 
