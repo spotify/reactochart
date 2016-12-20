@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import d3 from 'd3';
+import * as d3 from 'd3';
 
 import resolveObjectProps from './utils/resolveObjectProps';
 import resolveXYScales from './utils/resolveXYScales';
