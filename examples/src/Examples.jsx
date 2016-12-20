@@ -740,7 +740,7 @@ const HistogramKDEExample = (props) => {
       <XYPlot margin={{left: 40, right: 8}} width={700} height={300}>
         <XAxis /><YAxis />
         <Histogram
-          data={randomNormal} getX={null}
+          data={randomNormal} getValue={null}
         />
         <KernelDensityEstimation
           data={randomNormal} getX={null} bandwidth={0.5}
