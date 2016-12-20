@@ -62,16 +62,13 @@ function hasAllPadding(padding) {
   return _.isObject(padding) && _.every(paddingKeys, k => _.has(padding, k));
 }
 
-function hasGoodXY(obj, isValid = (v => !_.isUndefined(v))) {
-  return _.isObject(obj) && isValid(obj.x)
-}
-
-function mapStaticOnChildren(children, methodName, passProps = {}) {
+function runFunctionOnChildren(children, passedFunction, ...passProps) {
   // returns the result of looping over all children and calling a static method on each one
   return _.compact(React.Children.map(children, child => {
-    console.log(_.keys(child.type));
-    return _.isFunction(child.type[methodName]) ?
-      child.type[methodName]({...child.props, ...passProps}) : null;
+    // if a string denotes that it should be a child attribute
+    const localProps = passProps.map(item => typeof item === 'string' ? child[item] : item);
+    return _.isFunction(passedFunction) ?
+      passedFunction(...localProps) : null;
   }));
 }
 
@@ -80,52 +77,52 @@ function omitNullUndefined(obj) {
   return _.omitBy(obj, v => _.isUndefined(v) || _.isNull(v));
 }
 
-function resolveXYPropsOnComponentOrChildren(propKeys, props, reducers = {}, validators = {}, result = {}) {
-  const isDone = (o) => (_.every(propKeys, k => _.isObject(o[k]) && _.every(['x', 'y'], xy => _.has(o[k][xy]))));
-  result = _.pick({...props, ...result}, propKeys);
+// not currently being used but potentially has some learnings
+// function resolveXYPropsOnComponentOrChildren(propKeys, props, reducers = {}, validators = {}, result = {}) {
+//   const isDone = (o) => (_.every(propKeys, k => _.isObject(o[k]) && _.every(['x', 'y'], xy => _.has(o[k][xy]))));
+//   result = _.pick({...props, ...result}, propKeys);
 
-  let resolved = {};
-  _.forEach(propKeys, propKey => {
-    _.forEach(['x', 'y'], k => {
-      const isValid = validators[propKey] || (() => true);
-      if(_.isObject(props[propKey]) && _.has(props[propKey], k) && isValid(props[propKey][k])) {
-        if(!_.has(result, propKey)) result[propKey] = {};
-        result[propKey][k] = props[propKey][k];
-      }
-    });
-  });
+//   let resolved = {};
+//   _.forEach(propKeys, propKey => {
+//     _.forEach(['x', 'y'], k => {
+//       const isValid = validators[propKey] || (() => true);
+//       if(_.isObject(props[propKey]) && _.has(props[propKey], k) && isValid(props[propKey][k])) {
+//         if(!_.has(result, propKey)) result[propKey] = {};
+//         result[propKey][k] = props[propKey][k];
+//       }
+//     });
+//   });
 
-  if(isDone(result)) return result;
+//   if(isDone(result)) return result;
 
-  if(React.Children.count(props.children)) {
-    let childProps = [];
-    React.Children.forEach(props.children, child => {
-      if(!child) return;
-      childProps.push(resolveXYPropsOnComponentOrChildren(propKeys, child.props, result));
-    });
+//   if(React.Children.count(props.children)) {
+//     let childProps = runFunctionOnChildren(props.children, resolveXYPropsOnComponentOrChildren, propKeys, 'props', result);
+//     React.Children.forEach(props.children, child => {
+//       if(!child) return;
+//       childProps.push(resolveXYPropsOnComponentOrChildren(propKeys, child.props, result));
+//     });
+//       let childDomains = [];
+//       React.Children.forEach(props.children, child => {
+//         childDomains = childDomains.concat(this._resolveDomain(child.props, child.type, scaleType));
+//       });
 
-    // let childDomains = [];
-    // React.Children.forEach(props.children, child => {
-    //   childDomains = childDomains.concat(this._resolveDomain(child.props, child.type, scaleType));
-    // });
-    //
-    // console.log('combining domains', childDomains);
-    // const childDomain =  _.fromPairs(['x', 'y'].map(k => {
-    //   console.log(_.compact(_.map(childDomains, k)), scaleType[k]);
-    //   const kDomain = combineDomains(_.compact(_.map(childDomains, k)), dataTypeFromScaleType(scaleType[k]));
-    //   console.log(kDomain);
-    //   return [k, kDomain];
-    // }));
-    // console.log('combined domains', childDomain);
-    //
-    // domain = _.assign(childDomain, domain);
-    // return domain;
-  }
+//       console.log('combining domains', childDomains);
+//       const childDomain =  _.fromPairs(['x', 'y'].map(k => {
+//         console.log(_.compact(_.map(childDomains, k)), scaleType[k]);
+//         const kDomain = combineDomains(_.compact(_.map(childDomains, k)), dataTypeFromScaleType(scaleType[k]));
+//         console.log(kDomain);
+//         return [k, kDomain];
+//       }));
+//       console.log('combined domains', childDomain);
 
-  propKeys.forEach(k => {
-    result[propKeys] = props
-  })
-}
+//       domain = _.assign(childDomain, domain);
+//       return domain;
+//   }
+
+//   propKeys.forEach(k => {
+//     result[propKeys] = props
+//   })
+// }
 
 
 
@@ -133,9 +130,6 @@ export default function resolveXYScales(ComposedComponent) {
   return class extends React.Component {
     static defaultProps = _.defaults(ComposedComponent.defaultProps, {
       invertScale: {x: false, y: false},
-      // nice: {x: true, y: true},
-      // tickCount: {x: 10, y: 10},
-      // ticks: {x: null, y: null}
     });
 
     // todo better way for HOC's to pass statics through?
@@ -196,11 +190,7 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their scale types the same way
       if(React.Children.count(props.children)) {
         // console.log('get scaletype from children')
-        let childScaleTypes = [];
-        React.Children.forEach(props.children, child => {
-          if(!child) return;
-          childScaleTypes.push(this._resolveScaleType(child.props, child.type));
-        });
+        let childScaleTypes = runFunctionOnChildren(props.children, this._resolveScaleType, 'props', 'type');
         // console.log('childScaleTypes', childScaleTypes);
 
 
@@ -215,16 +205,6 @@ export default function resolveXYScales(ComposedComponent) {
         return scaleType;
       }
     }
-
-    // _resolveTicks(props, Component) {
-    //   const propsTicks = props.ticks || {};
-    //   const hasTicksOrTickCount = (v, k) =>
-    //     (_.isArray(_.get(v, `ticks.${k}`)) || _.isFinite(_.get(v, `tickCount.${k}`)));
-    //   if(_.every(['x', 'y'], k => hasTicksOrTickCount(props)))
-    //     return _.pick(props, ['tick', 'tickCount'])
-    //
-    // }
-
 
     _resolveDomain(props, Component, scaleType) {
       const propsDomain = props.domain || {};
@@ -265,11 +245,7 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their domains the same way,
       // and combine them into a single domain, if there are multiple
       if(React.Children.count(props.children)) {
-        let childDomains = [];
-        React.Children.forEach(props.children, child => {
-          if(!child) return;
-          childDomains = childDomains.concat(this._resolveDomain(child.props, child.type, scaleType));
-        });
+        let childDomains = runFunctionOnChildren(props.children, this._resolveDomain, 'props', 'type', scaleType);
 
         // console.log('combining domains', childDomains);
         const childDomain =  _.fromPairs(['x', 'y'].map(k => {
@@ -290,11 +266,7 @@ export default function resolveXYScales(ComposedComponent) {
       }
 
       if(React.Children.count(props.children)) {
-        let childTickDomains = [];
-        React.Children.forEach(props.children, child => {
-          if(!child) return;
-          childTickDomains.push(this._resolveTickDomain(child.props, child.type, scaleType, domain, scale));
-        });
+        let childTickDomains = runFunctionOnChildren(props.children, this._resolveTickDomain, 'props', 'type', scaleType, domain, scale);
 
         const tickDomain = _.fromPairs(['x', 'y'].map(k => {
           const kChildTickDomains = _.compact(childTickDomains.map(v => _.get(v, k)));
@@ -328,11 +300,7 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their paddings the same way,
       // and combine them into a single padding, if there are multiple
       if(React.Children.count(props.children)) {
-        let childPaddings = [];
-        React.Children.forEach(props.children, child => {
-          if(!child) return;
-          childPaddings = childPaddings.concat(this._resolvePadding(child.props, child.type, scaleType, domain, scale));
-        });
+        let childPaddings = runFunctionOnChildren(props.children, this._resolvePadding, 'props', 'type', scaleType, domain, scale);
 
         // console.log('combining child margins', childMargins);
         const childPadding = _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
@@ -369,11 +337,7 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their margins the same way,
       // and combine them into a single margin, if there are multiple
       if(React.Children.count(props.children)) {
-        let childMargins = [];
-        React.Children.forEach(props.children, child => {
-          if(!child) return;
-          childMargins = childMargins.concat(this._resolveMargin(child.props, child.type, scaleType, domain, scale));
-        });
+        let childMargins = runFunctionOnChildren(props.children, this._resolveMargin, 'props', 'type', scaleType, domain, scale);
 
         // console.log('combining child margins', childMargins);
         const childMargin = _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
@@ -390,8 +354,8 @@ export default function resolveXYScales(ComposedComponent) {
     _makeScales = ({width, height, scaleType={}, domain={}, margin={}, scale={}, spacing={}}) => {
       const {invertScale, nice, tickCount, ticks} = this.props;
       
-      const innerMarginWidthX = Math.abs(_.subtract.apply(_, innerRangeX(width, margin)));
-      const innerMarginWidthY = Math.abs(_.subtract.apply(_, innerRangeY(height, margin)));
+      const innerMarginWidthX = _.subtract(...innerRangeX(width, margin).reverse());
+      const innerMarginWidthY = _.subtract(...innerRangeY(height, margin));
 
       const range = {
         x: innerRangeX(innerMarginWidthX, spacing).map(v => v - (spacing.left || 0)),
@@ -409,9 +373,6 @@ export default function resolveXYScales(ComposedComponent) {
         const rangeMethod = (scaleType[k] === 'ordinal') ? 'rangePoints' : 'range';
         const kScale = initScale(scaleType[k])
           .domain(domain[k])[rangeMethod](range[k]);
-
-
-
 
         // todo - ticks, nice and getDomain should be an axis prop instead, and axis should have getDomain
 
