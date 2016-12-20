@@ -105,7 +105,7 @@ const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", 
 
 
 const LineChartExample = (props) => {
-  const colors = d3.scaleOrdinal(d3.schemeCategory10);
+  const colors = scaleOrdinal(schemeCategory10);
 
   return <div>
     <XYPlot scaleType="linear" {...{width: 600, height: 350, domain: {x: [-20, 150]}}}>
@@ -144,7 +144,7 @@ class LineChartExample2 extends React.Component {
 
   render() {
     const {activeX} = this.state;
-    const colors = d3.scaleOrdinal(d3.schemeCategory10);
+    const colors = scaleOrdinal(schemeCategory10);
 
     const line1 = d => Math.sin(d*.1);
     const line2 = d => Math.cos(d*.1);
@@ -1035,10 +1035,10 @@ const TreeMapExample = (props) => {
     }))
   };
 
-  const colorScale = d3.scaleLinear()
+  const colorScale = scaleLinear()
     .domain([0, 65])
     .range(['#6b6ecf', '#8ca252'])
-    .interpolate(d3.interpolateHcl);
+    .interpolate(interpolateHcl);
 
   return <div>
     <TreeMap
