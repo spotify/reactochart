@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import d3 from 'd3';
+import {area, scaleOrdinal, schemeCategory20b} from 'd3';
 import invariant from 'invariant';
 
 import * as CustomPropTypes from './utils/CustomPropTypes';
@@ -46,21 +46,25 @@ export default class FunnelChart extends React.Component {
   render() {
     const {data, scale, getX, getY, horizontal} = this.props;
 
-    const area = d3.svg.area()
-      .x(d => scale.x(makeAccessor(getX)(d)))
-      .y(d => scale.y(makeAccessor(getY)(d)));
+    const funnelArea = area();
+    if(horizontal) {
+      funnelArea
+        .x0(d => scale.x(-makeAccessor(getX)(d)))
+        .x1(d => scale.x(makeAccessor(getX)(d)))
+        .y(d => scale.y(makeAccessor(getY)(d)));
+    } else {
+      funnelArea
+        .x(d => scale.x(makeAccessor(getX)(d)))
+        .y0(d => scale.y(-makeAccessor(getY)(d)))
+        .y1(d => scale.y(makeAccessor(getY)(d)));
+    }
 
-    if(horizontal)
-      area.x0(d => scale.x(-makeAccessor(getX)(d)));
-    else
-      area.y0(d => scale.y(-makeAccessor(getY)(d)));
-
-    const colors = d3.scale.category20b().domain(_.range(10));
+    const colors = scaleOrdinal(schemeCategory20b).domain(_.range(10));
 
     return <g className="funnel-chart">
       {data.map((d, i) => {
         if(i == 0) return null;
-        const pathStr = area([data[i-1], d]);
+        const pathStr = funnelArea([data[i-1], d]);
 
         return <path d={pathStr} style={{fill: colors(i-1), stroke: 'transparent'}} />;
       })}

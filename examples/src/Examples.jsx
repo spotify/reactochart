@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import d3 from 'd3';
+import * as d3 from 'd3';
 import React from 'react';
 import update from 'react-addons-update';
 import numeral from 'numeral';
@@ -98,16 +98,16 @@ const barTickData = {
 };
 //console.log('rangeValue', rangeValueData);
 
-const normalDistribution = d3.random.normal(0);
+const normalDistribution = d3.randomNormal(0);
 //const randomNormal = _.times(1000, normalDistribution);
-const randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.random.normal(3, 0.5)));
+const randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.randomNormal(3, 0.5)));
 
 const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 // end fake data
 
 
 const LineChartExample = (props) => {
-  const colors = d3.scale.category10().domain(_.range(10));
+  const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
   return <div>
     <XYPlot scaleType="linear" {...{width: 600, height: 350, domain: {x: [-20, 150]}}}>
@@ -146,7 +146,7 @@ class LineChartExample2 extends React.Component {
 
   render() {
     const {activeX} = this.state;
-    const colors = d3.scale.category10().domain(_.range(10));
+    const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
     const line1 = d => Math.sin(d*.1);
     const line2 = d => Math.cos(d*.1);
@@ -1037,7 +1037,7 @@ const TreeMapExample = (props) => {
     }))
   };
 
-  const colorScale = d3.scale.linear()
+  const colorScale = d3.scaleLinear()
     .domain([0, 65])
     .range(['#6b6ecf', '#8ca252'])
     .interpolate(d3.interpolateHcl);

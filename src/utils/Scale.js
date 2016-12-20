@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import d3 from 'd3';
+import * as d3 from 'd3';
 
 import {combineDomains, domainFromData} from './Data';
 
@@ -42,11 +42,11 @@ export function inferScaleType(scale) {
 
 export function initScale(scaleType) {
   switch(scaleType) {
-    case 'linear': return d3.scale.linear();
-    case 'time': return d3.time.scale();
-    case 'ordinal': return d3.scale.ordinal();
-    case 'log': return d3.scale.log();
-    case 'pow': return d3.scale.pow();
+    case 'linear': return d3.scaleLinear();
+    case 'time': return d3.scaleTime();
+    case 'ordinal': return d3.scaleOrdinal();
+    case 'log': return d3.scaleLog();
+    case 'pow': return d3.scalePow();
   }
 }
 
