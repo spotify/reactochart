@@ -113,10 +113,7 @@ export default class YAxis extends React.Component {
     // `height` is height of inner chart *not* including spacing - add spacing to figure out where to draw axis line
     const axisLineHeight = height + spacing.top + spacing.bottom;
 
-    return <g
-      className="chart-axis chart-axis-y"
-      transform={`translate(${-spacing.left}, 0)`}
-    >
+    return <g className="chart-axis chart-axis-y">
       {showGrid ? <YGrid {...gridProps} /> : null}
 
       {showTicks ? <YTicks {...ticksProps}/> : null}

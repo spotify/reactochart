@@ -35,10 +35,10 @@ export default class YGrid extends React.Component {
     return <g className="chart-grid-y">
       {ticks.map((tick, i) => {
         return <YLine {...{
+          className, spacing,
           scale: this.props.scale,
           value: tick,
-          width: width + spacing.left + spacing.right,
-          className,
+          width: width,
           style: lineStyle,
           key: `grid-y-line-${i}`
         }} />;

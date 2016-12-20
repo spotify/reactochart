@@ -36,10 +36,10 @@ export default class XGrid extends React.Component {
     return <g className="chart-grid-x">
       {ticks.map((tick, i) => {
         return <XLine {...{
+          className, spacing,
           scale: this.props.scale,
           value: tick,
-          height: height + spacing.top + spacing.bottom,
-          className,
+          height: height,
           style: lineStyle,
           key: `grid-x-line-${i}`
         }} />;

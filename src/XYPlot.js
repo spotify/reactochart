@@ -109,6 +109,7 @@ class XYPlot extends React.Component {
       <g transform={`translate(${margin.left + spacing.left}, ${margin.top + spacing.top})`} className="chart-inner">
         <rect transform={`translate(${-spacing.left}, ${-spacing.top})`} className="plot-background" {...panelSize} />
         {React.Children.map(this.props.children, child => {
+          console.log('child', child.type.name);
           return (_.isNull(child) || _.isUndefined(child)) ? null :
             React.cloneElement(child, propsToPass);
         })}

@@ -113,10 +113,7 @@ export default class XAxis extends React.Component {
     // `width` is width of inner chart *not* including spacing - add spacing to figure out where to draw line
     const axisLineWidth = width + spacing.left + spacing.right;
 
-    return <g
-      className="chart-axis chart-axis-x"
-      transform={`translate(0, ${-spacing.top})`}
-    >
+    return <g className="chart-axis chart-axis-x">
       {showGrid ? <XGrid {...gridProps} /> : null}
 
       {showTicks ? <XTicks {...ticksProps}/> : null}

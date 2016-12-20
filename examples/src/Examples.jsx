@@ -1251,16 +1251,41 @@ const CustomAxisLabelsExample = React.createClass({
 
 class SpacingExample extends React.Component {
   render() {
-    return <XYPlot scaleType="linear" {...{width: 600, height: 350, spacing: {left: 30, top: 53, right: 16, bottom: 9} }}>
-      <XAxis title="Phase" spacing={{left: 30, top: 53, right: 16, bottom: 9}} />
-      <YAxis title="Intensity" spacing={{left: 30, top: 53, right: 16, bottom: 9}} />
-
+    const spacing = {left: 10, top: 53, right: 16, bottom: 9};
+    const lineChart = (
       <LineChart
-        spacing={{left: 30, top: 53, right: 16, bottom: 9}}
+        spacing={spacing}
         data={_.range(100)}
         getY={d => Math.sin(d*.1)}
       />
-    </XYPlot>
+    );
+
+    return <div>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing }}>
+        <XAxis title="Phase" spacing={spacing} />
+        <YAxis title="Intensity" spacing={spacing} />
+        {lineChart}
+      </XYPlot>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing }}>
+        <XAxis title="Phase" spacing={spacing} position="top" />
+        <YAxis title="Intensity" spacing={spacing} position="right"/>
+        {lineChart}
+      </XYPlot>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing }}>
+        <XTicks/><XGrid/><XAxisLabels/>
+        <YTicks/><YGrid/><YAxisLabels/>
+        {lineChart}
+      </XYPlot>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing }}>
+        <XTicks position="top"/><XGrid position="top"/><XAxisLabels position="top"/>
+        <YTicks position="right"/><YGrid position="right"/><YAxisLabels position="right"/>
+        {lineChart}
+      </XYPlot>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing }}>
+        <XTicks placement="above"/><XGrid placement="above"/><XAxisLabels placement="above"/>
+        {lineChart}
+      </XYPlot>
+    </div>
   }
 }
 
