@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import {extent} from 'd3-array';
+import {extent} from 'd3';
 
 import {methodIfFuncProp} from './util.js';
 import {makeAccessor} from './utils/Data';

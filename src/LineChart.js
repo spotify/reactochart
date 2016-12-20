@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import {bisector} from 'd3-array';
+import {bisector} from 'd3';
 import shallowEqual from './utils/shallowEqual';
 
 import {makeAccessor} from './utils/Data';

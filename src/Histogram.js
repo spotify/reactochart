@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import {histogram} from 'd3-array';
+import {histogram} from 'd3';
 
 import AreaBarChart from './AreaBarChart';
 

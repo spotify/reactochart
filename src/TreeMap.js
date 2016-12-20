@@ -1,7 +1,7 @@
 import React from 'react';
 const {PropTypes} = React;
 import _ from 'lodash';
-import {treemap} from 'd3-hierarchy';
+import {treemap} from 'd3';
 
 import {makeAccessor} from './utils/Data';
 import * as CustomPropTypes from './utils/CustomPropTypes';

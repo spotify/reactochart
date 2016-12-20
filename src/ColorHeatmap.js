@@ -1,7 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import {interpolateHcl, interpolateHsl, interpolateLab, interpolateRgb} from 'd3-interpolate';
-import {scaleLinear} from 'd3-scale';
+import {scaleLinear, interpolateHcl, interpolateHsl, interpolateLab, interpolateRgb} from 'd3';
 import invariant from 'invariant';
 
 import * as CustomPropTypes from './utils/CustomPropTypes';

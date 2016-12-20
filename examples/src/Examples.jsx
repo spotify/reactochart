@@ -1,7 +1,5 @@
 import _ from 'lodash';
-import {randomNormal} from 'd3-random';
-import {scaleOrdinal, scaleLinear, schemeCategory10} from 'd3-scale';
-import {interpolateHcl} from 'd3-interpolate';
+import {randomNormal, scaleOrdinal, scaleLinear, schemeCategory10, interpolateHcl} from 'd3';
 import React from 'react';
 import update from 'react-addons-update';
 import numeral from 'numeral';

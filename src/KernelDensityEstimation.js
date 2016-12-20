@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import {mean} from 'd3-array';
+import {mean} from 'd3';
 
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import LineChart from './LineChart.js';

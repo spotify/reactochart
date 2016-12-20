@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {extent} from 'd3-array';
+import {extent} from 'd3';
 import React from 'react';
 
 /**
