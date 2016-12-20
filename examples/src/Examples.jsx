@@ -338,7 +338,7 @@ const BarChartExample = (props) => {
   const count = 30;
   const startDate = new Date(1992, 0, 1);
 
-  const numbers = _.range(3, count);
+  const numbers = _.range(  count);
   const letters = _.times(count, n => String.fromCharCode(97 + n));
   const dates = _.times(count, n => new Date(+(startDate) + (n * 1000 * 60 * 60 * 24 * 100)));
 
@@ -354,14 +354,13 @@ const BarChartExample = (props) => {
         <h4>{horizontal ? "Horizontal" : "Vertical"}</h4>
 
         {chartDefs.map(([data, getValue]) => {
-          return <XYPlot width={320} height={320} spacing={{bottom: 30, right: 50}} margin={{bottom: 50, left: 55}}>
-            <XAxis /><YAxis nice={false}/>
+          return <XYPlot width={320} height={320}>
+            <XAxis /><YAxis />
             <BarChart
               data={data}
               horizontal={horizontal}
               getX={horizontal ? getValue : null}
               getY={horizontal ? null : getValue}
-              barThickness={10}
             />
           </XYPlot>;
         })}
@@ -1261,27 +1260,27 @@ class SpacingExample extends React.Component {
     );
 
     return <div>
-      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing }}>
-        <XAxis title="Phase" spacing={spacing} />
-        <YAxis title="Intensity" spacing={spacing} />
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
+        <XAxis title="Phase" />
+        <YAxis title="Intensity" />
         {lineChart}
       </XYPlot>
-      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing }}>
-        <XAxis title="Phase" spacing={spacing} position="top" />
-        <YAxis title="Intensity" spacing={spacing} position="right"/>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
+        <XAxis title="Phase" position="top" />
+        <YAxis title="Intensity" position="right"/>
         {lineChart}
       </XYPlot>
-      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing }}>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
         <XTicks/><XGrid/><XAxisLabels/>
         <YTicks/><YGrid/><YAxisLabels/>
         {lineChart}
       </XYPlot>
-      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing }}>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
         <XTicks position="top"/><XGrid position="top"/><XAxisLabels position="top"/>
         <YTicks position="right"/><YGrid position="right"/><YAxisLabels position="right"/>
         {lineChart}
       </XYPlot>
-      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing }}>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
         <XTicks placement="above"/><XGrid placement="above"/><XAxisLabels placement="above"/>
         {lineChart}
       </XYPlot>

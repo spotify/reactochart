@@ -128,7 +128,6 @@ export default class XAxis extends React.Component {
         className="chart-axis-line chart-axis-line-x"
         x1={-spacing.left} x2={width + spacing.right}
         y1={axisLineY} y2={axisLineY}
-        style={{stroke: 'red'}}
       />
     </g>;
   }

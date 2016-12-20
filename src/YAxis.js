@@ -127,7 +127,6 @@ export default class YAxis extends React.Component {
         className="chart-axis-line chart-axis-line-y"
         x1={axisLineX} x2={axisLineX}
         y1={-spacing.top} y2={height + spacing.bottom}
-        style={{stroke: 'red'}}
       />
     </g>;
   }

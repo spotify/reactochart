@@ -67,6 +67,7 @@ class XYPlot extends React.Component {
     // scaleType: {},
     // domain: {},
     // margin: {},
+    // @samw todo remove this when resolvePadding/Spacing is done
     spacing: {top: 0, bottom: 0, left: 0, right: 0}
   };
 
@@ -91,11 +92,6 @@ class XYPlot extends React.Component {
     const panelSize = innerSize({width, height}, margin);
     const chartSize = innerSize(panelSize, spacing);
 
-    console.log('size', {width, height});
-    console.log('panelSize', panelSize);
-    console.log('chartSize', chartSize);
-    // const chartSize = innerSize({})
-
     const handlerNames = ['onMouseMove', 'onMouseEnter', 'onMouseLeave', 'onMouseDown', 'onMouseUp', 'onClick'];
     const handlers = _.fromPairs(handlerNames.map(n => [n, methodIfFuncProp(n, this.props, this)]));
 
@@ -109,7 +105,6 @@ class XYPlot extends React.Component {
       <g transform={`translate(${margin.left + spacing.left}, ${margin.top + spacing.top})`} className="chart-inner">
         <rect transform={`translate(${-spacing.left}, ${-spacing.top})`} className="plot-background" {...panelSize} />
         {React.Children.map(this.props.children, child => {
-          console.log('child', child.type.name);
           return (_.isNull(child) || _.isUndefined(child)) ? null :
             React.cloneElement(child, propsToPass);
         })}
