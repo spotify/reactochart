@@ -338,7 +338,7 @@ const BarChartExample = (props) => {
   const count = 30;
   const startDate = new Date(1992, 0, 1);
 
-  const numbers = _.range(3, count);
+  const numbers = _.range(count);
   const letters = _.times(count, n => String.fromCharCode(97 + n));
   const dates = _.times(count, n => new Date(+(startDate) + (n * 1000 * 60 * 60 * 24 * 100)));
 
@@ -354,14 +354,13 @@ const BarChartExample = (props) => {
         <h4>{horizontal ? "Horizontal" : "Vertical"}</h4>
 
         {chartDefs.map(([data, getValue]) => {
-          return <XYPlot width={320} height={320} spacing={{bottom: 30, right: 50}} margin={{bottom: 50, left: 55}}>
-            <XAxis /><YAxis nice={false}/>
+          return <XYPlot width={320} height={320}>
+            <XAxis /><YAxis />
             <BarChart
               data={data}
               horizontal={horizontal}
               getX={horizontal ? getValue : null}
               getY={horizontal ? null : getValue}
-              barThickness={10}
             />
           </XYPlot>;
         })}
@@ -1249,14 +1248,54 @@ const CustomAxisLabelsExample = React.createClass({
   }
 });
 
+class SpacingExample extends React.Component {
+  render() {
+    const spacing = {left: 10, top: 53, right: 16, bottom: 9};
+    const lineChart = (
+      <LineChart
+        spacing={spacing}
+        data={_.range(100)}
+        getY={d => Math.sin(d*.1)}
+      />
+    );
+
+    return <div>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
+        <XAxis title="Phase" />
+        <YAxis title="Intensity" />
+        {lineChart}
+      </XYPlot>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
+        <XAxis title="Phase" position="top" />
+        <YAxis title="Intensity" position="right"/>
+        {lineChart}
+      </XYPlot>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
+        <XTicks/><XGrid/><XAxisLabels/>
+        <YTicks/><YGrid/><YAxisLabels/>
+        {lineChart}
+      </XYPlot>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
+        <XTicks position="top"/><XGrid position="top"/><XAxisLabels position="top"/>
+        <YTicks position="right"/><YGrid position="right"/><YAxisLabels position="right"/>
+        {lineChart}
+      </XYPlot>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
+        <XTicks placement="above"/><XGrid placement="above"/><XAxisLabels placement="above"/>
+        {lineChart}
+      </XYPlot>
+    </div>
+  }
+}
+
 export const examples = [
- /* {id: 'line', title: 'Line Chart', Component: LineChartExample},
+  {id: 'line', title: 'Line Chart', Component: LineChartExample},
   {id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2},
   // {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
   {id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample},
-  {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample},*/
+  {id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample},
   {id: 'barChart', title: 'Bar Chart', Component: BarChartExample},
- /* {id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample},
+  {id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample},
   {id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample},
   {id: 'area', title: 'Area Chart', Component: AreaChartExample},
   {id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample},
@@ -1271,10 +1310,10 @@ export const examples = [
   {id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample},
   {id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest},
   {id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest},
+  {id: 'spacing', title: 'Spacing', Component: SpacingExample},
   {id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample},
   {id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample},
-  {id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample},*/
-
+  {id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample},
 
   // todo rewrite these?
   // {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},

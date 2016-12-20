@@ -67,7 +67,8 @@ class YAxisValueLabels extends React.Component {
       fontSize: '14px',
       lineHeight: 1,
       textAnchor: 'end'
-    }
+    },
+    spacing: {top: 0, bottom: 0, left: 0, right: 0}
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -122,7 +123,6 @@ class YAxisValueLabels extends React.Component {
     // nudge down the tickCount and try again
     // doing this will require communicating the updated ticks/tickCount back to the parent element...
 
-    const start = performance.now();
     const {labels} = resolveYLabelsForValues(scale, ticks, formats, style);
     // console.log('resolveYLabelsForValues took ', performance.now() - start);
     // console.log('found labels', labels);
@@ -131,16 +131,16 @@ class YAxisValueLabels extends React.Component {
 
   render() {
     // todo: position: 'zero' prop to position along the zero line
-    const {width, position, distance, labelStyle, labelClassName} = this.props;
+    const {width, position, distance, labelStyle, labelClassName, spacing} = this.props;
     const scale = this.props.scale.y;
     const placement = this.props.placement || ((position === 'left') ? 'before' : 'after');
     const className = `chart-value-label chart-value-label-y ${labelClassName}`;
     const textAnchor = (placement === 'before') ? 'end' : 'start';
     const style = _.defaults({textAnchor}, labelStyle, YAxisValueLabels.defaultProps.labelStyle);
-
     const labels = this.props.labels || YAxisValueLabels.getLabels(this.props);
+    const transform = (position === 'left') ?
+      `translate(${-spacing.left}, 0)` : `translate(${width + spacing.right}, 0)`;
 
-    const transform = (position === 'left') ? '' : `translate(${width},0)`;
     return <g className="chart-value-labels-y" transform={transform}>
       {labels.map((label, i) => {
         const y = scale(label.value);
