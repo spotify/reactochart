@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import * as d3 from 'd3';
+import {randomNormal, scaleOrdinal, scaleLinear, schemeCategory10, interpolateHcl} from 'd3';
 import React from 'react';
 import update from 'react-addons-update';
 import numeral from 'numeral';
@@ -96,11 +96,9 @@ const barTickData = {
   numberNumber: randomBarData2.numberNumber.map(d => [d[0], d[1] + _.random(-5000, 5000)]),
   numberRangeNumber: rangeValueData.numberNumber.map(d => [d[0], d[1] + _.random(-5000, 5000)]),
 };
-//console.log('rangeValue', rangeValueData);
 
-const normalDistribution = d3.randomNormal(0);
-//const randomNormal = _.times(1000, normalDistribution);
-const randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.randomNormal(3, 0.5)));
+const normalDistribution = randomNormal(0);
+const randomNormalArr = _.times(1000, normalDistribution).concat(_.times(1000, randomNormal(3, 0.5)));
 
 const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 // end fake data
@@ -740,16 +738,16 @@ const HistogramKDEExample = (props) => {
       <XYPlot margin={{left: 40, right: 8}} width={700} height={300}>
         <XAxis /><YAxis />
         <Histogram
-          data={randomNormal} getValue={null}
+          data={randomNormalArr} getValue={null}
         />
         <KernelDensityEstimation
-          data={randomNormal} getX={null} bandwidth={0.5}
+          data={randomNormalArr} getX={null} bandwidth={0.5}
         />
         <KernelDensityEstimation
-          data={randomNormal} getX={null} bandwidth={0.1}
+          data={randomNormalArr} getX={null} bandwidth={0.1}
         />
         <KernelDensityEstimation
-          data={randomNormal} getX={null} bandwidth={2}
+          data={randomNormalArr} getX={null} bandwidth={2}
         />
       </XYPlot>
     </div>
@@ -762,7 +760,7 @@ const HistogramKDEExample = (props) => {
         showTicks={false}
       >
         <ScatterPlot
-          data={randomNormal}
+          data={randomNormalArr}
           getX={null}
           getY={() => Math.random()}
           pointRadius={1}
@@ -1009,16 +1007,16 @@ const KDEExample = (props) => {
         <YAxis title="Count" />
 
         <KernelDensityEstimation
-          data={randomNormal} getValue={{x: null}} bandwidth={0.5}
+          data={randomNormalArr} getValue={{x: null}} bandwidth={0.5}
         />
         <KernelDensityEstimation
-          data={randomNormal} getValue={{x: null}} bandwidth={0.1}
+          data={randomNormalArr} getValue={{x: null}} bandwidth={0.1}
         />
         <KernelDensityEstimation
-          data={randomNormal} getValue={{x: null}} bandwidth={2}
+          data={randomNormalArr} getValue={{x: null}} bandwidth={2}
         />
         <ScatterPlot
-          data={randomNormal}
+          data={randomNormalArr}
           getX={null}
           getY={d => Math.abs(d) * 10000 % 200}
           pointRadius={1}
