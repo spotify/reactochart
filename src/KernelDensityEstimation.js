@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import * as d3 from 'd3';
+import {mean} from 'd3-array';
 
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import LineChart from './LineChart.js';
@@ -75,7 +75,7 @@ class KernelDensityEstimation extends React.Component {
 function kernelDensityEstimator(kernel, x) {
   return function(sample) {
     return x.map(function(x) {
-      return [x, d3.mean(sample, function(v) { return kernel(x - v); })];
+      return [x, mean(sample, function(v) { return kernel(x - v); })];
     });
   };
 }

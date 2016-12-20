@@ -1,7 +1,6 @@
 import React from 'react';
 const {PropTypes} = React;
 import _ from 'lodash';
-import * as d3 from 'd3';
 
 import {methodIfFuncProp} from './util.js';
 import * as CustomPropTypes from './utils/CustomPropTypes';
