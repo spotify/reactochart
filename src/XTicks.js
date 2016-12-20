@@ -39,7 +39,7 @@ export default class XTicks extends React.Component {
     const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
     const className = `chart-tick chart-tick-x ${tickClassName || ''}`;
     const transform = (position === 'bottom') ?
-      `translate(0,${height + spacing.bottom})` : `translate(0,${-spacing.top})`;
+      `translate(0, ${height + spacing.bottom})` : `translate(0, ${-spacing.top})`;
 
     return <g className="chart-ticks-x" transform={transform}>
       {ticks.map((tick, i) => {

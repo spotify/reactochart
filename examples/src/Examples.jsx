@@ -338,7 +338,7 @@ const BarChartExample = (props) => {
   const count = 30;
   const startDate = new Date(1992, 0, 1);
 
-  const numbers = _.range(  count);
+  const numbers = _.range(count);
   const letters = _.times(count, n => String.fromCharCode(97 + n));
   const dates = _.times(count, n => new Date(+(startDate) + (n * 1000 * 60 * 60 * 24 * 100)));
 
@@ -1289,7 +1289,6 @@ class SpacingExample extends React.Component {
 }
 
 export const examples = [
-  {id: 'spacing', title: 'Spacing', Component: SpacingExample},
   {id: 'line', title: 'Line Chart', Component: LineChartExample},
   {id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2},
   // {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
@@ -1311,9 +1310,11 @@ export const examples = [
   {id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample},
   {id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest},
   {id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest},
+  {id: 'spacing', title: 'Spacing', Component: SpacingExample},
   {id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample},
   {id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample},
   {id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample},
+
   // todo rewrite these?
   // {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
   // {id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample},
