@@ -24,8 +24,13 @@ export default class Histogram extends React.Component {
   }
 
   componentWillMount() {
-    const histogramData = d3.layout.histogram().bins(30)(this.props.data);
-    //console.log('histogram', this.props.data, histogramData);
+    const histogram = d3.histogram()
+      .domain(this.props.domain.x)
+      .thresholds(30);
+
+    // why is `histogram` returning an array of length 40+ when it should be exactly 30???
+    const histogramData = histogram(this.props.data);
+
     this.setState({histogramData});
   }
 
@@ -35,9 +40,9 @@ export default class Histogram extends React.Component {
 
     return <AreaBarChart
       data={this.state.histogramData}
-      getX="x"
-      getXEnd={d => d.x + d.dx}
-      getY="y"
+      getX={d => d.x0}
+      getXEnd={d => d.x1}
+      getY={d => d.length}
       {...{name, scale, axisType, scaleWidth, scaleHeight, plotWidth, plotHeight}}
     />;
   }
