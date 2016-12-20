@@ -28,7 +28,7 @@ export default class XGrid extends React.Component {
   }
 
   render() {
-    const {height, tickCount, lineClassName, lineStyle} = this.props;
+    const {height, spacing, tickCount, lineClassName, lineStyle} = this.props;
     const scale = this.props.scale.x;
     const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
     const className = `chart-grid-line chart-grid-line-x ${lineClassName || ''}`;
@@ -36,10 +36,9 @@ export default class XGrid extends React.Component {
     return <g className="chart-grid-x">
       {ticks.map((tick, i) => {
         return <XLine {...{
+          height, className, spacing,
           scale: this.props.scale,
           value: tick,
-          height,
-          className,
           style: lineStyle,
           key: `grid-x-line-${i}`
         }} />;
