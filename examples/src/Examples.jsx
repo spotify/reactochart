@@ -1,5 +1,7 @@
 import _ from 'lodash';
-import * as d3 from 'd3';
+import {randomNormal} from 'd3-random';
+import {scaleOrdinal, scaleLinear, schemeCategory10} from 'd3-scale';
+import {interpolateHcl} from 'd3-interpolate';
 import React from 'react';
 import update from 'react-addons-update';
 import numeral from 'numeral';
@@ -84,7 +86,6 @@ const randomBarData2 = {
 
 const variableBins = _.range(0,12).reduce((bins, i) => {
   const lastBinEnd = bins.length ? _.last(bins)[1] : 0;
-  //return bins.concat([[lastBinEnd, lastBinEnd + _.random(5, 20)]])
   return bins.concat([[lastBinEnd, lastBinEnd + i]])
 }, []);
 
@@ -96,18 +97,17 @@ const barTickData = {
   numberNumber: randomBarData2.numberNumber.map(d => [d[0], d[1] + _.random(-5000, 5000)]),
   numberRangeNumber: rangeValueData.numberNumber.map(d => [d[0], d[1] + _.random(-5000, 5000)]),
 };
-//console.log('rangeValue', rangeValueData);
 
-const normalDistribution = d3.randomNormal(0);
-//const randomNormal = _.times(1000, normalDistribution);
-const randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.randomNormal(3, 0.5)));
+
+const normalDistribution = randomNormal(0);
+const randomNormalArr = _.times(1000, normalDistribution).concat(_.times(1000, randomNormal(3, 0.5)));
 
 const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 // end fake data
 
 
 const LineChartExample = (props) => {
-  const colors = d3.scaleOrdinal(d3.schemeCategory10);
+  const colors = scaleOrdinal(schemeCategory10);
 
   return <div>
     <XYPlot scaleType="linear" {...{width: 600, height: 350, domain: {x: [-20, 150]}}}>
@@ -146,7 +146,7 @@ class LineChartExample2 extends React.Component {
 
   render() {
     const {activeX} = this.state;
-    const colors = d3.scaleOrdinal(d3.schemeCategory10);
+    const colors = scaleOrdinal(schemeCategory10);
 
     const line1 = d => Math.sin(d*.1);
     const line2 = d => Math.cos(d*.1);
@@ -740,16 +740,16 @@ const HistogramKDEExample = (props) => {
       <XYPlot margin={{left: 40, right: 8}} width={700} height={300}>
         <XAxis /><YAxis />
         <Histogram
-          data={randomNormal} getX={null}
+          data={randomNormalArr} getX={null}
         />
         <KernelDensityEstimation
-          data={randomNormal} getX={null} bandwidth={0.5}
+          data={randomNormalArr} getX={null} bandwidth={0.5}
         />
         <KernelDensityEstimation
-          data={randomNormal} getX={null} bandwidth={0.1}
+          data={randomNormalArr} getX={null} bandwidth={0.1}
         />
         <KernelDensityEstimation
-          data={randomNormal} getX={null} bandwidth={2}
+          data={randomNormalArr} getX={null} bandwidth={2}
         />
       </XYPlot>
     </div>
@@ -762,7 +762,7 @@ const HistogramKDEExample = (props) => {
         showTicks={false}
       >
         <ScatterPlot
-          data={randomNormal}
+          data={randomNormalArr}
           getX={null}
           getY={() => Math.random()}
           pointRadius={1}
@@ -1009,16 +1009,16 @@ const KDEExample = (props) => {
         <YAxis title="Count" />
 
         <KernelDensityEstimation
-          data={randomNormal} getValue={{x: null}} bandwidth={0.5}
+          data={randomNormalArr} getValue={{x: null}} bandwidth={0.5}
         />
         <KernelDensityEstimation
-          data={randomNormal} getValue={{x: null}} bandwidth={0.1}
+          data={randomNormalArr} getValue={{x: null}} bandwidth={0.1}
         />
         <KernelDensityEstimation
-          data={randomNormal} getValue={{x: null}} bandwidth={2}
+          data={randomNormalArr} getValue={{x: null}} bandwidth={2}
         />
         <ScatterPlot
-          data={randomNormal}
+          data={randomNormalArr}
           getX={null}
           getY={d => Math.abs(d) * 10000 % 200}
           pointRadius={1}
@@ -1037,10 +1037,10 @@ const TreeMapExample = (props) => {
     }))
   };
 
-  const colorScale = d3.scaleLinear()
+  const colorScale = scaleLinear()
     .domain([0, 65])
     .range(['#6b6ecf', '#8ca252'])
-    .interpolate(d3.interpolateHcl);
+    .interpolate(interpolateHcl);
 
   return <div>
     <TreeMap
