@@ -11,7 +11,8 @@ export default class YTicks extends React.Component {
     position: 'left',
     nice: true,
     tickLength: 5,
-    tickStyle: {}
+    tickStyle: {},
+    spacing: {top: 0, bottom: 0, left: 0, right: 0}
   };
 
   static getTickDomain(props) {
@@ -32,12 +33,13 @@ export default class YTicks extends React.Component {
   }
 
   render() {
-    const {width, tickCount, position, tickLength, tickStyle, tickClassName} = this.props;
+    const {width, tickCount, position, tickLength, tickStyle, tickClassName, spacing} = this.props;
     const scale = this.props.scale.y;
     const placement = this.props.placement || ((position === 'left') ? 'before' : 'after');
     const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
     const className = `chart-tick chart-tick-y ${tickClassName || ''}`;
-    const transform = (position === 'right') ? `translate(${width}, 0)` : '';
+    const transform = (position === 'right') ?
+      `translate(${width + spacing.right}, 0)` :  `translate(${-spacing.left}, 0)`;
 
     return <g className="chart-ticks-y" transform={transform}>
       {ticks.map((tick, i) => {

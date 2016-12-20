@@ -11,7 +11,8 @@ export default class XTicks extends React.Component {
     position: 'bottom',
     nice: true,
     tickLength: 5,
-    tickStyle: {}
+    tickStyle: {},
+    spacing: {top: 0, bottom: 0, left: 0, right: 0}
   };
 
   static getTickDomain(props) {
