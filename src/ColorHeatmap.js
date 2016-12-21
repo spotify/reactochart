@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import d3 from 'd3';
+import {scaleLinear, interpolateHcl, interpolateHsl, interpolateLab, interpolateRgb} from 'd3';
 import invariant from 'invariant';
 
 import * as CustomPropTypes from './utils/CustomPropTypes';
@@ -11,11 +11,11 @@ import RangeRect from './RangeRect';
 
 function interpolatorFromType(type) {
   switch(type.toLowerCase()) {
-    case 'hcl': return d3.interpolateHcl;
-    case 'hsl': return d3.interpolateHsl;
-    case 'lab': return d3.interpolateLab;
-    case 'rgb': return d3.interpolateRgb;
-    default: return d3.interpolateHsl;
+    case 'hcl': return interpolateHcl;
+    case 'hsl': return interpolateHsl;
+    case 'lab': return interpolateLab;
+    case 'rgb': return interpolateRgb;
+    default: return interpolateHsl;
   }
 }
 
@@ -25,7 +25,7 @@ function makeColorScale(domain, colors, interpolator) {
   if(_.isString(interpolator))
     interpolator = interpolatorFromType(interpolator);
 
-  return d3.scale.linear()
+  return scaleLinear()
     .domain(domain)
     .range(colors)
     .interpolate(interpolator);
@@ -35,7 +35,7 @@ export default class ColorHeatmap extends React.Component {
   static propTypes = {
     // passed from xyplot
     scale: CustomPropTypes.xyObjectOf(React.PropTypes.func.isRequired),
-    
+
     // data array - should be 1D array of all grid values
     // (if you have a 2D array, _.flatten it)
     data: React.PropTypes.array.isRequired,
@@ -77,7 +77,7 @@ export default class ColorHeatmap extends React.Component {
       const colors = this.props.colors || (
         (valueDomain.length == 2) ?
           ['#000000', '#ffffff'] :
-          _.times(valueDomain.length, d3.scale.category10().domain(_.range(10)))
+          _.times(valueDomain.length, scale.schemeCategory10().domain(_.range(10)))
       );
       colorScale = makeColorScale(valueDomain, colors, interpolator);
     }
