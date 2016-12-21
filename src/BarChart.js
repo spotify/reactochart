@@ -1,12 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
 import invariant from 'invariant';
-
 import RangeBarChart from './RangeBarChart';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {hasXYScales} from './utils/Scale';
 import {makeAccessor, domainFromData} from './utils/Data';
-
 
 // BarChart represents a basic "Value/Value" bar chart,
 // where each bar represents a single independent variable value and a single dependent value,
@@ -70,8 +68,11 @@ export default class BarChart extends React.Component {
     const domain = BarChart.getDataDomain(props);
     const P = barThickness / 2; //padding
     const k = horizontal ? 'y' : 'x';
+    //find the edges of the tick domain, and map them through the scale function
     const [TD1, TD2] = _.map(_.pick(tickDomain[k], [0, tickDomain[k].length - 1]), scale[k]);
+    //find the edges of the data domain, and map them through the scale function
     const [D1, D2] = _.map(_.pick(domain[k], [0, domain[k].length - 1]), scale[k]);
+    //find the neccessary spacing (based on bar width) to push the bars completely inside the tick domain
     const [S1, S2] = [_.clamp(P - (D1 - TD1), 0, P), _.clamp(P - (D2 - TD2), 0, P)];//_.map([_.clamp(P - (D1 - TD1), 0, P), _.clamp(P - (TD2 - D2), 0, P)], scale[k]);
     if(horizontal){
       return {top: S2, right: 0, bottom: S1, left: 0}

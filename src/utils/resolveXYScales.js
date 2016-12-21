@@ -36,7 +36,6 @@ const errs = {
 function componentName(Component) {
   return Component.displayName || "Component wrapped by resolveXYScales";
 }
-
 function hasScaleFor(scalesObj, key) {
   return _.isObject(scalesObj) && isValidScale(scalesObj[key]);
 }
@@ -56,12 +55,6 @@ function hasAllMargins(margin) {
   const marginKeys = ['top', 'bottom', 'left', 'right'];
   return _.isObject(margin) && _.every(marginKeys, k => _.has(margin, k));
 }
-
-function hasAllPadding(padding) {
-  const paddingKeys = ['top', 'bottom', 'left', 'right'];
-  return _.isObject(padding) && _.every(paddingKeys, k => _.has(padding, k));
-}
-
 function hasAllSpacing(spacing) {
   const spacingKeys = ['top', 'bottom', 'left', 'right'];
   return _.isObject(spacing) && _.every(spacingKeys, k => _.has(spacing, k));
@@ -75,8 +68,6 @@ function runFunctionOnChildren(children, passedFunction, ...passProps) {
       passedFunction(...localProps) : null;
   }));
 }
-
-
 function omitNullUndefined(obj) {
   return _.omitBy(obj, v => _.isUndefined(v) || _.isNull(v));
 }
@@ -285,39 +276,6 @@ export default function resolveXYScales(ComposedComponent) {
     _resolveLabels(props) {
 
     }
-    _resolvePadding(props, Component, scaleType, domain, scale){
-      const propsPadding = props.padding || {};
-
-      // short-circuit if all paddings provided
-      if(hasAllPadding(propsPadding)) return propsPadding;     
-
-      let padding = omitNullUndefined(propsPadding);
-
-      if(_.isFunction(Component.getPadding)) {
-        const componentPadding = omitNullUndefined(Component.getPadding({scaleType, domain, scale, ...props}));
-        // console.log('Component.getMargin', componentMargin);
-        padding = _.assign(componentPadding, padding);
-        if(hasAllPadding(padding)) return padding;
-      }
-
-      // if Component has children,
-      // recurse through descendants to resolve their paddings the same way,
-      // and combine them into a single padding, if there are multiple
-      if(React.Children.count(props.children)) {
-        let childPaddings = runFunctionOnChildren(props.children, this._resolvePadding, 'props', 'type', scaleType, domain, scale);
-
-        // console.log('combining child margins', childMargins);
-        const childPadding = _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
-          // combine margins by taking the max value of each padding direction
-          return [k, _.get(_.maxBy(childPaddings, k), k)];
-        }));
-        // console.log('combined paddings', childPadding);
-
-        padding = _.assign(childPadding, padding);
-      }
-      return padding;
-
-    }
     _resolveSpacing(props, Component, scaleType, domain, scale){
       const propsSpacing = props.spacing || {};
 
@@ -397,10 +355,8 @@ export default function resolveXYScales(ComposedComponent) {
         x: innerRangeX(innerMarginWidthX, spacing).map(v => v - (spacing.left || 0)),
         y: innerRangeY(innerMarginWidthY, spacing).map(v => v - (spacing.top || 0))
       };
-      // console.log(height, margin, innerRangeY(height, margin));
       //innerRange functions produce range (i.e. [5,20]) and map function normalizes to 0 (i.e. [0,15])
 
-      // console.log('range', range);
       return _.fromPairs(['x', 'y'].map(k => {
         // use existing scales if provided, otherwise create new
         if(hasScaleFor(scale, k)) return [k, scale[k]];
@@ -431,7 +387,6 @@ export default function resolveXYScales(ComposedComponent) {
     };
 
     render() {
-      // console.log('xyScales Props', this.props);
       const {props} = this;
       const {width, height, nice} = props;
       const scaleFromProps = this.props.scale || {};
@@ -445,8 +400,6 @@ export default function resolveXYScales(ComposedComponent) {
       // first resolve scale types and domains
       const scaleType = this._resolveScaleType(props, ComposedComponent);
       const domain = this._resolveDomain(props, ComposedComponent, scaleType);
-      // console.log('scaleType', scaleType);
-      // console.log('domain ', domain);
       let scaleOptions = {width, height, scaleType, domain, margin: props.margin, scale: props.scale, padding: props.padding, spacing: props.spacing};
       // create a temporary scale with size & domain, which may be used by the Component to calculate margin/tickDomain
       // (eg. to create and measure labels for the scales)
@@ -482,9 +435,6 @@ export default function resolveXYScales(ComposedComponent) {
       // console.log('making scales', scaleOptions);
       const scale = this._makeScales(scaleOptions);
       
-      
-
-      // and pass scales to wrapped component
       const passedProps = _.assign({}, this.props, {scale, scaleType, margin, domain, spacing});
       return <ComposedComponent {...passedProps} />;
 
