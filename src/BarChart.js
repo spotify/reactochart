@@ -29,16 +29,6 @@ function makeRangeBarChartProps(barChartProps) {
   };
 }
 
-function getDataDomain(props) {
-  const {horizontal, data, getX, getY} = props;
-  const accessor = horizontal ?  makeAccessor(getY) : makeAccessor(getX);
-  // only have to specify range axis domain, other axis uses default domainFromData
-  const rangeAxis = horizontal ? 'y' : 'x';
-  return {
-    [rangeAxis]: domainFromData(data, accessor)
-  };
-}
-
 export default class BarChart extends React.Component {
   static propTypes = {
     scale: CustomPropTypes.xyObjectOf(React.PropTypes.func.isRequired),
@@ -64,21 +54,7 @@ export default class BarChart extends React.Component {
     return RangeBarChart.getDomain(makeRangeBarChartProps(props));
   }
   static getSpacing(props) {
-    const {barThickness, horizontal, scale, data, domain} = props;
-    const dataDomain = getDataDomain(props);
-    const P = barThickness / 2; //padding
-    const k = horizontal ? 'y' : 'x';
-    //find the edges of the tick domain, and map them through the scale function
-    const [domainHead, domainTail] = [_.first(domain[k]), _.last(domain[k])].map(scale[k]);
-    //find the edges of the data domain, and map them through the scale function
-    const [dataDomainHead, dataDomainTail] = [_.first(dataDomain[k]), _.last(dataDomain[k])].map(scale[k]);
-    //find the neccessary spacing (based on bar width) to push the bars completely inside the tick domain
-    const [spacingHead, spacingTail] = [_.clamp(P - (dataDomainTail - domainTail), 0, P), _.clamp(P - (dataDomainHead - domainHead), 0, P)];
-    if(horizontal){
-      return {top: spacingHead, right: 0, bottom: spacingTail, left: 0}
-    } else {
-      return {top: 0, right: spacingTail, bottom: 0, left: spacingHead}
-    }
+    return RangeBarChart.getSpacing(makeRangeBarChartProps(props));
   }
   render() {
     invariant(hasXYScales(this.props.scale), `BarChart.props.scale.x and scale.y must both be valid d3 scales`);

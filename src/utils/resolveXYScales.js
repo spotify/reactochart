@@ -9,6 +9,7 @@ import {
   inferDatasetsType,
   datasetsFromPropsOrDescendants,
   combineDomains,
+  combineBorderObjects,
   isValidDomain
 } from './Data';
 
@@ -20,7 +21,7 @@ import {
   isValidScale
 } from './Scale';
 
-import {innerRangeX, innerRangeY} from './Margin';
+import {innerRangeX, innerRangeY, innerWidth, innerHeight} from './Margin';
 
 /**
  * `resolveXYScales` is a higher-order-component.
@@ -290,14 +291,11 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their spacings the same way,
       // and combine them into a single spacing, if there are multiple
       if(React.Children.count(props.children)) {
-        let childspacings = mapOverChildren(props.children, this._resolveSpacing, 'props', 'type', scaleType, domain, scale);
+        let childSpacings = mapOverChildren(props.children, this._resolveSpacing, 'props', 'type', scaleType, domain, scale);
 
-        const childspacing = _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
-          // combine margins by taking the max value of each spacing direction
-          return [k, _.get(_.maxBy(childspacings, k), k)];
-        }));
+        const childSpacing = combineBorderObjects(childSpacings);
 
-        spacing = _.assign(childspacing, spacing);
+        spacing = _.assign(childSpacing, spacing);
       }
       return spacing;
 
@@ -326,11 +324,7 @@ export default function resolveXYScales(ComposedComponent) {
         let childMargins = mapOverChildren(props.children, this._resolveMargin, 'props', 'type', scaleType, domain, scale);
 
         // console.log('combining child margins', childMargins);
-        const childMargin = _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
-          // combine margins by taking the max value of each margin direction
-          return [k, _.get(_.maxBy(childMargins, k), k)];
-        }));
-        // console.log('combined margins', childMargin);
+        const childMargin = combineBorderObjects(childMargins);
 
         margin = _.assign(childMargin, margin);
       }
@@ -340,12 +334,12 @@ export default function resolveXYScales(ComposedComponent) {
     _makeScales = ({width, height, scaleType={}, domain={}, margin={}, scale={}, spacing={}}) => {
       const {invertScale, nice, tickCount, ticks} = this.props;
       
-      const innerMarginWidthX = _.subtract(...innerRangeX(width, margin).reverse());
-      const innerMarginWidthY = _.subtract(...innerRangeY(height, margin));
+      const innerMarginWidth = innerWidth(width, margin);
+      const innerMarginHeight = innerHeight(height, margin);
 
       const range = {
-        x: innerRangeX(innerMarginWidthX, spacing).map(v => v - (spacing.left || 0)),
-        y: innerRangeY(innerMarginWidthY, spacing).map(v => v - (spacing.top || 0))
+        x: innerRangeX(innerMarginWidth, spacing).map(v => v - (spacing.left || 0)),
+        y: innerRangeY(innerMarginHeight, spacing).map(v => v - (spacing.top || 0))
       };
       //innerRange functions produce range (i.e. [5,20]) and map function normalizes to 0 (i.e. [0,15])
 

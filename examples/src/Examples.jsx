@@ -1313,8 +1313,7 @@ export const examples = [
   {id: 'spacing', title: 'Spacing', Component: SpacingExample},
   {id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample},
   {id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample},
-  {id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample},
-  {id: 'spacing', title: 'Spacing', Component: SpacingExample}
+  {id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample}
 
   // todo rewrite these?
   // {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
