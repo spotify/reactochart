@@ -1,15 +1,19 @@
 import React from 'react';
 import _ from 'lodash';
-import d3 from 'd3';
+import {histogram} from 'd3';
 
+import * as CustomPropTypes from './utils/CustomPropTypes';
+import {makeAccessor, domainFromRangeData} from './utils/Data';
 import AreaBarChart from './AreaBarChart';
 
+// todo make histogram work horizontally *or* vertically
 export default class Histogram extends React.Component {
   static propTypes = {
     // the array of data objects
     data: React.PropTypes.array.isRequired,
-    // accessor for X & Y coordinates
-    getValue: React.PropTypes.object,
+    // accessors for X & Y coordinates
+    getValue: CustomPropTypes.getter,
+
     axisType: React.PropTypes.object,
     scale: React.PropTypes.object
   };
@@ -24,8 +28,15 @@ export default class Histogram extends React.Component {
   }
 
   componentWillMount() {
-    const histogramData = d3.layout.histogram().bins(30)(this.props.data);
-    //console.log('histogram', this.props.data, histogramData);
+    const {domain, getValue, data} = this.props;
+    const chartHistogram = histogram()
+      .domain(domain.x)
+      // todo - get this working with arbitrary getValue accessor - seems to be broken -DD
+      .value(makeAccessor(getValue))
+      .thresholds(30);
+
+    const histogramData = chartHistogram(data);
+
     this.setState({histogramData});
   }
 
@@ -35,9 +46,9 @@ export default class Histogram extends React.Component {
 
     return <AreaBarChart
       data={this.state.histogramData}
-      getX="x"
-      getXEnd={d => d.x + d.dx}
-      getY="y"
+      getX={d => d.x0}
+      getXEnd={d => d.x1}
+      getY={d => d.length}
       {...{name, scale, axisType, scaleWidth, scaleHeight, plotWidth, plotHeight}}
     />;
   }
