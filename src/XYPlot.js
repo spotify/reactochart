@@ -1,6 +1,5 @@
 import React from 'react';
 import _ from 'lodash';
-import d3 from 'd3';
 
 import resolveObjectProps from './utils/resolveObjectProps';
 import resolveXYScales from './utils/resolveXYScales';
@@ -14,6 +13,14 @@ function indexOfClosestNumberInList(number, list) {
   }, 0);
 }
 
+function invertPointScale(scale, rangeValue) {
+  // shim until d3.scalePoint.invert() is implemented for real
+  // given a value from the output range, returns the *nearest* corresponding value in the input domain
+  const rangePoints = scale.domain().map(domainValue => scale(domainValue));
+  const nearestPointIndex = indexOfClosestNumberInList(rangeValue, rangePoints);
+  return scale.domain()[nearestPointIndex];
+}
+
 function getMouseOptions(event, {scale, height, width, margin}) {
   const chartBB = event.currentTarget.getBoundingClientRect();
   const outerX = Math.round(event.clientX - chartBB.left);
@@ -25,11 +32,11 @@ function getMouseOptions(event, {scale, height, width, margin}) {
 
   const xValue = (!_.inRange(innerX, 0, chartSize.width /* + padding.left + padding.right */)) ? null :
     (scaleType.x === 'ordinal') ?
-      scale.x.domain()[indexOfClosestNumberInList(innerX, scale.x.range())] :
+      invertPointScale(scale.x, innerX) :
       scale.x.invert(innerX);
   const yValue = (!_.inRange(innerY, 0, chartSize.height /* + padding.top + padding.bottom */)) ? null :
     (scaleType.y === 'ordinal') ?
-      scale.y.domain()[indexOfClosestNumberInList(innerY, scale.y.range())] :
+      invertPointScale(scale.y, innerY) :
       scale.y.invert(innerY);
 
   return {event, outerX, outerY, innerX, innerY, xValue, yValue, scale, margin};

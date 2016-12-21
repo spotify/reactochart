@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import d3 from 'd3';
+import {extent} from 'd3';
 import React from 'react';
 
 /**
@@ -86,13 +86,13 @@ export function combineDomains(domains, dataType) {
   if(!_.isArray(domains)) return undefined;
   return (dataType === 'categorical') ?
     _.uniq(_.flatten(_.compact(domains))) :
-    d3.extent(_.flatten(domains));
+    extent(_.flatten(domains));
 }
 
 export function domainFromData(data, accessor = _.identity, type = undefined) {
   if(!type) type = inferDataType(data, accessor);
   return (type === 'number' || type === 'time') ?
-    d3.extent(data.map(accessor)) :
+    extent(data.map(accessor)) :
     _.uniq(data.map(accessor));
 }
 
@@ -114,9 +114,9 @@ export function domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, 
   switch(dataType) {
     case 'number':
     case 'time':
-      return d3.extent(_.flatten([
-        d3.extent(data, (d, i) => +rangeStartAccessor(d, i)),
-        d3.extent(data, (d, i) => +rangeEndAccessor(d, i))
+      return extent(_.flatten([
+        extent(data, (d, i) => +rangeStartAccessor(d, i)),
+        extent(data, (d, i) => +rangeEndAccessor(d, i))
       ]));
     case 'categorical':
       return _.uniq(_.flatten([data.map(rangeStartAccessor), data.map(rangeEndAccessor)]));
