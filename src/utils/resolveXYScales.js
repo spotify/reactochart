@@ -334,12 +334,12 @@ export default function resolveXYScales(ComposedComponent) {
     _makeScales = ({width, height, scaleType={}, domain={}, margin={}, scale={}, spacing={}}) => {
       const {invertScale, nice, tickCount, ticks} = this.props;
       
-      const innerMarginWidth = innerWidth(width, margin);
-      const innerMarginHeight = innerHeight(height, margin);
+      const innerChartWidth = innerWidth(width, margin);
+      const innerChartHeight = innerHeight(height, margin);
 
       const range = {
-        x: innerRangeX(innerMarginWidth, spacing).map(v => v - (spacing.left || 0)),
-        y: innerRangeY(innerMarginHeight, spacing).map(v => v - (spacing.top || 0))
+        x: innerRangeX(innerChartWidth, spacing).map(v => v - (spacing.left || 0)),
+        y: innerRangeY(innerChartHeight, spacing).map(v => v - (spacing.top || 0))
       };
       //innerRange functions produce range (i.e. [5,20]) and map function normalizes to 0 (i.e. [0,15])
 
