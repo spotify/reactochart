@@ -342,7 +342,7 @@ const BarChartExample = (props) => {
   const letters = _.times(count, n => String.fromCharCode(97 + n));
   const dates = _.times(count, n => new Date(+(startDate) + (n * 1000 * 60 * 60 * 24 * 100)));
 
-  const getNumberValue = (d) => 2 + Math.cos(d / 10);
+  const getNumberValue = (d) => 1.97 + Math.cos(d / 10);
   const getDateValue = (d) => getNumberValue(d.getFullYear() + (d.getMonth() / 12));
   const getLetterValue = (d) => getNumberValue(d.charCodeAt(0));
 
@@ -1310,7 +1310,6 @@ export const examples = [
   {id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample},
   {id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest},
   {id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest},
-  {id: 'spacing', title: 'Spacing', Component: SpacingExample},
   {id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample},
   {id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample},
   {id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample}
