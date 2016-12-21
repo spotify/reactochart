@@ -49,7 +49,7 @@ export default class BarChart extends React.Component {
     barStyle: {}
   };
 
-  // todo: static getDomain
+  // gets data domain of dependent variable
   static getDataDomain(props) {
     const {horizontal, data, getX, getY} = props;
     const accessor = horizontal ?  makeAccessor(getY) : makeAccessor(getX);
@@ -59,6 +59,7 @@ export default class BarChart extends React.Component {
       [rangeAxis]: domainFromData(data, accessor)
     };
   }
+  // gets data domain of independent variable
   static getDomain(props) {
     return RangeBarChart.getDomain(makeRangeBarChartProps(props));
   }
