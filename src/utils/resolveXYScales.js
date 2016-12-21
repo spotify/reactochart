@@ -59,10 +59,12 @@ function hasAllSpacing(spacing) {
   const spacingKeys = ['top', 'bottom', 'left', 'right'];
   return _.isObject(spacing) && _.every(spacingKeys, k => _.has(spacing, k));
 }
-function runFunctionOnChildren(children, passedFunction, ...passProps) {
-  // returns the result of looping over all children and calling a static method on each one
+function mapOverChildren(children, passedFunction, ...passProps) {
+  // returns the result of looping over all children and calling a method on each one
   return _.compact(React.Children.map(children, child => {
     // if a string denotes that it should be a child attribute
+    // the only two strings ever passed into ...passProps, are 'type' amd 'props', both of which are to be called on child
+    // every other item in ...passProps should be passed down the recursive tree to be available to all passedFunction executions
     const localProps = passProps.map(item => typeof item === 'string' ? child[item] : item);
     return _.isFunction(passedFunction) ?
       passedFunction(...localProps) : null;
@@ -91,7 +93,7 @@ function omitNullUndefined(obj) {
 //   if(isDone(result)) return result;
 
 //   if(React.Children.count(props.children)) {
-//     let childProps = runFunctionOnChildren(props.children, resolveXYPropsOnComponentOrChildren, propKeys, 'props', result);
+//     let childProps = mapOverChildren(props.children, resolveXYPropsOnComponentOrChildren, propKeys, 'props', result);
 //     React.Children.forEach(props.children, child => {
 //       if(!child) return;
 //       childProps.push(resolveXYPropsOnComponentOrChildren(propKeys, child.props, result));
@@ -128,8 +130,7 @@ export default function resolveXYScales(ComposedComponent) {
     });
 
     // todo better way for HOC's to pass statics through?
-    static getScaleType = ComposedComponent.getScaleType;
-    static getPadding = ComposedComponent.getPadding; 
+    static getScaleType = ComposedComponent.getScaleType; 
     static getSpacing = ComposedComponent.getSpacing;
     static getDomain = ComposedComponent.getDomain;
     static getMargin = ComposedComponent.getMargin;
@@ -186,7 +187,7 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their scale types the same way
       if(React.Children.count(props.children)) {
         // console.log('get scaletype from children')
-        let childScaleTypes = runFunctionOnChildren(props.children, this._resolveScaleType, 'props', 'type');
+        let childScaleTypes = mapOverChildren(props.children, this._resolveScaleType, 'props', 'type');
 
         const childScaleType =  _.fromPairs(['x', 'y'].map(k => {
           // todo warn on multiple scale types, probably not what you want
@@ -237,7 +238,7 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their domains the same way,
       // and combine them into a single domain, if there are multiple
       if(React.Children.count(props.children)) {
-        let childDomains = runFunctionOnChildren(props.children, this._resolveDomain, 'props', 'type', scaleType);
+        let childDomains = mapOverChildren(props.children, this._resolveDomain, 'props', 'type', scaleType);
 
         const childDomain =  _.fromPairs(['x', 'y'].map(k => {
           const kDomain = combineDomains(_.compact(_.map(childDomains, k)), dataTypeFromScaleType(scaleType[k]));
@@ -256,7 +257,7 @@ export default function resolveXYScales(ComposedComponent) {
       }
 
       if(React.Children.count(props.children)) {
-        let childTickDomains = runFunctionOnChildren(props.children, this._resolveTickDomain, 'props', 'type', scaleType, domain, scale);
+        let childTickDomains = mapOverChildren(props.children, this._resolveTickDomain, 'props', 'type', scaleType, domain, scale);
 
         const tickDomain = _.fromPairs(['x', 'y'].map(k => {
           const kChildTickDomains = _.compact(childTickDomains.map(v => _.get(v, k)));
@@ -289,7 +290,7 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their spacings the same way,
       // and combine them into a single spacing, if there are multiple
       if(React.Children.count(props.children)) {
-        let childspacings = runFunctionOnChildren(props.children, this._resolveSpacing, 'props', 'type', scaleType, domain, scale);
+        let childspacings = mapOverChildren(props.children, this._resolveSpacing, 'props', 'type', scaleType, domain, scale);
 
         const childspacing = _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
           // combine margins by taking the max value of each spacing direction
@@ -322,7 +323,7 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their margins the same way,
       // and combine them into a single margin, if there are multiple
       if(React.Children.count(props.children)) {
-        let childMargins = runFunctionOnChildren(props.children, this._resolveMargin, 'props', 'type', scaleType, domain, scale);
+        let childMargins = mapOverChildren(props.children, this._resolveMargin, 'props', 'type', scaleType, domain, scale);
 
         // console.log('combining child margins', childMargins);
         const childMargin = _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {

@@ -29,6 +29,16 @@ function makeRangeBarChartProps(barChartProps) {
   };
 }
 
+function getDataDomain(props) {
+  const {horizontal, data, getX, getY} = props;
+  const accessor = horizontal ?  makeAccessor(getY) : makeAccessor(getX);
+  // only have to specify range axis domain, other axis uses default domainFromData
+  const rangeAxis = horizontal ? 'y' : 'x';
+  return {
+    [rangeAxis]: domainFromData(data, accessor)
+  };
+}
+
 export default class BarChart extends React.Component {
   static propTypes = {
     scale: CustomPropTypes.xyObjectOf(React.PropTypes.func.isRequired),
@@ -49,36 +59,25 @@ export default class BarChart extends React.Component {
     barStyle: {}
   };
 
-  // gets data domain of dependent variable
-  static getDataDomain(props) {
-    const {horizontal, data, getX, getY} = props;
-    const accessor = horizontal ?  makeAccessor(getY) : makeAccessor(getX);
-    // only have to specify range axis domain, other axis uses default domainFromData
-    const rangeAxis = horizontal ? 'y' : 'x';
-    return {
-      [rangeAxis]: domainFromData(data, accessor)
-    };
-  }
   // gets data domain of independent variable
   static getDomain(props) {
     return RangeBarChart.getDomain(makeRangeBarChartProps(props));
   }
   static getSpacing(props) {
-    const {barThickness, horizontal, scale, data} = props;
-    const tickDomain = props.domain;
-    const domain = BarChart.getDataDomain(props);
+    const {barThickness, horizontal, scale, data, domain} = props;
+    const dataDomain = getDataDomain(props);
     const P = barThickness / 2; //padding
     const k = horizontal ? 'y' : 'x';
     //find the edges of the tick domain, and map them through the scale function
-    const [TD1, TD2] = _.map(_.pick(tickDomain[k], [0, tickDomain[k].length - 1]), scale[k]);
+    const [domainHead, domainTail] = [_.first(domain[k]), _.last(domain[k])].map(scale[k]);
     //find the edges of the data domain, and map them through the scale function
-    const [D1, D2] = _.map(_.pick(domain[k], [0, domain[k].length - 1]), scale[k]);
+    const [dataDomainHead, dataDomainTail] = [_.first(dataDomain[k]), _.last(dataDomain[k])].map(scale[k]);
     //find the neccessary spacing (based on bar width) to push the bars completely inside the tick domain
-    const [S1, S2] = [_.clamp(P - (D1 - TD1), 0, P), _.clamp(P - (D2 - TD2), 0, P)];
+    const [spacingHead, spacingTail] = [_.clamp(P - (dataDomainTail - domainTail), 0, P), _.clamp(P - (dataDomainHead - domainHead), 0, P)];
     if(horizontal){
-      return {top: S2, right: 0, bottom: S1, left: 0}
+      return {top: spacingHead, right: 0, bottom: spacingTail, left: 0}
     } else {
-      return {top: 0, right: S1, bottom: 0, left: S2}
+      return {top: 0, right: spacingTail, bottom: 0, left: spacingHead}
     }
   }
   render() {

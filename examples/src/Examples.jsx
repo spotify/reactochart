@@ -338,7 +338,7 @@ const BarChartExample = (props) => {
   const count = 30;
   const startDate = new Date(1992, 0, 1);
 
-  const numbers = _.range(count);
+  const numbers = _.range(count).reverse();
   const letters = _.times(count, n => String.fromCharCode(97 + n));
   const dates = _.times(count, n => new Date(+(startDate) + (n * 1000 * 60 * 60 * 24 * 100)));
 
@@ -354,7 +354,7 @@ const BarChartExample = (props) => {
         <h4>{horizontal ? "Horizontal" : "Vertical"}</h4>
 
         {chartDefs.map(([data, getValue]) => {
-          return <XYPlot width={320} height={320}>
+          return <XYPlot width={320} height={320} invertScale={{x: false, y: true}}>
             <XAxis /><YAxis />
             <BarChart
               data={data}
