@@ -187,8 +187,6 @@ export default function resolveXYScales(ComposedComponent) {
       if(React.Children.count(props.children)) {
         // console.log('get scaletype from children')
         let childScaleTypes = runFunctionOnChildren(props.children, this._resolveScaleType, 'props', 'type');
-        // console.log('childScaleTypes', childScaleTypes);
-
 
         const childScaleType =  _.fromPairs(['x', 'y'].map(k => {
           // todo warn on multiple scale types, probably not what you want
@@ -215,7 +213,6 @@ export default function resolveXYScales(ComposedComponent) {
       // use it to determine remaining domains
       if(_.isFunction(Component.getDomain)) {
         const componentDomain = omitNullUndefined(Component.getDomain({scaleType, ...props}));
-        // console.log('Component.getDomain', componentDomain);
         domain = _.assign(componentDomain, domain);
         if(hasXYDomains(domain)) return domain;
       }
@@ -231,7 +228,6 @@ export default function resolveXYScales(ComposedComponent) {
           const kDomain = domainFromDatasets(datasets, kAccessor, dataType);
           return [k, kDomain];
         }));
-        // console.log('datasetDomain', datasetDomain);
 
         domain = _.assign(datasetDomain, domain);
         if(hasXYDomains(domain)) return domain;
@@ -243,12 +239,11 @@ export default function resolveXYScales(ComposedComponent) {
       if(React.Children.count(props.children)) {
         let childDomains = runFunctionOnChildren(props.children, this._resolveDomain, 'props', 'type', scaleType);
 
-        // console.log('combining domains', childDomains);
         const childDomain =  _.fromPairs(['x', 'y'].map(k => {
           const kDomain = combineDomains(_.compact(_.map(childDomains, k)), dataTypeFromScaleType(scaleType[k]));
           return [k, kDomain];
         }));
-        // console.log('combined domains', childDomain); 
+
         domain = _.assign(childDomain, domain);
         return domain;
       }
@@ -286,7 +281,6 @@ export default function resolveXYScales(ComposedComponent) {
 
       if(_.isFunction(Component.getSpacing)) {
         const componentSpacing = omitNullUndefined(Component.getSpacing({scaleType, domain, scale, ...props}));
-        // console.log('Component.getMargin', componentMargin);
         spacing = _.assign(componentSpacing, spacing);
         if(hasAllSpacing(spacing)) return spacing;
       }
@@ -297,12 +291,10 @@ export default function resolveXYScales(ComposedComponent) {
       if(React.Children.count(props.children)) {
         let childspacings = runFunctionOnChildren(props.children, this._resolveSpacing, 'props', 'type', scaleType, domain, scale);
 
-        // console.log('combining child margins', childMargins);
         const childspacing = _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
           // combine margins by taking the max value of each spacing direction
           return [k, _.get(_.maxBy(childspacings, k), k)];
         }));
-        // console.log('combined spacings', childspacing);
 
         spacing = _.assign(childspacing, spacing);
       }
@@ -322,7 +314,6 @@ export default function resolveXYScales(ComposedComponent) {
       // use it to determine remaining domains
       if(_.isFunction(Component.getMargin)) {
         const componentMargin = omitNullUndefined(Component.getMargin({scaleType, domain, scale, ...props}));
-        // console.log('Component.getMargin', componentMargin);
         margin = _.assign(componentMargin, margin);
         if(hasAllMargins(margin)) return margin;
       }
@@ -432,7 +423,6 @@ export default function resolveXYScales(ComposedComponent) {
 
       // create real scales from resolved margins
       scaleOptions = {...scaleOptions, margin, spacing};
-      // console.log('making scales', scaleOptions);
       const scale = this._makeScales(scaleOptions);
       
       const passedProps = _.assign({}, this.props, {scale, scaleType, margin, domain, spacing});
