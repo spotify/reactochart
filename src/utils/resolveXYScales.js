@@ -60,15 +60,15 @@ function hasAllSpacing(spacing) {
   const spacingKeys = ['top', 'bottom', 'left', 'right'];
   return _.isObject(spacing) && _.every(spacingKeys, k => _.has(spacing, k));
 }
-function mapOverChildren(children, passedFunction, ...passProps) {
-  // returns the result of looping over all children and calling a method on each one
+
+function mapOverChildren(children, iteratee, ...iterateeArgs) {
+  // loop over all children (react elements) and call iteratee (a function) on each one
+  // iteratee is called with parameters (child.props, child.type, ...iterateeArgs)
+  if(!_.isFunction(iteratee)) throw new Error('mapOverChildren iteratee must be a function');
+
   return _.compact(React.Children.map(children, child => {
-    // if a string denotes that it should be a child attribute
-    // the only two strings ever passed into ...passProps, are 'type' amd 'props', both of which are to be called on child
-    // every other item in ...passProps should be passed down the recursive tree to be available to all passedFunction executions
-    const localProps = passProps.map(item => typeof item === 'string' ? child[item] : item);
-    return _.isFunction(passedFunction) ?
-      passedFunction(...localProps) : null;
+    if(!child || !React.isValidElement(child)) return null;
+    return iteratee(child.props, child.type, ...iterateeArgs);
   }));
 }
 function omitNullUndefined(obj) {
@@ -188,7 +188,7 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their scale types the same way
       if(React.Children.count(props.children)) {
         // console.log('get scaletype from children')
-        let childScaleTypes = mapOverChildren(props.children, this._resolveScaleType, 'props', 'type');
+        let childScaleTypes = mapOverChildren(props.children, this._resolveScaleType);
 
         const childScaleType =  _.fromPairs(['x', 'y'].map(k => {
           // todo warn on multiple scale types, probably not what you want
@@ -239,7 +239,7 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their domains the same way,
       // and combine them into a single domain, if there are multiple
       if(React.Children.count(props.children)) {
-        let childDomains = mapOverChildren(props.children, this._resolveDomain, 'props', 'type', scaleType);
+        let childDomains = mapOverChildren(props.children, this._resolveDomain, scaleType);
 
         const childDomain =  _.fromPairs(['x', 'y'].map(k => {
           const kDomain = combineDomains(_.compact(_.map(childDomains, k)), dataTypeFromScaleType(scaleType[k]));
@@ -258,7 +258,7 @@ export default function resolveXYScales(ComposedComponent) {
       }
 
       if(React.Children.count(props.children)) {
-        let childTickDomains = mapOverChildren(props.children, this._resolveTickDomain, 'props', 'type', scaleType, domain, scale);
+        let childTickDomains = mapOverChildren(props.children, this._resolveTickDomain, scaleType, domain, scale);
 
         const tickDomain = _.fromPairs(['x', 'y'].map(k => {
           const kChildTickDomains = _.compact(childTickDomains.map(v => _.get(v, k)));
@@ -291,7 +291,7 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their spacings the same way,
       // and combine them into a single spacing, if there are multiple
       if(React.Children.count(props.children)) {
-        let childSpacings = mapOverChildren(props.children, this._resolveSpacing, 'props', 'type', scaleType, domain, scale);
+        let childSpacings = mapOverChildren(props.children, this._resolveSpacing, scaleType, domain, scale);
 
         const childSpacing = combineBorderObjects(childSpacings);
 
@@ -321,7 +321,7 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their margins the same way,
       // and combine them into a single margin, if there are multiple
       if(React.Children.count(props.children)) {
-        let childMargins = mapOverChildren(props.children, this._resolveMargin, 'props', 'type', scaleType, domain, scale);
+        let childMargins = mapOverChildren(props.children, this._resolveMargin, scaleType, domain, scale);
 
         // console.log('combining child margins', childMargins);
         const childMargin = combineBorderObjects(childMargins);
