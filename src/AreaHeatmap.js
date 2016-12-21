@@ -7,7 +7,13 @@ import {makeAccessor} from './utils/Data';
 
 export default class AreaHeatmap extends React.Component {
   static propTypes = {
-    unitsPerPixel: React.PropTypes.number
+    unitsPerPixel: React.PropTypes.number,
+    rectClassName: React.PropTypes.string,
+    rectStyle: React.PropTypes.object
+  };
+  static defaultProps = {
+    rectClassName: '',
+    rectStyle: {}
   };
 
   static getDomain(props) {
@@ -46,7 +52,8 @@ export default class AreaHeatmap extends React.Component {
   };
 
   render() {
-    const {data, getArea, getX, getXEnd, getY, getYEnd, scale, scaleWidth, scaleHeight} = this.props;
+    const {data, getArea, getX, getXEnd, getY, getYEnd, scale, scaleWidth, scaleHeight, rectClassName, rectStyle}
+      = this.props;
     const [areaAccessor, xAccessor, xEndAccessor, yAccessor, yEndAccessor] =
       [getArea, getX, getXEnd, getY, getYEnd].map(makeAccessor);
 
@@ -90,7 +97,11 @@ export default class AreaHeatmap extends React.Component {
 
         if(!_.every([x, y, width, height], _.isFinite)) return null;
 
-        return <rect {...{x, y, width, height, className: 'area-heatmap-rect', key: `rect-${i}`}}/>;
+        const className = `area-heatmap-rect ${rectClassName}`;
+        const style = rectStyle;
+        const key = `rect-${i}`;
+
+        return <rect {...{x, y, width, height, className, style, key}}/>;
       })}
     </g>;
   }
