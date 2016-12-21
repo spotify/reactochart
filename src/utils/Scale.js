@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import {scaleLinear, scaleTime, scaleOrdinal, scaleLog, scalePow} from 'd3';
+import {scaleLinear, scaleTime, scalePoint, scaleLog, scalePow} from 'd3';
 
 import {combineDomains, domainFromData} from './Data';
 
@@ -44,7 +44,7 @@ export function initScale(scaleType) {
   switch(scaleType) {
     case 'linear': return scaleLinear();
     case 'time': return scaleTime();
-    case 'ordinal': return scaleOrdinal();
+    case 'ordinal': return scalePoint();
     case 'log': return scaleLog();
     case 'pow': return scalePow();
   }

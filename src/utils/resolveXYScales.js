@@ -357,15 +357,7 @@ export default function resolveXYScales(ComposedComponent) {
         if(hasScaleFor(scale, k)) return [k, scale[k]];
 
         // create scale from domain/range
-        // PM/ER December 19, 2016 - Unsure whether or not this is the best approach.
-        //                           Importing d3 in this file also seems wrong. Graphs render correctly.
-        let kScale;
-        const rangeMethod = (scaleType[k] === 'ordinal') ? 'rangePoints' : 'range';
-        if (scaleType[k] === 'ordinal') {
-          kScale = scalePoint().domain(domain[k]).range(range[k]);
-        } else {
-          kScale = initScale(scaleType[k]).domain(domain[k])[rangeMethod](range[k]);
-        }
+        const kScale = initScale(scaleType[k]).domain(domain[k]).range(range[k]);
 
         // todo - ticks, nice and getDomain should be an axis prop instead, and axis should have getDomain
 
