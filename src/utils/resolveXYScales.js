@@ -62,6 +62,10 @@ function hasAllPadding(padding) {
   return _.isObject(padding) && _.every(paddingKeys, k => _.has(padding, k));
 }
 
+function hasAllSpacing(spacing) {
+  const spacingKeys = ['top', 'bottom', 'left', 'right'];
+  return _.isObject(spacing) && _.every(spacingKeys, k => _.has(spacing, k));
+}
 function runFunctionOnChildren(children, passedFunction, ...passProps) {
   // returns the result of looping over all children and calling a static method on each one
   return _.compact(React.Children.map(children, child => {
@@ -135,6 +139,7 @@ export default function resolveXYScales(ComposedComponent) {
     // todo better way for HOC's to pass statics through?
     static getScaleType = ComposedComponent.getScaleType;
     static getPadding = ComposedComponent.getPadding; 
+    static getSpacing = ComposedComponent.getSpacing;
     static getDomain = ComposedComponent.getDomain;
     static getMargin = ComposedComponent.getMargin;
 
@@ -252,8 +257,7 @@ export default function resolveXYScales(ComposedComponent) {
           const kDomain = combineDomains(_.compact(_.map(childDomains, k)), dataTypeFromScaleType(scaleType[k]));
           return [k, kDomain];
         }));
-        // console.log('combined domains', childDomain);
-
+        // console.log('combined domains', childDomain); 
         domain = _.assign(childDomain, domain);
         return domain;
       }
@@ -313,6 +317,38 @@ export default function resolveXYScales(ComposedComponent) {
       }
       return padding;
 
+    }
+    _resolveSpacing(props, Component, scaleType, domain, scale){
+      const propsSpacing = props.spacing || {};
+
+      // short-circuit if all spacings provided
+      if(hasAllSpacing(propsSpacing)) return propsSpacing;     
+
+      let spacing = omitNullUndefined(propsSpacing);
+
+      if(_.isFunction(Component.getSpacing)) {
+        const componentSpacing = omitNullUndefined(Component.getSpacing({scaleType, domain, scale, ...props}));
+        // console.log('Component.getMargin', componentMargin);
+        spacing = _.assign(componentSpacing, spacing);
+        if(hasAllSpacing(spacing)) return spacing;
+      }
+
+      // if Component has children,
+      // recurse through descendants to resolve their spacings the same way,
+      // and combine them into a single spacing, if there are multiple
+      if(React.Children.count(props.children)) {
+        let childspacings = runFunctionOnChildren(props.children, this._resolveSpacing, 'props', 'type', scaleType, domain, scale);
+
+        // console.log('combining child margins', childMargins);
+        const childspacing = _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
+          // combine margins by taking the max value of each spacing direction
+          return [k, _.get(_.maxBy(childspacings, k), k)];
+        }));
+        // console.log('combined spacings', childspacing);
+
+        spacing = _.assign(childspacing, spacing);
+      }
+      return spacing;
 
     }
     _resolveMargin(props, Component, scaleType, domain, scale) {
@@ -435,21 +471,21 @@ export default function resolveXYScales(ComposedComponent) {
         this._resolveMargin(props, ComposedComponent, scaleType, domain, tempScale),
         {top: 0, bottom: 0, left: 0, right: 0}
       );
-      // console.log('margin', margin);
 
-      const padding = this._resolvePadding(props, ComposedComponent, scaleType, domain, tempScale);
+      const spacing = _.defaults(
+        this._resolveSpacing(props, ComposedComponent, scaleType, domain, tempScale),
+        {top: 0, bottom: 0, left: 0, right: 0}
+      );
 
       // create real scales from resolved margins
-      scaleOptions = {...scaleOptions, margin};
+      scaleOptions = {...scaleOptions, margin, spacing};
       // console.log('making scales', scaleOptions);
-      const scale = _.isEqual(margin, props.margin) ?
-        tempScale : // don't re-create scales if margin hasn't changed (ie. was passed in props)
-        this._makeScales(scaleOptions);
-      //TAKE THE DIFFERENT OF THE DOMAIN AND THE TICKDOMAIN TO FIGURE OUT THE MAGIC PADDING AND CLAMP IT TO THE PASSED
-      //IN PADDING 
+      const scale = this._makeScales(scaleOptions);
+      
+      
 
       // and pass scales to wrapped component
-      const passedProps = _.assign({}, this.props, {scale, scaleType, margin, domain});
+      const passedProps = _.assign({}, this.props, {scale, scaleType, margin, domain, spacing});
       return <ComposedComponent {...passedProps} />;
 
       // todo spacing/padding

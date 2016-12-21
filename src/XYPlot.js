@@ -67,8 +67,7 @@ class XYPlot extends React.Component {
     // scaleType: {},
     // domain: {},
     // margin: {},
-    // @samw todo remove this when resolvePadding/Spacing is done
-    spacing: {top: 0, bottom: 0, left: 0, right: 0}
+    //spacing: {top: 0, bottom: 0, left: 0, right: 0}
   };
 
   onXYMouseEvent = (callbackKey, event) => {
@@ -100,7 +99,7 @@ class XYPlot extends React.Component {
       ...chartSize
     };
 
-    return <svg {...{width, height, className: 'xy-plot', onMouseMove: this.onMouseMove, style: {background: 'thistle'}}} {...handlers}>
+    return <svg {...{width, height, className: 'xy-plot', onMouseMove: this.onMouseMove}} {...handlers}>
       <rect className="chart-background" {...{width, height}} />
       <g transform={`translate(${margin.left + spacing.left}, ${margin.top + spacing.top})`} className="chart-inner">
         <rect transform={`translate(${-spacing.left}, ${-spacing.top})`} className="plot-background" {...panelSize} />
