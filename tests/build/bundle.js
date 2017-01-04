@@ -65237,10 +65237,12 @@
 	  _createClass(TreeMap, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
+	      var data = this.props.data;
 	      // initialize the layout function
+	
 	      this._tree = getTree(this.props);
 	      // clone the data because d3 mutates it!
-	      this._rootNode = getRootNode(_lodash2.default.cloneDeep(newProps.data), this.props);
+	      this._rootNode = getRootNode(_lodash2.default.cloneDeep(data), this.props);
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',

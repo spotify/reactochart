@@ -122,10 +122,11 @@ class TreeMap extends React.Component {
     NodeLabelComponent: TreeMapNodeLabel
   };
   componentWillMount() {
+    const {data} = this.props;
     // initialize the layout function
     this._tree = getTree(this.props);
     // clone the data because d3 mutates it!
-    this._rootNode = getRootNode(_.cloneDeep(newProps.data), this.props);
+    this._rootNode = getRootNode(_.cloneDeep(data), this.props);
   }
   componentWillReceiveProps(newProps){
     const {width, height, data, sticky} = this.props;
