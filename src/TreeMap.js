@@ -166,23 +166,21 @@ function getRootNode(data, options){
 }
 
 function getTree(options) {
-  const {width, height} = options;
-  return treemap().tile(treemapResquarify).size([width, height]);
+  const {width, height, ratio, round, padding} = options;
+  const tiling = !_.isUndefined(ratio) ? treemapResquarify.ratio(ratio) : treemapResquarify;
+  const tree = treemap().tile(tiling).size([width, height]);
+  if(!_.isUndefined(padding)) tree.padding(padding);
+  if(!_.isUndefined(round)) tree.round(round);
+  return tree;
 }
 
 function initTreemap(rootNode, tree, options) {
   // create a d3 treemap layout function,
   // and configure it with the given options
-  const {getValue, sort, padding, round, sticky, mode, ratio} = options;
-  const treemapLayout = tree(rootNode.sum(d => d[getValue] || 0)).descendants();
-
-  if(!_.isUndefined(sort)) treemapLayout.sort(sort);
-  if(!_.isUndefined(padding)) treemapLayout.padding(padding);
-  if(!_.isUndefined(round)) treemapLayout.round(round);
-  if(!_.isUndefined(mode)) treemapLayout.mode(mode);
-  if(!_.isUndefined(ratio)) treemapLayout.ratio(ratio);
-
-  return treemapLayout;
+  const {getValue, sort} = options;
+  rootNode.sum(d => d[getValue] || 0);
+  if(!_.isUndefined(sort)) rootNode.sort(sort);
+  return tree(rootNode).descendants();
 }
 
 export default TreeMap;

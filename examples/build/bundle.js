@@ -77061,33 +77061,29 @@
 	
 	function getTree(options) {
 	  var width = options.width,
-	      height = options.height;
+	      height = options.height,
+	      ratio = options.ratio,
+	      round = options.round,
+	      padding = options.padding;
 	
-	  return (0, _d3Hierarchy.treemap)().tile(_d3Hierarchy.treemapResquarify).size([width, height]);
+	  var tiling = !_lodash2.default.isUndefined(ratio) ? _d3Hierarchy.treemapResquarify.ratio(ratio) : _d3Hierarchy.treemapResquarify;
+	  var tree = (0, _d3Hierarchy.treemap)().tile(tiling).size([width, height]);
+	  if (!_lodash2.default.isUndefined(padding)) tree.padding(padding);
+	  if (!_lodash2.default.isUndefined(round)) tree.round(round);
+	  return tree;
 	}
 	
 	function initTreemap(rootNode, tree, options) {
 	  // create a d3 treemap layout function,
 	  // and configure it with the given options
 	  var getValue = options.getValue,
-	      sort = options.sort,
-	      padding = options.padding,
-	      round = options.round,
-	      sticky = options.sticky,
-	      mode = options.mode,
-	      ratio = options.ratio;
+	      sort = options.sort;
 	
-	  var treemapLayout = tree(rootNode.sum(function (d) {
+	  rootNode.sum(function (d) {
 	    return d[getValue] || 0;
-	  })).descendants();
-	
-	  if (!_lodash2.default.isUndefined(sort)) treemapLayout.sort(sort);
-	  if (!_lodash2.default.isUndefined(padding)) treemapLayout.padding(padding);
-	  if (!_lodash2.default.isUndefined(round)) treemapLayout.round(round);
-	  if (!_lodash2.default.isUndefined(mode)) treemapLayout.mode(mode);
-	  if (!_lodash2.default.isUndefined(ratio)) treemapLayout.ratio(ratio);
-	
-	  return treemapLayout;
+	  });
+	  if (!_lodash2.default.isUndefined(sort)) rootNode.sort(sort);
+	  return tree(rootNode).descendants();
 	}
 	
 	exports.default = TreeMap;
