@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import d3 from 'd3';
+import {bisector} from 'd3';
 import shallowEqual from './utils/shallowEqual';
 
 import {makeAccessor} from './utils/Data';
@@ -52,7 +52,7 @@ export default class LineChart extends React.Component {
   // }
 
   initBisector(props) {
-    this.setState({bisectX: d3.bisector(d => makeAccessor(props.getX)(d)).left});
+    this.setState({bisectX: bisector(d => makeAccessor(props.getX)(d)).left});
   }
 
   getHovered = (x, y) => {

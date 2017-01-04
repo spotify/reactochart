@@ -1,7 +1,7 @@
 import React from 'react';
 const {PropTypes} = React;
 import _ from 'lodash';
-import d3 from 'd3';
+import {hierarchy, treemap, treemapResquarify} from 'd3-hierarchy';
 
 import {makeAccessor} from './utils/Data';
 import * as CustomPropTypes from './utils/CustomPropTypes';
@@ -34,14 +34,14 @@ class TreeMapNode extends React.Component {
   render() {
     const {node, getLabel, nodeStyle, labelStyle, minLabelWidth, minLabelHeight, NodeLabelComponent, parentNames}
       = this.props;
-    const {x, y, dx, dy, depth, parent} = node;
+    const {depth, parent, x0, y0, x1, y1} = node;
 
     const nodeGroupClass = parent ?
       `node-group-${_.kebabCase(parent.name)} node-group-i-${parentNames.indexOf(parent.name)}` : '';
     const className = `tree-map-node node-depth-${depth} ${nodeGroupClass}`;
 
-    let style = {position: 'absolute', width: dx, height: dy, top: y, left: x, transition: "all .2s"};
-    const customStyle = _.isFunction(nodeStyle) ? nodeStyle(node) : (_.isObject(nodeStyle) ? nodeStyle : {});
+    let style = {position: 'absolute', width: (x1 - x0), height: (y1 - y0), top: y0, left: x0, transition: "all .2s"};
+    const customStyle = _.isFunction(nodeStyle) ? nodeStyle(node.data) : (_.isObject(nodeStyle) ? nodeStyle : {});
     _.assign(style, customStyle);
 
     let handlers = ['onClick', 'onMouseEnter', 'onMouseLeave', 'onMouseMove'].reduce((handlers, eventName) => {
@@ -51,7 +51,7 @@ class TreeMapNode extends React.Component {
     }, {});
 
     return <div {...{className, style}} {...handlers}>
-      {dx > minLabelWidth && dy > minLabelHeight ? // show label if node is big enough
+      {(x1 - x0) > minLabelWidth && (y1 - y0) > minLabelHeight ? // show label if node is big enough
         <NodeLabelComponent {...{node, getLabel, labelStyle}} />
         : null
       }
@@ -70,14 +70,13 @@ class TreeMapNodeLabel extends React.Component {
 
   render() {
     const {node, getLabel, labelStyle} = this.props;
-    const {x, y, dx, dy} = node;
-
-    let style = {width: dx};
+    const {x1, x0} = node;
+    let style = {width: (x1 - x0)};
     const customStyle = _.isFunction(labelStyle) ? labelStyle(node) : (_.isObject(labelStyle) ? labelStyle : {});
     _.assign(style, customStyle);
 
     return <div className="node-label" {...{style}}>
-      {makeAccessor(getLabel)(node)}
+      {makeAccessor(getLabel)(node.data)}
     </div>
   }
 }
@@ -124,19 +123,19 @@ class TreeMap extends React.Component {
   };
   componentWillMount() {
     // initialize the layout function
-    this._treemap = initTreemapLayout(this.props);
+    this._tree = getTree(this.props);
     // clone the data because d3 mutates it!
-    this._data = _.cloneDeep(this.props.data);
+    this._rootNode = getRootNode(_.cloneDeep(newProps.data), this.props);
   }
   componentWillReceiveProps(newProps){
     const {width, height, data, sticky} = this.props;
 
-    //if height, width, or the data changes, or if the treemap is not sticky, re-initialize the layout function
-   // if(!sticky || width != newProps.width || height != newProps.height || JSON.stringify(data) != JSON.stringify(newProps.data))
-   // {
-      this._data = _.cloneDeep(newProps.data);
-      this._treemap = initTreemapLayout(newProps);
-    //}
+   // if height, width, or the data changes, or if the treemap is not sticky, re-initialize the layout function
+   if(!sticky || width != newProps.width || height != newProps.height || JSON.stringify(data) != JSON.stringify(newProps.data))
+   {
+      this._tree = getTree(newProps);
+      this._rootNode = getRootNode(_.cloneDeep(newProps.data), this.props);
+    }
   }
   render() {
     const {
@@ -144,9 +143,7 @@ class TreeMap extends React.Component {
       onClickNode, onMouseEnterNode, onMouseLeaveNode, onMouseMoveNode, NodeComponent, NodeLabelComponent, getValue
     } = this.props;
 
-    
-    // run the layout function with our data to create treemap layout
-    const nodes =  this._treemap.value(makeAccessor(getValue)).nodes(this._data);
+    const nodes = initTreemap(this._rootNode, this._tree, this.props);
 
     const style = {position: 'relative', width, height};
 
@@ -162,25 +159,29 @@ class TreeMap extends React.Component {
   }
 }
 
-function initTreemapLayout(options) {
+function getRootNode(data, options){
+  const {getChildren} = options;
+  return hierarchy(data, makeAccessor(getChildren));
+}
+
+function getTree(options) {
+  const {width, height} = options;
+  return treemap().tile(treemapResquarify).size([width, height]);
+}
+
+function initTreemap(rootNode, tree, options) {
   // create a d3 treemap layout function,
   // and configure it with the given options
-  const {width, height, getValue, getChildren, sort, padding, round, sticky, mode, ratio} = options;
+  const {getValue, sort, padding, round, sticky, mode, ratio} = options;
+  const treemapLayout = tree(rootNode.sum(d => d[getValue] || 0)).descendants();
 
-  const treemap = d3.layout.treemap()
-    .size([width, height])
-    .value(makeAccessor(getValue))
-    ;
+  if(!_.isUndefined(sort)) treemapLayout.sort(sort);
+  if(!_.isUndefined(padding)) treemapLayout.padding(padding);
+  if(!_.isUndefined(round)) treemapLayout.round(round);
+  if(!_.isUndefined(mode)) treemapLayout.mode(mode);
+  if(!_.isUndefined(ratio)) treemapLayout.ratio(ratio);
 
-  if(!_.isUndefined(getChildren)) treemap.children(makeAccessor(getChildren));
-  if(!_.isUndefined(sort)) treemap.sort(sort);
-  if(!_.isUndefined(padding)) treemap.padding(padding);
-  if(!_.isUndefined(round)) treemap.round(round);
-  if(!_.isUndefined(sticky)) treemap.sticky(sticky);
-  if(!_.isUndefined(mode)) treemap.mode(mode);
-  if(!_.isUndefined(ratio)) treemap.ratio(ratio);
-
-  return treemap;
+  return treemapLayout;
 }
 
 export default TreeMap;

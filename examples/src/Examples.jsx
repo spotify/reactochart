@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import d3 from 'd3';
+import {randomNormal, scaleOrdinal, scaleLinear, schemeCategory10, interpolateHcl} from 'd3';
 import React from 'react';
 import update from 'react-addons-update';
 import numeral from 'numeral';
@@ -35,9 +35,10 @@ import TreeMap from '../../src/TreeMap';
 import Histogram from '../../src/Histogram';
 import FunnelChart from '../../src/FunnelChart';
 
-
 import MarkerLineChart from '../../src/MarkerLineChart';
 import KernelDensityEstimation from '../../src/KernelDensityEstimation';
+
+import AreaChart from '../../src/AreaChart';
 
 import {randomWalk, randomWalkSeries} from './data/util';
 
@@ -95,21 +96,19 @@ const barTickData = {
   numberNumber: randomBarData2.numberNumber.map(d => [d[0], d[1] + _.random(-5000, 5000)]),
   numberRangeNumber: rangeValueData.numberNumber.map(d => [d[0], d[1] + _.random(-5000, 5000)]),
 };
-//console.log('rangeValue', rangeValueData);
 
-const normalDistribution = d3.random.normal(0);
-//const randomNormal = _.times(1000, normalDistribution);
-const randomNormal = _.times(1000, normalDistribution).concat(_.times(1000, d3.random.normal(3, 0.5)));
+const normalDistribution = randomNormal(0);
+const randomNormalArr = _.times(1000, normalDistribution).concat(_.times(1000, randomNormal(3, 0.5)));
 
 const emojis = ["😀", "😁", "😂", "😅", "😆", "😇", "😈", "👿", "😉", "😊", "😐", "😑", "😒", "😓", "😔", "😕", "😖", "😗", "😘", "😙", "😚", "😛", "😜", "😝", "👻", "👹", "👺", "💩", "💀", "👽", "👾", "🙇", "💁", "🙅", "🙆", "🙋", "🙎", "🙍", "💆", "💇"];
 // end fake data
 
 
 const LineChartExample = (props) => {
-  const colors = d3.scale.category10().domain(_.range(10));
+  const colors = scaleOrdinal(schemeCategory10);
 
   return <div>
-    <XYPlot {...{width: 600, height: 350, domain: {y: [-2, 2]}}}>
+    <XYPlot scaleType="linear" {...{width: 600, height: 350, domain: {x: [-20, 150]}}}>
 
       <XAxis title="Phase" />
       <YAxis title="Intensity" />
@@ -151,7 +150,7 @@ class LineChartExample2 extends React.Component {
 
   render() {
     const {activeX} = this.state;
-    const colors = d3.scale.category10().domain(_.range(10));
+    const colors = scaleOrdinal(schemeCategory10);
 
     const line1 = d => Math.sin(d*.1);
     const line2 = d => Math.cos(d*.1);
@@ -638,6 +637,21 @@ const ColorHeatMapExample = (props) => {
   </div>;
 };
 
+const AreaChartExample = (props) => {
+  return <div>
+    <XYPlot width={400} height={400}>
+      <XAxis gridLineStyle={{stroke: '#666'}}/>
+      <YAxis gridLineStyle={{stroke: '#666'}}/>
+      <AreaChart
+        data={_.range(41)}
+        getX={undefined}
+        getY={d => Math.sin(d / 10) * 10}
+        getYEnd={d => Math.cos((d + 1) / 10) * 10}
+      />
+    </XYPlot>
+  </div>
+}
+
 const CategoricalColorHeatmapExample = (props) => {
   // sorry, kinda hacky currently!
   // working on a better solution... -d
@@ -779,16 +793,16 @@ const HistogramKDEExample = (props) => {
       <XYPlot margin={{left: 40, right: 8}} width={700} height={300}>
         <XAxis /><YAxis />
         <Histogram
-          data={randomNormal} getX={null}
+          data={randomNormalArr} getValue={null}
         />
         <KernelDensityEstimation
-          data={randomNormal} getX={null} bandwidth={0.5}
+          data={randomNormalArr} getX={null} bandwidth={0.5}
         />
         <KernelDensityEstimation
-          data={randomNormal} getX={null} bandwidth={0.1}
+          data={randomNormalArr} getX={null} bandwidth={0.1}
         />
         <KernelDensityEstimation
-          data={randomNormal} getX={null} bandwidth={2}
+          data={randomNormalArr} getX={null} bandwidth={2}
         />
       </XYPlot>
     </div>
@@ -801,7 +815,7 @@ const HistogramKDEExample = (props) => {
         showTicks={false}
       >
         <ScatterPlot
-          data={randomNormal}
+          data={randomNormalArr}
           getX={null}
           getY={() => Math.random()}
           pointRadius={1}
@@ -1048,16 +1062,16 @@ const KDEExample = (props) => {
         <YAxis title="Count" />
 
         <KernelDensityEstimation
-          data={randomNormal} getValue={{x: null}} bandwidth={0.5}
+          data={randomNormalArr} getValue={{x: null}} bandwidth={0.5}
         />
         <KernelDensityEstimation
-          data={randomNormal} getValue={{x: null}} bandwidth={0.1}
+          data={randomNormalArr} getValue={{x: null}} bandwidth={0.1}
         />
         <KernelDensityEstimation
-          data={randomNormal} getValue={{x: null}} bandwidth={2}
+          data={randomNormalArr} getValue={{x: null}} bandwidth={2}
         />
         <ScatterPlot
-          data={randomNormal}
+          data={randomNormalArr}
           getX={null}
           getY={d => Math.abs(d) * 10000 % 200}
           pointRadius={1}
@@ -1076,10 +1090,10 @@ const TreeMapExample = (props) => {
     }))
   };
 
-  const colorScale = d3.scale.linear()
+  const colorScale = scaleLinear()
     .domain([0, 65])
     .range(['#6b6ecf', '#8ca252'])
-    .interpolate(d3.interpolateHcl);
+    .interpolate(interpolateHcl);
 
   return <div>
     <TreeMap
@@ -1124,10 +1138,10 @@ class AnimatedTreeMapExample extends React.Component {
   render() {
     const {getValue} = this.state;
 
-    const colorScale = d3.scale.linear()
+    const colorScale = scaleLinear()
       .domain([0, 65])
       .range(['#6b6ecf', '#8ca252'])
-      .interpolate(d3.interpolateHcl);
+      .interpolate(interpolateHcl);
 
     return <div>
       <TreeMap
@@ -1347,7 +1361,7 @@ export const examples = [
   {id: 'barChart', title: 'Bar Chart', Component: BarChartExample},
   {id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample},
   {id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample},
-  {id: 'interactiveAreaBar', title: 'Interactive Area Bar Chart', Component: InteractiveAreaBarChartExample},
+  {id: 'area', title: 'Area Chart', Component: AreaChartExample},
   {id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample},
   {id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample},
   {id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample},

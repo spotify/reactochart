@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import {scalePoint} from 'd3';
 import React from 'react';
 import invariant from 'invariant';
 
@@ -356,12 +357,7 @@ export default function resolveXYScales(ComposedComponent) {
         if(hasScaleFor(scale, k)) return [k, scale[k]];
 
         // create scale from domain/range
-        const rangeMethod = (scaleType[k] === 'ordinal') ? 'rangePoints' : 'range';
-        const kScale = initScale(scaleType[k])
-          .domain(domain[k])[rangeMethod](range[k]);
-
-
-
+        const kScale = initScale(scaleType[k]).domain(domain[k]).range(range[k]);
 
         // todo - ticks, nice and getDomain should be an axis prop instead, and axis should have getDomain
 
