@@ -1,19 +1,28 @@
+@import "side-navigation";
 body {
-  //font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  //margin: 0;
-  //padding: 0;
-  //background: #f0f0f0;
-  //color: #0f0f0f;
-
-  #container {
-    margin: 10px;
-  }
+  background: #fafafa;
 }
 
-.example-section {
-  display: inline-block;
-  margin: 10px;
+.navbar {
+  border: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+}
 
+.example-sections {
+  position: absolute;
+  right: 10px;
+  width: 70%;
+  margin: 10px;
+}
+.example-section {
+  margin-top: 100px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  border: 1px solid #e8e8e8;
+  padding: 75px;
+  background: #fff;
+  border-radius: 3px;
   &.example-section-visible {
     display: block;
   }
@@ -42,6 +51,10 @@ body {
   .example-section-content {
     margin: 10px 20px;
   }
+}
+
+.example-section h3 {
+  border-bottom: 1px solid;
 }
 
 .chart-tick {
@@ -136,7 +149,6 @@ body {
 
 path {
   fill: none;
-  //stroke: steelblue;
   stroke: #0a0a0a;
   stroke-width: 1.5px;
   stroke-linejoin: bevel;
@@ -150,7 +162,6 @@ path {
 .chart-series-2 {
   path { stroke: orange; }
 }
-
 .area-chart {
   .area-chart-path {
     stroke-width: 0;

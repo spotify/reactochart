@@ -42,6 +42,8 @@ import AreaChart from '../../src/AreaChart';
 
 import {randomWalk, randomWalkSeries} from './data/util';
 
+import SideNav from './SideNav';
+
 // sample ordinal data
 const ordinalData = ['Always', 'Usually', 'Sometimes', 'Rarely', 'Never'];
 const ordinalData2 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
@@ -1332,8 +1334,7 @@ export const App = React.createClass({
 
   render() {
     return <div>
-      <h1>Reactochart Examples</h1>
-
+      <SideNav list={examples}/>
       {this.renderExamples()}
     </div>
   },
@@ -1348,19 +1349,11 @@ export const App = React.createClass({
     const className = `example-section example-section-${example.id} ${isVisible ? 'example-section-visible' : ''}`;
 
     return <div className={className} key={`${example.id}`}>
-      <div
-        className={`example-section-button ${isVisible ? 'active' : ''}`}
-        onClick={this.toggleExample.bind(null, example.id)}
-      >
-        {example.title}
-        <span className="example-arrow">{isVisible ? " ▼" : " ►"}</span>
-      </div>
-      {isVisible ?
+        <h3 id={example.id}>{example.title}</h3>
         <div className="example-section-content">
           <ExampleComponent />
         </div>
-        : null
-      }
+
     </div>
   }
 });
