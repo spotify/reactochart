@@ -50,7 +50,9 @@ class XYPlot extends React.Component {
     scaleType: React.PropTypes.object,
     domain: React.PropTypes.object,
     margin: React.PropTypes.object,
+    spacing: React.PropTypes.object,
     // todo spacing & padding...
+    padding: React.PropTypes.object,
     nice: React.PropTypes.object,
     invertScale: React.PropTypes.object,
 
@@ -72,7 +74,7 @@ class XYPlot extends React.Component {
     // scaleType: {},
     // domain: {},
     // margin: {},
-    // spacing: {}
+    //spacing: {top: 0, bottom: 0, left: 0, right: 0}
   };
 
   onXYMouseEvent = (callbackKey, event) => {
@@ -89,8 +91,12 @@ class XYPlot extends React.Component {
   onMouseLeave = (event) => this.props.onMouseLeave({event});
 
   render() {
-    const {width, height, margin} = this.props;
-    const chartSize = innerSize({width, height}, margin);
+    const {width, height, margin, spacing} = this.props;
+    // subtract margin + spacing from width/height to obtain inner width/height of panel & chart area
+    // panelSize is the area including chart + spacing but NOT margin
+    // chartSize is smaller, chart *only*, not including margin or spacing
+    const panelSize = innerSize({width, height}, margin);
+    const chartSize = innerSize(panelSize, spacing);
 
     const handlerNames = ['onMouseMove', 'onMouseEnter', 'onMouseLeave', 'onMouseDown', 'onMouseUp', 'onClick'];
     const handlers = _.fromPairs(handlerNames.map(n => [n, methodIfFuncProp(n, this.props, this)]));
@@ -102,8 +108,8 @@ class XYPlot extends React.Component {
 
     return <svg {...{width, height, className: 'xy-plot', onMouseMove: this.onMouseMove}} {...handlers}>
       <rect className="chart-background" {...{width, height}} />
-      <g transform={`translate(${margin.left}, ${margin.top})`} className="chart-inner">
-        <rect className="plot-background" {...chartSize} />
+      <g transform={`translate(${margin.left + spacing.left}, ${margin.top + spacing.top})`} className="chart-inner">
+        <rect transform={`translate(${-spacing.left}, ${-spacing.top})`} className="plot-background" {...panelSize} />
         {React.Children.map(this.props.children, child => {
           return (_.isNull(child) || _.isUndefined(child)) ? null :
             React.cloneElement(child, propsToPass);

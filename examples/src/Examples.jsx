@@ -357,7 +357,7 @@ const BarChartExample = (props) => {
   const letters = _.times(count, n => String.fromCharCode(97 + n));
   const dates = _.times(count, n => new Date(+(startDate) + (n * 1000 * 60 * 60 * 24 * 100)));
 
-  const getNumberValue = (d) => 2 + Math.cos(d / 10);
+  const getNumberValue = (d) => 1.97 + Math.cos(d / 10);
   const getDateValue = (d) => getNumberValue(d.getFullYear() + (d.getMonth() / 12));
   const getLetterValue = (d) => getNumberValue(d.charCodeAt(0));
 
@@ -1352,6 +1352,46 @@ const CustomAxisLabelsExample = React.createClass({
   }
 });
 
+class SpacingExample extends React.Component {
+  render() {
+    const spacing = {left: 10, top: 53, right: 16, bottom: 9};
+    const lineChart = (
+      <LineChart
+        spacing={spacing}
+        data={_.range(100)}
+        getY={d => Math.sin(d*.1)}
+      />
+    );
+
+    return <div>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
+        <XAxis title="Phase" />
+        <YAxis title="Intensity" />
+        {lineChart}
+      </XYPlot>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
+        <XAxis title="Phase" position="top" />
+        <YAxis title="Intensity" position="right"/>
+        {lineChart}
+      </XYPlot>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
+        <XTicks/><XGrid/><XAxisLabels/>
+        <YTicks/><YGrid/><YAxisLabels/>
+        {lineChart}
+      </XYPlot>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
+        <XTicks position="top"/><XGrid position="top"/><XAxisLabels position="top"/>
+        <YTicks position="right"/><YGrid position="right"/><YAxisLabels position="right"/>
+        {lineChart}
+      </XYPlot>
+      <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
+        <XTicks placement="above"/><XGrid placement="above"/><XAxisLabels placement="above"/>
+        {lineChart}
+      </XYPlot>
+    </div>
+  }
+}
+
 export const examples = [
   {id: 'line', title: 'Line Chart', Component: LineChartExample},
   {id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2},
@@ -1377,8 +1417,8 @@ export const examples = [
   {id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest},
   {id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample},
   {id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample},
-  {id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample}
-
+  {id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample},
+  {id: 'spacing', title: 'Spacing', Component: SpacingExample}
   // todo rewrite these?
   // {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
   // {id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample},

@@ -89,11 +89,28 @@ export function combineDomains(domains, dataType) {
     extent(_.flatten(domains));
 }
 
+export function combineBorderObjects(borderObjects){
+  return _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
+    // combine border objects by taking the max value of each spacing direction
+    return [k, _.get(_.maxBy(borderObjects, k), k)];
+  }));
+}
+
 export function domainFromData(data, accessor = _.identity, type = undefined) {
   if(!type) type = inferDataType(data, accessor);
   return (type === 'number' || type === 'time') ?
     extent(data.map(accessor)) :
     _.uniq(data.map(accessor));
+}
+
+export function getDataDomainByAxis(props) {
+  const {horizontal, data, getX, getY} = props;
+  const accessor = horizontal ?  makeAccessor(getY) : makeAccessor(getX);
+  // only have to specify range axis domain, other axis uses default domainFromData
+  const rangeAxis = horizontal ? 'y' : 'x';
+  return {
+    [rangeAxis]: domainFromData(data, accessor)
+  };
 }
 
 export function domainFromDatasets(datasets, accessor = _.identity, type = undefined) {

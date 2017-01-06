@@ -26,7 +26,8 @@ export default class YAxisTitle extends React.Component {
       fontSize: '24px',
       fontWeight: 'bold',
       lineHeight: 1
-    }
+    },
+    spacing: {top: 0, bottom: 0, left: 0, right: 0}
   };
 
   static getMargin(props) {
@@ -54,12 +55,12 @@ export default class YAxisTitle extends React.Component {
   }
 
   render() {
-    const {height, width, distance, position, alignment, style} = this.props;
+    const {height, width, distance, position, alignment, style, spacing} = this.props;
     const title = this.props.title || this.props.children;
     const placement = this.props.placement || ((position === 'left') ? 'before' : 'after');
 
     const rotate = this.props.rotate ? -90 : 0;
-    const posX = (position === 'right') ? width : 0;
+    const posX = (position === 'right') ? width + spacing.right : -spacing.left;
     const translateX = posX +
       ((placement === 'before') ? -distance : distance);
     const translateY =

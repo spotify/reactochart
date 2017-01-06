@@ -82,7 +82,8 @@ class XAxisValueLabels extends React.Component {
     },
     format: undefined,
     formats: undefined,
-    labels: undefined
+    labels: undefined,
+    spacing: {top: 0, bottom: 0, left: 0, right: 0}
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -143,13 +144,14 @@ class XAxisValueLabels extends React.Component {
   }
 
   render() {
-    const {height, position, distance, labelStyle, labelClassName, onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel} = this.props;
+    const {height, position, distance, labelStyle, labelClassName, onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel, spacing} = this.props;
     const scale = this.props.scale.x;
     const labels = this.props.labels || XAxisValueLabels.getLabels(this.props);
     const placement = this.props.placement || ((position === 'top') ? 'above' : 'below');
     const style = _.defaults(labelStyle, XAxisValueLabels.defaultProps.labelStyle);
     const className = `chart-value-label chart-value-label-x ${labelClassName}`;
-    const transform = (position === 'bottom') ? `translate(0,${height})` : '';
+    const transform = (position === 'bottom') ?
+      `translate(0, ${height + spacing.bottom})` : `translate(0, ${-spacing.top})`;
     // todo: position: 'zero' to position along the zero line
 
     return <g className="chart-value-labels-x" transform={transform}>
