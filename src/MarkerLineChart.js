@@ -5,7 +5,7 @@ import _ from 'lodash';
 import {methodIfFuncProp} from './util.js';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {dataTypeFromScaleType} from './utils/Scale';
-import {makeAccessor, domainFromRangeData} from './utils/Data';
+import {makeAccessor, domainFromRangeData, getDataDomainByAxis} from './utils/Data';
 
 // MarkerLine is similar to a bar chart,
 // except that it just draws a line at the data value, rather than a full bar
@@ -77,6 +77,26 @@ export default class MarkerLineChart extends React.Component {
     return options;
   }
   */
+
+  static getSpacing(props) {
+    const tickType = getTickType(props);
+    if(tickType === 'RangeValue') return {top: 0, right: 0, bottom: 0, left: 0}; //no spacing for rangeValue marker charts since line start and end are set explicitly
+    const {lineLength, horizontal, scale, data, domain} = props;
+    const dataDomain = getDataDomainByAxis(props);
+    const P = lineLength / 2; //padding
+    const k = horizontal ? 'y' : 'x';
+    //find the edges of the tick domain, and map them through the scale function
+    const [domainHead, domainTail] = _([_.first(domain[k]), _.last(domain[k])]).map(scale[k]).sortBy(); //sort the pixel values return by the domain extents
+    //find the edges of the data domain, and map them through the scale function
+    const [dataDomainHead, dataDomainTail] = _([_.first(dataDomain[k]), _.last(dataDomain[k])]).map(scale[k]).sortBy(); //sort the pixel values return by the domain extents
+    //find the neccessary spacing (based on bar width) to push the bars completely inside the tick domain
+    const [spacingTail, spacingHead] = [_.clamp(P - (domainTail - dataDomainTail), 0, P), _.clamp(P - (dataDomainHead - domainHead), 0, P)];
+    if(horizontal){
+      return {top: spacingHead, right: 0, bottom: spacingTail, left: 0}
+    } else {
+      return {top: 0, right: spacingTail, bottom: 0, left: spacingHead}
+    }
+  }
 
   static getDomain(props) {
     if(getTickType(props) === 'RangeValue') { // set range domain for range type
