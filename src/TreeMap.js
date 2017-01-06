@@ -36,12 +36,13 @@ class TreeMapNode extends React.Component {
       = this.props;
     const {depth, parent, x0, y0, x1, y1} = node;
 
+    var parentName = _.get(parent, 'data.name');
     const nodeGroupClass = parent ?
-      `node-group-${_.kebabCase(parent.name)} node-group-i-${parentNames.indexOf(parent.name)}` : '';
+      `node-group-${_.kebabCase(parentName)} node-group-i-${parentNames.indexOf(parentName)}` : '';
     const className = `tree-map-node node-depth-${depth} ${nodeGroupClass}`;
 
     let style = {position: 'absolute', width: (x1 - x0), height: (y1 - y0), top: y0, left: x0, transition: "all .2s"};
-    const customStyle = _.isFunction(nodeStyle) ? nodeStyle(node.data) : (_.isObject(nodeStyle) ? nodeStyle : {});
+    const customStyle = _.isFunction(nodeStyle) ? nodeStyle(node) : (_.isObject(nodeStyle) ? nodeStyle : {});
     _.assign(style, customStyle);
 
     let handlers = ['onClick', 'onMouseEnter', 'onMouseLeave', 'onMouseMove'].reduce((handlers, eventName) => {
@@ -148,7 +149,7 @@ class TreeMap extends React.Component {
 
     const style = {position: 'relative', width, height};
 
-    const parentNames = _.uniq(_.map(nodes, 'parent.name'));
+    const parentNames = _.uniq(_.map(nodes, 'parent.data.name'));
 
     return <div className="tree-map" {...{style}}>
       {nodes.map((node, i) => <NodeComponent {...{
@@ -169,7 +170,7 @@ function getTree(options) {
   const {width, height, ratio, round, padding} = options;
   const tiling = !_.isUndefined(ratio) ? treemapResquarify.ratio(ratio) : treemapResquarify;
   const tree = treemap().tile(tiling).size([width, height]);
-  if(!_.isUndefined(padding)) tree.padding(padding);
+  if(!_.isUndefined(padding)) tree.paddingOuter(padding);
   if(!_.isUndefined(round)) tree.round(round);
   return tree;
 }
@@ -178,9 +179,13 @@ function initTreemap(rootNode, tree, options) {
   // create a d3 treemap layout function,
   // and configure it with the given options
   const {getValue, sort} = options;
-  rootNode.sum(d => d[getValue] || 0);
-  if(!_.isUndefined(sort)) rootNode.sort(sort);
-  return tree(rootNode).descendants();
+  const treeRoot = rootNode
+                .sum(d => {
+                  if(_.isFunction(getValue)) return getValue(d);
+                  else if(_.isString(getValue)) return d[getValue];
+                  else return 0;
+  });
+  return tree(sort ? treeRoot.sort(sort) : treeRoot).descendants();
 }
 
 export default TreeMap;

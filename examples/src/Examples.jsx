@@ -1101,7 +1101,7 @@ const TreeMapExample = (props) => {
       getValue="size"
       getLabel="size"
       nodeStyle={(node) => ({
-        backgroundColor: colorScale(parseInt(node.size)),
+        backgroundColor: colorScale(parseInt(node.data.size)),
         border: '1px solid #333'
       })}
       width={800}
@@ -1149,7 +1149,7 @@ class AnimatedTreeMapExample extends React.Component {
         getValue={getValue}
         getLabel="size"
         nodeStyle={(node) => ({
-          backgroundColor: colorScale(parseInt(node.size)),
+          backgroundColor: colorScale(parseInt(node.data.size)),
           border: '1px solid #333'
         })}
         sticky
