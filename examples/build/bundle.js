@@ -77074,7 +77074,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        _extends({ className: 'node-label' }, { style: style }),
-	        (0, _Data.makeAccessor)(getLabel)(node.data)
+	        (0, _Data.makeAccessor)(getLabel)(node)
 	      );
 	    }
 	  }]);

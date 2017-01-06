@@ -77,7 +77,7 @@ class TreeMapNodeLabel extends React.Component {
     _.assign(style, customStyle);
 
     return <div className="node-label" {...{style}}>
-      {makeAccessor(getLabel)(node.data)}
+      {makeAccessor(getLabel)(node)}
     </div>
   }
 }
