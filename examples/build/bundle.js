@@ -20843,7 +20843,7 @@
 	  });
 	
 	  var getNumberValue = function getNumberValue(d) {
-	    return 2 + Math.cos(d / 10);
+	    return 1.97 + Math.cos(d / 10);
 	  };
 	  var getDateValue = function getDateValue(d) {
 	    return getNumberValue(d.getFullYear() + d.getMonth() / 12);
@@ -21864,7 +21864,7 @@
 	      getLabel: 'size',
 	      nodeStyle: function nodeStyle(node) {
 	        return {
-	          backgroundColor: colorScale(parseInt(node.size)),
+	          backgroundColor: colorScale(parseInt(node.data.size)),
 	          border: '1px solid #333'
 	        };
 	      },
@@ -21932,7 +21932,7 @@
 	          getLabel: 'size',
 	          nodeStyle: function nodeStyle(node) {
 	            return {
-	              backgroundColor: colorScale(parseInt(node.size)),
+	              backgroundColor: colorScale(parseInt(node.data.size)),
 	              border: '1px solid #333'
 	            };
 	          },
@@ -22179,10 +22179,84 @@
 	  }
 	});
 	
+	var SpacingExample = function (_React$Component6) {
+	  _inherits(SpacingExample, _React$Component6);
+	
+	  function SpacingExample() {
+	    _classCallCheck(this, SpacingExample);
+	
+	    return _possibleConstructorReturn(this, (SpacingExample.__proto__ || Object.getPrototypeOf(SpacingExample)).apply(this, arguments));
+	  }
+	
+	  _createClass(SpacingExample, [{
+	    key: 'render',
+	    value: function render() {
+	      var spacing = { left: 10, top: 53, right: 16, bottom: 9 };
+	      var lineChart = _react2.default.createElement(_LineChart2.default, {
+	        spacing: spacing,
+	        data: _lodash2.default.range(100),
+	        getY: function getY(d) {
+	          return Math.sin(d * .1);
+	        }
+	      });
+	
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _XYPlot2.default,
+	          _extends({ scaleType: 'linear' }, { width: 400, height: 350, spacing: spacing }),
+	          _react2.default.createElement(_XAxis2.default, { title: 'Phase' }),
+	          _react2.default.createElement(_YAxis2.default, { title: 'Intensity' }),
+	          lineChart
+	        ),
+	        _react2.default.createElement(
+	          _XYPlot2.default,
+	          _extends({ scaleType: 'linear' }, { width: 400, height: 350, spacing: spacing }),
+	          _react2.default.createElement(_XAxis2.default, { title: 'Phase', position: 'top' }),
+	          _react2.default.createElement(_YAxis2.default, { title: 'Intensity', position: 'right' }),
+	          lineChart
+	        ),
+	        _react2.default.createElement(
+	          _XYPlot2.default,
+	          _extends({ scaleType: 'linear' }, { width: 400, height: 350, spacing: spacing }),
+	          _react2.default.createElement(_XTicks2.default, null),
+	          _react2.default.createElement(_XGrid2.default, null),
+	          _react2.default.createElement(_XAxisLabels2.default, null),
+	          _react2.default.createElement(_YTicks2.default, null),
+	          _react2.default.createElement(_YGrid2.default, null),
+	          _react2.default.createElement(_YAxisLabels2.default, null),
+	          lineChart
+	        ),
+	        _react2.default.createElement(
+	          _XYPlot2.default,
+	          _extends({ scaleType: 'linear' }, { width: 400, height: 350, spacing: spacing }),
+	          _react2.default.createElement(_XTicks2.default, { position: 'top' }),
+	          _react2.default.createElement(_XGrid2.default, { position: 'top' }),
+	          _react2.default.createElement(_XAxisLabels2.default, { position: 'top' }),
+	          _react2.default.createElement(_YTicks2.default, { position: 'right' }),
+	          _react2.default.createElement(_YGrid2.default, { position: 'right' }),
+	          _react2.default.createElement(_YAxisLabels2.default, { position: 'right' }),
+	          lineChart
+	        ),
+	        _react2.default.createElement(
+	          _XYPlot2.default,
+	          _extends({ scaleType: 'linear' }, { width: 400, height: 350, spacing: spacing }),
+	          _react2.default.createElement(_XTicks2.default, { placement: 'above' }),
+	          _react2.default.createElement(_XGrid2.default, { placement: 'above' }),
+	          _react2.default.createElement(_XAxisLabels2.default, { placement: 'above' }),
+	          lineChart
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return SpacingExample;
+	}(_react2.default.Component);
+	
 	var examples = exports.examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2 },
 	// {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
-	{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'area', title: 'Area Chart', Component: AreaChartExample }, { id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample }, { id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample }, { id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'animatedTreeMap', title: 'Animated TreeMap', Component: AnimatedTreeMapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample }
-	
+	{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'area', title: 'Area Chart', Component: AreaChartExample }, { id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample }, { id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample }, { id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'animatedTreeMap', title: 'Animated TreeMap', Component: AnimatedTreeMapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample }, { id: 'spacing', title: 'Spacing', Component: SpacingExample }
 	// todo rewrite these?
 	// {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
 	// {id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample},
@@ -55869,9 +55943,14 @@
 	      var _props = this.props,
 	          width = _props.width,
 	          height = _props.height,
-	          margin = _props.margin;
+	          margin = _props.margin,
+	          spacing = _props.spacing;
+	      // subtract margin + spacing from width/height to obtain inner width/height of panel & chart area
+	      // panelSize is the area including chart + spacing but NOT margin
+	      // chartSize is smaller, chart *only*, not including margin or spacing
 	
-	      var chartSize = (0, _Margin.innerSize)({ width: width, height: height }, margin);
+	      var panelSize = (0, _Margin.innerSize)({ width: width, height: height }, margin);
+	      var chartSize = (0, _Margin.innerSize)(panelSize, spacing);
 	
 	      var handlerNames = ['onMouseMove', 'onMouseEnter', 'onMouseLeave', 'onMouseDown', 'onMouseUp', 'onClick'];
 	      var handlers = _lodash2.default.fromPairs(handlerNames.map(function (n) {
@@ -55886,8 +55965,8 @@
 	        _react2.default.createElement('rect', _extends({ className: 'chart-background' }, { width: width, height: height })),
 	        _react2.default.createElement(
 	          'g',
-	          { transform: 'translate(' + margin.left + ', ' + margin.top + ')', className: 'chart-inner' },
-	          _react2.default.createElement('rect', _extends({ className: 'plot-background' }, chartSize)),
+	          { transform: 'translate(' + (margin.left + spacing.left) + ', ' + (margin.top + spacing.top) + ')', className: 'chart-inner' },
+	          _react2.default.createElement('rect', _extends({ transform: 'translate(' + -spacing.left + ', ' + -spacing.top + ')', className: 'plot-background' }, panelSize)),
 	          _react2.default.Children.map(this.props.children, function (child) {
 	            return _lodash2.default.isNull(child) || _lodash2.default.isUndefined(child) ? null : _react2.default.cloneElement(child, propsToPass);
 	          })
@@ -55906,7 +55985,9 @@
 	  scaleType: _react2.default.PropTypes.object,
 	  domain: _react2.default.PropTypes.object,
 	  margin: _react2.default.PropTypes.object,
+	  spacing: _react2.default.PropTypes.object,
 	  // todo spacing & padding...
+	  padding: _react2.default.PropTypes.object,
 	  nice: _react2.default.PropTypes.object,
 	  invertScale: _react2.default.PropTypes.object,
 	
@@ -56201,11 +56282,11 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	exports.default = resolveXYScales;
 	
@@ -56252,9 +56333,11 @@
 	function componentName(Component) {
 	  return Component.displayName || "Component wrapped by resolveXYScales";
 	}
-	
 	function hasScaleFor(scalesObj, key) {
 	  return _lodash2.default.isObject(scalesObj) && (0, _Scale.isValidScale)(scalesObj[key]);
+	}
+	function hasPaddingFor(paddingObj, key) {
+	  return _lodash2.default.isObject(paddingObj) && _lodash2.default.isNumber(paddingObj[key]);
 	}
 	function hasXYScales(scale) {
 	  return _lodash2.default.isObject(scale) && (0, _Scale.isValidScale)(scale.x) && (0, _Scale.isValidScale)(scale.y);
@@ -56271,91 +56354,80 @@
 	    return _lodash2.default.has(margin, k);
 	  });
 	}
-	
-	function hasGoodXY(obj) {
-	  var isValid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function (v) {
-	    return !_lodash2.default.isUndefined(v);
-	  };
-	
-	  return _lodash2.default.isObject(obj) && isValid(obj.x);
+	function hasAllSpacing(spacing) {
+	  var spacingKeys = ['top', 'bottom', 'left', 'right'];
+	  return _lodash2.default.isObject(spacing) && _lodash2.default.every(spacingKeys, function (k) {
+	    return _lodash2.default.has(spacing, k);
+	  });
 	}
 	
-	function mapStaticOnChildren(children, methodName) {
-	  var passProps = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+	function mapOverChildren(children, iteratee) {
+	  for (var _len = arguments.length, iterateeArgs = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+	    iterateeArgs[_key - 2] = arguments[_key];
+	  }
 	
-	  // returns the result of looping over all children and calling a static method on each one
+	  // loop over all children (react elements) and call iteratee (a function) on each one
+	  // iteratee is called with parameters (child.props, child.type, ...iterateeArgs)
+	  if (!_lodash2.default.isFunction(iteratee)) throw new Error('mapOverChildren iteratee must be a function');
+	
 	  return _lodash2.default.compact(_react2.default.Children.map(children, function (child) {
-	    console.log(_lodash2.default.keys(child.type));
-	    return _lodash2.default.isFunction(child.type[methodName]) ? child.type[methodName](_extends({}, child.props, passProps)) : null;
+	    if (!child || !_react2.default.isValidElement(child)) return null;
+	    return iteratee.apply(undefined, [child.props, child.type].concat(iterateeArgs));
 	  }));
 	}
-	
 	function omitNullUndefined(obj) {
 	  return _lodash2.default.omitBy(obj, function (v) {
 	    return _lodash2.default.isUndefined(v) || _lodash2.default.isNull(v);
 	  });
 	}
 	
-	function resolveXYPropsOnComponentOrChildren(propKeys, props) {
-	  var reducers = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-	  var validators = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
-	  var result = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
+	// not currently being used but potentially has some learnings
+	// function resolveXYPropsOnComponentOrChildren(propKeys, props, reducers = {}, validators = {}, result = {}) {
+	//   const isDone = (o) => (_.every(propKeys, k => _.isObject(o[k]) && _.every(['x', 'y'], xy => _.has(o[k][xy]))));
+	//   result = _.pick({...props, ...result}, propKeys);
 	
-	  var isDone = function isDone(o) {
-	    return _lodash2.default.every(propKeys, function (k) {
-	      return _lodash2.default.isObject(o[k]) && _lodash2.default.every(['x', 'y'], function (xy) {
-	        return _lodash2.default.has(o[k][xy]);
-	      });
-	    });
-	  };
-	  result = _lodash2.default.pick(_extends({}, props, result), propKeys);
+	//   let resolved = {};
+	//   _.forEach(propKeys, propKey => {
+	//     _.forEach(['x', 'y'], k => {
+	//       const isValid = validators[propKey] || (() => true);
+	//       if(_.isObject(props[propKey]) && _.has(props[propKey], k) && isValid(props[propKey][k])) {
+	//         if(!_.has(result, propKey)) result[propKey] = {};
+	//         result[propKey][k] = props[propKey][k];
+	//       }
+	//     });
+	//   });
 	
-	  var resolved = {};
-	  _lodash2.default.forEach(propKeys, function (propKey) {
-	    _lodash2.default.forEach(['x', 'y'], function (k) {
-	      var isValid = validators[propKey] || function () {
-	        return true;
-	      };
-	      if (_lodash2.default.isObject(props[propKey]) && _lodash2.default.has(props[propKey], k) && isValid(props[propKey][k])) {
-	        if (!_lodash2.default.has(result, propKey)) result[propKey] = {};
-	        result[propKey][k] = props[propKey][k];
-	      }
-	    });
-	  });
+	//   if(isDone(result)) return result;
 	
-	  if (isDone(result)) return result;
+	//   if(React.Children.count(props.children)) {
+	//     let childProps = mapOverChildren(props.children, resolveXYPropsOnComponentOrChildren, propKeys, 'props', result);
+	//     React.Children.forEach(props.children, child => {
+	//       if(!child) return;
+	//       childProps.push(resolveXYPropsOnComponentOrChildren(propKeys, child.props, result));
+	//     });
+	//       let childDomains = [];
+	//       React.Children.forEach(props.children, child => {
+	//         childDomains = childDomains.concat(this._resolveDomain(child.props, child.type, scaleType));
+	//       });
 	
-	  if (_react2.default.Children.count(props.children)) {
-	    (function () {
-	      var childProps = [];
-	      _react2.default.Children.forEach(props.children, function (child) {
-	        if (!child) return;
-	        childProps.push(resolveXYPropsOnComponentOrChildren(propKeys, child.props, result));
-	      });
+	//       console.log('combining domains', childDomains);
+	//       const childDomain =  _.fromPairs(['x', 'y'].map(k => {
+	//         console.log(_.compact(_.map(childDomains, k)), scaleType[k]);
+	//         const kDomain = combineDomains(_.compact(_.map(childDomains, k)), dataTypeFromScaleType(scaleType[k]));
+	//         console.log(kDomain);
+	//         return [k, kDomain];
+	//       }));
+	//       console.log('combined domains', childDomain);
 	
-	      // let childDomains = [];
-	      // React.Children.forEach(props.children, child => {
-	      //   childDomains = childDomains.concat(this._resolveDomain(child.props, child.type, scaleType));
-	      // });
-	      //
-	      // console.log('combining domains', childDomains);
-	      // const childDomain =  _.fromPairs(['x', 'y'].map(k => {
-	      //   console.log(_.compact(_.map(childDomains, k)), scaleType[k]);
-	      //   const kDomain = combineDomains(_.compact(_.map(childDomains, k)), dataTypeFromScaleType(scaleType[k]));
-	      //   console.log(kDomain);
-	      //   return [k, kDomain];
-	      // }));
-	      // console.log('combined domains', childDomain);
-	      //
-	      // domain = _.assign(childDomain, domain);
-	      // return domain;
-	    })();
-	  }
+	//       domain = _.assign(childDomain, domain);
+	//       return domain;
+	//   }
 	
-	  propKeys.forEach(function (k) {
-	    result[propKeys] = props;
-	  });
-	}
+	//   propKeys.forEach(k => {
+	//     result[propKeys] = props
+	//   })
+	// }
+	
 	
 	function resolveXYScales(ComposedComponent) {
 	  var _class, _temp2;
@@ -56366,15 +56438,15 @@
 	    function _class() {
 	      var _ref;
 	
-	      var _temp, _this, _ret2;
+	      var _temp, _this, _ret;
 	
 	      _classCallCheck(this, _class);
 	
-	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	        args[_key] = arguments[_key];
+	      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	        args[_key2] = arguments[_key2];
 	      }
 	
-	      return _ret2 = (_temp = (_this = _possibleConstructorReturn(this, (_ref = _class.__proto__ || Object.getPrototypeOf(_class)).call.apply(_ref, [this].concat(args))), _this), _this._makeScales = function (_ref2) {
+	      return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = _class.__proto__ || Object.getPrototypeOf(_class)).call.apply(_ref, [this].concat(args))), _this), _this._makeScales = function (_ref2) {
 	        var width = _ref2.width,
 	            height = _ref2.height,
 	            _ref2$scaleType = _ref2.scaleType,
@@ -56384,25 +56456,29 @@
 	            _ref2$margin = _ref2.margin,
 	            margin = _ref2$margin === undefined ? {} : _ref2$margin,
 	            _ref2$scale = _ref2.scale,
-	            scale = _ref2$scale === undefined ? {} : _ref2$scale;
+	            scale = _ref2$scale === undefined ? {} : _ref2$scale,
+	            _ref2$spacing = _ref2.spacing,
+	            spacing = _ref2$spacing === undefined ? {} : _ref2$spacing;
 	        var _this$props = _this.props,
 	            invertScale = _this$props.invertScale,
 	            nice = _this$props.nice,
 	            tickCount = _this$props.tickCount,
 	            ticks = _this$props.ticks;
 	
+	
+	        var innerChartWidth = (0, _Margin.innerWidth)(width, margin);
+	        var innerChartHeight = (0, _Margin.innerHeight)(height, margin);
+	
 	        var range = {
-	          x: (0, _Margin.innerRangeX)(width, margin).map(function (v) {
-	            return v - (margin.left || 0);
+	          x: (0, _Margin.innerRangeX)(innerChartWidth, spacing).map(function (v) {
+	            return v - (spacing.left || 0);
 	          }),
-	          y: (0, _Margin.innerRangeY)(height, margin).map(function (v) {
-	            return v - (margin.top || 0);
+	          y: (0, _Margin.innerRangeY)(innerChartHeight, spacing).map(function (v) {
+	            return v - (spacing.top || 0);
 	          })
 	        };
-	        // console.log(height, margin, innerRangeY(height, margin));
+	        //innerRange functions produce range (i.e. [5,20]) and map function normalizes to 0 (i.e. [0,15])
 	
-	
-	        // console.log('range', range);
 	        return _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
 	          // use existing scales if provided, otherwise create new
 	          if (hasScaleFor(scale, k)) return [k, scale[k]];
@@ -56428,7 +56504,7 @@
 	
 	          return [k, kScale];
 	        }));
-	      }, _temp), _possibleConstructorReturn(_this, _ret2);
+	      }, _temp), _possibleConstructorReturn(_this, _ret);
 	    }
 	
 	    // todo better way for HOC's to pass statics through?
@@ -56471,7 +56547,7 @@
 	        // if Component has data or datasets props,
 	        // infer the data type, & use that to get scale type
 	        if (_lodash2.default.isArray(props.data) || _lodash2.default.isArray(props.datasets)) {
-	          var _ret3 = function () {
+	          var _ret2 = function () {
 	            var datasets = _lodash2.default.isArray(props.datasets) ? props.datasets : [props.data];
 	            var datasetScaleType = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
 	              // const kAccessor = makeAccessor(_.get(props, `getValue.${k}`));
@@ -56487,21 +56563,15 @@
 	            };
 	          }();
 	
-	          if ((typeof _ret3 === 'undefined' ? 'undefined' : _typeof(_ret3)) === "object") return _ret3.v;
+	          if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
 	        }
 	
 	        // if Component has children,
 	        // recurse through descendants to resolve their scale types the same way
 	        if (_react2.default.Children.count(props.children)) {
-	          var _ret4 = function () {
+	          var _ret3 = function () {
 	            // console.log('get scaletype from children')
-	            var childScaleTypes = [];
-	            _react2.default.Children.forEach(props.children, function (child) {
-	              if (!child) return;
-	              childScaleTypes.push(_this2._resolveScaleType(child.props, child.type));
-	            });
-	            // console.log('childScaleTypes', childScaleTypes);
-	
+	            var childScaleTypes = mapOverChildren(props.children, _this2._resolveScaleType);
 	
 	            var childScaleType = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
 	              // todo warn on multiple scale types, probably not what you want
@@ -56516,20 +56586,9 @@
 	            };
 	          }();
 	
-	          if ((typeof _ret4 === 'undefined' ? 'undefined' : _typeof(_ret4)) === "object") return _ret4.v;
+	          if ((typeof _ret3 === 'undefined' ? 'undefined' : _typeof(_ret3)) === "object") return _ret3.v;
 	        }
 	      }
-	
-	      // _resolveTicks(props, Component) {
-	      //   const propsTicks = props.ticks || {};
-	      //   const hasTicksOrTickCount = (v, k) =>
-	      //     (_.isArray(_.get(v, `ticks.${k}`)) || _.isFinite(_.get(v, `tickCount.${k}`)));
-	      //   if(_.every(['x', 'y'], k => hasTicksOrTickCount(props)))
-	      //     return _.pick(props, ['tick', 'tickCount'])
-	      //
-	      // }
-	
-	
 	    }, {
 	      key: '_resolveDomain',
 	      value: function _resolveDomain(props, Component, scaleType) {
@@ -56547,7 +56606,6 @@
 	        // use it to determine remaining domains
 	        if (_lodash2.default.isFunction(Component.getDomain)) {
 	          var componentDomain = omitNullUndefined(Component.getDomain(_extends({ scaleType: scaleType }, props)));
-	          // console.log('Component.getDomain', componentDomain);
 	          domain = _lodash2.default.assign(componentDomain, domain);
 	          if (hasXYDomains(domain)) return domain;
 	        }
@@ -56555,7 +56613,7 @@
 	        // if Component has data or datasets props,
 	        // use the default domainFromDatasets function to determine a domain from them
 	        if (_lodash2.default.isArray(props.data) || _lodash2.default.isArray(props.datasets)) {
-	          var _ret5 = function () {
+	          var _ret4 = function () {
 	            var datasets = _lodash2.default.isArray(props.datasets) ? props.datasets : [props.data];
 	            var datasetDomain = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
 	              // const kAccessor = makeAccessor(_.get(props, `getValue.${k}`));
@@ -56564,7 +56622,6 @@
 	              var kDomain = (0, _Data.domainFromDatasets)(datasets, kAccessor, dataType);
 	              return [k, kDomain];
 	            }));
-	            // console.log('datasetDomain', datasetDomain);
 	
 	            domain = _lodash2.default.assign(datasetDomain, domain);
 	            if (hasXYDomains(domain)) return {
@@ -56572,26 +56629,20 @@
 	              };
 	          }();
 	
-	          if ((typeof _ret5 === 'undefined' ? 'undefined' : _typeof(_ret5)) === "object") return _ret5.v;
+	          if ((typeof _ret4 === 'undefined' ? 'undefined' : _typeof(_ret4)) === "object") return _ret4.v;
 	        }
 	
 	        // if Component has children,
 	        // recurse through descendants to resolve their domains the same way,
 	        // and combine them into a single domain, if there are multiple
 	        if (_react2.default.Children.count(props.children)) {
-	          var _ret6 = function () {
-	            var childDomains = [];
-	            _react2.default.Children.forEach(props.children, function (child) {
-	              if (!child) return;
-	              childDomains = childDomains.concat(_this3._resolveDomain(child.props, child.type, scaleType));
-	            });
+	          var _ret5 = function () {
+	            var childDomains = mapOverChildren(props.children, _this3._resolveDomain, scaleType);
 	
-	            // console.log('combining domains', childDomains);
 	            var childDomain = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
 	              var kDomain = (0, _Data.combineDomains)(_lodash2.default.compact(_lodash2.default.map(childDomains, k)), (0, _Scale.dataTypeFromScaleType)(scaleType[k]));
 	              return [k, kDomain];
 	            }));
-	            // console.log('combined domains', childDomain);
 	
 	            domain = _lodash2.default.assign(childDomain, domain);
 	            return {
@@ -56599,7 +56650,7 @@
 	            };
 	          }();
 	
-	          if ((typeof _ret6 === 'undefined' ? 'undefined' : _typeof(_ret6)) === "object") return _ret6.v;
+	          if ((typeof _ret5 === 'undefined' ? 'undefined' : _typeof(_ret5)) === "object") return _ret5.v;
 	        }
 	      }
 	    }, {
@@ -56613,12 +56664,8 @@
 	        }
 	
 	        if (_react2.default.Children.count(props.children)) {
-	          var _ret7 = function () {
-	            var childTickDomains = [];
-	            _react2.default.Children.forEach(props.children, function (child) {
-	              if (!child) return;
-	              childTickDomains.push(_this4._resolveTickDomain(child.props, child.type, scaleType, domain, scale));
-	            });
+	          var _ret6 = function () {
+	            var childTickDomains = mapOverChildren(props.children, _this4._resolveTickDomain, scaleType, domain, scale);
 	
 	            var tickDomain = _lodash2.default.fromPairs(['x', 'y'].map(function (k) {
 	              var kChildTickDomains = _lodash2.default.compact(childTickDomains.map(function (v) {
@@ -56632,17 +56679,43 @@
 	            };
 	          }();
 	
-	          if ((typeof _ret7 === 'undefined' ? 'undefined' : _typeof(_ret7)) === "object") return _ret7.v;
+	          if ((typeof _ret6 === 'undefined' ? 'undefined' : _typeof(_ret6)) === "object") return _ret6.v;
 	        }
 	      }
 	    }, {
 	      key: '_resolveLabels',
 	      value: function _resolveLabels(props) {}
 	    }, {
+	      key: '_resolveSpacing',
+	      value: function _resolveSpacing(props, Component, scaleType, domain, scale) {
+	        var propsSpacing = props.spacing || {};
+	
+	        // short-circuit if all spacings provided
+	        if (hasAllSpacing(propsSpacing)) return propsSpacing;
+	
+	        var spacing = omitNullUndefined(propsSpacing);
+	
+	        if (_lodash2.default.isFunction(Component.getSpacing)) {
+	          var componentSpacing = omitNullUndefined(Component.getSpacing(_extends({ scaleType: scaleType, domain: domain, scale: scale }, props)));
+	          spacing = _lodash2.default.assign(componentSpacing, spacing);
+	          if (hasAllSpacing(spacing)) return spacing;
+	        }
+	
+	        // if Component has children,
+	        // recurse through descendants to resolve their spacings the same way,
+	        // and combine them into a single spacing, if there are multiple
+	        if (_react2.default.Children.count(props.children)) {
+	          var childSpacings = mapOverChildren(props.children, this._resolveSpacing, scaleType, domain, scale);
+	
+	          var childSpacing = (0, _Data.combineBorderObjects)(childSpacings);
+	
+	          spacing = _lodash2.default.assign(childSpacing, spacing);
+	        }
+	        return spacing;
+	      }
+	    }, {
 	      key: '_resolveMargin',
 	      value: function _resolveMargin(props, Component, scaleType, domain, scale) {
-	        var _this5 = this;
-	
 	        var propsMargin = props.margin || {};
 	
 	        // short-circuit if all margins provided
@@ -56655,7 +56728,6 @@
 	        // use it to determine remaining domains
 	        if (_lodash2.default.isFunction(Component.getMargin)) {
 	          var componentMargin = omitNullUndefined(Component.getMargin(_extends({ scaleType: scaleType, domain: domain, scale: scale }, props)));
-	          // console.log('Component.getMargin', componentMargin);
 	          margin = _lodash2.default.assign(componentMargin, margin);
 	          if (hasAllMargins(margin)) return margin;
 	        }
@@ -56664,29 +56736,18 @@
 	        // recurse through descendants to resolve their margins the same way,
 	        // and combine them into a single margin, if there are multiple
 	        if (_react2.default.Children.count(props.children)) {
-	          (function () {
-	            var childMargins = [];
-	            _react2.default.Children.forEach(props.children, function (child) {
-	              if (!child) return;
-	              childMargins = childMargins.concat(_this5._resolveMargin(child.props, child.type, scaleType, domain, scale));
-	            });
+	          var childMargins = mapOverChildren(props.children, this._resolveMargin, scaleType, domain, scale);
 	
-	            // console.log('combining child margins', childMargins);
-	            var childMargin = _lodash2.default.fromPairs(['top', 'bottom', 'left', 'right'].map(function (k) {
-	              // combine margins by taking the max value of each margin direction
-	              return [k, _lodash2.default.get(_lodash2.default.maxBy(childMargins, k), k)];
-	            }));
-	            // console.log('combined margins', childMargin);
+	          // console.log('combining child margins', childMargins);
+	          var childMargin = (0, _Data.combineBorderObjects)(childMargins);
 	
-	            margin = _lodash2.default.assign(childMargin, margin);
-	          })();
+	          margin = _lodash2.default.assign(childMargin, margin);
 	        }
 	        return margin;
 	      }
 	    }, {
 	      key: 'render',
 	      value: function render() {
-	        // console.log('xyScales Props', this.props);
 	        var props = this.props;
 	        var width = props.width,
 	            height = props.height,
@@ -56702,15 +56763,14 @@
 	        // first resolve scale types and domains
 	        var scaleType = this._resolveScaleType(props, ComposedComponent);
 	        var domain = this._resolveDomain(props, ComposedComponent, scaleType);
-	        // console.log('scaleType', scaleType);
-	        // console.log('domain ', domain);
-	
+	        var scaleOptions = { width: width, height: height, scaleType: scaleType, domain: domain, margin: props.margin, scale: props.scale, padding: props.padding, spacing: props.spacing };
 	        // create a temporary scale with size & domain, which may be used by the Component to calculate margin/tickDomain
 	        // (eg. to create and measure labels for the scales)
-	        var tempScale = this._makeScales({ width: width, height: height, scaleType: scaleType, domain: domain, margin: props.margin, scale: props.scale });
+	        var tempScale = this._makeScales(scaleOptions);
 	
 	        // getTickDomain gives children the opportunity to modify the domain to include their scale ticks
 	        // (can't happen in getDomain, because it can't be done until the base domain/tempScale has been created)
+	        //nice-ing happens in the getTickDomain function inside of _resolveTickDomain
 	        var tickDomain = this._resolveTickDomain(props, ComposedComponent, scaleType, domain, tempScale);
 	        if (_lodash2.default.isObject(tickDomain)) {
 	          ['x', 'y'].forEach(function (k) {
@@ -56719,20 +56779,18 @@
 	          });
 	        }
 	        // update tempScale to use new domain before creating margins
-	        tempScale = this._makeScales({ width: width, height: height, scaleType: scaleType, domain: domain, margin: props.margin, scale: props.scale });
+	        tempScale = this._makeScales(scaleOptions);
 	
 	        // then resolve the margins
 	        var margin = _lodash2.default.defaults(this._resolveMargin(props, ComposedComponent, scaleType, domain, tempScale), { top: 0, bottom: 0, left: 0, right: 0 });
-	        // console.log('margin', margin);
+	
+	        var spacing = _lodash2.default.defaults(this._resolveSpacing(props, ComposedComponent, scaleType, domain, tempScale), { top: 0, bottom: 0, left: 0, right: 0 });
 	
 	        // create real scales from resolved margins
-	        var scaleOptions = { scale: props.scale, width: width, height: height, scaleType: scaleType, domain: domain, margin: margin, nice: nice };
-	        // console.log('making scales', scaleOptions);
-	        var scale = _lodash2.default.isEqual(margin, props.margin) ? tempScale : // don't re-create scales if margin hasn't changed (ie. was passed in props)
-	        this._makeScales(scaleOptions);
+	        scaleOptions = _extends({}, scaleOptions, { margin: margin, spacing: spacing });
+	        var scale = this._makeScales(scaleOptions);
 	
-	        // and pass scales to wrapped component
-	        var passedProps = _lodash2.default.assign({}, this.props, { scale: scale, scaleType: scaleType, margin: margin, domain: domain });
+	        var passedProps = _lodash2.default.assign({}, this.props, { scale: scale, scaleType: scaleType, margin: margin, domain: domain, spacing: spacing });
 	        return _react2.default.createElement(ComposedComponent, passedProps);
 	
 	        // todo spacing/padding
@@ -56749,7 +56807,7 @@
 	    return _class;
 	  }(_react2.default.Component), _class.defaultProps = _lodash2.default.defaults(ComposedComponent.defaultProps, {
 	    invertScale: { x: false, y: false }
-	  }), _class.getScaleType = ComposedComponent.getScaleType, _class.getDomain = ComposedComponent.getDomain, _class.getMargin = ComposedComponent.getMargin, _temp2;
+	  }), _class.getScaleType = ComposedComponent.getScaleType, _class.getSpacing = ComposedComponent.getSpacing, _class.getDomain = ComposedComponent.getDomain, _class.getMargin = ComposedComponent.getMargin, _temp2;
 	}
 
 /***/ },
@@ -56770,7 +56828,9 @@
 	exports.inferDatasetsType = inferDatasetsType;
 	exports.isValidDomain = isValidDomain;
 	exports.combineDomains = combineDomains;
+	exports.combineBorderObjects = combineBorderObjects;
 	exports.domainFromData = domainFromData;
+	exports.getDataDomainByAxis = getDataDomainByAxis;
 	exports.domainFromDatasets = domainFromDatasets;
 	exports.domainFromRangeData = domainFromRangeData;
 	
@@ -56785,6 +56845,8 @@
 	var _react2 = _interopRequireDefault(_react);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	/**
 	 * `makeAccessor` creates an accessor or "getter" function given a variety of options
@@ -56878,12 +56940,31 @@
 	  return dataType === 'categorical' ? _lodash2.default.uniq(_lodash2.default.flatten(_lodash2.default.compact(domains))) : (0, _d.extent)(_lodash2.default.flatten(domains));
 	}
 	
+	function combineBorderObjects(borderObjects) {
+	  return _lodash2.default.fromPairs(['top', 'bottom', 'left', 'right'].map(function (k) {
+	    // combine border objects by taking the max value of each spacing direction
+	    return [k, _lodash2.default.get(_lodash2.default.maxBy(borderObjects, k), k)];
+	  }));
+	}
+	
 	function domainFromData(data) {
 	  var accessor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _lodash2.default.identity;
 	  var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
 	
 	  if (!type) type = inferDataType(data, accessor);
 	  return type === 'number' || type === 'time' ? (0, _d.extent)(data.map(accessor)) : _lodash2.default.uniq(data.map(accessor));
+	}
+	
+	function getDataDomainByAxis(props) {
+	  var horizontal = props.horizontal,
+	      data = props.data,
+	      getX = props.getX,
+	      getY = props.getY;
+	
+	  var accessor = horizontal ? makeAccessor(getY) : makeAccessor(getX);
+	  // only have to specify range axis domain, other axis uses default domainFromData
+	  var rangeAxis = horizontal ? 'y' : 'x';
+	  return _defineProperty({}, rangeAxis, domainFromData(data, accessor));
 	}
 	
 	function domainFromDatasets(datasets) {
@@ -57227,6 +57308,7 @@
 	          width = _props.width,
 	          height = _props.height,
 	          position = _props.position,
+	          spacing = _props.spacing,
 	          tickLength = _props.tickLength,
 	          titleDistance = _props.titleDistance,
 	          labelDistance = _props.labelDistance,
@@ -57251,7 +57333,9 @@
 	        titleProps.distance = titleDistance + tickLength;
 	      }
 	
-	      var axisLineY = position === 'bottom' ? height : 0;
+	      var axisLineY = position === 'bottom' ? height + spacing.bottom : -spacing.top;
+	      // `width` is width of inner chart *not* including spacing - add spacing to figure out where to draw line
+	      var axisLineWidth = width + spacing.left + spacing.right;
 	
 	      return _react2.default.createElement(
 	        'g',
@@ -57260,7 +57344,11 @@
 	        showTicks ? _react2.default.createElement(_XTicks2.default, ticksProps) : null,
 	        showLabels ? _react2.default.createElement(_XAxisLabels2.default, labelsProps) : null,
 	        showTitle ? _react2.default.createElement(_XAxisTitle2.default, titleProps) : null,
-	        _react2.default.createElement('line', { className: 'chart-axis-line chart-axis-line-x', x1: 0, x2: width, y1: axisLineY, y2: axisLineY })
+	        _react2.default.createElement('line', {
+	          className: 'chart-axis-line chart-axis-line-x',
+	          x1: -spacing.left, x2: width + spacing.right,
+	          y1: axisLineY, y2: axisLineY
+	        })
 	      );
 	    }
 	  }], [{
@@ -57345,7 +57433,8 @@
 	  showGrid: true,
 	  tickLength: 5,
 	  labelDistance: 3,
-	  titleDistance: 5
+	  titleDistance: 5,
+	  spacing: { top: 0, bottom: 0, left: 0, right: 0 }
 	};
 	exports.default = XAxis;
 
@@ -57442,6 +57531,7 @@
 	      height = props.height,
 	      position = props.position,
 	      placement = props.placement,
+	      spacing = props.spacing,
 	      ticks = props.ticks,
 	      tickCount = props.tickCount,
 	      tickLength = props.tickLength,
@@ -57466,24 +57556,24 @@
 	
 	
 	  var ticksProps = {
-	    width: width, height: height, scale: scale, ticks: ticks, tickCount: tickCount,
+	    width: width, height: height, scale: scale, ticks: ticks, tickCount: tickCount, spacing: spacing,
 	    position: position, placement: placement, tickLength: tickLength, tickStyle: tickStyle, tickClassName: tickClassName
 	  };
 	
 	  var gridProps = {
-	    width: width, height: height, scale: scale, ticks: ticks, tickCount: tickCount,
+	    width: width, height: height, scale: scale, ticks: ticks, tickCount: tickCount, spacing: spacing,
 	    lineClassName: gridLineClassName, lineStyle: gridLineStyle
 	  };
 	
 	  var labelsProps = {
-	    width: width, height: height, scale: scale, ticks: ticks, tickCount: tickCount,
+	    width: width, height: height, scale: scale, ticks: ticks, tickCount: tickCount, spacing: spacing,
 	    position: position, placement: placement, labels: labels,
 	    labelClassName: labelClassName, labelStyle: labelStyle, distance: labelDistance, format: labelFormat, formats: labelFormats,
 	    onMouseEnterLabel: onMouseEnterLabel, onMouseMoveLabel: onMouseMoveLabel, onMouseLeaveLabel: onMouseLeaveLabel
 	  };
 	
 	  var titleProps = {
-	    width: width, height: height, position: position, placement: placement, title: title,
+	    width: width, height: height, position: position, placement: placement, title: title, spacing: spacing,
 	    style: titleStyle, distance: titleDistance, alignment: titleAlign, rotate: titleRotate
 	  };
 	
@@ -57582,13 +57672,14 @@
 	          position = _props.position,
 	          tickLength = _props.tickLength,
 	          tickStyle = _props.tickStyle,
-	          tickClassName = _props.tickClassName;
+	          tickClassName = _props.tickClassName,
+	          spacing = _props.spacing;
 	
 	      var scale = this.props.scale.x;
 	      var placement = this.props.placement || (position === 'top' ? 'above' : 'below');
 	      var ticks = this.props.ticks || (0, _Scale.getScaleTicks)(scale, null, tickCount);
 	      var className = 'chart-tick chart-tick-x ' + (tickClassName || '');
-	      var transform = position === 'bottom' ? 'translate(0,' + height + ')' : '';
+	      var transform = position === 'bottom' ? 'translate(0, ' + (height + spacing.bottom) + ')' : 'translate(0, ' + -spacing.top + ')';
 	
 	      return _react2.default.createElement(
 	        'g',
@@ -57639,7 +57730,8 @@
 	  position: 'bottom',
 	  nice: true,
 	  tickLength: 5,
-	  tickStyle: {}
+	  tickStyle: {},
+	  spacing: { top: 0, bottom: 0, left: 0, right: 0 }
 	};
 	exports.default = XTicks;
 
@@ -57693,6 +57785,7 @@
 	
 	      var _props = this.props,
 	          height = _props.height,
+	          spacing = _props.spacing,
 	          tickCount = _props.tickCount,
 	          lineClassName = _props.lineClassName,
 	          lineStyle = _props.lineStyle;
@@ -57706,10 +57799,9 @@
 	        { className: 'chart-grid-x' },
 	        ticks.map(function (tick, i) {
 	          return _react2.default.createElement(_XLine2.default, {
+	            height: height, className: className, spacing: spacing,
 	            scale: _this2.props.scale,
 	            value: tick,
-	            height: height,
-	            className: className,
 	            style: lineStyle,
 	            key: 'grid-x-line-' + i
 	          });
@@ -57783,6 +57875,7 @@
 	      var _props = this.props,
 	          value = _props.value,
 	          height = _props.height,
+	          spacing = _props.spacing,
 	          style = _props.style;
 	
 	      var scale = this.props.scale.x;
@@ -57792,8 +57885,8 @@
 	      return _react2.default.createElement('line', {
 	        x1: lineX,
 	        x2: lineX,
-	        y1: 0,
-	        y2: height,
+	        y1: -spacing.top,
+	        y2: height + spacing.bottom,
 	        className: className, style: style
 	      });
 	    }
@@ -57941,14 +58034,15 @@
 	          labelClassName = _props.labelClassName,
 	          onMouseEnterLabel = _props.onMouseEnterLabel,
 	          onMouseMoveLabel = _props.onMouseMoveLabel,
-	          onMouseLeaveLabel = _props.onMouseLeaveLabel;
+	          onMouseLeaveLabel = _props.onMouseLeaveLabel,
+	          spacing = _props.spacing;
 	
 	      var scale = this.props.scale.x;
 	      var labels = this.props.labels || XAxisValueLabels.getLabels(this.props);
 	      var placement = this.props.placement || (position === 'top' ? 'above' : 'below');
 	      var style = _lodash2.default.defaults(labelStyle, XAxisValueLabels.defaultProps.labelStyle);
 	      var className = 'chart-value-label chart-value-label-x ' + labelClassName;
-	      var transform = position === 'bottom' ? 'translate(0,' + height + ')' : '';
+	      var transform = position === 'bottom' ? 'translate(0, ' + (height + spacing.bottom) + ')' : 'translate(0, ' + -spacing.top + ')';
 	      // todo: position: 'zero' to position along the zero line
 	
 	      return _react2.default.createElement(
@@ -58082,7 +58176,8 @@
 	  },
 	  format: undefined,
 	  formats: undefined,
-	  labels: undefined
+	  labels: undefined,
+	  spacing: { top: 0, bottom: 0, left: 0, right: 0 }
 	};
 	
 	var XAxisLabelDebugRect = function (_React$Component2) {
@@ -74063,13 +74158,14 @@
 	          distance = _props.distance,
 	          position = _props.position,
 	          alignment = _props.alignment,
-	          style = _props.style;
+	          style = _props.style,
+	          spacing = _props.spacing;
 	
 	      var title = this.props.title || this.props.children;
 	      var placement = this.props.placement || (position === 'bottom' ? 'below' : 'above');
 	      var rotate = this.props.rotate ? -90 : 0;
 	
-	      var posY = position === 'bottom' ? height : 0;
+	      var posY = position === 'bottom' ? height + spacing.bottom : -spacing.top;
 	      var translateY = posY + (placement === 'above' ? -distance : distance);
 	      var translateX = alignment === 'center' ? width / 2 : alignment === 'right' ? width : 0;
 	
@@ -74137,7 +74233,8 @@
 	    fontSize: '24px',
 	    fontWeight: 'bold',
 	    lineHeight: 1
-	  }
+	  },
+	  spacing: { top: 0, bottom: 0, left: 0, right: 0 }
 	};
 	exports.default = XAxisTitle;
 
@@ -74216,6 +74313,7 @@
 	          width = _props.width,
 	          height = _props.height,
 	          position = _props.position,
+	          spacing = _props.spacing,
 	          tickLength = _props.tickLength,
 	          titleDistance = _props.titleDistance,
 	          labelDistance = _props.labelDistance,
@@ -74240,7 +74338,9 @@
 	        titleProps.distance = titleDistance + tickLength;
 	      }
 	
-	      var axisLineX = position === 'left' ? 0 : width;
+	      var axisLineX = position === 'left' ? -spacing.left : width + spacing.right;
+	      // `height` is height of inner chart *not* including spacing - add spacing to figure out where to draw axis line
+	      var axisLineHeight = height + spacing.top + spacing.bottom;
 	
 	      return _react2.default.createElement(
 	        'g',
@@ -74249,7 +74349,11 @@
 	        showTicks ? _react2.default.createElement(_YTicks2.default, ticksProps) : null,
 	        showLabels ? _react2.default.createElement(_YAxisLabels2.default, labelsProps) : null,
 	        showTitle ? _react2.default.createElement(_YAxisTitle2.default, titleProps) : null,
-	        _react2.default.createElement('line', { className: 'chart-axis-line chart-axis-line-y', x1: axisLineX, x2: axisLineX, y1: 0, y2: height })
+	        _react2.default.createElement('line', {
+	          className: 'chart-axis-line chart-axis-line-y',
+	          x1: axisLineX, x2: axisLineX,
+	          y1: -spacing.top, y2: height + spacing.bottom
+	        })
 	      );
 	    }
 	  }], [{
@@ -74334,7 +74438,8 @@
 	  showGrid: true,
 	  tickLength: 5,
 	  labelDistance: 3,
-	  titleDistance: 5
+	  titleDistance: 5,
+	  spacing: { top: 0, bottom: 0, left: 0, right: 0 }
 	};
 	exports.default = YAxis;
 
@@ -74388,13 +74493,14 @@
 	          position = _props.position,
 	          tickLength = _props.tickLength,
 	          tickStyle = _props.tickStyle,
-	          tickClassName = _props.tickClassName;
+	          tickClassName = _props.tickClassName,
+	          spacing = _props.spacing;
 	
 	      var scale = this.props.scale.y;
 	      var placement = this.props.placement || (position === 'left' ? 'before' : 'after');
 	      var ticks = this.props.ticks || (0, _Scale.getScaleTicks)(scale, null, tickCount);
 	      var className = 'chart-tick chart-tick-y ' + (tickClassName || '');
-	      var transform = position === 'right' ? 'translate(' + width + ', 0)' : '';
+	      var transform = position === 'right' ? 'translate(' + (width + spacing.right) + ', 0)' : 'translate(' + -spacing.left + ', 0)';
 	
 	      return _react2.default.createElement(
 	        'g',
@@ -74445,7 +74551,8 @@
 	  position: 'left',
 	  nice: true,
 	  tickLength: 5,
-	  tickStyle: {}
+	  tickStyle: {},
+	  spacing: { top: 0, bottom: 0, left: 0, right: 0 }
 	};
 	exports.default = YTicks;
 
@@ -74499,6 +74606,7 @@
 	
 	      var _props = this.props,
 	          width = _props.width,
+	          spacing = _props.spacing,
 	          tickCount = _props.tickCount,
 	          lineClassName = _props.lineClassName,
 	          lineStyle = _props.lineStyle;
@@ -74512,10 +74620,10 @@
 	        { className: 'chart-grid-y' },
 	        ticks.map(function (tick, i) {
 	          return _react2.default.createElement(_YLine2.default, {
+	            className: className, spacing: spacing,
 	            scale: _this2.props.scale,
 	            value: tick,
 	            width: width,
-	            className: className,
 	            style: lineStyle,
 	            key: 'grid-y-line-' + i
 	          });
@@ -74589,6 +74697,7 @@
 	      var _props = this.props,
 	          value = _props.value,
 	          width = _props.width,
+	          spacing = _props.spacing,
 	          style = _props.style;
 	
 	      var scale = this.props.scale.y;
@@ -74596,8 +74705,8 @@
 	      var lineY = scale(value);
 	
 	      return _react2.default.createElement('line', {
-	        x1: 0,
-	        x2: width,
+	        x1: -spacing.left,
+	        x2: width + spacing.right,
 	        y1: lineY,
 	        y2: lineY,
 	        className: className, style: style
@@ -74732,17 +74841,17 @@
 	          labelClassName = _props.labelClassName,
 	          onMouseEnterLabel = _props.onMouseEnterLabel,
 	          onMouseMoveLabel = _props.onMouseMoveLabel,
-	          onMouseLeaveLabel = _props.onMouseLeaveLabel;
+	          onMouseLeaveLabel = _props.onMouseLeaveLabel,
+	          spacing = _props.spacing;
 	
 	      var scale = this.props.scale.y;
 	      var placement = this.props.placement || (position === 'left' ? 'before' : 'after');
 	      var className = 'chart-value-label chart-value-label-y ' + labelClassName;
 	      var textAnchor = placement === 'before' ? 'end' : 'start';
 	      var style = _lodash2.default.defaults({ textAnchor: textAnchor }, labelStyle, YAxisValueLabels.defaultProps.labelStyle);
-	
 	      var labels = this.props.labels || YAxisValueLabels.getLabels(this.props);
+	      var transform = position === 'left' ? 'translate(' + -spacing.left + ', 0)' : 'translate(' + (width + spacing.right) + ', 0)';
 	
-	      var transform = position === 'left' ? '' : 'translate(' + width + ',0)';
 	      return _react2.default.createElement(
 	        'g',
 	        { className: 'chart-value-labels-y', transform: transform },
@@ -74837,8 +74946,6 @@
 	      // nudge down the tickCount and try again
 	      // doing this will require communicating the updated ticks/tickCount back to the parent element...
 	
-	      var start = performance.now();
-	
 	      var _resolveYLabelsForVal = resolveYLabelsForValues(scale, ticks, formats, style),
 	          labels = _resolveYLabelsForVal.labels;
 	      // console.log('resolveYLabelsForValues took ', performance.now() - start);
@@ -74877,7 +74984,8 @@
 	    fontSize: '14px',
 	    lineHeight: 1,
 	    textAnchor: 'end'
-	  }
+	  },
+	  spacing: { top: 0, bottom: 0, left: 0, right: 0 }
 	};
 	
 	var YAxisLabelDebugRect = function (_React$Component2) {
@@ -74966,13 +75074,14 @@
 	          distance = _props.distance,
 	          position = _props.position,
 	          alignment = _props.alignment,
-	          style = _props.style;
+	          style = _props.style,
+	          spacing = _props.spacing;
 	
 	      var title = this.props.title || this.props.children;
 	      var placement = this.props.placement || (position === 'left' ? 'before' : 'after');
 	
 	      var rotate = this.props.rotate ? -90 : 0;
-	      var posX = position === 'right' ? width : 0;
+	      var posX = position === 'right' ? width + spacing.right : -spacing.left;
 	      var translateX = posX + (placement === 'before' ? -distance : distance);
 	      var translateY = alignment === 'middle' ? height / 2 : alignment === 'bottom' ? height : 0;
 	      var textAnchor = rotate && alignment === 'top' ? 'end' : rotate && alignment === 'middle' ? 'middle' : rotate && alignment === 'bottom' ? 'start' : placement === 'before' ? 'end' : 'start';
@@ -75038,7 +75147,8 @@
 	    fontSize: '24px',
 	    fontWeight: 'bold',
 	    lineHeight: 1
-	  }
+	  },
+	  spacing: { top: 0, bottom: 0, left: 0, right: 0 }
 	};
 	exports.default = YAxisTitle;
 
@@ -75332,6 +75442,44 @@
 	
 	      return _defineProperty({}, rangeAxis, (0, _Data.domainFromRangeData)(data, rangeStartAccessor, rangeEndAccessor, rangeDataType));
 	    }
+	  }, {
+	    key: 'getSpacing',
+	    value: function getSpacing(props) {
+	      var barThickness = props.barThickness,
+	          horizontal = props.horizontal,
+	          scale = props.scale,
+	          data = props.data,
+	          domain = props.domain;
+	
+	      var dataDomain = (0, _Data.getDataDomainByAxis)(props);
+	      var P = barThickness / 2; //padding
+	      var k = horizontal ? 'y' : 'x';
+	      //find the edges of the tick domain, and map them through the scale function
+	
+	      var _$map$sortBy = _([_.first(domain[k]), _.last(domain[k])]).map(scale[k]).sortBy(),
+	          _$map$sortBy2 = _slicedToArray(_$map$sortBy, 2),
+	          domainHead = _$map$sortBy2[0],
+	          domainTail = _$map$sortBy2[1]; //sort the pixel values return by the domain extents
+	      //find the edges of the data domain, and map them through the scale function
+	
+	
+	      var _$map$sortBy3 = _([_.first(dataDomain[k]), _.last(dataDomain[k])]).map(scale[k]).sortBy(),
+	          _$map$sortBy4 = _slicedToArray(_$map$sortBy3, 2),
+	          dataDomainHead = _$map$sortBy4[0],
+	          dataDomainTail = _$map$sortBy4[1]; //sort the pixel values return by the domain extents
+	      //find the neccessary spacing (based on bar width) to push the bars completely inside the tick domain
+	
+	
+	      var _ref2 = [_.clamp(P - (domainTail - dataDomainTail), 0, P), _.clamp(P - (dataDomainHead - domainHead), 0, P)],
+	          spacingTail = _ref2[0],
+	          spacingHead = _ref2[1];
+	
+	      if (horizontal) {
+	        return { top: spacingHead, right: 0, bottom: spacingTail, left: 0 };
+	      } else {
+	        return { top: 0, right: spacingTail, bottom: 0, left: spacingHead };
+	      }
+	    }
 	  }]);
 	
 	  return RangeBarChart;
@@ -75549,6 +75697,8 @@
 	
 	var _Scale = __webpack_require__(172);
 	
+	var _Data = __webpack_require__(171);
+	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -75606,9 +75756,14 @@
 	    key: 'getDomain',
 	
 	
-	    // todo: static getDomain
+	    // gets data domain of independent variable
 	    value: function getDomain(props) {
 	      return _RangeBarChart2.default.getDomain(makeRangeBarChartProps(props));
+	    }
+	  }, {
+	    key: 'getSpacing',
+	    value: function getSpacing(props) {
+	      return _RangeBarChart2.default.getSpacing(makeRangeBarChartProps(props));
 	    }
 	  }]);
 	
@@ -76843,11 +76998,12 @@
 	          y1 = node.y1;
 	
 	
-	      var nodeGroupClass = parent ? 'node-group-' + _lodash2.default.kebabCase(parent.name) + ' node-group-i-' + parentNames.indexOf(parent.name) : '';
+	      var parentName = _lodash2.default.get(parent, 'data.name');
+	      var nodeGroupClass = parent ? 'node-group-' + _lodash2.default.kebabCase(parentName) + ' node-group-i-' + parentNames.indexOf(parentName) : '';
 	      var className = 'tree-map-node node-depth-' + depth + ' ' + nodeGroupClass;
 	
 	      var style = { position: 'absolute', width: x1 - x0, height: y1 - y0, top: y0, left: x0, transition: "all .2s" };
-	      var customStyle = _lodash2.default.isFunction(nodeStyle) ? nodeStyle(node.data) : _lodash2.default.isObject(nodeStyle) ? nodeStyle : {};
+	      var customStyle = _lodash2.default.isFunction(nodeStyle) ? nodeStyle(node) : _lodash2.default.isObject(nodeStyle) ? nodeStyle : {};
 	      _lodash2.default.assign(style, customStyle);
 	
 	      var handlers = ['onClick', 'onMouseEnter', 'onMouseLeave', 'onMouseMove'].reduce(function (handlers, eventName) {
@@ -76993,7 +77149,7 @@
 	
 	      var style = { position: 'relative', width: width, height: height };
 	
-	      var parentNames = _lodash2.default.uniq(_lodash2.default.map(nodes, 'parent.name'));
+	      var parentNames = _lodash2.default.uniq(_lodash2.default.map(nodes, 'parent.data.name'));
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -77068,7 +77224,7 @@
 	
 	  var tiling = !_lodash2.default.isUndefined(ratio) ? _d3Hierarchy.treemapResquarify.ratio(ratio) : _d3Hierarchy.treemapResquarify;
 	  var tree = (0, _d3Hierarchy.treemap)().tile(tiling).size([width, height]);
-	  if (!_lodash2.default.isUndefined(padding)) tree.padding(padding);
+	  if (!_lodash2.default.isUndefined(padding)) tree.paddingOuter(padding);
 	  if (!_lodash2.default.isUndefined(round)) tree.round(round);
 	  return tree;
 	}
@@ -77079,11 +77235,10 @@
 	  var getValue = options.getValue,
 	      sort = options.sort;
 	
-	  rootNode.sum(function (d) {
-	    return d[getValue] || 0;
+	  var treeRoot = rootNode.sum(function (d) {
+	    if (_lodash2.default.isFunction(getValue)) return getValue(d);else if (_lodash2.default.isString(getValue)) return d[getValue];else return 0;
 	  });
-	  if (!_lodash2.default.isUndefined(sort)) rootNode.sort(sort);
-	  return tree(rootNode).descendants();
+	  return tree(sort ? treeRoot.sort(sort) : treeRoot).descendants();
 	}
 	
 	exports.default = TreeMap;
@@ -78809,7 +78964,7 @@
 	      );
 	    }
 	  }], [{
-	    key: 'getDomain',
+	    key: 'getSpacing',
 	
 	
 	    // todo reimplement padding/spacing
@@ -78835,6 +78990,46 @@
 	    }
 	    */
 	
+	    value: function getSpacing(props) {
+	      var tickType = getTickType(props);
+	      if (tickType === 'RangeValue') return { top: 0, right: 0, bottom: 0, left: 0 }; //no spacing for rangeValue marker charts since line start and end are set explicitly
+	      var lineLength = props.lineLength,
+	          horizontal = props.horizontal,
+	          scale = props.scale,
+	          data = props.data,
+	          domain = props.domain;
+	
+	      var dataDomain = (0, _Data.getDataDomainByAxis)(props);
+	      var P = lineLength / 2; //padding
+	      var k = horizontal ? 'y' : 'x';
+	      //find the edges of the tick domain, and map them through the scale function
+	
+	      var _$map$sortBy = (0, _lodash2.default)([_lodash2.default.first(domain[k]), _lodash2.default.last(domain[k])]).map(scale[k]).sortBy(),
+	          _$map$sortBy2 = _slicedToArray(_$map$sortBy, 2),
+	          domainHead = _$map$sortBy2[0],
+	          domainTail = _$map$sortBy2[1]; //sort the pixel values return by the domain extents
+	      //find the edges of the data domain, and map them through the scale function
+	
+	
+	      var _$map$sortBy3 = (0, _lodash2.default)([_lodash2.default.first(dataDomain[k]), _lodash2.default.last(dataDomain[k])]).map(scale[k]).sortBy(),
+	          _$map$sortBy4 = _slicedToArray(_$map$sortBy3, 2),
+	          dataDomainHead = _$map$sortBy4[0],
+	          dataDomainTail = _$map$sortBy4[1]; //sort the pixel values return by the domain extents
+	      //find the neccessary spacing (based on bar width) to push the bars completely inside the tick domain
+	
+	
+	      var _ref2 = [_lodash2.default.clamp(P - (domainTail - dataDomainTail), 0, P), _lodash2.default.clamp(P - (dataDomainHead - domainHead), 0, P)],
+	          spacingTail = _ref2[0],
+	          spacingHead = _ref2[1];
+	
+	      if (horizontal) {
+	        return { top: spacingHead, right: 0, bottom: spacingTail, left: 0 };
+	      } else {
+	        return { top: 0, right: spacingTail, bottom: 0, left: spacingHead };
+	      }
+	    }
+	  }, {
+	    key: 'getDomain',
 	    value: function getDomain(props) {
 	      if (getTickType(props) === 'RangeValue') {
 	        // set range domain for range type
