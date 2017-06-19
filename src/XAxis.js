@@ -38,7 +38,7 @@ export default class XAxis extends React.Component {
     labelDistance: React.PropTypes.number,
     labelClassName: React.PropTypes.string,
     labelStyle: React.PropTypes.object,
-    labelFormat: React.PropTypes.object,
+    labelFormat: React.PropTypes.oneOfType([React.PropTypes.object, React.PropTypes.func]),
     labelFormats: React.PropTypes.array,
     labels: React.PropTypes.array,
 
