@@ -17,9 +17,14 @@ export default class AreaBarChart extends React.Component {
     getXEnd: CustomPropTypes.getter,
     getY: CustomPropTypes.getter,
     getYEnd: CustomPropTypes.getter,
+    getClass: CustomPropTypes.getter,
 
     barClassName: React.PropTypes.string,
-    barStyle: React.PropTypes.object
+    barStyle: React.PropTypes.object,
+
+    onMouseEnterBar: React.PropTypes.func, 
+    onMouseMoveBar: React.PropTypes.func, 
+    onMouseLeaveBar: React.PropTypes.func
   };
   static defaultProps = {
     data: [],
@@ -46,18 +51,26 @@ export default class AreaBarChart extends React.Component {
   }
 
   render() {
-    const {scale, data, horizontal, getX, getXEnd, getY, getYEnd, barClassName, barStyle} = this.props;
+    const {scale, data, horizontal, getX, getXEnd, getY, getYEnd, barClassName, barStyle, getClass} = this.props;
     invariant(hasXYScales(scale), `AreaBarChart.props.scale.x and scale.y must both be valid d3 scales`);
 
     const barProps = {
       scale,
-      className: `chart-area-bar ${barClassName}`,
       style: barStyle
     };
     const getZero = _.constant(0);
 
     return <g>
       {data.map((d, i) => {
+        const [onMouseEnter, onMouseMove, onMouseLeave] =
+          ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(eventName => {
+
+            // partially apply this bar's data point as 2nd callback argument
+            const callback = _.get(this.props, eventName);
+            return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+        });
+
+        barProps.className = `chart-area-bar ${getClass ? makeAccessor(getClass)(d) : ''} ${barClassName}`; 
         return <RangeRect
           datum={d}
           getX={horizontal ? getZero : getX}
@@ -65,6 +78,9 @@ export default class AreaBarChart extends React.Component {
           getY={!horizontal ? getZero : getY}
           getYEnd={!horizontal ? getY : getYEnd}
           key={`chart-area-bar-${i}`}
+          onMouseEnter={onMouseEnter} 
+          onMouseMove={onMouseMove} 
+          onMouseLeave={onMouseLeave}
           {...barProps}
         />;
       })}

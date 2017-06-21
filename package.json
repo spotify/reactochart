@@ -15,7 +15,7 @@
     "enzyme": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require test-enzyme/setup.js --recursive test-enzyme/spec"
   },
   "dependencies": {
-    "d3": "^3.5.6",
+    "d3": "^4.4.0",
     "invariant": "^2.2.0",
     "jquery": "^2.1.4",
     "lodash": "^4.5.1",

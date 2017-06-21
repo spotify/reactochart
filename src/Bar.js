@@ -32,7 +32,7 @@ export default class Bar extends React.Component {
 
   render() {
     //  x/yValue are values in the *data* domain, not pixel domain
-    const {scale, xValue, xEndValue, yValue, yEndValue, thickness, style} = this.props;
+    const {scale, xValue, xEndValue, yValue, yEndValue, thickness, style, onMouseEnter, onMouseMove, onMouseLeave} = this.props;
     // console.log('bar', this.props);
 
     invariant(hasXYScales(this.props.scale), `Bar.props.scale.x and scale.y must both be valid d3 scales`);
@@ -62,7 +62,7 @@ export default class Bar extends React.Component {
     return <rect {...{
       x, y, width, height,
       className, style,
-      // todo onMouseEnter, onMouseMove, onMouseLeave
+       onMouseEnter, onMouseMove, onMouseLeave
     }} />
   }
 }

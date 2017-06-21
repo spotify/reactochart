@@ -47,7 +47,11 @@ export default class XAxis extends React.Component {
     tickStyle: React.PropTypes.object,
 
     gridLineClassName: React.PropTypes.string,
-    gridLineStyle: React.PropTypes.object
+    gridLineStyle: React.PropTypes.object,
+
+    onMouseEnterLabel: React.PropTypes.func,
+    onMouseMoveLabel: React.PropTypes.func,
+    onMouseLeaveLabel: React.PropTypes.func
   };
 
   static defaultProps = {
@@ -61,7 +65,8 @@ export default class XAxis extends React.Component {
     showGrid: true,
     tickLength: 5,
     labelDistance: 3,
-    titleDistance: 5
+    titleDistance: 5,
+    spacing: {top: 0, bottom: 0, left: 0, right: 0}
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -93,7 +98,7 @@ export default class XAxis extends React.Component {
 
   render() {
     const {
-      width, height, position, tickLength, titleDistance, labelDistance,
+      width, height, position, spacing, tickLength, titleDistance, labelDistance,
       showTitle, showLabels, showTicks, showGrid
     } = this.props;
 
@@ -109,7 +114,10 @@ export default class XAxis extends React.Component {
       titleProps.distance = titleDistance + tickLength;
     }
 
-    const axisLineY = (position === 'bottom') ? height : 0;
+    const axisLineY = (position === 'bottom') ?
+      height + spacing.bottom : -spacing.top;
+    // `width` is width of inner chart *not* including spacing - add spacing to figure out where to draw line
+    const axisLineWidth = width + spacing.left + spacing.right;
 
     return <g className="chart-axis chart-axis-x">
       {showGrid ? <XGrid {...gridProps} /> : null}
@@ -120,7 +128,11 @@ export default class XAxis extends React.Component {
 
       {showTitle ? <XAxisTitle {...titleProps} /> : null}
 
-      <line className="chart-axis-line chart-axis-line-x" x1={0} x2={width} y1={axisLineY} y2={axisLineY} />
+      <line
+        className="chart-axis-line chart-axis-line-x"
+        x1={-spacing.left} x2={width + spacing.right}
+        y1={axisLineY} y2={axisLineY}
+      />
     </g>;
   }
 }

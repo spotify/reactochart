@@ -1,10 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
 import invariant from 'invariant';
-
 import RangeBarChart from './RangeBarChart';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {hasXYScales} from './utils/Scale';
+import {makeAccessor, domainFromData} from './utils/Data';
 
 // BarChart represents a basic "Value/Value" bar chart,
 // where each bar represents a single independent variable value and a single dependent value,
@@ -39,7 +39,12 @@ export default class BarChart extends React.Component {
 
     barThickness: React.PropTypes.number,
     barClassName: React.PropTypes.string,
-    barStyle: React.PropTypes.object
+    barStyle: React.PropTypes.object,
+    getClass: CustomPropTypes.getter,
+    
+    onMouseEnterBar: React.PropTypes.func, 
+    onMouseMoveBar: React.PropTypes.func, 
+    onMouseLeaveBar: React.PropTypes.func 
   };
   static defaultProps = {
     data: [],
@@ -49,11 +54,13 @@ export default class BarChart extends React.Component {
     barStyle: {}
   };
 
-  // todo: static getDomain
+  // gets data domain of independent variable
   static getDomain(props) {
     return RangeBarChart.getDomain(makeRangeBarChartProps(props));
   }
-
+  static getSpacing(props) {
+    return RangeBarChart.getSpacing(makeRangeBarChartProps(props));
+  }
   render() {
     invariant(hasXYScales(this.props.scale), `BarChart.props.scale.x and scale.y must both be valid d3 scales`);
 

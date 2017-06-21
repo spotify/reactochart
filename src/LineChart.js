@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import d3 from 'd3';
+import {bisector} from 'd3';
 import shallowEqual from './utils/shallowEqual';
 
 import {makeAccessor} from './utils/Data';
@@ -15,8 +15,13 @@ export default class LineChart extends React.Component {
     // accessor for X & Y coordinates
     getX: React.PropTypes.any,
     getY: React.PropTypes.any,
+    // inline style object to be applied to the path
+    lineStyle: React.PropTypes.object,
     // props from XYPlot
     scale: React.PropTypes.object
+  };
+  static defaultProps = {
+    lineStyle: {}
   };
 
   componentWillMount() {
@@ -47,7 +52,7 @@ export default class LineChart extends React.Component {
   // }
 
   initBisector(props) {
-    this.setState({bisectX: d3.bisector(d => makeAccessor(props.getX)(d)).left});
+    this.setState({bisectX: bisector(d => makeAccessor(props.getX)(d)).left});
   }
 
   getHovered = (x, y) => {
@@ -57,13 +62,13 @@ export default class LineChart extends React.Component {
   };
 
   render() {
-    const {data, scale, getX, getY} = this.props;
+    const {data, scale, getX, getY, lineStyle} = this.props;
     const accessors = {x: makeAccessor(getX), y: makeAccessor(getY)};
     const points = _.map(data, d => [scale.x(accessors.x(d)), scale.y(accessors.y(d))]);
     const pathStr = pointsToPathStr(points);
 
     return <g className={this.props.name}>
-      <path d={pathStr} />
+      <path d={pathStr} style={lineStyle}/>
     </g>;
   }
 }

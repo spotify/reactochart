@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import d3 from 'd3';
+import {extent} from 'd3';
 import React from 'react';
 
 /**
@@ -53,11 +53,11 @@ export function datasetsFromPropsOrDescendants(props) {
 export function inferDataType(data, accessor = _.identity) {
   if(!_.isArray(data))
     throw new Error('inferDataType expects a data array');
-  else if(_.every(data, d => _.isUndefined(accessor(d))))
+  else if(_.every(data, (d, i) => _.isUndefined(accessor(d, i))))
     return 'categorical'; // should this be allowed?
-  else if(_.every(data, d => _.isNumber(accessor(d)) || _.isUndefined(accessor(d))))
+  else if(_.every(data, (d, i) => _.isNumber(accessor(d, i)) || _.isUndefined(accessor(d, i))))
     return 'number';
-  else if(_.every(data, d => _.isDate(accessor(d)) || _.isUndefined(accessor(d))))
+  else if(_.every(data, (d, i) => _.isDate(accessor(d, i)) || _.isUndefined(accessor(d, i))))
     return 'time';
   else
     return 'categorical';
@@ -86,14 +86,31 @@ export function combineDomains(domains, dataType) {
   if(!_.isArray(domains)) return undefined;
   return (dataType === 'categorical') ?
     _.uniq(_.flatten(_.compact(domains))) :
-    d3.extent(_.flatten(domains));
+    extent(_.flatten(domains));
+}
+
+export function combineBorderObjects(borderObjects){
+  return _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
+    // combine border objects by taking the max value of each spacing direction
+    return [k, _.get(_.maxBy(borderObjects, k), k)];
+  }));
 }
 
 export function domainFromData(data, accessor = _.identity, type = undefined) {
   if(!type) type = inferDataType(data, accessor);
   return (type === 'number' || type === 'time') ?
-    d3.extent(data.map(accessor)) :
+    extent(data.map(accessor)) :
     _.uniq(data.map(accessor));
+}
+
+export function getDataDomainByAxis(props) {
+  const {horizontal, data, getX, getY} = props;
+  const accessor = horizontal ?  makeAccessor(getY) : makeAccessor(getX);
+  // only have to specify range axis domain, other axis uses default domainFromData
+  const rangeAxis = horizontal ? 'y' : 'x';
+  return {
+    [rangeAxis]: domainFromData(data, accessor)
+  };
 }
 
 export function domainFromDatasets(datasets, accessor = _.identity, type = undefined) {
@@ -114,9 +131,9 @@ export function domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, 
   switch(dataType) {
     case 'number':
     case 'time':
-      return d3.extent(_.flatten([
-        d3.extent(data, (d) => +rangeStartAccessor(d)),
-        d3.extent(data, (d) => +rangeEndAccessor(d))
+      return extent(_.flatten([
+        extent(data, (d, i) => +rangeStartAccessor(d, i)),
+        extent(data, (d, i) => +rangeEndAccessor(d, i))
       ]));
     case 'categorical':
       return _.uniq(_.flatten([data.map(rangeStartAccessor), data.map(rangeEndAccessor)]));
