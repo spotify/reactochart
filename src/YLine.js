@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class YLine extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.shape({y: React.PropTypes.func.isRequired}),
-    value: React.PropTypes.any.isRequired
+    scale: PropTypes.shape({y: PropTypes.func.isRequired}),
+    value: PropTypes.any.isRequired
   };
   static defaultProps = {
     style: {}

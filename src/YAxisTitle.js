@@ -1,17 +1,18 @@
 import React from 'react';
 import _ from 'lodash';
 import measureText from 'measure-text';
+import PropTypes from 'prop-types';
 
 export default class YAxisTitle extends React.Component {
   static propTypes = {
-    height: React.PropTypes.number,
-    width: React.PropTypes.number,
-    distance: React.PropTypes.number,
-    position: React.PropTypes.oneOf(['left', 'right']),
-    alignment: React.PropTypes.oneOf(['top', 'middle', 'bottom']),
-    placement: React.PropTypes.oneOf(['before', 'after']),
-    rotate: React.PropTypes.bool,
-    style: React.PropTypes.object
+    height: PropTypes.number,
+    width: PropTypes.number,
+    distance: PropTypes.number,
+    position: PropTypes.oneOf(['left', 'right']),
+    alignment: PropTypes.oneOf(['top', 'middle', 'bottom']),
+    placement: PropTypes.oneOf(['before', 'after']),
+    rotate: PropTypes.bool,
+    style: PropTypes.object
   };
   static defaultProps = {
     height: 250,

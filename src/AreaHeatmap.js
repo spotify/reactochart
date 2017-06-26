@@ -1,15 +1,16 @@
 import React from 'react';
 import _ from 'lodash';
 import {extent} from 'd3';
+import PropTypes from 'prop-types';
 
 import {methodIfFuncProp} from './util.js';
 import {makeAccessor} from './utils/Data';
 
 export default class AreaHeatmap extends React.Component {
   static propTypes = {
-    unitsPerPixel: React.PropTypes.number,
-    rectClassName: React.PropTypes.string,
-    rectStyle: React.PropTypes.object
+    unitsPerPixel: PropTypes.number,
+    rectClassName: PropTypes.string,
+    rectStyle: PropTypes.object
   };
   static defaultProps = {
     rectClassName: '',

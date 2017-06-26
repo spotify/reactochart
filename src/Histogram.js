@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import {histogram} from 'd3';
-
+import PropTypes from 'prop-types';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {makeAccessor, domainFromRangeData} from './utils/Data';
 import AreaBarChart from './AreaBarChart';
@@ -10,12 +10,12 @@ import AreaBarChart from './AreaBarChart';
 export default class Histogram extends React.Component {
   static propTypes = {
     // the array of data objects
-    data: React.PropTypes.array.isRequired,
+    data: PropTypes.array.isRequired,
     // accessors for X & Y coordinates
     getValue: CustomPropTypes.getter,
 
-    axisType: React.PropTypes.object,
-    scale: React.PropTypes.object
+    axisType: PropTypes.object,
+    scale: PropTypes.object
   };
 
   state = {

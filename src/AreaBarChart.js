@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import invariant from 'invariant';
-
+import PropTypes from 'prop-types';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {hasXYScales, dataTypeFromScaleType} from './utils/Scale';
 import {makeAccessor, domainFromRangeData} from './utils/Data';
@@ -9,9 +9,9 @@ import RangeRect from './RangeRect';
 
 export default class AreaBarChart extends React.Component {
   static propTypes = {
-    scale: CustomPropTypes.xyObjectOf(React.PropTypes.func.isRequired),
-    data: React.PropTypes.array,
-    horizontal: React.PropTypes.bool,
+    scale: CustomPropTypes.xyObjectOf(PropTypes.func.isRequired),
+    data: PropTypes.array,
+    horizontal: PropTypes.bool,
 
     getX: CustomPropTypes.getter,
     getXEnd: CustomPropTypes.getter,
@@ -19,12 +19,12 @@ export default class AreaBarChart extends React.Component {
     getYEnd: CustomPropTypes.getter,
     getClass: CustomPropTypes.getter,
 
-    barClassName: React.PropTypes.string,
-    barStyle: React.PropTypes.object,
+    barClassName: PropTypes.string,
+    barStyle: PropTypes.object,
 
-    onMouseEnterBar: React.PropTypes.func, 
-    onMouseMoveBar: React.PropTypes.func, 
-    onMouseLeaveBar: React.PropTypes.func
+    onMouseEnterBar: PropTypes.func,
+    onMouseMoveBar: PropTypes.func,
+    onMouseLeaveBar: PropTypes.func
   };
   static defaultProps = {
     data: [],

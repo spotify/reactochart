@@ -1,32 +1,32 @@
 import React from 'react';
 import _ from 'lodash';
 import {mean} from 'd3';
-
+import PropTypes from 'prop-types';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import LineChart from './LineChart.js';
 
 class KernelDensityEstimation extends React.Component {
   static propTypes = {
     // the array of data objects
-    data: React.PropTypes.array.isRequired,
+    data: PropTypes.array.isRequired,
 
     // kernel bandwidth for kernel density estimator
     // https://en.wikipedia.org/wiki/Kernel_density_estimation#Bandwidth_selection
     // high bandwidth => oversmoothing & underfitting; low bandwidth => undersmoothing & overfitting
-    bandwidth: React.PropTypes.number,
+    bandwidth: PropTypes.number,
     // number of samples to take from the KDE
     // ie. the resolution/smoothness of the KDE line - more samples => higher resolution, smooth line
-    sampleCount: React.PropTypes.number,
+    sampleCount: PropTypes.number,
 
     // common props from XYPlot
     // accessor for data values
     getX: CustomPropTypes.getter,
     getY: CustomPropTypes.getter,
-    name: React.PropTypes.string,
-    scale: React.PropTypes.object,
-    axisType: React.PropTypes.object,
-    scaleWidth: React.PropTypes.number,
-    scaleHeight: React.PropTypes.number
+    name: PropTypes.string,
+    scale: PropTypes.object,
+    axisType: PropTypes.object,
+    scaleWidth: PropTypes.number,
+    scaleHeight: PropTypes.number
   };
   static defaultProps = {
     bandwidth: 0.5,

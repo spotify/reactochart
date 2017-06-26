@@ -1,7 +1,7 @@
 import React from 'react';
 import invariant from 'invariant';
 import isUndefined from 'lodash/isUndefined';
-
+import PropTypes from 'prop-types';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {hasOneOfTwo} from './util';
 import {hasXYScales} from './utils/Scale';
@@ -13,17 +13,17 @@ import {makeAccessor} from './utils/Data';
 
 export default class RangeRect extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.shape({x: React.PropTypes.func.isRequired, y: React.PropTypes.func.isRequired}),
-    datum: React.PropTypes.any,
+    scale: PropTypes.shape({x: PropTypes.func.isRequired, y: PropTypes.func.isRequired}),
+    datum: PropTypes.any,
     getX: CustomPropTypes.getter,
     getXEnd: CustomPropTypes.getter,
     getY: CustomPropTypes.getter,
     getYEnd: CustomPropTypes.getter,
-    className: React.PropTypes.string,
-    style: React.PropTypes.object,
-    onMouseEnter: React.PropTypes.func, 
-    onMouseMove: React.PropTypes.func, 
-    onMouseLeave: React.PropTypes.func
+    className: PropTypes.string,
+    style: PropTypes.object,
+    onMouseEnter: PropTypes.func,
+    onMouseMove: PropTypes.func,
+    onMouseLeave: PropTypes.func
   };
   static defaultProps = {
     className: '',

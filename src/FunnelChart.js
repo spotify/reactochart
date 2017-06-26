@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 import {area, scaleOrdinal, schemeCategory20b} from 'd3';
 import invariant from 'invariant';
-
+import PropTypes from 'prop-types';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {makeAccessor, domainFromData, combineDomains} from './utils/Data';
 import {dataTypeFromScaleType} from './utils/Scale';
@@ -10,9 +10,9 @@ import {dataTypeFromScaleType} from './utils/Scale';
 export default class FunnelChart extends React.Component {
   static propTypes = {
     // passed from xyplot
-    scale: CustomPropTypes.xyObjectOf(React.PropTypes.func.isRequired),
+    scale: CustomPropTypes.xyObjectOf(PropTypes.func.isRequired),
     // data array
-    data: React.PropTypes.array.isRequired,
+    data: PropTypes.array.isRequired,
     // data getters
     getX: CustomPropTypes.getter,
     getY: CustomPropTypes.getter

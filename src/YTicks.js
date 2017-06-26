@@ -1,11 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 import {getScaleTicks, getTickDomain} from './utils/Scale';
 
 export default class YTicks extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.shape({y: React.PropTypes.func.isRequired})
+    scale: PropTypes.shape({y: PropTypes.func.isRequired})
   };
   static defaultProps = {
     position: 'left',
