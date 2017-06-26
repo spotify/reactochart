@@ -69603,7 +69603,7 @@
 	  labelDistance: _react2.default.PropTypes.number,
 	  labelClassName: _react2.default.PropTypes.string,
 	  labelStyle: _react2.default.PropTypes.object,
-	  labelFormat: _react2.default.PropTypes.object,
+	  labelFormat: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.object, _react2.default.PropTypes.func]),
 	  labelFormats: _react2.default.PropTypes.array,
 	  labels: _react2.default.PropTypes.array,
 	
@@ -88187,7 +88187,7 @@
 	  labelDistance: _react2.default.PropTypes.number,
 	  labelClassName: _react2.default.PropTypes.string,
 	  labelStyle: _react2.default.PropTypes.object,
-	  labelFormat: _react2.default.PropTypes.string,
+	  labelFormat: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.func]),
 	  labelFormats: _react2.default.PropTypes.array,
 	  labels: _react2.default.PropTypes.array,
 	
