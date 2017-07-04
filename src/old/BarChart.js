@@ -1,5 +1,5 @@
 import React from 'react';
-const {PropTypes} = React;
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import * as d3 from 'd3';
 

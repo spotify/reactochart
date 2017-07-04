@@ -59,8 +59,8 @@
 	__webpack_require__(212);
 	
 	__webpack_require__(215);
-	__webpack_require__(380);
-	__webpack_require__(382);
+	__webpack_require__(388);
+	__webpack_require__(390);
 	
 	// run mocha
 	(function () {
@@ -64901,7 +64901,7 @@
 	  }
 	});
 	
-	var _TreeMap = __webpack_require__(220);
+	var _TreeMap = __webpack_require__(228);
 	
 	Object.defineProperty(exports, 'TreeMap', {
 	  enumerable: true,
@@ -64910,7 +64910,7 @@
 	  }
 	});
 	
-	var _XYPlot = __webpack_require__(222);
+	var _XYPlot = __webpack_require__(230);
 	
 	Object.defineProperty(exports, 'XYPlot', {
 	  enumerable: true,
@@ -64919,7 +64919,7 @@
 	  }
 	});
 	
-	var _LineChart = __webpack_require__(223);
+	var _LineChart = __webpack_require__(231);
 	
 	Object.defineProperty(exports, 'LineChart', {
 	  enumerable: true,
@@ -64928,7 +64928,7 @@
 	  }
 	});
 	
-	var _ScatterPlot = __webpack_require__(226);
+	var _ScatterPlot = __webpack_require__(234);
 	
 	Object.defineProperty(exports, 'ScatterPlot', {
 	  enumerable: true,
@@ -64937,7 +64937,7 @@
 	  }
 	});
 	
-	var _BarChart = __webpack_require__(227);
+	var _BarChart = __webpack_require__(235);
 	
 	Object.defineProperty(exports, 'BarChart', {
 	  enumerable: true,
@@ -64946,7 +64946,7 @@
 	  }
 	});
 	
-	var _RangeBarChart = __webpack_require__(228);
+	var _RangeBarChart = __webpack_require__(236);
 	
 	Object.defineProperty(exports, 'RangeBarChart', {
 	  enumerable: true,
@@ -64955,7 +64955,7 @@
 	  }
 	});
 	
-	var _AreaBarChart = __webpack_require__(231);
+	var _AreaBarChart = __webpack_require__(239);
 	
 	Object.defineProperty(exports, 'AreaBarChart', {
 	  enumerable: true,
@@ -64964,7 +64964,7 @@
 	  }
 	});
 	
-	var _MarkerLineChart = __webpack_require__(233);
+	var _MarkerLineChart = __webpack_require__(241);
 	
 	Object.defineProperty(exports, 'MarkerLineChart', {
 	  enumerable: true,
@@ -64973,7 +64973,7 @@
 	  }
 	});
 	
-	var _AreaHeatmap = __webpack_require__(234);
+	var _AreaHeatmap = __webpack_require__(242);
 	
 	Object.defineProperty(exports, 'AreaHeatmap', {
 	  enumerable: true,
@@ -64982,7 +64982,7 @@
 	  }
 	});
 	
-	var _Histogram = __webpack_require__(235);
+	var _Histogram = __webpack_require__(243);
 	
 	Object.defineProperty(exports, 'Histogram', {
 	  enumerable: true,
@@ -64991,7 +64991,7 @@
 	  }
 	});
 	
-	var _KernelDensityEstimation = __webpack_require__(236);
+	var _KernelDensityEstimation = __webpack_require__(244);
 	
 	Object.defineProperty(exports, 'KernelDensityEstimation', {
 	  enumerable: true,
@@ -65000,7 +65000,7 @@
 	  }
 	});
 	
-	var _Bar = __webpack_require__(229);
+	var _Bar = __webpack_require__(237);
 	
 	Object.defineProperty(exports, 'Bar', {
 	  enumerable: true,
@@ -65009,7 +65009,7 @@
 	  }
 	});
 	
-	var _RangeRect = __webpack_require__(232);
+	var _RangeRect = __webpack_require__(240);
 	
 	Object.defineProperty(exports, 'RangeRect', {
 	  enumerable: true,
@@ -65018,7 +65018,7 @@
 	  }
 	});
 	
-	var _XLine = __webpack_require__(237);
+	var _XLine = __webpack_require__(245);
 	
 	Object.defineProperty(exports, 'XLine', {
 	  enumerable: true,
@@ -65027,7 +65027,7 @@
 	  }
 	});
 	
-	var _YLine = __webpack_require__(238);
+	var _YLine = __webpack_require__(246);
 	
 	Object.defineProperty(exports, 'YLine', {
 	  enumerable: true,
@@ -65036,7 +65036,7 @@
 	  }
 	});
 	
-	var _XAxis = __webpack_require__(239);
+	var _XAxis = __webpack_require__(247);
 	
 	Object.defineProperty(exports, 'XAxis', {
 	  enumerable: true,
@@ -65045,7 +65045,7 @@
 	  }
 	});
 	
-	var _XAxisLabels = __webpack_require__(243);
+	var _XAxisLabels = __webpack_require__(251);
 	
 	Object.defineProperty(exports, 'XAxisLabels', {
 	  enumerable: true,
@@ -65054,7 +65054,7 @@
 	  }
 	});
 	
-	var _XAxisTitle = __webpack_require__(374);
+	var _XAxisTitle = __webpack_require__(382);
 	
 	Object.defineProperty(exports, 'XAxisTitle', {
 	  enumerable: true,
@@ -65063,7 +65063,7 @@
 	  }
 	});
 	
-	var _XGrid = __webpack_require__(242);
+	var _XGrid = __webpack_require__(250);
 	
 	Object.defineProperty(exports, 'XGrid', {
 	  enumerable: true,
@@ -65072,7 +65072,7 @@
 	  }
 	});
 	
-	var _XTicks = __webpack_require__(241);
+	var _XTicks = __webpack_require__(249);
 	
 	Object.defineProperty(exports, 'XTicks', {
 	  enumerable: true,
@@ -65081,7 +65081,7 @@
 	  }
 	});
 	
-	var _YAxis = __webpack_require__(375);
+	var _YAxis = __webpack_require__(383);
 	
 	Object.defineProperty(exports, 'YAxis', {
 	  enumerable: true,
@@ -65090,7 +65090,7 @@
 	  }
 	});
 	
-	var _YAxisLabels = __webpack_require__(378);
+	var _YAxisLabels = __webpack_require__(386);
 	
 	Object.defineProperty(exports, 'YAxisLabels', {
 	  enumerable: true,
@@ -65099,7 +65099,7 @@
 	  }
 	});
 	
-	var _YAxisTitle = __webpack_require__(379);
+	var _YAxisTitle = __webpack_require__(387);
 	
 	Object.defineProperty(exports, 'YAxisTitle', {
 	  enumerable: true,
@@ -65108,7 +65108,7 @@
 	  }
 	});
 	
-	var _YGrid = __webpack_require__(377);
+	var _YGrid = __webpack_require__(385);
 	
 	Object.defineProperty(exports, 'YGrid', {
 	  enumerable: true,
@@ -65117,7 +65117,7 @@
 	  }
 	});
 	
-	var _YTicks = __webpack_require__(376);
+	var _YTicks = __webpack_require__(384);
 	
 	Object.defineProperty(exports, 'YTicks', {
 	  enumerable: true,
@@ -65166,15 +65166,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _lodash = __webpack_require__(3);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _util = __webpack_require__(218);
+	var _util = __webpack_require__(226);
 	
 	var _Data = __webpack_require__(205);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -65187,9 +65191,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PropTypes = _react2.default.PropTypes;
-	
 	
 	var DEFAULT_PROPS = {
 	  getValue: null,
@@ -65336,38 +65337,38 @@
 	
 	PieChart.propTypes = {
 	  // array of data to plot with pie chart
-	  data: PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	  // (optional) accessor for getting the values plotted on the pie chart
 	  // if not provided, just uses the value itself at given index
 	  getValue: CustomPropTypes.getter,
 	  // (optional) total expected sum of all the pie slice values
 	  // if provided && slices don't add up to total, an "empty" slice will be rendered for the rest
 	  // if not provided, will be the sum of all values (ie. all values will always add up to 100%)
-	  total: PropTypes.number,
+	  total: _propTypes2.default.number,
 	  // (optional) height and width of the SVG
 	  // if only one is passed, same # is used for both (ie. width=100 means height=100 also)
 	  // if neither is passed, but radius is, radius+margins is used
 	  // if neither is passed, and radius isn't either, DEFAULTS.size is used
-	  width: PropTypes.number,
-	  height: PropTypes.number,
+	  width: _propTypes2.default.number,
+	  height: _propTypes2.default.number,
 	  // (optional) main radius of the pie chart, inferred from margin/width/height if not provided
-	  radius: PropTypes.number,
+	  radius: _propTypes2.default.number,
 	  // (optional) margins (between svg edges and pie circle), inferred from radius/width/height if not provided
 	  // can either be a single number (to make all margins equal), or {top, bottom, left, right} object
-	  margin: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+	  margin: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.number]),
 	  // (optional) radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
-	  holeRadius: PropTypes.number,
+	  holeRadius: _propTypes2.default.number,
 	  // (optional) label text to display in the middle of the pie/donut
-	  centerLabel: PropTypes.string,
+	  centerLabel: _propTypes2.default.string,
 	
-	  markerLineValue: PropTypes.number,
-	  markerLineClass: PropTypes.string,
-	  markerLineOverhangInner: PropTypes.number,
-	  markerLineOverhangOuter: PropTypes.number,
+	  markerLineValue: _propTypes2.default.number,
+	  markerLineClass: _propTypes2.default.string,
+	  markerLineOverhangInner: _propTypes2.default.number,
+	  markerLineOverhangOuter: _propTypes2.default.number,
 	
-	  onMouseEnterLine: PropTypes.func,
-	  onMouseMoveLine: PropTypes.func,
-	  onMouseLeaveLine: PropTypes.func
+	  onMouseEnterLine: _propTypes2.default.func,
+	  onMouseMoveLine: _propTypes2.default.func,
+	  onMouseLeaveLine: _propTypes2.default.func
 	};
 	PieChart.defaultProps = DEFAULT_PROPS;
 	
@@ -65430,6 +65431,891 @@
 /* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+	    Symbol.for &&
+	    Symbol.for('react.element')) ||
+	    0xeac7;
+	
+	  var isValidElement = function(object) {
+	    return typeof object === 'object' &&
+	      object !== null &&
+	      object.$$typeof === REACT_ELEMENT_TYPE;
+	  };
+	
+	  // By explicitly using `prop-types` you are opting into new development behavior.
+	  // http://fb.me/prop-types-in-prod
+	  var throwOnDirectAccess = true;
+	  module.exports = __webpack_require__(219)(isValidElement, throwOnDirectAccess);
+	} else {
+	  // By explicitly using `prop-types` you are opting into new production behavior.
+	  // http://fb.me/prop-types-in-prod
+	  module.exports = __webpack_require__(225)();
+	}
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ }),
+/* 219 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+	
+	'use strict';
+	
+	var emptyFunction = __webpack_require__(220);
+	var invariant = __webpack_require__(221);
+	var warning = __webpack_require__(222);
+	
+	var ReactPropTypesSecret = __webpack_require__(223);
+	var checkPropTypes = __webpack_require__(224);
+	
+	module.exports = function(isValidElement, throwOnDirectAccess) {
+	  /* global Symbol */
+	  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+	  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
+	
+	  /**
+	   * Returns the iterator method function contained on the iterable object.
+	   *
+	   * Be sure to invoke the function with the iterable as context:
+	   *
+	   *     var iteratorFn = getIteratorFn(myIterable);
+	   *     if (iteratorFn) {
+	   *       var iterator = iteratorFn.call(myIterable);
+	   *       ...
+	   *     }
+	   *
+	   * @param {?object} maybeIterable
+	   * @return {?function}
+	   */
+	  function getIteratorFn(maybeIterable) {
+	    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
+	    if (typeof iteratorFn === 'function') {
+	      return iteratorFn;
+	    }
+	  }
+	
+	  /**
+	   * Collection of methods that allow declaration and validation of props that are
+	   * supplied to React components. Example usage:
+	   *
+	   *   var Props = require('ReactPropTypes');
+	   *   var MyArticle = React.createClass({
+	   *     propTypes: {
+	   *       // An optional string prop named "description".
+	   *       description: Props.string,
+	   *
+	   *       // A required enum prop named "category".
+	   *       category: Props.oneOf(['News','Photos']).isRequired,
+	   *
+	   *       // A prop named "dialog" that requires an instance of Dialog.
+	   *       dialog: Props.instanceOf(Dialog).isRequired
+	   *     },
+	   *     render: function() { ... }
+	   *   });
+	   *
+	   * A more formal specification of how these methods are used:
+	   *
+	   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
+	   *   decl := ReactPropTypes.{type}(.isRequired)?
+	   *
+	   * Each and every declaration produces a function with the same signature. This
+	   * allows the creation of custom validation functions. For example:
+	   *
+	   *  var MyLink = React.createClass({
+	   *    propTypes: {
+	   *      // An optional string or URI prop named "href".
+	   *      href: function(props, propName, componentName) {
+	   *        var propValue = props[propName];
+	   *        if (propValue != null && typeof propValue !== 'string' &&
+	   *            !(propValue instanceof URI)) {
+	   *          return new Error(
+	   *            'Expected a string or an URI for ' + propName + ' in ' +
+	   *            componentName
+	   *          );
+	   *        }
+	   *      }
+	   *    },
+	   *    render: function() {...}
+	   *  });
+	   *
+	   * @internal
+	   */
+	
+	  var ANONYMOUS = '<<anonymous>>';
+	
+	  // Important!
+	  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
+	  var ReactPropTypes = {
+	    array: createPrimitiveTypeChecker('array'),
+	    bool: createPrimitiveTypeChecker('boolean'),
+	    func: createPrimitiveTypeChecker('function'),
+	    number: createPrimitiveTypeChecker('number'),
+	    object: createPrimitiveTypeChecker('object'),
+	    string: createPrimitiveTypeChecker('string'),
+	    symbol: createPrimitiveTypeChecker('symbol'),
+	
+	    any: createAnyTypeChecker(),
+	    arrayOf: createArrayOfTypeChecker,
+	    element: createElementTypeChecker(),
+	    instanceOf: createInstanceTypeChecker,
+	    node: createNodeChecker(),
+	    objectOf: createObjectOfTypeChecker,
+	    oneOf: createEnumTypeChecker,
+	    oneOfType: createUnionTypeChecker,
+	    shape: createShapeTypeChecker
+	  };
+	
+	  /**
+	   * inlined Object.is polyfill to avoid requiring consumers ship their own
+	   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+	   */
+	  /*eslint-disable no-self-compare*/
+	  function is(x, y) {
+	    // SameValue algorithm
+	    if (x === y) {
+	      // Steps 1-5, 7-10
+	      // Steps 6.b-6.e: +0 != -0
+	      return x !== 0 || 1 / x === 1 / y;
+	    } else {
+	      // Step 6.a: NaN == NaN
+	      return x !== x && y !== y;
+	    }
+	  }
+	  /*eslint-enable no-self-compare*/
+	
+	  /**
+	   * We use an Error-like object for backward compatibility as people may call
+	   * PropTypes directly and inspect their output. However, we don't use real
+	   * Errors anymore. We don't inspect their stack anyway, and creating them
+	   * is prohibitively expensive if they are created too often, such as what
+	   * happens in oneOfType() for any type before the one that matched.
+	   */
+	  function PropTypeError(message) {
+	    this.message = message;
+	    this.stack = '';
+	  }
+	  // Make `instanceof Error` still work for returned errors.
+	  PropTypeError.prototype = Error.prototype;
+	
+	  function createChainableTypeChecker(validate) {
+	    if (process.env.NODE_ENV !== 'production') {
+	      var manualPropTypeCallCache = {};
+	      var manualPropTypeWarningCount = 0;
+	    }
+	    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+	      componentName = componentName || ANONYMOUS;
+	      propFullName = propFullName || propName;
+	
+	      if (secret !== ReactPropTypesSecret) {
+	        if (throwOnDirectAccess) {
+	          // New behavior only for users of `prop-types` package
+	          invariant(
+	            false,
+	            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+	            'Use `PropTypes.checkPropTypes()` to call them. ' +
+	            'Read more at http://fb.me/use-check-prop-types'
+	          );
+	        } else if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
+	          // Old behavior for people using React.PropTypes
+	          var cacheKey = componentName + ':' + propName;
+	          if (
+	            !manualPropTypeCallCache[cacheKey] &&
+	            // Avoid spamming the console because they are often not actionable except for lib authors
+	            manualPropTypeWarningCount < 3
+	          ) {
+	            warning(
+	              false,
+	              'You are manually calling a React.PropTypes validation ' +
+	              'function for the `%s` prop on `%s`. This is deprecated ' +
+	              'and will throw in the standalone `prop-types` package. ' +
+	              'You may be seeing this warning due to a third-party PropTypes ' +
+	              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.',
+	              propFullName,
+	              componentName
+	            );
+	            manualPropTypeCallCache[cacheKey] = true;
+	            manualPropTypeWarningCount++;
+	          }
+	        }
+	      }
+	      if (props[propName] == null) {
+	        if (isRequired) {
+	          if (props[propName] === null) {
+	            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
+	          }
+	          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
+	        }
+	        return null;
+	      } else {
+	        return validate(props, propName, componentName, location, propFullName);
+	      }
+	    }
+	
+	    var chainedCheckType = checkType.bind(null, false);
+	    chainedCheckType.isRequired = checkType.bind(null, true);
+	
+	    return chainedCheckType;
+	  }
+	
+	  function createPrimitiveTypeChecker(expectedType) {
+	    function validate(props, propName, componentName, location, propFullName, secret) {
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== expectedType) {
+	        // `propValue` being instance of, say, date/regexp, pass the 'object'
+	        // check, but we can offer a more precise error message here rather than
+	        // 'of type `object`'.
+	        var preciseType = getPreciseType(propValue);
+	
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createAnyTypeChecker() {
+	    return createChainableTypeChecker(emptyFunction.thatReturnsNull);
+	  }
+	
+	  function createArrayOfTypeChecker(typeChecker) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (typeof typeChecker !== 'function') {
+	        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
+	      }
+	      var propValue = props[propName];
+	      if (!Array.isArray(propValue)) {
+	        var propType = getPropType(propValue);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
+	      }
+	      for (var i = 0; i < propValue.length; i++) {
+	        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
+	        if (error instanceof Error) {
+	          return error;
+	        }
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createElementTypeChecker() {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      if (!isValidElement(propValue)) {
+	        var propType = getPropType(propValue);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createInstanceTypeChecker(expectedClass) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (!(props[propName] instanceof expectedClass)) {
+	        var expectedClassName = expectedClass.name || ANONYMOUS;
+	        var actualClassName = getClassName(props[propName]);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createEnumTypeChecker(expectedValues) {
+	    if (!Array.isArray(expectedValues)) {
+	      process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid argument supplied to oneOf, expected an instance of array.') : void 0;
+	      return emptyFunction.thatReturnsNull;
+	    }
+	
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      for (var i = 0; i < expectedValues.length; i++) {
+	        if (is(propValue, expectedValues[i])) {
+	          return null;
+	        }
+	      }
+	
+	      var valuesString = JSON.stringify(expectedValues);
+	      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createObjectOfTypeChecker(typeChecker) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (typeof typeChecker !== 'function') {
+	        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
+	      }
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== 'object') {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
+	      }
+	      for (var key in propValue) {
+	        if (propValue.hasOwnProperty(key)) {
+	          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+	          if (error instanceof Error) {
+	            return error;
+	          }
+	        }
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createUnionTypeChecker(arrayOfTypeCheckers) {
+	    if (!Array.isArray(arrayOfTypeCheckers)) {
+	      process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
+	      return emptyFunction.thatReturnsNull;
+	    }
+	
+	    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+	      var checker = arrayOfTypeCheckers[i];
+	      if (typeof checker !== 'function') {
+	        warning(
+	          false,
+	          'Invalid argument supplid to oneOfType. Expected an array of check functions, but ' +
+	          'received %s at index %s.',
+	          getPostfixForTypeWarning(checker),
+	          i
+	        );
+	        return emptyFunction.thatReturnsNull;
+	      }
+	    }
+	
+	    function validate(props, propName, componentName, location, propFullName) {
+	      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+	        var checker = arrayOfTypeCheckers[i];
+	        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) {
+	          return null;
+	        }
+	      }
+	
+	      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createNodeChecker() {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (!isNode(props[propName])) {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createShapeTypeChecker(shapeTypes) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== 'object') {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+	      }
+	      for (var key in shapeTypes) {
+	        var checker = shapeTypes[key];
+	        if (!checker) {
+	          continue;
+	        }
+	        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+	        if (error) {
+	          return error;
+	        }
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function isNode(propValue) {
+	    switch (typeof propValue) {
+	      case 'number':
+	      case 'string':
+	      case 'undefined':
+	        return true;
+	      case 'boolean':
+	        return !propValue;
+	      case 'object':
+	        if (Array.isArray(propValue)) {
+	          return propValue.every(isNode);
+	        }
+	        if (propValue === null || isValidElement(propValue)) {
+	          return true;
+	        }
+	
+	        var iteratorFn = getIteratorFn(propValue);
+	        if (iteratorFn) {
+	          var iterator = iteratorFn.call(propValue);
+	          var step;
+	          if (iteratorFn !== propValue.entries) {
+	            while (!(step = iterator.next()).done) {
+	              if (!isNode(step.value)) {
+	                return false;
+	              }
+	            }
+	          } else {
+	            // Iterator will provide entry [k,v] tuples rather than values.
+	            while (!(step = iterator.next()).done) {
+	              var entry = step.value;
+	              if (entry) {
+	                if (!isNode(entry[1])) {
+	                  return false;
+	                }
+	              }
+	            }
+	          }
+	        } else {
+	          return false;
+	        }
+	
+	        return true;
+	      default:
+	        return false;
+	    }
+	  }
+	
+	  function isSymbol(propType, propValue) {
+	    // Native Symbol.
+	    if (propType === 'symbol') {
+	      return true;
+	    }
+	
+	    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
+	    if (propValue['@@toStringTag'] === 'Symbol') {
+	      return true;
+	    }
+	
+	    // Fallback for non-spec compliant Symbols which are polyfilled.
+	    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
+	      return true;
+	    }
+	
+	    return false;
+	  }
+	
+	  // Equivalent of `typeof` but with special handling for array and regexp.
+	  function getPropType(propValue) {
+	    var propType = typeof propValue;
+	    if (Array.isArray(propValue)) {
+	      return 'array';
+	    }
+	    if (propValue instanceof RegExp) {
+	      // Old webkits (at least until Android 4.0) return 'function' rather than
+	      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
+	      // passes PropTypes.object.
+	      return 'object';
+	    }
+	    if (isSymbol(propType, propValue)) {
+	      return 'symbol';
+	    }
+	    return propType;
+	  }
+	
+	  // This handles more types than `getPropType`. Only used for error messages.
+	  // See `createPrimitiveTypeChecker`.
+	  function getPreciseType(propValue) {
+	    if (typeof propValue === 'undefined' || propValue === null) {
+	      return '' + propValue;
+	    }
+	    var propType = getPropType(propValue);
+	    if (propType === 'object') {
+	      if (propValue instanceof Date) {
+	        return 'date';
+	      } else if (propValue instanceof RegExp) {
+	        return 'regexp';
+	      }
+	    }
+	    return propType;
+	  }
+	
+	  // Returns a string that is postfixed to a warning about an invalid type.
+	  // For example, "undefined" or "of type array"
+	  function getPostfixForTypeWarning(value) {
+	    var type = getPreciseType(value);
+	    switch (type) {
+	      case 'array':
+	      case 'object':
+	        return 'an ' + type;
+	      case 'boolean':
+	      case 'date':
+	      case 'regexp':
+	        return 'a ' + type;
+	      default:
+	        return type;
+	    }
+	  }
+	
+	  // Returns class name of the object, if any.
+	  function getClassName(propValue) {
+	    if (!propValue.constructor || !propValue.constructor.name) {
+	      return ANONYMOUS;
+	    }
+	    return propValue.constructor.name;
+	  }
+	
+	  ReactPropTypes.checkPropTypes = checkPropTypes;
+	  ReactPropTypes.PropTypes = ReactPropTypes;
+	
+	  return ReactPropTypes;
+	};
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ }),
+/* 220 */
+/***/ (function(module, exports) {
+
+	"use strict";
+	
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * 
+	 */
+	
+	function makeEmptyFunction(arg) {
+	  return function () {
+	    return arg;
+	  };
+	}
+	
+	/**
+	 * This function accepts and discards inputs; it has no side effects. This is
+	 * primarily useful idiomatically for overridable function endpoints which
+	 * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
+	 */
+	var emptyFunction = function emptyFunction() {};
+	
+	emptyFunction.thatReturns = makeEmptyFunction;
+	emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
+	emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
+	emptyFunction.thatReturnsNull = makeEmptyFunction(null);
+	emptyFunction.thatReturnsThis = function () {
+	  return this;
+	};
+	emptyFunction.thatReturnsArgument = function (arg) {
+	  return arg;
+	};
+	
+	module.exports = emptyFunction;
+
+/***/ }),
+/* 221 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 */
+	
+	'use strict';
+	
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+	
+	var validateFormat = function validateFormat(format) {};
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  validateFormat = function validateFormat(format) {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  };
+	}
+	
+	function invariant(condition, format, a, b, c, d, e, f) {
+	  validateFormat(format);
+	
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error(format.replace(/%s/g, function () {
+	        return args[argIndex++];
+	      }));
+	      error.name = 'Invariant Violation';
+	    }
+	
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	}
+	
+	module.exports = invariant;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ }),
+/* 222 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 */
+	
+	'use strict';
+	
+	var emptyFunction = __webpack_require__(220);
+	
+	/**
+	 * Similar to invariant but only logs a warning if the condition is not met.
+	 * This can be used to log issues in development environments in critical
+	 * paths. Removing the logging code for production environments will keep the
+	 * same logic and follow the same code paths.
+	 */
+	
+	var warning = emptyFunction;
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  (function () {
+	    var printWarning = function printWarning(format) {
+	      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	        args[_key - 1] = arguments[_key];
+	      }
+	
+	      var argIndex = 0;
+	      var message = 'Warning: ' + format.replace(/%s/g, function () {
+	        return args[argIndex++];
+	      });
+	      if (typeof console !== 'undefined') {
+	        console.error(message);
+	      }
+	      try {
+	        // --- Welcome to debugging React ---
+	        // This error was thrown as a convenience so that you can use this stack
+	        // to find the callsite that caused this warning to fire.
+	        throw new Error(message);
+	      } catch (x) {}
+	    };
+	
+	    warning = function warning(condition, format) {
+	      if (format === undefined) {
+	        throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
+	      }
+	
+	      if (format.indexOf('Failed Composite propType: ') === 0) {
+	        return; // Ignore CompositeComponent proptype check.
+	      }
+	
+	      if (!condition) {
+	        for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+	          args[_key2 - 2] = arguments[_key2];
+	        }
+	
+	        printWarning.apply(undefined, [format].concat(args));
+	      }
+	    };
+	  })();
+	}
+	
+	module.exports = warning;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ }),
+/* 223 */
+/***/ (function(module, exports) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+	
+	'use strict';
+	
+	var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+	
+	module.exports = ReactPropTypesSecret;
+
+
+/***/ }),
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+	
+	'use strict';
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  var invariant = __webpack_require__(221);
+	  var warning = __webpack_require__(222);
+	  var ReactPropTypesSecret = __webpack_require__(223);
+	  var loggedTypeFailures = {};
+	}
+	
+	/**
+	 * Assert that the values match with the type specs.
+	 * Error messages are memorized and will only be shown once.
+	 *
+	 * @param {object} typeSpecs Map of name to a ReactPropType
+	 * @param {object} values Runtime values that need to be type-checked
+	 * @param {string} location e.g. "prop", "context", "child context"
+	 * @param {string} componentName Name of the component for error messages.
+	 * @param {?Function} getStack Returns the component stack.
+	 * @private
+	 */
+	function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    for (var typeSpecName in typeSpecs) {
+	      if (typeSpecs.hasOwnProperty(typeSpecName)) {
+	        var error;
+	        // Prop type validation may throw. In case they do, we don't want to
+	        // fail the render phase where it didn't fail before. So we log it.
+	        // After these have been cleaned up, we'll let them throw.
+	        try {
+	          // This is intentionally an invariant that gets caught. It's the same
+	          // behavior as without this statement except with a better message.
+	          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', componentName || 'React class', location, typeSpecName);
+	          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+	        } catch (ex) {
+	          error = ex;
+	        }
+	        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+	        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+	          // Only monitor this failure once because there tends to be a lot of the
+	          // same error.
+	          loggedTypeFailures[error.message] = true;
+	
+	          var stack = getStack ? getStack() : '';
+	
+	          warning(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
+	        }
+	      }
+	    }
+	  }
+	}
+	
+	module.exports = checkPropTypes;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ }),
+/* 225 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+	
+	'use strict';
+	
+	var emptyFunction = __webpack_require__(220);
+	var invariant = __webpack_require__(221);
+	var ReactPropTypesSecret = __webpack_require__(223);
+	
+	module.exports = function() {
+	  function shim(props, propName, componentName, location, propFullName, secret) {
+	    if (secret === ReactPropTypesSecret) {
+	      // It is still safe when called from React.
+	      return;
+	    }
+	    invariant(
+	      false,
+	      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+	      'Use PropTypes.checkPropTypes() to call them. ' +
+	      'Read more at http://fb.me/use-check-prop-types'
+	    );
+	  };
+	  shim.isRequired = shim;
+	  function getShim() {
+	    return shim;
+	  };
+	  // Important!
+	  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+	  var ReactPropTypes = {
+	    array: shim,
+	    bool: shim,
+	    func: shim,
+	    number: shim,
+	    object: shim,
+	    string: shim,
+	    symbol: shim,
+	
+	    any: shim,
+	    arrayOf: getShim,
+	    element: shim,
+	    instanceOf: getShim,
+	    node: shim,
+	    objectOf: getShim,
+	    oneOf: getShim,
+	    oneOfType: getShim,
+	    shape: getShim
+	  };
+	
+	  ReactPropTypes.checkPropTypes = emptyFunction;
+	  ReactPropTypes.PropTypes = ReactPropTypes;
+	
+	  return ReactPropTypes;
+	};
+
+
+/***/ }),
+/* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -65457,7 +66343,7 @@
 	}
 
 /***/ }),
-/* 219 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65471,15 +66357,18 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var PropTypes = _react2.default.PropTypes;
 	var xyObjectOf = exports.xyObjectOf = function xyObjectOf(type) {
-	  return PropTypes.shape({ x: type, y: type });
+	  return _propTypes2.default.shape({ x: type, y: type });
 	};
 	
 	var fourDirectionsOf = exports.fourDirectionsOf = function fourDirectionsOf(type) {
-	  return PropTypes.shape({
+	  return _propTypes2.default.shape({
 	    top: type,
 	    bottom: type,
 	    left: type,
@@ -65487,12 +66376,12 @@
 	  });
 	};
 	
-	var getter = exports.getter = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.func]);
+	var getter = exports.getter = _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number, _propTypes2.default.array, _propTypes2.default.func]);
 	
-	var scaleType = exports.scaleType = PropTypes.oneOf(['linear', 'time', 'ordinal', 'log', 'pow']);
+	var scaleType = exports.scaleType = _propTypes2.default.oneOf(['linear', 'time', 'ordinal', 'log', 'pow']);
 
 /***/ }),
-/* 220 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65509,15 +66398,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _lodash = __webpack_require__(3);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d3Hierarchy = __webpack_require__(221);
+	var _d3Hierarchy = __webpack_require__(229);
 	
 	var _Data = __webpack_require__(205);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -65530,8 +66423,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PropTypes = _react2.default.PropTypes;
 	
 	var TreeMapNode = function (_React$Component) {
 	  _inherits(TreeMapNode, _React$Component);
@@ -65591,23 +66482,23 @@
 	}(_react2.default.Component);
 	
 	TreeMapNode.propTypes = {
-	  node: PropTypes.shape({
-	    parent: PropTypes.object,
-	    children: PropTypes.array,
-	    value: PropTypes.number,
-	    depth: PropTypes.number,
-	    x: PropTypes.number,
-	    y: PropTypes.number,
-	    dx: PropTypes.number,
-	    dy: PropTypes.number
+	  node: _propTypes2.default.shape({
+	    parent: _propTypes2.default.object,
+	    children: _propTypes2.default.array,
+	    value: _propTypes2.default.number,
+	    depth: _propTypes2.default.number,
+	    x: _propTypes2.default.number,
+	    y: _propTypes2.default.number,
+	    dx: _propTypes2.default.number,
+	    dy: _propTypes2.default.number
 	  }),
-	  nodeStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-	  minLabelWidth: PropTypes.number,
-	  minLabelHeight: PropTypes.number,
+	  nodeStyle: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.object]),
+	  minLabelWidth: _propTypes2.default.number,
+	  minLabelHeight: _propTypes2.default.number,
 	
 	  getLabel: CustomPropTypes.getter,
-	  labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-	  NodeLabelComponent: PropTypes.func
+	  labelStyle: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.object]),
+	  NodeLabelComponent: _propTypes2.default.func
 	};
 	TreeMapNode.defaultProps = {
 	  minLabelWidth: 0,
@@ -65649,11 +66540,11 @@
 	}(_react2.default.Component);
 	
 	TreeMapNodeLabel.propTypes = {
-	  node: PropTypes.object,
+	  node: _propTypes2.default.object,
 	  getLabel: CustomPropTypes.getter,
-	  labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-	  minLabelWidth: PropTypes.number,
-	  minLabelHeight: PropTypes.number
+	  labelStyle: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.object]),
+	  minLabelWidth: _propTypes2.default.number,
+	  minLabelHeight: _propTypes2.default.number
 	};
 	
 	var TreeMap = function (_React$Component3) {
@@ -65735,34 +66626,34 @@
 	}(_react2.default.Component);
 	
 	TreeMap.propTypes = {
-	  width: PropTypes.number.isRequired,
-	  height: PropTypes.number.isRequired,
+	  width: _propTypes2.default.number.isRequired,
+	  height: _propTypes2.default.number.isRequired,
 	
-	  data: PropTypes.object.isRequired,
+	  data: _propTypes2.default.object.isRequired,
 	  getValue: CustomPropTypes.getter,
 	  getChildren: CustomPropTypes.getter,
 	  getLabel: CustomPropTypes.getter,
 	
 	  // options for d3 treemap layout - see d3 docs
-	  sort: PropTypes.func,
-	  padding: PropTypes.number,
-	  round: PropTypes.bool,
-	  sticky: PropTypes.bool,
-	  mode: PropTypes.string,
-	  ratio: PropTypes.number,
+	  sort: _propTypes2.default.func,
+	  padding: _propTypes2.default.number,
+	  round: _propTypes2.default.bool,
+	  sticky: _propTypes2.default.bool,
+	  mode: _propTypes2.default.string,
+	  ratio: _propTypes2.default.number,
 	
-	  nodeStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-	  labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-	  minLabelWidth: PropTypes.number,
-	  minLabelHeight: PropTypes.number,
+	  nodeStyle: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.object]),
+	  labelStyle: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.object]),
+	  minLabelWidth: _propTypes2.default.number,
+	  minLabelHeight: _propTypes2.default.number,
 	
-	  onClickNode: PropTypes.func,
-	  onMouseEnterNode: PropTypes.func,
-	  onMouseLeaveNode: PropTypes.func,
-	  onMouseMoveNode: PropTypes.func,
+	  onClickNode: _propTypes2.default.func,
+	  onMouseEnterNode: _propTypes2.default.func,
+	  onMouseLeaveNode: _propTypes2.default.func,
+	  onMouseMoveNode: _propTypes2.default.func,
 	
-	  NodeComponent: PropTypes.func,
-	  NodeLabelComponent: PropTypes.func
+	  NodeComponent: _propTypes2.default.func,
+	  NodeLabelComponent: _propTypes2.default.func
 	};
 	TreeMap.defaultProps = {
 	  getValue: 'value',
@@ -65810,7 +66701,7 @@
 	exports.default = TreeMap;
 
 /***/ }),
-/* 221 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// https://d3js.org/d3-hierarchy/ Version 1.1.4. Copyright 2017 Mike Bostock.
@@ -67107,7 +67998,7 @@
 
 
 /***/ }),
-/* 222 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67128,6 +68019,10 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _resolveObjectProps = __webpack_require__(209);
 	
 	var _resolveObjectProps2 = _interopRequireDefault(_resolveObjectProps);
@@ -67140,7 +68035,7 @@
 	
 	var _Scale = __webpack_require__(207);
 	
-	var _util = __webpack_require__(218);
+	var _util = __webpack_require__(226);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -67256,23 +68151,23 @@
 	}(_react2.default.Component);
 	
 	XYPlot.propTypes = {
-	  width: _react2.default.PropTypes.number,
-	  height: _react2.default.PropTypes.number,
-	  scale: _react2.default.PropTypes.object,
-	  scaleType: _react2.default.PropTypes.object,
-	  domain: _react2.default.PropTypes.object,
-	  margin: _react2.default.PropTypes.object,
-	  spacing: _react2.default.PropTypes.object,
+	  width: _propTypes2.default.number,
+	  height: _propTypes2.default.number,
+	  scale: _propTypes2.default.object,
+	  scaleType: _propTypes2.default.object,
+	  domain: _propTypes2.default.object,
+	  margin: _propTypes2.default.object,
+	  spacing: _propTypes2.default.object,
 	  // todo spacing & padding...
-	  padding: _react2.default.PropTypes.object,
-	  nice: _react2.default.PropTypes.object,
-	  invertScale: _react2.default.PropTypes.object,
+	  padding: _propTypes2.default.object,
+	  nice: _propTypes2.default.object,
+	  invertScale: _propTypes2.default.object,
 	
-	  onMouseMove: _react2.default.PropTypes.func,
-	  onMouseEnter: _react2.default.PropTypes.func,
-	  onMouseLeave: _react2.default.PropTypes.func,
-	  onMouseDown: _react2.default.PropTypes.func,
-	  onMouseUp: _react2.default.PropTypes.func
+	  onMouseMove: _propTypes2.default.func,
+	  onMouseEnter: _propTypes2.default.func,
+	  onMouseLeave: _propTypes2.default.func,
+	  onMouseDown: _propTypes2.default.func,
+	  onMouseUp: _propTypes2.default.func
 	};
 	XYPlot.defaultProps = {
 	  width: 400,
@@ -67297,7 +68192,7 @@
 	exports.default = XYPlotResolved;
 
 /***/ }),
-/* 223 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67320,15 +68215,19 @@
 	
 	var _d = __webpack_require__(162);
 	
-	var _shallowEqual = __webpack_require__(224);
+	var _shallowEqual = __webpack_require__(232);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	var _Data = __webpack_require__(205);
 	
 	var _Scale = __webpack_require__(207);
 	
-	var _xyPropsEqual = __webpack_require__(225);
+	var _xyPropsEqual = __webpack_require__(233);
 	
 	var _xyPropsEqual2 = _interopRequireDefault(_xyPropsEqual);
 	
@@ -67429,14 +68328,14 @@
 	
 	LineChart.propTypes = {
 	  // the array of data objects
-	  data: _react2.default.PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	  // accessor for X & Y coordinates
-	  getX: _react2.default.PropTypes.any,
-	  getY: _react2.default.PropTypes.any,
+	  getX: _propTypes2.default.any,
+	  getY: _propTypes2.default.any,
 	  // inline style object to be applied to the path
-	  lineStyle: _react2.default.PropTypes.object,
+	  lineStyle: _propTypes2.default.object,
 	  // props from XYPlot
-	  scale: _react2.default.PropTypes.object
+	  scale: _propTypes2.default.object
 	};
 	LineChart.defaultProps = {
 	  lineStyle: {}
@@ -67459,7 +68358,7 @@
 	}
 
 /***/ }),
-/* 224 */
+/* 232 */
 /***/ (function(module, exports) {
 
 	/**
@@ -67536,7 +68435,7 @@
 	module.exports = shallowEqual;
 
 /***/ }),
-/* 225 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67550,7 +68449,7 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _shallowEqual = __webpack_require__(224);
+	var _shallowEqual = __webpack_require__(232);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
@@ -67578,7 +68477,7 @@
 	}
 
 /***/ }),
-/* 226 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67597,15 +68496,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _lodash = __webpack_require__(3);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
 	var _Data = __webpack_require__(205);
 	
-	var _util = __webpack_require__(218);
+	var _util = __webpack_require__(226);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -67618,8 +68521,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PropTypes = _react2.default.PropTypes;
 	
 	var ScatterPlot = function (_React$Component) {
 	  _inherits(ScatterPlot, _React$Component);
@@ -67711,28 +68612,28 @@
 	
 	ScatterPlot.propTypes = {
 	  // the array of data objects
-	  data: PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	  // accessors for X & Y coordinates
 	  getX: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
 	  // allow user to pass an accessor for setting the class of a point
 	  getClass: CustomPropTypes.getter,
 	
-	  scaleType: PropTypes.object,
-	  scale: PropTypes.object,
+	  scaleType: _propTypes2.default.object,
+	  scale: _propTypes2.default.object,
 	
 	  // used with the default point symbol (circle), defines the circle radius
-	  pointRadius: PropTypes.number,
+	  pointRadius: _propTypes2.default.number,
 	  // text or SVG node to use as custom point symbol, or function which returns text/SVG
-	  pointSymbol: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+	  pointSymbol: _propTypes2.default.oneOfType([_propTypes2.default.node, _propTypes2.default.func]),
 	  // manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered
-	  pointOffset: PropTypes.arrayOf(PropTypes.number),
+	  pointOffset: _propTypes2.default.arrayOf(_propTypes2.default.number),
 	  // inline styles for points
-	  pointStyle: PropTypes.object,
+	  pointStyle: _propTypes2.default.object,
 	
-	  onMouseEnterPoint: PropTypes.func,
-	  onMouseMovePoint: PropTypes.func,
-	  onMouseLeavePoint: PropTypes.func
+	  onMouseEnterPoint: _propTypes2.default.func,
+	  onMouseMovePoint: _propTypes2.default.func,
+	  onMouseLeavePoint: _propTypes2.default.func
 	};
 	ScatterPlot.defaultProps = {
 	  pointRadius: 3,
@@ -67743,7 +68644,7 @@
 	exports.default = ScatterPlot;
 
 /***/ }),
-/* 227 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67764,15 +68665,19 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _invariant = __webpack_require__(210);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _RangeBarChart = __webpack_require__(228);
+	var _RangeBarChart = __webpack_require__(236);
 	
 	var _RangeBarChart2 = _interopRequireDefault(_RangeBarChart);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -67852,20 +68757,20 @@
 	}(_react2.default.Component);
 	
 	BarChart.propTypes = {
-	  scale: CustomPropTypes.xyObjectOf(_react2.default.PropTypes.func.isRequired),
-	  data: _react2.default.PropTypes.array,
+	  scale: CustomPropTypes.xyObjectOf(_propTypes2.default.func.isRequired),
+	  data: _propTypes2.default.array,
 	  getX: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
-	  horizontal: _react2.default.PropTypes.bool,
+	  horizontal: _propTypes2.default.bool,
 	
-	  barThickness: _react2.default.PropTypes.number,
-	  barClassName: _react2.default.PropTypes.string,
-	  barStyle: _react2.default.PropTypes.object,
+	  barThickness: _propTypes2.default.number,
+	  barClassName: _propTypes2.default.string,
+	  barStyle: _propTypes2.default.object,
 	  getClass: CustomPropTypes.getter,
 	
-	  onMouseEnterBar: _react2.default.PropTypes.func,
-	  onMouseMoveBar: _react2.default.PropTypes.func,
-	  onMouseLeaveBar: _react2.default.PropTypes.func
+	  onMouseEnterBar: _propTypes2.default.func,
+	  onMouseMoveBar: _propTypes2.default.func,
+	  onMouseLeaveBar: _propTypes2.default.func
 	};
 	BarChart.defaultProps = {
 	  data: [],
@@ -67877,7 +68782,7 @@
 	exports.default = BarChart;
 
 /***/ }),
-/* 228 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67900,7 +68805,11 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -67908,7 +68817,7 @@
 	
 	var _Data = __webpack_require__(205);
 	
-	var _Bar = __webpack_require__(229);
+	var _Bar = __webpack_require__(237);
 	
 	var _Bar2 = _interopRequireDefault(_Bar);
 	
@@ -68056,23 +68965,23 @@
 	}(_react2.default.Component);
 	
 	RangeBarChart.propTypes = {
-	  scale: CustomPropTypes.xyObjectOf(_react2.default.PropTypes.func.isRequired),
-	  data: _react2.default.PropTypes.array,
-	  horizontal: _react2.default.PropTypes.bool,
+	  scale: CustomPropTypes.xyObjectOf(_propTypes2.default.func.isRequired),
+	  data: _propTypes2.default.array,
+	  horizontal: _propTypes2.default.bool,
 	
 	  getX: CustomPropTypes.getter,
 	  getXEnd: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
 	  getYEnd: CustomPropTypes.getter,
 	
-	  barThickness: _react2.default.PropTypes.number,
-	  barClassName: _react2.default.PropTypes.string,
-	  barStyle: _react2.default.PropTypes.object,
+	  barThickness: _propTypes2.default.number,
+	  barClassName: _propTypes2.default.string,
+	  barStyle: _propTypes2.default.object,
 	  getClass: CustomPropTypes.getter,
 	
-	  onMouseEnterBar: _react2.default.PropTypes.func,
-	  onMouseMoveBar: _react2.default.PropTypes.func,
-	  onMouseLeaveBar: _react2.default.PropTypes.func
+	  onMouseEnterBar: _propTypes2.default.func,
+	  onMouseMoveBar: _propTypes2.default.func,
+	  onMouseLeaveBar: _propTypes2.default.func
 	};
 	RangeBarChart.defaultProps = {
 	  data: [],
@@ -68084,7 +68993,7 @@
 	exports.default = RangeBarChart;
 
 /***/ }),
-/* 229 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68103,13 +69012,17 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _isUndefined = __webpack_require__(230);
+	var _isUndefined = __webpack_require__(238);
 	
 	var _isUndefined2 = _interopRequireDefault(_isUndefined);
 	
-	var _util = __webpack_require__(218);
+	var _util = __webpack_require__(226);
 	
 	var _Scale = __webpack_require__(207);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -68191,14 +69104,14 @@
 	}(_react2.default.Component);
 	
 	Bar.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired, y: _react2.default.PropTypes.func.isRequired }),
-	  xValue: _react2.default.PropTypes.any,
-	  yValue: _react2.default.PropTypes.any,
-	  xEndValue: _react2.default.PropTypes.any,
-	  yEndValue: _react2.default.PropTypes.any,
-	  thickness: _react2.default.PropTypes.number,
-	  className: _react2.default.PropTypes.string,
-	  style: _react2.default.PropTypes.object
+	  scale: _propTypes2.default.shape({ x: _propTypes2.default.func.isRequired, y: _propTypes2.default.func.isRequired }),
+	  xValue: _propTypes2.default.any,
+	  yValue: _propTypes2.default.any,
+	  xEndValue: _propTypes2.default.any,
+	  yEndValue: _propTypes2.default.any,
+	  thickness: _propTypes2.default.number,
+	  className: _propTypes2.default.string,
+	  style: _propTypes2.default.object
 	};
 	Bar.defaultProps = {
 	  xValue: 0,
@@ -68210,7 +69123,7 @@
 	exports.default = Bar;
 
 /***/ }),
-/* 230 */
+/* 238 */
 /***/ (function(module, exports) {
 
 	/**
@@ -68238,7 +69151,7 @@
 
 
 /***/ }),
-/* 231 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68265,7 +69178,11 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -68273,7 +69190,7 @@
 	
 	var _Data = __webpack_require__(205);
 	
-	var _RangeRect = __webpack_require__(232);
+	var _RangeRect = __webpack_require__(240);
 	
 	var _RangeRect2 = _interopRequireDefault(_RangeRect);
 	
@@ -68378,9 +69295,9 @@
 	}(_react2.default.Component);
 	
 	AreaBarChart.propTypes = {
-	  scale: CustomPropTypes.xyObjectOf(_react2.default.PropTypes.func.isRequired),
-	  data: _react2.default.PropTypes.array,
-	  horizontal: _react2.default.PropTypes.bool,
+	  scale: CustomPropTypes.xyObjectOf(_propTypes2.default.func.isRequired),
+	  data: _propTypes2.default.array,
+	  horizontal: _propTypes2.default.bool,
 	
 	  getX: CustomPropTypes.getter,
 	  getXEnd: CustomPropTypes.getter,
@@ -68388,12 +69305,12 @@
 	  getYEnd: CustomPropTypes.getter,
 	  getClass: CustomPropTypes.getter,
 	
-	  barClassName: _react2.default.PropTypes.string,
-	  barStyle: _react2.default.PropTypes.object,
+	  barClassName: _propTypes2.default.string,
+	  barStyle: _propTypes2.default.object,
 	
-	  onMouseEnterBar: _react2.default.PropTypes.func,
-	  onMouseMoveBar: _react2.default.PropTypes.func,
-	  onMouseLeaveBar: _react2.default.PropTypes.func
+	  onMouseEnterBar: _propTypes2.default.func,
+	  onMouseMoveBar: _propTypes2.default.func,
+	  onMouseLeaveBar: _propTypes2.default.func
 	};
 	AreaBarChart.defaultProps = {
 	  data: [],
@@ -68404,7 +69321,7 @@
 	exports.default = AreaBarChart;
 
 /***/ }),
-/* 232 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68423,15 +69340,19 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _isUndefined = __webpack_require__(230);
+	var _isUndefined = __webpack_require__(238);
 	
 	var _isUndefined2 = _interopRequireDefault(_isUndefined);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
-	var _util = __webpack_require__(218);
+	var _util = __webpack_require__(226);
 	
 	var _Scale = __webpack_require__(207);
 	
@@ -68498,17 +69419,17 @@
 	}(_react2.default.Component);
 	
 	RangeRect.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired, y: _react2.default.PropTypes.func.isRequired }),
-	  datum: _react2.default.PropTypes.any,
+	  scale: _propTypes2.default.shape({ x: _propTypes2.default.func.isRequired, y: _propTypes2.default.func.isRequired }),
+	  datum: _propTypes2.default.any,
 	  getX: CustomPropTypes.getter,
 	  getXEnd: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
 	  getYEnd: CustomPropTypes.getter,
-	  className: _react2.default.PropTypes.string,
-	  style: _react2.default.PropTypes.object,
-	  onMouseEnter: _react2.default.PropTypes.func,
-	  onMouseMove: _react2.default.PropTypes.func,
-	  onMouseLeave: _react2.default.PropTypes.func
+	  className: _propTypes2.default.string,
+	  style: _propTypes2.default.object,
+	  onMouseEnter: _propTypes2.default.func,
+	  onMouseMove: _propTypes2.default.func,
+	  onMouseLeave: _propTypes2.default.func
 	};
 	RangeRect.defaultProps = {
 	  className: '',
@@ -68517,7 +69438,7 @@
 	exports.default = RangeRect;
 
 /***/ }),
-/* 233 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68540,9 +69461,13 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _util = __webpack_require__(218);
+	var _propTypes = __webpack_require__(218);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _util = __webpack_require__(226);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -68561,9 +69486,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PropTypes = _react2.default.PropTypes;
-	
 	
 	// MarkerLine is similar to a bar chart,
 	// except that it just draws a line at the data value, rather than a full bar
@@ -68773,23 +69695,23 @@
 	
 	MarkerLineChart.propTypes = {
 	  // the array of data objects
-	  data: PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	  // accessor for X & Y coordinates
 	  getX: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
 	  getXEnd: CustomPropTypes.getter,
 	  getYEnd: CustomPropTypes.getter,
 	
-	  horizontal: _react2.default.PropTypes.bool,
-	  lineLength: PropTypes.number,
+	  horizontal: _propTypes2.default.bool,
+	  lineLength: _propTypes2.default.number,
 	
 	  // x & y scale types
-	  scaleType: PropTypes.object,
-	  scale: PropTypes.object,
+	  scaleType: _propTypes2.default.object,
+	  scale: _propTypes2.default.object,
 	
-	  onMouseEnterLine: PropTypes.func,
-	  onMouseMoveLine: PropTypes.func,
-	  onMouseLeaveLine: PropTypes.func
+	  onMouseEnterLine: _propTypes2.default.func,
+	  onMouseMoveLine: _propTypes2.default.func,
+	  onMouseLeaveLine: _propTypes2.default.func
 	};
 	MarkerLineChart.defaultProps = {
 	  horizontal: false,
@@ -68798,7 +69720,7 @@
 	exports.default = MarkerLineChart;
 
 /***/ }),
-/* 234 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68823,7 +69745,11 @@
 	
 	var _d2 = __webpack_require__(162);
 	
-	var _util = __webpack_require__(218);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _util = __webpack_require__(226);
 	
 	var _Data = __webpack_require__(205);
 	
@@ -68984,9 +69910,9 @@
 	}(_react2.default.Component);
 	
 	AreaHeatmap.propTypes = {
-	  unitsPerPixel: _react2.default.PropTypes.number,
-	  rectClassName: _react2.default.PropTypes.string,
-	  rectStyle: _react2.default.PropTypes.object
+	  unitsPerPixel: _propTypes2.default.number,
+	  rectClassName: _propTypes2.default.string,
+	  rectStyle: _propTypes2.default.object
 	};
 	AreaHeatmap.defaultProps = {
 	  rectClassName: '',
@@ -68995,7 +69921,7 @@
 	exports.default = AreaHeatmap;
 
 /***/ }),
-/* 235 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69018,13 +69944,17 @@
 	
 	var _d = __webpack_require__(162);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
 	var _Data = __webpack_require__(205);
 	
-	var _AreaBarChart = __webpack_require__(231);
+	var _AreaBarChart = __webpack_require__(239);
 	
 	var _AreaBarChart2 = _interopRequireDefault(_AreaBarChart);
 	
@@ -69114,17 +70044,17 @@
 	
 	Histogram.propTypes = {
 	  // the array of data objects
-	  data: _react2.default.PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	  // accessors for X & Y coordinates
 	  getValue: CustomPropTypes.getter,
 	
-	  axisType: _react2.default.PropTypes.object,
-	  scale: _react2.default.PropTypes.object
+	  axisType: _propTypes2.default.object,
+	  scale: _propTypes2.default.object
 	};
 	exports.default = Histogram;
 
 /***/ }),
-/* 236 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69147,11 +70077,15 @@
 	
 	var _d = __webpack_require__(162);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
-	var _LineChart = __webpack_require__(223);
+	var _LineChart = __webpack_require__(231);
 	
 	var _LineChart2 = _interopRequireDefault(_LineChart);
 	
@@ -69244,25 +70178,25 @@
 	
 	KernelDensityEstimation.propTypes = {
 	  // the array of data objects
-	  data: _react2.default.PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	
 	  // kernel bandwidth for kernel density estimator
 	  // https://en.wikipedia.org/wiki/Kernel_density_estimation#Bandwidth_selection
 	  // high bandwidth => oversmoothing & underfitting; low bandwidth => undersmoothing & overfitting
-	  bandwidth: _react2.default.PropTypes.number,
+	  bandwidth: _propTypes2.default.number,
 	  // number of samples to take from the KDE
 	  // ie. the resolution/smoothness of the KDE line - more samples => higher resolution, smooth line
-	  sampleCount: _react2.default.PropTypes.number,
+	  sampleCount: _propTypes2.default.number,
 	
 	  // common props from XYPlot
 	  // accessor for data values
 	  getX: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
-	  name: _react2.default.PropTypes.string,
-	  scale: _react2.default.PropTypes.object,
-	  axisType: _react2.default.PropTypes.object,
-	  scaleWidth: _react2.default.PropTypes.number,
-	  scaleHeight: _react2.default.PropTypes.number
+	  name: _propTypes2.default.string,
+	  scale: _propTypes2.default.object,
+	  axisType: _propTypes2.default.object,
+	  scaleWidth: _propTypes2.default.number,
+	  scaleHeight: _propTypes2.default.number
 	};
 	KernelDensityEstimation.defaultProps = {
 	  bandwidth: 0.5,
@@ -69290,7 +70224,7 @@
 	exports.default = KernelDensityEstimation;
 
 /***/ }),
-/* 237 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69304,6 +70238,10 @@
 	var _react = __webpack_require__(5);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -69349,8 +70287,8 @@
 	}(_react2.default.Component);
 	
 	XLine.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired }),
-	  value: _react2.default.PropTypes.any.isRequired
+	  scale: _propTypes2.default.shape({ x: _propTypes2.default.func.isRequired }),
+	  value: _propTypes2.default.any.isRequired
 	};
 	XLine.defaultProps = {
 	  style: {}
@@ -69358,7 +70296,7 @@
 	exports.default = XLine;
 
 /***/ }),
-/* 238 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69372,6 +70310,10 @@
 	var _react = __webpack_require__(5);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -69417,8 +70359,8 @@
 	}(_react2.default.Component);
 	
 	YLine.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ y: _react2.default.PropTypes.func.isRequired }),
-	  value: _react2.default.PropTypes.any.isRequired
+	  scale: _propTypes2.default.shape({ y: _propTypes2.default.func.isRequired }),
+	  value: _propTypes2.default.any.isRequired
 	};
 	YLine.defaultProps = {
 	  style: {}
@@ -69426,7 +70368,7 @@
 	exports.default = YLine;
 
 /***/ }),
-/* 239 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69445,33 +70387,37 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _shallowEqual = __webpack_require__(224);
+	var _shallowEqual = __webpack_require__(232);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	var _Scale = __webpack_require__(207);
 	
 	var _Margin = __webpack_require__(213);
 	
-	var _Axis = __webpack_require__(240);
+	var _Axis = __webpack_require__(248);
 	
-	var _xyPropsEqual = __webpack_require__(225);
+	var _xyPropsEqual = __webpack_require__(233);
 	
 	var _xyPropsEqual2 = _interopRequireDefault(_xyPropsEqual);
 	
-	var _XTicks = __webpack_require__(241);
+	var _XTicks = __webpack_require__(249);
 	
 	var _XTicks2 = _interopRequireDefault(_XTicks);
 	
-	var _XGrid = __webpack_require__(242);
+	var _XGrid = __webpack_require__(250);
 	
 	var _XGrid2 = _interopRequireDefault(_XGrid);
 	
-	var _XAxisLabels = __webpack_require__(243);
+	var _XAxisLabels = __webpack_require__(251);
 	
 	var _XAxisLabels2 = _interopRequireDefault(_XAxisLabels);
 	
-	var _XAxisTitle = __webpack_require__(374);
+	var _XAxisTitle = __webpack_require__(382);
 	
 	var _XAxisTitle2 = _interopRequireDefault(_XAxisTitle);
 	
@@ -69579,44 +70525,44 @@
 	}(_react2.default.Component);
 	
 	XAxis.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired }),
+	  scale: _propTypes2.default.shape({ x: _propTypes2.default.func.isRequired }),
 	
-	  width: _react2.default.PropTypes.number,
-	  height: _react2.default.PropTypes.number,
-	  position: _react2.default.PropTypes.string,
-	  placement: _react2.default.PropTypes.string,
-	  nice: _react2.default.PropTypes.bool,
-	  ticks: _react2.default.PropTypes.array,
-	  tickCount: _react2.default.PropTypes.number,
+	  width: _propTypes2.default.number,
+	  height: _propTypes2.default.number,
+	  position: _propTypes2.default.string,
+	  placement: _propTypes2.default.string,
+	  nice: _propTypes2.default.bool,
+	  ticks: _propTypes2.default.array,
+	  tickCount: _propTypes2.default.number,
 	
-	  showTitle: _react2.default.PropTypes.bool,
-	  showLabels: _react2.default.PropTypes.bool,
-	  showTicks: _react2.default.PropTypes.bool,
-	  showGrid: _react2.default.PropTypes.bool,
+	  showTitle: _propTypes2.default.bool,
+	  showLabels: _propTypes2.default.bool,
+	  showTicks: _propTypes2.default.bool,
+	  showGrid: _propTypes2.default.bool,
 	
-	  title: _react2.default.PropTypes.string,
-	  titleDistance: _react2.default.PropTypes.number,
-	  titleAlign: _react2.default.PropTypes.string,
-	  titleRotate: _react2.default.PropTypes.bool,
-	  titleStyle: _react2.default.PropTypes.object,
+	  title: _propTypes2.default.string,
+	  titleDistance: _propTypes2.default.number,
+	  titleAlign: _propTypes2.default.string,
+	  titleRotate: _propTypes2.default.bool,
+	  titleStyle: _propTypes2.default.object,
 	
-	  labelDistance: _react2.default.PropTypes.number,
-	  labelClassName: _react2.default.PropTypes.string,
-	  labelStyle: _react2.default.PropTypes.object,
-	  labelFormat: _react2.default.PropTypes.object,
-	  labelFormats: _react2.default.PropTypes.array,
-	  labels: _react2.default.PropTypes.array,
+	  labelDistance: _propTypes2.default.number,
+	  labelClassName: _propTypes2.default.string,
+	  labelStyle: _propTypes2.default.object,
+	  labelFormat: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.func]),
+	  labelFormats: _propTypes2.default.array,
+	  labels: _propTypes2.default.array,
 	
-	  tickLength: _react2.default.PropTypes.number,
-	  tickClassName: _react2.default.PropTypes.string,
-	  tickStyle: _react2.default.PropTypes.object,
+	  tickLength: _propTypes2.default.number,
+	  tickClassName: _propTypes2.default.string,
+	  tickStyle: _propTypes2.default.object,
 	
-	  gridLineClassName: _react2.default.PropTypes.string,
-	  gridLineStyle: _react2.default.PropTypes.object,
+	  gridLineClassName: _propTypes2.default.string,
+	  gridLineStyle: _propTypes2.default.object,
 	
-	  onMouseEnterLabel: _react2.default.PropTypes.func,
-	  onMouseMoveLabel: _react2.default.PropTypes.func,
-	  onMouseLeaveLabel: _react2.default.PropTypes.func
+	  onMouseEnterLabel: _propTypes2.default.func,
+	  onMouseMoveLabel: _propTypes2.default.func,
+	  onMouseLeaveLabel: _propTypes2.default.func
 	};
 	XAxis.defaultProps = {
 	  width: 400,
@@ -69635,7 +70581,7 @@
 	exports.default = XAxis;
 
 /***/ }),
-/* 240 */
+/* 248 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -69700,7 +70646,7 @@
 	}
 
 /***/ }),
-/* 241 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69718,6 +70664,10 @@
 	var _lodash = __webpack_require__(3);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	var _Scale = __webpack_require__(207);
 	
@@ -69801,7 +70751,7 @@
 	}(_react2.default.Component);
 	
 	XTicks.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired })
+	  scale: _propTypes2.default.shape({ x: _propTypes2.default.func.isRequired })
 	};
 	XTicks.defaultProps = {
 	  position: 'bottom',
@@ -69813,7 +70763,7 @@
 	exports.default = XTicks;
 
 /***/ }),
-/* 242 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69832,9 +70782,13 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _Scale = __webpack_require__(207);
 	
-	var _XLine = __webpack_require__(237);
+	var _XLine = __webpack_require__(245);
 	
 	var _XLine2 = _interopRequireDefault(_XLine);
 	
@@ -69898,14 +70852,14 @@
 	}(_react2.default.Component);
 	
 	XGrid.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired }),
-	  width: _react2.default.PropTypes.number,
-	  height: _react2.default.PropTypes.number,
-	  nice: _react2.default.PropTypes.bool,
-	  ticks: _react2.default.PropTypes.array,
-	  tickCount: _react2.default.PropTypes.number,
-	  lineClassName: _react2.default.PropTypes.string,
-	  lineStyle: _react2.default.PropTypes.object
+	  scale: _propTypes2.default.shape({ x: _propTypes2.default.func.isRequired }),
+	  width: _propTypes2.default.number,
+	  height: _propTypes2.default.number,
+	  nice: _propTypes2.default.bool,
+	  ticks: _propTypes2.default.array,
+	  tickCount: _propTypes2.default.number,
+	  lineClassName: _propTypes2.default.string,
+	  lineStyle: _propTypes2.default.object
 	};
 	XGrid.defaultProps = {
 	  nice: true,
@@ -69914,7 +70868,7 @@
 	exports.default = XGrid;
 
 /***/ }),
-/* 243 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69937,15 +70891,19 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _MeasuredValueLabel = __webpack_require__(244);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _MeasuredValueLabel = __webpack_require__(252);
 	
 	var _MeasuredValueLabel2 = _interopRequireDefault(_MeasuredValueLabel);
 	
 	var _Scale = __webpack_require__(207);
 	
-	var _Label = __webpack_require__(255);
+	var _Label = __webpack_require__(263);
 	
-	var _xyPropsEqual = __webpack_require__(225);
+	var _xyPropsEqual = __webpack_require__(233);
 	
 	var _xyPropsEqual2 = _interopRequireDefault(_xyPropsEqual);
 	
@@ -70162,11 +71120,11 @@
 	}(_react2.default.Component);
 	
 	XAxisValueLabels.propTypes = {
-	  scale: _react2.default.PropTypes.object,
+	  scale: _propTypes2.default.object,
 	  // Label Handling
-	  onMouseEnterLabel: _react2.default.PropTypes.func,
-	  onMouseMoveLabel: _react2.default.PropTypes.func,
-	  onMouseLeaveLabel: _react2.default.PropTypes.func
+	  onMouseEnterLabel: _propTypes2.default.func,
+	  onMouseMoveLabel: _propTypes2.default.func,
+	  onMouseLeaveLabel: _propTypes2.default.func
 	};
 	XAxisValueLabels.defaultProps = {
 	  height: 250,
@@ -70222,7 +71180,7 @@
 	exports.default = XAxisValueLabels;
 
 /***/ }),
-/* 244 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70241,9 +71199,13 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _measureText = __webpack_require__(245);
+	var _measureText = __webpack_require__(253);
 	
 	var _measureText2 = _interopRequireDefault(_measureText);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -70300,7 +71262,7 @@
 	}(_react2.default.Component);
 	
 	MeasuredValueLabel.propTypes = {
-	  value: _react2.default.PropTypes.any.isRequired
+	  value: _propTypes2.default.any.isRequired
 	};
 	MeasuredValueLabel.defaultProps = {
 	  format: _lodash2.default.identity,
@@ -70314,7 +71276,7 @@
 	exports.default = MeasuredValueLabel;
 
 /***/ }),
-/* 245 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -70323,7 +71285,7 @@
 	  value: true
 	});
 	
-	var _unitsCss = __webpack_require__(246);
+	var _unitsCss = __webpack_require__(254);
 	
 	var _unitsCss2 = _interopRequireDefault(_unitsCss);
 	
@@ -70399,18 +71361,18 @@
 	exports.default = measureText;
 
 /***/ }),
-/* 246 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* eslint-env browser, node */
 	
 	'use strict';
 	
-	module.exports = __webpack_require__(247);
+	module.exports = __webpack_require__(255);
 
 
 /***/ }),
-/* 247 */
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* eslint-env browser, node */
@@ -70418,8 +71380,8 @@
 	'use strict';
 	
 	// Imports
-	var conversions = __webpack_require__(248);
-	var isNumeric = __webpack_require__(254);
+	var conversions = __webpack_require__(256);
+	var isNumeric = __webpack_require__(262);
 	
 	var units = {};
 	
@@ -70556,7 +71518,7 @@
 
 
 /***/ }),
-/* 248 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* eslint-env browser, node */
@@ -70565,14 +71527,14 @@
 	
 	// Exports
 	module.exports = {
-	  'angle': __webpack_require__(249),
-	  'length': __webpack_require__(250),
-	  'resolution': __webpack_require__(253)
+	  'angle': __webpack_require__(257),
+	  'length': __webpack_require__(258),
+	  'resolution': __webpack_require__(261)
 	};
 
 
 /***/ }),
-/* 249 */
+/* 257 */
 /***/ (function(module, exports) {
 
 	/* eslint-env browser, node */
@@ -70621,7 +71583,7 @@
 
 
 /***/ }),
-/* 250 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* eslint-env browser, node */
@@ -70629,8 +71591,8 @@
 	'use strict';
 	
 	// Imports
-	var utilities = __webpack_require__(251);
-	var viewport = __webpack_require__(252);
+	var utilities = __webpack_require__(259);
+	var viewport = __webpack_require__(260);
 	
 	var length = {'_default': 'px'};
 	
@@ -70794,7 +71756,7 @@
 
 
 /***/ }),
-/* 251 */
+/* 259 */
 /***/ (function(module, exports) {
 
 	/* eslint-env browser, node */
@@ -70932,7 +71894,7 @@
 
 
 /***/ }),
-/* 252 */
+/* 260 */
 /***/ (function(module, exports) {
 
 	/* eslint-env browser, node */
@@ -71022,7 +71984,7 @@
 
 
 /***/ }),
-/* 253 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* eslint-env browser, node */
@@ -71030,7 +71992,7 @@
 	'use strict';
 	
 	// Imports
-	var utilities = __webpack_require__(251);
+	var utilities = __webpack_require__(259);
 	
 	var resolution = {'_default': 'dpi'};
 	
@@ -71064,7 +72026,7 @@
 
 
 /***/ }),
-/* 254 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var isNumeric = function (obj) {
@@ -71081,7 +72043,7 @@
 
 
 /***/ }),
-/* 255 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71106,11 +72068,11 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _moment = __webpack_require__(256);
+	var _moment = __webpack_require__(264);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _numeral = __webpack_require__(373);
+	var _numeral = __webpack_require__(381);
 	
 	var _numeral2 = _interopRequireDefault(_numeral);
 	
@@ -71232,7 +72194,7 @@
 	}
 
 /***/ }),
-/* 256 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
@@ -73064,7 +74026,7 @@
 	            module && module.exports) {
 	        try {
 	            oldLocale = globalLocale._abbr;
-	            __webpack_require__(257)("./" + name);
+	            __webpack_require__(265)("./" + name);
 	            // because defineLocale currently also sets the global locale, we
 	            // want to undo that for lazy loaded locales
 	            getSetGlobalLocale(oldLocale);
@@ -75702,240 +76664,240 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ }),
-/* 257 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./af": 258,
-		"./af.js": 258,
-		"./ar": 259,
-		"./ar-dz": 260,
-		"./ar-dz.js": 260,
-		"./ar-kw": 261,
-		"./ar-kw.js": 261,
-		"./ar-ly": 262,
-		"./ar-ly.js": 262,
-		"./ar-ma": 263,
-		"./ar-ma.js": 263,
-		"./ar-sa": 264,
-		"./ar-sa.js": 264,
-		"./ar-tn": 265,
-		"./ar-tn.js": 265,
-		"./ar.js": 259,
-		"./az": 266,
-		"./az.js": 266,
-		"./be": 267,
-		"./be.js": 267,
-		"./bg": 268,
-		"./bg.js": 268,
-		"./bn": 269,
-		"./bn.js": 269,
-		"./bo": 270,
-		"./bo.js": 270,
-		"./br": 271,
-		"./br.js": 271,
-		"./bs": 272,
-		"./bs.js": 272,
-		"./ca": 273,
-		"./ca.js": 273,
-		"./cs": 274,
-		"./cs.js": 274,
-		"./cv": 275,
-		"./cv.js": 275,
-		"./cy": 276,
-		"./cy.js": 276,
-		"./da": 277,
-		"./da.js": 277,
-		"./de": 278,
-		"./de-at": 279,
-		"./de-at.js": 279,
-		"./de-ch": 280,
-		"./de-ch.js": 280,
-		"./de.js": 278,
-		"./dv": 281,
-		"./dv.js": 281,
-		"./el": 282,
-		"./el.js": 282,
-		"./en-au": 283,
-		"./en-au.js": 283,
-		"./en-ca": 284,
-		"./en-ca.js": 284,
-		"./en-gb": 285,
-		"./en-gb.js": 285,
-		"./en-ie": 286,
-		"./en-ie.js": 286,
-		"./en-nz": 287,
-		"./en-nz.js": 287,
-		"./eo": 288,
-		"./eo.js": 288,
-		"./es": 289,
-		"./es-do": 290,
-		"./es-do.js": 290,
-		"./es.js": 289,
-		"./et": 291,
-		"./et.js": 291,
-		"./eu": 292,
-		"./eu.js": 292,
-		"./fa": 293,
-		"./fa.js": 293,
-		"./fi": 294,
-		"./fi.js": 294,
-		"./fo": 295,
-		"./fo.js": 295,
-		"./fr": 296,
-		"./fr-ca": 297,
-		"./fr-ca.js": 297,
-		"./fr-ch": 298,
-		"./fr-ch.js": 298,
-		"./fr.js": 296,
-		"./fy": 299,
-		"./fy.js": 299,
-		"./gd": 300,
-		"./gd.js": 300,
-		"./gl": 301,
-		"./gl.js": 301,
-		"./gom-latn": 302,
-		"./gom-latn.js": 302,
-		"./he": 303,
-		"./he.js": 303,
-		"./hi": 304,
-		"./hi.js": 304,
-		"./hr": 305,
-		"./hr.js": 305,
-		"./hu": 306,
-		"./hu.js": 306,
-		"./hy-am": 307,
-		"./hy-am.js": 307,
-		"./id": 308,
-		"./id.js": 308,
-		"./is": 309,
-		"./is.js": 309,
-		"./it": 310,
-		"./it.js": 310,
-		"./ja": 311,
-		"./ja.js": 311,
-		"./jv": 312,
-		"./jv.js": 312,
-		"./ka": 313,
-		"./ka.js": 313,
-		"./kk": 314,
-		"./kk.js": 314,
-		"./km": 315,
-		"./km.js": 315,
-		"./kn": 316,
-		"./kn.js": 316,
-		"./ko": 317,
-		"./ko.js": 317,
-		"./ky": 318,
-		"./ky.js": 318,
-		"./lb": 319,
-		"./lb.js": 319,
-		"./lo": 320,
-		"./lo.js": 320,
-		"./lt": 321,
-		"./lt.js": 321,
-		"./lv": 322,
-		"./lv.js": 322,
-		"./me": 323,
-		"./me.js": 323,
-		"./mi": 324,
-		"./mi.js": 324,
-		"./mk": 325,
-		"./mk.js": 325,
-		"./ml": 326,
-		"./ml.js": 326,
-		"./mr": 327,
-		"./mr.js": 327,
-		"./ms": 328,
-		"./ms-my": 329,
-		"./ms-my.js": 329,
-		"./ms.js": 328,
-		"./my": 330,
-		"./my.js": 330,
-		"./nb": 331,
-		"./nb.js": 331,
-		"./ne": 332,
-		"./ne.js": 332,
-		"./nl": 333,
-		"./nl-be": 334,
-		"./nl-be.js": 334,
-		"./nl.js": 333,
-		"./nn": 335,
-		"./nn.js": 335,
-		"./pa-in": 336,
-		"./pa-in.js": 336,
-		"./pl": 337,
-		"./pl.js": 337,
-		"./pt": 338,
-		"./pt-br": 339,
-		"./pt-br.js": 339,
-		"./pt.js": 338,
-		"./ro": 340,
-		"./ro.js": 340,
-		"./ru": 341,
-		"./ru.js": 341,
-		"./sd": 342,
-		"./sd.js": 342,
-		"./se": 343,
-		"./se.js": 343,
-		"./si": 344,
-		"./si.js": 344,
-		"./sk": 345,
-		"./sk.js": 345,
-		"./sl": 346,
-		"./sl.js": 346,
-		"./sq": 347,
-		"./sq.js": 347,
-		"./sr": 348,
-		"./sr-cyrl": 349,
-		"./sr-cyrl.js": 349,
-		"./sr.js": 348,
-		"./ss": 350,
-		"./ss.js": 350,
-		"./sv": 351,
-		"./sv.js": 351,
-		"./sw": 352,
-		"./sw.js": 352,
-		"./ta": 353,
-		"./ta.js": 353,
-		"./te": 354,
-		"./te.js": 354,
-		"./tet": 355,
-		"./tet.js": 355,
-		"./th": 356,
-		"./th.js": 356,
-		"./tl-ph": 357,
-		"./tl-ph.js": 357,
-		"./tlh": 358,
-		"./tlh.js": 358,
-		"./tr": 359,
-		"./tr.js": 359,
-		"./tzl": 360,
-		"./tzl.js": 360,
-		"./tzm": 361,
-		"./tzm-latn": 362,
-		"./tzm-latn.js": 362,
-		"./tzm.js": 361,
-		"./uk": 363,
-		"./uk.js": 363,
-		"./ur": 364,
-		"./ur.js": 364,
-		"./uz": 365,
-		"./uz-latn": 366,
-		"./uz-latn.js": 366,
-		"./uz.js": 365,
-		"./vi": 367,
-		"./vi.js": 367,
-		"./x-pseudo": 368,
-		"./x-pseudo.js": 368,
-		"./yo": 369,
-		"./yo.js": 369,
-		"./zh-cn": 370,
-		"./zh-cn.js": 370,
-		"./zh-hk": 371,
-		"./zh-hk.js": 371,
-		"./zh-tw": 372,
-		"./zh-tw.js": 372
+		"./af": 266,
+		"./af.js": 266,
+		"./ar": 267,
+		"./ar-dz": 268,
+		"./ar-dz.js": 268,
+		"./ar-kw": 269,
+		"./ar-kw.js": 269,
+		"./ar-ly": 270,
+		"./ar-ly.js": 270,
+		"./ar-ma": 271,
+		"./ar-ma.js": 271,
+		"./ar-sa": 272,
+		"./ar-sa.js": 272,
+		"./ar-tn": 273,
+		"./ar-tn.js": 273,
+		"./ar.js": 267,
+		"./az": 274,
+		"./az.js": 274,
+		"./be": 275,
+		"./be.js": 275,
+		"./bg": 276,
+		"./bg.js": 276,
+		"./bn": 277,
+		"./bn.js": 277,
+		"./bo": 278,
+		"./bo.js": 278,
+		"./br": 279,
+		"./br.js": 279,
+		"./bs": 280,
+		"./bs.js": 280,
+		"./ca": 281,
+		"./ca.js": 281,
+		"./cs": 282,
+		"./cs.js": 282,
+		"./cv": 283,
+		"./cv.js": 283,
+		"./cy": 284,
+		"./cy.js": 284,
+		"./da": 285,
+		"./da.js": 285,
+		"./de": 286,
+		"./de-at": 287,
+		"./de-at.js": 287,
+		"./de-ch": 288,
+		"./de-ch.js": 288,
+		"./de.js": 286,
+		"./dv": 289,
+		"./dv.js": 289,
+		"./el": 290,
+		"./el.js": 290,
+		"./en-au": 291,
+		"./en-au.js": 291,
+		"./en-ca": 292,
+		"./en-ca.js": 292,
+		"./en-gb": 293,
+		"./en-gb.js": 293,
+		"./en-ie": 294,
+		"./en-ie.js": 294,
+		"./en-nz": 295,
+		"./en-nz.js": 295,
+		"./eo": 296,
+		"./eo.js": 296,
+		"./es": 297,
+		"./es-do": 298,
+		"./es-do.js": 298,
+		"./es.js": 297,
+		"./et": 299,
+		"./et.js": 299,
+		"./eu": 300,
+		"./eu.js": 300,
+		"./fa": 301,
+		"./fa.js": 301,
+		"./fi": 302,
+		"./fi.js": 302,
+		"./fo": 303,
+		"./fo.js": 303,
+		"./fr": 304,
+		"./fr-ca": 305,
+		"./fr-ca.js": 305,
+		"./fr-ch": 306,
+		"./fr-ch.js": 306,
+		"./fr.js": 304,
+		"./fy": 307,
+		"./fy.js": 307,
+		"./gd": 308,
+		"./gd.js": 308,
+		"./gl": 309,
+		"./gl.js": 309,
+		"./gom-latn": 310,
+		"./gom-latn.js": 310,
+		"./he": 311,
+		"./he.js": 311,
+		"./hi": 312,
+		"./hi.js": 312,
+		"./hr": 313,
+		"./hr.js": 313,
+		"./hu": 314,
+		"./hu.js": 314,
+		"./hy-am": 315,
+		"./hy-am.js": 315,
+		"./id": 316,
+		"./id.js": 316,
+		"./is": 317,
+		"./is.js": 317,
+		"./it": 318,
+		"./it.js": 318,
+		"./ja": 319,
+		"./ja.js": 319,
+		"./jv": 320,
+		"./jv.js": 320,
+		"./ka": 321,
+		"./ka.js": 321,
+		"./kk": 322,
+		"./kk.js": 322,
+		"./km": 323,
+		"./km.js": 323,
+		"./kn": 324,
+		"./kn.js": 324,
+		"./ko": 325,
+		"./ko.js": 325,
+		"./ky": 326,
+		"./ky.js": 326,
+		"./lb": 327,
+		"./lb.js": 327,
+		"./lo": 328,
+		"./lo.js": 328,
+		"./lt": 329,
+		"./lt.js": 329,
+		"./lv": 330,
+		"./lv.js": 330,
+		"./me": 331,
+		"./me.js": 331,
+		"./mi": 332,
+		"./mi.js": 332,
+		"./mk": 333,
+		"./mk.js": 333,
+		"./ml": 334,
+		"./ml.js": 334,
+		"./mr": 335,
+		"./mr.js": 335,
+		"./ms": 336,
+		"./ms-my": 337,
+		"./ms-my.js": 337,
+		"./ms.js": 336,
+		"./my": 338,
+		"./my.js": 338,
+		"./nb": 339,
+		"./nb.js": 339,
+		"./ne": 340,
+		"./ne.js": 340,
+		"./nl": 341,
+		"./nl-be": 342,
+		"./nl-be.js": 342,
+		"./nl.js": 341,
+		"./nn": 343,
+		"./nn.js": 343,
+		"./pa-in": 344,
+		"./pa-in.js": 344,
+		"./pl": 345,
+		"./pl.js": 345,
+		"./pt": 346,
+		"./pt-br": 347,
+		"./pt-br.js": 347,
+		"./pt.js": 346,
+		"./ro": 348,
+		"./ro.js": 348,
+		"./ru": 349,
+		"./ru.js": 349,
+		"./sd": 350,
+		"./sd.js": 350,
+		"./se": 351,
+		"./se.js": 351,
+		"./si": 352,
+		"./si.js": 352,
+		"./sk": 353,
+		"./sk.js": 353,
+		"./sl": 354,
+		"./sl.js": 354,
+		"./sq": 355,
+		"./sq.js": 355,
+		"./sr": 356,
+		"./sr-cyrl": 357,
+		"./sr-cyrl.js": 357,
+		"./sr.js": 356,
+		"./ss": 358,
+		"./ss.js": 358,
+		"./sv": 359,
+		"./sv.js": 359,
+		"./sw": 360,
+		"./sw.js": 360,
+		"./ta": 361,
+		"./ta.js": 361,
+		"./te": 362,
+		"./te.js": 362,
+		"./tet": 363,
+		"./tet.js": 363,
+		"./th": 364,
+		"./th.js": 364,
+		"./tl-ph": 365,
+		"./tl-ph.js": 365,
+		"./tlh": 366,
+		"./tlh.js": 366,
+		"./tr": 367,
+		"./tr.js": 367,
+		"./tzl": 368,
+		"./tzl.js": 368,
+		"./tzm": 369,
+		"./tzm-latn": 370,
+		"./tzm-latn.js": 370,
+		"./tzm.js": 369,
+		"./uk": 371,
+		"./uk.js": 371,
+		"./ur": 372,
+		"./ur.js": 372,
+		"./uz": 373,
+		"./uz-latn": 374,
+		"./uz-latn.js": 374,
+		"./uz.js": 373,
+		"./vi": 375,
+		"./vi.js": 375,
+		"./x-pseudo": 376,
+		"./x-pseudo.js": 376,
+		"./yo": 377,
+		"./yo.js": 377,
+		"./zh-cn": 378,
+		"./zh-cn.js": 378,
+		"./zh-hk": 379,
+		"./zh-hk.js": 379,
+		"./zh-tw": 380,
+		"./zh-tw.js": 380
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -75948,11 +76910,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 257;
+	webpackContext.id = 265;
 
 
 /***/ }),
-/* 258 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -75960,7 +76922,7 @@
 	//! author : Werner Mollentze : https://github.com/wernerm
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76030,7 +76992,7 @@
 
 
 /***/ }),
-/* 259 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76040,7 +77002,7 @@
 	//! author : forabi https://github.com/forabi
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76177,7 +77139,7 @@
 
 
 /***/ }),
-/* 260 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76185,7 +77147,7 @@
 	//! author : Noureddine LOUAHEDJ : https://github.com/noureddineme
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76241,7 +77203,7 @@
 
 
 /***/ }),
-/* 261 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76249,7 +77211,7 @@
 	//! author : Nusret Parlak: https://github.com/nusretparlak
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76305,7 +77267,7 @@
 
 
 /***/ }),
-/* 262 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76313,7 +77275,7 @@
 	//! author : Ali Hmer: https://github.com/kikoanis
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76436,7 +77398,7 @@
 
 
 /***/ }),
-/* 263 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76445,7 +77407,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76501,7 +77463,7 @@
 
 
 /***/ }),
-/* 264 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76509,7 +77471,7 @@
 	//! author : Suhail Alkowaileet : https://github.com/xsoh
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76611,7 +77573,7 @@
 
 
 /***/ }),
-/* 265 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76619,7 +77581,7 @@
 	//! author : Nader Toukabri : https://github.com/naderio
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76675,7 +77637,7 @@
 
 
 /***/ }),
-/* 266 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76683,7 +77645,7 @@
 	//! author : topchiyev : https://github.com/topchiyev
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76785,7 +77747,7 @@
 
 
 /***/ }),
-/* 267 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76795,7 +77757,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76924,7 +77886,7 @@
 
 
 /***/ }),
-/* 268 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76932,7 +77894,7 @@
 	//! author : Krasen Borisov : https://github.com/kraz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77019,7 +77981,7 @@
 
 
 /***/ }),
-/* 269 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77027,7 +77989,7 @@
 	//! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77143,7 +78105,7 @@
 
 
 /***/ }),
-/* 270 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77151,7 +78113,7 @@
 	//! author : Thupten N. Chakrishar : https://github.com/vajradog
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77267,7 +78229,7 @@
 
 
 /***/ }),
-/* 271 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77275,7 +78237,7 @@
 	//! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77380,7 +78342,7 @@
 
 
 /***/ }),
-/* 272 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77389,7 +78351,7 @@
 	//! based on (hr) translation by Bojan Marković
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77528,7 +78490,7 @@
 
 
 /***/ }),
-/* 273 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77536,7 +78498,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77621,7 +78583,7 @@
 
 
 /***/ }),
-/* 274 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77629,7 +78591,7 @@
 	//! author : petrbela : https://github.com/petrbela
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77798,7 +78760,7 @@
 
 
 /***/ }),
-/* 275 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77806,7 +78768,7 @@
 	//! author : Anatoly Mironov : https://github.com/mirontoli
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77866,7 +78828,7 @@
 
 
 /***/ }),
-/* 276 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77875,7 +78837,7 @@
 	//! author : https://github.com/ryangreaves
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77952,7 +78914,7 @@
 
 
 /***/ }),
-/* 277 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77960,7 +78922,7 @@
 	//! author : Ulrik Nielsen : https://github.com/mrbase
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78017,7 +78979,7 @@
 
 
 /***/ }),
-/* 278 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78027,7 +78989,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78100,7 +79062,7 @@
 
 
 /***/ }),
-/* 279 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78111,7 +79073,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78184,7 +79146,7 @@
 
 
 /***/ }),
-/* 280 */
+/* 288 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78192,7 +79154,7 @@
 	//! author : sschueller : https://github.com/sschueller
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78267,7 +79229,7 @@
 
 
 /***/ }),
-/* 281 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78275,7 +79237,7 @@
 	//! author : Jawish Hameed : https://github.com/jawish
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78372,7 +79334,7 @@
 
 
 /***/ }),
-/* 282 */
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78380,7 +79342,7 @@
 	//! author : Aggelos Karalias : https://github.com/mehiel
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78477,7 +79439,7 @@
 
 
 /***/ }),
-/* 283 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78485,7 +79447,7 @@
 	//! author : Jared Morse : https://github.com/jarcoal
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78549,7 +79511,7 @@
 
 
 /***/ }),
-/* 284 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78557,7 +79519,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78617,7 +79579,7 @@
 
 
 /***/ }),
-/* 285 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78625,7 +79587,7 @@
 	//! author : Chris Gedrim : https://github.com/chrisgedrim
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78689,7 +79651,7 @@
 
 
 /***/ }),
-/* 286 */
+/* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78697,7 +79659,7 @@
 	//! author : Chris Cartlidge : https://github.com/chriscartlidge
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78761,7 +79723,7 @@
 
 
 /***/ }),
-/* 287 */
+/* 295 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78769,7 +79731,7 @@
 	//! author : Luke McGregor : https://github.com/lukemcgregor
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78833,7 +79795,7 @@
 
 
 /***/ }),
-/* 288 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78843,7 +79805,7 @@
 	//! comment : miestasmia corrected the translation by colindean
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78911,7 +79873,7 @@
 
 
 /***/ }),
-/* 289 */
+/* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78919,7 +79881,7 @@
 	//! author : Julio Napurí : https://github.com/julionc
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78999,14 +79961,14 @@
 
 
 /***/ }),
-/* 290 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Spanish (Dominican Republic) [es-do]
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79086,7 +80048,7 @@
 
 
 /***/ }),
-/* 291 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79095,7 +80057,7 @@
 	//! improvements : Illimar Tambek : https://github.com/ragulka
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79171,7 +80133,7 @@
 
 
 /***/ }),
-/* 292 */
+/* 300 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79179,7 +80141,7 @@
 	//! author : Eneko Illarramendi : https://github.com/eillarra
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79242,7 +80204,7 @@
 
 
 /***/ }),
-/* 293 */
+/* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79250,7 +80212,7 @@
 	//! author : Ebrahim Byagowi : https://github.com/ebraminio
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79354,7 +80316,7 @@
 
 
 /***/ }),
-/* 294 */
+/* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79362,7 +80324,7 @@
 	//! author : Tarmo Aidantausta : https://github.com/bleadof
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79466,7 +80428,7 @@
 
 
 /***/ }),
-/* 295 */
+/* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79474,7 +80436,7 @@
 	//! author : Ragnar Johannesen : https://github.com/ragnar123
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79531,7 +80493,7 @@
 
 
 /***/ }),
-/* 296 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79539,7 +80501,7 @@
 	//! author : John Fischer : https://github.com/jfroffice
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79619,7 +80581,7 @@
 
 
 /***/ }),
-/* 297 */
+/* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79627,7 +80589,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79698,7 +80660,7 @@
 
 
 /***/ }),
-/* 298 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79706,7 +80668,7 @@
 	//! author : Gaspard Bucher : https://github.com/gaspard
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79781,7 +80743,7 @@
 
 
 /***/ }),
-/* 299 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79789,7 +80751,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79861,7 +80823,7 @@
 
 
 /***/ }),
-/* 300 */
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79869,7 +80831,7 @@
 	//! author : Jon Ashdown : https://github.com/jonashdown
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79942,7 +80904,7 @@
 
 
 /***/ }),
-/* 301 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79950,7 +80912,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80024,7 +80986,7 @@
 
 
 /***/ }),
-/* 302 */
+/* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80032,7 +80994,7 @@
 	//! author : The Discoverer : https://github.com/WikiDiscoverer
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80151,7 +81113,7 @@
 
 
 /***/ }),
-/* 303 */
+/* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80161,7 +81123,7 @@
 	//! author : Tal Ater : https://github.com/TalAter
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80255,7 +81217,7 @@
 
 
 /***/ }),
-/* 304 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80263,7 +81225,7 @@
 	//! author : Mayank Singhal : https://github.com/mayanksinghal
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80384,7 +81346,7 @@
 
 
 /***/ }),
-/* 305 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80392,7 +81354,7 @@
 	//! author : Bojan Marković : https://github.com/bmarkovic
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80534,7 +81496,7 @@
 
 
 /***/ }),
-/* 306 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80542,7 +81504,7 @@
 	//! author : Adam Brunner : https://github.com/adambrunner
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80648,7 +81610,7 @@
 
 
 /***/ }),
-/* 307 */
+/* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80656,7 +81618,7 @@
 	//! author : Armendarabyan : https://github.com/armendarabyan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80748,7 +81710,7 @@
 
 
 /***/ }),
-/* 308 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80757,7 +81719,7 @@
 	//! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80836,7 +81798,7 @@
 
 
 /***/ }),
-/* 309 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80844,7 +81806,7 @@
 	//! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80968,7 +81930,7 @@
 
 
 /***/ }),
-/* 310 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80977,7 +81939,7 @@
 	//! author: Mattia Larentis: https://github.com/nostalgiaz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81043,7 +82005,7 @@
 
 
 /***/ }),
-/* 311 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81051,7 +82013,7 @@
 	//! author : LI Long : https://github.com/baryon
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81128,7 +82090,7 @@
 
 
 /***/ }),
-/* 312 */
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81137,7 +82099,7 @@
 	//! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81216,7 +82178,7 @@
 
 
 /***/ }),
-/* 313 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81224,7 +82186,7 @@
 	//! author : Irakli Janiashvili : https://github.com/irakli-janiashvili
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81310,7 +82272,7 @@
 
 
 /***/ }),
-/* 314 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81318,7 +82280,7 @@
 	//! authors : Nurlan Rakhimzhanov : https://github.com/nurlan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81402,7 +82364,7 @@
 
 
 /***/ }),
-/* 315 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81410,7 +82372,7 @@
 	//! author : Kruy Vanna : https://github.com/kruyvanna
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81465,7 +82427,7 @@
 
 
 /***/ }),
-/* 316 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81473,7 +82435,7 @@
 	//! author : Rajeev Naik : https://github.com/rajeevnaikte
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81596,7 +82558,7 @@
 
 
 /***/ }),
-/* 317 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81605,7 +82567,7 @@
 	//! author : Jeeeyul Lee <jeeeyul@gmail.com>
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81670,7 +82632,7 @@
 
 
 /***/ }),
-/* 318 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81678,7 +82640,7 @@
 	//! author : Chyngyz Arystan uulu : https://github.com/chyngyz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81763,7 +82725,7 @@
 
 
 /***/ }),
-/* 319 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81772,7 +82734,7 @@
 	//! author : David Raison : https://github.com/kwisatz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81905,7 +82867,7 @@
 
 
 /***/ }),
-/* 320 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81913,7 +82875,7 @@
 	//! author : Ryan Hart : https://github.com/ryanhart2
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81980,7 +82942,7 @@
 
 
 /***/ }),
-/* 321 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81988,7 +82950,7 @@
 	//! author : Mindaugas Mozūras : https://github.com/mmozuras
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82102,7 +83064,7 @@
 
 
 /***/ }),
-/* 322 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82111,7 +83073,7 @@
 	//! author : Jānis Elmeris : https://github.com/JanisE
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82204,7 +83166,7 @@
 
 
 /***/ }),
-/* 323 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82212,7 +83174,7 @@
 	//! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82320,7 +83282,7 @@
 
 
 /***/ }),
-/* 324 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82328,7 +83290,7 @@
 	//! author : John Corrigan <robbiecloset@gmail.com> : https://github.com/johnideal
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82389,7 +83351,7 @@
 
 
 /***/ }),
-/* 325 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82397,7 +83359,7 @@
 	//! author : Borislav Mickov : https://github.com/B0k0
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82484,7 +83446,7 @@
 
 
 /***/ }),
-/* 326 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82492,7 +83454,7 @@
 	//! author : Floyd Pink : https://github.com/floydpink
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82570,7 +83532,7 @@
 
 
 /***/ }),
-/* 327 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82579,7 +83541,7 @@
 	//! author : Vivek Athalye : https://github.com/vnathalye
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82734,7 +83696,7 @@
 
 
 /***/ }),
-/* 328 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82742,7 +83704,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82821,7 +83783,7 @@
 
 
 /***/ }),
-/* 329 */
+/* 337 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82830,7 +83792,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82909,7 +83871,7 @@
 
 
 /***/ }),
-/* 330 */
+/* 338 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82919,7 +83881,7 @@
 	//! author : Tin Aung Lin : https://github.com/thanyawzinmin
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83010,7 +83972,7 @@
 
 
 /***/ }),
-/* 331 */
+/* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83019,7 +83981,7 @@
 	//!           Sigurd Gartmann : https://github.com/sigurdga
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83078,7 +84040,7 @@
 
 
 /***/ }),
-/* 332 */
+/* 340 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83086,7 +84048,7 @@
 	//! author : suvash : https://github.com/suvash
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83206,7 +84168,7 @@
 
 
 /***/ }),
-/* 333 */
+/* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83215,7 +84177,7 @@
 	//! author : Jacob Middag : https://github.com/middagj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83299,7 +84261,7 @@
 
 
 /***/ }),
-/* 334 */
+/* 342 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83308,7 +84270,7 @@
 	//! author : Jacob Middag : https://github.com/middagj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83392,7 +84354,7 @@
 
 
 /***/ }),
-/* 335 */
+/* 343 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83400,7 +84362,7 @@
 	//! author : https://github.com/mechuwind
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83457,7 +84419,7 @@
 
 
 /***/ }),
-/* 336 */
+/* 344 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83465,7 +84427,7 @@
 	//! author : Harpreet Singh : https://github.com/harpreetkhalsagtbit
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83586,7 +84548,7 @@
 
 
 /***/ }),
-/* 337 */
+/* 345 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83594,7 +84556,7 @@
 	//! author : Rafal Hirsz : https://github.com/evoL
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83698,7 +84660,7 @@
 
 
 /***/ }),
-/* 338 */
+/* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83706,7 +84668,7 @@
 	//! author : Jefferson : https://github.com/jalex79
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83768,7 +84730,7 @@
 
 
 /***/ }),
-/* 339 */
+/* 347 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83776,7 +84738,7 @@
 	//! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83834,7 +84796,7 @@
 
 
 /***/ }),
-/* 340 */
+/* 348 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83843,7 +84805,7 @@
 	//! author : Valentin Agachi : https://github.com/avaly
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83914,7 +84876,7 @@
 
 
 /***/ }),
-/* 341 */
+/* 349 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83924,7 +84886,7 @@
 	//! author : Коренберг Марк : https://github.com/socketpair
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84102,7 +85064,7 @@
 
 
 /***/ }),
-/* 342 */
+/* 350 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84110,7 +85072,7 @@
 	//! author : Narain Sagar : https://github.com/narainsagar
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84205,7 +85167,7 @@
 
 
 /***/ }),
-/* 343 */
+/* 351 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84213,7 +85175,7 @@
 	//! authors : Bård Rolstad Henriksen : https://github.com/karamell
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84271,7 +85233,7 @@
 
 
 /***/ }),
-/* 344 */
+/* 352 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84279,7 +85241,7 @@
 	//! author : Sampath Sitinamaluwa : https://github.com/sampathsris
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84347,7 +85309,7 @@
 
 
 /***/ }),
-/* 345 */
+/* 353 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84356,7 +85318,7 @@
 	//! based on work of petrbela : https://github.com/petrbela
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84502,7 +85464,7 @@
 
 
 /***/ }),
-/* 346 */
+/* 354 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84510,7 +85472,7 @@
 	//! author : Robert Sedovšek : https://github.com/sedovsek
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84669,7 +85631,7 @@
 
 
 /***/ }),
-/* 347 */
+/* 355 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84679,7 +85641,7 @@
 	//! author : Oerd Cukalla : https://github.com/oerd
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84744,7 +85706,7 @@
 
 
 /***/ }),
-/* 348 */
+/* 356 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84752,7 +85714,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84859,7 +85821,7 @@
 
 
 /***/ }),
-/* 349 */
+/* 357 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84867,7 +85829,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84974,7 +85936,7 @@
 
 
 /***/ }),
-/* 350 */
+/* 358 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84982,7 +85944,7 @@
 	//! author : Nicolai Davies<mail@nicolai.io> : https://github.com/nicolaidavies
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85068,7 +86030,7 @@
 
 
 /***/ }),
-/* 351 */
+/* 359 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85076,7 +86038,7 @@
 	//! author : Jens Alm : https://github.com/ulmus
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85142,7 +86104,7 @@
 
 
 /***/ }),
-/* 352 */
+/* 360 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85150,7 +86112,7 @@
 	//! author : Fahad Kassim : https://github.com/fadsel
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85206,7 +86168,7 @@
 
 
 /***/ }),
-/* 353 */
+/* 361 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85214,7 +86176,7 @@
 	//! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85341,7 +86303,7 @@
 
 
 /***/ }),
-/* 354 */
+/* 362 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85349,7 +86311,7 @@
 	//! author : Krishna Chaitanya Thota : https://github.com/kcthota
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85435,7 +86397,7 @@
 
 
 /***/ }),
-/* 355 */
+/* 363 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85444,7 +86406,7 @@
 	//! author : Onorio De J. Afonso : https://github.com/marobo
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85508,7 +86470,7 @@
 
 
 /***/ }),
-/* 356 */
+/* 364 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85516,7 +86478,7 @@
 	//! author : Kridsada Thanabulpong : https://github.com/sirn
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85580,7 +86542,7 @@
 
 
 /***/ }),
-/* 357 */
+/* 365 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85588,7 +86550,7 @@
 	//! author : Dan Hagman : https://github.com/hagmandan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85647,7 +86609,7 @@
 
 
 /***/ }),
-/* 358 */
+/* 366 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85655,7 +86617,7 @@
 	//! author : Dominika Kruk : https://github.com/amaranthrose
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85772,7 +86734,7 @@
 
 
 /***/ }),
-/* 359 */
+/* 367 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85781,7 +86743,7 @@
 	//!           Burak Yiğit Kaya: https://github.com/BYK
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85867,7 +86829,7 @@
 
 
 /***/ }),
-/* 360 */
+/* 368 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85876,7 +86838,7 @@
 	//! author : Iustì Canun
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85963,7 +86925,7 @@
 
 
 /***/ }),
-/* 361 */
+/* 369 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85971,7 +86933,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86026,7 +86988,7 @@
 
 
 /***/ }),
-/* 362 */
+/* 370 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86034,7 +86996,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86089,7 +87051,7 @@
 
 
 /***/ }),
-/* 363 */
+/* 371 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86098,7 +87060,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86245,7 +87207,7 @@
 
 
 /***/ }),
-/* 364 */
+/* 372 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86254,7 +87216,7 @@
 	//! author : Zack : https://github.com/ZackVision
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86349,7 +87311,7 @@
 
 
 /***/ }),
-/* 365 */
+/* 373 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86357,7 +87319,7 @@
 	//! author : Sardor Muminov : https://github.com/muminoff
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86412,7 +87374,7 @@
 
 
 /***/ }),
-/* 366 */
+/* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86420,7 +87382,7 @@
 	//! author : Rasulbek Mirzayev : github.com/Rasulbeeek
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86475,7 +87437,7 @@
 
 
 /***/ }),
-/* 367 */
+/* 375 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86483,7 +87445,7 @@
 	//! author : Bang Nguyen : https://github.com/bangnk
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86559,7 +87521,7 @@
 
 
 /***/ }),
-/* 368 */
+/* 376 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86567,7 +87529,7 @@
 	//! author : Andrew Hood : https://github.com/andrewhood125
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86632,7 +87594,7 @@
 
 
 /***/ }),
-/* 369 */
+/* 377 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86640,7 +87602,7 @@
 	//! author : Atolagbe Abisoye : https://github.com/andela-batolagbe
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86697,7 +87659,7 @@
 
 
 /***/ }),
-/* 370 */
+/* 378 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86706,7 +87668,7 @@
 	//! author : Zeno Zeng : https://github.com/zenozeng
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86813,7 +87775,7 @@
 
 
 /***/ }),
-/* 371 */
+/* 379 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86823,7 +87785,7 @@
 	//! author : Konstantin : https://github.com/skfd
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86923,7 +87885,7 @@
 
 
 /***/ }),
-/* 372 */
+/* 380 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86932,7 +87894,7 @@
 	//! author : Chris Lam : https://github.com/hehachris
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -87032,7 +87994,7 @@
 
 
 /***/ }),
-/* 373 */
+/* 381 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! @preserve
@@ -87882,7 +88844,7 @@
 
 
 /***/ }),
-/* 374 */
+/* 382 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87903,9 +88865,13 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _measureText = __webpack_require__(245);
+	var _measureText = __webpack_require__(253);
 	
 	var _measureText2 = _interopRequireDefault(_measureText);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -87986,14 +88952,14 @@
 	}(_react2.default.Component);
 	
 	XAxisTitle.propTypes = {
-	  height: _react2.default.PropTypes.number,
-	  width: _react2.default.PropTypes.number,
-	  distance: _react2.default.PropTypes.number,
-	  position: _react2.default.PropTypes.oneOf(['top', 'bottom']),
-	  placement: _react2.default.PropTypes.oneOf(['above', 'below']),
-	  alignment: _react2.default.PropTypes.oneOf(['left', 'center', 'right']),
-	  rotate: _react2.default.PropTypes.bool,
-	  style: _react2.default.PropTypes.object
+	  height: _propTypes2.default.number,
+	  width: _propTypes2.default.number,
+	  distance: _propTypes2.default.number,
+	  position: _propTypes2.default.oneOf(['top', 'bottom']),
+	  placement: _propTypes2.default.oneOf(['above', 'below']),
+	  alignment: _propTypes2.default.oneOf(['left', 'center', 'right']),
+	  rotate: _propTypes2.default.bool,
+	  style: _propTypes2.default.object
 	};
 	XAxisTitle.defaultProps = {
 	  height: 250,
@@ -88014,7 +88980,7 @@
 	exports.default = XAxisTitle;
 
 /***/ }),
-/* 375 */
+/* 383 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88033,29 +88999,33 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _Scale = __webpack_require__(207);
 	
 	var _Margin = __webpack_require__(213);
 	
-	var _Axis = __webpack_require__(240);
+	var _Axis = __webpack_require__(248);
 	
-	var _xyPropsEqual = __webpack_require__(225);
+	var _xyPropsEqual = __webpack_require__(233);
 	
 	var _xyPropsEqual2 = _interopRequireDefault(_xyPropsEqual);
 	
-	var _YTicks = __webpack_require__(376);
+	var _YTicks = __webpack_require__(384);
 	
 	var _YTicks2 = _interopRequireDefault(_YTicks);
 	
-	var _YGrid = __webpack_require__(377);
+	var _YGrid = __webpack_require__(385);
 	
 	var _YGrid2 = _interopRequireDefault(_YGrid);
 	
-	var _YAxisLabels = __webpack_require__(378);
+	var _YAxisLabels = __webpack_require__(386);
 	
 	var _YAxisLabels2 = _interopRequireDefault(_YAxisLabels);
 	
-	var _YAxisTitle = __webpack_require__(379);
+	var _YAxisTitle = __webpack_require__(387);
 	
 	var _YAxisTitle2 = _interopRequireDefault(_YAxisTitle);
 	
@@ -88163,44 +89133,44 @@
 	}(_react2.default.Component);
 	
 	YAxis.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ y: _react2.default.PropTypes.func.isRequired }),
+	  scale: _propTypes2.default.shape({ y: _propTypes2.default.func.isRequired }),
 	
-	  width: _react2.default.PropTypes.number,
-	  height: _react2.default.PropTypes.number,
-	  position: _react2.default.PropTypes.string,
-	  placement: _react2.default.PropTypes.string,
-	  nice: _react2.default.PropTypes.bool,
-	  ticks: _react2.default.PropTypes.array,
-	  tickCount: _react2.default.PropTypes.number,
+	  width: _propTypes2.default.number,
+	  height: _propTypes2.default.number,
+	  position: _propTypes2.default.string,
+	  placement: _propTypes2.default.string,
+	  nice: _propTypes2.default.bool,
+	  ticks: _propTypes2.default.array,
+	  tickCount: _propTypes2.default.number,
 	
-	  showTitle: _react2.default.PropTypes.bool,
-	  showLabels: _react2.default.PropTypes.bool,
-	  showTicks: _react2.default.PropTypes.bool,
-	  showGrid: _react2.default.PropTypes.bool,
+	  showTitle: _propTypes2.default.bool,
+	  showLabels: _propTypes2.default.bool,
+	  showTicks: _propTypes2.default.bool,
+	  showGrid: _propTypes2.default.bool,
 	
-	  title: _react2.default.PropTypes.string,
-	  titleDistance: _react2.default.PropTypes.number,
-	  titleAlign: _react2.default.PropTypes.string,
-	  titleRotate: _react2.default.PropTypes.bool,
-	  titleStyle: _react2.default.PropTypes.object,
+	  title: _propTypes2.default.string,
+	  titleDistance: _propTypes2.default.number,
+	  titleAlign: _propTypes2.default.string,
+	  titleRotate: _propTypes2.default.bool,
+	  titleStyle: _propTypes2.default.object,
 	
-	  labelDistance: _react2.default.PropTypes.number,
-	  labelClassName: _react2.default.PropTypes.string,
-	  labelStyle: _react2.default.PropTypes.object,
-	  labelFormat: _react2.default.PropTypes.string,
-	  labelFormats: _react2.default.PropTypes.array,
-	  labels: _react2.default.PropTypes.array,
+	  labelDistance: _propTypes2.default.number,
+	  labelClassName: _propTypes2.default.string,
+	  labelStyle: _propTypes2.default.object,
+	  labelFormat: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.func]),
+	  labelFormats: _propTypes2.default.array,
+	  labels: _propTypes2.default.array,
 	
-	  tickLength: _react2.default.PropTypes.number,
-	  tickClassName: _react2.default.PropTypes.string,
-	  tickStyle: _react2.default.PropTypes.object,
+	  tickLength: _propTypes2.default.number,
+	  tickClassName: _propTypes2.default.string,
+	  tickStyle: _propTypes2.default.object,
 	
-	  gridLineClassName: _react2.default.PropTypes.string,
-	  gridLineStyle: _react2.default.PropTypes.object,
+	  gridLineClassName: _propTypes2.default.string,
+	  gridLineStyle: _propTypes2.default.object,
 	
-	  onMouseEnterLabel: _react2.default.PropTypes.func,
-	  onMouseMoveLabel: _react2.default.PropTypes.func,
-	  onMouseLeaveLabel: _react2.default.PropTypes.func
+	  onMouseEnterLabel: _propTypes2.default.func,
+	  onMouseMoveLabel: _propTypes2.default.func,
+	  onMouseLeaveLabel: _propTypes2.default.func
 	};
 	YAxis.defaultProps = {
 	  width: 400,
@@ -88219,7 +89189,7 @@
 	exports.default = YAxis;
 
 /***/ }),
-/* 376 */
+/* 384 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88237,6 +89207,10 @@
 	var _lodash = __webpack_require__(3);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	var _Scale = __webpack_require__(207);
 	
@@ -88320,7 +89294,7 @@
 	}(_react2.default.Component);
 	
 	YTicks.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ y: _react2.default.PropTypes.func.isRequired })
+	  scale: _propTypes2.default.shape({ y: _propTypes2.default.func.isRequired })
 	};
 	YTicks.defaultProps = {
 	  position: 'left',
@@ -88332,7 +89306,7 @@
 	exports.default = YTicks;
 
 /***/ }),
-/* 377 */
+/* 385 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88351,7 +89325,11 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _YLine = __webpack_require__(238);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _YLine = __webpack_require__(246);
 	
 	var _YLine2 = _interopRequireDefault(_YLine);
 	
@@ -88418,14 +89396,14 @@
 	}(_react2.default.Component);
 	
 	YGrid.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ y: _react2.default.PropTypes.func.isRequired }),
-	  width: _react2.default.PropTypes.number,
-	  height: _react2.default.PropTypes.number,
-	  nice: _react2.default.PropTypes.bool,
-	  ticks: _react2.default.PropTypes.array,
-	  tickCount: _react2.default.PropTypes.number,
-	  lineClassName: _react2.default.PropTypes.string,
-	  lineStyle: _react2.default.PropTypes.object
+	  scale: _propTypes2.default.shape({ y: _propTypes2.default.func.isRequired }),
+	  width: _propTypes2.default.number,
+	  height: _propTypes2.default.number,
+	  nice: _propTypes2.default.bool,
+	  ticks: _propTypes2.default.array,
+	  tickCount: _propTypes2.default.number,
+	  lineClassName: _propTypes2.default.string,
+	  lineStyle: _propTypes2.default.object
 	};
 	YGrid.defaultProps = {
 	  nice: true,
@@ -88434,7 +89412,7 @@
 	exports.default = YGrid;
 
 /***/ }),
-/* 378 */
+/* 386 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88457,15 +89435,19 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _MeasuredValueLabel = __webpack_require__(244);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _MeasuredValueLabel = __webpack_require__(252);
 	
 	var _MeasuredValueLabel2 = _interopRequireDefault(_MeasuredValueLabel);
 	
 	var _Scale = __webpack_require__(207);
 	
-	var _Label = __webpack_require__(255);
+	var _Label = __webpack_require__(263);
 	
-	var _xyPropsEqual = __webpack_require__(225);
+	var _xyPropsEqual = __webpack_require__(233);
 	
 	var _xyPropsEqual2 = _interopRequireDefault(_xyPropsEqual);
 	
@@ -88667,11 +89649,11 @@
 	}(_react2.default.Component);
 	
 	YAxisValueLabels.propTypes = {
-	  scale: _react2.default.PropTypes.object,
+	  scale: _propTypes2.default.object,
 	  // Label Handling
-	  onMouseEnterLabel: _react2.default.PropTypes.func,
-	  onMouseMoveLabel: _react2.default.PropTypes.func,
-	  onMouseLeaveLabel: _react2.default.PropTypes.func
+	  onMouseEnterLabel: _propTypes2.default.func,
+	  onMouseMoveLabel: _propTypes2.default.func,
+	  onMouseLeaveLabel: _propTypes2.default.func
 	  // placement: undefined,
 	  // format: undefined,
 	  // formats: undefined,
@@ -88730,7 +89712,7 @@
 	exports.default = YAxisValueLabels;
 
 /***/ }),
-/* 379 */
+/* 387 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88751,9 +89733,13 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _measureText = __webpack_require__(245);
+	var _measureText = __webpack_require__(253);
 	
 	var _measureText2 = _interopRequireDefault(_measureText);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -88832,14 +89818,14 @@
 	}(_react2.default.Component);
 	
 	YAxisTitle.propTypes = {
-	  height: _react2.default.PropTypes.number,
-	  width: _react2.default.PropTypes.number,
-	  distance: _react2.default.PropTypes.number,
-	  position: _react2.default.PropTypes.oneOf(['left', 'right']),
-	  alignment: _react2.default.PropTypes.oneOf(['top', 'middle', 'bottom']),
-	  placement: _react2.default.PropTypes.oneOf(['before', 'after']),
-	  rotate: _react2.default.PropTypes.bool,
-	  style: _react2.default.PropTypes.object
+	  height: _propTypes2.default.number,
+	  width: _propTypes2.default.number,
+	  distance: _propTypes2.default.number,
+	  position: _propTypes2.default.oneOf(['left', 'right']),
+	  alignment: _propTypes2.default.oneOf(['top', 'middle', 'bottom']),
+	  placement: _propTypes2.default.oneOf(['before', 'after']),
+	  rotate: _propTypes2.default.bool,
+	  style: _propTypes2.default.object
 	};
 	YAxisTitle.defaultProps = {
 	  height: 250,
@@ -88860,7 +89846,7 @@
 	exports.default = YAxisTitle;
 
 /***/ }),
-/* 380 */
+/* 388 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88869,7 +89855,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(381);
+	var _reactDom = __webpack_require__(389);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
@@ -88979,7 +89965,7 @@
 	});
 
 /***/ }),
-/* 381 */
+/* 389 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88988,7 +89974,7 @@
 
 
 /***/ }),
-/* 382 */
+/* 390 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89007,7 +89993,7 @@
 	
 	var _chai = __webpack_require__(165);
 	
-	var _Examples = __webpack_require__(383);
+	var _Examples = __webpack_require__(391);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -89035,7 +90021,7 @@
 	});
 
 /***/ }),
-/* 383 */
+/* 391 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89061,99 +90047,99 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactAddonsUpdate = __webpack_require__(384);
+	var _reactAddonsUpdate = __webpack_require__(392);
 	
 	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 	
-	var _numeral = __webpack_require__(373);
+	var _numeral = __webpack_require__(381);
 	
 	var _numeral2 = _interopRequireDefault(_numeral);
 	
-	var _XYPlot = __webpack_require__(222);
+	var _XYPlot = __webpack_require__(230);
 	
 	var _XYPlot2 = _interopRequireDefault(_XYPlot);
 	
-	var _XAxis = __webpack_require__(239);
+	var _XAxis = __webpack_require__(247);
 	
 	var _XAxis2 = _interopRequireDefault(_XAxis);
 	
-	var _XTicks = __webpack_require__(241);
+	var _XTicks = __webpack_require__(249);
 	
 	var _XTicks2 = _interopRequireDefault(_XTicks);
 	
-	var _XLine = __webpack_require__(237);
+	var _XLine = __webpack_require__(245);
 	
 	var _XLine2 = _interopRequireDefault(_XLine);
 	
-	var _XGrid = __webpack_require__(242);
+	var _XGrid = __webpack_require__(250);
 	
 	var _XGrid2 = _interopRequireDefault(_XGrid);
 	
-	var _XAxisLabels = __webpack_require__(243);
+	var _XAxisLabels = __webpack_require__(251);
 	
 	var _XAxisLabels2 = _interopRequireDefault(_XAxisLabels);
 	
-	var _XAxisTitle = __webpack_require__(374);
+	var _XAxisTitle = __webpack_require__(382);
 	
 	var _XAxisTitle2 = _interopRequireDefault(_XAxisTitle);
 	
-	var _YAxis = __webpack_require__(375);
+	var _YAxis = __webpack_require__(383);
 	
 	var _YAxis2 = _interopRequireDefault(_YAxis);
 	
-	var _YTicks = __webpack_require__(376);
+	var _YTicks = __webpack_require__(384);
 	
 	var _YTicks2 = _interopRequireDefault(_YTicks);
 	
-	var _YLine = __webpack_require__(238);
+	var _YLine = __webpack_require__(246);
 	
 	var _YLine2 = _interopRequireDefault(_YLine);
 	
-	var _YGrid = __webpack_require__(377);
+	var _YGrid = __webpack_require__(385);
 	
 	var _YGrid2 = _interopRequireDefault(_YGrid);
 	
-	var _YAxisLabels = __webpack_require__(378);
+	var _YAxisLabels = __webpack_require__(386);
 	
 	var _YAxisLabels2 = _interopRequireDefault(_YAxisLabels);
 	
-	var _YAxisTitle = __webpack_require__(379);
+	var _YAxisTitle = __webpack_require__(387);
 	
 	var _YAxisTitle2 = _interopRequireDefault(_YAxisTitle);
 	
-	var _Bar = __webpack_require__(229);
+	var _Bar = __webpack_require__(237);
 	
 	var _Bar2 = _interopRequireDefault(_Bar);
 	
-	var _RangeBarChart = __webpack_require__(228);
+	var _RangeBarChart = __webpack_require__(236);
 	
 	var _RangeBarChart2 = _interopRequireDefault(_RangeBarChart);
 	
-	var _RangeRect = __webpack_require__(232);
+	var _RangeRect = __webpack_require__(240);
 	
 	var _RangeRect2 = _interopRequireDefault(_RangeRect);
 	
-	var _BarChart = __webpack_require__(227);
+	var _BarChart = __webpack_require__(235);
 	
 	var _BarChart2 = _interopRequireDefault(_BarChart);
 	
-	var _AreaBarChart = __webpack_require__(231);
+	var _AreaBarChart = __webpack_require__(239);
 	
 	var _AreaBarChart2 = _interopRequireDefault(_AreaBarChart);
 	
-	var _LineChart = __webpack_require__(223);
+	var _LineChart = __webpack_require__(231);
 	
 	var _LineChart2 = _interopRequireDefault(_LineChart);
 	
-	var _ColorHeatmap = __webpack_require__(386);
+	var _ColorHeatmap = __webpack_require__(394);
 	
 	var _ColorHeatmap2 = _interopRequireDefault(_ColorHeatmap);
 	
-	var _AreaHeatmap = __webpack_require__(234);
+	var _AreaHeatmap = __webpack_require__(242);
 	
 	var _AreaHeatmap2 = _interopRequireDefault(_AreaHeatmap);
 	
-	var _ScatterPlot = __webpack_require__(226);
+	var _ScatterPlot = __webpack_require__(234);
 	
 	var _ScatterPlot2 = _interopRequireDefault(_ScatterPlot);
 	
@@ -89161,31 +90147,31 @@
 	
 	var _PieChart2 = _interopRequireDefault(_PieChart);
 	
-	var _TreeMap = __webpack_require__(220);
+	var _TreeMap = __webpack_require__(228);
 	
 	var _TreeMap2 = _interopRequireDefault(_TreeMap);
 	
-	var _Histogram = __webpack_require__(235);
+	var _Histogram = __webpack_require__(243);
 	
 	var _Histogram2 = _interopRequireDefault(_Histogram);
 	
-	var _FunnelChart = __webpack_require__(387);
+	var _FunnelChart = __webpack_require__(395);
 	
 	var _FunnelChart2 = _interopRequireDefault(_FunnelChart);
 	
-	var _MarkerLineChart = __webpack_require__(233);
+	var _MarkerLineChart = __webpack_require__(241);
 	
 	var _MarkerLineChart2 = _interopRequireDefault(_MarkerLineChart);
 	
-	var _KernelDensityEstimation = __webpack_require__(236);
+	var _KernelDensityEstimation = __webpack_require__(244);
 	
 	var _KernelDensityEstimation2 = _interopRequireDefault(_KernelDensityEstimation);
 	
-	var _AreaChart = __webpack_require__(388);
+	var _AreaChart = __webpack_require__(396);
 	
 	var _AreaChart2 = _interopRequireDefault(_AreaChart);
 	
-	var _util = __webpack_require__(389);
+	var _util = __webpack_require__(397);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -91058,13 +92044,13 @@
 	});
 
 /***/ }),
-/* 384 */
+/* 392 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(385);
+	module.exports = __webpack_require__(393);
 
 /***/ }),
-/* 385 */
+/* 393 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -91177,7 +92163,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
-/* 386 */
+/* 394 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91202,7 +92188,11 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -91210,7 +92200,7 @@
 	
 	var _Scale = __webpack_require__(207);
 	
-	var _RangeRect = __webpack_require__(232);
+	var _RangeRect = __webpack_require__(240);
 	
 	var _RangeRect2 = _interopRequireDefault(_RangeRect);
 	
@@ -91311,11 +92301,11 @@
 	
 	ColorHeatmap.propTypes = {
 	  // passed from xyplot
-	  scale: CustomPropTypes.xyObjectOf(_react2.default.PropTypes.func.isRequired),
+	  scale: CustomPropTypes.xyObjectOf(_propTypes2.default.func.isRequired),
 	
 	  // data array - should be 1D array of all grid values
 	  // (if you have a 2D array, _.flatten it)
-	  data: _react2.default.PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	
 	  // data getters
 	  getValue: CustomPropTypes.getter,
@@ -91325,11 +92315,11 @@
 	  getYEnd: CustomPropTypes.getter,
 	
 	  // a custom d3 color scale may be passed...
-	  colorScale: _react2.default.PropTypes.func,
+	  colorScale: _propTypes2.default.func,
 	  // ...or else one will be constructed from colors, colorStops and interpolator
-	  colors: _react2.default.PropTypes.array,
-	  valueDomain: _react2.default.PropTypes.array,
-	  interpolator: _react2.default.PropTypes.string
+	  colors: _propTypes2.default.array,
+	  valueDomain: _propTypes2.default.array,
+	  interpolator: _propTypes2.default.string
 	};
 	ColorHeatmap.defaultProps = {
 	  interpolator: 'lab'
@@ -91337,7 +92327,7 @@
 	exports.default = ColorHeatmap;
 
 /***/ }),
-/* 387 */
+/* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91362,7 +92352,11 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -91468,9 +92462,9 @@
 	
 	FunnelChart.propTypes = {
 	  // passed from xyplot
-	  scale: CustomPropTypes.xyObjectOf(_react2.default.PropTypes.func.isRequired),
+	  scale: CustomPropTypes.xyObjectOf(_propTypes2.default.func.isRequired),
 	  // data array
-	  data: _react2.default.PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	  // data getters
 	  getX: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter
@@ -91479,7 +92473,7 @@
 	exports.default = FunnelChart;
 
 /***/ }),
-/* 388 */
+/* 396 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91494,6 +92488,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _lodash = __webpack_require__(3);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
@@ -91502,7 +92500,7 @@
 	
 	var _Data = __webpack_require__(205);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -91515,8 +92513,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PropTypes = _react2.default.PropTypes;
 	
 	// AreaChart represents a simple bivariate area chart,
 	// a filled path drawn between two lines (datasets).
@@ -91587,21 +92583,21 @@
 	
 	AreaChart.propTypes = {
 	  // the array of data objects
-	  data: PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	  // accessors for X & Y coordinates
 	  getX: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
 	  getYEnd: CustomPropTypes.getter,
 	  // style applied to path element
-	  pathStyle: PropTypes.object,
+	  pathStyle: _propTypes2.default.object,
 	
-	  scaleType: PropTypes.object,
-	  scale: PropTypes.object
+	  scaleType: _propTypes2.default.object,
+	  scale: _propTypes2.default.object
 	};
 	exports.default = AreaChart;
 
 /***/ }),
-/* 389 */
+/* 397 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';

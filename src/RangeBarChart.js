@@ -1,6 +1,6 @@
 import React from 'react';
 import invariant from 'invariant';
-
+import PropTypes from 'prop-types';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {hasXYScales, dataTypeFromScaleType} from './utils/Scale';
 import {makeAccessor, domainFromRangeData, domainFromData, getDataDomainByAxis} from './utils/Data';
@@ -8,23 +8,23 @@ import Bar from './Bar';
 
 export default class RangeBarChart extends React.Component {
   static propTypes = {
-    scale: CustomPropTypes.xyObjectOf(React.PropTypes.func.isRequired),
-    data: React.PropTypes.array,
-    horizontal: React.PropTypes.bool,
+    scale: CustomPropTypes.xyObjectOf(PropTypes.func.isRequired),
+    data: PropTypes.array,
+    horizontal: PropTypes.bool,
 
     getX: CustomPropTypes.getter,
     getXEnd: CustomPropTypes.getter,
     getY: CustomPropTypes.getter,
     getYEnd: CustomPropTypes.getter,
 
-    barThickness: React.PropTypes.number,
-    barClassName: React.PropTypes.string,
-    barStyle: React.PropTypes.object,
+    barThickness: PropTypes.number,
+    barClassName: PropTypes.string,
+    barStyle: PropTypes.object,
     getClass: CustomPropTypes.getter,
 
-    onMouseEnterBar: React.PropTypes.func, 
-    onMouseMoveBar: React.PropTypes.func, 
-    onMouseLeaveBar: React.PropTypes.func
+    onMouseEnterBar: PropTypes.func,
+    onMouseMoveBar: PropTypes.func,
+    onMouseLeaveBar: PropTypes.func
   };
   static defaultProps = {
     data: [],

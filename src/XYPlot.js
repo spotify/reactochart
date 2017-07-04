@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 import resolveObjectProps from './utils/resolveObjectProps';
 import resolveXYScales from './utils/resolveXYScales';
@@ -44,23 +45,23 @@ function getMouseOptions(event, {scale, height, width, margin}) {
 
 class XYPlot extends React.Component {
   static propTypes = {
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    scale: React.PropTypes.object,
-    scaleType: React.PropTypes.object,
-    domain: React.PropTypes.object,
-    margin: React.PropTypes.object,
-    spacing: React.PropTypes.object,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    scale: PropTypes.object,
+    scaleType: PropTypes.object,
+    domain: PropTypes.object,
+    margin: PropTypes.object,
+    spacing: PropTypes.object,
     // todo spacing & padding...
-    padding: React.PropTypes.object,
-    nice: React.PropTypes.object,
-    invertScale: React.PropTypes.object,
+    padding: PropTypes.object,
+    nice: PropTypes.object,
+    invertScale: PropTypes.object,
 
-    onMouseMove: React.PropTypes.func,
-    onMouseEnter: React.PropTypes.func,
-    onMouseLeave: React.PropTypes.func,
-    onMouseDown: React.PropTypes.func,
-    onMouseUp: React.PropTypes.func
+    onMouseMove: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
+    onMouseDown: PropTypes.func,
+    onMouseUp: PropTypes.func
   };
 
   static defaultProps = {

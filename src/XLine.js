@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class XLine extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.shape({x: React.PropTypes.func.isRequired}),
-    value: React.PropTypes.any.isRequired
+    scale: PropTypes.shape({x: PropTypes.func.isRequired}),
+    value: PropTypes.any.isRequired
   };
   static defaultProps = {
     style: {}

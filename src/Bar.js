@@ -3,6 +3,7 @@ import invariant from 'invariant';
 import isUndefined from 'lodash/isUndefined';
 import {hasOneOfTwo} from './util';
 import {hasXYScales} from './utils/Scale';
+import PropTypes from 'prop-types';
 
 // Bar is a low-level component to be used in XYPlot-type charts (namely BarChart)
 // It is specified in terms of a range (min & max) of values on one axis (the bar's long axis)
@@ -13,14 +14,14 @@ import {hasXYScales} from './utils/Scale';
 
 export default class Bar extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.shape({x: React.PropTypes.func.isRequired, y: React.PropTypes.func.isRequired}),
-    xValue: React.PropTypes.any,
-    yValue: React.PropTypes.any,
-    xEndValue: React.PropTypes.any,
-    yEndValue: React.PropTypes.any,
-    thickness: React.PropTypes.number,
-    className: React.PropTypes.string,
-    style: React.PropTypes.object
+    scale: PropTypes.shape({x: PropTypes.func.isRequired, y: PropTypes.func.isRequired}),
+    xValue: PropTypes.any,
+    yValue: PropTypes.any,
+    xEndValue: PropTypes.any,
+    yEndValue: PropTypes.any,
+    thickness: PropTypes.number,
+    className: PropTypes.string,
+    style: PropTypes.object
   };
   static defaultProps = {
     xValue: 0,

@@ -1,11 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 import {getScaleTicks, getTickDomain} from './utils/Scale';
 
 export default class XTicks extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.shape({x: React.PropTypes.func.isRequired})
+    scale: PropTypes.shape({x: PropTypes.func.isRequired})
   };
   static defaultProps = {
     position: 'bottom',
