@@ -22,6 +22,7 @@
     "measure-text": "0.0.4",
     "moment": "^2.10.6",
     "numeral": "^1.5.3",
+    "prop-types": "^15.5.10",
     "react-addons-shallow-compare": "^0.14.7",
     "recompose": "^0.15.1"
   },
