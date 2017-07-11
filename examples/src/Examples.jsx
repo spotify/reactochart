@@ -1288,6 +1288,36 @@ class SpacingExample extends React.Component {
   }
 }
 
+class Area2DatasetsExample extends React.Component {
+  render() {
+    const data1 = randomWalkTimeSeries(115).map(([x,y]) => ({x, y}));
+    const data2 = randomWalkTimeSeries(115).map(([x,y]) => ({x, y}));
+
+    // remove some random data points (ie. add gaps) to make sure it still combines them correctly
+    const gapData1 = removeRandomData(data1, 5);
+    const gapData2 = removeRandomData(data2, 5);
+
+    // we have two datasets, but AreaChart takes one combined dataset
+    // so combine the two datasets into one using the combineDatasets utility function
+    // original datasets are of the shape [{x: ..., y: 20}]
+    // combined is of the shape [{x: ..., y0: 20, y1: 30}]
+    const combined = combineDatasets([
+      {data: gapData1, combineKey: 'x', dataKeys: {y: 'y0'}},
+      {data: gapData2, combineKey: 'x', dataKeys: {y: 'y1'}}
+    ], 'x');
+
+    return <div>
+      <XYPlot width={600}>
+        <XAxis tickCount={4}/><YAxis/>
+        <LineChart data={data1} getX="x" getY="y"/>
+        <LineChart data={data2} getX="x" getY="y"/>
+        <AreaChart data={combined} getX='x' getY='y0' getYEnd='y1' />
+      </XYPlot>
+    </div>
+  }
+}
+
+
 export const examples = [
   {id: 'line', title: 'Line Chart', Component: LineChartExample},
   {id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2},
@@ -1319,35 +1349,6 @@ export const examples = [
   // {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
   // {id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample},
 ];
-
-class Area2DatasetsExample extends React.Component {
-  render() {
-    const data1 = randomWalkTimeSeries(115).map(([x,y]) => ({x, y}));
-    const data2 = randomWalkTimeSeries(115).map(([x,y]) => ({x, y}));
-
-    // remove some random data points (ie. add gaps) to make sure it still combines them correctly
-    const gapData1 = removeRandomData(data1, 5);
-    const gapData2 = removeRandomData(data2, 5);
-
-    // we have two datasets, but AreaChart takes one combined dataset
-    // so combine the two datasets into one using the combineDatasets utility function
-    // original datasets are of the shape [{x: ..., y: 20}]
-    // combined is of the shape [{x: ..., y0: 20, y1: 30}]
-    const combined = combineDatasets([
-      {data: gapData1, combineKey: 'x', dataKeys: {y: 'y0'}},
-      {data: gapData2, combineKey: 'x', dataKeys: {y: 'y1'}}
-    ], 'x');
-
-    return <div>
-      <XYPlot width={600}>
-        <XAxis tickCount={4}/><YAxis/>
-        <LineChart data={data1} getX="x" getY="y"/>
-        <LineChart data={data2} getX="x" getY="y"/>
-        <AreaChart data={combined} getX='x' getY='y0' getYEnd='y1' />
-      </XYPlot>
-    </div>
-  }
-}
 
 export const App = React.createClass({
   getInitialState() {
