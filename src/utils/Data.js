@@ -140,3 +140,51 @@ export function domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, 
   }
   return [];
 }
+
+export function combineDatasets(datasetsInfo=[], combineKey='x') {
+  // combineDatasets combines multiple datasets into one, joined on a common key 'combineKey'
+  // datasetsInfo is an array that looks like:
+  // [
+  //   {data: [{x: 0, y: 3}, ...], combineKey: 'x', dataKeys: {y: 'y0'}}
+  //   {data: [{count: 0, value: 4}], combineKey: 'count', dataKeys: {value: 'y1'}}
+  // ]
+  // where `data` is an array of data points of any shape
+  // `combineKey` is the key for the value which the datasets are joined on
+  // `dataKeys` are getters for other values in each datapoint which should be merged into the combined dataset
+  //   - key = getter in original datapoint, value = setter for combined dataset
+  // example above (with default combinedKey) results in:
+  // [{x: 0, y0: 3, y1: 4}, ...]
+
+  // index each dataset by its combineKey values so we can quickly lookup if it has data for a given value
+  const datasetLookups = datasetsInfo.map(datasetInfo => {
+    const {data} = datasetInfo;
+    return _.keyBy(data, datasetInfo.combineKey || combineKey);
+  });
+
+  // create a unique sorted array containing all of the data values for combineKey in all datasets
+  const allCombineValues = _(datasetsInfo)
+    .map(datasetInfo => datasetInfo.data.map(makeAccessor(datasetInfo.combineKey || combineKey)))
+    .flatten()
+    .uniqBy(_.toString) // uniq by string, otherwise dates etc. are not unique
+    .sortBy()
+    .value();
+
+  // for each of the unique combineKey data values, go through each dataset and look for a combineKey value that matches
+  // if we find it, combine the values for that datum's dataKeys into the final combinedDatum object
+  return allCombineValues.map(combineValue => {
+    let combinedDatum = {[combineKey]: combineValue};
+
+    datasetsInfo.forEach((datasetInfo, datasetIndex) => {
+      if(!datasetInfo.dataKeys || !Object.keys(datasetInfo.dataKeys).length) return;
+      const datasetLookup = datasetLookups[datasetIndex];
+      if(!_.has(datasetLookup, combineValue)) return;
+
+      const datum = datasetLookup[combineValue];
+      _.forEach(datasetInfo.dataKeys, (newDataKey, originalDataKey) => {
+        combinedDatum[newDataKey] = datum[originalDataKey];
+      });
+    });
+
+    return combinedDatum;
+  });
+}
