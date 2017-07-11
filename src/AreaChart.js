@@ -11,7 +11,6 @@ import * as CustomPropTypes from './utils/CustomPropTypes';
 
 // todo horizontal prop, for filling area horizontally?
 // todo support categorical data?
-// todo support passing 2 data arrays and generating area between them? d3 doesn't seem to support this
 // todo build StackedAreaChart that composes multiple AreaCharts
 
 export default class AreaChart extends React.Component {
@@ -27,6 +26,17 @@ export default class AreaChart extends React.Component {
 
     scaleType: PropTypes.object,
     scale: PropTypes.object,
+    // if true, will show gaps in the shaded area for data where props.isDefined(datum) returns false
+    shouldShowGaps: PropTypes.bool,
+    // if shouldShowGaps is true, isDefined function describes when a datum should be considered "defined" vs. when to show gap
+    // by default, shows gap if either y or yEnd are undefined
+    isDefined: PropTypes.func
+  };
+  static defaultProps = {
+    shouldShowGaps: true,
+    isDefined: (d, i, accessors) => {
+      return !_.isUndefined(accessors.y(d, i)) && !_.isUndefined(accessors.yEnd(d, i));
+    }
   };
 
   static getDomain(props) {
@@ -42,10 +52,17 @@ export default class AreaChart extends React.Component {
   }
 
   render() {
-    const {name, data, getX, getY, getYEnd, scale, pathStyle} = this.props;
+    const {name, data, getX, getY, getYEnd, scale, pathStyle, shouldShowGaps, isDefined} = this.props;
     const accessors = {x: makeAccessor(getX), y: makeAccessor(getY), yEnd: makeAccessor(getYEnd)};
 
     const areaGenerator = area();
+
+    // if gaps in data should be shown, use `props.isDefined` function as the `defined` param for d3's area generator;
+    // but wrap it & pass in accessors as well, so that the function can easily access the relevant data values
+    if(shouldShowGaps) {
+      areaGenerator.defined((d, i) => isDefined(d, i, accessors));
+    }
+
     areaGenerator
       .x((d, i) => scale.x(accessors.x(d, i)))
       .y0((d, i) => scale.y(accessors.y(d, i)))
