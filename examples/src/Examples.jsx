@@ -1309,9 +1309,41 @@ class Area2DatasetsExample extends React.Component {
     return <div>
       <XYPlot width={600}>
         <XAxis tickCount={4}/><YAxis/>
+        <AreaChart data={combined} getX='x' getY='y0' getYEnd='y1' />
         <LineChart data={data1} getX="x" getY="y"/>
         <LineChart data={data2} getX="x" getY="y"/>
-        <AreaChart data={combined} getX='x' getY='y0' getYEnd='y1' />
+      </XYPlot>
+    </div>
+  }
+}
+
+class AreaDifferenceExample extends React.Component {
+  render() {
+    const data1 = randomWalkTimeSeries(115).map(([x, y]) => ({x, y}));
+    const data2 = randomWalkTimeSeries(115).map(([x, y]) => ({x, y}));
+
+    // we have two datasets, but AreaChart takes one combined dataset
+    // so combine the two datasets into one using the combineDatasets utility function
+    const combined = combineDatasets([
+      {data: data1, combineKey: 'x', dataKeys: {y: 'y0'}},
+      {data: data2, combineKey: 'x', dataKeys: {y: 'y1'}}
+    ], 'x');
+
+    return <div>
+      <XYPlot width={600}>
+        <XAxis tickCount={4}/><YAxis/>
+
+        <AreaChart
+          data={combined}
+          isDifference={true}
+          pathStyleNegative={{fill: 'lightcoral'}}
+          pathStylePositive={{fill: 'lightgreen'}}
+          getX='x'
+          getY='y0'
+          getYEnd='y1'
+        />
+        <LineChart data={data1} getX="x" getY="y" lineStyle={{strokeWidth: 3}}/>
+        <LineChart data={data2} getX="x" getY="y" />
       </XYPlot>
     </div>
   }
@@ -1345,6 +1377,8 @@ export const examples = [
   {id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample},
   {id: 'spacing', title: 'Spacing', Component: SpacingExample},
   {id: 'area2datasets', title: 'Area Chart w/ 2 datasets', Component: Area2DatasetsExample},
+  {id: 'areaDifference', title: 'Area Difference Chart', Component: AreaDifferenceExample},
+
   // todo rewrite these?
   // {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
   // {id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample},
