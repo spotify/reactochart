@@ -40,7 +40,9 @@ import KernelDensityEstimation from '../../src/KernelDensityEstimation';
 
 import AreaChart from '../../src/AreaChart';
 
-import {randomWalk, randomWalkSeries} from './data/util';
+import {randomWalk, randomWalkSeries, randomWalkTimeSeries, removeRandomData} from './data/util';
+
+import {combineDatasets} from '../../src/utils/Data';
 
 // sample ordinal data
 const ordinalData = ['Always', 'Usually', 'Sometimes', 'Rarely', 'Never'];
@@ -1286,6 +1288,68 @@ class SpacingExample extends React.Component {
   }
 }
 
+class Area2DatasetsExample extends React.Component {
+  render() {
+    const data1 = randomWalkTimeSeries(115).map(([x,y]) => ({x, y}));
+    const data2 = randomWalkTimeSeries(115).map(([x,y]) => ({x, y}));
+
+    // remove some random data points (ie. add gaps) to make sure it still combines them correctly
+    const gapData1 = removeRandomData(data1, 5);
+    const gapData2 = removeRandomData(data2, 5);
+
+    // we have two datasets, but AreaChart takes one combined dataset
+    // so combine the two datasets into one using the combineDatasets utility function
+    // original datasets are of the shape [{x: ..., y: 20}]
+    // combined is of the shape [{x: ..., y0: 20, y1: 30}]
+    const combined = combineDatasets([
+      {data: gapData1, combineKey: 'x', dataKeys: {y: 'y0'}},
+      {data: gapData2, combineKey: 'x', dataKeys: {y: 'y1'}}
+    ], 'x');
+
+    return <div>
+      <XYPlot width={600}>
+        <XAxis tickCount={4}/><YAxis/>
+        <AreaChart data={combined} getX='x' getY='y0' getYEnd='y1' />
+        <LineChart data={data1} getX="x" getY="y"/>
+        <LineChart data={data2} getX="x" getY="y"/>
+      </XYPlot>
+    </div>
+  }
+}
+
+class AreaDifferenceExample extends React.Component {
+  render() {
+    const data1 = randomWalkTimeSeries(115).map(([x, y]) => ({x, y}));
+    const data2 = randomWalkTimeSeries(115).map(([x, y]) => ({x, y}));
+
+    // we have two datasets, but AreaChart takes one combined dataset
+    // so combine the two datasets into one using the combineDatasets utility function
+    const combined = combineDatasets([
+      {data: data1, combineKey: 'x', dataKeys: {y: 'y0'}},
+      {data: data2, combineKey: 'x', dataKeys: {y: 'y1'}}
+    ], 'x');
+
+    return <div>
+      <XYPlot width={600}>
+        <XAxis tickCount={4}/><YAxis/>
+
+        <AreaChart
+          data={combined}
+          isDifference={true}
+          pathStyleNegative={{fill: 'lightcoral'}}
+          pathStylePositive={{fill: 'lightgreen'}}
+          getX='x'
+          getY='y0'
+          getYEnd='y1'
+        />
+        <LineChart data={data1} getX="x" getY="y" lineStyle={{strokeWidth: 3}}/>
+        <LineChart data={data2} getX="x" getY="y" />
+      </XYPlot>
+    </div>
+  }
+}
+
+
 export const examples = [
   {id: 'line', title: 'Line Chart', Component: LineChartExample},
   {id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2},
@@ -1311,12 +1375,14 @@ export const examples = [
   {id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample},
   {id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample},
   {id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample},
-  {id: 'spacing', title: 'Spacing', Component: SpacingExample}
+  {id: 'spacing', title: 'Spacing', Component: SpacingExample},
+  {id: 'area2datasets', title: 'Area Chart w/ 2 datasets', Component: Area2DatasetsExample},
+  {id: 'areaDifference', title: 'Area Difference Chart', Component: AreaDifferenceExample},
+
   // todo rewrite these?
   // {id: 'customTicks', title: 'Custom Axis Ticks', Component: CustomTicksExample},
   // {id: 'customAxisLabels', title: 'Custom Axis Labels', Component: CustomAxisLabelsExample},
 ];
-
 
 export const App = React.createClass({
   getInitialState() {
@@ -1333,7 +1399,6 @@ export const App = React.createClass({
   render() {
     return <div>
       <h1>Reactochart Examples</h1>
-
       {this.renderExamples()}
     </div>
   },
