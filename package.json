@@ -4,6 +4,7 @@
   "author": "Dan Delany <dand@spotify.com>",
   "version": "0.2.0",
   "main": "lib/index.js",
+  "files": ["lib/", "src/"],
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",
     "build-lib": "rm -rf lib/ && babel src --out-dir lib",
