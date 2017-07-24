@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 export default class MeasuredValueLabel extends React.Component {
   static propTypes = {
-    value: PropTypes.any.isRequired
+    value: PropTypes.any
   };
   static defaultProps = {
     format: _.identity,
