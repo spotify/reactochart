@@ -71353,7 +71353,7 @@
 	}(_react2.default.Component);
 	
 	MeasuredValueLabel.propTypes = {
-	  value: _propTypes2.default.any.isRequired
+	  value: _propTypes2.default.any
 	};
 	MeasuredValueLabel.defaultProps = {
 	  format: _lodash2.default.identity,
