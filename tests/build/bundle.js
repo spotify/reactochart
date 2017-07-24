@@ -59,8 +59,8 @@
 	__webpack_require__(212);
 	
 	__webpack_require__(215);
-	__webpack_require__(380);
-	__webpack_require__(382);
+	__webpack_require__(388);
+	__webpack_require__(390);
 	
 	// run mocha
 	(function () {
@@ -37147,14 +37147,14 @@
 /* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	// https://d3js.org Version 4.9.1. Copyright 2017 Mike Bostock.
+	// https://d3js.org Version 4.10.0. Copyright 2017 Mike Bostock.
 	(function (global, factory) {
 		 true ? factory(exports) :
 		typeof define === 'function' && define.amd ? define(['exports'], factory) :
 		(factory((global.d3 = global.d3 || {})));
 	}(this, (function (exports) { 'use strict';
 	
-	var version = "4.9.1";
+	var version = "4.10.0";
 	
 	var ascending = function(a, b) {
 	  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
@@ -37723,11 +37723,17 @@
 	  return "translate(0," + (y + 0.5) + ")";
 	}
 	
+	function number$1(scale) {
+	  return function(d) {
+	    return +scale(d);
+	  };
+	}
+	
 	function center(scale) {
 	  var offset = Math.max(0, scale.bandwidth() - 1) / 2; // Adjust for 0.5px offset.
 	  if (scale.round()) offset = Math.round(offset);
 	  return function(d) {
-	    return scale(d) + offset;
+	    return +scale(d) + offset;
 	  };
 	}
 	
@@ -37751,9 +37757,9 @@
 	        format = tickFormat == null ? (scale.tickFormat ? scale.tickFormat.apply(scale, tickArguments) : identity$1) : tickFormat,
 	        spacing = Math.max(tickSizeInner, 0) + tickPadding,
 	        range = scale.range(),
-	        range0 = range[0] + 0.5,
-	        range1 = range[range.length - 1] + 0.5,
-	        position = (scale.bandwidth ? center : identity$1)(scale.copy()),
+	        range0 = +range[0] + 0.5,
+	        range1 = +range[range.length - 1] + 0.5,
+	        position = (scale.bandwidth ? center : number$1)(scale.copy()),
 	        selection = context.selection ? context.selection() : context,
 	        path = selection.selectAll(".domain").data([null]),
 	        tick = selection.selectAll(".tick").data(values, scale).order(),
@@ -38393,9 +38399,9 @@
 	  return new Selection(this._exit || this._groups.map(sparse), this._parents);
 	};
 	
-	var selection_merge = function(selection) {
+	var selection_merge = function(selection$$1) {
 	
-	  for (var groups0 = this._groups, groups1 = selection._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j) {
+	  for (var groups0 = this._groups, groups1 = selection$$1._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j) {
 	    for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge = merges[j] = new Array(n), node, i = 0; i < n; ++i) {
 	      if (node = group0[i] || group1[i]) {
 	        merge[i] = node;
@@ -38979,6 +38985,10 @@
 	  return d == null ? {x: exports.event.x, y: exports.event.y} : d;
 	}
 	
+	function touchable() {
+	  return "ontouchstart" in this;
+	}
+	
 	var drag = function() {
 	  var filter = defaultFilter$1,
 	      container = defaultContainer,
@@ -38992,12 +39002,14 @@
 	      touchending,
 	      clickDistance2 = 0;
 	
-	  function drag(selection$$1) {
-	    selection$$1
+	  function drag(selection) {
+	    selection
 	        .on("mousedown.drag", mousedowned)
+	      .filter(touchable)
 	        .on("touchstart.drag", touchstarted)
 	        .on("touchmove.drag", touchmoved)
 	        .on("touchend.drag touchcancel.drag", touchended)
+	        .style("touch-action", "none")
 	        .style("-webkit-tap-highlight-color", "rgba(0,0,0,0)");
 	  }
 	
@@ -39688,7 +39700,7 @@
 	  return d ? linear(a, d) : constant$3(isNaN(a) ? b : a);
 	}
 	
-	var interpolateRgb = ((function rgbGamma(y) {
+	var interpolateRgb = (function rgbGamma(y) {
 	  var color$$1 = gamma(y);
 	
 	  function rgb$$1(start, end) {
@@ -39708,7 +39720,7 @@
 	  rgb$$1.gamma = rgbGamma;
 	
 	  return rgb$$1;
-	}))(1);
+	})(1);
 	
 	function rgbSpline(spline) {
 	  return function(colors) {
@@ -40143,7 +40155,7 @@
 	var clockNow = 0;
 	var clockSkew = 0;
 	var clock = typeof performance === "object" && performance.now ? performance : Date;
-	var setFrame = typeof requestAnimationFrame === "function" ? requestAnimationFrame : function(f) { setTimeout(f, 17); };
+	var setFrame = typeof window === "object" && window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : function(f) { setTimeout(f, 17); };
 	
 	function now() {
 	  return clockNow || (setFrame(clearNow), clockNow = clock.now() + clockSkew);
@@ -40421,7 +40433,7 @@
 	
 	var interrupt = function(node, name) {
 	  var schedules = node.__transition,
-	      schedule,
+	      schedule$$1,
 	      active,
 	      empty = true,
 	      i;
@@ -40431,11 +40443,11 @@
 	  name = name == null ? null : name + "";
 	
 	  for (i in schedules) {
-	    if ((schedule = schedules[i]).name !== name) { empty = false; continue; }
-	    active = schedule.state > STARTING && schedule.state < ENDING;
-	    schedule.state = ENDED;
-	    schedule.timer.stop();
-	    if (active) schedule.on.call("interrupt", node, node.__data__, schedule.index, schedule.group);
+	    if ((schedule$$1 = schedules[i]).name !== name) { empty = false; continue; }
+	    active = schedule$$1.state > STARTING && schedule$$1.state < ENDING;
+	    schedule$$1.state = ENDED;
+	    schedule$$1.timer.stop();
+	    if (active) schedule$$1.on.call("interrupt", node, node.__data__, schedule$$1.index, schedule$$1.group);
 	    delete schedules[i];
 	  }
 	
@@ -40451,8 +40463,8 @@
 	function tweenRemove(id, name) {
 	  var tween0, tween1;
 	  return function() {
-	    var schedule = set$1(this, id),
-	        tween = schedule.tween;
+	    var schedule$$1 = set$1(this, id),
+	        tween = schedule$$1.tween;
 	
 	    // If this node shared tween with the previous node,
 	    // just assign the updated shared tween and we’re done!
@@ -40468,7 +40480,7 @@
 	      }
 	    }
 	
-	    schedule.tween = tween1;
+	    schedule$$1.tween = tween1;
 	  };
 	}
 	
@@ -40476,8 +40488,8 @@
 	  var tween0, tween1;
 	  if (typeof value !== "function") throw new Error;
 	  return function() {
-	    var schedule = set$1(this, id),
-	        tween = schedule.tween;
+	    var schedule$$1 = set$1(this, id),
+	        tween = schedule$$1.tween;
 	
 	    // If this node shared tween with the previous node,
 	    // just assign the updated shared tween and we’re done!
@@ -40493,7 +40505,7 @@
 	      if (i === n) tween1.push(t);
 	    }
 	
-	    schedule.tween = tween1;
+	    schedule$$1.tween = tween1;
 	  };
 	}
 	
@@ -40519,8 +40531,8 @@
 	  var id = transition._id;
 	
 	  transition.each(function() {
-	    var schedule = set$1(this, id);
-	    (schedule.value || (schedule.value = {}))[name] = value.apply(this, arguments);
+	    var schedule$$1 = set$1(this, id);
+	    (schedule$$1.value || (schedule$$1.value = {}))[name] = value.apply(this, arguments);
 	  });
 	
 	  return function(node) {
@@ -40528,7 +40540,7 @@
 	  };
 	}
 	
-	var interpolate$$1 = function(a, b) {
+	var interpolate = function(a, b) {
 	  var c;
 	  return (typeof b === "number" ? reinterpolate
 	      : b instanceof color ? interpolateRgb
@@ -40599,7 +40611,7 @@
 	}
 	
 	var transition_attr = function(name, value) {
-	  var fullname = namespace(name), i = fullname === "transform" ? interpolateTransformSvg : interpolate$$1;
+	  var fullname = namespace(name), i = fullname === "transform" ? interpolateTransformSvg : interpolate;
 	  return this.attrTween(name, typeof value === "function"
 	      ? (fullname.local ? attrFunctionNS$1 : attrFunction$1)(fullname, i, tweenValue(this, "attr." + name, value))
 	      : value == null ? (fullname.local ? attrRemoveNS$1 : attrRemove$1)(fullname)
@@ -40710,10 +40722,10 @@
 	  return new Transition(subgroups, this._parents, this._name, this._id);
 	};
 	
-	var transition_merge = function(transition) {
-	  if (transition._id !== this._id) throw new Error;
+	var transition_merge = function(transition$$1) {
+	  if (transition$$1._id !== this._id) throw new Error;
 	
-	  for (var groups0 = this._groups, groups1 = transition._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j) {
+	  for (var groups0 = this._groups, groups1 = transition$$1._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j) {
 	    for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge = merges[j] = new Array(n), node, i = 0; i < n; ++i) {
 	      if (node = group0[i] || group1[i]) {
 	        merge[i] = node;
@@ -40739,15 +40751,15 @@
 	function onFunction(id, name, listener) {
 	  var on0, on1, sit = start(name) ? init : set$1;
 	  return function() {
-	    var schedule = sit(this, id),
-	        on = schedule.on;
+	    var schedule$$1 = sit(this, id),
+	        on = schedule$$1.on;
 	
 	    // If this node shared a dispatch with the previous node,
 	    // just assign the updated shared dispatch and we’re done!
 	    // Otherwise, copy-on-write.
 	    if (on !== on0) (on1 = (on0 = on).copy()).on(name, listener);
 	
-	    schedule.on = on1;
+	    schedule$$1.on = on1;
 	  };
 	}
 	
@@ -40819,7 +40831,7 @@
 	  return new Selection$1(this._groups, this._parents);
 	};
 	
-	function styleRemove$1(name, interpolate$$2) {
+	function styleRemove$1(name, interpolate$$1) {
 	  var value00,
 	      value10,
 	      interpolate0;
@@ -40828,7 +40840,7 @@
 	        value1 = (this.style.removeProperty(name), styleValue(this, name));
 	    return value0 === value1 ? null
 	        : value0 === value00 && value1 === value10 ? interpolate0
-	        : interpolate0 = interpolate$$2(value00 = value0, value10 = value1);
+	        : interpolate0 = interpolate$$1(value00 = value0, value10 = value1);
 	  };
 	}
 	
@@ -40838,18 +40850,18 @@
 	  };
 	}
 	
-	function styleConstant$1(name, interpolate$$2, value1) {
+	function styleConstant$1(name, interpolate$$1, value1) {
 	  var value00,
 	      interpolate0;
 	  return function() {
 	    var value0 = styleValue(this, name);
 	    return value0 === value1 ? null
 	        : value0 === value00 ? interpolate0
-	        : interpolate0 = interpolate$$2(value00 = value0, value1);
+	        : interpolate0 = interpolate$$1(value00 = value0, value1);
 	  };
 	}
 	
-	function styleFunction$1(name, interpolate$$2, value) {
+	function styleFunction$1(name, interpolate$$1, value) {
 	  var value00,
 	      value10,
 	      interpolate0;
@@ -40859,12 +40871,12 @@
 	    if (value1 == null) value1 = (this.style.removeProperty(name), styleValue(this, name));
 	    return value0 === value1 ? null
 	        : value0 === value00 && value1 === value10 ? interpolate0
-	        : interpolate0 = interpolate$$2(value00 = value0, value10 = value1);
+	        : interpolate0 = interpolate$$1(value00 = value0, value10 = value1);
 	  };
 	}
 	
 	var transition_style = function(name, value, priority) {
-	  var i = (name += "") === "transform" ? interpolateTransformCss : interpolate$$1;
+	  var i = (name += "") === "transform" ? interpolateTransformCss : interpolate;
 	  return value == null ? this
 	          .styleTween(name, styleRemove$1(name, i))
 	          .on("end.style." + name, styleRemoveEnd(name))
@@ -41235,13 +41247,13 @@
 	
 	var active = function(node, name) {
 	  var schedules = node.__transition,
-	      schedule,
+	      schedule$$1,
 	      i;
 	
 	  if (schedules) {
 	    name = name == null ? null : name + "";
 	    for (i in schedules) {
-	      if ((schedule = schedules[i]).state > SCHEDULED && schedule.name === name) {
+	      if ((schedule$$1 = schedules[i]).state > SCHEDULED && schedule$$1.name === name) {
 	        return new Transition([[node]], root$1, name, +i);
 	      }
 	    }
@@ -41450,7 +41462,7 @@
 	        .on("mousedown.brush touchstart.brush", started);
 	  }
 	
-	  brush.move = function(group, selection$$1) {
+	  brush.move = function(group, selection) {
 	    if (group.selection) {
 	      group
 	          .on("start.brush", function() { emitter(this, arguments).beforestart().start(); })
@@ -41460,7 +41472,7 @@
 	                state = that.__brush,
 	                emit = emitter(that, arguments),
 	                selection0 = state.selection,
-	                selection1 = dim.input(typeof selection$$1 === "function" ? selection$$1.apply(this, arguments) : selection$$1, state.extent),
+	                selection1 = dim.input(typeof selection === "function" ? selection.apply(this, arguments) : selection, state.extent),
 	                i = interpolateValue(selection0, selection1);
 	
 	            function tween(t) {
@@ -41477,7 +41489,7 @@
 	            var that = this,
 	                args = arguments,
 	                state = that.__brush,
-	                selection1 = dim.input(typeof selection$$1 === "function" ? selection$$1.apply(that, args) : selection$$1, state.extent),
+	                selection1 = dim.input(typeof selection === "function" ? selection.apply(that, args) : selection, state.extent),
 	                emit = emitter(that, args).beforestart();
 	
 	            interrupt(that);
@@ -41490,22 +41502,22 @@
 	
 	  function redraw() {
 	    var group = select(this),
-	        selection$$1 = local$$1(this).selection;
+	        selection = local$$1(this).selection;
 	
-	    if (selection$$1) {
+	    if (selection) {
 	      group.selectAll(".selection")
 	          .style("display", null)
-	          .attr("x", selection$$1[0][0])
-	          .attr("y", selection$$1[0][1])
-	          .attr("width", selection$$1[1][0] - selection$$1[0][0])
-	          .attr("height", selection$$1[1][1] - selection$$1[0][1]);
+	          .attr("x", selection[0][0])
+	          .attr("y", selection[0][1])
+	          .attr("width", selection[1][0] - selection[0][0])
+	          .attr("height", selection[1][1] - selection[0][1]);
 	
 	      group.selectAll(".handle")
 	          .style("display", null)
-	          .attr("x", function(d) { return d.type[d.type.length - 1] === "e" ? selection$$1[1][0] - handleSize / 2 : selection$$1[0][0] - handleSize / 2; })
-	          .attr("y", function(d) { return d.type[0] === "s" ? selection$$1[1][1] - handleSize / 2 : selection$$1[0][1] - handleSize / 2; })
-	          .attr("width", function(d) { return d.type === "n" || d.type === "s" ? selection$$1[1][0] - selection$$1[0][0] + handleSize : handleSize; })
-	          .attr("height", function(d) { return d.type === "e" || d.type === "w" ? selection$$1[1][1] - selection$$1[0][1] + handleSize : handleSize; });
+	          .attr("x", function(d) { return d.type[d.type.length - 1] === "e" ? selection[1][0] - handleSize / 2 : selection[0][0] - handleSize / 2; })
+	          .attr("y", function(d) { return d.type[0] === "s" ? selection[1][1] - handleSize / 2 : selection[0][1] - handleSize / 2; })
+	          .attr("width", function(d) { return d.type === "n" || d.type === "s" ? selection[1][0] - selection[0][0] + handleSize : handleSize; })
+	          .attr("height", function(d) { return d.type === "e" || d.type === "w" ? selection[1][1] - selection[0][1] + handleSize : handleSize; });
 	    }
 	
 	    else {
@@ -41563,7 +41575,7 @@
 	        signY = dim === X ? null : signsY[type],
 	        state = local$$1(that),
 	        extent = state.extent,
-	        selection$$1 = state.selection,
+	        selection = state.selection,
 	        W = extent[0][0], w0, w1,
 	        N = extent[0][1], n0, n1,
 	        E = extent[1][0], e0, e1,
@@ -41579,15 +41591,15 @@
 	        emit = emitter(that, arguments).beforestart();
 	
 	    if (type === "overlay") {
-	      state.selection = selection$$1 = [
+	      state.selection = selection = [
 	        [w0 = dim === Y ? W : point0[0], n0 = dim === X ? N : point0[1]],
 	        [e0 = dim === Y ? E : w0, s0 = dim === X ? S : n0]
 	      ];
 	    } else {
-	      w0 = selection$$1[0][0];
-	      n0 = selection$$1[0][1];
-	      e0 = selection$$1[1][0];
-	      s0 = selection$$1[1][1];
+	      w0 = selection[0][0];
+	      n0 = selection[0][1];
+	      e0 = selection[1][0];
+	      s0 = selection[1][1];
 	    }
 	
 	    w1 = w0;
@@ -41673,14 +41685,14 @@
 	        if (type in flipY) overlay.attr("cursor", cursors[type = flipY[type]]);
 	      }
 	
-	      if (state.selection) selection$$1 = state.selection; // May be set by brush.move!
-	      if (lockX) w1 = selection$$1[0][0], e1 = selection$$1[1][0];
-	      if (lockY) n1 = selection$$1[0][1], s1 = selection$$1[1][1];
+	      if (state.selection) selection = state.selection; // May be set by brush.move!
+	      if (lockX) w1 = selection[0][0], e1 = selection[1][0];
+	      if (lockY) n1 = selection[0][1], s1 = selection[1][1];
 	
-	      if (selection$$1[0][0] !== w1
-	          || selection$$1[0][1] !== n1
-	          || selection$$1[1][0] !== e1
-	          || selection$$1[1][1] !== s1) {
+	      if (selection[0][0] !== w1
+	          || selection[0][1] !== n1
+	          || selection[1][0] !== e1
+	          || selection[1][1] !== s1) {
 	        state.selection = [[w1, n1], [e1, s1]];
 	        redraw.call(that);
 	        emit.brush();
@@ -41700,8 +41712,8 @@
 	      }
 	      group.attr("pointer-events", "all");
 	      overlay.attr("cursor", cursors.overlay);
-	      if (state.selection) selection$$1 = state.selection; // May be set by brush.move (on start)!
-	      if (empty(selection$$1)) state.selection = null, redraw.call(that);
+	      if (state.selection) selection = state.selection; // May be set by brush.move (on start)!
+	      if (empty(selection)) state.selection = null, redraw.call(that);
 	      emit.end();
 	    }
 	
@@ -42230,10 +42242,10 @@
 	      nest;
 	
 	  function apply(array, depth, createResult, setResult) {
-	    if (depth >= keys.length) return rollup != null
-	        ? rollup(array) : (sortValues != null
-	        ? array.sort(sortValues)
-	        : array);
+	    if (depth >= keys.length) {
+	      if (sortValues != null) array.sort(sortValues);
+	      return rollup != null ? rollup(array) : array;
+	    }
 	
 	    var i = -1,
 	        n = array.length,
@@ -43338,17 +43350,17 @@
 	  }
 	
 	  function accumulate(quad) {
-	    var strength = 0, q, c, x$$1, y$$1, i;
+	    var strength = 0, q, c, x, y, i;
 	
 	    // For internal nodes, accumulate forces from child quadrants.
 	    if (quad.length) {
-	      for (x$$1 = y$$1 = i = 0; i < 4; ++i) {
+	      for (x = y = i = 0; i < 4; ++i) {
 	        if ((q = quad[i]) && (c = q.value)) {
-	          strength += c, x$$1 += c * q.x, y$$1 += c * q.y;
+	          strength += c, x += c * q.x, y += c * q.y;
 	        }
 	      }
-	      quad.x = x$$1 / strength;
-	      quad.y = y$$1 / strength;
+	      quad.x = x / strength;
+	      quad.y = y / strength;
 	    }
 	
 	    // For leaf nodes, accumulate forces from coincident quadrants.
@@ -43366,20 +43378,20 @@
 	  function apply(quad, x1, _, x2) {
 	    if (!quad.value) return true;
 	
-	    var x$$1 = quad.x - node.x,
-	        y$$1 = quad.y - node.y,
+	    var x = quad.x - node.x,
+	        y = quad.y - node.y,
 	        w = x2 - x1,
-	        l = x$$1 * x$$1 + y$$1 * y$$1;
+	        l = x * x + y * y;
 	
 	    // Apply the Barnes-Hut approximation if possible.
 	    // Limit forces for very close nodes; randomize direction if coincident.
 	    if (w * w / theta2 < l) {
 	      if (l < distanceMax2) {
-	        if (x$$1 === 0) x$$1 = jiggle(), l += x$$1 * x$$1;
-	        if (y$$1 === 0) y$$1 = jiggle(), l += y$$1 * y$$1;
+	        if (x === 0) x = jiggle(), l += x * x;
+	        if (y === 0) y = jiggle(), l += y * y;
 	        if (l < distanceMin2) l = Math.sqrt(distanceMin2 * l);
-	        node.vx += x$$1 * quad.value * alpha / l;
-	        node.vy += y$$1 * quad.value * alpha / l;
+	        node.vx += x * quad.value * alpha / l;
+	        node.vy += y * quad.value * alpha / l;
 	      }
 	      return true;
 	    }
@@ -43389,15 +43401,15 @@
 	
 	    // Limit forces for very close nodes; randomize direction if coincident.
 	    if (quad.data !== node || quad.next) {
-	      if (x$$1 === 0) x$$1 = jiggle(), l += x$$1 * x$$1;
-	      if (y$$1 === 0) y$$1 = jiggle(), l += y$$1 * y$$1;
+	      if (x === 0) x = jiggle(), l += x * x;
+	      if (y === 0) y = jiggle(), l += y * y;
 	      if (l < distanceMin2) l = Math.sqrt(distanceMin2 * l);
 	    }
 	
 	    do if (quad.data !== node) {
 	      w = strengths[quad.data.index] * alpha / l;
-	      node.vx += x$$1 * w;
-	      node.vy += y$$1 * w;
+	      node.vx += x * w;
+	      node.vy += y * w;
 	    } while (quad = quad.next);
 	  }
 	
@@ -46634,7 +46646,7 @@
 	}
 	
 	var identity$5 = function() {
-	  var k = 1, tx = 0, ty = 0, sx = 1, sy = 1, transform = identity$4, // scale, translate and reflect
+	  var k = 1, tx = 0, ty = 0, sx = 1, sy = 1, transform$$1 = identity$4, // scale, translate and reflect
 	      x0 = null, y0, x1, y1, clip = identity$4, // clip extent
 	      cache,
 	      cacheStream,
@@ -46647,22 +46659,22 @@
 	
 	  return projection = {
 	    stream: function(stream) {
-	      return cache && cacheStream === stream ? cache : cache = transform(clip(cacheStream = stream));
+	      return cache && cacheStream === stream ? cache : cache = transform$$1(clip(cacheStream = stream));
 	    },
 	    clipExtent: function(_) {
 	      return arguments.length ? (clip = _ == null ? (x0 = y0 = x1 = y1 = null, identity$4) : clipExtent(x0 = +_[0][0], y0 = +_[0][1], x1 = +_[1][0], y1 = +_[1][1]), reset()) : x0 == null ? null : [[x0, y0], [x1, y1]];
 	    },
 	    scale: function(_) {
-	      return arguments.length ? (transform = scaleTranslate((k = +_) * sx, k * sy, tx, ty), reset()) : k;
+	      return arguments.length ? (transform$$1 = scaleTranslate((k = +_) * sx, k * sy, tx, ty), reset()) : k;
 	    },
 	    translate: function(_) {
-	      return arguments.length ? (transform = scaleTranslate(k * sx, k * sy, tx = +_[0], ty = +_[1]), reset()) : [tx, ty];
+	      return arguments.length ? (transform$$1 = scaleTranslate(k * sx, k * sy, tx = +_[0], ty = +_[1]), reset()) : [tx, ty];
 	    },
 	    reflectX: function(_) {
-	      return arguments.length ? (transform = scaleTranslate(k * (sx = _ ? -1 : 1), k * sy, tx, ty), reset()) : sx < 0;
+	      return arguments.length ? (transform$$1 = scaleTranslate(k * (sx = _ ? -1 : 1), k * sy, tx, ty), reset()) : sx < 0;
 	    },
 	    reflectY: function(_) {
-	      return arguments.length ? (transform = scaleTranslate(k * sx, k * (sy = _ ? -1 : 1), tx, ty), reset()) : sy < 0;
+	      return arguments.length ? (transform$$1 = scaleTranslate(k * sx, k * (sy = _ ? -1 : 1), tx, ty), reset()) : sy < 0;
 	    },
 	    fitExtent: function(extent, object) {
 	      return fitExtent(projection, extent, object);
@@ -47015,83 +47027,92 @@
 	  copy: node_copy
 	};
 	
-	function Node$2(value) {
-	  this._ = value;
-	  this.next = null;
-	}
+	var slice$3 = Array.prototype.slice;
 	
-	var shuffle$1 = function(array) {
-	  var i,
-	      n = (array = array.slice()).length,
-	      head = null,
-	      node = head;
+	function shuffle$1(array) {
+	  var m = array.length,
+	      t,
+	      i;
 	
-	  while (n) {
-	    var next = new Node$2(array[n - 1]);
-	    if (node) node = node.next = next;
-	    else node = head = next;
-	    array[i] = array[--n];
+	  while (m) {
+	    i = Math.random() * m-- | 0;
+	    t = array[m];
+	    array[m] = array[i];
+	    array[i] = t;
 	  }
 	
-	  return {
-	    head: head,
-	    tail: node
-	  };
-	};
+	  return array;
+	}
 	
 	var enclose = function(circles) {
-	  return encloseN(shuffle$1(circles), []);
+	  var i = 0, n = (circles = shuffle$1(slice$3.call(circles))).length, B = [], p, e;
+	
+	  while (i < n) {
+	    p = circles[i];
+	    if (e && enclosesWeak(e, p)) ++i;
+	    else e = encloseBasis(B = extendBasis(B, p)), i = 0;
+	  }
+	
+	  return e;
 	};
 	
-	function encloses(a, b) {
-	  var dx = b.x - a.x,
-	      dy = b.y - a.y,
-	      dr = a.r - b.r;
-	  return dr * dr + 1e-6 > dx * dx + dy * dy;
-	}
+	function extendBasis(B, p) {
+	  var i, j;
 	
-	// Returns the smallest circle that contains circles L and intersects circles B.
-	function encloseN(L, B) {
-	  var circle,
-	      l0 = null,
-	      l1 = L.head,
-	      l2,
-	      p1;
+	  if (enclosesWeakAll(p, B)) return [p];
 	
-	  switch (B.length) {
-	    case 1: circle = enclose1(B[0]); break;
-	    case 2: circle = enclose2(B[0], B[1]); break;
-	    case 3: circle = enclose3(B[0], B[1], B[2]); break;
-	  }
-	
-	  while (l1) {
-	    p1 = l1._, l2 = l1.next;
-	    if (!circle || !encloses(circle, p1)) {
-	
-	      // Temporarily truncate L before l1.
-	      if (l0) L.tail = l0, l0.next = null;
-	      else L.head = L.tail = null;
-	
-	      B.push(p1);
-	      circle = encloseN(L, B); // Note: reorders L!
-	      B.pop();
-	
-	      // Move l1 to the front of L and reconnect the truncated list L.
-	      if (L.head) l1.next = L.head, L.head = l1;
-	      else l1.next = null, L.head = L.tail = l1;
-	      l0 = L.tail, l0.next = l2;
-	
-	    } else {
-	      l0 = l1;
+	  // If we get here then B must have at least one element.
+	  for (i = 0; i < B.length; ++i) {
+	    if (enclosesNot(p, B[i])
+	        && enclosesWeakAll(encloseBasis2(B[i], p), B)) {
+	      return [B[i], p];
 	    }
-	    l1 = l2;
 	  }
 	
-	  L.tail = l0;
-	  return circle;
+	  // If we get here then B must have at least two elements.
+	  for (i = 0; i < B.length - 1; ++i) {
+	    for (j = i + 1; j < B.length; ++j) {
+	      if (enclosesNot(encloseBasis2(B[i], B[j]), p)
+	          && enclosesNot(encloseBasis2(B[i], p), B[j])
+	          && enclosesNot(encloseBasis2(B[j], p), B[i])
+	          && enclosesWeakAll(encloseBasis3(B[i], B[j], p), B)) {
+	        return [B[i], B[j], p];
+	      }
+	    }
+	  }
+	
+	  // If we get here then something is very wrong.
+	  throw new Error;
 	}
 	
-	function enclose1(a) {
+	function enclosesNot(a, b) {
+	  var dr = a.r - b.r, dx = b.x - a.x, dy = b.y - a.y;
+	  return dr < 0 || dr * dr < dx * dx + dy * dy;
+	}
+	
+	function enclosesWeak(a, b) {
+	  var dr = a.r - b.r + 1e-6, dx = b.x - a.x, dy = b.y - a.y;
+	  return dr > 0 && dr * dr > dx * dx + dy * dy;
+	}
+	
+	function enclosesWeakAll(a, B) {
+	  for (var i = 0; i < B.length; ++i) {
+	    if (!enclosesWeak(a, B[i])) {
+	      return false;
+	    }
+	  }
+	  return true;
+	}
+	
+	function encloseBasis(B) {
+	  switch (B.length) {
+	    case 1: return encloseBasis1(B[0]);
+	    case 2: return encloseBasis2(B[0], B[1]);
+	    case 3: return encloseBasis3(B[0], B[1], B[2]);
+	  }
+	}
+	
+	function encloseBasis1(a) {
 	  return {
 	    x: a.x,
 	    y: a.y,
@@ -47099,7 +47120,7 @@
 	  };
 	}
 	
-	function enclose2(a, b) {
+	function encloseBasis2(a, b) {
 	  var x1 = a.x, y1 = a.y, r1 = a.r,
 	      x2 = b.x, y2 = b.y, r2 = b.r,
 	      x21 = x2 - x1, y21 = y2 - y1, r21 = r2 - r1,
@@ -47111,30 +47132,31 @@
 	  };
 	}
 	
-	function enclose3(a, b, c) {
+	function encloseBasis3(a, b, c) {
 	  var x1 = a.x, y1 = a.y, r1 = a.r,
 	      x2 = b.x, y2 = b.y, r2 = b.r,
 	      x3 = c.x, y3 = c.y, r3 = c.r,
-	      a2 = 2 * (x1 - x2),
-	      b2 = 2 * (y1 - y2),
-	      c2 = 2 * (r2 - r1),
-	      d2 = x1 * x1 + y1 * y1 - r1 * r1 - x2 * x2 - y2 * y2 + r2 * r2,
-	      a3 = 2 * (x1 - x3),
-	      b3 = 2 * (y1 - y3),
-	      c3 = 2 * (r3 - r1),
-	      d3 = x1 * x1 + y1 * y1 - r1 * r1 - x3 * x3 - y3 * y3 + r3 * r3,
+	      a2 = x1 - x2,
+	      a3 = x1 - x3,
+	      b2 = y1 - y2,
+	      b3 = y1 - y3,
+	      c2 = r2 - r1,
+	      c3 = r3 - r1,
+	      d1 = x1 * x1 + y1 * y1 - r1 * r1,
+	      d2 = d1 - x2 * x2 - y2 * y2 + r2 * r2,
+	      d3 = d1 - x3 * x3 - y3 * y3 + r3 * r3,
 	      ab = a3 * b2 - a2 * b3,
-	      xa = (b2 * d3 - b3 * d2) / ab - x1,
+	      xa = (b2 * d3 - b3 * d2) / (ab * 2) - x1,
 	      xb = (b3 * c2 - b2 * c3) / ab,
-	      ya = (a3 * d2 - a2 * d3) / ab - y1,
+	      ya = (a3 * d2 - a2 * d3) / (ab * 2) - y1,
 	      yb = (a2 * c3 - a3 * c2) / ab,
 	      A = xb * xb + yb * yb - 1,
-	      B = 2 * (xa * xb + ya * yb + r1),
+	      B = 2 * (r1 + xa * xb + ya * yb),
 	      C = xa * xa + ya * ya - r1 * r1,
-	      r = (-B - Math.sqrt(B * B - 4 * A * C)) / (2 * A);
+	      r = -(A ? (B + Math.sqrt(B * B - 4 * A * C)) / (2 * A) : C / B);
 	  return {
-	    x: xa + xb * r + x1,
-	    y: ya + yb * r + y1,
+	    x: x1 + xa + xb * r,
+	    y: y1 + ya + yb * r,
 	    r: r
 	  };
 	}
@@ -47165,12 +47187,12 @@
 	  return dr * dr - 1e-6 > dx * dx + dy * dy;
 	}
 	
-	function distance2(node, x, y) {
+	function score(node) {
 	  var a = node._,
 	      b = node.next._,
 	      ab = a.r + b.r,
-	      dx = (a.x * b.r + b.x * a.r) / ab - x,
-	      dy = (a.y * b.r + b.y * a.r) / ab - y;
+	      dx = (a.x * b.r + b.x * a.r) / ab,
+	      dy = (a.y * b.r + b.y * a.r) / ab;
 	  return dx * dx + dy * dy;
 	}
 	
@@ -47183,7 +47205,7 @@
 	function packEnclose(circles) {
 	  if (!(n = circles.length)) return 0;
 	
-	  var a, b, c, n;
+	  var a, b, c, n, aa, ca, i, j, k, sj, sk;
 	
 	  // Place the first circle.
 	  a = circles[0], a.x = 0, a.y = 0;
@@ -47195,15 +47217,6 @@
 	
 	  // Place the third circle.
 	  place(b, a, c = circles[2]);
-	
-	  // Initialize the weighted centroid.
-	  var aa = a.r * a.r,
-	      ba = b.r * b.r,
-	      ca = c.r * c.r,
-	      oa = aa + ba + ca,
-	      ox = aa * a.x + ba * b.x + ca * c.x,
-	      oy = aa * a.y + ba * b.y + ca * c.y,
-	      cx, cy, i, j, k, sj, sk;
 	
 	  // Initialize the front-chain using the first three circles a, b and c.
 	  a = new Node$1(a), b = new Node$1(b), c = new Node$1(c);
@@ -47238,15 +47251,10 @@
 	    // Success! Insert the new circle c between a and b.
 	    c.previous = a, c.next = b, a.next = b.previous = b = c;
 	
-	    // Update the weighted centroid.
-	    oa += ca = c._.r * c._.r;
-	    ox += ca * c._.x;
-	    oy += ca * c._.y;
-	
 	    // Compute the new closest circle pair to the centroid.
-	    aa = distance2(a, cx = ox / oa, cy = oy / oa);
+	    aa = score(a);
 	    while ((c = c.next) !== b) {
-	      if ((ca = distance2(c, cx, cy)) < aa) {
+	      if ((ca = score(c)) < aa) {
 	        a = c, aa = ca;
 	      }
 	    }
@@ -47803,7 +47811,7 @@
 	  return rows;
 	}
 	
-	var squarify = ((function custom(ratio) {
+	var squarify = (function custom(ratio) {
 	
 	  function squarify(parent, x0, y0, x1, y1) {
 	    squarifyRatio(ratio, parent, x0, y0, x1, y1);
@@ -47814,7 +47822,7 @@
 	  };
 	
 	  return squarify;
-	}))(phi);
+	})(phi);
 	
 	var index$3 = function() {
 	  var tile = squarify,
@@ -47957,7 +47965,7 @@
 	  (parent.depth & 1 ? treemapSlice : treemapDice)(parent, x0, y0, x1, y1);
 	};
 	
-	var resquarify = ((function custom(ratio) {
+	var resquarify = (function custom(ratio) {
 	
 	  function resquarify(parent, x0, y0, x1, y1) {
 	    if ((rows = parent._squarify) && (rows.ratio === ratio)) {
@@ -47988,7 +47996,7 @@
 	  };
 	
 	  return resquarify;
-	}))(phi);
+	})(phi);
 	
 	var area$1 = function(polygon) {
 	  var i = -1,
@@ -48124,7 +48132,7 @@
 	  return perimeter;
 	};
 	
-	var slice$3 = [].slice;
+	var slice$4 = [].slice;
 	
 	var noabort = {};
 	
@@ -48146,7 +48154,7 @@
 	    if (typeof callback !== "function") throw new Error("invalid callback");
 	    if (this._call) throw new Error("defer after await");
 	    if (this._error != null) return this;
-	    var t = slice$3.call(arguments, 1);
+	    var t = slice$4.call(arguments, 1);
 	    t.push(callback);
 	    ++this._waiting, this._tasks.push(t);
 	    poke$1(this);
@@ -48250,7 +48258,7 @@
 	  return Math.random();
 	};
 	
-	var uniform = ((function sourceRandomUniform(source) {
+	var uniform = (function sourceRandomUniform(source) {
 	  function randomUniform(min, max) {
 	    min = min == null ? 0 : +min;
 	    max = max == null ? 1 : +max;
@@ -48264,9 +48272,9 @@
 	  randomUniform.source = sourceRandomUniform;
 	
 	  return randomUniform;
-	}))(defaultSource$1);
+	})(defaultSource$1);
 	
-	var normal = ((function sourceRandomNormal(source) {
+	var normal = (function sourceRandomNormal(source) {
 	  function randomNormal(mu, sigma) {
 	    var x, r;
 	    mu = mu == null ? 0 : +mu;
@@ -48291,9 +48299,9 @@
 	  randomNormal.source = sourceRandomNormal;
 	
 	  return randomNormal;
-	}))(defaultSource$1);
+	})(defaultSource$1);
 	
-	var logNormal = ((function sourceRandomLogNormal(source) {
+	var logNormal = (function sourceRandomLogNormal(source) {
 	  function randomLogNormal() {
 	    var randomNormal = normal.source(source).apply(this, arguments);
 	    return function() {
@@ -48304,9 +48312,9 @@
 	  randomLogNormal.source = sourceRandomLogNormal;
 	
 	  return randomLogNormal;
-	}))(defaultSource$1);
+	})(defaultSource$1);
 	
-	var irwinHall = ((function sourceRandomIrwinHall(source) {
+	var irwinHall = (function sourceRandomIrwinHall(source) {
 	  function randomIrwinHall(n) {
 	    return function() {
 	      for (var sum = 0, i = 0; i < n; ++i) sum += source();
@@ -48317,9 +48325,9 @@
 	  randomIrwinHall.source = sourceRandomIrwinHall;
 	
 	  return randomIrwinHall;
-	}))(defaultSource$1);
+	})(defaultSource$1);
 	
-	var bates = ((function sourceRandomBates(source) {
+	var bates = (function sourceRandomBates(source) {
 	  function randomBates(n) {
 	    var randomIrwinHall = irwinHall.source(source)(n);
 	    return function() {
@@ -48330,9 +48338,9 @@
 	  randomBates.source = sourceRandomBates;
 	
 	  return randomBates;
-	}))(defaultSource$1);
+	})(defaultSource$1);
 	
-	var exponential$1 = ((function sourceRandomExponential(source) {
+	var exponential$1 = (function sourceRandomExponential(source) {
 	  function randomExponential(lambda) {
 	    return function() {
 	      return -Math.log(1 - source()) / lambda;
@@ -48342,7 +48350,7 @@
 	  randomExponential.source = sourceRandomExponential;
 	
 	  return randomExponential;
-	}))(defaultSource$1);
+	})(defaultSource$1);
 	
 	var request = function(url, callback) {
 	  var request,
@@ -48545,7 +48553,7 @@
 	var array$2 = Array.prototype;
 	
 	var map$3 = array$2.map;
-	var slice$4 = array$2.slice;
+	var slice$5 = array$2.slice;
 	
 	var implicit = {name: "implicit"};
 	
@@ -48554,7 +48562,7 @@
 	      domain = [],
 	      unknown = implicit;
 	
-	  range = range == null ? [] : slice$4.call(range);
+	  range = range == null ? [] : slice$5.call(range);
 	
 	  function scale(d) {
 	    var key = d + "", i = index.get(key);
@@ -48574,7 +48582,7 @@
 	  };
 	
 	  scale.range = function(_) {
-	    return arguments.length ? (range = slice$4.call(_), scale) : range.slice();
+	    return arguments.length ? (range = slice$5.call(_), scale) : range.slice();
 	  };
 	
 	  scale.unknown = function(_) {
@@ -48595,7 +48603,7 @@
 	  var scale = ordinal().unknown(undefined),
 	      domain = scale.domain,
 	      ordinalRange = scale.range,
-	      range$$1 = [0, 1],
+	      range = [0, 1],
 	      step,
 	      bandwidth,
 	      round = false,
@@ -48607,9 +48615,9 @@
 	
 	  function rescale() {
 	    var n = domain().length,
-	        reverse = range$$1[1] < range$$1[0],
-	        start = range$$1[reverse - 0],
-	        stop = range$$1[1 - reverse];
+	        reverse = range[1] < range[0],
+	        start = range[reverse - 0],
+	        stop = range[1 - reverse];
 	    step = (stop - start) / Math.max(1, n - paddingInner + paddingOuter * 2);
 	    if (round) step = Math.floor(step);
 	    start += (stop - start - step * (n - paddingInner)) * align;
@@ -48624,11 +48632,11 @@
 	  };
 	
 	  scale.range = function(_) {
-	    return arguments.length ? (range$$1 = [+_[0], +_[1]], rescale()) : range$$1.slice();
+	    return arguments.length ? (range = [+_[0], +_[1]], rescale()) : range.slice();
 	  };
 	
 	  scale.rangeRound = function(_) {
-	    return range$$1 = [+_[0], +_[1]], round = true, rescale();
+	    return range = [+_[0], +_[1]], round = true, rescale();
 	  };
 	
 	  scale.bandwidth = function() {
@@ -48662,7 +48670,7 @@
 	  scale.copy = function() {
 	    return band()
 	        .domain(domain())
-	        .range(range$$1)
+	        .range(range)
 	        .round(round)
 	        .paddingInner(paddingInner)
 	        .paddingOuter(paddingOuter)
@@ -48696,7 +48704,7 @@
 	  };
 	};
 	
-	var number$1 = function(x) {
+	var number$2 = function(x) {
 	  return +x;
 	};
 	
@@ -48715,22 +48723,22 @@
 	  };
 	}
 	
-	function reinterpolateClamp(reinterpolate) {
+	function reinterpolateClamp(reinterpolate$$1) {
 	  return function(a, b) {
-	    var r = reinterpolate(a = +a, b = +b);
+	    var r = reinterpolate$$1(a = +a, b = +b);
 	    return function(t) { return t <= 0 ? a : t >= 1 ? b : r(t); };
 	  };
 	}
 	
-	function bimap(domain, range$$1, deinterpolate, reinterpolate) {
-	  var d0 = domain[0], d1 = domain[1], r0 = range$$1[0], r1 = range$$1[1];
-	  if (d1 < d0) d0 = deinterpolate(d1, d0), r0 = reinterpolate(r1, r0);
-	  else d0 = deinterpolate(d0, d1), r0 = reinterpolate(r0, r1);
+	function bimap(domain, range, deinterpolate, reinterpolate$$1) {
+	  var d0 = domain[0], d1 = domain[1], r0 = range[0], r1 = range[1];
+	  if (d1 < d0) d0 = deinterpolate(d1, d0), r0 = reinterpolate$$1(r1, r0);
+	  else d0 = deinterpolate(d0, d1), r0 = reinterpolate$$1(r0, r1);
 	  return function(x) { return r0(d0(x)); };
 	}
 	
-	function polymap(domain, range$$1, deinterpolate, reinterpolate) {
-	  var j = Math.min(domain.length, range$$1.length) - 1,
+	function polymap(domain, range, deinterpolate, reinterpolate$$1) {
+	  var j = Math.min(domain.length, range.length) - 1,
 	      d = new Array(j),
 	      r = new Array(j),
 	      i = -1;
@@ -48738,12 +48746,12 @@
 	  // Reverse descending domains.
 	  if (domain[j] < domain[0]) {
 	    domain = domain.slice().reverse();
-	    range$$1 = range$$1.slice().reverse();
+	    range = range.slice().reverse();
 	  }
 	
 	  while (++i < j) {
 	    d[i] = deinterpolate(domain[i], domain[i + 1]);
-	    r[i] = reinterpolate(range$$1[i], range$$1[i + 1]);
+	    r[i] = reinterpolate$$1(range[i], range[i + 1]);
 	  }
 	
 	  return function(x) {
@@ -48762,39 +48770,39 @@
 	
 	// deinterpolate(a, b)(x) takes a domain value x in [a,b] and returns the corresponding parameter t in [0,1].
 	// reinterpolate(a, b)(t) takes a parameter t in [0,1] and returns the corresponding domain value x in [a,b].
-	function continuous(deinterpolate, reinterpolate) {
+	function continuous(deinterpolate, reinterpolate$$1) {
 	  var domain = unit,
-	      range$$1 = unit,
-	      interpolate$$1 = interpolateValue,
+	      range = unit,
+	      interpolate = interpolateValue,
 	      clamp = false,
 	      piecewise,
 	      output,
 	      input;
 	
 	  function rescale() {
-	    piecewise = Math.min(domain.length, range$$1.length) > 2 ? polymap : bimap;
+	    piecewise = Math.min(domain.length, range.length) > 2 ? polymap : bimap;
 	    output = input = null;
 	    return scale;
 	  }
 	
 	  function scale(x) {
-	    return (output || (output = piecewise(domain, range$$1, clamp ? deinterpolateClamp(deinterpolate) : deinterpolate, interpolate$$1)))(+x);
+	    return (output || (output = piecewise(domain, range, clamp ? deinterpolateClamp(deinterpolate) : deinterpolate, interpolate)))(+x);
 	  }
 	
 	  scale.invert = function(y) {
-	    return (input || (input = piecewise(range$$1, domain, deinterpolateLinear, clamp ? reinterpolateClamp(reinterpolate) : reinterpolate)))(+y);
+	    return (input || (input = piecewise(range, domain, deinterpolateLinear, clamp ? reinterpolateClamp(reinterpolate$$1) : reinterpolate$$1)))(+y);
 	  };
 	
 	  scale.domain = function(_) {
-	    return arguments.length ? (domain = map$3.call(_, number$1), rescale()) : domain.slice();
+	    return arguments.length ? (domain = map$3.call(_, number$2), rescale()) : domain.slice();
 	  };
 	
 	  scale.range = function(_) {
-	    return arguments.length ? (range$$1 = slice$4.call(_), rescale()) : range$$1.slice();
+	    return arguments.length ? (range = slice$5.call(_), rescale()) : range.slice();
 	  };
 	
 	  scale.rangeRound = function(_) {
-	    return range$$1 = slice$4.call(_), interpolate$$1 = interpolateRound, rescale();
+	    return range = slice$5.call(_), interpolate = interpolateRound, rescale();
 	  };
 	
 	  scale.clamp = function(_) {
@@ -48802,7 +48810,7 @@
 	  };
 	
 	  scale.interpolate = function(_) {
-	    return arguments.length ? (interpolate$$1 = _, rescale()) : interpolate$$1;
+	    return arguments.length ? (interpolate = _, rescale()) : interpolate;
 	  };
 	
 	  return rescale();
@@ -48912,7 +48920,7 @@
 	  scale.invert = scale;
 	
 	  scale.domain = scale.range = function(_) {
-	    return arguments.length ? (domain = map$3.call(_, number$1), scale) : domain.slice();
+	    return arguments.length ? (domain = map$3.call(_, number$2), scale) : domain.slice();
 	  };
 	
 	  scale.copy = function() {
@@ -49099,24 +49107,24 @@
 	  return pow$1().exponent(0.5);
 	}
 	
-	function quantile$$1() {
+	function quantile() {
 	  var domain = [],
-	      range$$1 = [],
+	      range = [],
 	      thresholds = [];
 	
 	  function rescale() {
-	    var i = 0, n = Math.max(1, range$$1.length);
+	    var i = 0, n = Math.max(1, range.length);
 	    thresholds = new Array(n - 1);
 	    while (++i < n) thresholds[i - 1] = threshold(domain, i / n);
 	    return scale;
 	  }
 	
 	  function scale(x) {
-	    if (!isNaN(x = +x)) return range$$1[bisectRight(thresholds, x)];
+	    if (!isNaN(x = +x)) return range[bisectRight(thresholds, x)];
 	  }
 	
 	  scale.invertExtent = function(y) {
-	    var i = range$$1.indexOf(y);
+	    var i = range.indexOf(y);
 	    return i < 0 ? [NaN, NaN] : [
 	      i > 0 ? thresholds[i - 1] : domain[0],
 	      i < thresholds.length ? thresholds[i] : domain[domain.length - 1]
@@ -49132,7 +49140,7 @@
 	  };
 	
 	  scale.range = function(_) {
-	    return arguments.length ? (range$$1 = slice$4.call(_), rescale()) : range$$1.slice();
+	    return arguments.length ? (range = slice$5.call(_), rescale()) : range.slice();
 	  };
 	
 	  scale.quantiles = function() {
@@ -49140,9 +49148,9 @@
 	  };
 	
 	  scale.copy = function() {
-	    return quantile$$1()
+	    return quantile()
 	        .domain(domain)
-	        .range(range$$1);
+	        .range(range);
 	  };
 	
 	  return scale;
@@ -49153,10 +49161,10 @@
 	      x1 = 1,
 	      n = 1,
 	      domain = [0.5],
-	      range$$1 = [0, 1];
+	      range = [0, 1];
 	
 	  function scale(x) {
-	    if (x <= x) return range$$1[bisectRight(domain, x, 0, n)];
+	    if (x <= x) return range[bisectRight(domain, x, 0, n)];
 	  }
 	
 	  function rescale() {
@@ -49171,11 +49179,11 @@
 	  };
 	
 	  scale.range = function(_) {
-	    return arguments.length ? (n = (range$$1 = slice$4.call(_)).length - 1, rescale()) : range$$1.slice();
+	    return arguments.length ? (n = (range = slice$5.call(_)).length - 1, rescale()) : range.slice();
 	  };
 	
 	  scale.invertExtent = function(y) {
-	    var i = range$$1.indexOf(y);
+	    var i = range.indexOf(y);
 	    return i < 0 ? [NaN, NaN]
 	        : i < 1 ? [x0, domain[0]]
 	        : i >= n ? [domain[n - 1], x1]
@@ -49185,7 +49193,7 @@
 	  scale.copy = function() {
 	    return quantize$1()
 	        .domain([x0, x1])
-	        .range(range$$1);
+	        .range(range);
 	  };
 	
 	  return linearish(scale);
@@ -49193,30 +49201,30 @@
 	
 	function threshold$1() {
 	  var domain = [0.5],
-	      range$$1 = [0, 1],
+	      range = [0, 1],
 	      n = 1;
 	
 	  function scale(x) {
-	    if (x <= x) return range$$1[bisectRight(domain, x, 0, n)];
+	    if (x <= x) return range[bisectRight(domain, x, 0, n)];
 	  }
 	
 	  scale.domain = function(_) {
-	    return arguments.length ? (domain = slice$4.call(_), n = Math.min(domain.length, range$$1.length - 1), scale) : domain.slice();
+	    return arguments.length ? (domain = slice$5.call(_), n = Math.min(domain.length, range.length - 1), scale) : domain.slice();
 	  };
 	
 	  scale.range = function(_) {
-	    return arguments.length ? (range$$1 = slice$4.call(_), n = Math.min(domain.length, range$$1.length - 1), scale) : range$$1.slice();
+	    return arguments.length ? (range = slice$5.call(_), n = Math.min(domain.length, range.length - 1), scale) : range.slice();
 	  };
 	
 	  scale.invertExtent = function(y) {
-	    var i = range$$1.indexOf(y);
+	    var i = range.indexOf(y);
 	    return [domain[i - 1], domain[i]];
 	  };
 	
 	  scale.copy = function() {
 	    return threshold$1()
 	        .domain(domain)
-	        .range(range$$1);
+	        .range(range);
 	  };
 	
 	  return scale;
@@ -49260,7 +49268,13 @@
 	    return newInterval(function(date) {
 	      if (date >= date) while (floori(date), !test(date)) date.setTime(date - 1);
 	    }, function(date, step) {
-	      if (date >= date) while (--step >= 0) while (offseti(date, 1), !test(date)) {} // eslint-disable-line no-empty
+	      if (date >= date) {
+	        if (step < 0) while (++step <= 0) {
+	          while (offseti(date, -1), !test(date)) {} // eslint-disable-line no-empty
+	        } else while (--step >= 0) {
+	          while (offseti(date, +1), !test(date)) {} // eslint-disable-line no-empty
+	        }
+	      }
 	    });
 	  };
 	
@@ -50113,7 +50127,7 @@
 	  return new Date(t);
 	}
 	
-	function number$2(t) {
+	function number$3(t) {
 	  return t instanceof Date ? +t : +new Date(+t);
 	}
 	
@@ -50152,39 +50166,39 @@
 	    [  year$$1,  1,      durationYear  ]
 	  ];
 	
-	  function tickFormat(date) {
-	    return (second$$1(date) < date ? formatMillisecond
-	        : minute$$1(date) < date ? formatSecond
-	        : hour$$1(date) < date ? formatMinute
-	        : day$$1(date) < date ? formatHour
-	        : month$$1(date) < date ? (week(date) < date ? formatDay : formatWeek)
-	        : year$$1(date) < date ? formatMonth
-	        : formatYear)(date);
+	  function tickFormat(date$$1) {
+	    return (second$$1(date$$1) < date$$1 ? formatMillisecond
+	        : minute$$1(date$$1) < date$$1 ? formatSecond
+	        : hour$$1(date$$1) < date$$1 ? formatMinute
+	        : day$$1(date$$1) < date$$1 ? formatHour
+	        : month$$1(date$$1) < date$$1 ? (week(date$$1) < date$$1 ? formatDay : formatWeek)
+	        : year$$1(date$$1) < date$$1 ? formatMonth
+	        : formatYear)(date$$1);
 	  }
 	
-	  function tickInterval(interval, start, stop, step) {
-	    if (interval == null) interval = 10;
+	  function tickInterval(interval$$1, start, stop, step) {
+	    if (interval$$1 == null) interval$$1 = 10;
 	
 	    // If a desired tick count is specified, pick a reasonable tick interval
 	    // based on the extent of the domain and a rough estimate of tick size.
 	    // Otherwise, assume interval is already a time interval and use it.
-	    if (typeof interval === "number") {
-	      var target = Math.abs(stop - start) / interval,
+	    if (typeof interval$$1 === "number") {
+	      var target = Math.abs(stop - start) / interval$$1,
 	          i = bisector(function(i) { return i[2]; }).right(tickIntervals, target);
 	      if (i === tickIntervals.length) {
-	        step = tickStep(start / durationYear, stop / durationYear, interval);
-	        interval = year$$1;
+	        step = tickStep(start / durationYear, stop / durationYear, interval$$1);
+	        interval$$1 = year$$1;
 	      } else if (i) {
 	        i = tickIntervals[target / tickIntervals[i - 1][2] < tickIntervals[i][2] / target ? i - 1 : i];
 	        step = i[1];
-	        interval = i[0];
+	        interval$$1 = i[0];
 	      } else {
-	        step = tickStep(start, stop, interval);
-	        interval = millisecond$$1;
+	        step = tickStep(start, stop, interval$$1);
+	        interval$$1 = millisecond$$1;
 	      }
 	    }
 	
-	    return step == null ? interval : interval.every(step);
+	    return step == null ? interval$$1 : interval$$1.every(step);
 	  }
 	
 	  scale.invert = function(y) {
@@ -50192,17 +50206,17 @@
 	  };
 	
 	  scale.domain = function(_) {
-	    return arguments.length ? domain(map$3.call(_, number$2)) : domain().map(date$1);
+	    return arguments.length ? domain(map$3.call(_, number$3)) : domain().map(date$1);
 	  };
 	
-	  scale.ticks = function(interval, step) {
+	  scale.ticks = function(interval$$1, step) {
 	    var d = domain(),
 	        t0 = d[0],
 	        t1 = d[d.length - 1],
 	        r = t1 < t0,
 	        t;
 	    if (r) t = t0, t0 = t1, t1 = t;
-	    t = tickInterval(interval, t0, t1, step);
+	    t = tickInterval(interval$$1, t0, t1, step);
 	    t = t ? t.range(t0, t1 + 1) : []; // inclusive stop
 	    return r ? t.reverse() : t;
 	  };
@@ -50211,10 +50225,10 @@
 	    return specifier == null ? tickFormat : format(specifier);
 	  };
 	
-	  scale.nice = function(interval, step) {
+	  scale.nice = function(interval$$1, step) {
 	    var d = domain();
-	    return (interval = tickInterval(interval, d[0], d[d.length - 1], step))
-	        ? domain(nice(d, interval))
+	    return (interval$$1 = tickInterval(interval$$1, d[0], d[d.length - 1], step))
+	        ? domain(nice(d, interval$$1))
 	        : scale;
 	  };
 	
@@ -50632,8 +50646,8 @@
 	}
 	
 	var line = function() {
-	  var x$$1 = x$3,
-	      y$$1 = y$3,
+	  var x = x$3,
+	      y = y$3,
 	      defined = constant$10(true),
 	      context = null,
 	      curve = curveLinear,
@@ -50653,18 +50667,18 @@
 	        if (defined0 = !defined0) output.lineStart();
 	        else output.lineEnd();
 	      }
-	      if (defined0) output.point(+x$$1(d, i, data), +y$$1(d, i, data));
+	      if (defined0) output.point(+x(d, i, data), +y(d, i, data));
 	    }
 	
 	    if (buffer) return output = null, buffer + "" || null;
 	  }
 	
 	  line.x = function(_) {
-	    return arguments.length ? (x$$1 = typeof _ === "function" ? _ : constant$10(+_), line) : x$$1;
+	    return arguments.length ? (x = typeof _ === "function" ? _ : constant$10(+_), line) : x;
 	  };
 	
 	  line.y = function(_) {
-	    return arguments.length ? (y$$1 = typeof _ === "function" ? _ : constant$10(+_), line) : y$$1;
+	    return arguments.length ? (y = typeof _ === "function" ? _ : constant$10(+_), line) : y;
 	  };
 	
 	  line.defined = function(_) {
@@ -50904,7 +50918,7 @@
 	  return radial;
 	}
 	
-	function radialLine(l) {
+	function lineRadial(l) {
 	  var c = l.curve;
 	
 	  l.angle = l.x, delete l.x;
@@ -50917,11 +50931,11 @@
 	  return l;
 	}
 	
-	var radialLine$1 = function() {
-	  return radialLine(line().curve(curveRadialLinear));
+	var lineRadial$1 = function() {
+	  return lineRadial(line().curve(curveRadialLinear));
 	};
 	
-	var radialArea = function() {
+	var areaRadial = function() {
 	  var a = area$2().curve(curveRadialLinear),
 	      c = a.curve,
 	      x0 = a.lineX0,
@@ -50935,10 +50949,10 @@
 	  a.radius = a.y, delete a.y;
 	  a.innerRadius = a.y0, delete a.y0;
 	  a.outerRadius = a.y1, delete a.y1;
-	  a.lineStartAngle = function() { return radialLine(x0()); }, delete a.lineX0;
-	  a.lineEndAngle = function() { return radialLine(x1()); }, delete a.lineX1;
-	  a.lineInnerRadius = function() { return radialLine(y0()); }, delete a.lineY0;
-	  a.lineOuterRadius = function() { return radialLine(y1()); }, delete a.lineY1;
+	  a.lineStartAngle = function() { return lineRadial(x0()); }, delete a.lineX0;
+	  a.lineEndAngle = function() { return lineRadial(x1()); }, delete a.lineX1;
+	  a.lineInnerRadius = function() { return lineRadial(y0()); }, delete a.lineY0;
+	  a.lineOuterRadius = function() { return lineRadial(y1()); }, delete a.lineY1;
 	
 	  a.curve = function(_) {
 	    return arguments.length ? c(curveRadial(_)) : c()._curve;
@@ -50947,11 +50961,11 @@
 	  return a;
 	};
 	
-	var slice$5 = Array.prototype.slice;
-	
-	var radialPoint = function(x, y) {
+	var pointRadial = function(x, y) {
 	  return [(y = +y) * Math.cos(x -= Math.PI / 2), y * Math.sin(x)];
 	};
+	
+	var slice$6 = Array.prototype.slice;
 	
 	function linkSource(d) {
 	  return d.source;
@@ -50964,14 +50978,14 @@
 	function link$2(curve) {
 	  var source = linkSource,
 	      target = linkTarget,
-	      x$$1 = x$3,
-	      y$$1 = y$3,
+	      x = x$3,
+	      y = y$3,
 	      context = null;
 	
 	  function link() {
-	    var buffer, argv = slice$5.call(arguments), s = source.apply(this, argv), t = target.apply(this, argv);
+	    var buffer, argv = slice$6.call(arguments), s = source.apply(this, argv), t = target.apply(this, argv);
 	    if (!context) context = buffer = path();
-	    curve(context, +x$$1.apply(this, (argv[0] = s, argv)), +y$$1.apply(this, argv), +x$$1.apply(this, (argv[0] = t, argv)), +y$$1.apply(this, argv));
+	    curve(context, +x.apply(this, (argv[0] = s, argv)), +y.apply(this, argv), +x.apply(this, (argv[0] = t, argv)), +y.apply(this, argv));
 	    if (buffer) return context = null, buffer + "" || null;
 	  }
 	
@@ -50984,11 +50998,11 @@
 	  };
 	
 	  link.x = function(_) {
-	    return arguments.length ? (x$$1 = typeof _ === "function" ? _ : constant$10(+_), link) : x$$1;
+	    return arguments.length ? (x = typeof _ === "function" ? _ : constant$10(+_), link) : x;
 	  };
 	
 	  link.y = function(_) {
-	    return arguments.length ? (y$$1 = typeof _ === "function" ? _ : constant$10(+_), link) : y$$1;
+	    return arguments.length ? (y = typeof _ === "function" ? _ : constant$10(+_), link) : y;
 	  };
 	
 	  link.context = function(_) {
@@ -51009,10 +51023,10 @@
 	}
 	
 	function curveRadial$1(context, x0, y0, x1, y1) {
-	  var p0 = radialPoint(x0, y0),
-	      p1 = radialPoint(x0, y0 = (y0 + y1) / 2),
-	      p2 = radialPoint(x1, y0),
-	      p3 = radialPoint(x1, y1);
+	  var p0 = pointRadial(x0, y0),
+	      p1 = pointRadial(x0, y0 = (y0 + y1) / 2),
+	      p2 = pointRadial(x1, y0),
+	      p3 = pointRadial(x1, y1);
 	  context.moveTo(p0[0], p0[1]);
 	  context.bezierCurveTo(p1[0], p1[1], p2[0], p2[1], p3[0], p3[1]);
 	}
@@ -51365,7 +51379,7 @@
 	  }
 	};
 	
-	var bundle = ((function custom(beta) {
+	var bundle = (function custom(beta) {
 	
 	  function bundle(context) {
 	    return beta === 1 ? new Basis(context) : new Bundle(context, beta);
@@ -51376,7 +51390,7 @@
 	  };
 	
 	  return bundle;
-	}))(0.85);
+	})(0.85);
 	
 	function point$3(that, x, y) {
 	  that._context.bezierCurveTo(
@@ -51427,7 +51441,7 @@
 	  }
 	};
 	
-	var cardinal = ((function custom(tension) {
+	var cardinal = (function custom(tension) {
 	
 	  function cardinal(context) {
 	    return new Cardinal(context, tension);
@@ -51438,7 +51452,7 @@
 	  };
 	
 	  return cardinal;
-	}))(0);
+	})(0);
 	
 	function CardinalClosed(context, tension) {
 	  this._context = context;
@@ -51486,18 +51500,18 @@
 	  }
 	};
 	
-	var cardinalClosed = ((function custom(tension) {
+	var cardinalClosed = (function custom(tension) {
 	
-	  function cardinal(context) {
+	  function cardinal$$1(context) {
 	    return new CardinalClosed(context, tension);
 	  }
 	
-	  cardinal.tension = function(tension) {
+	  cardinal$$1.tension = function(tension) {
 	    return custom(+tension);
 	  };
 	
-	  return cardinal;
-	}))(0);
+	  return cardinal$$1;
+	})(0);
 	
 	function CardinalOpen(context, tension) {
 	  this._context = context;
@@ -51534,18 +51548,18 @@
 	  }
 	};
 	
-	var cardinalOpen = ((function custom(tension) {
+	var cardinalOpen = (function custom(tension) {
 	
-	  function cardinal(context) {
+	  function cardinal$$1(context) {
 	    return new CardinalOpen(context, tension);
 	  }
 	
-	  cardinal.tension = function(tension) {
+	  cardinal$$1.tension = function(tension) {
 	    return custom(+tension);
 	  };
 	
-	  return cardinal;
-	}))(0);
+	  return cardinal$$1;
+	})(0);
 	
 	function point$4(that, x, y) {
 	  var x1 = that._x1,
@@ -51620,7 +51634,7 @@
 	  }
 	};
 	
-	var catmullRom = ((function custom(alpha) {
+	var catmullRom = (function custom(alpha) {
 	
 	  function catmullRom(context) {
 	    return alpha ? new CatmullRom(context, alpha) : new Cardinal(context, 0);
@@ -51631,7 +51645,7 @@
 	  };
 	
 	  return catmullRom;
-	}))(0.5);
+	})(0.5);
 	
 	function CatmullRomClosed(context, alpha) {
 	  this._context = context;
@@ -51691,18 +51705,18 @@
 	  }
 	};
 	
-	var catmullRomClosed = ((function custom(alpha) {
+	var catmullRomClosed = (function custom(alpha) {
 	
-	  function catmullRom(context) {
+	  function catmullRom$$1(context) {
 	    return alpha ? new CatmullRomClosed(context, alpha) : new CardinalClosed(context, 0);
 	  }
 	
-	  catmullRom.alpha = function(alpha) {
+	  catmullRom$$1.alpha = function(alpha) {
 	    return custom(+alpha);
 	  };
 	
-	  return catmullRom;
-	}))(0.5);
+	  return catmullRom$$1;
+	})(0.5);
 	
 	function CatmullRomOpen(context, alpha) {
 	  this._context = context;
@@ -51751,18 +51765,18 @@
 	  }
 	};
 	
-	var catmullRomOpen = ((function custom(alpha) {
+	var catmullRomOpen = (function custom(alpha) {
 	
-	  function catmullRom(context) {
+	  function catmullRom$$1(context) {
 	    return alpha ? new CatmullRomOpen(context, alpha) : new CardinalOpen(context, 0);
 	  }
 	
-	  catmullRom.alpha = function(alpha) {
+	  catmullRom$$1.alpha = function(alpha) {
 	    return custom(+alpha);
 	  };
 	
-	  return catmullRom;
-	}))(0.5);
+	  return catmullRom$$1;
+	})(0.5);
 	
 	function LinearClosed(context) {
 	  this._context = context;
@@ -52064,7 +52078,7 @@
 	  }
 	
 	  stack.keys = function(_) {
-	    return arguments.length ? (keys = typeof _ === "function" ? _ : constant$10(slice$5.call(_)), stack) : keys;
+	    return arguments.length ? (keys = typeof _ === "function" ? _ : constant$10(slice$6.call(_)), stack) : keys;
 	  };
 	
 	  stack.value = function(_) {
@@ -52072,7 +52086,7 @@
 	  };
 	
 	  stack.order = function(_) {
-	    return arguments.length ? (order = _ == null ? none$2 : typeof _ === "function" ? _ : constant$10(slice$5.call(_)), stack) : order;
+	    return arguments.length ? (order = _ == null ? none$2 : typeof _ === "function" ? _ : constant$10(slice$6.call(_)), stack) : order;
 	  };
 	
 	  stack.offset = function(_) {
@@ -53125,13 +53139,13 @@
 	};
 	
 	var voronoi = function() {
-	  var x$$1 = x$4,
-	      y$$1 = y$4,
+	  var x = x$4,
+	      y = y$4,
 	      extent = null;
 	
 	  function voronoi(data) {
 	    return new Diagram(data.map(function(d, i) {
-	      var s = [Math.round(x$$1(d, i, data) / epsilon$4) * epsilon$4, Math.round(y$$1(d, i, data) / epsilon$4) * epsilon$4];
+	      var s = [Math.round(x(d, i, data) / epsilon$4) * epsilon$4, Math.round(y(d, i, data) / epsilon$4) * epsilon$4];
 	      s.index = i;
 	      s.data = d;
 	      return s;
@@ -53151,11 +53165,11 @@
 	  };
 	
 	  voronoi.x = function(_) {
-	    return arguments.length ? (x$$1 = typeof _ === "function" ? _ : constant$11(+_), voronoi) : x$$1;
+	    return arguments.length ? (x = typeof _ === "function" ? _ : constant$11(+_), voronoi) : x;
 	  };
 	
 	  voronoi.y = function(_) {
-	    return arguments.length ? (y$$1 = typeof _ === "function" ? _ : constant$11(+_), voronoi) : y$$1;
+	    return arguments.length ? (y = typeof _ === "function" ? _ : constant$11(+_), voronoi) : y;
 	  };
 	
 	  voronoi.extent = function(_) {
@@ -53263,9 +53277,18 @@
 	  return this.__zoom || identity$8;
 	}
 	
+	function defaultWheelDelta() {
+	  return -exports.event.deltaY * (exports.event.deltaMode ? 120 : 1) / 500;
+	}
+	
+	function touchable$1() {
+	  return "ontouchstart" in this;
+	}
+	
 	var zoom = function() {
 	  var filter = defaultFilter$2,
 	      extent = defaultExtent$1,
+	      wheelDelta = defaultWheelDelta,
 	      k0 = 0,
 	      k1 = Infinity,
 	      x0 = -k1,
@@ -53273,7 +53296,7 @@
 	      y0 = x0,
 	      y1 = x1,
 	      duration = 250,
-	      interpolate$$1 = interpolateZoom,
+	      interpolate = interpolateZoom,
 	      gestures = [],
 	      listeners = dispatch("start", "zoom", "end"),
 	      touchstarting,
@@ -53284,26 +53307,28 @@
 	
 	  function zoom(selection$$1) {
 	    selection$$1
+	        .property("__zoom", defaultTransform)
 	        .on("wheel.zoom", wheeled)
 	        .on("mousedown.zoom", mousedowned)
 	        .on("dblclick.zoom", dblclicked)
+	      .filter(touchable$1)
 	        .on("touchstart.zoom", touchstarted)
 	        .on("touchmove.zoom", touchmoved)
 	        .on("touchend.zoom touchcancel.zoom", touchended)
-	        .style("-webkit-tap-highlight-color", "rgba(0,0,0,0)")
-	        .property("__zoom", defaultTransform);
+	        .style("touch-action", "none")
+	        .style("-webkit-tap-highlight-color", "rgba(0,0,0,0)");
 	  }
 	
-	  zoom.transform = function(collection, transform) {
+	  zoom.transform = function(collection, transform$$1) {
 	    var selection$$1 = collection.selection ? collection.selection() : collection;
 	    selection$$1.property("__zoom", defaultTransform);
 	    if (collection !== selection$$1) {
-	      schedule(collection, transform);
+	      schedule(collection, transform$$1);
 	    } else {
 	      selection$$1.interrupt().each(function() {
 	        gesture(this, arguments)
 	            .start()
-	            .zoom(null, typeof transform === "function" ? transform.apply(this, arguments) : transform)
+	            .zoom(null, typeof transform$$1 === "function" ? transform$$1.apply(this, arguments) : transform$$1)
 	            .end();
 	      });
 	    }
@@ -53337,22 +53362,34 @@
 	    });
 	  };
 	
-	  function scale(transform, k) {
+	  zoom.translateTo = function(selection$$1, x, y) {
+	    zoom.transform(selection$$1, function() {
+	      var e = extent.apply(this, arguments),
+	          t = this.__zoom,
+	          p = centroid(e);
+	      return constrain(identity$8.translate(p[0], p[1]).scale(t.k).translate(
+	        typeof x === "function" ? -x.apply(this, arguments) : -x,
+	        typeof y === "function" ? -y.apply(this, arguments) : -y
+	      ), e);
+	    });
+	  };
+	
+	  function scale(transform$$1, k) {
 	    k = Math.max(k0, Math.min(k1, k));
-	    return k === transform.k ? transform : new Transform(k, transform.x, transform.y);
+	    return k === transform$$1.k ? transform$$1 : new Transform(k, transform$$1.x, transform$$1.y);
 	  }
 	
-	  function translate(transform, p0, p1) {
-	    var x = p0[0] - p1[0] * transform.k, y = p0[1] - p1[1] * transform.k;
-	    return x === transform.x && y === transform.y ? transform : new Transform(transform.k, x, y);
+	  function translate(transform$$1, p0, p1) {
+	    var x = p0[0] - p1[0] * transform$$1.k, y = p0[1] - p1[1] * transform$$1.k;
+	    return x === transform$$1.x && y === transform$$1.y ? transform$$1 : new Transform(transform$$1.k, x, y);
 	  }
 	
-	  function constrain(transform, extent) {
-	    var dx0 = transform.invertX(extent[0][0]) - x0,
-	        dx1 = transform.invertX(extent[1][0]) - x1,
-	        dy0 = transform.invertY(extent[0][1]) - y0,
-	        dy1 = transform.invertY(extent[1][1]) - y1;
-	    return transform.translate(
+	  function constrain(transform$$1, extent) {
+	    var dx0 = transform$$1.invertX(extent[0][0]) - x0,
+	        dx1 = transform$$1.invertX(extent[1][0]) - x1,
+	        dy0 = transform$$1.invertY(extent[0][1]) - y0,
+	        dy1 = transform$$1.invertY(extent[1][1]) - y1;
+	    return transform$$1.translate(
 	      dx1 > dx0 ? (dx0 + dx1) / 2 : Math.min(0, dx0) || Math.max(0, dx1),
 	      dy1 > dy0 ? (dy0 + dy1) / 2 : Math.min(0, dy0) || Math.max(0, dy1)
 	    );
@@ -53362,7 +53399,7 @@
 	    return [(+extent[0][0] + +extent[1][0]) / 2, (+extent[0][1] + +extent[1][1]) / 2];
 	  }
 	
-	  function schedule(transition$$1, transform, center) {
+	  function schedule(transition$$1, transform$$1, center) {
 	    transition$$1
 	        .on("start.zoom", function() { gesture(this, arguments).start(); })
 	        .on("interrupt.zoom end.zoom", function() { gesture(this, arguments).end(); })
@@ -53374,8 +53411,8 @@
 	              p = center || centroid(e),
 	              w = Math.max(e[1][0] - e[0][0], e[1][1] - e[0][1]),
 	              a = that.__zoom,
-	              b = typeof transform === "function" ? transform.apply(that, args) : transform,
-	              i = interpolate$$1(a.invert(p).concat(w / a.k), b.invert(p).concat(w / b.k));
+	              b = typeof transform$$1 === "function" ? transform$$1.apply(that, args) : transform$$1,
+	              i = interpolate(a.invert(p).concat(w / a.k), b.invert(p).concat(w / b.k));
 	          return function(t) {
 	            if (t === 1) t = b; // Avoid rounding error on end.
 	            else { var l = i(t), k = w / l[2]; t = new Transform(k, p[0] - l[0] * k, p[1] - l[1] * k); }
@@ -53409,11 +53446,11 @@
 	      }
 	      return this;
 	    },
-	    zoom: function(key, transform) {
-	      if (this.mouse && key !== "mouse") this.mouse[1] = transform.invert(this.mouse[0]);
-	      if (this.touch0 && key !== "touch") this.touch0[1] = transform.invert(this.touch0[0]);
-	      if (this.touch1 && key !== "touch") this.touch1[1] = transform.invert(this.touch1[0]);
-	      this.that.__zoom = transform;
+	    zoom: function(key, transform$$1) {
+	      if (this.mouse && key !== "mouse") this.mouse[1] = transform$$1.invert(this.mouse[0]);
+	      if (this.touch0 && key !== "touch") this.touch0[1] = transform$$1.invert(this.touch0[0]);
+	      if (this.touch1 && key !== "touch") this.touch1[1] = transform$$1.invert(this.touch1[0]);
+	      this.that.__zoom = transform$$1;
 	      this.emit("zoom");
 	      return this;
 	    },
@@ -53434,7 +53471,7 @@
 	    if (!filter.apply(this, arguments)) return;
 	    var g = gesture(this, arguments),
 	        t = this.__zoom,
-	        k = Math.max(k0, Math.min(k1, t.k * Math.pow(2, -exports.event.deltaY * (exports.event.deltaMode ? 120 : 1) / 500))),
+	        k = Math.max(k0, Math.min(k1, t.k * Math.pow(2, wheelDelta.apply(this, arguments)))),
 	        p = mouse(this);
 	
 	    // If the mouse is in the same location as before, reuse it.
@@ -53588,6 +53625,10 @@
 	    else g.end();
 	  }
 	
+	  zoom.wheelDelta = function(_) {
+	    return arguments.length ? (wheelDelta = typeof _ === "function" ? _ : constant$12(+_), zoom) : wheelDelta;
+	  };
+	
 	  zoom.filter = function(_) {
 	    return arguments.length ? (filter = typeof _ === "function" ? _ : constant$12(!!_), zoom) : filter;
 	  };
@@ -53609,7 +53650,7 @@
 	  };
 	
 	  zoom.interpolate = function(_) {
-	    return arguments.length ? (interpolate$$1 = _, zoom) : interpolate$$1;
+	    return arguments.length ? (interpolate = _, zoom) : interpolate;
 	  };
 	
 	  zoom.on = function() {
@@ -53620,7 +53661,7 @@
 	  zoom.clickDistance = function(_) {
 	    return arguments.length ? (clickDistance2 = (_ = +_) * _, zoom) : Math.sqrt(clickDistance2);
 	  };
-	    
+	
 	  return zoom;
 	};
 	
@@ -53851,7 +53892,7 @@
 	exports.scaleImplicit = implicit;
 	exports.scalePow = pow$1;
 	exports.scaleSqrt = sqrt$1;
-	exports.scaleQuantile = quantile$$1;
+	exports.scaleQuantile = quantile;
 	exports.scaleQuantize = quantize$1;
 	exports.scaleThreshold = threshold$1;
 	exports.scaleTime = time;
@@ -53889,8 +53930,11 @@
 	exports.area = area$2;
 	exports.line = line;
 	exports.pie = pie;
-	exports.radialArea = radialArea;
-	exports.radialLine = radialLine$1;
+	exports.areaRadial = areaRadial;
+	exports.radialArea = areaRadial;
+	exports.lineRadial = lineRadial$1;
+	exports.radialLine = lineRadial$1;
+	exports.pointRadial = pointRadial;
 	exports.linkHorizontal = linkHorizontal;
 	exports.linkVertical = linkVertical;
 	exports.linkRadial = linkRadial;
@@ -64952,7 +64996,7 @@
 	  }
 	});
 	
-	var _TreeMap = __webpack_require__(220);
+	var _TreeMap = __webpack_require__(228);
 	
 	Object.defineProperty(exports, 'TreeMap', {
 	  enumerable: true,
@@ -64961,7 +65005,7 @@
 	  }
 	});
 	
-	var _XYPlot = __webpack_require__(222);
+	var _XYPlot = __webpack_require__(230);
 	
 	Object.defineProperty(exports, 'XYPlot', {
 	  enumerable: true,
@@ -64970,7 +65014,7 @@
 	  }
 	});
 	
-	var _LineChart = __webpack_require__(223);
+	var _LineChart = __webpack_require__(231);
 	
 	Object.defineProperty(exports, 'LineChart', {
 	  enumerable: true,
@@ -64979,7 +65023,7 @@
 	  }
 	});
 	
-	var _ScatterPlot = __webpack_require__(226);
+	var _ScatterPlot = __webpack_require__(234);
 	
 	Object.defineProperty(exports, 'ScatterPlot', {
 	  enumerable: true,
@@ -64988,7 +65032,7 @@
 	  }
 	});
 	
-	var _BarChart = __webpack_require__(227);
+	var _BarChart = __webpack_require__(235);
 	
 	Object.defineProperty(exports, 'BarChart', {
 	  enumerable: true,
@@ -64997,7 +65041,7 @@
 	  }
 	});
 	
-	var _RangeBarChart = __webpack_require__(228);
+	var _RangeBarChart = __webpack_require__(236);
 	
 	Object.defineProperty(exports, 'RangeBarChart', {
 	  enumerable: true,
@@ -65006,7 +65050,7 @@
 	  }
 	});
 	
-	var _AreaBarChart = __webpack_require__(231);
+	var _AreaBarChart = __webpack_require__(239);
 	
 	Object.defineProperty(exports, 'AreaBarChart', {
 	  enumerable: true,
@@ -65015,7 +65059,7 @@
 	  }
 	});
 	
-	var _MarkerLineChart = __webpack_require__(233);
+	var _MarkerLineChart = __webpack_require__(241);
 	
 	Object.defineProperty(exports, 'MarkerLineChart', {
 	  enumerable: true,
@@ -65024,7 +65068,7 @@
 	  }
 	});
 	
-	var _AreaHeatmap = __webpack_require__(234);
+	var _AreaHeatmap = __webpack_require__(242);
 	
 	Object.defineProperty(exports, 'AreaHeatmap', {
 	  enumerable: true,
@@ -65033,7 +65077,7 @@
 	  }
 	});
 	
-	var _Histogram = __webpack_require__(235);
+	var _Histogram = __webpack_require__(243);
 	
 	Object.defineProperty(exports, 'Histogram', {
 	  enumerable: true,
@@ -65042,7 +65086,7 @@
 	  }
 	});
 	
-	var _KernelDensityEstimation = __webpack_require__(236);
+	var _KernelDensityEstimation = __webpack_require__(244);
 	
 	Object.defineProperty(exports, 'KernelDensityEstimation', {
 	  enumerable: true,
@@ -65051,7 +65095,7 @@
 	  }
 	});
 	
-	var _Bar = __webpack_require__(229);
+	var _Bar = __webpack_require__(237);
 	
 	Object.defineProperty(exports, 'Bar', {
 	  enumerable: true,
@@ -65060,7 +65104,7 @@
 	  }
 	});
 	
-	var _RangeRect = __webpack_require__(232);
+	var _RangeRect = __webpack_require__(240);
 	
 	Object.defineProperty(exports, 'RangeRect', {
 	  enumerable: true,
@@ -65069,7 +65113,7 @@
 	  }
 	});
 	
-	var _XLine = __webpack_require__(237);
+	var _XLine = __webpack_require__(245);
 	
 	Object.defineProperty(exports, 'XLine', {
 	  enumerable: true,
@@ -65078,7 +65122,7 @@
 	  }
 	});
 	
-	var _YLine = __webpack_require__(238);
+	var _YLine = __webpack_require__(246);
 	
 	Object.defineProperty(exports, 'YLine', {
 	  enumerable: true,
@@ -65087,7 +65131,7 @@
 	  }
 	});
 	
-	var _XAxis = __webpack_require__(239);
+	var _XAxis = __webpack_require__(247);
 	
 	Object.defineProperty(exports, 'XAxis', {
 	  enumerable: true,
@@ -65096,7 +65140,7 @@
 	  }
 	});
 	
-	var _XAxisLabels = __webpack_require__(243);
+	var _XAxisLabels = __webpack_require__(251);
 	
 	Object.defineProperty(exports, 'XAxisLabels', {
 	  enumerable: true,
@@ -65105,7 +65149,7 @@
 	  }
 	});
 	
-	var _XAxisTitle = __webpack_require__(374);
+	var _XAxisTitle = __webpack_require__(382);
 	
 	Object.defineProperty(exports, 'XAxisTitle', {
 	  enumerable: true,
@@ -65114,7 +65158,7 @@
 	  }
 	});
 	
-	var _XGrid = __webpack_require__(242);
+	var _XGrid = __webpack_require__(250);
 	
 	Object.defineProperty(exports, 'XGrid', {
 	  enumerable: true,
@@ -65123,7 +65167,7 @@
 	  }
 	});
 	
-	var _XTicks = __webpack_require__(241);
+	var _XTicks = __webpack_require__(249);
 	
 	Object.defineProperty(exports, 'XTicks', {
 	  enumerable: true,
@@ -65132,7 +65176,7 @@
 	  }
 	});
 	
-	var _YAxis = __webpack_require__(375);
+	var _YAxis = __webpack_require__(383);
 	
 	Object.defineProperty(exports, 'YAxis', {
 	  enumerable: true,
@@ -65141,7 +65185,7 @@
 	  }
 	});
 	
-	var _YAxisLabels = __webpack_require__(378);
+	var _YAxisLabels = __webpack_require__(386);
 	
 	Object.defineProperty(exports, 'YAxisLabels', {
 	  enumerable: true,
@@ -65150,7 +65194,7 @@
 	  }
 	});
 	
-	var _YAxisTitle = __webpack_require__(379);
+	var _YAxisTitle = __webpack_require__(387);
 	
 	Object.defineProperty(exports, 'YAxisTitle', {
 	  enumerable: true,
@@ -65159,7 +65203,7 @@
 	  }
 	});
 	
-	var _YGrid = __webpack_require__(377);
+	var _YGrid = __webpack_require__(385);
 	
 	Object.defineProperty(exports, 'YGrid', {
 	  enumerable: true,
@@ -65168,7 +65212,7 @@
 	  }
 	});
 	
-	var _YTicks = __webpack_require__(376);
+	var _YTicks = __webpack_require__(384);
 	
 	Object.defineProperty(exports, 'YTicks', {
 	  enumerable: true,
@@ -65217,15 +65261,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _lodash = __webpack_require__(3);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _util = __webpack_require__(218);
+	var _util = __webpack_require__(226);
 	
 	var _Data = __webpack_require__(205);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -65238,9 +65286,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PropTypes = _react2.default.PropTypes;
-	
 	
 	var DEFAULT_PROPS = {
 	  getValue: null,
@@ -65387,38 +65432,38 @@
 	
 	PieChart.propTypes = {
 	  // array of data to plot with pie chart
-	  data: PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	  // (optional) accessor for getting the values plotted on the pie chart
 	  // if not provided, just uses the value itself at given index
 	  getValue: CustomPropTypes.getter,
 	  // (optional) total expected sum of all the pie slice values
 	  // if provided && slices don't add up to total, an "empty" slice will be rendered for the rest
 	  // if not provided, will be the sum of all values (ie. all values will always add up to 100%)
-	  total: PropTypes.number,
+	  total: _propTypes2.default.number,
 	  // (optional) height and width of the SVG
 	  // if only one is passed, same # is used for both (ie. width=100 means height=100 also)
 	  // if neither is passed, but radius is, radius+margins is used
 	  // if neither is passed, and radius isn't either, DEFAULTS.size is used
-	  width: PropTypes.number,
-	  height: PropTypes.number,
+	  width: _propTypes2.default.number,
+	  height: _propTypes2.default.number,
 	  // (optional) main radius of the pie chart, inferred from margin/width/height if not provided
-	  radius: PropTypes.number,
+	  radius: _propTypes2.default.number,
 	  // (optional) margins (between svg edges and pie circle), inferred from radius/width/height if not provided
 	  // can either be a single number (to make all margins equal), or {top, bottom, left, right} object
-	  margin: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+	  margin: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.number]),
 	  // (optional) radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
-	  holeRadius: PropTypes.number,
+	  holeRadius: _propTypes2.default.number,
 	  // (optional) label text to display in the middle of the pie/donut
-	  centerLabel: PropTypes.string,
+	  centerLabel: _propTypes2.default.string,
 	
-	  markerLineValue: PropTypes.number,
-	  markerLineClass: PropTypes.string,
-	  markerLineOverhangInner: PropTypes.number,
-	  markerLineOverhangOuter: PropTypes.number,
+	  markerLineValue: _propTypes2.default.number,
+	  markerLineClass: _propTypes2.default.string,
+	  markerLineOverhangInner: _propTypes2.default.number,
+	  markerLineOverhangOuter: _propTypes2.default.number,
 	
-	  onMouseEnterLine: PropTypes.func,
-	  onMouseMoveLine: PropTypes.func,
-	  onMouseLeaveLine: PropTypes.func
+	  onMouseEnterLine: _propTypes2.default.func,
+	  onMouseMoveLine: _propTypes2.default.func,
+	  onMouseLeaveLine: _propTypes2.default.func
 	};
 	PieChart.defaultProps = DEFAULT_PROPS;
 	
@@ -65481,6 +65526,891 @@
 /* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+	    Symbol.for &&
+	    Symbol.for('react.element')) ||
+	    0xeac7;
+	
+	  var isValidElement = function(object) {
+	    return typeof object === 'object' &&
+	      object !== null &&
+	      object.$$typeof === REACT_ELEMENT_TYPE;
+	  };
+	
+	  // By explicitly using `prop-types` you are opting into new development behavior.
+	  // http://fb.me/prop-types-in-prod
+	  var throwOnDirectAccess = true;
+	  module.exports = __webpack_require__(219)(isValidElement, throwOnDirectAccess);
+	} else {
+	  // By explicitly using `prop-types` you are opting into new production behavior.
+	  // http://fb.me/prop-types-in-prod
+	  module.exports = __webpack_require__(225)();
+	}
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ }),
+/* 219 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+	
+	'use strict';
+	
+	var emptyFunction = __webpack_require__(220);
+	var invariant = __webpack_require__(221);
+	var warning = __webpack_require__(222);
+	
+	var ReactPropTypesSecret = __webpack_require__(223);
+	var checkPropTypes = __webpack_require__(224);
+	
+	module.exports = function(isValidElement, throwOnDirectAccess) {
+	  /* global Symbol */
+	  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+	  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
+	
+	  /**
+	   * Returns the iterator method function contained on the iterable object.
+	   *
+	   * Be sure to invoke the function with the iterable as context:
+	   *
+	   *     var iteratorFn = getIteratorFn(myIterable);
+	   *     if (iteratorFn) {
+	   *       var iterator = iteratorFn.call(myIterable);
+	   *       ...
+	   *     }
+	   *
+	   * @param {?object} maybeIterable
+	   * @return {?function}
+	   */
+	  function getIteratorFn(maybeIterable) {
+	    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
+	    if (typeof iteratorFn === 'function') {
+	      return iteratorFn;
+	    }
+	  }
+	
+	  /**
+	   * Collection of methods that allow declaration and validation of props that are
+	   * supplied to React components. Example usage:
+	   *
+	   *   var Props = require('ReactPropTypes');
+	   *   var MyArticle = React.createClass({
+	   *     propTypes: {
+	   *       // An optional string prop named "description".
+	   *       description: Props.string,
+	   *
+	   *       // A required enum prop named "category".
+	   *       category: Props.oneOf(['News','Photos']).isRequired,
+	   *
+	   *       // A prop named "dialog" that requires an instance of Dialog.
+	   *       dialog: Props.instanceOf(Dialog).isRequired
+	   *     },
+	   *     render: function() { ... }
+	   *   });
+	   *
+	   * A more formal specification of how these methods are used:
+	   *
+	   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
+	   *   decl := ReactPropTypes.{type}(.isRequired)?
+	   *
+	   * Each and every declaration produces a function with the same signature. This
+	   * allows the creation of custom validation functions. For example:
+	   *
+	   *  var MyLink = React.createClass({
+	   *    propTypes: {
+	   *      // An optional string or URI prop named "href".
+	   *      href: function(props, propName, componentName) {
+	   *        var propValue = props[propName];
+	   *        if (propValue != null && typeof propValue !== 'string' &&
+	   *            !(propValue instanceof URI)) {
+	   *          return new Error(
+	   *            'Expected a string or an URI for ' + propName + ' in ' +
+	   *            componentName
+	   *          );
+	   *        }
+	   *      }
+	   *    },
+	   *    render: function() {...}
+	   *  });
+	   *
+	   * @internal
+	   */
+	
+	  var ANONYMOUS = '<<anonymous>>';
+	
+	  // Important!
+	  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
+	  var ReactPropTypes = {
+	    array: createPrimitiveTypeChecker('array'),
+	    bool: createPrimitiveTypeChecker('boolean'),
+	    func: createPrimitiveTypeChecker('function'),
+	    number: createPrimitiveTypeChecker('number'),
+	    object: createPrimitiveTypeChecker('object'),
+	    string: createPrimitiveTypeChecker('string'),
+	    symbol: createPrimitiveTypeChecker('symbol'),
+	
+	    any: createAnyTypeChecker(),
+	    arrayOf: createArrayOfTypeChecker,
+	    element: createElementTypeChecker(),
+	    instanceOf: createInstanceTypeChecker,
+	    node: createNodeChecker(),
+	    objectOf: createObjectOfTypeChecker,
+	    oneOf: createEnumTypeChecker,
+	    oneOfType: createUnionTypeChecker,
+	    shape: createShapeTypeChecker
+	  };
+	
+	  /**
+	   * inlined Object.is polyfill to avoid requiring consumers ship their own
+	   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+	   */
+	  /*eslint-disable no-self-compare*/
+	  function is(x, y) {
+	    // SameValue algorithm
+	    if (x === y) {
+	      // Steps 1-5, 7-10
+	      // Steps 6.b-6.e: +0 != -0
+	      return x !== 0 || 1 / x === 1 / y;
+	    } else {
+	      // Step 6.a: NaN == NaN
+	      return x !== x && y !== y;
+	    }
+	  }
+	  /*eslint-enable no-self-compare*/
+	
+	  /**
+	   * We use an Error-like object for backward compatibility as people may call
+	   * PropTypes directly and inspect their output. However, we don't use real
+	   * Errors anymore. We don't inspect their stack anyway, and creating them
+	   * is prohibitively expensive if they are created too often, such as what
+	   * happens in oneOfType() for any type before the one that matched.
+	   */
+	  function PropTypeError(message) {
+	    this.message = message;
+	    this.stack = '';
+	  }
+	  // Make `instanceof Error` still work for returned errors.
+	  PropTypeError.prototype = Error.prototype;
+	
+	  function createChainableTypeChecker(validate) {
+	    if (process.env.NODE_ENV !== 'production') {
+	      var manualPropTypeCallCache = {};
+	      var manualPropTypeWarningCount = 0;
+	    }
+	    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+	      componentName = componentName || ANONYMOUS;
+	      propFullName = propFullName || propName;
+	
+	      if (secret !== ReactPropTypesSecret) {
+	        if (throwOnDirectAccess) {
+	          // New behavior only for users of `prop-types` package
+	          invariant(
+	            false,
+	            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+	            'Use `PropTypes.checkPropTypes()` to call them. ' +
+	            'Read more at http://fb.me/use-check-prop-types'
+	          );
+	        } else if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
+	          // Old behavior for people using React.PropTypes
+	          var cacheKey = componentName + ':' + propName;
+	          if (
+	            !manualPropTypeCallCache[cacheKey] &&
+	            // Avoid spamming the console because they are often not actionable except for lib authors
+	            manualPropTypeWarningCount < 3
+	          ) {
+	            warning(
+	              false,
+	              'You are manually calling a React.PropTypes validation ' +
+	              'function for the `%s` prop on `%s`. This is deprecated ' +
+	              'and will throw in the standalone `prop-types` package. ' +
+	              'You may be seeing this warning due to a third-party PropTypes ' +
+	              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.',
+	              propFullName,
+	              componentName
+	            );
+	            manualPropTypeCallCache[cacheKey] = true;
+	            manualPropTypeWarningCount++;
+	          }
+	        }
+	      }
+	      if (props[propName] == null) {
+	        if (isRequired) {
+	          if (props[propName] === null) {
+	            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
+	          }
+	          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
+	        }
+	        return null;
+	      } else {
+	        return validate(props, propName, componentName, location, propFullName);
+	      }
+	    }
+	
+	    var chainedCheckType = checkType.bind(null, false);
+	    chainedCheckType.isRequired = checkType.bind(null, true);
+	
+	    return chainedCheckType;
+	  }
+	
+	  function createPrimitiveTypeChecker(expectedType) {
+	    function validate(props, propName, componentName, location, propFullName, secret) {
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== expectedType) {
+	        // `propValue` being instance of, say, date/regexp, pass the 'object'
+	        // check, but we can offer a more precise error message here rather than
+	        // 'of type `object`'.
+	        var preciseType = getPreciseType(propValue);
+	
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createAnyTypeChecker() {
+	    return createChainableTypeChecker(emptyFunction.thatReturnsNull);
+	  }
+	
+	  function createArrayOfTypeChecker(typeChecker) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (typeof typeChecker !== 'function') {
+	        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
+	      }
+	      var propValue = props[propName];
+	      if (!Array.isArray(propValue)) {
+	        var propType = getPropType(propValue);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
+	      }
+	      for (var i = 0; i < propValue.length; i++) {
+	        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
+	        if (error instanceof Error) {
+	          return error;
+	        }
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createElementTypeChecker() {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      if (!isValidElement(propValue)) {
+	        var propType = getPropType(propValue);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createInstanceTypeChecker(expectedClass) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (!(props[propName] instanceof expectedClass)) {
+	        var expectedClassName = expectedClass.name || ANONYMOUS;
+	        var actualClassName = getClassName(props[propName]);
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createEnumTypeChecker(expectedValues) {
+	    if (!Array.isArray(expectedValues)) {
+	      process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid argument supplied to oneOf, expected an instance of array.') : void 0;
+	      return emptyFunction.thatReturnsNull;
+	    }
+	
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      for (var i = 0; i < expectedValues.length; i++) {
+	        if (is(propValue, expectedValues[i])) {
+	          return null;
+	        }
+	      }
+	
+	      var valuesString = JSON.stringify(expectedValues);
+	      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createObjectOfTypeChecker(typeChecker) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (typeof typeChecker !== 'function') {
+	        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
+	      }
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== 'object') {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
+	      }
+	      for (var key in propValue) {
+	        if (propValue.hasOwnProperty(key)) {
+	          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+	          if (error instanceof Error) {
+	            return error;
+	          }
+	        }
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createUnionTypeChecker(arrayOfTypeCheckers) {
+	    if (!Array.isArray(arrayOfTypeCheckers)) {
+	      process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
+	      return emptyFunction.thatReturnsNull;
+	    }
+	
+	    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+	      var checker = arrayOfTypeCheckers[i];
+	      if (typeof checker !== 'function') {
+	        warning(
+	          false,
+	          'Invalid argument supplid to oneOfType. Expected an array of check functions, but ' +
+	          'received %s at index %s.',
+	          getPostfixForTypeWarning(checker),
+	          i
+	        );
+	        return emptyFunction.thatReturnsNull;
+	      }
+	    }
+	
+	    function validate(props, propName, componentName, location, propFullName) {
+	      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+	        var checker = arrayOfTypeCheckers[i];
+	        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) {
+	          return null;
+	        }
+	      }
+	
+	      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createNodeChecker() {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      if (!isNode(props[propName])) {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function createShapeTypeChecker(shapeTypes) {
+	    function validate(props, propName, componentName, location, propFullName) {
+	      var propValue = props[propName];
+	      var propType = getPropType(propValue);
+	      if (propType !== 'object') {
+	        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+	      }
+	      for (var key in shapeTypes) {
+	        var checker = shapeTypes[key];
+	        if (!checker) {
+	          continue;
+	        }
+	        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+	        if (error) {
+	          return error;
+	        }
+	      }
+	      return null;
+	    }
+	    return createChainableTypeChecker(validate);
+	  }
+	
+	  function isNode(propValue) {
+	    switch (typeof propValue) {
+	      case 'number':
+	      case 'string':
+	      case 'undefined':
+	        return true;
+	      case 'boolean':
+	        return !propValue;
+	      case 'object':
+	        if (Array.isArray(propValue)) {
+	          return propValue.every(isNode);
+	        }
+	        if (propValue === null || isValidElement(propValue)) {
+	          return true;
+	        }
+	
+	        var iteratorFn = getIteratorFn(propValue);
+	        if (iteratorFn) {
+	          var iterator = iteratorFn.call(propValue);
+	          var step;
+	          if (iteratorFn !== propValue.entries) {
+	            while (!(step = iterator.next()).done) {
+	              if (!isNode(step.value)) {
+	                return false;
+	              }
+	            }
+	          } else {
+	            // Iterator will provide entry [k,v] tuples rather than values.
+	            while (!(step = iterator.next()).done) {
+	              var entry = step.value;
+	              if (entry) {
+	                if (!isNode(entry[1])) {
+	                  return false;
+	                }
+	              }
+	            }
+	          }
+	        } else {
+	          return false;
+	        }
+	
+	        return true;
+	      default:
+	        return false;
+	    }
+	  }
+	
+	  function isSymbol(propType, propValue) {
+	    // Native Symbol.
+	    if (propType === 'symbol') {
+	      return true;
+	    }
+	
+	    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
+	    if (propValue['@@toStringTag'] === 'Symbol') {
+	      return true;
+	    }
+	
+	    // Fallback for non-spec compliant Symbols which are polyfilled.
+	    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
+	      return true;
+	    }
+	
+	    return false;
+	  }
+	
+	  // Equivalent of `typeof` but with special handling for array and regexp.
+	  function getPropType(propValue) {
+	    var propType = typeof propValue;
+	    if (Array.isArray(propValue)) {
+	      return 'array';
+	    }
+	    if (propValue instanceof RegExp) {
+	      // Old webkits (at least until Android 4.0) return 'function' rather than
+	      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
+	      // passes PropTypes.object.
+	      return 'object';
+	    }
+	    if (isSymbol(propType, propValue)) {
+	      return 'symbol';
+	    }
+	    return propType;
+	  }
+	
+	  // This handles more types than `getPropType`. Only used for error messages.
+	  // See `createPrimitiveTypeChecker`.
+	  function getPreciseType(propValue) {
+	    if (typeof propValue === 'undefined' || propValue === null) {
+	      return '' + propValue;
+	    }
+	    var propType = getPropType(propValue);
+	    if (propType === 'object') {
+	      if (propValue instanceof Date) {
+	        return 'date';
+	      } else if (propValue instanceof RegExp) {
+	        return 'regexp';
+	      }
+	    }
+	    return propType;
+	  }
+	
+	  // Returns a string that is postfixed to a warning about an invalid type.
+	  // For example, "undefined" or "of type array"
+	  function getPostfixForTypeWarning(value) {
+	    var type = getPreciseType(value);
+	    switch (type) {
+	      case 'array':
+	      case 'object':
+	        return 'an ' + type;
+	      case 'boolean':
+	      case 'date':
+	      case 'regexp':
+	        return 'a ' + type;
+	      default:
+	        return type;
+	    }
+	  }
+	
+	  // Returns class name of the object, if any.
+	  function getClassName(propValue) {
+	    if (!propValue.constructor || !propValue.constructor.name) {
+	      return ANONYMOUS;
+	    }
+	    return propValue.constructor.name;
+	  }
+	
+	  ReactPropTypes.checkPropTypes = checkPropTypes;
+	  ReactPropTypes.PropTypes = ReactPropTypes;
+	
+	  return ReactPropTypes;
+	};
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ }),
+/* 220 */
+/***/ (function(module, exports) {
+
+	"use strict";
+	
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * 
+	 */
+	
+	function makeEmptyFunction(arg) {
+	  return function () {
+	    return arg;
+	  };
+	}
+	
+	/**
+	 * This function accepts and discards inputs; it has no side effects. This is
+	 * primarily useful idiomatically for overridable function endpoints which
+	 * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
+	 */
+	var emptyFunction = function emptyFunction() {};
+	
+	emptyFunction.thatReturns = makeEmptyFunction;
+	emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
+	emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
+	emptyFunction.thatReturnsNull = makeEmptyFunction(null);
+	emptyFunction.thatReturnsThis = function () {
+	  return this;
+	};
+	emptyFunction.thatReturnsArgument = function (arg) {
+	  return arg;
+	};
+	
+	module.exports = emptyFunction;
+
+/***/ }),
+/* 221 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 */
+	
+	'use strict';
+	
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+	
+	var validateFormat = function validateFormat(format) {};
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  validateFormat = function validateFormat(format) {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  };
+	}
+	
+	function invariant(condition, format, a, b, c, d, e, f) {
+	  validateFormat(format);
+	
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error(format.replace(/%s/g, function () {
+	        return args[argIndex++];
+	      }));
+	      error.name = 'Invariant Violation';
+	    }
+	
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	}
+	
+	module.exports = invariant;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ }),
+/* 222 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 */
+	
+	'use strict';
+	
+	var emptyFunction = __webpack_require__(220);
+	
+	/**
+	 * Similar to invariant but only logs a warning if the condition is not met.
+	 * This can be used to log issues in development environments in critical
+	 * paths. Removing the logging code for production environments will keep the
+	 * same logic and follow the same code paths.
+	 */
+	
+	var warning = emptyFunction;
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  (function () {
+	    var printWarning = function printWarning(format) {
+	      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	        args[_key - 1] = arguments[_key];
+	      }
+	
+	      var argIndex = 0;
+	      var message = 'Warning: ' + format.replace(/%s/g, function () {
+	        return args[argIndex++];
+	      });
+	      if (typeof console !== 'undefined') {
+	        console.error(message);
+	      }
+	      try {
+	        // --- Welcome to debugging React ---
+	        // This error was thrown as a convenience so that you can use this stack
+	        // to find the callsite that caused this warning to fire.
+	        throw new Error(message);
+	      } catch (x) {}
+	    };
+	
+	    warning = function warning(condition, format) {
+	      if (format === undefined) {
+	        throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
+	      }
+	
+	      if (format.indexOf('Failed Composite propType: ') === 0) {
+	        return; // Ignore CompositeComponent proptype check.
+	      }
+	
+	      if (!condition) {
+	        for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+	          args[_key2 - 2] = arguments[_key2];
+	        }
+	
+	        printWarning.apply(undefined, [format].concat(args));
+	      }
+	    };
+	  })();
+	}
+	
+	module.exports = warning;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ }),
+/* 223 */
+/***/ (function(module, exports) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+	
+	'use strict';
+	
+	var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+	
+	module.exports = ReactPropTypesSecret;
+
+
+/***/ }),
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+	
+	'use strict';
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  var invariant = __webpack_require__(221);
+	  var warning = __webpack_require__(222);
+	  var ReactPropTypesSecret = __webpack_require__(223);
+	  var loggedTypeFailures = {};
+	}
+	
+	/**
+	 * Assert that the values match with the type specs.
+	 * Error messages are memorized and will only be shown once.
+	 *
+	 * @param {object} typeSpecs Map of name to a ReactPropType
+	 * @param {object} values Runtime values that need to be type-checked
+	 * @param {string} location e.g. "prop", "context", "child context"
+	 * @param {string} componentName Name of the component for error messages.
+	 * @param {?Function} getStack Returns the component stack.
+	 * @private
+	 */
+	function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    for (var typeSpecName in typeSpecs) {
+	      if (typeSpecs.hasOwnProperty(typeSpecName)) {
+	        var error;
+	        // Prop type validation may throw. In case they do, we don't want to
+	        // fail the render phase where it didn't fail before. So we log it.
+	        // After these have been cleaned up, we'll let them throw.
+	        try {
+	          // This is intentionally an invariant that gets caught. It's the same
+	          // behavior as without this statement except with a better message.
+	          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', componentName || 'React class', location, typeSpecName);
+	          error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
+	        } catch (ex) {
+	          error = ex;
+	        }
+	        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+	        if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+	          // Only monitor this failure once because there tends to be a lot of the
+	          // same error.
+	          loggedTypeFailures[error.message] = true;
+	
+	          var stack = getStack ? getStack() : '';
+	
+	          warning(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
+	        }
+	      }
+	    }
+	  }
+	}
+	
+	module.exports = checkPropTypes;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ }),
+/* 225 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-present, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+	
+	'use strict';
+	
+	var emptyFunction = __webpack_require__(220);
+	var invariant = __webpack_require__(221);
+	var ReactPropTypesSecret = __webpack_require__(223);
+	
+	module.exports = function() {
+	  function shim(props, propName, componentName, location, propFullName, secret) {
+	    if (secret === ReactPropTypesSecret) {
+	      // It is still safe when called from React.
+	      return;
+	    }
+	    invariant(
+	      false,
+	      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+	      'Use PropTypes.checkPropTypes() to call them. ' +
+	      'Read more at http://fb.me/use-check-prop-types'
+	    );
+	  };
+	  shim.isRequired = shim;
+	  function getShim() {
+	    return shim;
+	  };
+	  // Important!
+	  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+	  var ReactPropTypes = {
+	    array: shim,
+	    bool: shim,
+	    func: shim,
+	    number: shim,
+	    object: shim,
+	    string: shim,
+	    symbol: shim,
+	
+	    any: shim,
+	    arrayOf: getShim,
+	    element: shim,
+	    instanceOf: getShim,
+	    node: shim,
+	    objectOf: getShim,
+	    oneOf: getShim,
+	    oneOfType: getShim,
+	    shape: getShim
+	  };
+	
+	  ReactPropTypes.checkPropTypes = emptyFunction;
+	  ReactPropTypes.PropTypes = ReactPropTypes;
+	
+	  return ReactPropTypes;
+	};
+
+
+/***/ }),
+/* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -65508,7 +66438,7 @@
 	}
 
 /***/ }),
-/* 219 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65522,15 +66452,18 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var PropTypes = _react2.default.PropTypes;
 	var xyObjectOf = exports.xyObjectOf = function xyObjectOf(type) {
-	  return PropTypes.shape({ x: type, y: type });
+	  return _propTypes2.default.shape({ x: type, y: type });
 	};
 	
 	var fourDirectionsOf = exports.fourDirectionsOf = function fourDirectionsOf(type) {
-	  return PropTypes.shape({
+	  return _propTypes2.default.shape({
 	    top: type,
 	    bottom: type,
 	    left: type,
@@ -65538,12 +66471,12 @@
 	  });
 	};
 	
-	var getter = exports.getter = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array, PropTypes.func]);
+	var getter = exports.getter = _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number, _propTypes2.default.array, _propTypes2.default.func]);
 	
-	var scaleType = exports.scaleType = PropTypes.oneOf(['linear', 'time', 'ordinal', 'log', 'pow']);
+	var scaleType = exports.scaleType = _propTypes2.default.oneOf(['linear', 'time', 'ordinal', 'log', 'pow']);
 
 /***/ }),
-/* 220 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65560,15 +66493,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _lodash = __webpack_require__(3);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _d3Hierarchy = __webpack_require__(221);
+	var _d3Hierarchy = __webpack_require__(229);
 	
 	var _Data = __webpack_require__(205);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -65581,8 +66518,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PropTypes = _react2.default.PropTypes;
 	
 	var TreeMapNode = function (_React$Component) {
 	  _inherits(TreeMapNode, _React$Component);
@@ -65615,11 +66550,12 @@
 	          y1 = node.y1;
 	
 	
-	      var nodeGroupClass = parent ? 'node-group-' + _lodash2.default.kebabCase(parent.name) + ' node-group-i-' + parentNames.indexOf(parent.name) : '';
+	      var parentName = _lodash2.default.get(parent, 'data.name');
+	      var nodeGroupClass = parent ? 'node-group-' + _lodash2.default.kebabCase(parentName) + ' node-group-i-' + parentNames.indexOf(parentName) : '';
 	      var className = 'tree-map-node node-depth-' + depth + ' ' + nodeGroupClass;
 	
-	      var style = { position: 'absolute', width: x1 - x0, height: y1 - y0, top: y0, left: x0 };
-	      var customStyle = _lodash2.default.isFunction(nodeStyle) ? nodeStyle(node.data) : _lodash2.default.isObject(nodeStyle) ? nodeStyle : {};
+	      var style = { position: 'absolute', width: x1 - x0, height: y1 - y0, top: y0, left: x0, transition: "all .2s" };
+	      var customStyle = _lodash2.default.isFunction(nodeStyle) ? nodeStyle(node) : _lodash2.default.isObject(nodeStyle) ? nodeStyle : {};
 	      _lodash2.default.assign(style, customStyle);
 	
 	      var handlers = ['onClick', 'onMouseEnter', 'onMouseLeave', 'onMouseMove'].reduce(function (handlers, eventName) {
@@ -65641,23 +66577,23 @@
 	}(_react2.default.Component);
 	
 	TreeMapNode.propTypes = {
-	  node: PropTypes.shape({
-	    parent: PropTypes.object,
-	    children: PropTypes.array,
-	    value: PropTypes.number,
-	    depth: PropTypes.number,
-	    x: PropTypes.number,
-	    y: PropTypes.number,
-	    dx: PropTypes.number,
-	    dy: PropTypes.number
+	  node: _propTypes2.default.shape({
+	    parent: _propTypes2.default.object,
+	    children: _propTypes2.default.array,
+	    value: _propTypes2.default.number,
+	    depth: _propTypes2.default.number,
+	    x: _propTypes2.default.number,
+	    y: _propTypes2.default.number,
+	    dx: _propTypes2.default.number,
+	    dy: _propTypes2.default.number
 	  }),
-	  nodeStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-	  minLabelWidth: PropTypes.number,
-	  minLabelHeight: PropTypes.number,
+	  nodeStyle: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.object]),
+	  minLabelWidth: _propTypes2.default.number,
+	  minLabelHeight: _propTypes2.default.number,
 	
 	  getLabel: CustomPropTypes.getter,
-	  labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-	  NodeLabelComponent: PropTypes.func
+	  labelStyle: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.object]),
+	  NodeLabelComponent: _propTypes2.default.func
 	};
 	TreeMapNode.defaultProps = {
 	  minLabelWidth: 0,
@@ -65690,7 +66626,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        _extends({ className: 'node-label' }, { style: style }),
-	        (0, _Data.makeAccessor)(getLabel)(node.data)
+	        (0, _Data.makeAccessor)(getLabel)(node)
 	      );
 	    }
 	  }]);
@@ -65699,11 +66635,11 @@
 	}(_react2.default.Component);
 	
 	TreeMapNodeLabel.propTypes = {
-	  node: PropTypes.object,
+	  node: _propTypes2.default.object,
 	  getLabel: CustomPropTypes.getter,
-	  labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-	  minLabelWidth: PropTypes.number,
-	  minLabelHeight: PropTypes.number
+	  labelStyle: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.object]),
+	  minLabelWidth: _propTypes2.default.number,
+	  minLabelHeight: _propTypes2.default.number
 	};
 	
 	var TreeMap = function (_React$Component3) {
@@ -65716,32 +66652,56 @@
 	  }
 	
 	  _createClass(TreeMap, [{
-	    key: 'render',
-	    value: function render() {
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var data = this.props.data;
+	      // initialize the layout function
+	
+	      this._tree = getTree(this.props);
+	      // clone the data because d3 mutates it!
+	      this._rootNode = getRootNode(_lodash2.default.cloneDeep(data), this.props);
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(newProps) {
 	      var _props3 = this.props,
 	          width = _props3.width,
 	          height = _props3.height,
-	          nodeStyle = _props3.nodeStyle,
-	          labelStyle = _props3.labelStyle,
-	          getLabel = _props3.getLabel,
-	          minLabelWidth = _props3.minLabelWidth,
-	          minLabelHeight = _props3.minLabelHeight,
-	          onClickNode = _props3.onClickNode,
-	          onMouseEnterNode = _props3.onMouseEnterNode,
-	          onMouseLeaveNode = _props3.onMouseLeaveNode,
-	          onMouseMoveNode = _props3.onMouseMoveNode,
-	          NodeComponent = _props3.NodeComponent,
-	          NodeLabelComponent = _props3.NodeLabelComponent;
+	          data = _props3.data,
+	          sticky = _props3.sticky;
 	
-	      // clone the data because d3 mutates it!
+	      // if height, width, or the data changes, or if the treemap is not sticky, re-initialize the layout function
 	
-	      var data = _lodash2.default.cloneDeep(this.props.data);
-	      // // initialize the layout function
-	      var nodes = initTreemapLayout(this.props);
+	      if (!sticky || width != newProps.width || height != newProps.height || JSON.stringify(data) != JSON.stringify(newProps.data)) {
+	        this._tree = getTree(newProps);
+	        this._rootNode = getRootNode(_lodash2.default.cloneDeep(newProps.data), this.props);
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props4 = this.props,
+	          width = _props4.width,
+	          height = _props4.height,
+	          nodeStyle = _props4.nodeStyle,
+	          labelStyle = _props4.labelStyle,
+	          getLabel = _props4.getLabel,
+	          minLabelWidth = _props4.minLabelWidth,
+	          minLabelHeight = _props4.minLabelHeight,
+	          onClickNode = _props4.onClickNode,
+	          onMouseEnterNode = _props4.onMouseEnterNode,
+	          onMouseLeaveNode = _props4.onMouseLeaveNode,
+	          onMouseMoveNode = _props4.onMouseMoveNode,
+	          NodeComponent = _props4.NodeComponent,
+	          NodeLabelComponent = _props4.NodeLabelComponent,
+	          getValue = _props4.getValue;
+	
+	
+	      var nodes = initTreemap(this._rootNode, this._tree, this.props);
 	
 	      var style = { position: 'relative', width: width, height: height };
 	
-	      var parentNames = _lodash2.default.uniq(_lodash2.default.map(nodes, 'parent.name'));
+	      var parentNames = _lodash2.default.uniq(_lodash2.default.map(nodes, 'parent.data.name'));
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -65761,34 +66721,34 @@
 	}(_react2.default.Component);
 	
 	TreeMap.propTypes = {
-	  width: PropTypes.number.isRequired,
-	  height: PropTypes.number.isRequired,
+	  width: _propTypes2.default.number.isRequired,
+	  height: _propTypes2.default.number.isRequired,
 	
-	  data: PropTypes.object.isRequired,
+	  data: _propTypes2.default.object.isRequired,
 	  getValue: CustomPropTypes.getter,
 	  getChildren: CustomPropTypes.getter,
 	  getLabel: CustomPropTypes.getter,
 	
 	  // options for d3 treemap layout - see d3 docs
-	  sort: PropTypes.func,
-	  padding: PropTypes.number,
-	  round: PropTypes.bool,
-	  sticky: PropTypes.bool,
-	  mode: PropTypes.string,
-	  ratio: PropTypes.number,
+	  sort: _propTypes2.default.func,
+	  padding: _propTypes2.default.number,
+	  round: _propTypes2.default.bool,
+	  sticky: _propTypes2.default.bool,
+	  mode: _propTypes2.default.string,
+	  ratio: _propTypes2.default.number,
 	
-	  nodeStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-	  labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-	  minLabelWidth: PropTypes.number,
-	  minLabelHeight: PropTypes.number,
+	  nodeStyle: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.object]),
+	  labelStyle: _propTypes2.default.oneOfType([_propTypes2.default.func, _propTypes2.default.object]),
+	  minLabelWidth: _propTypes2.default.number,
+	  minLabelHeight: _propTypes2.default.number,
 	
-	  onClickNode: PropTypes.func,
-	  onMouseEnterNode: PropTypes.func,
-	  onMouseLeaveNode: PropTypes.func,
-	  onMouseMoveNode: PropTypes.func,
+	  onClickNode: _propTypes2.default.func,
+	  onMouseEnterNode: _propTypes2.default.func,
+	  onMouseLeaveNode: _propTypes2.default.func,
+	  onMouseMoveNode: _propTypes2.default.func,
 	
-	  NodeComponent: PropTypes.func,
-	  NodeLabelComponent: PropTypes.func
+	  NodeComponent: _propTypes2.default.func,
+	  NodeLabelComponent: _propTypes2.default.func
 	};
 	TreeMap.defaultProps = {
 	  getValue: 'value',
@@ -65801,45 +66761,45 @@
 	};
 	
 	
-	function initTreemapLayout(options) {
+	function getRootNode(data, options) {
+	  var getChildren = options.getChildren;
+	
+	  return (0, _d3Hierarchy.hierarchy)(data, (0, _Data.makeAccessor)(getChildren));
+	}
+	
+	function getTree(options) {
+	  var width = options.width,
+	      height = options.height,
+	      ratio = options.ratio,
+	      round = options.round,
+	      padding = options.padding;
+	
+	  var tiling = !_lodash2.default.isUndefined(ratio) ? _d3Hierarchy.treemapResquarify.ratio(ratio) : _d3Hierarchy.treemapResquarify;
+	  var tree = (0, _d3Hierarchy.treemap)().tile(tiling).size([width, height]);
+	  if (!_lodash2.default.isUndefined(padding)) tree.paddingOuter(padding);
+	  if (!_lodash2.default.isUndefined(round)) tree.round(round);
+	  return tree;
+	}
+	
+	function initTreemap(rootNode, tree, options) {
 	  // create a d3 treemap layout function,
 	  // and configure it with the given options
-	  var data = options.data,
-	      width = options.width,
-	      height = options.height,
-	      getValue = options.getValue,
-	      getChildren = options.getChildren,
-	      sort = options.sort,
-	      padding = options.padding,
-	      round = options.round,
-	      sticky = options.sticky,
-	      mode = options.mode,
-	      ratio = options.ratio;
+	  var getValue = options.getValue,
+	      sort = options.sort;
 	
-	
-	  var rootNode = (0, _d3Hierarchy.hierarchy)(data, (0, _Data.makeAccessor)(getChildren)).sum(function (d) {
-	    return d[getValue] || 0;
+	  var treeRoot = rootNode.sum(function (d) {
+	    if (_lodash2.default.isFunction(getValue)) return getValue(d);else if (_lodash2.default.isString(getValue)) return d[getValue];else return 0;
 	  });
-	  var tree = (0, _d3Hierarchy.treemap)().size([width, height]);
-	  var treemapLayout = tree(rootNode).descendants();
-	
-	  if (!_lodash2.default.isUndefined(sort)) treemapLayout.sort(sort);
-	  if (!_lodash2.default.isUndefined(padding)) treemapLayout.padding(padding);
-	  if (!_lodash2.default.isUndefined(round)) treemapLayout.round(round);
-	  if (!_lodash2.default.isUndefined(sticky)) treemapLayout.sticky(sticky);
-	  if (!_lodash2.default.isUndefined(mode)) treemapLayout.mode(mode);
-	  if (!_lodash2.default.isUndefined(ratio)) treemapLayout.ratio(ratio);
-	
-	  return treemapLayout;
+	  return tree(sort ? treeRoot.sort(sort) : treeRoot).descendants();
 	}
 	
 	exports.default = TreeMap;
 
 /***/ }),
-/* 221 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	// https://d3js.org/d3-hierarchy/ Version 1.1.4. Copyright 2017 Mike Bostock.
+	// https://d3js.org/d3-hierarchy/ Version 1.1.5. Copyright 2017 Mike Bostock.
 	(function (global, factory) {
 		 true ? factory(exports) :
 		typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -66136,83 +67096,92 @@
 	  copy: node_copy
 	};
 	
-	function Node$2(value) {
-	  this._ = value;
-	  this.next = null;
-	}
+	var slice = Array.prototype.slice;
 	
-	var shuffle = function(array) {
-	  var i,
-	      n = (array = array.slice()).length,
-	      head = null,
-	      node = head;
+	function shuffle(array) {
+	  var m = array.length,
+	      t,
+	      i;
 	
-	  while (n) {
-	    var next = new Node$2(array[n - 1]);
-	    if (node) node = node.next = next;
-	    else node = head = next;
-	    array[i] = array[--n];
+	  while (m) {
+	    i = Math.random() * m-- | 0;
+	    t = array[m];
+	    array[m] = array[i];
+	    array[i] = t;
 	  }
 	
-	  return {
-	    head: head,
-	    tail: node
-	  };
-	};
+	  return array;
+	}
 	
 	var enclose = function(circles) {
-	  return encloseN(shuffle(circles), []);
+	  var i = 0, n = (circles = shuffle(slice.call(circles))).length, B = [], p, e;
+	
+	  while (i < n) {
+	    p = circles[i];
+	    if (e && enclosesWeak(e, p)) ++i;
+	    else e = encloseBasis(B = extendBasis(B, p)), i = 0;
+	  }
+	
+	  return e;
 	};
 	
-	function encloses(a, b) {
-	  var dx = b.x - a.x,
-	      dy = b.y - a.y,
-	      dr = a.r - b.r;
-	  return dr * dr + 1e-6 > dx * dx + dy * dy;
-	}
+	function extendBasis(B, p) {
+	  var i, j;
 	
-	// Returns the smallest circle that contains circles L and intersects circles B.
-	function encloseN(L, B) {
-	  var circle,
-	      l0 = null,
-	      l1 = L.head,
-	      l2,
-	      p1;
+	  if (enclosesWeakAll(p, B)) return [p];
 	
-	  switch (B.length) {
-	    case 1: circle = enclose1(B[0]); break;
-	    case 2: circle = enclose2(B[0], B[1]); break;
-	    case 3: circle = enclose3(B[0], B[1], B[2]); break;
-	  }
-	
-	  while (l1) {
-	    p1 = l1._, l2 = l1.next;
-	    if (!circle || !encloses(circle, p1)) {
-	
-	      // Temporarily truncate L before l1.
-	      if (l0) L.tail = l0, l0.next = null;
-	      else L.head = L.tail = null;
-	
-	      B.push(p1);
-	      circle = encloseN(L, B); // Note: reorders L!
-	      B.pop();
-	
-	      // Move l1 to the front of L and reconnect the truncated list L.
-	      if (L.head) l1.next = L.head, L.head = l1;
-	      else l1.next = null, L.head = L.tail = l1;
-	      l0 = L.tail, l0.next = l2;
-	
-	    } else {
-	      l0 = l1;
+	  // If we get here then B must have at least one element.
+	  for (i = 0; i < B.length; ++i) {
+	    if (enclosesNot(p, B[i])
+	        && enclosesWeakAll(encloseBasis2(B[i], p), B)) {
+	      return [B[i], p];
 	    }
-	    l1 = l2;
 	  }
 	
-	  L.tail = l0;
-	  return circle;
+	  // If we get here then B must have at least two elements.
+	  for (i = 0; i < B.length - 1; ++i) {
+	    for (j = i + 1; j < B.length; ++j) {
+	      if (enclosesNot(encloseBasis2(B[i], B[j]), p)
+	          && enclosesNot(encloseBasis2(B[i], p), B[j])
+	          && enclosesNot(encloseBasis2(B[j], p), B[i])
+	          && enclosesWeakAll(encloseBasis3(B[i], B[j], p), B)) {
+	        return [B[i], B[j], p];
+	      }
+	    }
+	  }
+	
+	  // If we get here then something is very wrong.
+	  throw new Error;
 	}
 	
-	function enclose1(a) {
+	function enclosesNot(a, b) {
+	  var dr = a.r - b.r, dx = b.x - a.x, dy = b.y - a.y;
+	  return dr < 0 || dr * dr < dx * dx + dy * dy;
+	}
+	
+	function enclosesWeak(a, b) {
+	  var dr = a.r - b.r + 1e-6, dx = b.x - a.x, dy = b.y - a.y;
+	  return dr > 0 && dr * dr > dx * dx + dy * dy;
+	}
+	
+	function enclosesWeakAll(a, B) {
+	  for (var i = 0; i < B.length; ++i) {
+	    if (!enclosesWeak(a, B[i])) {
+	      return false;
+	    }
+	  }
+	  return true;
+	}
+	
+	function encloseBasis(B) {
+	  switch (B.length) {
+	    case 1: return encloseBasis1(B[0]);
+	    case 2: return encloseBasis2(B[0], B[1]);
+	    case 3: return encloseBasis3(B[0], B[1], B[2]);
+	  }
+	}
+	
+	function encloseBasis1(a) {
 	  return {
 	    x: a.x,
 	    y: a.y,
@@ -66220,7 +67189,7 @@
 	  };
 	}
 	
-	function enclose2(a, b) {
+	function encloseBasis2(a, b) {
 	  var x1 = a.x, y1 = a.y, r1 = a.r,
 	      x2 = b.x, y2 = b.y, r2 = b.r,
 	      x21 = x2 - x1, y21 = y2 - y1, r21 = r2 - r1,
@@ -66232,30 +67201,31 @@
 	  };
 	}
 	
-	function enclose3(a, b, c) {
+	function encloseBasis3(a, b, c) {
 	  var x1 = a.x, y1 = a.y, r1 = a.r,
 	      x2 = b.x, y2 = b.y, r2 = b.r,
 	      x3 = c.x, y3 = c.y, r3 = c.r,
-	      a2 = 2 * (x1 - x2),
-	      b2 = 2 * (y1 - y2),
-	      c2 = 2 * (r2 - r1),
-	      d2 = x1 * x1 + y1 * y1 - r1 * r1 - x2 * x2 - y2 * y2 + r2 * r2,
-	      a3 = 2 * (x1 - x3),
-	      b3 = 2 * (y1 - y3),
-	      c3 = 2 * (r3 - r1),
-	      d3 = x1 * x1 + y1 * y1 - r1 * r1 - x3 * x3 - y3 * y3 + r3 * r3,
+	      a2 = x1 - x2,
+	      a3 = x1 - x3,
+	      b2 = y1 - y2,
+	      b3 = y1 - y3,
+	      c2 = r2 - r1,
+	      c3 = r3 - r1,
+	      d1 = x1 * x1 + y1 * y1 - r1 * r1,
+	      d2 = d1 - x2 * x2 - y2 * y2 + r2 * r2,
+	      d3 = d1 - x3 * x3 - y3 * y3 + r3 * r3,
 	      ab = a3 * b2 - a2 * b3,
-	      xa = (b2 * d3 - b3 * d2) / ab - x1,
+	      xa = (b2 * d3 - b3 * d2) / (ab * 2) - x1,
 	      xb = (b3 * c2 - b2 * c3) / ab,
-	      ya = (a3 * d2 - a2 * d3) / ab - y1,
+	      ya = (a3 * d2 - a2 * d3) / (ab * 2) - y1,
 	      yb = (a2 * c3 - a3 * c2) / ab,
 	      A = xb * xb + yb * yb - 1,
-	      B = 2 * (xa * xb + ya * yb + r1),
+	      B = 2 * (r1 + xa * xb + ya * yb),
 	      C = xa * xa + ya * ya - r1 * r1,
-	      r = (-B - Math.sqrt(B * B - 4 * A * C)) / (2 * A);
+	      r = -(A ? (B + Math.sqrt(B * B - 4 * A * C)) / (2 * A) : C / B);
 	  return {
-	    x: xa + xb * r + x1,
-	    y: ya + yb * r + y1,
+	    x: x1 + xa + xb * r,
+	    y: y1 + ya + yb * r,
 	    r: r
 	  };
 	}
@@ -66286,12 +67256,12 @@
 	  return dr * dr - 1e-6 > dx * dx + dy * dy;
 	}
 	
-	function distance2(node, x, y) {
+	function score(node) {
 	  var a = node._,
 	      b = node.next._,
 	      ab = a.r + b.r,
-	      dx = (a.x * b.r + b.x * a.r) / ab - x,
-	      dy = (a.y * b.r + b.y * a.r) / ab - y;
+	      dx = (a.x * b.r + b.x * a.r) / ab,
+	      dy = (a.y * b.r + b.y * a.r) / ab;
 	  return dx * dx + dy * dy;
 	}
 	
@@ -66304,7 +67274,7 @@
 	function packEnclose(circles) {
 	  if (!(n = circles.length)) return 0;
 	
-	  var a, b, c, n;
+	  var a, b, c, n, aa, ca, i, j, k, sj, sk;
 	
 	  // Place the first circle.
 	  a = circles[0], a.x = 0, a.y = 0;
@@ -66316,15 +67286,6 @@
 	
 	  // Place the third circle.
 	  place(b, a, c = circles[2]);
-	
-	  // Initialize the weighted centroid.
-	  var aa = a.r * a.r,
-	      ba = b.r * b.r,
-	      ca = c.r * c.r,
-	      oa = aa + ba + ca,
-	      ox = aa * a.x + ba * b.x + ca * c.x,
-	      oy = aa * a.y + ba * b.y + ca * c.y,
-	      cx, cy, i, j, k, sj, sk;
 	
 	  // Initialize the front-chain using the first three circles a, b and c.
 	  a = new Node$1(a), b = new Node$1(b), c = new Node$1(c);
@@ -66359,15 +67320,10 @@
 	    // Success! Insert the new circle c between a and b.
 	    c.previous = a, c.next = b, a.next = b.previous = b = c;
 	
-	    // Update the weighted centroid.
-	    oa += ca = c._.r * c._.r;
-	    ox += ca * c._.x;
-	    oy += ca * c._.y;
-	
 	    // Compute the new closest circle pair to the centroid.
-	    aa = distance2(a, cx = ox / oa, cy = oy / oa);
+	    aa = score(a);
 	    while ((c = c.next) !== b) {
-	      if ((ca = distance2(c, cx, cy)) < aa) {
+	      if ((ca = score(c)) < aa) {
 	        a = c, aa = ca;
 	      }
 	    }
@@ -67133,7 +68089,7 @@
 
 
 /***/ }),
-/* 222 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67154,6 +68110,10 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _resolveObjectProps = __webpack_require__(209);
 	
 	var _resolveObjectProps2 = _interopRequireDefault(_resolveObjectProps);
@@ -67166,7 +68126,7 @@
 	
 	var _Scale = __webpack_require__(207);
 	
-	var _util = __webpack_require__(218);
+	var _util = __webpack_require__(226);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -67282,23 +68242,23 @@
 	}(_react2.default.Component);
 	
 	XYPlot.propTypes = {
-	  width: _react2.default.PropTypes.number,
-	  height: _react2.default.PropTypes.number,
-	  scale: _react2.default.PropTypes.object,
-	  scaleType: _react2.default.PropTypes.object,
-	  domain: _react2.default.PropTypes.object,
-	  margin: _react2.default.PropTypes.object,
-	  spacing: _react2.default.PropTypes.object,
+	  width: _propTypes2.default.number,
+	  height: _propTypes2.default.number,
+	  scale: _propTypes2.default.object,
+	  scaleType: _propTypes2.default.object,
+	  domain: _propTypes2.default.object,
+	  margin: _propTypes2.default.object,
+	  spacing: _propTypes2.default.object,
 	  // todo spacing & padding...
-	  padding: _react2.default.PropTypes.object,
-	  nice: _react2.default.PropTypes.object,
-	  invertScale: _react2.default.PropTypes.object,
+	  padding: _propTypes2.default.object,
+	  nice: _propTypes2.default.object,
+	  invertScale: _propTypes2.default.object,
 	
-	  onMouseMove: _react2.default.PropTypes.func,
-	  onMouseEnter: _react2.default.PropTypes.func,
-	  onMouseLeave: _react2.default.PropTypes.func,
-	  onMouseDown: _react2.default.PropTypes.func,
-	  onMouseUp: _react2.default.PropTypes.func
+	  onMouseMove: _propTypes2.default.func,
+	  onMouseEnter: _propTypes2.default.func,
+	  onMouseLeave: _propTypes2.default.func,
+	  onMouseDown: _propTypes2.default.func,
+	  onMouseUp: _propTypes2.default.func
 	};
 	XYPlot.defaultProps = {
 	  width: 400,
@@ -67323,7 +68283,7 @@
 	exports.default = XYPlotResolved;
 
 /***/ }),
-/* 223 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67346,15 +68306,19 @@
 	
 	var _d = __webpack_require__(162);
 	
-	var _shallowEqual = __webpack_require__(224);
+	var _shallowEqual = __webpack_require__(232);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	var _Data = __webpack_require__(205);
 	
 	var _Scale = __webpack_require__(207);
 	
-	var _xyPropsEqual = __webpack_require__(225);
+	var _xyPropsEqual = __webpack_require__(233);
 	
 	var _xyPropsEqual2 = _interopRequireDefault(_xyPropsEqual);
 	
@@ -67455,14 +68419,14 @@
 	
 	LineChart.propTypes = {
 	  // the array of data objects
-	  data: _react2.default.PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	  // accessor for X & Y coordinates
-	  getX: _react2.default.PropTypes.any,
-	  getY: _react2.default.PropTypes.any,
+	  getX: _propTypes2.default.any,
+	  getY: _propTypes2.default.any,
 	  // inline style object to be applied to the path
-	  lineStyle: _react2.default.PropTypes.object,
+	  lineStyle: _propTypes2.default.object,
 	  // props from XYPlot
-	  scale: _react2.default.PropTypes.object
+	  scale: _propTypes2.default.object
 	};
 	LineChart.defaultProps = {
 	  lineStyle: {}
@@ -67485,7 +68449,7 @@
 	}
 
 /***/ }),
-/* 224 */
+/* 232 */
 /***/ (function(module, exports) {
 
 	/**
@@ -67562,7 +68526,7 @@
 	module.exports = shallowEqual;
 
 /***/ }),
-/* 225 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67576,7 +68540,7 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _shallowEqual = __webpack_require__(224);
+	var _shallowEqual = __webpack_require__(232);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 	
@@ -67604,7 +68568,7 @@
 	}
 
 /***/ }),
-/* 226 */
+/* 234 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67623,15 +68587,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _lodash = __webpack_require__(3);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
 	var _Data = __webpack_require__(205);
 	
-	var _util = __webpack_require__(218);
+	var _util = __webpack_require__(226);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -67644,8 +68612,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PropTypes = _react2.default.PropTypes;
 	
 	var ScatterPlot = function (_React$Component) {
 	  _inherits(ScatterPlot, _React$Component);
@@ -67737,28 +68703,28 @@
 	
 	ScatterPlot.propTypes = {
 	  // the array of data objects
-	  data: PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	  // accessors for X & Y coordinates
 	  getX: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
 	  // allow user to pass an accessor for setting the class of a point
 	  getClass: CustomPropTypes.getter,
 	
-	  scaleType: PropTypes.object,
-	  scale: PropTypes.object,
+	  scaleType: _propTypes2.default.object,
+	  scale: _propTypes2.default.object,
 	
 	  // used with the default point symbol (circle), defines the circle radius
-	  pointRadius: PropTypes.number,
+	  pointRadius: _propTypes2.default.number,
 	  // text or SVG node to use as custom point symbol, or function which returns text/SVG
-	  pointSymbol: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+	  pointSymbol: _propTypes2.default.oneOfType([_propTypes2.default.node, _propTypes2.default.func]),
 	  // manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered
-	  pointOffset: PropTypes.arrayOf(PropTypes.number),
+	  pointOffset: _propTypes2.default.arrayOf(_propTypes2.default.number),
 	  // inline styles for points
-	  pointStyle: PropTypes.object,
+	  pointStyle: _propTypes2.default.object,
 	
-	  onMouseEnterPoint: PropTypes.func,
-	  onMouseMovePoint: PropTypes.func,
-	  onMouseLeavePoint: PropTypes.func
+	  onMouseEnterPoint: _propTypes2.default.func,
+	  onMouseMovePoint: _propTypes2.default.func,
+	  onMouseLeavePoint: _propTypes2.default.func
 	};
 	ScatterPlot.defaultProps = {
 	  pointRadius: 3,
@@ -67769,7 +68735,7 @@
 	exports.default = ScatterPlot;
 
 /***/ }),
-/* 227 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67790,15 +68756,19 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _invariant = __webpack_require__(210);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _RangeBarChart = __webpack_require__(228);
+	var _RangeBarChart = __webpack_require__(236);
 	
 	var _RangeBarChart2 = _interopRequireDefault(_RangeBarChart);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -67878,15 +68848,20 @@
 	}(_react2.default.Component);
 	
 	BarChart.propTypes = {
-	  scale: CustomPropTypes.xyObjectOf(_react2.default.PropTypes.func.isRequired),
-	  data: _react2.default.PropTypes.array,
+	  scale: CustomPropTypes.xyObjectOf(_propTypes2.default.func.isRequired),
+	  data: _propTypes2.default.array,
 	  getX: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
-	  horizontal: _react2.default.PropTypes.bool,
+	  horizontal: _propTypes2.default.bool,
 	
-	  barThickness: _react2.default.PropTypes.number,
-	  barClassName: _react2.default.PropTypes.string,
-	  barStyle: _react2.default.PropTypes.object
+	  barThickness: _propTypes2.default.number,
+	  barClassName: _propTypes2.default.string,
+	  barStyle: _propTypes2.default.object,
+	  getClass: CustomPropTypes.getter,
+	
+	  onMouseEnterBar: _propTypes2.default.func,
+	  onMouseMoveBar: _propTypes2.default.func,
+	  onMouseLeaveBar: _propTypes2.default.func
 	};
 	BarChart.defaultProps = {
 	  data: [],
@@ -67898,7 +68873,7 @@
 	exports.default = BarChart;
 
 /***/ }),
-/* 228 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67907,9 +68882,9 @@
 	  value: true
 	});
 	
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -67921,7 +68896,11 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -67929,7 +68908,7 @@
 	
 	var _Data = __webpack_require__(205);
 	
-	var _Bar = __webpack_require__(229);
+	var _Bar = __webpack_require__(237);
 	
 	var _Bar2 = _interopRequireDefault(_Bar);
 	
@@ -67957,6 +68936,8 @@
 	  _createClass(RangeBarChart, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      var _props = this.props,
 	          scale = _props.scale,
 	          data = _props.data,
@@ -67967,28 +68948,44 @@
 	          getYEnd = _props.getYEnd,
 	          barThickness = _props.barThickness,
 	          barClassName = _props.barClassName,
-	          barStyle = _props.barStyle;
+	          barStyle = _props.barStyle,
+	          getClass = _props.getClass;
 	
 	      (0, _invariant2.default)((0, _Scale.hasXYScales)(scale), 'RangeBarChart.props.scale.x and scale.y must both be valid d3 scales');
 	      // invariant(hasOneOfTwo(getXEnd, getYEnd), `RangeBarChart expects a getXEnd *or* getYEnd prop, but not both.`);
 	
 	      var accessors = { x: (0, _Data.makeAccessor)(getX), y: (0, _Data.makeAccessor)(getY) };
 	      var endAccessors = { x: (0, _Data.makeAccessor)(getXEnd), y: (0, _Data.makeAccessor)(getYEnd) };
-	      var barProps = {
-	        scale: scale,
-	        thickness: barThickness,
-	        className: 'chart-bar ' + barClassName,
-	        style: barStyle
-	      };
 	
 	      return _react2.default.createElement(
 	        'g',
 	        null,
 	        data.map(function (d, i) {
+	          var _map = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
+	
+	            // partially apply this bar's data point as 2nd callback argument
+	            var callback = _.get(_this2.props, eventName);
+	            return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+	          }),
+	              _map2 = _slicedToArray(_map, 3),
+	              onMouseEnter = _map2[0],
+	              onMouseMove = _map2[1],
+	              onMouseLeave = _map2[2];
+	
+	          var barProps = {
+	            scale: scale,
+	            thickness: barThickness,
+	            className: 'chart-bar ' + barClassName + ' ' + (getClass ? getClass(d) : ''),
+	            style: barStyle
+	          };
+	
 	          var thisBarProps = _extends({
 	            xValue: accessors.x(d),
 	            yValue: accessors.y(d),
-	            key: 'chart-bar-' + i
+	            key: 'chart-bar-' + i,
+	            onMouseEnter: onMouseEnter,
+	            onMouseMove: onMouseMove,
+	            onMouseLeave: onMouseLeave
 	          }, barProps);
 	
 	          return horizontal ? _react2.default.createElement(_Bar2.default, _extends({ xEndValue: endAccessors.x(d) }, thisBarProps)) : _react2.default.createElement(_Bar2.default, _extends({ yEndValue: endAccessors.y(d) }, thisBarProps));
@@ -68059,18 +69056,23 @@
 	}(_react2.default.Component);
 	
 	RangeBarChart.propTypes = {
-	  scale: CustomPropTypes.xyObjectOf(_react2.default.PropTypes.func.isRequired),
-	  data: _react2.default.PropTypes.array,
-	  horizontal: _react2.default.PropTypes.bool,
+	  scale: CustomPropTypes.xyObjectOf(_propTypes2.default.func.isRequired),
+	  data: _propTypes2.default.array,
+	  horizontal: _propTypes2.default.bool,
 	
 	  getX: CustomPropTypes.getter,
 	  getXEnd: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
 	  getYEnd: CustomPropTypes.getter,
 	
-	  barThickness: _react2.default.PropTypes.number,
-	  barClassName: _react2.default.PropTypes.string,
-	  barStyle: _react2.default.PropTypes.object
+	  barThickness: _propTypes2.default.number,
+	  barClassName: _propTypes2.default.string,
+	  barStyle: _propTypes2.default.object,
+	  getClass: CustomPropTypes.getter,
+	
+	  onMouseEnterBar: _propTypes2.default.func,
+	  onMouseMoveBar: _propTypes2.default.func,
+	  onMouseLeaveBar: _propTypes2.default.func
 	};
 	RangeBarChart.defaultProps = {
 	  data: [],
@@ -68082,7 +69084,7 @@
 	exports.default = RangeBarChart;
 
 /***/ }),
-/* 229 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68101,13 +69103,17 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _isUndefined = __webpack_require__(230);
+	var _isUndefined = __webpack_require__(238);
 	
 	var _isUndefined2 = _interopRequireDefault(_isUndefined);
 	
-	var _util = __webpack_require__(218);
+	var _util = __webpack_require__(226);
 	
 	var _Scale = __webpack_require__(207);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -68144,7 +69150,10 @@
 	          yValue = _props.yValue,
 	          yEndValue = _props.yEndValue,
 	          thickness = _props.thickness,
-	          style = _props.style;
+	          style = _props.style,
+	          onMouseEnter = _props.onMouseEnter,
+	          onMouseMove = _props.onMouseMove,
+	          onMouseLeave = _props.onMouseLeave;
 	      // console.log('bar', this.props);
 	
 	      (0, _invariant2.default)((0, _Scale.hasXYScales)(this.props.scale), 'Bar.props.scale.x and scale.y must both be valid d3 scales');
@@ -68176,8 +69185,8 @@
 	
 	      return _react2.default.createElement('rect', {
 	        x: x, y: y, width: width, height: height,
-	        className: className, style: style
-	        // todo onMouseEnter, onMouseMove, onMouseLeave
+	        className: className, style: style,
+	        onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave
 	      });
 	    }
 	  }]);
@@ -68186,14 +69195,14 @@
 	}(_react2.default.Component);
 	
 	Bar.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired, y: _react2.default.PropTypes.func.isRequired }),
-	  xValue: _react2.default.PropTypes.any,
-	  yValue: _react2.default.PropTypes.any,
-	  xEndValue: _react2.default.PropTypes.any,
-	  yEndValue: _react2.default.PropTypes.any,
-	  thickness: _react2.default.PropTypes.number,
-	  className: _react2.default.PropTypes.string,
-	  style: _react2.default.PropTypes.object
+	  scale: _propTypes2.default.shape({ x: _propTypes2.default.func.isRequired, y: _propTypes2.default.func.isRequired }),
+	  xValue: _propTypes2.default.any,
+	  yValue: _propTypes2.default.any,
+	  xEndValue: _propTypes2.default.any,
+	  yEndValue: _propTypes2.default.any,
+	  thickness: _propTypes2.default.number,
+	  className: _propTypes2.default.string,
+	  style: _propTypes2.default.object
 	};
 	Bar.defaultProps = {
 	  xValue: 0,
@@ -68205,7 +69214,7 @@
 	exports.default = Bar;
 
 /***/ }),
-/* 230 */
+/* 238 */
 /***/ (function(module, exports) {
 
 	/**
@@ -68233,7 +69242,7 @@
 
 
 /***/ }),
-/* 231 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68243,6 +69252,8 @@
 	});
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -68258,7 +69269,11 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -68266,7 +69281,7 @@
 	
 	var _Data = __webpack_require__(205);
 	
-	var _RangeRect = __webpack_require__(232);
+	var _RangeRect = __webpack_require__(240);
 	
 	var _RangeRect2 = _interopRequireDefault(_RangeRect);
 	
@@ -68294,6 +69309,8 @@
 	  _createClass(AreaBarChart, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      var _props = this.props,
 	          scale = _props.scale,
 	          data = _props.data,
@@ -68303,13 +69320,13 @@
 	          getY = _props.getY,
 	          getYEnd = _props.getYEnd,
 	          barClassName = _props.barClassName,
-	          barStyle = _props.barStyle;
+	          barStyle = _props.barStyle,
+	          getClass = _props.getClass;
 	
 	      (0, _invariant2.default)((0, _Scale.hasXYScales)(scale), 'AreaBarChart.props.scale.x and scale.y must both be valid d3 scales');
 	
 	      var barProps = {
 	        scale: scale,
-	        className: 'chart-area-bar ' + barClassName,
 	        style: barStyle
 	      };
 	      var getZero = _lodash2.default.constant(0);
@@ -68318,13 +69335,28 @@
 	        'g',
 	        null,
 	        data.map(function (d, i) {
+	          var _map = ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(function (eventName) {
+	
+	            // partially apply this bar's data point as 2nd callback argument
+	            var callback = _lodash2.default.get(_this2.props, eventName);
+	            return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, d) : null;
+	          }),
+	              _map2 = _slicedToArray(_map, 3),
+	              onMouseEnter = _map2[0],
+	              onMouseMove = _map2[1],
+	              onMouseLeave = _map2[2];
+	
+	          barProps.className = 'chart-area-bar ' + (getClass ? (0, _Data.makeAccessor)(getClass)(d) : '') + ' ' + barClassName;
 	          return _react2.default.createElement(_RangeRect2.default, _extends({
 	            datum: d,
 	            getX: horizontal ? getZero : getX,
 	            getXEnd: horizontal ? getX : getXEnd,
 	            getY: !horizontal ? getZero : getY,
 	            getYEnd: !horizontal ? getY : getYEnd,
-	            key: 'chart-area-bar-' + i
+	            key: 'chart-area-bar-' + i,
+	            onMouseEnter: onMouseEnter,
+	            onMouseMove: onMouseMove,
+	            onMouseLeave: onMouseLeave
 	          }, barProps));
 	        })
 	      );
@@ -68354,17 +69386,22 @@
 	}(_react2.default.Component);
 	
 	AreaBarChart.propTypes = {
-	  scale: CustomPropTypes.xyObjectOf(_react2.default.PropTypes.func.isRequired),
-	  data: _react2.default.PropTypes.array,
-	  horizontal: _react2.default.PropTypes.bool,
+	  scale: CustomPropTypes.xyObjectOf(_propTypes2.default.func.isRequired),
+	  data: _propTypes2.default.array,
+	  horizontal: _propTypes2.default.bool,
 	
 	  getX: CustomPropTypes.getter,
 	  getXEnd: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
 	  getYEnd: CustomPropTypes.getter,
+	  getClass: CustomPropTypes.getter,
 	
-	  barClassName: _react2.default.PropTypes.string,
-	  barStyle: _react2.default.PropTypes.object
+	  barClassName: _propTypes2.default.string,
+	  barStyle: _propTypes2.default.object,
+	
+	  onMouseEnterBar: _propTypes2.default.func,
+	  onMouseMoveBar: _propTypes2.default.func,
+	  onMouseLeaveBar: _propTypes2.default.func
 	};
 	AreaBarChart.defaultProps = {
 	  data: [],
@@ -68375,7 +69412,7 @@
 	exports.default = AreaBarChart;
 
 /***/ }),
-/* 232 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68394,15 +69431,19 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _isUndefined = __webpack_require__(230);
+	var _isUndefined = __webpack_require__(238);
 	
 	var _isUndefined2 = _interopRequireDefault(_isUndefined);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
-	var _util = __webpack_require__(218);
+	var _util = __webpack_require__(226);
 	
 	var _Scale = __webpack_require__(207);
 	
@@ -68441,7 +69482,10 @@
 	          getXEnd = _props.getXEnd,
 	          getY = _props.getY,
 	          getYEnd = _props.getYEnd,
-	          style = _props.style;
+	          style = _props.style,
+	          onMouseEnter = _props.onMouseEnter,
+	          onMouseMove = _props.onMouseMove,
+	          onMouseLeave = _props.onMouseLeave;
 	
 	
 	      (0, _invariant2.default)((0, _Scale.hasXYScales)(scale), 'Bar.props.scale.x and scale.y must both be valid d3 scales');
@@ -68458,7 +69502,7 @@
 	      var height = Math.abs(y1 - y0);
 	
 	      // todo onMouseEnter, onMouseMove, onMouseLeave
-	      return _react2.default.createElement('rect', { x: x, y: y, width: width, height: height, className: className, style: style });
+	      return _react2.default.createElement('rect', { x: x, y: y, width: width, height: height, className: className, style: style, onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave });
 	    }
 	  }]);
 	
@@ -68466,14 +69510,17 @@
 	}(_react2.default.Component);
 	
 	RangeRect.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired, y: _react2.default.PropTypes.func.isRequired }),
-	  datum: _react2.default.PropTypes.any,
+	  scale: _propTypes2.default.shape({ x: _propTypes2.default.func.isRequired, y: _propTypes2.default.func.isRequired }),
+	  datum: _propTypes2.default.any,
 	  getX: CustomPropTypes.getter,
 	  getXEnd: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
 	  getYEnd: CustomPropTypes.getter,
-	  className: _react2.default.PropTypes.string,
-	  style: _react2.default.PropTypes.object
+	  className: _propTypes2.default.string,
+	  style: _propTypes2.default.object,
+	  onMouseEnter: _propTypes2.default.func,
+	  onMouseMove: _propTypes2.default.func,
+	  onMouseLeave: _propTypes2.default.func
 	};
 	RangeRect.defaultProps = {
 	  className: '',
@@ -68482,7 +69529,7 @@
 	exports.default = RangeRect;
 
 /***/ }),
-/* 233 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68505,9 +69552,13 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _util = __webpack_require__(218);
+	var _propTypes = __webpack_require__(218);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _util = __webpack_require__(226);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -68526,9 +69577,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PropTypes = _react2.default.PropTypes;
-	
 	
 	// MarkerLine is similar to a bar chart,
 	// except that it just draws a line at the data value, rather than a full bar
@@ -68738,23 +69786,23 @@
 	
 	MarkerLineChart.propTypes = {
 	  // the array of data objects
-	  data: PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	  // accessor for X & Y coordinates
 	  getX: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
 	  getXEnd: CustomPropTypes.getter,
 	  getYEnd: CustomPropTypes.getter,
 	
-	  horizontal: _react2.default.PropTypes.bool,
-	  lineLength: PropTypes.number,
+	  horizontal: _propTypes2.default.bool,
+	  lineLength: _propTypes2.default.number,
 	
 	  // x & y scale types
-	  scaleType: PropTypes.object,
-	  scale: PropTypes.object,
+	  scaleType: _propTypes2.default.object,
+	  scale: _propTypes2.default.object,
 	
-	  onMouseEnterLine: PropTypes.func,
-	  onMouseMoveLine: PropTypes.func,
-	  onMouseLeaveLine: PropTypes.func
+	  onMouseEnterLine: _propTypes2.default.func,
+	  onMouseMoveLine: _propTypes2.default.func,
+	  onMouseLeaveLine: _propTypes2.default.func
 	};
 	MarkerLineChart.defaultProps = {
 	  horizontal: false,
@@ -68763,7 +69811,7 @@
 	exports.default = MarkerLineChart;
 
 /***/ }),
-/* 234 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68788,7 +69836,11 @@
 	
 	var _d2 = __webpack_require__(162);
 	
-	var _util = __webpack_require__(218);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _util = __webpack_require__(226);
 	
 	var _Data = __webpack_require__(205);
 	
@@ -68949,9 +70001,9 @@
 	}(_react2.default.Component);
 	
 	AreaHeatmap.propTypes = {
-	  unitsPerPixel: _react2.default.PropTypes.number,
-	  rectClassName: _react2.default.PropTypes.string,
-	  rectStyle: _react2.default.PropTypes.object
+	  unitsPerPixel: _propTypes2.default.number,
+	  rectClassName: _propTypes2.default.string,
+	  rectStyle: _propTypes2.default.object
 	};
 	AreaHeatmap.defaultProps = {
 	  rectClassName: '',
@@ -68960,7 +70012,7 @@
 	exports.default = AreaHeatmap;
 
 /***/ }),
-/* 235 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68983,13 +70035,17 @@
 	
 	var _d = __webpack_require__(162);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
 	var _Data = __webpack_require__(205);
 	
-	var _AreaBarChart = __webpack_require__(231);
+	var _AreaBarChart = __webpack_require__(239);
 	
 	var _AreaBarChart2 = _interopRequireDefault(_AreaBarChart);
 	
@@ -69079,17 +70135,17 @@
 	
 	Histogram.propTypes = {
 	  // the array of data objects
-	  data: _react2.default.PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	  // accessors for X & Y coordinates
 	  getValue: CustomPropTypes.getter,
 	
-	  axisType: _react2.default.PropTypes.object,
-	  scale: _react2.default.PropTypes.object
+	  axisType: _propTypes2.default.object,
+	  scale: _propTypes2.default.object
 	};
 	exports.default = Histogram;
 
 /***/ }),
-/* 236 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69112,11 +70168,15 @@
 	
 	var _d = __webpack_require__(162);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
-	var _LineChart = __webpack_require__(223);
+	var _LineChart = __webpack_require__(231);
 	
 	var _LineChart2 = _interopRequireDefault(_LineChart);
 	
@@ -69209,25 +70269,25 @@
 	
 	KernelDensityEstimation.propTypes = {
 	  // the array of data objects
-	  data: _react2.default.PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	
 	  // kernel bandwidth for kernel density estimator
 	  // https://en.wikipedia.org/wiki/Kernel_density_estimation#Bandwidth_selection
 	  // high bandwidth => oversmoothing & underfitting; low bandwidth => undersmoothing & overfitting
-	  bandwidth: _react2.default.PropTypes.number,
+	  bandwidth: _propTypes2.default.number,
 	  // number of samples to take from the KDE
 	  // ie. the resolution/smoothness of the KDE line - more samples => higher resolution, smooth line
-	  sampleCount: _react2.default.PropTypes.number,
+	  sampleCount: _propTypes2.default.number,
 	
 	  // common props from XYPlot
 	  // accessor for data values
 	  getX: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
-	  name: _react2.default.PropTypes.string,
-	  scale: _react2.default.PropTypes.object,
-	  axisType: _react2.default.PropTypes.object,
-	  scaleWidth: _react2.default.PropTypes.number,
-	  scaleHeight: _react2.default.PropTypes.number
+	  name: _propTypes2.default.string,
+	  scale: _propTypes2.default.object,
+	  axisType: _propTypes2.default.object,
+	  scaleWidth: _propTypes2.default.number,
+	  scaleHeight: _propTypes2.default.number
 	};
 	KernelDensityEstimation.defaultProps = {
 	  bandwidth: 0.5,
@@ -69255,7 +70315,7 @@
 	exports.default = KernelDensityEstimation;
 
 /***/ }),
-/* 237 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69269,6 +70329,10 @@
 	var _react = __webpack_require__(5);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -69314,8 +70378,8 @@
 	}(_react2.default.Component);
 	
 	XLine.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired }),
-	  value: _react2.default.PropTypes.any.isRequired
+	  scale: _propTypes2.default.shape({ x: _propTypes2.default.func.isRequired }),
+	  value: _propTypes2.default.any.isRequired
 	};
 	XLine.defaultProps = {
 	  style: {}
@@ -69323,7 +70387,7 @@
 	exports.default = XLine;
 
 /***/ }),
-/* 238 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69337,6 +70401,10 @@
 	var _react = __webpack_require__(5);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -69382,8 +70450,8 @@
 	}(_react2.default.Component);
 	
 	YLine.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ y: _react2.default.PropTypes.func.isRequired }),
-	  value: _react2.default.PropTypes.any.isRequired
+	  scale: _propTypes2.default.shape({ y: _propTypes2.default.func.isRequired }),
+	  value: _propTypes2.default.any.isRequired
 	};
 	YLine.defaultProps = {
 	  style: {}
@@ -69391,7 +70459,7 @@
 	exports.default = YLine;
 
 /***/ }),
-/* 239 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69410,33 +70478,37 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _shallowEqual = __webpack_require__(224);
+	var _shallowEqual = __webpack_require__(232);
 	
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	var _Scale = __webpack_require__(207);
 	
 	var _Margin = __webpack_require__(213);
 	
-	var _Axis = __webpack_require__(240);
+	var _Axis = __webpack_require__(248);
 	
-	var _xyPropsEqual = __webpack_require__(225);
+	var _xyPropsEqual = __webpack_require__(233);
 	
 	var _xyPropsEqual2 = _interopRequireDefault(_xyPropsEqual);
 	
-	var _XTicks = __webpack_require__(241);
+	var _XTicks = __webpack_require__(249);
 	
 	var _XTicks2 = _interopRequireDefault(_XTicks);
 	
-	var _XGrid = __webpack_require__(242);
+	var _XGrid = __webpack_require__(250);
 	
 	var _XGrid2 = _interopRequireDefault(_XGrid);
 	
-	var _XAxisLabels = __webpack_require__(243);
+	var _XAxisLabels = __webpack_require__(251);
 	
 	var _XAxisLabels2 = _interopRequireDefault(_XAxisLabels);
 	
-	var _XAxisTitle = __webpack_require__(374);
+	var _XAxisTitle = __webpack_require__(382);
 	
 	var _XAxisTitle2 = _interopRequireDefault(_XAxisTitle);
 	
@@ -69544,40 +70616,44 @@
 	}(_react2.default.Component);
 	
 	XAxis.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired }),
+	  scale: _propTypes2.default.shape({ x: _propTypes2.default.func.isRequired }),
 	
-	  width: _react2.default.PropTypes.number,
-	  height: _react2.default.PropTypes.number,
-	  position: _react2.default.PropTypes.string,
-	  placement: _react2.default.PropTypes.string,
-	  nice: _react2.default.PropTypes.bool,
-	  ticks: _react2.default.PropTypes.array,
-	  tickCount: _react2.default.PropTypes.number,
+	  width: _propTypes2.default.number,
+	  height: _propTypes2.default.number,
+	  position: _propTypes2.default.string,
+	  placement: _propTypes2.default.string,
+	  nice: _propTypes2.default.bool,
+	  ticks: _propTypes2.default.array,
+	  tickCount: _propTypes2.default.number,
 	
-	  showTitle: _react2.default.PropTypes.bool,
-	  showLabels: _react2.default.PropTypes.bool,
-	  showTicks: _react2.default.PropTypes.bool,
-	  showGrid: _react2.default.PropTypes.bool,
+	  showTitle: _propTypes2.default.bool,
+	  showLabels: _propTypes2.default.bool,
+	  showTicks: _propTypes2.default.bool,
+	  showGrid: _propTypes2.default.bool,
 	
-	  title: _react2.default.PropTypes.string,
-	  titleDistance: _react2.default.PropTypes.number,
-	  titleAlign: _react2.default.PropTypes.string,
-	  titleRotate: _react2.default.PropTypes.bool,
-	  titleStyle: _react2.default.PropTypes.object,
+	  title: _propTypes2.default.string,
+	  titleDistance: _propTypes2.default.number,
+	  titleAlign: _propTypes2.default.string,
+	  titleRotate: _propTypes2.default.bool,
+	  titleStyle: _propTypes2.default.object,
 	
-	  labelDistance: _react2.default.PropTypes.number,
-	  labelClassName: _react2.default.PropTypes.string,
-	  labelStyle: _react2.default.PropTypes.object,
-	  labelFormat: _react2.default.PropTypes.object,
-	  labelFormats: _react2.default.PropTypes.array,
-	  labels: _react2.default.PropTypes.array,
+	  labelDistance: _propTypes2.default.number,
+	  labelClassName: _propTypes2.default.string,
+	  labelStyle: _propTypes2.default.object,
+	  labelFormat: _propTypes2.default.oneOfType([_propTypes2.default.object, _propTypes2.default.func]),
+	  labelFormats: _propTypes2.default.array,
+	  labels: _propTypes2.default.array,
 	
-	  tickLength: _react2.default.PropTypes.number,
-	  tickClassName: _react2.default.PropTypes.string,
-	  tickStyle: _react2.default.PropTypes.object,
+	  tickLength: _propTypes2.default.number,
+	  tickClassName: _propTypes2.default.string,
+	  tickStyle: _propTypes2.default.object,
 	
-	  gridLineClassName: _react2.default.PropTypes.string,
-	  gridLineStyle: _react2.default.PropTypes.object
+	  gridLineClassName: _propTypes2.default.string,
+	  gridLineStyle: _propTypes2.default.object,
+	
+	  onMouseEnterLabel: _propTypes2.default.func,
+	  onMouseMoveLabel: _propTypes2.default.func,
+	  onMouseLeaveLabel: _propTypes2.default.func
 	};
 	XAxis.defaultProps = {
 	  width: 400,
@@ -69596,7 +70672,7 @@
 	exports.default = XAxis;
 
 /***/ }),
-/* 240 */
+/* 248 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -69629,7 +70705,10 @@
 	      labelFormats = props.labelFormats,
 	      labels = props.labels,
 	      gridLineClassName = props.gridLineClassName,
-	      gridLineStyle = props.gridLineStyle;
+	      gridLineStyle = props.gridLineStyle,
+	      onMouseEnterLabel = props.onMouseEnterLabel,
+	      onMouseMoveLabel = props.onMouseMoveLabel,
+	      onMouseLeaveLabel = props.onMouseLeaveLabel;
 	
 	
 	  var ticksProps = {
@@ -69645,7 +70724,8 @@
 	  var labelsProps = {
 	    width: width, height: height, scale: scale, ticks: ticks, tickCount: tickCount, spacing: spacing,
 	    position: position, placement: placement, labels: labels,
-	    labelClassName: labelClassName, labelStyle: labelStyle, distance: labelDistance, format: labelFormat, formats: labelFormats
+	    labelClassName: labelClassName, labelStyle: labelStyle, distance: labelDistance, format: labelFormat, formats: labelFormats,
+	    onMouseEnterLabel: onMouseEnterLabel, onMouseMoveLabel: onMouseMoveLabel, onMouseLeaveLabel: onMouseLeaveLabel
 	  };
 	
 	  var titleProps = {
@@ -69657,7 +70737,7 @@
 	}
 
 /***/ }),
-/* 241 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69675,6 +70755,10 @@
 	var _lodash = __webpack_require__(3);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	var _Scale = __webpack_require__(207);
 	
@@ -69758,7 +70842,7 @@
 	}(_react2.default.Component);
 	
 	XTicks.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired })
+	  scale: _propTypes2.default.shape({ x: _propTypes2.default.func.isRequired })
 	};
 	XTicks.defaultProps = {
 	  position: 'bottom',
@@ -69770,7 +70854,7 @@
 	exports.default = XTicks;
 
 /***/ }),
-/* 242 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69789,9 +70873,13 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _Scale = __webpack_require__(207);
 	
-	var _XLine = __webpack_require__(237);
+	var _XLine = __webpack_require__(245);
 	
 	var _XLine2 = _interopRequireDefault(_XLine);
 	
@@ -69855,14 +70943,14 @@
 	}(_react2.default.Component);
 	
 	XGrid.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ x: _react2.default.PropTypes.func.isRequired }),
-	  width: _react2.default.PropTypes.number,
-	  height: _react2.default.PropTypes.number,
-	  nice: _react2.default.PropTypes.bool,
-	  ticks: _react2.default.PropTypes.array,
-	  tickCount: _react2.default.PropTypes.number,
-	  lineClassName: _react2.default.PropTypes.string,
-	  lineStyle: _react2.default.PropTypes.object
+	  scale: _propTypes2.default.shape({ x: _propTypes2.default.func.isRequired }),
+	  width: _propTypes2.default.number,
+	  height: _propTypes2.default.number,
+	  nice: _propTypes2.default.bool,
+	  ticks: _propTypes2.default.array,
+	  tickCount: _propTypes2.default.number,
+	  lineClassName: _propTypes2.default.string,
+	  lineStyle: _propTypes2.default.object
 	};
 	XGrid.defaultProps = {
 	  nice: true,
@@ -69871,7 +70959,7 @@
 	exports.default = XGrid;
 
 /***/ }),
-/* 243 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69880,9 +70968,9 @@
 	  value: true
 	});
 	
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -69894,15 +70982,19 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _MeasuredValueLabel = __webpack_require__(244);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _MeasuredValueLabel = __webpack_require__(252);
 	
 	var _MeasuredValueLabel2 = _interopRequireDefault(_MeasuredValueLabel);
 	
 	var _Scale = __webpack_require__(207);
 	
-	var _Label = __webpack_require__(255);
+	var _Label = __webpack_require__(263);
 	
-	var _xyPropsEqual = __webpack_require__(225);
+	var _xyPropsEqual = __webpack_require__(233);
 	
 	var _xyPropsEqual2 = _interopRequireDefault(_xyPropsEqual);
 	
@@ -69990,12 +71082,17 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      var _props = this.props,
 	          height = _props.height,
 	          position = _props.position,
 	          distance = _props.distance,
 	          labelStyle = _props.labelStyle,
 	          labelClassName = _props.labelClassName,
+	          onMouseEnterLabel = _props.onMouseEnterLabel,
+	          onMouseMoveLabel = _props.onMouseMoveLabel,
+	          onMouseLeaveLabel = _props.onMouseLeaveLabel,
 	          spacing = _props.spacing;
 	
 	      var scale = this.props.scale.x;
@@ -70013,9 +71110,19 @@
 	          var x = scale(label.value);
 	          var y = placement === 'above' ? -label.height - distance : distance;
 	
+	          var _map = ['onMouseEnterLabel', 'onMouseMoveLabel', 'onMouseLeaveLabel'].map(function (eventName) {
+	            // partially apply this bar's data point as 2nd callback argument
+	            var callback = _lodash2.default.get(_this2.props, eventName);
+	            return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, label.value) : null;
+	          }),
+	              _map2 = _slicedToArray(_map, 3),
+	              onMouseEnter = _map2[0],
+	              onMouseMove = _map2[1],
+	              onMouseLeave = _map2[2];
+	
 	          return _react2.default.createElement(
 	            'g',
-	            { key: 'x-axis-label-' + i },
+	            _extends({ key: 'x-axis-label-' + i }, { onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }),
 	            _react2.default.createElement(
 	              _MeasuredValueLabel2.default,
 	              _extends({ value: label.value }, { x: x, y: y, className: className, dy: "0.8em", style: style }),
@@ -70104,7 +71211,11 @@
 	}(_react2.default.Component);
 	
 	XAxisValueLabels.propTypes = {
-	  scale: _react2.default.PropTypes.object
+	  scale: _propTypes2.default.object,
+	  // Label Handling
+	  onMouseEnterLabel: _propTypes2.default.func,
+	  onMouseMoveLabel: _propTypes2.default.func,
+	  onMouseLeaveLabel: _propTypes2.default.func
 	};
 	XAxisValueLabels.defaultProps = {
 	  height: 250,
@@ -70160,7 +71271,7 @@
 	exports.default = XAxisValueLabels;
 
 /***/ }),
-/* 244 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70179,9 +71290,13 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _measureText = __webpack_require__(245);
+	var _measureText = __webpack_require__(253);
 	
 	var _measureText2 = _interopRequireDefault(_measureText);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -70238,7 +71353,7 @@
 	}(_react2.default.Component);
 	
 	MeasuredValueLabel.propTypes = {
-	  value: _react2.default.PropTypes.any.isRequired
+	  value: _propTypes2.default.any.isRequired
 	};
 	MeasuredValueLabel.defaultProps = {
 	  format: _lodash2.default.identity,
@@ -70252,7 +71367,7 @@
 	exports.default = MeasuredValueLabel;
 
 /***/ }),
-/* 245 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -70261,7 +71376,7 @@
 	  value: true
 	});
 	
-	var _unitsCss = __webpack_require__(246);
+	var _unitsCss = __webpack_require__(254);
 	
 	var _unitsCss2 = _interopRequireDefault(_unitsCss);
 	
@@ -70337,18 +71452,18 @@
 	exports.default = measureText;
 
 /***/ }),
-/* 246 */
+/* 254 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* eslint-env browser, node */
 	
 	'use strict';
 	
-	module.exports = __webpack_require__(247);
+	module.exports = __webpack_require__(255);
 
 
 /***/ }),
-/* 247 */
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* eslint-env browser, node */
@@ -70356,8 +71471,8 @@
 	'use strict';
 	
 	// Imports
-	var conversions = __webpack_require__(248);
-	var isNumeric = __webpack_require__(254);
+	var conversions = __webpack_require__(256);
+	var isNumeric = __webpack_require__(262);
 	
 	var units = {};
 	
@@ -70494,7 +71609,7 @@
 
 
 /***/ }),
-/* 248 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* eslint-env browser, node */
@@ -70503,14 +71618,14 @@
 	
 	// Exports
 	module.exports = {
-	  'angle': __webpack_require__(249),
-	  'length': __webpack_require__(250),
-	  'resolution': __webpack_require__(253)
+	  'angle': __webpack_require__(257),
+	  'length': __webpack_require__(258),
+	  'resolution': __webpack_require__(261)
 	};
 
 
 /***/ }),
-/* 249 */
+/* 257 */
 /***/ (function(module, exports) {
 
 	/* eslint-env browser, node */
@@ -70559,7 +71674,7 @@
 
 
 /***/ }),
-/* 250 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* eslint-env browser, node */
@@ -70567,8 +71682,8 @@
 	'use strict';
 	
 	// Imports
-	var utilities = __webpack_require__(251);
-	var viewport = __webpack_require__(252);
+	var utilities = __webpack_require__(259);
+	var viewport = __webpack_require__(260);
 	
 	var length = {'_default': 'px'};
 	
@@ -70732,7 +71847,7 @@
 
 
 /***/ }),
-/* 251 */
+/* 259 */
 /***/ (function(module, exports) {
 
 	/* eslint-env browser, node */
@@ -70870,7 +71985,7 @@
 
 
 /***/ }),
-/* 252 */
+/* 260 */
 /***/ (function(module, exports) {
 
 	/* eslint-env browser, node */
@@ -70960,7 +72075,7 @@
 
 
 /***/ }),
-/* 253 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* eslint-env browser, node */
@@ -70968,7 +72083,7 @@
 	'use strict';
 	
 	// Imports
-	var utilities = __webpack_require__(251);
+	var utilities = __webpack_require__(259);
 	
 	var resolution = {'_default': 'dpi'};
 	
@@ -71002,7 +72117,7 @@
 
 
 /***/ }),
-/* 254 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var isNumeric = function (obj) {
@@ -71019,7 +72134,7 @@
 
 
 /***/ }),
-/* 255 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71044,11 +72159,11 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _moment = __webpack_require__(256);
+	var _moment = __webpack_require__(264);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _numeral = __webpack_require__(373);
+	var _numeral = __webpack_require__(381);
 	
 	var _numeral2 = _interopRequireDefault(_numeral);
 	
@@ -71170,7 +72285,7 @@
 	}
 
 /***/ }),
-/* 256 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
@@ -73002,7 +74117,7 @@
 	            module && module.exports) {
 	        try {
 	            oldLocale = globalLocale._abbr;
-	            __webpack_require__(257)("./" + name);
+	            __webpack_require__(265)("./" + name);
 	            // because defineLocale currently also sets the global locale, we
 	            // want to undo that for lazy loaded locales
 	            getSetGlobalLocale(oldLocale);
@@ -75640,240 +76755,240 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ }),
-/* 257 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./af": 258,
-		"./af.js": 258,
-		"./ar": 259,
-		"./ar-dz": 260,
-		"./ar-dz.js": 260,
-		"./ar-kw": 261,
-		"./ar-kw.js": 261,
-		"./ar-ly": 262,
-		"./ar-ly.js": 262,
-		"./ar-ma": 263,
-		"./ar-ma.js": 263,
-		"./ar-sa": 264,
-		"./ar-sa.js": 264,
-		"./ar-tn": 265,
-		"./ar-tn.js": 265,
-		"./ar.js": 259,
-		"./az": 266,
-		"./az.js": 266,
-		"./be": 267,
-		"./be.js": 267,
-		"./bg": 268,
-		"./bg.js": 268,
-		"./bn": 269,
-		"./bn.js": 269,
-		"./bo": 270,
-		"./bo.js": 270,
-		"./br": 271,
-		"./br.js": 271,
-		"./bs": 272,
-		"./bs.js": 272,
-		"./ca": 273,
-		"./ca.js": 273,
-		"./cs": 274,
-		"./cs.js": 274,
-		"./cv": 275,
-		"./cv.js": 275,
-		"./cy": 276,
-		"./cy.js": 276,
-		"./da": 277,
-		"./da.js": 277,
-		"./de": 278,
-		"./de-at": 279,
-		"./de-at.js": 279,
-		"./de-ch": 280,
-		"./de-ch.js": 280,
-		"./de.js": 278,
-		"./dv": 281,
-		"./dv.js": 281,
-		"./el": 282,
-		"./el.js": 282,
-		"./en-au": 283,
-		"./en-au.js": 283,
-		"./en-ca": 284,
-		"./en-ca.js": 284,
-		"./en-gb": 285,
-		"./en-gb.js": 285,
-		"./en-ie": 286,
-		"./en-ie.js": 286,
-		"./en-nz": 287,
-		"./en-nz.js": 287,
-		"./eo": 288,
-		"./eo.js": 288,
-		"./es": 289,
-		"./es-do": 290,
-		"./es-do.js": 290,
-		"./es.js": 289,
-		"./et": 291,
-		"./et.js": 291,
-		"./eu": 292,
-		"./eu.js": 292,
-		"./fa": 293,
-		"./fa.js": 293,
-		"./fi": 294,
-		"./fi.js": 294,
-		"./fo": 295,
-		"./fo.js": 295,
-		"./fr": 296,
-		"./fr-ca": 297,
-		"./fr-ca.js": 297,
-		"./fr-ch": 298,
-		"./fr-ch.js": 298,
-		"./fr.js": 296,
-		"./fy": 299,
-		"./fy.js": 299,
-		"./gd": 300,
-		"./gd.js": 300,
-		"./gl": 301,
-		"./gl.js": 301,
-		"./gom-latn": 302,
-		"./gom-latn.js": 302,
-		"./he": 303,
-		"./he.js": 303,
-		"./hi": 304,
-		"./hi.js": 304,
-		"./hr": 305,
-		"./hr.js": 305,
-		"./hu": 306,
-		"./hu.js": 306,
-		"./hy-am": 307,
-		"./hy-am.js": 307,
-		"./id": 308,
-		"./id.js": 308,
-		"./is": 309,
-		"./is.js": 309,
-		"./it": 310,
-		"./it.js": 310,
-		"./ja": 311,
-		"./ja.js": 311,
-		"./jv": 312,
-		"./jv.js": 312,
-		"./ka": 313,
-		"./ka.js": 313,
-		"./kk": 314,
-		"./kk.js": 314,
-		"./km": 315,
-		"./km.js": 315,
-		"./kn": 316,
-		"./kn.js": 316,
-		"./ko": 317,
-		"./ko.js": 317,
-		"./ky": 318,
-		"./ky.js": 318,
-		"./lb": 319,
-		"./lb.js": 319,
-		"./lo": 320,
-		"./lo.js": 320,
-		"./lt": 321,
-		"./lt.js": 321,
-		"./lv": 322,
-		"./lv.js": 322,
-		"./me": 323,
-		"./me.js": 323,
-		"./mi": 324,
-		"./mi.js": 324,
-		"./mk": 325,
-		"./mk.js": 325,
-		"./ml": 326,
-		"./ml.js": 326,
-		"./mr": 327,
-		"./mr.js": 327,
-		"./ms": 328,
-		"./ms-my": 329,
-		"./ms-my.js": 329,
-		"./ms.js": 328,
-		"./my": 330,
-		"./my.js": 330,
-		"./nb": 331,
-		"./nb.js": 331,
-		"./ne": 332,
-		"./ne.js": 332,
-		"./nl": 333,
-		"./nl-be": 334,
-		"./nl-be.js": 334,
-		"./nl.js": 333,
-		"./nn": 335,
-		"./nn.js": 335,
-		"./pa-in": 336,
-		"./pa-in.js": 336,
-		"./pl": 337,
-		"./pl.js": 337,
-		"./pt": 338,
-		"./pt-br": 339,
-		"./pt-br.js": 339,
-		"./pt.js": 338,
-		"./ro": 340,
-		"./ro.js": 340,
-		"./ru": 341,
-		"./ru.js": 341,
-		"./sd": 342,
-		"./sd.js": 342,
-		"./se": 343,
-		"./se.js": 343,
-		"./si": 344,
-		"./si.js": 344,
-		"./sk": 345,
-		"./sk.js": 345,
-		"./sl": 346,
-		"./sl.js": 346,
-		"./sq": 347,
-		"./sq.js": 347,
-		"./sr": 348,
-		"./sr-cyrl": 349,
-		"./sr-cyrl.js": 349,
-		"./sr.js": 348,
-		"./ss": 350,
-		"./ss.js": 350,
-		"./sv": 351,
-		"./sv.js": 351,
-		"./sw": 352,
-		"./sw.js": 352,
-		"./ta": 353,
-		"./ta.js": 353,
-		"./te": 354,
-		"./te.js": 354,
-		"./tet": 355,
-		"./tet.js": 355,
-		"./th": 356,
-		"./th.js": 356,
-		"./tl-ph": 357,
-		"./tl-ph.js": 357,
-		"./tlh": 358,
-		"./tlh.js": 358,
-		"./tr": 359,
-		"./tr.js": 359,
-		"./tzl": 360,
-		"./tzl.js": 360,
-		"./tzm": 361,
-		"./tzm-latn": 362,
-		"./tzm-latn.js": 362,
-		"./tzm.js": 361,
-		"./uk": 363,
-		"./uk.js": 363,
-		"./ur": 364,
-		"./ur.js": 364,
-		"./uz": 365,
-		"./uz-latn": 366,
-		"./uz-latn.js": 366,
-		"./uz.js": 365,
-		"./vi": 367,
-		"./vi.js": 367,
-		"./x-pseudo": 368,
-		"./x-pseudo.js": 368,
-		"./yo": 369,
-		"./yo.js": 369,
-		"./zh-cn": 370,
-		"./zh-cn.js": 370,
-		"./zh-hk": 371,
-		"./zh-hk.js": 371,
-		"./zh-tw": 372,
-		"./zh-tw.js": 372
+		"./af": 266,
+		"./af.js": 266,
+		"./ar": 267,
+		"./ar-dz": 268,
+		"./ar-dz.js": 268,
+		"./ar-kw": 269,
+		"./ar-kw.js": 269,
+		"./ar-ly": 270,
+		"./ar-ly.js": 270,
+		"./ar-ma": 271,
+		"./ar-ma.js": 271,
+		"./ar-sa": 272,
+		"./ar-sa.js": 272,
+		"./ar-tn": 273,
+		"./ar-tn.js": 273,
+		"./ar.js": 267,
+		"./az": 274,
+		"./az.js": 274,
+		"./be": 275,
+		"./be.js": 275,
+		"./bg": 276,
+		"./bg.js": 276,
+		"./bn": 277,
+		"./bn.js": 277,
+		"./bo": 278,
+		"./bo.js": 278,
+		"./br": 279,
+		"./br.js": 279,
+		"./bs": 280,
+		"./bs.js": 280,
+		"./ca": 281,
+		"./ca.js": 281,
+		"./cs": 282,
+		"./cs.js": 282,
+		"./cv": 283,
+		"./cv.js": 283,
+		"./cy": 284,
+		"./cy.js": 284,
+		"./da": 285,
+		"./da.js": 285,
+		"./de": 286,
+		"./de-at": 287,
+		"./de-at.js": 287,
+		"./de-ch": 288,
+		"./de-ch.js": 288,
+		"./de.js": 286,
+		"./dv": 289,
+		"./dv.js": 289,
+		"./el": 290,
+		"./el.js": 290,
+		"./en-au": 291,
+		"./en-au.js": 291,
+		"./en-ca": 292,
+		"./en-ca.js": 292,
+		"./en-gb": 293,
+		"./en-gb.js": 293,
+		"./en-ie": 294,
+		"./en-ie.js": 294,
+		"./en-nz": 295,
+		"./en-nz.js": 295,
+		"./eo": 296,
+		"./eo.js": 296,
+		"./es": 297,
+		"./es-do": 298,
+		"./es-do.js": 298,
+		"./es.js": 297,
+		"./et": 299,
+		"./et.js": 299,
+		"./eu": 300,
+		"./eu.js": 300,
+		"./fa": 301,
+		"./fa.js": 301,
+		"./fi": 302,
+		"./fi.js": 302,
+		"./fo": 303,
+		"./fo.js": 303,
+		"./fr": 304,
+		"./fr-ca": 305,
+		"./fr-ca.js": 305,
+		"./fr-ch": 306,
+		"./fr-ch.js": 306,
+		"./fr.js": 304,
+		"./fy": 307,
+		"./fy.js": 307,
+		"./gd": 308,
+		"./gd.js": 308,
+		"./gl": 309,
+		"./gl.js": 309,
+		"./gom-latn": 310,
+		"./gom-latn.js": 310,
+		"./he": 311,
+		"./he.js": 311,
+		"./hi": 312,
+		"./hi.js": 312,
+		"./hr": 313,
+		"./hr.js": 313,
+		"./hu": 314,
+		"./hu.js": 314,
+		"./hy-am": 315,
+		"./hy-am.js": 315,
+		"./id": 316,
+		"./id.js": 316,
+		"./is": 317,
+		"./is.js": 317,
+		"./it": 318,
+		"./it.js": 318,
+		"./ja": 319,
+		"./ja.js": 319,
+		"./jv": 320,
+		"./jv.js": 320,
+		"./ka": 321,
+		"./ka.js": 321,
+		"./kk": 322,
+		"./kk.js": 322,
+		"./km": 323,
+		"./km.js": 323,
+		"./kn": 324,
+		"./kn.js": 324,
+		"./ko": 325,
+		"./ko.js": 325,
+		"./ky": 326,
+		"./ky.js": 326,
+		"./lb": 327,
+		"./lb.js": 327,
+		"./lo": 328,
+		"./lo.js": 328,
+		"./lt": 329,
+		"./lt.js": 329,
+		"./lv": 330,
+		"./lv.js": 330,
+		"./me": 331,
+		"./me.js": 331,
+		"./mi": 332,
+		"./mi.js": 332,
+		"./mk": 333,
+		"./mk.js": 333,
+		"./ml": 334,
+		"./ml.js": 334,
+		"./mr": 335,
+		"./mr.js": 335,
+		"./ms": 336,
+		"./ms-my": 337,
+		"./ms-my.js": 337,
+		"./ms.js": 336,
+		"./my": 338,
+		"./my.js": 338,
+		"./nb": 339,
+		"./nb.js": 339,
+		"./ne": 340,
+		"./ne.js": 340,
+		"./nl": 341,
+		"./nl-be": 342,
+		"./nl-be.js": 342,
+		"./nl.js": 341,
+		"./nn": 343,
+		"./nn.js": 343,
+		"./pa-in": 344,
+		"./pa-in.js": 344,
+		"./pl": 345,
+		"./pl.js": 345,
+		"./pt": 346,
+		"./pt-br": 347,
+		"./pt-br.js": 347,
+		"./pt.js": 346,
+		"./ro": 348,
+		"./ro.js": 348,
+		"./ru": 349,
+		"./ru.js": 349,
+		"./sd": 350,
+		"./sd.js": 350,
+		"./se": 351,
+		"./se.js": 351,
+		"./si": 352,
+		"./si.js": 352,
+		"./sk": 353,
+		"./sk.js": 353,
+		"./sl": 354,
+		"./sl.js": 354,
+		"./sq": 355,
+		"./sq.js": 355,
+		"./sr": 356,
+		"./sr-cyrl": 357,
+		"./sr-cyrl.js": 357,
+		"./sr.js": 356,
+		"./ss": 358,
+		"./ss.js": 358,
+		"./sv": 359,
+		"./sv.js": 359,
+		"./sw": 360,
+		"./sw.js": 360,
+		"./ta": 361,
+		"./ta.js": 361,
+		"./te": 362,
+		"./te.js": 362,
+		"./tet": 363,
+		"./tet.js": 363,
+		"./th": 364,
+		"./th.js": 364,
+		"./tl-ph": 365,
+		"./tl-ph.js": 365,
+		"./tlh": 366,
+		"./tlh.js": 366,
+		"./tr": 367,
+		"./tr.js": 367,
+		"./tzl": 368,
+		"./tzl.js": 368,
+		"./tzm": 369,
+		"./tzm-latn": 370,
+		"./tzm-latn.js": 370,
+		"./tzm.js": 369,
+		"./uk": 371,
+		"./uk.js": 371,
+		"./ur": 372,
+		"./ur.js": 372,
+		"./uz": 373,
+		"./uz-latn": 374,
+		"./uz-latn.js": 374,
+		"./uz.js": 373,
+		"./vi": 375,
+		"./vi.js": 375,
+		"./x-pseudo": 376,
+		"./x-pseudo.js": 376,
+		"./yo": 377,
+		"./yo.js": 377,
+		"./zh-cn": 378,
+		"./zh-cn.js": 378,
+		"./zh-hk": 379,
+		"./zh-hk.js": 379,
+		"./zh-tw": 380,
+		"./zh-tw.js": 380
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -75886,11 +77001,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 257;
+	webpackContext.id = 265;
 
 
 /***/ }),
-/* 258 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -75898,7 +77013,7 @@
 	//! author : Werner Mollentze : https://github.com/wernerm
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -75968,7 +77083,7 @@
 
 
 /***/ }),
-/* 259 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -75978,7 +77093,7 @@
 	//! author : forabi https://github.com/forabi
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76115,7 +77230,7 @@
 
 
 /***/ }),
-/* 260 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76123,7 +77238,7 @@
 	//! author : Noureddine LOUAHEDJ : https://github.com/noureddineme
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76179,7 +77294,7 @@
 
 
 /***/ }),
-/* 261 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76187,7 +77302,7 @@
 	//! author : Nusret Parlak: https://github.com/nusretparlak
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76243,7 +77358,7 @@
 
 
 /***/ }),
-/* 262 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76251,7 +77366,7 @@
 	//! author : Ali Hmer: https://github.com/kikoanis
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76374,7 +77489,7 @@
 
 
 /***/ }),
-/* 263 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76383,7 +77498,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76439,7 +77554,7 @@
 
 
 /***/ }),
-/* 264 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76447,7 +77562,7 @@
 	//! author : Suhail Alkowaileet : https://github.com/xsoh
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76549,7 +77664,7 @@
 
 
 /***/ }),
-/* 265 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76557,7 +77672,7 @@
 	//! author : Nader Toukabri : https://github.com/naderio
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76613,7 +77728,7 @@
 
 
 /***/ }),
-/* 266 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76621,7 +77736,7 @@
 	//! author : topchiyev : https://github.com/topchiyev
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76723,7 +77838,7 @@
 
 
 /***/ }),
-/* 267 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76733,7 +77848,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76862,7 +77977,7 @@
 
 
 /***/ }),
-/* 268 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76870,7 +77985,7 @@
 	//! author : Krasen Borisov : https://github.com/kraz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -76957,7 +78072,7 @@
 
 
 /***/ }),
-/* 269 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -76965,7 +78080,7 @@
 	//! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77081,7 +78196,7 @@
 
 
 /***/ }),
-/* 270 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77089,7 +78204,7 @@
 	//! author : Thupten N. Chakrishar : https://github.com/vajradog
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77205,7 +78320,7 @@
 
 
 /***/ }),
-/* 271 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77213,7 +78328,7 @@
 	//! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77318,7 +78433,7 @@
 
 
 /***/ }),
-/* 272 */
+/* 280 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77327,7 +78442,7 @@
 	//! based on (hr) translation by Bojan Marković
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77466,7 +78581,7 @@
 
 
 /***/ }),
-/* 273 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77474,7 +78589,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77559,7 +78674,7 @@
 
 
 /***/ }),
-/* 274 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77567,7 +78682,7 @@
 	//! author : petrbela : https://github.com/petrbela
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77736,7 +78851,7 @@
 
 
 /***/ }),
-/* 275 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77744,7 +78859,7 @@
 	//! author : Anatoly Mironov : https://github.com/mirontoli
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77804,7 +78919,7 @@
 
 
 /***/ }),
-/* 276 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77813,7 +78928,7 @@
 	//! author : https://github.com/ryangreaves
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77890,7 +79005,7 @@
 
 
 /***/ }),
-/* 277 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77898,7 +79013,7 @@
 	//! author : Ulrik Nielsen : https://github.com/mrbase
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -77955,7 +79070,7 @@
 
 
 /***/ }),
-/* 278 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -77965,7 +79080,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78038,7 +79153,7 @@
 
 
 /***/ }),
-/* 279 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78049,7 +79164,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78122,7 +79237,7 @@
 
 
 /***/ }),
-/* 280 */
+/* 288 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78130,7 +79245,7 @@
 	//! author : sschueller : https://github.com/sschueller
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78205,7 +79320,7 @@
 
 
 /***/ }),
-/* 281 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78213,7 +79328,7 @@
 	//! author : Jawish Hameed : https://github.com/jawish
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78310,7 +79425,7 @@
 
 
 /***/ }),
-/* 282 */
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78318,7 +79433,7 @@
 	//! author : Aggelos Karalias : https://github.com/mehiel
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78415,7 +79530,7 @@
 
 
 /***/ }),
-/* 283 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78423,7 +79538,7 @@
 	//! author : Jared Morse : https://github.com/jarcoal
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78487,7 +79602,7 @@
 
 
 /***/ }),
-/* 284 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78495,7 +79610,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78555,7 +79670,7 @@
 
 
 /***/ }),
-/* 285 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78563,7 +79678,7 @@
 	//! author : Chris Gedrim : https://github.com/chrisgedrim
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78627,7 +79742,7 @@
 
 
 /***/ }),
-/* 286 */
+/* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78635,7 +79750,7 @@
 	//! author : Chris Cartlidge : https://github.com/chriscartlidge
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78699,7 +79814,7 @@
 
 
 /***/ }),
-/* 287 */
+/* 295 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78707,7 +79822,7 @@
 	//! author : Luke McGregor : https://github.com/lukemcgregor
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78771,7 +79886,7 @@
 
 
 /***/ }),
-/* 288 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78781,7 +79896,7 @@
 	//! comment : miestasmia corrected the translation by colindean
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78849,7 +79964,7 @@
 
 
 /***/ }),
-/* 289 */
+/* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -78857,7 +79972,7 @@
 	//! author : Julio Napurí : https://github.com/julionc
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -78937,14 +80052,14 @@
 
 
 /***/ }),
-/* 290 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Spanish (Dominican Republic) [es-do]
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79024,7 +80139,7 @@
 
 
 /***/ }),
-/* 291 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79033,7 +80148,7 @@
 	//! improvements : Illimar Tambek : https://github.com/ragulka
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79109,7 +80224,7 @@
 
 
 /***/ }),
-/* 292 */
+/* 300 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79117,7 +80232,7 @@
 	//! author : Eneko Illarramendi : https://github.com/eillarra
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79180,7 +80295,7 @@
 
 
 /***/ }),
-/* 293 */
+/* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79188,7 +80303,7 @@
 	//! author : Ebrahim Byagowi : https://github.com/ebraminio
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79292,7 +80407,7 @@
 
 
 /***/ }),
-/* 294 */
+/* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79300,7 +80415,7 @@
 	//! author : Tarmo Aidantausta : https://github.com/bleadof
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79404,7 +80519,7 @@
 
 
 /***/ }),
-/* 295 */
+/* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79412,7 +80527,7 @@
 	//! author : Ragnar Johannesen : https://github.com/ragnar123
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79469,7 +80584,7 @@
 
 
 /***/ }),
-/* 296 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79477,7 +80592,7 @@
 	//! author : John Fischer : https://github.com/jfroffice
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79557,7 +80672,7 @@
 
 
 /***/ }),
-/* 297 */
+/* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79565,7 +80680,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79636,7 +80751,7 @@
 
 
 /***/ }),
-/* 298 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79644,7 +80759,7 @@
 	//! author : Gaspard Bucher : https://github.com/gaspard
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79719,7 +80834,7 @@
 
 
 /***/ }),
-/* 299 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79727,7 +80842,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79799,7 +80914,7 @@
 
 
 /***/ }),
-/* 300 */
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79807,7 +80922,7 @@
 	//! author : Jon Ashdown : https://github.com/jonashdown
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79880,7 +80995,7 @@
 
 
 /***/ }),
-/* 301 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79888,7 +81003,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -79962,7 +81077,7 @@
 
 
 /***/ }),
-/* 302 */
+/* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -79970,7 +81085,7 @@
 	//! author : The Discoverer : https://github.com/WikiDiscoverer
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80089,7 +81204,7 @@
 
 
 /***/ }),
-/* 303 */
+/* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80099,7 +81214,7 @@
 	//! author : Tal Ater : https://github.com/TalAter
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80193,7 +81308,7 @@
 
 
 /***/ }),
-/* 304 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80201,7 +81316,7 @@
 	//! author : Mayank Singhal : https://github.com/mayanksinghal
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80322,7 +81437,7 @@
 
 
 /***/ }),
-/* 305 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80330,7 +81445,7 @@
 	//! author : Bojan Marković : https://github.com/bmarkovic
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80472,7 +81587,7 @@
 
 
 /***/ }),
-/* 306 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80480,7 +81595,7 @@
 	//! author : Adam Brunner : https://github.com/adambrunner
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80586,7 +81701,7 @@
 
 
 /***/ }),
-/* 307 */
+/* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80594,7 +81709,7 @@
 	//! author : Armendarabyan : https://github.com/armendarabyan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80686,7 +81801,7 @@
 
 
 /***/ }),
-/* 308 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80695,7 +81810,7 @@
 	//! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80774,7 +81889,7 @@
 
 
 /***/ }),
-/* 309 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80782,7 +81897,7 @@
 	//! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80906,7 +82021,7 @@
 
 
 /***/ }),
-/* 310 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80915,7 +82030,7 @@
 	//! author: Mattia Larentis: https://github.com/nostalgiaz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -80981,7 +82096,7 @@
 
 
 /***/ }),
-/* 311 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -80989,7 +82104,7 @@
 	//! author : LI Long : https://github.com/baryon
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81066,7 +82181,7 @@
 
 
 /***/ }),
-/* 312 */
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81075,7 +82190,7 @@
 	//! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81154,7 +82269,7 @@
 
 
 /***/ }),
-/* 313 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81162,7 +82277,7 @@
 	//! author : Irakli Janiashvili : https://github.com/irakli-janiashvili
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81248,7 +82363,7 @@
 
 
 /***/ }),
-/* 314 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81256,7 +82371,7 @@
 	//! authors : Nurlan Rakhimzhanov : https://github.com/nurlan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81340,7 +82455,7 @@
 
 
 /***/ }),
-/* 315 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81348,7 +82463,7 @@
 	//! author : Kruy Vanna : https://github.com/kruyvanna
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81403,7 +82518,7 @@
 
 
 /***/ }),
-/* 316 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81411,7 +82526,7 @@
 	//! author : Rajeev Naik : https://github.com/rajeevnaikte
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81534,7 +82649,7 @@
 
 
 /***/ }),
-/* 317 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81543,7 +82658,7 @@
 	//! author : Jeeeyul Lee <jeeeyul@gmail.com>
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81608,7 +82723,7 @@
 
 
 /***/ }),
-/* 318 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81616,7 +82731,7 @@
 	//! author : Chyngyz Arystan uulu : https://github.com/chyngyz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81701,7 +82816,7 @@
 
 
 /***/ }),
-/* 319 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81710,7 +82825,7 @@
 	//! author : David Raison : https://github.com/kwisatz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81843,7 +82958,7 @@
 
 
 /***/ }),
-/* 320 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81851,7 +82966,7 @@
 	//! author : Ryan Hart : https://github.com/ryanhart2
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -81918,7 +83033,7 @@
 
 
 /***/ }),
-/* 321 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -81926,7 +83041,7 @@
 	//! author : Mindaugas Mozūras : https://github.com/mmozuras
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82040,7 +83155,7 @@
 
 
 /***/ }),
-/* 322 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82049,7 +83164,7 @@
 	//! author : Jānis Elmeris : https://github.com/JanisE
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82142,7 +83257,7 @@
 
 
 /***/ }),
-/* 323 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82150,7 +83265,7 @@
 	//! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82258,7 +83373,7 @@
 
 
 /***/ }),
-/* 324 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82266,7 +83381,7 @@
 	//! author : John Corrigan <robbiecloset@gmail.com> : https://github.com/johnideal
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82327,7 +83442,7 @@
 
 
 /***/ }),
-/* 325 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82335,7 +83450,7 @@
 	//! author : Borislav Mickov : https://github.com/B0k0
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82422,7 +83537,7 @@
 
 
 /***/ }),
-/* 326 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82430,7 +83545,7 @@
 	//! author : Floyd Pink : https://github.com/floydpink
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82508,7 +83623,7 @@
 
 
 /***/ }),
-/* 327 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82517,7 +83632,7 @@
 	//! author : Vivek Athalye : https://github.com/vnathalye
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82672,7 +83787,7 @@
 
 
 /***/ }),
-/* 328 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82680,7 +83795,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82759,7 +83874,7 @@
 
 
 /***/ }),
-/* 329 */
+/* 337 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82768,7 +83883,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82847,7 +83962,7 @@
 
 
 /***/ }),
-/* 330 */
+/* 338 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82857,7 +83972,7 @@
 	//! author : Tin Aung Lin : https://github.com/thanyawzinmin
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -82948,7 +84063,7 @@
 
 
 /***/ }),
-/* 331 */
+/* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -82957,7 +84072,7 @@
 	//!           Sigurd Gartmann : https://github.com/sigurdga
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83016,7 +84131,7 @@
 
 
 /***/ }),
-/* 332 */
+/* 340 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83024,7 +84139,7 @@
 	//! author : suvash : https://github.com/suvash
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83144,7 +84259,7 @@
 
 
 /***/ }),
-/* 333 */
+/* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83153,7 +84268,7 @@
 	//! author : Jacob Middag : https://github.com/middagj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83237,7 +84352,7 @@
 
 
 /***/ }),
-/* 334 */
+/* 342 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83246,7 +84361,7 @@
 	//! author : Jacob Middag : https://github.com/middagj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83330,7 +84445,7 @@
 
 
 /***/ }),
-/* 335 */
+/* 343 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83338,7 +84453,7 @@
 	//! author : https://github.com/mechuwind
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83395,7 +84510,7 @@
 
 
 /***/ }),
-/* 336 */
+/* 344 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83403,7 +84518,7 @@
 	//! author : Harpreet Singh : https://github.com/harpreetkhalsagtbit
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83524,7 +84639,7 @@
 
 
 /***/ }),
-/* 337 */
+/* 345 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83532,7 +84647,7 @@
 	//! author : Rafal Hirsz : https://github.com/evoL
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83636,7 +84751,7 @@
 
 
 /***/ }),
-/* 338 */
+/* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83644,7 +84759,7 @@
 	//! author : Jefferson : https://github.com/jalex79
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83706,7 +84821,7 @@
 
 
 /***/ }),
-/* 339 */
+/* 347 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83714,7 +84829,7 @@
 	//! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83772,7 +84887,7 @@
 
 
 /***/ }),
-/* 340 */
+/* 348 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83781,7 +84896,7 @@
 	//! author : Valentin Agachi : https://github.com/avaly
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -83852,7 +84967,7 @@
 
 
 /***/ }),
-/* 341 */
+/* 349 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -83862,7 +84977,7 @@
 	//! author : Коренберг Марк : https://github.com/socketpair
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84040,7 +85155,7 @@
 
 
 /***/ }),
-/* 342 */
+/* 350 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84048,7 +85163,7 @@
 	//! author : Narain Sagar : https://github.com/narainsagar
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84143,7 +85258,7 @@
 
 
 /***/ }),
-/* 343 */
+/* 351 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84151,7 +85266,7 @@
 	//! authors : Bård Rolstad Henriksen : https://github.com/karamell
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84209,7 +85324,7 @@
 
 
 /***/ }),
-/* 344 */
+/* 352 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84217,7 +85332,7 @@
 	//! author : Sampath Sitinamaluwa : https://github.com/sampathsris
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84285,7 +85400,7 @@
 
 
 /***/ }),
-/* 345 */
+/* 353 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84294,7 +85409,7 @@
 	//! based on work of petrbela : https://github.com/petrbela
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84440,7 +85555,7 @@
 
 
 /***/ }),
-/* 346 */
+/* 354 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84448,7 +85563,7 @@
 	//! author : Robert Sedovšek : https://github.com/sedovsek
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84607,7 +85722,7 @@
 
 
 /***/ }),
-/* 347 */
+/* 355 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84617,7 +85732,7 @@
 	//! author : Oerd Cukalla : https://github.com/oerd
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84682,7 +85797,7 @@
 
 
 /***/ }),
-/* 348 */
+/* 356 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84690,7 +85805,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84797,7 +85912,7 @@
 
 
 /***/ }),
-/* 349 */
+/* 357 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84805,7 +85920,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -84912,7 +86027,7 @@
 
 
 /***/ }),
-/* 350 */
+/* 358 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -84920,7 +86035,7 @@
 	//! author : Nicolai Davies<mail@nicolai.io> : https://github.com/nicolaidavies
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85006,7 +86121,7 @@
 
 
 /***/ }),
-/* 351 */
+/* 359 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85014,7 +86129,7 @@
 	//! author : Jens Alm : https://github.com/ulmus
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85080,7 +86195,7 @@
 
 
 /***/ }),
-/* 352 */
+/* 360 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85088,7 +86203,7 @@
 	//! author : Fahad Kassim : https://github.com/fadsel
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85144,7 +86259,7 @@
 
 
 /***/ }),
-/* 353 */
+/* 361 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85152,7 +86267,7 @@
 	//! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85279,7 +86394,7 @@
 
 
 /***/ }),
-/* 354 */
+/* 362 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85287,7 +86402,7 @@
 	//! author : Krishna Chaitanya Thota : https://github.com/kcthota
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85373,7 +86488,7 @@
 
 
 /***/ }),
-/* 355 */
+/* 363 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85382,7 +86497,7 @@
 	//! author : Onorio De J. Afonso : https://github.com/marobo
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85446,7 +86561,7 @@
 
 
 /***/ }),
-/* 356 */
+/* 364 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85454,7 +86569,7 @@
 	//! author : Kridsada Thanabulpong : https://github.com/sirn
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85518,7 +86633,7 @@
 
 
 /***/ }),
-/* 357 */
+/* 365 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85526,7 +86641,7 @@
 	//! author : Dan Hagman : https://github.com/hagmandan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85585,7 +86700,7 @@
 
 
 /***/ }),
-/* 358 */
+/* 366 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85593,7 +86708,7 @@
 	//! author : Dominika Kruk : https://github.com/amaranthrose
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85710,7 +86825,7 @@
 
 
 /***/ }),
-/* 359 */
+/* 367 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85719,7 +86834,7 @@
 	//!           Burak Yiğit Kaya: https://github.com/BYK
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85805,7 +86920,7 @@
 
 
 /***/ }),
-/* 360 */
+/* 368 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85814,7 +86929,7 @@
 	//! author : Iustì Canun
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85901,7 +87016,7 @@
 
 
 /***/ }),
-/* 361 */
+/* 369 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85909,7 +87024,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -85964,7 +87079,7 @@
 
 
 /***/ }),
-/* 362 */
+/* 370 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -85972,7 +87087,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86027,7 +87142,7 @@
 
 
 /***/ }),
-/* 363 */
+/* 371 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86036,7 +87151,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86183,7 +87298,7 @@
 
 
 /***/ }),
-/* 364 */
+/* 372 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86192,7 +87307,7 @@
 	//! author : Zack : https://github.com/ZackVision
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86287,7 +87402,7 @@
 
 
 /***/ }),
-/* 365 */
+/* 373 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86295,7 +87410,7 @@
 	//! author : Sardor Muminov : https://github.com/muminoff
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86350,7 +87465,7 @@
 
 
 /***/ }),
-/* 366 */
+/* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86358,7 +87473,7 @@
 	//! author : Rasulbek Mirzayev : github.com/Rasulbeeek
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86413,7 +87528,7 @@
 
 
 /***/ }),
-/* 367 */
+/* 375 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86421,7 +87536,7 @@
 	//! author : Bang Nguyen : https://github.com/bangnk
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86497,7 +87612,7 @@
 
 
 /***/ }),
-/* 368 */
+/* 376 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86505,7 +87620,7 @@
 	//! author : Andrew Hood : https://github.com/andrewhood125
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86570,7 +87685,7 @@
 
 
 /***/ }),
-/* 369 */
+/* 377 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86578,7 +87693,7 @@
 	//! author : Atolagbe Abisoye : https://github.com/andela-batolagbe
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86635,7 +87750,7 @@
 
 
 /***/ }),
-/* 370 */
+/* 378 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86644,7 +87759,7 @@
 	//! author : Zeno Zeng : https://github.com/zenozeng
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86751,7 +87866,7 @@
 
 
 /***/ }),
-/* 371 */
+/* 379 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86761,7 +87876,7 @@
 	//! author : Konstantin : https://github.com/skfd
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86861,7 +87976,7 @@
 
 
 /***/ }),
-/* 372 */
+/* 380 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -86870,7 +87985,7 @@
 	//! author : Chris Lam : https://github.com/hehachris
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(256)) :
+	    true ? factory(__webpack_require__(264)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -86970,7 +88085,7 @@
 
 
 /***/ }),
-/* 373 */
+/* 381 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! @preserve
@@ -87820,7 +88935,7 @@
 
 
 /***/ }),
-/* 374 */
+/* 382 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87841,9 +88956,13 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _measureText = __webpack_require__(245);
+	var _measureText = __webpack_require__(253);
 	
 	var _measureText2 = _interopRequireDefault(_measureText);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -87924,14 +89043,14 @@
 	}(_react2.default.Component);
 	
 	XAxisTitle.propTypes = {
-	  height: _react2.default.PropTypes.number,
-	  width: _react2.default.PropTypes.number,
-	  distance: _react2.default.PropTypes.number,
-	  position: _react2.default.PropTypes.oneOf(['top', 'bottom']),
-	  placement: _react2.default.PropTypes.oneOf(['above', 'below']),
-	  alignment: _react2.default.PropTypes.oneOf(['left', 'center', 'right']),
-	  rotate: _react2.default.PropTypes.bool,
-	  style: _react2.default.PropTypes.object
+	  height: _propTypes2.default.number,
+	  width: _propTypes2.default.number,
+	  distance: _propTypes2.default.number,
+	  position: _propTypes2.default.oneOf(['top', 'bottom']),
+	  placement: _propTypes2.default.oneOf(['above', 'below']),
+	  alignment: _propTypes2.default.oneOf(['left', 'center', 'right']),
+	  rotate: _propTypes2.default.bool,
+	  style: _propTypes2.default.object
 	};
 	XAxisTitle.defaultProps = {
 	  height: 250,
@@ -87952,7 +89071,7 @@
 	exports.default = XAxisTitle;
 
 /***/ }),
-/* 375 */
+/* 383 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87971,29 +89090,33 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _Scale = __webpack_require__(207);
 	
 	var _Margin = __webpack_require__(213);
 	
-	var _Axis = __webpack_require__(240);
+	var _Axis = __webpack_require__(248);
 	
-	var _xyPropsEqual = __webpack_require__(225);
+	var _xyPropsEqual = __webpack_require__(233);
 	
 	var _xyPropsEqual2 = _interopRequireDefault(_xyPropsEqual);
 	
-	var _YTicks = __webpack_require__(376);
+	var _YTicks = __webpack_require__(384);
 	
 	var _YTicks2 = _interopRequireDefault(_YTicks);
 	
-	var _YGrid = __webpack_require__(377);
+	var _YGrid = __webpack_require__(385);
 	
 	var _YGrid2 = _interopRequireDefault(_YGrid);
 	
-	var _YAxisLabels = __webpack_require__(378);
+	var _YAxisLabels = __webpack_require__(386);
 	
 	var _YAxisLabels2 = _interopRequireDefault(_YAxisLabels);
 	
-	var _YAxisTitle = __webpack_require__(379);
+	var _YAxisTitle = __webpack_require__(387);
 	
 	var _YAxisTitle2 = _interopRequireDefault(_YAxisTitle);
 	
@@ -88101,40 +89224,44 @@
 	}(_react2.default.Component);
 	
 	YAxis.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ y: _react2.default.PropTypes.func.isRequired }),
+	  scale: _propTypes2.default.shape({ y: _propTypes2.default.func.isRequired }),
 	
-	  width: _react2.default.PropTypes.number,
-	  height: _react2.default.PropTypes.number,
-	  position: _react2.default.PropTypes.string,
-	  placement: _react2.default.PropTypes.string,
-	  nice: _react2.default.PropTypes.bool,
-	  ticks: _react2.default.PropTypes.array,
-	  tickCount: _react2.default.PropTypes.number,
+	  width: _propTypes2.default.number,
+	  height: _propTypes2.default.number,
+	  position: _propTypes2.default.string,
+	  placement: _propTypes2.default.string,
+	  nice: _propTypes2.default.bool,
+	  ticks: _propTypes2.default.array,
+	  tickCount: _propTypes2.default.number,
 	
-	  showTitle: _react2.default.PropTypes.bool,
-	  showLabels: _react2.default.PropTypes.bool,
-	  showTicks: _react2.default.PropTypes.bool,
-	  showGrid: _react2.default.PropTypes.bool,
+	  showTitle: _propTypes2.default.bool,
+	  showLabels: _propTypes2.default.bool,
+	  showTicks: _propTypes2.default.bool,
+	  showGrid: _propTypes2.default.bool,
 	
-	  title: _react2.default.PropTypes.string,
-	  titleDistance: _react2.default.PropTypes.number,
-	  titleAlign: _react2.default.PropTypes.string,
-	  titleRotate: _react2.default.PropTypes.bool,
-	  titleStyle: _react2.default.PropTypes.object,
+	  title: _propTypes2.default.string,
+	  titleDistance: _propTypes2.default.number,
+	  titleAlign: _propTypes2.default.string,
+	  titleRotate: _propTypes2.default.bool,
+	  titleStyle: _propTypes2.default.object,
 	
-	  labelDistance: _react2.default.PropTypes.number,
-	  labelClassName: _react2.default.PropTypes.string,
-	  labelStyle: _react2.default.PropTypes.object,
-	  labelFormat: _react2.default.PropTypes.string,
-	  labelFormats: _react2.default.PropTypes.array,
-	  labels: _react2.default.PropTypes.array,
+	  labelDistance: _propTypes2.default.number,
+	  labelClassName: _propTypes2.default.string,
+	  labelStyle: _propTypes2.default.object,
+	  labelFormat: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.func]),
+	  labelFormats: _propTypes2.default.array,
+	  labels: _propTypes2.default.array,
 	
-	  tickLength: _react2.default.PropTypes.number,
-	  tickClassName: _react2.default.PropTypes.string,
-	  tickStyle: _react2.default.PropTypes.object,
+	  tickLength: _propTypes2.default.number,
+	  tickClassName: _propTypes2.default.string,
+	  tickStyle: _propTypes2.default.object,
 	
-	  gridLineClassName: _react2.default.PropTypes.string,
-	  gridLineStyle: _react2.default.PropTypes.object
+	  gridLineClassName: _propTypes2.default.string,
+	  gridLineStyle: _propTypes2.default.object,
+	
+	  onMouseEnterLabel: _propTypes2.default.func,
+	  onMouseMoveLabel: _propTypes2.default.func,
+	  onMouseLeaveLabel: _propTypes2.default.func
 	};
 	YAxis.defaultProps = {
 	  width: 400,
@@ -88153,7 +89280,7 @@
 	exports.default = YAxis;
 
 /***/ }),
-/* 376 */
+/* 384 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88171,6 +89298,10 @@
 	var _lodash = __webpack_require__(3);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	var _Scale = __webpack_require__(207);
 	
@@ -88254,7 +89385,7 @@
 	}(_react2.default.Component);
 	
 	YTicks.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ y: _react2.default.PropTypes.func.isRequired })
+	  scale: _propTypes2.default.shape({ y: _propTypes2.default.func.isRequired })
 	};
 	YTicks.defaultProps = {
 	  position: 'left',
@@ -88266,7 +89397,7 @@
 	exports.default = YTicks;
 
 /***/ }),
-/* 377 */
+/* 385 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88285,7 +89416,11 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _YLine = __webpack_require__(238);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _YLine = __webpack_require__(246);
 	
 	var _YLine2 = _interopRequireDefault(_YLine);
 	
@@ -88352,14 +89487,14 @@
 	}(_react2.default.Component);
 	
 	YGrid.propTypes = {
-	  scale: _react2.default.PropTypes.shape({ y: _react2.default.PropTypes.func.isRequired }),
-	  width: _react2.default.PropTypes.number,
-	  height: _react2.default.PropTypes.number,
-	  nice: _react2.default.PropTypes.bool,
-	  ticks: _react2.default.PropTypes.array,
-	  tickCount: _react2.default.PropTypes.number,
-	  lineClassName: _react2.default.PropTypes.string,
-	  lineStyle: _react2.default.PropTypes.object
+	  scale: _propTypes2.default.shape({ y: _propTypes2.default.func.isRequired }),
+	  width: _propTypes2.default.number,
+	  height: _propTypes2.default.number,
+	  nice: _propTypes2.default.bool,
+	  ticks: _propTypes2.default.array,
+	  tickCount: _propTypes2.default.number,
+	  lineClassName: _propTypes2.default.string,
+	  lineStyle: _propTypes2.default.object
 	};
 	YGrid.defaultProps = {
 	  nice: true,
@@ -88368,7 +89503,7 @@
 	exports.default = YGrid;
 
 /***/ }),
-/* 378 */
+/* 386 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88377,9 +89512,9 @@
 	  value: true
 	});
 	
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -88391,15 +89526,19 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _MeasuredValueLabel = __webpack_require__(244);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _MeasuredValueLabel = __webpack_require__(252);
 	
 	var _MeasuredValueLabel2 = _interopRequireDefault(_MeasuredValueLabel);
 	
 	var _Scale = __webpack_require__(207);
 	
-	var _Label = __webpack_require__(255);
+	var _Label = __webpack_require__(263);
 	
-	var _xyPropsEqual = __webpack_require__(225);
+	var _xyPropsEqual = __webpack_require__(233);
 	
 	var _xyPropsEqual2 = _interopRequireDefault(_xyPropsEqual);
 	
@@ -88471,6 +89610,8 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      // todo: position: 'zero' prop to position along the zero line
 	      var _props = this.props,
 	          width = _props.width,
@@ -88478,6 +89619,9 @@
 	          distance = _props.distance,
 	          labelStyle = _props.labelStyle,
 	          labelClassName = _props.labelClassName,
+	          onMouseEnterLabel = _props.onMouseEnterLabel,
+	          onMouseMoveLabel = _props.onMouseMoveLabel,
+	          onMouseLeaveLabel = _props.onMouseLeaveLabel,
 	          spacing = _props.spacing;
 	
 	      var scale = this.props.scale.y;
@@ -88495,9 +89639,19 @@
 	          var y = scale(label.value);
 	          var x = placement === 'before' ? -distance : distance;
 	
+	          var _map = ['onMouseEnterLabel', 'onMouseMoveLabel', 'onMouseLeaveLabel'].map(function (eventName) {
+	            // partially apply this bar's data point as 2nd callback argument
+	            var callback = _lodash2.default.get(_this2.props, eventName);
+	            return _lodash2.default.isFunction(callback) ? _lodash2.default.partial(callback, _lodash2.default, label.value) : null;
+	          }),
+	              _map2 = _slicedToArray(_map, 3),
+	              onMouseEnter = _map2[0],
+	              onMouseMove = _map2[1],
+	              onMouseLeave = _map2[2];
+	
 	          return _react2.default.createElement(
 	            'g',
-	            { key: 'x-axis-label-' + i },
+	            _extends({ key: 'x-axis-label-' + i }, { onMouseEnter: onMouseEnter, onMouseMove: onMouseMove, onMouseLeave: onMouseLeave }),
 	            _react2.default.createElement(
 	              _MeasuredValueLabel2.default,
 	              _extends({ value: label.value }, { x: x, y: y, className: className, dy: "0.35em", style: style }),
@@ -88586,7 +89740,11 @@
 	}(_react2.default.Component);
 	
 	YAxisValueLabels.propTypes = {
-	  scale: _react2.default.PropTypes.object
+	  scale: _propTypes2.default.object,
+	  // Label Handling
+	  onMouseEnterLabel: _propTypes2.default.func,
+	  onMouseMoveLabel: _propTypes2.default.func,
+	  onMouseLeaveLabel: _propTypes2.default.func
 	  // placement: undefined,
 	  // format: undefined,
 	  // formats: undefined,
@@ -88645,7 +89803,7 @@
 	exports.default = YAxisValueLabels;
 
 /***/ }),
-/* 379 */
+/* 387 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88666,9 +89824,13 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _measureText = __webpack_require__(245);
+	var _measureText = __webpack_require__(253);
 	
 	var _measureText2 = _interopRequireDefault(_measureText);
+	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -88747,14 +89909,14 @@
 	}(_react2.default.Component);
 	
 	YAxisTitle.propTypes = {
-	  height: _react2.default.PropTypes.number,
-	  width: _react2.default.PropTypes.number,
-	  distance: _react2.default.PropTypes.number,
-	  position: _react2.default.PropTypes.oneOf(['left', 'right']),
-	  alignment: _react2.default.PropTypes.oneOf(['top', 'middle', 'bottom']),
-	  placement: _react2.default.PropTypes.oneOf(['before', 'after']),
-	  rotate: _react2.default.PropTypes.bool,
-	  style: _react2.default.PropTypes.object
+	  height: _propTypes2.default.number,
+	  width: _propTypes2.default.number,
+	  distance: _propTypes2.default.number,
+	  position: _propTypes2.default.oneOf(['left', 'right']),
+	  alignment: _propTypes2.default.oneOf(['top', 'middle', 'bottom']),
+	  placement: _propTypes2.default.oneOf(['before', 'after']),
+	  rotate: _propTypes2.default.bool,
+	  style: _propTypes2.default.object
 	};
 	YAxisTitle.defaultProps = {
 	  height: 250,
@@ -88775,7 +89937,7 @@
 	exports.default = YAxisTitle;
 
 /***/ }),
-/* 380 */
+/* 388 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88784,7 +89946,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(381);
+	var _reactDom = __webpack_require__(389);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
@@ -88894,7 +90056,7 @@
 	});
 
 /***/ }),
-/* 381 */
+/* 389 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88903,7 +90065,7 @@
 
 
 /***/ }),
-/* 382 */
+/* 390 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88922,7 +90084,7 @@
 	
 	var _chai = __webpack_require__(165);
 	
-	var _Examples = __webpack_require__(383);
+	var _Examples = __webpack_require__(391);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -88950,7 +90112,7 @@
 	});
 
 /***/ }),
-/* 383 */
+/* 391 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88976,99 +90138,99 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactAddonsUpdate = __webpack_require__(384);
+	var _reactAddonsUpdate = __webpack_require__(392);
 	
 	var _reactAddonsUpdate2 = _interopRequireDefault(_reactAddonsUpdate);
 	
-	var _numeral = __webpack_require__(373);
+	var _numeral = __webpack_require__(381);
 	
 	var _numeral2 = _interopRequireDefault(_numeral);
 	
-	var _XYPlot = __webpack_require__(222);
+	var _XYPlot = __webpack_require__(230);
 	
 	var _XYPlot2 = _interopRequireDefault(_XYPlot);
 	
-	var _XAxis = __webpack_require__(239);
+	var _XAxis = __webpack_require__(247);
 	
 	var _XAxis2 = _interopRequireDefault(_XAxis);
 	
-	var _XTicks = __webpack_require__(241);
+	var _XTicks = __webpack_require__(249);
 	
 	var _XTicks2 = _interopRequireDefault(_XTicks);
 	
-	var _XLine = __webpack_require__(237);
+	var _XLine = __webpack_require__(245);
 	
 	var _XLine2 = _interopRequireDefault(_XLine);
 	
-	var _XGrid = __webpack_require__(242);
+	var _XGrid = __webpack_require__(250);
 	
 	var _XGrid2 = _interopRequireDefault(_XGrid);
 	
-	var _XAxisLabels = __webpack_require__(243);
+	var _XAxisLabels = __webpack_require__(251);
 	
 	var _XAxisLabels2 = _interopRequireDefault(_XAxisLabels);
 	
-	var _XAxisTitle = __webpack_require__(374);
+	var _XAxisTitle = __webpack_require__(382);
 	
 	var _XAxisTitle2 = _interopRequireDefault(_XAxisTitle);
 	
-	var _YAxis = __webpack_require__(375);
+	var _YAxis = __webpack_require__(383);
 	
 	var _YAxis2 = _interopRequireDefault(_YAxis);
 	
-	var _YTicks = __webpack_require__(376);
+	var _YTicks = __webpack_require__(384);
 	
 	var _YTicks2 = _interopRequireDefault(_YTicks);
 	
-	var _YLine = __webpack_require__(238);
+	var _YLine = __webpack_require__(246);
 	
 	var _YLine2 = _interopRequireDefault(_YLine);
 	
-	var _YGrid = __webpack_require__(377);
+	var _YGrid = __webpack_require__(385);
 	
 	var _YGrid2 = _interopRequireDefault(_YGrid);
 	
-	var _YAxisLabels = __webpack_require__(378);
+	var _YAxisLabels = __webpack_require__(386);
 	
 	var _YAxisLabels2 = _interopRequireDefault(_YAxisLabels);
 	
-	var _YAxisTitle = __webpack_require__(379);
+	var _YAxisTitle = __webpack_require__(387);
 	
 	var _YAxisTitle2 = _interopRequireDefault(_YAxisTitle);
 	
-	var _Bar = __webpack_require__(229);
+	var _Bar = __webpack_require__(237);
 	
 	var _Bar2 = _interopRequireDefault(_Bar);
 	
-	var _RangeBarChart = __webpack_require__(228);
+	var _RangeBarChart = __webpack_require__(236);
 	
 	var _RangeBarChart2 = _interopRequireDefault(_RangeBarChart);
 	
-	var _RangeRect = __webpack_require__(232);
+	var _RangeRect = __webpack_require__(240);
 	
 	var _RangeRect2 = _interopRequireDefault(_RangeRect);
 	
-	var _BarChart = __webpack_require__(227);
+	var _BarChart = __webpack_require__(235);
 	
 	var _BarChart2 = _interopRequireDefault(_BarChart);
 	
-	var _AreaBarChart = __webpack_require__(231);
+	var _AreaBarChart = __webpack_require__(239);
 	
 	var _AreaBarChart2 = _interopRequireDefault(_AreaBarChart);
 	
-	var _LineChart = __webpack_require__(223);
+	var _LineChart = __webpack_require__(231);
 	
 	var _LineChart2 = _interopRequireDefault(_LineChart);
 	
-	var _ColorHeatmap = __webpack_require__(386);
+	var _ColorHeatmap = __webpack_require__(394);
 	
 	var _ColorHeatmap2 = _interopRequireDefault(_ColorHeatmap);
 	
-	var _AreaHeatmap = __webpack_require__(234);
+	var _AreaHeatmap = __webpack_require__(242);
 	
 	var _AreaHeatmap2 = _interopRequireDefault(_AreaHeatmap);
 	
-	var _ScatterPlot = __webpack_require__(226);
+	var _ScatterPlot = __webpack_require__(234);
 	
 	var _ScatterPlot2 = _interopRequireDefault(_ScatterPlot);
 	
@@ -89076,31 +90238,31 @@
 	
 	var _PieChart2 = _interopRequireDefault(_PieChart);
 	
-	var _TreeMap = __webpack_require__(220);
+	var _TreeMap = __webpack_require__(228);
 	
 	var _TreeMap2 = _interopRequireDefault(_TreeMap);
 	
-	var _Histogram = __webpack_require__(235);
+	var _Histogram = __webpack_require__(243);
 	
 	var _Histogram2 = _interopRequireDefault(_Histogram);
 	
-	var _FunnelChart = __webpack_require__(387);
+	var _FunnelChart = __webpack_require__(395);
 	
 	var _FunnelChart2 = _interopRequireDefault(_FunnelChart);
 	
-	var _MarkerLineChart = __webpack_require__(233);
+	var _MarkerLineChart = __webpack_require__(241);
 	
 	var _MarkerLineChart2 = _interopRequireDefault(_MarkerLineChart);
 	
-	var _KernelDensityEstimation = __webpack_require__(236);
+	var _KernelDensityEstimation = __webpack_require__(244);
 	
 	var _KernelDensityEstimation2 = _interopRequireDefault(_KernelDensityEstimation);
 	
-	var _AreaChart = __webpack_require__(388);
+	var _AreaChart = __webpack_require__(396);
 	
 	var _AreaChart2 = _interopRequireDefault(_AreaChart);
 	
-	var _util = __webpack_require__(389);
+	var _util = __webpack_require__(397);
 	
 	var _Data = __webpack_require__(205);
 	
@@ -89229,6 +90391,10 @@
 	          yValue = _ref2.yValue;
 	
 	      _this.setState({ activeX: xValue });
+	    }, _this._onMouseEnterLabel = function (e, d) {
+	      debugger;
+	    }, _this._onMouseLeaveLabel = function (e, d) {
+	      debugger;
 	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 	
@@ -89255,8 +90421,8 @@
 	        _react2.default.createElement(
 	          _XYPlot2.default,
 	          _extends({ scaleType: 'linear' }, { width: 600, height: 350, domain: { y: [-2, 2] } }, { onMouseMove: this._onMouseMove }),
-	          _react2.default.createElement(_XAxis2.default, { title: 'Phase' }),
-	          _react2.default.createElement(_YAxis2.default, { title: 'Intensity' }),
+	          _react2.default.createElement(_XAxis2.default, { title: 'Phase', onMouseEnterLabel: this._onMouseEnterLabel, onMouseLeaveLabel: this._onMouseLeaveLabel }),
+	          _react2.default.createElement(_YAxis2.default, { title: 'Intensity', onMouseEnterLabel: this._onMouseEnterLabel, onMouseLeaveLabel: this._onMouseLeaveLabel }),
 	          _react2.default.createElement(_LineChart2.default, {
 	            data: _lodash2.default.range(100),
 	            getY: line1,
@@ -89308,6 +90474,12 @@
 	
 	    this.setState({ activeXValue: xValue, activeYValue: yValue });
 	  },
+	  onMouseEnterLabel: function onMouseEnterLabel(e, d) {
+	    debugger;
+	  },
+	  onMouseLeaveLabel: function onMouseLeaveLabel(e, d) {
+	    debugger;
+	  },
 	  onClick: function onClick(_ref4) {
 	    var yValue = _ref4.yValue;
 	
@@ -89335,8 +90507,16 @@
 	      _react2.default.createElement(
 	        _XYPlot2.default,
 	        { width: 700, height: 400, onMouseMove: this.onMouseMoveXYPlot, onClick: this.onClick },
-	        _react2.default.createElement(_XAxis2.default, { title: 'Days' }),
-	        _react2.default.createElement(_YAxis2.default, { title: 'Price' }),
+	        _react2.default.createElement(
+	          _XAxis2.default,
+	          { title: 'Days' },
+	          _react2.default.createElement(_XAxisLabels2.default, { onMouseEnterLabel: this.onMouseEnterLabel, onMouseLeaveLabel: this.onMouseLeaveLabel })
+	        ),
+	        _react2.default.createElement(
+	          _YAxis2.default,
+	          { title: 'Price' },
+	          _react2.default.createElement(_YAxisLabels2.default, { onMouseEnterLabel: this.onMouseEnterLabel, onMouseLeaveLabel: this.onMouseLeaveLabel })
+	        ),
 	        _react2.default.createElement(_LineChart2.default, _extends({ data: randomSequences[0] }, getters)),
 	        _react2.default.createElement(_LineChart2.default, _extends({ data: randomSequences[1] }, getters)),
 	        _react2.default.createElement(_LineChart2.default, _extends({ data: randomSequences[2] }, getters)),
@@ -89712,6 +90892,61 @@
 	    ';'
 	  );
 	};
+	
+	var InteractiveAreaBarChartExample = _react2.default.createClass({
+	  displayName: 'InteractiveAreaBarChartExample',
+	  getInitialState: function getInitialState() {
+	    return {
+	      activeValue: null
+	    };
+	  },
+	  onEnterBar: function onEnterBar(e, d) {
+	    this.setState({ activeValue: d });
+	  },
+	  onLeaveBar: function onLeaveBar(e, d) {
+	    this.setState({ activeValue: null });
+	  },
+	  render: function render() {
+	    var activeValue = this.state.activeValue;
+	
+	    var getters = { getX: 0, getY: 1 };
+	
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      activeValue ? _react2.default.createElement(
+	        'div',
+	        null,
+	        activeValue.toFixed(2)
+	      ) : _react2.default.createElement(
+	        'div',
+	        null,
+	        'Hover over the chart to show values'
+	      ),
+	      _react2.default.createElement(
+	        _XYPlot2.default,
+	        { width: 500, height: 320 },
+	        _react2.default.createElement(_XAxis2.default, null),
+	        _react2.default.createElement(_YAxis2.default, null),
+	        _react2.default.createElement(_AreaBarChart2.default, {
+	          data: _lodash2.default.range(15),
+	          getX: function getX(d) {
+	            return Math.sin(d / 10) * 10;
+	          },
+	          getXEnd: function getXEnd(d) {
+	            return Math.sin((d + 1) / 10) * 10;
+	          },
+	          getY: function getY(d) {
+	            return Math.cos(d / Math.PI);
+	          },
+	          onMouseEnterBar: this.onEnterBar,
+	          onMouseLeaveBar: this.onLeaveBar
+	        })
+	      ),
+	      ';'
+	    );
+	  }
+	});
 	
 	var ColorHeatMapExample = function ColorHeatMapExample(props) {
 	  var gridData = _lodash2.default.range(30).map(function (m) {
@@ -90442,7 +91677,7 @@
 	      getLabel: 'size',
 	      nodeStyle: function nodeStyle(node) {
 	        return {
-	          backgroundColor: colorScale(parseInt(node.size)),
+	          backgroundColor: colorScale(parseInt(node.data.size)),
 	          border: '1px solid #333'
 	        };
 	      },
@@ -90451,6 +91686,79 @@
 	    })
 	  );
 	};
+	
+	var AnimatedTreeMapExample = function (_React$Component3) {
+	  _inherits(AnimatedTreeMapExample, _React$Component3);
+	
+	  function AnimatedTreeMapExample() {
+	    var _ref34;
+	
+	    var _temp3, _this3, _ret3;
+	
+	    _classCallCheck(this, AnimatedTreeMapExample);
+	
+	    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+	      args[_key3] = arguments[_key3];
+	    }
+	
+	    return _ret3 = (_temp3 = (_this3 = _possibleConstructorReturn(this, (_ref34 = AnimatedTreeMapExample.__proto__ || Object.getPrototypeOf(AnimatedTreeMapExample)).call.apply(_ref34, [this].concat(args))), _this3), _this3.state = { getValue: "size" }, _this3._animateValue = function () {
+	      if (_this3.state.getValue === "size") _this3.setState({ getValue: "size2" });else _this3.setState({ getValue: "size" });
+	    }, _temp3), _possibleConstructorReturn(_this3, _ret3);
+	  }
+	
+	  _createClass(AnimatedTreeMapExample, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this._interval = setInterval(this._animateValue, 1000);
+	      this._data = {
+	        children: _lodash2.default.range(1, 5).map(function (n) {
+	          return {
+	            children: _lodash2.default.times(n * n, function (m) {
+	              return {
+	                size: (n + 1) * (m + 1) + 100 * Math.random(),
+	                size2: (n + 1) * (m + 1) + 100 * Math.random()
+	              };
+	            })
+	          };
+	        })
+	      };
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      clearInterval(this._interval);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var getValue = this.state.getValue;
+	
+	
+	      var colorScale = (0, _d.scaleLinear)().domain([0, 65]).range(['#6b6ecf', '#8ca252']).interpolate(_d.interpolateHcl);
+	
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_TreeMap2.default, {
+	          data: this._data,
+	          getValue: getValue,
+	          getLabel: 'size',
+	          nodeStyle: function nodeStyle(node) {
+	            return {
+	              backgroundColor: colorScale(parseInt(node.data.size)),
+	              border: '1px solid #333'
+	            };
+	          },
+	          sticky: true,
+	          width: 800,
+	          height: 500
+	        })
+	      );
+	    }
+	  }]);
+	
+	  return AnimatedTreeMapExample;
+	}(_react2.default.Component);
 	
 	var YAxisTitleTest = function YAxisTitleTest(props) {
 	  var xyProps = {
@@ -90547,8 +91855,8 @@
 	  );
 	};
 	
-	var CustomSelectionRect = function (_React$Component3) {
-	  _inherits(CustomSelectionRect, _React$Component3);
+	var CustomSelectionRect = function (_React$Component4) {
+	  _inherits(CustomSelectionRect, _React$Component4);
 	
 	  function CustomSelectionRect() {
 	    _classCallCheck(this, CustomSelectionRect);
@@ -90577,27 +91885,27 @@
 	
 	;
 	
-	var CustomChildExample = function (_React$Component4) {
-	  _inherits(CustomChildExample, _React$Component4);
+	var CustomChildExample = function (_React$Component5) {
+	  _inherits(CustomChildExample, _React$Component5);
 	
 	  function CustomChildExample() {
-	    var _ref34;
+	    var _ref35;
 	
-	    var _temp3, _this4, _ret3;
+	    var _temp4, _this5, _ret4;
 	
 	    _classCallCheck(this, CustomChildExample);
 	
-	    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-	      args[_key3] = arguments[_key3];
+	    for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+	      args[_key4] = arguments[_key4];
 	    }
 	
-	    return _ret3 = (_temp3 = (_this4 = _possibleConstructorReturn(this, (_ref34 = CustomChildExample.__proto__ || Object.getPrototypeOf(CustomChildExample)).call.apply(_ref34, [this].concat(args))), _this4), _this4.state = {
+	    return _ret4 = (_temp4 = (_this5 = _possibleConstructorReturn(this, (_ref35 = CustomChildExample.__proto__ || Object.getPrototypeOf(CustomChildExample)).call.apply(_ref35, [this].concat(args))), _this5), _this5.state = {
 	      hoveredYVal: null
-	    }, _this4.onMouseMoveChart = function (_ref35) {
-	      var yValue = _ref35.yValue;
+	    }, _this5.onMouseMoveChart = function (_ref36) {
+	      var yValue = _ref36.yValue;
 	
-	      _this4.setState({ hoveredYVal: yValue });
-	    }, _temp3), _possibleConstructorReturn(_this4, _ret3);
+	      _this5.setState({ hoveredYVal: yValue });
+	    }, _temp4), _possibleConstructorReturn(_this5, _ret4);
 	  }
 	
 	  _createClass(CustomChildExample, [{
@@ -90684,8 +91992,8 @@
 	  }
 	});
 	
-	var SpacingExample = function (_React$Component5) {
-	  _inherits(SpacingExample, _React$Component5);
+	var SpacingExample = function (_React$Component6) {
+	  _inherits(SpacingExample, _React$Component6);
 	
 	  function SpacingExample() {
 	    _classCallCheck(this, SpacingExample);
@@ -90759,8 +92067,8 @@
 	  return SpacingExample;
 	}(_react2.default.Component);
 	
-	var Area2DatasetsExample = function (_React$Component6) {
-	  _inherits(Area2DatasetsExample, _React$Component6);
+	var Area2DatasetsExample = function (_React$Component7) {
+	  _inherits(Area2DatasetsExample, _React$Component7);
 	
 	  function Area2DatasetsExample() {
 	    _classCallCheck(this, Area2DatasetsExample);
@@ -90771,17 +92079,17 @@
 	  _createClass(Area2DatasetsExample, [{
 	    key: 'render',
 	    value: function render() {
-	      var data1 = (0, _util.randomWalkTimeSeries)(115).map(function (_ref36) {
-	        var _ref37 = _slicedToArray(_ref36, 2),
-	            x = _ref37[0],
-	            y = _ref37[1];
+	      var data1 = (0, _util.randomWalkTimeSeries)(115).map(function (_ref37) {
+	        var _ref38 = _slicedToArray(_ref37, 2),
+	            x = _ref38[0],
+	            y = _ref38[1];
 	
 	        return { x: x, y: y };
 	      });
-	      var data2 = (0, _util.randomWalkTimeSeries)(115).map(function (_ref38) {
-	        var _ref39 = _slicedToArray(_ref38, 2),
-	            x = _ref39[0],
-	            y = _ref39[1];
+	      var data2 = (0, _util.randomWalkTimeSeries)(115).map(function (_ref39) {
+	        var _ref40 = _slicedToArray(_ref39, 2),
+	            x = _ref40[0],
+	            y = _ref40[1];
 	
 	        return { x: x, y: y };
 	      });
@@ -90815,8 +92123,8 @@
 	  return Area2DatasetsExample;
 	}(_react2.default.Component);
 	
-	var AreaDifferenceExample = function (_React$Component7) {
-	  _inherits(AreaDifferenceExample, _React$Component7);
+	var AreaDifferenceExample = function (_React$Component8) {
+	  _inherits(AreaDifferenceExample, _React$Component8);
 	
 	  function AreaDifferenceExample() {
 	    _classCallCheck(this, AreaDifferenceExample);
@@ -90827,17 +92135,17 @@
 	  _createClass(AreaDifferenceExample, [{
 	    key: 'render',
 	    value: function render() {
-	      var data1 = (0, _util.randomWalkTimeSeries)(115).map(function (_ref40) {
-	        var _ref41 = _slicedToArray(_ref40, 2),
-	            x = _ref41[0],
-	            y = _ref41[1];
+	      var data1 = (0, _util.randomWalkTimeSeries)(115).map(function (_ref41) {
+	        var _ref42 = _slicedToArray(_ref41, 2),
+	            x = _ref42[0],
+	            y = _ref42[1];
 	
 	        return { x: x, y: y };
 	      });
-	      var data2 = (0, _util.randomWalkTimeSeries)(115).map(function (_ref42) {
-	        var _ref43 = _slicedToArray(_ref42, 2),
-	            x = _ref43[0],
-	            y = _ref43[1];
+	      var data2 = (0, _util.randomWalkTimeSeries)(115).map(function (_ref43) {
+	        var _ref44 = _slicedToArray(_ref43, 2),
+	            x = _ref44[0],
+	            y = _ref44[1];
 	
 	        return { x: x, y: y };
 	      });
@@ -90875,7 +92183,7 @@
 	
 	var examples = exports.examples = [{ id: 'line', title: 'Line Chart', Component: LineChartExample }, { id: 'line2', title: 'Interactive Line Chart', Component: LineChartExample2 },
 	// {id: 'interactiveLine', title: 'Interactive Line Chart', Component: InteractiveLineExample},
-	{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'area', title: 'Area Chart', Component: AreaChartExample }, { id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample }, { id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample }, { id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample }, { id: 'spacing', title: 'Spacing', Component: SpacingExample }, { id: 'area2datasets', title: 'Area Chart w/ 2 datasets', Component: Area2DatasetsExample }, { id: 'areaDifference', title: 'Area Difference Chart', Component: AreaDifferenceExample }];
+	{ id: 'scatter', title: 'Scatter Plot', Component: ScatterPlotExample }, { id: 'pie', title: 'Pie/Donut Chart', Component: PieChartExample }, { id: 'barChart', title: 'Bar Chart', Component: BarChartExample }, { id: 'rangeBar', title: 'Range Bar Chart', Component: RangeBarChartExample }, { id: 'areaBar', title: 'Area Bar Chart', Component: AreaBarChartExample }, { id: 'area', title: 'Area Chart', Component: AreaChartExample }, { id: 'colorHeatMap', title: 'Color Heat Map', Component: ColorHeatMapExample }, { id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample }, { id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample }, { id: 'treeMap', title: 'TreeMap', Component: TreeMapExample }, { id: 'animatedTreeMap', title: 'Animated TreeMap', Component: AnimatedTreeMapExample }, { id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample }, { id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample }, { id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample }, { id: 'histogram', title: 'Histogram + KDE', Component: HistogramKDEExample }, { id: 'rangeRect', title: 'Range Rect', Component: RangeRectExample }, { id: 'xyAxis', title: 'X/Y Axis', Component: XYAxisExample }, { id: 'xAxisTitles', title: 'X Axis Titles', Component: XAxisTitleTest }, { id: 'yAxisTitles', title: 'Y Axis Titles', Component: YAxisTitleTest }, { id: 'barMarkerLine', title: 'Bar Charts with Marker Lines', Component: BarMarkerLineExample }, { id: 'customChildren', title: 'Custom Chart Children', Component: CustomChildExample }, { id: 'multipleXY', title: 'Multiple Chart Types', Component: MultipleXYExample }, { id: 'spacing', title: 'Spacing', Component: SpacingExample }, { id: 'area2datasets', title: 'Area Chart w/ 2 datasets', Component: Area2DatasetsExample }, { id: 'areaDifference', title: 'Area Difference Chart', Component: AreaDifferenceExample }];
 	
 	var App = exports.App = _react2.default.createClass({
 	  displayName: 'App',
@@ -90939,13 +92247,13 @@
 	});
 
 /***/ }),
-/* 384 */
+/* 392 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(385);
+	module.exports = __webpack_require__(393);
 
 /***/ }),
-/* 385 */
+/* 393 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -91058,7 +92366,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
-/* 386 */
+/* 394 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91083,7 +92391,11 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -91091,7 +92403,7 @@
 	
 	var _Scale = __webpack_require__(207);
 	
-	var _RangeRect = __webpack_require__(232);
+	var _RangeRect = __webpack_require__(240);
 	
 	var _RangeRect2 = _interopRequireDefault(_RangeRect);
 	
@@ -91192,11 +92504,11 @@
 	
 	ColorHeatmap.propTypes = {
 	  // passed from xyplot
-	  scale: CustomPropTypes.xyObjectOf(_react2.default.PropTypes.func.isRequired),
+	  scale: CustomPropTypes.xyObjectOf(_propTypes2.default.func.isRequired),
 	
 	  // data array - should be 1D array of all grid values
 	  // (if you have a 2D array, _.flatten it)
-	  data: _react2.default.PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	
 	  // data getters
 	  getValue: CustomPropTypes.getter,
@@ -91206,11 +92518,11 @@
 	  getYEnd: CustomPropTypes.getter,
 	
 	  // a custom d3 color scale may be passed...
-	  colorScale: _react2.default.PropTypes.func,
+	  colorScale: _propTypes2.default.func,
 	  // ...or else one will be constructed from colors, colorStops and interpolator
-	  colors: _react2.default.PropTypes.array,
-	  valueDomain: _react2.default.PropTypes.array,
-	  interpolator: _react2.default.PropTypes.string
+	  colors: _propTypes2.default.array,
+	  valueDomain: _propTypes2.default.array,
+	  interpolator: _propTypes2.default.string
 	};
 	ColorHeatmap.defaultProps = {
 	  interpolator: 'lab'
@@ -91218,7 +92530,7 @@
 	exports.default = ColorHeatmap;
 
 /***/ }),
-/* 387 */
+/* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91243,7 +92555,11 @@
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -91349,9 +92665,9 @@
 	
 	FunnelChart.propTypes = {
 	  // passed from xyplot
-	  scale: CustomPropTypes.xyObjectOf(_react2.default.PropTypes.func.isRequired),
+	  scale: CustomPropTypes.xyObjectOf(_propTypes2.default.func.isRequired),
 	  // data array
-	  data: _react2.default.PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	  // data getters
 	  getX: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter
@@ -91360,7 +92676,7 @@
 	exports.default = FunnelChart;
 
 /***/ }),
-/* 388 */
+/* 396 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91375,6 +92691,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _propTypes = __webpack_require__(218);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
 	var _lodash = __webpack_require__(3);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
@@ -91383,7 +92703,7 @@
 	
 	var _Data = __webpack_require__(205);
 	
-	var _CustomPropTypes = __webpack_require__(219);
+	var _CustomPropTypes = __webpack_require__(227);
 	
 	var CustomPropTypes = _interopRequireWildcard(_CustomPropTypes);
 	
@@ -91396,8 +92716,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var PropTypes = _react2.default.PropTypes;
 	
 	// AreaChart represents a simple bivariate area chart,
 	// a filled path drawn between two lines (datasets).
@@ -91514,30 +92832,30 @@
 	
 	AreaChart.propTypes = {
 	  // the array of data objects
-	  data: PropTypes.array.isRequired,
+	  data: _propTypes2.default.array.isRequired,
 	  // accessors for X & Y coordinates
 	  getX: CustomPropTypes.getter,
 	  getY: CustomPropTypes.getter,
 	  getYEnd: CustomPropTypes.getter,
 	  // style applied to path element
-	  pathStyle: PropTypes.object,
+	  pathStyle: _propTypes2.default.object,
 	
 	  // if isDifference is true, AreaChart generates a "difference chart" with two area paths instead of one:
 	  // one path which shows when YEnd > Y, and one vice versa, allowing them to be styled differently (eg red/green)
-	  isDifference: PropTypes.bool,
+	  isDifference: _propTypes2.default.bool,
 	  // when isDifference is true, pathStylePositive and pathStyleNegative can be passed to give 2 different inline
 	  // styles to the two different paths which are generated
 	  // ignored if isDifference is false
-	  pathStylePositive: PropTypes.object,
-	  pathStyleNegative: PropTypes.object,
+	  pathStylePositive: _propTypes2.default.object,
+	  pathStyleNegative: _propTypes2.default.object,
 	
-	  scaleType: PropTypes.object,
-	  scale: PropTypes.object,
+	  scaleType: _propTypes2.default.object,
+	  scale: _propTypes2.default.object,
 	  // if true, will show gaps in the shaded area for data where props.isDefined(datum) returns false
-	  shouldShowGaps: PropTypes.bool,
+	  shouldShowGaps: _propTypes2.default.bool,
 	  // if shouldShowGaps is true, isDefined function describes when a datum should be considered "defined" vs. when to show gap
 	  // by default, shows gap if either y or yEnd are undefined
-	  isDefined: PropTypes.func
+	  isDefined: _propTypes2.default.func
 	};
 	AreaChart.defaultProps = {
 	  shouldShowGaps: true,
@@ -91548,7 +92866,7 @@
 	exports.default = AreaChart;
 
 /***/ }),
-/* 389 */
+/* 397 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';

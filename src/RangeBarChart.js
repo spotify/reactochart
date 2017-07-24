@@ -1,6 +1,6 @@
 import React from 'react';
 import invariant from 'invariant';
-
+import PropTypes from 'prop-types';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {hasXYScales, dataTypeFromScaleType} from './utils/Scale';
 import {makeAccessor, domainFromRangeData, domainFromData, getDataDomainByAxis} from './utils/Data';
@@ -8,18 +8,23 @@ import Bar from './Bar';
 
 export default class RangeBarChart extends React.Component {
   static propTypes = {
-    scale: CustomPropTypes.xyObjectOf(React.PropTypes.func.isRequired),
-    data: React.PropTypes.array,
-    horizontal: React.PropTypes.bool,
+    scale: CustomPropTypes.xyObjectOf(PropTypes.func.isRequired),
+    data: PropTypes.array,
+    horizontal: PropTypes.bool,
 
     getX: CustomPropTypes.getter,
     getXEnd: CustomPropTypes.getter,
     getY: CustomPropTypes.getter,
     getYEnd: CustomPropTypes.getter,
 
-    barThickness: React.PropTypes.number,
-    barClassName: React.PropTypes.string,
-    barStyle: React.PropTypes.object
+    barThickness: PropTypes.number,
+    barClassName: PropTypes.string,
+    barStyle: PropTypes.object,
+    getClass: CustomPropTypes.getter,
+
+    onMouseEnterBar: PropTypes.func,
+    onMouseMoveBar: PropTypes.func,
+    onMouseLeaveBar: PropTypes.func
   };
   static defaultProps = {
     data: [],
@@ -60,25 +65,40 @@ export default class RangeBarChart extends React.Component {
     }
   }
   render() {
-    const {scale, data, horizontal, getX, getXEnd, getY, getYEnd, barThickness, barClassName, barStyle} = this.props;
+    const {scale, data, horizontal, getX, getXEnd, getY, getYEnd, barThickness, barClassName, barStyle, getClass} = this.props;
     invariant(hasXYScales(scale), `RangeBarChart.props.scale.x and scale.y must both be valid d3 scales`);
     // invariant(hasOneOfTwo(getXEnd, getYEnd), `RangeBarChart expects a getXEnd *or* getYEnd prop, but not both.`);
 
     const accessors = {x: makeAccessor(getX), y: makeAccessor(getY)};
     const endAccessors = {x: makeAccessor(getXEnd), y: makeAccessor(getYEnd)};
-    const barProps = {
-      scale,
-      thickness: barThickness,
-      className: `chart-bar ${barClassName}`,
-      style: barStyle
-    };
+    
+
 
     return <g>
       {data.map((d, i) => {
+
+        const [onMouseEnter, onMouseMove, onMouseLeave] =
+          ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(eventName => {
+
+            // partially apply this bar's data point as 2nd callback argument
+            const callback = _.get(this.props, eventName);
+            return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+        });
+
+        const barProps = {
+          scale,
+          thickness: barThickness,
+          className: `chart-bar ${barClassName} ${getClass ? getClass(d) : ''}`,
+          style: barStyle
+        };
+
         const thisBarProps = {
           xValue: accessors.x(d),
           yValue: accessors.y(d),
           key: `chart-bar-${i}`,
+          onMouseEnter, 
+          onMouseMove, 
+          onMouseLeave,
           ...barProps
         };
 

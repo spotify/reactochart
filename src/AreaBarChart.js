@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import invariant from 'invariant';
-
+import PropTypes from 'prop-types';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {hasXYScales, dataTypeFromScaleType} from './utils/Scale';
 import {makeAccessor, domainFromRangeData} from './utils/Data';
@@ -9,17 +9,22 @@ import RangeRect from './RangeRect';
 
 export default class AreaBarChart extends React.Component {
   static propTypes = {
-    scale: CustomPropTypes.xyObjectOf(React.PropTypes.func.isRequired),
-    data: React.PropTypes.array,
-    horizontal: React.PropTypes.bool,
+    scale: CustomPropTypes.xyObjectOf(PropTypes.func.isRequired),
+    data: PropTypes.array,
+    horizontal: PropTypes.bool,
 
     getX: CustomPropTypes.getter,
     getXEnd: CustomPropTypes.getter,
     getY: CustomPropTypes.getter,
     getYEnd: CustomPropTypes.getter,
+    getClass: CustomPropTypes.getter,
 
-    barClassName: React.PropTypes.string,
-    barStyle: React.PropTypes.object
+    barClassName: PropTypes.string,
+    barStyle: PropTypes.object,
+
+    onMouseEnterBar: PropTypes.func,
+    onMouseMoveBar: PropTypes.func,
+    onMouseLeaveBar: PropTypes.func
   };
   static defaultProps = {
     data: [],
@@ -46,18 +51,26 @@ export default class AreaBarChart extends React.Component {
   }
 
   render() {
-    const {scale, data, horizontal, getX, getXEnd, getY, getYEnd, barClassName, barStyle} = this.props;
+    const {scale, data, horizontal, getX, getXEnd, getY, getYEnd, barClassName, barStyle, getClass} = this.props;
     invariant(hasXYScales(scale), `AreaBarChart.props.scale.x and scale.y must both be valid d3 scales`);
 
     const barProps = {
       scale,
-      className: `chart-area-bar ${barClassName}`,
       style: barStyle
     };
     const getZero = _.constant(0);
 
     return <g>
       {data.map((d, i) => {
+        const [onMouseEnter, onMouseMove, onMouseLeave] =
+          ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(eventName => {
+
+            // partially apply this bar's data point as 2nd callback argument
+            const callback = _.get(this.props, eventName);
+            return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+        });
+
+        barProps.className = `chart-area-bar ${getClass ? makeAccessor(getClass)(d) : ''} ${barClassName}`; 
         return <RangeRect
           datum={d}
           getX={horizontal ? getZero : getX}
@@ -65,6 +78,9 @@ export default class AreaBarChart extends React.Component {
           getY={!horizontal ? getZero : getY}
           getYEnd={!horizontal ? getY : getYEnd}
           key={`chart-area-bar-${i}`}
+          onMouseEnter={onMouseEnter} 
+          onMouseMove={onMouseMove} 
+          onMouseLeave={onMouseLeave}
           {...barProps}
         />;
       })}

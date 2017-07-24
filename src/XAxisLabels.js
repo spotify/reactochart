@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 import MeasuredValueLabel from './MeasuredValueLabel';
 import {getScaleTicks, inferScaleType, getTickDomain} from './utils/Scale';
@@ -59,7 +60,11 @@ function resolveXLabelsForValues(scale, values, formats, style, force = true) {
 
 class XAxisValueLabels extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.object
+    scale: PropTypes.object,
+    // Label Handling
+    onMouseEnterLabel: PropTypes.func,
+    onMouseMoveLabel: PropTypes.func,
+    onMouseLeaveLabel: PropTypes.func
   };
   static defaultProps = {
     height: 250,
@@ -140,7 +145,7 @@ class XAxisValueLabels extends React.Component {
   }
 
   render() {
-    const {height, position, distance, labelStyle, labelClassName, spacing} = this.props;
+    const {height, position, distance, labelStyle, labelClassName, onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel, spacing} = this.props;
     const scale = this.props.scale.x;
     const labels = this.props.labels || XAxisValueLabels.getLabels(this.props);
     const placement = this.props.placement || ((position === 'top') ? 'above' : 'below');
@@ -156,8 +161,14 @@ class XAxisValueLabels extends React.Component {
         const y = (placement === 'above') ?
           -label.height - distance :
           distance;
+        const [onMouseEnter, onMouseMove, onMouseLeave] =
+          ['onMouseEnterLabel', 'onMouseMoveLabel', 'onMouseLeaveLabel'].map(eventName => {
+            // partially apply this bar's data point as 2nd callback argument
+            const callback = _.get(this.props, eventName);
+            return _.isFunction(callback) ? _.partial(callback, _, label.value) : null;
+        });
 
-        return <g key={`x-axis-label-${i}`}>
+        return <g key={`x-axis-label-${i}`} {...{onMouseEnter, onMouseMove, onMouseLeave}}>
           {/* <XAxisLabelDebugRect {...{x, y, label}}/> */}
           <MeasuredValueLabel value={label.value} {...{x, y, className, dy:"0.8em", style}}>
             {label.text}

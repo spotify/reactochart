@@ -1,6 +1,6 @@
 import React from 'react';
-const {PropTypes} = React;
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 import {methodIfFuncProp} from './util.js';
 import * as CustomPropTypes from './utils/CustomPropTypes';
@@ -36,7 +36,7 @@ export default class MarkerLineChart extends React.Component {
     getXEnd: CustomPropTypes.getter,
     getYEnd: CustomPropTypes.getter,
 
-    horizontal: React.PropTypes.bool,
+    horizontal: PropTypes.bool,
     lineLength: PropTypes.number,
 
     // x & y scale types

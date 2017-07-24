@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 import MeasuredValueLabel from './MeasuredValueLabel';
 import {getScaleTicks, inferScaleType, getTickDomain} from './utils/Scale';
@@ -47,7 +48,11 @@ function resolveYLabelsForValues(scale, values, formats, style, force = true) {
 
 class YAxisValueLabels extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.object,
+    scale: PropTypes.object,
+    // Label Handling
+    onMouseEnterLabel: PropTypes.func,
+    onMouseMoveLabel: PropTypes.func,
+    onMouseLeaveLabel: PropTypes.func
     // placement: undefined,
     // format: undefined,
     // formats: undefined,
@@ -131,7 +136,7 @@ class YAxisValueLabels extends React.Component {
 
   render() {
     // todo: position: 'zero' prop to position along the zero line
-    const {width, position, distance, labelStyle, labelClassName, spacing} = this.props;
+    const {width, position, distance, labelStyle, labelClassName, onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel, spacing} = this.props;
     const scale = this.props.scale.y;
     const placement = this.props.placement || ((position === 'left') ? 'before' : 'after');
     const className = `chart-value-label chart-value-label-y ${labelClassName}`;
@@ -145,8 +150,15 @@ class YAxisValueLabels extends React.Component {
       {labels.map((label, i) => {
         const y = scale(label.value);
         const x = (placement === 'before') ? -distance : distance;
+         
+        const [onMouseEnter, onMouseMove, onMouseLeave] =
+          ['onMouseEnterLabel', 'onMouseMoveLabel', 'onMouseLeaveLabel'].map(eventName => {
+            // partially apply this bar's data point as 2nd callback argument
+            const callback = _.get(this.props, eventName);
+            return _.isFunction(callback) ? _.partial(callback, _, label.value) : null;
+        });
 
-        return <g key={`x-axis-label-${i}`}>
+        return <g key={`x-axis-label-${i}`} {...{onMouseEnter, onMouseMove, onMouseLeave}}>
           {/* <YAxisLabelDebugRect {...{x, y, label, style}}/> */}
           <MeasuredValueLabel value={label.value} {...{x, y, className, dy:"0.35em", style}}>
             {label.text}

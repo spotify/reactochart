@@ -143,6 +143,12 @@ class LineChartExample2 extends React.Component {
   _onMouseMove = ({xValue, yValue}) => {
     this.setState({activeX: xValue});
   };
+  _onMouseEnterLabel = (e, d) => {
+    debugger;
+  };
+  _onMouseLeaveLabel = (e, d) => {
+    debugger;
+  };
 
   render() {
     const {activeX} = this.state;
@@ -154,8 +160,9 @@ class LineChartExample2 extends React.Component {
 
     return <div>
       <XYPlot scaleType="linear" {...{width: 600, height: 350, domain: {y: [-2, 2]}}} onMouseMove={this._onMouseMove}>
-        <XAxis title="Phase" />
-        <YAxis title="Intensity" />
+        <XAxis title="Phase" onMouseEnterLabel={this._onMouseEnterLabel}  onMouseLeaveLabel={this._onMouseLeaveLabel} />
+        <YAxis title="Intensity" onMouseEnterLabel={this._onMouseEnterLabel}  onMouseLeaveLabel={this._onMouseLeaveLabel} />
+
 
         <LineChart
           data={_.range(100)}
@@ -207,6 +214,12 @@ const InteractiveLineExample = React.createClass({
   onMouseMoveXYPlot({xValue, yValue}) {
     this.setState({activeXValue: xValue, activeYValue: yValue});
   },
+  onMouseEnterLabel(e, d){
+    debugger;
+  },
+  onMouseLeaveLabel(e, d){
+    debugger;
+  },
   onClick({yValue}) {
     this.setState({clickedY: yValue})
   },
@@ -222,8 +235,12 @@ const InteractiveLineExample = React.createClass({
         <div>Hover over the chart to show values</div>
       }
       <XYPlot width={700} height={400} onMouseMove={this.onMouseMoveXYPlot} onClick={this.onClick}>
-        <XAxis title="Days" />
-        <YAxis title="Price" />
+        <XAxis title="Days" >
+          <XAxisLabels onMouseEnterLabel={this.onMouseEnterLabel}  onMouseLeaveLabel={this.onMouseLeaveLabel} />
+        </XAxis>
+        <YAxis title="Price" >
+            <YAxisLabels onMouseEnterLabel={this.onMouseEnterLabel}  onMouseLeaveLabel={this.onMouseLeaveLabel}  />
+        </YAxis>
         <LineChart data={randomSequences[0]} {...getters} />
         <LineChart data={randomSequences[1]} {...getters} />
         <LineChart data={randomSequences[2]} {...getters} />
@@ -505,6 +522,44 @@ const AreaBarChartExample = (props) => {
     </XYPlot>;
   </div>
 };
+
+const InteractiveAreaBarChartExample = React.createClass({
+  getInitialState() {
+    return {
+      activeValue: null
+    }
+  },
+  onEnterBar(e, d) {
+    this.setState({activeValue: d});
+  },
+  onLeaveBar(e, d) {
+    this.setState({activeValue: null})
+  },
+  render() {
+    const {activeValue} = this.state;
+    const getters = {getX: 0, getY: 1};
+
+    return <div>
+      {activeValue ?
+        <div>
+          {activeValue.toFixed(2)}
+        </div> :
+        <div>Hover over the chart to show values</div>
+      }
+      <XYPlot width={500} height={320}>
+        <XAxis /><YAxis />
+        <AreaBarChart
+          data={_.range(15)}
+          getX={d => Math.sin(d / 10) * 10}
+          getXEnd={d => Math.sin((d + 1) / 10) * 10}
+          getY={d => Math.cos(d / (Math.PI))}
+          onMouseEnterBar={this.onEnterBar}
+          onMouseLeaveBar={this.onLeaveBar}
+        />
+      </XYPlot>;
+    </div>
+  }
+});
 
 const ColorHeatMapExample = (props) => {
   const gridData = _.range(30).map(m => {
@@ -1048,7 +1103,7 @@ const TreeMapExample = (props) => {
       getValue="size"
       getLabel="size"
       nodeStyle={(node) => ({
-        backgroundColor: colorScale(parseInt(node.size)),
+        backgroundColor: colorScale(parseInt(node.data.size)),
         border: '1px solid #333'
       })}
       width={800}
@@ -1056,6 +1111,57 @@ const TreeMapExample = (props) => {
     />
   </div>
 };
+
+class AnimatedTreeMapExample extends React.Component {
+  state = {getValue: "size"};
+
+  _animateValue = () => {
+    if(this.state.getValue === "size")
+      this.setState({getValue: "size2"});
+    else
+      this.setState({getValue: "size"});
+  };
+
+  componentWillMount() {
+     this._interval = setInterval(this._animateValue, 1000);
+     this._data = {
+      children: _.range(1, 5).map(n => ({
+        children: _.times(n * n, m => ({
+          size:  (n +1) * (m + 1) + (100 * Math.random()),
+          size2: (n +1) * (m + 1) + (100 * Math.random())
+        }))
+      }))
+    };
+  }
+  componentWillUnmount() {
+    clearInterval(this._interval);
+  }
+
+  render() {
+    const {getValue} = this.state;
+
+    const colorScale = scaleLinear()
+      .domain([0, 65])
+      .range(['#6b6ecf', '#8ca252'])
+      .interpolate(interpolateHcl);
+
+    return <div>
+      <TreeMap
+        data={this._data}
+        getValue={getValue}
+        getLabel="size"
+        nodeStyle={(node) => ({
+          backgroundColor: colorScale(parseInt(node.data.size)),
+          border: '1px solid #333'
+        })}
+        sticky
+        width={800}
+        height={500}
+      />
+    </div>
+  }
+}
+
 
 const YAxisTitleTest = (props) => {
   const xyProps = {
@@ -1364,6 +1470,7 @@ export const examples = [
   {id: 'categoricalColorHeatMap', title: 'Categorical Color Heat Map', Component: CategoricalColorHeatmapExample},
   {id: 'areaHeatmap', title: 'Area Heat Map', Component: AreaHeatmapExample},
   {id: 'treeMap', title: 'TreeMap', Component: TreeMapExample},
+  {id: 'animatedTreeMap', title: 'Animated TreeMap', Component: AnimatedTreeMapExample},
   {id: 'markerLine', title: 'Marker Line Chart', Component: MarkerLineExample},
   {id: 'funnel', title: 'Funnel Chart', Component: FunnelChartExample},
   {id: 'kde', title: 'Kernel Density Estimation Chart', Component: KDEExample},

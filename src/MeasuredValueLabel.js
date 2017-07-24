@@ -1,10 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
 import measureText from 'measure-text';
+import PropTypes from 'prop-types';
 
 export default class MeasuredValueLabel extends React.Component {
   static propTypes = {
-    value: React.PropTypes.any.isRequired
+    value: PropTypes.any.isRequired
   };
   static defaultProps = {
     format: _.identity,

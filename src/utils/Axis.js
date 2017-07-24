@@ -5,7 +5,7 @@ export function getAxisChildProps(props) {
     ticks, tickCount, tickLength, tickClassName, tickStyle,
     title, titleDistance, titleAlign, titleRotate, titleStyle,
     labelDistance, labelClassName, labelStyle, labelFormat, labelFormats, labels,
-    gridLineClassName, gridLineStyle
+    gridLineClassName, gridLineStyle, onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel
   } = props;
 
   const ticksProps = {
@@ -21,7 +21,8 @@ export function getAxisChildProps(props) {
   const labelsProps = {
     width, height, scale, ticks, tickCount, spacing,
     position, placement, labels,
-    labelClassName, labelStyle, distance: labelDistance, format: labelFormat, formats: labelFormats
+    labelClassName, labelStyle, distance: labelDistance, format: labelFormat, formats: labelFormats,
+    onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel
   };
 
   const titleProps = {
