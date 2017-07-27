@@ -5,8 +5,8 @@ import shallowEqual from './utils/shallowEqual';
 import PropTypes from 'prop-types';
 
 import {makeAccessor} from './utils/Data';
-import {scaleEqual} from './utils/Scale';
 import xyPropsEqual from './utils/xyPropsEqual';
+// import {xyPropsEqualDebug} from './utils/xyPropsEqual';
 
 
 export default class LineChart extends React.Component {
@@ -35,22 +35,6 @@ export default class LineChart extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     return !xyPropsEqual(this.props, nextProps);
   }
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   // const start = performance.now();
-  //   const deepishProps = ['margin', 'scaleType'];
-  //   const deeperProps = ['domain'];
-  //   const deepProps = deepishProps.concat(deeperProps).concat('scale');
-  //
-  //   const isEqual =
-  //     shallowEqual(_.omit(this.props, deepProps), _.omit(nextProps, deepProps)) &&
-  //     _.every(deepishProps, (key) => shallowEqual(this.props[key], nextProps[key])) &&
-  //     _.every(deeperProps, (key) => _.isEqual(this.props[key], nextProps[key])) &&
-  //     _.every(['x', 'y'], (key) => scaleEqual(this.props.scale[key], nextProps.scale[key]));
-  //
-  //   // console.log('isEqual', isEqual);
-  //   // console.log('took', performance.now() - start);
-  //   return !isEqual;
-  // }
 
   initBisector(props) {
     this.setState({bisectX: bisector(d => makeAccessor(props.getX)(d)).left});
@@ -58,7 +42,6 @@ export default class LineChart extends React.Component {
 
   getHovered = (x, y) => {
     const closestDataIndex = this.state.bisectX(this.props.data, x);
-    //console.log(closestDataIndex, this.props.data[closestDataIndex]);
     return this.props.data[closestDataIndex];
   };
 
