@@ -1,0 +1,25 @@
+const AreaBarChartExample = (props) => {
+  return <div>
+    <XYPlot width={500} height={320}>
+      <XAxis /><YAxis />
+      <AreaBarChart
+        data={_.range(15)}
+        getX={d => Math.sin(d / 10) * 10}
+        getXEnd={d => Math.sin((d + 1) / 10) * 10}
+        getY={d => Math.cos(d / (Math.PI))}
+      />
+    </XYPlot>;
+    <XYPlot width={320} height={500}>
+      <XAxis /><YAxis />
+      <AreaBarChart
+        horizontal
+        data={_.range(15)}
+        getX={d => Math.cos(d / (Math.PI))}
+        getY={d => Math.sin(d / 10) * 10}
+        getYEnd={d => Math.sin((d + 1) / 10) * 10}
+      />
+    </XYPlot>;
+  </div>
+};
+
+ReactDOM.render(<AreaBarChartExample />, mountNode);

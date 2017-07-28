@@ -10,6 +10,8 @@ export {default as BarChart} from './BarChart';
 export {default as RangeBarChart} from './RangeBarChart';
 export {default as AreaBarChart} from './AreaBarChart';
 export {default as MarkerLineChart} from './MarkerLineChart';
+export {default as AreaChart} from './AreaChart';
+export {default as ColorHeatmap} from './ColorHeatmap';
 export {default as AreaHeatmap} from './AreaHeatmap';
 export {default as Histogram} from './Histogram';
 export {default as KernelDensityEstimation} from './KernelDensityEstimation';

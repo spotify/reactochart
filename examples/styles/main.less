@@ -157,3 +157,52 @@ path {
     fill: steelblue;
   }
 }
+
+.playground {
+  display: flex;
+  flex-wrap: wrap;
+
+  .playgroundCode, .playgroundPreview {
+    border: 1px solid #efefef;
+    border-radius: 3px;
+    flex-basis: 150px;
+
+    &:before {
+      display: block;
+      text-align: center;
+      color: #616467;
+      background-color: #f8f8f8;
+      border-bottom: 1px solid #efefef;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+      line-height: 28px;
+    }
+  }
+
+  .playgroundCode {
+    margin-right: 8px;
+    flex-grow: .6;
+
+    &:before {
+      content: "Editable Source";
+    }
+    .CodeMirror {
+      font-size: 10pt;
+      font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    }
+  }
+
+  .playgroundPreview {
+    margin-left: 8px;
+    //text-align: center;
+    flex-grow: .4;
+
+    &:before {
+      content: "Live Preview";
+    }
+    .previewArea {
+      padding: 8px 6px;
+    }
+  }
+}

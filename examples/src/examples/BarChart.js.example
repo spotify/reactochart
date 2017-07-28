@@ -1,0 +1,36 @@
+const BarChartExample = (props) => {
+  const count = 30;
+  const startDate = new Date(1992, 0, 1);
+
+  const numbers = _.range(count);
+  const letters = _.times(count, n => String.fromCharCode(97 + n));
+  const dates = _.times(count, n => new Date(+(startDate) + (n * 1000 * 60 * 60 * 24 * 100)));
+
+  const getNumberValue = (d) => 1.97 + Math.cos(d / 10);
+  const getDateValue = (d) => getNumberValue(d.getFullYear() + (d.getMonth() / 12));
+  const getLetterValue = (d) => getNumberValue(d.charCodeAt(0));
+
+  const chartDefs = _.zip([numbers, letters, dates], [getNumberValue, getLetterValue, getDateValue]);
+
+  return <div>
+    {([true, false]).map(horizontal => {
+      return <div>
+        <h4>{horizontal ? "Horizontal" : "Vertical"}</h4>
+
+        {chartDefs.map(([data, getValue]) => {
+          return <XYPlot width={320} height={320}>
+            <XAxis /><YAxis />
+            <BarChart
+              data={data}
+              horizontal={horizontal}
+              getX={horizontal ? getValue : null}
+              getY={horizontal ? null : getValue}
+            />
+          </XYPlot>;
+        })}
+      </div>;
+    })}
+  </div>
+};
+
+ReactDOM.render(<BarChartExample/>, mountNode);
