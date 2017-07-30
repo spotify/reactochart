@@ -11,9 +11,9 @@
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",
     "build-lib": "rm -rf lib/ && babel src --out-dir lib",
-    "build-examples": "BABEL_ENV=production webpack --config webpack.config.build.js",
+    "build-docs": "BABEL_ENV=production webpack --config webpack.config.build.js",
     "build-tests": "webpack --config webpack.config.test.js",
-    "build": "npm run build-lib && npm run build-examples && npm run build-tests",
+    "build": "npm run build-lib && npm run build-docs && npm run build-tests",
     "serve": "python -m SimpleHTTPServer",
     "test": "npm run build-tests && node_modules/.bin/mocha-phantomjs -p $(which phantomjs) tests/index.html",
     "enzyme": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require test-enzyme/setup.js --recursive test-enzyme/spec"

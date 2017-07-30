@@ -4,10 +4,10 @@ var webpack = require('webpack');
 module.exports = {
     context: __dirname,
     entry: [
-        './examples/src/main.js'
+        './docs/src/main.js'
     ],
     output: {
-        path: path.join(__dirname, 'examples/build'),
+        path: path.join(__dirname, 'docs/build'),
         filename: 'bundle.js',
         publicPath: '/build/'
     },

@@ -8,6 +8,7 @@ import PieChartDocs from './pages/PieChart';
 import BarChartDocs from './pages/BarChart';
 import AreaChartDocs from './pages/AreaChart';
 import ColorHeatmapDocs from './pages/ColorHeatmap';
+import AreaHeatmapDocs from './pages/AreaHeatmap';
 
 export const Home = (props) => (
   <div className="docs-home">
@@ -22,6 +23,7 @@ const components = [
   {name: 'Bar Chart', path: '/bar', Component: BarChartDocs},
   {name: 'Area Chart', path: '/area', Component: AreaChartDocs},
   {name: 'Color Heatmap', path: '/color-heatmap', Component: ColorHeatmapDocs},
+  {name: 'Area Heatmap', path: '/area-heatmap', Component: AreaHeatmapDocs},
 ];
 
 export const App = (props) => (

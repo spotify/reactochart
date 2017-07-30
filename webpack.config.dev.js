@@ -9,7 +9,7 @@ config = _.merge(config, {
     ].concat(config.entry),
     devServer: {
         port: 9876,
-        contentBase: 'examples/',
+        contentBase: 'docs/',
         hot: true
     },
     plugins: config.plugins.concat([

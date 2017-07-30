@@ -3,7 +3,7 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import {expect} from 'chai';
 
-import {examples} from '../../examples/src/Examples.jsx';
+import {examples} from '../../docs/src/Examples.jsx';
 
 describe('examples', () => {
   it('has examples', () => {
