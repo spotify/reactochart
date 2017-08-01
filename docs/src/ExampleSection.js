@@ -44,22 +44,24 @@ export default class ExampleSection extends React.Component {
     };
 
     return <div className={`row example ${isExpanded ? 'example-active' : 'example-inactive'}`}>
-      <h3 className="example-header" onClick={onClick ? this.onClick : _.noop}>
-        {label || id} {isExpanded ? "▼" : "►"}
-      </h3>
+      <div className="col-md-12">
+        <h3 className="example-header" onClick={onClick ? this.onClick : _.noop}>
+          {label || id} {isExpanded ? "▼" : "►"}
+        </h3>
 
-      {isExpanded ?
-        <div>
-          {description ?
-            <div className="example-description">
-              {description}
-            </div>
-            : null
-          }
-          <Playground codeText={codeText} scope={scope} noRender={false} />
-        </div>
-        : null
-      }
+        {isExpanded ?
+          <div>
+            {description ?
+              <div className="example-description">
+                {description}
+              </div>
+              : null
+            }
+            <Playground codeText={codeText} scope={scope} noRender={false} />
+          </div>
+          : null
+        }
+      </div>
     </div>
   }
 }

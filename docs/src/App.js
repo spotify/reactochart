@@ -2,14 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {HashRouter as Router, Link, Route} from 'react-router-dom';
 
-import LineChartDocs from './pages/LineChart';
-import ScatterPlotDocs from './pages/ScatterPlot';
-import PieChartDocs from './pages/PieChart';
-import BarChartDocs from './pages/BarChart';
-import AreaChartDocs from './pages/AreaChart';
-import ColorHeatmapDocs from './pages/ColorHeatmap';
-import AreaHeatmapDocs from './pages/AreaHeatmap';
-
 import * as Docs from './docs';
 import * as Lessons from './lessons';
 
@@ -60,8 +52,52 @@ const allComponents = lessons
   .concat(dataMarkComponents)
   .concat(axisComponents);
 
+
+const NavLink = ({label, to}) => {
+  return <Route path={to} exact={true} children={({match}) => (
+    <li className={`example-link ${match ? 'active' : ''}`}>
+      <Link to={to}>{label}</Link>
+    </li>
+  )}/>
+};
+
+const Nav = () => {
+  return <div className="sidebar-nav col-md-2" style={{backgroundColor: '#2E2F33'}}>
+    <h3>Lessons</h3>
+    <ul className="nav-inverse nav-tabs nav-stacked">
+      {lessons.map((lesson, i) => {
+        return <NavLink to={lesson.path} label={lesson.name} key={`lesson-${i}`}/>;
+      })}
+    </ul>
+
+    <h3>Component Docs</h3>
+    <h4>Chart Components</h4>
+    <ul className="nav-inverse nav-tabs nav-stacked">
+      {chartComponents.map((component, i) => {
+        return <NavLink to={component.path} label={component.name} key={`chart-component-${i}`}/>;
+      })}
+    </ul>
+
+    <h4>Data Components</h4>
+    <ul className="nav-inverse nav-tabs nav-stacked">
+      {dataMarkComponents.map((component, i) => {
+        return <NavLink to={component.path} label={component.name} key={`data-component-${i}`}/>;
+      })}
+    </ul>
+
+    <h4>Axis Components</h4>
+    <ul className="nav-inverse nav-tabs nav-stacked">
+      {axisComponents.map((component, i) => {
+        return <NavLink to={component.path} label={component.name} key={`axis-component-${i}`}/>;
+      })}
+    </ul>
+  </div>
+};
+
 export const Home = (props) => (
   <div className="docs-home">
+
+
     <p>
       Reactochart is a library of React components for creating charts and graphs, used internally at Spotify.
     </p>
@@ -106,15 +142,17 @@ export const Home = (props) => (
 );
 
 export const App = (props) => (
-    <Router>
-      <div className="docs-home">
-
+  <Router>
+    <div className="row docs-home">
+      <Nav />
+      <div className="col-md-10">
         <Route exact path={'/'} component={Home} />
         {allComponents.map((c, i) => (
           <Route path={c.path} component={c.Component} key={i} />
         ))}
       </div>
-    </Router>
+    </div>
+  </Router>
 );
 
 import * as Reactochart from '../../src';

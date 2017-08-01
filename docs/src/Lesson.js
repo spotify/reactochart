@@ -6,12 +6,11 @@ export default class Lesson extends React.Component {
   render() {
     const {name, children} = this.props;
 
-    return <div className="container">
-      <div className="row">
+    return <div>
         <h2>{name}</h2>
-      </div>
 
-      {children}
+        {children}
+
     </div>
   }
 }
