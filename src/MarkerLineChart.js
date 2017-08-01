@@ -7,11 +7,13 @@ import * as CustomPropTypes from './utils/CustomPropTypes';
 import {dataTypeFromScaleType} from './utils/Scale';
 import {makeAccessor, domainFromRangeData, getDataDomainByAxis} from './utils/Data';
 
-// MarkerLine is similar to a bar chart,
-// except that it just draws a line at the data value, rather than a full bar
-// If the independent variable is a range, the length of the line will represent that range
-// Otherwise all lines will be the same length.
-// The dependent variable must be a single value, not a range.
+/**
+ * MarkerLine is similar to a bar chart,
+ * except that it just draws a line at the data value, rather than a full bar.
+ * If the independent variable is a range, the length of the line will represent that range,
+ * otherwise all lines will be the same length.
+ * The dependent variable must be a single value, not a range.
+ */
 
 function getTickType(props) {
   const {getXEnd, getYEnd, horizontal} = props;

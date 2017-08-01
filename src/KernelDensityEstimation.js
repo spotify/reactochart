@@ -7,15 +7,21 @@ import LineChart from './LineChart.js';
 
 class KernelDensityEstimation extends React.Component {
   static propTypes = {
-    // the array of data objects
+    /**
+     * the array of data objects
+     */
     data: PropTypes.array.isRequired,
 
-    // kernel bandwidth for kernel density estimator
-    // https://en.wikipedia.org/wiki/Kernel_density_estimation#Bandwidth_selection
-    // high bandwidth => oversmoothing & underfitting; low bandwidth => undersmoothing & overfitting
+    /**
+     * Kernel bandwidth for kernel density estimator.
+     * High bandwidth => oversmoothing & underfitting; low bandwidth => undersmoothing & overfitting
+     */
     bandwidth: PropTypes.number,
-    // number of samples to take from the KDE
-    // ie. the resolution/smoothness of the KDE line - more samples => higher resolution, smooth line
+    /**
+     * Number of samples to take from the KDE,
+     * ie. the resolution/smoothness of the KDE line - more samples => higher resolution, smooth line.
+     * Defaults to null, which causes it to be auto-determined based on width.
+     */
     sampleCount: PropTypes.number,
 
     // common props from XYPlot

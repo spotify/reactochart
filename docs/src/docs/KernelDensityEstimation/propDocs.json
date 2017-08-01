@@ -29,14 +29,14 @@
         "name": "array"
       },
       "required": true,
-      "description": ""
+      "description": "the array of data objects"
     },
     "bandwidth": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Kernel bandwidth for kernel density estimator.\nHigh bandwidth => oversmoothing & underfitting; low bandwidth => undersmoothing & overfitting",
       "defaultValue": {
         "value": "0.5",
         "computed": false
@@ -47,7 +47,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Number of samples to take from the KDE,\nie. the resolution/smoothness of the KDE line - more samples => higher resolution, smooth line.\nDefaults to null, which causes it to be auto-determined based on width.",
       "defaultValue": {
         "value": "null",
         "computed": false

@@ -10,6 +10,7 @@ import {dataTypeFromScaleType} from './utils/Scale';
 export default class FunnelChart extends React.Component {
   static propTypes = {
     // passed from xyplot
+
     scale: CustomPropTypes.xyObjectOf(PropTypes.func.isRequired),
     // data array
     data: PropTypes.array.isRequired,

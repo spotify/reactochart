@@ -23,14 +23,14 @@
         "raw": "CustomPropTypes.xyObjectOf(PropTypes.func.isRequired)"
       },
       "required": false,
-      "description": ""
+      "description": "d3 scale passed from xyplot"
     },
     "data": {
       "type": {
         "name": "array"
       },
       "required": true,
-      "description": ""
+      "description": "data array - should be 1D array of all grid values\n(if you have a 2D array, _.flatten it)"
     },
     "getValue": {
       "type": {
@@ -38,7 +38,7 @@
         "raw": "CustomPropTypes.getter"
       },
       "required": false,
-      "description": ""
+      "description": "data getters"
     },
     "getX": {
       "type": {
@@ -77,14 +77,14 @@
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "a custom d3 color scale may be passed..."
     },
     "colors": {
       "type": {
         "name": "array"
       },
       "required": false,
-      "description": ""
+      "description": "...or else one will be constructed from colors, colorStops and interpolator"
     },
     "valueDomain": {
       "type": {

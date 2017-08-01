@@ -7,13 +7,6 @@ import * as CustomPropTypes from './utils/CustomPropTypes';
 import {hasXYScales} from './utils/Scale';
 import {makeAccessor, domainFromData} from './utils/Data';
 
-// BarChart represents a basic "Value/Value" bar chart,
-// where each bar represents a single independent variable value and a single dependent value,
-// with bars that are centered horizontally on x-value and extend from 0 to y-value,
-// (or centered vertically on their y-value and extend from 0 to the x-value, in the case of horizontal chart variant)
-// eg. http://www.snapsurveys.com/wp-content/uploads/2012/10/bar_2d8.png
-
-// For other bar chart types, see RangeBarChart and AreaBarChart
 
 function makeRangeBarChartProps(barChartProps) {
   // this component is a simple wrapper around RangeBarChart,
@@ -29,6 +22,16 @@ function makeRangeBarChartProps(barChartProps) {
     getYEnd: horizontal ? undefined : getY
   };
 }
+
+/**
+ * BarChart represents a basic "Value/Value" bar chart,
+ * where each bar represents a single independent variable value and a single dependent value,
+ * with bars that are centered horizontally on x-value and extend from 0 to y-value,
+ * (or centered vertically on their y-value and extend from 0 to the x-value, in the case of horizontal chart variant)
+ * eg. http://www.snapsurveys.com/wp-content/uploads/2012/10/bar_2d8.png
+ *
+ * For other bar chart types, see RangeBarChart and AreaBarChart
+ */
 
 export default class BarChart extends React.Component {
   static propTypes = {

@@ -33,23 +33,32 @@ function makeColorScale(domain, colors, interpolator) {
 
 export default class ColorHeatmap extends React.Component {
   static propTypes = {
-    // passed from xyplot
+    /**
+     * d3 scale passed from xyplot
+     */
     scale: CustomPropTypes.xyObjectOf(PropTypes.func.isRequired),
-
-    // data array - should be 1D array of all grid values
-    // (if you have a 2D array, _.flatten it)
+    /**
+     * data array - should be 1D array of all grid values
+     * (if you have a 2D array, _.flatten it)
+     */
     data: PropTypes.array.isRequired,
 
-    // data getters
+    /**
+     * data getters
+     */
     getValue: CustomPropTypes.getter,
     getX: CustomPropTypes.getter,
     getXEnd: CustomPropTypes.getter,
     getY: CustomPropTypes.getter,
     getYEnd: CustomPropTypes.getter,
 
-    // a custom d3 color scale may be passed...
+    /**
+     * a custom d3 color scale may be passed...
+     */
     colorScale: PropTypes.func,
-    // ...or else one will be constructed from colors, colorStops and interpolator
+    /**
+     * ...or else one will be constructed from colors, colorStops and interpolator
+     */
     colors: PropTypes.array,
     valueDomain: PropTypes.array,
     interpolator: PropTypes.string

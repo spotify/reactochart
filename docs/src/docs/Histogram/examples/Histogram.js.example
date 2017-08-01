@@ -1,5 +1,32 @@
 const HistogramExample = (props) => {
-  return <div>insert example here</div>;
+  const randomNormalArr = _.times(1000, d3.randomNormal(0, 1)).concat(_.times(1000, d3.randomNormal(3, 0.5)));
+
+  return <div>
+    <div>
+      <XYPlot margin={{left: 40, right: 8}} width={700} height={300}>
+        <XAxis /><YAxis />
+        <Histogram
+          data={randomNormalArr} getValue={null}
+        />
+      </XYPlot>
+    </div>
+    <div>
+      <XYPlot
+        margin={{left: 40, right: 8}}
+        width={700} height={40}
+        showGrid={false}
+        showLabels={false}
+        showTicks={false}
+      >
+        <ScatterPlot
+          data={randomNormalArr}
+          getX={null}
+          getY={() => Math.random()}
+          pointRadius={1}
+        />
+      </XYPlot>
+    </div>
+  </div>;
 };
 
 ReactDOM.render(<HistogramExample />, mountNode);

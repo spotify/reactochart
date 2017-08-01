@@ -36,28 +36,28 @@
         "name": "array"
       },
       "required": true,
-      "description": ""
+      "description": "the array of data objects"
     },
     "getX": {
       "type": {
         "name": "any"
       },
       "required": false,
-      "description": ""
+      "description": "data getter for line X coordinates"
     },
     "getY": {
       "type": {
         "name": "any"
       },
       "required": false,
-      "description": ""
+      "description": "data getter for line Y coordinates"
     },
     "lineStyle": {
       "type": {
         "name": "object"
       },
       "required": false,
-      "description": "",
+      "description": "inline style object to be applied to the line path",
       "defaultValue": {
         "value": "{}",
         "computed": false
@@ -68,7 +68,7 @@
         "name": "object"
       },
       "required": false,
-      "description": ""
+      "description": "d3 scale - provided by XYPlot"
     }
   }
 }

@@ -11,14 +11,25 @@ import xyPropsEqual from './utils/xyPropsEqual';
 
 export default class LineChart extends React.Component {
   static propTypes = {
-    // the array of data objects
+    /**
+     * the array of data objects
+     */
     data: PropTypes.array.isRequired,
-    // accessor for X & Y coordinates
+    /**
+     * data getter for line X coordinates
+     */
     getX: PropTypes.any,
+    /**
+     * data getter for line Y coordinates
+     */
     getY: PropTypes.any,
-    // inline style object to be applied to the path
+    /**
+     * inline style object to be applied to the line path
+     */
     lineStyle: PropTypes.object,
-    // props from XYPlot
+    /**
+     * d3 scale - provided by XYPlot
+     */
     scale: PropTypes.object
   };
   static defaultProps = {

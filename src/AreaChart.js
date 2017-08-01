@@ -15,30 +15,49 @@ import * as CustomPropTypes from './utils/CustomPropTypes';
 
 export default class AreaChart extends React.Component {
   static propTypes = {
-    // the array of data objects
+    /**
+     * the array of data objects
+     */
     data: PropTypes.array.isRequired,
-    // accessors for X & Y coordinates
+    /**
+     * data getter for X coordinates
+     */
     getX: CustomPropTypes.getter,
+    /**
+     * data getter for Y coordinates
+     */
     getY: CustomPropTypes.getter,
+    /**
+     * data getter for Y end coordinates
+     */
     getYEnd: CustomPropTypes.getter,
-    // style applied to path element
+    /**
+     * style applied to path element
+     */
     pathStyle: PropTypes.object,
-
-    // if isDifference is true, AreaChart generates a "difference chart" with two area paths instead of one:
-    // one path which shows when YEnd > Y, and one vice versa, allowing them to be styled differently (eg red/green)
+    /**
+     * if isDifference is true, AreaChart generates a "difference chart" with two area paths instead of one:
+     * one path which shows when YEnd > Y, and one vice versa, allowing them to be styled differently (eg red/green)
+     */
     isDifference: PropTypes.bool,
-    // when isDifference is true, pathStylePositive and pathStyleNegative can be passed to give 2 different inline
-    // styles to the two different paths which are generated
-    // ignored if isDifference is false
+    /**
+     * when isDifference is true, pathStylePositive and pathStyleNegative can be passed to give 2 different inline
+     * styles to the two different paths which are generated.
+     * Ignored if isDifference is false.
+     */
     pathStylePositive: PropTypes.object,
     pathStyleNegative: PropTypes.object,
 
     scaleType: PropTypes.object,
     scale: PropTypes.object,
-    // if true, will show gaps in the shaded area for data where props.isDefined(datum) returns false
+    /**
+     * if true, will show gaps in the shaded area for data where props.isDefined(datum) returns false
+     */
     shouldShowGaps: PropTypes.bool,
-    // if shouldShowGaps is true, isDefined function describes when a datum should be considered "defined" vs. when to show gap
-    // by default, shows gap if either y or yEnd are undefined
+    /**
+     * if shouldShowGaps is true, isDefined function describes when a datum should be considered "defined" vs. when to show gap
+     * by default, shows gap if either y or yEnd are undefined
+     */
     isDefined: PropTypes.func
   };
   static defaultProps = {

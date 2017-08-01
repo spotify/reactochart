@@ -9,11 +9,11 @@ import AreaBarChart from './AreaBarChart';
 // todo make histogram work horizontally *or* vertically
 export default class Histogram extends React.Component {
   static propTypes = {
-    // the array of data objects
+    /**
+     * the array of data objects
+     */
     data: PropTypes.array.isRequired,
-    // accessors for X & Y coordinates
     getValue: CustomPropTypes.getter,
-
     axisType: PropTypes.object,
     scale: PropTypes.object
   };
@@ -24,7 +24,10 @@ export default class Histogram extends React.Component {
 
   static getDomain() {
     // todo implement for real
-    return {y: 200};
+    return {
+      x: null,
+      y: [0,200]
+    }
   }
 
   componentWillMount() {
