@@ -19,7 +19,7 @@ export default class ComponentDocs extends React.Component {
         <h4>{name} props:</h4>
         {_.map(_.get(propDocs, 'props'), (propInfo, propKey) => {
           return <div key={propKey} className="prop-doc">
-            <strong>{propKey}</strong>: {propInfo.type.name}
+            <strong>{propKey}</strong>: {_.get(propInfo, 'type.name', 'unknown')}
             {propInfo.description ? <br/> : null}
             {propInfo.description ?
               <span className="prop-description">{propInfo.description}</span>

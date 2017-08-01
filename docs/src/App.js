@@ -35,7 +35,30 @@ const chartComponents = [
   {name: 'TreeMap', path: '/tree-map', Component: Docs.TreeMapDocs},
 ];
 
-const allComponents = lessons.concat(chartComponents);
+const dataMarkComponents = [
+  {name: 'Bar', path: '/bar', Component: Docs.BarDocs},
+  {name: 'RangeRect', path: '/range-rect', Component: Docs.RangeRectDocs},
+  {name: 'XLine', path: '/x-line', Component: Docs.XLineDocs},
+  {name: 'YLine', path: '/y-line', Component: Docs.YLineDocs},
+];
+
+const axisComponents = [
+  {name: 'XAxis', path: '/x-axis', Component: Docs.XAxisDocs},
+  {name: 'XAxisLabels', path: '/x-axis-labels', Component: Docs.XAxisLabelsDocs},
+  {name: 'XAxisTitle', path: '/x-axis-title', Component: Docs.XAxisTitleDocs},
+  {name: 'XGrid', path: '/x-grid', Component: Docs.XGridDocs},
+  {name: 'XTicks', path: '/x-ticks', Component: Docs.XTicksDocs},
+  {name: 'YAxis', path: '/y-axis', Component: Docs.YAxisDocs},
+  {name: 'YAxisLabels', path: '/y-axis-labels', Component: Docs.YAxisLabelsDocs},
+  {name: 'YAxisTitle', path: '/y-axis-title', Component: Docs.YAxisTitleDocs},
+  {name: 'YGrid', path: '/y-grid', Component: Docs.YGridDocs},
+  {name: 'YTicks', path: '/y-ticks', Component: Docs.YTicksDocs},
+];
+
+const allComponents = lessons
+  .concat(chartComponents)
+  .concat(dataMarkComponents)
+  .concat(axisComponents);
 
 export const Home = (props) => (
   <div className="docs-home">
@@ -58,6 +81,22 @@ export const Home = (props) => (
     <h4>Chart Components</h4>
     <ul>
       {chartComponents.map((component, i) => {
+        return <li className="example-link" key={i}>
+          <Link to={component.path}>{component.name}</Link>
+        </li>;
+      })}
+    </ul>
+    <h4>Data Mark Components</h4>
+    <ul>
+      {dataMarkComponents.map((component, i) => {
+        return <li className="example-link" key={i}>
+          <Link to={component.path}>{component.name}</Link>
+        </li>;
+      })}
+    </ul>
+    <h4>Axis Components</h4>
+    <ul>
+      {axisComponents.map((component, i) => {
         return <li className="example-link" key={i}>
           <Link to={component.path}>{component.name}</Link>
         </li>;
