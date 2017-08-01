@@ -1,0 +1,13 @@
+const XYLineChartExample = (props) => {
+  const data = [
+    {x: 0, y: 20},
+    {x: 5, y: 30},
+    {x: 10, y: 35},
+    {x: 15, y: 30},
+  ];
+  return <XYPlot width={400} height={300}>
+    <LineChart data={data} getX="x" getY="y" />
+  </XYPlot>
+};
+
+ReactDOM.render(<XYLineChartExample />, mountNode);

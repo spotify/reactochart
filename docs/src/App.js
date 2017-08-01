@@ -26,7 +26,8 @@ const components = [
 ];
 
 const lessons = [
-  {name: "Quick Start", path: '/quick-start', Component: Lessons.QuickStartLesson}
+  {name: "Quick Start", path: '/quick-start', Component: Lessons.QuickStartLesson},
+  {name: "XY Plots", path: '/xy-plots', Component: Lessons.XYPlotsLesson},
 ];
 
 const chartComponents = [
@@ -84,5 +85,3 @@ export const App = (props) => (
       </div>
     </Router>
 );
-
-

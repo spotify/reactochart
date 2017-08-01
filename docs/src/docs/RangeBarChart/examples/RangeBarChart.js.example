@@ -1,5 +1,111 @@
 const RangeBarChartExample = (props) => {
-  return <div>insert example here</div>;
+  const count = 30;
+  const dateDomain = [new Date(1992, 0, 1), new Date(2001, 0, 1)];
+  const numberDomain = [-2, 2];
+  const ordinalDomain = _.range(count).map(n => String.fromCharCode(97 + n));
+
+  const dates = _.range(30).map(n => new Date(+(dateDomain[0]) + (n * 1000 * 60 * 60 * 24 * 100)));
+
+  const addDays = (date, n) => new Date(+(date) + (1000 * 60 * 60 * 24 * n));
+
+  const numberRanges =
+    _.range(30).map(n => [Math.sin(n/5), Math.sin(n/8) + Math.cos(n/5)].sort((a, b) => (a - b)));
+  const dateRanges =
+    _.range(30).map(n => [dates[n], addDays(dates[n], (Math.sin(n/8) * 100))].sort((a, b) => (a - b)));
+
+  const numberNumberRangeData = _.zip(_.range(30), numberRanges);
+  const dateNumberRangeData = _.zip(dates, numberRanges);
+  const ordinalNumberRangeData = _.zip(ordinalDomain, numberRanges);
+
+  const numberDateRangeData = _.zip(_.range(30), dateRanges);
+  const dateDateRangeData = _.zip(dates, dateRanges);
+  const ordinalDateRangeData = _.zip(ordinalDomain, dateRanges);
+
+  return <div>
+
+    {[true, false].map(horizontal => {
+      const title = horizontal ? "Horizontal" : "Vertical";
+      const getters = horizontal ?
+        {getY: 0, getX: '1.0', getXEnd: '1.1'} :
+        {getX: 0, getY: '1.0', getYEnd: '1.1'};
+
+      const dep = horizontal ? 'x' : 'y';
+      const indep = horizontal ? 'y' : 'x';
+
+      return <div>
+        <h2>{title}</h2>
+
+        <div>
+          <XYPlot domain={{[dep]: numberDomain, [indep]: [0, count]}} scaleType="linear" {...{width: 300, height: 350}}>
+            <XAxis/><YAxis/>
+            <RangeBarChart
+              horizontal={horizontal}
+              data={numberNumberRangeData}
+              {...getters}
+            />
+          </XYPlot>
+
+          <XYPlot domain={{[dep]: numberDomain, [indep]: dateDomain}} {...{width: 300, height: 350}}>
+            <XAxis/><YAxis/>
+            <RangeBarChart
+              horizontal={horizontal}
+              data={dateNumberRangeData}
+              {...getters}
+            />
+          </XYPlot>
+
+          <XYPlot domain={{[dep]: numberDomain, [indep]: ordinalDomain}} {...{width: 300, height: 350}}>
+            <XAxis/><YAxis/>
+            <RangeBarChart
+              horizontal={horizontal}
+              data={ordinalNumberRangeData}
+              {...getters}
+            />
+          </XYPlot>
+        </div>
+
+        <div>
+          <XYPlot domain={{[dep]: dateDomain, [indep]: [0, count]}} {...{width: 300, height: 350}}>
+            <XAxis/><YAxis/>
+            <RangeBarChart
+              horizontal={horizontal}
+              data={numberDateRangeData}
+              {...getters}
+            />
+          </XYPlot>
+
+          <XYPlot domain={{[dep]: dateDomain, [indep]: dateDomain}} {...{width: 300, height: 350}}>
+            <XAxis/><YAxis/>
+            <RangeBarChart
+              horizontal={horizontal}
+              data={dateDateRangeData}
+              {...getters}
+            />
+          </XYPlot>
+
+          <XYPlot domain={{[dep]: dateDomain, [indep]: ordinalDomain}} {...{width: 300, height: 350}}>
+            <XAxis/><YAxis/>
+            <RangeBarChart
+              horizontal={horizontal}
+              data={ordinalDateRangeData}
+              {...getters}
+            />
+          </XYPlot>
+        </div>
+      </div>
+    })}
+
+    <XYPlot domain={{y: [-1, 1], x: [-1, 1]}} scaleType="linear" {...{width: 300, height: 350}}>
+      <XAxis/><YAxis/>
+      <RangeBarChart
+        data={_.range(-1, 1, .1)}
+        getX={null}
+        getY={d => Math.sin(d*2)}
+        getYEnd={d => Math.sin(d*2) * Math.cos(d*2)}
+        barThickness={6}
+      />
+    </XYPlot>
+  </div>
 };
 
 ReactDOM.render(<RangeBarChartExample />, mountNode);

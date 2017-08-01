@@ -1,0 +1,27 @@
+const MultiChartExample = (props) => {
+  const data = [
+    {x: 0, y: 2, z: 3},
+    {x: 5, y: 22, z: 12},
+    {x: 10, y: 32, z: 15},
+    {x: 15, y: 36, z: 25},
+  ];
+  return <XYPlot width={400} height={300}>
+    <XAxis showGrid={false} title="Days since Zombiepocalypse" />
+    <YAxis title="Zombie Attacks"/>
+    <BarChart
+      data={data} getX="x" getY="y"
+      barThickness={35}
+      barStyle={{fill: '#888'}}
+    />
+    <LineChart
+      data={data} getX="x" getY="y"
+      lineStyle={{stroke: 'royalblue', strokeWidth: 5}}
+    />
+    <LineChart
+      data={data} getX="x" getY="z"
+      lineStyle={{stroke: 'coral', strokeWidth: 3}}
+    />
+  </XYPlot>
+};
+
+ReactDOM.render(<MultiChartExample />, mountNode);
