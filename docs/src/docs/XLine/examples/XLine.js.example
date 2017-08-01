@@ -1,0 +1,5 @@
+const XLineExample = (props) => {
+  return <div>insert example here</div>;
+};
+
+ReactDOM.render(<XLineExample />, mountNode);

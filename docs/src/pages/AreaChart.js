@@ -8,7 +8,7 @@ const examples = [
   {
     id: "basic",
     label: "Basic Area Chart",
-    codeText: basicExample,
+    codeText: require('raw-loader!../examples/AreaChart.js.example'),
   },
 ];
 

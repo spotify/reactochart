@@ -1,0 +1,5 @@
+const TreeMapExample = (props) => {
+  return <div>insert example here</div>;
+};
+
+ReactDOM.render(<TreeMapExample />, mountNode);

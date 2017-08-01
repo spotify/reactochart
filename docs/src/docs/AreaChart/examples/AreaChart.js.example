@@ -1,0 +1,5 @@
+const AreaChartExample = (props) => {
+  return <div>insert example here</div>;
+};
+
+ReactDOM.render(<AreaChartExample />, mountNode);

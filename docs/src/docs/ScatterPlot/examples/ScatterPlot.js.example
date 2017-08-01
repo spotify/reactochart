@@ -1,0 +1,5 @@
+const ScatterPlotExample = (props) => {
+  return <div>insert example here</div>;
+};
+
+ReactDOM.render(<ScatterPlotExample />, mountNode);

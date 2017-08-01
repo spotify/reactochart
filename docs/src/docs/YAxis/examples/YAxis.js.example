@@ -1,0 +1,5 @@
+const YAxisExample = (props) => {
+  return <div>insert example here</div>;
+};
+
+ReactDOM.render(<YAxisExample />, mountNode);

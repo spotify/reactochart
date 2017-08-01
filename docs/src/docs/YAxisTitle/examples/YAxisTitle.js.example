@@ -1,0 +1,5 @@
+const YAxisTitleExample = (props) => {
+  return <div>insert example here</div>;
+};
+
+ReactDOM.render(<YAxisTitleExample />, mountNode);

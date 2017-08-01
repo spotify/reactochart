@@ -1,0 +1,5 @@
+const XGridExample = (props) => {
+  return <div>insert example here</div>;
+};
+
+ReactDOM.render(<XGridExample />, mountNode);

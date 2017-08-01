@@ -1,0 +1,276 @@
+{
+  "description": "",
+  "methods": [
+    {
+      "name": "onMouseEnterSlice",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "e",
+          "type": null
+        },
+        {
+          "name": "d",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "onMouseMoveSlice",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "e",
+          "type": null
+        },
+        {
+          "name": "d",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "onMouseLeaveSlice",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "e",
+          "type": null
+        },
+        {
+          "name": "d",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "onMouseEnterLine",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "e",
+          "type": null
+        },
+        {
+          "name": "d",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "onMouseMoveLine",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "e",
+          "type": null
+        },
+        {
+          "name": "d",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "onMouseLeaveLine",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "e",
+          "type": null
+        },
+        {
+          "name": "d",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "renderMarkerLine",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "className",
+          "type": null
+        },
+        {
+          "name": "pathData",
+          "type": null
+        },
+        {
+          "name": "key",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "renderCenterLabel",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "center",
+          "type": null
+        }
+      ],
+      "returns": null
+    }
+  ],
+  "props": {
+    "data": {
+      "type": {
+        "name": "array"
+      },
+      "required": true,
+      "description": ""
+    },
+    "getValue": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "null",
+        "computed": false
+      }
+    },
+    "total": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "width": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "height": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "radius": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "margin": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "number"
+          }
+        ]
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "{ top: 0, bottom: 0, left: 0, right: 0 }",
+        "computed": false
+      }
+    },
+    "holeRadius": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "centerLabel": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": ""
+    },
+    "markerLineValue": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "markerLineClass": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "'marker-line'",
+        "computed": false
+      }
+    },
+    "markerLineOverhangInner": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "2",
+        "computed": false
+      }
+    },
+    "markerLineOverhangOuter": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "2",
+        "computed": false
+      }
+    },
+    "onMouseEnterLine": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseMoveLine": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseLeaveLine": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    }
+  }
+}

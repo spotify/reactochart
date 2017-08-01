@@ -1,0 +1,78 @@
+{
+  "description": "",
+  "methods": [
+    {
+      "name": "getTickDomain",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "getMargin",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    }
+  ],
+  "props": {
+    "scale": {
+      "type": {
+        "name": "shape",
+        "value": {
+          "y": {
+            "name": "func",
+            "required": true
+          }
+        }
+      },
+      "required": false,
+      "description": ""
+    },
+    "position": {
+      "defaultValue": {
+        "value": "'left'",
+        "computed": false
+      }
+    },
+    "nice": {
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "tickLength": {
+      "defaultValue": {
+        "value": "5",
+        "computed": false
+      }
+    },
+    "tickStyle": {
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "spacing": {
+      "defaultValue": {
+        "value": "{top: 0, bottom: 0, left: 0, right: 0}",
+        "computed": false
+      }
+    }
+  }
+}

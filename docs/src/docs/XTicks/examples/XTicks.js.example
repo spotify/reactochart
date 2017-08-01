@@ -1,0 +1,5 @@
+const XTicksExample = (props) => {
+  return <div>insert example here</div>;
+};
+
+ReactDOM.render(<XTicksExample />, mountNode);

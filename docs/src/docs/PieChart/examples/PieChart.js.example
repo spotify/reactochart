@@ -1,0 +1,5 @@
+const PieChartExample = (props) => {
+  return <div>insert example here</div>;
+};
+
+ReactDOM.render(<PieChartExample />, mountNode);

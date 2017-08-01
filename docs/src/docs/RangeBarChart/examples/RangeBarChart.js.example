@@ -1,0 +1,5 @@
+const RangeBarChartExample = (props) => {
+  return <div>insert example here</div>;
+};
+
+ReactDOM.render(<RangeBarChartExample />, mountNode);

@@ -1,0 +1,5 @@
+const ColorHeatmapExample = (props) => {
+  return <div>insert example here</div>;
+};
+
+ReactDOM.render(<ColorHeatmapExample />, mountNode);

@@ -1,0 +1,5 @@
+const YAxisLabelsExample = (props) => {
+  return <div>insert example here</div>;
+};
+
+ReactDOM.render(<YAxisLabelsExample />, mountNode);

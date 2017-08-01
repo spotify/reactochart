@@ -1,0 +1,149 @@
+{
+  "description": "",
+  "methods": [
+    {
+      "name": "getMargin",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    }
+  ],
+  "props": {
+    "height": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "250",
+        "computed": false
+      }
+    },
+    "width": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "400",
+        "computed": false
+      }
+    },
+    "distance": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "5",
+        "computed": false
+      }
+    },
+    "position": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "'top'",
+            "computed": false
+          },
+          {
+            "value": "'bottom'",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "'bottom'",
+        "computed": false
+      }
+    },
+    "placement": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "'above'",
+            "computed": false
+          },
+          {
+            "value": "'below'",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "undefined",
+        "computed": true
+      }
+    },
+    "alignment": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "'left'",
+            "computed": false
+          },
+          {
+            "value": "'center'",
+            "computed": false
+          },
+          {
+            "value": "'right'",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "'center'",
+        "computed": false
+      }
+    },
+    "rotate": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
+    },
+    "style": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: '24px',\n  fontWeight: 'bold',\n  lineHeight: 1\n}",
+        "computed": false
+      }
+    },
+    "spacing": {
+      "defaultValue": {
+        "value": "{top: 0, bottom: 0, left: 0, right: 0}",
+        "computed": false
+      }
+    }
+  }
+}

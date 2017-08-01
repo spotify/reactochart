@@ -1,0 +1,5 @@
+const XYPlotExample = (props) => {
+  return <div>insert example here</div>;
+};
+
+ReactDOM.render(<XYPlotExample />, mountNode);
