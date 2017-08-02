@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.base.js",
-    "build-lib": "rm -rf lib/ && babel src --out-dir lib",
+    "build-lib": "rm -rf lib/ && babel src --out-dir lib --source-maps",
     "build-docs": "BABEL_ENV=production webpack --config webpack.config.build.js",
     "build-tests": "webpack --config webpack.config.test.js",
     "build": "npm run build-lib && npm run build-docs && npm run build-tests",
