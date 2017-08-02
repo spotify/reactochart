@@ -6,16 +6,19 @@ export default class ComponentDocs extends React.Component {
   render() {
     const {name, propDocs, children} = this.props;
 
-    return <div className="container component-docs">
+    return <div className="container-fluid component-docs">
       <div className="row">
         <h2>{name}</h2>
       </div>
 
-      <div className="row prop-docs">
-        {propDocs.description ?
+      {propDocs.description ?
+        <div className="row">
           <p className="component-description">{propDocs.description}</p>
-          : null
-        }
+        </div>
+        : null
+      }
+
+      <div className="row prop-docs">
         <h4>{name} props:</h4>
         {_.map(_.get(propDocs, 'props'), (propInfo, propKey) => {
           return <div key={propKey} className="prop-doc">

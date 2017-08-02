@@ -8,6 +8,7 @@ import * as Lessons from './lessons';
 const lessons = [
   {name: "Quick Start", path: '/quick-start', Component: Lessons.QuickStartLesson},
   {name: "XY Plots", path: '/xy-plots', Component: Lessons.XYPlotsLesson},
+  {name: "Getters & Accessors", path: '/getters-and-accessors', Component: Lessons.GettersAndAccessorsLesson},
 ];
 
 const chartComponents = [
@@ -96,48 +97,11 @@ const Nav = () => {
 
 export const Home = (props) => (
   <div className="docs-home">
-
-
     <p>
       Reactochart is a library of React components for creating charts and graphs, used internally at Spotify.
     </p>
 
     <MultipleXYExample/>
-
-    <h3>Lessons</h3>
-    <ul>
-      {lessons.map((lesson, i) => {
-        return <li className="example-link" key={i}>
-          <Link to={lesson.path}>{lesson.name}</Link>
-        </li>;
-      })}
-    </ul>
-
-    <h3>Component Docs</h3>
-    <h4>Chart Components</h4>
-    <ul>
-      {chartComponents.map((component, i) => {
-        return <li className="example-link" key={i}>
-          <Link to={component.path}>{component.name}</Link>
-        </li>;
-      })}
-    </ul>
-    <h4>Data Mark Components</h4>
-    <ul>
-      {dataMarkComponents.map((component, i) => {
-        return <li className="example-link" key={i}>
-          <Link to={component.path}>{component.name}</Link>
-        </li>;
-      })}
-    </ul>
-    <h4>Axis Components</h4>
-    <ul>
-      {axisComponents.map((component, i) => {
-        return <li className="example-link" key={i}>
-          <Link to={component.path}>{component.name}</Link>
-        </li>;
-      })}
-    </ul>
   </div>
 );
 
