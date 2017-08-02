@@ -10,8 +10,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'docs/build'),
-    filename: 'bundle.js',
-    // publicPath: '/build/'
+    filename: 'bundle.[hash].js',
   },
   devServer: {
     port: 9876,
@@ -25,7 +24,6 @@ module.exports = {
       filename: '../index.html',
       title: "Reactochart Docs",
       template: "docs/src/index_html.ejs",
-      // favicon: 'docs/assets/favicon.png'
     }),
     new CopyPlugin([{from: path.join(__dirname, 'docs/assets'), to: 'assets'}])
   ],

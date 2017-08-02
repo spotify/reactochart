@@ -105,6 +105,7 @@ export const Home = (props) => (
   </div>
 );
 
+
 export const App = (props) => (
   <Router>
     <div className="row docs-home">
@@ -189,3 +190,5 @@ class MultipleXYExample extends React.Component {
     </div>;
   }
 }
+
+console.log('test');
