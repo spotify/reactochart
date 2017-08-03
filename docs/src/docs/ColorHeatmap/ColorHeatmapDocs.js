@@ -11,6 +11,11 @@ const examples = [
     label: "Basic ColorHeatmap",
     codeText: require('raw-loader!./examples/ColorHeatmap.js.example'),
   },
+  {
+    id: "categorical",
+    label: "Categorical ColorHeatmap",
+    codeText: require('raw-loader!./examples/CategoricalColorHeatmap.js.example'),
+  },
 ];
 
 export default class ColorHeatmapExamples extends React.Component {

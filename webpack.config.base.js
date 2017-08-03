@@ -21,7 +21,7 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlPlugin({
       // put built html file in /docs/index.html ('../' because relative to /docs/build)
-      filename: '../index.html',
+      // filename: path.join(__dirname, 'docs/index.html'),
       title: "Reactochart Docs",
       template: "docs/src/index_html.ejs",
     }),

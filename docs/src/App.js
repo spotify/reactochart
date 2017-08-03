@@ -100,6 +100,7 @@ export const Home = (props) => (
   <div className="docs-home">
     <p>
       Reactochart is a library of React components for creating charts and graphs, used internally at Spotify.
+      test
     </p>
 
     <MultipleXYExample/>

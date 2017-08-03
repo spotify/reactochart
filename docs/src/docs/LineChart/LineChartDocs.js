@@ -11,6 +11,11 @@ const examples = [
     label: "Basic LineChart",
     codeText: require('raw-loader!./examples/LineChart.js.example'),
   },
+  {
+    id: "interactive",
+    label: "Interactive LineChart",
+    codeText: require('raw-loader!./examples/InteractiveLineChart.js.example'),
+  },
 ];
 
 export default class LineChartExamples extends React.Component {
