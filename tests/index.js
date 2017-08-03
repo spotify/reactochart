@@ -5,6 +5,8 @@ require('./spec/resolveXYScales.spec');
 
 require('./spec/LineChart.spec');
 require('./spec/XYPlot.spec');
+require('./spec/XAxis.spec');
+
 require('./spec/examples.spec');
 
 // run mocha

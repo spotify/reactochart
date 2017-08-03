@@ -10,11 +10,13 @@
   ],
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.base.js",
+    "dev-test": "webpack-dev-server --config webpack.config.test.js",
     "build-lib": "rm -rf lib/ && babel src --out-dir lib --source-maps",
     "build-docs": "BABEL_ENV=production webpack --config webpack.config.build.js",
     "build-tests": "webpack --config webpack.config.test.js",
     "build": "npm run build-lib && npm run build-docs && npm run build-tests",
     "serve": "python -m SimpleHTTPServer",
+
     "test": "npm run build-tests && node_modules/.bin/mocha-phantomjs -p $(which phantomjs) tests/index.html",
     "enzyme": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require test-enzyme/setup.js --recursive test-enzyme/spec"
   },
@@ -49,7 +51,7 @@
     "component-playground": "^1.3.2",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.15.6",
-    "enzyme": "^2.1.0",
+    "enzyme": "^2.9.1",
     "html-webpack-plugin": "^2.30.1",
     "json-loader": "^0.5.2",
     "less": "^2.5.1",

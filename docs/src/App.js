@@ -4,6 +4,7 @@ import {HashRouter as Router, Link, Route} from 'react-router-dom';
 
 import * as Docs from './docs';
 import * as Lessons from './lessons';
+import Playground from './Playground';
 
 const lessons = [
   {name: "Quick Start", path: '/quick-start', Component: Lessons.QuickStartLesson},
@@ -112,6 +113,8 @@ export const App = (props) => (
       <Nav />
       <div className="col-md-10">
         <Route exact path={'/'} component={Home} />
+        <Route exact path={'/playground'} component={Playground} />
+
         {allComponents.map((c, i) => (
           <Route path={c.path} component={c.Component} key={i} />
         ))}
@@ -190,5 +193,3 @@ class MultipleXYExample extends React.Component {
     </div>;
   }
 }
-
-console.log('test');

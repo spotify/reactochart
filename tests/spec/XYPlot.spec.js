@@ -1,27 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
 import d3 from 'd3';
-
 import {expect} from 'chai';
+import {mount, shallow} from 'enzyme';
 
 import {XYPlot, LineChart} from '../../src/index.js';
 
-const getXYArrayValue = { // accessors for (X, Y) data from simple arrays that look like [[x, y], [x, y]]
-    x: d => d[0],
-    y: d => d[1]
-};
+const commonXYProps = {domain: {x: [0, 10], y: [0, 100]}};
 
 describe('XYPlot', () => {
     it('renders SVG with given width & height (or a default)', () => {
-        const chart = TestUtils.renderIntoDocument(<XYPlot width={600} height={800} />);
-        const node = TestUtils.findRenderedDOMComponentWithTag(chart, 'svg');
+        const chart = mount(<XYPlot width={600} height={800} {...commonXYProps} />);
+        const node = chart.find('svg').getNode();
         expect(node.tagName.toLowerCase()).to.equal('svg');
         expect(node.getAttribute('width')).to.equal('600');
         expect(node.getAttribute('height')).to.equal('800');
 
-        const chart2 = TestUtils.renderIntoDocument(<XYPlot />);
-        const node2 = TestUtils.findRenderedDOMComponentWithTag(chart2, 'svg');
+        const chart2 = mount(<XYPlot {...commonXYProps} />);
+        const node2 = chart2.find('svg').getNode();
         expect(node2.tagName.toLowerCase()).to.equal('svg');
         expect(parseInt(node2.getAttribute('width'))).to.be.a('number').and.to.be.above(0);
         expect(parseInt(node2.getAttribute('height'))).to.be.a('number').and.to.be.above(0);
@@ -30,9 +26,9 @@ describe('XYPlot', () => {
     it('renders inner chart area with given margin', () => {
         const size = 400;
         const margin = {top: 10, bottom: 20, left: 30, right: 40};
-        const chart = TestUtils.renderIntoDocument(<XYPlot width={size} height={size} margin={margin} />);
-        const inner = TestUtils.findRenderedDOMComponentWithClass(chart, 'chart-inner');
-        const bg = TestUtils.findRenderedDOMComponentWithClass(chart, 'chart-background');
+        const chart = mount(<XYPlot width={size} height={size} margin={margin} {...commonXYProps} />);
+        const inner = chart.find('.chart-inner').getNode();
+        const bg = chart.find('.plot-background').getNode();
         expect(inner.getAttribute('transform').replace(/\s/, ''))
             .to.contain(`translate(${margin.left},${margin.top})`);
         expect(parseInt(bg.getAttribute('width'))).to.equal(size - (margin.left + margin.right));
@@ -42,9 +38,9 @@ describe('XYPlot', () => {
     it('creates a top/bottom/left/right object from single value, if object is not given for directional props', () => {
         const size = 400;
         const margin = 50;
-        const chart = TestUtils.renderIntoDocument(<XYPlot width={size} height={size} margin={margin} />);
-        const inner = TestUtils.findRenderedDOMComponentWithClass(chart, 'chart-inner');
-        const bg = TestUtils.findRenderedDOMComponentWithClass(chart, 'chart-background');
+        const chart = mount(<XYPlot width={size} height={size} margin={margin} {...commonXYProps} />);
+        const inner = chart.find('.chart-inner').getNode();
+        const bg = chart.find('.plot-background').getNode();
         expect(inner.getAttribute('transform').replace(/\s/, ''))
             .to.contain(`translate(${margin},${margin})`);
         expect(parseInt(bg.getAttribute('width'))).to.equal(size - (margin + margin));

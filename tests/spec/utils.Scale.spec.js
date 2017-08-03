@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import d3 from 'd3';
-import TestUtils from 'react-addons-test-utils';
+import * as d3 from 'd3';
 import {expect} from 'chai';
 
 import {
@@ -41,11 +40,11 @@ describe('Scale utils', () => {
 
   describe('inferScaleType', () => {
     it('infers the correct scale type, given a scale', () => {
-      expect(inferScaleType(d3.scale.linear())).to.equal('linear');
-      expect(inferScaleType(d3.time.scale())).to.equal('time');
-      expect(inferScaleType(d3.scale.ordinal())).to.equal('ordinal');
-      expect(inferScaleType(d3.scale.log())).to.equal('log');
-      expect(inferScaleType(d3.scale.pow())).to.equal('pow');
+      expect(inferScaleType(d3.scaleLinear())).to.equal('linear');
+      expect(inferScaleType(d3.scaleTime())).to.equal('time');
+      expect(inferScaleType(d3.scaleOrdinal())).to.equal('ordinal');
+      expect(inferScaleType(d3.scaleLog())).to.equal('log');
+      expect(inferScaleType(d3.scalePow())).to.equal('pow');
     });
   });
 
@@ -64,11 +63,11 @@ describe('Scale utils', () => {
 
   describe('isValidScale', () => {
     it('returns true for all known scale types', () => {
-      expect(isValidScale(d3.scale.linear())).to.equal(true);
-      expect(isValidScale(d3.time.scale())).to.equal(true);
-      expect(isValidScale(d3.scale.ordinal())).to.equal(true);
-      expect(isValidScale(d3.scale.log())).to.equal(true);
-      expect(isValidScale(d3.scale.pow())).to.equal(true);
+      expect(isValidScale(d3.scaleLinear())).to.equal(true);
+      expect(isValidScale(d3.scaleTime())).to.equal(true);
+      expect(isValidScale(d3.scaleOrdinal())).to.equal(true);
+      expect(isValidScale(d3.scaleLog())).to.equal(true);
+      expect(isValidScale(d3.scalePow())).to.equal(true);
     });
     it('returns false for non-scale things', () => {
       expect(isValidScale(9)).to.equal(false);

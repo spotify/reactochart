@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
 import {expect} from 'chai';
+import {mount, shallow} from 'enzyme';
 
 import resolveObjectProps from '../../src/utils/resolveObjectProps';
 
@@ -25,13 +25,12 @@ describe('resolveObjectProps', () => {
       domain: {x: [53, 442]},
       axisType: {y: "mimsy"}
     };
-    const wrapped = TestUtils.renderIntoDocument(<XYResolved {...props} />);
-    const resolved = TestUtils.findRenderedComponentWithType(wrapped, XYPropTest);
+    const resolved = mount(<XYResolved {...props} />).find(XYPropTest);
 
-    expect(resolved.props.domain.y).to.equal(XYPropTest.defaultProps.domain.y);
-    expect(resolved.props.axisType.x).to.equal(XYPropTest.defaultProps.axisType.x);
-    expect(resolved.props.domain.x).to.equal(props.domain.x);
-    expect(resolved.props.axisType.y).to.equal(props.axisType.y);
+    expect(resolved.props().domain.y).to.equal(XYPropTest.defaultProps.domain.y);
+    expect(resolved.props().axisType.x).to.equal(XYPropTest.defaultProps.axisType.x);
+    expect(resolved.props().domain.x).to.equal(props.domain.x);
+    expect(resolved.props().axisType.y).to.equal(props.axisType.y);
   });
 
   it('resolves single values into fully-specified objects', () => {
@@ -39,8 +38,7 @@ describe('resolveObjectProps', () => {
       domain: 0,
       axisType: "uffish"
     };
-    const wrapped = TestUtils.renderIntoDocument(<XYResolved {...props} />);
-    const resolved = TestUtils.findRenderedComponentWithType(wrapped, XYPropTest);
+    const resolved = mount(<XYResolved {...props} />).find(XYPropTest);
 
     _.forEach(props, (value, key) => {
       expect(resolved.props[key]).to.deep.equal({x: value, y: value});
@@ -48,13 +46,13 @@ describe('resolveObjectProps', () => {
   });
 
   it('uses defaultProps normally for undefined object props', () => {
-    const wrapped = TestUtils.renderIntoDocument(<XYResolved />);
-    const resolved = TestUtils.findRenderedComponentWithType(wrapped, XYPropTest);
+    const wrapped = mount(<XYResolved />);
+    const resolved = wrapped.find(XYPropTest);
     const {defaultProps} = XYPropTest;
 
     _.keys(defaultProps).forEach(k => {
-      expect(resolved.props[k]).to.equal(defaultProps[k]);
-      expect(resolved.props[k]).to.deep.equal(defaultProps[k]);
+      expect(resolved.props()[k]).to.equal(defaultProps[k]);
+      expect(resolved.props()[k]).to.deep.equal(defaultProps[k]);
     });
   });
 
@@ -63,12 +61,12 @@ describe('resolveObjectProps', () => {
       domain: {x: [99, 199], y: [88, 188]},
       axisType: {x: "brillig", y: "slithy"}
     };
-    const wrapped = TestUtils.renderIntoDocument(<XYResolved {...props} />);
-    const resolved = TestUtils.findRenderedComponentWithType(wrapped, XYPropTest);
+    const wrapped = mount(<XYResolved {...props} />);
+    const resolved = wrapped.find(XYPropTest);
 
     _.keys(props).forEach(k => {
-      expect(resolved.props[k]).to.equal(props[k]);
-      expect(resolved.props[k]).to.deep.equal(props[k]);
+      expect(resolved.props()[k]).to.equal(props[k]);
+      expect(resolved.props()[k]).to.deep.equal(props[k]);
     });
   });
 
@@ -81,18 +79,18 @@ describe('resolveObjectProps', () => {
       nullable: null,
       notDefined: undefined
     };
-    const wrapped = TestUtils.renderIntoDocument(<XYResolved {...props} />);
-    const resolved = TestUtils.findRenderedComponentWithType(wrapped, XYPropTest);
+    const wrapped = mount(<XYResolved {...props} />);
+    const resolved = wrapped.find(XYPropTest);
 
     _.keys(props).forEach(k => {
-      expect(resolved.props[k]).to.equal(props[k])
+      expect(resolved.props()[k]).to.equal(props[k])
     });
   });
 
   it('throws if a defaultProp is incorrectly shaped', () => {
     const XYResolvedBad = resolveObjectProps(XYPropTest, ['domain', 'axisType', 'foo'], ['x', 'y']);
     expect(() => {
-      TestUtils.renderIntoDocument(<XYResolvedBad />);
+      mount(<XYResolvedBad />);
     }).to.throw(Error);
   });
 });

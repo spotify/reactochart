@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import d3 from 'd3';
+import * as d3 from 'd3';
 import TestUtils from 'react-addons-test-utils';
 import {expect} from 'chai';
 
