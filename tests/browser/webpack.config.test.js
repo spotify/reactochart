@@ -1,17 +1,17 @@
 var path = require('path');
 var webpack = require('webpack');
 var _ = require('lodash');
-var config = require('./webpack.config.base');
 var HtmlPlugin = require('html-webpack-plugin');
 var CleanPlugin = require('clean-webpack-plugin');
 
+console.log('dirname', __dirname);
 module.exports = {
   context: __dirname,
   entry: [
-    './tests/index.js'
+    path.join(__dirname, 'index.js')
   ],
   output: {
-    path: path.join(__dirname, 'tests/build'),
+    path: path.join(__dirname, 'build'),
     filename: 'bundle.[hash].js',
   },
   devtool: 'source-map',
@@ -19,12 +19,13 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlPlugin({
       title: "Reactochart Tests",
-      template: "tests/index_html.ejs",
+      template: path.join(__dirname, 'index_html.ejs'),
     }),
-    new CleanPlugin([path.join(__dirname, 'tests/build')])
+    new CleanPlugin([path.join(__dirname, 'build')])
   ],
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    modules: ["node_modules", path.resolve(__dirname, "../..")]
   },
   module: {
     rules: [
@@ -58,18 +59,3 @@ module.exports = {
 };
 
 
-
-// config = _.merge(config, {
-//     entry: [
-//         './tests/index.js'
-//     ],
-//     output: {
-//         path: path.join(__dirname, 'tests/build'),
-//         filename: 'bundle.js',
-//         publicPath: '/build/'
-//     }
-// });
-//
-// //delete config.devtool;
-//
-// module.exports = config;

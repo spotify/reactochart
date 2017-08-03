@@ -3,7 +3,7 @@ import React from 'react';
 // import TestUtils from 'react-addons-test-utils';
 import {expect} from 'chai';
 
-import {examples} from '../../docs/src/Examples.jsx';
+import {examples} from '../../../docs/src/Examples.jsx';
 
 // TODO: fix this to work with new examples structure
 

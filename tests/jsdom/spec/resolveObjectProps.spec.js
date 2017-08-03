@@ -3,7 +3,7 @@ import React from 'react';
 import {expect} from 'chai';
 import {mount, shallow} from 'enzyme';
 
-import resolveObjectProps from '../../src/utils/resolveObjectProps';
+import resolveObjectProps from '../../../src/utils/resolveObjectProps';
 
 describe('resolveObjectProps', () => {
   class XYPropTest extends React.Component {
@@ -41,7 +41,7 @@ describe('resolveObjectProps', () => {
     const resolved = mount(<XYResolved {...props} />).find(XYPropTest);
 
     _.forEach(props, (value, key) => {
-      expect(resolved.props[key]).to.deep.equal({x: value, y: value});
+      expect(resolved.props()[key]).to.deep.equal({x: value, y: value});
     });
   });
 

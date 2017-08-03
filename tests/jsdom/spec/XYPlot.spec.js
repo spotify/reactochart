@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import d3 from 'd3';
+import * as d3 from 'd3';
 import {expect} from 'chai';
 import {mount, shallow} from 'enzyme';
 
-import {XYPlot, LineChart} from '../../src/index.js';
+import {XYPlot, LineChart} from '../../../src/index.js';
 
 const commonXYProps = {domain: {x: [0, 10], y: [0, 100]}};
 

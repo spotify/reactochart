@@ -10,15 +10,14 @@
   ],
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.base.js",
-    "dev-test": "webpack-dev-server --config webpack.config.test.js",
     "build-lib": "rm -rf lib/ && babel src --out-dir lib --source-maps",
     "build-docs": "BABEL_ENV=production webpack --config webpack.config.build.js",
     "build-tests": "webpack --config webpack.config.test.js",
     "build": "npm run build-lib && npm run build-docs && npm run build-tests",
     "serve": "python -m SimpleHTTPServer",
-
-    "test": "npm run build-tests && node_modules/.bin/mocha-phantomjs -p $(which phantomjs) tests/index.html",
-    "enzyme": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require test-enzyme/setup.js --recursive test-enzyme/spec"
+    "test": "npm run test-jsdom",
+    "test-browser": "webpack-dev-server --config tests/browser/webpack.config.test.js",
+    "test-jsdom": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec"
   },
   "dependencies": {
     "d3": "^4.4.0",
@@ -53,6 +52,7 @@
     "css-loader": "^0.15.6",
     "enzyme": "^2.9.1",
     "html-webpack-plugin": "^2.30.1",
+    "jsdom": "^9.8.0",
     "json-loader": "^0.5.2",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",

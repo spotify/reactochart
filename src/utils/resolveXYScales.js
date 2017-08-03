@@ -207,7 +207,7 @@ export default function resolveXYScales(ComposedComponent) {
       const propsDomain = props.domain || {};
 
       // short-circuit if all domains provided
-      if(hasXYDomains(propsDomain)) return propsDomain;
+      if(hasXYDomains(propsDomain)) return {x: propsDomain.x, y: propsDomain.y};
 
       // start with any domains in props, and try to resolve the rest
       let domain = omitNullUndefined(propsDomain);
@@ -355,7 +355,8 @@ export default function resolveXYScales(ComposedComponent) {
         // todo - ticks, nice and getDomain should be an axis prop instead, and axis should have getDomain
 
         // set `nice` option to round scale domains to nicer numbers
-        // if(nice[k] && _.isFunction(kScale.nice)) kScale.nice(tickCount[k] || 10);
+        // const kTickCount = tickCount ? tickCount[k] : 10;
+        // if(nice && nice[k] && _.isFunction(kScale.nice)) kScale.nice(kTickCount);
 
         // extend scale domain to include custom `ticks` if passed
         //
@@ -366,7 +367,7 @@ export default function resolveXYScales(ComposedComponent) {
         // }
 
         // reverse scale domain if `invertScale` is passed
-        if(invertScale[k]) kScale.domain(kScale.domain().reverse());
+        // if(invertScale[k]) kScale.domain(kScale.domain().reverse());
 
         return [k, kScale];
       }));
@@ -374,7 +375,7 @@ export default function resolveXYScales(ComposedComponent) {
 
     render() {
       const {props} = this;
-      const {width, height, nice} = props;
+      const {width, height, invertScale} = props;
       const scaleFromProps = this.props.scale || {};
 
       // short-circuit if scales provided
@@ -386,6 +387,12 @@ export default function resolveXYScales(ComposedComponent) {
       // first resolve scale types and domains
       const scaleType = this._resolveScaleType(props, ComposedComponent);
       const domain = this._resolveDomain(props, ComposedComponent, scaleType);
+      if(_.isObject(invertScale)) {
+        ['x', 'y'].forEach(k => {
+          if(invertScale[k]) domain[k] = domain[k].slice().reverse();
+        })
+      }
+
       let scaleOptions = {width, height, scaleType, domain, margin: props.margin, scale: props.scale, padding: props.padding, spacing: props.spacing};
       // create a temporary scale with size & domain, which may be used by the Component to calculate margin/tickDomain
       // (eg. to create and measure labels for the scales)

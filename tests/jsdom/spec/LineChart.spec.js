@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 import {expect} from 'chai';
 import {mount, shallow} from 'enzyme';
 
-import {XYPlot, LineChart} from '../../src/index.js';
+import {XYPlot, LineChart} from '../../../src/index.js';
 
 const getXYArrayValue = { // accessors for (X, Y) data from simple arrays that look like [[x, y], [x, y]]
   x: d => d[0],

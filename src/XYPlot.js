@@ -120,7 +120,7 @@ class XYPlot extends React.Component {
   }
 }
 
-const xyKeys = ['scaleType', 'domain', 'invertScale'];
+const xyKeys = ['scaleType', 'domain', 'invertScale', 'nice'];
 const dirKeys = ['margin', 'padding', 'spacing'];
 
 const XYPlotResolved = _.flow([

@@ -8,7 +8,7 @@ import {
   innerHeight,
   innerRangeX,
   innerRangeY
-} from '../../src/utils/Margin'
+} from '../../../src/utils/Margin'
 
 describe('Scale utils', () => {
   describe('innerWidth', () => {

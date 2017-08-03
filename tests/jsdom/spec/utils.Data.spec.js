@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import React from 'react';
 import * as d3 from 'd3';
-import TestUtils from 'react-addons-test-utils';
 import {expect} from 'chai';
+import {mount, shallow} from 'enzyme';
 
 import {
   makeAccessor,
@@ -13,7 +13,7 @@ import {
   domainFromDatasets,
   combineDomains,
   isValidDomain
-} from '../../src/utils/Data'
+} from '../../../src/utils/Data'
 
 const notImplemented = () => {
   console.log('* * * TEST NOT YET IMPLEMENTED * * *');
@@ -72,8 +72,8 @@ describe('Data utils', () => {
           <div><TestComponent data={[6, 7]}/></div>
         </div></TestComponent>;
 
-      const rendered = TestUtils.renderIntoDocument(tree);
-      const datasets = datasetsFromPropsOrDescendants(rendered.props);
+      const rendered = mount(tree);
+      const datasets = datasetsFromPropsOrDescendants(rendered.props());
       expect(datasets).to.be.an('array');
       expect(datasets).to.deep.equal([[0, 1], [2, 3], [4, 5], [6, 7]]);
     });

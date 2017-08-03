@@ -9,7 +9,7 @@ import {
   inferScaleType,
   initScale,
   isValidScale
-} from '../../src/utils/Scale'
+} from '../../../src/utils/Scale'
 
 describe('Scale utils', () => {
   describe('scaleTypeFromDataType', () => {
