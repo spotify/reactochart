@@ -45,26 +45,68 @@
       "description": ""
     },
     "position": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "'bottom'",
+            "computed": false
+          },
+          {
+            "value": "'top'",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": "",
       "defaultValue": {
         "value": "'bottom'",
         "computed": false
       }
     },
-    "nice": {
-      "defaultValue": {
-        "value": "true",
-        "computed": false
-      }
+    "placement": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "'above'",
+            "computed": false
+          },
+          {
+            "value": "'below'",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": ""
     },
     "tickLength": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
       "defaultValue": {
         "value": "5",
         "computed": false
       }
     },
     "tickStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "",
       "defaultValue": {
         "value": "{}",
+        "computed": false
+      }
+    },
+    "nice": {
+      "defaultValue": {
+        "value": "true",
         "computed": false
       }
     },
