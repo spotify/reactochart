@@ -28,7 +28,7 @@
     "lodash": "^4.5.1",
     "measure-text": "0.0.4",
     "moment": "^2.10.6",
-    "numeral": "^1.5.3",
+    "numeral": "^2.0.6",
     "prop-types": "^15.5.10",
     "react-addons-shallow-compare": "^15.6.0"
   },

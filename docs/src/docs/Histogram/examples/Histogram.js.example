@@ -1,9 +1,10 @@
 const HistogramExample = (props) => {
   const randomNormalArr = _.times(1000, d3.randomNormal(0, 1)).concat(_.times(1000, d3.randomNormal(3, 0.5)));
+  const domain = {x: [-4, 5], y: [0, 200]};
 
   return <div>
     <div>
-      <XYPlot margin={{left: 40, right: 8}} width={700} height={300}>
+      <XYPlot margin={{left: 40, right: 8}} domain={domain} width={450} height={300}>
         <XAxis /><YAxis />
         <Histogram
           data={randomNormalArr} getValue={null}
@@ -12,8 +13,9 @@ const HistogramExample = (props) => {
     </div>
     <div>
       <XYPlot
+        domain={domain}
         margin={{left: 40, right: 8}}
-        width={700} height={40}
+        width={450} height={40}
         showGrid={false}
         showLabels={false}
         showTicks={false}
@@ -21,7 +23,7 @@ const HistogramExample = (props) => {
         <ScatterPlot
           data={randomNormalArr}
           getX={null}
-          getY={() => Math.random()}
+          getY={() => Math.random()*200}
           pointRadius={1}
         />
       </XYPlot>
