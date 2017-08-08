@@ -11,6 +11,11 @@ const examples = [
     label: "Basic TreeMap",
     codeText: require('raw-loader!./examples/TreeMap.js.example'),
   },
+  {
+    id: "animated",
+    label: "Animated TreeMap",
+    codeText: require('raw-loader!./examples/AnimatedTreeMap.js.example'),
+  },
 ];
 
 export default class TreeMapExamples extends React.Component {

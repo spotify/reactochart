@@ -11,6 +11,16 @@ const examples = [
     label: "Basic AreaChart",
     codeText: require('raw-loader!./examples/AreaChart.js.example'),
   },
+  {
+    id: "twoDatasets",
+    label: "Area Chart with Two Datasets",
+    codeText: require('raw-loader!./examples/Area2Datasets.js.example'),
+  },
+  {
+    id: "difference",
+    label: "Difference Area Chart",
+    codeText: require('raw-loader!./examples/AreaDifference.js.example'),
+  },
 ];
 
 export default class AreaChartExamples extends React.Component {

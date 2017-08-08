@@ -11,6 +11,11 @@ const examples = [
     label: "Basic XAxisTitle",
     codeText: require('raw-loader!./examples/XAxisTitle.js.example'),
   },
+  {
+    id: "all",
+    label: "All XAxisTitle Options",
+    codeText: require('raw-loader!./examples/XAxisTitleAll.js.example'),
+  },
 ];
 
 export default class XAxisTitleExamples extends React.Component {

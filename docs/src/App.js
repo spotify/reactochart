@@ -10,6 +10,11 @@ const lessons = [
   {name: "Quick Start", path: '/quick-start', Component: Lessons.QuickStartLesson},
   {name: "XY Plots", path: '/xy-plots', Component: Lessons.XYPlotsLesson},
   {name: "Getters & Accessors", path: '/getters-and-accessors', Component: Lessons.GettersAndAccessorsLesson},
+  // {name: "Interaction", path: '/interaction', Component: Lessons.InteractionLesson},
+];
+
+const mainComponents = [
+  {name: 'XYPlot', path: '/xy-plot', Component: Docs.XYPlotDocs},
 ];
 
 const chartComponents = [
@@ -50,6 +55,7 @@ const axisComponents = [
 ];
 
 const allComponents = lessons
+  .concat(mainComponents)
   .concat(chartComponents)
   .concat(dataMarkComponents)
   .concat(axisComponents);
@@ -73,6 +79,12 @@ const Nav = () => {
     </ul>
 
     <h3>Component Docs</h3>
+    <ul className="nav-inverse nav-tabs nav-stacked">
+      {mainComponents.map((component, i) => {
+        return <NavLink to={component.path} label={component.name} key={`chart-component-${i}`}/>;
+      })}
+    </ul>
+
     <h4>Chart Components</h4>
     <ul className="nav-inverse nav-tabs nav-stacked">
       {chartComponents.map((component, i) => {

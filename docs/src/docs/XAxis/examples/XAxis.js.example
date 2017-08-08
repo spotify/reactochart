@@ -1,5 +1,26 @@
 const XAxisExample = (props) => {
-  return <div>insert example here</div>;
+  const dateDomain = [new Date(2008, 0, 1), new Date(2017, 0, 1)];
+  const numberDomain = [-20, 20];
+  const categoricalDomain = ['puppies', 'kitties', 'ponies'];
+  const smallSize = {width: 300, height: 100};
+
+  return <div>
+    <div style={{marginBottom: '10px'}}>
+      <XYPlot domain={{x: numberDomain, y: numberDomain}} {...smallSize}>
+        <XAxis title="Number Axis"/>
+      </XYPlot>
+    </div>
+    <div style={{marginBottom: '10px'}}>
+      <XYPlot domain={{x: dateDomain, y: dateDomain}} {...smallSize}>
+        <XAxis title="Date Axis"/>
+      </XYPlot>
+    </div>
+    <div style={{marginBottom: '10px'}}>
+      <XYPlot domain={{x: categoricalDomain, y: dateDomain}} {...smallSize}>
+        <XAxis title="Categorical Axis"/>
+      </XYPlot>
+    </div>
+  </div>
 };
 
 ReactDOM.render(<XAxisExample />, mountNode);

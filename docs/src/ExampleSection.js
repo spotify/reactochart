@@ -8,6 +8,7 @@ import Playground from 'component-playground';
 import * as Reactochart from '../../src';
 
 import {randomWalk, randomWalkSeries, randomWalkTimeSeries, removeRandomData} from './data/util';
+window.Reactochart = Reactochart;
 
 export default class ExampleSection extends React.Component {
   static propTypes = {

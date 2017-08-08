@@ -11,6 +11,11 @@ const examples = [
     label: "Basic YAxisTitle",
     codeText: require('raw-loader!./examples/YAxisTitle.js.example'),
   },
+  {
+    id: "all",
+    label: "YAxisTitle Positions and Placements",
+    codeText: require('raw-loader!./examples/YAxisTitleAll.js.example'),
+  },
 ];
 
 export default class YAxisTitleExamples extends React.Component {

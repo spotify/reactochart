@@ -1,5 +1,30 @@
 const TreeMapExample = (props) => {
-  return <div>insert example here</div>;
+  const data = {
+    children: _.range(1, 5).map(n => ({
+      children: _.times(n * n, m => ({
+        size: n * (m + 1)
+      }))
+    }))
+  };
+
+  const colorScale = d3.scaleLinear()
+    .domain([0, 65])
+    .range(['#6b6ecf', '#8ca252'])
+    .interpolate(d3.interpolateHcl);
+
+  return <div>
+    <TreeMap
+      data={data}
+      getValue="size"
+      getLabel="value"
+      nodeStyle={(node) => ({
+        backgroundColor: colorScale(parseInt(node.data.size)),
+        border: '1px solid #333'
+      })}
+      width={400}
+      height={500}
+    />
+  </div>
 };
 
 ReactDOM.render(<TreeMapExample />, mountNode);

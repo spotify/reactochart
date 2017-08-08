@@ -11,6 +11,11 @@ const examples = [
     label: "Basic MarkerLineChart",
     codeText: require('raw-loader!./examples/MarkerLineChart.js.example'),
   },
+  {
+    id: "withBar",
+    label: "MarkerLineChart with BarChart",
+    codeText: require('raw-loader!./examples/MarkerLineWithBarChart.js.example'),
+  },
 ];
 
 export default class MarkerLineChartExamples extends React.Component {
