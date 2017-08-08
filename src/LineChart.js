@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import {makeAccessor} from './utils/Data';
 import xyPropsEqual from './utils/xyPropsEqual';
-// import {xyPropsEqualDebug} from './utils/xyPropsEqual';
+// import {xyPropsEqualDebug as xyPropsEqual} from './utils/xyPropsEqual';
 
 
 export default class LineChart extends React.Component {
@@ -44,7 +44,7 @@ export default class LineChart extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return !xyPropsEqual(this.props, nextProps);
+    return !xyPropsEqual(this.props, nextProps, ['lineStyle']);
   }
 
   initBisector(props) {

@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import {makeAccessor} from './utils/Data';
 import {methodIfFuncProp} from './util.js';
+import xyPropsEqual from './utils/xyPropsEqual';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 
 export default class ScatterPlot extends React.Component {
@@ -50,6 +51,11 @@ export default class ScatterPlot extends React.Component {
   onMouseLeavePoint = (e, d) => {
     this.props.onMouseLeavePoint(e, d);
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['pointStyle']);
+    return shouldUpdate;
+  }
 
   render() {
     return <g className={this.props.name}>

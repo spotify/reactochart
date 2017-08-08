@@ -2,7 +2,10 @@ import React from 'react';
 import _ from 'lodash';
 import {mean} from 'd3';
 import PropTypes from 'prop-types';
+
 import * as CustomPropTypes from './utils/CustomPropTypes';
+import xyPropsEqual from './utils/xyPropsEqual';
+
 import LineChart from './LineChart.js';
 
 class KernelDensityEstimation extends React.Component {
@@ -50,6 +53,11 @@ class KernelDensityEstimation extends React.Component {
       x: null,
       y: [0,200]
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, []);
+    return shouldUpdate;
   }
 
   componentWillMount() {

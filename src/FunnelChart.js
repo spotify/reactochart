@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {makeAccessor, domainFromData, combineDomains} from './utils/Data';
 import {dataTypeFromScaleType} from './utils/Scale';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 export default class FunnelChart extends React.Component {
   static propTypes = {
@@ -42,6 +43,11 @@ export default class FunnelChart extends React.Component {
           domainFromData(data, d => -yAccessor(d), yDataType)
         ])
       };
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, []);
+    return shouldUpdate;
   }
 
   render() {

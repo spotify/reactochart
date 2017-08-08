@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {hasXYScales, dataTypeFromScaleType} from './utils/Scale';
 import {makeAccessor, domainFromRangeData} from './utils/Data';
+import xyPropsEqual from './utils/xyPropsEqual';
 import RangeRect from './RangeRect';
 
 export default class AreaBarChart extends React.Component {
@@ -32,6 +33,12 @@ export default class AreaBarChart extends React.Component {
     barClassName: '',
     barStyle: {}
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['barStyle']);
+    // console.log('should areabarchart update?', shouldUpdate);
+    return shouldUpdate;
+  }
 
   static getDomain(props) {
     const {scaleType, horizontal, data} = props;

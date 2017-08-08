@@ -12,10 +12,14 @@ import {scaleEqual} from './Scale';
 // can be overridden by components by passing `propKeysToDeepCheck` argument
 // todo: decide whether data really belongs on this list? deep-checking data can be slow, but re-rendering is even slower
 export const defaultPropKeysToDeepCheck = [
-  'margin', 'scaleType', 'spacing', 'domain', 'style', 'lineStyle', 'data'
+  'margin', 'scaleType', 'spacing', 'domain', 'style', 'data'
 ];
 
-export default function xyPropsEqual(propsA, propsB, propKeysToDeepCheck = defaultPropKeysToDeepCheck) {
+export default function xyPropsEqual(propsA, propsB, customKeysToDeepCheck = [], includeDefaults = true) {
+  const propKeysToDeepCheck = includeDefaults ?
+    defaultPropKeysToDeepCheck.concat(customKeysToDeepCheck) :
+    customKeysToDeepCheck;
+
   const propKeysToSkipShallowCheck = propKeysToDeepCheck.concat('scale');
 
   const isEqual =
@@ -31,7 +35,10 @@ export default function xyPropsEqual(propsA, propsB, propKeysToDeepCheck = defau
   return isEqual;
 }
 
-export function xyPropsEqualDebug(propsA, propsB, propKeysToDeepCheck = defaultPropKeysToDeepCheck) {
+export function xyPropsEqualDebug(propsA, propsB, customKeysToDeepCheck = [], includeDefaults = true) {
+  const propKeysToDeepCheck = includeDefaults ?
+    defaultPropKeysToDeepCheck.concat(customKeysToDeepCheck) :
+    customKeysToDeepCheck;
   // debug version of xyPropsEqual which console.logs, for figuring out which props are failing equality check
   // const start = performance.now();
   const propKeysToSkipShallowCheck = propKeysToDeepCheck.concat('scale');
@@ -39,7 +46,7 @@ export function xyPropsEqualDebug(propsA, propsB, propKeysToDeepCheck = defaultP
   const isEqual =
     // most keys just get shallow-equality checked
     shallowEqual(_.omit(propsA, propKeysToSkipShallowCheck), _.omit(propsB, propKeysToSkipShallowCheck)) &&
-    _.every(deeperProps, (key) => {
+    _.every(propKeysToDeepCheck, (key) => {
       const isDeepEqual = _.isEqual(propsA[key], propsB[key]);
       if(!isDeepEqual) console.log(`xyProps: ${key} not equal`);
       return isDeepEqual;

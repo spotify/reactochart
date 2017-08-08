@@ -3,9 +3,12 @@ import _ from 'lodash';
 import {scaleLinear, interpolateHcl, interpolateHsl, interpolateLab, interpolateRgb} from 'd3';
 import invariant from 'invariant';
 import PropTypes from 'prop-types';
+
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {makeAccessor, domainFromData, domainFromRangeData} from './utils/Data';
 import {dataTypeFromScaleType} from './utils/Scale';
+import xyPropsEqual from './utils/xyPropsEqual';
+
 import RangeRect from './RangeRect';
 
 
@@ -73,6 +76,11 @@ export default class ColorHeatmap extends React.Component {
       x: domainFromRangeData(data, makeAccessor(getX), makeAccessor(getXEnd), dataTypeFromScaleType(scaleType.x)),
       y: domainFromRangeData(data, makeAccessor(getY), makeAccessor(getYEnd), dataTypeFromScaleType(scaleType.y))
     };
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['colors', 'valueDomain']);
+    return shouldUpdate;
   }
 
   render() {

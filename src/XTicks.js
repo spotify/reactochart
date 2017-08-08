@@ -6,7 +6,11 @@ import {getScaleTicks, getTickDomain} from './utils/Scale';
 
 export default class XTicks extends React.Component {
   static propTypes = {
-    scale: PropTypes.shape({x: PropTypes.func.isRequired})
+    scale: PropTypes.shape({x: PropTypes.func.isRequired}),
+    position: PropTypes.oneOf(['bottom', 'top']),
+    placement: PropTypes.oneOf(['above', 'below']),
+    tickLength: PropTypes.number,
+    tickStyle: PropTypes.object
   };
   static defaultProps = {
     position: 'bottom',

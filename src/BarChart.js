@@ -6,6 +6,7 @@ import RangeBarChart from './RangeBarChart';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {hasXYScales} from './utils/Scale';
 import {makeAccessor, domainFromData} from './utils/Data';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 
 function makeRangeBarChartProps(barChartProps) {
@@ -65,6 +66,12 @@ export default class BarChart extends React.Component {
   static getSpacing(props) {
     return RangeBarChart.getSpacing(makeRangeBarChartProps(props));
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['barStyle']);
+    return shouldUpdate;
+  }
+
   render() {
     invariant(hasXYScales(this.props.scale), `BarChart.props.scale.x and scale.y must both be valid d3 scales`);
 

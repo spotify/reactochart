@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {hasXYScales, dataTypeFromScaleType} from './utils/Scale';
 import {makeAccessor, domainFromRangeData, domainFromData, getDataDomainByAxis} from './utils/Data';
+import xyPropsEqual from './utils/xyPropsEqual';
 import Bar from './Bar';
 
 export default class RangeBarChart extends React.Component {
@@ -64,6 +65,12 @@ export default class RangeBarChart extends React.Component {
       return {top: 0, right: spacingTail, bottom: 0, left: spacingHead}
     }
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['barStyle']);
+    return shouldUpdate;
+  }
+
   render() {
     const {scale, data, horizontal, getX, getXEnd, getY, getYEnd, barThickness, barClassName, barStyle, getClass} = this.props;
     invariant(hasXYScales(scale), `RangeBarChart.props.scale.x and scale.y must both be valid d3 scales`);

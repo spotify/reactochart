@@ -6,6 +6,7 @@ import {methodIfFuncProp} from './util.js';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {dataTypeFromScaleType} from './utils/Scale';
 import {makeAccessor, domainFromRangeData, getDataDomainByAxis} from './utils/Data';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 /**
  * MarkerLine is similar to a bar chart,
@@ -115,6 +116,11 @@ export default class MarkerLineChart extends React.Component {
         [rangeAxis]: domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, rangeDataType)
       };
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, []);
+    return shouldUpdate;
   }
 
   onMouseEnterLine = (e, d) => {

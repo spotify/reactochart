@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import {methodIfFuncProp} from './util.js';
 import {makeAccessor} from './utils/Data';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 export default class AreaHeatmap extends React.Component {
   static propTypes = {
@@ -23,6 +24,11 @@ export default class AreaHeatmap extends React.Component {
       x: extent(_.flatten([data.map(makeAccessor(getX)), data.map(makeAccessor(getXEnd))])),
       y: extent(_.flatten([data.map(makeAccessor(getY)), data.map(makeAccessor(getYEnd))]))
     };
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['rectStyle']);
+    return shouldUpdate;
   }
 
   onMouseEnter = (e) => {

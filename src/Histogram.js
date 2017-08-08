@@ -2,8 +2,11 @@ import React from 'react';
 import _ from 'lodash';
 import {histogram} from 'd3';
 import PropTypes from 'prop-types';
+
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {makeAccessor, domainFromRangeData} from './utils/Data';
+import xyPropsEqual from './utils/xyPropsEqual';
+
 import AreaBarChart from './AreaBarChart';
 
 // todo make histogram work horizontally *or* vertically
@@ -28,6 +31,11 @@ export default class Histogram extends React.Component {
       x: null,
       y: [0,200]
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, []);
+    return shouldUpdate;
   }
 
   componentWillMount() {

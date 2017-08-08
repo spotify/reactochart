@@ -15,6 +15,7 @@ export {default as ColorHeatmap} from './ColorHeatmap';
 export {default as AreaHeatmap} from './AreaHeatmap';
 export {default as Histogram} from './Histogram';
 export {default as KernelDensityEstimation} from './KernelDensityEstimation';
+export {default as FunnelChart} from './FunnelChart';
 
 // XY datum components (used by charts & axes)
 export {default as Bar} from './Bar';
@@ -38,6 +39,11 @@ export {default as YTicks} from './YTicks';
 // ### Higher-order components
 export {default as resolveObjectProps} from './utils/resolveObjectProps';
 export {default as resolveXYScales} from './utils/resolveXYScales';
+
+import * as Data from './utils/Data';
+export const utils = {Data};
+// export {utils};
+
 
 // ### Utilities
 // * Data

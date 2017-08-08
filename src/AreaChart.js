@@ -4,6 +4,7 @@ import _ from 'lodash';
 import {area} from 'd3';
 
 import {makeAccessor, domainFromData, combineDomains} from './utils/Data';
+import xyPropsEqual from './utils/xyPropsEqual';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 
 // AreaChart represents a simple bivariate area chart,
@@ -77,6 +78,11 @@ export default class AreaChart extends React.Component {
         domainFromData(data, accessors.yEnd)
       ])
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['pathStyle', 'pathStylePositive', 'pathStyleNegative']);
+    return shouldUpdate;
   }
 
   render() {
