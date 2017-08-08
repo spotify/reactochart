@@ -1,5 +1,0 @@
-const LineChartExample = (props) => {
-  return <div>hi</div>
-};
-
-ReactDOM.render(<LineChartExample/>, mountNode);
