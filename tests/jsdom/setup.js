@@ -16,3 +16,7 @@ Object.keys(document.defaultView).forEach((property) => {
 global.navigator = {
   userAgent: 'node.js'
 };
+
+// hack to deal with https://github.com/airbnb/enzyme/issues/888
+// see also https://github.com/chaijs/type-detect/issues/98
+global.HTMLElement = window.HTMLElement;

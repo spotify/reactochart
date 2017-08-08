@@ -162,6 +162,7 @@ describe('resolveXYScales', () => {
     const wrapped = mount(<XYChart {...props} />);
     const rendered = wrapped.find(Chart);
     const renderedScale = rendered.props().scale;
+    
     expectXYScales(renderedScale);
     expect(renderedScale.x.domain()).to.deep.equal(props.domain.x);
     expect(renderedScale.y.domain()).to.deep.equal(props.domain.y);
@@ -364,13 +365,7 @@ describe('resolveXYScales', () => {
     </XYContainerChartWithObjectProps>;
     const wrapped = mount(tree);
     const rendered = wrapped.find(ContainerChart);
-    //
-    // expectXYScaledComponent(rendered, {
-    //   ...containerProps,
-    //   margin: customMargin,
-    //   scaleType: {x: 'linear', y: 'linear'},
-    //   domain: {x: [-12, 12], y: [-12, 12]}
-    // });
+
     expect(rendered.props().margin).to.deep.equal(customMargin);
     expect(rendered.props().scaleType).to.deep.equal({x: 'linear', y: 'linear'});
     expect(rendered.props().domain.x).to.deep.equal([-12, 12]);
