@@ -11,6 +11,11 @@ const examples = [
     label: "Basic YAxis",
     codeText: require('raw-loader!./examples/YAxis.js.example'),
   },
+  {
+    id: "customTicks",
+    label: "YAxis with custom ticks",
+    codeText: require('raw-loader!./examples/YAxisCustomTicks.js.example'),
+  },
 ];
 
 export default class YAxisExamples extends React.Component {

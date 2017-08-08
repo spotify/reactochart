@@ -11,6 +11,11 @@ const examples = [
     label: "Basic XYPlot",
     codeText: require('raw-loader!./examples/XYPlot.js.example'),
   },
+  {
+    id: "spacing",
+    label: "Custom Spacing",
+    codeText: require('raw-loader!./examples/CustomSpacing.js.example'),
+  },
 ];
 
 export default class XYPlotExamples extends React.Component {

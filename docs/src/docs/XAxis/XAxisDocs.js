@@ -11,6 +11,11 @@ const examples = [
     label: "Basic XAxis",
     codeText: require('raw-loader!./examples/XAxis.js.example'),
   },
+  {
+    id: "customTicks",
+    label: "XAxis with custom ticks",
+    codeText: require('raw-loader!./examples/XAxisCustomTicks.js.example'),
+  },
 ];
 
 export default class XAxisExamples extends React.Component {
