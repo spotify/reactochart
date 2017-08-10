@@ -1,5 +1,5 @@
 import React from 'react';
-const {PropTypes} = React;
+import PropTypes from 'prop-types';
 
 export const xyObjectOf = (type) => (
   PropTypes.shape({x: type, y: type})

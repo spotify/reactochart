@@ -1,17 +1,18 @@
+var path = require('path');
 var webpack = require('webpack');
-// var CleanPlugin = require('clean-webpack-plugin');
 var _ = require('lodash');
 var config = require('./webpack.config.base');
+var CleanPlugin = require('clean-webpack-plugin');
 
 config = _.merge(config, {
   plugins: config.plugins.concat([
-    // new CleanPlugin(['build']),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
-    new webpack.optimize.DedupePlugin(),
+    new CleanPlugin([path.join(__dirname, 'docs/build')])
+
     // new webpack.optimize.UglifyJsPlugin()
   ])
 });

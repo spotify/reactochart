@@ -1,0 +1,33 @@
+class AreaDifferenceExample extends React.Component {
+  render() {
+    const data1 = randomWalkTimeSeries(115).map(([x, y]) => ({x, y}));
+    const data2 = randomWalkTimeSeries(115).map(([x, y]) => ({x, y}));
+
+    // we have two datasets, but AreaChart takes one combined dataset
+    // so combine the two datasets into one using the combineDatasets utility function
+    // (from 'reactochart/lib/utils/Data')
+    const combined = utils.Data.combineDatasets([
+      {data: data1, combineKey: 'x', dataKeys: {y: 'y0'}},
+      {data: data2, combineKey: 'x', dataKeys: {y: 'y1'}}
+    ], 'x');
+
+    return <div>
+      <XYPlot width={450}>
+        <XAxis tickCount={4}/><YAxis/>
+
+        <AreaChart
+          data={combined}
+          isDifference={true}
+          pathStyleNegative={{fill: 'lightcoral'}}
+          pathStylePositive={{fill: 'lightgreen'}}
+          getX='x'
+          getY='y0'
+          getYEnd='y1'
+        />
+        <LineChart data={data1} getX="x" getY="y" lineStyle={{strokeWidth: 3}}/>
+        <LineChart data={data2} getX="x" getY="y" />
+      </XYPlot>
+    </div>
+  }
+}
+ReactDOM.render(<AreaDifferenceExample />, mountNode);

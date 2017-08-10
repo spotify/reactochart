@@ -1,0 +1,91 @@
+const line1 = d => Math.sin(d*.1);
+const line2 = d => Math.cos(d*.1);
+const line3 = d => Math.sin(d*.2) * 1.5;
+
+const dPlusOne = d => d + 1;
+
+const gridData = _.range(30).map(m => {
+  return _.range(30).map(n => {
+    return {
+      x: n,
+      xEnd: n + 1,
+      y: m,
+      yEnd: m + 1,
+      value: Math.sin(m * n * 0.01)
+    };
+  });
+});
+
+const randomNormalArr = _.times(1000, d3.randomNormal(0, 1)).concat(_.times(1000, d3.randomNormal(3, 0.5)));
+
+class InteractiveLineChartExample extends React.Component {
+  state = {
+    activeX: null
+  };
+
+  _onMouseMove = ({xValue, yValue}) => {
+    this.setState({activeX: xValue});
+  };
+
+  render() {
+    const {activeX} = this.state;
+    const colors = d3.scaleOrdinal(d3.schemeCategory10);
+
+    return <div>
+      <XYPlot scaleType="linear" {...{width: 600, height: 350, domain: {y: [-2, 2]}}} onMouseMove={this._onMouseMove}>
+        <XAxis title="Phase" />
+        <YAxis title="Intensity" />
+
+
+        <ScatterPlot
+          data={_.range(100)}
+          getY={line1}
+          pointStyle={{stroke: colors(0), strokeWidth: 3}}
+        />
+        <LineChart
+          data={_.range(100)}
+          getY={line1}
+          lineStyle={{stroke: colors(0), strokeWidth: 3}}
+        />
+        <LineChart
+          data={_.range(100)}
+          getY={line2}
+          lineStyle={{stroke: colors(1), strokeWidth: 2}}
+        />
+        <LineChart
+          data={_.range(100)}
+          getY={line3}
+          lineStyle={{stroke: colors(2), strokeWidth: 1}}
+        />
+
+        <MarkerLineChart
+          data={_.range(100)}
+          getXEnd={dPlusOne}
+          getY={line1}
+        />
+
+        {activeX ?
+          <XLine value={activeX} style={{stroke: '#666'}} /> :
+          null
+        }
+
+        {activeX ?
+          <ScatterPlot
+            data={[line1, line2, line3].map(lineFunc => [activeX, lineFunc(activeX)])}
+            getX={0}
+            getY={1}
+            pointRadius={5}
+          /> :
+          null
+        }
+      </XYPlot>
+
+      {activeX ?
+        <h3>{this.state.activeX.toFixed(3)}</h3> :
+        null
+      }
+    </div>
+  }
+}
+
+ReactDOM.render(<InteractiveLineChartExample/>, mountNode);

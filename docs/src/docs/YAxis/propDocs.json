@@ -1,0 +1,316 @@
+{
+  "description": "",
+  "methods": [
+    {
+      "name": "getTickDomain",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "getMargin",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    }
+  ],
+  "props": {
+    "scale": {
+      "type": {
+        "name": "shape",
+        "value": {
+          "y": {
+            "name": "func",
+            "required": true
+          }
+        }
+      },
+      "required": false,
+      "description": ""
+    },
+    "width": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "400",
+        "computed": false
+      }
+    },
+    "height": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "250",
+        "computed": false
+      }
+    },
+    "position": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "'left'",
+        "computed": false
+      }
+    },
+    "placement": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": ""
+    },
+    "nice": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "ticks": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": ""
+    },
+    "tickCount": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "showTitle": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "showLabels": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "showTicks": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "showGrid": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "title": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": ""
+    },
+    "titleDistance": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "5",
+        "computed": false
+      }
+    },
+    "titleAlign": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": ""
+    },
+    "titleRotate": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": ""
+    },
+    "titleStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "labelDistance": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "3",
+        "computed": false
+      }
+    },
+    "labelClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": ""
+    },
+    "labelStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "labelFormat": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": ""
+    },
+    "labelFormats": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": ""
+    },
+    "labels": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": ""
+    },
+    "tickLength": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "5",
+        "computed": false
+      }
+    },
+    "tickClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": ""
+    },
+    "tickStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "gridLineClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": ""
+    },
+    "gridLineStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseEnterLabel": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseMoveLabel": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseLeaveLabel": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "spacing": {
+      "defaultValue": {
+        "value": "{top: 0, bottom: 0, left: 0, right: 0}",
+        "computed": false
+      }
+    }
+  }
+}

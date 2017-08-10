@@ -1,0 +1,151 @@
+{
+  "description": "",
+  "methods": [
+    {
+      "name": "getTickDomain",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "getMargin",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "getDefaultFormats",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "scaleType",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "getLabels",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    }
+  ],
+  "props": {
+    "scale": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseEnterLabel": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseMoveLabel": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseLeaveLabel": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "height": {
+      "defaultValue": {
+        "value": "250",
+        "computed": false
+      }
+    },
+    "width": {
+      "defaultValue": {
+        "value": "400",
+        "computed": false
+      }
+    },
+    "position": {
+      "defaultValue": {
+        "value": "'left'",
+        "computed": false
+      }
+    },
+    "distance": {
+      "defaultValue": {
+        "value": "4",
+        "computed": false
+      }
+    },
+    "nice": {
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "tickCount": {
+      "defaultValue": {
+        "value": "10",
+        "computed": false
+      }
+    },
+    "ticks": {
+      "defaultValue": {
+        "value": "null",
+        "computed": false
+      }
+    },
+    "labelClassName": {
+      "defaultValue": {
+        "value": "''",
+        "computed": false
+      }
+    },
+    "labelStyle": {
+      "defaultValue": {
+        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: '14px',\n  lineHeight: 1,\n  textAnchor: 'end'\n}",
+        "computed": false
+      }
+    },
+    "spacing": {
+      "defaultValue": {
+        "value": "{top: 0, bottom: 0, left: 0, right: 0}",
+        "computed": false
+      }
+    }
+  }
+}

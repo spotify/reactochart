@@ -1,0 +1,22 @@
+
+const RangeRectExample = (props) => {
+  return <div>
+    <XYPlot width={500} height={320} domain={{x: [0, 100], y: [0, 100]}}>
+      <XAxis /><YAxis />
+      <RangeRect
+        datum={[10, 40, 50, 80]}
+        getX={0} getXEnd={1}
+        getY={2} getYEnd={3}
+        style={{fill: 'rebeccapurple'}}
+      />
+      <RangeRect
+        datum={[65, 85, 15, 95]}
+        getX={0} getXEnd={1}
+        getY={2} getYEnd={3}
+        style={{fill: 'coral'}}
+      />
+    </XYPlot>
+  </div>;
+};
+
+ReactDOM.render(<RangeRectExample />, mountNode);

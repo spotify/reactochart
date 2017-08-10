@@ -1,0 +1,52 @@
+{
+  "description": "",
+  "methods": [
+    {
+      "name": "getDomain",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    }
+  ],
+  "props": {
+    "scale": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.xyObjectOf(PropTypes.func.isRequired)"
+      },
+      "required": false,
+      "description": ""
+    },
+    "data": {
+      "type": {
+        "name": "array"
+      },
+      "required": true,
+      "description": ""
+    },
+    "getX": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "getY": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    }
+  }
+}

@@ -1,0 +1,22 @@
+const MarkerLineWithBarChartExample = (props) => {
+  const data1 = [[1, 12], [2, 23], [3, 14], [4, 17], [5, 29], [6, 21]];
+  const data2 = [[1, 14], [2, 21], [3, 19], [4, 11], [5, 27], [6, 11]];
+
+  return <div>
+    <XYPlot width={300} height={300}>
+      <XAxis />
+      <YAxis />
+      <BarChart
+        data={data1}
+        getX={0} getY={1}
+      />
+      <MarkerLineChart
+        data={data2}
+        getX={0} getY={1}
+        lineLength={15}
+      />
+    </XYPlot>
+  </div>;
+};
+
+ReactDOM.render(<MarkerLineWithBarChartExample />, mountNode);

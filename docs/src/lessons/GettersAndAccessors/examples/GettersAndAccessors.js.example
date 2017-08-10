@@ -1,0 +1,40 @@
+const GettersAndAccessorsExample = (props) => {
+  // sample data in a few different shapes
+  const arrData = [
+    [0, 4], [5, 20], [10, 13], [15, 19]
+  ];
+  const objData = [
+    {count: 4, friends: [{id: 'a', age: 24}, {id: 'b', age: 19}]},
+    {count: 7, friends: [{id: 'a', age: 28}, {id: 'b', age: 29}]},
+    {count: 19, friends: [{id: 'a', age: 22}, {id: 'b', age: 44}]},
+    {count: 22, friends: [{id: 'a', age: 41}, {id: 'b', age: 22}]},
+  ];
+
+  return <XYPlot width={400} height={300}>
+    <XAxis />
+    <YAxis />
+    {/* array getters: line X is d[0] and line Y is d[1] */}
+    <LineChart
+      data={arrData}
+      getX={0} getY={1}
+      lineStyle={{stroke: 'royalblue'}}
+    />
+    {/* use strings for deep object access */}
+    <LineChart
+      data={objData}
+      getX="count"
+      getY="friends[0].age"
+      lineStyle={{stroke: 'orange'}}
+    />
+    {/* or use functions if you prefer */}
+    <LineChart
+      data={objData}
+      getX={(d) => d.count}
+      getY={(d) => d.friends[1].age}
+      lineStyle={{stroke: 'purple'}}
+    />
+  </XYPlot>
+};
+
+
+ReactDOM.render(<GettersAndAccessorsExample />, mountNode);

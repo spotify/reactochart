@@ -1,0 +1,20 @@
+const GraphingCalculatorExample = (props) => {
+  // generate an array of numbers using _.range
+  // returns [0, 1, 2, 3, ..., 99]
+  const data = _.range(100);
+
+  return <XYPlot width={400} height={300}>
+    <XAxis />
+    <YAxis />
+    <LineChart
+      data={data}
+      // null getX - use the number itself as X value
+      getX={null}
+      // we want to plot a sine wave, so use Math.sin in our Y getter
+      getY={(d) => Math.sin(d*0.1)}
+    />
+  </XYPlot>
+};
+
+
+ReactDOM.render(<GraphingCalculatorExample />, mountNode);

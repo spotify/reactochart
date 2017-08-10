@@ -1,0 +1,45 @@
+{
+  "description": "",
+  "methods": [
+    {
+      "name": "getDomain",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [],
+      "returns": null
+    }
+  ],
+  "props": {
+    "data": {
+      "type": {
+        "name": "array"
+      },
+      "required": true,
+      "description": "the array of data objects"
+    },
+    "getValue": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "axisType": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "scale": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    }
+  }
+}

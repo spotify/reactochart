@@ -1,0 +1,92 @@
+{
+  "description": "Bar is a low-level component to be used in XYPlot-type charts (namely BarChart)\nIt is specified in terms of a range (min & max) of values on one axis (the bar's long axis)\nand a single value on the other axis.\nPassing props `xValue`, `xEndValue` and `yValue` specifies a horizontal bar,\ncentered on `yValue` and spanning from `xValue` to `xEndValue`;\npassing props `xValue`, `yValue`, and `yEndValue' specifies a vertical bar.",
+  "methods": [],
+  "props": {
+    "scale": {
+      "type": {
+        "name": "shape",
+        "value": {
+          "x": {
+            "name": "func",
+            "required": true
+          },
+          "y": {
+            "name": "func",
+            "required": true
+          }
+        }
+      },
+      "required": false,
+      "description": ""
+    },
+    "xValue": {
+      "type": {
+        "name": "any"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "yValue": {
+      "type": {
+        "name": "any"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "xEndValue": {
+      "type": {
+        "name": "any"
+      },
+      "required": false,
+      "description": ""
+    },
+    "yEndValue": {
+      "type": {
+        "name": "any"
+      },
+      "required": false,
+      "description": ""
+    },
+    "thickness": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "8",
+        "computed": false
+      }
+    },
+    "className": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "''",
+        "computed": false
+      }
+    },
+    "style": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    }
+  }
+}

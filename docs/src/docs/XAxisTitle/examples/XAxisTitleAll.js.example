@@ -1,0 +1,45 @@
+const XAxisTitleExample = (props) => {
+  const xyProps = {
+    width: 500, height: 360,
+    domain: {x: [0, 100], y: [0, 100]}
+  };
+
+  return <XYPlot {...xyProps}>
+    <XAxisTitle title="AAAA" alignment="left" />
+    <XAxisTitle title="BBBB" alignment="center" />
+    <XAxisTitle title="CCCC" alignment="right" />
+
+    <XAxisTitle title="DDDD" alignment="left" placement="above" />
+    <XAxisTitle title="EEEE" alignment="center" placement="above" />
+    <XAxisTitle title="FFFF" alignment="right" placement="above" />
+
+
+    <XAxisTitle title="GGGG" alignment="left" rotate={true} />
+    <XAxisTitle title="HHHH" alignment="center" rotate={true} />
+    <XAxisTitle title="IIII" alignment="right" rotate={true} />
+
+    <XAxisTitle title="JJJJ" alignment="left" placement="above" rotate={true} />
+    <XAxisTitle title="KKKK" alignment="center" placement="above" rotate={true} />
+    <XAxisTitle title="LLLL" alignment="right" placement="above" rotate={true} />
+
+
+    <XAxisTitle title="MMMM" position="top" alignment="left" />
+    <XAxisTitle title="NNNN" position="top" alignment="center" />
+    <XAxisTitle title="OOOO" position="top" alignment="right" />
+
+    <XAxisTitle title="PPPP" position="top" alignment="left" placement="below" />
+    <XAxisTitle title="QQQQ" position="top" alignment="center" placement="below" />
+    <XAxisTitle title="RRRR" position="top" alignment="right" placement="below" />
+
+
+    <XAxisTitle title="SSSS" position="top" alignment="left" rotate={true} />
+    <XAxisTitle title="TTTT" position="top" alignment="center" rotate={true} />
+    <XAxisTitle title="UUUU" position="top" alignment="right" rotate={true} />
+
+    <XAxisTitle title="VVVV" position="top" alignment="left" placement="below" rotate={true} />
+    <XAxisTitle title="WWWW" position="top" alignment="center" placement="below" rotate={true} />
+    <XAxisTitle title="XXXX" position="top" alignment="right" placement="below" rotate={true} />
+  </XYPlot>;
+};
+
+ReactDOM.render(<XAxisTitleExample />, mountNode);

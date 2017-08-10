@@ -1,0 +1,17 @@
+const XAxisLabelsExample = (props) => {
+  const chartStyle = {marginBottom: '10px'};
+
+  return <div>
+    <div style={chartStyle}>
+      <XYPlot
+        width={400} height={150}
+        domain={{x: [-20, 20], y: [-20, 20]}}
+      >
+        <XAxisLabels />
+        <XAxisLabels position="top" distance={2} tickCount={5} labelStyle={{fontSize: '10px'}} />
+      </XYPlot>
+    </div>
+  </div>
+};
+
+ReactDOM.render(<XAxisLabelsExample />, mountNode);

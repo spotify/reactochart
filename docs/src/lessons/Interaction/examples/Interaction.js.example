@@ -1,0 +1,38 @@
+const InteractionExample = React.createClass({
+  getInitialState() {
+    return {
+      activeValue: null
+    }
+  },
+  onEnterBar(e, d) {
+    this.setState({activeValue: d});
+  },
+  onLeaveBar(e, d) {
+    this.setState({activeValue: null})
+  },
+  render() {
+    const {activeValue} = this.state;
+
+    return <div>
+      {_.isNumber(activeValue) ?
+        <div>
+          {activeValue.toFixed(2)}
+        </div> :
+        <div>Hover over the chart to show values</div>
+      }
+      <XYPlot width={500} height={320}>
+        <XAxis /><YAxis />
+        <AreaBarChart
+          data={_.range(15)}
+          getX={d => Math.sin(d / 10) * 10}
+          getXEnd={d => Math.sin((d + 1) / 10) * 10}
+          getY={d => Math.cos(d / (Math.PI))}
+          onMouseEnterBar={this.onEnterBar}
+          onMouseLeaveBar={this.onLeaveBar}
+        />
+      </XYPlot>;
+    </div>
+  }
+});
+
+ReactDOM.render(<InteractionExample />, mountNode);

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import d3 from 'd3';
+import {extent} from 'd3';
 import React from 'react';
 
 /**
@@ -53,11 +53,11 @@ export function datasetsFromPropsOrDescendants(props) {
 export function inferDataType(data, accessor = _.identity) {
   if(!_.isArray(data))
     throw new Error('inferDataType expects a data array');
-  else if(_.every(data, d => _.isUndefined(accessor(d))))
+  else if(_.every(data, (d, i) => _.isUndefined(accessor(d, i))))
     return 'categorical'; // should this be allowed?
-  else if(_.every(data, d => _.isNumber(accessor(d)) || _.isUndefined(accessor(d))))
+  else if(_.every(data, (d, i) => _.isNumber(accessor(d, i)) || _.isUndefined(accessor(d, i))))
     return 'number';
-  else if(_.every(data, d => _.isDate(accessor(d)) || _.isUndefined(accessor(d))))
+  else if(_.every(data, (d, i) => _.isDate(accessor(d, i)) || _.isUndefined(accessor(d, i))))
     return 'time';
   else
     return 'categorical';
@@ -86,14 +86,31 @@ export function combineDomains(domains, dataType) {
   if(!_.isArray(domains)) return undefined;
   return (dataType === 'categorical') ?
     _.uniq(_.flatten(_.compact(domains))) :
-    d3.extent(_.flatten(domains));
+    extent(_.flatten(domains));
+}
+
+export function combineBorderObjects(borderObjects){
+  return _.fromPairs(['top', 'bottom', 'left', 'right'].map(k => {
+    // combine border objects by taking the max value of each spacing direction
+    return [k, _.get(_.maxBy(borderObjects, k), k)];
+  }));
 }
 
 export function domainFromData(data, accessor = _.identity, type = undefined) {
   if(!type) type = inferDataType(data, accessor);
   return (type === 'number' || type === 'time') ?
-    d3.extent(data.map(accessor)) :
+    extent(data.map(accessor)) :
     _.uniq(data.map(accessor));
+}
+
+export function getDataDomainByAxis(props) {
+  const {horizontal, data, getX, getY} = props;
+  const accessor = horizontal ?  makeAccessor(getY) : makeAccessor(getX);
+  // only have to specify range axis domain, other axis uses default domainFromData
+  const rangeAxis = horizontal ? 'y' : 'x';
+  return {
+    [rangeAxis]: domainFromData(data, accessor)
+  };
 }
 
 export function domainFromDatasets(datasets, accessor = _.identity, type = undefined) {
@@ -114,12 +131,60 @@ export function domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, 
   switch(dataType) {
     case 'number':
     case 'time':
-      return d3.extent(_.flatten([
-        d3.extent(data, (d) => +rangeStartAccessor(d)),
-        d3.extent(data, (d) => +rangeEndAccessor(d))
+      return extent(_.flatten([
+        extent(data, (d, i) => +rangeStartAccessor(d, i)),
+        extent(data, (d, i) => +rangeEndAccessor(d, i))
       ]));
     case 'categorical':
       return _.uniq(_.flatten([data.map(rangeStartAccessor), data.map(rangeEndAccessor)]));
   }
   return [];
+}
+
+export function combineDatasets(datasetsInfo=[], combineKey='x') {
+  // combineDatasets combines multiple datasets into one, joined on a common key 'combineKey'
+  // datasetsInfo is an array that looks like:
+  // [
+  //   {data: [{x: 0, y: 3}, ...], combineKey: 'x', dataKeys: {y: 'y0'}}
+  //   {data: [{count: 0, value: 4}], combineKey: 'count', dataKeys: {value: 'y1'}}
+  // ]
+  // where `data` is an array of data points of any shape
+  // `combineKey` is the key for the value which the datasets are joined on
+  // `dataKeys` are getters for other values in each datapoint which should be merged into the combined dataset
+  //   - key = getter in original datapoint, value = setter for combined dataset
+  // example above (with default combinedKey) results in:
+  // [{x: 0, y0: 3, y1: 4}, ...]
+
+  // index each dataset by its combineKey values so we can quickly lookup if it has data for a given value
+  const datasetLookups = datasetsInfo.map(datasetInfo => {
+    const {data} = datasetInfo;
+    return _.keyBy(data, datasetInfo.combineKey || combineKey);
+  });
+
+  // create a unique sorted array containing all of the data values for combineKey in all datasets
+  const allCombineValues = _(datasetsInfo)
+    .map(datasetInfo => datasetInfo.data.map(makeAccessor(datasetInfo.combineKey || combineKey)))
+    .flatten()
+    .uniqBy(_.toString) // uniq by string, otherwise dates etc. are not unique
+    .sortBy()
+    .value();
+
+  // for each of the unique combineKey data values, go through each dataset and look for a combineKey value that matches
+  // if we find it, combine the values for that datum's dataKeys into the final combinedDatum object
+  return allCombineValues.map(combineValue => {
+    let combinedDatum = {[combineKey]: combineValue};
+
+    datasetsInfo.forEach((datasetInfo, datasetIndex) => {
+      if(!datasetInfo.dataKeys || !Object.keys(datasetInfo.dataKeys).length) return;
+      const datasetLookup = datasetLookups[datasetIndex];
+      if(!_.has(datasetLookup, combineValue)) return;
+
+      const datum = datasetLookup[combineValue];
+      _.forEach(datasetInfo.dataKeys, (newDataKey, originalDataKey) => {
+        combinedDatum[newDataKey] = datum[originalDataKey];
+      });
+    });
+
+    return combinedDatum;
+  });
 }

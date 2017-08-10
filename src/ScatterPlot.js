@@ -1,9 +1,10 @@
 import React from 'react';
-const {PropTypes} = React;
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 import {makeAccessor} from './utils/Data';
 import {methodIfFuncProp} from './util.js';
+import xyPropsEqual from './utils/xyPropsEqual';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 
 export default class ScatterPlot extends React.Component {
@@ -25,6 +26,8 @@ export default class ScatterPlot extends React.Component {
     pointSymbol: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     // manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered
     pointOffset: PropTypes.arrayOf(PropTypes.number),
+    // inline styles for points
+    pointStyle: PropTypes.object,
 
     onMouseEnterPoint: PropTypes.func,
     onMouseMovePoint: PropTypes.func,
@@ -33,7 +36,8 @@ export default class ScatterPlot extends React.Component {
   static defaultProps = {
     pointRadius: 3,
     pointSymbol: <circle />,
-    pointOffset: [0,0]
+    pointOffset: [0,0],
+    pointStyle: {}
   };
 
   // todo: implement getSpacing or getPadding static
@@ -48,6 +52,11 @@ export default class ScatterPlot extends React.Component {
     this.props.onMouseLeavePoint(e, d);
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['pointStyle']);
+    return shouldUpdate;
+  }
+
   render() {
     return <g className={this.props.name}>
       {this.props.data.map(this.renderPoint)}
@@ -60,7 +69,7 @@ export default class ScatterPlot extends React.Component {
         const callback = methodIfFuncProp(eventName, this.props, this);
         return _.isFunction(callback) ? _.partial(callback, _, d) : null;
       });
-    const {scale, getX, getY, pointRadius, pointOffset, getClass} = this.props;
+    const {scale, getX, getY, pointRadius, pointOffset, pointStyle, getClass} = this.props;
     let {pointSymbol} = this.props;
     const className = `chart-scatterplot-point ${getClass ? makeAccessor(getClass)(d) : ''}`;
     let symbolProps = {className, onMouseEnter, onMouseMove, onMouseLeave, key: `scatter-point-${i}`};
@@ -78,11 +87,11 @@ export default class ScatterPlot extends React.Component {
 
     // set positioning attributes based on symbol type
     if(pointSymbol.type === 'circle' || pointSymbol.type === 'ellipse') {
-      _.assign(symbolProps, {cx, cy});
+      _.assign(symbolProps, {cx, cy, style: pointStyle});
     } else if(pointSymbol.type === 'text') {
-      _.assign(symbolProps, {x: cx, y: cy, style: {textAnchor: 'middle', dominantBaseline: 'central'}});
+      _.assign(symbolProps, {x: cx, y: cy, style: {textAnchor: 'middle', dominantBaseline: 'central', ...pointStyle}});
     } else {
-      _.assign(symbolProps, {x: cx, y: cy, style: {transform: "translate(-50%, -50%)"}});
+      _.assign(symbolProps, {x: cx, y: cy, style: {transform: "translate(-50%, -50%)", ...pointStyle}});
     }
 
     return React.cloneElement(pointSymbol, symbolProps);

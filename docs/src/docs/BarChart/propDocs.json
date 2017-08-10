@@ -1,0 +1,143 @@
+{
+  "description": "BarChart represents a basic \"Value/Value\" bar chart,\nwhere each bar represents a single independent variable value and a single dependent value,\nwith bars that are centered horizontally on x-value and extend from 0 to y-value,\n(or centered vertically on their y-value and extend from 0 to the x-value, in the case of horizontal chart variant)\neg. http://www.snapsurveys.com/wp-content/uploads/2012/10/bar_2d8.png\n\nFor other bar chart types, see RangeBarChart and AreaBarChart",
+  "methods": [
+    {
+      "name": "getDomain",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "getSpacing",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    }
+  ],
+  "props": {
+    "scale": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.xyObjectOf(PropTypes.func.isRequired)"
+      },
+      "required": false,
+      "description": ""
+    },
+    "data": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "[]",
+        "computed": false
+      }
+    },
+    "getX": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "getY": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "horizontal": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
+    },
+    "barThickness": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "8",
+        "computed": false
+      }
+    },
+    "barClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "''",
+        "computed": false
+      }
+    },
+    "barStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "getClass": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseEnterBar": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseMoveBar": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseLeaveBar": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    }
+  }
+}

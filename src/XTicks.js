@@ -1,17 +1,23 @@
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 import {getScaleTicks, getTickDomain} from './utils/Scale';
 
 export default class XTicks extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.shape({x: React.PropTypes.func.isRequired})
+    scale: PropTypes.shape({x: PropTypes.func.isRequired}),
+    position: PropTypes.oneOf(['bottom', 'top']),
+    placement: PropTypes.oneOf(['above', 'below']),
+    tickLength: PropTypes.number,
+    tickStyle: PropTypes.object
   };
   static defaultProps = {
     position: 'bottom',
     nice: true,
     tickLength: 5,
-    tickStyle: {}
+    tickStyle: {},
+    spacing: {top: 0, bottom: 0, left: 0, right: 0}
   };
 
   static getTickDomain(props) {
@@ -32,12 +38,13 @@ export default class XTicks extends React.Component {
   }
 
   render() {
-    const {height, tickCount, position, tickLength, tickStyle, tickClassName} = this.props;
+    const {height, tickCount, position, tickLength, tickStyle, tickClassName, spacing} = this.props;
     const scale = this.props.scale.x;
     const placement = this.props.placement || ((position === 'top') ? 'above' : 'below');
     const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
     const className = `chart-tick chart-tick-x ${tickClassName || ''}`;
-    const transform = (position === 'bottom') ? `translate(0,${height})` : '';
+    const transform = (position === 'bottom') ?
+      `translate(0, ${height + spacing.bottom})` : `translate(0, ${-spacing.top})`;
 
     return <g className="chart-ticks-x" transform={transform}>
       {ticks.map((tick, i) => {

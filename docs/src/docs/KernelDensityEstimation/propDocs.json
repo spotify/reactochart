@@ -1,0 +1,112 @@
+{
+  "description": "",
+  "methods": [
+    {
+      "name": "getDomain",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [],
+      "returns": null
+    },
+    {
+      "name": "initKDE",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    }
+  ],
+  "props": {
+    "data": {
+      "type": {
+        "name": "array"
+      },
+      "required": true,
+      "description": "the array of data objects"
+    },
+    "bandwidth": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Kernel bandwidth for kernel density estimator.\nHigh bandwidth => oversmoothing & underfitting; low bandwidth => undersmoothing & overfitting",
+      "defaultValue": {
+        "value": "0.5",
+        "computed": false
+      }
+    },
+    "sampleCount": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Number of samples to take from the KDE,\nie. the resolution/smoothness of the KDE line - more samples => higher resolution, smooth line.\nDefaults to null, which causes it to be auto-determined based on width.",
+      "defaultValue": {
+        "value": "null",
+        "computed": false
+      }
+    },
+    "getX": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "getY": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "name": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "''",
+        "computed": false
+      }
+    },
+    "scale": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "axisType": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "scaleWidth": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "scaleHeight": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    }
+  }
+}

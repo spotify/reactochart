@@ -1,0 +1,12 @@
+const XAxisTitleExample = (props) => {
+  const xyProps = {
+    width: 500, height: 200,
+    domain: {x: [0, 100], y: [0, 100]}
+  };
+
+  return <XYPlot {...xyProps}>
+    <XAxisTitle title="Basic X Axis Title" />
+  </XYPlot>;
+};
+
+ReactDOM.render(<XAxisTitleExample />, mountNode);

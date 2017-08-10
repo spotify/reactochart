@@ -1,0 +1,116 @@
+{
+  "description": "",
+  "methods": [
+    {
+      "name": "getDomain",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    }
+  ],
+  "props": {
+    "data": {
+      "type": {
+        "name": "array"
+      },
+      "required": true,
+      "description": "the array of data objects"
+    },
+    "getX": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": "data getter for X coordinates"
+    },
+    "getY": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": "data getter for Y coordinates"
+    },
+    "getYEnd": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": "data getter for Y end coordinates"
+    },
+    "pathStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "style applied to path element"
+    },
+    "isDifference": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "if isDifference is true, AreaChart generates a \"difference chart\" with two area paths instead of one:\none path which shows when YEnd > Y, and one vice versa, allowing them to be styled differently (eg red/green)"
+    },
+    "pathStylePositive": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "when isDifference is true, pathStylePositive and pathStyleNegative can be passed to give 2 different inline\nstyles to the two different paths which are generated.\nIgnored if isDifference is false."
+    },
+    "pathStyleNegative": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "scaleType": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "scale": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "shouldShowGaps": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "if true, will show gaps in the shaded area for data where props.isDefined(datum) returns false",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "isDefined": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "if shouldShowGaps is true, isDefined function describes when a datum should be considered \"defined\" vs. when to show gap\nby default, shows gap if either y or yEnd are undefined",
+      "defaultValue": {
+        "value": "(d, i, accessors) => {\n  return !_.isUndefined(accessors.y(d, i)) && !_.isUndefined(accessors.yEnd(d, i));\n}",
+        "computed": false
+      }
+    }
+  }
+}

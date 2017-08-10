@@ -1,0 +1,239 @@
+body {
+  //font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  //margin: 0;
+  //padding: 0;
+  //background: #f0f0f0;
+  //color: #0f0f0f;
+
+  #container {
+    //margin: 10px;
+  }
+}
+
+.sidebar-nav {
+  h1, h2, h3, h4, h5, h6 {
+    color: #f8f8f8;
+    text-transform: uppercase;
+  }
+  h3 {
+    font-size: 16px;
+  }
+  h4 {
+    font-size: 14px;
+  }
+}
+
+.example {
+  margin-bottom: 2em;
+}
+
+.component-docs {
+  padding: 0 30px;
+}
+.prop-docs {
+  background-color: #EFEFEF;
+  padding: 15px;
+
+  .prop-description, .prop-default {
+    display: block;
+    margin-left: 2em;
+    font-size: 0.85em;
+  }
+}
+
+.example-section {
+  display: inline-block;
+  margin: 10px;
+
+  &.example-section-visible {
+    display: block;
+  }
+
+  .example-section-button {
+    display: inline-block;
+    //margin: 10px;
+    padding: 10px 20px;
+    font-size: 20pt;
+    font-weight: bold;
+    background: #cccccc;
+    cursor: pointer;
+    border-radius: 5px;
+
+    .example-arrow {
+      color: #888;
+    }
+    &.active {
+      background-color: #4cba6f;
+      .example-arrow {
+        color: #0f0f0f;
+      }
+    }
+  }
+
+  .example-section-content {
+    margin: 10px 20px;
+  }
+}
+
+.chart-tick {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1px;
+}
+.chart-grid-line {
+  stroke: #b9b9b9;
+  stroke-width: 1px;
+}
+
+.line-chart, .xy-plot {
+  //background: #f0f0f0;
+  //background: lightblue;
+  margin-right: 6px;
+
+  .chart-background {
+    fill: none;
+  }
+  .plot-background {
+    fill: #e0e0e0;
+  }
+
+  * {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+  }
+  .chart-line {
+    fill: none;
+    //stroke: steelblue;
+    stroke: #090909;
+    stroke-width: 1.5px;
+    stroke-linejoin: bevel;
+  }
+
+
+  .chart-zero-line {
+    stroke: #888;
+    stroke-width: 1.5px;
+  }
+  .chart-axis-value-label {
+    font-size: 8pt;
+  }
+  .chart-axis-value-label-x {
+    text-anchor: middle;
+  }
+  .chart-axis-value-label-y {
+    text-anchor: end;
+  }
+  .chart-selected-range {
+    fill: #eeeef6;
+  }
+
+  .chart-axis-label {
+    font-size: 16pt;
+    font-weight: bold;
+  }
+}
+
+.chart-bar, .chart-area-bar {
+  fill: steelblue;
+}
+
+
+.marker-line-chart {
+  line {
+    stroke: black;
+    stroke-width: 2px;
+  }
+}
+
+.pie-chart {
+  path {
+    stroke: none;
+    //stroke: black;
+  }
+  .pie-slice-0 { fill: steelblue; }
+  .pie-slice-1 { fill: darkred; }
+  .pie-slice-2 { fill: orange; }
+  .pie-slice-empty { fill: #ddd; }
+  .pie-label-center {
+    font-size: 26pt;
+  }
+  .marker-line {
+    stroke: black;
+    stroke-width: 2px;
+  }
+}
+
+
+path {
+  fill: none;
+  //stroke: steelblue;
+  stroke: #0a0a0a;
+  stroke-width: 1.5px;
+  stroke-linejoin: bevel;
+}
+.chart-series-0 {
+  path { stroke: steelblue; }
+}
+.chart-series-1 {
+  path { stroke: darkred; }
+}
+.chart-series-2 {
+  path { stroke: orange; }
+}
+
+.area-chart {
+  .area-chart-path {
+    stroke-width: 0;
+    fill: steelblue;
+  }
+}
+
+.playground {
+  display: flex;
+  flex-wrap: wrap;
+
+  .playgroundCode, .playgroundPreview {
+    border: 1px solid #efefef;
+    border-radius: 3px;
+    flex-basis: 150px;
+
+    &:before {
+      display: block;
+      text-align: center;
+      color: #616467;
+      background-color: #f8f8f8;
+      border-bottom: 1px solid #efefef;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 14px;
+      line-height: 28px;
+    }
+  }
+
+  .playgroundCode {
+    margin-right: 8px;
+    flex-grow: .6;
+
+    &:before {
+      content: "Editable Source";
+    }
+    .CodeMirror {
+      font-size: 10pt;
+      font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    }
+  }
+
+  .playgroundPreview {
+    margin-left: 8px;
+    //text-align: center;
+    flex-grow: .4;
+
+    &:before {
+      content: "Live Preview";
+    }
+    .previewArea {
+      padding: 8px 6px;
+    }
+  }
+}

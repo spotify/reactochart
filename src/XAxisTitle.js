@@ -1,17 +1,18 @@
 import React from 'react';
 import _ from 'lodash';
 import measureText from 'measure-text';
+import PropTypes from 'prop-types';
 
 export default class XAxisTitle extends React.Component {
   static propTypes = {
-    height: React.PropTypes.number,
-    width: React.PropTypes.number,
-    distance: React.PropTypes.number,
-    position: React.PropTypes.oneOf(['top', 'bottom']),
-    placement: React.PropTypes.oneOf(['above', 'below']),
-    alignment: React.PropTypes.oneOf(['left', 'center', 'right']),
-    rotate: React.PropTypes.bool,
-    style: React.PropTypes.object
+    height: PropTypes.number,
+    width: PropTypes.number,
+    distance: PropTypes.number,
+    position: PropTypes.oneOf(['top', 'bottom']),
+    placement: PropTypes.oneOf(['above', 'below']),
+    alignment: PropTypes.oneOf(['left', 'center', 'right']),
+    rotate: PropTypes.bool,
+    style: PropTypes.object
   };
   static defaultProps = {
     height: 250,
@@ -26,7 +27,8 @@ export default class XAxisTitle extends React.Component {
       fontSize: '24px',
       fontWeight: 'bold',
       lineHeight: 1
-    }
+    },
+    spacing: {top: 0, bottom: 0, left: 0, right: 0}
   };
 
   static getMargin(props) {
@@ -54,12 +56,12 @@ export default class XAxisTitle extends React.Component {
   }
 
   render() {
-    const {height, width, distance, position, alignment, style} = this.props;
+    const {height, width, distance, position, alignment, style, spacing} = this.props;
     const title = this.props.title || this.props.children;
     const placement = this.props.placement || ((position === 'bottom') ? 'below' : 'above');
     const rotate = this.props.rotate ? -90 : 0;
 
-    const posY = (position === 'bottom') ? height : 0;
+    const posY = (position === 'bottom') ? height + spacing.bottom : -spacing.top;
     const translateY = posY +
       ((placement === 'above') ? -distance : distance);
     const translateX =

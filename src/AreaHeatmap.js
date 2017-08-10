@@ -1,21 +1,34 @@
 import React from 'react';
 import _ from 'lodash';
-import d3 from 'd3';
+import {extent} from 'd3';
+import PropTypes from 'prop-types';
 
 import {methodIfFuncProp} from './util.js';
 import {makeAccessor} from './utils/Data';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 export default class AreaHeatmap extends React.Component {
   static propTypes = {
-    unitsPerPixel: React.PropTypes.number
+    unitsPerPixel: PropTypes.number,
+    rectClassName: PropTypes.string,
+    rectStyle: PropTypes.object
+  };
+  static defaultProps = {
+    rectClassName: '',
+    rectStyle: {}
   };
 
   static getDomain(props) {
     const {data, getX, getXEnd, getY, getYEnd} = props;
     return {
-      x: d3.extent(_.flatten([data.map(makeAccessor(getX)), data.map(makeAccessor(getXEnd))])),
-      y: d3.extent(_.flatten([data.map(makeAccessor(getY)), data.map(makeAccessor(getYEnd))]))
+      x: extent(_.flatten([data.map(makeAccessor(getX)), data.map(makeAccessor(getXEnd))])),
+      y: extent(_.flatten([data.map(makeAccessor(getY)), data.map(makeAccessor(getYEnd))]))
     };
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['rectStyle']);
+    return shouldUpdate;
   }
 
   onMouseEnter = (e) => {
@@ -46,7 +59,8 @@ export default class AreaHeatmap extends React.Component {
   };
 
   render() {
-    const {data, getArea, getX, getXEnd, getY, getYEnd, scale, scaleWidth, scaleHeight} = this.props;
+    const {data, getArea, getX, getXEnd, getY, getYEnd, scale, scaleWidth, scaleHeight, rectClassName, rectStyle}
+      = this.props;
     const [areaAccessor, xAccessor, xEndAccessor, yAccessor, yEndAccessor] =
       [getArea, getX, getXEnd, getY, getYEnd].map(makeAccessor);
 
@@ -90,7 +104,11 @@ export default class AreaHeatmap extends React.Component {
 
         if(!_.every([x, y, width, height], _.isFinite)) return null;
 
-        return <rect {...{x, y, width, height, className: 'area-heatmap-rect', key: `rect-${i}`}}/>;
+        const className = `area-heatmap-rect ${rectClassName}`;
+        const style = rectStyle;
+        const key = `rect-${i}`;
+
+        return <rect {...{x, y, width, height, className, style, key}}/>;
       })}
     </g>;
   }

@@ -1,0 +1,28 @@
+const YAxisExample = (props) => {
+  const dateDomain = [new Date(2008, 0, 1), new Date(2017, 0, 1)];
+  const numberDomain = [-20, 20];
+  const categoricalDomain = ['puppies', 'kitties', 'ponies'];
+  const size = {width: 100, height: 300};
+  const chartStyle = {display: 'inline-block', marginRight: '10px'};
+
+  return <div>
+    <div style={chartStyle}>
+      <XYPlot domain={{x: numberDomain, y: numberDomain}} {...size}>
+        <YAxis title="Number"/>
+      </XYPlot>
+    </div>
+    <div style={chartStyle}>
+      <XYPlot domain={{x: numberDomain, y: dateDomain}} {...size}>
+        <YAxis title="Date"/>
+      </XYPlot>
+    </div>
+    <div style={chartStyle}>
+      <XYPlot domain={{x: numberDomain, y: categoricalDomain}} {...size}>
+        <YAxis title="Categorical"/>
+      </XYPlot>
+    </div>
+  </div>
+};
+
+
+ReactDOM.render(<YAxisExample />, mountNode);

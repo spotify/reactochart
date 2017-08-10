@@ -1,0 +1,5 @@
+const MeasuredValueLabelExample = (props) => {
+  return <div>insert example here</div>;
+};
+
+ReactDOM.render(<MeasuredValueLabelExample />, mountNode);

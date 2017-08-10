@@ -1,0 +1,45 @@
+const YAxisTitleExample = (props) => {
+  const xyProps = {
+    width: 500, height: 360,
+    domain: {x: [0, 100], y: [0, 100]}
+  };
+
+  return <XYPlot {...xyProps}>
+    <YAxisTitle title="AAAA" alignment="top"  />
+    <YAxisTitle title="BBBB" alignment="middle" />
+    <YAxisTitle title="CCCC" alignment="bottom" />
+
+    <YAxisTitle title="DDDD" alignment="top" rotate={false} />
+    <YAxisTitle title="EEEE" alignment="middle" rotate={false} />
+    <YAxisTitle title="FFFF" alignment="bottom" rotate={false} />
+
+
+    <YAxisTitle title="GGGG" alignment="top" placement="after" />
+    <YAxisTitle title="HHHH" alignment="middle" placement="after" />
+    <YAxisTitle title="IIII" alignment="bottom" placement="after" />
+
+    <YAxisTitle title="JJJJ" alignment="top" placement="after" rotate={false} />
+    <YAxisTitle title="KKKK" alignment="middle" placement="after" rotate={false} />
+    <YAxisTitle title="LLLL" alignment="bottom" placement="after" rotate={false} />
+
+
+    <YAxisTitle title="MMMM" alignment="top" position="right" />
+    <YAxisTitle title="NNNN" alignment="middle" position="right" />
+    <YAxisTitle title="OOOO" alignment="bottom" position="right" />
+
+    <YAxisTitle title="PPPP" alignment="top" position="right" rotate={false} />
+    <YAxisTitle title="QQQQ" alignment="middle" position="right" rotate={false} />
+    <YAxisTitle title="RRRR" alignment="bottom" position="right" rotate={false} />
+
+
+    <YAxisTitle title="SSSS" alignment="top" placement="before" position="right" />
+    <YAxisTitle title="TTTT" alignment="middle" placement="before" position="right" />
+    <YAxisTitle title="UUUU" alignment="bottom" placement="before" position="right" />
+
+    <YAxisTitle title="VVVV" alignment="top" position="right" placement="before" rotate={false} />
+    <YAxisTitle title="WWWW" alignment="middle" position="right" placement="before" rotate={false} />
+    <YAxisTitle title="XXXX" alignment="bottom" position="right" placement="before" rotate={false} />
+  </XYPlot>;
+};
+
+ReactDOM.render(<YAxisTitleExample />, mountNode);

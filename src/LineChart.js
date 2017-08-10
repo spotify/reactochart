@@ -1,22 +1,39 @@
 import React from 'react';
 import _ from 'lodash';
-import d3 from 'd3';
+import {bisector} from 'd3';
 import shallowEqual from './utils/shallowEqual';
+import PropTypes from 'prop-types';
 
 import {makeAccessor} from './utils/Data';
-import {scaleEqual} from './utils/Scale';
 import xyPropsEqual from './utils/xyPropsEqual';
+// import {xyPropsEqualDebug as xyPropsEqual} from './utils/xyPropsEqual';
 
 
 export default class LineChart extends React.Component {
   static propTypes = {
-    // the array of data objects
-    data: React.PropTypes.array.isRequired,
-    // accessor for X & Y coordinates
-    getX: React.PropTypes.any,
-    getY: React.PropTypes.any,
-    // props from XYPlot
-    scale: React.PropTypes.object
+    /**
+     * the array of data objects
+     */
+    data: PropTypes.array.isRequired,
+    /**
+     * data getter for line X coordinates
+     */
+    getX: PropTypes.any,
+    /**
+     * data getter for line Y coordinates
+     */
+    getY: PropTypes.any,
+    /**
+     * inline style object to be applied to the line path
+     */
+    lineStyle: PropTypes.object,
+    /**
+     * d3 scale - provided by XYPlot
+     */
+    scale: PropTypes.object
+  };
+  static defaultProps = {
+    lineStyle: {}
   };
 
   componentWillMount() {
@@ -27,43 +44,26 @@ export default class LineChart extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return !xyPropsEqual(this.props, nextProps);
+    return !xyPropsEqual(this.props, nextProps, ['lineStyle']);
   }
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   // const start = performance.now();
-  //   const deepishProps = ['margin', 'scaleType'];
-  //   const deeperProps = ['domain'];
-  //   const deepProps = deepishProps.concat(deeperProps).concat('scale');
-  //
-  //   const isEqual =
-  //     shallowEqual(_.omit(this.props, deepProps), _.omit(nextProps, deepProps)) &&
-  //     _.every(deepishProps, (key) => shallowEqual(this.props[key], nextProps[key])) &&
-  //     _.every(deeperProps, (key) => _.isEqual(this.props[key], nextProps[key])) &&
-  //     _.every(['x', 'y'], (key) => scaleEqual(this.props.scale[key], nextProps.scale[key]));
-  //
-  //   // console.log('isEqual', isEqual);
-  //   // console.log('took', performance.now() - start);
-  //   return !isEqual;
-  // }
 
   initBisector(props) {
-    this.setState({bisectX: d3.bisector(d => makeAccessor(props.getX)(d)).left});
+    this.setState({bisectX: bisector(d => makeAccessor(props.getX)(d)).left});
   }
 
   getHovered = (x, y) => {
     const closestDataIndex = this.state.bisectX(this.props.data, x);
-    //console.log(closestDataIndex, this.props.data[closestDataIndex]);
     return this.props.data[closestDataIndex];
   };
 
   render() {
-    const {data, scale, getX, getY} = this.props;
+    const {data, scale, getX, getY, lineStyle} = this.props;
     const accessors = {x: makeAccessor(getX), y: makeAccessor(getY)};
     const points = _.map(data, d => [scale.x(accessors.x(d)), scale.y(accessors.y(d))]);
     const pathStr = pointsToPathStr(points);
 
     return <g className={this.props.name}>
-      <path d={pathStr} />
+      <path d={pathStr} style={lineStyle}/>
     </g>;
   }
 }

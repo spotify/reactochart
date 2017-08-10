@@ -3,24 +3,27 @@ import invariant from 'invariant';
 import isUndefined from 'lodash/isUndefined';
 import {hasOneOfTwo} from './util';
 import {hasXYScales} from './utils/Scale';
+import PropTypes from 'prop-types';
 
-// Bar is a low-level component to be used in XYPlot-type charts (namely BarChart)
-// It is specified in terms of a range (min & max) of values on one axis (the bar's long axis)
-// and a single value on the other axis.
-// Passing props `xValue`, `xEndValue` and `yValue` specifies a horizontal bar,
-//   centered on `yValue` and spanning from `xValue` to `xEndValue`;
-// passing props `xValue`, `yValue`, and `yEndValue' specifies a vertical bar.
+/**
+ * Bar is a low-level component to be used in XYPlot-type charts (namely BarChart)
+ * It is specified in terms of a range (min & max) of values on one axis (the bar's long axis)
+ * and a single value on the other axis.
+ * Passing props `xValue`, `xEndValue` and `yValue` specifies a horizontal bar,
+ * centered on `yValue` and spanning from `xValue` to `xEndValue`;
+ * passing props `xValue`, `yValue`, and `yEndValue' specifies a vertical bar.
+ */
 
 export default class Bar extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.shape({x: React.PropTypes.func.isRequired, y: React.PropTypes.func.isRequired}),
-    xValue: React.PropTypes.any,
-    yValue: React.PropTypes.any,
-    xEndValue: React.PropTypes.any,
-    yEndValue: React.PropTypes.any,
-    thickness: React.PropTypes.number,
-    className: React.PropTypes.string,
-    style: React.PropTypes.object
+    scale: PropTypes.shape({x: PropTypes.func.isRequired, y: PropTypes.func.isRequired}),
+    xValue: PropTypes.any,
+    yValue: PropTypes.any,
+    xEndValue: PropTypes.any,
+    yEndValue: PropTypes.any,
+    thickness: PropTypes.number,
+    className: PropTypes.string,
+    style: PropTypes.object
   };
   static defaultProps = {
     xValue: 0,
@@ -32,7 +35,7 @@ export default class Bar extends React.Component {
 
   render() {
     //  x/yValue are values in the *data* domain, not pixel domain
-    const {scale, xValue, xEndValue, yValue, yEndValue, thickness, style} = this.props;
+    const {scale, xValue, xEndValue, yValue, yEndValue, thickness, style, onMouseEnter, onMouseMove, onMouseLeave} = this.props;
     // console.log('bar', this.props);
 
     invariant(hasXYScales(this.props.scale), `Bar.props.scale.x and scale.y must both be valid d3 scales`);
@@ -62,7 +65,7 @@ export default class Bar extends React.Component {
     return <rect {...{
       x, y, width, height,
       className, style,
-      // todo onMouseEnter, onMouseMove, onMouseLeave
+       onMouseEnter, onMouseMove, onMouseLeave
     }} />
   }
 }

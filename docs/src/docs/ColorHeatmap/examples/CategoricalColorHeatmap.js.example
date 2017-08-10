@@ -1,0 +1,48 @@
+const CategoricalColorHeatmapExample = (props) => {
+  // sorry, kinda hacky currently!
+  // working on a better solution... -d
+  const playTypes = ['www', 'open', 'play', 'other'];
+  const platforms = ['desktop', 'mobile', 'webplayer', 'other'];
+
+  const gridData = playTypes.map(function(n, i) {
+    return platforms.map(function(m, j) {
+      return {
+        x: i,
+        xEnd: i + 1,
+        y: j,
+        yEnd: j+1,
+        value: Math.sin(i * j * 0.1)
+      };
+    })
+  });
+  const data = _.flatten(gridData);
+
+  return <div>
+    <XYPlot width={400} height={400}>
+      <ColorHeatmap
+        data={data}
+        getValue="value"
+        getX="x"
+        getXEnd="xEnd"
+        getY="y"
+        getYEnd="yEnd"
+        colors={['rebeccapurple', 'goldenrod']}
+        interpolator={'lab'}
+      />
+      <XAxis
+        showGrid={false}
+        ticks={playTypes.map((t, i) => i + 0.5)}
+        labelFormat={d => playTypes[Math.round(d - 0.5)]}
+      />
+      <YAxis
+        showGrid={false}
+        ticks={platforms.map((t, i) => i + 0.5)}
+        labelFormat={d => platforms[Math.round(d - 0.5)]}
+      />
+      <XGrid tickCount={4} />
+      <YGrid tickCount={4} />
+    </XYPlot>
+  </div>
+};
+
+ReactDOM.render(<CategoricalColorHeatmapExample />, mountNode);

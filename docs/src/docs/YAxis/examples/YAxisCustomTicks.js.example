@@ -1,0 +1,11 @@
+const YAxisCustomTicksExample = (props) => {
+  const size = {width: 150, height: 300};
+
+  return <div>
+      <XYPlot domain={{x: [-20, 20], y: [-20, 20]}} {...size}>
+        <YAxis title="Custom Ticks" ticks={[-12, -5, -2, 0, 2, 5, 12]}/>
+      </XYPlot>
+  </div>
+};
+
+ReactDOM.render(<YAxisCustomTicksExample />, mountNode);

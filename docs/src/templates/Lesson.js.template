@@ -1,0 +1,25 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Lesson from '../../Lesson';
+import ExampleSection from '../../ExampleSection';
+
+const examples = [
+  {
+    id: "basic",
+    label: "${name} Example",
+    codeText: require('raw-loader!./examples/${componentName}.js.example'),
+  },
+];
+
+export default class ${componentName}Lesson extends React.Component {
+  render() {
+    return <Lesson name="${name}" componentName="${componentName}">
+
+      {/* ${name} lesson goes here. intersperse with examples or leave examples loop below */}
+
+      {examples.map(example => {
+        return <ExampleSection {...example} key={example.id} />;
+      })}
+    </Lesson>;
+  }
+}

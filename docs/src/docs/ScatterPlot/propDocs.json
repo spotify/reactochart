@@ -1,0 +1,192 @@
+{
+  "description": "",
+  "methods": [
+    {
+      "name": "onMouseEnterPoint",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "e",
+          "type": null
+        },
+        {
+          "name": "d",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "onMouseMovePoint",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "e",
+          "type": null
+        },
+        {
+          "name": "d",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "onMouseLeavePoint",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "e",
+          "type": null
+        },
+        {
+          "name": "d",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "renderPoint",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "d",
+          "type": null
+        },
+        {
+          "name": "i",
+          "type": null
+        }
+      ],
+      "returns": null
+    }
+  ],
+  "props": {
+    "data": {
+      "type": {
+        "name": "array"
+      },
+      "required": true,
+      "description": ""
+    },
+    "getX": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "getY": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "getClass": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "scaleType": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "scale": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "pointRadius": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "3",
+        "computed": false
+      }
+    },
+    "pointSymbol": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "node"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "<circle />",
+        "computed": false
+      }
+    },
+    "pointOffset": {
+      "type": {
+        "name": "arrayOf",
+        "value": {
+          "name": "number"
+        }
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "[0,0]",
+        "computed": false
+      }
+    },
+    "pointStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "onMouseEnterPoint": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseMovePoint": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseLeavePoint": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    }
+  }
+}

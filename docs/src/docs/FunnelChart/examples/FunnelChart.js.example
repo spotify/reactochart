@@ -1,0 +1,34 @@
+const FunnelChartExample = (props) => {
+  const funnelData = [
+    {observation: 1, value: 100},
+    {observation: 2, value: 85},
+    {observation: 3, value: 42},
+    {observation: 4, value: 37},
+    {observation: 5, value: 12}
+  ];
+
+  return <div>
+    <XYPlot width={500} height={500}>
+      <XAxis />
+      <YAxis />
+      <FunnelChart
+        data={funnelData}
+        getX="observation"
+        getY="value"
+      />
+    </XYPlot>
+
+    <XYPlot width={500} height={500} invertScale={{y: true}}>
+      <XAxis />
+      <YAxis />
+      <FunnelChart
+        horizontal
+        data={funnelData}
+        getX="value"
+        getY="observation"
+      />
+    </XYPlot>
+  </div>
+};
+
+ReactDOM.render(<FunnelChartExample />, mountNode);

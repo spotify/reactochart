@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 import {getTickDomain} from './utils/Scale';
 import {sumMargins} from './utils/Margin';
@@ -14,40 +15,44 @@ import YAxisTitle from './YAxisTitle';
 
 export default class YAxis extends React.Component {
   static propTypes = {
-    scale: React.PropTypes.shape({y: React.PropTypes.func.isRequired}),
+    scale: PropTypes.shape({y: PropTypes.func.isRequired}),
 
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    position: React.PropTypes.string,
-    placement: React.PropTypes.string,
-    nice: React.PropTypes.bool,
-    ticks: React.PropTypes.array,
-    tickCount: React.PropTypes.number,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    position: PropTypes.string,
+    placement: PropTypes.string,
+    nice: PropTypes.bool,
+    ticks: PropTypes.array,
+    tickCount: PropTypes.number,
 
-    showTitle: React.PropTypes.bool,
-    showLabels: React.PropTypes.bool,
-    showTicks: React.PropTypes.bool,
-    showGrid: React.PropTypes.bool,
+    showTitle: PropTypes.bool,
+    showLabels: PropTypes.bool,
+    showTicks: PropTypes.bool,
+    showGrid: PropTypes.bool,
 
-    title: React.PropTypes.string,
-    titleDistance: React.PropTypes.number,
-    titleAlign: React.PropTypes.string,
-    titleRotate: React.PropTypes.bool,
-    titleStyle: React.PropTypes.object,
+    title: PropTypes.string,
+    titleDistance: PropTypes.number,
+    titleAlign: PropTypes.string,
+    titleRotate: PropTypes.bool,
+    titleStyle: PropTypes.object,
 
-    labelDistance: React.PropTypes.number,
-    labelClassName: React.PropTypes.string,
-    labelStyle: React.PropTypes.object,
-    labelFormat: React.PropTypes.object,
-    labelFormats: React.PropTypes.array,
-    labels: React.PropTypes.array,
+    labelDistance: PropTypes.number,
+    labelClassName: PropTypes.string,
+    labelStyle: PropTypes.object,
+    labelFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    labelFormats: PropTypes.array,
+    labels: PropTypes.array,
 
-    tickLength: React.PropTypes.number,
-    tickClassName: React.PropTypes.string,
-    tickStyle: React.PropTypes.object,
+    tickLength: PropTypes.number,
+    tickClassName: PropTypes.string,
+    tickStyle: PropTypes.object,
 
-    gridLineClassName: React.PropTypes.string,
-    gridLineStyle: React.PropTypes.object
+    gridLineClassName: PropTypes.string,
+    gridLineStyle: PropTypes.object,
+
+    onMouseEnterLabel: PropTypes.func,
+    onMouseMoveLabel: PropTypes.func,
+    onMouseLeaveLabel: PropTypes.func
   };
 
   static defaultProps = {
@@ -61,7 +66,8 @@ export default class YAxis extends React.Component {
     showGrid: true,
     tickLength: 5,
     labelDistance: 3,
-    titleDistance: 5
+    titleDistance: 5,
+    spacing: {top: 0, bottom: 0, left: 0, right: 0}
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -93,7 +99,7 @@ export default class YAxis extends React.Component {
 
   render() {
     const {
-      width, height, position, tickLength, titleDistance, labelDistance,
+      width, height, position, spacing, tickLength, titleDistance, labelDistance,
       showTitle, showLabels, showTicks, showGrid
     } = this.props;
 
@@ -109,7 +115,9 @@ export default class YAxis extends React.Component {
       titleProps.distance = titleDistance + tickLength;
     }
 
-    const axisLineX = (position === 'left') ? 0 : width;
+    const axisLineX = (position === 'left') ? -spacing.left : width + spacing.right;
+    // `height` is height of inner chart *not* including spacing - add spacing to figure out where to draw axis line
+    const axisLineHeight = height + spacing.top + spacing.bottom;
 
     return <g className="chart-axis chart-axis-y">
       {showGrid ? <YGrid {...gridProps} /> : null}
@@ -120,7 +128,11 @@ export default class YAxis extends React.Component {
 
       {showTitle ? <YAxisTitle {...titleProps} /> : null}
 
-      <line className="chart-axis-line chart-axis-line-y" x1={axisLineX} x2={axisLineX} y1={0} y2={height} />
+      <line
+        className="chart-axis-line chart-axis-line-y"
+        x1={axisLineX} x2={axisLineX}
+        y1={-spacing.top} y2={height + spacing.bottom}
+      />
     </g>;
   }
 }

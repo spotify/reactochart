@@ -1,0 +1,91 @@
+{
+  "description": "",
+  "methods": [
+    {
+      "name": "getTickDomain",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    }
+  ],
+  "props": {
+    "scale": {
+      "type": {
+        "name": "shape",
+        "value": {
+          "y": {
+            "name": "func",
+            "required": true
+          }
+        }
+      },
+      "required": false,
+      "description": ""
+    },
+    "width": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "height": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "nice": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "ticks": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": ""
+    },
+    "tickCount": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "lineClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": ""
+    },
+    "lineStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    }
+  }
+}

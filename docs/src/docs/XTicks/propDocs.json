@@ -1,0 +1,120 @@
+{
+  "description": "",
+  "methods": [
+    {
+      "name": "getTickDomain",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "getMargin",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    }
+  ],
+  "props": {
+    "scale": {
+      "type": {
+        "name": "shape",
+        "value": {
+          "x": {
+            "name": "func",
+            "required": true
+          }
+        }
+      },
+      "required": false,
+      "description": ""
+    },
+    "position": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "'bottom'",
+            "computed": false
+          },
+          {
+            "value": "'top'",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "'bottom'",
+        "computed": false
+      }
+    },
+    "placement": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "'above'",
+            "computed": false
+          },
+          {
+            "value": "'below'",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": ""
+    },
+    "tickLength": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "5",
+        "computed": false
+      }
+    },
+    "tickStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "nice": {
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "spacing": {
+      "defaultValue": {
+        "value": "{top: 0, bottom: 0, left: 0, right: 0}",
+        "computed": false
+      }
+    }
+  }
+}

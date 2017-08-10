@@ -1,0 +1,108 @@
+{
+  "description": "",
+  "methods": [
+    {
+      "name": "getDomain",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    }
+  ],
+  "props": {
+    "scale": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.xyObjectOf(PropTypes.func.isRequired)"
+      },
+      "required": false,
+      "description": "d3 scale passed from xyplot"
+    },
+    "data": {
+      "type": {
+        "name": "array"
+      },
+      "required": true,
+      "description": "data array - should be 1D array of all grid values\n(if you have a 2D array, _.flatten it)"
+    },
+    "getValue": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": "data getters"
+    },
+    "getX": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "getXEnd": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "getY": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "getYEnd": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "colorScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "a custom d3 color scale may be passed..."
+    },
+    "colors": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": "...or else one will be constructed from colors, colorStops and interpolator"
+    },
+    "valueDomain": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": ""
+    },
+    "interpolator": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "'lab'",
+        "computed": false
+      }
+    }
+  }
+}

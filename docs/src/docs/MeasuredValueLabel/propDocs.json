@@ -1,0 +1,40 @@
+{
+  "description": "",
+  "methods": [
+    {
+      "name": "getLabel",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    }
+  ],
+  "props": {
+    "value": {
+      "type": {
+        "name": "any"
+      },
+      "required": false,
+      "description": ""
+    },
+    "format": {
+      "defaultValue": {
+        "value": "_.identity",
+        "computed": true
+      }
+    },
+    "style": {
+      "defaultValue": {
+        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: '20px',\n  lineHeight: 1,\n  textAnchor: 'middle'\n}",
+        "computed": false
+      }
+    }
+  }
+}
