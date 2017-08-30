@@ -24,6 +24,7 @@ module.exports = {
       // filename: path.join(__dirname, 'docs/index.html'),
       title: "Reactochart Docs",
       template: "docs/src/index_html.ejs",
+      filename: "../index.html"
     }),
     new CopyPlugin([{from: path.join(__dirname, 'docs/assets'), to: 'assets'}])
   ],
