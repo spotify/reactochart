@@ -14,7 +14,7 @@ module.exports = {
   },
   devServer: {
     port: 9876,
-    // contentBase: path.join(__dirname, "docs"),
+    contentBase: path.join(__dirname, "docs/build"),
   },
   devtool: 'source-map',
   plugins: [
@@ -23,8 +23,7 @@ module.exports = {
       // put built html file in /docs/index.html ('../' because relative to /docs/build)
       // filename: path.join(__dirname, 'docs/index.html'),
       title: "Reactochart Docs",
-      template: "docs/src/index_html.ejs",
-      filename: "../index.html"
+      template: "docs/src/index_html.ejs"
     }),
     new CopyPlugin([{from: path.join(__dirname, 'docs/assets'), to: 'assets'}])
   ],
