@@ -45,12 +45,34 @@ function getMouseOptions(event, {scale, height, width, margin}) {
 
 class XYPlot extends React.Component {
   static propTypes = {
+    /**
+     * (outer) width of the chart (SVG element).
+     */
     width: PropTypes.number,
+    /**
+     * (outer) width of the chart (SVG element).
+     */
     height: PropTypes.number,
-    scale: PropTypes.object,
-    scaleType: PropTypes.object,
+    /**
+     * The X and/or Y domains of the data in {x: [...], y: [...]} format.
+     * For numerical scales, this is represented as [min, max] of the data;
+     * for ordinal/categorical scales it is an array of known values ie. ['a', 'b', 'c'].
+     * Automatically determined from data if not passed.
+     */
     domain: PropTypes.object,
+    /**
+     *
+     */
     margin: PropTypes.object,
+
+    /**
+     * d3 scales for the X and Y axes of the chart, in {x, y} object format.
+     * (optional, normally determined automatically by XYPlot)
+     */
+    scale: PropTypes.object,
+
+    scaleType: PropTypes.object,
+
     spacing: PropTypes.object,
     // todo spacing & padding...
     padding: PropTypes.object,

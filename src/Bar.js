@@ -6,7 +6,7 @@ import {hasXYScales} from './utils/Scale';
 import PropTypes from 'prop-types';
 
 /**
- * Bar is a low-level component to be used in XYPlot-type charts (namely BarChart)
+ * Bar is a low-level component to be used in XYPlot-type charts (namely BarChart).
  * It is specified in terms of a range (min & max) of values on one axis (the bar's long axis)
  * and a single value on the other axis.
  * Passing props `xValue`, `xEndValue` and `yValue` specifies a horizontal bar,
@@ -16,14 +16,54 @@ import PropTypes from 'prop-types';
 
 export default class Bar extends React.Component {
   static propTypes = {
+    /**
+     * D3 scales for the X and Y axes of the chart, in {x, y} object format.
+     */
     scale: PropTypes.shape({x: PropTypes.func.isRequired, y: PropTypes.func.isRequired}),
+    /**
+     * For a vertical bar, xValue represents the X data value on which the bar is centered.
+     * For a horizontal bar, represents the *starting* X data value of the bar, ie. the minimum of the range it spans
+     */
     xValue: PropTypes.any,
+    /**
+     * For a horizontal bar, yValue represents the Y data value on which the bar is centered.
+     * For a vertical bar, represents the *starting* Y data value of the bar, ie. the minimum of the range it spans
+     */
     yValue: PropTypes.any,
+    /**
+     * For a horizontal bar, represents the *ending* X data value of the bar, ie. the maximum of the range it spans.
+     * Should be undefined if the bar is vertical.
+     */
     xEndValue: PropTypes.any,
+    /**
+     * For a vertical bar, represents the *ending* Y data value of the bar, ie. the maximum of the range it spans.
+     * Should be undefined if the bar is horizontal.
+     */
     yEndValue: PropTypes.any,
+    /**
+     * The thickness of the bar, in pixels. (width of vertical bar, or height of horizontal bar)
+     */
     thickness: PropTypes.number,
+    /**
+     * Class name(s) to be included on the bar's <rect> element
+     */
     className: PropTypes.string,
-    style: PropTypes.object
+    /**
+     * Inline style object to be included on the bar's <rect> element
+     */
+    style: PropTypes.object,
+    /**
+     * onMouseMove event handler callback, called when user's mouse moves within the bar.
+     */
+    onMouseMove: PropTypes.func,
+    /**
+     * onMouseEnter event handler callback, called when user's mouse enters the bar.
+     */
+    onMouseEnter: PropTypes.func,
+    /**
+     * onMouseLeave event handler callback, called when user's mouse leaves the bar.
+     */
+    onMouseLeave: PropTypes.func
   };
   static defaultProps = {
     xValue: 0,
@@ -65,7 +105,7 @@ export default class Bar extends React.Component {
     return <rect {...{
       x, y, width, height,
       className, style,
-       onMouseEnter, onMouseMove, onMouseLeave
+      onMouseEnter, onMouseMove, onMouseLeave
     }} />
   }
 }

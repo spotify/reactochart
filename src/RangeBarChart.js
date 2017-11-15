@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import invariant from 'invariant';
 import PropTypes from 'prop-types';
 import * as CustomPropTypes from './utils/CustomPropTypes';

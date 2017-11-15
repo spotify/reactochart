@@ -66,6 +66,8 @@
     "react-router": "^4.1.2",
     "react-router-dom": "^4.1.2",
     "shelljs": "^0.7.8",
+    "sinon": "^4.1.2",
+    "sinon-chai": "^2.14.0",
     "style-loader": "^0.18.2",
     "webpack": "^3.4.1",
     "webpack-dev-server": "^2.7.1"
