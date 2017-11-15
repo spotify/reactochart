@@ -1,5 +1,5 @@
 {
-  "description": "Bar is a low-level component to be used in XYPlot-type charts (namely BarChart)\nIt is specified in terms of a range (min & max) of values on one axis (the bar's long axis)\nand a single value on the other axis.\nPassing props `xValue`, `xEndValue` and `yValue` specifies a horizontal bar,\ncentered on `yValue` and spanning from `xValue` to `xEndValue`;\npassing props `xValue`, `yValue`, and `yEndValue' specifies a vertical bar.",
+  "description": "Bar is a low-level component to be used in XYPlot-type charts (namely BarChart).\nIt is specified in terms of a range (min & max) of values on one axis (the bar's long axis)\nand a single value on the other axis.\nPassing props `xValue`, `xEndValue` and `yValue` specifies a horizontal bar,\ncentered on `yValue` and spanning from `xValue` to `xEndValue`;\npassing props `xValue`, `yValue`, and `yEndValue' specifies a vertical bar.",
   "methods": [],
   "props": {
     "scale": {
@@ -17,14 +17,14 @@
         }
       },
       "required": false,
-      "description": ""
+      "description": "D3 scales for the X and Y axes of the chart, in {x, y} object format."
     },
     "xValue": {
       "type": {
         "name": "any"
       },
       "required": false,
-      "description": "",
+      "description": "For a vertical bar, xValue represents the X data value on which the bar is centered.\nFor a horizontal bar, represents the *starting* X data value of the bar, ie. the minimum of the range it spans",
       "defaultValue": {
         "value": "0",
         "computed": false
@@ -35,7 +35,7 @@
         "name": "any"
       },
       "required": false,
-      "description": "",
+      "description": "For a horizontal bar, yValue represents the Y data value on which the bar is centered.\nFor a vertical bar, represents the *starting* Y data value of the bar, ie. the minimum of the range it spans",
       "defaultValue": {
         "value": "0",
         "computed": false
@@ -46,21 +46,21 @@
         "name": "any"
       },
       "required": false,
-      "description": ""
+      "description": "For a horizontal bar, represents the *ending* X data value of the bar, ie. the maximum of the range it spans.\nShould be undefined if the bar is vertical."
     },
     "yEndValue": {
       "type": {
         "name": "any"
       },
       "required": false,
-      "description": ""
+      "description": "For a vertical bar, represents the *ending* Y data value of the bar, ie. the maximum of the range it spans.\nShould be undefined if the bar is horizontal."
     },
     "thickness": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "The thickness of the bar, in pixels. (width of vertical bar, or height of horizontal bar)",
       "defaultValue": {
         "value": "8",
         "computed": false
@@ -71,7 +71,7 @@
         "name": "string"
       },
       "required": false,
-      "description": "",
+      "description": "Class name(s) to be included on the bar's <rect> element",
       "defaultValue": {
         "value": "''",
         "computed": false
@@ -82,11 +82,32 @@
         "name": "object"
       },
       "required": false,
-      "description": "",
+      "description": "Inline style object to be included on the bar's <rect> element",
       "defaultValue": {
         "value": "{}",
         "computed": false
       }
+    },
+    "onMouseMove": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "onMouseMove event handler callback, called when user's mouse moves within the bar."
+    },
+    "onMouseEnter": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "onMouseEnter event handler callback, called when user's mouse enters the bar."
+    },
+    "onMouseLeave": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "onMouseLeave event handler callback, called when user's mouse leaves the bar."
     }
   }
 }

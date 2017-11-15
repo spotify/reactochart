@@ -1,5 +1,16 @@
 const BarExample = (props) => {
-  return <div>insert example here</div>;
+  return <svg width={100} height={100}>
+    <Bar
+      scale={{
+        x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
+        y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
+      }}
+      xValue={'b'}
+      yValue={0}
+      yEndValue={0.75}
+      thickness={15}
+    />
+  </svg>;
 };
 
 ReactDOM.render(<BarExample />, mountNode);

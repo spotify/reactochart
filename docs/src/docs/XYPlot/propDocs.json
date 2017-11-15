@@ -48,7 +48,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "(outer) width of the chart (SVG element).",
       "defaultValue": {
         "value": "400",
         "computed": false
@@ -59,34 +59,34 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "(outer) width of the chart (SVG element).",
       "defaultValue": {
         "value": "250",
         "computed": false
       }
-    },
-    "scale": {
-      "type": {
-        "name": "object"
-      },
-      "required": false,
-      "description": ""
-    },
-    "scaleType": {
-      "type": {
-        "name": "object"
-      },
-      "required": false,
-      "description": ""
     },
     "domain": {
       "type": {
         "name": "object"
       },
       "required": false,
-      "description": ""
+      "description": "The X and/or Y domains of the data in {x: [...], y: [...]} format.\nFor numerical scales, this is represented as [min, max] of the data;\nfor ordinal/categorical scales it is an array of known values ie. ['a', 'b', 'c'].\nAutomatically determined from data if not passed."
     },
     "margin": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "scale": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "d3 scales for the X and Y axes of the chart, in {x, y} object format.\n(optional, normally determined automatically by XYPlot)"
+    },
+    "scaleType": {
       "type": {
         "name": "object"
       },
