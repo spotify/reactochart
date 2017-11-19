@@ -8,24 +8,83 @@ import {makeAccessor, domainFromRangeData, domainFromData, getDataDomainByAxis} 
 import xyPropsEqual from './utils/xyPropsEqual';
 import Bar from './Bar';
 
+/**
+ *
+ * `RangeBarChart` is a variation on the standard bar chart. Just like a normal bar chart, each bar represents a single
+ * value on the *independent* axis (X axis for vertical bars), and is centered on this value.
+ * However, on the *dependent* axis, each bar represents a *range* (min/max) of values,
+ * rather than always starting at zero.
+ */
+
 export default class RangeBarChart extends React.Component {
   static propTypes = {
+    /**
+     * D3 scales for the X and Y axes of the chart, in {x, y} object format.
+     */
     scale: CustomPropTypes.xyObjectOf(PropTypes.func.isRequired),
+    /**
+     * Array of data to be plotted. One bar will be rendered per datum in this array.
+     */
     data: PropTypes.array,
+    /**
+     * Boolean which determines whether the chart will use horizontal or vertical bars.
+     * When `true`, bars will be horizontal, ie. the X-axis will be treated as the dependent axis.
+     */
     horizontal: PropTypes.bool,
 
+    /**
+     * Data getter for bar X-value, called once per bar (datum).
+     * If `horizontal` is `false`, this gets the *independent* variable value on which the bar is centered.
+     * If `horizontal` is `true`, this gets the start (minimum value) of the *dependent* variable range which is spanned by the bar's length.
+     */
     getX: CustomPropTypes.getter,
+    /**
+     * Data getter for the end (maximum X-value) of the *dependent* variable range which is spanned by the bar's length.
+     * Should only be passed when `horizontal` is `true` (ignored otherwise).
+     */
     getXEnd: CustomPropTypes.getter,
+    /**
+     * Data getter for bar Y-value, called once per bar (datum).
+     * If `horizontal` is `false`, this gets the start (minimum value) of the *dependent* variable range which is spanned by the bar's length.
+     * If `horizontal` is `true`, this gets the *independent* variable value on which the bar is centered.
+     */
     getY: CustomPropTypes.getter,
+    /**
+     * Data getter for the end (maximum Y-value) of the *dependent* variable range which is spanned by the bar's length.
+     * Should only be passed when `horizontal` is `false` (ignored otherwise).
+     */
     getYEnd: CustomPropTypes.getter,
 
+    /**
+     * Thickness (in pixels) of each bar (ie. bar height if `horizontal` is `true`, otherwise bar width).
+     */
     barThickness: PropTypes.number,
-    barClassName: PropTypes.string,
+    /**
+     * Inline style object to be applied to each bar.
+     */
     barStyle: PropTypes.object,
+    /**
+     * Class attribute to be applied to each bar.
+     */
+    barClassName: PropTypes.string,
+    /**
+     * Data getter for class attribute to be applied to each bar. Whereas `className` passes the same class to all
+     * bars, this is a function called once per bar, which gets the bar's datum as its first argument,
+     * so that each bar may determine its own className.
+     */
     getClass: CustomPropTypes.getter,
 
-    onMouseEnterBar: PropTypes.func,
+    /**
+     * `mousemove` event handler callback, called when user's mouse moves within a bar.
+     */
     onMouseMoveBar: PropTypes.func,
+    /**
+     * `mouseenter` event handler callback, called when user's mouse enters a bar.
+     */
+    onMouseEnterBar: PropTypes.func,
+    /**
+     * `mouseleave` event handler callback, called when user's mouse leaves a bar.
+     */
     onMouseLeaveBar: PropTypes.func
   };
   static defaultProps = {

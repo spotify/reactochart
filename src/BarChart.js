@@ -36,19 +36,52 @@ function makeRangeBarChartProps(barChartProps) {
 
 export default class BarChart extends React.Component {
   static propTypes = {
+    /**
+     * D3 scales for the X and Y axes of the chart, in {x, y} object format.
+     */
     scale: CustomPropTypes.xyObjectOf(PropTypes.func.isRequired),
+    /**
+     * Array of data to be plotted. One bar will be rendered per datum in the array.
+     */
     data: PropTypes.array,
     getX: CustomPropTypes.getter,
     getY: CustomPropTypes.getter,
+    /**
+     * Boolean which determines whether the chart will use horizontal or vertical bars.
+     * When `true`, bars will be horizontal, ie. the X-axis will be treated as the dependent axis.
+     */
     horizontal: PropTypes.bool,
 
+    /**
+     * Thickness (in pixels) of each bar (ie. bar height if `horizontal` is `true`, otherwise bar width).
+     */
     barThickness: PropTypes.number,
-    barClassName: PropTypes.string,
+    /**
+     * Inline style object to be applied to each bar.
+     */
     barStyle: PropTypes.object,
+    /**
+     * Class attribute to be applied to each bar.
+     */
+    barClassName: PropTypes.string,
+    /**
+     * Data getter for class attribute to be applied to each bar. Whereas `className` passes the same class to all
+     * bars, this is a function called once per bar, which gets the bar's datum as its first argument,
+     * so that each bar may determine its own className.
+     */
     getClass: CustomPropTypes.getter,
-    
-    onMouseEnterBar: PropTypes.func,
+
+    /**
+     * `mousemove` event handler callback, called when user's mouse moves within a bar.
+     */
     onMouseMoveBar: PropTypes.func,
+    /**
+     * `mouseenter` event handler callback, called when user's mouse enters a bar.
+     */
+    onMouseEnterBar: PropTypes.func,
+    /**
+     * `mouseleave` event handler callback, called when user's mouse leaves a bar.
+     */
     onMouseLeaveBar: PropTypes.func
   };
   static defaultProps = {
