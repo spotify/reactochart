@@ -61,44 +61,44 @@
         "computed": false
       }
     },
-    "getX": {
+    "x": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Data getter for bar X-value, called once per bar (datum).\nIf `horizontal` is `false`, this gets the *independent* variable value on which the bar is centered.\nIf `horizontal` is `true`, this gets the start (minimum value) of the *dependent* variable range which is spanned by the bar's length."
+      "description": "Accessor function for bar X values, called once per bar (datum), or a single value to be used for all bars.\nIf `horizontal` is `false`, this gets the *independent* variable value on which the bar is centered.\nIf `horizontal` is `true`, this gets the start (minimum value) of the *dependent* variable range which is spanned by the bar's length."
     },
-    "getXEnd": {
+    "xEnd": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Data getter for the end (maximum X-value) of the *dependent* variable range which is spanned by the bar's length.\nShould only be passed when `horizontal` is `true` (ignored otherwise)."
+      "description": "Accessor function for the end (maximum X values) of the *dependent* variable range which is spanned by the bar's length,\nor a single value to be used for all bars.\nShould only be passed when `horizontal` is `true` (ignored otherwise)."
     },
-    "getY": {
+    "y": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Data getter for bar Y-value, called once per bar (datum).\nIf `horizontal` is `false`, this gets the start (minimum value) of the *dependent* variable range which is spanned by the bar's length.\nIf `horizontal` is `true`, this gets the *independent* variable value on which the bar is centered."
+      "description": "Accessor function for bar Y values, called once per bar (datum), or a single value to be used for all bars.\nIf `horizontal` is `false`, this gets the start (minimum value) of the *dependent* variable range which is spanned by the bar's length.\nIf `horizontal` is `true`, this gets the *independent* variable value on which the bar is centered."
     },
-    "getYEnd": {
+    "yEnd": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Data getter for the end (maximum Y-value) of the *dependent* variable range which is spanned by the bar's length.\nShould only be passed when `horizontal` is `false` (ignored otherwise)."
+      "description": "Accessor function for the end (maximum Y-value) of the *dependent* variable range which is spanned by the bar's length,\nor a single value to be used for all bars.\nShould only be passed when `horizontal` is `false` (ignored otherwise)."
     },
     "barThickness": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": "Thickness (in pixels) of each bar (ie. bar height if `horizontal` is `true`, otherwise bar width).",
+      "description": "Thickness (in pixels) of each bar (ie. bar height if `horizontal` is `true`, otherwise bar width),",
       "defaultValue": {
         "value": "8",
         "computed": false
@@ -106,10 +106,18 @@
     },
     "barStyle": {
       "type": {
-        "name": "object"
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
       },
       "required": false,
-      "description": "Inline style object to be applied to each bar.",
+      "description": "Inline style object to be applied to each bar,\nor accessor function which returns a style object;",
       "defaultValue": {
         "value": "{}",
         "computed": false
@@ -117,22 +125,22 @@
     },
     "barClassName": {
       "type": {
-        "name": "string"
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
       },
       "required": false,
-      "description": "Class attribute to be applied to each bar.",
+      "description": "Class attribute to be applied to each bar.\nor accessor function which returns a class;",
       "defaultValue": {
         "value": "''",
         "computed": false
       }
-    },
-    "getClass": {
-      "type": {
-        "name": "custom",
-        "raw": "CustomPropTypes.getter"
-      },
-      "required": false,
-      "description": "Data getter for class attribute to be applied to each bar. Whereas `className` passes the same class to all\nbars, this is a function called once per bar, which gets the bar's datum as its first argument,\nso that each bar may determine its own className."
     },
     "onMouseMoveBar": {
       "type": {

@@ -12,15 +12,14 @@ import xyPropsEqual from './utils/xyPropsEqual';
 function makeRangeBarChartProps(barChartProps) {
   // this component is a simple wrapper around RangeBarChart,
   // passing accessors to make range bars which span from zero to the data value
-  const {horizontal, getX, getY} = barChartProps;
-  const getZero = _.constant(0);
+  const {horizontal, x, y} = barChartProps;
 
   return {
     ...barChartProps,
-    getX: horizontal ? getZero : getX,
-    getY: horizontal ? getY : getZero,
-    getXEnd: horizontal ? getX : undefined,
-    getYEnd: horizontal ? undefined : getY
+    x: horizontal ? 0 : x,
+    y: horizontal ? y : 0,
+    xEnd: horizontal ? x : undefined,
+    yEnd: horizontal ? undefined : y
   };
 }
 
@@ -44,8 +43,9 @@ export default class BarChart extends React.Component {
      * Array of data to be plotted. One bar will be rendered per datum in the array.
      */
     data: PropTypes.array,
-    getX: CustomPropTypes.getter,
-    getY: CustomPropTypes.getter,
+
+    x: CustomPropTypes.valueOrAccessor,
+    y: CustomPropTypes.valueOrAccessor,
     /**
      * Boolean which determines whether the chart will use horizontal or vertical bars.
      * When `true`, bars will be horizontal, ie. the X-axis will be treated as the dependent axis.
@@ -106,6 +106,7 @@ export default class BarChart extends React.Component {
   }
 
   render() {
+    // todo: throw an error if dependent axis is not a number axis
     invariant(hasXYScales(this.props.scale), `BarChart.props.scale.x and scale.y must both be valid d3 scales`);
 
     const rangeBarChartProps = makeRangeBarChartProps(this.props);

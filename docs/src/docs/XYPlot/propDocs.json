@@ -72,9 +72,51 @@
       "required": false,
       "description": "The X and/or Y domains of the data in {x: [...], y: [...]} format.\nFor numerical scales, this is represented as [min, max] of the data;\nfor ordinal/categorical scales it is an array of known values ie. ['a', 'b', 'c'].\nAutomatically determined from data if not passed."
     },
+    "xDomain": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": ""
+    },
+    "yDomain": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": ""
+    },
     "margin": {
       "type": {
         "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "marginTop": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "marginBottom": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "marginLeft": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "marginRight": {
+      "type": {
+        "name": "number"
       },
       "required": false,
       "description": ""
@@ -96,6 +138,34 @@
     "spacing": {
       "type": {
         "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "paddingTop": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "paddingBottom": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "paddingLeft": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "paddingRight": {
+      "type": {
+        "name": "number"
       },
       "required": false,
       "description": ""

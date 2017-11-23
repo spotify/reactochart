@@ -26,6 +26,24 @@ export function makeAccessor(key) {
 }
 
 /**
+ * `makeAccessor2` creates a constant accessor function if passed a value,
+ * if passed a function, just returns it
+ */
+export function makeAccessor2(valueOrAccessor) {
+  if(_.isFunction(valueOrAccessor)) return valueOrAccessor;
+  return () => valueOrAccessor;
+}
+
+/**
+ * `getValue` takes as its first argument a value or an accessor function.
+ * If it's a value (ie not a function), it is returned.
+ * If a function, returns the result of calling function with remaining arguments
+ */
+export function getValue(accessor, ...args) {
+  return _.isFunction(accessor) ? accessor(...args) : accessor;
+}
+
+/**
  * `datasetsFromPropsOrDescendants` expects a `props` object which may have `children`.
  * if `props` has `data` or `datasets`, returns it; otherwise recursively searches props.children
  * for components have `data` or `datasets` and combines them into one `datasets` array.

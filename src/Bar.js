@@ -9,9 +9,9 @@ import PropTypes from 'prop-types';
  * Bar is a low-level component to be used in XYPlot-type charts (namely BarChart).
  * It is specified in terms of a range (min & max) of values on one axis (the bar's long axis)
  * and a single value on the other axis.
- * Passing props `xValue`, `xEndValue` and `yValue` specifies a horizontal bar,
- * centered on `yValue` and spanning from `xValue` to `xEndValue`;
- * passing props `xValue`, `yValue`, and `yEndValue' specifies a vertical bar.
+ * Passing props `x`, `xEnd` and `y` specifies a horizontal bar,
+ * centered on `y` and spanning from `x` to `xEnd`;
+ * passing props `x`, `y`, and `yEnd' specifies a vertical bar.
  */
 
 export default class Bar extends React.Component {
@@ -20,26 +20,28 @@ export default class Bar extends React.Component {
      * D3 scales for the X and Y axes of the chart, in {x, y} object format.
      */
     scale: PropTypes.shape({x: PropTypes.func.isRequired, y: PropTypes.func.isRequired}),
+
     /**
-     * For a vertical bar, xValue represents the X data value on which the bar is centered.
-     * For a horizontal bar, represents the *starting* X data value of the bar, ie. the minimum of the range it spans
+     * For a vertical bar, `x` represents the X data value on which the bar is centered.
+     * For a horizontal bar, represents the *starting* X value of the bar, ie. the minimum of the range it spans
      */
-    xValue: PropTypes.any,
+    x: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)]),
     /**
-     * For a horizontal bar, yValue represents the Y data value on which the bar is centered.
-     * For a vertical bar, represents the *starting* Y data value of the bar, ie. the minimum of the range it spans
+     * For a horizontal bar, `y` represents the Y data value on which the bar is centered.
+     * For a vertical bar, represents the *starting* Y value of the bar, ie. the minimum of the range it spans
      */
-    yValue: PropTypes.any,
+    y: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)]),
     /**
-     * For a horizontal bar, represents the *ending* X data value of the bar, ie. the maximum of the range it spans.
+     * For a horizontal bar, `xEnd` represents the *ending* X data value of the bar, ie. the maximum of the range it spans.
      * Should be undefined if the bar is vertical.
      */
-    xEndValue: PropTypes.any,
+    xEnd: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)]),
     /**
-     * For a vertical bar, represents the *ending* Y data value of the bar, ie. the maximum of the range it spans.
+     * For a vertical bar, `yEnd` represents the *ending* Y data value of the bar, ie. the maximum of the range it spans.
      * Should be undefined if the bar is horizontal.
      */
-    yEndValue: PropTypes.any,
+    yEnd: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)]),
+
     /**
      * The thickness of the bar, in pixels. (width of vertical bar, or height of horizontal bar)
      */
@@ -66,45 +68,44 @@ export default class Bar extends React.Component {
     onMouseLeave: PropTypes.func
   };
   static defaultProps = {
-    xValue: 0,
-    yValue: 0,
+    x: 0,
+    y: 0,
     thickness: 8,
     className: '',
     style: {}
   };
 
   render() {
-    //  x/yValue are values in the *data* domain, not pixel domain
-    const {scale, xValue, xEndValue, yValue, yEndValue, thickness, style, onMouseEnter, onMouseMove, onMouseLeave} = this.props;
-    // console.log('bar', this.props);
+    //  x/y are values in the *data* domain, not pixel domain
+    const {scale, x, xEnd, y, yEnd, thickness, style, onMouseEnter, onMouseMove, onMouseLeave} = this.props;
 
     invariant(hasXYScales(this.props.scale), `Bar.props.scale.x and scale.y must both be valid d3 scales`);
-    invariant(hasOneOfTwo(xEndValue, yEndValue), `Bar expects an xEnd *or* yEnd prop, but not both.`);
+    invariant(hasOneOfTwo(xEnd, yEnd), `Bar expects an xEnd *or* yEnd prop, but not both.`);
 
-    const orientation = isUndefined(xEndValue) ? 'vertical' : 'horizontal';
+    const orientation = isUndefined(xEnd) ? 'vertical' : 'horizontal';
     const className = `chart-bar chart-bar-${orientation} ${this.props.className || ''}`;
 
-    let x, y, width, height;
+    let rectX, rectY, width, height;
     if(orientation === 'horizontal') {
-      y = scale.y(yValue) - (thickness / 2);
-      const x0 = scale.x(xValue);
-      const x1 = scale.x(xEndValue);
-      x = Math.min(x0, x1);
+      rectY = scale.y(y) - (thickness / 2);
+      const x0 = scale.x(x);
+      const x1 = scale.x(xEnd);
+      rectX = Math.min(x0, x1);
       width = Math.abs(x1 - x0);
       height = thickness;
 
     } else { // vertical
-      x = scale.x(xValue) - (thickness / 2);
-      const y0 = scale.y(yValue);
-      const y1 = scale.y(yEndValue);
-      y = Math.min(y0, y1);
+      rectX = scale.x(x) - (thickness / 2);
+      const y0 = scale.y(y);
+      const y1 = scale.y(yEnd);
+      rectY = Math.min(y0, y1);
       height = Math.abs(y1 - y0);
       width = thickness;
     }
 
     return <rect {...{
-      x, y, width, height,
-      className, style,
+      x: rectX, y: rectY,
+      width, height, className, style,
       onMouseEnter, onMouseMove, onMouseLeave
     }} />
   }

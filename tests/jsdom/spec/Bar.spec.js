@@ -25,9 +25,9 @@ describe('Bar', () => {
           x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
           y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
         }}
-        xValue={'b'}
-        yValue={0.25}
-        yEndValue={0.75}
+        x={'b'}
+        y={0.25}
+        yEnd={0.75}
         thickness={20}
       />
     );
@@ -51,9 +51,9 @@ describe('Bar', () => {
           x: d3.scaleLinear().domain([0, 1]).range([0, 100]),
           y: d3.scalePoint().domain(['a', 'b', 'c']).range([100, 0]),
         }}
-        xValue={.1}
-        xEndValue={.7}
-        yValue={'b'}
+        x={.1}
+        xEnd={.7}
+        y={'b'}
         thickness={20}
       />
     );
@@ -76,9 +76,9 @@ describe('Bar', () => {
         x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
         y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
       },
-      xValue: 'a',
-      yValue: 0,
-      yEndValue: 1,
+      x: 'a',
+      y: 0,
+      yEnd: 1,
       thickness: 10
     };
 
@@ -95,9 +95,9 @@ describe('Bar', () => {
         x: d3.scaleLinear().domain([0, 1]).range([0, 100]),
         y: d3.scalePoint().domain(['a', 'b', 'c']).range([100, 0]),
       },
-      xValue: .2,
-      xEndValue: .9,
-      yValue: 'c',
+      x: .2,
+      xEnd: .9,
+      y: 'c',
       thickness: 12
     };
 
@@ -116,9 +116,9 @@ describe('Bar', () => {
         x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
         y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
       },
-      xValue: 'a',
-      yValue: 0,
-      yEndValue: 1,
+      x: 'a',
+      y: 0,
+      yEnd: 1,
       className: 'foo-bar-test-class',
       style: {fill: 'thistle'}
     };
@@ -136,9 +136,9 @@ describe('Bar', () => {
         x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
         y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
       },
-      xValue: 'a',
-      yValue: 0,
-      yEndValue: 1,
+      x: 'a',
+      y: 0,
+      yEnd: 1,
       onMouseMove: sinon.spy(),
       onMouseEnter: sinon.spy(),
       onMouseLeave: sinon.spy()
@@ -161,7 +161,7 @@ describe('Bar', () => {
   });
 
   it("throws an error if x/y scale(s) are missing or invalid", () => {
-    const barProps = {xValue: 'a', yValue: 0, yEndValue: 1};
+    const barProps = {x: 'a', y: 0, yEnd: 1};
     const xScale = d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]);
     const yScale = d3.scaleLinear().domain([0, 1]).range([100, 0]);
 
@@ -181,22 +181,22 @@ describe('Bar', () => {
     }).not.to.throw(Error);
   });
 
-  it("throws an error if exactly ONE of xEndValue OR yEndValue are not provided", () => {
+  it("throws an error if exactly ONE of xEnd OR yEnd are not provided", () => {
     const barProps = {
       scale: {
         x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
         y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
       },
-      xValue: 'a',
-      yValue: 0
+      x: 'a',
+      y: 0
     };
 
-    // throw if neither xEndValue or yEndValue passed
+    // throw if neither xEnd or yEnd passed
     expect(() => { shallow(<Bar {...barProps}/>); }).to.throw(Error);
-    // throw if both xEndValue and yEndValue passed
-    expect(() => { shallow(<Bar {...{...barProps, xEndValue: 'b', yEndValue: 1}}/>); }).to.throw(Error);
+    // throw if both xEnd and yEnd passed
+    expect(() => { shallow(<Bar {...{...barProps, xEnd: 'b', yEnd: 1}}/>); }).to.throw(Error);
     // OK if one or other is passed
-    expect(() => { shallow(<Bar {...{...barProps, xEndValue: 'b'}}/>); }).not.to.throw(Error);
-    expect(() => { shallow(<Bar {...{...barProps, yEndValue: 1}}/>); }).not.to.throw(Error);
+    expect(() => { shallow(<Bar {...{...barProps, xEnd: 'b'}}/>); }).not.to.throw(Error);
+    expect(() => { shallow(<Bar {...{...barProps, yEnd: 1}}/>); }).not.to.throw(Error);
   })
 });

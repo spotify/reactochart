@@ -4,7 +4,7 @@ import invariant from 'invariant';
 import PropTypes from 'prop-types';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {hasXYScales, dataTypeFromScaleType} from './utils/Scale';
-import {makeAccessor, domainFromRangeData, domainFromData, getDataDomainByAxis} from './utils/Data';
+import {makeAccessor2, getValue, domainFromRangeData, domainFromData, getDataDomainByAxis} from './utils/Data';
 import xyPropsEqual from './utils/xyPropsEqual';
 import Bar from './Bar';
 
@@ -33,46 +33,46 @@ export default class RangeBarChart extends React.Component {
     horizontal: PropTypes.bool,
 
     /**
-     * Data getter for bar X-value, called once per bar (datum).
+     * Accessor function for bar X values, called once per bar (datum), or a single value to be used for all bars.
      * If `horizontal` is `false`, this gets the *independent* variable value on which the bar is centered.
      * If `horizontal` is `true`, this gets the start (minimum value) of the *dependent* variable range which is spanned by the bar's length.
      */
-    getX: CustomPropTypes.getter,
+    x: CustomPropTypes.valueOrAccessor,
     /**
-     * Data getter for the end (maximum X-value) of the *dependent* variable range which is spanned by the bar's length.
+     * Accessor function for the end (maximum X values) of the *dependent* variable range which is spanned by the bar's length,
+     * or a single value to be used for all bars.
      * Should only be passed when `horizontal` is `true` (ignored otherwise).
      */
-    getXEnd: CustomPropTypes.getter,
+    xEnd: CustomPropTypes.valueOrAccessor,
     /**
-     * Data getter for bar Y-value, called once per bar (datum).
+     * Accessor function for bar Y values, called once per bar (datum), or a single value to be used for all bars.
      * If `horizontal` is `false`, this gets the start (minimum value) of the *dependent* variable range which is spanned by the bar's length.
      * If `horizontal` is `true`, this gets the *independent* variable value on which the bar is centered.
      */
-    getY: CustomPropTypes.getter,
+    y: CustomPropTypes.valueOrAccessor,
     /**
-     * Data getter for the end (maximum Y-value) of the *dependent* variable range which is spanned by the bar's length.
+     * Accessor function for the end (maximum Y-value) of the *dependent* variable range which is spanned by the bar's length,
+     * or a single value to be used for all bars.
      * Should only be passed when `horizontal` is `false` (ignored otherwise).
      */
-    getYEnd: CustomPropTypes.getter,
+    yEnd: CustomPropTypes.valueOrAccessor,
 
     /**
-     * Thickness (in pixels) of each bar (ie. bar height if `horizontal` is `true`, otherwise bar width).
+     * Thickness (in pixels) of each bar (ie. bar height if `horizontal` is `true`, otherwise bar width),
      */
     barThickness: PropTypes.number,
+    // barThickness: PropTypes.oneOfType([PropTypes.number, PropTypes.func]), // todo
+
     /**
-     * Inline style object to be applied to each bar.
+     * Inline style object to be applied to each bar,
+     * or accessor function which returns a style object;
      */
-    barStyle: PropTypes.object,
+    barStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /**
      * Class attribute to be applied to each bar.
+     * or accessor function which returns a class;
      */
-    barClassName: PropTypes.string,
-    /**
-     * Data getter for class attribute to be applied to each bar. Whereas `className` passes the same class to all
-     * bars, this is a function called once per bar, which gets the bar's datum as its first argument,
-     * so that each bar may determine its own className.
-     */
-    getClass: CustomPropTypes.getter,
+    barClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 
     /**
      * `mousemove` event handler callback, called when user's mouse moves within a bar.
@@ -96,12 +96,12 @@ export default class RangeBarChart extends React.Component {
   };
 
   static getDomain(props) {
-    const {scaleType, horizontal, data, getX, getXEnd, getY, getYEnd} = props;
+    const {scaleType, horizontal, data, x, xEnd, y, yEnd} = props;
 
     // only have to specify range axis domain, other axis uses default domainFromData
     const rangeAxis = horizontal ? 'x' : 'y';
-    const rangeStartAccessor = horizontal ? makeAccessor(getX) : makeAccessor(getY);
-    const rangeEndAccessor = horizontal ? makeAccessor(getXEnd) : makeAccessor(getYEnd);
+    const rangeStartAccessor = horizontal ? makeAccessor2(x) : makeAccessor2(y);
+    const rangeEndAccessor = horizontal ? makeAccessor2(xEnd) : makeAccessor2(yEnd);
     const rangeDataType = dataTypeFromScaleType(scaleType[rangeAxis]);
 
     return {
@@ -132,46 +132,36 @@ export default class RangeBarChart extends React.Component {
   }
 
   render() {
-    const {scale, data, horizontal, getX, getXEnd, getY, getYEnd, barThickness, barClassName, barStyle, getClass} = this.props;
+    const {scale, data, horizontal, x, xEnd, y, yEnd, barThickness, barClassName, barStyle} = this.props;
     invariant(hasXYScales(scale), `RangeBarChart.props.scale.x and scale.y must both be valid d3 scales`);
-    // invariant(hasOneOfTwo(getXEnd, getYEnd), `RangeBarChart expects a getXEnd *or* getYEnd prop, but not both.`);
-
-    const accessors = {x: makeAccessor(getX), y: makeAccessor(getY)};
-    const endAccessors = {x: makeAccessor(getXEnd), y: makeAccessor(getYEnd)};
-    
-
+    // invariant(hasOneOfTwo(xEnd, yEnd), `RangeBarChart expects a xEnd *or* yEnd prop, but not both.`);
 
     return <g>
       {data.map((d, i) => {
-
         const [onMouseEnter, onMouseMove, onMouseLeave] =
           ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(eventName => {
-
             // partially apply this bar's data point as 2nd callback argument
             const callback = _.get(this.props, eventName);
             return _.isFunction(callback) ? _.partial(callback, _, d) : null;
         });
 
         const barProps = {
+          x: getValue(x, d, i),
+          y: getValue(y, d, i),
+          key: `chart-bar-${i}`,
+          onMouseEnter,
+          onMouseMove,
+          onMouseLeave,
           scale,
           thickness: barThickness,
-          className: `chart-bar ${barClassName} ${getClass ? getClass(d) : ''}`,
-          style: barStyle
+          className: `chart-bar ${getValue(barClassName, d, i) || ''}`,
+          style: getValue(barStyle, d, i)
         };
 
-        const thisBarProps = {
-          xValue: accessors.x(d),
-          yValue: accessors.y(d),
-          key: `chart-bar-${i}`,
-          onMouseEnter, 
-          onMouseMove, 
-          onMouseLeave,
-          ...barProps
-        };
-
+        // console.log('xEnd yEnd value', getValue(xEnd, d), getValue(yEnd, d), horizontal);
         return horizontal ?
-          <Bar xEndValue={endAccessors.x(d)} {...thisBarProps} /> :
-          <Bar yEndValue={endAccessors.y(d)} {...thisBarProps} />;
+          <Bar xEnd={getValue(xEnd, d, i)} {...barProps} /> :
+          <Bar yEnd={getValue(yEnd, d, i)} {...barProps} />;
       })}
     </g>;
   }

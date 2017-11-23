@@ -50,18 +50,18 @@
         "computed": false
       }
     },
-    "getX": {
+    "x": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
       "description": ""
     },
-    "getY": {
+    "y": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
       "description": ""

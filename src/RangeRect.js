@@ -1,10 +1,8 @@
 import React from 'react';
 import invariant from 'invariant';
-import isUndefined from 'lodash/isUndefined';
 import PropTypes from 'prop-types';
 import * as CustomPropTypes from './utils/CustomPropTypes';
-import {hasXYScales} from './utils/Scale';
-import {makeAccessor} from './utils/Data';
+import {isValidScale} from './utils/Scale';
 
 /**
  * RangeRect is a low-level component to be used in XYPlot-type charts (namely AreaBarChart).
@@ -15,29 +13,29 @@ import {makeAccessor} from './utils/Data';
 export default class RangeRect extends React.Component {
   static propTypes = {
     /**
-     * D3 scales for the X and Y axes of the chart, in {x, y} object format.
+     * D3 scale for the X (horizontal) axis.
      */
-    scale: PropTypes.shape({x: PropTypes.func.isRequired, y: PropTypes.func.isRequired}),
+    xScale: PropTypes.func.isRequired,
     /**
-     * Array of data to be plotted. One bar will be rendered per datum in the array.
+     * D3 scale for the Y (vertical) axis.
      */
-    datum: PropTypes.any,
+    yScale: PropTypes.func.isRequired,
     /**
-     * Data getter for the starting (min) X-value (left edge, usually) of the rectangle range
+     * Starting (minimum) X value (left edge, usually) of the rectangle range
      */
-    getX: CustomPropTypes.getter,
+    x: PropTypes.oneOfType(CustomPropTypes.datumValueTypes).isRequired,
     /**
-     * Data getter for the ending (max) X-value (right edge, usually) of the rectangle range
+     * Ending (maximum) X value (right edge, usually) of the rectangle range
      */
-    getXEnd: CustomPropTypes.getter,
+    xEnd: PropTypes.oneOfType(CustomPropTypes.datumValueTypes).isRequired,
     /**
-     * Data getter for the starting (min) Y-value (bottom edge, usually) of the rectangle range
+     * Starting (minimum) Y value (bottom edge, usually) of the rectangle range
      */
-    getY: CustomPropTypes.getter,
+    y: PropTypes.oneOfType(CustomPropTypes.datumValueTypes).isRequired,
     /**
-     * Data getter for the ending (max) Y-value (top edge, usually) of the rectangle range
+     * Ending (maximum) Y value (top edge, usually) of the rectangle range
      */
-    getYEnd: CustomPropTypes.getter,
+    yEnd: PropTypes.oneOfType(CustomPropTypes.datumValueTypes).isRequired,
     /**
      * Class attribute to be applied to the rectangle element
      */
@@ -65,22 +63,21 @@ export default class RangeRect extends React.Component {
   };
 
   render() {
-    const {scale, datum, getX, getXEnd, getY, getYEnd, style, onMouseEnter, onMouseMove, onMouseLeave} = this.props;
+    const {xScale, yScale, x, xEnd, y, yEnd, style, onMouseEnter, onMouseMove, onMouseLeave} = this.props;
 
-    invariant(hasXYScales(scale), `RangeRect.props.scale.x and scale.y must both be valid d3 scales`);
-    // todo warn if getX/Y/etc return bad values
+    invariant(isValidScale(xScale), `RangeRect.props.xScale is not a valid d3 scale`);
+    invariant(isValidScale(yScale), `RangeRect.props.yScale is not a valid d3 scale`);
 
     const className = `chart-range-rect ${this.props.className || ''}`;
-    const x0 = scale.x(makeAccessor(getX)(datum));
-    const x1 = scale.x(makeAccessor(getXEnd)(datum));
-    const y0 = scale.y(makeAccessor(getY)(datum));
-    const y1 = scale.y(makeAccessor(getYEnd)(datum));
-    const x = Math.min(x0, x1);
-    const y = Math.min(y0, y1);
+    const x0 = xScale(x);
+    const x1 = xScale(xEnd);
+    const y0 = yScale(y);
+    const y1 = yScale(yEnd);
+    const rectX = Math.min(x0, x1);
+    const rectY = Math.min(y0, y1);
     const width = Math.abs(x1 - x0);
     const height = Math.abs(y1 - y0);
 
-    // todo onMouseEnter, onMouseMove, onMouseLeave
-    return <rect {...{x, y, width, height, className, style, onMouseEnter, onMouseMove, onMouseLeave}} />;
+    return <rect {...{x: rectX, y: rectY, width, height, className, style, onMouseEnter, onMouseMove, onMouseLeave}} />;
   }
 }

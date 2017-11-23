@@ -5,6 +5,8 @@ import invariant from 'invariant';
 
 import {
   makeAccessor,
+  makeAccessor2,
+  getValue,
   domainFromDatasets,
   domainFromData,
   inferDatasetsType,
@@ -38,28 +40,16 @@ const errs = {
 function componentName(Component) {
   return Component.displayName || "Component wrapped by resolveXYScales";
 }
-function hasScaleFor(scalesObj, key) {
-  return _.isObject(scalesObj) && isValidScale(scalesObj[key]);
+
+function isValidScaleType(scaleType) {
+  // todo: check against whitelist?
+  return _.isString(scaleType);
 }
-function hasPaddingFor(paddingObj, key) {
-  return _.isObject(paddingObj) && _.isNumber(paddingObj[key]);
+function areValidScales(scales) {
+  return _.every(scales, isValidScale);
 }
-function hasXYScales(scale) {
-  return _.isObject(scale) && isValidScale(scale.x) && isValidScale(scale.y);
-}
-function hasXYDomains(domain) {
-  return _.isObject(domain) && isValidDomain(domain.x) && isValidDomain(domain.y);
-}
-function hasXYScaleTypes(scaleType) {
-  return _.isObject(scaleType) && _.isString(scaleType.x) && _.isString(scaleType.y);
-}
-function hasAllMargins(margin) {
-  const marginKeys = ['top', 'bottom', 'left', 'right'];
-  return _.isObject(margin) && _.every(marginKeys, k => _.has(margin, k));
-}
-function hasAllSpacing(spacing) {
-  const spacingKeys = ['top', 'bottom', 'left', 'right'];
-  return _.isObject(spacing) && _.every(spacingKeys, k => _.has(spacing, k));
+function areValidScaleTypes(scaleTypes) {
+  return _.every(scaleTypes, isValidScaleType);
 }
 
 function mapOverChildren(children, iteratee, ...iterateeArgs) {
@@ -128,7 +118,8 @@ function omitNullUndefined(obj) {
 export default function resolveXYScales(ComposedComponent) {
   return class extends React.Component {
     static defaultProps = _.defaults(ComposedComponent.defaultProps, {
-      invertScale: {x: false, y: false},
+      invertXScale: false,
+      invertYScale: false
     });
 
     // todo better way for HOC's to pass statics through?
@@ -138,303 +129,351 @@ export default function resolveXYScales(ComposedComponent) {
     static getMargin = ComposedComponent.getMargin;
 
     _resolveScaleType(props, Component) {
-      const propsScaleType = props.scaleType || {};
+      let {xScaleType, yScaleType} = props;
 
-      // short-circuit if all scale types provided
-      if(hasXYScaleTypes(propsScaleType)) return propsScaleType;
+      const isDone = () => areValidScaleTypes([xScaleType, yScaleType]);
 
-      // start with any scale types in props, try to resolve the rest
-      let scaleType = omitNullUndefined(propsScaleType);
+      // short-circuit if both scale types provided
+      if(isDone()) return {xScaleType, yScaleType};
 
       // if Component provides a custom static getScaleType method
       // use it to determine remaining scale types
       if(_.isFunction(Component.getScaleType)) {
-        const componentScaleType = omitNullUndefined(Component.getScaleType(props));
-        scaleType = _.assign(componentScaleType, scaleType);
-        if(hasXYScaleTypes(scaleType)) return scaleType;
+        const componentScaleTypes = omitNullUndefined(Component.getScaleType(props));
+        ({xScaleType, yScaleType} = _.assign(componentScaleTypes, omitNullUndefined({xScaleType, yScaleType})));
+        if(isDone()) return {xScaleType, yScaleType};
       }
 
-      // todo infer scaleType from domain?
       // if component has domain props,
       // infer the data type, & use that to get scale type
-      if(_.isObject(props.domain) && (isValidDomain(props.domain.x) || isValidDomain(props.domain.y))) {
-        // console.log('inferring scale type from domain');
-        const domainScaleType = _.fromPairs(['x', 'y'].map(k => {
-          const domain = props.domain[k];
-          return isValidDomain(domain) ?
-            [k, scaleTypeFromDataType(inferDataTypeFromDomain(domain))] :
-            [k, undefined];
-        }));
-        scaleType = _.assign(domainScaleType, scaleType);
-        if(hasXYScaleTypes(scaleType)) return scaleType;
+      if(!isValidScaleType(xScaleType) && isValidDomain(props.xDomain)) {
+        xScaleType = scaleTypeFromDataType(inferDataTypeFromDomain(props.xDomain));
       }
+      if(!isValidScaleType(yScaleType) && isValidDomain(props.yDomain)) {
+        yScaleType = scaleTypeFromDataType(inferDataTypeFromDomain(props.yDomain));
+      }
+      if(isDone()) return {xScaleType, yScaleType};
 
       // if Component has data or datasets props,
       // infer the data type, & use that to get scale type
       if(_.isArray(props.data) || _.isArray(props.datasets)) {
         const datasets = _.isArray(props.datasets) ? props.datasets : [props.data];
-        const datasetScaleType = _.fromPairs(['x', 'y'].map(k => {
-          // const kAccessor = makeAccessor(_.get(props, `getValue.${k}`));
-          const kAccessor = makeAccessor(_.get(props, `get${k.toUpperCase()}`));
-          const kDataType = inferDatasetsType(datasets, kAccessor);
-          const kScaleType = scaleTypeFromDataType(kDataType);
-          return [k, kScaleType];
-        }));
 
-        scaleType = _.assign(datasetScaleType, scaleType);
-        return scaleType;
+        if(!isValidScaleType(xScaleType)) {
+          xScaleType = scaleTypeFromDataType(inferDatasetsType(datasets, makeAccessor2(props.x)));
+        }
+        if(!isValidScaleType(yScaleType)) {
+          yScaleType = scaleTypeFromDataType(inferDatasetsType(datasets, makeAccessor2(props.y)));
+        }
+        if(isDone()) return {xScaleType, yScaleType};
       }
 
       // if Component has children,
       // recurse through descendants to resolve their scale types the same way
       if(React.Children.count(props.children)) {
-        // console.log('get scaletype from children')
-        let childScaleTypes = mapOverChildren(props.children, this._resolveScaleType.bind(this));
+        let childrenScaleTypes = mapOverChildren(props.children, this._resolveScaleType.bind(this));
 
-        const childScaleType =  _.fromPairs(['x', 'y'].map(k => {
-          // todo warn on multiple scale types, probably not what you want
-          const kScaleTypes = _.compact(_.uniq(_.map(childScaleTypes, k)));
-          const kScaleType = (kScaleTypes.length === 1) ? kScaleTypes[0] : "ordinal";
-          return [k, kScaleType];
-        }));
-
-        scaleType = _.assign(childScaleType, scaleType);
-        return scaleType;
+        if(!isValidScaleType(xScaleType)) {
+          const childXScaleTypes = _.compact(_.uniq(childrenScaleTypes.map(childScaleTypes => childScaleTypes.xScaleType)));
+          if(!childXScaleTypes.length === 1) console.warn("Multiple children with different X scale types found - defaulting to 'ordinal'");
+          xScaleType = (childXScaleTypes.length === 1) ? childXScaleTypes[0] : "ordinal";
+        }
+        if(!isValidScaleType(yScaleType)) {
+          const childYScaleTypes = _.compact(_.uniq(childrenScaleTypes.map(childScaleTypes => childScaleTypes.yScaleType)));
+          if(!childYScaleTypes.length === 1) console.warn("Multiple children with different Y scale types found - defaulting to 'ordinal'");
+          yScaleType = (childYScaleTypes.length === 1) ? childYScaleTypes[0] : "ordinal";
+        }
       }
+
+      if(!isDone()) console.warn(`resolveXYScales was unable to resolve both scale types. xScaleType: ${xScaleType}, yScaleType: ${yScaleType}`);
+
+      return {xScaleType, yScaleType};
     }
 
-    _resolveDomain(props, Component, scaleType) {
-      const propsDomain = props.domain || {};
+    _resolveDomain(props, Component, xScaleType, yScaleType) {
+      let {xDomain, yDomain} = props;
+      const xDataType = dataTypeFromScaleType(xScaleType);
+      const yDataType = dataTypeFromScaleType(yScaleType);
+
+      const isXDone = () => isValidDomain(xDomain, xDataType);
+      const isYDone = () => isValidDomain(yDomain, yDataType);
+      const isDone = () => isXDone() && isYDone();
 
       // short-circuit if all domains provided
-      if(hasXYDomains(propsDomain)) return {x: propsDomain.x, y: propsDomain.y};
+      if(isDone()) return {xDomain, yDomain};
 
-      // start with any domains in props, and try to resolve the rest
-      let domain = omitNullUndefined(propsDomain);
-
-      // if Component provides a custom static getDomain method
-      // use it to determine remaining domains
+      // if Component provides a custom static getScaleType method
+      // use it to determine remaining scale types
       if(_.isFunction(Component.getDomain)) {
-        const componentDomain = omitNullUndefined(Component.getDomain({scaleType, ...props}));
-        domain = _.assign(componentDomain, domain);
-        if(hasXYDomains(domain)) return domain;
+        const {xDomain: componentXDomain, yDomain: componentYDomain} = Component.getDomain({...props, xScaleType, yScaleType});
+
+        if(!isXDone() && componentXDomain && !isValidDomain(componentXDomain, xDataType))
+          console.warn(`Component.getDomain returned an invalid domain for data type '${xDataType}': ${componentXDomain} - ignoring`);
+        if(!isXDone() && isValidDomain(componentXDomain, xDataType)) xDomain = componentXDomain;
+
+        if(!isYDone() && componentYDomain && !isValidDomain(componentYDomain, yDataType))
+          console.warn(`Component.getDomain returned an invalid domain for data type '${yDataType}': ${componentYDomain} - ignoring`);
+        if(!isYDone() && isValidDomain(componentYDomain, yDataType)) yDomain = componentYDomain;
+
+        if(isDone()) return {xDomain, yDomain};
       }
 
       // if Component has data or datasets props,
       // use the default domainFromDatasets function to determine a domain from them
       if(_.isArray(props.data) || _.isArray(props.datasets)) {
         const datasets = _.isArray(props.datasets) ? props.datasets : [props.data];
-        const datasetDomain = _.fromPairs(['x', 'y'].map(k => {
-          // const kAccessor = makeAccessor(_.get(props, `getValue.${k}`));
-          const kAccessor = makeAccessor(_.get(props, `get${k.toUpperCase()}`));
-          const dataType = dataTypeFromScaleType(scaleType[k]);
-          const kDomain = domainFromDatasets(datasets, kAccessor, dataType);
-          return [k, kDomain];
-        }));
-
-        domain = _.assign(datasetDomain, domain);
-        if(hasXYDomains(domain)) return domain;
+        if(!isXDone()) {
+          xDomain = domainFromDatasets(datasets, makeAccessor2(props.x), xDataType);
+        }
+        if(!isYDone()) {
+          yDomain = domainFromDatasets(datasets, makeAccessor2(props.y), yDataType);
+        }
+        if(isDone()) return {xDomain, yDomain};
       }
 
       // if Component has children,
       // recurse through descendants to resolve their domains the same way,
       // and combine them into a single domain, if there are multiple
       if(React.Children.count(props.children)) {
-        let childDomains = mapOverChildren(props.children, this._resolveDomain.bind(this), scaleType);
+        let childrenDomains = mapOverChildren(props.children, this._resolveDomain.bind(this), xScaleType, yScaleType);
 
-        const childDomain =  _.fromPairs(['x', 'y'].map(k => {
-          const kDomain = combineDomains(_.compact(_.map(childDomains, k)), dataTypeFromScaleType(scaleType[k]));
-          return [k, kDomain];
-        }));
-
-        domain = _.assign(childDomain, domain);
-        return domain;
+        if(!isXDone()) {
+          const childXDomains = _.compact(childrenDomains.map(childDomains => childDomains.xDomain));
+          xDomain = combineDomains(childXDomains, xDataType);
+        }
+        if(!isYDone()) {
+          const childYDomains = _.compact(childrenDomains.map(childDomains => childDomains.yDomain));
+          yDomain = combineDomains(childYDomains, yDataType);
+        }
       }
+
+      if(!isDone()) console.warn(`resolveXYScales was unable to resolve both domains. xDomain: ${xDomain}, yDomain: ${yDomain}`);
+
+      return {xDomain, yDomain};
     }
 
-    _resolveTickDomain(props, Component, scaleType, domain, scale) {
+    _resolveTickDomain(props, Component, {xScaleType, yScaleType, xDomain, yDomain, xScale, yScale}) {
       // todo resolve directly from ticks/tickCount props?
       if(_.isFunction(Component.getTickDomain)) {
-        return omitNullUndefined(Component.getTickDomain({scaleType, domain, scale, ...props}));
+        const componentTickDomains = Component.getTickDomain({xScaleType, yScaleType, xDomain, yDomain, xScale, yScale, ...props});
+        return omitNullUndefined(componentTickDomains);
       }
 
       if(React.Children.count(props.children)) {
-        let childTickDomains =
-          mapOverChildren(props.children, this._resolveTickDomain.bind(this), scaleType, domain, scale);
+        let childrenTickDomains =
+          mapOverChildren(props.children, this._resolveTickDomain.bind(this), {xScaleType, yScaleType, xDomain, yDomain, xScale, yScale});
 
-        const tickDomain = _.fromPairs(['x', 'y'].map(k => {
-          const kChildTickDomains = _.compact(childTickDomains.map(v => _.get(v, k)));
-          const kTickDomain = kChildTickDomains.length ?
-            combineDomains(kChildTickDomains, dataTypeFromScaleType(scaleType[k])) : undefined;
-          return [k, kTickDomain];
-        }));
-        return omitNullUndefined(tickDomain);
-      }
-    }
+        const childrenXTickDomains = _.compact(childrenTickDomains.map(childTickDomains => childTickDomains.xTickDomain));
+        const xTickDomain = childrenXTickDomains.length ?
+          combineDomains(childrenXTickDomains, dataTypeFromScaleType(xScaleType)) : undefined;
 
-    _resolveLabels(props) {
+        const childrenYTickDomains = _.compact(childrenTickDomains.map(childTickDomains => childTickDomains.yTickDomain));
+        const yTickDomain = childrenYTickDomains.length ?
+          combineDomains(childrenYTickDomains, dataTypeFromScaleType(yScaleType)) : undefined;
 
-    }
-    _resolveSpacing(props, Component, scaleType, domain, scale){
-      const propsSpacing = props.spacing || {};
-
-      // short-circuit if all spacings provided
-      if(hasAllSpacing(propsSpacing)) return propsSpacing;     
-
-      let spacing = omitNullUndefined(propsSpacing);
-
-      if(_.isFunction(Component.getSpacing)) {
-        const componentSpacing = omitNullUndefined(Component.getSpacing({scaleType, domain, scale, ...props}));
-        spacing = _.assign(componentSpacing, spacing);
-        if(hasAllSpacing(spacing)) return spacing;
+        return omitNullUndefined({xTickDomain, yTickDomain});
       }
 
-      // if Component has children,
-      // recurse through descendants to resolve their spacings the same way,
-      // and combine them into a single spacing, if there are multiple
-      if(React.Children.count(props.children)) {
-        let childSpacings = mapOverChildren(props.children, this._resolveSpacing.bind(this), scaleType, domain, scale);
-
-        const childSpacing = combineBorderObjects(childSpacings);
-
-        spacing = _.assign(childSpacing, spacing);
-      }
-      return spacing;
-
+      return {};
     }
-    _resolveMargin(props, Component, scaleType, domain, scale) {
-      const propsMargin = props.margin || {};
+
+    _resolveMargin(props, Component, {xScaleType, yScaleType, xDomain, yDomain, xScale, yScale}) {
+      let {marginTop, marginBottom, marginLeft, marginRight} = props;
+
+      const isDone = () => _.every([marginTop, marginBottom, marginLeft, marginRight], _.isNumber);
 
       // short-circuit if all margins provided
-      if(hasAllMargins(propsMargin)) return propsMargin;
+      if(isDone()) return {marginTop, marginBottom, marginLeft, marginRight};
 
-      // start with any margins in props, and try to resolve the rest
-      let margin = omitNullUndefined(propsMargin);
 
       // if Component provides a custom static getMargin method
       // use it to determine remaining domains
       if(_.isFunction(Component.getMargin)) {
-        const componentMargin = omitNullUndefined(Component.getMargin({scaleType, domain, scale, ...props}));
-        margin = _.assign(componentMargin, margin);
-        if(hasAllMargins(margin)) return margin;
+        const componentMargin = omitNullUndefined(Component.getMargin({...props, xScaleType, yScaleType, xDomain, yDomain, xScale, yScale}));
+        ({marginTop, marginBottom, marginLeft, marginRight} =
+          _.assign(componentMargin, omitNullUndefined({marginTop, marginBottom, marginLeft, marginRight})));
+        if(isDone()) return {marginTop, marginBottom, marginLeft, marginRight};
       }
 
       // if Component has children,
       // recurse through descendants to resolve their margins the same way,
       // and combine them into a single margin, if there are multiple
       if(React.Children.count(props.children)) {
-        let childMargins = mapOverChildren(props.children, this._resolveMargin.bind(this), scaleType, domain, scale);
+        let childrenMargins = mapOverChildren(props.children, this._resolveMargin.bind(this), {xScaleType, yScaleType, xDomain, yDomain, xScale, yScale});
 
         // console.log('combining child margins', childMargins);
-        const childMargin = combineBorderObjects(childMargins);
+        const childrenMargin = combineBorderObjects(childrenMargins.map(
+          childMargins => ({top: childMargins.marginTop, bottom: childMargins.marginBottom, left: childMargins.marginLeft, right: childMargins.marginRight})
+        ));
 
-        margin = _.assign(childMargin, margin);
+        marginTop = _.isUndefined(marginTop) ? childrenMargin.top : marginTop;
+        marginBottom = _.isUndefined(marginBottom) ? childrenMargin.bottom : marginBottom;
+        marginLeft = _.isUndefined(marginLeft) ? childrenMargin.left : marginLeft;
+        marginRight = _.isUndefined(marginRight) ? childrenMargin.right : marginRight;
       }
-      return margin;
+
+      return {marginTop, marginBottom, marginLeft, marginRight};
     }
 
-    _makeScales = ({width, height, scaleType={}, domain={}, margin={}, scale={}, spacing={}}) => {
-      const {invertScale, nice, tickCount, ticks} = this.props;
-      
+    _resolveSpacing(props, Component, {xScaleType, yScaleType, xDomain, yDomain, xScale, yScale}) {
+      let {spacingTop, spacingBottom, spacingLeft, spacingRight} = props;
+
+      const isDone = () => _.every([spacingTop, spacingBottom, spacingLeft, spacingRight], _.isNumber);
+
+      // short-circuit if all spacing provided
+      if(isDone()) return {spacingTop, spacingBottom, spacingLeft, spacingRight};
+
+      // if Component provides a custom static getSpacing method
+      // use it to determine remaining domains
+      if(_.isFunction(Component.getSpacing)) {
+        const componentSpacing = omitNullUndefined(Component.getSpacing({...props, xScaleType, yScaleType, xDomain, yDomain, xScale, yScale}));
+        ({spacingTop, spacingBottom, spacingLeft, spacingRight} =
+          _.assign(componentSpacing, omitNullUndefined({spacingTop, spacingBottom, spacingLeft, spacingRight})));
+        if(isDone()) return {spacingTop, spacingBottom, spacingLeft, spacingRight};
+      }
+
+      // if Component has children,
+      // recurse through descendants to resolve their spacings the same way,
+      // and combine them into a single spacing, if there are multiple
+      if(React.Children.count(props.children)) {
+        let childrenSpacings = mapOverChildren(props.children, this._resolveSpacing.bind(this), {xScaleType, yScaleType, xDomain, yDomain, xScale, yScale});
+
+        const childrenSpacing = combineBorderObjects(childrenSpacings.map(
+          childSpacing => ({top: childSpacing.spacingTop, bottom: childSpacing.spacingBottom, left: childSpacing.spacingLeft, right: childSpacing.spacingRight})
+        ));
+
+        spacingTop = _.isUndefined(spacingTop) ? childrenSpacing.top : spacingTop;
+        spacingBottom = _.isUndefined(spacingBottom) ? childrenSpacing.bottom : spacingBottom;
+        spacingLeft = _.isUndefined(spacingLeft) ? childrenSpacing.left : spacingLeft;
+        spacingRight = _.isUndefined(spacingRight) ? childrenSpacing.right : spacingRight;
+      }
+
+      if(isDone()) return {spacingTop, spacingBottom, spacingLeft, spacingRight};
+    }
+
+    _makeScales = ({width, height, xScaleType, yScaleType, xDomain, yDomain, xScale, yScale,
+                      marginTop, marginBottom, marginLeft, marginRight, spacingTop, spacingBottom, spacingLeft, spacingRight}) => {
+      const spacing = {top: spacingTop, bottom: spacingBottom, left: spacingLeft, right: spacingRight};
+      const margin = {top: marginTop, bottom: marginBottom, left: marginLeft, right: marginRight};
       const innerChartWidth = innerWidth(width, margin);
       const innerChartHeight = innerHeight(height, margin);
 
-      const range = {
-        x: innerRangeX(innerChartWidth, spacing).map(v => v - (spacing.left || 0)),
-        y: innerRangeY(innerChartHeight, spacing).map(v => v - (spacing.top || 0))
-      };
-      //innerRange functions produce range (i.e. [5,20]) and map function normalizes to 0 (i.e. [0,15])
+      // use existing scales if provided, otherwise create new
+      if(!isValidScale(xScale)) {
+        //innerRange functions produce range (i.e. [5,20]) and map function normalizes to 0 (i.e. [0,15])
+        const xRange = innerRangeX(innerChartWidth, spacing).map(v => v - (spacing.left || 0));
+        xScale = initScale(xScaleType).domain(xDomain).range(xRange);
+      }
+      if(!isValidScale(yScale)) {
+        const yRange = innerRangeY(innerChartHeight, spacing).map(v => v - (spacing.top || 0));
+        yScale = initScale(yScaleType).domain(yDomain).range(yRange);
+      }
 
-      return _.fromPairs(['x', 'y'].map(k => {
-        // use existing scales if provided, otherwise create new
-        if(hasScaleFor(scale, k)) return [k, scale[k]];
+      // todo - ticks, nice and getDomain should be an axis prop instead, and axis should have getDomain
 
-        // create scale from domain/range
-        const kScale = initScale(scaleType[k]).domain(domain[k]).range(range[k]);
+      // set `nice` option to round scale domains to nicer numbers
+      // const kTickCount = tickCount ? tickCount[k] : 10;
+      // if(nice && nice[k] && _.isFunction(kScale.nice)) kScale.nice(kTickCount);
 
-        // todo - ticks, nice and getDomain should be an axis prop instead, and axis should have getDomain
+      // extend scale domain to include custom `ticks` if passed
+      //
+      // if(ticks[k]) {
+      //   const dataType = dataTypeFromScaleType(scaleType[k]);
+      //   const tickDomain = domainFromData(ticks[k], _.identity, dataType);
+      //   kScale.domain(combineDomains([kScale.domain(), tickDomain]), dataType);
+      // }
 
-        // set `nice` option to round scale domains to nicer numbers
-        // const kTickCount = tickCount ? tickCount[k] : 10;
-        // if(nice && nice[k] && _.isFunction(kScale.nice)) kScale.nice(kTickCount);
+      // reverse scale domain if `invertScale` is passed
+      // if(invertScale[k]) kScale.domain(kScale.domain().reverse());
 
-        // extend scale domain to include custom `ticks` if passed
-        //
-        // if(ticks[k]) {
-        //   const dataType = dataTypeFromScaleType(scaleType[k]);
-        //   const tickDomain = domainFromData(ticks[k], _.identity, dataType);
-        //   kScale.domain(combineDomains([kScale.domain(), tickDomain]), dataType);
-        // }
-
-        // reverse scale domain if `invertScale` is passed
-        // if(invertScale[k]) kScale.domain(kScale.domain().reverse());
-
-        return [k, kScale];
-      }));
+      return {xScale, yScale};
     };
 
     render() {
       const {props} = this;
-      const {width, height, invertScale} = props;
-      const scaleFromProps = this.props.scale || {};
+      const {width, height, invertXScale, invertYScale} = props;
 
       // short-circuit if scales provided
       // todo warn/throw if bad scales are passed
-      if(hasXYScales(scaleFromProps))
+      // todo also pass domain/scaleType/etc from scales??
+      if(isValidScale(props.xScale) && isValidScale(props.yScale))
         return <ComposedComponent {...this.props} />;
 
       // scales not provided, so we have to resolve them
       // first resolve scale types and domains
-      const scaleType = this._resolveScaleType(props, ComposedComponent);
-      const domain = this._resolveDomain(props, ComposedComponent, scaleType);
-      if(_.isObject(invertScale)) {
-        ['x', 'y'].forEach(k => {
-          if(invertScale[k]) domain[k] = domain[k].slice().reverse();
-        })
-      }
+      // const scaleType = this._resolveScaleType(props, ComposedComponent);
+      const {xScaleType, yScaleType} = this._resolveScaleType(props, ComposedComponent);
 
-      let scaleOptions = {width, height, scaleType, domain, margin: props.margin, scale: props.scale, padding: props.padding, spacing: props.spacing};
+      // const domain = this._resolveDomain(props, ComposedComponent, scaleType);
+      let {xDomain, yDomain} = this._resolveDomain(props, ComposedComponent, xScaleType, yScaleType);
+      if(invertXScale) xDomain = xDomain.slice().reverse();
+      if(invertYScale) yDomain = yDomain.slice().reverse();
+
+      // create a temporary scale with size & domain, which may be used by the Component to calculate margin/tickDomain
+      // (eg. to create and measure labels for the scales)
+      // let tempScale = this._makeScales(scaleOptions);
+      let scaleOptions = {
+        width, height, xScaleType, yScaleType, xDomain, yDomain, scaleX: props.scaleX, scaleY: props.scaleY,
+        marginTop: props.marginTop, marginBottom: props.marginBottom, marginLeft: props.marginLeft, marginRight: props.marginRight,
+        spacingTop: props.spacingTop, spacingBottom: props.spacingBottom, spacingLeft: props.spacingLeft, spacingRight: props.spacingRight,
+        xScale: props.xScale, yScale: props.yScale
+      };
       // create a temporary scale with size & domain, which may be used by the Component to calculate margin/tickDomain
       // (eg. to create and measure labels for the scales)
       let tempScale = this._makeScales(scaleOptions);
+      let {xScale: tempXScale, yScale: tempYScale} = tempScale;
 
       // getTickDomain gives children the opportunity to modify the domain to include their scale ticks
       // (can't happen in getDomain, because it can't be done until the base domain/tempScale has been created)
-      //nice-ing happens in the getTickDomain function inside of _resolveTickDomain
-      const tickDomain = this._resolveTickDomain(props, ComposedComponent, scaleType, domain, tempScale);
-      if(_.isObject(tickDomain)) {
-        ['x', 'y'].forEach(k => {
-          const dataType = dataTypeFromScaleType(scaleType[k]);
-          if(isValidDomain(tickDomain[k], dataType))
-            domain[k] = combineDomains([domain[k], tickDomain[k]], dataType);
-        })
+      // nice-ing happens in the getTickDomain function inside of _resolveTickDomain
+      const {xTickDomain, yTickDomain} = this._resolveTickDomain(props, ComposedComponent, {xScaleType, yScaleType, xDomain, yDomain, xScale: tempXScale, yScale: tempYScale});
+      if(isValidDomain(xTickDomain, dataTypeFromScaleType(xScaleType))) {
+        xDomain = combineDomains([xDomain, xTickDomain], dataTypeFromScaleType(xScaleType));
       }
+      if(isValidDomain(yTickDomain, dataTypeFromScaleType(yScaleType))) {
+        yDomain = combineDomains([yDomain, yTickDomain], dataTypeFromScaleType(yScaleType));
+      }
+
       // update tempScale to use new domain before creating margins
+      scaleOptions = {...scaleOptions, xDomain, yDomain};
       tempScale = this._makeScales(scaleOptions);
 
+
       // then resolve the margins
-      const margin = _.defaults(
-        this._resolveMargin(props, ComposedComponent, scaleType, domain, tempScale),
-        {top: 0, bottom: 0, left: 0, right: 0}
+      const {marginTop, marginBottom, marginLeft, marginRight} = _.defaults(
+        this._resolveMargin(props, ComposedComponent, {xScaleType, yScaleType, xDomain, yDomain, xScale: tempScale.xScale, yScale: tempScale.yScale}),
+        {marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0}
       );
 
-      const spacing = _.defaults(
-        this._resolveSpacing(props, ComposedComponent, scaleType, domain, tempScale),
-        {top: 0, bottom: 0, left: 0, right: 0}
+      const {spacingTop, spacingBottom, spacingLeft, spacingRight} = _.defaults(
+        this._resolveSpacing(props, ComposedComponent, {xScaleType, yScaleType, xDomain, yDomain, xScale: tempScale.xScale, yScale: tempScale.yScale}),
+        {spacingTop: 0, spacingBottom: 0, spacingLeft: 0, spacingRight: 0}
       );
 
       // create real scales from resolved margins
-      scaleOptions = {...scaleOptions, margin, spacing};
-      const scale = this._makeScales(scaleOptions);
+      scaleOptions = {...scaleOptions, marginTop, marginBottom, marginLeft, marginRight, spacingTop, spacingBottom, spacingLeft, spacingRight};
+      const {xScale, yScale} = this._makeScales(scaleOptions);
+
       
-      const passedProps = _.assign({}, this.props, {scale, scaleType, margin, domain, spacing});
+      const passedProps = _.assign({}, this.props, {
+        //legacy
+        // scale: {x: xScale, y: yScale},
+        // domain: {x: xDomain, y: yDomain},
+        // scaleType: {x: xScaleType, y: yScaleType},
+        // margin: {top: marginTop, bottom: marginBottom, left: marginLeft, right: marginRight},
+        // 0.4.0
+        xScale, yScale,
+        xDomain, yDomain,
+        xScaleType, yScaleType,
+        marginTop, marginBottom, marginLeft, marginRight,
+        spacingTop, spacingBottom, spacingLeft, spacingRight,
+      });
       return <ComposedComponent {...passedProps} />;
 
       // todo spacing/padding
       // todo includeZero
       // todo purerender/shouldcomponentupdate?
       // todo resolve margins if scales are present
-      // todo use zero for any margins which can't be resolved
       // todo throw if cannot resolve scaleType
       // todo throw if cannot resolve domain
       // todo check to make sure margins didn't change after scales resolved?

@@ -22,3 +22,6 @@ export const scaleType = PropTypes.oneOf([
   'linear', 'time', 'ordinal', 'log', 'pow'
 ]);
 
+export const datumValueTypes = [PropTypes.number, PropTypes.string, PropTypes.instanceOf(Date)];
+
+export const valueOrAccessor = PropTypes.oneOfType([...datumValueTypes, PropTypes.func]);
