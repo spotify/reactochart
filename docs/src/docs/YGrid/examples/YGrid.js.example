@@ -1,14 +1,11 @@
 const YGridExample = (props) => {
   const size = {width: 400, height: 300};
-  const chartStyle = {display: 'inline-block', marginRight: '10px'};
 
   return <div>
-    <div style={chartStyle}>
-      <XYPlot domain={{x: [-20, 20], y: [-20, 20]}} {...size}>
-        <YGrid tickCount={50} />
-        <YGrid tickCount={5} lineStyle={{stroke: 'blue', strokewidth: 2}} />
-      </XYPlot>
-    </div>
+    <XYPlot xDomain={[-20, 20]} yDomain={[-20, 20]} {...size}>
+      <YGrid tickCount={50} />
+      <YGrid tickCount={5} lineStyle={{stroke: 'blue', strokeWidth: 2}} />
+    </XYPlot>
   </div>
 };
 

@@ -17,7 +17,7 @@ const mainComponents = [
   {name: 'XYPlot', path: '/xy-plot', Component: Docs.XYPlotDocs},
 ];
 
-const chartComponents = [
+const xyChartComponents = [
   {name: 'AreaBarChart', path: '/area-bar-chart', Component: Docs.AreaBarChartDocs},
   {name: 'AreaChart', path: '/area-chart', Component: Docs.AreaChartDocs},
   {name: 'AreaHeatmap', path: '/area-heatmap', Component: Docs.AreaHeatmapDocs},
@@ -28,9 +28,12 @@ const chartComponents = [
   {name: 'KernelDensityEstimation', path: '/kernel-density-estimation', Component: Docs.KernelDensityEstimationDocs},
   {name: 'LineChart', path: '/line-chart', Component: Docs.LineChartDocs},
   {name: 'MarkerLineChart', path: '/marker-line-chart', Component: Docs.MarkerLineChartDocs},
-  {name: 'PieChart', path: '/pie-chart', Component: Docs.PieChartDocs},
   {name: 'RangeBarChart', path: '/range-bar-chart', Component: Docs.RangeBarChartDocs},
   {name: 'ScatterPlot', path: '/scatter-plot', Component: Docs.ScatterPlotDocs},
+];
+
+const standaloneChartComponents = [
+  {name: 'PieChart', path: '/pie-chart', Component: Docs.PieChartDocs},
   {name: 'TreeMap', path: '/tree-map', Component: Docs.TreeMapDocs},
 ];
 
@@ -56,7 +59,8 @@ const axisComponents = [
 
 const allComponents = lessons
   .concat(mainComponents)
-  .concat(chartComponents)
+  .concat(xyChartComponents)
+  .concat(standaloneChartComponents)
   .concat(dataMarkComponents)
   .concat(axisComponents);
 
@@ -85,21 +89,28 @@ const Nav = () => {
       })}
     </ul>
 
-    <h4>Chart Components</h4>
+    <h4>XY Chart Components</h4>
     <ul className="nav-inverse nav-tabs nav-stacked">
-      {chartComponents.map((component, i) => {
+      {xyChartComponents.map((component, i) => {
         return <NavLink to={component.path} label={component.name} key={`chart-component-${i}`}/>;
       })}
     </ul>
 
-    <h4>Data Components</h4>
+    <h4>Standalone Chart Components</h4>
+    <ul className="nav-inverse nav-tabs nav-stacked">
+      {standaloneChartComponents.map((component, i) => {
+        return <NavLink to={component.path} label={component.name} key={`chart-component-${i}`}/>;
+      })}
+    </ul>
+
+    <h4>XY Data Components</h4>
     <ul className="nav-inverse nav-tabs nav-stacked">
       {dataMarkComponents.map((component, i) => {
         return <NavLink to={component.path} label={component.name} key={`data-component-${i}`}/>;
       })}
     </ul>
 
-    <h4>Axis Components</h4>
+    <h4>XY Axis Components</h4>
     <ul className="nav-inverse nav-tabs nav-stacked">
       {axisComponents.map((component, i) => {
         return <NavLink to={component.path} label={component.name} key={`axis-component-${i}`}/>;

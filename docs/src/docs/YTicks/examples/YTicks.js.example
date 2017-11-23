@@ -3,13 +3,17 @@ const YTicksExample = (props) => {
   const chartStyle = {display: 'inline-block', marginRight: '10px'};
 
   return <div>
+    <div>
+      Left: default params<br />
+      Right: Multiple sets of ticks, with options
+    </div>
     <div style={chartStyle}>
-      <XYPlot domain={{x: [-20, 20], y: [-20, 20]}} {...size}>
+      <XYPlot xDomain={[-20, 20]} yDomain={[-20, 20]} {...size}>
         <YTicks />
       </XYPlot>
     </div>
     <div style={chartStyle}>
-      <XYPlot domain={{x: [-20, 20], y: [-20, 20]}} {...size}>
+      <XYPlot xDomain={[-20, 20]} yDomain={[-20, 20]} {...size}>
         <YTicks placement="after" tickCount={10} />
         <YTicks position="right" placement="before" tickCount={5} tickLength={20} />
         <YTicks position="right" tickCount={30} tickLength={15} tickStyle={{stroke: 'red'}} />

@@ -5,13 +5,13 @@ const XTicksExample = (props) => {
   return <div>
     <div style={chartStyle}>
       Default: <br/>
-      <XYPlot domain={{x: [-20, 20], y: [-20, 20]}} {...size}>
+      <XYPlot xDomain={[-20, 20]} yDomain={[-20, 20]} {...size}>
         <XTicks />
       </XYPlot>
     </div>
     <div style={chartStyle}>
       Multiple sets of ticks, with options: <br/>
-      <XYPlot domain={{x: [-20, 20], y: [-20, 20]}} {...size}>
+      <XYPlot xDomain={[-20, 20]} yDomain={[-20, 20]} {...size}>
         <XTicks placement="above" tickCount={10} />
         <XTicks position="top" placement="below" tickCount={5} tickLength={20} />
         <XTicks position="top" tickCount={30} tickLength={15} tickStyle={{stroke: 'red'}} />
