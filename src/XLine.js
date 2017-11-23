@@ -3,24 +3,28 @@ import PropTypes from 'prop-types';
 
 export default class XLine extends React.Component {
   static propTypes = {
-    scale: PropTypes.shape({x: PropTypes.func.isRequired}),
-    value: PropTypes.any.isRequired
+    xScale: PropTypes.func,
+    value: PropTypes.any.isRequired,
+    spacingTop: PropTypes.number,
+    spacingBottom: PropTypes.number,
+    style: PropTypes.object,
+    className: PropTypes.string
   };
   static defaultProps = {
-    style: {}
+    style: {},
+    className: ''
   };
 
   render() {
-    const {value, height, spacing, style} = this.props;
-    const scale = this.props.scale.x;
-    const className = `chart-line-x ${this.props.className || ''}`;
-    const lineX = scale(value);
+    const {xScale, value, height, spacingTop, spacingBottom, style} = this.props;
+    const className = `chart-line-x ${this.props.className}`;
+    const lineX = xScale(value);
 
     return <line {...{
       x1: lineX,
       x2: lineX,
-      y1: -spacing.top,
-      y2: height + spacing.bottom,
+      y1: -spacingTop,
+      y2: height + spacingBottom,
       className, style
     }} />;
   }

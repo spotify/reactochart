@@ -7,9 +7,13 @@ import {getScaleTicks, getTickDomain} from './utils/Scale';
 
 export default class YGrid extends React.Component {
   static propTypes = {
-    scale: PropTypes.shape({y: PropTypes.func.isRequired}),
     width: PropTypes.number,
     height: PropTypes.number,
+    yScale: PropTypes.func,
+    spacingTop: PropTypes.number,
+    spacingBottom: PropTypes.number,
+    spacingLeft: PropTypes.number,
+    spacingRight: PropTypes.number,
     nice: PropTypes.bool,
     ticks: PropTypes.array,
     tickCount: PropTypes.number,
@@ -22,24 +26,22 @@ export default class YGrid extends React.Component {
   };
 
   static getTickDomain(props) {
-    if(!_.get(props, 'scale.y')) return;
+    if(!props.yScale) return;
     props = _.defaults({}, props, YGrid.defaultProps);
-    return {y: getTickDomain(props.scale.y, props)};
+    return {yTickDomain: getTickDomain(props.yScale, props)};
   }
 
   render() {
-    const {width, spacing, tickCount, lineClassName, lineStyle} = this.props;
-    const scale = this.props.scale.y;
-    const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
+    const {width, yScale, tickCount, lineClassName, lineStyle, spacingTop, spacingBottom, spacingLeft, spacingRight} = this.props;
+    const ticks = this.props.ticks || getScaleTicks(yScale, null, tickCount);
     const className = `chart-grid-line chart-grid-line-y ${lineClassName || ''}`;
 
     return <g className="chart-grid-y">
       {ticks.map((tick, i) => {
         return <YLine {...{
-          className, spacing,
-          scale: this.props.scale,
+          width, yScale, className,
+          spacingTop, spacingBottom, spacingLeft, spacingRight,
           value: tick,
-          width: width,
           style: lineStyle,
           key: `grid-y-line-${i}`
         }} />;

@@ -17,19 +17,6 @@
     }
   ],
   "props": {
-    "scale": {
-      "type": {
-        "name": "shape",
-        "value": {
-          "y": {
-            "name": "func",
-            "required": true
-          }
-        }
-      },
-      "required": false,
-      "description": ""
-    },
     "width": {
       "type": {
         "name": "number"
@@ -38,6 +25,41 @@
       "description": ""
     },
     "height": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "spacingTop": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "spacingBottom": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "spacingLeft": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "spacingRight": {
       "type": {
         "name": "number"
       },

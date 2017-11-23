@@ -5,7 +5,7 @@ const RangeRectExample = (props) => {
       xDomain={[0, 100]} yDomain={[0, 100]}
       domain={{x: [0,100], y: [0,100]}}
       xScaleType="linear" yScaleType="linear">
-      <XAxis /><YAxis />
+      {/*<XAxis /><YAxis />*/}
       <RangeRect
         x={10} xEnd={40}
         y={50} yEnd={80}

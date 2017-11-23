@@ -31,18 +31,63 @@
     }
   ],
   "props": {
-    "scale": {
+    "xScale": {
       "type": {
-        "name": "shape",
-        "value": {
-          "x": {
-            "name": "func",
-            "required": true
-          }
-        }
+        "name": "func"
       },
       "required": false,
       "description": ""
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "spacingTop": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "spacingBottom": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "spacingLeft": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "spacingRight": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
     },
     "width": {
       "type": {
@@ -305,12 +350,6 @@
       },
       "required": false,
       "description": ""
-    },
-    "spacing": {
-      "defaultValue": {
-        "value": "{top: 0, bottom: 0, left: 0, right: 0}",
-        "computed": false
-      }
     }
   }
 }

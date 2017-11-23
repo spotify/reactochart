@@ -4,9 +4,9 @@ import {bisector} from 'd3';
 import shallowEqual from './utils/shallowEqual';
 import PropTypes from 'prop-types';
 
-import {makeAccessor} from './utils/Data';
+import * as CustomPropTypes from './utils/CustomPropTypes';
+import {getValue} from './utils/Data';
 import xyPropsEqual from './utils/xyPropsEqual';
-// import {xyPropsEqualDebug as xyPropsEqual} from './utils/xyPropsEqual';
 
 
 export default class LineChart extends React.Component {
@@ -16,24 +16,33 @@ export default class LineChart extends React.Component {
      */
     data: PropTypes.array.isRequired,
     /**
-     * data getter for line X coordinates
+     * Accessor function for line X values, called once per bar (datum), or a single X value to be used for the entire line.
      */
-    getX: PropTypes.any,
+    x: CustomPropTypes.valueOrAccessor,
     /**
-     * data getter for line Y coordinates
+     * Accessor function for line Y values, called once per bar (datum), or a single Y value to be used for the entire line.
      */
-    getY: PropTypes.any,
+    y: CustomPropTypes.valueOrAccessor,
     /**
-     * inline style object to be applied to the line path
+     * Inline style object to be applied to the line path
      */
     lineStyle: PropTypes.object,
     /**
-     * d3 scale - provided by XYPlot
+     * Class attribute to be applied to the line path
      */
-    scale: PropTypes.object
+    lineClassName: PropTypes.string,
+    /**
+     * D3 scale for X axis - provided by XYPlot
+     */
+    xScale: PropTypes.func,
+    /**
+     * D3 scale for Y axis - provided by XYPlot
+     */
+    yScale: PropTypes.func,
   };
   static defaultProps = {
-    lineStyle: {}
+    lineStyle: {},
+    lineClassName: ''
   };
 
   componentWillMount() {
@@ -44,11 +53,11 @@ export default class LineChart extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return !xyPropsEqual(this.props, nextProps, ['lineStyle']);
+    return !xyPropsEqual(this.props, nextProps, ['lineStyle', 'lineClassName']);
   }
 
   initBisector(props) {
-    this.setState({bisectX: bisector(d => makeAccessor(props.getX)(d)).left});
+    this.setState({bisectX: bisector(d => getValue(props.x, d)).left});
   }
 
   getHovered = (x, y) => {
@@ -57,12 +66,12 @@ export default class LineChart extends React.Component {
   };
 
   render() {
-    const {data, scale, getX, getY, lineStyle} = this.props;
-    const accessors = {x: makeAccessor(getX), y: makeAccessor(getY)};
-    const points = _.map(data, d => [scale.x(accessors.x(d)), scale.y(accessors.y(d))]);
+    const {data, xScale, yScale, x, y, lineStyle, lineClassName} = this.props;
+
+    const points = _.map(data, (d, i) => [xScale(getValue(x, d, i)), yScale(getValue(y, d, i))]);
     const pathStr = pointsToPathStr(points);
 
-    return <g className={this.props.name}>
+    return <g className={`${this.props.name} ${lineClassName}`}>
       <path d={pathStr} style={lineStyle}/>
     </g>;
   }
@@ -72,6 +81,7 @@ function pointsToPathStr(points) {
   // takes array of points in [[x, y], [x, y]... ] format
   // returns SVG path string in "M X Y L X Y" format
   // https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Line_commands
+  // todo: replace this with d3 path generator
   return _.map(points, ([x, y], i) => {
     const command = (i === 0) ? 'M' : 'L';
     return `${command} ${x} ${y}`;

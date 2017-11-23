@@ -31,15 +31,9 @@
     }
   ],
   "props": {
-    "scale": {
+    "xScale": {
       "type": {
-        "name": "shape",
-        "value": {
-          "x": {
-            "name": "func",
-            "required": true
-          }
-        }
+        "name": "func"
       },
       "required": false,
       "description": ""
@@ -82,6 +76,20 @@
       "required": false,
       "description": ""
     },
+    "ticks": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": ""
+    },
+    "tickCount": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
     "tickLength": {
       "type": {
         "name": "number"
@@ -104,15 +112,42 @@
         "computed": false
       }
     },
-    "nice": {
+    "tickClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "",
       "defaultValue": {
-        "value": "true",
+        "value": "''",
         "computed": false
       }
     },
-    "spacing": {
+    "spacingTop": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
       "defaultValue": {
-        "value": "{top: 0, bottom: 0, left: 0, right: 0}",
+        "value": "0",
+        "computed": false
+      }
+    },
+    "spacingBottom": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "nice": {
+      "defaultValue": {
+        "value": "true",
         "computed": false
       }
     }

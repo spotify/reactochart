@@ -8,9 +8,13 @@ import XLine from './XLine';
 
 export default class XGrid extends React.Component {
   static propTypes = {
-    scale: PropTypes.shape({x: PropTypes.func.isRequired}),
     width: PropTypes.number,
     height: PropTypes.number,
+    xScale: PropTypes.func,
+    spacingTop: PropTypes.number,
+    spacingBottom: PropTypes.number,
+    spacingLeft: PropTypes.number,
+    spacingRight: PropTypes.number,
     nice: PropTypes.bool,
     ticks: PropTypes.array,
     tickCount: PropTypes.number,
@@ -23,22 +27,21 @@ export default class XGrid extends React.Component {
   };
 
   static getTickDomain(props) {
-    if(!_.get(props, 'scale.x')) return;
+    if(!props.xScale) return;
     props = _.defaults({}, props, XGrid.defaultProps);
-    return {x: getTickDomain(props.scale.x, props)};
+    return {xTickDomain: getTickDomain(props.xScale, props)};
   }
 
   render() {
-    const {height, spacing, tickCount, lineClassName, lineStyle} = this.props;
-    const scale = this.props.scale.x;
-    const ticks = this.props.ticks || getScaleTicks(scale, null, tickCount);
+    const {height, xScale, tickCount, lineClassName, lineStyle, spacingTop, spacingBottom, spacingLeft, spacingRight} = this.props;
+    const ticks = this.props.ticks || getScaleTicks(xScale, null, tickCount);
     const className = `chart-grid-line chart-grid-line-x ${lineClassName || ''}`;
 
     return <g className="chart-grid-x">
       {ticks.map((tick, i) => {
         return <XLine {...{
-          height, className, spacing,
-          scale: this.props.scale,
+          height, xScale, className,
+          spacingTop, spacingBottom, spacingLeft, spacingRight,
           value: tick,
           style: lineStyle,
           key: `grid-x-line-${i}`

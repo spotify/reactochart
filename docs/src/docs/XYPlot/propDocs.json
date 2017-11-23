@@ -128,6 +128,20 @@
       "required": false,
       "description": "d3 scales for the X and Y axes of the chart, in {x, y} object format.\n(optional, normally determined automatically by XYPlot)"
     },
+    "xScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
     "scaleType": {
       "type": {
         "name": "object"
@@ -136,6 +150,41 @@
       "description": ""
     },
     "spacing": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "spacingTop": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "spacingBottom": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "spacingLeft": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "spacingRight": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "padding": {
       "type": {
         "name": "object"
       },
@@ -170,28 +219,32 @@
       "required": false,
       "description": ""
     },
-    "padding": {
-      "type": {
-        "name": "object"
-      },
-      "required": false,
-      "description": ""
-    },
-    "nice": {
-      "type": {
-        "name": "object"
-      },
-      "required": false,
-      "description": ""
-    },
     "invertScale": {
       "type": {
         "name": "object"
       },
       "required": false,
+      "description": ""
+    },
+    "invertXScale": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
       "description": "",
       "defaultValue": {
-        "value": "{x: false, y: false}",
+        "value": "false",
+        "computed": false
+      }
+    },
+    "invertYScale": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "false",
         "computed": false
       }
     },
