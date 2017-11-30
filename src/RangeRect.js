@@ -15,11 +15,11 @@ export default class RangeRect extends React.Component {
     /**
      * D3 scale for the X (horizontal) axis.
      */
-    xScale: PropTypes.func.isRequired,
+    xScale: PropTypes.func,
     /**
      * D3 scale for the Y (vertical) axis.
      */
-    yScale: PropTypes.func.isRequired,
+    yScale: PropTypes.func,
     /**
      * Starting (minimum) X value (left edge, usually) of the rectangle range
      */

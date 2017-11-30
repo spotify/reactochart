@@ -21,10 +21,8 @@ describe('Bar', () => {
   it('renders a basic vertical bar correctly', () => {
     const bar = shallow(
       <Bar
-        scale={{
-          x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
-          y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
-        }}
+        xScale={d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100])}
+        yScale={d3.scaleLinear().domain([0, 1]).range([100, 0])}
         x={'b'}
         y={0.25}
         yEnd={0.75}
@@ -47,10 +45,8 @@ describe('Bar', () => {
   it('renders a basic horizontal bar correctly', () => {
     const bar = shallow(
       <Bar
-        scale={{
-          x: d3.scaleLinear().domain([0, 1]).range([0, 100]),
-          y: d3.scalePoint().domain(['a', 'b', 'c']).range([100, 0]),
-        }}
+        xScale={d3.scaleLinear().domain([0, 1]).range([0, 100])}
+        yScale={d3.scalePoint().domain(['a', 'b', 'c']).range([100, 0])}
         x={.1}
         xEnd={.7}
         y={'b'}
@@ -72,10 +68,8 @@ describe('Bar', () => {
 
   it('has a thickness prop which controls the thickness of the bar', () => {
     const verticalBarProps = {
-      scale: {
-        x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
-        y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
-      },
+      xScale: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
+      yScale: d3.scaleLinear().domain([0, 1]).range([100, 0]),
       x: 'a',
       y: 0,
       yEnd: 1,
@@ -91,10 +85,8 @@ describe('Bar', () => {
     expect(thickVerticalBar.find('rect').props().width).to.equal(40);
 
     const horizontalBarProps = {
-      scale: {
-        x: d3.scaleLinear().domain([0, 1]).range([0, 100]),
-        y: d3.scalePoint().domain(['a', 'b', 'c']).range([100, 0]),
-      },
+      xScale: d3.scaleLinear().domain([0, 1]).range([0, 100]),
+      yScale: d3.scalePoint().domain(['a', 'b', 'c']).range([100, 0]),
       x: .2,
       xEnd: .9,
       y: 'c',
@@ -112,10 +104,8 @@ describe('Bar', () => {
 
   it("passes className and style props through to the bar's rectangle element", () => {
     const verticalBarProps = {
-      scale: {
-        x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
-        y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
-      },
+      xScale: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
+      yScale: d3.scaleLinear().domain([0, 1]).range([100, 0]),
       x: 'a',
       y: 0,
       yEnd: 1,
@@ -132,10 +122,8 @@ describe('Bar', () => {
 
   it("attaches onMouseMove, onMouseEnter and onMouseLeave handlers to the bar's rectangle",  () => {
     const barProps = {
-      scale: {
-        x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
-        y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
-      },
+      xScale: d3.scaleLinear().domain([0, 1]).range([0, 100]),
+      yScale: d3.scalePoint().domain(['a', 'b', 'c']).range([100, 0]),
       x: 'a',
       y: 0,
       yEnd: 1,
@@ -169,24 +157,22 @@ describe('Bar', () => {
     expect(() => { shallow(<Bar {...barProps}/>); }).to.throw(Error);
     // throw if one scale is missing
     expect(() => {
-      shallow(<Bar {...{...barProps, scale: {x: xScale}}}/>);
+      shallow(<Bar {...{...barProps, xScale}}/>);
     }).to.throw(Error);
     // throw if one scale is invalid
     expect(() => {
-      shallow(<Bar {...{...barProps, scale: {x: 'bad', y: yScale}}}/>);
+      shallow(<Bar {...{...barProps, xScale: 'bad', yScale}}/>);
     }).to.throw(Error);
     // don't throw if both are provided
     expect(() => {
-      shallow(<Bar {...{...barProps, scale: {x: xScale, y: yScale}}}/>);
+      shallow(<Bar {...{...barProps, xScale, yScale}}/>);
     }).not.to.throw(Error);
   });
 
   it("throws an error if exactly ONE of xEnd OR yEnd are not provided", () => {
     const barProps = {
-      scale: {
-        x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
-        y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
-      },
+      xScale: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
+      yScale: d3.scaleLinear().domain([0, 1]).range([100, 0]),
       x: 'a',
       y: 0
     };

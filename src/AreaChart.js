@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import {area} from 'd3';
 
-import {makeAccessor, domainFromData, combineDomains} from './utils/Data';
+import {makeAccessor2, domainFromData, combineDomains} from './utils/Data';
 import xyPropsEqual from './utils/xyPropsEqual';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 
@@ -21,19 +21,23 @@ export default class AreaChart extends React.Component {
      */
     data: PropTypes.array.isRequired,
     /**
-     * data getter for X coordinates
+     * Accessor function for area X values, called once per datum
      */
-    getX: CustomPropTypes.getter,
+    x: CustomPropTypes.valueOrAccessor,
     /**
-     * data getter for Y coordinates
+     * Accessor function for area's starting (minimum) Y values, called once per datum,
+     * or a single Y value to be used for the entire line.
+     * Should return the minimum of the Y range spanned by the area at this point.
      */
-    getY: CustomPropTypes.getter,
+    y: CustomPropTypes.valueOrAccessor,
     /**
-     * data getter for Y end coordinates
+     * Accessor function for area's ending (maximum) Y values, called once per datum,
+     * or a single Y value to be used for the entire line.
+     * Should return the maximum of the Y range spanned by the area at this point.
      */
-    getYEnd: CustomPropTypes.getter,
+    yEnd: CustomPropTypes.valueOrAccessor,
     /**
-     * style applied to path element
+     * style applied to area path element
      */
     pathStyle: PropTypes.object,
     /**
@@ -48,9 +52,6 @@ export default class AreaChart extends React.Component {
      */
     pathStylePositive: PropTypes.object,
     pathStyleNegative: PropTypes.object,
-
-    scaleType: PropTypes.object,
-    scale: PropTypes.object,
     /**
      * if true, will show gaps in the shaded area for data where props.isDefined(datum) returns false
      */
@@ -59,7 +60,23 @@ export default class AreaChart extends React.Component {
      * if shouldShowGaps is true, isDefined function describes when a datum should be considered "defined" vs. when to show gap
      * by default, shows gap if either y or yEnd are undefined
      */
-    isDefined: PropTypes.func
+    isDefined: PropTypes.func,
+    /**
+     * D3 scale for X axis - provided by XYPlot
+     */
+    xScale: PropTypes.func,
+    /**
+     * D3 scale for Y axis - provided by XYPlot
+     */
+    yScale: PropTypes.func,
+    /**
+     * Type of X scale - provided by XYPlot
+     */
+    xScaleType: PropTypes.object,
+    /**
+     * Type of Y scale - provided by XYPlot
+     */
+    yScaleType: PropTypes.object,
   };
   static defaultProps = {
     shouldShowGaps: true,
@@ -70,10 +87,10 @@ export default class AreaChart extends React.Component {
 
   static getDomain(props) {
     // custom Y domain - the total (union) extent of getY and getYEnd combined
-    const {data, getX, getY, getYEnd} = props;
-    const accessors = {x: makeAccessor(getX), y: makeAccessor(getY), yEnd: makeAccessor(getYEnd)};
+    const {data, x, y, yEnd} = props;
+    const accessors = {x: makeAccessor2(x), y: makeAccessor2(y), yEnd: makeAccessor2(yEnd)};
     return {
-      y: combineDomains([
+      yDomain: combineDomains([
         domainFromData(data, accessors.y),
         domainFromData(data, accessors.yEnd)
       ])
@@ -86,9 +103,9 @@ export default class AreaChart extends React.Component {
   }
 
   render() {
-    const {name, data, getX, getY, getYEnd, scale, isDifference, pathStyle,
+    const {name, data, x, y, yEnd, xScale, yScale, isDifference, pathStyle,
       pathStylePositive, pathStyleNegative, shouldShowGaps, isDefined} = this.props;
-    const accessors = {x: makeAccessor(getX), y: makeAccessor(getY), yEnd: makeAccessor(getYEnd)};
+    const accessors = {x: makeAccessor2(x), y: makeAccessor2(y), yEnd: makeAccessor2(yEnd)};
 
     // create d3 area path generator
     const areaGenerator = area();
@@ -100,9 +117,9 @@ export default class AreaChart extends React.Component {
     }
 
     areaGenerator
-      .x((d, i) => scale.x(accessors.x(d, i)))
-      .y0((d, i) => scale.y(accessors.y(d, i)))
-      .y1((d, i) => scale.y(accessors.yEnd(d, i)));
+      .x((d, i) => xScale(accessors.x(d, i)))
+      .y0((d, i) => yScale(accessors.y(d, i)))
+      .y1((d, i) => yScale(accessors.yEnd(d, i)));
 
     const areaPathStr = areaGenerator(data);
 

@@ -16,11 +16,11 @@ export default class LineChart extends React.Component {
      */
     data: PropTypes.array.isRequired,
     /**
-     * Accessor function for line X values, called once per bar (datum), or a single X value to be used for the entire line.
+     * Accessor function for line X values, called once per datum, or a single X value to be used for the entire line.
      */
     x: CustomPropTypes.valueOrAccessor,
     /**
-     * Accessor function for line Y values, called once per bar (datum), or a single Y value to be used for the entire line.
+     * Accessor function for line Y values, called once per datum, or a single Y value to be used for the entire line.
      */
     y: CustomPropTypes.valueOrAccessor,
     /**

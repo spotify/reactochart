@@ -124,7 +124,6 @@ export function domainFromData(data, accessor = _.identity, type = undefined) {
 export function getDataDomainByAxis(props) {
   const {horizontal, data, getX, getY} = props;
   const accessor = horizontal ?  makeAccessor(getY) : makeAccessor(getX);
-  // only have to specify range axis domain, other axis uses default domainFromData
   const rangeAxis = horizontal ? 'y' : 'x';
   return {
     [rangeAxis]: domainFromData(data, accessor)

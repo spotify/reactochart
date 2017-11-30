@@ -26,17 +26,18 @@ const RangeBarChartExample = (props) => {
     {[true, false].map(horizontal => {
       const title = horizontal ? "Horizontal" : "Vertical";
       const getters = horizontal ?
-        {getY: 0, getX: '1.0', getXEnd: '1.1'} :
-        {getX: 0, getY: '1.0', getYEnd: '1.1'};
+        {y: d => d[0], x: d => d[1][0], xEnd: d => d[1][1]} :
+        {x: d => d[0], y: d => d[1][0], yEnd: d => d[1][1]};
 
-      const dep = horizontal ? 'x' : 'y';
-      const indep = horizontal ? 'y' : 'x';
+      const depDomain = horizontal ? 'xDomain' : 'yDomain';
+      const indepDomain = horizontal ? 'yDomain' : 'xDomain';
+      const size = {width: 300, height: 350};
 
       return <div>
         <h2>{title}</h2>
 
         <div>
-          <XYPlot domain={{[dep]: numberDomain, [indep]: [0, count]}} scaleType="linear" {...{width: 300, height: 350}}>
+          <XYPlot {...size}>
             <XAxis/><YAxis/>
             <RangeBarChart
               horizontal={horizontal}
@@ -45,7 +46,7 @@ const RangeBarChartExample = (props) => {
             />
           </XYPlot>
 
-          <XYPlot domain={{[dep]: numberDomain, [indep]: dateDomain}} {...{width: 300, height: 350}}>
+          <XYPlot {...size}>
             <XAxis/><YAxis/>
             <RangeBarChart
               horizontal={horizontal}
@@ -54,7 +55,7 @@ const RangeBarChartExample = (props) => {
             />
           </XYPlot>
 
-          <XYPlot domain={{[dep]: numberDomain, [indep]: ordinalDomain}} {...{width: 300, height: 350}}>
+          <XYPlot {...size}>
             <XAxis/><YAxis/>
             <RangeBarChart
               horizontal={horizontal}
@@ -65,7 +66,7 @@ const RangeBarChartExample = (props) => {
         </div>
 
         <div>
-          <XYPlot domain={{[dep]: dateDomain, [indep]: [0, count]}} {...{width: 300, height: 350}}>
+          <XYPlot {...size}>
             <XAxis/><YAxis/>
             <RangeBarChart
               horizontal={horizontal}
@@ -74,7 +75,7 @@ const RangeBarChartExample = (props) => {
             />
           </XYPlot>
 
-          <XYPlot domain={{[dep]: dateDomain, [indep]: dateDomain}} {...{width: 300, height: 350}}>
+          <XYPlot {...size}>
             <XAxis/><YAxis/>
             <RangeBarChart
               horizontal={horizontal}
@@ -83,7 +84,7 @@ const RangeBarChartExample = (props) => {
             />
           </XYPlot>
 
-          <XYPlot domain={{[dep]: dateDomain, [indep]: ordinalDomain}} {...{width: 300, height: 350}}>
+          <XYPlot {...size}>
             <XAxis/><YAxis/>
             <RangeBarChart
               horizontal={horizontal}
@@ -95,13 +96,13 @@ const RangeBarChartExample = (props) => {
       </div>
     })}
 
-    <XYPlot domain={{y: [-1, 1], x: [-1, 1]}} scaleType="linear" {...{width: 300, height: 350}}>
+    <XYPlot {...{width: 300, height: 350}}>
       <XAxis/><YAxis/>
       <RangeBarChart
         data={_.range(-1, 1, .1)}
-        getX={null}
-        getY={d => Math.sin(d*2)}
-        getYEnd={d => Math.sin(d*2) * Math.cos(d*2)}
+        x={d => d}
+        y={d => Math.sin(d*2)}
+        yEnd={d => Math.sin(d*2) * Math.cos(d*2)}
         barThickness={6}
       />
     </XYPlot>

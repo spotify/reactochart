@@ -16,12 +16,6 @@ import XAxisTitle from './XAxisTitle';
 export default class XAxis extends React.Component {
   static propTypes = {
     xScale: PropTypes.func,
-    yScale: PropTypes.func,
-    spacingTop: PropTypes.number,
-    spacingBottom: PropTypes.number,
-    spacingLeft: PropTypes.number,
-    spacingRight: PropTypes.number,
-
     width: PropTypes.number,
     height: PropTypes.number,
     position: PropTypes.string,
@@ -29,6 +23,10 @@ export default class XAxis extends React.Component {
     nice: PropTypes.bool,
     ticks: PropTypes.array,
     tickCount: PropTypes.number,
+    spacingTop: PropTypes.number,
+    spacingBottom: PropTypes.number,
+    spacingLeft: PropTypes.number,
+    spacingRight: PropTypes.number,
 
     showTitle: PropTypes.bool,
     showLabels: PropTypes.bool,
@@ -102,7 +100,7 @@ export default class XAxis extends React.Component {
     if(props.showLabels)
       margins.push(XAxisLabels.getMargin(labelsProps));
 
-    return sumMargins(margins);
+    return sumMargins(margins, 'margin');
   }
 
   render() {
@@ -118,7 +116,7 @@ export default class XAxis extends React.Component {
     if(showTitle && showLabels) {
       // todo optimize so we don't generate labels twice
       const labelsMargin = XAxisLabels.getMargin(labelsProps);
-      titleProps.distance = titleDistance + labelsMargin[position];
+      titleProps.distance = titleDistance + labelsMargin[`margin${_.upperFirst(position)}`];
     } else if(showTitle && showTicks) {
       titleProps.distance = titleDistance + tickLength;
     }

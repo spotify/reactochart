@@ -20,10 +20,8 @@ describe('RangeBarChart', () => {
     // most tests for render correctness are in RangeBarChart and Bar specs
 
     const props = {
-      scale: {
-        x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
-        y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
-      },
+      xScale: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
+      yScale: d3.scaleLinear().domain([0, 1]).range([100, 0]),
       data: [['a', [0.3, 0.5]], ['b', [0.6, .9]]],
       x: d => d[0],
       y: d => d[1][0],

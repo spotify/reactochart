@@ -20,24 +20,28 @@ const ScatterPlotExample = () => {
 
       <ScatterPlot
         data={randomScatter[3]}
-        getX={0} getY={1}
+        x={d => d[0]}
+        y={d => d[1]}
         pointSymbol={rectangleSymbol}
       />
       <ScatterPlot
         data={randomScatter[4]}
-        getX={0} getY={1}
+        x={d => d[0]}
+        y={d => d[1]}
         pointSymbol={randomEmoji}
         pointOffset={[0, 2]}
       />
 
       <ScatterPlot
         data={randomScatter[0]}
-        getX={0} getY={1}
+        x={d => d[0]}
+        y={d => d[1]}
         pointSymbol={(d, i) => i}
       />
       <ScatterPlot
         data={randomScatter[2]}
-        getX={0} getY={1}
+        x={d => d[0]}
+        y={d => d[1]}
         pointSymbol={triangleSymbol}
         pointOffset={[-4, -3]}
       />

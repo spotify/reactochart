@@ -20,12 +20,19 @@ class AreaDifferenceExample extends React.Component {
           isDifference={true}
           pathStyleNegative={{fill: 'lightcoral'}}
           pathStylePositive={{fill: 'lightgreen'}}
-          getX='x'
-          getY='y0'
-          getYEnd='y1'
+          x={d => d.x}
+          y={d => d.y0}
+          yEnd={d => d.y1}
         />
-        <LineChart data={data1} getX="x" getY="y" lineStyle={{strokeWidth: 3}}/>
-        <LineChart data={data2} getX="x" getY="y" />
+        <LineChart
+          data={data1}
+          x={d => d.x} y={d => d.y}
+          lineStyle={{strokeWidth: 3}}
+        />
+        <LineChart
+          data={data2}
+          x={d => d.x} y={d => d.y}
+        />
       </XYPlot>
     </div>
   }

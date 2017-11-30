@@ -4,30 +4,31 @@ const HistogramExample = (props) => {
 
   return <div>
     <div>
-      <XYPlot margin={{left: 40, right: 8}} domain={domain} width={450} height={300}>
+      <XYPlot width={450} height={300}>
         <XAxis /><YAxis />
         <Histogram
-          data={randomNormalArr} getValue={null}
+          data={randomNormalArr} value={d => d}
         />
       </XYPlot>
     </div>
-    <div>
-      <XYPlot
-        domain={domain}
-        margin={{left: 40, right: 8}}
-        width={450} height={40}
-        showGrid={false}
-        showLabels={false}
-        showTicks={false}
-      >
-        <ScatterPlot
-          data={randomNormalArr}
-          getX={null}
-          getY={() => Math.random()*200}
-          pointRadius={1}
-        />
-      </XYPlot>
-    </div>
+    {/*<div>*/}
+      {/*<XYPlot*/}
+        {/*domain={domain}*/}
+        {/*marginLeft={40}*/}
+        {/*marginRight={8}*/}
+        {/*width={450} height={40}*/}
+        {/*showGrid={false}*/}
+        {/*showLabels={false}*/}
+        {/*showTicks={false}*/}
+      {/*>*/}
+        {/*<ScatterPlot*/}
+          {/*data={randomNormalArr}*/}
+          {/*x={d => d}*/}
+          {/*getY={() => Math.random()*200}*/}
+          {/*pointRadius={1}*/}
+        {/*/>*/}
+      {/*</XYPlot>*/}
+    {/*</div>*/}
   </div>;
 };
 

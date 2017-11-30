@@ -19,10 +19,6 @@ import Bar from './Bar';
 export default class RangeBarChart extends React.Component {
   static propTypes = {
     /**
-     * D3 scales for the X and Y axes of the chart, in {x, y} object format.
-     */
-    scale: CustomPropTypes.xyObjectOf(PropTypes.func.isRequired),
-    /**
      * Array of data to be plotted. One bar will be rendered per datum in this array.
      */
     data: PropTypes.array,
@@ -56,7 +52,14 @@ export default class RangeBarChart extends React.Component {
      * Should only be passed when `horizontal` is `false` (ignored otherwise).
      */
     yEnd: CustomPropTypes.valueOrAccessor,
-
+    /**
+     * D3 scale for X axis - provided by XYPlot
+     */
+    xScale: PropTypes.func,
+    /**
+     * D3 scale for Y axis - provided by XYPlot
+     */
+    yScale: PropTypes.func,
     /**
      * Thickness (in pixels) of each bar (ie. bar height if `horizontal` is `true`, otherwise bar width),
      */
@@ -96,33 +99,41 @@ export default class RangeBarChart extends React.Component {
   };
 
   static getDomain(props) {
-    const {scaleType, horizontal, data, x, xEnd, y, yEnd} = props;
+    const {xScaleType, yScaleType, horizontal, data, x, xEnd, y, yEnd} = props;
 
     // only have to specify range axis domain, other axis uses default domainFromData
     const rangeAxis = horizontal ? 'x' : 'y';
     const rangeStartAccessor = horizontal ? makeAccessor2(x) : makeAccessor2(y);
     const rangeEndAccessor = horizontal ? makeAccessor2(xEnd) : makeAccessor2(yEnd);
-    const rangeDataType = dataTypeFromScaleType(scaleType[rangeAxis]);
+    const rangeScaleType = horizontal ? xScaleType : yScaleType;
+    const rangeDataType = dataTypeFromScaleType(rangeScaleType);
 
     return {
-      [rangeAxis]: domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, rangeDataType)
+      [`${rangeAxis}Domain`]: domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, rangeDataType)
     };
   }
   static getSpacing(props) {
-    const {barThickness, horizontal, scale, data, domain} = props;
-    const dataDomain = getDataDomainByAxis(props);
+    const {barThickness, horizontal, x, y, xScale, yScale, data, xDomain, yDomain} = props;
     const P = barThickness / 2; //padding
-    const k = horizontal ? 'y' : 'x';
+    const barsDomain = horizontal ? yDomain : xDomain;
+    const barsScale = horizontal ? yScale : xScale;
+    const barsAccessor = horizontal ? makeAccessor2(y) : makeAccessor2(x);
+    const barsDataDomain = domainFromData(data, barsAccessor);
+
+    // todo refactor/add better comments to clarify
     //find the edges of the tick domain, and map them through the scale function
-    const [domainHead, domainTail] = _([_.first(domain[k]), _.last(domain[k])]).map(scale[k]).sortBy(); //sort the pixel values return by the domain extents
+    const [domainHead, domainTail] = _([_.first(barsDomain), _.last(barsDomain)]).map(barsScale).sortBy(); //sort the pixel values return by the domain extents
     //find the edges of the data domain, and map them through the scale function
-    const [dataDomainHead, dataDomainTail] = _([_.first(dataDomain[k]), _.last(dataDomain[k])]).map(scale[k]).sortBy(); //sort the pixel values return by the domain extents
-    //find the neccessary spacing (based on bar width) to push the bars completely inside the tick domain
-    const [spacingTail, spacingHead] = [_.clamp(P - (domainTail - dataDomainTail), 0, P), _.clamp(P - (dataDomainHead - domainHead), 0, P)];
-    if(horizontal){
-      return {top: spacingHead, right: 0, bottom: spacingTail, left: 0}
+    const [dataDomainHead, dataDomainTail] = _([_.first(barsDataDomain), _.last(barsDataDomain)]).map(barsScale).sortBy(); //sort the pixel values return by the domain extents
+    //find the necessary spacing (based on bar width) to push the bars completely inside the tick domain
+    const [spacingTail, spacingHead] = [
+      _.clamp(P - (domainTail - dataDomainTail), 0, P),
+      _.clamp(P - (dataDomainHead - domainHead), 0, P)
+    ];
+    if(horizontal) {
+      return {spacingTop: spacingHead, spacingBottom: spacingTail, spacingLeft: 0, spacingRight: 0};
     } else {
-      return {top: 0, right: spacingTail, bottom: 0, left: spacingHead}
+      return {spacingTop: 0, spacingBottom: 0, spacingLeft: spacingHead, spacingRight: spacingTail}
     }
   }
 
@@ -132,8 +143,7 @@ export default class RangeBarChart extends React.Component {
   }
 
   render() {
-    const {scale, data, horizontal, x, xEnd, y, yEnd, barThickness, barClassName, barStyle} = this.props;
-    invariant(hasXYScales(scale), `RangeBarChart.props.scale.x and scale.y must both be valid d3 scales`);
+    const {xScale, yScale, data, horizontal, x, xEnd, y, yEnd, barThickness, barClassName, barStyle} = this.props;
     // invariant(hasOneOfTwo(xEnd, yEnd), `RangeBarChart expects a xEnd *or* yEnd prop, but not both.`);
 
     return <g>
@@ -148,15 +158,19 @@ export default class RangeBarChart extends React.Component {
         const barProps = {
           x: getValue(x, d, i),
           y: getValue(y, d, i),
+          xEnd: horizontal ? getValue(xEnd, d, i) : undefined,
+          yEnd: horizontal ? undefined : getValue(yEnd, d, i),
+          xScale, yScale,
           key: `chart-bar-${i}`,
           onMouseEnter,
           onMouseMove,
           onMouseLeave,
-          scale,
           thickness: barThickness,
           className: `chart-bar ${getValue(barClassName, d, i) || ''}`,
           style: getValue(barStyle, d, i)
         };
+
+        return <Bar {...barProps}/>;
 
         // console.log('xEnd yEnd value', getValue(xEnd, d), getValue(yEnd, d), horizontal);
         return horizontal ?

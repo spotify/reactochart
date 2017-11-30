@@ -23,9 +23,13 @@ import RangeRect from './RangeRect';
 export default class AreaBarChart extends React.Component {
   static propTypes = {
     /**
-     * D3 scales for the X and Y axes of the chart, in {x, y} object format.
+     * D3 scale for X axis - provided by XYPlot
      */
-    scale: CustomPropTypes.xyObjectOf(PropTypes.func.isRequired),
+    xScale: PropTypes.func,
+    /**
+     * D3 scale for Y axis - provided by XYPlot
+     */
+    yScale: PropTypes.func,
     /**
      * Array of data to be plotted. One bar will be rendered per datum in this array.
      */
@@ -97,25 +101,24 @@ export default class AreaBarChart extends React.Component {
   }
 
   static getDomain(props) {
-    const {scaleType, horizontal, data} = props;
+    const {xScaleType, yScaleType, horizontal, data} = props;
 
     // only have to specify range axis domain, other axis uses default domainFromData
     // for area bar chart, the independent variable is the range
     // ie. the range controls the thickness of the bar
     const rangeAxis = horizontal ? 'y' : 'x';
-    const rangeDataType = dataTypeFromScaleType(scaleType[rangeAxis]);
+    const rangeDataType = dataTypeFromScaleType(rangeAxis === 'x' ? xScaleType : yScaleType);
     // make accessor functions from getX|Y and getX|YEnd
     const rangeStartAccessor = makeAccessor2(props[`${rangeAxis}`]);
     const rangeEndAccessor = makeAccessor2(props[`${rangeAxis}End`]);
 
     return {
-      [rangeAxis]: domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, rangeDataType)
+      [rangeAxis+'Domain']: domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, rangeDataType)
     };
   }
 
   render() {
-    const {scale, data, horizontal, x, xEnd, y, yEnd, barClassName, barStyle} = this.props;
-    invariant(hasXYScales(scale), `AreaBarChart.props.scale.x and scale.y must both be valid d3 scales`);
+    const {xScale, yScale, data, horizontal, x, xEnd, y, yEnd, barClassName, barStyle} = this.props;
 
     return <g>
       {data.map((d, i) => {
@@ -127,13 +130,12 @@ export default class AreaBarChart extends React.Component {
         });
 
         return <RangeRect {...{
-          scale,
-          datum: d,
+          xScale, yScale,
           className: `chart-area-bar ${getValue(barClassName, d, i)}`,
           style: getValue(barStyle, d, i),
           x: horizontal ? 0 : getValue(x, d, i),
           xEnd: horizontal ? getValue(x, d, i) : getValue(xEnd, d, i),
-          getY: !horizontal ? 0 : getValue(y, d, i),
+          y: !horizontal ? 0 : getValue(y, d, i),
           yEnd: !horizontal ? getValue(y, d, i) : getValue(yEnd, d, i),
           key: `chart-area-bar-${i}`,
           onMouseEnter, onMouseMove, onMouseLeave

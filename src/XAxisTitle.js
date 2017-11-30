@@ -12,7 +12,9 @@ export default class XAxisTitle extends React.Component {
     placement: PropTypes.oneOf(['above', 'below']),
     alignment: PropTypes.oneOf(['left', 'center', 'right']),
     rotate: PropTypes.bool,
-    style: PropTypes.object
+    style: PropTypes.object,
+    spacingTop: PropTypes.number,
+    spacingBottom: PropTypes.number,
   };
   static defaultProps = {
     height: 250,
@@ -28,16 +30,17 @@ export default class XAxisTitle extends React.Component {
       fontWeight: 'bold',
       lineHeight: 1
     },
-    spacing: {top: 0, bottom: 0, left: 0, right: 0}
+    spacingTop: 0,
+    spacingBottom: 0
   };
 
   static getMargin(props) {
     props = _.defaults({}, props, XAxisTitle.defaultProps);
     const {distance, position, rotate} = props;
     const placement = props.placement || ((position === 'bottom') ? 'below' : 'above');
-    const zeroMargin = {top: 0, bottom: 0, left: 0, right: 0};
+    const zeroMargin = {marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0};
 
-    if((position === 'bottom' && placement === 'above') || (position == 'top' && placement === 'below'))
+    if((position === 'bottom' && placement === 'above') || (position === 'top' && placement === 'below'))
       return zeroMargin;
 
     const title = props.title || props.children;
@@ -51,17 +54,17 @@ export default class XAxisTitle extends React.Component {
       );
 
     return (position === 'bottom') ?
-      {...zeroMargin, bottom: marginValue} :
-      {...zeroMargin, top: marginValue};
+      {...zeroMargin, marginBottom: marginValue} :
+      {...zeroMargin, marginTop: marginValue};
   }
 
   render() {
-    const {height, width, distance, position, alignment, style, spacing} = this.props;
+    const {height, width, distance, position, alignment, style, spacingTop, spacingBottom} = this.props;
     const title = this.props.title || this.props.children;
     const placement = this.props.placement || ((position === 'bottom') ? 'below' : 'above');
     const rotate = this.props.rotate ? -90 : 0;
 
-    const posY = (position === 'bottom') ? height + spacing.bottom : -spacing.top;
+    const posY = (position === 'bottom') ? height + spacingBottom : -spacingTop;
     const translateY = posY +
       ((placement === 'above') ? -distance : distance);
     const translateX =

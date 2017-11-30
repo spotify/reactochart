@@ -3,38 +3,38 @@ const KernelDensityEstimationExample = (props) => {
 
   return <div>
     <div>
-      <XYPlot margin={{left: 40, right: 8}} width={700} height={300}>
+      <XYPlot yDomain={[0,200]} marginLeft={40} marginRight={8} width={700} height={300}>
         <XAxis /><YAxis />
         <Histogram
-          data={randomNormalArr} getValue={null}
+          data={randomNormalArr} value={null}
         />
         <KernelDensityEstimation
-          data={randomNormalArr} getX={null} bandwidth={0.5}
+          data={randomNormalArr} x={d => d} bandwidth={0.5}
         />
         <KernelDensityEstimation
-          data={randomNormalArr} getX={null} bandwidth={0.1}
+          data={randomNormalArr} x={d => d} bandwidth={0.1}
         />
         <KernelDensityEstimation
-          data={randomNormalArr} getX={null} bandwidth={2}
+          data={randomNormalArr} x={d => d} bandwidth={2}
         />
       </XYPlot>
     </div>
-    <div>
-      <XYPlot
-        margin={{left: 40, right: 8}}
-        width={700} height={40}
-        showGrid={false}
-        showLabels={false}
-        showTicks={false}
-      >
-        <ScatterPlot
-          data={randomNormalArr}
-          getX={null}
-          getY={() => Math.random()}
-          pointRadius={1}
-        />
-      </XYPlot>
-    </div>
+    {/*<div>*/}
+      {/*<XYPlot*/}
+        {/*margin={{left: 40, right: 8}}*/}
+        {/*width={700} height={40}*/}
+        {/*showGrid={false}*/}
+        {/*showLabels={false}*/}
+        {/*showTicks={false}*/}
+      {/*>*/}
+        {/*<ScatterPlot*/}
+          {/*data={randomNormalArr}*/}
+          {/*getX={null}*/}
+          {/*getY={() => Math.random()}*/}
+          {/*pointRadius={1}*/}
+        {/*/>*/}
+      {/*</XYPlot>*/}
+    {/*</div>*/}
   </div>;
 };
 

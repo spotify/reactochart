@@ -6,7 +6,11 @@ const XYLineChartExample = (props) => {
     {x: 15, y: 30},
   ];
   return <XYPlot width={400} height={300}>
-    <LineChart data={data} getX="x" getY="y" />
+    <LineChart
+      data={data}
+      x={d => d.x}
+      y={d => d.y}
+    />
   </XYPlot>
 };
 

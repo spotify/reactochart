@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {methodIfFuncProp} from './util.js';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import {dataTypeFromScaleType} from './utils/Scale';
-import {makeAccessor, domainFromRangeData, getDataDomainByAxis} from './utils/Data';
+import {makeAccessor2, domainFromRangeData, domainFromData, getDataDomainByAxis} from './utils/Data';
 import xyPropsEqual from './utils/xyPropsEqual';
 
 /**
@@ -17,12 +17,12 @@ import xyPropsEqual from './utils/xyPropsEqual';
  */
 
 function getTickType(props) {
-  const {getXEnd, getYEnd, horizontal} = props;
+  const {xEnd, yEnd, horizontal} = props;
   // warn if a range is passed for the dependent variable, which is expected to be a value
-  if((!horizontal && !_.isUndefined(getYEnd)) || (horizontal && !_.isUndefined(getXEnd)))
+  if((!horizontal && !_.isUndefined(yEnd)) || (horizontal && !_.isUndefined(xEnd)))
     console.warn("Warning: MarkerLineChart can only show the independent variable as a range, not the dependent variable.");
 
-  if((!horizontal && !_.isUndefined(getXEnd)) || (horizontal && !_.isUndefined(getYEnd)))
+  if((!horizontal && !_.isUndefined(xEnd)) || (horizontal && !_.isUndefined(yEnd)))
     return "RangeValue";
 
   return "ValueValue";
@@ -34,17 +34,19 @@ export default class MarkerLineChart extends React.Component {
     // the array of data objects
     data: PropTypes.array.isRequired,
     // accessor for X & Y coordinates
-    getX: CustomPropTypes.getter,
-    getY: CustomPropTypes.getter,
-    getXEnd: CustomPropTypes.getter,
-    getYEnd: CustomPropTypes.getter,
+    x: CustomPropTypes.valueOrAccessor,
+    y: CustomPropTypes.valueOrAccessor,
+    xEnd: CustomPropTypes.valueOrAccessor,
+    yEnd: CustomPropTypes.valueOrAccessor,
 
     horizontal: PropTypes.bool,
     lineLength: PropTypes.number,
 
     // x & y scale types
-    scaleType: PropTypes.object,
-    scale: PropTypes.object,
+    xScaleType: PropTypes.object,
+    yScaleType: PropTypes.object,
+    xScale: PropTypes.object,
+    yScale: PropTypes.object,
 
     onMouseEnterLine: PropTypes.func,
     onMouseMoveLine: PropTypes.func,
@@ -83,38 +85,50 @@ export default class MarkerLineChart extends React.Component {
 
   static getSpacing(props) {
     const tickType = getTickType(props);
-    if(tickType === 'RangeValue') return {top: 0, right: 0, bottom: 0, left: 0}; //no spacing for rangeValue marker charts since line start and end are set explicitly
-    const {lineLength, horizontal, scale, data, domain} = props;
-    const dataDomain = getDataDomainByAxis(props);
+    //no spacing for rangeValue marker charts since line start and end are set explicitly
+    if(tickType === 'RangeValue') return {spacingTop: 0, spacingRight: 0, spacingBottom: 0, spacingLeft: 0};
+
+    const {lineLength, horizontal, data, xDomain, yDomain, xScale, yScale, x, y} = props;
     const P = lineLength / 2; //padding
-    const k = horizontal ? 'y' : 'x';
-    //find the edges of the tick domain, and map them through the scale function
-    const [domainHead, domainTail] = _([_.first(domain[k]), _.last(domain[k])]).map(scale[k]).sortBy(); //sort the pixel values return by the domain extents
-    //find the edges of the data domain, and map them through the scale function
-    const [dataDomainHead, dataDomainTail] = _([_.first(dataDomain[k]), _.last(dataDomain[k])]).map(scale[k]).sortBy(); //sort the pixel values return by the domain extents
-    //find the neccessary spacing (based on bar width) to push the bars completely inside the tick domain
-    const [spacingTail, spacingHead] = [_.clamp(P - (domainTail - dataDomainTail), 0, P), _.clamp(P - (dataDomainHead - domainHead), 0, P)];
-    if(horizontal){
-      return {top: spacingHead, right: 0, bottom: spacingTail, left: 0}
+    const markDomain = horizontal ? yDomain : xDomain;
+    const markScale = horizontal ? yScale : xScale;
+    const markAccessor = horizontal ? makeAccessor2(y) : makeAccessor2(x);
+    const markDataDomain = domainFromData(data, markAccessor);
+
+    // todo refactor/add better comments to clarify
+    // find the edges of the tick domain, and map them through the scale function
+    const [domainHead, domainTail] = _([_.first(markDomain), _.last(markDomain)]).map(markScale).sortBy(); //sort the pixel values return by the domain extents
+    // find the edges of the data domain, and map them through the scale function
+    const [dataDomainHead, dataDomainTail] = _([_.first(markDataDomain), _.last(markDataDomain)]).map(markScale).sortBy(); //sort the pixel values return by the domain extents
+    // find the necessary spacing (based on bar width) to push the bars completely inside the tick domain
+    const [spacingTail, spacingHead] = [
+      _.clamp(P - (domainTail - dataDomainTail), 0, P),
+      _.clamp(P - (dataDomainHead - domainHead), 0, P)
+    ];
+
+    if(horizontal) {
+      return {spacingTop: spacingHead, spacingBottom: spacingTail, spacingLeft: 0, spacingRight: 0};
     } else {
-      return {top: 0, right: spacingTail, bottom: 0, left: spacingHead}
+      return {spacingTop: 0, spacingBottom: 0, spacingLeft: spacingHead, spacingRight: spacingTail}
     }
   }
 
   static getDomain(props) {
     if(getTickType(props) === 'RangeValue') { // set range domain for range type
-      const {data, getX, getXEnd, getY, getYEnd, scaleType, horizontal} = props;
+      const {data, x, xEnd, y, yEnd, xScaleType, yScaleType, horizontal} = props;
 
       // only have to specify range axis domain, other axis uses default domainFromData
       // in this chart type, the range axis, if there is one, is always the *independent* variable
       const rangeAxis = horizontal ? 'y' : 'x';
-      const rangeStartAccessor = horizontal ? makeAccessor(getY) : makeAccessor(getX);
-      const rangeEndAccessor = horizontal ? makeAccessor(getYEnd) : makeAccessor(getXEnd);
-      const rangeDataType = dataTypeFromScaleType(scaleType[rangeAxis]);
+      const rangeStartAccessor = horizontal ? makeAccessor2(y) : makeAccessor2(x);
+      const rangeEndAccessor = horizontal ? makeAccessor2(yEnd) : makeAccessor2(xEnd);
+      const rangeDataType = dataTypeFromScaleType(horizontal ? yScaleType : xScaleType);
 
       return {
-        [rangeAxis]: domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, rangeDataType)
+        [`${rangeAxis}Domain`]: domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, rangeDataType)
       };
+    } else {
+      return {};
     }
   }
 
@@ -151,11 +165,11 @@ export default class MarkerLineChart extends React.Component {
         return _.isFunction(callback) ? _.partial(callback, _, d) : null;
       });
 
-    const {getX, getXEnd, getY, getYEnd, horizontal, scale} = this.props;
-    const xVal = scale.x(makeAccessor(getX)(d));
-    const yVal = scale.y(makeAccessor(getY)(d));
-    const xEndVal = _.isUndefined(getXEnd) ? 0 : scale.x(makeAccessor(getXEnd)(d));
-    const yEndVal = _.isUndefined(getYEnd) ? 0 : scale.y(makeAccessor(getYEnd)(d));
+    const {x, xEnd, y, yEnd, horizontal, xScale, yScale} = this.props;
+    const xVal = xScale(makeAccessor2(x)(d));
+    const yVal = yScale(makeAccessor2(y)(d));
+    const xEndVal = _.isUndefined(xEnd) ? 0 : xScale(makeAccessor2(xEnd)(d));
+    const yEndVal = _.isUndefined(yEnd) ? 0 : yScale(makeAccessor2(yEnd)(d));
     const [x1, y1] = [xVal, yVal];
     const x2 = horizontal ?  xVal : xEndVal;
     const y2 = horizontal ? yEndVal : yVal;
@@ -173,9 +187,9 @@ export default class MarkerLineChart extends React.Component {
         return _.isFunction(callback) ? _.partial(callback, _, d) : null;
       });
 
-    const {getX, getY, horizontal, lineLength, scale} = this.props;
-    const xVal = scale.x(makeAccessor(getX)(d));
-    const yVal = scale.y(makeAccessor(getY)(d));
+    const {x, y, horizontal, lineLength, xScale, yScale} = this.props;
+    const xVal = xScale(makeAccessor2(x)(d));
+    const yVal = yScale(makeAccessor2(y)(d));
     const x1 = (!horizontal) ? xVal - (lineLength / 2) : xVal;
     const x2 = (!horizontal) ? xVal + (lineLength / 2) : xVal;
     const y1 = (!horizontal) ? yVal : yVal - (lineLength / 2);

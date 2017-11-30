@@ -12,7 +12,9 @@ export default class YLine extends React.Component {
   };
   static defaultProps = {
     style: {},
-    className: ''
+    className: '',
+    spacingLeft: 0,
+    spacingRight: 0
   };
 
   render() {

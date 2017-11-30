@@ -20,10 +20,8 @@ describe('BarChart', () => {
   it('passes most props through to RangeBarChart', () => {
     // bar chart is just a simple wrapper around RangeBarChart, most props are passed through
     const props = {
-      scale: {
-        x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
-        y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
-      },
+      xScale: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
+      yScale: d3.scaleLinear().domain([0, 1]).range([100, 0]),
       data: [['a', 0.25], ['b', .5], ['c', .67]],
       x: d => d[0],
       y: d => d[1],
@@ -57,10 +55,7 @@ describe('BarChart', () => {
     testWithScales(['linear', 'ordinal'], ({scale: xScale, testValues: xTestValues}) => {
       testWithScales(['linear'], ({scale: yScale, testValues: yTestValues}) => {
         const props = {
-          scale: {
-            x: xScale,
-            y: yScale
-          },
+          xScale, yScale,
           data: _.zip(_.take(xTestValues, 3), _.take(yTestValues, 3)),
           x: d => d[0],
           y: d => d[1],
@@ -80,7 +75,6 @@ describe('BarChart', () => {
           expect(barProps.width).to.equal(props.barThickness);
           const yZero = yScale(0);
           const yVal = yScale(yTestValues[i]);
-          console.log(yZero, yVal);
           expect(barProps.y).to.equal(Math.min(yZero, yVal));
           expect(barProps.height).to.equal(Math.abs(yVal - yZero));
         });

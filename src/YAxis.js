@@ -15,8 +15,7 @@ import YAxisTitle from './YAxisTitle';
 
 export default class YAxis extends React.Component {
   static propTypes = {
-    scale: PropTypes.shape({y: PropTypes.func.isRequired}),
-
+    yScale: PropTypes.func,
     width: PropTypes.number,
     height: PropTypes.number,
     position: PropTypes.string,
@@ -24,6 +23,10 @@ export default class YAxis extends React.Component {
     nice: PropTypes.bool,
     ticks: PropTypes.array,
     tickCount: PropTypes.number,
+    spacingTop: PropTypes.number,
+    spacingBottom: PropTypes.number,
+    spacingLeft: PropTypes.number,
+    spacingRight: PropTypes.number,
 
     showTitle: PropTypes.bool,
     showLabels: PropTypes.bool,
@@ -67,7 +70,10 @@ export default class YAxis extends React.Component {
     tickLength: 5,
     labelDistance: 3,
     titleDistance: 5,
-    spacing: {top: 0, bottom: 0, left: 0, right: 0}
+    spacingTop: 0,
+    spacingBottom: 0,
+    spacingLeft: 0,
+    spacingRight: 0
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -75,9 +81,9 @@ export default class YAxis extends React.Component {
   }
 
   static getTickDomain(props) {
-    if(!_.get(props, 'scale.y')) return;
+    if(!props.yScale) return;
     props = _.defaults({}, props, YAxis.defaultProps);
-    return {y: getTickDomain(props.scale.y, props)};
+    return {yTickDomain: getTickDomain(props.yScale, props)};
   }
 
   static getMargin(props) {
@@ -94,13 +100,13 @@ export default class YAxis extends React.Component {
     if(props.showLabels)
       margins.push(YAxisLabels.getMargin(labelsProps));
 
-    return sumMargins(margins);
+    return sumMargins(margins, 'margin');
   }
 
   render() {
     const {
-      width, height, position, spacing, tickLength, titleDistance, labelDistance,
-      showTitle, showLabels, showTicks, showGrid
+      width, height, position, tickLength, titleDistance, labelDistance,
+      showTitle, showLabels, showTicks, showGrid, spacingTop, spacingBottom, spacingLeft, spacingRight,
     } = this.props;
 
     const {ticksProps, gridProps, labelsProps, titleProps} = getAxisChildProps(this.props);
@@ -110,14 +116,12 @@ export default class YAxis extends React.Component {
     if(showTitle && showLabels) {
       // todo optimize so we don't generate labels twice
       const labelsMargin = YAxisLabels.getMargin(labelsProps);
-      titleProps.distance = titleDistance + labelsMargin[position];
+      titleProps.distance = titleDistance + labelsMargin[`margin${_.upperFirst(position)}`];
     } else if(showTitle && showTicks) {
       titleProps.distance = titleDistance + tickLength;
     }
 
-    const axisLineX = (position === 'left') ? -spacing.left : width + spacing.right;
-    // `height` is height of inner chart *not* including spacing - add spacing to figure out where to draw axis line
-    const axisLineHeight = height + spacing.top + spacing.bottom;
+    const axisLineX = (position === 'left') ? -spacingLeft : width + spacingRight;
 
     return <g className="chart-axis chart-axis-y">
       {showGrid ? <YGrid {...gridProps} /> : null}
@@ -131,7 +135,7 @@ export default class YAxis extends React.Component {
       <line
         className="chart-axis-line chart-axis-line-y"
         x1={axisLineX} x2={axisLineX}
-        y1={-spacing.top} y2={height + spacing.bottom}
+        y1={-spacingTop} y2={height + spacingBottom}
       />
     </g>;
   }

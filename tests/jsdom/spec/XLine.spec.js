@@ -39,32 +39,32 @@ describe('XLine', () => {
   const commonProps = {spacing: {top: 0, bottom: 0, left: 0, right: 0}};
 
   it('renders a .chart-line-x element in the correct place', () => {
-    let wrapper = shallow(<XLine scale={{x: linearScale}} value={linearValue} {...commonProps} />);
+    let wrapper = shallow(<XLine xScale={linearScale} value={linearValue} {...commonProps} />);
     expectCorrectLinePlacement(wrapper, linearValue, linearScale);
 
-    wrapper = shallow(<XLine scale={{x: timeScale}} value={timeValue} {...commonProps} />);
+    wrapper = shallow(<XLine xScale={timeScale} value={timeValue} {...commonProps} />);
     expectCorrectLinePlacement(wrapper, timeValue, timeScale);
 
-    wrapper = shallow(<XLine scale={{x: ordinalScale}} value={ordinalValue} {...commonProps} />);
+    wrapper = shallow(<XLine xScale={ordinalScale} value={ordinalValue} {...commonProps} />);
     expectCorrectLinePlacement(wrapper, ordinalValue, ordinalScale);
   });
 
   it('renders a line with the correct height', () => {
-    let wrapper = shallow(<XLine scale={{x: linearScale}} value={linearValue} height={200} {...commonProps} />);
+    let wrapper = shallow(<XLine xScale={linearScale} value={linearValue} height={200} {...commonProps} />);
     expect(getLineHeight(findLine(wrapper))).to.equal(200);
 
-    wrapper = shallow(<XLine scale={{x: linearScale}} value={linearValue} height={400} {...commonProps} />);
+    wrapper = shallow(<XLine xScale={linearScale} value={linearValue} height={400} {...commonProps} />);
     expect(getLineHeight(findLine(wrapper))).to.equal(400);
   });
 
   it('passes className to the line', () => {
-    let wrapper = shallow(<XLine scale={{x: linearScale}} value={linearValue} className={'test-line-class'} {...commonProps} />);
+    let wrapper = shallow(<XLine xScale={linearScale} value={linearValue} className={'test-line-class'} {...commonProps} />);
     expect(wrapper).to.have.descendants('line.test-line-class');
   });
 
   it('passes style to the line', () => {
     const style = {fill: 'red'};
-    let wrapper = shallow(<XLine scale={{x: linearScale}} value={linearValue} style={style} {...commonProps} />);
+    let wrapper = shallow(<XLine xScale={linearScale} value={linearValue} style={style} {...commonProps} />);
     expect(findLine(wrapper).prop('style')).to.deep.equal(style);
   });
 });

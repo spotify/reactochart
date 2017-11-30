@@ -9,16 +9,22 @@ const MultiChartExample = (props) => {
     <XAxis showGrid={false} title="Days since Zombiepocalypse" />
     <YAxis title="Zombie Attacks"/>
     <BarChart
-      data={data} getX="x" getY="y"
+      data={data}
+      x={d => d.x}
+      y={d => d.y}
       barThickness={35}
       barStyle={{fill: '#888'}}
     />
     <LineChart
-      data={data} getX="x" getY="y"
+      data={data}
+      x={d => d.x}
+      y={d => d.y}
       lineStyle={{stroke: 'royalblue', strokeWidth: 5}}
     />
     <LineChart
-      data={data} getX="x" getY="z"
+      data={data}
+      x={d => d.x}
+      y={d => d.z}
       lineStyle={{stroke: 'coral', strokeWidth: 3}}
     />
   </XYPlot>

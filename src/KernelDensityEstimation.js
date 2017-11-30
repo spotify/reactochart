@@ -29,8 +29,6 @@ class KernelDensityEstimation extends React.Component {
 
     // common props from XYPlot
     // accessor for data values
-    getX: CustomPropTypes.getter,
-    getY: CustomPropTypes.getter,
     name: PropTypes.string,
     scale: PropTypes.object,
     axisType: PropTypes.object,
@@ -50,8 +48,7 @@ class KernelDensityEstimation extends React.Component {
   static getDomain() {
     // todo implement real static getDomain method
     return {
-      x: null,
-      y: [0,200]
+      yDomain: [0,200]
     }
   }
 
@@ -67,21 +64,20 @@ class KernelDensityEstimation extends React.Component {
     this.initKDE(newProps);
   }
   initKDE(props) {
-    const {data, bandwidth, sampleCount, scale, width} = props;
+    const {data, bandwidth, sampleCount, xScale, width} = props;
     const kernel = epanechnikovKernel(bandwidth);
-    const samples = scale.x.ticks(sampleCount || Math.ceil(width / 2));
+    const samples = xScale.ticks(sampleCount || Math.ceil(width / 2));
     this.setState({kdeData: kernelDensityEstimator(kernel, samples)(data)});
   }
 
   render() {
-    const {name, scale, width, height, plotWidth, plotHeight} = this.props;
     const {kdeData} = this.state;
 
     return <LineChart
+      {...this.props}
       data={kdeData}
-      getX={0}
-      getY={d => d[1] * 500}
-      {...{name, scale, width, height, plotWidth, plotHeight}}
+      x={d => d[0]}
+      y={d => d[1] * 500}
     />;
   }
 }

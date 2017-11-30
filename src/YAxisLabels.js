@@ -46,7 +46,7 @@ function resolveYLabelsForValues(scale, values, formats, style, force = true) {
   }
 }
 
-class YAxisValueLabels extends React.Component {
+class YAxisLabels extends React.Component {
   static propTypes = {
     yScale: PropTypes.func,
     height: PropTypes.number,
@@ -58,7 +58,7 @@ class YAxisValueLabels extends React.Component {
     tickCount: PropTypes.number,
     ticks: PropTypes.array,
     labelClassName: PropTypes.string,
-    labelStyle: PropTypes.string,
+    labelStyle: PropTypes.object,
     spacingLeft: PropTypes.number,
     spacingRight: PropTypes.number,
     // Label Handling
@@ -94,14 +94,14 @@ class YAxisValueLabels extends React.Component {
 
   static getTickDomain(props) {
     if(!props.yScale) return;
-    props = _.defaults({}, props, YAxisValueLabels.defaultProps);
+    props = _.defaults({}, props, YAxisLabels.defaultProps);
     return {yTickDomain: getTickDomain(props.yScale, props)};
   }
 
   static getMargin(props) {
-    props = _.defaults({}, props, YAxisValueLabels.defaultProps);
+    props = _.defaults({}, props, YAxisLabels.defaultProps);
     const {yScale, position, placement, distance, labelStyle} = props;
-    const labels = props.labels || YAxisValueLabels.getLabels(props);
+    const labels = props.labels || YAxisLabels.getLabels(props);
     const zeroMargin = {marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0};
 
     if((position === 'left' && placement === 'after') || (position === 'right' && placement === 'before'))
@@ -123,14 +123,14 @@ class YAxisValueLabels extends React.Component {
   }
 
   static getLabels(props) {
-    const {tickCount, labelStyle, yScale} = _.defaults(props, {}, YAxisValueLabels.defaultProps);
+    const {tickCount, labelStyle, yScale} = _.defaults(props, {}, YAxisLabels.defaultProps);
     const ticks = props.ticks || getScaleTicks(yScale, null, tickCount);
-    const style = _.defaults(labelStyle, YAxisValueLabels.defaultProps.labelStyle);
+    const style = _.defaults(labelStyle, YAxisLabels.defaultProps.labelStyle);
 
     const scaleType = inferScaleType(yScale);
     const propsFormats = props.format ? [props.format] : props.formats;
     const formatStrs = (_.isArray(propsFormats) && propsFormats.length) ?
-      propsFormats : YAxisValueLabels.getDefaultFormats(scaleType);
+      propsFormats : YAxisLabels.getDefaultFormats(scaleType);
     const formats = makeLabelFormatters(formatStrs, scaleType);
 
     // todo resolve ticks also
@@ -150,8 +150,8 @@ class YAxisValueLabels extends React.Component {
     const placement = this.props.placement || ((position === 'left') ? 'before' : 'after');
     const className = `chart-value-label chart-value-label-y ${labelClassName}`;
     const textAnchor = (placement === 'before') ? 'end' : 'start';
-    const style = _.defaults({textAnchor}, labelStyle, YAxisValueLabels.defaultProps.labelStyle);
-    const labels = this.props.labels || YAxisValueLabels.getLabels(this.props);
+    const style = _.defaults({textAnchor}, labelStyle, YAxisLabels.defaultProps.labelStyle);
+    const labels = this.props.labels || YAxisLabels.getLabels(this.props);
     const transform = (position === 'left') ?
       `translate(${-spacingLeft}, 0)` : `translate(${width + spacingRight}, 0)`;
 
@@ -192,4 +192,4 @@ class YAxisLabelDebugRect extends React.Component {
   }
 }
 
-export default YAxisValueLabels;
+export default YAxisLabels;

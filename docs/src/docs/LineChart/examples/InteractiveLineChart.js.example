@@ -32,36 +32,40 @@ class InteractiveLineChartExample extends React.Component {
     const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
     return <div>
-      <XYPlot scaleType="linear" {...{width: 600, height: 350, domain: {y: [-2, 2]}}} onMouseMove={this._onMouseMove}>
+      <XYPlot scaleType="linear" {...{width: 600, height: 350, yDomain: [-2, 2]}} onMouseMove={this._onMouseMove}>
         <XAxis title="Phase" />
         <YAxis title="Intensity" />
 
-
-        <ScatterPlot
-          data={_.range(100)}
-          getY={line1}
-          pointStyle={{stroke: colors(0), strokeWidth: 3}}
-        />
+        {/*<ScatterPlot*/}
+          {/*data={_.range(100)}*/}
+          {/*x={_.identity}*/}
+          {/*y={line1}*/}
+          {/*pointStyle={{stroke: colors(0), strokeWidth: 3}}*/}
+        {/*/>*/}
         <LineChart
           data={_.range(100)}
-          getY={line1}
+          x={_.identity}
+          y={line1}
           lineStyle={{stroke: colors(0), strokeWidth: 3}}
         />
         <LineChart
           data={_.range(100)}
-          getY={line2}
+          x={_.identity}
+          y={line2}
           lineStyle={{stroke: colors(1), strokeWidth: 2}}
         />
         <LineChart
           data={_.range(100)}
-          getY={line3}
+          x={_.identity}
+          y={line3}
           lineStyle={{stroke: colors(2), strokeWidth: 1}}
         />
 
         <MarkerLineChart
           data={_.range(100)}
-          getXEnd={dPlusOne}
-          getY={line1}
+          x={_.identity}
+          xEnd={dPlusOne}
+          y={line1}
         />
 
         {activeX ?
@@ -69,15 +73,15 @@ class InteractiveLineChartExample extends React.Component {
           null
         }
 
-        {activeX ?
-          <ScatterPlot
-            data={[line1, line2, line3].map(lineFunc => [activeX, lineFunc(activeX)])}
-            getX={0}
-            getY={1}
-            pointRadius={5}
-          /> :
-          null
-        }
+        {/*{activeX ?*/}
+          {/*<ScatterPlot*/}
+            {/*data={[line1, line2, line3].map(lineFunc => [activeX, lineFunc(activeX)])}*/}
+            {/*getX={0}*/}
+            {/*getY={1}*/}
+            {/*pointRadius={5}*/}
+          {/*/> :*/}
+          {/*null*/}
+        {/*}*/}
       </XYPlot>
 
       {activeX ?

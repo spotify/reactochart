@@ -17,11 +17,11 @@ const ColorHeatMapExample = (props) => {
     <XYPlot width={500} height={500}>
       <ColorHeatmap
         data={data}
-        getValue="value"
-        getX="x"
-        getXEnd="xEnd"
-        getY="y"
-        getYEnd="yEnd"
+        value={d => d.value}
+        x={d => d.x}
+        xEnd={d => d.xEnd}
+        y={d => d.y}
+        yEnd={d => d.yEnd}
         colors={['rebeccapurple', 'goldenrod']}
         interpolator={'lab'}
       />
@@ -32,11 +32,11 @@ const ColorHeatMapExample = (props) => {
     <XYPlot width={500} height={500}>
       <ColorHeatmap
         data={data}
-        getValue="value"
-        getX="x"
-        getXEnd="xEnd"
-        getY="y"
-        getYEnd="yEnd"
+        value={d => d.value}
+        x={d => d.x}
+        xEnd={d => d.xEnd}
+        y={d => d.y}
+        yEnd={d => d.yEnd}
         valueDomain={[-1, 0, 1]}
         colors={['Crimson', '#eee', 'ForestGreen']}
         interpolator={'lab'}

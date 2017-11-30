@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import invariant from 'invariant';
 import RangeBarChart from './RangeBarChart';
 import * as CustomPropTypes from './utils/CustomPropTypes';
-import {hasXYScales} from './utils/Scale';
-import {makeAccessor, domainFromData} from './utils/Data';
 import xyPropsEqual from './utils/xyPropsEqual';
 
 
@@ -36,16 +34,20 @@ function makeRangeBarChartProps(barChartProps) {
 export default class BarChart extends React.Component {
   static propTypes = {
     /**
-     * D3 scales for the X and Y axes of the chart, in {x, y} object format.
-     */
-    scale: CustomPropTypes.xyObjectOf(PropTypes.func.isRequired),
-    /**
      * Array of data to be plotted. One bar will be rendered per datum in the array.
      */
     data: PropTypes.array,
 
     x: CustomPropTypes.valueOrAccessor,
     y: CustomPropTypes.valueOrAccessor,
+    /**
+     * D3 scale for X axis - provided by XYPlot
+     */
+    xScale: PropTypes.func,
+    /**
+     * D3 scale for Y axis - provided by XYPlot
+     */
+    yScale: PropTypes.func,
     /**
      * Boolean which determines whether the chart will use horizontal or vertical bars.
      * When `true`, bars will be horizontal, ie. the X-axis will be treated as the dependent axis.
@@ -57,19 +59,15 @@ export default class BarChart extends React.Component {
      */
     barThickness: PropTypes.number,
     /**
-     * Inline style object to be applied to each bar.
+     * Inline style object to be applied to each bar,
+     * or accessor function which returns a style object;
      */
-    barStyle: PropTypes.object,
+    barStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /**
      * Class attribute to be applied to each bar.
+     * or accessor function which returns a class;
      */
-    barClassName: PropTypes.string,
-    /**
-     * Data getter for class attribute to be applied to each bar. Whereas `className` passes the same class to all
-     * bars, this is a function called once per bar, which gets the bar's datum as its first argument,
-     * so that each bar may determine its own className.
-     */
-    getClass: CustomPropTypes.getter,
+    barClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 
     /**
      * `mousemove` event handler callback, called when user's mouse moves within a bar.
@@ -107,7 +105,6 @@ export default class BarChart extends React.Component {
 
   render() {
     // todo: throw an error if dependent axis is not a number axis
-    invariant(hasXYScales(this.props.scale), `BarChart.props.scale.x and scale.y must both be valid d3 scales`);
 
     const rangeBarChartProps = makeRangeBarChartProps(this.props);
 
