@@ -44,7 +44,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Accessor function for line X values, called once per bar (datum), or a single X value to be used for the entire line."
+      "description": "Accessor function for line X values, called once per datum, or a single X value to be used for the entire line."
     },
     "y": {
       "type": {
@@ -52,7 +52,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Accessor function for line Y values, called once per bar (datum), or a single Y value to be used for the entire line."
+      "description": "Accessor function for line Y values, called once per datum, or a single Y value to be used for the entire line."
     },
     "lineStyle": {
       "type": {

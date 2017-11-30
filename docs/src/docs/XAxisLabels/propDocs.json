@@ -59,9 +59,9 @@
     }
   ],
   "props": {
-    "scale": {
+    "xScale": {
       "type": {
-        "name": "object"
+        "name": "func"
       },
       "required": false,
       "description": ""
@@ -159,9 +159,15 @@
         "computed": true
       }
     },
-    "spacing": {
+    "spacingTop": {
       "defaultValue": {
-        "value": "{top: 0, bottom: 0, left: 0, right: 0}",
+        "value": "0",
+        "computed": false
+      }
+    },
+    "spacingBottom": {
+      "defaultValue": {
+        "value": "0",
         "computed": false
       }
     }

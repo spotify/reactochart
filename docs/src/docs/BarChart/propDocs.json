@@ -31,14 +31,6 @@
     }
   ],
   "props": {
-    "scale": {
-      "type": {
-        "name": "custom",
-        "raw": "CustomPropTypes.xyObjectOf(PropTypes.func.isRequired)"
-      },
-      "required": false,
-      "description": "D3 scales for the X and Y axes of the chart, in {x, y} object format."
-    },
     "data": {
       "type": {
         "name": "array"
@@ -66,6 +58,20 @@
       "required": false,
       "description": ""
     },
+    "xScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for X axis - provided by XYPlot"
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for Y axis - provided by XYPlot"
+    },
     "horizontal": {
       "type": {
         "name": "bool"
@@ -90,10 +96,18 @@
     },
     "barStyle": {
       "type": {
-        "name": "object"
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
       },
       "required": false,
-      "description": "Inline style object to be applied to each bar.",
+      "description": "Inline style object to be applied to each bar,\nor accessor function which returns a style object;",
       "defaultValue": {
         "value": "{}",
         "computed": false
@@ -101,22 +115,22 @@
     },
     "barClassName": {
       "type": {
-        "name": "string"
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
       },
       "required": false,
-      "description": "Class attribute to be applied to each bar.",
+      "description": "Class attribute to be applied to each bar.\nor accessor function which returns a class;",
       "defaultValue": {
         "value": "''",
         "computed": false
       }
-    },
-    "getClass": {
-      "type": {
-        "name": "custom",
-        "raw": "CustomPropTypes.getter"
-      },
-      "required": false,
-      "description": "Data getter for class attribute to be applied to each bar. Whereas `className` passes the same class to all\nbars, this is a function called once per bar, which gets the bar's datum as its first argument,\nso that each bar may determine its own className."
     },
     "onMouseMoveBar": {
       "type": {

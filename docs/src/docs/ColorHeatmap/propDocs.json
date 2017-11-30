@@ -17,14 +17,6 @@
     }
   ],
   "props": {
-    "scale": {
-      "type": {
-        "name": "custom",
-        "raw": "CustomPropTypes.xyObjectOf(PropTypes.func.isRequired)"
-      },
-      "required": false,
-      "description": "d3 scale passed from xyplot"
-    },
     "data": {
       "type": {
         "name": "array"
@@ -32,45 +24,59 @@
       "required": true,
       "description": "data array - should be 1D array of all grid values\n(if you have a 2D array, _.flatten it)"
     },
-    "getValue": {
+    "value": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
-      },
-      "required": false,
-      "description": "data getters"
-    },
-    "getX": {
-      "type": {
-        "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
       "description": ""
     },
-    "getXEnd": {
+    "x": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
       "description": ""
     },
-    "getY": {
+    "xEnd": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
       "description": ""
     },
-    "getYEnd": {
+    "y": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
       "description": ""
+    },
+    "yEnd": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.valueOrAccessor"
+      },
+      "required": false,
+      "description": ""
+    },
+    "xScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for X axis - provided by XYPlot"
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for Y axis - provided by XYPlot"
     },
     "colorScale": {
       "type": {
@@ -101,6 +107,44 @@
       "description": "",
       "defaultValue": {
         "value": "'lab'",
+        "computed": false
+      }
+    },
+    "rectStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "rectClassName": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "''",
         "computed": false
       }
     }

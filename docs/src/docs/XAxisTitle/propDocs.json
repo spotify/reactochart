@@ -139,9 +139,25 @@
         "computed": false
       }
     },
-    "spacing": {
+    "spacingTop": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
       "defaultValue": {
-        "value": "{top: 0, bottom: 0, left: 0, right: 0}",
+        "value": "0",
+        "computed": false
+      }
+    },
+    "spacingBottom": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
         "computed": false
       }
     }

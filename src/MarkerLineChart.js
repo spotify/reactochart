@@ -43,10 +43,10 @@ export default class MarkerLineChart extends React.Component {
     lineLength: PropTypes.number,
 
     // x & y scale types
-    xScaleType: PropTypes.object,
-    yScaleType: PropTypes.object,
-    xScale: PropTypes.object,
-    yScale: PropTypes.object,
+    xScaleType: PropTypes.string,
+    yScaleType: PropTypes.string,
+    xScale: PropTypes.func,
+    yScale: PropTypes.func,
 
     onMouseEnterLine: PropTypes.func,
     onMouseMoveLine: PropTypes.func,

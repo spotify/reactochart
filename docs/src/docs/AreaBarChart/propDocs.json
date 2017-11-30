@@ -17,13 +17,19 @@
     }
   ],
   "props": {
-    "scale": {
+    "xScale": {
       "type": {
-        "name": "custom",
-        "raw": "CustomPropTypes.xyObjectOf(PropTypes.func.isRequired)"
+        "name": "func"
       },
       "required": false,
-      "description": "D3 scales for the X and Y axes of the chart, in {x, y} object format."
+      "description": "D3 scale for X axis - provided by XYPlot"
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for Y axis - provided by XYPlot"
     },
     "data": {
       "type": {

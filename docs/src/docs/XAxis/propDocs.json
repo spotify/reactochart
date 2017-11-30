@@ -38,57 +38,6 @@
       "required": false,
       "description": ""
     },
-    "yScale": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "spacingTop": {
-      "type": {
-        "name": "number"
-      },
-      "required": false,
-      "description": "",
-      "defaultValue": {
-        "value": "0",
-        "computed": false
-      }
-    },
-    "spacingBottom": {
-      "type": {
-        "name": "number"
-      },
-      "required": false,
-      "description": "",
-      "defaultValue": {
-        "value": "0",
-        "computed": false
-      }
-    },
-    "spacingLeft": {
-      "type": {
-        "name": "number"
-      },
-      "required": false,
-      "description": "",
-      "defaultValue": {
-        "value": "0",
-        "computed": false
-      }
-    },
-    "spacingRight": {
-      "type": {
-        "name": "number"
-      },
-      "required": false,
-      "description": "",
-      "defaultValue": {
-        "value": "0",
-        "computed": false
-      }
-    },
     "width": {
       "type": {
         "name": "number"
@@ -153,6 +102,50 @@
       },
       "required": false,
       "description": ""
+    },
+    "spacingTop": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "spacingBottom": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "spacingLeft": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "spacingRight": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
     },
     "showTitle": {
       "type": {

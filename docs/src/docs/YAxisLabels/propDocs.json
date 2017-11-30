@@ -59,12 +59,160 @@
     }
   ],
   "props": {
-    "scale": {
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "height": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "250",
+        "computed": false
+      }
+    },
+    "width": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "400",
+        "computed": false
+      }
+    },
+    "position": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "'left'",
+            "computed": false
+          },
+          {
+            "value": "'right'",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "'left'",
+        "computed": false
+      }
+    },
+    "placement": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "'before'",
+            "computed": false
+          },
+          {
+            "value": "'after'",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": ""
+    },
+    "distance": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "4",
+        "computed": false
+      }
+    },
+    "nice": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "tickCount": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "10",
+        "computed": false
+      }
+    },
+    "ticks": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "null",
+        "computed": false
+      }
+    },
+    "labelClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "''",
+        "computed": false
+      }
+    },
+    "labelStyle": {
       "type": {
         "name": "object"
       },
       "required": false,
-      "description": ""
+      "description": "",
+      "defaultValue": {
+        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: '14px',\n  lineHeight: 1,\n  textAnchor: 'end'\n}",
+        "computed": false
+      }
+    },
+    "spacingLeft": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "spacingRight": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
     },
     "onMouseEnterLabel": {
       "type": {
@@ -86,66 +234,6 @@
       },
       "required": false,
       "description": ""
-    },
-    "height": {
-      "defaultValue": {
-        "value": "250",
-        "computed": false
-      }
-    },
-    "width": {
-      "defaultValue": {
-        "value": "400",
-        "computed": false
-      }
-    },
-    "position": {
-      "defaultValue": {
-        "value": "'left'",
-        "computed": false
-      }
-    },
-    "distance": {
-      "defaultValue": {
-        "value": "4",
-        "computed": false
-      }
-    },
-    "nice": {
-      "defaultValue": {
-        "value": "true",
-        "computed": false
-      }
-    },
-    "tickCount": {
-      "defaultValue": {
-        "value": "10",
-        "computed": false
-      }
-    },
-    "ticks": {
-      "defaultValue": {
-        "value": "null",
-        "computed": false
-      }
-    },
-    "labelClassName": {
-      "defaultValue": {
-        "value": "''",
-        "computed": false
-      }
-    },
-    "labelStyle": {
-      "defaultValue": {
-        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: '14px',\n  lineHeight: 1,\n  textAnchor: 'end'\n}",
-        "computed": false
-      }
-    },
-    "spacing": {
-      "defaultValue": {
-        "value": "{top: 0, bottom: 0, left: 0, right: 0}",
-        "computed": false
-      }
     }
   }
 }

@@ -53,6 +53,53 @@
     }
   ],
   "props": {
+    "data": {
+      "type": {
+        "name": "array"
+      },
+      "required": true,
+      "description": "the array of data objects"
+    },
+    "x": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.valueOrAccessor"
+      },
+      "required": false,
+      "description": ""
+    },
+    "xEnd": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.valueOrAccessor"
+      },
+      "required": false,
+      "description": ""
+    },
+    "y": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.valueOrAccessor"
+      },
+      "required": false,
+      "description": ""
+    },
+    "yEnd": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.valueOrAccessor"
+      },
+      "required": false,
+      "description": ""
+    },
+    "area": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.valueOrAccessor"
+      },
+      "required": false,
+      "description": ""
+    },
     "unitsPerPixel": {
       "type": {
         "name": "number"
@@ -81,6 +128,20 @@
         "value": "{}",
         "computed": false
       }
+    },
+    "xScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for X axis - provided by XYPlot"
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for Y axis - provided by XYPlot"
     }
   }
 }

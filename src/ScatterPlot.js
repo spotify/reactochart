@@ -27,8 +27,8 @@ export default class ScatterPlot extends React.Component {
      * D3 scale for Y axis - provided by XYPlot
      */
     yScale: PropTypes.func,
-    xScaleType: PropTypes.object,
-    yScaleType: PropTypes.object,
+    xScaleType: PropTypes.string,
+    yScaleType: PropTypes.string,
 
     // used with the default point symbol (circle), defines the circle radius
     pointRadius: PropTypes.number,
@@ -97,7 +97,6 @@ export default class ScatterPlot extends React.Component {
     // x,y coords of center of symbol
     const cx = xScale(getValue(x, d, i)) + pointOffset[0];
     const cy = yScale(getValue(y, d, i)) + pointOffset[1];
-    console.log('scatter', this.props, symbolProps);
 
     // set positioning attributes based on symbol type
     if(pointSymbol.type === 'circle' || pointSymbol.type === 'ellipse') {

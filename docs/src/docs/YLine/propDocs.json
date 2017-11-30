@@ -21,14 +21,22 @@
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
     },
     "spacingRight": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
     },
     "style": {
       "type": {

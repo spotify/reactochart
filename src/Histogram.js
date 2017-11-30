@@ -63,7 +63,6 @@ export default class Histogram extends React.Component {
     if(!this.state.histogramData) return <g></g>;
     const {name, scale, axisType, scaleWidth, scaleHeight, plotWidth, plotHeight} = this.props;
 
-    console.log('histo', this.props, this.state);
     return <AreaBarChart
       {...this.props}
       data={this.state.histogramData}

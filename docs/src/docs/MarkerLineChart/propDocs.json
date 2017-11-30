@@ -118,34 +118,34 @@
       "required": true,
       "description": ""
     },
-    "getX": {
+    "x": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
       "description": ""
     },
-    "getY": {
+    "y": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
       "description": ""
     },
-    "getXEnd": {
+    "xEnd": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
       "description": ""
     },
-    "getYEnd": {
+    "yEnd": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
       "description": ""
@@ -172,16 +172,30 @@
         "computed": false
       }
     },
-    "scaleType": {
+    "xScaleType": {
       "type": {
-        "name": "object"
+        "name": "string"
       },
       "required": false,
       "description": ""
     },
-    "scale": {
+    "yScaleType": {
       "type": {
-        "name": "object"
+        "name": "string"
+      },
+      "required": false,
+      "description": ""
+    },
+    "xScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
       },
       "required": false,
       "description": ""

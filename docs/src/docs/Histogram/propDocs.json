@@ -2,12 +2,26 @@
   "description": "",
   "methods": [
     {
-      "name": "getDomain",
+      "name": "getScaleType",
       "docblock": null,
       "modifiers": [
         "static"
       ],
       "params": [],
+      "returns": null
+    },
+    {
+      "name": "getDomain",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
       "returns": null
     }
   ],
@@ -19,10 +33,10 @@
       "required": true,
       "description": "the array of data objects"
     },
-    "getValue": {
+    "value": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
       "description": ""

@@ -53,22 +53,6 @@
         "computed": false
       }
     },
-    "getX": {
-      "type": {
-        "name": "custom",
-        "raw": "CustomPropTypes.getter"
-      },
-      "required": false,
-      "description": ""
-    },
-    "getY": {
-      "type": {
-        "name": "custom",
-        "raw": "CustomPropTypes.getter"
-      },
-      "required": false,
-      "description": ""
-    },
     "name": {
       "type": {
         "name": "string"

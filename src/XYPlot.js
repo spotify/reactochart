@@ -2,7 +2,6 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 
-import resolveObjectProps from './utils/resolveObjectProps';
 import resolveXYScales from './utils/resolveXYScales';
 import {innerSize} from './utils/Margin';
 import {inferScaleType} from './utils/Scale';
@@ -60,9 +59,18 @@ class XYPlot extends React.Component {
      * for ordinal/categorical scales it is an array of known values ie. ['a', 'b', 'c'].
      * Automatically determined from data if not passed.
      */
-    domain: PropTypes.object,
     xDomain: PropTypes.array,
     yDomain: PropTypes.array,
+    /**
+     * d3 scales for the X and Y axes of the chart, in {x, y} object format.
+     * (optional, normally determined automatically by XYPlot)
+     */
+    xScale: PropTypes.func,
+    yScale: PropTypes.func,
+
+    xScaleType: PropTypes.string,
+    yScaleType: PropTypes.string,
+
     /**
      *
      */
@@ -72,30 +80,17 @@ class XYPlot extends React.Component {
     marginLeft: PropTypes.number,
     marginRight: PropTypes.number,
 
-    /**
-     * d3 scales for the X and Y axes of the chart, in {x, y} object format.
-     * (optional, normally determined automatically by XYPlot)
-     */
-    scale: PropTypes.object,
-    xScale: PropTypes.func,
-    yScale: PropTypes.func,
-
-    scaleType: PropTypes.object,
-
     // todo spacing & padding...
-    spacing: PropTypes.object,
     spacingTop: PropTypes.number,
     spacingBottom: PropTypes.number,
     spacingLeft: PropTypes.number,
     spacingRight: PropTypes.number,
 
-    padding: PropTypes.object,
     paddingTop: PropTypes.number,
     paddingBottom: PropTypes.number,
     paddingLeft: PropTypes.number,
     paddingRight: PropTypes.number,
 
-    invertScale: PropTypes.object,
     invertXScale: PropTypes.bool,
     invertYScale: PropTypes.bool,
 
@@ -164,13 +159,6 @@ class XYPlot extends React.Component {
   }
 }
 
-// const xyKeys = ['scaleType', 'domain', 'invertScale'];
-// const dirKeys = ['margin', 'padding', 'spacing'];
-
-const XYPlotResolved = _.flow([
-  resolveXYScales,
-  // _.partial(resolveObjectProps, _, xyKeys, ['x', 'y']),
-  // _.partial(resolveObjectProps, _, dirKeys, ['top', 'bottom', 'left', 'right'])
-])(XYPlot);
+const XYPlotResolved = resolveXYScales(XYPlot);
 
 export default XYPlotResolved;

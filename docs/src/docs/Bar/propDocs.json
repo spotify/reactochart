@@ -2,23 +2,6 @@
   "description": "Bar is a low-level component to be used in XYPlot-type charts (namely BarChart).\nIt is specified in terms of a range (min & max) of values on one axis (the bar's long axis)\nand a single value on the other axis.\nPassing props `x`, `xEnd` and `y` specifies a horizontal bar,\ncentered on `y` and spanning from `x` to `xEnd`;\npassing props `x`, `y`, and `yEnd' specifies a vertical bar.",
   "methods": [],
   "props": {
-    "scale": {
-      "type": {
-        "name": "shape",
-        "value": {
-          "x": {
-            "name": "func",
-            "required": true
-          },
-          "y": {
-            "name": "func",
-            "required": true
-          }
-        }
-      },
-      "required": false,
-      "description": "D3 scales for the X and Y axes of the chart, in {x, y} object format."
-    },
     "x": {
       "type": {
         "name": "union",
@@ -156,6 +139,20 @@
       },
       "required": false,
       "description": "onMouseLeave event handler callback, called when user's mouse leaves the bar."
+    },
+    "xScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for X axis - provided by XYPlot"
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for Y axis - provided by XYPlot"
     }
   }
 }

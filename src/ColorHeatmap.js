@@ -64,8 +64,8 @@ export default class ColorHeatmap extends React.Component {
     colors: PropTypes.array,
     valueDomain: PropTypes.array,
     interpolator: PropTypes.string,
-    rectStyle: CustomPropTypes.valueOrAccessor,
-    rectClassName: CustomPropTypes.valueOrAccessor
+    rectStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    rectClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
   };
   static defaultProps = {
     interpolator: 'lab',

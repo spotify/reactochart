@@ -31,14 +31,6 @@
     }
   ],
   "props": {
-    "scale": {
-      "type": {
-        "name": "custom",
-        "raw": "CustomPropTypes.xyObjectOf(PropTypes.func.isRequired)"
-      },
-      "required": false,
-      "description": "D3 scales for the X and Y axes of the chart, in {x, y} object format."
-    },
     "data": {
       "type": {
         "name": "array"
@@ -92,6 +84,20 @@
       },
       "required": false,
       "description": "Accessor function for the end (maximum Y-value) of the *dependent* variable range which is spanned by the bar's length,\nor a single value to be used for all bars.\nShould only be passed when `horizontal` is `false` (ignored otherwise)."
+    },
+    "xScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for X axis - provided by XYPlot"
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for Y axis - provided by XYPlot"
     },
     "barThickness": {
       "type": {
