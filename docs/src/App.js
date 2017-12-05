@@ -34,6 +34,7 @@ const xyChartComponents = [
 
 const standaloneChartComponents = [
   {name: 'PieChart', path: '/pie-chart', Component: Docs.PieChartDocs},
+  {name: 'SankeyDiagram', path: '/sankey', Component: Docs.SankeyDiagramDocs},
   {name: 'TreeMap', path: '/tree-map', Component: Docs.TreeMapDocs},
 ];
 

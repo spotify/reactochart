@@ -13,6 +13,7 @@ export {default as MeasuredValueLabelDocs} from './MeasuredValueLabel/MeasuredVa
 export {default as PieChartDocs} from './PieChart/PieChartDocs';
 export {default as RangeBarChartDocs} from './RangeBarChart/RangeBarChartDocs';
 export {default as RangeRectDocs} from './RangeRect/RangeRectDocs';
+export {default as SankeyDiagramDocs} from './SankeyDiagram/SankeyDiagramDocs';
 export {default as ScatterPlotDocs} from './ScatterPlot/ScatterPlotDocs';
 export {default as TreeMapDocs} from './TreeMap/TreeMapDocs';
 export {default as XAxisDocs} from './XAxis/XAxisDocs';

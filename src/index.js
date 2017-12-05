@@ -1,5 +1,6 @@
 //  Non-XY charts
 export {default as PieChart} from './PieChart';
+export {default as SankeyDiagram} from './SankeyDiagram';
 export {default as TreeMap} from './TreeMap';
 
 // XYPlot & XY charts

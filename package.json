@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "d3": "^4.4.0",
+    "d3-sankey": "^0.7.1",
     "invariant": "^2.2.0",
     "lodash": "^4.5.1",
     "measure-text": "0.0.4",

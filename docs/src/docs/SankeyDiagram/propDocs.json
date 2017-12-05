@@ -1,0 +1,200 @@
+{
+  "description": "A Sankey diagram is a type of flow diagram which represents",
+  "methods": [],
+  "props": {
+    "nodes": {
+      "type": {
+        "name": "arrayOf",
+        "value": {
+          "name": "shape",
+          "value": {
+            "id": {
+              "name": "union",
+              "value": [
+                {
+                  "name": "string"
+                },
+                {
+                  "name": "number"
+                }
+              ],
+              "required": false
+            },
+            "value": {
+              "name": "number",
+              "required": false
+            },
+            "step": {
+              "name": "number",
+              "required": false
+            }
+          }
+        }
+      },
+      "required": false,
+      "description": "Array of node objects, represented by vertical lines.\nThese represent the base entities which links flow into & out of.\nEach should have a numerical value and (optionally) a unique identifier.\nIf no identifier is included, the node index will be used."
+    },
+    "links": {
+      "type": {
+        "name": "arrayOf",
+        "value": {
+          "name": "shape",
+          "value": {
+            "source": {
+              "name": "union",
+              "value": [
+                {
+                  "name": "string"
+                },
+                {
+                  "name": "number"
+                }
+              ],
+              "required": false
+            },
+            "target": {
+              "name": "union",
+              "value": [
+                {
+                  "name": "string"
+                },
+                {
+                  "name": "number"
+                }
+              ],
+              "required": false
+            },
+            "value": {
+              "name": "number",
+              "required": false
+            }
+          }
+        }
+      },
+      "required": false,
+      "description": "Array of link objects, represented by curved paths between nodes.\nLinks represent a magnitude of flow between one node and another.\nEach should have a 'source' node [identifier], a 'target' node [identifier],\nand a numerical value representing flow magnitude."
+    },
+    "nodeId": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": ""
+    },
+    "nodeWidth": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Width (in pixels) of the vertical node lines.",
+      "defaultValue": {
+        "value": "12",
+        "computed": false
+      }
+    },
+    "nodePadding": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Vertical padding (in pixels) between each of the node lines.",
+      "defaultValue": {
+        "value": "8",
+        "computed": false
+      }
+    },
+    "nodeAlignment": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "'left'",
+            "computed": false
+          },
+          {
+            "value": "'right'",
+            "computed": false
+          },
+          {
+            "value": "'center'",
+            "computed": false
+          },
+          {
+            "value": "'justify'",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": "Node alignment method used to layout the nodes.\nMay be 'left', 'right', 'center', 'justify', or a custom function.\nSee [d3-sankey alignment docs](https://github.com/d3/d3-sankey#alignments) for more details.",
+      "defaultValue": {
+        "value": "'justify'",
+        "computed": false
+      }
+    },
+    "nodeClassName": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Class attribute to be applied to each node,\nor accessor function which returns a class (string).",
+      "defaultValue": {
+        "value": "''",
+        "computed": false
+      }
+    },
+    "nodeStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Inline style object to be applied to each node,\nor accessor function which returns a style object.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "width": {
+      "defaultValue": {
+        "value": "400",
+        "computed": false
+      }
+    },
+    "height": {
+      "defaultValue": {
+        "value": "300",
+        "computed": false
+      }
+    },
+    "getNodeId": {
+      "defaultValue": {
+        "value": "'id'",
+        "computed": false
+      }
+    }
+  }
+}
