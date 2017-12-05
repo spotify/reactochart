@@ -17,7 +17,7 @@ const nodeAlignmentsByName = {
 };
 
 
-export const SankeyNode = (props) => {
+const SankeyNode = (props) => {
   const {graph, node, nodeIndex, nodeClassName, nodeStyle,
     onMouseEnterNode, onMouseLeaveNode, onMouseMoveNode, onMouseDownNode, onMouseUpNode, onClickNode
   } = props;
@@ -41,7 +41,7 @@ export const SankeyNode = (props) => {
   />;
 };
 
-export const SankeyLink = (props) => {
+const SankeyLink = (props) => {
   const {
     graph, link, linkIndex, linkPath, linkClassName, linkStyle,
     onMouseEnterLink, onMouseLeaveLink, onMouseMoveLink, onMouseDownLink, onMouseUpLink, onClickLink

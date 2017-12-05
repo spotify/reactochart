@@ -6,33 +6,11 @@
       "type": {
         "name": "arrayOf",
         "value": {
-          "name": "shape",
-          "value": {
-            "id": {
-              "name": "union",
-              "value": [
-                {
-                  "name": "string"
-                },
-                {
-                  "name": "number"
-                }
-              ],
-              "required": false
-            },
-            "value": {
-              "name": "number",
-              "required": false
-            },
-            "step": {
-              "name": "number",
-              "required": false
-            }
-          }
+          "name": "object"
         }
       },
-      "required": false,
-      "description": "Array of node objects, represented by vertical lines.\nThese represent the base entities which links flow into & out of.\nEach should have a numerical value and (optionally) a unique identifier.\nIf no identifier is included, the node index will be used."
+      "required": true,
+      "description": "Array of node objects, represented by vertical rectangles.\nThese represent the base entities which links flow into & out of."
     },
     "links": {
       "type": {
@@ -71,15 +49,81 @@
           }
         }
       },
-      "required": false,
+      "required": true,
       "description": "Array of link objects, represented by curved paths between nodes.\nLinks represent a magnitude of flow between one node and another.\nEach should have a 'source' node [identifier], a 'target' node [identifier],\nand a numerical value representing flow magnitude."
     },
+    "width": {
+      "type": {
+        "name": "number"
+      },
+      "required": true,
+      "description": "Width of the SVG element.",
+      "defaultValue": {
+        "value": "400",
+        "computed": false
+      }
+    },
+    "height": {
+      "type": {
+        "name": "number"
+      },
+      "required": true,
+      "description": "Height of the SVG element.",
+      "defaultValue": {
+        "value": "300",
+        "computed": false
+      }
+    },
+    "className": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "`className` attribute to be applied to the SVG element.",
+      "defaultValue": {
+        "value": "''",
+        "computed": false
+      }
+    },
+    "style": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "Inline style object to be applied to the SVG element.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
     "nodeId": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Accessor function `nodeId(node, nodeIndex)` which specifies how to access the ID of each node object.\nThese should be the same identifiers used by `links[].source` and `.target`.\nUses the node's index in `nodes` array by default.",
+      "defaultValue": {
+        "value": "node => node.index",
+        "computed": false
+      }
+    },
+    "nodeLabelText": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "node => node.name",
+        "computed": false
+      }
+    },
+    "showNodes": {
       "type": {
         "name": "union",
         "value": [
           {
-            "name": "string"
+            "name": "bool"
           },
           {
             "name": "func"
@@ -87,7 +131,11 @@
         ]
       },
       "required": false,
-      "description": ""
+      "description": "Boolean which determines if node rectangles should be shown,\nor function (`showNode(node, nodeIndex)`) which returns a boolean",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
     },
     "nodeWidth": {
       "type": {
@@ -153,7 +201,7 @@
         ]
       },
       "required": false,
-      "description": "Class attribute to be applied to each node,\nor accessor function which returns a class (string).",
+      "description": "`className` attribute to be applied to each node,\nor accessor function which returns a class (string).",
       "defaultValue": {
         "value": "''",
         "computed": false
@@ -178,23 +226,184 @@
         "computed": false
       }
     },
-    "width": {
+    "showLinks": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "bool"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Boolean which determines if link paths should be shown,\nor function (`showLink(link, linkIndex)`) which returns a boolean",
       "defaultValue": {
-        "value": "400",
+        "value": "true",
         "computed": false
       }
     },
-    "height": {
+    "linkClassName": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Class attribute to be applied to each link,\nor accessor function which returns a class (string).",
       "defaultValue": {
-        "value": "300",
+        "value": "''",
         "computed": false
       }
     },
-    "getNodeId": {
+    "linkStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Inline style object to be applied to each link,\nor accessor function which returns a style object.",
       "defaultValue": {
-        "value": "'id'",
+        "value": "{}",
         "computed": false
       }
+    },
+    "showNodeLabels": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "bool"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Boolean which determines if node labels should be shown,\nor function (`showLink(link, linkIndex)`) which returns a boolean",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "showLinkLabels": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "bool"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Boolean which determines if node labels should be shown,\nor function (`showLink(link, linkIndex)`) which returns a boolean",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "onMouseEnterNode": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseLeaveNode": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseMoveNode": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseDownNode": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseUpNode": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onClickNode": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseEnterLink": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseLeaveLink": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseMoveLink": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseDownLink": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseUpLink": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onClickLink": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
     }
   }
 }

@@ -8,9 +8,12 @@ import sinonChai from 'sinon-chai';
 chai.use(sinonChai);
 const {expect} = chai;
 
-import {SankeyDiagram} from '../../../src/index.js';
-import {SankeyNode, SankeyLink} from '../../../src/SankeyDiagram';
-
+// use rewire to test internal SankeyNode/Link/etc. components
+const rewire = require('rewire');
+const Sankey = rewire('../../../src/SankeyDiagram');
+const SankeyDiagram = Sankey.default;
+const SankeyNode = Sankey.__get__('SankeyNode');
+const SankeyLink = Sankey.__get__('SankeyLink');
 
 describe('SankeyDiagram', () => {
   it('renders a Sankey Diagram', () => {
