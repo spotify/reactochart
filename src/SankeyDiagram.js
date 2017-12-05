@@ -104,16 +104,10 @@ const SankeyLinkLabel = (props) => {
 export default class SankeyDiagram extends React.Component {
   static propTypes = {
     /**
-     * Array of node objects, represented by vertical lines.
+     * Array of node objects, represented by vertical rectangles.
      * These represent the base entities which links flow into & out of.
-     * Each should have a numerical value and (optionally) a unique identifier.
-     * If no identifier is included, the node index will be used.
      */
-    nodes: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      value: PropTypes.number,
-      step: PropTypes.number,
-    })),
+    nodes: PropTypes.arrayOf(PropTypes.object).isRequired,
     /**
      * Array of link objects, represented by curved paths between nodes.
      * Links represent a magnitude of flow between one node and another.
@@ -124,15 +118,38 @@ export default class SankeyDiagram extends React.Component {
       source: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       target: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       value: PropTypes.number
-    })),
+    })).isRequired,
+    /**
+     * Width of the SVG element.
+     */
+    width: PropTypes.number.isRequired,
+    /**
+     * Height of the SVG element.
+     */
+    height: PropTypes.number.isRequired,
+    /**
+     * `className` attribute to be applied to the SVG element.
+     */
+    className: PropTypes.string,
+    /**
+     * Inline style object to be applied to the SVG element.
+     */
+    style: PropTypes.object,
 
-
+    /**
+     * Accessor function `nodeId(node, nodeIndex)` which specifies how to access the ID of each node object.
+     * These should be the same identifiers used by `links[].source` and `.target`.
+     * Uses the node's index in `nodes` array by default.
+     */
     nodeId: PropTypes.func,
+
     nodeLabelText: PropTypes.func,
     // nodeLabelPlacement
     // nodeLabelDistance
     // showLinkInLabels
     // showLinkOutLabels
+    // className
+    // style
 
     /**
      * Boolean which determines if node rectangles should be shown,
@@ -154,7 +171,7 @@ export default class SankeyDiagram extends React.Component {
      */
     nodeAlignment: PropTypes.oneOf(['left', 'right', 'center', 'justify']),
     /**
-     * Class attribute to be applied to each node,
+     * `className` attribute to be applied to each node,
      * or accessor function which returns a class (string).
      */
     nodeClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
@@ -209,6 +226,8 @@ export default class SankeyDiagram extends React.Component {
   static defaultProps = {
     width: 400,
     height: 300,
+    className: '',
+    style: {},
     nodeId: node => node.index,
     showNodes: true,
     nodeWidth: 12,
@@ -235,14 +254,14 @@ export default class SankeyDiagram extends React.Component {
   }
 
   render() {
-    const {nodes, links, width, height, showNodes, showLinks, showNodeLabels, showLinkLabels, nodeId} = this.props;
+    const {nodes, links, width, height, className, style, showNodes, showLinks, showNodeLabels, showLinkLabels, nodeId} = this.props;
 
     const graph = this._sankey({nodes, links});
     const makeLinkPath = sankeyLinkHorizontal();
 
     // console.log('graph', graph);
 
-    return <svg width={width} height={height}>
+    return <svg width={width} height={height} className={`sankey-diagram ${className}`} style={style}>
       {showLinks ?
         <g className="sankey-links">
           {(graph.links || []).map((link, linkIndex) => {
