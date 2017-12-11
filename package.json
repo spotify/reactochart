@@ -20,7 +20,8 @@
     "serve": "python -m SimpleHTTPServer",
     "test": "npm run test-jsdom",
     "test-browser": "webpack-dev-server --config tests/browser/webpack.config.test.js",
-    "test-jsdom": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec"
+    "test-jsdom": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec",
+    "test-watch": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --watch --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec"
   },
   "dependencies": {
     "d3": "^4.4.0",

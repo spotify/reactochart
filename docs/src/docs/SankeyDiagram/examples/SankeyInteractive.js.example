@@ -66,16 +66,14 @@ function getSampleData() {
       {id: 'g', label: "Grapes"},
     ],
     links: [
-      {source: 'a', target: 'c', value: 0.5},
-      {source: 'a', target: 'd', value: 0.5},
-      {source: 'b', target: 'c', value: 0.5},
-      {source: 'b', target: 'd', value: 0.5},
-      {source: 'c', target: 'e', value: 0.333},
-      {source: 'c', target: 'f', value: 0.333},
-      {source: 'c', target: 'g', value: 0.333},
-      {source: 'd', target: 'e', value: 0.333},
-      {source: 'd', target: 'f', value: 0.333},
-      {source: 'd', target: 'g', value: 0.333},
+      {source: 'a', target: 'c', value: 5},
+      {source: 'a', target: 'd', value: 5},
+      {source: 'b', target: 'c', value: 5},
+      {source: 'b', target: 'd', value: 5},
+      {source: 'c', target: 'e', value: 3.33},
+      {source: 'c', target: 'g', value: 3.33},
+      {source: 'd', target: 'e', value: 3.33},
+      {source: 'd', target: 'f', value: 3.33},
     ]
   }
 }
