@@ -1,3 +1,5 @@
+const graph = getSampleData();
+
 class SankeyInteractiveExample extends React.Component {
   state = {
     activeNode: undefined,
@@ -6,7 +8,6 @@ class SankeyInteractiveExample extends React.Component {
   };
 
   render() {
-    const graph = getSampleData();
     return <div>
       <SankeyDiagram
         width={900}
@@ -14,7 +15,8 @@ class SankeyInteractiveExample extends React.Component {
         nodes={graph.nodes}
         links={graph.links}
         nodeId={getNodeId}
-        nodeLabelText={(node) => node.label}
+        nodeAlignment="left"
+        nodeLabelText={getNodeLabel}
         nodeStyle={(node) => {
           const nodeId = getNodeId(node);
           if(nodeId === this.state.activeNode)
@@ -53,6 +55,7 @@ class SankeyInteractiveExample extends React.Component {
 ReactDOM.render(<SankeyInteractiveExample />, mountNode);
 
 function getNodeId(node) { return node.id }
+function getNodeLabel(node) { return node.label; }
 
 
 function getSampleData() {
@@ -65,15 +68,12 @@ function getSampleData() {
       {id: 'work', label: "Work"},
       {id: 'eating', label: "Eating"},
       {id: 'free', label: "Free Time"},
-
-
-      // {id: 'a', label: "Apples"},
-      // {id: 'b', label: "Bananas"},
-      // {id: 'c', label: "Cherries"},
-      // {id: 'd', label: "Dates"},
-      // {id: 'e', label: "Elderberries"},
-      // {id: 'f', label: "Figs"},
-      // {id: 'g', label: "Grapes"},
+      {id: 'meetings', label: "Meetings"},
+      {id: 'communication', label: "Communication"},
+      {id: 'programming', label: "Programming"},
+      {id: 'socializing', label: "Socializing"},
+      {id: 'media', label: "Media (TV, books, etc.)"},
+      {id: 'outdoors', label: "Outdoors"},
     ],
     links: [
       {source: 'week', target: 'weekdays', value: 120},
@@ -85,31 +85,12 @@ function getSampleData() {
       {source: 'weekends', target: 'sleep', value: 16},
       {source: 'weekends', target: 'eating', value: 4},
       {source: 'weekends', target: 'free', value: 28},
-
-    ]
-  }
-}
-
-function getSampleData2() {
-  return {
-    nodes: [
-      {id: 'a', label: "Apples"},
-      {id: 'b', label: "Bananas"},
-      {id: 'c', label: "Cherries"},
-      {id: 'd', label: "Dates"},
-      {id: 'e', label: "Elderberries"},
-      {id: 'f', label: "Figs"},
-      {id: 'g', label: "Grapes"},
-    ],
-    links: [
-      {source: 'a', target: 'c', value: 25},
-      {source: 'a', target: 'd', value: 75},
-      {source: 'b', target: 'c', value: 40},
-      {source: 'b', target: 'd', value: 60},
-      {source: 'c', target: 'e', value: 30},
-      {source: 'c', target: 'g', value: 20},
-      {source: 'd', target: 'e', value: 20},
-      {source: 'd', target: 'f', value: 20},
+      {source: 'free', target: 'socializing', value: 20},
+      {source: 'free', target: 'media', value: 20},
+      {source: 'free', target: 'outdoors', value: 10},
+      {source: 'work', target: 'meetings', value: 10},
+      {source: 'work', target: 'communication', value: 8},
+      {source: 'work', target: 'programming', value: 22}
     ]
   }
 }

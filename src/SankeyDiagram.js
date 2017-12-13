@@ -4,18 +4,7 @@ import _ from "lodash";
 import numeral from "numeral";
 import {sankey, sankeyLinkHorizontal, sankeyLeft, sankeyRight, sankeyCenter, sankeyJustify} from "d3-sankey";
 
-import {makeAccessor, getValue, domainFromData, combineDomains} from "./utils/Data";
-import xyPropsEqual from "./utils/xyPropsEqual";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
-
-window.numeral = numeral;
-
-const nodeAlignmentsByName = {
-  left: sankeyLeft,
-  right: sankeyRight,
-  center: sankeyCenter,
-  justify: sankeyJustify
-};
+import {getValue} from "./utils/Data";
 
 const SankeyNode = props => {
   const {graph, node, nodeClassName, nodeStyle} = props;
@@ -180,6 +169,13 @@ function enhanceGraph(graph) {
 function getLinkId(link, nodeId) {
   return `link-${nodeId(link.source)}-to-${nodeId(link.target)}`;
 }
+
+const nodeAlignmentsByName = {
+  left: sankeyLeft,
+  right: sankeyRight,
+  center: sankeyCenter,
+  justify: sankeyJustify
+};
 
 /**
  * A Sankey diagram is a type of flow diagram which represents
@@ -427,7 +423,6 @@ export default class SankeyDiagram extends React.Component {
      */
     linkTargetLabelStartOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
-
     // showLinkInLabels
     // showLinkOutLabels
 
@@ -485,9 +480,9 @@ export default class SankeyDiagram extends React.Component {
     },
     nodeLabelClassName: "",
     nodeLabelStyle: {},
-    showLinkLabels: true,
+    showLinkLabels: false,
     linkLabelText: (link, graph, props) => {
-      const valueText = numeral(link.value || 0).format('0.[0]a');
+      const valueText = numeral(link.value || 0).format("0.[0]a");
       const sourceText = getValue(props.nodeLabelText, link.source, graph, props);
       const targetText = getValue(props.nodeLabelText, link.target, graph, props);
       return `${sourceText}→${targetText}: ${valueText}`;
@@ -496,7 +491,7 @@ export default class SankeyDiagram extends React.Component {
     linkLabelStyle: {},
     linkLabelAttributes: {},
     linkLabelStartOffset: "25%",
-    showLinkSourceLabels: true,
+    showLinkSourceLabels: false,
     linkSourceLabelText: (link, graph, props) => {
       const valueRelative = link.valueSourceRelative;
       if (!_.isFinite(valueRelative)) return "";
@@ -507,7 +502,7 @@ export default class SankeyDiagram extends React.Component {
     linkSourceLabelStyle: {},
     linkSourceLabelAttributes: {},
     linkSourceLabelStartOffset: "2%",
-    showLinkTargetLabels: true,
+    showLinkTargetLabels: false,
     linkTargetLabelText: (link, graph, props) => {
       const valueRelative = link.valueTargetRelative;
       if (!_.isFinite(valueRelative)) return "";
@@ -520,25 +515,47 @@ export default class SankeyDiagram extends React.Component {
     linkTargetLabelStartOffset: "98%"
   };
 
+  _makeSankeyGraph() {
+    const makeSankey = sankey()
+      .size([this.props.width, this.props.height])
+      .nodeId(this.props.nodeId)
+      .nodeWidth(this.props.nodeWidth)
+      .nodePadding(this.props.nodePadding)
+      .nodeAlign(nodeAlignmentsByName[this.props.nodeAlignment] || nodeAlignmentsByName.justify);
+
+    const sankeyGraph = makeSankey({nodes: this.props.nodes, links: this.props.links});
+    this._graph = enhanceGraph(sankeyGraph);
+  }
+
   componentWillMount() {
-    const {width, height, nodeId, nodeWidth, nodePadding, nodeAlignment} = this.props;
-    this._sankey = sankey()
-      .size([width, height])
-      .nodeId(nodeId)
-      .nodeWidth(nodeWidth)
-      .nodePadding(nodePadding)
-      .nodeAlign(nodeAlignmentsByName[nodeAlignment] || nodeAlignmentsByName.justify);
+    this._makeSankeyGraph();
+  }
+  componentWillReceiveProps(nextProps) {
+    // only update this._graph if a prop which affects the sankey layout has changed (most don't)
+    const sankeyLayoutPropKeys = [
+      "nodes",
+      "links",
+      "width",
+      "height",
+      "nodeId",
+      "nodeWidth",
+      "nodePadding",
+      "nodeAlignment"
+    ];
+
+    const hasChangedSankey = _.some(sankeyLayoutPropKeys, key => {
+      if (nextProps[key] !== this.props[key]) console.log("changed", key);
+      return nextProps[key] !== this.props[key];
+    });
+    if (hasChangedSankey) this._makeSankeyGraph();
   }
 
   render() {
     const {width, height, style, nodeId} = this.props;
 
-    const graph = enhanceGraph(this._sankey({nodes: this.props.nodes, links: this.props.links}));
+    const graph = this._graph;
     const makeLinkPath = sankeyLinkHorizontal();
     const className = `sankey-diagram ${this.props.className}`;
-
-    console.log(graph);
-    console.log(Object.keys(SankeyDiagram.propTypes).length, "props");
 
     function mapNodesInGroupIf(shouldShow, groupClassName, mapFunc) {
       if (!shouldShow) return null;
