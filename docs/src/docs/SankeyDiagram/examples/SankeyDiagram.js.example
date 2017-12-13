@@ -6,7 +6,6 @@ const SankeyDiagramExample = (props) => {
       height={500}
       nodes={graph.nodes}
       links={graph.links}
-      getNodeId={(d, i) => i}
     />
   </div>;
 };

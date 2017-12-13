@@ -644,6 +644,8 @@ describe('SankeyDiagram', () => {
     });
   });
   // todo SankeyLinkLabel
+  // todo test terminals
+  // todo test link labels
 });
 
 function getSampleData() {

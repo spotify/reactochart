@@ -54,7 +54,43 @@ ReactDOM.render(<SankeyInteractiveExample />, mountNode);
 
 function getNodeId(node) { return node.id }
 
+
 function getSampleData() {
+  return {
+    nodes: [
+      {id: 'week', label: "Week"},
+      {id: 'weekdays', label: "Weekdays"},
+      {id: 'weekends', label: "Weekends"},
+      {id: 'sleep', label: "Sleep"},
+      {id: 'work', label: "Work"},
+      {id: 'eating', label: "Eating"},
+      {id: 'free', label: "Free Time"},
+
+
+      // {id: 'a', label: "Apples"},
+      // {id: 'b', label: "Bananas"},
+      // {id: 'c', label: "Cherries"},
+      // {id: 'd', label: "Dates"},
+      // {id: 'e', label: "Elderberries"},
+      // {id: 'f', label: "Figs"},
+      // {id: 'g', label: "Grapes"},
+    ],
+    links: [
+      {source: 'week', target: 'weekdays', value: 120},
+      {source: 'week', target: 'weekends', value: 48},
+      {source: 'weekdays', target: 'sleep', value: 40},
+      {source: 'weekdays', target: 'work', value: 40},
+      {source: 'weekdays', target: 'eating', value: 10},
+      {source: 'weekdays', target: 'free', value: 30},
+      {source: 'weekends', target: 'sleep', value: 16},
+      {source: 'weekends', target: 'eating', value: 4},
+      {source: 'weekends', target: 'free', value: 28},
+
+    ]
+  }
+}
+
+function getSampleData2() {
   return {
     nodes: [
       {id: 'a', label: "Apples"},
@@ -66,14 +102,14 @@ function getSampleData() {
       {id: 'g', label: "Grapes"},
     ],
     links: [
-      {source: 'a', target: 'c', value: 5},
-      {source: 'a', target: 'd', value: 5},
-      {source: 'b', target: 'c', value: 5},
-      {source: 'b', target: 'd', value: 5},
-      {source: 'c', target: 'e', value: 3.33},
-      {source: 'c', target: 'g', value: 3.33},
-      {source: 'd', target: 'e', value: 3.33},
-      {source: 'd', target: 'f', value: 3.33},
+      {source: 'a', target: 'c', value: 25},
+      {source: 'a', target: 'd', value: 75},
+      {source: 'b', target: 'c', value: 40},
+      {source: 'b', target: 'd', value: 60},
+      {source: 'c', target: 'e', value: 30},
+      {source: 'c', target: 'g', value: 20},
+      {source: 'd', target: 'e', value: 20},
+      {source: 'd', target: 'f', value: 20},
     ]
   }
 }

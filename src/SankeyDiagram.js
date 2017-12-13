@@ -18,18 +18,7 @@ const nodeAlignmentsByName = {
 };
 
 const SankeyNode = props => {
-  const {
-    graph,
-    node,
-    nodeClassName,
-    nodeStyle,
-    onMouseEnterNode,
-    onMouseLeaveNode,
-    onMouseMoveNode,
-    onMouseDownNode,
-    onMouseUpNode,
-    onClickNode
-  } = props;
+  const {graph, node, nodeClassName, nodeStyle} = props;
   // create partial functions for handlers - callbacks with the current node/graph arguments attached
   const makeHandler = origHandler => (_.isFunction(origHandler) ? _.partial(origHandler, _, {node, graph}) : null);
 
@@ -41,30 +30,18 @@ const SankeyNode = props => {
       height={Math.abs(node.y1 - node.y0)}
       className={`sankey-node ${getValue(nodeClassName, node, graph)}`}
       style={getValue(nodeStyle, node, graph)}
-      onMouseEnter={makeHandler(onMouseEnterNode)}
-      onMouseLeave={makeHandler(onMouseLeaveNode)}
-      onMouseMove={makeHandler(onMouseMoveNode)}
-      onMouseDown={makeHandler(onMouseDownNode)}
-      onMouseUp={makeHandler(onMouseUpNode)}
-      onClick={makeHandler(onClickNode)}
+      onMouseEnter={makeHandler(props.onMouseEnterNode)}
+      onMouseLeave={makeHandler(props.onMouseLeaveNode)}
+      onMouseMove={makeHandler(props.onMouseMoveNode)}
+      onMouseDown={makeHandler(props.onMouseDownNode)}
+      onMouseUp={makeHandler(props.onMouseUpNode)}
+      onClick={makeHandler(props.onClickNode)}
     />
   );
 };
 
 const SankeyLink = props => {
-  const {
-    graph,
-    link,
-    linkPath,
-    linkClassName,
-    linkStyle,
-    onMouseEnterLink,
-    onMouseLeaveLink,
-    onMouseMoveLink,
-    onMouseDownLink,
-    onMouseUpLink,
-    onClickLink
-  } = props;
+  const {graph, link, linkPath, linkClassName, linkStyle} = props;
   // create partial functions for handlers - callbacks with the current graph/link arguments attached
   const makeHandler = origHandler => (_.isFunction(origHandler) ? _.partial(origHandler, _, {link, graph}) : null);
 
@@ -76,23 +53,26 @@ const SankeyLink = props => {
         ...getValue(linkStyle, link, graph),
         strokeWidth: link.width
       }}
-      onMouseEnter={makeHandler(onMouseEnterLink)}
-      onMouseLeave={makeHandler(onMouseLeaveLink)}
-      onMouseMove={makeHandler(onMouseMoveLink)}
-      onMouseDown={makeHandler(onMouseDownLink)}
-      onMouseUp={makeHandler(onMouseUpLink)}
-      onClick={makeHandler(onClickLink)}
+      onMouseEnter={makeHandler(props.onMouseEnterLink)}
+      onMouseLeave={makeHandler(props.onMouseLeaveLink)}
+      onMouseMove={makeHandler(props.onMouseMoveLink)}
+      onMouseDown={makeHandler(props.onMouseDownLink)}
+      onMouseUp={makeHandler(props.onMouseUpLink)}
+      onClick={makeHandler(props.onClickLink)}
     />
   );
 };
 
 const SankeyNodeTerminal = props => {
   const {node, graph} = props;
+  if (!node.terminalValue) return null;
+  const makeHandler = origHandler =>
+    _.isFunction(origHandler) ? _.partial(origHandler, _, {node, graph, props}) : null;
   const getWithNode = accessor => getValue(accessor, node, graph, props);
   const width = getWithNode(props.nodeTerminalWidth) || 0;
   const distance = getWithNode(props.nodeTerminalDistance) || 0;
   const nodeHeight = Math.abs(node.y1 - node.y0) || 0;
-  const height = (((nodeHeight * node.terminalValue) || 0) / (node.value || 0)) || 0;
+  const height = (nodeHeight * node.terminalValue || 0) / (node.value || 0) || 0;
   const style = getWithNode(props.nodeTerminalStyle);
   const className = `sankey-node-terminal ${getWithNode(props.nodeTerminalClassName)}`;
   const attributes = getWithNode(props.nodeTerminalAttributes);
@@ -103,33 +83,25 @@ const SankeyNodeTerminal = props => {
       y={node.y0 + (nodeHeight - height)}
       {...{width, height, style, className}}
       {...attributes}
-      // onMouseEnter={makeHandler(props.onMouseEnterNode)}
-      // onMouseLeave={makeHandler(props.onMouseLeaveNode)}
-      // onMouseMove={makeHandler(props.onMouseMoveNode)}
-      // onMouseDown={makeHandler(props.onMouseDownNode)}
-      // onMouseUp={makeHandler(props.onMouseUpNode)}
-      // onClick={makeHandler(props.onClickNode)}
+      onMouseEnter={makeHandler(props.onMouseEnterNodeTerminal)}
+      onMouseLeave={makeHandler(props.onMouseLeaveNodeTerminal)}
+      onMouseMove={makeHandler(props.onMouseMoveNodeTerminal)}
+      onMouseDown={makeHandler(props.onMouseDownNodeTerminal)}
+      onMouseUp={makeHandler(props.onMouseUpNodeTerminal)}
+      onClick={makeHandler(props.onClickNodeTerminal)}
     />
   );
 };
 
 const SankeyNodeLabel = props => {
-  const {
-    node,
-    graph,
-    nodeLabelText,
-    nodeId,
-    nodeLabelPlacement,
-    nodeLabelDistance,
-    nodeLabelClassName,
-    nodeLabelStyle
-  } = props;
-  const getWithNode = accessor => getValue(accessor, node, graph);
+  const {node, graph, nodeLabelText, nodeId} = props;
+  const getWithNode = accessor => getValue(accessor, node, graph, props);
   const getLabelText = _.isFunction(nodeLabelText) ? nodeLabelText : nodeId;
-  const placement = getWithNode(nodeLabelPlacement);
-  const distance = getWithNode(nodeLabelDistance) || 0;
+  const placement = getWithNode(props.nodeLabelPlacement);
+  const distance = getWithNode(props.nodeLabelDistance) || 0;
 
-  let style = {...getWithNode(nodeLabelStyle)};
+  const className = `sankey-node-label ${getWithNode(props.nodeLabelClassName)}`;
+  let style = {...getWithNode(props.nodeLabelStyle)};
   let textPosition;
 
   // use placement prop to determine x, y, alignmentBaseline and
@@ -162,30 +134,52 @@ const SankeyNodeLabel = props => {
   }
 
   return (
-    <text {...textPosition} className={`sankey-node-label ${getWithNode(nodeLabelClassName)}`} style={style}>
+    <text {...textPosition} className={className} style={style}>
       {getLabelText(node, graph)}
     </text>
   );
 };
 
 const SankeyLinkLabel = props => {
-  const {link, linkPath, nodeId, linkLabelText, linkLabelClassName, linkLabelStyle} = props;
-  const className = getValue(linkLabelClassName, link, props.graph, props);
-  const style = getValue(linkLabelStyle, link, props.graph, props);
+  const {link, graph} = props;
+  const getWithLink = accessor => getValue(accessor, link, graph, props);
+  const className = `sankey-link-label ${getWithLink(props.linkLabelClassName || "")}`;
+  const style = getWithLink(props.linkLabelStyle || {});
+  const attributes = getWithLink(props.linkLabelAttributes || {});
+  const startOffset = getWithLink(props.linkLabelStartOffset || 0);
 
   return (
-    <g className="sankey-link-label-container">
-      <defs>
-        <path id={`link-${nodeId(link.source)}-to-${nodeId(link.target)}`} d={linkPath} />
-      </defs>
-      <text className={`sankey-link-label ${className}`} style={style}>
-        <textPath startOffset="15%" xlinkHref={`#link-${nodeId(link.source)}-to-${nodeId(link.target)}`}>
-          {getValue(linkLabelText, link, props.graph, props)}
-        </textPath>
-      </text>
-    </g>
+    <text className={className} style={style} {...attributes}>
+      <textPath startOffset={startOffset} xlinkHref={`#${props.linkPathId}`}>
+        {getWithLink(props.linkLabelText)}
+      </textPath>
+    </text>
   );
 };
+
+/**
+ * Enhance the graph object created by d3-sankey by adding some additional useful properties.
+ * Adds `maxDepth` (max of node `depth` properties)
+ * and `node.terminalValue` (value of node's terminal, sum of all 'out' nodes minus sum of 'in' nodes)
+ */
+function enhanceGraph(graph) {
+  graph.nodes.forEach(node => {
+    const sourceLinksSum = (node.sourceLinks || []).reduce((sum, link) => sum + link.value, 0);
+    node.terminalValue = Math.max(node.value - sourceLinksSum, 0);
+  });
+  graph.links.forEach(link => {
+    link.valueSourceRelative = (link.value || 0) / _.get(link, "source.value", 0);
+    link.valueTargetRelative = (link.value || 0) / _.get(link, "target.value", 0);
+  });
+
+  graph.maxDepth = _.maxBy(graph.nodes, "depth");
+  graph.maxDepth = graph.nodes.reduce((max, node) => Math.max(node.depth || 0, max), 0);
+  return graph;
+}
+
+function getLinkId(link, nodeId) {
+  return `link-${nodeId(link.source)}-to-${nodeId(link.target)}`;
+}
 
 /**
  * A Sankey diagram is a type of flow diagram which represents
@@ -233,29 +227,13 @@ export default class SankeyDiagram extends React.Component {
      */
     showNodes: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     /**
-     * Boolean which determines if link paths should be shown,
-     * or function (`showLink(link, graph)`) which returns a boolean
-     */
-    showLinks: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-    /**
-     * Boolean which determines if node labels should be shown,
-     * or function (`showLink(link, graph)`) which returns a boolean
-     */
-    showNodeLabels: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-    /**
-     * Boolean which determines if node labels should be shown,
-     * or function (`showLink(link, graph)`) which returns a boolean
-     */
-    showLinkLabels: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-
-    /**
      * Accessor function `nodeId(node, graph)` which specifies how to access the ID of each node object.
      * These should be the same identifiers used by `links[].source` and `.target`.
      * Uses the node's index in `nodes` array by default.
      */
     nodeId: PropTypes.func,
     /**
-     * Width (in pixels) of the vertical node lines.
+     * Width (in pixels) of the vertical node rectangles.
      */
     nodeWidth: PropTypes.number,
     /**
@@ -280,6 +258,11 @@ export default class SankeyDiagram extends React.Component {
     nodeStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 
     /**
+     * Boolean which determines if link paths should be shown,
+     * or function (`showLink(link, graph)`) which returns a boolean
+     */
+    showLinks: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    /**
      * Class attribute to be applied to each link,
      * or accessor function which returns a class (string).
      */
@@ -290,6 +273,44 @@ export default class SankeyDiagram extends React.Component {
      */
     linkStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 
+    /**
+     * Boolean which determines if node terminals should be shown,
+     * or function (`showLink(link, graph)`) which returns a boolean.
+     * Terminals are bars that run alongside to show the amount
+     * which has flowed *in* but not *out*
+     */
+    showNodeTerminals: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    /**
+     * Width (in pixels) of the node terminal rectangles,
+     * or accessor function `f(node, graph)` which returns a width.
+     */
+    nodeTerminalWidth: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
+    /**
+     * Distance (in pixels) between nodes and their terminals,
+     * or accessor function `f(node, graph)` which returns a distance.
+     */
+    nodeTerminalDistance: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
+    /**
+     * `className` attribute to be applied to each node terminal,
+     * or accessor function which returns a class (string).
+     */
+    nodeTerminalClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    /**
+     * Inline style object to be applied to each node terminal,
+     * or accessor function which returns a style object.
+     */
+    nodeTerminalStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    /**
+     * Attributes object to be applied to each node terminal element,
+     * or accessor function which returns an object.
+     */
+    nodeTerminalAttributes: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+
+    /**
+     * Boolean which determines if node labels should be shown,
+     * or function (`showLink(link, graph)`) which returns a boolean
+     */
+    showNodeLabels: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     /**
      * Placement of the node label relative to the node rectangle.
      * Expects 'before', 'after', 'above' or 'below', or a function which returns one of these.
@@ -316,7 +337,11 @@ export default class SankeyDiagram extends React.Component {
      */
     nodeLabelStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 
-    // to test
+    /**
+     * Boolean which determines if link labels should be shown,
+     * or function (`showLink(link, graph)`) which returns a boolean
+     */
+    showLinkLabels: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     /**
      * Accessor function `f(link, graph)` which returns the text to be used for link labels.
      */
@@ -331,13 +356,77 @@ export default class SankeyDiagram extends React.Component {
      * or accessor function which returns a style object.
      */
     linkLabelStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    /**
+     * Attributes object to be applied to each link label element,
+     * or accessor function which returns an object.
+     */
+    linkLabelAttributes: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    /**
+     * `startOffset` attribute to apply to the link label `<textpath>` element.
+     * May be a number (in SVG units) or percent string (`"25%"`)
+     */
+    linkLabelStartOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
-    // showNodeTerminals
-    // nodeTerminalWidth
-    // nodeTerminalDistance
-    // nodeTerminalClassName
-    // nodeTerminalStyle
-    // nodeTerminalAttributes
+    /**
+     * Boolean which determines if link *source* labels should be shown,
+     * or function (`showLink(link, graph)`) which returns a boolean
+     */
+    showLinkSourceLabels: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    /**
+     * Accessor function `f(link, graph)` which returns the text to be used for link *source* labels.
+     */
+    linkSourceLabelText: PropTypes.func,
+    /**
+     * `className` attribute to be applied to each link *source* label,
+     * or accessor function which returns a class (string).
+     */
+    linkSourceLabelClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    /**
+     * Inline style object to be applied to each link *source* label,
+     * or accessor function which returns a style object.
+     */
+    linkSourceLabelStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    /**
+     * Attributes object to be applied to each link *source* label,
+     * or accessor function which returns an object.
+     */
+    linkSourceLabelAttributes: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    /**
+     * `startOffset` attribute to apply to the link *source* label `<textpath>` element.
+     * May be a number (in SVG units) or percent string (`"25%"`)
+     */
+    linkSourceLabelStartOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+    /**
+     * Boolean which determines if link *target* labels should be shown,
+     * or function (`showLink(link, graph)`) which returns a boolean
+     */
+    showLinkTargetLabels: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    /**
+     * Accessor function `f(link, graph)` which returns the text to be used for link *target* labels.
+     */
+    linkTargetLabelText: PropTypes.func,
+    /**
+     * `className` attribute to be applied to each link *target* label,
+     * or accessor function which returns a class (string).
+     */
+    linkTargetLabelClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    /**
+     * Inline style object to be applied to each link *target* label,
+     * or accessor function which returns a style object.
+     */
+    linkTargetLabelStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    /**
+     * Attributes object to be applied to each link *target* label,
+     * or accessor function which returns an object.
+     */
+    linkTargetLabelAttributes: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    /**
+     * `startOffset` attribute to apply to the link *target* label `<textpath>` element.
+     * May be a number (in SVG units) or percent string (`"25%"`)
+     */
+    linkTargetLabelStartOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
 
     // showLinkInLabels
     // showLinkOutLabels
@@ -354,7 +443,14 @@ export default class SankeyDiagram extends React.Component {
     onMouseMoveLink: PropTypes.func,
     onMouseDownLink: PropTypes.func,
     onMouseUpLink: PropTypes.func,
-    onClickLink: PropTypes.func
+    onClickLink: PropTypes.func,
+
+    onMouseEnterNodeTerminal: PropTypes.func,
+    onMouseLeaveNodeTerminal: PropTypes.func,
+    onMouseMoveNodeTerminal: PropTypes.func,
+    onMouseDownNodeTerminal: PropTypes.func,
+    onMouseUpNodeTerminal: PropTypes.func,
+    onClickNodeTerminal: PropTypes.func
   };
   static defaultProps = {
     width: 400,
@@ -371,29 +467,57 @@ export default class SankeyDiagram extends React.Component {
     showLinks: true,
     linkClassName: "",
     linkStyle: {},
+    showNodeTerminals: true,
+    nodeTerminalWidth: 5,
+    nodeTerminalDistance: 1,
+    nodeTerminalClassName: "",
+    nodeTerminalStyle: {},
+    nodeTerminalAttributes: {rx: 2, ry: 2},
     showNodeLabels: true,
     nodeLabelPlacement: (node, graph) => {
       return node.depth < graph.maxDepth / 2 ? "after" : "before";
     },
     nodeLabelDistance: 4,
-    nodeLabelText: node => node.name,
+    nodeLabelText: (node, graph, props) => {
+      if (_.has(node, "name")) return node.name;
+      if (_.has(node, "label")) return node.label;
+      return getValue(props.nodeId, node, graph, props);
+    },
     nodeLabelClassName: "",
     nodeLabelStyle: {},
     showLinkLabels: true,
     linkLabelText: (link, graph, props) => {
-      const valueRelative = (link.value || 0) / _.get(link, "source.value", 0);
+      const valueText = numeral(link.value || 0).format('0.[0]a');
+      const sourceText = getValue(props.nodeLabelText, link.source, graph, props);
+      const targetText = getValue(props.nodeLabelText, link.target, graph, props);
+      return `${sourceText}→${targetText}: ${valueText}`;
+    },
+    linkLabelClassName: "",
+    linkLabelStyle: {},
+    linkLabelAttributes: {},
+    linkLabelStartOffset: "25%",
+    showLinkSourceLabels: true,
+    linkSourceLabelText: (link, graph, props) => {
+      const valueRelative = link.valueSourceRelative;
       if (!_.isFinite(valueRelative)) return "";
       const percentText = valueRelative < 0.001 ? "<0.1%" : numeral(valueRelative).format("0.[0]%");
       return `${percentText} to ${getValue(props.nodeLabelText, link.target, graph, props)}`;
     },
-    linkLabelClassName: "",
-    linkLabelStyle: {},
-    showNodeTerminals: true,
-    nodeTerminalWidth: 6,
-    nodeTerminalDistance: 1,
-    nodeTerminalClassName: '',
-    nodeTerminalStyle: {},
-    nodeTerminalAttributes: {rx: 2, ry: 2}
+    linkSourceLabelClassName: "",
+    linkSourceLabelStyle: {},
+    linkSourceLabelAttributes: {},
+    linkSourceLabelStartOffset: "2%",
+    showLinkTargetLabels: true,
+    linkTargetLabelText: (link, graph, props) => {
+      const valueRelative = link.valueTargetRelative;
+      if (!_.isFinite(valueRelative)) return "";
+      const percentText = valueRelative < 0.001 ? "<0.1%" : numeral(valueRelative).format("0.[0]%");
+      return `${percentText} from ${getValue(props.nodeLabelText, link.source, graph, props)}`;
+    },
+    linkTargetLabelClassName: "",
+    linkTargetLabelStyle: {},
+    linkTargetLabelAttributes: {},
+    linkTargetLabelStartOffset: "98%"
   };
 
   componentWillMount() {
@@ -407,106 +531,106 @@ export default class SankeyDiagram extends React.Component {
   }
 
   render() {
-    const {
-      nodes,
-      links,
-      width,
-      height,
-      className,
-      style,
-      showNodes,
-      showLinks,
-      showNodeLabels,
-      showLinkLabels,
-      showNodeTerminals,
-      nodeId
-    } = this.props;
+    const {width, height, style, nodeId} = this.props;
 
-    const graph = enhanceGraph(this._sankey({nodes, links}));
+    const graph = enhanceGraph(this._sankey({nodes: this.props.nodes, links: this.props.links}));
     const makeLinkPath = sankeyLinkHorizontal();
+    const className = `sankey-diagram ${this.props.className}`;
 
     console.log(graph);
+    console.log(Object.keys(SankeyDiagram.propTypes).length, "props");
 
-    function enhanceGraph(graph) {
-      graph.nodes.forEach(node => {
-        const sourceLinksSum = (node.sourceLinks || []).reduce((sum, link) => sum + link.value, 0);
-        node.terminalValue = Math.max(node.value - sourceLinksSum, 0);
-      });
-
-      graph.maxDepth = _.maxBy(graph.nodes, "depth");
-      graph.maxDepth = graph.nodes.reduce((max, node) => Math.max(node.depth || 0, max), 0);
-      return graph;
+    function mapNodesInGroupIf(shouldShow, groupClassName, mapFunc) {
+      if (!shouldShow) return null;
+      return (
+        <g className={groupClassName}>
+          {(graph.nodes || []).map((node, i) => {
+            if (!getValue(shouldShow, node, graph)) return null;
+            const key = `node-${nodeId(node)}`;
+            return mapFunc(node, i, key);
+          })}
+        </g>
+      );
     }
 
+    function mapLinksInGroupIf(shouldShow, groupClassName, mapFunc) {
+      if (!shouldShow) return null;
+      return (
+        <g className={groupClassName}>
+          {(graph.links || []).map((link, i) => {
+            if (!getValue(shouldShow, link, graph)) return null;
+            const key = `link-${nodeId(link.source)}-to-${nodeId(link.target)}`;
+            return mapFunc(link, i, key);
+          })}
+        </g>
+      );
+    }
 
     return (
-      <svg width={width} height={height} className={`sankey-diagram ${className}`} style={style}>
-        {showLinks ? (
-          <g className="sankey-links">
-            {(graph.links || []).map(link => {
-              if (!getValue(showLinks, link, graph)) return null;
-              const key = `link-${nodeId(link.source)}-to-${nodeId(link.target)}`;
-              return (
-                <SankeyLink
-                  {...this.props}
-                  {...{
-                    key,
-                    graph,
-                    link,
-                    linkPath: makeLinkPath(link)
-                  }}
-                />
-              );
-            })}
-          </g>
-        ) : null}
-        {showNodes ? (
-          <g className="sankey-nodes">
-            {graph.nodes.map(node => {
-              if (!getValue(showNodes, node, graph)) return null;
-              const key = `node-${nodeId(node)}`;
-              return <SankeyNode {...this.props} {...{key, graph, node}} />;
-            })}
-          </g>
-        ) : null}
-        {showNodeTerminals ? (
-          <g className="sankey-node-terminals">
-            {graph.nodes.map(node => {
-              if (!getValue(showNodeTerminals, node, graph)) return null;
-              const key = `node-terminal-${nodeId(node)}`;
-              return <SankeyNodeTerminal {...this.props} {...{key, graph, node}} />;
-            })}
-          </g>
-        ) : null}
-        {showLinkLabels ? (
-          <g className="sankey-link-labels">
+      <svg {...{width, height, className, style}}>
+        {mapLinksInGroupIf(this.props.showLinks, "sankey-links", (link, i, key) => {
+          const linkProps = {...this.props, key, graph, link, linkPath: makeLinkPath(link)};
+          return <SankeyLink {...linkProps} />;
+        })}
+        {mapNodesInGroupIf(this.props.showNodes, "sankey-nodes", (node, i, key) => {
+          return <SankeyNode {...this.props} {...{key, graph, node}} />;
+        })};
+        {mapNodesInGroupIf(this.props.showNodeTerminals, "sankey-node-terminals", (node, i, key) => {
+          return <SankeyNodeTerminal {...this.props} {...{key, graph, node}} />;
+        })};
+        {/* the three types of link labels (link, link source, link target) use textpath to follow the link's path */}
+        {/* to minimize dom elements, first render one set of path definitions to be used by all three label types */}
+        {this.props.showLinkLabels || this.props.showLinkSourceLabels || this.props.showLinkTargetLabels ? (
+          <defs>
             {graph.links.map(link => {
-              if (!getValue(showLinkLabels, link, graph)) return null;
-              const key = `link-label-${nodeId(link.source)}-to-${nodeId(link.target)}`;
+              const hasLabel =
+                getValue(this.props.showLinkLabels, link, graph) ||
+                getValue(this.props.showLinkSourceLabels, link, graph) ||
+                getValue(this.props.showLinkTargetLabels, link, graph);
+              if (!hasLabel) return null;
+
               const linkPath = makeLinkPath(link);
-              return (
-                <SankeyLinkLabel
-                  {...this.props}
-                  {...{
-                    key,
-                    graph,
-                    link,
-                    linkPath
-                  }}
-                />
-              );
+              const linkPathId = `${getLinkId(link, nodeId)}-path`;
+              return <path id={linkPathId} d={linkPath} key={linkPathId} />;
             })}
-          </g>
+          </defs>
         ) : null}
-        {showNodeLabels ? (
-          <g className="sankey-node-labels">
-            {graph.nodes.map(node => {
-              if (!getValue(showNodeLabels, node, graph)) return null;
-              const key = `node-label-${nodeId(node)}`;
-              return <SankeyNodeLabel {...this.props} {...{key, graph, node}} />;
-            })}
-          </g>
-        ) : null}
+        {mapLinksInGroupIf(this.props.showLinkLabels, "sankey-link-labels", (link, i, key) => {
+          const linkPathId = `${getLinkId(link, nodeId)}-path`;
+          const labelProps = {...this.props, key, graph, link, linkPathId};
+          return <SankeyLinkLabel {...labelProps} />;
+        })}
+        {mapNodesInGroupIf(this.props.showNodeLabels, "sankey-node-labels", (node, i, key) => {
+          return <SankeyNodeLabel {...this.props} {...{key, graph, node}} />;
+        })};
+        {mapLinksInGroupIf(this.props.showLinkSourceLabels, "sankey-link-source-labels", (link, i, key) => {
+          const linkPathId = `${getLinkId(link, nodeId)}-path`;
+          const commonProps = {...this.props, key, graph, link, linkPathId};
+          const labelProps = {
+            ...commonProps,
+            linkLabelText: this.props.linkSourceLabelText,
+            linkLabelClassName: this.props.linkSourceLabelClassName,
+            linkLabelStyle: this.props.linkSourceLabelStyle,
+            linkLabelAttributes: this.props.linkSourceLabelAttributes,
+            linkLabelStartOffset: this.props.linkSourceLabelStartOffset
+          };
+
+          return <SankeyLinkLabel {...labelProps} />;
+        })}
+        {mapLinksInGroupIf(this.props.showLinkTargetLabels, "sankey-link-target-labels", (link, i, key) => {
+          const linkPathId = `${getLinkId(link, nodeId)}-path`;
+          const commonProps = {...this.props, key, graph, link, linkPathId};
+          const labelProps = {
+            ...commonProps,
+            linkLabelText: this.props.linkTargetLabelText,
+            linkLabelClassName: this.props.linkTargetLabelClassName,
+            linkLabelStyle: {textAnchor: "end", ...this.props.linkTargetLabelStyle},
+            linkLabelAttributes: this.props.linkTargetLabelAttributes,
+            linkLabelStartOffset: this.props.linkTargetLabelStartOffset
+          };
+
+          return <SankeyLinkLabel {...labelProps} />;
+        })}
       </svg>
     );
   }

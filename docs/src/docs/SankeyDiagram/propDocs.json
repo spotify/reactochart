@@ -81,7 +81,7 @@
       "required": false,
       "description": "`className` attribute to be applied to the SVG element.",
       "defaultValue": {
-        "value": "''",
+        "value": "\"\"",
         "computed": false
       }
     },
@@ -93,28 +93,6 @@
       "description": "Inline style object to be applied to the SVG element.",
       "defaultValue": {
         "value": "{}",
-        "computed": false
-      }
-    },
-    "nodeId": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": "Accessor function `nodeId(node, nodeIndex)` which specifies how to access the ID of each node object.\nThese should be the same identifiers used by `links[].source` and `.target`.\nUses the node's index in `nodes` array by default.",
-      "defaultValue": {
-        "value": "node => node.index",
-        "computed": false
-      }
-    },
-    "nodeLabelText": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": "",
-      "defaultValue": {
-        "value": "node => node.name",
         "computed": false
       }
     },
@@ -131,9 +109,77 @@
         ]
       },
       "required": false,
-      "description": "Boolean which determines if node rectangles should be shown,\nor function (`showNode(node, nodeIndex)`) which returns a boolean",
+      "description": "Boolean which determines if node rectangles should be shown,\nor function (`showNode(node, graph)`) which returns a boolean",
       "defaultValue": {
         "value": "true",
+        "computed": false
+      }
+    },
+    "showLinks": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "bool"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Boolean which determines if link paths should be shown,\nor function (`showLink(link, graph)`) which returns a boolean",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "showNodeLabels": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "bool"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Boolean which determines if node labels should be shown,\nor function (`showLink(link, graph)`) which returns a boolean",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "showLinkLabels": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "bool"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Boolean which determines if node labels should be shown,\nor function (`showLink(link, graph)`) which returns a boolean",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "nodeId": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Accessor function `nodeId(node, graph)` which specifies how to access the ID of each node object.\nThese should be the same identifiers used by `links[].source` and `.target`.\nUses the node's index in `nodes` array by default.",
+      "defaultValue": {
+        "value": "node => node.index",
         "computed": false
       }
     },
@@ -164,19 +210,19 @@
         "name": "enum",
         "value": [
           {
-            "value": "'left'",
+            "value": "\"left\"",
             "computed": false
           },
           {
-            "value": "'right'",
+            "value": "\"right\"",
             "computed": false
           },
           {
-            "value": "'center'",
+            "value": "\"center\"",
             "computed": false
           },
           {
-            "value": "'justify'",
+            "value": "\"justify\"",
             "computed": false
           }
         ]
@@ -184,7 +230,7 @@
       "required": false,
       "description": "Node alignment method used to layout the nodes.\nMay be 'left', 'right', 'center', 'justify', or a custom function.\nSee [d3-sankey alignment docs](https://github.com/d3/d3-sankey#alignments) for more details.",
       "defaultValue": {
-        "value": "'justify'",
+        "value": "\"justify\"",
         "computed": false
       }
     },
@@ -203,7 +249,7 @@
       "required": false,
       "description": "`className` attribute to be applied to each node,\nor accessor function which returns a class (string).",
       "defaultValue": {
-        "value": "''",
+        "value": "\"\"",
         "computed": false
       }
     },
@@ -226,25 +272,6 @@
         "computed": false
       }
     },
-    "showLinks": {
-      "type": {
-        "name": "union",
-        "value": [
-          {
-            "name": "bool"
-          },
-          {
-            "name": "func"
-          }
-        ]
-      },
-      "required": false,
-      "description": "Boolean which determines if link paths should be shown,\nor function (`showLink(link, linkIndex)`) which returns a boolean",
-      "defaultValue": {
-        "value": "true",
-        "computed": false
-      }
-    },
     "linkClassName": {
       "type": {
         "name": "union",
@@ -260,7 +287,7 @@
       "required": false,
       "description": "Class attribute to be applied to each link,\nor accessor function which returns a class (string).",
       "defaultValue": {
-        "value": "''",
+        "value": "\"\"",
         "computed": false
       }
     },
@@ -283,12 +310,30 @@
         "computed": false
       }
     },
-    "showNodeLabels": {
+    "nodeLabelPlacement": {
       "type": {
         "name": "union",
         "value": [
           {
-            "name": "bool"
+            "name": "enum",
+            "value": [
+              {
+                "value": "\"before\"",
+                "computed": false
+              },
+              {
+                "value": "\"after\"",
+                "computed": false
+              },
+              {
+                "value": "\"above\"",
+                "computed": false
+              },
+              {
+                "value": "\"below\"",
+                "computed": false
+              }
+            ]
           },
           {
             "name": "func"
@@ -296,18 +341,18 @@
         ]
       },
       "required": false,
-      "description": "Boolean which determines if node labels should be shown,\nor function (`showLink(link, linkIndex)`) which returns a boolean",
+      "description": "Placement of the node label relative to the node rectangle.\nExpects 'before', 'after', 'above' or 'below', or a function which returns one of these.\nBy default, labels in the left half of the diagram are placed 'after' and those in the right half 'before'",
       "defaultValue": {
-        "value": "true",
+        "value": "(node, graph) => {\n  return node.depth < graph.maxDepth / 2 ? \"after\" : \"before\";\n}",
         "computed": false
       }
     },
-    "showLinkLabels": {
+    "nodeLabelDistance": {
       "type": {
         "name": "union",
         "value": [
           {
-            "name": "bool"
+            "name": "number"
           },
           {
             "name": "func"
@@ -315,9 +360,107 @@
         ]
       },
       "required": false,
-      "description": "Boolean which determines if node labels should be shown,\nor function (`showLink(link, linkIndex)`) which returns a boolean",
+      "description": "Distance (in pixels) between nodes and their labels,\nor accessor function `f(node, graph)` which returns a distance.",
       "defaultValue": {
-        "value": "true",
+        "value": "4",
+        "computed": false
+      }
+    },
+    "nodeLabelText": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Accessor function `nodeLabelText(node, graph)` which returns the text to be used for node labels.",
+      "defaultValue": {
+        "value": "node => node.name",
+        "computed": false
+      }
+    },
+    "nodeLabelClassName": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "`className` attribute to be applied to each node label,\nor accessor function which returns a class (string).",
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
+    },
+    "nodeLabelStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Inline style object to be applied to each node label,\nor accessor function which returns a style object.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "linkLabelText": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Accessor function `f(link, graph)` which returns the text to be used for link labels.",
+      "defaultValue": {
+        "value": "(link, graph, props) => {\n  const valueRelative = (link.value || 0) / _.get(link, \"source.value\", 0);\n  if (!_.isFinite(valueRelative)) return \"\";\n  const percentText = valueRelative < 0.001 ? \"<0.1%\" : numeral(valueRelative).format(\"0.[0]%\");\n  return `${percentText} to ${getValue(props.nodeLabelText, link.target, graph, props)}`;\n}",
+        "computed": false
+      }
+    },
+    "linkLabelClassName": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "`className` attribute to be applied to each link label,\nor accessor function which returns a class (string).",
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
+    },
+    "linkLabelStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Inline style object to be applied to each link label,\nor accessor function which returns a style object.",
+      "defaultValue": {
+        "value": "{}",
         "computed": false
       }
     },
@@ -357,6 +500,48 @@
       "description": ""
     },
     "onClickNode": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseEnterNodeTerminal": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseLeaveNodeTerminal": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseMoveNodeTerminal": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseDownNodeTerminal": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onMouseUpNodeTerminal": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "onClickNodeTerminal": {
       "type": {
         "name": "func"
       },
@@ -404,6 +589,42 @@
       },
       "required": false,
       "description": ""
+    },
+    "showNodeTerminals": {
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "nodeTerminalWidth": {
+      "defaultValue": {
+        "value": "5",
+        "computed": false
+      }
+    },
+    "nodeTerminalDistance": {
+      "defaultValue": {
+        "value": "1",
+        "computed": false
+      }
+    },
+    "nodeTerminalClassName": {
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
+    },
+    "nodeTerminalStyle": {
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "nodeTerminalAttributes": {
+      "defaultValue": {
+        "value": "{rx: 2, ry: 2}",
+        "computed": false
+      }
     }
   }
 }
