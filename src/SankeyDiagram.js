@@ -187,7 +187,8 @@ const nodeAlignmentsByName = {
 };
 
 /**
- * A Sankey diagram is a type of flow diagram which represents
+ * A Sankey diagram is a type of flow diagram which visualizes directed flow between nodes
+ * of a network graph. Currently only *acyclic* networks are supported.
  */
 export default class SankeyDiagram extends React.Component {
   static propTypes = {
@@ -503,6 +504,8 @@ export default class SankeyDiagram extends React.Component {
      * May be a number (in SVG units) or percent string (`"25%"`)
      */
     linkTargetLabelStartOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+
+    //standalone
   };
   static defaultProps = {
     width: 400,
@@ -602,7 +605,6 @@ export default class SankeyDiagram extends React.Component {
     ];
 
     const hasChangedSankey = _.some(sankeyLayoutPropKeys, key => {
-      if (nextProps[key] !== this.props[key]) console.log("changed", key);
       return nextProps[key] !== this.props[key];
     });
     if (hasChangedSankey) this._makeSankeyGraph();
