@@ -41,6 +41,8 @@ export {default as YTicks} from './YTicks';
 export {default as resolveObjectProps} from './utils/resolveObjectProps';
 export {default as resolveXYScales} from './utils/resolveXYScales';
 
+export {default as ZoomContainer} from './ZoomContainer';
+
 import * as Data from './utils/Data';
 export const utils = {Data};
 // export {utils};

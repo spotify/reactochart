@@ -29,3 +29,4 @@ export {default as YAxisTitleDocs} from './YAxisTitle/YAxisTitleDocs';
 export {default as YGridDocs} from './YGrid/YGridDocs';
 export {default as YLineDocs} from './YLine/YLineDocs';
 export {default as YTicksDocs} from './YTicks/YTicksDocs';
+export {default as ZoomContainerDocs} from './ZoomContainer/ZoomContainerDocs';

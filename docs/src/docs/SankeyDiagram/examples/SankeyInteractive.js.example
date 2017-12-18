@@ -9,45 +9,48 @@ class SankeyInteractiveExample extends React.Component {
 
   render() {
     return <div>
-      <SankeyDiagram
-        width={900}
-        height={500}
-        nodes={graph.nodes}
-        links={graph.links}
-        nodeId={getNodeId}
-        nodeAlignment="left"
-        nodeLabelText={getNodeLabel}
-        nodeStyle={(node) => {
-          const nodeId = getNodeId(node);
-          if(nodeId === this.state.activeNode)
-            return {fill: 'red'};
-          if(nodeId === this.state.activeLinkSource || nodeId === this.state.activeLinkTarget)
-            return {fill: 'blue'};
-          return {};
-        }}
-        linkStyle={(link) => {
-          const sourceId = getNodeId(link.source);
-          const targetId = getNodeId(link.target);
-          if(this.state.activeLinkSource === sourceId && this.state.activeLinkTarget === targetId)
-            return {stroke: 'thistle'};
-          return {};
-        }}
-        onMouseEnterNode={(event, info) => {
-          this.setState({activeNode: getNodeId(info.node)})
-        }}
-        onMouseLeaveNode={(event, info) => {
-          this.setState({activeNode: undefined})
-        }}
-        onMouseEnterLink={(event, info) => {
-          this.setState({
-            activeLinkSource: getNodeId(info.link.source),
-            activeLinkTarget: getNodeId(info.link.target),
-          });
-        }}
-        onMouseLeaveLink={(event, info) => {
-          this.setState({activeLinkSource: undefined, activeLinkTarget: undefined});
-        }}
-      />
+      <ZoomContainer width={900} height={500}>
+        <SankeyDiagram
+          width={900}
+          height={500}
+          nodes={graph.nodes}
+          links={graph.links}
+          nodeId={getNodeId}
+          nodeAlignment="left"
+          nodeLabelText={getNodeLabel}
+          nodeStyle={(node) => {
+            const nodeId = getNodeId(node);
+            if(nodeId === this.state.activeNode)
+              return {fill: 'red'};
+            if(nodeId === this.state.activeLinkSource || nodeId === this.state.activeLinkTarget)
+              return {fill: 'blue'};
+            return {};
+          }}
+          linkStyle={(link) => {
+            const sourceId = getNodeId(link.source);
+            const targetId = getNodeId(link.target);
+            if(this.state.activeLinkSource === sourceId && this.state.activeLinkTarget === targetId)
+              return {stroke: 'thistle'};
+            return {};
+          }}
+          onMouseEnterNode={(event, info) => {
+            this.setState({activeNode: getNodeId(info.node)})
+          }}
+          onMouseLeaveNode={(event, info) => {
+            this.setState({activeNode: undefined})
+          }}
+          onMouseEnterLink={(event, info) => {
+            this.setState({
+              activeLinkSource: getNodeId(info.link.source),
+              activeLinkTarget: getNodeId(info.link.target),
+            });
+          }}
+          onMouseLeaveLink={(event, info) => {
+            this.setState({activeLinkSource: undefined, activeLinkTarget: undefined});
+          }}
+        />
+      </ZoomContainer>
+
     </div>;
   }
 }

@@ -146,6 +146,15 @@ const SankeyLinkLabel = props => {
   );
 };
 
+
+const SVGContainer = props => {
+  const otherProps = _.omit(props, ['standalone']);
+  if(props.standalone) {
+    return <svg {...otherProps} />;
+  }
+  return <g {...otherProps} />;
+};
+
 /**
  * Enhance the graph object created by d3-sankey by adding some additional useful properties.
  * Adds `maxDepth` (max of node `depth` properties)
@@ -252,6 +261,30 @@ export default class SankeyDiagram extends React.Component {
      * or accessor function which returns a style object.
      */
     nodeStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    /**
+     * Node `mouseenter` event handler, called when user's mouse enters a node.
+     */
+    onMouseEnterNode: PropTypes.func,
+    /**
+     * Node `mouseleave` event handler, called when user's mouse leaves a node.
+     */
+    onMouseLeaveNode: PropTypes.func,
+    /**
+     * Node `mousemove` event handler, called when user's mouse moves within a node.
+     */
+    onMouseMoveNode: PropTypes.func,
+    /**
+     * Node `mousedown` event handler, called when user's mouse button is depressed within a node.
+     */
+    onMouseDownNode: PropTypes.func,
+    /**
+     * Node `mouseup` event handler, called when user's mouse button is released within a node.
+     */
+    onMouseUpNode: PropTypes.func,
+    /**
+     * Node `click` event handler, called when user clicks within a node.
+     */
+    onClickNode: PropTypes.func,
 
     /**
      * Boolean which determines if link paths should be shown,
@@ -268,6 +301,30 @@ export default class SankeyDiagram extends React.Component {
      * or accessor function which returns a style object.
      */
     linkStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    /**
+     * Link `mouseenter` event handler, called when user's mouse enters a link.
+     */
+    onMouseEnterLink: PropTypes.func,
+    /**
+     * Link `mouseleave` event handler, called when user's mouse leaves a link.
+     */
+    onMouseLeaveLink: PropTypes.func,
+    /**
+     * Link `mousemove` event handler, called when user's mouse moves within a link.
+     */
+    onMouseMoveLink: PropTypes.func,
+    /**
+     * Link `mousedown` event handler, called when user's mouse button is depressed within a link.
+     */
+    onMouseDownLink: PropTypes.func,
+    /**
+     * Link `mouseup` event handler, called when user's mouse button is released within a link.
+     */
+    onMouseUpLink: PropTypes.func,
+    /**
+     * Link `click` event handler, called when user clicks within a link.
+     */
+    onClickLink: PropTypes.func,
 
     /**
      * Boolean which determines if node terminals should be shown,
@@ -301,6 +358,30 @@ export default class SankeyDiagram extends React.Component {
      * or accessor function which returns an object.
      */
     nodeTerminalAttributes: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    /**
+     * Node terminal `mouseenter` event handler, called when user's mouse enters a node terminal.
+     */
+    onMouseEnterNodeTerminal: PropTypes.func,
+    /**
+     * Node terminal `mouseleave` event handler, called when user's mouse leaves a node terminal.
+     */
+    onMouseLeaveNodeTerminal: PropTypes.func,
+    /**
+     * Node terminal `mousemove` event handler, called when user's mouse moves within a node terminal.
+     */
+    onMouseMoveNodeTerminal: PropTypes.func,
+    /**
+     * Node terminal `mousedown` event handler, called when user's mouse button is depressed within a node terminal.
+     */
+    onMouseDownNodeTerminal: PropTypes.func,
+    /**
+     * Node terminal `mouseup` event handler, called when user's mouse button is released within a node terminal.
+     */
+    onMouseUpNodeTerminal: PropTypes.func,
+    /**
+     * Node terminal `click` event handler, called when user clicks within a node terminal.
+     */
+    onClickNodeTerminal: PropTypes.func,
 
     /**
      * Boolean which determines if node labels should be shown,
@@ -421,37 +502,14 @@ export default class SankeyDiagram extends React.Component {
      * `startOffset` attribute to apply to the link *target* label `<textpath>` element.
      * May be a number (in SVG units) or percent string (`"25%"`)
      */
-    linkTargetLabelStartOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-    // showLinkInLabels
-    // showLinkOutLabels
-
-    onMouseEnterNode: PropTypes.func,
-    onMouseLeaveNode: PropTypes.func,
-    onMouseMoveNode: PropTypes.func,
-    onMouseDownNode: PropTypes.func,
-    onMouseUpNode: PropTypes.func,
-    onClickNode: PropTypes.func,
-
-    onMouseEnterLink: PropTypes.func,
-    onMouseLeaveLink: PropTypes.func,
-    onMouseMoveLink: PropTypes.func,
-    onMouseDownLink: PropTypes.func,
-    onMouseUpLink: PropTypes.func,
-    onClickLink: PropTypes.func,
-
-    onMouseEnterNodeTerminal: PropTypes.func,
-    onMouseLeaveNodeTerminal: PropTypes.func,
-    onMouseMoveNodeTerminal: PropTypes.func,
-    onMouseDownNodeTerminal: PropTypes.func,
-    onMouseUpNodeTerminal: PropTypes.func,
-    onClickNodeTerminal: PropTypes.func
+    linkTargetLabelStartOffset: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   };
   static defaultProps = {
     width: 400,
     height: 300,
     className: "",
     style: {},
+    standalone: true,
     nodeId: node => node.index,
     showNodes: true,
     nodeWidth: 12,
@@ -551,7 +609,7 @@ export default class SankeyDiagram extends React.Component {
   }
 
   render() {
-    const {width, height, style, nodeId} = this.props;
+    const {width, height, style, standalone, nodeId} = this.props;
 
     const graph = this._graph;
     const makeLinkPath = sankeyLinkHorizontal();
@@ -584,7 +642,7 @@ export default class SankeyDiagram extends React.Component {
     }
 
     return (
-      <svg {...{width, height, className, style}}>
+      <SVGContainer {...{standalone, width, height, className, style}}>
         {mapLinksInGroupIf(this.props.showLinks, "sankey-links", (link, i, key) => {
           const linkProps = {...this.props, key, graph, link, linkPath: makeLinkPath(link)};
           return <SankeyLink {...linkProps} />;
@@ -648,7 +706,7 @@ export default class SankeyDiagram extends React.Component {
 
           return <SankeyLinkLabel {...labelProps} />;
         })}
-      </svg>
+      </SVGContainer>
     );
   }
 }

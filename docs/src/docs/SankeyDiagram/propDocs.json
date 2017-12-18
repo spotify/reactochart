@@ -1,6 +1,14 @@
 {
   "description": "A Sankey diagram is a type of flow diagram which represents",
-  "methods": [],
+  "methods": [
+    {
+      "name": "_makeSankeyGraph",
+      "docblock": null,
+      "modifiers": [],
+      "params": [],
+      "returns": null
+    }
+  ],
   "props": {
     "nodes": {
       "type": {
@@ -115,63 +123,6 @@
         "computed": false
       }
     },
-    "showLinks": {
-      "type": {
-        "name": "union",
-        "value": [
-          {
-            "name": "bool"
-          },
-          {
-            "name": "func"
-          }
-        ]
-      },
-      "required": false,
-      "description": "Boolean which determines if link paths should be shown,\nor function (`showLink(link, graph)`) which returns a boolean",
-      "defaultValue": {
-        "value": "true",
-        "computed": false
-      }
-    },
-    "showNodeLabels": {
-      "type": {
-        "name": "union",
-        "value": [
-          {
-            "name": "bool"
-          },
-          {
-            "name": "func"
-          }
-        ]
-      },
-      "required": false,
-      "description": "Boolean which determines if node labels should be shown,\nor function (`showLink(link, graph)`) which returns a boolean",
-      "defaultValue": {
-        "value": "true",
-        "computed": false
-      }
-    },
-    "showLinkLabels": {
-      "type": {
-        "name": "union",
-        "value": [
-          {
-            "name": "bool"
-          },
-          {
-            "name": "func"
-          }
-        ]
-      },
-      "required": false,
-      "description": "Boolean which determines if node labels should be shown,\nor function (`showLink(link, graph)`) which returns a boolean",
-      "defaultValue": {
-        "value": "true",
-        "computed": false
-      }
-    },
     "nodeId": {
       "type": {
         "name": "func"
@@ -188,7 +139,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "Width (in pixels) of the vertical node lines.",
+      "description": "Width (in pixels) of the vertical node rectangles.",
       "defaultValue": {
         "value": "12",
         "computed": false
@@ -272,6 +223,67 @@
         "computed": false
       }
     },
+    "onMouseEnterNode": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Node `mouseenter` event handler, called when user's mouse enters a node."
+    },
+    "onMouseLeaveNode": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Node `mouseleave` event handler, called when user's mouse leaves a node."
+    },
+    "onMouseMoveNode": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Node `mousemove` event handler, called when user's mouse moves within a node."
+    },
+    "onMouseDownNode": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Node `mousedown` event handler, called when user's mouse button is depressed within a node."
+    },
+    "onMouseUpNode": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Node `mouseup` event handler, called when user's mouse button is released within a node."
+    },
+    "onClickNode": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Node `click` event handler, called when user clicks within a node."
+    },
+    "showLinks": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "bool"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Boolean which determines if link paths should be shown,\nor function (`showLink(link, graph)`) which returns a boolean",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
     "linkClassName": {
       "type": {
         "name": "union",
@@ -307,6 +319,223 @@
       "description": "Inline style object to be applied to each link,\nor accessor function which returns a style object.",
       "defaultValue": {
         "value": "{}",
+        "computed": false
+      }
+    },
+    "onMouseEnterLink": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Link `mouseenter` event handler, called when user's mouse enters a link."
+    },
+    "onMouseLeaveLink": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Link `mouseleave` event handler, called when user's mouse leaves a link."
+    },
+    "onMouseMoveLink": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Link `mousemove` event handler, called when user's mouse moves within a link."
+    },
+    "onMouseDownLink": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Link `mousedown` event handler, called when user's mouse button is depressed within a link."
+    },
+    "onMouseUpLink": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Link `mouseup` event handler, called when user's mouse button is released within a link."
+    },
+    "onClickLink": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Link `click` event handler, called when user clicks within a link."
+    },
+    "showNodeTerminals": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "bool"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Boolean which determines if node terminals should be shown,\nor function (`showLink(link, graph)`) which returns a boolean.\nTerminals are bars that run alongside to show the amount\nwhich has flowed *in* but not *out*",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "nodeTerminalWidth": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "bool"
+          },
+          {
+            "name": "number"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Width (in pixels) of the node terminal rectangles,\nor accessor function `f(node, graph)` which returns a width.",
+      "defaultValue": {
+        "value": "5",
+        "computed": false
+      }
+    },
+    "nodeTerminalDistance": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "number"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Distance (in pixels) between nodes and their terminals,\nor accessor function `f(node, graph)` which returns a distance.",
+      "defaultValue": {
+        "value": "1",
+        "computed": false
+      }
+    },
+    "nodeTerminalClassName": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "`className` attribute to be applied to each node terminal,\nor accessor function which returns a class (string).",
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
+    },
+    "nodeTerminalStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Inline style object to be applied to each node terminal,\nor accessor function which returns a style object.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "nodeTerminalAttributes": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Attributes object to be applied to each node terminal element,\nor accessor function which returns an object.",
+      "defaultValue": {
+        "value": "{rx: 2, ry: 2}",
+        "computed": false
+      }
+    },
+    "onMouseEnterNodeTerminal": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Node terminal `mouseenter` event handler, called when user's mouse enters a node terminal."
+    },
+    "onMouseLeaveNodeTerminal": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Node terminal `mouseleave` event handler, called when user's mouse leaves a node terminal."
+    },
+    "onMouseMoveNodeTerminal": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Node terminal `mousemove` event handler, called when user's mouse moves within a node terminal."
+    },
+    "onMouseDownNodeTerminal": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Node terminal `mousedown` event handler, called when user's mouse button is depressed within a node terminal."
+    },
+    "onMouseUpNodeTerminal": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Node terminal `mouseup` event handler, called when user's mouse button is released within a node terminal."
+    },
+    "onClickNodeTerminal": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Node terminal `click` event handler, called when user clicks within a node terminal."
+    },
+    "showNodeLabels": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "bool"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Boolean which determines if node labels should be shown,\nor function (`showLink(link, graph)`) which returns a boolean",
+      "defaultValue": {
+        "value": "true",
         "computed": false
       }
     },
@@ -373,7 +602,7 @@
       "required": false,
       "description": "Accessor function `nodeLabelText(node, graph)` which returns the text to be used for node labels.",
       "defaultValue": {
-        "value": "node => node.name",
+        "value": "(node, graph, props) => {\n  if (_.has(node, \"name\")) return node.name;\n  if (_.has(node, \"label\")) return node.label;\n  return getValue(props.nodeId, node, graph, props);\n}",
         "computed": false
       }
     },
@@ -415,6 +644,25 @@
         "computed": false
       }
     },
+    "showLinkLabels": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "bool"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Boolean which determines if link labels should be shown,\nor function (`showLink(link, graph)`) which returns a boolean",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
+    },
     "linkLabelText": {
       "type": {
         "name": "func"
@@ -422,7 +670,7 @@
       "required": false,
       "description": "Accessor function `f(link, graph)` which returns the text to be used for link labels.",
       "defaultValue": {
-        "value": "(link, graph, props) => {\n  const valueRelative = (link.value || 0) / _.get(link, \"source.value\", 0);\n  if (!_.isFinite(valueRelative)) return \"\";\n  const percentText = valueRelative < 0.001 ? \"<0.1%\" : numeral(valueRelative).format(\"0.[0]%\");\n  return `${percentText} to ${getValue(props.nodeLabelText, link.target, graph, props)}`;\n}",
+        "value": "(link, graph, props) => {\n  const valueText = numeral(link.value || 0).format(\"0.[0]a\");\n  const sourceText = getValue(props.nodeLabelText, link.source, graph, props);\n  const targetText = getValue(props.nodeLabelText, link.target, graph, props);\n  return `${sourceText}→${targetText}: ${valueText}`;\n}",
         "computed": false
       }
     },
@@ -464,165 +712,259 @@
         "computed": false
       }
     },
-    "onMouseEnterNode": {
+    "linkLabelAttributes": {
       "type": {
-        "name": "func"
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
       },
       "required": false,
-      "description": ""
-    },
-    "onMouseLeaveNode": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onMouseMoveNode": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onMouseDownNode": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onMouseUpNode": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onClickNode": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onMouseEnterNodeTerminal": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onMouseLeaveNodeTerminal": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onMouseMoveNodeTerminal": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onMouseDownNodeTerminal": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onMouseUpNodeTerminal": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onClickNodeTerminal": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onMouseEnterLink": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onMouseLeaveLink": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onMouseMoveLink": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onMouseDownLink": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onMouseUpLink": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "onClickLink": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "showNodeTerminals": {
-      "defaultValue": {
-        "value": "true",
-        "computed": false
-      }
-    },
-    "nodeTerminalWidth": {
-      "defaultValue": {
-        "value": "5",
-        "computed": false
-      }
-    },
-    "nodeTerminalDistance": {
-      "defaultValue": {
-        "value": "1",
-        "computed": false
-      }
-    },
-    "nodeTerminalClassName": {
-      "defaultValue": {
-        "value": "\"\"",
-        "computed": false
-      }
-    },
-    "nodeTerminalStyle": {
+      "description": "Attributes object to be applied to each link label element,\nor accessor function which returns an object.",
       "defaultValue": {
         "value": "{}",
         "computed": false
       }
     },
-    "nodeTerminalAttributes": {
+    "linkLabelStartOffset": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "number"
+          }
+        ]
+      },
+      "required": false,
+      "description": "`startOffset` attribute to apply to the link label `<textpath>` element.\nMay be a number (in SVG units) or percent string (`\"25%\"`)",
       "defaultValue": {
-        "value": "{rx: 2, ry: 2}",
+        "value": "\"25%\"",
+        "computed": false
+      }
+    },
+    "showLinkSourceLabels": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "bool"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Boolean which determines if link *source* labels should be shown,\nor function (`showLink(link, graph)`) which returns a boolean",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
+    },
+    "linkSourceLabelText": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Accessor function `f(link, graph)` which returns the text to be used for link *source* labels.",
+      "defaultValue": {
+        "value": "(link, graph, props) => {\n  const valueRelative = link.valueSourceRelative;\n  if (!_.isFinite(valueRelative)) return \"\";\n  const percentText = valueRelative < 0.001 ? \"<0.1%\" : numeral(valueRelative).format(\"0.[0]%\");\n  return `${percentText} to ${getValue(props.nodeLabelText, link.target, graph, props)}`;\n}",
+        "computed": false
+      }
+    },
+    "linkSourceLabelClassName": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "`className` attribute to be applied to each link *source* label,\nor accessor function which returns a class (string).",
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
+    },
+    "linkSourceLabelStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Inline style object to be applied to each link *source* label,\nor accessor function which returns a style object.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "linkSourceLabelAttributes": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Attributes object to be applied to each link *source* label,\nor accessor function which returns an object.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "linkSourceLabelStartOffset": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "number"
+          }
+        ]
+      },
+      "required": false,
+      "description": "`startOffset` attribute to apply to the link *source* label `<textpath>` element.\nMay be a number (in SVG units) or percent string (`\"25%\"`)",
+      "defaultValue": {
+        "value": "\"2%\"",
+        "computed": false
+      }
+    },
+    "showLinkTargetLabels": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "bool"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Boolean which determines if link *target* labels should be shown,\nor function (`showLink(link, graph)`) which returns a boolean",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
+    },
+    "linkTargetLabelText": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Accessor function `f(link, graph)` which returns the text to be used for link *target* labels.",
+      "defaultValue": {
+        "value": "(link, graph, props) => {\n  const valueRelative = link.valueTargetRelative;\n  if (!_.isFinite(valueRelative)) return \"\";\n  const percentText = valueRelative < 0.001 ? \"<0.1%\" : numeral(valueRelative).format(\"0.[0]%\");\n  return `${percentText} from ${getValue(props.nodeLabelText, link.source, graph, props)}`;\n}",
+        "computed": false
+      }
+    },
+    "linkTargetLabelClassName": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "`className` attribute to be applied to each link *target* label,\nor accessor function which returns a class (string).",
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
+    },
+    "linkTargetLabelStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Inline style object to be applied to each link *target* label,\nor accessor function which returns a style object.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "linkTargetLabelAttributes": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Attributes object to be applied to each link *target* label,\nor accessor function which returns an object.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "linkTargetLabelStartOffset": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "number"
+          }
+        ]
+      },
+      "required": false,
+      "description": "`startOffset` attribute to apply to the link *target* label `<textpath>` element.\nMay be a number (in SVG units) or percent string (`\"25%\"`)",
+      "defaultValue": {
+        "value": "\"98%\"",
+        "computed": false
+      }
+    },
+    "standalone": {
+      "defaultValue": {
+        "value": "true",
         "computed": false
       }
     }
