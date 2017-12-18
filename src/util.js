@@ -12,7 +12,7 @@ export function hasOneOfTwo(a, b) {
 }
 
 function componentName(Component) {
-  return Component.displayName || "Component wrapped by resolveObjectProps";
+  return Component.displayName || "Component";
 }
 
 function hasSome(obj, keys) {

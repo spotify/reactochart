@@ -9,7 +9,7 @@ import Playground from './Playground';
 const lessons = [
   {name: "Quick Start", path: '/quick-start', Component: Lessons.QuickStartLesson},
   {name: "XY Plots", path: '/xy-plots', Component: Lessons.XYPlotsLesson},
-  {name: "Getters & Accessors", path: '/getters-and-accessors', Component: Lessons.GettersAndAccessorsLesson},
+  // {name: "Getters & Accessors", path: '/getters-and-accessors', Component: Lessons.GettersAndAccessorsLesson},
   // {name: "Interaction", path: '/interaction', Component: Lessons.InteractionLesson},
 ];
 

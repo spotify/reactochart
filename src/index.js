@@ -37,10 +37,10 @@ export {default as YAxisTitle} from './YAxisTitle';
 export {default as YGrid} from './YGrid';
 export {default as YTicks} from './YTicks';
 
-// ### Higher-order components
-export {default as resolveObjectProps} from './utils/resolveObjectProps';
+// Higher-order components
 export {default as resolveXYScales} from './utils/resolveXYScales';
 
+// Containers
 export {default as ZoomContainer} from './ZoomContainer';
 
 import * as Data from './utils/Data';

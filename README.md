@@ -35,7 +35,6 @@ Charting library for React
 * *planned: AreaRect?, AreaCircle?*
 
 ### Higher-order components
-* resolveObjectProps
 * resolveXYScales
 
 ### Utilities

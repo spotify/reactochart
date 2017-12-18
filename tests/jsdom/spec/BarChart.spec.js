@@ -70,7 +70,6 @@ describe('BarChart', () => {
 
         ([0, 1, 2]).forEach((i) => {
           const barProps = bars.at(i).props();
-          console.log(_.pick(barProps, ['x','y','width','height']));
           expect(barProps.x).to.equal(xScale(xTestValues[i]) - (props.barThickness / 2));
           expect(barProps.width).to.equal(props.barThickness);
           const yZero = yScale(0);
