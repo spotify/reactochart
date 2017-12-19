@@ -185,7 +185,7 @@ export default function resolveXYScales(ComposedComponent) {
         }
       }
 
-      if(!isDone()) console.warn(`resolveXYScales was unable to resolve both scale types. xScaleType: ${xScaleType}, yScaleType: ${yScaleType}`);
+      // if(!isDone()) console.warn(`resolveXYScales was unable to resolve both scale types. xScaleType: ${xScaleType}, yScaleType: ${yScaleType}`);
 
       return {xScaleType, yScaleType};
     }
@@ -247,7 +247,7 @@ export default function resolveXYScales(ComposedComponent) {
         }
       }
 
-      if(!isDone()) console.warn(`resolveXYScales was unable to resolve both domains. xDomain: ${xDomain}, yDomain: ${yDomain}`);
+      // if(!isDone()) console.warn(`resolveXYScales was unable to resolve both domains. xDomain: ${xDomain}, yDomain: ${yDomain}`);
 
       return {xDomain, yDomain};
     }

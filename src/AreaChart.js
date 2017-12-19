@@ -72,11 +72,11 @@ export default class AreaChart extends React.Component {
     /**
      * Type of X scale - provided by XYPlot
      */
-    xScaleType: PropTypes.object,
+    xScaleType: PropTypes.string,
     /**
      * Type of Y scale - provided by XYPlot
      */
-    yScaleType: PropTypes.object,
+    yScaleType: PropTypes.string,
   };
   static defaultProps = {
     shouldShowGaps: true,

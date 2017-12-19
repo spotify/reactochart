@@ -23,7 +23,7 @@ function interpolatorFromType(type) {
 }
 
 function makeColorScale(domain, colors, interpolator) {
-  invariant(domain.length === colors.length, 'ColorHeatmap makeColorScale: domain.length should equal colors.length');
+  // invariant(domain.length === colors.length, 'ColorHeatmap makeColorScale: domain.length should equal colors.length');
 
   if(_.isString(interpolator))
     interpolator = interpolatorFromType(interpolator);

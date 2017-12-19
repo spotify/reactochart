@@ -14,7 +14,7 @@ const ScatterPlotExample = () => {
   const randomEmoji = (d, i) => _.sample(emojis);
 
   return <div>
-    <XYPlot width={400} height={500}>
+    <XYPlot width={500} height={500}>
       <XAxis title="Phase" />
       <YAxis title="Intensity" />
 

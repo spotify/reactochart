@@ -6,7 +6,7 @@ const KernelDensityEstimationExample = (props) => {
       <XYPlot yDomain={[0,200]} marginLeft={40} marginRight={8} width={700} height={300}>
         <XAxis /><YAxis />
         <Histogram
-          data={randomNormalArr} value={null}
+          data={randomNormalArr} value={d => d}
         />
         <KernelDensityEstimation
           data={randomNormalArr} x={d => d} bandwidth={0.5}

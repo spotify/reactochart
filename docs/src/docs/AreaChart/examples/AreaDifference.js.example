@@ -5,7 +5,7 @@ class AreaDifferenceExample extends React.Component {
 
     // we have two datasets, but AreaChart takes one combined dataset
     // so combine the two datasets into one using the combineDatasets utility function
-    // (from 'reactochart/lib/utils/Data')
+    // (from 'reactochart/utils/Data')
     const combined = utils.Data.combineDatasets([
       {data: data1, combineKey: 'x', dataKeys: {y: 'y0'}},
       {data: data2, combineKey: 'x', dataKeys: {y: 'y1'}}

@@ -1,23 +1,26 @@
 {
   "name": "reactochart",
-  "description": "Reactochart - React Charts, graphs and data visualization (UNSTABLE)",
+  "description": "Reactochart - React Charts, graphs and data visualization",
   "author": "Dan Delany <dand@spotify.com>",
   "version": "0.3.1",
-  "main": "lib/index.js",
+  "main": "index.js",
   "files": [
-    "lib/",
-    "src/"
+    "src/",
+    "*.js",
+    "*.js.map"
   ],
   "engines": {
     "node": ">=4.0.0"
   },
   "scripts": {
+    "prepublish": "npm run build",
+    "build": "npm run build-lib && npm run docs",
     "dev": "webpack-dev-server --config webpack.config.base.js",
-    "clean": "node scripts/clean.js",
+    "docs": "npm run make-docs && npm run build-docs",
     "build-lib": "npm run clean && babel src --out-dir ./ --source-maps",
     "build-docs": "BABEL_ENV=production webpack --config webpack.config.build.js",
-    "build": "npm run build-lib && npm run make-docs && npm run build-docs",
     "make-docs": "node scripts/makeDocs.js",
+    "clean": "node scripts/clean.js",
     "serve": "python -m SimpleHTTPServer",
     "test": "npm run test-jsdom",
     "test-browser": "webpack-dev-server --config tests/browser/webpack.config.test.js",
