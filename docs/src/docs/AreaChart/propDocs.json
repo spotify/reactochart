@@ -114,14 +114,14 @@
     },
     "xScaleType": {
       "type": {
-        "name": "object"
+        "name": "string"
       },
       "required": false,
       "description": "Type of X scale - provided by XYPlot"
     },
     "yScaleType": {
       "type": {
-        "name": "object"
+        "name": "string"
       },
       "required": false,
       "description": "Type of Y scale - provided by XYPlot"
