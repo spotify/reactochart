@@ -13,7 +13,8 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.base.js",
-    "build-lib": "rm -rf lib/ && babel src --out-dir lib --source-maps",
+    "clean": "node scripts/clean.js",
+    "build-lib": "npm run clean && babel src --out-dir ./ --source-maps",
     "build-docs": "BABEL_ENV=production webpack --config webpack.config.build.js",
     "build": "npm run build-lib && npm run make-docs && npm run build-docs",
     "make-docs": "node scripts/makeDocs.js",
