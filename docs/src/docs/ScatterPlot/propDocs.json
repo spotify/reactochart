@@ -74,40 +74,46 @@
       "required": true,
       "description": ""
     },
-    "getX": {
+    "x": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for plot X values, called once per datum"
     },
-    "getY": {
+    "y": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
+      },
+      "required": false,
+      "description": "Accessor function for plot Y values, called once per datum"
+    },
+    "xScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for X axis - provided by XYPlot"
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for Y axis - provided by XYPlot"
+    },
+    "xScaleType": {
+      "type": {
+        "name": "string"
       },
       "required": false,
       "description": ""
     },
-    "getClass": {
+    "yScaleType": {
       "type": {
-        "name": "custom",
-        "raw": "CustomPropTypes.getter"
-      },
-      "required": false,
-      "description": ""
-    },
-    "scaleType": {
-      "type": {
-        "name": "object"
-      },
-      "required": false,
-      "description": ""
-    },
-    "scale": {
-      "type": {
-        "name": "object"
+        "name": "string"
       },
       "required": false,
       "description": ""
@@ -164,6 +170,18 @@
       "description": "",
       "defaultValue": {
         "value": "{}",
+        "computed": false
+      }
+    },
+    "pointClassName": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "''",
         "computed": false
       }
     },

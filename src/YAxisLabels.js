@@ -46,14 +46,25 @@ function resolveYLabelsForValues(scale, values, formats, style, force = true) {
   }
 }
 
-class YAxisValueLabels extends React.Component {
+class YAxisLabels extends React.Component {
   static propTypes = {
-    scale: PropTypes.object,
+    yScale: PropTypes.func,
+    height: PropTypes.number,
+    width: PropTypes.number,
+    position: PropTypes.oneOf(['left', 'right']),
+    placement: PropTypes.oneOf(['before', 'after']),
+    distance: PropTypes.number,
+    nice: PropTypes.bool,
+    tickCount: PropTypes.number,
+    ticks: PropTypes.array,
+    labelClassName: PropTypes.string,
+    labelStyle: PropTypes.object,
+    spacingLeft: PropTypes.number,
+    spacingRight: PropTypes.number,
     // Label Handling
     onMouseEnterLabel: PropTypes.func,
     onMouseMoveLabel: PropTypes.func,
     onMouseLeaveLabel: PropTypes.func
-    // placement: undefined,
     // format: undefined,
     // formats: undefined,
     // labels: undefined
@@ -73,7 +84,8 @@ class YAxisValueLabels extends React.Component {
       lineHeight: 1,
       textAnchor: 'end'
     },
-    spacing: {top: 0, bottom: 0, left: 0, right: 0}
+    spacingLeft: 0,
+    spacingRight: 0
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -81,29 +93,28 @@ class YAxisValueLabels extends React.Component {
   }
 
   static getTickDomain(props) {
-    if(!_.get(props, 'scale.y')) return;
-    props = _.defaults({}, props, YAxisValueLabels.defaultProps);
-    return {y: getTickDomain(props.scale.y, props)};
+    if(!props.yScale) return;
+    props = _.defaults({}, props, YAxisLabels.defaultProps);
+    return {yTickDomain: getTickDomain(props.yScale, props)};
   }
 
   static getMargin(props) {
-    props = _.defaults({}, props, YAxisValueLabels.defaultProps);
-    const {position, placement, distance, labelStyle} = props;
-    const scale = props.scale.y;
-    const labels = props.labels || YAxisValueLabels.getLabels(props);
-    const zeroMargin = {top: 0, bottom: 0, left: 0, right: 0};
+    props = _.defaults({}, props, YAxisLabels.defaultProps);
+    const {yScale, position, placement, distance, labelStyle} = props;
+    const labels = props.labels || YAxisLabels.getLabels(props);
+    const zeroMargin = {marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0};
 
-    if((position === 'left' && placement === 'after') || (position == 'right' && placement === 'before'))
+    if((position === 'left' && placement === 'after') || (position === 'right' && placement === 'before'))
       return zeroMargin;
 
     const marginX = _.max(labels.map(label => Math.ceil(distance + label.width)));
-    const [top, bottom] = getLabelsYOverhang(scale, labels, 'middle');
+    const [marginTop, marginBottom] = getLabelsYOverhang(yScale, labels, 'middle');
 
-    return _.defaults({[position] : marginX, top, bottom}, zeroMargin);
+    return _.defaults({[`margin${_.capitalize(position)}`]: marginX, marginTop, marginBottom}, zeroMargin);
   }
 
   static getDefaultFormats(scaleType) {
-    const timeFormatStrs = ['YYYY', 'YY', 'MMM YYYY', 'M/YY'];
+    const timeFormatStrs = ['YYYY', "'YY", 'MMM YYYY', 'M/YY'];
     const numberFormatStrs = ["0.[00]a", "0,0", "0.[0]", "0.[00]", "0.[0000]", "0.[000000]"];
 
     return (scaleType === 'ordinal') ? [_.identity] :
@@ -112,15 +123,14 @@ class YAxisValueLabels extends React.Component {
   }
 
   static getLabels(props) {
-    const {tickCount, labelStyle} = _.defaults(props, {}, YAxisValueLabels.defaultProps);
-    const scale = props.scale.y;
-    const ticks = props.ticks || getScaleTicks(scale, null, tickCount);
-    const style = _.defaults(labelStyle, YAxisValueLabels.defaultProps.labelStyle);
+    const {tickCount, labelStyle, yScale} = _.defaults(props, {}, YAxisLabels.defaultProps);
+    const ticks = props.ticks || getScaleTicks(yScale, null, tickCount);
+    const style = _.defaults(labelStyle, YAxisLabels.defaultProps.labelStyle);
 
-    const scaleType = inferScaleType(scale);
+    const scaleType = inferScaleType(yScale);
     const propsFormats = props.format ? [props.format] : props.formats;
     const formatStrs = (_.isArray(propsFormats) && propsFormats.length) ?
-      propsFormats : YAxisValueLabels.getDefaultFormats(scaleType);
+      propsFormats : YAxisLabels.getDefaultFormats(scaleType);
     const formats = makeLabelFormatters(formatStrs, scaleType);
 
     // todo resolve ticks also
@@ -128,7 +138,7 @@ class YAxisValueLabels extends React.Component {
     // nudge down the tickCount and try again
     // doing this will require communicating the updated ticks/tickCount back to the parent element...
 
-    const {labels} = resolveYLabelsForValues(scale, ticks, formats, style);
+    const {labels} = resolveYLabelsForValues(yScale, ticks, formats, style);
     // console.log('resolveYLabelsForValues took ', performance.now() - start);
     // console.log('found labels', labels);
     return labels;
@@ -136,19 +146,18 @@ class YAxisValueLabels extends React.Component {
 
   render() {
     // todo: position: 'zero' prop to position along the zero line
-    const {width, position, distance, labelStyle, labelClassName, onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel, spacing} = this.props;
-    const scale = this.props.scale.y;
+    const {width, yScale, position, distance, labelStyle, labelClassName, onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel, spacingLeft, spacingRight} = this.props;
     const placement = this.props.placement || ((position === 'left') ? 'before' : 'after');
     const className = `chart-value-label chart-value-label-y ${labelClassName}`;
     const textAnchor = (placement === 'before') ? 'end' : 'start';
-    const style = _.defaults({textAnchor}, labelStyle, YAxisValueLabels.defaultProps.labelStyle);
-    const labels = this.props.labels || YAxisValueLabels.getLabels(this.props);
+    const style = _.defaults({textAnchor}, labelStyle, YAxisLabels.defaultProps.labelStyle);
+    const labels = this.props.labels || YAxisLabels.getLabels(this.props);
     const transform = (position === 'left') ?
-      `translate(${-spacing.left}, 0)` : `translate(${width + spacing.right}, 0)`;
+      `translate(${-spacingLeft}, 0)` : `translate(${width + spacingRight}, 0)`;
 
     return <g className="chart-value-labels-y" transform={transform}>
       {labels.map((label, i) => {
-        const y = scale(label.value);
+        const y = yScale(label.value);
         const x = (placement === 'before') ? -distance : distance;
          
         const [onMouseEnter, onMouseMove, onMouseLeave] =
@@ -183,4 +192,4 @@ class YAxisLabelDebugRect extends React.Component {
   }
 }
 
-export default YAxisValueLabels;
+export default YAxisLabels;

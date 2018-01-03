@@ -5,7 +5,7 @@ class AreaDifferenceExample extends React.Component {
 
     // we have two datasets, but AreaChart takes one combined dataset
     // so combine the two datasets into one using the combineDatasets utility function
-    // (from 'reactochart/lib/utils/Data')
+    // (from 'reactochart/utils/Data')
     const combined = utils.Data.combineDatasets([
       {data: data1, combineKey: 'x', dataKeys: {y: 'y0'}},
       {data: data2, combineKey: 'x', dataKeys: {y: 'y1'}}
@@ -20,12 +20,19 @@ class AreaDifferenceExample extends React.Component {
           isDifference={true}
           pathStyleNegative={{fill: 'lightcoral'}}
           pathStylePositive={{fill: 'lightgreen'}}
-          getX='x'
-          getY='y0'
-          getYEnd='y1'
+          x={d => d.x}
+          y={d => d.y0}
+          yEnd={d => d.y1}
         />
-        <LineChart data={data1} getX="x" getY="y" lineStyle={{strokeWidth: 3}}/>
-        <LineChart data={data2} getX="x" getY="y" />
+        <LineChart
+          data={data1}
+          x={d => d.x} y={d => d.y}
+          lineStyle={{strokeWidth: 3}}
+        />
+        <LineChart
+          data={data2}
+          x={d => d.x} y={d => d.y}
+        />
       </XYPlot>
     </div>
   }

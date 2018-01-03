@@ -19,11 +19,11 @@ const AreaHeatmapExample = (props) => {
 
       <AreaHeatmap
         data={data}
-        getArea="value"
-        getX="x"
-        getXEnd="xEnd"
-        getY="y"
-        getYEnd="yEnd"
+        area={d => d.value}
+        x={d => d.x}
+        xEnd={d => d.xEnd}
+        y={d => d.y}
+        yEnd={d => d.yEnd}
         rectStyle={{fill: 'rebeccapurple'}}
       />
     </XYPlot>
@@ -33,20 +33,20 @@ const AreaHeatmapExample = (props) => {
 
       <AreaHeatmap
         data={data}
-        getArea="value"
-        getX="x"
-        getXEnd="xEnd"
-        getY="y"
-        getYEnd="yEnd"
+        area={d => d.value}
+        x={d => d.x}
+        xEnd={d => d.xEnd}
+        y={d => d.y}
+        yEnd={d => d.yEnd}
         rectStyle={{fill: '#41ab5d'}}
       />
       <AreaHeatmap
         data={data}
-        getArea={d => d.value * -1}
-        getX="x"
-        getXEnd="xEnd"
-        getY="y"
-        getYEnd="yEnd"
+        area={d => d.value * -1}
+        x={d => d.x}
+        xEnd={d => d.xEnd}
+        y={d => d.y}
+        yEnd={d => d.yEnd}
         rectStyle={{fill: '#fc4e2a'}}
       />
     </XYPlot>

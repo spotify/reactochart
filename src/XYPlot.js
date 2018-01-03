@@ -2,7 +2,6 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 
-import resolveObjectProps from './utils/resolveObjectProps';
 import resolveXYScales from './utils/resolveXYScales';
 import {innerSize} from './utils/Margin';
 import {inferScaleType} from './utils/Scale';
@@ -22,25 +21,26 @@ function invertPointScale(scale, rangeValue) {
   return scale.domain()[nearestPointIndex];
 }
 
-function getMouseOptions(event, {scale, height, width, margin}) {
+function getMouseOptions(event, {xScale, yScale, height, width, marginTop, marginBottom, marginLeft, marginRight}) {
   const chartBB = event.currentTarget.getBoundingClientRect();
   const outerX = Math.round(event.clientX - chartBB.left);
   const outerY = Math.round(event.clientY - chartBB.top);
-  const innerX = (outerX - (margin.left || 0));
-  const innerY = (outerY -(margin.top || 0));
-  const chartSize = innerSize({width, height}, margin);
-  const scaleType = {x: inferScaleType(scale.x), y: inferScaleType(scale.y)};
+  const innerX = (outerX - (marginLeft || 0));
+  const innerY = (outerY -(marginTop || 0));
+  const chartSize = innerSize({width, height}, {top: marginTop, bottom: marginBottom, left: marginLeft, right: marginRight});
+  const xScaleType = inferScaleType(xScale);
+  const yScaleType = inferScaleType(yScale);
 
   const xValue = (!_.inRange(innerX, 0, chartSize.width /* + padding.left + padding.right */)) ? null :
-    (scaleType.x === 'ordinal') ?
-      invertPointScale(scale.x, innerX) :
-      scale.x.invert(innerX);
+    (xScaleType === 'ordinal') ?
+      invertPointScale(xScale, innerX) :
+      xScale.invert(innerX);
   const yValue = (!_.inRange(innerY, 0, chartSize.height /* + padding.top + padding.bottom */)) ? null :
-    (scaleType.y === 'ordinal') ?
-      invertPointScale(scale.y, innerY) :
-      scale.y.invert(innerY);
+    (yScaleType === 'ordinal') ?
+      invertPointScale(yScale, innerY) :
+      yScale.invert(innerY);
 
-  return {event, outerX, outerY, innerX, innerY, xValue, yValue, scale, margin};
+  return {event, outerX, outerY, innerX, innerY, xValue, yValue, xScale, yScale, marginTop, marginBottom, marginLeft, marginRight};
 }
 
 class XYPlot extends React.Component {
@@ -59,25 +59,40 @@ class XYPlot extends React.Component {
      * for ordinal/categorical scales it is an array of known values ie. ['a', 'b', 'c'].
      * Automatically determined from data if not passed.
      */
-    domain: PropTypes.object,
-    /**
-     *
-     */
-    margin: PropTypes.object,
-
+    xDomain: PropTypes.array,
+    yDomain: PropTypes.array,
     /**
      * d3 scales for the X and Y axes of the chart, in {x, y} object format.
      * (optional, normally determined automatically by XYPlot)
      */
-    scale: PropTypes.object,
+    xScale: PropTypes.func,
+    yScale: PropTypes.func,
 
-    scaleType: PropTypes.object,
+    xScaleType: PropTypes.string,
+    yScaleType: PropTypes.string,
 
-    spacing: PropTypes.object,
+    /**
+     *
+     */
+    margin: PropTypes.object,
+    marginTop: PropTypes.number,
+    marginBottom: PropTypes.number,
+    marginLeft: PropTypes.number,
+    marginRight: PropTypes.number,
+
     // todo spacing & padding...
-    padding: PropTypes.object,
-    nice: PropTypes.object,
-    invertScale: PropTypes.object,
+    spacingTop: PropTypes.number,
+    spacingBottom: PropTypes.number,
+    spacingLeft: PropTypes.number,
+    spacingRight: PropTypes.number,
+
+    paddingTop: PropTypes.number,
+    paddingBottom: PropTypes.number,
+    paddingLeft: PropTypes.number,
+    paddingRight: PropTypes.number,
+
+    invertXScale: PropTypes.bool,
+    invertYScale: PropTypes.bool,
 
     onMouseMove: PropTypes.func,
     onMouseEnter: PropTypes.func,
@@ -89,8 +104,9 @@ class XYPlot extends React.Component {
   static defaultProps = {
     width: 400,
     height: 250,
-    // nice: {x: true, y: true},
-    invertScale: {x: false, y: false},
+    // invertScale: {x: false, y: false},
+    invertXScale: false,
+    invertYScale: false
     // emptyLabel: "Unknown",
 
     // these values are inferred from data if not provided, therefore empty defaults
@@ -114,12 +130,13 @@ class XYPlot extends React.Component {
   onMouseLeave = (event) => this.props.onMouseLeave({event});
 
   render() {
-    const {width, height, margin, spacing} = this.props;
+    const {width, height, marginTop, marginBottom, marginLeft, marginRight, spacingTop, spacingBottom, spacingLeft, spacingRight}
+      = this.props;
     // subtract margin + spacing from width/height to obtain inner width/height of panel & chart area
     // panelSize is the area including chart + spacing but NOT margin
     // chartSize is smaller, chart *only*, not including margin or spacing
-    const panelSize = innerSize({width, height}, margin);
-    const chartSize = innerSize(panelSize, spacing);
+    const panelSize = innerSize({width, height}, {top: marginTop, bottom: marginBottom, left: marginLeft, right: marginRight});
+    const chartSize = innerSize(panelSize, {top: spacingTop, bottom: spacingBottom, left: spacingLeft, right: spacingRight});
 
     const handlerNames = ['onMouseMove', 'onMouseEnter', 'onMouseLeave', 'onMouseDown', 'onMouseUp', 'onClick'];
     const handlers = _.fromPairs(handlerNames.map(n => [n, methodIfFuncProp(n, this.props, this)]));
@@ -129,10 +146,10 @@ class XYPlot extends React.Component {
       ...chartSize
     };
 
-    return <svg {...{width, height, className: 'xy-plot', onMouseMove: this.onMouseMove}} {...handlers}>
+    return <svg {...{width, height, className: 'xy-plot'}} {...handlers}>
       <rect className="chart-background" {...{width, height}} />
-      <g transform={`translate(${margin.left + spacing.left}, ${margin.top + spacing.top})`} className="chart-inner">
-        <rect transform={`translate(${-spacing.left}, ${-spacing.top})`} className="plot-background" {...panelSize} />
+      <g transform={`translate(${marginLeft + spacingLeft}, ${marginTop + spacingTop})`} className="chart-inner">
+        <rect transform={`translate(${-spacingLeft}, ${-spacingTop})`} className="plot-background" {...panelSize} />
         {React.Children.map(this.props.children, child => {
           return (_.isNull(child) || _.isUndefined(child)) ? null :
             React.cloneElement(child, propsToPass);
@@ -142,13 +159,6 @@ class XYPlot extends React.Component {
   }
 }
 
-const xyKeys = ['scaleType', 'domain', 'invertScale', 'nice'];
-const dirKeys = ['margin', 'padding', 'spacing'];
-
-const XYPlotResolved = _.flow([
-  resolveXYScales,
-  _.partial(resolveObjectProps, _, xyKeys, ['x', 'y']),
-  _.partial(resolveObjectProps, _, dirKeys, ['top', 'bottom', 'left', 'right'])
-])(XYPlot);
+const XYPlotResolved = resolveXYScales(XYPlot);
 
 export default XYPlotResolved;

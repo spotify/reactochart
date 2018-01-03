@@ -5,7 +5,7 @@ const YAxisLabelsExample = (props) => {
     <div style={chartStyle}>
       <XYPlot
         width={300} height={300}
-        domain={{x: [-20, 20], y: [-20, 20]}}
+        xDomain={[-20, 20]} yDomain={[-20, 20]}
       >
         <YAxisLabels />
         <YAxisLabels position="right" tickCount={5} />

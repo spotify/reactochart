@@ -1,13 +1,14 @@
 const SpacingExample = (props) => {
-  const spacing = {left: 10, top: 53, right: 16, bottom: 9};
+  const spacing = {spacingLeft: 10, spacingTop: 53, spacingRight: 16, spacingBottom: 9};
 
   return <div>
-    <XYPlot scaleType="linear" {...{width: 400, height: 350, spacing}}>
+    <XYPlot {...{width: 400, height: 350}} {...spacing}>
       <XAxis />
       <YAxis />
       <LineChart
         data={_.range(100)}
-        getY={d => Math.sin(d*.1)}
+        x={d => d}
+        y={d => Math.sin(d*.1)}
       />
     </XYPlot>
   </div>

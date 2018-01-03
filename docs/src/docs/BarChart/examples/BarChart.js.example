@@ -23,8 +23,8 @@ const BarChartExample = (props) => {
             <BarChart
               data={data}
               horizontal={horizontal}
-              getX={horizontal ? getValue : null}
-              getY={horizontal ? null : getValue}
+              x={horizontal ? getValue : d => d}
+              y={horizontal ? d => d : getValue}
             />
           </XYPlot>;
         })}

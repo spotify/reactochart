@@ -5,7 +5,7 @@ class Area2DatasetsExample extends React.Component {
 
     // we have two datasets, but AreaChart takes one combined dataset
     // so combine the two datasets into one using the combineDatasets utility function
-    // (import from 'Reactochart/lib/utils')
+    // (import from 'Reactochart/utils')
     // original datasets are of the shape [{x: ..., y: 20}]
     // combined is of the shape [{x: ..., y0: 20, y1: 30}]
     const combined = utils.Data.combineDatasets([
@@ -16,9 +16,12 @@ class Area2DatasetsExample extends React.Component {
     return <div>
       <XYPlot width={500}>
         <XAxis tickCount={4}/><YAxis/>
-        <AreaChart data={combined} getX='x' getY='y0' getYEnd='y1' />
-        <LineChart data={data1} getX="x" getY="y"/>
-        <LineChart data={data2} getX="x" getY="y"/>
+        <AreaChart
+          data={combined}
+          x={d => d.x}
+          y={d => d.y0}
+          yEnd={d => d.y1}
+        />
       </XYPlot>
     </div>
   }

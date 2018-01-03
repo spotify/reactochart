@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
+import remark from 'remark';
+import remarkReact from 'remark-react';
 
 export default class ComponentDocs extends React.Component {
   render() {
@@ -13,7 +15,9 @@ export default class ComponentDocs extends React.Component {
 
       {propDocs.description ?
         <div className="row">
-          <p className="component-description">{propDocs.description}</p>
+          <p className="component-description">
+            {renderMarkdown(propDocs.description)}
+          </p>
         </div>
         : null
       }
@@ -25,18 +29,28 @@ export default class ComponentDocs extends React.Component {
             <strong>{propKey}</strong>: {_.get(propInfo, 'type.name', 'unknown')}
             {propInfo.description ? <br/> : null}
             {propInfo.description ?
-              <span className="prop-description">{propInfo.description}</span>
+              <span className="prop-description">
+                {renderMarkdown(propInfo.description)}
+              </span>
               : null}
 
             {propInfo.defaultValue ?
-              <div className="prop-default">default value: <code>{propInfo.defaultValue.value}</code></div>
+              <div className="prop-default">
+                default value: <code>{propInfo.defaultValue.value}</code>
+              </div>
               : null}
           </div>
         })}
-
       </div>
 
       {children}
     </div>
   }
+}
+
+function renderMarkdown(markdownText = '') {
+  return remark()
+    .use(remarkReact)
+    .processSync(markdownText)
+    .contents;
 }

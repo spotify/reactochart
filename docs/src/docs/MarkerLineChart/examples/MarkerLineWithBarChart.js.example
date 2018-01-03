@@ -8,11 +8,13 @@ const MarkerLineWithBarChartExample = (props) => {
       <YAxis />
       <BarChart
         data={data1}
-        getX={0} getY={1}
+        x={d => d[0]}
+        y={d => d[1]}
       />
       <MarkerLineChart
         data={data2}
-        getX={0} getY={1}
+        x={d => d[0]}
+        y={d => d[1]}
         lineLength={15}
       />
     </XYPlot>

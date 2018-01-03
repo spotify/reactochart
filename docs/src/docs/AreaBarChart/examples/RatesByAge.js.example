@@ -1,0 +1,22 @@
+const RatesByAge = (props) => {
+  return <div>
+    <h3 style={{textAlign: 'center'}}>US Smoking Rates by Age Group</h3>
+    <XYPlot width={500} height={320} yDomain={[0, .2]}>
+      <XAxis title="Age" ticks={[18, 25, 45, 65]} nice={false}/>
+      <YAxis title="Cigarette Use" tickCount={4} labelFormat={'%'} />
+      <AreaBarChart
+        data={[
+          {ageMin: 18, ageMax: 25, rate: .13},
+          {ageMin: 25, ageMax: 45, rate: .177},
+          {ageMin: 45, ageMax: 65, rate: .17},
+          {ageMin: 65, ageMax: 85, rate: .084}
+        ]}
+        x={d => d.ageMin}
+        xEnd={d => d.ageMax}
+        y={d => d.rate}
+      />
+    </XYPlot>
+  </div>
+};
+
+ReactDOM.render(<RatesByAge />, mountNode);

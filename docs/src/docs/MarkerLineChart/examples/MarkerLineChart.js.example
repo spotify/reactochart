@@ -6,7 +6,8 @@ const MarkerLineChartExample = (props) => {
         <YAxis title="Intensity" />
         <MarkerLineChart
           data={_.range(30)}
-          getY={d => Math.sin(d / (Math.PI))}
+          x={d => d}
+          y={d => Math.sin(d / (Math.PI))}
         />
       </XYPlot>
 
@@ -16,7 +17,8 @@ const MarkerLineChartExample = (props) => {
         <MarkerLineChart
           horizontal
           data={_.range(30)}
-          getX={d => Math.sin(d / (Math.PI))}
+          x={d => d}
+          y={d => Math.sin(d / (Math.PI))}
         />
       </XYPlot>
     </div>
@@ -27,9 +29,9 @@ const MarkerLineChartExample = (props) => {
         <YAxis title="Intensity" />
         <MarkerLineChart
           data={_.range(15)}
-          getX={d => Math.sin(d / 10) * 10}
-          getXEnd={d => Math.sin((d + 1) / 10) * 10}
-          getY={d => Math.sin(d / (Math.PI))}
+          x={d => Math.sin(d / 10) * 10}
+          xEnd={d => Math.sin((d + 1) / 10) * 10}
+          y={d => Math.sin(d / (Math.PI))}
         />
       </XYPlot>
 
@@ -39,9 +41,9 @@ const MarkerLineChartExample = (props) => {
         <MarkerLineChart
           horizontal
           data={_.range(15)}
-          getX={d => Math.sin(d / (Math.PI))}
-          getY={d => Math.sin(d / 10) * 10}
-          getYEnd={d => Math.sin((d + 1) / 10) * 10}
+          x={d => Math.sin(d / (Math.PI))}
+          y={d => Math.sin(d / 10) * 10}
+          yEnd={d => Math.sin((d + 1) / 10) * 10}
         />
       </XYPlot>
     </div>

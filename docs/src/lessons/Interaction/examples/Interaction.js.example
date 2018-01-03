@@ -1,15 +1,16 @@
-const InteractionExample = React.createClass({
+// const InteractionExample = React.createClass({
+class InteractionExample extends React.Component {
   getInitialState() {
     return {
       activeValue: null
     }
-  },
+  }
   onEnterBar(e, d) {
     this.setState({activeValue: d});
-  },
+  }
   onLeaveBar(e, d) {
     this.setState({activeValue: null})
-  },
+  }
   render() {
     const {activeValue} = this.state;
 
@@ -33,6 +34,6 @@ const InteractionExample = React.createClass({
       </XYPlot>;
     </div>
   }
-});
+}
 
 ReactDOM.render(<InteractionExample />, mountNode);

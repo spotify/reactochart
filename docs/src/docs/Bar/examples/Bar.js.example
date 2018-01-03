@@ -1,16 +1,23 @@
 const BarExample = (props) => {
-  return <svg width={100} height={100}>
-    <Bar
-      scale={{
-        x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
-        y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
-      }}
-      xValue={'b'}
-      yValue={0}
-      yEndValue={0.75}
-      thickness={15}
-    />
-  </svg>;
+  return <div>
+    <XYPlot
+      width={500} height={320}
+      xDomain={['a', 'b', 'c', 'd']} yDomain={[0, 100]}
+    >
+      <XAxis /><YAxis />
+      <Bar
+        x={'b'}
+        y={0} yEnd={75}
+        thickness={15}
+      />
+      <Bar
+        x={'c'}
+        y={45} yEnd={80}
+        thickness={30}
+        style={{fill: 'coral'}}
+      />
+    </XYPlot>
+  </div>;
 };
 
 ReactDOM.render(<BarExample />, mountNode);

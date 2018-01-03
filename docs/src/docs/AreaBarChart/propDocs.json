@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "`AreaBarChart` is a variation on the standard bar chart. Just like a normal bar chart, each bar represents a single\nvalue on the *dependent* axis (Y axis for vertical bars), and the bar stretches from zero to this value.\nHowever, on the *independent* axis, each bar represents a *range* (min/max) of values,\nrather than being centered on a specific value.\nIn other words, the bar *lengths* act the same way as standard bar chart bars,\nbut their *thicknesses* are variable and meaningful.\n`AreaBarChart`s are the correct way to display histograms with variable bin sizes.\nThey are so named because, in cases like these histograms, since both the bar thickness and length are meaningful,\nso too is the bar's total *area*, unlike in other bar charts.",
   "methods": [
     {
       "name": "getDomain",
@@ -17,20 +17,26 @@
     }
   ],
   "props": {
-    "scale": {
+    "xScale": {
       "type": {
-        "name": "custom",
-        "raw": "CustomPropTypes.xyObjectOf(PropTypes.func.isRequired)"
+        "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "D3 scale for X axis - provided by XYPlot"
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for Y axis - provided by XYPlot"
     },
     "data": {
       "type": {
         "name": "array"
       },
       "required": false,
-      "description": "",
+      "description": "Array of data to be plotted. One bar will be rendered per datum in this array.",
       "defaultValue": {
         "value": "[]",
         "computed": false
@@ -41,58 +47,58 @@
         "name": "bool"
       },
       "required": false,
-      "description": "",
+      "description": "Boolean which determines whether the chart will use horizontal or vertical bars.\nWhen `true`, bars will be horizontal, ie. the X-axis will be treated as the dependent axis.",
       "defaultValue": {
         "value": "false",
         "computed": false
       }
     },
-    "getX": {
+    "x": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for bar X values, called once per bar (datum).\nIf `horizontal` is `false`, this gets the start (min value) of the *independent* variable range, spanned by the bar's thickness.\nIf `horizontal` is `true`, this gets the *dependent* variable value, the end of the bar's length"
     },
-    "getXEnd": {
+    "xEnd": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for the end (max X value) of the *independent* variable range, spanned by the bar's thickness.\nShould only be passed when `horizontal` is `false` (ignored otherwise)."
     },
-    "getY": {
+    "y": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for bar Y values, called once per bar (datum).\nIf `horizontal` is `true`, this gets the start (min value) of the *independent* variable range which is spanned by the bar's thickness.\nIf `horizontal` is `false`, this gets the *dependent* variable value, the end of the bar's length"
     },
-    "getYEnd": {
+    "yEnd": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
-    },
-    "getClass": {
-      "type": {
-        "name": "custom",
-        "raw": "CustomPropTypes.getter"
-      },
-      "required": false,
-      "description": ""
+      "description": "Accessor function for the end (max Y value) of the *independent* variable range, spanned by the bar's thickness.\nShould only be passed when `horizontal` is `true` (ignored otherwise)."
     },
     "barClassName": {
       "type": {
-        "name": "string"
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
       },
       "required": false,
-      "description": "",
+      "description": "Class attribute to be applied to each bar.\nor accessor function which returns a class;",
       "defaultValue": {
         "value": "''",
         "computed": false
@@ -100,35 +106,43 @@
     },
     "barStyle": {
       "type": {
-        "name": "object"
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
       },
       "required": false,
-      "description": "",
+      "description": "Inline style object to be applied to each bar,\nor accessor function which returns a style object;",
       "defaultValue": {
         "value": "{}",
         "computed": false
       }
-    },
-    "onMouseEnterBar": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
     },
     "onMouseMoveBar": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mousemove` event handler callback, called when user's mouse moves within a bar."
+    },
+    "onMouseEnterBar": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`mouseenter` event handler callback, called when user's mouse enters a bar."
     },
     "onMouseLeaveBar": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mouseleave` event handler callback, called when user's mouse leaves a bar."
     }
   }
 }

@@ -1,5 +1,11 @@
 const YLineExample = (props) => {
-  return <div>insert example here</div>;
+  return <div>
+    <XYPlot width={400} height={300} xDomain={[-20, 20]} yDomain={[-20, 20]}>
+      <XAxis/><YAxis/>
+      <YLine value={-12} style={{stroke: 'red'}} />
+      <YLine value={15} style={{stroke: 'blue', strokeWidth: 3}} />
+    </XYPlot>
+  </div>
 };
 
 ReactDOM.render(<YLineExample />, mountNode);

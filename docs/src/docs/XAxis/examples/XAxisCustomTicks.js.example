@@ -2,7 +2,7 @@ const XAxisExample = (props) => {
   const size = {width: 350, height: 100};
 
   return <div>
-      <XYPlot domain={{x: [-20, 20], y: [-20, 20]}} {...size}>
+      <XYPlot xDomain={[-20, 20]} yDomain={[-20, 20]} {...size}>
         <XAxis title="Custom Ticks" ticks={[-12, -5, -2, 0, 2, 5, 12]}/>
       </XYPlot>
   </div>

@@ -21,13 +21,11 @@ describe('Bar', () => {
   it('renders a basic vertical bar correctly', () => {
     const bar = shallow(
       <Bar
-        scale={{
-          x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
-          y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
-        }}
-        xValue={'b'}
-        yValue={0.25}
-        yEndValue={0.75}
+        xScale={d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100])}
+        yScale={d3.scaleLinear().domain([0, 1]).range([100, 0])}
+        x={'b'}
+        y={0.25}
+        yEnd={0.75}
         thickness={20}
       />
     );
@@ -47,13 +45,11 @@ describe('Bar', () => {
   it('renders a basic horizontal bar correctly', () => {
     const bar = shallow(
       <Bar
-        scale={{
-          x: d3.scaleLinear().domain([0, 1]).range([0, 100]),
-          y: d3.scalePoint().domain(['a', 'b', 'c']).range([100, 0]),
-        }}
-        xValue={.1}
-        xEndValue={.7}
-        yValue={'b'}
+        xScale={d3.scaleLinear().domain([0, 1]).range([0, 100])}
+        yScale={d3.scalePoint().domain(['a', 'b', 'c']).range([100, 0])}
+        x={.1}
+        xEnd={.7}
+        y={'b'}
         thickness={20}
       />
     );
@@ -72,13 +68,11 @@ describe('Bar', () => {
 
   it('has a thickness prop which controls the thickness of the bar', () => {
     const verticalBarProps = {
-      scale: {
-        x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
-        y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
-      },
-      xValue: 'a',
-      yValue: 0,
-      yEndValue: 1,
+      xScale: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
+      yScale: d3.scaleLinear().domain([0, 1]).range([100, 0]),
+      x: 'a',
+      y: 0,
+      yEnd: 1,
       thickness: 10
     };
 
@@ -91,13 +85,11 @@ describe('Bar', () => {
     expect(thickVerticalBar.find('rect').props().width).to.equal(40);
 
     const horizontalBarProps = {
-      scale: {
-        x: d3.scaleLinear().domain([0, 1]).range([0, 100]),
-        y: d3.scalePoint().domain(['a', 'b', 'c']).range([100, 0]),
-      },
-      xValue: .2,
-      xEndValue: .9,
-      yValue: 'c',
+      xScale: d3.scaleLinear().domain([0, 1]).range([0, 100]),
+      yScale: d3.scalePoint().domain(['a', 'b', 'c']).range([100, 0]),
+      x: .2,
+      xEnd: .9,
+      y: 'c',
       thickness: 12
     };
 
@@ -112,13 +104,11 @@ describe('Bar', () => {
 
   it("passes className and style props through to the bar's rectangle element", () => {
     const verticalBarProps = {
-      scale: {
-        x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
-        y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
-      },
-      xValue: 'a',
-      yValue: 0,
-      yEndValue: 1,
+      xScale: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
+      yScale: d3.scaleLinear().domain([0, 1]).range([100, 0]),
+      x: 'a',
+      y: 0,
+      yEnd: 1,
       className: 'foo-bar-test-class',
       style: {fill: 'thistle'}
     };
@@ -132,13 +122,11 @@ describe('Bar', () => {
 
   it("attaches onMouseMove, onMouseEnter and onMouseLeave handlers to the bar's rectangle",  () => {
     const barProps = {
-      scale: {
-        x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
-        y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
-      },
-      xValue: 'a',
-      yValue: 0,
-      yEndValue: 1,
+      xScale: d3.scaleLinear().domain([0, 1]).range([0, 100]),
+      yScale: d3.scalePoint().domain(['a', 'b', 'c']).range([100, 0]),
+      x: 'a',
+      y: 0,
+      yEnd: 1,
       onMouseMove: sinon.spy(),
       onMouseEnter: sinon.spy(),
       onMouseLeave: sinon.spy()
@@ -161,7 +149,7 @@ describe('Bar', () => {
   });
 
   it("throws an error if x/y scale(s) are missing or invalid", () => {
-    const barProps = {xValue: 'a', yValue: 0, yEndValue: 1};
+    const barProps = {x: 'a', y: 0, yEnd: 1};
     const xScale = d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]);
     const yScale = d3.scaleLinear().domain([0, 1]).range([100, 0]);
 
@@ -169,34 +157,32 @@ describe('Bar', () => {
     expect(() => { shallow(<Bar {...barProps}/>); }).to.throw(Error);
     // throw if one scale is missing
     expect(() => {
-      shallow(<Bar {...{...barProps, scale: {x: xScale}}}/>);
+      shallow(<Bar {...{...barProps, xScale}}/>);
     }).to.throw(Error);
     // throw if one scale is invalid
     expect(() => {
-      shallow(<Bar {...{...barProps, scale: {x: 'bad', y: yScale}}}/>);
+      shallow(<Bar {...{...barProps, xScale: 'bad', yScale}}/>);
     }).to.throw(Error);
     // don't throw if both are provided
     expect(() => {
-      shallow(<Bar {...{...barProps, scale: {x: xScale, y: yScale}}}/>);
+      shallow(<Bar {...{...barProps, xScale, yScale}}/>);
     }).not.to.throw(Error);
   });
 
-  it("throws an error if exactly ONE of xEndValue OR yEndValue are not provided", () => {
+  it("throws an error if exactly ONE of xEnd OR yEnd are not provided", () => {
     const barProps = {
-      scale: {
-        x: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
-        y: d3.scaleLinear().domain([0, 1]).range([100, 0]),
-      },
-      xValue: 'a',
-      yValue: 0
+      xScale: d3.scalePoint().domain(['a', 'b', 'c']).range([0, 100]),
+      yScale: d3.scaleLinear().domain([0, 1]).range([100, 0]),
+      x: 'a',
+      y: 0
     };
 
-    // throw if neither xEndValue or yEndValue passed
+    // throw if neither xEnd or yEnd passed
     expect(() => { shallow(<Bar {...barProps}/>); }).to.throw(Error);
-    // throw if both xEndValue and yEndValue passed
-    expect(() => { shallow(<Bar {...{...barProps, xEndValue: 'b', yEndValue: 1}}/>); }).to.throw(Error);
+    // throw if both xEnd and yEnd passed
+    expect(() => { shallow(<Bar {...{...barProps, xEnd: 'b', yEnd: 1}}/>); }).to.throw(Error);
     // OK if one or other is passed
-    expect(() => { shallow(<Bar {...{...barProps, xEndValue: 'b'}}/>); }).not.to.throw(Error);
-    expect(() => { shallow(<Bar {...{...barProps, yEndValue: 1}}/>); }).not.to.throw(Error);
+    expect(() => { shallow(<Bar {...{...barProps, xEnd: 'b'}}/>); }).not.to.throw(Error);
+    expect(() => { shallow(<Bar {...{...barProps, yEnd: 1}}/>); }).not.to.throw(Error);
   })
 });

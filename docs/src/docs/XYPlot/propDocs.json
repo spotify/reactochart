@@ -65,12 +65,47 @@
         "computed": false
       }
     },
-    "domain": {
+    "xDomain": {
       "type": {
-        "name": "object"
+        "name": "array"
       },
       "required": false,
       "description": "The X and/or Y domains of the data in {x: [...], y: [...]} format.\nFor numerical scales, this is represented as [min, max] of the data;\nfor ordinal/categorical scales it is an array of known values ie. ['a', 'b', 'c'].\nAutomatically determined from data if not passed."
+    },
+    "yDomain": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": ""
+    },
+    "xScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "d3 scales for the X and Y axes of the chart, in {x, y} object format.\n(optional, normally determined automatically by XYPlot)"
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "xScaleType": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": ""
+    },
+    "yScaleType": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": ""
     },
     "margin": {
       "type": {
@@ -79,49 +114,109 @@
       "required": false,
       "description": ""
     },
-    "scale": {
+    "marginTop": {
       "type": {
-        "name": "object"
-      },
-      "required": false,
-      "description": "d3 scales for the X and Y axes of the chart, in {x, y} object format.\n(optional, normally determined automatically by XYPlot)"
-    },
-    "scaleType": {
-      "type": {
-        "name": "object"
+        "name": "number"
       },
       "required": false,
       "description": ""
     },
-    "spacing": {
+    "marginBottom": {
       "type": {
-        "name": "object"
+        "name": "number"
       },
       "required": false,
       "description": ""
     },
-    "padding": {
+    "marginLeft": {
       "type": {
-        "name": "object"
+        "name": "number"
       },
       "required": false,
       "description": ""
     },
-    "nice": {
+    "marginRight": {
       "type": {
-        "name": "object"
+        "name": "number"
       },
       "required": false,
       "description": ""
     },
-    "invertScale": {
+    "spacingTop": {
       "type": {
-        "name": "object"
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "spacingBottom": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "spacingLeft": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "spacingRight": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "paddingTop": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "paddingBottom": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "paddingLeft": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "paddingRight": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "invertXScale": {
+      "type": {
+        "name": "bool"
       },
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "{x: false, y: false}",
+        "value": "false",
+        "computed": false
+      }
+    },
+    "invertYScale": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "false",
         "computed": false
       }
     },

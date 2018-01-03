@@ -15,8 +15,7 @@ import XAxisTitle from './XAxisTitle';
 
 export default class XAxis extends React.Component {
   static propTypes = {
-    scale: PropTypes.shape({x: PropTypes.func.isRequired}),
-
+    xScale: PropTypes.func,
     width: PropTypes.number,
     height: PropTypes.number,
     position: PropTypes.string,
@@ -24,6 +23,10 @@ export default class XAxis extends React.Component {
     nice: PropTypes.bool,
     ticks: PropTypes.array,
     tickCount: PropTypes.number,
+    spacingTop: PropTypes.number,
+    spacingBottom: PropTypes.number,
+    spacingLeft: PropTypes.number,
+    spacingRight: PropTypes.number,
 
     showTitle: PropTypes.bool,
     showLabels: PropTypes.bool,
@@ -67,7 +70,10 @@ export default class XAxis extends React.Component {
     tickLength: 5,
     labelDistance: 3,
     titleDistance: 5,
-    spacing: {top: 0, bottom: 0, left: 0, right: 0}
+    spacingTop: 0,
+    spacingBottom: 0,
+    spacingLeft: 0,
+    spacingRight: 0
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -75,9 +81,9 @@ export default class XAxis extends React.Component {
   }
 
   static getTickDomain(props) {
-    if(!_.get(props, 'scale.x')) return;
+    if(!props.xScale) return;
     props = _.defaults({}, props, XAxis.defaultProps);
-    return {x: getTickDomain(props.scale.x, props)};
+    return {xTickDomain: getTickDomain(props.xScale, props)};
   }
 
   static getMargin(props) {
@@ -94,13 +100,13 @@ export default class XAxis extends React.Component {
     if(props.showLabels)
       margins.push(XAxisLabels.getMargin(labelsProps));
 
-    return sumMargins(margins);
+    return sumMargins(margins, 'margin');
   }
 
   render() {
     const {
-      width, height, position, spacing, tickLength, titleDistance, labelDistance,
-      showTitle, showLabels, showTicks, showGrid
+      width, height, position, spacingTop, spacingBottom, spacingLeft, spacingRight,
+      tickLength, titleDistance, labelDistance, showTitle, showLabels, showTicks, showGrid
     } = this.props;
 
     const {ticksProps, gridProps, labelsProps, titleProps} = getAxisChildProps(this.props);
@@ -110,15 +116,15 @@ export default class XAxis extends React.Component {
     if(showTitle && showLabels) {
       // todo optimize so we don't generate labels twice
       const labelsMargin = XAxisLabels.getMargin(labelsProps);
-      titleProps.distance = titleDistance + labelsMargin[position];
+      titleProps.distance = titleDistance + labelsMargin[`margin${_.upperFirst(position)}`];
     } else if(showTitle && showTicks) {
       titleProps.distance = titleDistance + tickLength;
     }
 
     const axisLineY = (position === 'bottom') ?
-      height + spacing.bottom : -spacing.top;
+      height + spacingBottom : -spacingTop;
     // `width` is width of inner chart *not* including spacing - add spacing to figure out where to draw line
-    const axisLineWidth = width + spacing.left + spacing.right;
+    const axisLineWidth = width + spacingLeft + spacingRight;
 
     return <g className="chart-axis chart-axis-x">
       {showGrid ? <XGrid {...gridProps} /> : null}
@@ -131,7 +137,7 @@ export default class XAxis extends React.Component {
 
       <line
         className="chart-axis-line chart-axis-line-x"
-        x1={-spacing.left} x2={width + spacing.right}
+        x1={-spacingLeft} x2={width + spacingRight}
         y1={axisLineY} y2={axisLineY}
       />
     </g>;

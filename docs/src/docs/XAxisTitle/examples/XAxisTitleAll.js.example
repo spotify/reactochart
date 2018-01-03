@@ -1,7 +1,7 @@
 const XAxisTitleExample = (props) => {
   const xyProps = {
     width: 500, height: 360,
-    domain: {x: [0, 100], y: [0, 100]}
+    xDomain: [0, 100], yDomain: [0, 100]
   };
 
   return <XYPlot {...xyProps}>

@@ -31,46 +31,119 @@
     }
   ],
   "props": {
-    "scale": {
+    "yScale": {
       "type": {
-        "name": "shape",
-        "value": {
-          "y": {
-            "name": "func",
-            "required": true
-          }
-        }
+        "name": "func"
       },
       "required": false,
       "description": ""
     },
     "position": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "'left'",
+            "computed": false
+          },
+          {
+            "value": "'right'",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": "",
       "defaultValue": {
         "value": "'left'",
         "computed": false
       }
     },
-    "nice": {
-      "defaultValue": {
-        "value": "true",
-        "computed": false
-      }
+    "placement": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "'before'",
+            "computed": false
+          },
+          {
+            "value": "'after'",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": ""
+    },
+    "ticks": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": ""
+    },
+    "tickCount": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
     },
     "tickLength": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
       "defaultValue": {
         "value": "5",
         "computed": false
       }
     },
     "tickStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "",
       "defaultValue": {
         "value": "{}",
         "computed": false
       }
     },
-    "spacing": {
+    "tickClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": ""
+    },
+    "spacingLeft": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
       "defaultValue": {
-        "value": "{top: 0, bottom: 0, left: 0, right: 0}",
+        "value": "0",
+        "computed": false
+      }
+    },
+    "spacingRight": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "nice": {
+      "defaultValue": {
+        "value": "true",
         "computed": false
       }
     }

@@ -12,7 +12,9 @@ export default class YAxisTitle extends React.Component {
     alignment: PropTypes.oneOf(['top', 'middle', 'bottom']),
     placement: PropTypes.oneOf(['before', 'after']),
     rotate: PropTypes.bool,
-    style: PropTypes.object
+    style: PropTypes.object,
+    spacingLeft: PropTypes.number,
+    spacingRight: PropTypes.number,
   };
   static defaultProps = {
     height: 250,
@@ -28,16 +30,17 @@ export default class YAxisTitle extends React.Component {
       fontWeight: 'bold',
       lineHeight: 1
     },
-    spacing: {top: 0, bottom: 0, left: 0, right: 0}
+    spacingLeft: 0,
+    spacingRight: 0
   };
 
   static getMargin(props) {
     props = _.defaults({}, props, YAxisTitle.defaultProps);
     const {distance, position, rotate} = props;
     const placement = props.placement || ((position === 'left') ? 'before' : 'after');
-    const zeroMargin = {top: 0, bottom: 0, left: 0, right: 0};
+    const zeroMargin = {marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0};
 
-    if((position === 'left' && placement === 'after') || (position == 'right' && placement === 'before'))
+    if((position === 'left' && placement === 'after') || (position === 'right' && placement === 'before'))
       return zeroMargin;
 
     const title = props.title || props.children;
@@ -51,17 +54,17 @@ export default class YAxisTitle extends React.Component {
       );
 
     return (position === 'left') ?
-    {...zeroMargin, left: marginValue} :
-    {...zeroMargin, right: marginValue};
+      {...zeroMargin, marginLeft: marginValue} :
+      {...zeroMargin, marginRight: marginValue};
   }
 
   render() {
-    const {height, width, distance, position, alignment, style, spacing} = this.props;
+    const {height, width, distance, position, alignment, style, spacingLeft, spacingRight} = this.props;
     const title = this.props.title || this.props.children;
     const placement = this.props.placement || ((position === 'left') ? 'before' : 'after');
 
     const rotate = this.props.rotate ? -90 : 0;
-    const posX = (position === 'right') ? width + spacing.right : -spacing.left;
+    const posX = (position === 'right') ? width + spacingRight : -spacingLeft;
     const translateX = posX +
       ((placement === 'before') ? -distance : distance);
     const translateY =

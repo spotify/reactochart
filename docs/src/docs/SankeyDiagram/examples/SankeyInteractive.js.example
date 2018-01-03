@@ -1,0 +1,99 @@
+const graph = getSampleData();
+
+class SankeyInteractiveExample extends React.Component {
+  state = {
+    activeNode: undefined,
+    activeLinkSource: undefined,
+    activeLinkTarget: undefined
+  };
+
+  render() {
+    return <div>
+      <ZoomContainer width={900} height={500}>
+        <SankeyDiagram
+          width={900}
+          height={500}
+          nodes={graph.nodes}
+          links={graph.links}
+          nodeId={getNodeId}
+          nodeAlignment="left"
+          nodeLabelText={getNodeLabel}
+          nodeStyle={(node) => {
+            const nodeId = getNodeId(node);
+            if(nodeId === this.state.activeNode)
+              return {fill: 'red'};
+            if(nodeId === this.state.activeLinkSource || nodeId === this.state.activeLinkTarget)
+              return {fill: 'blue'};
+            return {};
+          }}
+          linkStyle={(link) => {
+            const sourceId = getNodeId(link.source);
+            const targetId = getNodeId(link.target);
+            if(this.state.activeLinkSource === sourceId && this.state.activeLinkTarget === targetId)
+              return {stroke: 'thistle'};
+            return {};
+          }}
+          onMouseEnterNode={(event, info) => {
+            this.setState({activeNode: getNodeId(info.node)})
+          }}
+          onMouseLeaveNode={(event, info) => {
+            this.setState({activeNode: undefined})
+          }}
+          onMouseEnterLink={(event, info) => {
+            this.setState({
+              activeLinkSource: getNodeId(info.link.source),
+              activeLinkTarget: getNodeId(info.link.target),
+            });
+          }}
+          onMouseLeaveLink={(event, info) => {
+            this.setState({activeLinkSource: undefined, activeLinkTarget: undefined});
+          }}
+        />
+      </ZoomContainer>
+
+    </div>;
+  }
+}
+
+ReactDOM.render(<SankeyInteractiveExample />, mountNode);
+
+function getNodeId(node) { return node.id }
+function getNodeLabel(node) { return node.label; }
+
+
+function getSampleData() {
+  return {
+    nodes: [
+      {id: 'week', label: "Week"},
+      {id: 'weekdays', label: "Weekdays"},
+      {id: 'weekends', label: "Weekends"},
+      {id: 'sleep', label: "Sleep"},
+      {id: 'work', label: "Work"},
+      {id: 'eating', label: "Eating"},
+      {id: 'free', label: "Free Time"},
+      {id: 'meetings', label: "Meetings"},
+      {id: 'communication', label: "Communication"},
+      {id: 'programming', label: "Programming"},
+      {id: 'socializing', label: "Socializing"},
+      {id: 'media', label: "Media (TV, books, etc.)"},
+      {id: 'outdoors', label: "Outdoors"},
+    ],
+    links: [
+      {source: 'week', target: 'weekdays', value: 120},
+      {source: 'week', target: 'weekends', value: 48},
+      {source: 'weekdays', target: 'sleep', value: 40},
+      {source: 'weekdays', target: 'work', value: 40},
+      {source: 'weekdays', target: 'eating', value: 10},
+      {source: 'weekdays', target: 'free', value: 30},
+      {source: 'weekends', target: 'sleep', value: 16},
+      {source: 'weekends', target: 'eating', value: 4},
+      {source: 'weekends', target: 'free', value: 28},
+      {source: 'free', target: 'socializing', value: 20},
+      {source: 'free', target: 'media', value: 20},
+      {source: 'free', target: 'outdoors', value: 10},
+      {source: 'work', target: 'meetings', value: 10},
+      {source: 'work', target: 'communication', value: 8},
+      {source: 'work', target: 'programming', value: 22}
+    ]
+  }
+}

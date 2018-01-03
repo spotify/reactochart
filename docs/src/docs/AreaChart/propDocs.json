@@ -24,36 +24,36 @@
       "required": true,
       "description": "the array of data objects"
     },
-    "getX": {
+    "x": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "data getter for X coordinates"
+      "description": "Accessor function for area X values, called once per datum"
     },
-    "getY": {
+    "y": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "data getter for Y coordinates"
+      "description": "Accessor function for area's starting (minimum) Y values, called once per datum,\nor a single Y value to be used for the entire line.\nShould return the minimum of the Y range spanned by the area at this point."
     },
-    "getYEnd": {
+    "yEnd": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "data getter for Y end coordinates"
+      "description": "Accessor function for area's ending (maximum) Y values, called once per datum,\nor a single Y value to be used for the entire line.\nShould return the maximum of the Y range spanned by the area at this point."
     },
     "pathStyle": {
       "type": {
         "name": "object"
       },
       "required": false,
-      "description": "style applied to path element"
+      "description": "style applied to area path element"
     },
     "isDifference": {
       "type": {
@@ -70,20 +70,6 @@
       "description": "when isDifference is true, pathStylePositive and pathStyleNegative can be passed to give 2 different inline\nstyles to the two different paths which are generated.\nIgnored if isDifference is false."
     },
     "pathStyleNegative": {
-      "type": {
-        "name": "object"
-      },
-      "required": false,
-      "description": ""
-    },
-    "scaleType": {
-      "type": {
-        "name": "object"
-      },
-      "required": false,
-      "description": ""
-    },
-    "scale": {
       "type": {
         "name": "object"
       },
@@ -111,6 +97,34 @@
         "value": "(d, i, accessors) => {\n  return !_.isUndefined(accessors.y(d, i)) && !_.isUndefined(accessors.yEnd(d, i));\n}",
         "computed": false
       }
+    },
+    "xScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for X axis - provided by XYPlot"
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for Y axis - provided by XYPlot"
+    },
+    "xScaleType": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "Type of X scale - provided by XYPlot"
+    },
+    "yScaleType": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "Type of Y scale - provided by XYPlot"
     }
   }
 }

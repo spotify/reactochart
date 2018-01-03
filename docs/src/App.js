@@ -9,7 +9,7 @@ import Playground from './Playground';
 const lessons = [
   {name: "Quick Start", path: '/quick-start', Component: Lessons.QuickStartLesson},
   {name: "XY Plots", path: '/xy-plots', Component: Lessons.XYPlotsLesson},
-  {name: "Getters & Accessors", path: '/getters-and-accessors', Component: Lessons.GettersAndAccessorsLesson},
+  // {name: "Getters & Accessors", path: '/getters-and-accessors', Component: Lessons.GettersAndAccessorsLesson},
   // {name: "Interaction", path: '/interaction', Component: Lessons.InteractionLesson},
 ];
 
@@ -17,7 +17,7 @@ const mainComponents = [
   {name: 'XYPlot', path: '/xy-plot', Component: Docs.XYPlotDocs},
 ];
 
-const chartComponents = [
+const xyChartComponents = [
   {name: 'AreaBarChart', path: '/area-bar-chart', Component: Docs.AreaBarChartDocs},
   {name: 'AreaChart', path: '/area-chart', Component: Docs.AreaChartDocs},
   {name: 'AreaHeatmap', path: '/area-heatmap', Component: Docs.AreaHeatmapDocs},
@@ -28,9 +28,13 @@ const chartComponents = [
   {name: 'KernelDensityEstimation', path: '/kernel-density-estimation', Component: Docs.KernelDensityEstimationDocs},
   {name: 'LineChart', path: '/line-chart', Component: Docs.LineChartDocs},
   {name: 'MarkerLineChart', path: '/marker-line-chart', Component: Docs.MarkerLineChartDocs},
-  {name: 'PieChart', path: '/pie-chart', Component: Docs.PieChartDocs},
   {name: 'RangeBarChart', path: '/range-bar-chart', Component: Docs.RangeBarChartDocs},
   {name: 'ScatterPlot', path: '/scatter-plot', Component: Docs.ScatterPlotDocs},
+];
+
+const standaloneChartComponents = [
+  {name: 'PieChart', path: '/pie-chart', Component: Docs.PieChartDocs},
+  {name: 'SankeyDiagram', path: '/sankey', Component: Docs.SankeyDiagramDocs},
   {name: 'TreeMap', path: '/tree-map', Component: Docs.TreeMapDocs},
 ];
 
@@ -56,7 +60,8 @@ const axisComponents = [
 
 const allComponents = lessons
   .concat(mainComponents)
-  .concat(chartComponents)
+  .concat(xyChartComponents)
+  .concat(standaloneChartComponents)
   .concat(dataMarkComponents)
   .concat(axisComponents);
 
@@ -85,21 +90,28 @@ const Nav = () => {
       })}
     </ul>
 
-    <h4>Chart Components</h4>
+    <h4>XY Chart Components</h4>
     <ul className="nav-inverse nav-tabs nav-stacked">
-      {chartComponents.map((component, i) => {
+      {xyChartComponents.map((component, i) => {
         return <NavLink to={component.path} label={component.name} key={`chart-component-${i}`}/>;
       })}
     </ul>
 
-    <h4>Data Components</h4>
+    <h4>Standalone Chart Components</h4>
+    <ul className="nav-inverse nav-tabs nav-stacked">
+      {standaloneChartComponents.map((component, i) => {
+        return <NavLink to={component.path} label={component.name} key={`chart-component-${i}`}/>;
+      })}
+    </ul>
+
+    <h4>XY Data Components</h4>
     <ul className="nav-inverse nav-tabs nav-stacked">
       {dataMarkComponents.map((component, i) => {
         return <NavLink to={component.path} label={component.name} key={`data-component-${i}`}/>;
       })}
     </ul>
 
-    <h4>Axis Components</h4>
+    <h4>XY Axis Components</h4>
     <ul className="nav-inverse nav-tabs nav-stacked">
       {axisComponents.map((component, i) => {
         return <NavLink to={component.path} label={component.name} key={`axis-component-${i}`}/>;
@@ -144,62 +156,66 @@ const {
 class MultipleXYExample extends React.Component {
   render() {
     return <div>
-      <XYPlot domain={{y: [-2, 2], x: [-2, 2]}} scaleType="linear" {...{width: 400, height: 400}}>
+      <XYPlot xDomain={[-2, 2]} yDomain={[-2, 2]} {...{width: 400, height: 400}}>
         <XAxis title="Phase" />
         <YAxis title="Intensity" />
 
         <RangeBarChart
           data={_.range(0, 2, .03)}
-          getX={null}
-          getY={d => (Math.sin(d*3) * .7) + 1.2}
-          getYEnd={d => (Math.sin(d*3) * Math.cos(d*3) * .7) + 1.2}
+          x={d => d}
+          y={d => (Math.sin(d*3) * .7) + 1.2}
+          yEnd={d => (Math.sin(d*3) * Math.cos(d*3) * .7) + 1.2}
           barThickness={2}
           barStyle={{fill: '#3690c0'}}
         />
 
         <LineChart
           data={_.range(-2, 0, .005)}
-          getY={d => Math.pow(Math.abs(Math.sin(d*5)), Math.abs(Math.sin(d*.25))) * 1.8}
+          x={d => d}
+          y={d => Math.pow(Math.abs(Math.sin(d*5)), Math.abs(Math.sin(d*.25))) * 1.8}
           lineStyle={{stroke: '#02818a', strokeWidth: 3}}
         />
 
         <ScatterPlot
           data={_.range(-2, 0, .05)}
-          getY={d => Math.pow(2, (d + 2) * 1.8) * 0.1}
+          x={d => d}
+          y={d => Math.pow(2, (d + 2) * 1.8) * 0.1}
           pointSymbol={<rect width={5} height={5} fill="#3690c0" />}
         />
 
         <BarChart
           data={_.range(0, 2, .03)}
-          getY={d => -Math.abs(Math.sin(d*4) * Math.cos(d*3))}
+          x={d => d}
+          y={d => -Math.abs(Math.sin(d*4) * Math.cos(d*3))}
           barThickness={3}
           barStyle={{fill: '#67a9cf'}}
         />
 
         <MarkerLineChart
           data={_.range(0, 1.5, .1)}
-          getY={d => Math.cos(d)}
+          x={d => d}
+          y={d => Math.cos(d)}
           lineStyle={{stroke: '#ec7014', strokeWidth: 3}}
         />
 
         <ColorHeatmap
           data={_.flatten(_.range(-2, 0, .1).map(i => _.range(-2, 0, .1).map(j => [i, j])))}
-          getValue={([i, j]) => Math.sin(i * j * 5)}
-          getX={([i, j]) => i}
-          getXEnd={([i, j]) => i + .1}
-          getY={([i, j]) => j}
-          getYEnd={([i, j]) => j + .1}
+          value={([i, j]) => Math.sin(i * j * 5)}
+          x={([i, j]) => i}
+          xEnd={([i, j]) => i + .1}
+          y={([i, j]) => j}
+          yEnd={([i, j]) => j + .1}
           colors={['#d0d1e6', '#016450']}
           interpolator={'lab'}
         />
 
         <AreaHeatmap
           data={_.flatten(_.range(0, 2, .1).map(i => _.range(-2, -1, .1).map(j => [i, j])))}
-          getArea={([i, j]) => -Math.sin(i * j * 5)}
-          getX={([i, j]) => i}
-          getXEnd={([i, j]) => i + .1}
-          getY={([i, j]) => j}
-          getYEnd={([i, j]) => j + .1}
+          area={([i, j]) => -Math.sin(i * j * 5)}
+          x={([i, j]) => i}
+          xEnd={([i, j]) => i + .1}
+          y={([i, j]) => j}
+          yEnd={([i, j]) => j + .1}
           rectStyle={{fill: '#016450'}}
         />
       </XYPlot>

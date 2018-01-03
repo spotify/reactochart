@@ -25,7 +25,7 @@ export default class QuickStartLesson extends React.Component {
         Then you can <code>import</code> individual Reactochart components:
       </p>
       <pre>
-        import LineChart from 'reactochart/lib/LineChart'
+        import LineChart from 'reactochart/LineChart'
       </pre>
       <p>
         The examples in this documentation will omit these imports to save space,
@@ -33,19 +33,19 @@ export default class QuickStartLesson extends React.Component {
         For example, the example below requires importing the following components:
       </p>
       <pre>
-        import XYPlot from 'reactochart/lib/XYPlot';<br/>
-        import XAxis from 'reactochart/lib/XAxis';<br/>
-        import YAxis from 'reactochart/lib/YAxis';<br/>
-        import LineChart from 'reactochart/lib/LineChart';
+        import XYPlot from 'reactochart/XYPlot';<br/>
+        import XAxis from 'reactochart/XAxis';<br/>
+        import YAxis from 'reactochart/YAxis';<br/>
+        import LineChart from 'reactochart/LineChart';
       </pre>
       <p>
         If you prefer, you can import all of Reactochart at once, though this may hinder some optimizations,
         such as <code>webpack</code> tree-shaking:
       </p>
       <pre>
-        import {'{'}XYPlot, XAxis, YAxis, LineChart{'}'} from 'reactochart/lib';<br/>
+        import {'{'}XYPlot, XAxis, YAxis, LineChart{'}'} from 'reactochart';<br/>
         // or <br/>
-        import * as Reactochart from 'reactochart/lib';
+        import * as Reactochart from 'reactochart';
       </pre>
       <p>
         And now, here's our first line chart showing the basic usage of these components. In this and all

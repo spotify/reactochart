@@ -5,9 +5,9 @@ const AreaChartExample = (props) => {
       <YAxis gridLineStyle={{stroke: '#666'}}/>
       <AreaChart
         data={_.range(41)}
-        getX={undefined}
-        getY={d => Math.sin(d / 10) * 10}
-        getYEnd={d => Math.cos((d + 1) / 10) * 10}
+        x={d => d}
+        y={d => Math.sin(d / 10) * 10}
+        yEnd={d => Math.cos((d + 1) / 10) * 10}
       />
     </XYPlot>
   </div>

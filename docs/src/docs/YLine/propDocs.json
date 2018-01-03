@@ -2,15 +2,9 @@
   "description": "",
   "methods": [],
   "props": {
-    "scale": {
+    "yScale": {
       "type": {
-        "name": "shape",
-        "value": {
-          "y": {
-            "name": "func",
-            "required": true
-          }
-        }
+        "name": "func"
       },
       "required": false,
       "description": ""
@@ -22,9 +16,47 @@
       "required": true,
       "description": ""
     },
+    "spacingLeft": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "spacingRight": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
     "style": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "",
       "defaultValue": {
         "value": "{}",
+        "computed": false
+      }
+    },
+    "className": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "''",
         "computed": false
       }
     }

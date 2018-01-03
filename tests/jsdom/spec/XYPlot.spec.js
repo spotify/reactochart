@@ -6,7 +6,7 @@ import {mount, shallow} from 'enzyme';
 
 import {XYPlot, LineChart} from '../../../src/index.js';
 
-const commonXYProps = {domain: {x: [0, 10], y: [0, 100]}};
+const commonXYProps = {xDomain: [0, 10], yDomain: [0, 100]};
 
 describe('XYPlot', () => {
     it('renders SVG with given width & height (or a default)', () => {
@@ -25,27 +25,30 @@ describe('XYPlot', () => {
 
     it('renders inner chart area with given margin', () => {
         const size = 400;
-        const margin = {top: 10, bottom: 20, left: 30, right: 40};
-        const chart = mount(<XYPlot width={size} height={size} margin={margin} {...commonXYProps} />);
+        const margin = {marginTop: 10, marginBottom: 20, marginLeft: 30, marginRight: 40};
+        const chart = mount(<XYPlot width={size} height={size} {...margin} {...commonXYProps} />);
         const inner = chart.find('.chart-inner').getNode();
         const bg = chart.find('.plot-background').getNode();
         expect(inner.getAttribute('transform').replace(/\s/, ''))
-            .to.contain(`translate(${margin.left},${margin.top})`);
-        expect(parseInt(bg.getAttribute('width'))).to.equal(size - (margin.left + margin.right));
-        expect(parseInt(bg.getAttribute('height'))).to.equal(size - (margin.top + margin.bottom));
+            .to.contain(`translate(${margin.marginLeft},${margin.marginTop})`);
+        expect(parseInt(bg.getAttribute('width'))).to.equal(size - (margin.marginLeft + margin.marginRight));
+        expect(parseInt(bg.getAttribute('height'))).to.equal(size - (margin.marginTop + margin.marginBottom));
     });
 
-    it('creates a top/bottom/left/right object from single value, if object is not given for directional props', () => {
-        const size = 400;
-        const margin = 50;
-        const chart = mount(<XYPlot width={size} height={size} margin={margin} {...commonXYProps} />);
-        const inner = chart.find('.chart-inner').getNode();
-        const bg = chart.find('.plot-background').getNode();
-        expect(inner.getAttribute('transform').replace(/\s/, ''))
-            .to.contain(`translate(${margin},${margin})`);
-        expect(parseInt(bg.getAttribute('width'))).to.equal(size - (margin + margin));
-        expect(parseInt(bg.getAttribute('height'))).to.equal(size - (margin + margin));
-    });
+    // TODO: TEST MOUSE EVENTS!
+
+    //
+    // it('creates a top/bottom/left/right object from single value, if object is not given for directional props', () => {
+    //     const size = 400;
+    //     const margin = 50;
+    //     const chart = mount(<XYPlot width={size} height={size} margin={margin} {...commonXYProps} />);
+    //     const inner = chart.find('.chart-inner').getNode();
+    //     const bg = chart.find('.plot-background').getNode();
+    //     expect(inner.getAttribute('transform').replace(/\s/, ''))
+    //         .to.contain(`translate(${margin},${margin})`);
+    //     expect(parseInt(bg.getAttribute('width'))).to.equal(size - (margin + margin));
+    //     expect(parseInt(bg.getAttribute('height'))).to.equal(size - (margin + margin));
+    // });
 
     /*
      spacing: PropTypes.fourDirections,

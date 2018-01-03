@@ -6,17 +6,17 @@ const XAxisExample = (props) => {
 
   return <div>
     <div style={{marginBottom: '10px'}}>
-      <XYPlot domain={{x: numberDomain, y: numberDomain}} {...smallSize}>
+      <XYPlot xDomain={numberDomain} yDomain={numberDomain} {...smallSize}>
         <XAxis title="Number Axis"/>
       </XYPlot>
     </div>
     <div style={{marginBottom: '10px'}}>
-      <XYPlot domain={{x: dateDomain, y: dateDomain}} {...smallSize}>
+      <XYPlot xDomain={dateDomain} yDomain={dateDomain} {...smallSize}>
         <XAxis title="Date Axis"/>
       </XYPlot>
     </div>
     <div style={{marginBottom: '10px'}}>
-      <XYPlot domain={{x: categoricalDomain, y: dateDomain}} {...smallSize}>
+      <XYPlot xDomain={categoricalDomain} yDomain={dateDomain} {...smallSize}>
         <XAxis title="Categorical Axis"/>
       </XYPlot>
     </div>

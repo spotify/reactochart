@@ -4,7 +4,7 @@ import {histogram} from 'd3';
 import PropTypes from 'prop-types';
 
 import * as CustomPropTypes from './utils/CustomPropTypes';
-import {makeAccessor, domainFromRangeData} from './utils/Data';
+import {makeAccessor2, domainFromRangeData, domainFromData} from './utils/Data';
 import xyPropsEqual from './utils/xyPropsEqual';
 
 import AreaBarChart from './AreaBarChart';
@@ -16,7 +16,7 @@ export default class Histogram extends React.Component {
      * the array of data objects
      */
     data: PropTypes.array.isRequired,
-    getValue: CustomPropTypes.getter,
+    value: CustomPropTypes.valueOrAccessor,
     axisType: PropTypes.object,
     scale: PropTypes.object
   };
@@ -25,11 +25,19 @@ export default class Histogram extends React.Component {
     histogramData: null
   };
 
-  static getDomain() {
+  static getScaleType() {
+    return {
+      xScaleType: 'linear',
+      yScaleType: 'linear'
+    }
+  }
+  static getDomain(props) {
+    const {data, value} = props;
     // todo implement for real
     return {
-      x: null,
-      y: [0,200]
+      // x: null,
+      xDomain: domainFromData(data, makeAccessor2(value)),
+      yDomain: [0,200]
     }
   }
 
@@ -39,11 +47,11 @@ export default class Histogram extends React.Component {
   }
 
   componentWillMount() {
-    const {domain, getValue, data} = this.props;
+    const {xDomain, value, data} = this.props;
     const chartHistogram = histogram()
-      .domain(domain.x)
+      .domain(xDomain)
       // todo - get this working with arbitrary getValue accessor - seems to be broken -DD
-      .value(makeAccessor(getValue))
+      .value(makeAccessor2(value))
       .thresholds(30);
 
     const histogramData = chartHistogram(data);
@@ -56,11 +64,15 @@ export default class Histogram extends React.Component {
     const {name, scale, axisType, scaleWidth, scaleHeight, plotWidth, plotHeight} = this.props;
 
     return <AreaBarChart
+      {...this.props}
       data={this.state.histogramData}
-      getX={d => d.x0}
-      getXEnd={d => d.x1}
-      getY={d => d.length}
-      {...{name, scale, axisType, scaleWidth, scaleHeight, plotWidth, plotHeight}}
+      x={getX0}
+      xEnd={getX1}
+      y={getLength}
     />;
   }
 }
+
+function getX0(d) { return d.x0; }
+function getX1(d) { return d.x1; }
+function getLength(d) { return d.length; }

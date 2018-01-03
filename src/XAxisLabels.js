@@ -58,9 +58,9 @@ function resolveXLabelsForValues(scale, values, formats, style, force = true) {
   }
 }
 
-class XAxisValueLabels extends React.Component {
+class XAxisLabels extends React.Component {
   static propTypes = {
-    scale: PropTypes.object,
+    xScale: PropTypes.func,
     // Label Handling
     onMouseEnterLabel: PropTypes.func,
     onMouseMoveLabel: PropTypes.func,
@@ -84,7 +84,9 @@ class XAxisValueLabels extends React.Component {
     format: undefined,
     formats: undefined,
     labels: undefined,
-    spacing: {top: 0, bottom: 0, left: 0, right: 0}
+    spacingTop: 0,
+    spacingBottom: 0,
+
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -92,25 +94,24 @@ class XAxisValueLabels extends React.Component {
   }
 
   static getTickDomain(props) {
-    if(!_.get(props, 'scale.x')) return;
-    props = _.defaults({}, props, XAxisValueLabels.defaultProps);
-    return {x: getTickDomain(props.scale.x, props)};
+    if(!props.xScale) return;
+    props = _.defaults({}, props, XAxisLabels.defaultProps);
+    return {xTickDomain: getTickDomain(props.xScale, props)};
   }
 
   static getMargin(props) {
-    props = _.defaults({}, props, XAxisValueLabels.defaultProps);
-    const {position, placement, distance, tickCount, labelStyle} = props;
-    const scale = props.scale.x;
-    const labels = props.labels || XAxisValueLabels.getLabels(props);
-    const zeroMargin = {top: 0, bottom: 0, left: 0, right: 0};
+    props = _.defaults({}, props, XAxisLabels.defaultProps);
+    const {xScale, position, placement, distance, labelStyle} = props;
+    const labels = props.labels || XAxisLabels.getLabels(props);
+    const zeroMargin = {marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0};
 
-    if((position === 'bottom' && placement === 'above') || (position == 'top' && placement === 'below'))
+    if((position === 'bottom' && placement === 'above') || (position === 'top' && placement === 'below'))
       return zeroMargin;
 
     const marginY = _.max(labels.map(label => Math.ceil(distance + label.height)));
-    const [left, right] = getLabelsXOverhang(scale, labels, labelStyle.textAnchor || 'middle');
+    const [marginLeft, marginRight] = getLabelsXOverhang(xScale, labels, labelStyle.textAnchor || 'middle');
 
-    return _.defaults({[position] : marginY, left, right}, zeroMargin);
+    return _.defaults({[`margin${_.capitalize(position)}`]: marginY, marginLeft, marginRight}, zeroMargin);
   }
 
   static getDefaultFormats(scaleType) {
@@ -123,15 +124,14 @@ class XAxisValueLabels extends React.Component {
   }
 
   static getLabels(props) {
-    const {tickCount, labelStyle} = _.defaults(props, {}, XAxisValueLabels.defaultProps);
-    const scale = props.scale.x;
-    const ticks = props.ticks || getScaleTicks(scale, null, tickCount);
-    const style = _.defaults(labelStyle, XAxisValueLabels.defaultProps.labelStyle);
+    const {tickCount, labelStyle, xScale} = _.defaults(props, {}, XAxisLabels.defaultProps);
+    const ticks = props.ticks || getScaleTicks(xScale, null, tickCount);
+    const style = _.defaults(labelStyle, XAxisLabels.defaultProps.labelStyle);
 
-    const scaleType = inferScaleType(scale);
+    const scaleType = inferScaleType(xScale);
     const propsFormats = props.format ? [props.format] : props.formats;
     const formatStrs = (_.isArray(propsFormats) && propsFormats.length) ?
-      propsFormats : XAxisValueLabels.getDefaultFormats(scaleType);
+      propsFormats : XAxisLabels.getDefaultFormats(scaleType);
     const formats = makeLabelFormatters(formatStrs, scaleType);
 
     // todo resolve ticks also
@@ -139,25 +139,23 @@ class XAxisValueLabels extends React.Component {
     // nudge down the tickCount and try again
     // doing this will require communicating the updated ticks/tickCount back to the parent element...
 
-    const {labels} = resolveXLabelsForValues(scale, ticks, formats, style);
+    const {labels} = resolveXLabelsForValues(xScale, ticks, formats, style);
     // console.log('found labels', labels);
     return labels;
   }
 
   render() {
-    const {height, position, distance, labelStyle, labelClassName, onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel, spacing} = this.props;
-    const scale = this.props.scale.x;
-    const labels = this.props.labels || XAxisValueLabels.getLabels(this.props);
+    const {height, xScale, position, distance, labelStyle, labelClassName, onMouseEnterLabel, onMouseMoveLabel, onMouseLeaveLabel, spacingTop, spacingBottom} = this.props;
+    const labels = this.props.labels || XAxisLabels.getLabels(this.props);
     const placement = this.props.placement || ((position === 'top') ? 'above' : 'below');
-    const style = _.defaults(labelStyle, XAxisValueLabels.defaultProps.labelStyle);
     const className = `chart-value-label chart-value-label-x ${labelClassName}`;
     const transform = (position === 'bottom') ?
-      `translate(0, ${height + spacing.bottom})` : `translate(0, ${-spacing.top})`;
+      `translate(0, ${height + spacingBottom})` : `translate(0, ${-spacingTop})`;
     // todo: position: 'zero' to position along the zero line
 
     return <g className="chart-value-labels-x" transform={transform}>
       {labels.map((label, i) => {
-        const x = scale(label.value);
+        const x = xScale(label.value);
         const y = (placement === 'above') ?
           -label.height - distance :
           distance;
@@ -170,7 +168,7 @@ class XAxisValueLabels extends React.Component {
 
         return <g key={`x-axis-label-${i}`} {...{onMouseEnter, onMouseMove, onMouseLeave}}>
           {/* <XAxisLabelDebugRect {...{x, y, label}}/> */}
-          <MeasuredValueLabel value={label.value} {...{x, y, className, dy:"0.8em", style}}>
+          <MeasuredValueLabel value={label.value} {...{x, y, className, dy: "0.8em", style: labelStyle}}>
             {label.text}
           </MeasuredValueLabel>
         </g>;
@@ -192,4 +190,4 @@ class XAxisLabelDebugRect extends React.Component {
   }
 }
 
-export default XAxisValueLabels;
+export default XAxisLabels;

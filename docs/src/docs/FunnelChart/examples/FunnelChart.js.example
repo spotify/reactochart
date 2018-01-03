@@ -13,19 +13,19 @@ const FunnelChartExample = (props) => {
       <YAxis />
       <FunnelChart
         data={funnelData}
-        getX="observation"
-        getY="value"
+        x={d => d.observation}
+        y={d => d.value}
       />
     </XYPlot>
 
-    <XYPlot width={500} height={500} invertScale={{y: true}}>
+    <XYPlot width={500} height={500} invertYScale={true}>
       <XAxis />
       <YAxis />
       <FunnelChart
         horizontal
         data={funnelData}
-        getX="value"
-        getY="observation"
+        x={d => d.value}
+        y={d => d.observation}
       />
     </XYPlot>
   </div>
