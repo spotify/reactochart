@@ -134,6 +134,29 @@ describe("SankeyDiagram", () => {
     expect(svg.props().style.paddingLeft).to.equal(30);
   });
 
+  it("uses shouldClone prop to determine whether to clone or mutate nodes/links data", () => {
+    const dataToClone = getSampleData();
+    const cloneProps = {
+        ...dataToClone,
+      width: 600,
+      height: 400,
+      shouldClone: true
+    };
+    const cloneChart = mount(<SankeyDiagram {...cloneProps} />);
+    expect(dataToClone).to.deep.equal(getSampleData());
+
+    const dataToMutate = getSampleData();
+    const mutateProps = {
+      ...dataToMutate,
+      width: 600,
+      height: 400,
+      shouldClone: false
+    };
+    const mutateChart = mount(<SankeyDiagram {...mutateProps} />);
+    expect(dataToMutate).not.to.deep.equal(getSampleData());
+    expect(dataToMutate.links[0].source).to.deep.equal(dataToMutate.nodes[0]);
+  });
+
   it("uses nodeId accessor prop to determine node IDs", () => {
     const props = {
       width: 600,

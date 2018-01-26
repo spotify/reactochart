@@ -219,6 +219,12 @@ export default class SankeyDiagram extends React.Component {
      */
     height: PropTypes.number.isRequired,
     /**
+     * Boolean which decides if the nodes & links props should be cloned before being mutated into
+     * the Sankey data structure. Passing `false` is faster, but may cause unintended side effects
+     * if nodes or links data are used elsewhere
+     */
+    shouldClone: PropTypes.bool,
+    /**
      * `className` attribute to be applied to the SVG element.
      */
     className: PropTypes.string,
@@ -510,6 +516,7 @@ export default class SankeyDiagram extends React.Component {
   static defaultProps = {
     width: 400,
     height: 300,
+    shouldClone: true,
     className: "",
     style: {},
     standalone: true,
@@ -584,7 +591,9 @@ export default class SankeyDiagram extends React.Component {
       .nodePadding(this.props.nodePadding)
       .nodeAlign(nodeAlignmentsByName[this.props.nodeAlignment] || nodeAlignmentsByName.justify);
 
-    const sankeyGraph = makeSankey({nodes: this.props.nodes, links: this.props.links});
+    const nodes = this.props.shouldClone ? _.cloneDeep(this.props.nodes) : this.props.nodes;
+    const links = this.props.shouldClone ? _.cloneDeep(this.props.links) : this.props.links;
+    const sankeyGraph = makeSankey({nodes, links});
     this._graph = enhanceGraph(sankeyGraph);
   }
 
