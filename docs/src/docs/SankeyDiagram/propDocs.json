@@ -82,6 +82,17 @@
         "computed": false
       }
     },
+    "shouldClone": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "Boolean which decides if the nodes & links props should be cloned before being mutated into\nthe Sankey data structure. Passing `false` is faster, but may cause unintended side effects\nif nodes or links data are used elsewhere",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
     "className": {
       "type": {
         "name": "string"
