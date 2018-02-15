@@ -8,8 +8,8 @@ export default class XYPlotsLesson extends React.Component {
     return <Lesson name="XY Plots" componentName="XYPlots">
       <p>
         Nearly all of the chart components included in Reactochart (except PieChart and TreeMap)
-        are cartesian or "X/Y"-type charts. They accept an array of <code>data</code>
-        and represent these data with some form of SVG marks on a 2-dimensional X/Y coordinate plane.
+        are cartesian or "X/Y"-type charts. They accept an array of <code>data</code> and
+        represent these data with some form of SVG marks on a 2-dimensional X/Y coordinate plane.
       </p>
       <p>
         These chart components are not meant to be rendered on their own, but should instead always be wrapped in a
@@ -29,7 +29,7 @@ export default class XYPlotsLesson extends React.Component {
       />
 
       <p>
-        Generally, you will want to render an <code>XAxis</code> and a <code>YAxis</code> component
+        Generally, you will want to render a <code>XAxis</code> and a <code>YAxis</code> component
         along with your chart. These components render
         titles, labels, ticks and grid lines to denote your X and Y axes. One
         advantage of using a common <code>XYPlot</code> wrapper is that it ensures the axis labels are using the
@@ -59,8 +59,8 @@ export default class XYPlotsLesson extends React.Component {
       </p>
       <p>
         Note that these charts render SVG elements, which do not respect <code>z-index</code>; instead their
-        Z-order is determined by the order in which they are drawn. So if you want to draw a <code>BarChart</code>
-        underneath a <code>LineChart</code>, put it before the <code>LineChart</code> inside <code>XYPlot</code>.
+        Z-order is determined by the order in which they are drawn. So if you want to draw a <code>BarChart</code> underneath
+        a <code>LineChart</code>, put it before the <code>LineChart</code> inside <code>XYPlot</code>.
       </p>
       <ExampleSection
         id="multiChart"
