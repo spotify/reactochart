@@ -88,45 +88,81 @@ const SankeyNodeLabel = props => {
   const getLabelText = _.isFunction(nodeLabelText) ? nodeLabelText : nodeId;
   const placement = getWithNode(props.nodeLabelPlacement);
   const distance = getWithNode(props.nodeLabelDistance) || 0;
+  const labelContent = getWithNode(getLabelText);
+  // don't render empty labels
+  if(_.isNull(labelContent) || _.isUndefined(labelContent) || labelContent === false || labelContent === "") {
+    return null;
+  }
 
-  const className = `sankey-node-label ${getWithNode(props.nodeLabelClassName)}`;
-  let style = {...getWithNode(props.nodeLabelStyle)};
-  let textPosition;
+  const baseClassName = `sankey-node-label ${getWithNode(props.nodeLabelClassName)}`;
+  const baseStyle = getWithNode(props.nodeLabelStyle);
+  let position;
+  let textStyle;
+  let translate;
 
   // use placement prop to determine x, y, alignmentBaseline and
   if (placement === "above") {
-    style = {alignmentBaseline: "baseline", textAnchor: "middle", ...style};
-    textPosition = {
+    // render label above node, centered horizontally
+    textStyle = {alignmentBaseline: "baseline", textAnchor: "middle", ...baseStyle};
+    translate = '-50%, -100%';
+    position = {
       x: node.x0 + Math.abs(node.x1 - node.x0) / 2,
       y: node.y0 - distance
     };
   } else if (placement === "below") {
-    style = {alignmentBaseline: "hanging", textAnchor: "middle", ...style};
-    textPosition = {
+    // render label above node, centered horizontally
+    textStyle = {alignmentBaseline: "hanging", textAnchor: "middle", ...baseStyle};
+    translate = '-50%, 0';
+    position = {
       x: node.x0 + Math.abs(node.x1 - node.x0) / 2,
       y: node.y1 + distance
     };
   } else if (placement === "before") {
-    style = {alignmentBaseline: "middle", textAnchor: "end", ...style};
-    textPosition = {
+    // render label before (to left of) node, centered vertically
+    textStyle = {alignmentBaseline: "middle", textAnchor: "end", ...baseStyle};
+    translate = '-100%, -50%';
+    position = {
       x: node.x0 - distance,
       y: node.y0 + Math.abs(node.y1 - node.y0) / 2
     };
   } else {
     if (!_.isUndefined(placement) && placement !== "after")
       console.warn(`${placement} is not a valid value for nodeLabelPlacement - defaulting to "after"`);
-    style = {alignmentBaseline: "middle", textAnchor: "start", ...style};
-    textPosition = {
+    // render label after (to right of) node, centered vertically
+    textStyle = {alignmentBaseline: "middle", textAnchor: "start", ...baseStyle};
+    translate = '0, -50%';
+    position = {
       x: node.x1 + distance,
       y: node.y0 + Math.abs(node.y1 - node.y0) / 2
     };
   }
 
-  return (
-    <text {...textPosition} className={className} style={style}>
-      {getLabelText(node, graph)}
-    </text>
-  );
+  // if `labelContent` is a string or number, it is rendered as text within a SVG <text> element
+  // otherwise, it is rendered as arbitrary HTML content inside of a <foreignObject />
+  // allows users to render arbitrary components inside a node label (eg. to add an icon or link)
+  const isTextLabel = _.isString(labelContent) || _.isNumber(labelContent);
+
+  if(isTextLabel) {
+    const className = `${baseClassName} sankey-node-label-text`;
+    return (
+      <text {...position} className={className} style={textStyle}>
+        {labelContent}
+      </text>
+    );
+
+  } else {
+    const className = `${baseClassName} sankey-node-label-html`;
+    // wrap HTML labels in a div with "inline-block" so that translation (%) is relative to width of its content
+    const style = {...baseStyle, display: "inline-block", transform: `translate(${translate})`};
+    // give foreignObject container a large width/height to prevent unintentional line breaks/cut off content
+    return (
+      <foreignObject {...position} style={{overflow: "visible"}} width="5000" height="5000">
+        <div className={className} style={style}>
+          {labelContent}
+        </div>
+      </foreignObject>
+    );
+  }
 };
 
 const SankeyLinkLabel = props => {
@@ -146,10 +182,9 @@ const SankeyLinkLabel = props => {
   );
 };
 
-
 const SVGContainer = props => {
-  const otherProps = _.omit(props, ['standalone']);
-  if(props.standalone) {
+  const otherProps = _.omit(props, ["standalone"]);
+  if (props.standalone) {
     return <svg {...otherProps} />;
   }
   return <g {...otherProps} />;
@@ -232,6 +267,28 @@ export default class SankeyDiagram extends React.Component {
      * Inline style object to be applied to the SVG element.
      */
     style: PropTypes.object,
+    /**
+     * Boolean which determines whether the chart should be rendered as a standalone `<svg>` element
+     * or a `<g>` group element (as a child within an existing `<svg>`).
+     * True by default, pass `false` to render in a `<g>`.
+     */
+    standalone: PropTypes.bool,
+    /**
+     * Internal top margin, in pixels. Generally used to eg. leave extra space inside the SVG for labels.
+     */
+    marginTop: PropTypes.number,
+    /**
+     * Internal bottom margin, in pixels.
+     */
+    marginBottom: PropTypes.number,
+    /**
+     * Internal left margin, in pixels.
+     */
+    marginLeft: PropTypes.number,
+    /**
+     * Internal right margin, in pixels.
+     */
+    marginRight: PropTypes.number,
 
     /**
      * Boolean which determines if node rectangles should be shown,
@@ -407,7 +464,9 @@ export default class SankeyDiagram extends React.Component {
      */
     nodeLabelDistance: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
     /**
-     * Accessor function `nodeLabelText(node, graph)` which returns the text to be used for node labels.
+     * Accessor function `nodeLabelText(node, graph)` which returns the content to be used for node labels.
+     * The function may return a string/number (rendered as SVG `<text>`),
+     * or arbitrary React HTML element(s) (rendered as HTML wrapped in SVG `<foreignObject>`).
      */
     nodeLabelText: PropTypes.func,
     /**
@@ -520,6 +579,10 @@ export default class SankeyDiagram extends React.Component {
     className: "",
     style: {},
     standalone: true,
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
     nodeId: node => node.index,
     showNodes: true,
     nodeWidth: 12,
@@ -584,8 +647,10 @@ export default class SankeyDiagram extends React.Component {
   };
 
   _makeSankeyGraph() {
+    const innerWidth = this.props.width - (this.props.marginLeft + this.props.marginRight);
+    const innerHeight = this.props.height - (this.props.marginTop + this.props.marginBottom);
     const makeSankey = sankey()
-      .size([this.props.width, this.props.height])
+      .size([innerWidth, innerHeight])
       .nodeId(this.props.nodeId)
       .nodeWidth(this.props.nodeWidth)
       .nodePadding(this.props.nodePadding)
@@ -607,6 +672,10 @@ export default class SankeyDiagram extends React.Component {
       "links",
       "width",
       "height",
+      "marginTop",
+      "marginBottom",
+      "marginLeft",
+      "marginRight",
       "nodeId",
       "nodeWidth",
       "nodePadding",
@@ -620,11 +689,13 @@ export default class SankeyDiagram extends React.Component {
   }
 
   render() {
-    const {width, height, style, standalone, nodeId} = this.props;
+    const {width, height, style, standalone, nodeId, marginTop, marginBottom, marginLeft, marginRight} = this.props;
 
     const graph = this._graph;
     const makeLinkPath = sankeyLinkHorizontal();
     const className = `sankey-diagram ${this.props.className}`;
+    const innerWidth = width - (marginLeft + marginRight);
+    const innerHeight = height - (marginTop + marginBottom);
 
     function mapNodesInGroupIf(shouldShow, groupClassName, mapFunc) {
       if (!shouldShow) return null;
@@ -654,69 +725,71 @@ export default class SankeyDiagram extends React.Component {
 
     return (
       <SVGContainer {...{standalone, width, height, className, style}}>
-        {mapLinksInGroupIf(this.props.showLinks, "sankey-links", (link, i, key) => {
-          const linkProps = {...this.props, key, graph, link, linkPath: makeLinkPath(link)};
-          return <SankeyLink {...linkProps} />;
-        })}
-        {mapNodesInGroupIf(this.props.showNodes, "sankey-nodes", (node, i, key) => {
-          return <SankeyNode {...this.props} {...{key, graph, node}} />;
-        })};
-        {mapNodesInGroupIf(this.props.showNodeTerminals, "sankey-node-terminals", (node, i, key) => {
-          return <SankeyNodeTerminal {...this.props} {...{key, graph, node}} />;
-        })};
-        {/* the three types of link labels (link, link source, link target) use textpath to follow the link's path */}
-        {/* to minimize dom elements, first render one set of path definitions to be used by all three label types */}
-        {this.props.showLinkLabels || this.props.showLinkSourceLabels || this.props.showLinkTargetLabels ? (
-          <defs>
-            {graph.links.map(link => {
-              const hasLabel =
-                getValue(this.props.showLinkLabels, link, graph) ||
-                getValue(this.props.showLinkSourceLabels, link, graph) ||
-                getValue(this.props.showLinkTargetLabels, link, graph);
-              if (!hasLabel) return null;
+        <g width={innerWidth} height={innerHeight} transform={`translate(${marginLeft}, ${marginTop})`}>
+          {mapLinksInGroupIf(this.props.showLinks, "sankey-links", (link, i, key) => {
+            const linkProps = {...this.props, key, graph, link, linkPath: makeLinkPath(link)};
+            return <SankeyLink {...linkProps} />;
+          })}
+          {mapNodesInGroupIf(this.props.showNodes, "sankey-nodes", (node, i, key) => {
+            return <SankeyNode {...this.props} {...{key, graph, node}} />;
+          })};
+          {mapNodesInGroupIf(this.props.showNodeTerminals, "sankey-node-terminals", (node, i, key) => {
+            return <SankeyNodeTerminal {...this.props} {...{key, graph, node}} />;
+          })};
+          {/* the three types of link labels (link, link source, link target) use textpath to follow the link's path */}
+          {/* to minimize dom elements, first render one set of path definitions to be used by all three label types */}
+          {this.props.showLinkLabels || this.props.showLinkSourceLabels || this.props.showLinkTargetLabels ? (
+            <defs>
+              {graph.links.map(link => {
+                const hasLabel =
+                  getValue(this.props.showLinkLabels, link, graph) ||
+                  getValue(this.props.showLinkSourceLabels, link, graph) ||
+                  getValue(this.props.showLinkTargetLabels, link, graph);
+                if (!hasLabel) return null;
 
-              const linkPath = makeLinkPath(link);
-              const linkPathId = `${getLinkId(link, nodeId)}-path`;
-              return <path id={linkPathId} d={linkPath} key={linkPathId} />;
-            })}
-          </defs>
-        ) : null}
-        {mapLinksInGroupIf(this.props.showLinkLabels, "sankey-link-labels", (link, i, key) => {
-          const linkPathId = `${getLinkId(link, nodeId)}-path`;
-          const labelProps = {...this.props, key, graph, link, linkPathId};
-          return <SankeyLinkLabel {...labelProps} />;
-        })}
-        {mapNodesInGroupIf(this.props.showNodeLabels, "sankey-node-labels", (node, i, key) => {
-          return <SankeyNodeLabel {...this.props} {...{key, graph, node}} />;
-        })};
-        {mapLinksInGroupIf(this.props.showLinkSourceLabels, "sankey-link-source-labels", (link, i, key) => {
-          const linkPathId = `${getLinkId(link, nodeId)}-path`;
-          const commonProps = {...this.props, key, graph, link, linkPathId};
-          const labelProps = {
-            ...commonProps,
-            linkLabelText: this.props.linkSourceLabelText,
-            linkLabelClassName: this.props.linkSourceLabelClassName,
-            linkLabelStyle: this.props.linkSourceLabelStyle,
-            linkLabelAttributes: this.props.linkSourceLabelAttributes,
-            linkLabelStartOffset: this.props.linkSourceLabelStartOffset
-          };
+                const linkPath = makeLinkPath(link);
+                const linkPathId = `${getLinkId(link, nodeId)}-path`;
+                return <path id={linkPathId} d={linkPath} key={linkPathId} />;
+              })}
+            </defs>
+          ) : null}
+          {mapLinksInGroupIf(this.props.showLinkLabels, "sankey-link-labels", (link, i, key) => {
+            const linkPathId = `${getLinkId(link, nodeId)}-path`;
+            const labelProps = {...this.props, key, graph, link, linkPathId};
+            return <SankeyLinkLabel {...labelProps} />;
+          })}
+          {mapNodesInGroupIf(this.props.showNodeLabels, "sankey-node-labels", (node, i, key) => {
+            return <SankeyNodeLabel {...this.props} {...{key, graph, node}} />;
+          })};
+          {mapLinksInGroupIf(this.props.showLinkSourceLabels, "sankey-link-source-labels", (link, i, key) => {
+            const linkPathId = `${getLinkId(link, nodeId)}-path`;
+            const commonProps = {...this.props, key, graph, link, linkPathId};
+            const labelProps = {
+              ...commonProps,
+              linkLabelText: this.props.linkSourceLabelText,
+              linkLabelClassName: this.props.linkSourceLabelClassName,
+              linkLabelStyle: this.props.linkSourceLabelStyle,
+              linkLabelAttributes: this.props.linkSourceLabelAttributes,
+              linkLabelStartOffset: this.props.linkSourceLabelStartOffset
+            };
 
-          return <SankeyLinkLabel {...labelProps} />;
-        })}
-        {mapLinksInGroupIf(this.props.showLinkTargetLabels, "sankey-link-target-labels", (link, i, key) => {
-          const linkPathId = `${getLinkId(link, nodeId)}-path`;
-          const commonProps = {...this.props, key, graph, link, linkPathId};
-          const labelProps = {
-            ...commonProps,
-            linkLabelText: this.props.linkTargetLabelText,
-            linkLabelClassName: this.props.linkTargetLabelClassName,
-            linkLabelStyle: {textAnchor: "end", ...this.props.linkTargetLabelStyle},
-            linkLabelAttributes: this.props.linkTargetLabelAttributes,
-            linkLabelStartOffset: this.props.linkTargetLabelStartOffset
-          };
+            return <SankeyLinkLabel {...labelProps} />;
+          })}
+          {mapLinksInGroupIf(this.props.showLinkTargetLabels, "sankey-link-target-labels", (link, i, key) => {
+            const linkPathId = `${getLinkId(link, nodeId)}-path`;
+            const commonProps = {...this.props, key, graph, link, linkPathId};
+            const labelProps = {
+              ...commonProps,
+              linkLabelText: this.props.linkTargetLabelText,
+              linkLabelClassName: this.props.linkTargetLabelClassName,
+              linkLabelStyle: {textAnchor: "end", ...this.props.linkTargetLabelStyle},
+              linkLabelAttributes: this.props.linkTargetLabelAttributes,
+              linkLabelStartOffset: this.props.linkTargetLabelStartOffset
+            };
 
-          return <SankeyLinkLabel {...labelProps} />;
-        })}
+            return <SankeyLinkLabel {...labelProps} />;
+          })}
+        </g>
       </SVGContainer>
     );
   }
