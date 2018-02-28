@@ -35,6 +35,3 @@
 - Changed `MarkerLineChart` to use `horizontal` prop, rather than `orientation`, for consistency
 - Fixed missing import in `Scale`
 - Fixed incorrect propTypes in `ScatterPlot` and `YAxis`
-
-
-- See pull request [#45](https://github.com/spotify/reactochart/pull/45) for details

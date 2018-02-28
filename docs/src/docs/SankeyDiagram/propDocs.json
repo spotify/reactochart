@@ -115,6 +115,61 @@
         "computed": false
       }
     },
+    "standalone": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "Boolean which determines whether the chart should be rendered as a standalone `<svg>` element\nor a `<g>` group element (as a child within an existing `<svg>`).\nTrue by default, pass `false` to render in a `<g>`.",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "marginTop": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Internal top margin, in pixels. Generally used to eg. leave extra space inside the SVG for labels.",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "marginBottom": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Internal bottom margin, in pixels.",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "marginLeft": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Internal left margin, in pixels.",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "marginRight": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Internal right margin, in pixels.",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
     "showNodes": {
       "type": {
         "name": "union",
@@ -611,7 +666,7 @@
         "name": "func"
       },
       "required": false,
-      "description": "Accessor function `nodeLabelText(node, graph)` which returns the text to be used for node labels.",
+      "description": "Accessor function `nodeLabelText(node, graph)` which returns the content to be used for node labels.\nThe function may return a string/number (rendered as SVG `<text>`),\nor arbitrary React HTML element(s) (rendered as HTML wrapped in SVG `<foreignObject>`).",
       "defaultValue": {
         "value": "(node, graph, props) => {\n  if (_.has(node, \"name\")) return node.name;\n  if (_.has(node, \"label\")) return node.label;\n  return getValue(props.nodeId, node, graph, props);\n}",
         "computed": false
@@ -970,12 +1025,6 @@
       "description": "`startOffset` attribute to apply to the link *target* label `<textpath>` element.\nMay be a number (in SVG units) or percent string (`\"25%\"`)",
       "defaultValue": {
         "value": "\"98%\"",
-        "computed": false
-      }
-    },
-    "standalone": {
-      "defaultValue": {
-        "value": "true",
         "computed": false
       }
     }

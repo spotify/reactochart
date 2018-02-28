@@ -2,7 +2,7 @@
   "name": "reactochart",
   "description": "Reactochart - React Charts, graphs and data visualization",
   "author": "Dan Delany <dand@spotify.com>",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "main": "index.js",
   "files": [
     "*.js",
