@@ -610,7 +610,7 @@ describe("SankeyDiagram", () => {
       id: "lemons",
       name: "Sour Lemons"
     };
-    it("renders a node label", () => {
+    it("renders a node label in a <text> element", () => {
       const label = mount(<SankeyNodeLabel {...{node: basicNodeObj, nodeLabelText: () => "ok"}} />);
       const text = label.find("text");
       expect(text).to.have.length(1);
@@ -643,6 +643,20 @@ describe("SankeyDiagram", () => {
       expect(textWithId).to.have.length(1);
       expect(textWithId.text()).to.equal("lemons");
     });
+    it("renders nodeLabelText as-is (not wrapped in <text>), if it returns an element instead of string", () => {
+      const label = mount(
+        <SankeyNodeLabel
+          {...{
+            node: basicNodeObj,
+            nodeLabelText: node => <rect x={node.x0} y={node.y0} width={50} height={20} />
+          }}
+        />
+      );
+      expect(label.find("text")).to.have.length(0);
+      expect(label.find("rect")).to.have.length(1);
+      expect(label.find("rect").props().width).to.equal(50);
+    });
+
     it("passes nodeLabelClassName and nodeLabelStyle through to the text element", () => {
       const nodeLabelClassName = "my-fun-node-label";
       const nodeLabelStyle = {fill: "salmon"};
