@@ -666,7 +666,7 @@
         "name": "func"
       },
       "required": false,
-      "description": "Accessor function `nodeLabelText(node, graph)` which returns the content to be used for node labels.\nThe function may return a string/number (rendered as SVG `<text>`),\nor arbitrary React HTML element(s) (rendered as HTML wrapped in SVG `<foreignObject>`).",
+      "description": "Accessor function `nodeLabelText(node, graph)` which returns the content to be used for node labels.\nThe function may return a string/number (rendered as SVG `<text>`),\nor arbitrary React SVG element(s) (rendered as-is inside the SVG).\nNOTE: in the latter case (returning arbitrary SVG), `nodeLabelPlacement`, `nodeLabelDistance`,\n`nodeLabelClassName` and `nodeLabelStyle` props will not be applied -\nuser is responsible for all positioning and attributes on this element.",
       "defaultValue": {
         "value": "(node, graph, props) => {\n  if (_.has(node, \"name\")) return node.name;\n  if (_.has(node, \"label\")) return node.label;\n  return getValue(props.nodeId, node, graph, props);\n}",
         "computed": false

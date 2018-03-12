@@ -1,3 +1,6 @@
+## 0.4.3 (2016-03-12)
+- Fix for non-string `SankeyDiagram` `nodeLabelText` prop (see 0.4.2 notes) - now rendered as SVG instead of HTML wrapped in `<foreignObject>`
+
 ## 0.4.2 (2018-02-27)
 - Added CHANGELOG file
 - [#52](https://github.com/spotify/reactochart/pull/52) New `SankeyDiagram` features
