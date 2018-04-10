@@ -2,10 +2,15 @@
   "description": "",
   "methods": [
     {
-      "name": "_initZoom",
+      "name": "_updateZoomProps",
       "docblock": null,
       "modifiers": [],
-      "params": [],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
       "returns": null
     },
     {
@@ -27,7 +32,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "(outer) width of the chart (SVG element).",
       "defaultValue": {
         "value": "800",
         "computed": false
@@ -38,102 +43,132 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "(outer) width of the chart (SVG element).",
       "defaultValue": {
         "value": "600",
         "computed": false
       }
-    },
-    "standalone": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
-    "customZoon": {
-      "type": {
-        "name": "bool"
-      },
-      "required": false,
-      "description": ""
     },
     "onZoom": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "Zoom callback function, called when zoom changes.\nFor controlled version of this component, you should update zoomX, zoomY and zoomScale props in this callback."
+    },
+    "controlled": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "Boolean which determines whether the component is \"controlled\" (true) or \"stateful\" (false).\nWhen true, zoom transformation is controlled entirely by the `zoomX`, `zoomY` and `zoomScale` props, which\nyou are responsible for updating in the `onZoom` callback function.\nWhen false, zoom transformation is handled by internal state, and the `zoomX`, `zoomY` and `zoomScale` props\nspecify only the initial X, Y and scale transformation of the component.",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
+    },
+    "zoomX": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "The X-coordinate of the zoom transformation (or initial X-coordinate, if `controlled` is false)",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "zoomY": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "The Y-coordinate of the zoom transformation (or initial Y-coordinate, if `controlled` is false)",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "zoomScale": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "The scaling factor of the zoom transformation (or initial scaling, if `controlled` is false).\n1.0 is normal size, 2.0 is double size, 0.5 is half size.",
+      "defaultValue": {
+        "value": "1",
+        "computed": false
+      }
     },
     "extent": {
       "type": {
         "name": "array"
       },
       "required": false,
-      "description": ""
+      "description": "Sets the viewport extent to the specified array of points [[x0, y0], [x1, y1]],\nwhere [x0, y0] is the top-left corner of the viewport and [x1, y1] is the bottom-right corner of the viewport.\nSee d3-zoom docs for more information."
     },
     "scaleExtent": {
       "type": {
         "name": "array"
       },
       "required": false,
-      "description": ""
+      "description": "Sets the scale extent to the specified array of numbers [k0, k1]\nwhere k0 is the minimum allowed scale factor and k1 is the maximum allowed scale factor.\nSee d3-zoom docs for more information."
     },
     "translateExtent": {
       "type": {
         "name": "array"
       },
       "required": false,
-      "description": ""
+      "description": "Sets the translate extent to the specified array of points [[x0, y0], [x1, y1]],\nwhere [x0, y0] is the top-left corner of the world and [x1, y1] is the bottom-right corner of the world.\nSee d3-zoom docs for more information."
     },
     "clickDistance": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Sets the maximum distance that the mouse can move between mousedown and mouseup that will trigger\na subsequent click event.\nSee d3-zoom docs for more information."
     },
     "duration": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Sets the duration for zoom transitions on double-click and double-tap to the specified number of milliseconds.\nSee d3-zoom docs for more information."
     },
     "interpolate": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "Sets the interpolation factory for zoom transitions to the specified function.\nSee d3-zoom docs for more information."
     },
     "constrain": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "Sets the transform constraint function to the specified function.\nSee d3-zoom docs for more information."
     },
     "filter": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "Sets the zoom event filter to the specified function.\nSee d3-zoom docs for more information."
     },
     "touchable": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "Sets the touch support detector to the specified function.\nSee d3-zoom docs for more information."
     },
     "wheelDelta": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "Sets the wheel delta function to the specified function.\nSee d3-zoom docs for more information."
     }
   }
 }
