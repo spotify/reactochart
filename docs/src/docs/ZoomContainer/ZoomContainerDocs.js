@@ -11,6 +11,11 @@ const examples = [
     label: "Basic ZoomContainer",
     codeText: require('raw-loader!./examples/ZoomContainer.js.example'),
   },
+  {
+    id: "controlled",
+    label: "Controlled ZoomContainer",
+    codeText: require('raw-loader!./examples/ZoomContainerControlled.js.example'),
+  },
 ];
 
 export default class ZoomContainerExamples extends React.Component {
