@@ -15,6 +15,7 @@ const lessons = [
 
 const mainComponents = [
   {name: 'XYPlot', path: '/xy-plot', Component: Docs.XYPlotDocs},
+  {name: 'ZoomContainer', path: '/zoom-container', Component: Docs.ZoomContainerDocs}
 ];
 
 const xyChartComponents = [

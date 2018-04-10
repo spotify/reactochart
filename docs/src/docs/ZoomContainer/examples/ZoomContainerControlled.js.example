@@ -1,4 +1,4 @@
-class ZoomContainerControlledExample extends React.Component {
+class ZoomControlledExample extends React.Component {
   state = {
     zoomTransform: {k: 1, x: 0, y: 0},
     zoomX: 0,
@@ -50,4 +50,4 @@ class ZoomContainerControlledExample extends React.Component {
   }
 }
 
-ReactDOM.render(<ZoomContainerControlledExample />, mountNode);
+ReactDOM.render(<ZoomControlledExample />, mountNode);

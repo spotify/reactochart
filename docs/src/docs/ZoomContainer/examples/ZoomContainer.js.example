@@ -1,6 +1,6 @@
 const ZoomContainerExample = (props) => {
   return <div>
-    <ZoomContainer width={600} height={350} onZoom={handleZoom}>
+    <ZoomContainer width={600} height={350}>
       <XYPlot scaleType="linear" width={600} height={350}>
         <XAxis title="Phase" />
         <YAxis title="Intensity" />
@@ -13,9 +13,5 @@ const ZoomContainerExample = (props) => {
     </ZoomContainer>
   </div>
 };
-
-function handleZoom(...args) {
-  console.log(args);
-}
 
 ReactDOM.render(<ZoomContainerExample />, mountNode);
