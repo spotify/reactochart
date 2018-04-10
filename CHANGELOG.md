@@ -1,4 +1,7 @@
-## 0.4.3 (2016-03-12)
+## 0.4.4 (2018-04-10)
+- [#55](https://github.com/spotify/reactochart/pull/55) Add `controlled` prop to `ZoomContainer` so it can be controlled by props instead of internal state.
+
+## 0.4.3 (2018-03-12)
 - [#54](https://github.com/spotify/reactochart/pull/54) Fix for non-string `SankeyDiagram` `nodeLabelText` prop (see 0.4.2 notes) - now rendered as SVG instead of HTML wrapped in `<foreignObject>`
 
 ## 0.4.2 (2018-02-27)
