@@ -1,3 +1,6 @@
+## 0.4.5 (2018-04-18)
+- [#56](https://github.com/spotify/reactochart/pull/56) Add `react-docgen` to devDependencies.
+
 ## 0.4.4 (2018-04-10)
 - [#55](https://github.com/spotify/reactochart/pull/55) Add `controlled` prop to `ZoomContainer` so it can be controlled by props instead of internal state.
 
