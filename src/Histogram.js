@@ -1,14 +1,7 @@
 import React from "react";
 import _ from "lodash";
-import { histogram, extent, ticks, scaleLinear } from "d3";
+import { histogram, extent, scaleLinear } from "d3";
 import PropTypes from "prop-types";
-
-import * as CustomPropTypes from "./utils/CustomPropTypes";
-import {
-  makeAccessor2,
-  domainFromRangeData,
-  domainFromData
-} from "./utils/Data";
 
 import xyPropsEqual from "./utils/xyPropsEqual";
 import AreaBarChart from "./AreaBarChart";
@@ -17,11 +10,17 @@ import AreaBarChart from "./AreaBarChart";
 export default class Histogram extends React.Component {
   static propTypes = {
     /**
-     * the array of data objects
+     * The array of data objects for the histogram.
+     * These should be individual "samples" or "facts", not an array of bins -
+     * this component will count and bin the samples for you. If you have data that is already binned,
+     * use the `<AreaBarChart>` component.
      */
     data: PropTypes.array.isRequired,
-    value: CustomPropTypes.valueOrAccessor,
-    axisType: PropTypes.object,
+    /**
+     * Data value accessor function, called once per datum, which returns the values to bin and plot in the histogram.
+     * If `data` is just an array of numbers, this may be the identity function (`function(d) { return d }`).
+     */
+    value: PropTypes.func,
     /**
      * D3 scale for X axis - provided by XYPlot
      */
@@ -41,23 +40,25 @@ export default class Histogram extends React.Component {
     thresholds: PropTypes.oneOfType([PropTypes.number, PropTypes.array])
       .isRequired,
     /**
-     * The domain to which your data will be mapped and binned. binDomain is defined as an array `[min, max]`.
+     * The domain over which your data will be binned. Defined as an array `[min, max]`.
+     * If not provided, binDomain will be the domain of your data values by default.
      *
-     * Warning: This prop takes priority if `nice = true`
+     * Warning: This prop takes priority if `nice = true`.
      */
     binDomain: PropTypes.array,
     /**
-     * Nicely rounds the start and end values of your bins. Implemented using [d3's ticks nicing logic](https://github.com/d3/d3-array#ticks)
+     * If true, nicely rounds the start and end values of your bins.
+     * Implemented using [d3's ticks nicing logic](https://github.com/d3/d3-array#ticks).
      */
     nice: PropTypes.bool,
     /**
-     * Class attribute to be applied to each bar.
-     * or accessor function which returns a class;
+     * Class attribute to be applied to each bar,
+     * or accessor function which returns a class.
      */
     barClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     /**
      * Inline style object to be applied to each bar,
-     * or accessor function which returns a style object;
+     * or accessor function which returns a style object.
      */
     barStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /**
@@ -85,12 +86,11 @@ export default class Histogram extends React.Component {
 
   static getDomain(props) {
     const { data, value, thresholds, binDomain, nice } = props;
-    const xDomain = domainFromData(data, makeAccessor2(value));
 
     const bins = Histogram.computeHistogram(
       data,
       thresholds,
-      makeAccessor2(value),
+      value,
       binDomain,
       nice
     );
@@ -112,7 +112,7 @@ export default class Histogram extends React.Component {
       // Throw warning if nice = true and binDomain is defined
       if (nice) {
         console.warn(
-          "Warning: if binDomain is defined and nice = true, histogram prioritizes binDomain and disregards nicing."
+          "Warning: if binDomain is defined and nice = true, histogram prioritizes binDomain and disregards nice."
         );
       }
 
@@ -144,36 +144,23 @@ export default class Histogram extends React.Component {
     return shouldUpdate;
   }
 
-  componentWillMount() {
+  render() {
     const { value, data, thresholds, binDomain, nice } = this.props;
 
     const bins = Histogram.computeHistogram(
       data,
       thresholds,
-      makeAccessor2(value),
+      value,
       binDomain,
       nice
     );
 
-    this.setState({ histogramData: bins });
-  }
-
-  render() {
-    if (!this.state.histogramData) return <g />;
-    const {
-      name,
-      scale,
-      axisType,
-      scaleWidth,
-      scaleHeight,
-      plotWidth,
-      plotHeight
-    } = this.props;
+    if (!bins) return <g />;
 
     return (
       <AreaBarChart
         {...this.props}
-        data={this.state.histogramData}
+        data={bins}
         x={getX0}
         xEnd={getX1}
         y={getLength}
