@@ -1,34 +1,48 @@
 const HistogramExample = (props) => {
   const randomNormalArr = _.times(1000, d3.randomNormal(0, 1)).concat(_.times(1000, d3.randomNormal(3, 0.5)));
-  const domain = {x: [-4, 5], y: [0, 200]};
 
   return <div>
     <div>
-      <XYPlot width={450} height={300}>
+      <XYPlot
+        width={450}
+        height={300}
+      >
         <XAxis /><YAxis />
         <Histogram
-          data={randomNormalArr} value={d => d}
+          data={randomNormalArr}
+          value={d => d}
         />
       </XYPlot>
     </div>
-    {/*<div>*/}
-      {/*<XYPlot*/}
-        {/*domain={domain}*/}
-        {/*marginLeft={40}*/}
-        {/*marginRight={8}*/}
-        {/*width={450} height={40}*/}
-        {/*showGrid={false}*/}
-        {/*showLabels={false}*/}
-        {/*showTicks={false}*/}
-      {/*>*/}
-        {/*<ScatterPlot*/}
-          {/*data={randomNormalArr}*/}
-          {/*x={d => d}*/}
-          {/*getY={() => Math.random()*200}*/}
-          {/*pointRadius={1}*/}
-        {/*/>*/}
-      {/*</XYPlot>*/}
-    {/*</div>*/}
+    <div>
+      <h4>With nicing applied</h4>
+      <XYPlot
+        width={450}
+        height={300}
+      >
+        <XAxis /><YAxis />
+        <Histogram
+          data={randomNormalArr}
+          value={d => d}
+          nice={true}
+          thresholds={10}
+        />
+      </XYPlot>
+    </div>
+    <div>
+      <h4>With specified binDomain</h4>
+      <XYPlot
+        width={450}
+        height={300}
+      >
+        <XAxis /><YAxis />
+        <Histogram
+          data={randomNormalArr}
+          value={d => d}
+          binDomain={[-6, 6]}
+        />
+      </XYPlot>
+    </div>
   </div>;
 };
 
