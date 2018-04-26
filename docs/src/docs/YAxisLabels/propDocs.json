@@ -93,11 +93,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "'left'",
+            "value": "\"left\"",
             "computed": false
           },
           {
-            "value": "'right'",
+            "value": "\"right\"",
             "computed": false
           }
         ]
@@ -105,7 +105,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "'left'",
+        "value": "\"left\"",
         "computed": false
       }
     },
@@ -114,11 +114,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "'before'",
+            "value": "\"before\"",
             "computed": false
           },
           {
-            "value": "'after'",
+            "value": "\"after\"",
             "computed": false
           }
         ]
@@ -177,7 +177,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "''",
+        "value": "\"\"",
         "computed": false
       }
     },
@@ -188,7 +188,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: '14px',\n  lineHeight: 1,\n  textAnchor: 'end'\n}",
+        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: \"14px\",\n  lineHeight: 1,\n  textAnchor: \"end\"\n}",
         "computed": false
       }
     },

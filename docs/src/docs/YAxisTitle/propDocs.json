@@ -55,11 +55,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "'left'",
+            "value": "\"left\"",
             "computed": false
           },
           {
-            "value": "'right'",
+            "value": "\"right\"",
             "computed": false
           }
         ]
@@ -67,7 +67,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "'left'",
+        "value": "\"left\"",
         "computed": false
       }
     },
@@ -76,15 +76,15 @@
         "name": "enum",
         "value": [
           {
-            "value": "'top'",
+            "value": "\"top\"",
             "computed": false
           },
           {
-            "value": "'middle'",
+            "value": "\"middle\"",
             "computed": false
           },
           {
-            "value": "'bottom'",
+            "value": "\"bottom\"",
             "computed": false
           }
         ]
@@ -92,7 +92,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "'middle'",
+        "value": "\"middle\"",
         "computed": false
       }
     },
@@ -101,11 +101,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "'before'",
+            "value": "\"before\"",
             "computed": false
           },
           {
-            "value": "'after'",
+            "value": "\"after\"",
             "computed": false
           }
         ]
@@ -135,7 +135,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: '24px',\n  fontWeight: 'bold',\n  lineHeight: 1\n}",
+        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: \"24px\",\n  fontWeight: \"bold\",\n  lineHeight: 1\n}",
         "computed": false
       }
     },

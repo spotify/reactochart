@@ -43,11 +43,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "'bottom'",
+            "value": "\"bottom\"",
             "computed": false
           },
           {
-            "value": "'top'",
+            "value": "\"top\"",
             "computed": false
           }
         ]
@@ -55,7 +55,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "'bottom'",
+        "value": "\"bottom\"",
         "computed": false
       }
     },
@@ -64,11 +64,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "'above'",
+            "value": "\"above\"",
             "computed": false
           },
           {
-            "value": "'below'",
+            "value": "\"below\"",
             "computed": false
           }
         ]
@@ -119,7 +119,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "''",
+        "value": "\"\"",
         "computed": false
       }
     },

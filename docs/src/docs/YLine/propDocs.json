@@ -56,7 +56,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "''",
+        "value": "\"\"",
         "computed": false
       }
     }

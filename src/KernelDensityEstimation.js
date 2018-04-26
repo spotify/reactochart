@@ -1,12 +1,12 @@
-import React from 'react';
-import _ from 'lodash';
-import {mean} from 'd3';
-import PropTypes from 'prop-types';
+import React from "react";
+import _ from "lodash";
+import { mean } from "d3";
+import PropTypes from "prop-types";
 
-import * as CustomPropTypes from './utils/CustomPropTypes';
-import xyPropsEqual from './utils/xyPropsEqual';
+import * as CustomPropTypes from "./utils/CustomPropTypes";
+import xyPropsEqual from "./utils/xyPropsEqual";
 
-import LineChart from './LineChart.js';
+import LineChart from "./LineChart.js";
 
 class KernelDensityEstimation extends React.Component {
   static propTypes = {
@@ -38,7 +38,7 @@ class KernelDensityEstimation extends React.Component {
   static defaultProps = {
     bandwidth: 0.5,
     sampleCount: null, // null = auto-determined based on width
-    name: ''
+    name: ""
   };
 
   state = {
@@ -48,8 +48,8 @@ class KernelDensityEstimation extends React.Component {
   static getDomain() {
     // todo implement real static getDomain method
     return {
-      yDomain: [0,200]
-    }
+      yDomain: [0, 200]
+    };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -64,35 +64,42 @@ class KernelDensityEstimation extends React.Component {
     this.initKDE(newProps);
   }
   initKDE(props) {
-    const {data, bandwidth, sampleCount, xScale, width} = props;
+    const { data, bandwidth, sampleCount, xScale, width } = props;
     const kernel = epanechnikovKernel(bandwidth);
     const samples = xScale.ticks(sampleCount || Math.ceil(width / 2));
-    this.setState({kdeData: kernelDensityEstimator(kernel, samples)(data)});
+    this.setState({ kdeData: kernelDensityEstimator(kernel, samples)(data) });
   }
 
   render() {
-    const {kdeData} = this.state;
+    const { kdeData } = this.state;
 
-    return <LineChart
-      {...this.props}
-      data={kdeData}
-      x={d => d[0]}
-      y={d => d[1] * 500}
-    />;
+    return (
+      <LineChart
+        {...this.props}
+        data={kdeData}
+        x={d => d[0]}
+        y={d => d[1] * 500}
+      />
+    );
   }
 }
 
 function kernelDensityEstimator(kernel, x) {
   return function(sample) {
     return x.map(function(x) {
-      return [x, mean(sample, function(v) { return kernel(x - v); })];
+      return [
+        x,
+        mean(sample, function(v) {
+          return kernel(x - v);
+        })
+      ];
     });
   };
 }
 
 function epanechnikovKernel(scale) {
   return function(u) {
-    return Math.abs(u /= scale) <= 1 ? .75 * (1 - u * u) / scale : 0;
+    return Math.abs((u /= scale)) <= 1 ? 0.75 * (1 - u * u) / scale : 0;
   };
 }
 

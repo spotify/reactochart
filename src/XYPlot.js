@@ -1,15 +1,17 @@
-import React from 'react';
-import _ from 'lodash';
-import PropTypes from 'prop-types';
+import React from "react";
+import _ from "lodash";
+import PropTypes from "prop-types";
 
-import resolveXYScales from './utils/resolveXYScales';
-import {innerSize} from './utils/Margin';
-import {inferScaleType} from './utils/Scale';
-import {methodIfFuncProp} from './util';
+import resolveXYScales from "./utils/resolveXYScales";
+import { innerSize } from "./utils/Margin";
+import { inferScaleType } from "./utils/Scale";
+import { methodIfFuncProp } from "./util";
 
 function indexOfClosestNumberInList(number, list) {
   return list.reduce((closestI, current, i) => {
-    return Math.abs(current - number) < Math.abs(list[closestI] - number) ? i : closestI;
+    return Math.abs(current - number) < Math.abs(list[closestI] - number)
+      ? i
+      : closestI;
   }, 0);
 }
 
@@ -21,26 +23,70 @@ function invertPointScale(scale, rangeValue) {
   return scale.domain()[nearestPointIndex];
 }
 
-function getMouseOptions(event, {xScale, yScale, height, width, marginTop, marginBottom, marginLeft, marginRight}) {
+function getMouseOptions(
+  event,
+  {
+    xScale,
+    yScale,
+    height,
+    width,
+    marginTop,
+    marginBottom,
+    marginLeft,
+    marginRight
+  }
+) {
   const chartBB = event.currentTarget.getBoundingClientRect();
   const outerX = Math.round(event.clientX - chartBB.left);
   const outerY = Math.round(event.clientY - chartBB.top);
-  const innerX = (outerX - (marginLeft || 0));
-  const innerY = (outerY -(marginTop || 0));
-  const chartSize = innerSize({width, height}, {top: marginTop, bottom: marginBottom, left: marginLeft, right: marginRight});
+  const innerX = outerX - (marginLeft || 0);
+  const innerY = outerY - (marginTop || 0);
+  const chartSize = innerSize(
+    { width, height },
+    {
+      top: marginTop,
+      bottom: marginBottom,
+      left: marginLeft,
+      right: marginRight
+    }
+  );
   const xScaleType = inferScaleType(xScale);
   const yScaleType = inferScaleType(yScale);
 
-  const xValue = (!_.inRange(innerX, 0, chartSize.width /* + padding.left + padding.right */)) ? null :
-    (xScaleType === 'ordinal') ?
-      invertPointScale(xScale, innerX) :
-      xScale.invert(innerX);
-  const yValue = (!_.inRange(innerY, 0, chartSize.height /* + padding.top + padding.bottom */)) ? null :
-    (yScaleType === 'ordinal') ?
-      invertPointScale(yScale, innerY) :
-      yScale.invert(innerY);
+  const xValue = !_.inRange(
+    innerX,
+    0,
+    chartSize.width /* + padding.left + padding.right */
+  )
+    ? null
+    : xScaleType === "ordinal"
+      ? invertPointScale(xScale, innerX)
+      : xScale.invert(innerX);
+  const yValue = !_.inRange(
+    innerY,
+    0,
+    chartSize.height /* + padding.top + padding.bottom */
+  )
+    ? null
+    : yScaleType === "ordinal"
+      ? invertPointScale(yScale, innerY)
+      : yScale.invert(innerY);
 
-  return {event, outerX, outerY, innerX, innerY, xValue, yValue, xScale, yScale, marginTop, marginBottom, marginLeft, marginRight};
+  return {
+    event,
+    outerX,
+    outerY,
+    innerX,
+    innerY,
+    xValue,
+    yValue,
+    xScale,
+    yScale,
+    marginTop,
+    marginBottom,
+    marginLeft,
+    marginRight
+  };
 }
 
 class XYPlot extends React.Component {
@@ -118,44 +164,87 @@ class XYPlot extends React.Component {
 
   onXYMouseEvent = (callbackKey, event) => {
     const callback = this.props[callbackKey];
-    if(!_.isFunction(callback)) return;
+    if (!_.isFunction(callback)) return;
     const options = getMouseOptions(event, this.props);
     callback(options);
   };
-  onMouseMove = _.partial(this.onXYMouseEvent, 'onMouseMove');
-  onMouseDown = _.partial(this.onXYMouseEvent, 'onMouseDown');
-  onMouseUp = _.partial(this.onXYMouseEvent, 'onMouseUp');
-  onClick = _.partial(this.onXYMouseEvent, 'onClick');
-  onMouseEnter = (event) => this.props.onMouseEnter({event});
-  onMouseLeave = (event) => this.props.onMouseLeave({event});
+  onMouseMove = _.partial(this.onXYMouseEvent, "onMouseMove");
+  onMouseDown = _.partial(this.onXYMouseEvent, "onMouseDown");
+  onMouseUp = _.partial(this.onXYMouseEvent, "onMouseUp");
+  onClick = _.partial(this.onXYMouseEvent, "onClick");
+  onMouseEnter = event => this.props.onMouseEnter({ event });
+  onMouseLeave = event => this.props.onMouseLeave({ event });
 
   render() {
-    const {width, height, marginTop, marginBottom, marginLeft, marginRight, spacingTop, spacingBottom, spacingLeft, spacingRight}
-      = this.props;
+    const {
+      width,
+      height,
+      marginTop,
+      marginBottom,
+      marginLeft,
+      marginRight,
+      spacingTop,
+      spacingBottom,
+      spacingLeft,
+      spacingRight
+    } = this.props;
     // subtract margin + spacing from width/height to obtain inner width/height of panel & chart area
     // panelSize is the area including chart + spacing but NOT margin
     // chartSize is smaller, chart *only*, not including margin or spacing
-    const panelSize = innerSize({width, height}, {top: marginTop, bottom: marginBottom, left: marginLeft, right: marginRight});
-    const chartSize = innerSize(panelSize, {top: spacingTop, bottom: spacingBottom, left: spacingLeft, right: spacingRight});
+    const panelSize = innerSize(
+      { width, height },
+      {
+        top: marginTop,
+        bottom: marginBottom,
+        left: marginLeft,
+        right: marginRight
+      }
+    );
+    const chartSize = innerSize(panelSize, {
+      top: spacingTop,
+      bottom: spacingBottom,
+      left: spacingLeft,
+      right: spacingRight
+    });
 
-    const handlerNames = ['onMouseMove', 'onMouseEnter', 'onMouseLeave', 'onMouseDown', 'onMouseUp', 'onClick'];
-    const handlers = _.fromPairs(handlerNames.map(n => [n, methodIfFuncProp(n, this.props, this)]));
+    const handlerNames = [
+      "onMouseMove",
+      "onMouseEnter",
+      "onMouseLeave",
+      "onMouseDown",
+      "onMouseUp",
+      "onClick"
+    ];
+    const handlers = _.fromPairs(
+      handlerNames.map(n => [n, methodIfFuncProp(n, this.props, this)])
+    );
 
     const propsToPass = {
-      ..._.omit(this.props, ['children']),
+      ..._.omit(this.props, ["children"]),
       ...chartSize
     };
 
-    return <svg {...{width, height, className: 'xy-plot'}} {...handlers}>
-      <rect className="chart-background" {...{width, height}} />
-      <g transform={`translate(${marginLeft + spacingLeft}, ${marginTop + spacingTop})`} className="chart-inner">
-        <rect transform={`translate(${-spacingLeft}, ${-spacingTop})`} className="plot-background" {...panelSize} />
-        {React.Children.map(this.props.children, child => {
-          return (_.isNull(child) || _.isUndefined(child)) ? null :
-            React.cloneElement(child, propsToPass);
-        })}
-      </g>
-    </svg>
+    return (
+      <svg {...{ width, height, className: "xy-plot" }} {...handlers}>
+        <rect className="chart-background" {...{ width, height }} />
+        <g
+          transform={`translate(${marginLeft + spacingLeft}, ${marginTop +
+            spacingTop})`}
+          className="chart-inner"
+        >
+          <rect
+            transform={`translate(${-spacingLeft}, ${-spacingTop})`}
+            className="plot-background"
+            {...panelSize}
+          />
+          {React.Children.map(this.props.children, child => {
+            return _.isNull(child) || _.isUndefined(child)
+              ? null
+              : React.cloneElement(child, propsToPass);
+          })}
+        </g>
+      </svg>
+    );
   }
 }
 

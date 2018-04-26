@@ -225,7 +225,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "'marker-line'",
+        "value": "\"marker-line\"",
         "computed": false
       }
     },

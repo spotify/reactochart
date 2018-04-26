@@ -1,13 +1,12 @@
-import React from 'react';
-import _ from 'lodash';
-import {bisector} from 'd3';
-import shallowEqual from './utils/shallowEqual';
-import PropTypes from 'prop-types';
+import React from "react";
+import _ from "lodash";
+import { bisector } from "d3";
+import shallowEqual from "./utils/shallowEqual";
+import PropTypes from "prop-types";
 
-import * as CustomPropTypes from './utils/CustomPropTypes';
-import {getValue} from './utils/Data';
-import xyPropsEqual from './utils/xyPropsEqual';
-
+import * as CustomPropTypes from "./utils/CustomPropTypes";
+import { getValue } from "./utils/Data";
+import xyPropsEqual from "./utils/xyPropsEqual";
 
 export default class LineChart extends React.Component {
   static propTypes = {
@@ -38,11 +37,11 @@ export default class LineChart extends React.Component {
     /**
      * D3 scale for Y axis - provided by XYPlot
      */
-    yScale: PropTypes.func,
+    yScale: PropTypes.func
   };
   static defaultProps = {
     lineStyle: {},
-    lineClassName: ''
+    lineClassName: ""
   };
 
   componentWillMount() {
@@ -53,11 +52,11 @@ export default class LineChart extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return !xyPropsEqual(this.props, nextProps, ['lineStyle', 'lineClassName']);
+    return !xyPropsEqual(this.props, nextProps, ["lineStyle", "lineClassName"]);
   }
 
   initBisector(props) {
-    this.setState({bisectX: bisector(d => getValue(props.x, d)).left});
+    this.setState({ bisectX: bisector(d => getValue(props.x, d)).left });
   }
 
   getHovered = (x, y) => {
@@ -66,14 +65,19 @@ export default class LineChart extends React.Component {
   };
 
   render() {
-    const {data, xScale, yScale, x, y, lineStyle, lineClassName} = this.props;
+    const { data, xScale, yScale, x, y, lineStyle, lineClassName } = this.props;
 
-    const points = _.map(data, (d, i) => [xScale(getValue(x, d, i)), yScale(getValue(y, d, i))]);
+    const points = _.map(data, (d, i) => [
+      xScale(getValue(x, d, i)),
+      yScale(getValue(y, d, i))
+    ]);
     const pathStr = pointsToPathStr(points);
 
-    return <g className={`${this.props.name} ${lineClassName}`}>
-      <path d={pathStr} style={lineStyle}/>
-    </g>;
+    return (
+      <g className={`${this.props.name} ${lineClassName}`}>
+        <path d={pathStr} style={lineStyle} />
+      </g>
+    );
   }
 }
 
@@ -83,7 +87,7 @@ function pointsToPathStr(points) {
   // https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Line_commands
   // todo: replace this with d3 path generator
   return _.map(points, ([x, y], i) => {
-    const command = (i === 0) ? 'M' : 'L';
+    const command = i === 0 ? "M" : "L";
     return `${command} ${x} ${y}`;
-  }).join(' ');
+  }).join(" ");
 }
