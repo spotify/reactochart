@@ -107,12 +107,6 @@ class XYPlot extends React.Component {
      */
     xDomain: PropTypes.array,
     yDomain: PropTypes.array,
-    /**
-     * d3 scales for the X and Y axes of the chart, in {x, y} object format.
-     * (optional, normally determined automatically by XYPlot)
-     */
-    xScale: PropTypes.func,
-    yScale: PropTypes.func,
 
     xScaleType: PropTypes.string,
     yScaleType: PropTypes.string,
@@ -187,7 +181,10 @@ class XYPlot extends React.Component {
       spacingTop,
       spacingBottom,
       spacingLeft,
-      spacingRight
+      spacingRight,
+      // Passed in as prop from resolveXYScales
+      xScale,
+      yScale
     } = this.props;
     // subtract margin + spacing from width/height to obtain inner width/height of panel & chart area
     // panelSize is the area including chart + spacing but NOT margin
@@ -219,10 +216,15 @@ class XYPlot extends React.Component {
     const handlers = _.fromPairs(
       handlerNames.map(n => [n, methodIfFuncProp(n, this.props, this)])
     );
-
+    const scales = {
+      xScale,
+      yScale
+    };
+    const xyPlotPropKeys = _.keys(XYPlot.propTypes);
     const propsToPass = {
-      ..._.omit(this.props, ["children"]),
-      ...chartSize
+      ..._.pick(this.props, xyPlotPropKeys),
+      ...chartSize,
+      ...scales
     };
 
     return (
