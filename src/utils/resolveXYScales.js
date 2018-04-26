@@ -122,11 +122,6 @@ function omitNullUndefined(obj) {
 
 export default function resolveXYScales(ComposedComponent) {
   return class extends React.Component {
-    static defaultProps = _.defaults(ComposedComponent.defaultProps, {
-      invertXScale: false,
-      invertYScale: false
-    });
-
     _resolveScaleType(props, Component) {
       let { xScaleType, yScaleType } = props;
 
@@ -541,6 +536,8 @@ export default function resolveXYScales(ComposedComponent) {
       height,
       xScaleType,
       yScaleType,
+      invertXScale,
+      invertYScale,
       xDomain,
       yDomain,
       xScale,
@@ -578,7 +575,13 @@ export default function resolveXYScales(ComposedComponent) {
         xScale = initScale(xScaleType)
           .domain(xDomain)
           .range(xRange);
+
+        // reverse scale domain if `invertXScale` is passed
+        if (invertXScale) {
+          xScale.domain(xScale.domain().reverse());
+        }
       }
+
       if (!isValidScale(yScale)) {
         const yRange = innerRangeY(innerChartHeight, spacing).map(
           v => v - (spacing.top || 0)
@@ -586,11 +589,12 @@ export default function resolveXYScales(ComposedComponent) {
         yScale = initScale(yScaleType)
           .domain(yDomain)
           .range(yRange);
-      }
 
-      // todo - add invertXScale and invertYScale as prop for XYPlot
-      // reverse scale domain if `invertScale` is passed
-      // if(invertScale[k]) kScale.domain(kScale.domain().reverse());
+        // reverse scale domain if `invertYScale` is passed
+        if (invertYScale) {
+          yScale.domain(yScale.domain().reverse());
+        }
+      }
 
       return { xScale, yScale };
     };
@@ -627,6 +631,8 @@ export default function resolveXYScales(ComposedComponent) {
         yScaleType,
         xDomain,
         yDomain,
+        invertXScale,
+        invertYScale,
         scaleX: props.scaleX,
         scaleY: props.scaleY,
         marginTop: props.marginTop,

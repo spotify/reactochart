@@ -112,6 +112,12 @@ class XYPlot extends React.Component {
     yScaleType: PropTypes.string,
 
     /**
+     * Whether or not to invert the x and y scales
+     */
+    invertXScale: PropTypes.bool,
+    invertYScale: PropTypes.bool,
+
+    /**
      *
      */
     margin: PropTypes.object,
@@ -132,9 +138,6 @@ class XYPlot extends React.Component {
     // paddingLeft: PropTypes.number,
     // paddingRight: PropTypes.number,
 
-    invertXScale: PropTypes.bool,
-    invertYScale: PropTypes.bool,
-
     onMouseMove: PropTypes.func,
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
@@ -145,16 +148,8 @@ class XYPlot extends React.Component {
   static defaultProps = {
     width: 400,
     height: 250,
-    // invertScale: {x: false, y: false},
     invertXScale: false,
     invertYScale: false
-    // emptyLabel: "Unknown",
-
-    // these values are inferred from data if not provided, therefore empty defaults
-    // scaleType: {},
-    // domain: {},
-    // margin: {},
-    //spacing: {top: 0, bottom: 0, left: 0, right: 0}
   };
 
   onXYMouseEvent = (callbackKey, event) => {
