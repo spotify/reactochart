@@ -44,8 +44,9 @@ function componentName(Component) {
 }
 
 function isValidScaleType(scaleType) {
-  // todo: check against whitelist?
-  return _.isString(scaleType);
+  const validScaleTypes = ["ordinal", "time", "log", "pow", "linear"];
+
+  return _.includes(validScaleTypes, scaleType);
 }
 function areValidScales(scales) {
   return _.every(scales, isValidScale);
@@ -125,12 +126,6 @@ export default function resolveXYScales(ComposedComponent) {
       invertXScale: false,
       invertYScale: false
     });
-
-    // todo better way for HOC's to pass statics through?
-    static getScaleType = ComposedComponent.getScaleType;
-    static getSpacing = ComposedComponent.getSpacing;
-    static getDomain = ComposedComponent.getDomain;
-    static getMargin = ComposedComponent.getMargin;
 
     _resolveScaleType(props, Component) {
       let { xScaleType, yScaleType } = props;
@@ -603,11 +598,6 @@ export default function resolveXYScales(ComposedComponent) {
     render() {
       const { props } = this;
       const { width, height, invertXScale, invertYScale } = props;
-
-      // short-circuit if scales provided
-      // todo deprecate passing in of xScale and yScale
-      if (isValidScale(props.xScale) && isValidScale(props.yScale))
-        return <ComposedComponent {...this.props} />;
 
       // scales not provided, so we have to resolve them
       // first resolve scale types and domains
