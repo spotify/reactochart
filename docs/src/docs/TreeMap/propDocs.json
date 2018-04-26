@@ -31,7 +31,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "'value'",
+        "value": "\"value\"",
         "computed": false
       }
     },
@@ -43,7 +43,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "'children'",
+        "value": "\"children\"",
         "computed": false
       }
     },
@@ -55,7 +55,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "'name'",
+        "value": "\"name\"",
         "computed": false
       }
     },
@@ -188,7 +188,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "class TreeMapNode extends React.Component {\n  static propTypes = {\n    node: PropTypes.shape({\n      parent: PropTypes.object,\n      children: PropTypes.array,\n      value: PropTypes.number,\n      depth: PropTypes.number,\n      x: PropTypes.number,\n      y: PropTypes.number,\n      dx: PropTypes.number,\n      dy: PropTypes.number\n    }),\n    nodeStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),\n    minLabelWidth: PropTypes.number,\n    minLabelHeight: PropTypes.number,\n\n    getLabel: CustomPropTypes.getter,\n    labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),\n    NodeLabelComponent: PropTypes.func\n  };\n  static defaultProps = {\n    minLabelWidth: 0,\n    minLabelHeight: 0\n  };\n\n  render() {\n    const {node, getLabel, nodeStyle, labelStyle, minLabelWidth, minLabelHeight, NodeLabelComponent, parentNames}\n      = this.props;\n    const {depth, parent, x0, y0, x1, y1} = node;\n\n    var parentName = _.get(parent, 'data.name');\n    const nodeGroupClass = parent ?\n      `node-group-${_.kebabCase(parentName)} node-group-i-${parentNames.indexOf(parentName)}` : '';\n    const className = `tree-map-node node-depth-${depth} ${nodeGroupClass}`;\n\n    let style = {position: 'absolute', width: (x1 - x0), height: (y1 - y0), top: y0, left: x0, transition: \"all .2s\"};\n    const customStyle = _.isFunction(nodeStyle) ? nodeStyle(node) : (_.isObject(nodeStyle) ? nodeStyle : {});\n    _.assign(style, customStyle);\n\n    let handlers = ['onClick', 'onMouseEnter', 'onMouseLeave', 'onMouseMove'].reduce((handlers, eventName) => {\n      const handler = this.props[`${eventName}Node`];\n      if(handler) handlers[eventName] = handler.bind(null, node);\n      return handlers;\n    }, {});\n\n    return <div {...{className, style}} {...handlers}>\n      {(x1 - x0) > minLabelWidth && (y1 - y0) > minLabelHeight ? // show label if node is big enough\n        <NodeLabelComponent {...{node, getLabel, labelStyle}} />\n        : null\n      }\n    </div>;\n  }\n}",
+        "value": "class TreeMapNode extends React.Component {\n  static propTypes = {\n    node: PropTypes.shape({\n      parent: PropTypes.object,\n      children: PropTypes.array,\n      value: PropTypes.number,\n      depth: PropTypes.number,\n      x: PropTypes.number,\n      y: PropTypes.number,\n      dx: PropTypes.number,\n      dy: PropTypes.number\n    }),\n    nodeStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),\n    minLabelWidth: PropTypes.number,\n    minLabelHeight: PropTypes.number,\n\n    getLabel: CustomPropTypes.getter,\n    labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),\n    NodeLabelComponent: PropTypes.func\n  };\n  static defaultProps = {\n    minLabelWidth: 0,\n    minLabelHeight: 0\n  };\n\n  render() {\n    const {\n      node,\n      getLabel,\n      nodeStyle,\n      labelStyle,\n      minLabelWidth,\n      minLabelHeight,\n      NodeLabelComponent,\n      parentNames\n    } = this.props;\n    const { depth, parent, x0, y0, x1, y1 } = node;\n\n    var parentName = _.get(parent, \"data.name\");\n    const nodeGroupClass = parent\n      ? `node-group-${_.kebabCase(\n          parentName\n        )} node-group-i-${parentNames.indexOf(parentName)}`\n      : \"\";\n    const className = `tree-map-node node-depth-${depth} ${nodeGroupClass}`;\n\n    let style = {\n      position: \"absolute\",\n      width: x1 - x0,\n      height: y1 - y0,\n      top: y0,\n      left: x0,\n      transition: \"all .2s\"\n    };\n    const customStyle = _.isFunction(nodeStyle)\n      ? nodeStyle(node)\n      : _.isObject(nodeStyle)\n        ? nodeStyle\n        : {};\n    _.assign(style, customStyle);\n\n    let handlers = [\n      \"onClick\",\n      \"onMouseEnter\",\n      \"onMouseLeave\",\n      \"onMouseMove\"\n    ].reduce((handlers, eventName) => {\n      const handler = this.props[`${eventName}Node`];\n      if (handler) handlers[eventName] = handler.bind(null, node);\n      return handlers;\n    }, {});\n\n    return (\n      <div {...{ className, style }} {...handlers}>\n        {x1 - x0 > minLabelWidth && y1 - y0 > minLabelHeight ? ( // show label if node is big enough\n          <NodeLabelComponent {...{ node, getLabel, labelStyle }} />\n        ) : null}\n      </div>\n    );\n  }\n}",
         "computed": false
       }
     },
@@ -199,7 +199,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "class TreeMapNodeLabel extends React.Component {\n  static propTypes = {\n    node: PropTypes.object,\n    getLabel: CustomPropTypes.getter,\n    labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),\n    minLabelWidth: PropTypes.number,\n    minLabelHeight: PropTypes.number\n  };\n\n  render() {\n    const {node, getLabel, labelStyle} = this.props;\n    const {x1, x0} = node;\n    let style = {width: (x1 - x0)};\n    const customStyle = _.isFunction(labelStyle) ? labelStyle(node) : (_.isObject(labelStyle) ? labelStyle : {});\n    _.assign(style, customStyle);\n\n    return <div className=\"node-label\" {...{style}}>\n      {makeAccessor(getLabel)(node)}\n    </div>\n  }\n}",
+        "value": "class TreeMapNodeLabel extends React.Component {\n  static propTypes = {\n    node: PropTypes.object,\n    getLabel: CustomPropTypes.getter,\n    labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),\n    minLabelWidth: PropTypes.number,\n    minLabelHeight: PropTypes.number\n  };\n\n  render() {\n    const { node, getLabel, labelStyle } = this.props;\n    const { x1, x0 } = node;\n    let style = { width: x1 - x0 };\n    const customStyle = _.isFunction(labelStyle)\n      ? labelStyle(node)\n      : _.isObject(labelStyle)\n        ? labelStyle\n        : {};\n    _.assign(style, customStyle);\n\n    return (\n      <div className=\"node-label\" {...{ style }}>\n        {makeAccessor(getLabel)(node)}\n      </div>\n    );\n  }\n}",
         "computed": false
       }
     }

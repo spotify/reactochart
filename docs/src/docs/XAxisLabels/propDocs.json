@@ -95,7 +95,7 @@
     },
     "position": {
       "defaultValue": {
-        "value": "'bottom'",
+        "value": "\"bottom\"",
         "computed": false
       }
     },
@@ -131,13 +131,13 @@
     },
     "labelClassName": {
       "defaultValue": {
-        "value": "''",
+        "value": "\"\"",
         "computed": false
       }
     },
     "labelStyle": {
       "defaultValue": {
-        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: '14px',\n  lineHeight: 1,\n  textAnchor: 'middle'\n}",
+        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: \"14px\",\n  lineHeight: 1,\n  textAnchor: \"middle\"\n}",
         "computed": false
       }
     },

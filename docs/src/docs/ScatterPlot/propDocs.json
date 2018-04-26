@@ -158,7 +158,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "[0,0]",
+        "value": "[0, 0]",
         "computed": false
       }
     },
@@ -181,7 +181,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "''",
+        "value": "\"\"",
         "computed": false
       }
     },
