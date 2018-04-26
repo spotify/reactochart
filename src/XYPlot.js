@@ -132,10 +132,11 @@ class XYPlot extends React.Component {
     spacingLeft: PropTypes.number,
     spacingRight: PropTypes.number,
 
-    paddingTop: PropTypes.number,
-    paddingBottom: PropTypes.number,
-    paddingLeft: PropTypes.number,
-    paddingRight: PropTypes.number,
+    // todo implement padding (helper for spacing)
+    // paddingTop: PropTypes.number,
+    // paddingBottom: PropTypes.number,
+    // paddingLeft: PropTypes.number,
+    // paddingRight: PropTypes.number,
 
     invertXScale: PropTypes.bool,
     invertYScale: PropTypes.bool,

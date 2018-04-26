@@ -72,6 +72,7 @@ function omitNullUndefined(obj) {
 }
 
 // not currently being used but potentially has some learnings
+// attempt at condensing all the resolve functions below
 // function resolveXYPropsOnComponentOrChildren(propKeys, props, reducers = {}, validators = {}, result = {}) {
 //   const isDone = (o) => (_.every(propKeys, k => _.isObject(o[k]) && _.every(['x', 'y'], xy => _.has(o[k][xy]))));
 //   result = _.pick({...props, ...result}, propKeys);
@@ -334,7 +335,6 @@ export default function resolveXYScales(ComposedComponent) {
       Component,
       { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale }
     ) {
-      // todo resolve directly from ticks/tickCount props?
       if (_.isFunction(Component.getTickDomain)) {
         const componentTickDomains = Component.getTickDomain({
           xScaleType,
@@ -593,20 +593,7 @@ export default function resolveXYScales(ComposedComponent) {
           .range(yRange);
       }
 
-      // todo - ticks, nice and getDomain should be an axis prop instead, and axis should have getDomain
-
-      // set `nice` option to round scale domains to nicer numbers
-      // const kTickCount = tickCount ? tickCount[k] : 10;
-      // if(nice && nice[k] && _.isFunction(kScale.nice)) kScale.nice(kTickCount);
-
-      // extend scale domain to include custom `ticks` if passed
-      //
-      // if(ticks[k]) {
-      //   const dataType = dataTypeFromScaleType(scaleType[k]);
-      //   const tickDomain = domainFromData(ticks[k], _.identity, dataType);
-      //   kScale.domain(combineDomains([kScale.domain(), tickDomain]), dataType);
-      // }
-
+      // todo - add invertXScale and invertYScale as prop for XYPlot
       // reverse scale domain if `invertScale` is passed
       // if(invertScale[k]) kScale.domain(kScale.domain().reverse());
 
@@ -618,8 +605,7 @@ export default function resolveXYScales(ComposedComponent) {
       const { width, height, invertXScale, invertYScale } = props;
 
       // short-circuit if scales provided
-      // todo warn/throw if bad scales are passed
-      // todo also pass domain/scaleType/etc from scales??
+      // todo deprecate passing in of xScale and yScale
       if (isValidScale(props.xScale) && isValidScale(props.yScale))
         return <ComposedComponent {...this.props} />;
 
@@ -711,7 +697,12 @@ export default function resolveXYScales(ComposedComponent) {
           xScale: tempScale.xScale,
           yScale: tempScale.yScale
         }),
-        { marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0 }
+        {
+          marginTop: 0,
+          marginBottom: 0,
+          marginLeft: 0,
+          marginRight: 0
+        }
       );
 
       const {
@@ -728,7 +719,12 @@ export default function resolveXYScales(ComposedComponent) {
           xScale: tempScale.xScale,
           yScale: tempScale.yScale
         }),
-        { spacingTop: 0, spacingBottom: 0, spacingLeft: 0, spacingRight: 0 }
+        {
+          spacingTop: 0,
+          spacingBottom: 0,
+          spacingLeft: 0,
+          spacingRight: 0
+        }
       );
 
       // create real scales from resolved margins
@@ -746,12 +742,6 @@ export default function resolveXYScales(ComposedComponent) {
       const { xScale, yScale } = this._makeScales(scaleOptions);
 
       const passedProps = _.assign({}, this.props, {
-        //legacy
-        // scale: {x: xScale, y: yScale},
-        // domain: {x: xDomain, y: yDomain},
-        // scaleType: {x: xScaleType, y: yScaleType},
-        // margin: {top: marginTop, bottom: marginBottom, left: marginLeft, right: marginRight},
-        // 0.4.0
         xScale,
         yScale,
         xDomain,
@@ -769,10 +759,10 @@ export default function resolveXYScales(ComposedComponent) {
       });
       return <ComposedComponent {...passedProps} />;
 
-      // todo spacing/padding
       // todo includeZero
-      // todo purerender/shouldcomponentupdate?
-      // todo resolve margins if scales are present
+      // forcing 0 in the domain (includeXZero includeYZero)
+      // https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=00003q
+
       // todo throw if cannot resolve scaleType
       // todo throw if cannot resolve domain
       // todo check to make sure margins didn't change after scales resolved?
