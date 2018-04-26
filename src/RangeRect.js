@@ -1,8 +1,8 @@
-import React from 'react';
-import invariant from 'invariant';
-import PropTypes from 'prop-types';
-import * as CustomPropTypes from './utils/CustomPropTypes';
-import {isValidScale} from './utils/Scale';
+import React from "react";
+import invariant from "invariant";
+import PropTypes from "prop-types";
+import * as CustomPropTypes from "./utils/CustomPropTypes";
+import { isValidScale } from "./utils/Scale";
 
 /**
  * RangeRect is a low-level component to be used in XYPlot-type charts (namely AreaBarChart).
@@ -58,17 +58,34 @@ export default class RangeRect extends React.Component {
     onMouseLeave: PropTypes.func
   };
   static defaultProps = {
-    className: '',
+    className: "",
     style: {}
   };
 
   render() {
-    const {xScale, yScale, x, xEnd, y, yEnd, style, onMouseEnter, onMouseMove, onMouseLeave} = this.props;
+    const {
+      xScale,
+      yScale,
+      x,
+      xEnd,
+      y,
+      yEnd,
+      style,
+      onMouseEnter,
+      onMouseMove,
+      onMouseLeave
+    } = this.props;
 
-    invariant(isValidScale(xScale), `RangeRect.props.xScale is not a valid d3 scale`);
-    invariant(isValidScale(yScale), `RangeRect.props.yScale is not a valid d3 scale`);
+    invariant(
+      isValidScale(xScale),
+      `RangeRect.props.xScale is not a valid d3 scale`
+    );
+    invariant(
+      isValidScale(yScale),
+      `RangeRect.props.yScale is not a valid d3 scale`
+    );
 
-    const className = `chart-range-rect ${this.props.className || ''}`;
+    const className = `chart-range-rect ${this.props.className || ""}`;
     const x0 = xScale(x);
     const x1 = xScale(xEnd);
     const y0 = yScale(y);
@@ -78,6 +95,20 @@ export default class RangeRect extends React.Component {
     const width = Math.abs(x1 - x0);
     const height = Math.abs(y1 - y0);
 
-    return <rect {...{x: rectX, y: rectY, width, height, className, style, onMouseEnter, onMouseMove, onMouseLeave}} />;
+    return (
+      <rect
+        {...{
+          x: rectX,
+          y: rectY,
+          width,
+          height,
+          className,
+          style,
+          onMouseEnter,
+          onMouseMove,
+          onMouseLeave
+        }}
+      />
+    );
   }
 }

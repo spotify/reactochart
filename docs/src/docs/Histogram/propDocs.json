@@ -61,7 +61,7 @@
         "name": "array"
       },
       "required": true,
-      "description": "the array of data objects",
+      "description": "The array of data objects for the histogram.\nThese should be individual \"samples\" or \"facts\", not an array of bins -\nthis component will count and bin the samples for you. If you have data that is already binned,\nuse the `<AreaBarChart>` component.",
       "defaultValue": {
         "value": "[]",
         "computed": false
@@ -69,18 +69,10 @@
     },
     "value": {
       "type": {
-        "name": "custom",
-        "raw": "CustomPropTypes.valueOrAccessor"
+        "name": "func"
       },
       "required": false,
-      "description": ""
-    },
-    "axisType": {
-      "type": {
-        "name": "object"
-      },
-      "required": false,
-      "description": ""
+      "description": "Data value accessor function, called once per datum, which returns the values to bin and plot in the histogram.\nIf `data` is just an array of numbers, this may be the identity function (`function(d) { return d }`)."
     },
     "xScale": {
       "type": {
@@ -120,14 +112,14 @@
         "name": "array"
       },
       "required": false,
-      "description": "The domain to which your data will be mapped and binned. binDomain is defined as an array `[min, max]`.\n\nWarning: This prop takes priority if `nice = true`"
+      "description": "The domain over which your data will be binned. Defined as an array `[min, max]`.\nIf not provided, binDomain will be the domain of your data values by default.\n\nWarning: This prop takes priority if `nice = true`."
     },
     "nice": {
       "type": {
         "name": "bool"
       },
       "required": false,
-      "description": "Nicely rounds the start and end values of your bins. Implemented using [d3's ticks nicing logic](https://github.com/d3/d3-array#ticks)",
+      "description": "If true, nicely rounds the start and end values of your bins.\nImplemented using [d3's ticks nicing logic](https://github.com/d3/d3-array#ticks).",
       "defaultValue": {
         "value": "false",
         "computed": false
@@ -146,7 +138,7 @@
         ]
       },
       "required": false,
-      "description": "Class attribute to be applied to each bar.\nor accessor function which returns a class;"
+      "description": "Class attribute to be applied to each bar,\nor accessor function which returns a class."
     },
     "barStyle": {
       "type": {
@@ -161,7 +153,7 @@
         ]
       },
       "required": false,
-      "description": "Inline style object to be applied to each bar,\nor accessor function which returns a style object;"
+      "description": "Inline style object to be applied to each bar,\nor accessor function which returns a style object."
     },
     "onMouseMoveBar": {
       "type": {
