@@ -59,26 +59,86 @@ function resolveYLabelsForValues(scale, values, formats, style, force = true) {
 
 class YAxisLabels extends React.Component {
   static propTypes = {
+    /**
+     * D3 scale for Y axis - provided by XYPlot
+     */
     yScale: PropTypes.func,
     height: PropTypes.number,
     width: PropTypes.number,
+    /***
+     * Position of y axis labels. Accepted options are "left" or "right"
+     */
     position: PropTypes.oneOf(["left", "right"]),
+    /**
+     * Placement of labels in regards to the x axis. Accepted options are "before" or "after"
+     */
     placement: PropTypes.oneOf(["before", "after"]),
+    /**
+     * Label distance from Y Axis
+     */
     distance: PropTypes.number,
+    /**
+     * Round ticks to capture extent of given y Domain from XYPlot
+     */
     nice: PropTypes.bool,
+    /**
+     * Number of ticks on axis
+     */
     tickCount: PropTypes.number,
+    /**
+     * Custom ticks to display
+     */
     ticks: PropTypes.array,
-    labelClassName: PropTypes.string,
+    /**
+     * Object declaring styles for label.
+     *
+     * Disclaimer: labelStyle will merge its defaults with the given labelStyle prop
+     * in order to ensure that our collision library measureText is able to calculate the
+     * smallest amount of possible collissions along the axis. It's therefore dependent on
+     * fontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized
+     * stylesheet, we suggest creating a styled label component that wraps YAxisLabels with your preferred styles.
+     */
     labelStyle: PropTypes.object,
+    labelClassName: PropTypes.string,
+    /**
+     * Spacing - provided by XYPlot
+     */
     spacingLeft: PropTypes.number,
+    /**
+     * Spacing - provided by XYPlot
+     */
     spacingRight: PropTypes.number,
     // Label Handling
     onMouseEnterLabel: PropTypes.func,
     onMouseMoveLabel: PropTypes.func,
-    onMouseLeaveLabel: PropTypes.func
-    // format: undefined,
-    // formats: undefined,
-    // labels: undefined
+    onMouseLeaveLabel: PropTypes.func,
+    /**
+     * Format to use for the labels
+     *
+     * For example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit
+     */
+    format: PropTypes.string,
+    /**
+     * Formats to use for the labels in priority order. XAxisLabels will try to be smart about which format
+     * to use that keeps the labels distinct and provides the least amount of collisions when rendered.
+     *
+     * For example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit
+     */
+    formats: PropTypes.array,
+    /**
+     * Custom labels provided. Note that each object in the array has to be of shape
+     * `{
+     *  value,
+     *  text,
+     *  height,
+     *  width
+     * }`
+     * value - value you'd like this label to be aligned with
+     * text - text you'd like displayed
+     * height - height of the given label
+     * width - width of the given label
+     */
+    labels: PropTypes.array
   };
   static defaultProps = {
     height: 250,
@@ -94,9 +154,7 @@ class YAxisLabels extends React.Component {
       fontSize: "14px",
       lineHeight: 1,
       textAnchor: "end"
-    },
-    spacingLeft: 0,
-    spacingRight: 0
+    }
   };
 
   shouldComponentUpdate(nextProps, nextState) {

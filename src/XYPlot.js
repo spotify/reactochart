@@ -221,7 +221,7 @@ class XYPlot extends React.Component {
       ...chartSize,
       ...scales
     };
-
+    console.log("propsToPass", propsToPass);
     return (
       <svg {...{ width, height, className: "xy-plot" }} {...handlers}>
         <rect className="chart-background" {...{ width, height }} />

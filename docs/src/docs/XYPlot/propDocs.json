@@ -79,20 +79,6 @@
       "required": false,
       "description": ""
     },
-    "xScale": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": "d3 scales for the X and Y axes of the chart, in {x, y} object format.\n(optional, normally determined automatically by XYPlot)"
-    },
-    "yScale": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
     "xScaleType": {
       "type": {
         "name": "string"
@@ -106,6 +92,28 @@
       },
       "required": false,
       "description": ""
+    },
+    "invertXScale": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "Whether or not to invert the x and y scales",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
+    },
+    "invertYScale": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
     },
     "margin": {
       "type": {
@@ -169,56 +177,6 @@
       },
       "required": false,
       "description": ""
-    },
-    "paddingTop": {
-      "type": {
-        "name": "number"
-      },
-      "required": false,
-      "description": ""
-    },
-    "paddingBottom": {
-      "type": {
-        "name": "number"
-      },
-      "required": false,
-      "description": ""
-    },
-    "paddingLeft": {
-      "type": {
-        "name": "number"
-      },
-      "required": false,
-      "description": ""
-    },
-    "paddingRight": {
-      "type": {
-        "name": "number"
-      },
-      "required": false,
-      "description": ""
-    },
-    "invertXScale": {
-      "type": {
-        "name": "bool"
-      },
-      "required": false,
-      "description": "",
-      "defaultValue": {
-        "value": "false",
-        "computed": false
-      }
-    },
-    "invertYScale": {
-      "type": {
-        "name": "bool"
-      },
-      "required": false,
-      "description": "",
-      "defaultValue": {
-        "value": "false",
-        "computed": false
-      }
     },
     "onMouseMove": {
       "type": {
