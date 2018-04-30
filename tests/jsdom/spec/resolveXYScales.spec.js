@@ -1,11 +1,11 @@
 import _ from "lodash";
 import React from "react";
 import * as d3 from "d3";
-import {expect} from "chai";
-import {mount, shallow} from "enzyme";
+import { expect } from "chai";
+import { mount, shallow } from "enzyme";
 
-import {isValidScale} from "../../../src/utils/Scale";
-import {innerRangeX, innerRangeY} from "../../../src/utils/Margin";
+import { isValidScale } from "../../../src/utils/Scale";
+import { innerRangeX, innerRangeY } from "../../../src/utils/Margin";
 
 import resolveXYScales from "../../../src/utils/resolveXYScales";
 
@@ -28,11 +28,17 @@ function expectXYScales(scales) {
   });
 }
 
-function expectXYScaledComponent(rendered, {width, height, scaleType, domain, margin, range}) {
+function expectXYScaledComponent(
+  rendered,
+  { width, height, scaleType, domain, margin, range }
+) {
   // checks that a given rendered component has been created with XY scales/margin
   // that match the expected domain, range & margin
   // if range not provided, it should be width/height minus margins
-  range = range || {x: innerRangeX(width, margin), y: innerRangeY(height, margin)};
+  range = range || {
+    x: innerRangeX(width, margin),
+    y: innerRangeY(height, margin)
+  };
   expect(scaleType).to.be.an("object");
   console.log("expected domains", domain);
   console.log("expected range", range);
@@ -59,11 +65,17 @@ function expectXYScaledComponent(rendered, {width, height, scaleType, domain, ma
   });
 }
 
-function expectXYScaledComponentEnzyme(rendered, {width, height, scaleType, domain, margin, range}) {
+function expectXYScaledComponentEnzyme(
+  rendered,
+  { width, height, scaleType, domain, margin, range }
+) {
   // checks that a given rendered component has been created with XY scales/margin
   // that match the expected domain, range & margin
   // if range not provided, it should be width/height minus margins
-  range = range || {x: innerRangeX(width, margin), y: innerRangeY(height, margin)};
+  range = range || {
+    x: innerRangeX(width, margin),
+    y: innerRangeY(height, margin)
+  };
   expect(scaleType).to.be.an("object");
 
   expect(rendered.props().margin).to.deep.equal(margin);
@@ -89,16 +101,20 @@ function expectXYScaledComponentEnzyme(rendered, {width, height, scaleType, doma
 }
 
 describe("resolveXYScales", () => {
-  const customScaleType = {xScaleType: "ordinal", yScaleType: "linear"};
-  const customDomain = {xDomain: [-5, 5], yDomain: [0, 10]};
-  const customMargin = {marginTop: 10, marginBottom: 20, marginLeft: 30, marginRight: 40};
+  const customScaleType = { xScaleType: "ordinal", yScaleType: "linear" };
+  const customDomain = { xDomain: [-5, 5], yDomain: [0, 10] };
+  const customMargin = {
+    marginTop: 10,
+    marginBottom: 20,
+    marginLeft: 30,
+    marginRight: 40
+  };
   const width = 500;
   const height = 400;
 
   // test fixture component classes
   class ComponentWithChildren extends React.Component {
     render() {
-      //console.log(this.props.scale.x.range())
       return <div>{this.props.children}</div>;
     }
   }
@@ -143,36 +159,29 @@ describe("resolveXYScales", () => {
         xDomain,
         yDomain
       } = this.props;
-      const newChildren = React.Children.map(this.props.children, (child, i) => {
-        return React.cloneElement(child, {
-          width,
-          height,
-          xScale,
-          yScale,
-          xScaleType,
-          yScaleType,
-          marginTop,
-          marginBottom,
-          marginLeft,
-          marginRight,
-          xDomain,
-          yDomain
-        });
-      });
+      const newChildren = React.Children.map(
+        this.props.children,
+        (child, i) => {
+          return React.cloneElement(child, {
+            width,
+            height,
+            xScale,
+            yScale,
+            xScaleType,
+            yScaleType,
+            marginTop,
+            marginBottom,
+            marginLeft,
+            marginRight,
+            xDomain,
+            yDomain
+          });
+        }
+      );
       return <div>{newChildren}</div>;
     }
   }
   const XYContainerChart = resolveXYScales(ContainerChart);
-  //
-  // const XYChartWithObjectProps = resolveObjectProps(resolveXYScales(Chart),
-  //   ['domain', 'scale', 'scaleType'], ['x', 'y']
-  // );
-  // const XYChartWithCustomMarginAndObjectProps = resolveObjectProps(resolveXYScales(ChartWithCustomMargin),
-  //   ['domain', 'scale', 'scaleType'], ['x', 'y']
-  // );
-  // const XYContainerChartWithObjectProps = resolveObjectProps(resolveXYScales(ContainerChart),
-  //   ['domain', 'scale', 'scaleType'], ['x', 'y']
-  // );
 
   it("passes XY scales and margins through if both are provided", () => {
     const props = {
@@ -192,7 +201,14 @@ describe("resolveXYScales", () => {
     const wrapped = mount(<XYChart {...props} />);
     const rendered = wrapped.find(Chart);
 
-    ["xScale", "yScale", "marginTop", "marginBottom", "marginLeft", "marginRight"].forEach(propKey => {
+    [
+      "xScale",
+      "yScale",
+      "marginTop",
+      "marginBottom",
+      "marginLeft",
+      "marginRight"
+    ].forEach(propKey => {
       expectRefAndDeepEqual(rendered.props()[propKey], props[propKey]);
     });
   });
@@ -216,13 +232,18 @@ describe("resolveXYScales", () => {
     const renderedXScale = rendered.props().xScale;
     const renderedYScale = rendered.props().yScale;
 
-    // expectXYScales(renderedScale);
     expect(isValidScale(renderedXScale)).to.equal(true);
     expect(isValidScale(renderedYScale)).to.equal(true);
     expect(renderedXScale.domain()).to.deep.equal(props.xDomain);
     expect(renderedYScale.domain()).to.deep.equal(props.yDomain);
-    expect(renderedXScale.range()).to.deep.equal([0, width - (props.marginLeft + props.marginRight)]);
-    expect(renderedYScale.range()).to.deep.equal([height - (props.marginTop + props.marginBottom), 0]);
+    expect(renderedXScale.range()).to.deep.equal([
+      0,
+      width - (props.marginLeft + props.marginRight)
+    ]);
+    expect(renderedYScale.range()).to.deep.equal([
+      height - (props.marginTop + props.marginBottom),
+      0
+    ]);
   });
 
   it("infers scaleType from Component.getScaleType", () => {
@@ -396,6 +417,32 @@ describe("resolveXYScales", () => {
     expect(rendered.props().yDomain).to.deep.equal([0, 5]);
   });
 
+  it("x and y domain includes 0 given inferred domain from children data", () => {
+    const props = {
+      width,
+      height,
+      includeXZero: true,
+      includeYZero: true,
+      xScaleType: "linear",
+      yScaleType: "linear",
+      marginTop: 11,
+      marginBottom: 22,
+      marginLeft: 33,
+      marginRight: 44
+    };
+    const tree = (
+      <XYContainerChart {...props}>
+        <XYChart data={[[5, 10], [5, 14]]} x={d => d[0]} y={d => d[1]} />
+        <XYChart data={[[10, 5], [10, 5]]} x={d => d[0]} y={d => d[1]} />
+      </XYContainerChart>
+    );
+    const wrapped = mount(tree);
+    const rendered = wrapped.find(ContainerChart);
+
+    expect(rendered.props().xDomain).to.deep.equal([0, 10]);
+    expect(rendered.props().yDomain).to.deep.equal([0, 14]);
+  });
+
   it("infers margin from Component.getMargin", () => {
     const props = {
       width,
@@ -459,7 +506,7 @@ describe("resolveXYScales", () => {
   });
 
   it("infers scaleType & domain from data, margin from getMargin", () => {
-    const containerProps = {width, height};
+    const containerProps = { width, height };
     const chartProps = {
       data: [[12, "a"], [18, "b"], [22, "c"]],
       x: d => d[0],
@@ -515,11 +562,15 @@ describe("resolveXYScales", () => {
       marginRight: 44
     };
 
-    const invertXChart = mount(<XYChart {...props} invertXScale={true} />).find(Chart);
+    const invertXChart = mount(<XYChart {...props} invertXScale={true} />).find(
+      Chart
+    );
     expect(invertXChart.props().xDomain).to.deep.equal([3, -3]);
     expect(invertXChart.props().yDomain).to.deep.equal([0, 10]);
 
-    const invertYChart = mount(<XYChart {...props} invertYScale={true} />).find(Chart);
+    const invertYChart = mount(<XYChart {...props} invertYScale={true} />).find(
+      Chart
+    );
     expect(invertYChart.props().xDomain).to.deep.equal([-3, 3]);
     expect(invertYChart.props().yDomain).to.deep.equal([10, 0]);
   });

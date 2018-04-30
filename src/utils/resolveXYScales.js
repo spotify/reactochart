@@ -122,6 +122,12 @@ function omitNullUndefined(obj) {
 
 export default function resolveXYScales(ComposedComponent) {
   return class extends React.Component {
+    // todo better way for HOC's to pass statics through?
+    static getScaleType = ComposedComponent.getScaleType;
+    static getSpacing = ComposedComponent.getSpacing;
+    static getDomain = ComposedComponent.getDomain;
+    static getMargin = ComposedComponent.getMargin;
+
     _resolveScaleType(props, Component) {
       let { xScaleType, yScaleType } = props;
 
@@ -223,7 +229,7 @@ export default function resolveXYScales(ComposedComponent) {
     }
 
     _resolveDomain(props, Component, xScaleType, yScaleType) {
-      let { xDomain, yDomain } = props;
+      let { xDomain, yDomain, includeXZero, includeYZero } = props;
       const xDataType = dataTypeFromScaleType(xScaleType);
       const yDataType = dataTypeFromScaleType(yScaleType);
 
@@ -263,13 +269,11 @@ export default function resolveXYScales(ComposedComponent) {
           );
         if (!isYDone() && isValidDomain(componentYDomain, yDataType))
           yDomain = componentYDomain;
-
-        if (isDone()) return { xDomain, yDomain };
       }
 
       // if Component has data or datasets props,
       // use the default domainFromDatasets function to determine a domain from them
-      if (_.isArray(props.data) || _.isArray(props.datasets)) {
+      if (!isDone() && (_.isArray(props.data) || _.isArray(props.datasets))) {
         const datasets = _.isArray(props.datasets)
           ? props.datasets
           : [props.data];
@@ -287,13 +291,12 @@ export default function resolveXYScales(ComposedComponent) {
             yDataType
           );
         }
-        if (isDone()) return { xDomain, yDomain };
       }
 
       // if Component has children,
       // recurse through descendants to resolve their domains the same way,
       // and combine them into a single domain, if there are multiple
-      if (React.Children.count(props.children)) {
+      if (!isDone() && React.Children.count(props.children)) {
         let childrenDomains = mapOverChildren(
           props.children,
           this._resolveDomain.bind(this),
@@ -315,7 +318,29 @@ export default function resolveXYScales(ComposedComponent) {
         }
       }
 
-      // if(!isDone()) console.warn(`resolveXYScales was unable to resolve both domains. xDomain: ${xDomain}, yDomain: ${yDomain}`);
+      if (!isDone()) {
+        console.warn(
+          `resolveXYScales was unable to resolve both domains. xDomain: ${xDomain}, yDomain: ${yDomain}`
+        );
+      } else {
+        if (includeXZero && !_.inRange(0, ...xDomain)) {
+          // If both are negative set max of domain to 0
+          if (xDomain[0] < 0 && xDomain[1] < 0) {
+            xDomain[1] = 0;
+          } else {
+            xDomain[0] = 0;
+          }
+        }
+
+        if (includeYZero && !_.inRange(0, ...yDomain)) {
+          // If both are negative set max of domain to 0
+          if (yDomain[0] < 0 && yDomain[1] < 0) {
+            yDomain[1] = 0;
+          } else {
+            yDomain[0] = 0;
+          }
+        }
+      }
 
       return { xDomain, yDomain };
     }
@@ -754,10 +779,6 @@ export default function resolveXYScales(ComposedComponent) {
         spacingRight
       });
       return <ComposedComponent {...passedProps} />;
-
-      // todo includeZero
-      // forcing 0 in the domain (includeXZero includeYZero)
-      // https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=00003q
 
       // todo throw if cannot resolve scaleType
       // todo throw if cannot resolve domain

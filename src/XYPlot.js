@@ -118,9 +118,17 @@ class XYPlot extends React.Component {
     invertYScale: PropTypes.bool,
 
     /**
+     * Whether or not to coerce 0 into your x domain
+     */
+    includeXZero: PropTypes.bool,
+    /**
+     * Whether or not to coerce 0 into your y domain
+     */
+    includeYZero: PropTypes.bool,
+
+    /**
      *
      */
-    margin: PropTypes.object,
     marginTop: PropTypes.number,
     marginBottom: PropTypes.number,
     marginLeft: PropTypes.number,
@@ -149,7 +157,9 @@ class XYPlot extends React.Component {
     width: 400,
     height: 250,
     invertXScale: false,
-    invertYScale: false
+    invertYScale: false,
+    includeXZero: false,
+    includeYZero: false
   };
 
   onXYMouseEvent = (callbackKey, event) => {
@@ -221,7 +231,7 @@ class XYPlot extends React.Component {
       ...chartSize,
       ...scales
     };
-    console.log("propsToPass", propsToPass);
+
     return (
       <svg {...{ width, height, className: "xy-plot" }} {...handlers}>
         <rect className="chart-background" {...{ width, height }} />
