@@ -167,6 +167,7 @@ class TreeMap extends React.Component {
     const { width, height, data, sticky } = this.props;
 
     // if height, width, or the data changes, or if the treemap is not sticky, re-initialize the layout function
+    // todo reevaluate this logic
     if (
       !sticky ||
       width != newProps.width ||

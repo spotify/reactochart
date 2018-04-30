@@ -87,7 +87,6 @@ export default class XAxis extends React.Component {
   }
 
   static getMargin(props) {
-    // todo figure out margin if labels change after margin?
     const { ticksProps, labelsProps, titleProps } = getAxisChildProps(props);
     let margins = [];
 

@@ -11,7 +11,7 @@ import * as CustomPropTypes from "./utils/CustomPropTypes";
 // a filled path drawn between two lines (datasets).
 
 // todo horizontal prop, for filling area horizontally?
-// todo support categorical data?
+// todo support ordinal (like days of the week) data?
 // todo build StackedAreaChart that composes multiple AreaCharts
 
 export default class AreaChart extends React.Component {

@@ -17,7 +17,7 @@ export const defaultPropKeysToDeepCheck = [
   "spacing",
   "domain",
   "style",
-  "data"
+  "data" // not worth deepchecking data due to perf issues
 ];
 
 export default function xyPropsEqual(

@@ -69,32 +69,6 @@ export default class MarkerLineChart extends React.Component {
     lineLength: 10
   };
 
-  // todo reimplement padding/spacing
-  /*
-  static getOptions(props) {
-    const {data, getX, getXEnd, getY, getYEnd, scaleType, orientation, lineLength} = props;
-    const tickType = getTickType(props);
-    const isVertical = (orientation === 'vertical');
-    const accessors = {x: makeAccessor(getX), y: makeAccessor(getY)};
-    const endAccessors = {x: makeAccessor(getXEnd), y: makeAccessor(getYEnd)};
-
-    let options = {domain: {}, spacing: {}};
-
-    if(tickType === 'RangeValue') { // set range domain for range type
-      let rangeAxis = isVertical ? 'x' : 'y';
-      options.domain[rangeAxis] =
-        rangeAxisDomain(data, accessors[rangeAxis], endAccessors[rangeAxis], scaleType[rangeAxis]);
-    } else {
-      // the value, and therefore the center of the marker line, may fall exactly on the axis min or max,
-      // therefore marker lines need (0.5*lineLength) spacing so they don't hang over the edge of the chart
-      const halfLine = Math.ceil(0.5 * lineLength);
-      options.spacing = isVertical ? {left: halfLine, right: halfLine} : {top: halfLine, bottom: halfLine};
-    }
-
-    return options;
-  }
-  */
-
   static getSpacing(props) {
     const tickType = getTickType(props);
     //no spacing for rangeValue marker charts since line start and end are set explicitly

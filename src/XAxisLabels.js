@@ -291,6 +291,7 @@ class XAxisLabels extends React.Component {
         ? `translate(0, ${height + spacingBottom})`
         : `translate(0, ${-spacingTop})`;
     // todo: position: 'zero' to position along the zero line
+    // example include having both positive and negative areas and youd like labels just on zero line
 
     return (
       <g className="chart-value-labels-x" transform={transform}>
