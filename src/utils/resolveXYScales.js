@@ -44,8 +44,9 @@ function componentName(Component) {
 }
 
 function isValidScaleType(scaleType) {
-  // todo: check against whitelist?
-  return _.isString(scaleType);
+  const validScaleTypes = ["ordinal", "time", "log", "pow", "linear"];
+
+  return _.includes(validScaleTypes, scaleType);
 }
 function areValidScales(scales) {
   return _.every(scales, isValidScale);
@@ -72,6 +73,7 @@ function omitNullUndefined(obj) {
 }
 
 // not currently being used but potentially has some learnings
+// attempt at condensing all the resolve functions below
 // function resolveXYPropsOnComponentOrChildren(propKeys, props, reducers = {}, validators = {}, result = {}) {
 //   const isDone = (o) => (_.every(propKeys, k => _.isObject(o[k]) && _.every(['x', 'y'], xy => _.has(o[k][xy]))));
 //   result = _.pick({...props, ...result}, propKeys);
@@ -120,11 +122,6 @@ function omitNullUndefined(obj) {
 
 export default function resolveXYScales(ComposedComponent) {
   return class extends React.Component {
-    static defaultProps = _.defaults(ComposedComponent.defaultProps, {
-      invertXScale: false,
-      invertYScale: false
-    });
-
     // todo better way for HOC's to pass statics through?
     static getScaleType = ComposedComponent.getScaleType;
     static getSpacing = ComposedComponent.getSpacing;
@@ -232,7 +229,7 @@ export default function resolveXYScales(ComposedComponent) {
     }
 
     _resolveDomain(props, Component, xScaleType, yScaleType) {
-      let { xDomain, yDomain } = props;
+      let { xDomain, yDomain, includeXZero, includeYZero } = props;
       const xDataType = dataTypeFromScaleType(xScaleType);
       const yDataType = dataTypeFromScaleType(yScaleType);
 
@@ -272,13 +269,11 @@ export default function resolveXYScales(ComposedComponent) {
           );
         if (!isYDone() && isValidDomain(componentYDomain, yDataType))
           yDomain = componentYDomain;
-
-        if (isDone()) return { xDomain, yDomain };
       }
 
       // if Component has data or datasets props,
       // use the default domainFromDatasets function to determine a domain from them
-      if (_.isArray(props.data) || _.isArray(props.datasets)) {
+      if (!isDone() && (_.isArray(props.data) || _.isArray(props.datasets))) {
         const datasets = _.isArray(props.datasets)
           ? props.datasets
           : [props.data];
@@ -296,13 +291,12 @@ export default function resolveXYScales(ComposedComponent) {
             yDataType
           );
         }
-        if (isDone()) return { xDomain, yDomain };
       }
 
       // if Component has children,
       // recurse through descendants to resolve their domains the same way,
       // and combine them into a single domain, if there are multiple
-      if (React.Children.count(props.children)) {
+      if (!isDone() && React.Children.count(props.children)) {
         let childrenDomains = mapOverChildren(
           props.children,
           this._resolveDomain.bind(this),
@@ -324,7 +318,29 @@ export default function resolveXYScales(ComposedComponent) {
         }
       }
 
-      // if(!isDone()) console.warn(`resolveXYScales was unable to resolve both domains. xDomain: ${xDomain}, yDomain: ${yDomain}`);
+      if (!isDone()) {
+        console.warn(
+          `resolveXYScales was unable to resolve both domains. xDomain: ${xDomain}, yDomain: ${yDomain}`
+        );
+      } else {
+        if (includeXZero && !_.inRange(0, ...xDomain)) {
+          // If both are negative set max of domain to 0
+          if (xDomain[0] < 0 && xDomain[1] < 0) {
+            xDomain[1] = 0;
+          } else {
+            xDomain[0] = 0;
+          }
+        }
+
+        if (includeYZero && !_.inRange(0, ...yDomain)) {
+          // If both are negative set max of domain to 0
+          if (yDomain[0] < 0 && yDomain[1] < 0) {
+            yDomain[1] = 0;
+          } else {
+            yDomain[0] = 0;
+          }
+        }
+      }
 
       return { xDomain, yDomain };
     }
@@ -334,7 +350,6 @@ export default function resolveXYScales(ComposedComponent) {
       Component,
       { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale }
     ) {
-      // todo resolve directly from ticks/tickCount props?
       if (_.isFunction(Component.getTickDomain)) {
         const componentTickDomains = Component.getTickDomain({
           xScaleType,
@@ -546,6 +561,8 @@ export default function resolveXYScales(ComposedComponent) {
       height,
       xScaleType,
       yScaleType,
+      invertXScale,
+      invertYScale,
       xDomain,
       yDomain,
       xScale,
@@ -583,7 +600,13 @@ export default function resolveXYScales(ComposedComponent) {
         xScale = initScale(xScaleType)
           .domain(xDomain)
           .range(xRange);
+
+        // reverse scale domain if `invertXScale` is passed
+        if (invertXScale) {
+          xScale.domain(xScale.domain().reverse());
+        }
       }
+
       if (!isValidScale(yScale)) {
         const yRange = innerRangeY(innerChartHeight, spacing).map(
           v => v - (spacing.top || 0)
@@ -591,24 +614,12 @@ export default function resolveXYScales(ComposedComponent) {
         yScale = initScale(yScaleType)
           .domain(yDomain)
           .range(yRange);
+
+        // reverse scale domain if `invertYScale` is passed
+        if (invertYScale) {
+          yScale.domain(yScale.domain().reverse());
+        }
       }
-
-      // todo - ticks, nice and getDomain should be an axis prop instead, and axis should have getDomain
-
-      // set `nice` option to round scale domains to nicer numbers
-      // const kTickCount = tickCount ? tickCount[k] : 10;
-      // if(nice && nice[k] && _.isFunction(kScale.nice)) kScale.nice(kTickCount);
-
-      // extend scale domain to include custom `ticks` if passed
-      //
-      // if(ticks[k]) {
-      //   const dataType = dataTypeFromScaleType(scaleType[k]);
-      //   const tickDomain = domainFromData(ticks[k], _.identity, dataType);
-      //   kScale.domain(combineDomains([kScale.domain(), tickDomain]), dataType);
-      // }
-
-      // reverse scale domain if `invertScale` is passed
-      // if(invertScale[k]) kScale.domain(kScale.domain().reverse());
 
       return { xScale, yScale };
     };
@@ -616,12 +627,6 @@ export default function resolveXYScales(ComposedComponent) {
     render() {
       const { props } = this;
       const { width, height, invertXScale, invertYScale } = props;
-
-      // short-circuit if scales provided
-      // todo warn/throw if bad scales are passed
-      // todo also pass domain/scaleType/etc from scales??
-      if (isValidScale(props.xScale) && isValidScale(props.yScale))
-        return <ComposedComponent {...this.props} />;
 
       // scales not provided, so we have to resolve them
       // first resolve scale types and domains
@@ -651,6 +656,8 @@ export default function resolveXYScales(ComposedComponent) {
         yScaleType,
         xDomain,
         yDomain,
+        invertXScale,
+        invertYScale,
         scaleX: props.scaleX,
         scaleY: props.scaleY,
         marginTop: props.marginTop,
@@ -711,7 +718,12 @@ export default function resolveXYScales(ComposedComponent) {
           xScale: tempScale.xScale,
           yScale: tempScale.yScale
         }),
-        { marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0 }
+        {
+          marginTop: 0,
+          marginBottom: 0,
+          marginLeft: 0,
+          marginRight: 0
+        }
       );
 
       const {
@@ -728,7 +740,12 @@ export default function resolveXYScales(ComposedComponent) {
           xScale: tempScale.xScale,
           yScale: tempScale.yScale
         }),
-        { spacingTop: 0, spacingBottom: 0, spacingLeft: 0, spacingRight: 0 }
+        {
+          spacingTop: 0,
+          spacingBottom: 0,
+          spacingLeft: 0,
+          spacingRight: 0
+        }
       );
 
       // create real scales from resolved margins
@@ -746,12 +763,6 @@ export default function resolveXYScales(ComposedComponent) {
       const { xScale, yScale } = this._makeScales(scaleOptions);
 
       const passedProps = _.assign({}, this.props, {
-        //legacy
-        // scale: {x: xScale, y: yScale},
-        // domain: {x: xDomain, y: yDomain},
-        // scaleType: {x: xScaleType, y: yScaleType},
-        // margin: {top: marginTop, bottom: marginBottom, left: marginLeft, right: marginRight},
-        // 0.4.0
         xScale,
         yScale,
         xDomain,
@@ -769,10 +780,6 @@ export default function resolveXYScales(ComposedComponent) {
       });
       return <ComposedComponent {...passedProps} />;
 
-      // todo spacing/padding
-      // todo includeZero
-      // todo purerender/shouldcomponentupdate?
-      // todo resolve margins if scales are present
       // todo throw if cannot resolve scaleType
       // todo throw if cannot resolve domain
       // todo check to make sure margins didn't change after scales resolved?

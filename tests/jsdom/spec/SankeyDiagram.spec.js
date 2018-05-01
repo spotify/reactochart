@@ -1,12 +1,12 @@
 import React from "react";
 import * as d3 from "d3";
 import _ from "lodash";
-import {mount, shallow} from "enzyme";
+import { mount, shallow } from "enzyme";
 import chai from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 chai.use(sinonChai);
-const {expect} = chai;
+const { expect } = chai;
 
 // use rewire to test internal SankeyNode/Link/etc. components
 const rewire = require("rewire");
@@ -20,14 +20,20 @@ const SankeyLinkLabel = Sankey.__get__("SankeyLinkLabel");
 
 function getSampleData() {
   return {
-    nodes: [{name: "Apples"}, {name: "Bananas"}, {name: "Cherries"}, {name: "Dates"}, {name: "Elderberries"}],
+    nodes: [
+      { name: "Apples" },
+      { name: "Bananas" },
+      { name: "Cherries" },
+      { name: "Dates" },
+      { name: "Elderberries" }
+    ],
     links: [
-      {source: 0, target: 2, value: 0.5},
-      {source: 0, target: 3, value: 0.5},
-      {source: 1, target: 2, value: 0.5},
-      {source: 1, target: 3, value: 0.5},
-      {source: 2, target: 4, value: 1},
-      {source: 3, target: 4, value: 1}
+      { source: 0, target: 2, value: 0.5 },
+      { source: 0, target: 3, value: 0.5 },
+      { source: 1, target: 2, value: 0.5 },
+      { source: 1, target: 3, value: 0.5 },
+      { source: 2, target: 4, value: 1 },
+      { source: 3, target: 4, value: 1 }
     ]
   };
 }
@@ -35,33 +41,33 @@ function getSampleData() {
 function getSampleDataWithId() {
   return {
     nodes: [
-      {id: "a", label: "Apples"},
-      {id: "b", label: "Bananas"},
-      {id: "c", label: "Cherries"},
-      {id: "d", label: "Dates"},
-      {id: "e", label: "Elderberries"}
+      { id: "a", label: "Apples" },
+      { id: "b", label: "Bananas" },
+      { id: "c", label: "Cherries" },
+      { id: "d", label: "Dates" },
+      { id: "e", label: "Elderberries" }
     ],
     links: [
-      {source: "a", target: "c", value: 0.5},
-      {source: "a", target: "d", value: 0.5},
-      {source: "b", target: "c", value: 0.5},
-      {source: "b", target: "d", value: 0.5},
-      {source: "c", target: "e", value: 1},
-      {source: "d", target: "e", value: 1}
+      { source: "a", target: "c", value: 0.5 },
+      { source: "a", target: "d", value: 0.5 },
+      { source: "b", target: "c", value: 0.5 },
+      { source: "b", target: "d", value: 0.5 },
+      { source: "c", target: "e", value: 1 },
+      { source: "d", target: "e", value: 1 }
     ]
   };
 }
 
 describe("SankeyDiagram", () => {
   it("renders a Sankey Diagram", () => {
-    const {nodes, links} = getSampleData();
-    const props = {width: 600, height: 400, nodes, links};
+    const { nodes, links } = getSampleData();
+    const props = { width: 600, height: 400, nodes, links };
     const chart = mount(<SankeyDiagram {...props} />);
     const svg = chart.find("svg");
     expect(svg).to.have.length(1);
 
+    // todo check shouldClone
     // get sampleData again since it has been mutated by the component
-    // todo don't mutate incoming nodes/links?
     const sampleData = getSampleData();
     const sankeyNodes = chart.find(SankeyNode);
     const sankeyLinks = chart.find(SankeyLink);
@@ -82,7 +88,10 @@ describe("SankeyDiagram", () => {
       expect(nodeProps.node.sourceLinks).to.have.length(sourceLinks.length);
       expect(nodeProps.node.targetLinks).to.be.an("array");
       expect(nodeProps.node.targetLinks).to.have.length(targetLinks.length);
-      const expectedNodeValue = Math.max(_.sumBy(sourceLinks, l => l.value), _.sumBy(targetLinks, l => l.value));
+      const expectedNodeValue = Math.max(
+        _.sumBy(sourceLinks, l => l.value),
+        _.sumBy(targetLinks, l => l.value)
+      );
       expect(nodeProps.node.value).to.equal(expectedNodeValue);
       expect(nodeProps.node.x0).to.be.finite;
       expect(nodeProps.node.x1).to.be.finite;
@@ -122,7 +131,7 @@ describe("SankeyDiagram", () => {
       width: 600,
       height: 400,
       className: "woof",
-      style: {paddingLeft: 30}
+      style: { paddingLeft: 30 }
     };
     const chart = mount(<SankeyDiagram {...props} />);
     const svg = chart.find("svg");
@@ -137,7 +146,7 @@ describe("SankeyDiagram", () => {
   it("uses shouldClone prop to determine whether to clone or mutate nodes/links data", () => {
     const dataToClone = getSampleData();
     const cloneProps = {
-        ...dataToClone,
+      ...dataToClone,
       width: 600,
       height: 400,
       shouldClone: true
@@ -178,13 +187,20 @@ describe("SankeyDiagram", () => {
     sankeyNodes.forEach((node, i) => {
       const nodeProps = node.props();
       expect(nodeProps.node).to.be.an("object");
-      const sourceLinks = sampleData.links.filter(link => link.source === nodeProps.node.id);
-      const targetLinks = sampleData.links.filter(link => link.target === nodeProps.node.id);
+      const sourceLinks = sampleData.links.filter(
+        link => link.source === nodeProps.node.id
+      );
+      const targetLinks = sampleData.links.filter(
+        link => link.target === nodeProps.node.id
+      );
       expect(nodeProps.node.sourceLinks).to.be.an("array");
       expect(nodeProps.node.sourceLinks).to.have.length(sourceLinks.length);
       expect(nodeProps.node.targetLinks).to.be.an("array");
       expect(nodeProps.node.targetLinks).to.have.length(targetLinks.length);
-      const expectedNodeValue = Math.max(_.sumBy(sourceLinks, l => l.value), _.sumBy(targetLinks, l => l.value));
+      const expectedNodeValue = Math.max(
+        _.sumBy(sourceLinks, l => l.value),
+        _.sumBy(targetLinks, l => l.value)
+      );
       expect(nodeProps.node.value).to.equal(expectedNodeValue);
       expect(nodeProps.node.x0).to.be.finite;
       expect(nodeProps.node.x1).to.be.finite;
@@ -217,7 +233,7 @@ describe("SankeyDiagram", () => {
   });
 
   it("uses showNodes boolean or accessor prop to determine whether to render nodes", () => {
-    const size = {width: 600, height: 400};
+    const size = { width: 600, height: 400 };
     const showNodesProps = {
       ...size,
       ...getSampleData(),
@@ -244,7 +260,7 @@ describe("SankeyDiagram", () => {
   });
 
   it("uses showLinks boolean or accessor prop to determine whether to render links", () => {
-    const size = {width: 600, height: 400};
+    const size = { width: 600, height: 400 };
     const showLinksProps = {
       ...size,
       ...getSampleData(),
@@ -303,8 +319,12 @@ describe("SankeyDiagram", () => {
     const chart = mount(<SankeyDiagram {...props} />);
     const sankeyNodes = chart.find(SankeyNode);
     expect(sankeyNodes).to.have.length(5);
-    expect(sankeyNodes.at(1).props().node.y0 - sankeyNodes.at(0).props().node.y1).to.equal(37);
-    expect(sankeyNodes.at(3).props().node.y0 - sankeyNodes.at(2).props().node.y1).to.equal(37);
+    expect(
+      sankeyNodes.at(1).props().node.y0 - sankeyNodes.at(0).props().node.y1
+    ).to.equal(37);
+    expect(
+      sankeyNodes.at(3).props().node.y0 - sankeyNodes.at(2).props().node.y1
+    ).to.equal(37);
   });
 
   // todo: test nodeAlignment? how?
@@ -315,7 +335,7 @@ describe("SankeyDiagram", () => {
       width: 600,
       height: 400,
       nodeClassName: "doggo",
-      nodeStyle: {fill: "orange"},
+      nodeStyle: { fill: "orange" },
       onMouseEnterNode: sinon.spy(),
       onMouseLeaveNode: sinon.spy(),
       onMouseMoveNode: sinon.spy(),
@@ -347,7 +367,7 @@ describe("SankeyDiagram", () => {
       width: 600,
       height: 400,
       linkClassName: "kitten",
-      linkStyle: {fill: "tomato"},
+      linkStyle: { fill: "tomato" },
       onMouseEnterLink: sinon.spy(),
       onMouseLeaveLink: sinon.spy(),
       onMouseMoveLink: sinon.spy(),
@@ -374,13 +394,15 @@ describe("SankeyDiagram", () => {
   });
 
   it("uses showNodeLabels boolean or accessor prop to determine whether to render node labels", () => {
-    const size = {width: 600, height: 400};
+    const size = { width: 600, height: 400 };
     const showNodeLabelsProps = {
       ...size,
       ...getSampleData(),
       showNodeLabels: true
     };
-    const showNodeLabelsChart = mount(<SankeyDiagram {...showNodeLabelsProps} />);
+    const showNodeLabelsChart = mount(
+      <SankeyDiagram {...showNodeLabelsProps} />
+    );
     expect(showNodeLabelsChart.find(SankeyNodeLabel)).to.have.length(5);
 
     const hideNodeLabelsProps = {
@@ -388,7 +410,9 @@ describe("SankeyDiagram", () => {
       ...getSampleData(),
       showNodeLabels: false
     };
-    const hideNodeLabelsChart = mount(<SankeyDiagram {...hideNodeLabelsProps} />);
+    const hideNodeLabelsChart = mount(
+      <SankeyDiagram {...hideNodeLabelsProps} />
+    );
     expect(hideNodeLabelsChart.find(SankeyNodeLabel)).to.have.length(0);
 
     const showSomeNodeLabelsProps = {
@@ -396,18 +420,22 @@ describe("SankeyDiagram", () => {
       ...getSampleData(),
       showNodeLabels: node => node.index < 3
     };
-    const showSomeNodeLabelsChart = mount(<SankeyDiagram {...showSomeNodeLabelsProps} />);
+    const showSomeNodeLabelsChart = mount(
+      <SankeyDiagram {...showSomeNodeLabelsProps} />
+    );
     expect(showSomeNodeLabelsChart.find(SankeyNodeLabel)).to.have.length(3);
   });
 
   it("uses showLinkLabels boolean or accessor prop to determine whether to render link labels", () => {
-    const size = {width: 600, height: 400};
+    const size = { width: 600, height: 400 };
     const showLinkLabelsProps = {
       ...size,
       ...getSampleData(),
       showLinkLabels: true
     };
-    const showLinkLabelsChart = mount(<SankeyDiagram {...showLinkLabelsProps} />);
+    const showLinkLabelsChart = mount(
+      <SankeyDiagram {...showLinkLabelsProps} />
+    );
     expect(showLinkLabelsChart.find(SankeyLinkLabel)).to.have.length(6);
 
     const hideLinkLabelsProps = {
@@ -415,7 +443,9 @@ describe("SankeyDiagram", () => {
       ...getSampleData(),
       showLinkLabels: false
     };
-    const hideLinkLabelsChart = mount(<SankeyDiagram {...hideLinkLabelsProps} />);
+    const hideLinkLabelsChart = mount(
+      <SankeyDiagram {...hideLinkLabelsProps} />
+    );
     expect(hideLinkLabelsChart.find(SankeyLinkLabel)).to.have.length(0);
 
     const showSomeLinkLabelsProps = {
@@ -423,7 +453,9 @@ describe("SankeyDiagram", () => {
       ...getSampleData(),
       showLinkLabels: (link, graph) => link.target.index === 2
     };
-    const showSomeLinkLabelsChart = mount(<SankeyDiagram {...showSomeLinkLabelsProps} />);
+    const showSomeLinkLabelsChart = mount(
+      <SankeyDiagram {...showSomeLinkLabelsProps} />
+    );
     expect(showSomeLinkLabelsChart.find(SankeyLinkLabel)).to.have.length(2);
   });
 
@@ -436,7 +468,7 @@ describe("SankeyDiagram", () => {
       y1: 100
     };
     it("renders a rectangle with the position & size of the current node", () => {
-      const node = mount(<SankeyNode {...{node: basicNodeObj}} />);
+      const node = mount(<SankeyNode {...{ node: basicNodeObj }} />);
       const rect = node.find("rect");
       expect(rect).to.have.length(1);
       expect(rect.props().x).to.equal(30);
@@ -447,8 +479,12 @@ describe("SankeyDiagram", () => {
     });
     it("passes nodeClassName and nodeStyle through to the node rectangle element", () => {
       const className = "foo-bar-node";
-      const style = {fill: "coral"};
-      const nodeProps = {node: basicNodeObj, nodeClassName: className, nodeStyle: style};
+      const style = { fill: "coral" };
+      const nodeProps = {
+        node: basicNodeObj,
+        nodeClassName: className,
+        nodeStyle: style
+      };
       const node = mount(<SankeyNode {...nodeProps} />);
       const rect = node.find("rect");
       expect(rect.props().className).to.contain(className);
@@ -457,8 +493,12 @@ describe("SankeyDiagram", () => {
     });
     it("calls nodeClassName & nodeStyle to get class & style, if they are functions", () => {
       const className = (node, graph) => `i-${node.index}-x0-${node.x0}`;
-      const style = (node, graph) => ({strokeWidth: `${node.x1}px`});
-      const nodeProps = {node: basicNodeObj, nodeClassName: className, nodeStyle: style};
+      const style = (node, graph) => ({ strokeWidth: `${node.x1}px` });
+      const nodeProps = {
+        node: basicNodeObj,
+        nodeClassName: className,
+        nodeStyle: style
+      };
       const node = mount(<SankeyNode {...nodeProps} />);
       const rect = node.find("rect");
       expect(rect.props().className).to.contain("i-5-x0-30");
@@ -468,7 +508,7 @@ describe("SankeyDiagram", () => {
     it("attaches mouse event handlers (enter, leave, move, down, up, click) to the node rectangle", () => {
       const nodeProps = {
         node: basicNodeObj,
-        graph: {nodes: [], links: []},
+        graph: { nodes: [], links: [] },
         onMouseEnterNode: sinon.spy(),
         onMouseLeaveNode: sinon.spy(),
         onMouseMoveNode: sinon.spy(),
@@ -520,9 +560,9 @@ describe("SankeyDiagram", () => {
 
   describe("SankeyLink", () => {
     const linkPath = "M10 10";
-    const linkObj = {width: 20};
+    const linkObj = { width: 20 };
     it("renders a link path", () => {
-      const link = mount(<SankeyLink {...{link: linkObj, linkPath}} />);
+      const link = mount(<SankeyLink {...{ link: linkObj, linkPath }} />);
       const path = link.find("path");
       expect(path).to.have.length(1);
       expect(path.props().d).to.equal(linkPath);
@@ -531,8 +571,12 @@ describe("SankeyDiagram", () => {
     });
     it("passes linkClassName and linkStyle through to the path element", () => {
       const linkClassName = "foo-bar-link";
-      const linkStyle = {fill: "thistle"};
-      const link = mount(<SankeyLink {...{link: linkObj, linkPath, linkClassName, linkStyle}} />);
+      const linkStyle = { fill: "thistle" };
+      const link = mount(
+        <SankeyLink
+          {...{ link: linkObj, linkPath, linkClassName, linkStyle }}
+        />
+      );
       const path = link.find("path");
       expect(path.props().className).to.contain(linkClassName);
       expect(path.props().style).to.be.an("object");
@@ -540,8 +584,8 @@ describe("SankeyDiagram", () => {
     });
     it("calls linkClassName & linkStyle to get class & style, if they are functions", () => {
       const linkClassName = (link, graph) => `w-${link.width}`;
-      const linkStyle = (link, graph) => ({borderWidth: link.width});
-      const linkProps = {link: linkObj, linkClassName, linkStyle};
+      const linkStyle = (link, graph) => ({ borderWidth: link.width });
+      const linkProps = { link: linkObj, linkClassName, linkStyle };
       const link = mount(<SankeyLink {...linkProps} />);
       const path = link.find("path");
       expect(path.props().className).to.contain("w-20");
@@ -551,7 +595,7 @@ describe("SankeyDiagram", () => {
     it("attaches mouse event handlers (enter, leave, move, down, up, click) to the link path", () => {
       const linkProps = {
         link: linkObj,
-        graph: {nodes: [], links: []},
+        graph: { nodes: [], links: [] },
         onMouseEnterLink: sinon.spy(),
         onMouseLeaveLink: sinon.spy(),
         onMouseMoveLink: sinon.spy(),
@@ -611,7 +655,11 @@ describe("SankeyDiagram", () => {
       name: "Sour Lemons"
     };
     it("renders a node label in a <text> element", () => {
-      const label = mount(<SankeyNodeLabel {...{node: basicNodeObj, nodeLabelText: () => "ok"}} />);
+      const label = mount(
+        <SankeyNodeLabel
+          {...{ node: basicNodeObj, nodeLabelText: () => "ok" }}
+        />
+      );
       const text = label.find("text");
       expect(text).to.have.length(1);
       expect(text.props().x).to.be.finite;
@@ -648,7 +696,9 @@ describe("SankeyDiagram", () => {
         <SankeyNodeLabel
           {...{
             node: basicNodeObj,
-            nodeLabelText: node => <rect x={node.x0} y={node.y0} width={50} height={20} />
+            nodeLabelText: node => (
+              <rect x={node.x0} y={node.y0} width={50} height={20} />
+            )
           }}
         />
       );
@@ -659,10 +709,17 @@ describe("SankeyDiagram", () => {
 
     it("passes nodeLabelClassName and nodeLabelStyle through to the text element", () => {
       const nodeLabelClassName = "my-fun-node-label";
-      const nodeLabelStyle = {fill: "salmon"};
+      const nodeLabelStyle = { fill: "salmon" };
       const nodeLabelText = node => node.name;
       const label = mount(
-        <SankeyNodeLabel {...{node: basicNodeObj, nodeLabelText, nodeLabelClassName, nodeLabelStyle}} />
+        <SankeyNodeLabel
+          {...{
+            node: basicNodeObj,
+            nodeLabelText,
+            nodeLabelClassName,
+            nodeLabelStyle
+          }}
+        />
       );
       const text = label.find("text");
       expect(text).to.have.length(1);
@@ -672,10 +729,19 @@ describe("SankeyDiagram", () => {
     });
     it("calls nodeLabelClassName & nodeLabelStyle to get class & style, if they are functions", () => {
       const nodeLabelClassName = node => `node-label-${node.id}`;
-      const nodeLabelStyle = node => ({fill: node.id === "lemons" ? "orange" : "purple"});
+      const nodeLabelStyle = node => ({
+        fill: node.id === "lemons" ? "orange" : "purple"
+      });
       const nodeLabelText = node => node.name;
       const label = mount(
-        <SankeyNodeLabel {...{node: basicNodeObj, nodeLabelText, nodeLabelClassName, nodeLabelStyle}} />
+        <SankeyNodeLabel
+          {...{
+            node: basicNodeObj,
+            nodeLabelText,
+            nodeLabelClassName,
+            nodeLabelStyle
+          }}
+        />
       );
       const text = label.find("text");
       expect(text).to.have.length(1);
@@ -685,71 +751,112 @@ describe("SankeyDiagram", () => {
     });
     it("uses nodeLabelPlacement to determine the label's position", () => {
       const nodeLabelText = node => node.name;
-      const commonProps = {node: basicNodeObj, nodeLabelText};
+      const commonProps = { node: basicNodeObj, nodeLabelText };
 
-      const labelBefore = mount(<SankeyNodeLabel {...{...commonProps, nodeLabelPlacement: "before"}} />);
+      const labelBefore = mount(
+        <SankeyNodeLabel
+          {...{ ...commonProps, nodeLabelPlacement: "before" }}
+        />
+      );
       const labelBeforeText = labelBefore.find("text");
       expect(labelBeforeText.props().x).to.be.at.most(30);
       expect(labelBeforeText.props().y).to.equal(70);
-      expect(labelBeforeText.props().style.alignmentBaseline).to.equal("middle");
+      expect(labelBeforeText.props().style.alignmentBaseline).to.equal(
+        "middle"
+      );
       expect(labelBeforeText.props().style.textAnchor).to.equal("end");
 
-      const labelAfter = mount(<SankeyNodeLabel {...{...commonProps, nodeLabelPlacement: "after"}} />);
+      const labelAfter = mount(
+        <SankeyNodeLabel {...{ ...commonProps, nodeLabelPlacement: "after" }} />
+      );
       const labelAfterText = labelAfter.find("text");
       expect(labelAfterText.props().x).to.be.at.least(50);
       expect(labelAfterText.props().y).to.equal(70);
       expect(labelAfterText.props().style.alignmentBaseline).to.equal("middle");
       expect(labelAfterText.props().style.textAnchor).to.equal("start");
 
-      const labelAbove = mount(<SankeyNodeLabel {...{...commonProps, nodeLabelPlacement: "above"}} />);
+      const labelAbove = mount(
+        <SankeyNodeLabel {...{ ...commonProps, nodeLabelPlacement: "above" }} />
+      );
       const labelAboveText = labelAbove.find("text");
       expect(labelAboveText.props().x).to.equal(40);
       expect(labelAboveText.props().y).to.be.at.most(40);
-      expect(labelAboveText.props().style.alignmentBaseline).to.equal("baseline");
+      expect(labelAboveText.props().style.alignmentBaseline).to.equal(
+        "baseline"
+      );
       expect(labelAboveText.props().style.textAnchor).to.equal("middle");
 
-      const labelBelow = mount(<SankeyNodeLabel {...{...commonProps, nodeLabelPlacement: "below"}} />);
+      const labelBelow = mount(
+        <SankeyNodeLabel {...{ ...commonProps, nodeLabelPlacement: "below" }} />
+      );
       const labelBelowText = labelBelow.find("text");
       expect(labelBelowText.props().x).to.equal(40);
       expect(labelBelowText.props().y).to.be.at.least(100);
-      expect(labelBelowText.props().style.alignmentBaseline).to.equal("hanging");
+      expect(labelBelowText.props().style.alignmentBaseline).to.equal(
+        "hanging"
+      );
       expect(labelBelowText.props().style.textAnchor).to.equal("middle");
 
-      const conditionalPlacement = node => (node.id === "lemons" ? "below" : "above");
+      const conditionalPlacement = node =>
+        node.id === "lemons" ? "below" : "above";
       const labelConditional = mount(
-        <SankeyNodeLabel {...{...commonProps, nodeLabelPlacement: conditionalPlacement}} />
+        <SankeyNodeLabel
+          {...{ ...commonProps, nodeLabelPlacement: conditionalPlacement }}
+        />
       );
       // should resolve to 'below', so use same tests as 'below'
       const labelConditionalText = labelConditional.find("text");
       expect(labelConditionalText.props().x).to.equal(40);
       expect(labelConditionalText.props().y).to.be.at.least(100);
-      expect(labelConditionalText.props().style.alignmentBaseline).to.equal("hanging");
+      expect(labelConditionalText.props().style.alignmentBaseline).to.equal(
+        "hanging"
+      );
       expect(labelConditionalText.props().style.textAnchor).to.equal("middle");
     });
     it("uses nodeLabelDistance to determine node label's distance from the node", () => {
       const nodeLabelText = node => node.name;
-      const commonProps = {node: basicNodeObj, nodeLabelText, nodeLabelDistance: 9};
+      const commonProps = {
+        node: basicNodeObj,
+        nodeLabelText,
+        nodeLabelDistance: 9
+      };
 
-      const labelBefore = mount(<SankeyNodeLabel {...{...commonProps, nodeLabelPlacement: "before"}} />);
+      const labelBefore = mount(
+        <SankeyNodeLabel
+          {...{ ...commonProps, nodeLabelPlacement: "before" }}
+        />
+      );
       const labelBeforeText = labelBefore.find("text");
       expect(labelBeforeText.props().x).to.equal(21);
 
-      const labelAfter = mount(<SankeyNodeLabel {...{...commonProps, nodeLabelPlacement: "after"}} />);
+      const labelAfter = mount(
+        <SankeyNodeLabel {...{ ...commonProps, nodeLabelPlacement: "after" }} />
+      );
       const labelAfterText = labelAfter.find("text");
       expect(labelAfterText.props().x).to.equal(59);
 
-      const labelAbove = mount(<SankeyNodeLabel {...{...commonProps, nodeLabelPlacement: "above"}} />);
+      const labelAbove = mount(
+        <SankeyNodeLabel {...{ ...commonProps, nodeLabelPlacement: "above" }} />
+      );
       const labelAboveText = labelAbove.find("text");
       expect(labelAboveText.props().y).to.equal(31);
 
-      const labelBelow = mount(<SankeyNodeLabel {...{...commonProps, nodeLabelPlacement: "below"}} />);
+      const labelBelow = mount(
+        <SankeyNodeLabel {...{ ...commonProps, nodeLabelPlacement: "below" }} />
+      );
       const labelBelowText = labelBelow.find("text");
       expect(labelBelowText.props().y).to.equal(109);
 
       const getDistance = node => 7;
 
       const labelDynamic = mount(
-        <SankeyNodeLabel {...{...commonProps, nodeLabelDistance: getDistance, nodeLabelPlacement: "below"}} />
+        <SankeyNodeLabel
+          {...{
+            ...commonProps,
+            nodeLabelDistance: getDistance,
+            nodeLabelPlacement: "below"
+          }}
+        />
       );
       const labelDynamicText = labelDynamic.find("text");
       expect(labelDynamicText.props().y).to.equal(107);
@@ -757,10 +864,14 @@ describe("SankeyDiagram", () => {
   });
 
   describe("SankeyLinkLabel", () => {
-    const basicLinkObj = {source: 2, target: 5, value: 99};
+    const basicLinkObj = { source: 2, target: 5, value: 99 };
 
     it("renders a link label", () => {
-      const props = {link: basicLinkObj, linkPathId: "myLinkPath", linkLabelText: () => "r2d2"};
+      const props = {
+        link: basicLinkObj,
+        linkPathId: "myLinkPath",
+        linkLabelText: () => "r2d2"
+      };
       const label = mount(<SankeyLinkLabel {...props} />);
       const text = label.find("text");
       expect(text).to.have.length(1);
@@ -775,8 +886,8 @@ describe("SankeyDiagram", () => {
         linkPathId: "myLinkPath",
         linkLabelText: () => "r2d2",
         linkLabelClassName: "link-zelda",
-        linkLabelStyle: {fill: "orange"},
-        linkLabelAttributes: {textAnchor: "end"}
+        linkLabelStyle: { fill: "orange" },
+        linkLabelAttributes: { textAnchor: "end" }
       };
       const label = mount(<SankeyLinkLabel {...props} />);
       const text = label.find("text");
@@ -791,9 +902,9 @@ describe("SankeyDiagram", () => {
         link: basicLinkObj,
         linkPathId: "myLinkPath",
         linkLabelText: () => "r2d2",
-        linkLabelClassName: (link) => `link-${link.source}-${link.target}`,
-        linkLabelStyle: () => ({fill: "thistle"}),
-        linkLabelAttributes: () => ({textAnchor: "start"})
+        linkLabelClassName: link => `link-${link.source}-${link.target}`,
+        linkLabelStyle: () => ({ fill: "thistle" }),
+        linkLabelAttributes: () => ({ textAnchor: "start" })
       };
       const label = mount(<SankeyLinkLabel {...props} />);
       const text = label.find("text");
@@ -808,15 +919,16 @@ describe("SankeyDiagram", () => {
         link: basicLinkObj,
         linkPathId: "myLinkPath",
         linkLabelText: () => "r2d2",
-        linkLabelStartOffset: '27%'
+        linkLabelStartOffset: "27%"
       };
       const label = mount(<SankeyLinkLabel {...props} />);
       const text = label.find("text");
       expect(text).to.have.length(1);
       const textPath = text.find("textPath");
       expect(textPath).to.have.length(1);
-      expect(textPath.props().startOffset).to.equal('27%');
+      expect(textPath.props().startOffset).to.equal("27%");
     });
   });
   // todo test terminals
+  // test their properties & rendered correctly
 });

@@ -107,20 +107,28 @@ class XYPlot extends React.Component {
      */
     xDomain: PropTypes.array,
     yDomain: PropTypes.array,
-    /**
-     * d3 scales for the X and Y axes of the chart, in {x, y} object format.
-     * (optional, normally determined automatically by XYPlot)
-     */
-    xScale: PropTypes.func,
-    yScale: PropTypes.func,
 
     xScaleType: PropTypes.string,
     yScaleType: PropTypes.string,
 
     /**
+     * Whether or not to invert the x and y scales
+     */
+    invertXScale: PropTypes.bool,
+    invertYScale: PropTypes.bool,
+
+    /**
+     * Whether or not to coerce 0 into your x domain
+     */
+    includeXZero: PropTypes.bool,
+    /**
+     * Whether or not to coerce 0 into your y domain
+     */
+    includeYZero: PropTypes.bool,
+
+    /**
      *
      */
-    margin: PropTypes.object,
     marginTop: PropTypes.number,
     marginBottom: PropTypes.number,
     marginLeft: PropTypes.number,
@@ -132,13 +140,11 @@ class XYPlot extends React.Component {
     spacingLeft: PropTypes.number,
     spacingRight: PropTypes.number,
 
-    paddingTop: PropTypes.number,
-    paddingBottom: PropTypes.number,
-    paddingLeft: PropTypes.number,
-    paddingRight: PropTypes.number,
-
-    invertXScale: PropTypes.bool,
-    invertYScale: PropTypes.bool,
+    // todo implement padding (helper for spacing)
+    // paddingTop: PropTypes.number,
+    // paddingBottom: PropTypes.number,
+    // paddingLeft: PropTypes.number,
+    // paddingRight: PropTypes.number,
 
     onMouseMove: PropTypes.func,
     onMouseEnter: PropTypes.func,
@@ -150,16 +156,10 @@ class XYPlot extends React.Component {
   static defaultProps = {
     width: 400,
     height: 250,
-    // invertScale: {x: false, y: false},
     invertXScale: false,
-    invertYScale: false
-    // emptyLabel: "Unknown",
-
-    // these values are inferred from data if not provided, therefore empty defaults
-    // scaleType: {},
-    // domain: {},
-    // margin: {},
-    //spacing: {top: 0, bottom: 0, left: 0, right: 0}
+    invertYScale: false,
+    includeXZero: false,
+    includeYZero: false
   };
 
   onXYMouseEvent = (callbackKey, event) => {
@@ -186,7 +186,10 @@ class XYPlot extends React.Component {
       spacingTop,
       spacingBottom,
       spacingLeft,
-      spacingRight
+      spacingRight,
+      // Passed in as prop from resolveXYScales
+      xScale,
+      yScale
     } = this.props;
     // subtract margin + spacing from width/height to obtain inner width/height of panel & chart area
     // panelSize is the area including chart + spacing but NOT margin
@@ -218,10 +221,15 @@ class XYPlot extends React.Component {
     const handlers = _.fromPairs(
       handlerNames.map(n => [n, methodIfFuncProp(n, this.props, this)])
     );
-
+    const scales = {
+      xScale,
+      yScale
+    };
+    const xyPlotPropKeys = _.keys(XYPlot.propTypes);
     const propsToPass = {
-      ..._.omit(this.props, ["children"]),
-      ...chartSize
+      ..._.pick(this.props, xyPlotPropKeys),
+      ...chartSize,
+      ...scales
     };
 
     return (

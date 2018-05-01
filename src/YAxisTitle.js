@@ -7,15 +7,40 @@ export default class YAxisTitle extends React.Component {
   static propTypes = {
     height: PropTypes.number,
     width: PropTypes.number,
+    /**
+     * Title distance from Y Axis
+     */
     distance: PropTypes.number,
+    /**
+     * Position of title in regards to the y axis. Accepted options are "left" or "right"
+     */
     position: PropTypes.oneOf(["left", "right"]),
     alignment: PropTypes.oneOf(["top", "middle", "bottom"]),
-    placement: PropTypes.oneOf(["before", "after"]),
+    /**
+     * Placement of title in regards to the x axis. Accepted options are "above" or "below"
+     */
+    placement: PropTypes.oneOf(["above", "below"]),
     rotate: PropTypes.bool,
+    /**
+     * Object declaring styles for label.
+     *
+     * Disclaimer: style will merge its defaults with the given style prop
+     * in order to ensure that our collision library measureText is able to calculate the
+     * smallest amount of possible collissions along the axis. It's therefore dependent on
+     * fontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized
+     * stylesheet, we suggest creating a styled title component that wraps YAxisTitle with your preferred styles.
+     */
     style: PropTypes.object,
+    /**
+     * Spacing - provided by XYPlot
+     */
     spacingLeft: PropTypes.number,
+    /**
+     * Spacing - provided by XYPlot
+     */
     spacingRight: PropTypes.number
   };
+
   static defaultProps = {
     height: 250,
     width: 400,

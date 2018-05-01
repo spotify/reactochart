@@ -93,6 +93,7 @@ export function getTickDomain(scale, { ticks, tickCount, nice } = {}) {
   const scaleType = inferScaleType(scale);
   // bug - d3 linearScale.copy().nice() modifies original scale, so we must create a new scale instead of copy()ing
   // todo replace this with d3-scale from d3 v4.0
+  // check if d3 still has this issue
   if (nice && scaleType !== "ordinal") {
     scale = initScale(scaleType)
       .domain(scale.domain())
@@ -113,6 +114,5 @@ export function scaleEqual(scaleA, scaleB) {
     ? scaleA === scaleB // safe fallback
     : // check scale equality
       _.isEqual(scaleA.domain(), scaleB.domain()) &&
-        _.isEqual(scaleA.range(), scaleB.range()) &&
-        _.isEqual(getScaleTicks(scaleA), getScaleTicks(scaleB)); // todo is this necessary?
+        _.isEqual(scaleA.range(), scaleB.range());
 }

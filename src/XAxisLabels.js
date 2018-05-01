@@ -81,7 +81,81 @@ function resolveXLabelsForValues(scale, values, formats, style, force = true) {
 
 class XAxisLabels extends React.Component {
   static propTypes = {
+    height: PropTypes.number,
+    /***
+     * Position of x axis labels. Accepted options are "top" or "bottom"
+     */
+    position: PropTypes.oneOf(["top", "bottom"]),
+    /**
+     * Placement of labels in regards to the x axis. Accepted options are "above" or "below"
+     */
+    placement: PropTypes.oneOf(["below", "above"]),
+    /**
+     * D3 scale for X axis - provided by XYPlot
+     */
     xScale: PropTypes.func,
+    /**
+     * Spacing - provided by XYPlot
+     */
+    spacingTop: PropTypes.number,
+    /**
+     * Spacing - provided by XYPlot
+     */
+    spacingBottom: PropTypes.number,
+    /**
+     * Label distance from X Axis
+     */
+    distance: PropTypes.number,
+    /**
+     * Number of ticks on axis
+     */
+    tickCount: PropTypes.number,
+    /**
+     * Custom ticks to display
+     */
+    ticks: PropTypes.array,
+    /**
+     * Object declaring styles for label.
+     *
+     * Disclaimer: labelStyle will merge its defaults with the given labelStyle prop
+     * in order to ensure that our collision library measureText is able to calculate the
+     * smallest amount of possible collissions along the axis. It's therefore dependent on
+     * fontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized
+     * stylesheet, we suggest creating a styled label component that wraps XAxisLabels with your preferred styles.
+     */
+    labelStyle: PropTypes.object,
+    labelClassName: PropTypes.string,
+    /**
+     * Format to use for the labels
+     *
+     * For example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit
+     */
+    format: PropTypes.string,
+    /**
+     * Formats to use for the labels in priority order. XAxisLabels will try to be smart about which format
+     * to use that keeps the labels distinct and provides the least amount of collisions when rendered.
+     *
+     * For example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit
+     */
+    formats: PropTypes.array,
+    /**
+     * Custom labels provided. Note that each object in the array has to be of shape
+     * `{
+     *  value,
+     *  text,
+     *  height,
+     *  width
+     * }`
+     * value - value you'd like this label to be aligned with
+     * text - text you'd like displayed
+     * height - height of the given label
+     * width - width of the given label
+     */
+    labels: PropTypes.array,
+    /**
+     * Round ticks to capture extent of given x Domain from XYPlot
+     */
+    nice: PropTypes.bool,
     // Label Handling
     onMouseEnterLabel: PropTypes.func,
     onMouseMoveLabel: PropTypes.func,
@@ -104,9 +178,7 @@ class XAxisLabels extends React.Component {
     },
     format: undefined,
     formats: undefined,
-    labels: undefined,
-    spacingTop: 0,
-    spacingBottom: 0
+    labels: undefined
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -192,7 +264,7 @@ class XAxisLabels extends React.Component {
     // doing this will require communicating the updated ticks/tickCount back to the parent element...
 
     const { labels } = resolveXLabelsForValues(xScale, ticks, formats, style);
-    // console.log('found labels', labels);
+
     return labels;
   }
 
@@ -219,6 +291,7 @@ class XAxisLabels extends React.Component {
         ? `translate(0, ${height + spacingBottom})`
         : `translate(0, ${-spacingTop})`;
     // todo: position: 'zero' to position along the zero line
+    // example include having both positive and negative areas and youd like labels just on zero line
 
     return (
       <g className="chart-value-labels-x" transform={transform}>
