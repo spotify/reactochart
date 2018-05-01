@@ -115,12 +115,27 @@
         "computed": false
       }
     },
-    "margin": {
+    "includeXZero": {
       "type": {
-        "name": "object"
+        "name": "bool"
       },
       "required": false,
-      "description": ""
+      "description": "Whether or not to coerce 0 into your x domain",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
+    },
+    "includeYZero": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "Whether or not to coerce 0 into your y domain",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
     },
     "marginTop": {
       "type": {

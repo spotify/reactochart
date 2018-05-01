@@ -72,7 +72,17 @@
     },
     "position": {
       "type": {
-        "name": "string"
+        "name": "enum",
+        "value": [
+          {
+            "value": "\"top\"",
+            "computed": false
+          },
+          {
+            "value": "\"bottom\"",
+            "computed": false
+          }
+        ]
       },
       "required": false,
       "description": "",
@@ -83,7 +93,17 @@
     },
     "placement": {
       "type": {
-        "name": "string"
+        "name": "enum",
+        "value": [
+          {
+            "value": "\"below\"",
+            "computed": false
+          },
+          {
+            "value": "\"above\"",
+            "computed": false
+          }
+        ]
       },
       "required": false,
       "description": "Placement of labels in regards to the x axis. Accepted options are \"above\" or \"below\"",
@@ -206,7 +226,7 @@
         "name": "bool"
       },
       "required": false,
-      "description": "Round ticks to capture extent of given x and y Domain",
+      "description": "Round ticks to capture extent of given x Domain from XYPlot",
       "defaultValue": {
         "value": "true",
         "computed": false
