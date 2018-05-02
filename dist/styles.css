@@ -1,0 +1,233 @@
+.chart-tick {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1px;
+}
+.chart-grid-line {
+  stroke: #b9b9b9;
+  stroke-width: 1px;
+}
+.line-chart,
+.xy-plot {
+  margin-right: 6px;
+}
+.line-chart .chart-background,
+.xy-plot .chart-background {
+  fill: none;
+}
+.line-chart .plot-background,
+.xy-plot .plot-background {
+  fill: #e0e0e0;
+}
+.line-chart *,
+.xy-plot * {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+.line-chart .chart-line,
+.xy-plot .chart-line {
+  fill: none;
+  stroke: #090909;
+  stroke-width: 1.5px;
+  stroke-linejoin: bevel;
+}
+.line-chart .chart-zero-line,
+.xy-plot .chart-zero-line {
+  stroke: #888;
+  stroke-width: 1.5px;
+}
+.line-chart .chart-axis-value-label,
+.xy-plot .chart-axis-value-label {
+  font-size: 8pt;
+}
+.line-chart .chart-axis-value-label-x,
+.xy-plot .chart-axis-value-label-x {
+  text-anchor: middle;
+}
+.line-chart .chart-axis-value-label-y,
+.xy-plot .chart-axis-value-label-y {
+  text-anchor: end;
+}
+.line-chart .chart-selected-range,
+.xy-plot .chart-selected-range {
+  fill: #eeeef6;
+}
+.line-chart .chart-axis-label,
+.xy-plot .chart-axis-label {
+  font-size: 16pt;
+  font-weight: bold;
+}
+.chart-bar,
+.chart-area-bar {
+  fill: steelblue;
+}
+.marker-line-chart line {
+  stroke: black;
+  stroke-width: 2px;
+}
+.pie-chart path {
+  stroke: none;
+}
+.pie-chart .pie-slice-0 {
+  fill: steelblue;
+}
+.pie-chart .pie-slice-1 {
+  fill: darkred;
+}
+.pie-chart .pie-slice-2 {
+  fill: orange;
+}
+.pie-chart .pie-slice-empty {
+  fill: #ddd;
+}
+.pie-chart .pie-label-center {
+  font-size: 26pt;
+}
+.pie-chart .marker-line {
+  stroke: black;
+  stroke-width: 2px;
+}
+path {
+  fill: none;
+  stroke: #0a0a0a;
+  stroke-width: 1.5px;
+  stroke-linejoin: bevel;
+}
+.chart-series-0 path {
+  stroke: steelblue;
+}
+.chart-series-1 path {
+  stroke: darkred;
+}
+.chart-series-2 path {
+  stroke: orange;
+}
+.area-chart .area-chart-path {
+  stroke-width: 0;
+  fill: steelblue;
+}
+.sankey-nodes .sankey-node {
+  fill: #000;
+}
+.sankey-links .sankey-link {
+  stroke: rgba(0, 0, 0, 0.16);
+}
+.sankey-node-label {
+  pointer-events: none;
+  font-size: 10pt;
+}
+.sankey-link-label {
+  pointer-events: none;
+  alignment-baseline: middle;
+  dominant-baseline: central;
+  font-size: 8.5pt;
+  color: #333;
+}
+.sankey-node-terminal {
+  fill: steelblue;
+}
+.sidebar-nav h1,
+.sidebar-nav h2,
+.sidebar-nav h3,
+.sidebar-nav h4,
+.sidebar-nav h5,
+.sidebar-nav h6 {
+  color: #f8f8f8;
+  text-transform: uppercase;
+}
+.sidebar-nav h3 {
+  font-size: 16px;
+}
+.sidebar-nav h4 {
+  font-size: 14px;
+}
+.example {
+  margin-bottom: 2em;
+}
+.component-docs {
+  padding: 0 30px;
+}
+.prop-docs {
+  background-color: #EFEFEF;
+  padding: 15px;
+}
+.prop-docs .prop-description,
+.prop-docs .prop-default {
+  display: block;
+  margin-left: 2em;
+  font-size: 0.85em;
+}
+.example-section {
+  display: inline-block;
+  margin: 10px;
+}
+.example-section.example-section-visible {
+  display: block;
+}
+.example-section .example-section-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 20pt;
+  font-weight: bold;
+  background: #cccccc;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.example-section .example-section-button .example-arrow {
+  color: #888;
+}
+.example-section .example-section-button.active {
+  background-color: #4cba6f;
+}
+.example-section .example-section-button.active .example-arrow {
+  color: #0f0f0f;
+}
+.example-section .example-section-content {
+  margin: 10px 20px;
+}
+.playground {
+  display: flex;
+  flex-wrap: wrap;
+}
+.playground .playgroundCode,
+.playground .playgroundPreview {
+  border: 1px solid #efefef;
+  border-radius: 3px;
+  flex-basis: 150px;
+}
+.playground .playgroundCode:before,
+.playground .playgroundPreview:before {
+  display: block;
+  text-align: center;
+  color: #616467;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #efefef;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+  line-height: 28px;
+}
+.playground .playgroundCode {
+  margin-right: 8px;
+  flex-grow: .6;
+}
+.playground .playgroundCode:before {
+  content: "Editable Source";
+}
+.playground .playgroundCode .CodeMirror {
+  font-size: 10pt;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+.playground .playgroundPreview {
+  margin-left: 8px;
+  flex-grow: .4;
+}
+.playground .playgroundPreview:before {
+  content: "Live Preview";
+}
+.playground .playgroundPreview .previewArea {
+  padding: 8px 6px;
+}
+
+/*# sourceMappingURL=styles.css.map*/
