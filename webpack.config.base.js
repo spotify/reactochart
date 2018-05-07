@@ -1,22 +1,20 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlPlugin = require('html-webpack-plugin');
-var CopyPlugin = require('copy-webpack-plugin');
+const path = require("path");
+const webpack = require("webpack");
+const HtmlPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   context: __dirname,
-  entry: [
-    './docs/src/main.js'
-  ],
+  entry: ["./docs/src/main.js"],
   output: {
-    path: path.join(__dirname, 'docs/build'),
-    filename: 'bundle.[hash].js',
+    path: path.join(__dirname, "docs/build"),
+    filename: "bundle.[hash].js"
   },
   devServer: {
     port: 9876,
-    contentBase: path.join(__dirname, "docs/build"),
+    contentBase: path.join(__dirname, "docs/build")
   },
-  devtool: 'source-map',
+  devtool: "source-map",
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlPlugin({
@@ -25,29 +23,31 @@ module.exports = {
       title: "Reactochart Docs",
       template: "docs/src/index_html.ejs"
     }),
-    new CopyPlugin([{from: path.join(__dirname, 'docs/assets'), to: 'assets'}])
+    new CopyPlugin([
+      { from: path.join(__dirname, "docs/assets"), to: "assets" }
+    ])
   ],
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: [".js", ".jsx"]
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [{loader: 'babel-loader'}]
+        use: [{ loader: "babel-loader" }]
       },
       {
         test: /\.less?$/,
         use: [
-          {loader: 'style-loader'},
-          {loader: 'css-loader'},
-          {loader: 'less-loader'}
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          { loader: "less-loader" }
         ]
       },
       {
         test: /\.json$/,
-        use: [{loader: 'json-loader'}]
+        use: [{ loader: "json-loader" }]
       }
     ]
   }

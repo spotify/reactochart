@@ -43,10 +43,6 @@ export { default as resolveXYScales } from "./utils/resolveXYScales";
 // Containers
 export { default as ZoomContainer } from "./ZoomContainer";
 
-import * as Data from "./utils/Data";
-export const utils = { Data };
-// export {utils};
-
 // ### Utilities
 // * Data
 // * Scale
@@ -54,3 +50,5 @@ export const utils = { Data };
 // * Label
 // * Margin
 // * depthEqual
+import * as Data from "./utils/Data";
+export const utils = { Data };
