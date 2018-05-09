@@ -59,7 +59,7 @@ Charting library for React
 If you just want to run the examples locally:
 
 1.  Clone this repo and `cd` to the newly-created directory
-2.  Run `npm serve` in your terminal
+2.  Run `npm run serve` in your terminal (note: if you're running Python in v3 or higher you'll need to run `python -m http.server`)
 3.  Go to [http://localhost:8000](http://localhost:8000)
 
 # Development
