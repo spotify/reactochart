@@ -127,6 +127,7 @@ export default function resolveXYScales(ComposedComponent) {
     static getSpacing = ComposedComponent.getSpacing;
     static getDomain = ComposedComponent.getDomain;
     static getMargin = ComposedComponent.getMargin;
+    static defaultProps = ComposedComponent.defaultProps;
 
     _resolveScaleType(props, Component) {
       let { xScaleType, yScaleType } = props;
@@ -318,11 +319,7 @@ export default function resolveXYScales(ComposedComponent) {
         }
       }
 
-      if (!isDone()) {
-        console.warn(
-          `resolveXYScales was unable to resolve both domains. xDomain: ${xDomain}, yDomain: ${yDomain}`
-        );
-      } else {
+      if (isDone()) {
         if (includeXZero && !_.inRange(0, ...xDomain)) {
           // If both are negative set max of domain to 0
           if (xDomain[0] < 0 && xDomain[1] < 0) {
@@ -341,6 +338,13 @@ export default function resolveXYScales(ComposedComponent) {
           }
         }
       }
+
+      // TODO handle resolveXYScales not calculating the domain
+      // Because this is recursive on its children it will log this warn for children missing domain
+      // even though it is later inferred by parent later during the recursion
+      // if (!isDone()) {
+      //   console.warn(`resolveXYScales was unable to resolve both domains. xDomain: ${xDomain}, yDomain: ${yDomain}`);
+      // }
 
       return { xDomain, yDomain };
     }
