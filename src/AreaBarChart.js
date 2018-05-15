@@ -161,13 +161,13 @@ export default class AreaBarChart extends React.Component {
               {...{
                 xScale,
                 yScale,
-                className: `chart-area-bar ${getValue(barClassName, d, i)}`,
+                className: `rct-chart-area-bar ${getValue(barClassName, d, i)}`,
                 style: getValue(barStyle, d, i),
                 x: horizontal ? 0 : getValue(x, d, i),
                 xEnd: horizontal ? getValue(x, d, i) : getValue(xEnd, d, i),
                 y: !horizontal ? 0 : getValue(y, d, i),
                 yEnd: !horizontal ? getValue(y, d, i) : getValue(yEnd, d, i),
-                key: `chart-area-bar-${i}`,
+                key: `rct-chart-area-bar-${i}`,
                 onMouseEnter,
                 onMouseMove,
                 onMouseLeave
