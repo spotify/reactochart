@@ -20,26 +20,29 @@ export default class AreaHeatmap extends React.Component {
     yEnd: CustomPropTypes.valueOrAccessor,
     area: CustomPropTypes.valueOrAccessor,
     unitsPerPixel: PropTypes.number,
-    rectClassName: PropTypes.string,
-    rectStyle: PropTypes.object,
+    /**
+     * Class attribute to be applied to each rect
+     * or accessor function which returns a class
+     */
+    rectClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    /**
+     * Inline style object to be applied to each rect,
+     * or accessor function which returns a style object.
+     */
+    rectStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /**
      * D3 scale for X axis - provided by XYPlot
      */
-    xScale: PropTypes.func,
-    /**
+    xScale: PropTypes.func /**
      * D3 scale for Y axis - provided by XYPlot
-     */
+     */,
     yScale: PropTypes.func
   };
-  static defaultProps = {
-    rectClassName: "",
-    rectStyle: {}
-  };
+  static defaultProps = { rectClassName: "", rectStyle: {} };
 
   static getDomain(props) {
     const { data, x, xEnd, y, yEnd } = props;
     return {
-      // x: extent(_.flatten([data.map(makeAccessor(getX)), data.map(makeAccessor(getXEnd))])),
       x: extent(
         _.flatten([data.map(makeAccessor2(x)), data.map(makeAccessor2(xEnd))])
       ),
@@ -57,9 +60,11 @@ export default class AreaHeatmap extends React.Component {
   onMouseEnter = e => {
     this.props.onMouseEnter(e);
   };
+
   onMouseLeave = e => {
     this.props.onMouseLeave(e);
   };
+
   onMouseMove = e => {
     const { xScale, yScale, onMouseMove } = this.props;
     if (!_.isFunction(onMouseMove)) return;
@@ -123,7 +128,7 @@ export default class AreaHeatmap extends React.Component {
     };
 
     return (
-      <g className="area-heatmap-chart" {...handlers}>
+      <g className="rct-area-heatmap-chart" {...handlers}>
         <rect
           x="0"
           y="0"
@@ -164,7 +169,7 @@ export default class AreaHeatmap extends React.Component {
 
           if (!_.every([rectX, rectY, width, height], _.isFinite)) return null;
 
-          const className = `area-heatmap-rect ${getValue(
+          const className = `rct-area-heatmap-rect ${getValue(
             rectClassName,
             d,
             i
