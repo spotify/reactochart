@@ -37,6 +37,10 @@ export default class AreaChart extends React.Component {
      */
     yEnd: CustomPropTypes.valueOrAccessor,
     /**
+     * classname applied to area path element
+     */
+    pathClassName: PropTypes.string,
+    /**
      * style applied to area path element
      */
     pathStyle: PropTypes.object,
@@ -78,6 +82,7 @@ export default class AreaChart extends React.Component {
      */
     yScaleType: PropTypes.string
   };
+
   static defaultProps = {
     shouldShowGaps: true,
     isDefined: (d, i, accessors) => {
@@ -85,7 +90,8 @@ export default class AreaChart extends React.Component {
         !_.isUndefined(accessors.y(d, i)) &&
         !_.isUndefined(accessors.yEnd(d, i))
       );
-    }
+    },
+    pathClassName: ""
   };
 
   static getDomain(props) {
@@ -127,6 +133,7 @@ export default class AreaChart extends React.Component {
       pathStylePositive,
       pathStyleNegative,
       shouldShowGaps,
+      pathClassName,
       isDefined
     } = this.props;
     const accessors = {
@@ -166,7 +173,7 @@ export default class AreaChart extends React.Component {
       const pathStyleBelow = pathStyleNegative || pathStyle || {};
 
       return (
-        <g className={`${name} area-chart`}>
+        <g className={`${name} rct-area-chart`}>
           <clipPath id={clipAboveId}>
             <path d={clipAbovePathStr} />
           </clipPath>
@@ -174,13 +181,13 @@ export default class AreaChart extends React.Component {
             <path d={clipBelowPathStr} />
           </clipPath>
           <path
-            className="area-chart-path"
+            className="rct-area-chart-path"
             d={areaPathStr}
             clipPath={`url(#${clipAboveId})`}
             style={pathStyleAbove}
           />
           <path
-            className="area-chart-path"
+            className="rct-area-chart-path"
             d={areaPathStr}
             clipPath={`url(#${clipBelowId})`}
             style={pathStyleBelow}
@@ -189,9 +196,9 @@ export default class AreaChart extends React.Component {
       );
     } else {
       return (
-        <g className={`${name} area-chart`}>
+        <g className={`${name} rct-area-chart`}>
           <path
-            className="area-chart-path"
+            className={`rct-area-chart-path ${pathClassName}`}
             d={areaPathStr}
             style={pathStyle || {}}
           />
