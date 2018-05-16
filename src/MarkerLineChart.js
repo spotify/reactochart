@@ -7,6 +7,7 @@ import * as CustomPropTypes from "./utils/CustomPropTypes";
 import { dataTypeFromScaleType } from "./utils/Scale";
 import {
   makeAccessor2,
+  getValue,
   domainFromRangeData,
   domainFromData,
   getDataDomainByAxis
@@ -59,6 +60,16 @@ export default class MarkerLineChart extends React.Component {
     yScaleType: PropTypes.string,
     xScale: PropTypes.func,
     yScale: PropTypes.func,
+    /**
+     * Class attribute to be applied to the line path,
+     * or accessor function which returns a class.
+     */
+    lineClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    /**
+     * Inline style object to be applied to each marker line,
+     * or accessor function which returns a style object.
+     */
+    lineStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 
     onMouseEnterLine: PropTypes.func,
     onMouseMoveLine: PropTypes.func,
@@ -66,7 +77,9 @@ export default class MarkerLineChart extends React.Component {
   };
   static defaultProps = {
     horizontal: false,
-    lineLength: 10
+    lineLength: 10,
+    lineClassName: "",
+    lineStyle: {}
   };
 
   static getSpacing(props) {
@@ -190,17 +203,6 @@ export default class MarkerLineChart extends React.Component {
     this.props.onMouseLeaveLine(e, d);
   };
 
-  render() {
-    const tickType = getTickType(this.props);
-    return (
-      <g className="marker-line-chart">
-        {tickType === "RangeValue"
-          ? this.props.data.map(this.renderRangeValueLine)
-          : this.props.data.map(this.renderValueValueLine)}
-      </g>
-    );
-  }
-
   renderRangeValueLine = (d, i) => {
     const [onMouseEnter, onMouseMove, onMouseLeave] = [
       "onMouseEnterLine",
@@ -212,7 +214,17 @@ export default class MarkerLineChart extends React.Component {
       return _.isFunction(callback) ? _.partial(callback, _, d) : null;
     });
 
-    const { x, xEnd, y, yEnd, horizontal, xScale, yScale } = this.props;
+    const {
+      x,
+      xEnd,
+      y,
+      yEnd,
+      horizontal,
+      xScale,
+      yScale,
+      lineClassName,
+      lineStyle
+    } = this.props;
     const xVal = xScale(makeAccessor2(x)(d));
     const yVal = yScale(makeAccessor2(y)(d));
     const xEndVal = _.isUndefined(xEnd) ? 0 : xScale(makeAccessor2(xEnd)(d));
@@ -225,7 +237,8 @@ export default class MarkerLineChart extends React.Component {
     if (!_.every([x1, x2, y1, y2], _.isFinite)) return null;
     return (
       <line
-        className="marker-line"
+        className={`${getValue(lineClassName, d, i)}`}
+        style={getValue(lineStyle, d, i)}
         {...{ x1, x2, y1, y2, key, onMouseEnter, onMouseMove, onMouseLeave }}
       />
     );
@@ -242,7 +255,16 @@ export default class MarkerLineChart extends React.Component {
       return _.isFunction(callback) ? _.partial(callback, _, d) : null;
     });
 
-    const { x, y, horizontal, lineLength, xScale, yScale } = this.props;
+    const {
+      x,
+      y,
+      horizontal,
+      lineLength,
+      xScale,
+      yScale,
+      lineClassName,
+      lineStyle
+    } = this.props;
     const xVal = xScale(makeAccessor2(x)(d));
     const yVal = yScale(makeAccessor2(y)(d));
     const x1 = !horizontal ? xVal - lineLength / 2 : xVal;
@@ -254,9 +276,21 @@ export default class MarkerLineChart extends React.Component {
     if (!_.every([x1, x2, y1, y2], _.isFinite)) return null;
     return (
       <line
-        className="marker-line"
+        className={`${getValue(lineClassName, d, i)}`}
+        style={getValue(lineStyle, d, i)}
         {...{ x1, x2, y1, y2, key, onMouseEnter, onMouseMove, onMouseLeave }}
       />
     );
   };
+
+  render() {
+    const tickType = getTickType(this.props);
+    return (
+      <g className="rct-marker-line-chart">
+        {tickType === "RangeValue"
+          ? this.props.data.map(this.renderRangeValueLine)
+          : this.props.data.map(this.renderValueValueLine)}
+      </g>
+    );
+  }
 }
