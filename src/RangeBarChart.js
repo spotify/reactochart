@@ -74,12 +74,12 @@ export default class RangeBarChart extends React.Component {
 
     /**
      * Inline style object to be applied to each bar,
-     * or accessor function which returns a style object;
+     * or accessor function which returns a style object.
      */
     barStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /**
-     * Class attribute to be applied to each bar.
-     * or accessor function which returns a class;
+     * Class attribute to be applied to each bar,
+     * or accessor function which returns a class.
      */
     barClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 
@@ -235,13 +235,12 @@ export default class RangeBarChart extends React.Component {
             onMouseMove,
             onMouseLeave,
             thickness: barThickness,
-            className: `chart-bar ${getValue(barClassName, d, i) || ""}`,
+            className: `rct-chart-bar ${getValue(barClassName, d, i) || ""}`,
             style: getValue(barStyle, d, i)
           };
 
           return <Bar {...barProps} />;
 
-          // console.log('xEnd yEnd value', getValue(xEnd, d), getValue(yEnd, d), horizontal);
           return horizontal ? (
             <Bar xEnd={getValue(xEnd, d, i)} {...barProps} />
           ) : (
