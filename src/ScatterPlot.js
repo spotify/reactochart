@@ -36,9 +36,16 @@ export default class ScatterPlot extends React.Component {
     pointSymbol: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     // manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered
     pointOffset: PropTypes.arrayOf(PropTypes.number),
-    // inline styles for points
-    pointStyle: PropTypes.object,
-    pointClassName: CustomPropTypes.getter,
+    /**
+     * Inline style object to be applied to each point,
+     * or accessor function which returns a style object.
+     */
+    pointStyle: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    /**
+     * Class attribute to be applied to each point,
+     * or accessor function which returns a class.
+     */
+    pointClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 
     onMouseEnterPoint: PropTypes.func,
     onMouseMovePoint: PropTypes.func,
@@ -95,7 +102,7 @@ export default class ScatterPlot extends React.Component {
       pointClassName
     } = this.props;
     let { pointSymbol } = this.props;
-    const className = `chart-scatterplot-point ${getValue(
+    const className = `rct-chart-scatterplot-point ${getValue(
       pointClassName,
       d,
       i
@@ -135,6 +142,7 @@ export default class ScatterPlot extends React.Component {
       _.assign(symbolProps, {
         x: cx,
         y: cy,
+        // TODO figure out why this translate is here
         style: { transform: "translate(-50%, -50%)", ...style }
       });
     }
