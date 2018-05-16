@@ -44,8 +44,7 @@ export default class YGrid extends React.Component {
       spacingRight
     } = this.props;
     const ticks = this.props.ticks || getScaleTicks(yScale, null, tickCount);
-    const className = `chart-grid-line chart-grid-line-y ${lineClassName ||
-      ""}`;
+    const className = `rct-chart-grid-line ${lineClassName || ""}`;
 
     return (
       <g className="chart-grid-y">

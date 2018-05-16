@@ -26,7 +26,7 @@ export default class XLine extends React.Component {
       spacingTop,
       spacingBottom
     } = this.props;
-    const className = `chart-line-x ${this.props.className}`;
+    const className = `rct-chart-line-x ${this.props.className}`;
     const lineX = xScale(value);
 
     return (

@@ -26,7 +26,7 @@ export default class YLine extends React.Component {
       spacingRight,
       style
     } = this.props;
-    const className = `chart-line-y ${this.props.className || ""}`;
+    const className = `rct-chart-line-y ${this.props.className || ""}`;
     const lineY = yScale(value);
 
     return (

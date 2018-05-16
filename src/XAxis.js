@@ -142,7 +142,7 @@ export default class XAxis extends React.Component {
     const axisLineWidth = width + spacingLeft + spacingRight;
 
     return (
-      <g className="chart-axis chart-axis-x">
+      <g className="rct-chart-axis rct-chart-axis-x">
         {showGrid ? <XGrid {...gridProps} /> : null}
 
         {showTicks ? <XTicks {...ticksProps} /> : null}
@@ -152,7 +152,7 @@ export default class XAxis extends React.Component {
         {showTitle ? <XAxisTitle {...titleProps} /> : null}
 
         <line
-          className="chart-axis-line chart-axis-line-x"
+          className="rct-chart-axis-line rct-chart-axis-line-x"
           x1={-spacingLeft}
           x2={width + spacingRight}
           y1={axisLineY}

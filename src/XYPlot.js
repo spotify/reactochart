@@ -150,7 +150,12 @@ class XYPlot extends React.Component {
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
     onMouseDown: PropTypes.func,
-    onMouseUp: PropTypes.func
+    onMouseUp: PropTypes.func,
+
+    /**
+     * Class attribute applied to xy plot
+     */
+    xyPlotClassName: PropTypes.string
   };
 
   static defaultProps = {
@@ -159,7 +164,8 @@ class XYPlot extends React.Component {
     invertXScale: false,
     invertYScale: false,
     includeXZero: false,
-    includeYZero: false
+    includeYZero: false,
+    xyPlotClassName: ""
   };
 
   onXYMouseEvent = (callbackKey, event) => {
@@ -187,6 +193,7 @@ class XYPlot extends React.Component {
       spacingBottom,
       spacingLeft,
       spacingRight,
+      xyPlotClassName,
       // Passed in as prop from resolveXYScales
       xScale,
       yScale
@@ -232,17 +239,19 @@ class XYPlot extends React.Component {
       ...scales
     };
 
+    const className = `rct-xy-plot ${this.props.xyPlotClassName}`;
+
     return (
-      <svg {...{ width, height, className: "xy-plot" }} {...handlers}>
-        <rect className="chart-background" {...{ width, height }} />
+      <svg {...{ width, height, className }} {...handlers}>
+        <rect className="rct-chart-background" {...{ width, height }} />
         <g
           transform={`translate(${marginLeft + spacingLeft}, ${marginTop +
             spacingTop})`}
-          className="chart-inner"
+          className="rct-chart-inner"
         >
           <rect
             transform={`translate(${-spacingLeft}, ${-spacingTop})`}
-            className="plot-background"
+            className="rct-plot-background"
             {...panelSize}
           />
           {React.Children.map(this.props.children, child => {
