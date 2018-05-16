@@ -6,14 +6,6 @@ import { methodIfFuncProp } from "./util.js";
 import { makeAccessor } from "./utils/Data";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
 
-const DEFAULT_PROPS = {
-  getValue: null,
-  margin: { top: 0, bottom: 0, left: 0, right: 0 },
-  markerLineClass: "marker-line",
-  markerLineOverhangInner: 2,
-  markerLineOverhangOuter: 2
-};
-
 // default height/width, used only if height & width & radius are all undefined
 const DEFAULT_SIZE = 150;
 
@@ -21,12 +13,16 @@ class PieChart extends React.Component {
   static propTypes = {
     // array of data to plot with pie chart
     data: PropTypes.array.isRequired,
-    // (optional) accessor for getting the values plotted on the pie chart
-    // if not provided, just uses the value itself at given index
+    /**
+     * Accessor for getting the values plotted on the pie chart.
+     * If not provided, just uses the value itself at given index.
+     */
     getValue: CustomPropTypes.getter,
-    // (optional) total expected sum of all the pie slice values
-    // if provided && slices don't add up to total, an "empty" slice will be rendered for the rest
-    // if not provided, will be the sum of all values (ie. all values will always add up to 100%)
+    /**
+     * Total expected sum of all the pie slice values.
+     * If provided && slices don't add up to total, an "empty" slice will be rendered for the rest
+     * If not provided, will be the sum of all values (ie. all values will always add up to 100%)
+     */
     total: PropTypes.number,
     // (optional) height and width of the SVG
     // if only one is passed, same # is used for both (ie. width=100 means height=100 also)
@@ -36,24 +32,51 @@ class PieChart extends React.Component {
     height: PropTypes.number,
     // (optional) main radius of the pie chart, inferred from margin/width/height if not provided
     radius: PropTypes.number,
-    // (optional) margins (between svg edges and pie circle), inferred from radius/width/height if not provided
-    // can either be a single number (to make all margins equal), or {top, bottom, left, right} object
-    margin: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+
+    marginTop: PropTypes.number,
+    marginBottom: PropTypes.number,
+    marginLeft: PropTypes.number,
+    marginRight: PropTypes.number,
     // (optional) radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
     holeRadius: PropTypes.number,
     // (optional) label text to display in the middle of the pie/donut
     centerLabel: PropTypes.string,
-
+    /**
+     * Value for where to place markerline
+     */
     markerLineValue: PropTypes.number,
-    markerLineClass: PropTypes.string,
+    /**
+     * Class attribute to be applied to marker line
+     */
+    markerLineClassName: PropTypes.string,
+    /**
+     * Inline style object to be applied to marker line
+     */
+    markerLineStyle: PropTypes.object,
+    /**
+     * Number of pixels marker line hangs inside the pie chart
+     */
     markerLineOverhangInner: PropTypes.number,
+    /**
+     * Number of pixels marker line hangs outside the pie chart
+     */
     markerLineOverhangOuter: PropTypes.number,
 
     onMouseEnterLine: PropTypes.func,
     onMouseMoveLine: PropTypes.func,
     onMouseLeaveLine: PropTypes.func
   };
-  static defaultProps = DEFAULT_PROPS;
+  static defaultProps = {
+    getValue: null,
+    markerLineClassName: "rct-marker-line",
+    markerLineOverhangInner: 2,
+    markerLineOverhangOuter: 2,
+    markerLineStyle: {},
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0
+  };
 
   onMouseEnterSlice = (e, d) => {
     this.props.onMouseEnterSlice(e, d);
@@ -76,39 +99,38 @@ class PieChart extends React.Component {
   };
 
   render() {
-    const margin = _.isNumber(this.props.margin)
-      ? {
-          top: this.props.margin,
-          bottom: this.props.margin,
-          left: this.props.margin,
-          right: this.props.margin
-        }
-      : _.defaults({}, this.props.margin, DEFAULT_PROPS.margin);
+    const {
+      marginLeft,
+      marginRight,
+      marginTop,
+      marginBottom,
+      holeRadius
+    } = this.props;
+
     // sizes fallback based on provided info: given dimension -> radius + margin -> other dimension -> default
     const width =
       this.props.width ||
       (this.props.radius
-        ? this.props.radius * 2 + margin.left + margin.right
+        ? this.props.radius * 2 + marginLeft + marginRight
         : this.props.height) ||
       DEFAULT_SIZE;
     const height =
       this.props.height ||
       (this.props.radius
-        ? this.props.radius * 2 + margin.top + margin.bottom
+        ? this.props.radius * 2 + marginTop + marginBottom
         : this.props.width) ||
       DEFAULT_SIZE;
     const radius =
       this.props.radius ||
       Math.min(
-        (width - (margin.left + margin.right)) / 2,
-        (height - (margin.top + margin.bottom)) / 2
+        (width - (marginLeft + marginRight)) / 2,
+        (height - (marginTop + marginBottom)) / 2
       );
-    const { holeRadius } = this.props;
-    const center = { x: margin.left + radius, y: margin.top + radius };
+    const center = { x: marginLeft + radius, y: marginTop + radius };
 
     const {
       markerLineValue,
-      markerLineClass,
+      markerLineClassName,
       markerLineOverhangInner,
       markerLineOverhangOuter
     } = this.props;
@@ -122,7 +144,7 @@ class PieChart extends React.Component {
 
     let startPercent = 0;
     return (
-      <svg className="pie-chart" {...{ width, height }}>
+      <svg className="rct-pie-chart" {...{ width, height }}>
         {this.props.data.map((d, i) => {
           const [onMouseEnter, onMouseMove, onMouseLeave] = [
             "onMouseEnterSlice",
@@ -134,7 +156,7 @@ class PieChart extends React.Component {
             return _.isFunction(callback) ? _.partial(callback, _, d) : null;
           });
 
-          const className = `pie-slice pie-slice-${i}`;
+          const className = `rct-pie-slice rct-pie-slice-${i}`;
           const slicePercent = valueAccessor(d) / total;
           const endPercent = startPercent + slicePercent;
           const pathStr = pieSlicePath(
@@ -163,7 +185,7 @@ class PieChart extends React.Component {
 
         {sum < total ? ( // draw empty slice if the sum of slices is less than expected total
           <path
-            className="pie-slice pie-slice-empty"
+            className="rct-pie-slice rct-pie-slice-empty"
             d={pieSlicePath(startPercent, 1, center, radius, holeRadius)}
             key="pie-slice-empty"
           />
@@ -171,7 +193,6 @@ class PieChart extends React.Component {
 
         {_.isFinite(markerLinePercent)
           ? this.renderMarkerLine(
-              markerLineClass,
               markerLine(
                 markerLinePercent,
                 center,
@@ -179,8 +200,7 @@ class PieChart extends React.Component {
                 holeRadius,
                 markerLineOverhangOuter,
                 markerLineOverhangInner
-              ),
-              "pie-slice-marker-line"
+              )
             )
           : null}
 
@@ -189,7 +209,8 @@ class PieChart extends React.Component {
     );
   }
 
-  renderMarkerLine(className, pathData, key) {
+  renderMarkerLine(pathData) {
+    const { markerLineClassName, markerLineStyle } = this.props;
     const lineD = {
       value: this.props.markerLineValue
     };
@@ -206,9 +227,9 @@ class PieChart extends React.Component {
 
     return (
       <path
-        className={className}
+        style={markerLineStyle}
+        className={markerLineClassName}
         d={pathData}
-        key={key}
         {...{ onMouseEnter, onMouseMove, onMouseLeave }}
       />
     );
