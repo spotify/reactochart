@@ -67,25 +67,12 @@
   }
 }
 
-path {
-  fill: none;
-  stroke: #0a0a0a;
-  stroke-width: 1.5px;
-  stroke-linejoin: bevel;
-}
-.chart-series-0 {
-  path {
-    stroke: steelblue;
-  }
-}
-.chart-series-1 {
-  path {
-    stroke: darkred;
-  }
-}
-.chart-series-2 {
-  path {
-    stroke: orange;
+.rct-line-chart {
+  .rct-line-path {
+    fill: none;
+    stroke: #0a0a0a;
+    stroke-width: 1.5px;
+    stroke-linejoin: bevel;
   }
 }
 
@@ -93,6 +80,14 @@ path {
   .rct-area-chart-path {
     stroke-width: 0;
     fill: steelblue;
+  }
+}
+
+.rct-area-chart--difference {
+  .rct-area-chart-path {
+    stroke: #0a0a0a;
+    stroke-width: 1.5px;
+    stroke-linejoin: bevel;
   }
 }
 

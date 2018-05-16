@@ -121,7 +121,6 @@ export default class AreaChart extends React.Component {
 
   render() {
     const {
-      name,
       data,
       x,
       y,
@@ -166,19 +165,19 @@ export default class AreaChart extends React.Component {
       const clipAbovePathStr = areaGenerator(data);
 
       // make sure we have a unique ID for this chart, so clip path IDs don't affect other charts
-      const chartId = name || _.uniqueId();
+      const chartId = _.uniqueId();
       const clipAboveId = `clip-above-area-${chartId}`;
       const clipBelowId = `clip-below-area-${chartId}`;
       const pathStyleAbove = pathStylePositive || pathStyle || {};
       const pathStyleBelow = pathStyleNegative || pathStyle || {};
 
       return (
-        <g className={`${name} rct-area-chart`}>
+        <g className={`${name} rct-area-chart--difference`}>
           <clipPath id={clipAboveId}>
-            <path d={clipAbovePathStr} />
+            <path className="rct-area-chart-path" d={clipAbovePathStr} />
           </clipPath>
           <clipPath id={clipBelowId}>
-            <path d={clipBelowPathStr} />
+            <path className="rct-area-chart-path" d={clipBelowPathStr} />
           </clipPath>
           <path
             className="rct-area-chart-path"
