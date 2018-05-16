@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 
 import { methodIfFuncProp } from "./util.js";
-import { makeAccessor } from "./utils/Data";
+import { getValue, makeAccessor } from "./utils/Data";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
 
 // default height/width, used only if height & width & radius are all undefined
@@ -39,8 +39,23 @@ class PieChart extends React.Component {
     marginRight: PropTypes.number,
     // (optional) radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
     holeRadius: PropTypes.number,
-    // (optional) label text to display in the middle of the pie/donut
+    /**
+     * Optional label text to display in the middle of the pie/donut
+     */
     centerLabel: PropTypes.string,
+    /**
+     * Class attribute to be applied to center label
+     */
+    centerLabelClassName: PropTypes.string,
+    /**
+     * Inline style object to be applied to center label
+     */
+    centerLabelStyle: PropTypes.object,
+    /**
+     * Class attribute to be applied to each pie slice,
+     * or accessor function which returns a class.
+     */
+    pieSliceClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     /**
      * Value for where to place markerline
      */
@@ -68,7 +83,10 @@ class PieChart extends React.Component {
   };
   static defaultProps = {
     getValue: null,
-    markerLineClassName: "rct-marker-line",
+    centerLabelClassName: "",
+    centerLabelStyle: {},
+    pieSliceClassName: "",
+    markerLineClassName: "",
     markerLineOverhangInner: 2,
     markerLineOverhangOuter: 2,
     markerLineStyle: {},
@@ -130,7 +148,7 @@ class PieChart extends React.Component {
 
     const {
       markerLineValue,
-      markerLineClassName,
+      pieSliceClassName,
       markerLineOverhangInner,
       markerLineOverhangOuter
     } = this.props;
@@ -156,7 +174,11 @@ class PieChart extends React.Component {
             return _.isFunction(callback) ? _.partial(callback, _, d) : null;
           });
 
-          const className = `rct-pie-slice rct-pie-slice-${i}`;
+          const className = `rct-pie-slice rct-pie-slice-${i} ${getValue(
+            pieSliceClassName,
+            d,
+            i
+          ) || ""}`;
           const slicePercent = valueAccessor(d) / total;
           const endPercent = startPercent + slicePercent;
           const pathStr = pieSlicePath(
@@ -185,7 +207,7 @@ class PieChart extends React.Component {
 
         {sum < total ? ( // draw empty slice if the sum of slices is less than expected total
           <path
-            className="rct-pie-slice rct-pie-slice-empty"
+            className={`rct-pie-slice rct-pie-slice-empty`}
             d={pieSlicePath(startPercent, 1, center, radius, holeRadius)}
             key="pie-slice-empty"
           />
@@ -228,7 +250,7 @@ class PieChart extends React.Component {
     return (
       <path
         style={markerLineStyle}
-        className={markerLineClassName}
+        className={`rct-marker-line ${markerLineClassName}`}
         d={pathData}
         {...{ onMouseEnter, onMouseMove, onMouseLeave }}
       />
@@ -236,10 +258,19 @@ class PieChart extends React.Component {
   }
 
   renderCenterLabel(center) {
+    const { centerLabelStyle, centerLabelClassStyle } = this.props;
     const { x, y } = center;
-    const style = { textAnchor: "middle", dominantBaseline: "central" };
+    const style = Object.assign(
+      {},
+      { textAnchor: "middle", dominantBaseline: "central" },
+      centerLabelStyle
+    );
+
     return (
-      <text className="pie-label-center" {...{ x, y, style }}>
+      <text
+        className={`rct-pie-label-center ${centerLabelClassStyle}`}
+        {...{ x, y, style }}
+      >
         {this.props.centerLabel}
       </text>
     );

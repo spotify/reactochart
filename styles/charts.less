@@ -58,7 +58,7 @@
   .rct-pie-slice-empty {
     fill: #ddd;
   }
-  .pie-label-center {
+  .rct-pie-label-center {
     font-size: 26pt;
   }
   .rct-marker-line {
@@ -91,23 +91,26 @@
   }
 }
 
-.sankey-nodes .sankey-node {
-  fill: #000;
-}
-.sankey-links .sankey-link {
-  stroke: rgba(0, 0, 0, 0.16);
-}
-.sankey-node-label {
-  pointer-events: none;
-  font-size: 10pt;
-}
-.sankey-link-label {
-  pointer-events: none;
-  alignment-baseline: middle;
-  dominant-baseline: central;
-  font-size: 8.5pt;
-  color: #333;
-}
-.sankey-node-terminal {
-  fill: steelblue;
+.rct-sankey-diagram {
+  .rct-sankey-nodes .rct-sankey-node {
+    fill: #000;
+  }
+  .rct-sankey-links .rct-sankey-link {
+    stroke: rgba(0, 0, 0, 0.16);
+    fill: none;
+  }
+  .rct-sankey-node-label {
+    pointer-events: none;
+    font-size: 10pt;
+  }
+  .rct-sankey-link-label {
+    pointer-events: none;
+    alignment-baseline: middle;
+    dominant-baseline: central;
+    font-size: 8.5pt;
+    color: #333;
+  }
+  .rct-sankey-node-terminal {
+    fill: steelblue;
+  }
 }
