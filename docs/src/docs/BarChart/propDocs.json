@@ -107,7 +107,7 @@
         ]
       },
       "required": false,
-      "description": "Inline style object to be applied to each bar,\nor accessor function which returns a style object;",
+      "description": "Inline style object to be applied to each bar,\nor accessor function which returns a style object.",
       "defaultValue": {
         "value": "{}",
         "computed": false
@@ -126,7 +126,7 @@
         ]
       },
       "required": false,
-      "description": "Class attribute to be applied to each bar.\nor accessor function which returns a class;",
+      "description": "Class attribute to be applied to each bar,\nor accessor function which returns a class.",
       "defaultValue": {
         "value": "\"\"",
         "computed": false

@@ -33,7 +33,7 @@ const RangeBarChartExample = (props) => {
       const indepDomain = horizontal ? 'yDomain' : 'xDomain';
       const size = {width: 300, height: 350};
 
-      return <div>
+      return <div key={horizontal}>
         <h2>{title}</h2>
 
         <div>

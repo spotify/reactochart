@@ -20,10 +20,8 @@ export default class ComponentDocs extends React.Component {
         </div>
 
         {propDocs.description ? (
-          <div className="row">
-            <p className="component-description">
-              {renderMarkdown(propDocs.description)}
-            </p>
+          <div className="row component-description">
+            {renderMarkdown(propDocs.description)}
           </div>
         ) : null}
 

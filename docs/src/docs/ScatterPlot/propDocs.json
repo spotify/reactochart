@@ -164,10 +164,18 @@
     },
     "pointStyle": {
       "type": {
-        "name": "object"
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
       },
       "required": false,
-      "description": "",
+      "description": "Inline style object to be applied to each point,\nor accessor function which returns a style object.",
       "defaultValue": {
         "value": "{}",
         "computed": false
@@ -175,11 +183,18 @@
     },
     "pointClassName": {
       "type": {
-        "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
       },
       "required": false,
-      "description": "",
+      "description": "Class attribute to be applied to each point,\nor accessor function which returns a class.",
       "defaultValue": {
         "value": "\"\"",
         "computed": false
