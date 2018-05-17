@@ -116,7 +116,8 @@ export default class Bar extends React.Component {
     );
 
     const orientation = isUndefined(xEnd) ? "vertical" : "horizontal";
-    const className = `rct-chart-bar ${this.props.className || ""}`;
+    const className = `rct-chart-bar rct-chart-bar-${orientation} ${this.props
+      .className || ""}`;
 
     let rectX, rectY, width, height;
     if (orientation === "horizontal") {

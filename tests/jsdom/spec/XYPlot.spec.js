@@ -38,8 +38,8 @@ describe("XYPlot", () => {
     const chart = mount(
       <XYPlot width={size} height={size} {...margin} {...commonXYProps} />
     );
-    const inner = chart.find(".chart-inner").getNode();
-    const bg = chart.find(".plot-background").getNode();
+    const inner = chart.find(".rct-chart-inner").getNode();
+    const bg = chart.find(".rct-plot-background").getNode();
     expect(inner.getAttribute("transform").replace(/\s/, "")).to.contain(
       `translate(${margin.marginLeft},${margin.marginTop})`
     );
