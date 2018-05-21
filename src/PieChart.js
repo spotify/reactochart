@@ -61,6 +61,10 @@ class PieChart extends React.Component {
      */
     markerLineValue: PropTypes.number,
     /**
+     * [TO BE DEPRECATED. USE markerLineClassName] Class attribute to be applied to marker line.
+     */
+    markerLineClass: PropTypes.string,
+    /**
      * Class attribute to be applied to marker line
      */
     markerLineClassName: PropTypes.string,
@@ -86,6 +90,8 @@ class PieChart extends React.Component {
     centerLabelClassName: "",
     centerLabelStyle: {},
     pieSliceClassName: "",
+    // TODO deprecate
+    markerLineClass: "",
     markerLineClassName: "",
     markerLineOverhangInner: 2,
     markerLineOverhangOuter: 2,
@@ -232,7 +238,11 @@ class PieChart extends React.Component {
   }
 
   renderMarkerLine(pathData) {
-    const { markerLineClassName, markerLineStyle } = this.props;
+    const {
+      markerLineClass,
+      markerLineClassName,
+      markerLineStyle
+    } = this.props;
     const lineD = {
       value: this.props.markerLineValue
     };
@@ -250,7 +260,9 @@ class PieChart extends React.Component {
     return (
       <path
         style={markerLineStyle}
-        className={`rct-marker-line ${markerLineClassName}`}
+        className={`rct-marker-line ${
+          markerLineClass ? markerLineClass : markerLineClassName
+        }`}
         d={pathData}
         {...{ onMouseEnter, onMouseMove, onMouseLeave }}
       />
