@@ -32,7 +32,7 @@
     },
     "style": {
       "defaultValue": {
-        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: '20px',\n  lineHeight: 1,\n  textAnchor: 'middle'\n}",
+        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: \"20px\",\n  lineHeight: 1,\n  textAnchor: \"middle\"\n}",
         "computed": false
       }
     }

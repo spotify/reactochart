@@ -23,6 +23,36 @@
         }
       ],
       "returns": null
+    },
+    {
+      "name": "computeHistogram",
+      "docblock": null,
+      "modifiers": [
+        "static"
+      ],
+      "params": [
+        {
+          "name": "data",
+          "type": null
+        },
+        {
+          "name": "thresholds",
+          "type": null
+        },
+        {
+          "name": "accessor",
+          "type": null
+        },
+        {
+          "name": "binDomain",
+          "type": null
+        },
+        {
+          "name": "nice",
+          "type": null
+        }
+      ],
+      "returns": null
     }
   ],
   "props": {
@@ -31,29 +61,120 @@
         "name": "array"
       },
       "required": true,
-      "description": "the array of data objects"
+      "description": "The array of data objects for the histogram.\nThese should be individual \"samples\" or \"facts\", not an array of bins -\nthis component will count and bin the samples for you. If you have data that is already binned,\nuse the `<AreaBarChart>` component.",
+      "defaultValue": {
+        "value": "[]",
+        "computed": false
+      }
     },
     "value": {
       "type": {
-        "name": "custom",
-        "raw": "CustomPropTypes.valueOrAccessor"
+        "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "Data value accessor function, called once per datum, which returns the values to bin and plot in the histogram.\nIf `data` is just an array of numbers, this may be the identity function (`function(d) { return d }`)."
     },
-    "axisType": {
+    "xScale": {
       "type": {
-        "name": "object"
+        "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "D3 scale for X axis - provided by XYPlot"
     },
-    "scale": {
+    "yScale": {
       "type": {
-        "name": "object"
+        "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "D3 scale for Y axis - provided by XYPlot"
+    },
+    "thresholds": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "number"
+          },
+          {
+            "name": "array"
+          }
+        ]
+      },
+      "required": true,
+      "description": "Following [d3's thresholds documentation](https://github.com/d3/d3-array#histogram_thresholds) ...\n\nIf a number `count`  is specified, then the domain will be uniformly divided into approximately `count` bins.\n\nIf an array `[x0, x1 ... xN]` is specified, then any value less than `x0` will be placed in the first bin; any value greater than\nor equal to `x0` but less than `x1` will be placed in the second bin; and so on. The generated histogram will have `array.length` + 1 bins.",
+      "defaultValue": {
+        "value": "30",
+        "computed": false
+      }
+    },
+    "binDomain": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": "The domain over which your data will be binned. Defined as an array `[min, max]`.\nIf not provided, binDomain will be the domain of your data values by default.\n\nWarning: This prop takes priority if `nice = true`."
+    },
+    "nice": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "If true, nicely rounds the start and end values of your bins.\nImplemented using [d3's ticks nicing logic](https://github.com/d3/d3-array#ticks).",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
+    },
+    "barClassName": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Class attribute to be applied to each bar,\nor accessor function which returns a class."
+    },
+    "barStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Inline style object to be applied to each bar,\nor accessor function which returns a style object."
+    },
+    "onMouseMoveBar": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`mousemove` event handler callback, called when user's mouse moves within a bar."
+    },
+    "onMouseEnterBar": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`mouseenter` event handler callback, called when user's mouse enters a bar."
+    },
+    "onMouseLeaveBar": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`mouseleave` event handler callback, called when user's mouse leaves a bar."
     }
   }
 }

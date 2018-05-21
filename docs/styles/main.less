@@ -1,4 +1,4 @@
-@import "./charts.less";
+@import "../../styles/charts.less";
 
 body {
   //font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -13,7 +13,12 @@ body {
 }
 
 .sidebar-nav {
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     color: #f8f8f8;
     text-transform: uppercase;
   }
@@ -33,10 +38,11 @@ body {
   padding: 0 30px;
 }
 .prop-docs {
-  background-color: #EFEFEF;
+  background-color: #efefef;
   padding: 15px;
 
-  .prop-description, .prop-default {
+  .prop-description,
+  .prop-default {
     display: block;
     margin-left: 2em;
     font-size: 0.85em;
@@ -81,7 +87,8 @@ body {
   display: flex;
   flex-wrap: wrap;
 
-  .playgroundCode, .playgroundPreview {
+  .playgroundCode,
+  .playgroundPreview {
     border: 1px solid #efefef;
     border-radius: 3px;
     flex-basis: 150px;
@@ -101,21 +108,21 @@ body {
 
   .playgroundCode {
     margin-right: 8px;
-    flex-grow: .6;
+    flex-grow: 0.6;
 
     &:before {
       content: "Editable Source";
     }
     .CodeMirror {
       font-size: 10pt;
-      font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+      font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
     }
   }
 
   .playgroundPreview {
     margin-left: 8px;
     //text-align: center;
-    flex-grow: .4;
+    flex-grow: 0.4;
 
     &:before {
       content: "Live Preview";

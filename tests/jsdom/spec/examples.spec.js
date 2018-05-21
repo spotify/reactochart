@@ -1,9 +1,11 @@
-import _ from 'lodash';
-import React from 'react';
+import _ from "lodash";
+import React from "react";
 // import TestUtils from 'react-addons-test-utils';
-import {expect} from 'chai';
+import { expect } from "chai";
 
 // TODO: fix this to work with new examples structure??
+
+// test the examples render
 
 // import {examples} from '../../../docs/src/Examples.jsx';
 

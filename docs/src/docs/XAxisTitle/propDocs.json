@@ -44,7 +44,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Title distance from X Axis",
       "defaultValue": {
         "value": "5",
         "computed": false
@@ -55,19 +55,19 @@
         "name": "enum",
         "value": [
           {
-            "value": "'top'",
+            "value": "\"top\"",
             "computed": false
           },
           {
-            "value": "'bottom'",
+            "value": "\"bottom\"",
             "computed": false
           }
         ]
       },
       "required": false,
-      "description": "",
+      "description": "Position of title in regards to the x axis. Accepted options are \"top\" or \"bottom\"",
       "defaultValue": {
-        "value": "'bottom'",
+        "value": "\"bottom\"",
         "computed": false
       }
     },
@@ -76,17 +76,17 @@
         "name": "enum",
         "value": [
           {
-            "value": "'above'",
+            "value": "\"above\"",
             "computed": false
           },
           {
-            "value": "'below'",
+            "value": "\"below\"",
             "computed": false
           }
         ]
       },
       "required": false,
-      "description": "",
+      "description": "Placement of title in regards to the x axis. Accepted options are \"above\" or \"below\"",
       "defaultValue": {
         "value": "undefined",
         "computed": true
@@ -97,15 +97,15 @@
         "name": "enum",
         "value": [
           {
-            "value": "'left'",
+            "value": "\"left\"",
             "computed": false
           },
           {
-            "value": "'center'",
+            "value": "\"center\"",
             "computed": false
           },
           {
-            "value": "'right'",
+            "value": "\"right\"",
             "computed": false
           }
         ]
@@ -113,7 +113,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "'center'",
+        "value": "\"center\"",
         "computed": false
       }
     },
@@ -133,9 +133,9 @@
         "name": "object"
       },
       "required": false,
-      "description": "",
+      "description": "Object declaring styles for label.\n\nDisclaimer: labelStyle will merge its defaults with the given labelStyle prop\nin order to ensure that our collision library measureText is able to calculate the\nsmallest amount of possible collissions along the axis. It's therefore dependent on\nfontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized\nstylesheet, we suggest creating a styled title component that wraps XAxisTitle with your preferred styles.",
       "defaultValue": {
-        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: '24px',\n  fontWeight: 'bold',\n  lineHeight: 1\n}",
+        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: \"24px\",\n  fontWeight: \"bold\",\n  lineHeight: 1\n}",
         "computed": false
       }
     },
@@ -144,7 +144,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Spacing - provided by XYPlot",
       "defaultValue": {
         "value": "0",
         "computed": false
@@ -155,7 +155,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Spacing - provided by XYPlot",
       "defaultValue": {
         "value": "0",
         "computed": false

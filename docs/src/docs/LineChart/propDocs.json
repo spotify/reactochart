@@ -72,7 +72,7 @@
       "required": false,
       "description": "Class attribute to be applied to the line path",
       "defaultValue": {
-        "value": "''",
+        "value": "\"\"",
         "computed": false
       }
     },

@@ -6,8 +6,10 @@ import * as d3 from "d3";
 // todo: make sure this correctly handles new props getting passed in, doesn't double bind events
 
 function zoomTransformFromProps(props) {
-  const {zoomScale, zoomX, zoomY} = props;
-  return d3.zoomIdentity.translate(zoomX || 0, zoomY || 0).scale(zoomScale || 1);
+  const { zoomScale, zoomX, zoomY } = props;
+  return d3.zoomIdentity
+    .translate(zoomX || 0, zoomY || 0)
+    .scale(zoomScale || 1);
 }
 
 export default class ZoomContainer extends React.Component {
@@ -33,6 +35,10 @@ export default class ZoomContainer extends React.Component {
      * specify only the initial X, Y and scale transformation of the component.
      */
     controlled: PropTypes.bool,
+    /**
+     * Disables wheel-driven zooming (say to not interfere with native scrolling)
+     */
+    disableMouseWheelZoom: PropTypes.bool,
     /**
      * The X-coordinate of the zoom transformation (or initial X-coordinate, if `controlled` is false)
      */
@@ -106,6 +112,7 @@ export default class ZoomContainer extends React.Component {
     width: 800,
     height: 600,
     controlled: false,
+    disableMouseWheelZoom: false,
     zoomX: 0,
     zoomY: 0,
     zoomScale: 1
@@ -118,8 +125,18 @@ export default class ZoomContainer extends React.Component {
 
   _updateZoomProps(props) {
     if (!props) props = this.props;
-    const {extent, scaleExtent, translateExtent, clickDistance, duration, interpolate} = props;
-    const {constrain, filter, touchable, wheelDelta} = props;
+    const {
+      extent,
+      scaleExtent,
+      translateExtent,
+      clickDistance,
+      duration,
+      interpolate,
+      constrain,
+      filter,
+      touchable,
+      wheelDelta
+    } = props;
 
     if (_.isArray(extent)) this.zoom.extent(extent);
     if (_.isArray(scaleExtent)) this.zoom.scaleExtent(scaleExtent);
@@ -139,6 +156,13 @@ export default class ZoomContainer extends React.Component {
 
     this.zoom = d3.zoom();
     selection.call(this.zoom);
+
+    if (this.props.disableMouseWheelZoom) {
+      selection.call(this.zoom).on("wheel.zoom", null);
+    } else {
+      selection.call(this.zoom);
+    }
+
     this.zoom.transform(selection, initialZoomTransform);
     this._updateZoomProps();
     this.zoom.on("zoom", this.handleZoom);
@@ -160,14 +184,14 @@ export default class ZoomContainer extends React.Component {
         nextProps.zoomY !== this.props.zoomY ||
         nextProps.zoomScale !== this.props.zoomScale;
 
-      if(hasChangedZoom) {
+      if (hasChangedZoom) {
         this.zoom.on("zoom", null);
         const nextZoomTransform = zoomTransformFromProps(nextProps);
         this.zoom.transform(this.state.selection, nextZoomTransform);
         this.zoom.on("zoom", this.handleZoom);
 
         // update state.lastZoomTransform so we can revert d3-zoom to this next time it's changed internally
-        this.setState({lastZoomTransform: nextZoomTransform});
+        this.setState({ lastZoomTransform: nextZoomTransform });
       }
     }
     this._updateZoomProps(nextProps);
@@ -179,7 +203,7 @@ export default class ZoomContainer extends React.Component {
     if (this.props.controlled) {
       // zoom transform should be controlled by props, but d3-zoom has already applied new transform to this.zoom
       // (even though props haven't changed), so we must *undo* it by applying lastZoomTransform to this.zoom
-      const {selection, lastZoomTransform} = this.state;
+      const { selection, lastZoomTransform } = this.state;
 
       // unbind zoom event first, so that manually setting transform doesn't trigger handleZoom infinite loop
       this.zoom.on("zoom", null);
@@ -188,18 +212,24 @@ export default class ZoomContainer extends React.Component {
     } else {
       // *uncontrolled* (stateful) ZoomContainer, we want to keep the transform applied by d3-zoom;
       // but since the state is inside d3-zoom, we need to update something on this.state to trigger re-render
-      this.setState({zoomKey: Math.random()});
+      this.setState({ zoomKey: Math.random() });
     }
 
     if (this.props.onZoom) this.props.onZoom(nextZoomTransform, ...args);
   };
 
   render() {
-    const zoomTransform = this.refs.svg ? d3.zoomTransform(this.refs.svg) : null;
+    const zoomTransform = this.refs.svg
+      ? d3.zoomTransform(this.refs.svg)
+      : null;
 
     return (
       <svg ref="svg" width={this.props.width} height={this.props.height}>
-        <g width={this.props.width} height={this.props.height} transform={zoomTransform}>
+        <g
+          width={this.props.width}
+          height={this.props.height}
+          transform={zoomTransform}
+        >
           {this.props.children}
         </g>
       </svg>
