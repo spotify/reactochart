@@ -67,6 +67,17 @@
         "computed": false
       }
     },
+    "disableMouseWheelZoom": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "Disables wheel-driven zooming (say to not interfere with native scrolling)",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
+    },
     "zoomX": {
       "type": {
         "name": "number"
