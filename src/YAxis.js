@@ -138,7 +138,7 @@ export default class YAxis extends React.Component {
     const axisLineX = position === "left" ? -spacingLeft : width + spacingRight;
 
     return (
-      <g className="chart-axis chart-axis-y">
+      <g className="rct-chart-axis rct-chart-axis-y">
         {showGrid ? <YGrid {...gridProps} /> : null}
 
         {showTicks ? <YTicks {...ticksProps} /> : null}
@@ -148,7 +148,7 @@ export default class YAxis extends React.Component {
         {showTitle ? <YAxisTitle {...titleProps} /> : null}
 
         <line
-          className="chart-axis-line chart-axis-line-y"
+          className="rct-chart-axis-line rct-chart-axis-line-y"
           x1={axisLineX}
           x2={axisLineX}
           y1={-spacingTop}

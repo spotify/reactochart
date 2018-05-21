@@ -79,7 +79,15 @@ export default class ColorHeatmap extends React.Component {
     colors: PropTypes.array,
     valueDomain: PropTypes.array,
     interpolator: PropTypes.string,
+    /**
+     * Inline style object to be applied to each rect,
+     * or accessor function which returns a style object.
+     */
     rectStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    /**
+     * Class attribute to be applied to each rect,
+     * or accessor function which returns a class.
+     */
     rectClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
   };
   static defaultProps = {
@@ -148,11 +156,11 @@ export default class ColorHeatmap extends React.Component {
     }
 
     return (
-      <g className="color-heatmap-chart">
+      <g className="rct-color-heatmap-chart">
         {data.map((d, i) => {
           const color = colorScale(valueAccessor(d));
           const style = { ...getValue(rectStyle, d, i), fill: color };
-          const className = `heatmap-rect ${getValue(rectClassName, d, i)}`;
+          const className = `${getValue(rectClassName, d, i)}`;
           const key = `heatmap-rect-${i}`;
           return (
             <RangeRect

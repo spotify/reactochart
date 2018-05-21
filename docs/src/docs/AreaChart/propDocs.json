@@ -48,6 +48,17 @@
       "required": false,
       "description": "Accessor function for area's ending (maximum) Y values, called once per datum,\nor a single Y value to be used for the entire line.\nShould return the maximum of the Y range spanned by the area at this point."
     },
+    "pathClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "classname applied to area path element",
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
+    },
     "pathStyle": {
       "type": {
         "name": "object"

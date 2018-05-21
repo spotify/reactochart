@@ -20,7 +20,24 @@ export default class FunnelChart extends React.Component {
     // data getters
     x: CustomPropTypes.valueOrAccessor,
     y: CustomPropTypes.valueOrAccessor,
+    /**
+     * Color applied to the path element,
+     * or accessor function which returns a class.
+     *
+     * Note that the first datum's color would not be applied since it fills in the area of the path
+     */
+    color: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     horizontal: PropTypes.bool,
+    /**
+     * Classname applied to each path element,
+     * or accessor function which returns a class.
+     */
+    pathClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    /**
+     * Style applied to each path element,
+     * or accessor function which returns a style object.
+     */
+    pathStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /**
      * D3 scale for X axis - provided by XYPlot
      */
@@ -30,7 +47,9 @@ export default class FunnelChart extends React.Component {
      */
     yScale: PropTypes.func
   };
-  static defaultProps = {};
+  static defaultProps = {
+    pathClassName: ""
+  };
 
   static getDomain(props) {
     const { data, xScaleType, yScaleType, x, y, horizontal } = props;
@@ -63,7 +82,17 @@ export default class FunnelChart extends React.Component {
   }
 
   render() {
-    const { data, xScale, yScale, x, y, horizontal } = this.props;
+    const {
+      data,
+      xScale,
+      yScale,
+      color,
+      pathStyle,
+      x,
+      y,
+      horizontal,
+      pathClassName
+    } = this.props;
 
     const funnelArea = area();
     if (horizontal) {
@@ -81,15 +110,20 @@ export default class FunnelChart extends React.Component {
     const colors = scaleOrdinal(schemeCategory20b).domain(_.range(10));
 
     return (
-      <g className="funnel-chart">
+      <g className="rct-funnel-chart">
         {data.map((d, i) => {
           if (i === 0) return null;
           const pathStr = funnelArea([data[i - 1], d]);
+          const fill = color ? getValue(color, d, i) : colors(i - 1);
+          let style = pathStyle ? getValue(pathStyle, d, i) : {};
+
+          style = _.defaults({}, style, { fill, stroke: "transparent" });
 
           return (
             <path
               d={pathStr}
-              style={{ fill: colors(i - 1), stroke: "transparent" }}
+              className={`${getValue(pathClassName, d, i) || ""}`}
+              style={style}
             />
           );
         })}

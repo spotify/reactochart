@@ -95,7 +95,7 @@ export default class Bar extends React.Component {
   };
 
   render() {
-    //  x/y are values in the *data* domain, not pixel domain
+    // x/y are values in the *data* domain, not pixel domain
     const {
       xScale,
       yScale,
@@ -116,7 +116,7 @@ export default class Bar extends React.Component {
     );
 
     const orientation = isUndefined(xEnd) ? "vertical" : "horizontal";
-    const className = `chart-bar chart-bar-${orientation} ${this.props
+    const className = `rct-chart-bar rct-chart-bar-${orientation} ${this.props
       .className || ""}`;
 
     let rectX, rectY, width, height;

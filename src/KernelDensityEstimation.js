@@ -26,7 +26,14 @@ class KernelDensityEstimation extends React.Component {
      * Defaults to null, which causes it to be auto-determined based on width.
      */
     sampleCount: PropTypes.number,
-
+    /**
+     * Inline style object to be applied to the line path
+     */
+    lineStyle: PropTypes.object,
+    /**
+     * Class attribute to be applied to the line path
+     */
+    lineClassName: PropTypes.string,
     // common props from XYPlot
     // accessor for data values
     name: PropTypes.string,

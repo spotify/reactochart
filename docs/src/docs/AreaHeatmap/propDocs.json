@@ -109,10 +109,18 @@
     },
     "rectClassName": {
       "type": {
-        "name": "string"
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
       },
       "required": false,
-      "description": "",
+      "description": "Class attribute to be applied to each rect\nor accessor function which returns a class",
       "defaultValue": {
         "value": "\"\"",
         "computed": false
@@ -120,10 +128,18 @@
     },
     "rectStyle": {
       "type": {
-        "name": "object"
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
       },
       "required": false,
-      "description": "",
+      "description": "Inline style object to be applied to each rect,\nor accessor function which returns a style object.",
       "defaultValue": {
         "value": "{}",
         "computed": false

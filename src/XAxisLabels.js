@@ -285,7 +285,7 @@ class XAxisLabels extends React.Component {
     const labels = this.props.labels || XAxisLabels.getLabels(this.props);
     const placement =
       this.props.placement || (position === "top" ? "above" : "below");
-    const className = `chart-value-label chart-value-label-x ${labelClassName}`;
+    const className = `rct-chart-value-label rct-chart-value-label-x ${labelClassName}`;
     const transform =
       position === "bottom"
         ? `translate(0, ${height + spacingBottom})`
@@ -294,7 +294,7 @@ class XAxisLabels extends React.Component {
     // example include having both positive and negative areas and youd like labels just on zero line
 
     return (
-      <g className="chart-value-labels-x" transform={transform}>
+      <g className="rct-chart-value-labels-x" transform={transform}>
         {labels.map((label, i) => {
           const x = xScale(label.value);
           const y = placement === "above" ? -label.height - distance : distance;

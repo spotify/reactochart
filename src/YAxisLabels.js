@@ -262,7 +262,7 @@ class YAxisLabels extends React.Component {
     } = this.props;
     const placement =
       this.props.placement || (position === "left" ? "before" : "after");
-    const className = `chart-value-label chart-value-label-y ${labelClassName}`;
+    const className = `rct-chart-value-label rct-chart-value-label-y ${labelClassName}`;
     const textAnchor = placement === "before" ? "end" : "start";
     const style = _.defaults(
       { textAnchor },
@@ -276,7 +276,7 @@ class YAxisLabels extends React.Component {
         : `translate(${width + spacingRight}, 0)`;
 
     return (
-      <g className="chart-value-labels-y" transform={transform}>
+      <g className="rct-chart-value-labels-y" transform={transform}>
         {labels.map((label, i) => {
           const y = yScale(label.value);
           const x = placement === "before" ? -distance : distance;

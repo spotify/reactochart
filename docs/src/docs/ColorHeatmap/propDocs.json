@@ -123,7 +123,7 @@
         ]
       },
       "required": false,
-      "description": "",
+      "description": "Inline style object to be applied to each rect,\nor accessor function which returns a style object.",
       "defaultValue": {
         "value": "{}",
         "computed": false
@@ -142,7 +142,7 @@
         ]
       },
       "required": false,
-      "description": "",
+      "description": "Class attribute to be applied to each rect,\nor accessor function which returns a class.",
       "defaultValue": {
         "value": "\"\"",
         "computed": false

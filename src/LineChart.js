@@ -74,8 +74,8 @@ export default class LineChart extends React.Component {
     const pathStr = pointsToPathStr(points);
 
     return (
-      <g className={`${this.props.name} ${lineClassName}`}>
-        <path d={pathStr} style={lineStyle} />
+      <g className={`rct-line-chart ${lineClassName}`}>
+        <path className={`rct-line-path`} d={pathStr} style={lineStyle} />
       </g>
     );
   }

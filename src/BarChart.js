@@ -59,12 +59,12 @@ export default class BarChart extends React.Component {
     barThickness: PropTypes.number,
     /**
      * Inline style object to be applied to each bar,
-     * or accessor function which returns a style object;
+     * or accessor function which returns a style object.
      */
     barStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /**
-     * Class attribute to be applied to each bar.
-     * or accessor function which returns a class;
+     * Class attribute to be applied to each bar,
+     * or accessor function which returns a class.
      */
     barClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 

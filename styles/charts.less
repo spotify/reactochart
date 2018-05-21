@@ -1,147 +1,116 @@
-.chart-tick {
-  fill: none;
-  stroke: #666;
-  stroke-width: 1px;
-}
-.chart-grid-line {
-  stroke: #b9b9b9;
-  stroke-width: 1px;
-}
-
-.line-chart,
-.xy-plot {
-  //background: #f0f0f0;
-  //background: lightblue;
-  margin-right: 6px;
-
-  .chart-background {
-    fill: none;
-  }
-  .plot-background {
-    fill: #e0e0e0;
-  }
-
+.rct-xy-plot {
   * {
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
   }
-  .chart-line {
+
+  .rct-chart-tick {
     fill: none;
-    //stroke: steelblue;
-    stroke: #090909;
-    stroke-width: 1.5px;
-    stroke-linejoin: bevel;
+    stroke: #666;
+    stroke-width: 1px;
   }
 
-  .chart-zero-line {
-    stroke: #888;
-    stroke-width: 1.5px;
-  }
-  .chart-axis-value-label {
-    font-size: 8pt;
-  }
-  .chart-axis-value-label-x {
-    text-anchor: middle;
-  }
-  .chart-axis-value-label-y {
-    text-anchor: end;
-  }
-  .chart-selected-range {
-    fill: #eeeef6;
+  .rct-chart-background {
+    fill: none;
   }
 
-  .chart-axis-label {
-    font-size: 16pt;
-    font-weight: bold;
+  .rct-plot-background {
+    fill: #e0e0e0;
+  }
+
+  .rct-chart-grid-line {
+    stroke: #b9b9b9;
+    stroke-width: 1px;
   }
 }
 
-.chart-bar,
-.chart-area-bar {
+.rct-chart-line-x,
+.rct-chart-line-y {
+  stroke: #090909;
+}
+
+.rct-chart-bar,
+.rct-chart-area-bar {
   fill: steelblue;
 }
 
-.marker-line-chart {
+.rct-marker-line-chart {
   line {
     stroke: black;
     stroke-width: 2px;
   }
 }
 
-.pie-chart {
-  path {
+.rct-pie-chart {
+  .rct-pie-slice {
     stroke: none;
-    //stroke: black;
   }
-  .pie-slice-0 {
+  .rct-pie-slice-0 {
     fill: steelblue;
   }
-  .pie-slice-1 {
+  .rct-pie-slice-1 {
     fill: darkred;
   }
-  .pie-slice-2 {
+  .rct-pie-slice-2 {
     fill: orange;
   }
-  .pie-slice-empty {
+  .rct-pie-slice-empty {
     fill: #ddd;
   }
-  .pie-label-center {
+  .rct-pie-label-center {
     font-size: 26pt;
   }
-  .marker-line {
+  .rct-marker-line {
     stroke: black;
     stroke-width: 2px;
   }
 }
 
-path {
-  fill: none;
-  //stroke: steelblue;
-  stroke: #0a0a0a;
-  stroke-width: 1.5px;
-  stroke-linejoin: bevel;
-}
-.chart-series-0 {
-  path {
-    stroke: steelblue;
-  }
-}
-.chart-series-1 {
-  path {
-    stroke: darkred;
-  }
-}
-.chart-series-2 {
-  path {
-    stroke: orange;
+.rct-line-chart {
+  .rct-line-path {
+    fill: none;
+    stroke: #0a0a0a;
+    stroke-width: 1.5px;
+    stroke-linejoin: bevel;
   }
 }
 
-.area-chart {
-  .area-chart-path {
+.rct-area-chart {
+  .rct-area-chart-path {
     stroke-width: 0;
     fill: steelblue;
   }
 }
 
-.sankey-nodes .sankey-node {
-  fill: #000;
+.rct-area-chart--difference {
+  .rct-area-chart-path {
+    stroke: #0a0a0a;
+    stroke-width: 1.5px;
+    stroke-linejoin: bevel;
+  }
 }
-.sankey-links .sankey-link {
-  stroke: rgba(0, 0, 0, 0.16);
-}
-.sankey-node-label {
-  pointer-events: none;
-  font-size: 10pt;
-}
-.sankey-link-label {
-  pointer-events: none;
-  alignment-baseline: middle;
-  dominant-baseline: central;
-  font-size: 8.5pt;
-  color: #333;
-}
-.sankey-node-terminal {
-  fill: steelblue;
+
+.rct-sankey-diagram {
+  .rct-sankey-nodes .rct-sankey-node {
+    fill: #000;
+  }
+  .rct-sankey-links .rct-sankey-link {
+    stroke: rgba(0, 0, 0, 0.16);
+    fill: none;
+  }
+  .rct-sankey-node-label {
+    pointer-events: none;
+    font-size: 10pt;
+  }
+  .rct-sankey-link-label {
+    pointer-events: none;
+    alignment-baseline: middle;
+    dominant-baseline: central;
+    font-size: 8.5pt;
+    color: #333;
+  }
+  .rct-sankey-node-terminal {
+    fill: steelblue;
+  }
 }

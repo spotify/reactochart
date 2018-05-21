@@ -73,7 +73,8 @@ export default class RangeRect extends React.Component {
       style,
       onMouseEnter,
       onMouseMove,
-      onMouseLeave
+      onMouseLeave,
+      className
     } = this.props;
 
     invariant(
@@ -85,7 +86,6 @@ export default class RangeRect extends React.Component {
       `RangeRect.props.yScale is not a valid d3 scale`
     );
 
-    const className = `chart-range-rect ${this.props.className || ""}`;
     const x0 = xScale(x);
     const x1 = xScale(xEnd);
     const y0 = yScale(y);

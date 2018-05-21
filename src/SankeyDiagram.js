@@ -27,7 +27,7 @@ const SankeyNode = props => {
       y={node.y0}
       width={Math.abs(node.x1 - node.x0)}
       height={Math.abs(node.y1 - node.y0)}
-      className={`sankey-node ${getValue(nodeClassName, node, graph)}`}
+      className={`rct-sankey-node ${getValue(nodeClassName, node, graph)}`}
       style={getValue(nodeStyle, node, graph)}
       onMouseEnter={makeHandler(props.onMouseEnterNode)}
       onMouseLeave={makeHandler(props.onMouseLeaveNode)}
@@ -50,7 +50,7 @@ const SankeyLink = props => {
   return (
     <path
       d={linkPath}
-      className={`sankey-link ${getValue(linkClassName, link, graph)}`}
+      className={`rct-sankey-link ${getValue(linkClassName, link, graph)}`}
       style={{
         ...getValue(linkStyle, link, graph),
         strokeWidth: link.width
@@ -79,7 +79,7 @@ const SankeyNodeTerminal = props => {
   const height =
     (nodeHeight * node.terminalValue || 0) / (node.value || 0) || 0;
   const style = getWithNode(props.nodeTerminalStyle);
-  const className = `sankey-node-terminal ${getWithNode(
+  const className = `rct-sankey-node-terminal ${getWithNode(
     props.nodeTerminalClassName
   )}`;
   const attributes = getWithNode(props.nodeTerminalAttributes);
@@ -125,7 +125,7 @@ const SankeyNodeLabel = props => {
     return labelContent;
   }
 
-  const baseClassName = `sankey-node-label ${getWithNode(
+  const baseClassName = `rct-sankey-node-label ${getWithNode(
     props.nodeLabelClassName
   )}`;
   const baseStyle = getWithNode(props.nodeLabelStyle);
@@ -183,7 +183,7 @@ const SankeyNodeLabel = props => {
     };
   }
 
-  const className = `${baseClassName} sankey-node-label-text`;
+  const className = `${baseClassName} rct-sankey-node-label-text`;
   return (
     <text {...position} className={className} style={textStyle}>
       {labelContent}
@@ -194,7 +194,7 @@ const SankeyNodeLabel = props => {
 const SankeyLinkLabel = props => {
   const { link, graph } = props;
   const getWithLink = accessor => getValue(accessor, link, graph, props);
-  const className = `sankey-link-label ${getWithLink(
+  const className = `rct-sankey-link-label ${getWithLink(
     props.linkLabelClassName || ""
   )}`;
   const style = getWithLink(props.linkLabelStyle || {});
@@ -819,7 +819,7 @@ export default class SankeyDiagram extends React.Component {
 
     const graph = this._graph;
     const makeLinkPath = sankeyLinkHorizontal();
-    const className = `sankey-diagram ${this.props.className}`;
+    const className = `rct-sankey-diagram ${this.props.className}`;
     const innerWidth = width - (marginLeft + marginRight);
     const innerHeight = height - (marginTop + marginBottom);
 
@@ -858,7 +858,7 @@ export default class SankeyDiagram extends React.Component {
         >
           {mapLinksInGroupIf(
             this.props.showLinks,
-            "sankey-links",
+            "rct-sankey-links",
             (link, i, key) => {
               const linkProps = {
                 ...this.props,
@@ -872,14 +872,14 @@ export default class SankeyDiagram extends React.Component {
           )}
           {mapNodesInGroupIf(
             this.props.showNodes,
-            "sankey-nodes",
+            "rct-sankey-nodes",
             (node, i, key) => {
               return <SankeyNode {...this.props} {...{ key, graph, node }} />;
             }
           )};
           {mapNodesInGroupIf(
             this.props.showNodeTerminals,
-            "sankey-node-terminals",
+            "rct-sankey-node-terminals",
             (node, i, key) => {
               return (
                 <SankeyNodeTerminal {...this.props} {...{ key, graph, node }} />
@@ -907,7 +907,7 @@ export default class SankeyDiagram extends React.Component {
           ) : null}
           {mapLinksInGroupIf(
             this.props.showLinkLabels,
-            "sankey-link-labels",
+            "rct-sankey-link-labels",
             (link, i, key) => {
               const linkPathId = `${getLinkId(link, nodeId)}-path`;
               const labelProps = {
@@ -922,7 +922,7 @@ export default class SankeyDiagram extends React.Component {
           )}
           {mapNodesInGroupIf(
             this.props.showNodeLabels,
-            "sankey-node-labels",
+            "rct-sankey-node-labels",
             (node, i, key) => {
               return (
                 <SankeyNodeLabel {...this.props} {...{ key, graph, node }} />
@@ -931,7 +931,7 @@ export default class SankeyDiagram extends React.Component {
           )};
           {mapLinksInGroupIf(
             this.props.showLinkSourceLabels,
-            "sankey-link-source-labels",
+            "rct-sankey-link-source-labels",
             (link, i, key) => {
               const linkPathId = `${getLinkId(link, nodeId)}-path`;
               const commonProps = {
@@ -955,7 +955,7 @@ export default class SankeyDiagram extends React.Component {
           )}
           {mapLinksInGroupIf(
             this.props.showLinkTargetLabels,
-            "sankey-link-target-labels",
+            "rct-sankey-link-target-labels",
             (link, i, key) => {
               const linkPathId = `${getLinkId(link, nodeId)}-path`;
               const commonProps = {

@@ -227,6 +227,17 @@
       },
       "required": false,
       "description": ""
+    },
+    "xyPlotClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "Class attribute applied to xy plot",
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
     }
   }
 }

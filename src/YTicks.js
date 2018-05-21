@@ -70,14 +70,14 @@ export default class YTicks extends React.Component {
     const placement =
       this.props.placement || (position === "left" ? "before" : "after");
     const ticks = this.props.ticks || getScaleTicks(yScale, null, tickCount);
-    const className = `chart-tick chart-tick-y ${tickClassName || ""}`;
+    const className = `rct-chart-tick rct-chart-tick-y ${tickClassName || ""}`;
     const transform =
       position === "right"
         ? `translate(${width + spacingRight}, 0)`
         : `translate(${-spacingLeft}, 0)`;
 
     return (
-      <g className="chart-ticks-y" transform={transform}>
+      <g className="rct-chart-ticks-y" transform={transform}>
         {ticks.map((tick, i) => {
           const y1 = yScale(tick);
           const x2 = placement === "before" ? -tickLength : tickLength;
