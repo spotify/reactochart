@@ -276,6 +276,17 @@
       "required": false,
       "description": "Value for where to place markerline"
     },
+    "markerLineClass": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "[TO BE DEPRECATED. USE markerLineClassName] Class attribute to be applied to marker line.",
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
+    },
     "markerLineClassName": {
       "type": {
         "name": "string"
