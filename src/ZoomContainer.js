@@ -36,6 +36,10 @@ export default class ZoomContainer extends React.Component {
      */
     controlled: PropTypes.bool,
     /**
+     * Disables wheel-driven zooming (say to not interfere with native scrolling)
+     */
+    disableMouseWheelZoom: PropTypes.bool,
+    /**
      * The X-coordinate of the zoom transformation (or initial X-coordinate, if `controlled` is false)
      */
     zoomX: PropTypes.number,
@@ -108,6 +112,7 @@ export default class ZoomContainer extends React.Component {
     width: 800,
     height: 600,
     controlled: false,
+    disableMouseWheelZoom: false,
     zoomX: 0,
     zoomY: 0,
     zoomScale: 1
@@ -126,9 +131,12 @@ export default class ZoomContainer extends React.Component {
       translateExtent,
       clickDistance,
       duration,
-      interpolate
+      interpolate,
+      constrain,
+      filter,
+      touchable,
+      wheelDelta
     } = props;
-    const { constrain, filter, touchable, wheelDelta } = props;
 
     if (_.isArray(extent)) this.zoom.extent(extent);
     if (_.isArray(scaleExtent)) this.zoom.scaleExtent(scaleExtent);
@@ -148,6 +156,13 @@ export default class ZoomContainer extends React.Component {
 
     this.zoom = d3.zoom();
     selection.call(this.zoom);
+
+    if (this.props.disableMouseWheelZoom) {
+      selection.call(this.zoom).on("wheel.zoom", null);
+    } else {
+      selection.call(this.zoom);
+    }
+
     this.zoom.transform(selection, initialZoomTransform);
     this._updateZoomProps();
     this.zoom.on("zoom", this.handleZoom);
