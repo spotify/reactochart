@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 export default class YLine extends React.Component {
   static propTypes = {
@@ -12,22 +12,34 @@ export default class YLine extends React.Component {
   };
   static defaultProps = {
     style: {},
-    className: '',
+    className: "",
     spacingLeft: 0,
     spacingRight: 0
   };
 
   render() {
-    const {yScale, value, width, spacingLeft, spacingRight, style} = this.props;
-    const className = `chart-line-y ${this.props.className || ''}`;
+    const {
+      yScale,
+      value,
+      width,
+      spacingLeft,
+      spacingRight,
+      style
+    } = this.props;
+    const className = `rct-chart-line-y ${this.props.className || ""}`;
     const lineY = yScale(value);
 
-    return <line {...{
-      x1: -spacingLeft,
-      x2: width + spacingRight,
-      y1: lineY,
-      y2: lineY,
-      className, style
-    }} />;
+    return (
+      <line
+        {...{
+          x1: -spacingLeft,
+          x2: width + spacingRight,
+          y1: lineY,
+          y2: lineY,
+          className,
+          style
+        }}
+      />
+    );
   }
 }

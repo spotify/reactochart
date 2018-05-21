@@ -1,17 +1,16 @@
-import React from 'react';
-import _ from 'lodash';
-import PropTypes from 'prop-types';
+import React from "react";
+import _ from "lodash";
+import PropTypes from "prop-types";
 
-import {getTickDomain} from './utils/Scale';
-import {sumMargins} from './utils/Margin';
-import {getAxisChildProps} from './utils/Axis'
-import xyPropsEqual from './utils/xyPropsEqual';
+import { getTickDomain } from "./utils/Scale";
+import { sumMargins } from "./utils/Margin";
+import { getAxisChildProps } from "./utils/Axis";
+import xyPropsEqual from "./utils/xyPropsEqual";
 
-
-import YTicks from './YTicks';
-import YGrid from './YGrid';
-import YAxisLabels from './YAxisLabels';
-import YAxisTitle from './YAxisTitle';
+import YTicks from "./YTicks";
+import YGrid from "./YGrid";
+import YAxisLabels from "./YAxisLabels";
+import YAxisTitle from "./YAxisTitle";
 
 export default class YAxis extends React.Component {
   static propTypes = {
@@ -61,7 +60,7 @@ export default class YAxis extends React.Component {
   static defaultProps = {
     width: 400,
     height: 250,
-    position: 'left',
+    position: "left",
     nice: true,
     showTitle: true,
     showLabels: true,
@@ -81,62 +80,81 @@ export default class YAxis extends React.Component {
   }
 
   static getTickDomain(props) {
-    if(!props.yScale) return;
+    if (!props.yScale) return;
     props = _.defaults({}, props, YAxis.defaultProps);
-    return {yTickDomain: getTickDomain(props.yScale, props)};
+    return { yTickDomain: getTickDomain(props.yScale, props) };
   }
 
   static getMargin(props) {
-    // todo figure out margin if labels change after margin?
-    const {ticksProps, labelsProps, titleProps} = getAxisChildProps(props);
+    const { ticksProps, labelsProps, titleProps } = getAxisChildProps(props);
     let margins = [];
 
-    if(props.showTicks)
-      margins.push(YTicks.getMargin(ticksProps));
+    if (props.showTicks) margins.push(YTicks.getMargin(ticksProps));
 
-    if(props.showTitle && props.title)
+    if (props.showTitle && props.title)
       margins.push(YAxisTitle.getMargin(titleProps));
 
-    if(props.showLabels)
-      margins.push(YAxisLabels.getMargin(labelsProps));
+    if (props.showLabels) margins.push(YAxisLabels.getMargin(labelsProps));
 
-    return sumMargins(margins, 'margin');
+    return sumMargins(margins, "margin");
   }
 
   render() {
     const {
-      width, height, position, tickLength, titleDistance, labelDistance,
-      showTitle, showLabels, showTicks, showGrid, spacingTop, spacingBottom, spacingLeft, spacingRight,
+      width,
+      height,
+      position,
+      tickLength,
+      titleDistance,
+      labelDistance,
+      showTitle,
+      showLabels,
+      showTicks,
+      showGrid,
+      spacingTop,
+      spacingBottom,
+      spacingLeft,
+      spacingRight
     } = this.props;
 
-    const {ticksProps, gridProps, labelsProps, titleProps} = getAxisChildProps(this.props);
+    const {
+      ticksProps,
+      gridProps,
+      labelsProps,
+      titleProps
+    } = getAxisChildProps(this.props);
 
     labelsProps.distance = labelDistance + (showTicks ? tickLength : 0);
 
-    if(showTitle && showLabels) {
+    if (showTitle && showLabels) {
       // todo optimize so we don't generate labels twice
       const labelsMargin = YAxisLabels.getMargin(labelsProps);
-      titleProps.distance = titleDistance + labelsMargin[`margin${_.upperFirst(position)}`];
-    } else if(showTitle && showTicks) {
+      titleProps.distance =
+        titleDistance + labelsMargin[`margin${_.upperFirst(position)}`];
+    } else if (showTitle && showTicks) {
       titleProps.distance = titleDistance + tickLength;
     }
 
-    const axisLineX = (position === 'left') ? -spacingLeft : width + spacingRight;
+    const axisLineX = position === "left" ? -spacingLeft : width + spacingRight;
 
-    return <g className="chart-axis chart-axis-y">
-      {showGrid ? <YGrid {...gridProps} /> : null}
+    return (
+      <g className="rct-chart-axis rct-chart-axis-y">
+        {showGrid ? <YGrid {...gridProps} /> : null}
 
-      {showTicks ? <YTicks {...ticksProps}/> : null}
+        {showTicks ? <YTicks {...ticksProps} /> : null}
 
-      {showLabels ? <YAxisLabels {...labelsProps} /> : null}
+        {showLabels ? <YAxisLabels {...labelsProps} /> : null}
 
-      {showTitle ? <YAxisTitle {...titleProps} /> : null}
+        {showTitle ? <YAxisTitle {...titleProps} /> : null}
 
-      <line
-        className="chart-axis-line chart-axis-line-y"
-        x1={axisLineX} x2={axisLineX}
-        y1={-spacingTop} y2={height + spacingBottom}
-      />
-    </g>;
+        <line
+          className="rct-chart-axis-line rct-chart-axis-line-y"
+          x1={axisLineX}
+          x2={axisLineX}
+          y1={-spacingTop}
+          y2={height + spacingBottom}
+        />
+      </g>
+    );
   }
 }

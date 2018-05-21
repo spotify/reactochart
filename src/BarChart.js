@@ -1,16 +1,15 @@
-import React from 'react';
-import _ from 'lodash';
-import PropTypes from 'prop-types';
-import invariant from 'invariant';
-import RangeBarChart from './RangeBarChart';
-import * as CustomPropTypes from './utils/CustomPropTypes';
-import xyPropsEqual from './utils/xyPropsEqual';
-
+import React from "react";
+import _ from "lodash";
+import PropTypes from "prop-types";
+import invariant from "invariant";
+import RangeBarChart from "./RangeBarChart";
+import * as CustomPropTypes from "./utils/CustomPropTypes";
+import xyPropsEqual from "./utils/xyPropsEqual";
 
 function makeRangeBarChartProps(barChartProps) {
   // this component is a simple wrapper around RangeBarChart,
   // passing accessors to make range bars which span from zero to the data value
-  const {horizontal, x, y} = barChartProps;
+  const { horizontal, x, y } = barChartProps;
 
   return {
     ...barChartProps,
@@ -60,12 +59,12 @@ export default class BarChart extends React.Component {
     barThickness: PropTypes.number,
     /**
      * Inline style object to be applied to each bar,
-     * or accessor function which returns a style object;
+     * or accessor function which returns a style object.
      */
     barStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /**
-     * Class attribute to be applied to each bar.
-     * or accessor function which returns a class;
+     * Class attribute to be applied to each bar,
+     * or accessor function which returns a class.
      */
     barClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 
@@ -86,7 +85,7 @@ export default class BarChart extends React.Component {
     data: [],
     horizontal: false,
     barThickness: 8,
-    barClassName: '',
+    barClassName: "",
     barStyle: {}
   };
 
@@ -99,7 +98,7 @@ export default class BarChart extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['barStyle']);
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ["barStyle"]);
     return shouldUpdate;
   }
 

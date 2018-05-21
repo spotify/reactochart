@@ -1,9 +1,9 @@
-import React from 'react';
-import _ from 'lodash';
-import PropTypes from 'prop-types';
+import React from "react";
+import _ from "lodash";
+import PropTypes from "prop-types";
 
-import YLine from './YLine';
-import {getScaleTicks, getTickDomain} from './utils/Scale';
+import YLine from "./YLine";
+import { getScaleTicks, getTickDomain } from "./utils/Scale";
 
 export default class YGrid extends React.Component {
   static propTypes = {
@@ -26,26 +26,47 @@ export default class YGrid extends React.Component {
   };
 
   static getTickDomain(props) {
-    if(!props.yScale) return;
+    if (!props.yScale) return;
     props = _.defaults({}, props, YGrid.defaultProps);
-    return {yTickDomain: getTickDomain(props.yScale, props)};
+    return { yTickDomain: getTickDomain(props.yScale, props) };
   }
 
   render() {
-    const {width, yScale, tickCount, lineClassName, lineStyle, spacingTop, spacingBottom, spacingLeft, spacingRight} = this.props;
+    const {
+      width,
+      yScale,
+      tickCount,
+      lineClassName,
+      lineStyle,
+      spacingTop,
+      spacingBottom,
+      spacingLeft,
+      spacingRight
+    } = this.props;
     const ticks = this.props.ticks || getScaleTicks(yScale, null, tickCount);
-    const className = `chart-grid-line chart-grid-line-y ${lineClassName || ''}`;
+    const className = `rct-chart-grid-line ${lineClassName || ""}`;
 
-    return <g className="chart-grid-y">
-      {ticks.map((tick, i) => {
-        return <YLine {...{
-          width, yScale, className,
-          spacingTop, spacingBottom, spacingLeft, spacingRight,
-          value: tick,
-          style: lineStyle,
-          key: `grid-y-line-${i}`
-        }} />;
-      })}
-    </g>;
+    return (
+      <g className="chart-grid-y">
+        {ticks.map((tick, i) => {
+          return (
+            <YLine
+              {...{
+                width,
+                yScale,
+                className,
+                spacingTop,
+                spacingBottom,
+                spacingLeft,
+                spacingRight,
+                value: tick,
+                style: lineStyle,
+                key: `grid-y-line-${i}`
+              }}
+            />
+          );
+        })}
+      </g>
+    );
   }
 }

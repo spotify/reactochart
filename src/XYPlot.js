@@ -1,15 +1,17 @@
-import React from 'react';
-import _ from 'lodash';
-import PropTypes from 'prop-types';
+import React from "react";
+import _ from "lodash";
+import PropTypes from "prop-types";
 
-import resolveXYScales from './utils/resolveXYScales';
-import {innerSize} from './utils/Margin';
-import {inferScaleType} from './utils/Scale';
-import {methodIfFuncProp} from './util';
+import resolveXYScales from "./utils/resolveXYScales";
+import { innerSize } from "./utils/Margin";
+import { inferScaleType } from "./utils/Scale";
+import { methodIfFuncProp } from "./util";
 
 function indexOfClosestNumberInList(number, list) {
   return list.reduce((closestI, current, i) => {
-    return Math.abs(current - number) < Math.abs(list[closestI] - number) ? i : closestI;
+    return Math.abs(current - number) < Math.abs(list[closestI] - number)
+      ? i
+      : closestI;
   }, 0);
 }
 
@@ -21,26 +23,70 @@ function invertPointScale(scale, rangeValue) {
   return scale.domain()[nearestPointIndex];
 }
 
-function getMouseOptions(event, {xScale, yScale, height, width, marginTop, marginBottom, marginLeft, marginRight}) {
+function getMouseOptions(
+  event,
+  {
+    xScale,
+    yScale,
+    height,
+    width,
+    marginTop,
+    marginBottom,
+    marginLeft,
+    marginRight
+  }
+) {
   const chartBB = event.currentTarget.getBoundingClientRect();
   const outerX = Math.round(event.clientX - chartBB.left);
   const outerY = Math.round(event.clientY - chartBB.top);
-  const innerX = (outerX - (marginLeft || 0));
-  const innerY = (outerY -(marginTop || 0));
-  const chartSize = innerSize({width, height}, {top: marginTop, bottom: marginBottom, left: marginLeft, right: marginRight});
+  const innerX = outerX - (marginLeft || 0);
+  const innerY = outerY - (marginTop || 0);
+  const chartSize = innerSize(
+    { width, height },
+    {
+      top: marginTop,
+      bottom: marginBottom,
+      left: marginLeft,
+      right: marginRight
+    }
+  );
   const xScaleType = inferScaleType(xScale);
   const yScaleType = inferScaleType(yScale);
 
-  const xValue = (!_.inRange(innerX, 0, chartSize.width /* + padding.left + padding.right */)) ? null :
-    (xScaleType === 'ordinal') ?
-      invertPointScale(xScale, innerX) :
-      xScale.invert(innerX);
-  const yValue = (!_.inRange(innerY, 0, chartSize.height /* + padding.top + padding.bottom */)) ? null :
-    (yScaleType === 'ordinal') ?
-      invertPointScale(yScale, innerY) :
-      yScale.invert(innerY);
+  const xValue = !_.inRange(
+    innerX,
+    0,
+    chartSize.width /* + padding.left + padding.right */
+  )
+    ? null
+    : xScaleType === "ordinal"
+      ? invertPointScale(xScale, innerX)
+      : xScale.invert(innerX);
+  const yValue = !_.inRange(
+    innerY,
+    0,
+    chartSize.height /* + padding.top + padding.bottom */
+  )
+    ? null
+    : yScaleType === "ordinal"
+      ? invertPointScale(yScale, innerY)
+      : yScale.invert(innerY);
 
-  return {event, outerX, outerY, innerX, innerY, xValue, yValue, xScale, yScale, marginTop, marginBottom, marginLeft, marginRight};
+  return {
+    event,
+    outerX,
+    outerY,
+    innerX,
+    innerY,
+    xValue,
+    yValue,
+    xScale,
+    yScale,
+    marginTop,
+    marginBottom,
+    marginLeft,
+    marginRight
+  };
 }
 
 class XYPlot extends React.Component {
@@ -61,20 +107,28 @@ class XYPlot extends React.Component {
      */
     xDomain: PropTypes.array,
     yDomain: PropTypes.array,
-    /**
-     * d3 scales for the X and Y axes of the chart, in {x, y} object format.
-     * (optional, normally determined automatically by XYPlot)
-     */
-    xScale: PropTypes.func,
-    yScale: PropTypes.func,
 
     xScaleType: PropTypes.string,
     yScaleType: PropTypes.string,
 
     /**
+     * Whether or not to invert the x and y scales
+     */
+    invertXScale: PropTypes.bool,
+    invertYScale: PropTypes.bool,
+
+    /**
+     * Whether or not to coerce 0 into your x domain
+     */
+    includeXZero: PropTypes.bool,
+    /**
+     * Whether or not to coerce 0 into your y domain
+     */
+    includeYZero: PropTypes.bool,
+
+    /**
      *
      */
-    margin: PropTypes.object,
     marginTop: PropTypes.number,
     marginBottom: PropTypes.number,
     marginLeft: PropTypes.number,
@@ -86,76 +140,128 @@ class XYPlot extends React.Component {
     spacingLeft: PropTypes.number,
     spacingRight: PropTypes.number,
 
-    paddingTop: PropTypes.number,
-    paddingBottom: PropTypes.number,
-    paddingLeft: PropTypes.number,
-    paddingRight: PropTypes.number,
-
-    invertXScale: PropTypes.bool,
-    invertYScale: PropTypes.bool,
+    // todo implement padding (helper for spacing)
+    // paddingTop: PropTypes.number,
+    // paddingBottom: PropTypes.number,
+    // paddingLeft: PropTypes.number,
+    // paddingRight: PropTypes.number,
 
     onMouseMove: PropTypes.func,
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
     onMouseDown: PropTypes.func,
-    onMouseUp: PropTypes.func
+    onMouseUp: PropTypes.func,
+
+    /**
+     * Class attribute applied to xy plot
+     */
+    xyPlotClassName: PropTypes.string
   };
 
   static defaultProps = {
     width: 400,
     height: 250,
-    // invertScale: {x: false, y: false},
     invertXScale: false,
-    invertYScale: false
-    // emptyLabel: "Unknown",
-
-    // these values are inferred from data if not provided, therefore empty defaults
-    // scaleType: {},
-    // domain: {},
-    // margin: {},
-    //spacing: {top: 0, bottom: 0, left: 0, right: 0}
+    invertYScale: false,
+    includeXZero: false,
+    includeYZero: false,
+    xyPlotClassName: ""
   };
 
   onXYMouseEvent = (callbackKey, event) => {
     const callback = this.props[callbackKey];
-    if(!_.isFunction(callback)) return;
+    if (!_.isFunction(callback)) return;
     const options = getMouseOptions(event, this.props);
     callback(options);
   };
-  onMouseMove = _.partial(this.onXYMouseEvent, 'onMouseMove');
-  onMouseDown = _.partial(this.onXYMouseEvent, 'onMouseDown');
-  onMouseUp = _.partial(this.onXYMouseEvent, 'onMouseUp');
-  onClick = _.partial(this.onXYMouseEvent, 'onClick');
-  onMouseEnter = (event) => this.props.onMouseEnter({event});
-  onMouseLeave = (event) => this.props.onMouseLeave({event});
+  onMouseMove = _.partial(this.onXYMouseEvent, "onMouseMove");
+  onMouseDown = _.partial(this.onXYMouseEvent, "onMouseDown");
+  onMouseUp = _.partial(this.onXYMouseEvent, "onMouseUp");
+  onClick = _.partial(this.onXYMouseEvent, "onClick");
+  onMouseEnter = event => this.props.onMouseEnter({ event });
+  onMouseLeave = event => this.props.onMouseLeave({ event });
 
   render() {
-    const {width, height, marginTop, marginBottom, marginLeft, marginRight, spacingTop, spacingBottom, spacingLeft, spacingRight}
-      = this.props;
+    const {
+      width,
+      height,
+      marginTop,
+      marginBottom,
+      marginLeft,
+      marginRight,
+      spacingTop,
+      spacingBottom,
+      spacingLeft,
+      spacingRight,
+      xyPlotClassName,
+      // Passed in as prop from resolveXYScales
+      xScale,
+      yScale
+    } = this.props;
     // subtract margin + spacing from width/height to obtain inner width/height of panel & chart area
     // panelSize is the area including chart + spacing but NOT margin
     // chartSize is smaller, chart *only*, not including margin or spacing
-    const panelSize = innerSize({width, height}, {top: marginTop, bottom: marginBottom, left: marginLeft, right: marginRight});
-    const chartSize = innerSize(panelSize, {top: spacingTop, bottom: spacingBottom, left: spacingLeft, right: spacingRight});
+    const panelSize = innerSize(
+      { width, height },
+      {
+        top: marginTop,
+        bottom: marginBottom,
+        left: marginLeft,
+        right: marginRight
+      }
+    );
+    const chartSize = innerSize(panelSize, {
+      top: spacingTop,
+      bottom: spacingBottom,
+      left: spacingLeft,
+      right: spacingRight
+    });
 
-    const handlerNames = ['onMouseMove', 'onMouseEnter', 'onMouseLeave', 'onMouseDown', 'onMouseUp', 'onClick'];
-    const handlers = _.fromPairs(handlerNames.map(n => [n, methodIfFuncProp(n, this.props, this)]));
-
+    const handlerNames = [
+      "onMouseMove",
+      "onMouseEnter",
+      "onMouseLeave",
+      "onMouseDown",
+      "onMouseUp",
+      "onClick"
+    ];
+    const handlers = _.fromPairs(
+      handlerNames.map(n => [n, methodIfFuncProp(n, this.props, this)])
+    );
+    const scales = {
+      xScale,
+      yScale
+    };
+    const xyPlotPropKeys = _.keys(XYPlot.propTypes);
     const propsToPass = {
-      ..._.omit(this.props, ['children']),
-      ...chartSize
+      ..._.pick(this.props, xyPlotPropKeys),
+      ...chartSize,
+      ...scales
     };
 
-    return <svg {...{width, height, className: 'xy-plot'}} {...handlers}>
-      <rect className="chart-background" {...{width, height}} />
-      <g transform={`translate(${marginLeft + spacingLeft}, ${marginTop + spacingTop})`} className="chart-inner">
-        <rect transform={`translate(${-spacingLeft}, ${-spacingTop})`} className="plot-background" {...panelSize} />
-        {React.Children.map(this.props.children, child => {
-          return (_.isNull(child) || _.isUndefined(child)) ? null :
-            React.cloneElement(child, propsToPass);
-        })}
-      </g>
-    </svg>
+    const className = `rct-xy-plot ${this.props.xyPlotClassName}`;
+
+    return (
+      <svg {...{ width, height, className }} {...handlers}>
+        <rect className="rct-chart-background" {...{ width, height }} />
+        <g
+          transform={`translate(${marginLeft + spacingLeft}, ${marginTop +
+            spacingTop})`}
+          className="rct-chart-inner"
+        >
+          <rect
+            transform={`translate(${-spacingLeft}, ${-spacingTop})`}
+            className="rct-plot-background"
+            {...panelSize}
+          />
+          {React.Children.map(this.props.children, child => {
+            return _.isNull(child) || _.isUndefined(child)
+              ? null
+              : React.cloneElement(child, propsToPass);
+          })}
+        </g>
+      </svg>
+    );
   }
 }
 

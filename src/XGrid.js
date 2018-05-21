@@ -1,10 +1,9 @@
-import React from 'react';
-import _ from 'lodash';
-import PropTypes from 'prop-types';
+import React from "react";
+import _ from "lodash";
+import PropTypes from "prop-types";
 
-import {getScaleTicks, getTickDomain} from './utils/Scale';
-import XLine from './XLine';
-
+import { getScaleTicks, getTickDomain } from "./utils/Scale";
+import XLine from "./XLine";
 
 export default class XGrid extends React.Component {
   static propTypes = {
@@ -27,26 +26,47 @@ export default class XGrid extends React.Component {
   };
 
   static getTickDomain(props) {
-    if(!props.xScale) return;
+    if (!props.xScale) return;
     props = _.defaults({}, props, XGrid.defaultProps);
-    return {xTickDomain: getTickDomain(props.xScale, props)};
+    return { xTickDomain: getTickDomain(props.xScale, props) };
   }
 
   render() {
-    const {height, xScale, tickCount, lineClassName, lineStyle, spacingTop, spacingBottom, spacingLeft, spacingRight} = this.props;
+    const {
+      height,
+      xScale,
+      tickCount,
+      lineClassName,
+      lineStyle,
+      spacingTop,
+      spacingBottom,
+      spacingLeft,
+      spacingRight
+    } = this.props;
     const ticks = this.props.ticks || getScaleTicks(xScale, null, tickCount);
-    const className = `chart-grid-line chart-grid-line-x ${lineClassName || ''}`;
+    const className = `rct-chart-grid-line ${lineClassName || ""}`;
 
-    return <g className="chart-grid-x">
-      {ticks.map((tick, i) => {
-        return <XLine {...{
-          height, xScale, className,
-          spacingTop, spacingBottom, spacingLeft, spacingRight,
-          value: tick,
-          style: lineStyle,
-          key: `grid-x-line-${i}`
-        }} />;
-      })}
-    </g>;
+    return (
+      <g className="rct-chart-grid-x">
+        {ticks.map((tick, i) => {
+          return (
+            <XLine
+              {...{
+                height,
+                xScale,
+                className,
+                spacingTop,
+                spacingBottom,
+                spacingLeft,
+                spacingRight,
+                value: tick,
+                style: lineStyle,
+                key: `grid-x-line-${i}`
+              }}
+            />
+          );
+        })}
+      </g>
+    );
   }
 }

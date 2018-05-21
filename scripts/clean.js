@@ -1,7 +1,7 @@
 const fs = require("fs");
 const sh = require("shelljs");
 
-const {fileExists, dirExists} = require("./utils");
+const { fileExists, dirExists } = require("./utils");
 
 const srcContents = sh.ls("src");
 
@@ -22,8 +22,13 @@ srcContents.forEach(fileOrDir => {
     sh.rm("-rf", `./${fileOrDir}`);
   }
   // check for source maps too
-  if(fileExists(`./${fileOrDir}.map`)) {
+  if (fileExists(`./${fileOrDir}.map`)) {
     console.log(`deleting file ./${fileOrDir}.map`);
     sh.rm(`./${fileOrDir}.map`);
   }
 });
+
+// Clean compiled css file
+if (fileExists("./styles.css")) {
+  sh.rm("./styles.css");
+}

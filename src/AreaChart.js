@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import _ from 'lodash';
-import {area} from 'd3';
+import React from "react";
+import PropTypes from "prop-types";
+import _ from "lodash";
+import { area } from "d3";
 
-import {makeAccessor2, domainFromData, combineDomains} from './utils/Data';
-import xyPropsEqual from './utils/xyPropsEqual';
-import * as CustomPropTypes from './utils/CustomPropTypes';
+import { makeAccessor2, domainFromData, combineDomains } from "./utils/Data";
+import xyPropsEqual from "./utils/xyPropsEqual";
+import * as CustomPropTypes from "./utils/CustomPropTypes";
 
 // AreaChart represents a simple bivariate area chart,
 // a filled path drawn between two lines (datasets).
 
 // todo horizontal prop, for filling area horizontally?
-// todo support categorical data?
+// todo support ordinal (like days of the week) data?
 // todo build StackedAreaChart that composes multiple AreaCharts
 
 export default class AreaChart extends React.Component {
@@ -36,6 +36,10 @@ export default class AreaChart extends React.Component {
      * Should return the maximum of the Y range spanned by the area at this point.
      */
     yEnd: CustomPropTypes.valueOrAccessor,
+    /**
+     * classname applied to area path element
+     */
+    pathClassName: PropTypes.string,
     /**
      * style applied to area path element
      */
@@ -76,43 +80,73 @@ export default class AreaChart extends React.Component {
     /**
      * Type of Y scale - provided by XYPlot
      */
-    yScaleType: PropTypes.string,
+    yScaleType: PropTypes.string
   };
+
   static defaultProps = {
     shouldShowGaps: true,
     isDefined: (d, i, accessors) => {
-      return !_.isUndefined(accessors.y(d, i)) && !_.isUndefined(accessors.yEnd(d, i));
-    }
+      return (
+        !_.isUndefined(accessors.y(d, i)) &&
+        !_.isUndefined(accessors.yEnd(d, i))
+      );
+    },
+    pathClassName: ""
   };
 
   static getDomain(props) {
     // custom Y domain - the total (union) extent of getY and getYEnd combined
-    const {data, x, y, yEnd} = props;
-    const accessors = {x: makeAccessor2(x), y: makeAccessor2(y), yEnd: makeAccessor2(yEnd)};
+    const { data, x, y, yEnd } = props;
+    const accessors = {
+      x: makeAccessor2(x),
+      y: makeAccessor2(y),
+      yEnd: makeAccessor2(yEnd)
+    };
     return {
       yDomain: combineDomains([
         domainFromData(data, accessors.y),
         domainFromData(data, accessors.yEnd)
       ])
-    }
+    };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['pathStyle', 'pathStylePositive', 'pathStyleNegative']);
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, [
+      "pathStyle",
+      "pathStylePositive",
+      "pathStyleNegative"
+    ]);
     return shouldUpdate;
   }
 
   render() {
-    const {name, data, x, y, yEnd, xScale, yScale, isDifference, pathStyle,
-      pathStylePositive, pathStyleNegative, shouldShowGaps, isDefined} = this.props;
-    const accessors = {x: makeAccessor2(x), y: makeAccessor2(y), yEnd: makeAccessor2(yEnd)};
+    const {
+      data,
+      x,
+      y,
+      yEnd,
+      xScale,
+      yScale,
+      isDifference,
+      pathStyle,
+      pathStylePositive,
+      pathStyleNegative,
+      shouldShowGaps,
+      pathClassName,
+      isDefined
+    } = this.props;
+    const accessors = {
+      x: makeAccessor2(x),
+      y: makeAccessor2(y),
+      yEnd: makeAccessor2(yEnd)
+    };
 
     // create d3 area path generator
     const areaGenerator = area();
 
     // if gaps in data should be shown, use `props.isDefined` function as the `defined` param for d3's area generator;
     // but wrap it & pass in accessors as well, so that the function can easily access the relevant data values
-    if(shouldShowGaps) {
+    if (shouldShowGaps) {
       areaGenerator.defined((d, i) => isDefined(d, i, accessors));
     }
 
@@ -123,7 +157,7 @@ export default class AreaChart extends React.Component {
 
     const areaPathStr = areaGenerator(data);
 
-    if(isDifference) {
+    if (isDifference) {
       // difference chart - create 2 clip paths, one which clips to only show path where YEnd > Y, and other vice versa
       areaGenerator.y0(this.props.height);
       const clipBelowPathStr = areaGenerator(data);
@@ -131,27 +165,44 @@ export default class AreaChart extends React.Component {
       const clipAbovePathStr = areaGenerator(data);
 
       // make sure we have a unique ID for this chart, so clip path IDs don't affect other charts
-      const chartId = name || _.uniqueId();
+      const chartId = _.uniqueId();
       const clipAboveId = `clip-above-area-${chartId}`;
       const clipBelowId = `clip-below-area-${chartId}`;
       const pathStyleAbove = pathStylePositive || pathStyle || {};
       const pathStyleBelow = pathStyleNegative || pathStyle || {};
 
-      return (<g className={`${name} area-chart`}>
-        <clipPath id={clipAboveId}>
-          <path d={clipAbovePathStr} />
-        </clipPath>
-        <clipPath id={clipBelowId}>
-          <path d={clipBelowPathStr} />
-        </clipPath>
-        <path className="area-chart-path" d={areaPathStr} clipPath={`url(#${clipAboveId})`} style={pathStyleAbove} />
-        <path className="area-chart-path" d={areaPathStr} clipPath={`url(#${clipBelowId})`} style={pathStyleBelow} />
-      </g>);
-
+      return (
+        <g className={`${name} rct-area-chart--difference`}>
+          <clipPath id={clipAboveId}>
+            <path className="rct-area-chart-path" d={clipAbovePathStr} />
+          </clipPath>
+          <clipPath id={clipBelowId}>
+            <path className="rct-area-chart-path" d={clipBelowPathStr} />
+          </clipPath>
+          <path
+            className="rct-area-chart-path"
+            d={areaPathStr}
+            clipPath={`url(#${clipAboveId})`}
+            style={pathStyleAbove}
+          />
+          <path
+            className="rct-area-chart-path"
+            d={areaPathStr}
+            clipPath={`url(#${clipBelowId})`}
+            style={pathStyleBelow}
+          />
+        </g>
+      );
     } else {
-      return (<g className={`${name} area-chart`}>
-        <path className="area-chart-path" d={areaPathStr} style={pathStyle || {}} />
-      </g>);
+      return (
+        <g className={`${name} rct-area-chart`}>
+          <path
+            className={`rct-area-chart-path ${pathClassName}`}
+            d={areaPathStr}
+            style={pathStyle || {}}
+          />
+        </g>
+      );
     }
   }
 }

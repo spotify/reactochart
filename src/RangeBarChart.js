@@ -1,12 +1,18 @@
-import React from 'react';
-import _ from 'lodash';
-import invariant from 'invariant';
-import PropTypes from 'prop-types';
-import * as CustomPropTypes from './utils/CustomPropTypes';
-import {hasXYScales, dataTypeFromScaleType} from './utils/Scale';
-import {makeAccessor2, getValue, domainFromRangeData, domainFromData, getDataDomainByAxis} from './utils/Data';
-import xyPropsEqual from './utils/xyPropsEqual';
-import Bar from './Bar';
+import React from "react";
+import _ from "lodash";
+import invariant from "invariant";
+import PropTypes from "prop-types";
+import * as CustomPropTypes from "./utils/CustomPropTypes";
+import { hasXYScales, dataTypeFromScaleType } from "./utils/Scale";
+import {
+  makeAccessor2,
+  getValue,
+  domainFromRangeData,
+  domainFromData,
+  getDataDomainByAxis
+} from "./utils/Data";
+import xyPropsEqual from "./utils/xyPropsEqual";
+import Bar from "./Bar";
 
 /**
  *
@@ -68,12 +74,12 @@ export default class RangeBarChart extends React.Component {
 
     /**
      * Inline style object to be applied to each bar,
-     * or accessor function which returns a style object;
+     * or accessor function which returns a style object.
      */
     barStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /**
-     * Class attribute to be applied to each bar.
-     * or accessor function which returns a class;
+     * Class attribute to be applied to each bar,
+     * or accessor function which returns a class.
      */
     barClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 
@@ -94,26 +100,52 @@ export default class RangeBarChart extends React.Component {
     data: [],
     horizontal: false,
     barThickness: 8,
-    barClassName: '',
+    barClassName: "",
     barStyle: {}
   };
 
   static getDomain(props) {
-    const {xScaleType, yScaleType, horizontal, data, x, xEnd, y, yEnd} = props;
+    const {
+      xScaleType,
+      yScaleType,
+      horizontal,
+      data,
+      x,
+      xEnd,
+      y,
+      yEnd
+    } = props;
 
     // only have to specify range axis domain, other axis uses default domainFromData
-    const rangeAxis = horizontal ? 'x' : 'y';
+    const rangeAxis = horizontal ? "x" : "y";
     const rangeStartAccessor = horizontal ? makeAccessor2(x) : makeAccessor2(y);
-    const rangeEndAccessor = horizontal ? makeAccessor2(xEnd) : makeAccessor2(yEnd);
+    const rangeEndAccessor = horizontal
+      ? makeAccessor2(xEnd)
+      : makeAccessor2(yEnd);
     const rangeScaleType = horizontal ? xScaleType : yScaleType;
     const rangeDataType = dataTypeFromScaleType(rangeScaleType);
 
     return {
-      [`${rangeAxis}Domain`]: domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, rangeDataType)
+      [`${rangeAxis}Domain`]: domainFromRangeData(
+        data,
+        rangeStartAccessor,
+        rangeEndAccessor,
+        rangeDataType
+      )
     };
   }
   static getSpacing(props) {
-    const {barThickness, horizontal, x, y, xScale, yScale, data, xDomain, yDomain} = props;
+    const {
+      barThickness,
+      horizontal,
+      x,
+      y,
+      xScale,
+      yScale,
+      data,
+      xDomain,
+      yDomain
+    } = props;
     const P = barThickness / 2; //padding
     const barsDomain = horizontal ? yDomain : xDomain;
     const barsScale = horizontal ? yScale : xScale;
@@ -122,61 +154,100 @@ export default class RangeBarChart extends React.Component {
 
     // todo refactor/add better comments to clarify
     //find the edges of the tick domain, and map them through the scale function
-    const [domainHead, domainTail] = _([_.first(barsDomain), _.last(barsDomain)]).map(barsScale).sortBy(); //sort the pixel values return by the domain extents
+    const [domainHead, domainTail] = _([
+      _.first(barsDomain),
+      _.last(barsDomain)
+    ])
+      .map(barsScale)
+      .sortBy(); //sort the pixel values return by the domain extents
     //find the edges of the data domain, and map them through the scale function
-    const [dataDomainHead, dataDomainTail] = _([_.first(barsDataDomain), _.last(barsDataDomain)]).map(barsScale).sortBy(); //sort the pixel values return by the domain extents
+    const [dataDomainHead, dataDomainTail] = _([
+      _.first(barsDataDomain),
+      _.last(barsDataDomain)
+    ])
+      .map(barsScale)
+      .sortBy(); //sort the pixel values return by the domain extents
     //find the necessary spacing (based on bar width) to push the bars completely inside the tick domain
     const [spacingTail, spacingHead] = [
       _.clamp(P - (domainTail - dataDomainTail), 0, P),
       _.clamp(P - (dataDomainHead - domainHead), 0, P)
     ];
-    if(horizontal) {
-      return {spacingTop: spacingHead, spacingBottom: spacingTail, spacingLeft: 0, spacingRight: 0};
+    if (horizontal) {
+      return {
+        spacingTop: spacingHead,
+        spacingBottom: spacingTail,
+        spacingLeft: 0,
+        spacingRight: 0
+      };
     } else {
-      return {spacingTop: 0, spacingBottom: 0, spacingLeft: spacingHead, spacingRight: spacingTail}
+      return {
+        spacingTop: 0,
+        spacingBottom: 0,
+        spacingLeft: spacingHead,
+        spacingRight: spacingTail
+      };
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['barStyle']);
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ["barStyle"]);
     return shouldUpdate;
   }
 
   render() {
-    const {xScale, yScale, data, horizontal, x, xEnd, y, yEnd, barThickness, barClassName, barStyle} = this.props;
+    const {
+      xScale,
+      yScale,
+      data,
+      horizontal,
+      x,
+      xEnd,
+      y,
+      yEnd,
+      barThickness,
+      barClassName,
+      barStyle
+    } = this.props;
     // invariant(hasOneOfTwo(xEnd, yEnd), `RangeBarChart expects a xEnd *or* yEnd prop, but not both.`);
 
-    return <g>
-      {data.map((d, i) => {
-        const [onMouseEnter, onMouseMove, onMouseLeave] =
-          ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(eventName => {
+    return (
+      <g>
+        {data.map((d, i) => {
+          const [onMouseEnter, onMouseMove, onMouseLeave] = [
+            "onMouseEnterBar",
+            "onMouseMoveBar",
+            "onMouseLeaveBar"
+          ].map(eventName => {
             // partially apply this bar's data point as 2nd callback argument
             const callback = _.get(this.props, eventName);
             return _.isFunction(callback) ? _.partial(callback, _, d) : null;
-        });
+          });
 
-        const barProps = {
-          x: getValue(x, d, i),
-          y: getValue(y, d, i),
-          xEnd: horizontal ? getValue(xEnd, d, i) : undefined,
-          yEnd: horizontal ? undefined : getValue(yEnd, d, i),
-          xScale, yScale,
-          key: `chart-bar-${i}`,
-          onMouseEnter,
-          onMouseMove,
-          onMouseLeave,
-          thickness: barThickness,
-          className: `chart-bar ${getValue(barClassName, d, i) || ''}`,
-          style: getValue(barStyle, d, i)
-        };
+          const barProps = {
+            x: getValue(x, d, i),
+            y: getValue(y, d, i),
+            xEnd: horizontal ? getValue(xEnd, d, i) : undefined,
+            yEnd: horizontal ? undefined : getValue(yEnd, d, i),
+            xScale,
+            yScale,
+            key: `chart-bar-${i}`,
+            onMouseEnter,
+            onMouseMove,
+            onMouseLeave,
+            thickness: barThickness,
+            className: `rct-chart-bar ${getValue(barClassName, d, i) || ""}`,
+            style: getValue(barStyle, d, i)
+          };
 
-        return <Bar {...barProps}/>;
+          return <Bar {...barProps} />;
 
-        // console.log('xEnd yEnd value', getValue(xEnd, d), getValue(yEnd, d), horizontal);
-        return horizontal ?
-          <Bar xEnd={getValue(xEnd, d, i)} {...barProps} /> :
-          <Bar yEnd={getValue(yEnd, d, i)} {...barProps} />;
-      })}
-    </g>;
+          return horizontal ? (
+            <Bar xEnd={getValue(xEnd, d, i)} {...barProps} />
+          ) : (
+            <Bar yEnd={getValue(yEnd, d, i)} {...barProps} />
+          );
+        })}
+      </g>
+    );
   }
 }

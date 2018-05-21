@@ -13,7 +13,7 @@
 
 /*eslint-disable no-self-compare */
 
-'use strict';
+"use strict";
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -23,7 +23,8 @@ const hasOwnProperty = Object.prototype.hasOwnProperty;
  */
 function is(x: mixed, y: mixed): boolean {
   // SameValue algorithm
-  if (x === y) { // Steps 1-5, 7-10
+  if (x === y) {
+    // Steps 1-5, 7-10
     // Steps 6.b-6.e: +0 != -0
     return x !== 0 || 1 / (x: $FlowIssue) === 1 / (y: $FlowIssue);
   } else {
@@ -42,8 +43,12 @@ function shallowEqual(objA: mixed, objB: mixed): boolean {
     return true;
   }
 
-  if (typeof objA !== 'object' || objA === null ||
-    typeof objB !== 'object' || objB === null) {
+  if (
+    typeof objA !== "object" ||
+    objA === null ||
+    typeof objB !== "object" ||
+    objB === null
+  ) {
     // console.log('shallowEqual: not object??');
     return false;
   }

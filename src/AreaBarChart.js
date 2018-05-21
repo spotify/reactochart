@@ -1,12 +1,17 @@
-import React from 'react';
-import _ from 'lodash';
-import invariant from 'invariant';
-import PropTypes from 'prop-types';
-import * as CustomPropTypes from './utils/CustomPropTypes';
-import {hasXYScales, dataTypeFromScaleType} from './utils/Scale';
-import {makeAccessor, makeAccessor2, getValue, domainFromRangeData} from './utils/Data';
-import xyPropsEqual from './utils/xyPropsEqual';
-import RangeRect from './RangeRect';
+import React from "react";
+import _ from "lodash";
+import invariant from "invariant";
+import PropTypes from "prop-types";
+import * as CustomPropTypes from "./utils/CustomPropTypes";
+import { hasXYScales, dataTypeFromScaleType } from "./utils/Scale";
+import {
+  makeAccessor,
+  makeAccessor2,
+  getValue,
+  domainFromRangeData
+} from "./utils/Data";
+import xyPropsEqual from "./utils/xyPropsEqual";
+import RangeRect from "./RangeRect";
 
 /**
  * `AreaBarChart` is a variation on the standard bar chart. Just like a normal bar chart, each bar represents a single
@@ -90,58 +95,87 @@ export default class AreaBarChart extends React.Component {
   static defaultProps = {
     data: [],
     horizontal: false,
-    barClassName: '',
+    barClassName: "",
     barStyle: {}
   };
 
   shouldComponentUpdate(nextProps, nextState) {
-    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['barStyle']);
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ["barStyle"]);
     // console.log('should areabarchart update?', shouldUpdate);
     return shouldUpdate;
   }
 
   static getDomain(props) {
-    const {xScaleType, yScaleType, horizontal, data} = props;
+    const { xScaleType, yScaleType, horizontal, data } = props;
 
     // only have to specify range axis domain, other axis uses default domainFromData
     // for area bar chart, the independent variable is the range
     // ie. the range controls the thickness of the bar
-    const rangeAxis = horizontal ? 'y' : 'x';
-    const rangeDataType = dataTypeFromScaleType(rangeAxis === 'x' ? xScaleType : yScaleType);
+    const rangeAxis = horizontal ? "y" : "x";
+    const rangeDataType = dataTypeFromScaleType(
+      rangeAxis === "x" ? xScaleType : yScaleType
+    );
     // make accessor functions from getX|Y and getX|YEnd
     const rangeStartAccessor = makeAccessor2(props[`${rangeAxis}`]);
     const rangeEndAccessor = makeAccessor2(props[`${rangeAxis}End`]);
 
     return {
-      [rangeAxis+'Domain']: domainFromRangeData(data, rangeStartAccessor, rangeEndAccessor, rangeDataType)
+      [rangeAxis + "Domain"]: domainFromRangeData(
+        data,
+        rangeStartAccessor,
+        rangeEndAccessor,
+        rangeDataType
+      )
     };
   }
 
   render() {
-    const {xScale, yScale, data, horizontal, x, xEnd, y, yEnd, barClassName, barStyle} = this.props;
+    const {
+      xScale,
+      yScale,
+      data,
+      horizontal,
+      x,
+      xEnd,
+      y,
+      yEnd,
+      barClassName,
+      barStyle
+    } = this.props;
 
-    return <g>
-      {data.map((d, i) => {
-        const [onMouseEnter, onMouseMove, onMouseLeave] =
-          ['onMouseEnterBar', 'onMouseMoveBar', 'onMouseLeaveBar'].map(eventName => {
+    return (
+      <g>
+        {data.map((d, i) => {
+          const [onMouseEnter, onMouseMove, onMouseLeave] = [
+            "onMouseEnterBar",
+            "onMouseMoveBar",
+            "onMouseLeaveBar"
+          ].map(eventName => {
             // partially apply this bar's data point as 2nd callback argument
             const callback = _.get(this.props, eventName);
             return _.isFunction(callback) ? _.partial(callback, _, d) : null;
-        });
+          });
 
-        return <RangeRect {...{
-          xScale, yScale,
-          className: `chart-area-bar ${getValue(barClassName, d, i)}`,
-          style: getValue(barStyle, d, i),
-          x: horizontal ? 0 : getValue(x, d, i),
-          xEnd: horizontal ? getValue(x, d, i) : getValue(xEnd, d, i),
-          y: !horizontal ? 0 : getValue(y, d, i),
-          yEnd: !horizontal ? getValue(y, d, i) : getValue(yEnd, d, i),
-          key: `chart-area-bar-${i}`,
-          onMouseEnter, onMouseMove, onMouseLeave
-          }}
-        />;
-      })}
-    </g>;
+          return (
+            <RangeRect
+              {...{
+                xScale,
+                yScale,
+                className: `rct-chart-area-bar ${getValue(barClassName, d, i)}`,
+                style: getValue(barStyle, d, i),
+                x: horizontal ? 0 : getValue(x, d, i),
+                xEnd: horizontal ? getValue(x, d, i) : getValue(xEnd, d, i),
+                y: !horizontal ? 0 : getValue(y, d, i),
+                yEnd: !horizontal ? getValue(y, d, i) : getValue(yEnd, d, i),
+                key: `rct-chart-area-bar-${i}`,
+                onMouseEnter,
+                onMouseMove,
+                onMouseLeave
+              }}
+            />
+          );
+        })}
+      </g>
+    );
   }
 }

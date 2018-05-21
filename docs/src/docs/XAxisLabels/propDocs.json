@@ -59,12 +59,178 @@
     }
   ],
   "props": {
+    "height": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "250",
+        "computed": false
+      }
+    },
+    "position": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "\"top\"",
+            "computed": false
+          },
+          {
+            "value": "\"bottom\"",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "\"bottom\"",
+        "computed": false
+      }
+    },
+    "placement": {
+      "type": {
+        "name": "enum",
+        "value": [
+          {
+            "value": "\"below\"",
+            "computed": false
+          },
+          {
+            "value": "\"above\"",
+            "computed": false
+          }
+        ]
+      },
+      "required": false,
+      "description": "Placement of labels in regards to the x axis. Accepted options are \"above\" or \"below\"",
+      "defaultValue": {
+        "value": "undefined",
+        "computed": true
+      }
+    },
     "xScale": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "D3 scale for X axis - provided by XYPlot"
+    },
+    "spacingTop": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Spacing - provided by XYPlot"
+    },
+    "spacingBottom": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Spacing - provided by XYPlot"
+    },
+    "distance": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Label distance from X Axis",
+      "defaultValue": {
+        "value": "4",
+        "computed": false
+      }
+    },
+    "tickCount": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Number of ticks on axis",
+      "defaultValue": {
+        "value": "10",
+        "computed": false
+      }
+    },
+    "ticks": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": "Custom ticks to display",
+      "defaultValue": {
+        "value": "null",
+        "computed": false
+      }
+    },
+    "labelStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "Object declaring styles for label.\n\nDisclaimer: labelStyle will merge its defaults with the given labelStyle prop\nin order to ensure that our collision library measureText is able to calculate the\nsmallest amount of possible collissions along the axis. It's therefore dependent on\nfontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized\nstylesheet, we suggest creating a styled label component that wraps XAxisLabels with your preferred styles.",
+      "defaultValue": {
+        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: \"14px\",\n  lineHeight: 1,\n  textAnchor: \"middle\"\n}",
+        "computed": false
+      }
+    },
+    "labelClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
+    },
+    "format": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "Format to use for the labels\n\nFor example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit",
+      "defaultValue": {
+        "value": "undefined",
+        "computed": true
+      }
+    },
+    "formats": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": "Formats to use for the labels in priority order. XAxisLabels will try to be smart about which format\nto use that keeps the labels distinct and provides the least amount of collisions when rendered.\n\nFor example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit",
+      "defaultValue": {
+        "value": "undefined",
+        "computed": true
+      }
+    },
+    "labels": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": "Custom labels provided. Note that each object in the array has to be of shape\n`{\n value,\n text,\n height,\n width\n}`\nvalue - value you'd like this label to be aligned with\ntext - text you'd like displayed\nheight - height of the given label\nwidth - width of the given label",
+      "defaultValue": {
+        "value": "undefined",
+        "computed": true
+      }
+    },
+    "nice": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "Round ticks to capture extent of given x Domain from XYPlot",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
     },
     "onMouseEnterLabel": {
       "type": {
@@ -86,90 +252,6 @@
       },
       "required": false,
       "description": ""
-    },
-    "height": {
-      "defaultValue": {
-        "value": "250",
-        "computed": false
-      }
-    },
-    "position": {
-      "defaultValue": {
-        "value": "'bottom'",
-        "computed": false
-      }
-    },
-    "placement": {
-      "defaultValue": {
-        "value": "undefined",
-        "computed": true
-      }
-    },
-    "distance": {
-      "defaultValue": {
-        "value": "4",
-        "computed": false
-      }
-    },
-    "nice": {
-      "defaultValue": {
-        "value": "true",
-        "computed": false
-      }
-    },
-    "tickCount": {
-      "defaultValue": {
-        "value": "10",
-        "computed": false
-      }
-    },
-    "ticks": {
-      "defaultValue": {
-        "value": "null",
-        "computed": false
-      }
-    },
-    "labelClassName": {
-      "defaultValue": {
-        "value": "''",
-        "computed": false
-      }
-    },
-    "labelStyle": {
-      "defaultValue": {
-        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: '14px',\n  lineHeight: 1,\n  textAnchor: 'middle'\n}",
-        "computed": false
-      }
-    },
-    "format": {
-      "defaultValue": {
-        "value": "undefined",
-        "computed": true
-      }
-    },
-    "formats": {
-      "defaultValue": {
-        "value": "undefined",
-        "computed": true
-      }
-    },
-    "labels": {
-      "defaultValue": {
-        "value": "undefined",
-        "computed": true
-      }
-    },
-    "spacingTop": {
-      "defaultValue": {
-        "value": "0",
-        "computed": false
-      }
-    },
-    "spacingBottom": {
-      "defaultValue": {
-        "value": "0",
-        "computed": false
-      }
     }
   }
 }

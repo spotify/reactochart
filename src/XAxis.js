@@ -1,17 +1,17 @@
-import React from 'react';
-import _ from 'lodash';
-import shallowEqual from './utils/shallowEqual';
-import PropTypes from 'prop-types';
+import React from "react";
+import _ from "lodash";
+import shallowEqual from "./utils/shallowEqual";
+import PropTypes from "prop-types";
 
-import {getTickDomain, scaleEqual} from './utils/Scale';
-import {sumMargins} from './utils/Margin';
-import {getAxisChildProps} from './utils/Axis';
-import xyPropsEqual from './utils/xyPropsEqual';
+import { getTickDomain, scaleEqual } from "./utils/Scale";
+import { sumMargins } from "./utils/Margin";
+import { getAxisChildProps } from "./utils/Axis";
+import xyPropsEqual from "./utils/xyPropsEqual";
 
-import XTicks from './XTicks';
-import XGrid from './XGrid';
-import XAxisLabels from './XAxisLabels';
-import XAxisTitle from './XAxisTitle';
+import XTicks from "./XTicks";
+import XGrid from "./XGrid";
+import XAxisLabels from "./XAxisLabels";
+import XAxisTitle from "./XAxisTitle";
 
 export default class XAxis extends React.Component {
   static propTypes = {
@@ -61,7 +61,7 @@ export default class XAxis extends React.Component {
   static defaultProps = {
     width: 400,
     height: 250,
-    position: 'bottom',
+    position: "bottom",
     nice: true,
     showTitle: true,
     showLabels: true,
@@ -81,65 +81,84 @@ export default class XAxis extends React.Component {
   }
 
   static getTickDomain(props) {
-    if(!props.xScale) return;
+    if (!props.xScale) return;
     props = _.defaults({}, props, XAxis.defaultProps);
-    return {xTickDomain: getTickDomain(props.xScale, props)};
+    return { xTickDomain: getTickDomain(props.xScale, props) };
   }
 
   static getMargin(props) {
-    // todo figure out margin if labels change after margin?
-    const {ticksProps, labelsProps, titleProps} = getAxisChildProps(props);
+    const { ticksProps, labelsProps, titleProps } = getAxisChildProps(props);
     let margins = [];
 
-    if(props.showTicks)
-      margins.push(XTicks.getMargin(ticksProps));
+    if (props.showTicks) margins.push(XTicks.getMargin(ticksProps));
 
-    if(props.showTitle && props.title)
+    if (props.showTitle && props.title)
       margins.push(XAxisTitle.getMargin(titleProps));
 
-    if(props.showLabels)
-      margins.push(XAxisLabels.getMargin(labelsProps));
+    if (props.showLabels) margins.push(XAxisLabels.getMargin(labelsProps));
 
-    return sumMargins(margins, 'margin');
+    return sumMargins(margins, "margin");
   }
 
   render() {
     const {
-      width, height, position, spacingTop, spacingBottom, spacingLeft, spacingRight,
-      tickLength, titleDistance, labelDistance, showTitle, showLabels, showTicks, showGrid
+      width,
+      height,
+      position,
+      spacingTop,
+      spacingBottom,
+      spacingLeft,
+      spacingRight,
+      tickLength,
+      titleDistance,
+      labelDistance,
+      showTitle,
+      showLabels,
+      showTicks,
+      showGrid
     } = this.props;
 
-    const {ticksProps, gridProps, labelsProps, titleProps} = getAxisChildProps(this.props);
+    const {
+      ticksProps,
+      gridProps,
+      labelsProps,
+      titleProps
+    } = getAxisChildProps(this.props);
 
     labelsProps.distance = labelDistance + (showTicks ? tickLength : 0);
 
-    if(showTitle && showLabels) {
+    if (showTitle && showLabels) {
       // todo optimize so we don't generate labels twice
       const labelsMargin = XAxisLabels.getMargin(labelsProps);
-      titleProps.distance = titleDistance + labelsMargin[`margin${_.upperFirst(position)}`];
-    } else if(showTitle && showTicks) {
+      titleProps.distance =
+        titleDistance + labelsMargin[`margin${_.upperFirst(position)}`];
+    } else if (showTitle && showTicks) {
       titleProps.distance = titleDistance + tickLength;
     }
 
-    const axisLineY = (position === 'bottom') ?
-      height + spacingBottom : -spacingTop;
+    const axisLineY =
+      position === "bottom" ? height + spacingBottom : -spacingTop;
     // `width` is width of inner chart *not* including spacing - add spacing to figure out where to draw line
     const axisLineWidth = width + spacingLeft + spacingRight;
 
-    return <g className="chart-axis chart-axis-x">
-      {showGrid ? <XGrid {...gridProps} /> : null}
+    return (
+      <g className="rct-chart-axis rct-chart-axis-x">
+        {showGrid ? <XGrid {...gridProps} /> : null}
 
-      {showTicks ? <XTicks {...ticksProps}/> : null}
+        {showTicks ? <XTicks {...ticksProps} /> : null}
 
-      {showLabels ? <XAxisLabels {...labelsProps} /> : null}
+        {showLabels ? <XAxisLabels {...labelsProps} /> : null}
 
-      {showTitle ? <XAxisTitle {...titleProps} /> : null}
+        {showTitle ? <XAxisTitle {...titleProps} /> : null}
 
-      <line
-        className="chart-axis-line chart-axis-line-x"
-        x1={-spacingLeft} x2={width + spacingRight}
-        y1={axisLineY} y2={axisLineY}
-      />
-    </g>;
+        <line
+          className="rct-chart-axis-line rct-chart-axis-line-x"
+          x1={-spacingLeft}
+          x2={width + spacingRight}
+          y1={axisLineY}
+          y2={axisLineY}
+        />
+      </g>
+    );
   }
 }

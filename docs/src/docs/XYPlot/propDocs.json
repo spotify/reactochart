@@ -79,20 +79,6 @@
       "required": false,
       "description": ""
     },
-    "xScale": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": "d3 scales for the X and Y axes of the chart, in {x, y} object format.\n(optional, normally determined automatically by XYPlot)"
-    },
-    "yScale": {
-      "type": {
-        "name": "func"
-      },
-      "required": false,
-      "description": ""
-    },
     "xScaleType": {
       "type": {
         "name": "string"
@@ -107,12 +93,49 @@
       "required": false,
       "description": ""
     },
-    "margin": {
+    "invertXScale": {
       "type": {
-        "name": "object"
+        "name": "bool"
       },
       "required": false,
-      "description": ""
+      "description": "Whether or not to invert the x and y scales",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
+    },
+    "invertYScale": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
+    },
+    "includeXZero": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "Whether or not to coerce 0 into your x domain",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
+    },
+    "includeYZero": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "Whether or not to coerce 0 into your y domain",
+      "defaultValue": {
+        "value": "false",
+        "computed": false
+      }
     },
     "marginTop": {
       "type": {
@@ -170,56 +193,6 @@
       "required": false,
       "description": ""
     },
-    "paddingTop": {
-      "type": {
-        "name": "number"
-      },
-      "required": false,
-      "description": ""
-    },
-    "paddingBottom": {
-      "type": {
-        "name": "number"
-      },
-      "required": false,
-      "description": ""
-    },
-    "paddingLeft": {
-      "type": {
-        "name": "number"
-      },
-      "required": false,
-      "description": ""
-    },
-    "paddingRight": {
-      "type": {
-        "name": "number"
-      },
-      "required": false,
-      "description": ""
-    },
-    "invertXScale": {
-      "type": {
-        "name": "bool"
-      },
-      "required": false,
-      "description": "",
-      "defaultValue": {
-        "value": "false",
-        "computed": false
-      }
-    },
-    "invertYScale": {
-      "type": {
-        "name": "bool"
-      },
-      "required": false,
-      "description": "",
-      "defaultValue": {
-        "value": "false",
-        "computed": false
-      }
-    },
     "onMouseMove": {
       "type": {
         "name": "func"
@@ -254,6 +227,17 @@
       },
       "required": false,
       "description": ""
+    },
+    "xyPlotClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "Class attribute applied to xy plot",
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
     }
   }
 }

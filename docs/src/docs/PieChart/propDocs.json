@@ -103,15 +103,7 @@
       "modifiers": [],
       "params": [
         {
-          "name": "className",
-          "type": null
-        },
-        {
           "name": "pathData",
-          "type": null
-        },
-        {
-          "name": "key",
           "type": null
         }
       ],
@@ -144,7 +136,7 @@
         "raw": "CustomPropTypes.getter"
       },
       "required": false,
-      "description": "",
+      "description": "Accessor for getting the values plotted on the pie chart.\nIf not provided, just uses the value itself at given index.",
       "defaultValue": {
         "value": "null",
         "computed": false
@@ -155,7 +147,7 @@
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Total expected sum of all the pie slice values.\nIf provided && slices don't add up to total, an \"empty\" slice will be rendered for the rest\nIf not provided, will be the sum of all values (ie. all values will always add up to 100%)"
     },
     "width": {
       "type": {
@@ -178,22 +170,47 @@
       "required": false,
       "description": ""
     },
-    "margin": {
+    "marginTop": {
       "type": {
-        "name": "union",
-        "value": [
-          {
-            "name": "object"
-          },
-          {
-            "name": "number"
-          }
-        ]
+        "name": "number"
       },
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "{ top: 0, bottom: 0, left: 0, right: 0 }",
+        "value": "0",
+        "computed": false
+      }
+    },
+    "marginBottom": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "marginLeft": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "marginRight": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
         "computed": false
       }
     },
@@ -209,23 +226,86 @@
         "name": "string"
       },
       "required": false,
-      "description": ""
+      "description": "Optional label text to display in the middle of the pie/donut"
+    },
+    "centerLabelClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "Class attribute to be applied to center label",
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
+    },
+    "centerLabelStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "Inline style object to be applied to center label",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "pieSliceClassName": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Class attribute to be applied to each pie slice,\nor accessor function which returns a class.",
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
     },
     "markerLineValue": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Value for where to place markerline"
     },
     "markerLineClass": {
       "type": {
         "name": "string"
       },
       "required": false,
-      "description": "",
+      "description": "[TO BE DEPRECATED. USE markerLineClassName] Class attribute to be applied to marker line.",
       "defaultValue": {
-        "value": "'marker-line'",
+        "value": "\"\"",
+        "computed": false
+      }
+    },
+    "markerLineClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "Class attribute to be applied to marker line",
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
+    },
+    "markerLineStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "Inline style object to be applied to marker line",
+      "defaultValue": {
+        "value": "{}",
         "computed": false
       }
     },
@@ -234,7 +314,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Number of pixels marker line hangs inside the pie chart",
       "defaultValue": {
         "value": "2",
         "computed": false
@@ -245,7 +325,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Number of pixels marker line hangs outside the pie chart",
       "defaultValue": {
         "value": "2",
         "computed": false

@@ -40,12 +40,61 @@
       "required": false,
       "description": ""
     },
+    "color": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Color applied to the path element,\nor accessor function which returns a class.\n\nNote that the first datum's color would not be applied since it fills in the area of the path"
+    },
     "horizontal": {
       "type": {
         "name": "bool"
       },
       "required": false,
       "description": ""
+    },
+    "pathClassName": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Classname applied to each path element,\nor accessor function which returns a class.",
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
+    },
+    "pathStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Style applied to each path element,\nor accessor function which returns a style object."
     },
     "xScale": {
       "type": {

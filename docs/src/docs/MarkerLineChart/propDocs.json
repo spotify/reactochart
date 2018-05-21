@@ -200,6 +200,44 @@
       "required": false,
       "description": ""
     },
+    "lineClassName": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Class attribute to be applied to the line path,\nor accessor function which returns a class.",
+      "defaultValue": {
+        "value": "\"\"",
+        "computed": false
+      }
+    },
+    "lineStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Inline style object to be applied to each marker line,\nor accessor function which returns a style object.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
     "onMouseEnterLine": {
       "type": {
         "name": "func"

@@ -53,6 +53,20 @@
         "computed": false
       }
     },
+    "lineStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "Inline style object to be applied to the line path"
+    },
+    "lineClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "Class attribute to be applied to the line path"
+    },
     "name": {
       "type": {
         "name": "string"
@@ -60,7 +74,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "''",
+        "value": "\"\"",
         "computed": false
       }
     },
