@@ -74,7 +74,7 @@ export default class ColorHeatmap extends React.Component {
      */
     colorScale: PropTypes.func,
     /**
-     * ...or else one will be constructed from colors, colorStops and interpolator
+     * ...or else one will be constructed from colors, valueDomain and interpolator
      */
     colors: PropTypes.array,
     valueDomain: PropTypes.array,

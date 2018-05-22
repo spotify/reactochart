@@ -1,10 +1,8 @@
 import React from "react";
 import * as d3 from "d3";
-import _ from "lodash";
 import { expect } from "chai";
-import { mount, shallow } from "enzyme";
+import { mount } from "enzyme";
 
-import { testWithScales, expectProps } from "../utils";
 import { XYPlot, AreaBarChart, RangeRect } from "../../../src/index.js";
 import { getValue } from "../../../src/utils/Data.js";
 
