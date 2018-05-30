@@ -484,7 +484,7 @@ describe("SankeyDiagram", () => {
     expect(showSomeLinkLabelsChart.find(SankeyLinkLabel)).to.have.length(2);
   });
 
-  it("uses stepLabelText text or accessor prop to determine whether to render SankeyLabels", () => {
+  it("uses stepLabelText text or accessor prop to determine whether to render SankeyStepLabels", () => {
     const size = { width: 600, height: 400 };
     const stepLabelsProps = {
       ...size,
