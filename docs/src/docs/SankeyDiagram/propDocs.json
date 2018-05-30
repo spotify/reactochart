@@ -1027,6 +1027,62 @@
         "value": "\"98%\"",
         "computed": false
       }
+    },
+    "stepLabelText": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Text for step label or\naccessor function `f(step)` that returns the label text"
+    },
+    "stepLabelClassName": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "`className` attribute applied to each label,\nor accessor function which returns a class (string)"
+    },
+    "stepLabelStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Inline style object to be applied to each label,\nor accessor function which returns an object"
+    },
+    "stepLabelPadding": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Vertical padding (in pixels) between step label and uppermost positioned node of that step",
+      "defaultValue": {
+        "value": "8",
+        "computed": false
+      }
     }
   }
 }

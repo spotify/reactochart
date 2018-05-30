@@ -13,10 +13,15 @@ class SankeyInteractiveExample extends React.Component {
         <SankeyDiagram
           width={900}
           height={500}
+          marginTop={50}
+          marginRight={50}
+          stepLabelText={step =>  `Step: ${step}`}
+          stepLabelPadding={16}
           nodes={graph.nodes}
           links={graph.links}
           nodeId={getNodeId}
           nodeAlignment="left"
+          nodeLabelPlacement="after"
           nodeLabelText={getNodeLabel}
           nodeStyle={(node) => {
             const nodeId = getNodeId(node);
