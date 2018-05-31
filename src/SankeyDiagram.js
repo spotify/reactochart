@@ -917,9 +917,9 @@ export default class SankeyDiagram extends React.Component {
         depthMapXPos[n.depth] = n.x0;
 
         // For the given depth, set the y equal to the highest positioned y value
-        depthMapYPos[n.depth]
-          ? (depthMapYPos[n.depth] = Math.min(n.y0, depthMapYPos[n.depth]))
-          : (depthMapYPos[n.depth] = n.y0);
+        depthMapYPos[n.depth] = depthMapYPos[n.depth]
+          ? Math.min(n.y0, depthMapYPos[n.depth])
+          : n.y0;
       });
 
       return (
