@@ -210,6 +210,36 @@ const SankeyLinkLabel = props => {
   );
 };
 
+const SankeyStepLabel = props => {
+  const {
+    x,
+    y,
+    stepLabelPadding,
+    stepLabelText,
+    stepLabelClassName,
+    stepLabelStyle,
+    step
+  } = props;
+
+  let yPos = y;
+
+  if (_.isNumber(stepLabelPadding)) {
+    yPos = yPos - stepLabelPadding;
+  }
+
+  return (
+    <text
+      className={`rct-step-label ${getValue(stepLabelClassName, step)}`}
+      style={getValue(stepLabelStyle, step)}
+      x={x}
+      y={yPos}
+      key={`step-${x}-${step}`}
+    >
+      {getValue(stepLabelText, step)}
+    </text>
+  );
+};
+
 const SVGContainer = props => {
   const otherProps = _.omit(props, ["standalone"]);
   if (props.standalone) {
@@ -649,7 +679,26 @@ export default class SankeyDiagram extends React.Component {
     linkTargetLabelStartOffset: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number
-    ])
+    ]),
+    /**
+     * Text for step label or
+     * accessor function `f(step)` that returns the label text
+     */
+    stepLabelText: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    /**
+     * `className` attribute applied to each label,
+     * or accessor function which returns a class (string)
+     */
+    stepLabelClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    /**
+     * Inline style object to be applied to each label,
+     * or accessor function which returns an object
+     */
+    stepLabelStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    /**
+     * Vertical padding (in pixels) between step label and uppermost positioned node of that step
+     */
+    stepLabelPadding: PropTypes.number
 
     //standalone
   };
@@ -668,6 +717,7 @@ export default class SankeyDiagram extends React.Component {
     showNodes: true,
     nodeWidth: 12,
     nodePadding: 8,
+    stepLabelPadding: 8,
     nodeAlignment: "justify",
     nodeClassName: "",
     nodeStyle: {},
@@ -849,6 +899,50 @@ export default class SankeyDiagram extends React.Component {
       );
     }
 
+    function displayStepLabelsIf(
+      stepLabelText,
+      stepLabelClassName,
+      stepLabelStyle,
+      stepLabelPadding,
+      nodes
+    ) {
+      if (!stepLabelText) {
+        return null;
+      }
+
+      const depthMapXPos = {};
+      const depthMapYPos = {};
+
+      nodes.forEach(n => {
+        depthMapXPos[n.depth] = n.x0;
+
+        // For the given depth, set the y equal to the highest positioned y value
+        depthMapYPos[n.depth] = depthMapYPos[n.depth]
+          ? Math.min(n.y0, depthMapYPos[n.depth])
+          : n.y0;
+      });
+
+      return (
+        <g className="rct-step-labels" width={innerWidth} height={100}>
+          {_.map(depthMapXPos, (x, step) => {
+            const stepLabelProps = {
+              y: depthMapYPos[step],
+              step,
+              x,
+              stepLabelText,
+              stepLabelClassName,
+              stepLabelPadding,
+              stepLabelStyle
+            };
+
+            return (
+              <SankeyStepLabel key={`rct-step-${step}`} {...stepLabelProps} />
+            );
+          })}
+        </g>
+      );
+    }
+
     return (
       <SVGContainer {...{ standalone, width, height, className, style }}>
         <g
@@ -856,6 +950,13 @@ export default class SankeyDiagram extends React.Component {
           height={innerHeight}
           transform={`translate(${marginLeft}, ${marginTop})`}
         >
+          {displayStepLabelsIf(
+            this.props.stepLabelText,
+            this.props.stepLabelClassName,
+            this.props.stepLabelStyle,
+            this.props.stepLabelPadding,
+            graph.nodes
+          )}
           {mapLinksInGroupIf(
             this.props.showLinks,
             "rct-sankey-links",
