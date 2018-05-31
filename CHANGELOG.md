@@ -1,3 +1,7 @@
+## 0.4.7 (2018-05-31)
+
+* [#73](https://github.com/spotify/reactochart/pull/73) Add step labeling to sankey
+
 ## 0.4.6 (2018-05-21)
 
 * [#63](https://github.com/spotify/reactochart/pull/63) Include css in root

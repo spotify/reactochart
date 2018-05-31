@@ -3,7 +3,7 @@
   "description": "Reactochart - React Charts, graphs and data visualization",
   "author": "Dan Delany <dand@spotify.com>",
   "contributors": ["Kris Salvador <kriss@spotify.com>"],
-  "version": "0.4.6",
+  "version": "0.4.7",
   "main": "index.js",
   "files": ["*.js", "*.js.map", "styles.css", "utils/", "src/"],
   "engines": {
