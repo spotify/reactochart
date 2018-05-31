@@ -4,9 +4,15 @@
 
 Charting library for React
 
+# Styles
+In order to use reactochart, import the base styles
+
+```
+import 'reactochart/styles.css'
+```
+
 # API
 
-[comment]: <> (TODO: Update readme to include directions on importing base styles)
 
 ### Non-XY charts
 

@@ -90,7 +90,7 @@
         "name": "array"
       },
       "required": false,
-      "description": "...or else one will be constructed from colors, colorStops and interpolator"
+      "description": "...or else one will be constructed from colors, valueDomain and interpolator"
     },
     "valueDomain": {
       "type": {

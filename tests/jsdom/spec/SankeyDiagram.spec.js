@@ -17,6 +17,7 @@ const SankeyLink = Sankey.__get__("SankeyLink");
 const SankeyNodeTerminal = Sankey.__get__("SankeyLink");
 const SankeyNodeLabel = Sankey.__get__("SankeyNodeLabel");
 const SankeyLinkLabel = Sankey.__get__("SankeyLinkLabel");
+const SankeyStepLabel = Sankey.__get__("SankeyStepLabel");
 
 function getSampleData() {
   return {
@@ -393,6 +394,30 @@ describe("SankeyDiagram", () => {
     });
   });
 
+  it("passes stepLabelText, stepLabelClassName, stepLabelPadding and stepLabelStyle through to SankeyStepLabel", () => {
+    const props = {
+      ...getSampleData(),
+      width: 600,
+      height: 400,
+      stepLabelText: "text",
+      stepLabelClassName: "scoop",
+      stepLabelStyle: { fill: "orange" },
+      stepLabelPadding: 16
+    };
+    const chart = mount(<SankeyDiagram {...props} />);
+    const sankeyStepLabels = chart.find(SankeyStepLabel);
+    expect(sankeyStepLabels).to.have.length(3);
+
+    sankeyStepLabels.forEach((label, i) => {
+      const stepLabelProps = label.props();
+      expect(stepLabelProps.stepLabelText).to.equal("text");
+      expect(stepLabelProps.stepLabelClassName).to.equal("scoop");
+      expect(stepLabelProps.stepLabelPadding).to.equal(16);
+      expect(stepLabelProps.stepLabelStyle).to.be.an("object");
+      expect(stepLabelProps.stepLabelStyle.fill).to.equal("orange");
+    });
+  });
+
   it("uses showNodeLabels boolean or accessor prop to determine whether to render node labels", () => {
     const size = { width: 600, height: 400 };
     const showNodeLabelsProps = {
@@ -457,6 +482,17 @@ describe("SankeyDiagram", () => {
       <SankeyDiagram {...showSomeLinkLabelsProps} />
     );
     expect(showSomeLinkLabelsChart.find(SankeyLinkLabel)).to.have.length(2);
+  });
+
+  it("uses stepLabelText text or accessor prop to determine whether to render SankeyStepLabels", () => {
+    const size = { width: 600, height: 400 };
+    const stepLabelsProps = {
+      ...size,
+      ...getSampleData(),
+      stepLabelText: step => `Step: ${step}`
+    };
+    const stepLabelsChart = mount(<SankeyDiagram {...stepLabelsProps} />);
+    expect(stepLabelsChart.find(SankeyStepLabel)).to.have.length(3);
   });
 
   describe("SankeyNode", () => {
@@ -929,6 +965,68 @@ describe("SankeyDiagram", () => {
       expect(textPath.props().startOffset).to.equal("27%");
     });
   });
+
+  describe("SankeyStepLabel", () => {
+    const step = 0;
+
+    it("renders a step label", () => {
+      const props = {
+        step,
+        x: 100,
+        y: 100,
+        stepLabelText: () => "r2d2"
+      };
+      const label = mount(<SankeyStepLabel {...props} />);
+
+      const text = label.find("text");
+      expect(text).to.have.length(1);
+      expect(text.props().x).to.be.finite;
+      expect(text.props().y).to.be.finite;
+      expect(text.text()).to.equal("r2d2");
+    });
+    it("uses stepLabelText accessor prop to create label text", () => {
+      const labelWithName = mount(
+        <SankeyStepLabel
+          {...{
+            step,
+            stepLabelText: step => step
+          }}
+        />
+      );
+      const textWithName = labelWithName.find("text");
+      expect(textWithName).to.have.length(1);
+      expect(textWithName.text()).to.equal("0");
+    });
+    it("passes stepLabelClassName & stepLabelStyle through to the text element", () => {
+      const props = {
+        step,
+        stepLabelText: () => "r2d2",
+        stepLabelClassName: "link-zelda",
+        stepLabelStyle: { fill: "orange" }
+      };
+      const label = mount(<SankeyStepLabel {...props} />);
+      const text = label.find("text");
+      expect(text).to.have.length(1);
+      expect(text.props().className).to.contain("link-zelda");
+      expect(text.props().style).to.be.an("object");
+      expect(text.props().style.fill).to.equal("orange");
+    });
+    it("calls stepLabelClassName & stepLabelStyle if they are functions", () => {
+      const props = {
+        step,
+        stepLabelText: () => "r2d2",
+        stepLabelClassName: step => `step-${step}`,
+        stepLabelStyle: () => ({ fill: "thistle" })
+      };
+      const label = mount(<SankeyStepLabel {...props} />);
+      const text = label.find("text");
+      expect(text).to.have.length(1);
+      expect(text.props().className).to.contain("step-0");
+      expect(text.props().style).to.be.an("object");
+      expect(text.props().style.fill).to.equal("thistle");
+    });
+  });
+
   // todo test terminals
   // test their properties & rendered correctly
 });
