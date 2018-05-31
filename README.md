@@ -14,7 +14,6 @@ import 'reactochart/styles.css'
 # API
 
 
-
 ### Non-XY charts
 
 * PieChart
