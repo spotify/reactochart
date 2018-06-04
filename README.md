@@ -117,3 +117,8 @@ If you'd like to contribute to the development this project, first fork & clone 
 * Range-Range Bar Chart
 * 2D Histogram (heatmap)
 * 2D KDE?
+
+## Code of Conduct
+This project adheres to the [Open Code of Conduct][code-of-conduct]. By participating, you are expected to honor this code.
+
+[code-of-conduct]: https://github.com/spotify/code-of-conduct/blob/master/code-of-conduct.md
