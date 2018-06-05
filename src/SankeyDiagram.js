@@ -700,7 +700,6 @@ export default class SankeyDiagram extends React.Component {
      */
     stepLabelPadding: PropTypes.number
 
-
     //standalone
   };
   static defaultProps = {
