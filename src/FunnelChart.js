@@ -124,6 +124,7 @@ export default class FunnelChart extends React.Component {
               d={pathStr}
               className={`${getValue(pathClassName, d, i) || ""}`}
               style={style}
+              key={i}
             />
           );
         })}
