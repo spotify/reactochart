@@ -39,8 +39,7 @@
     "measure-text": "0.0.4",
     "moment": "^2.10.6",
     "numeral": "^2.0.6",
-    "prop-types": "^15.5.10",
-    "react-addons-shallow-compare": "^15.6.0"
+    "prop-types": "^15.5.10"
   },
   "peerDependencies": {
     "react": ">=0.14.0, <16.0.0",
