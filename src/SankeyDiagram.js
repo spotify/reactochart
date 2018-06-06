@@ -1,16 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
-import _ from "lodash";
-import numeral from "numeral";
 import {
   sankey,
-  sankeyLinkHorizontal,
-  sankeyLeft,
-  sankeyRight,
   sankeyCenter,
-  sankeyJustify
+  sankeyJustify,
+  sankeyLeft,
+  sankeyLinkHorizontal,
+  sankeyRight
 } from "d3-sankey";
-
+import _ from "lodash";
+import numeral from "numeral";
+import PropTypes from "prop-types";
+import React from "react";
 import { getValue } from "./utils/Data";
 
 const SankeyNode = props => {
