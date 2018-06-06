@@ -24,6 +24,8 @@
     "clean": "node scripts/clean.js",
     "serve": "python -m SimpleHTTPServer",
     "test": "npm run test-jsdom-and-lint",
+    "test-files":
+      "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive",
     "test-browser":
       "webpack-dev-server --config tests/browser/webpack.config.test.js",
     "test-jsdom-and-lint":
