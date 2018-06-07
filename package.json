@@ -11,7 +11,7 @@
   },
   "scripts": {
     "lint": "eslint ./src",
-    "lint-fix": "eslint ./src --ext .js --fix",
+    "lint-fix": "eslint ./src ./tests/jsdom/spec --ext .js --fix",
     "prepublish": "npm run build",
     "build": "npm run build-lib && npm run build-css && npm run docs",
     "dev": "webpack-dev-server --config webpack.config.base.js",

@@ -35,9 +35,9 @@ describe("ColorHeatmap", () => {
       .scaleLinear()
       .domain([0, 10])
       .range([0, 30]),
-    colors: ['rebeccapurple', 'goldenrod'],
-    interpolator: 'lab',
-    rectClassName: 'rect-class',
+    colors: ["rebeccapurple", "goldenrod"],
+    interpolator: "lab",
+    rectClassName: "rect-class"
   };
 
   it("renders a color heatmap", () => {
@@ -47,23 +47,63 @@ describe("ColorHeatmap", () => {
     expect(rangeRects).to.have.length(props.data.length);
   });
 
-  it('passes props correctly', () => {
+  it("passes props correctly", () => {
     const chart = mount(<ColorHeatmap {...props} />);
 
-    expect(chart.find(RangeRect).first().props().x).to.equal(getValue(props.x, props.data[0]));
-    expect(chart.find(RangeRect).first().props().xEnd).to.equal(getValue(props.xEnd, props.data[0]));
-    expect(chart.find(RangeRect).first().props().y).to.equal(getValue(props.y, props.data[0]));
-    expect(chart.find(RangeRect).first().props().yEnd).to.equal(getValue(props.yEnd, props.data[0]));
-    expect(chart.find(RangeRect).first().props().xScale).to.equal(props.xScale);
-    expect(chart.find(RangeRect).first().props().yScale).to.equal(props.yScale);
-    expect(chart.find(RangeRect).first().props().className).to.equal(props.rectClassName);
+    expect(
+      chart
+        .find(RangeRect)
+        .first()
+        .props().x
+    ).to.equal(getValue(props.x, props.data[0]));
+    expect(
+      chart
+        .find(RangeRect)
+        .first()
+        .props().xEnd
+    ).to.equal(getValue(props.xEnd, props.data[0]));
+    expect(
+      chart
+        .find(RangeRect)
+        .first()
+        .props().y
+    ).to.equal(getValue(props.y, props.data[0]));
+    expect(
+      chart
+        .find(RangeRect)
+        .first()
+        .props().yEnd
+    ).to.equal(getValue(props.yEnd, props.data[0]));
+    expect(
+      chart
+        .find(RangeRect)
+        .first()
+        .props().xScale
+    ).to.equal(props.xScale);
+    expect(
+      chart
+        .find(RangeRect)
+        .first()
+        .props().yScale
+    ).to.equal(props.yScale);
+    expect(
+      chart
+        .find(RangeRect)
+        .first()
+        .props().className
+    ).to.equal(props.rectClassName);
 
-    describe('when colorScale prop is passed', () => {
-      it('sets the color scale to the prop value', () => {
-        const propsWithColorScale = {...props, colorScale: () => 'rgb'}
+    describe("when colorScale prop is passed", () => {
+      it("sets the color scale to the prop value", () => {
+        const propsWithColorScale = { ...props, colorScale: () => "rgb" };
         const chart = mount(<ColorHeatmap {...propsWithColorScale} />);
 
-        expect(chart.find(RangeRect).first().props().style).to.contain({ fill: 'rgb' })
+        expect(
+          chart
+            .find(RangeRect)
+            .first()
+            .props().style
+        ).to.contain({ fill: "rgb" });
       });
     });
   });

@@ -5,13 +5,17 @@ import glob from "glob";
 import { CLIEngine } from "eslint";
 import { expect, assert } from "chai";
 
-const paths = glob.sync("./src/*.js");
+const srcPaths = glob.sync("./src/*.js");
+const testPaths = glob.sync("./tests/jsdom/spec/*.js");
 const engine = new CLIEngine({
   envs: ["node", "mocha"],
   useEslintrc: true
 });
 
-const results = engine.executeOnFiles(paths).results;
+const srcResults = engine.executeOnFiles(srcPaths).results;
+const testResults = engine.executeOnFiles(testPaths).results;
+
+const results = srcResults.concat(testResults);
 
 describe("ESLint", () => {
   results.forEach(result => generateTest(result));
