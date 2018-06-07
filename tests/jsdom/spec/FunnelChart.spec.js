@@ -40,16 +40,15 @@ describe("FunnelChart", () => {
     expect(group).to.have.length(1);
     expect(group.find("path")).to.have.length(props.data.length - 1);
 
-    group.find('path').forEach((path) => {
-      const pathD = path.getNode().getAttribute('d');
+    group.find("path").forEach(path => {
+      const pathD = path.getNode().getAttribute("d");
 
-      expect(pathD).not.to.include('NaN');
-      }
-    );
+      expect(pathD).not.to.include("NaN");
+    });
 
-    const lastPath = group.find('path').last();
-    const pathData = lastPath.getNode().getAttribute('d');
-    expect(pathData).to.equal('M1140,12L390,15L-330,15L-1080,12Z');
+    const lastPath = group.find("path").last();
+    const pathData = lastPath.getNode().getAttribute("d");
+    expect(pathData).to.equal("M1140,12L390,15L-330,15L-1080,12Z");
   });
 
   it("passes props correctly", () => {
