@@ -19,7 +19,7 @@
   },
   "scripts": {
     "lint": "eslint ./src",
-    "lint-fix": "eslint ./src --ext .js --fix",
+    "lint-fix": "eslint ./src ./tests/jsdom/spec --ext .js --fix",
     "prepublish": "npm run build",
     "build": "npm run build-lib && npm run build-css && npm run docs",
     "dev": "webpack-dev-server --config webpack.config.base.js",
@@ -31,9 +31,14 @@
     "clean": "node scripts/clean.js",
     "serve": "python -m SimpleHTTPServer",
     "test": "npm run test-jsdom-and-lint",
-    "test-browser": "webpack-dev-server --config tests/browser/webpack.config.test.js",
-    "test-jsdom-and-lint": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec tests/eslint.spec.js",
-    "test-watch": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --watch --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec"
+    "test-files":
+      "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive",
+    "test-browser":
+      "webpack-dev-server --config tests/browser/webpack.config.test.js",
+    "test-jsdom-and-lint":
+      "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec tests/eslint.spec.js",
+    "test-watch":
+      "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --watch --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec"
   },
   "dependencies": {
     "d3": "^4.4.0",
