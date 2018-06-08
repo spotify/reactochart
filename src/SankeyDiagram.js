@@ -698,7 +698,6 @@ export default class SankeyDiagram extends React.Component {
      * Vertical padding (in pixels) between step label and uppermost positioned node of that step
      */
     stepLabelPadding: PropTypes.number
-
     //standalone
   };
   static defaultProps = {
