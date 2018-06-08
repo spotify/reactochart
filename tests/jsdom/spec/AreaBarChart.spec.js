@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import { expect } from "chai";
 import { mount } from "enzyme";
 
-import { XYPlot, AreaBarChart, RangeRect } from "../../../src/index.js";
+import { AreaBarChart, RangeRect } from "../../../src/index.js";
 import { getValue } from "../../../src/utils/Data.js";
 
 describe("AreaBarChart", () => {
