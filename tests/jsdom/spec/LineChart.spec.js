@@ -18,6 +18,30 @@ describe("LineChart", () => {
     .domain([0, 1])
     .range([100, 0]);
 
+  it("passes props correctly to group and path elements", () => {
+    const props = {
+      xScale: d3
+        .scaleLinear()
+        .domain([0, 2])
+        .range([0, 100]),
+      yScale: d3
+        .scaleLinear()
+        .domain([0, 1])
+        .range([100, 0]),
+      data: [[0, 0.5], [1, 1], [2, 0.25]],
+      x: d => d[0],
+      y: d => d[1],
+      lineClassName: "my-line",
+      lineStyle: { fill: "blue" }
+    };
+    const chart = mount(<LineChart {...props} />);
+    const group = chart.find("g");
+    const path = chart.find("path");
+
+    expect(path.props().style).to.equal(props.lineStyle);
+    expect(group.props().className).to.contain(props.lineClassName);
+  });
+
   it("renders a line with number X & Y scales", () => {
     // make simple number-number line chart with 3 datapoints
     const props = {
