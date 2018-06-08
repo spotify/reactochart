@@ -2,10 +2,18 @@
   "name": "reactochart",
   "description": "Reactochart - React Charts, graphs and data visualization",
   "author": "Dan Delany <dand@spotify.com>",
-  "contributors": ["Kris Salvador <kriss@spotify.com>"],
+  "contributors": [
+    "Kris Salvador <kriss@spotify.com>"
+  ],
   "version": "0.4.7",
   "main": "index.js",
-  "files": ["*.js", "*.js.map", "styles.css", "utils/", "src/"],
+  "files": [
+    "*.js",
+    "*.js.map",
+    "styles.css",
+    "utils/",
+    "src/"
+  ],
   "engines": {
     "node": ">=4.0.0"
   },
@@ -18,20 +26,15 @@
     "docs": "npm run make-docs && npm run build-docs",
     "build-lib": "npm run clean && babel src --out-dir ./ --source-maps",
     "build-css": "lessc ./styles/charts.less ./styles.css",
-    "build-docs":
-      "BABEL_ENV=production webpack --config webpack.config.build.js",
+    "build-docs": "BABEL_ENV=production webpack --config webpack.config.build.js",
     "make-docs": "node scripts/makeDocs.js",
     "clean": "node scripts/clean.js",
     "serve": "python -m SimpleHTTPServer",
     "test": "npm run test-jsdom-and-lint",
-    "test-files":
-      "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive",
-    "test-browser":
-      "webpack-dev-server --config tests/browser/webpack.config.test.js",
-    "test-jsdom-and-lint":
-      "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec tests/eslint.spec.js",
-    "test-watch":
-      "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --watch --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec"
+    "test-files": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive",
+    "test-browser": "webpack-dev-server --config tests/browser/webpack.config.test.js",
+    "test-jsdom-and-lint": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec tests/eslint.spec.js",
+    "test-watch": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --watch --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec"
   },
   "dependencies": {
     "d3": "^4.4.0",
@@ -73,7 +76,7 @@
     "json-loader": "^0.5.2",
     "less": "^3.0.4",
     "less-loader": "^4.0.5",
-    "mocha": "^3.5.0",
+    "mocha": "4.0.1",
     "prettier": "^1.12.1",
     "raw-loader": "^0.5.1",
     "react": "^15.6.1",
