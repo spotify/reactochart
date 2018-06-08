@@ -1,3 +1,7 @@
+## 0.4.8 (2018-06-08)
+
+* [#80](https://github.com/spotify/reactochart/pull/80) Upgrade mocha to v4.0.1 to fix [growl dependency](https://github.com/tj/node-growl/pull/68)
+
 ## 0.4.7 (2018-05-31)
 
 * [#73](https://github.com/spotify/reactochart/pull/73) Add step labeling to sankey

@@ -3,7 +3,7 @@
   "description": "Reactochart - React Charts, graphs and data visualization",
   "author": "Dan Delany <dand@spotify.com>",
   "contributors": ["Kris Salvador <kriss@spotify.com>"],
-  "version": "0.4.7",
+  "version": "0.4.8",
   "main": "index.js",
   "files": ["*.js", "*.js.map", "styles.css", "utils/", "src/"],
   "engines": {
@@ -11,7 +11,7 @@
   },
   "scripts": {
     "lint": "eslint ./src",
-    "lint-fix": "eslint ./src --ext .js --fix",
+    "lint-fix": "eslint ./src ./tests/jsdom/spec --ext .js --fix",
     "prepublish": "npm run build",
     "build": "npm run build-lib && npm run build-css && npm run docs",
     "dev": "webpack-dev-server --config webpack.config.base.js",
@@ -24,6 +24,8 @@
     "clean": "node scripts/clean.js",
     "serve": "python -m SimpleHTTPServer",
     "test": "npm run test-jsdom-and-lint",
+    "test-files":
+      "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive",
     "test-browser":
       "webpack-dev-server --config tests/browser/webpack.config.test.js",
     "test-jsdom-and-lint":
@@ -39,8 +41,7 @@
     "measure-text": "0.0.4",
     "moment": "^2.10.6",
     "numeral": "^2.0.6",
-    "prop-types": "^15.5.10",
-    "react-addons-shallow-compare": "^15.6.0"
+    "prop-types": "^15.5.10"
   },
   "peerDependencies": {
     "react": ">=0.14.0, <16.0.0",
@@ -72,7 +73,7 @@
     "json-loader": "^0.5.2",
     "less": "^3.0.4",
     "less-loader": "^4.0.5",
-    "mocha": "^3.5.0",
+    "mocha": "4.0.1",
     "prettier": "^1.12.1",
     "raw-loader": "^0.5.1",
     "react": "^15.6.1",
