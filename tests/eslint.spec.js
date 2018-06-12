@@ -6,7 +6,7 @@ import { CLIEngine } from "eslint";
 import { expect, assert } from "chai";
 
 const srcPaths = glob.sync("./src/*.js");
-const testPaths = glob.sync("./tests/jsdom/spec/*.js");
+const testPaths = glob.sync("./tests/*.js");
 const engine = new CLIEngine({
   envs: ["node", "mocha"],
   useEslintrc: true

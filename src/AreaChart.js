@@ -172,7 +172,7 @@ export default class AreaChart extends React.Component {
       const pathStyleBelow = pathStyleNegative || pathStyle || {};
 
       return (
-        <g className={`${name} rct-area-chart--difference`}>
+        <g className="rct-area-chart--difference">
           <clipPath id={clipAboveId}>
             <path className="rct-area-chart-path" d={clipAbovePathStr} />
           </clipPath>
@@ -180,13 +180,13 @@ export default class AreaChart extends React.Component {
             <path className="rct-area-chart-path" d={clipBelowPathStr} />
           </clipPath>
           <path
-            className="rct-area-chart-path"
+            className={`rct-area-chart-path ${pathClassName}`}
             d={areaPathStr}
             clipPath={`url(#${clipAboveId})`}
             style={pathStyleAbove}
           />
           <path
-            className="rct-area-chart-path"
+            className={`rct-area-chart-path ${pathClassName}`}
             d={areaPathStr}
             clipPath={`url(#${clipBelowId})`}
             style={pathStyleBelow}
@@ -195,7 +195,7 @@ export default class AreaChart extends React.Component {
       );
     } else {
       return (
-        <g className={`${name} rct-area-chart`}>
+        <g className="rct-area-chart">
           <path
             className={`rct-area-chart-path ${pathClassName}`}
             d={areaPathStr}
