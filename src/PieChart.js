@@ -61,10 +61,6 @@ class PieChart extends React.Component {
      */
     markerLineValue: PropTypes.number,
     /**
-     * [TO BE DEPRECATED. USE markerLineClassName] Class attribute to be applied to marker line.
-     */
-    markerLineClass: PropTypes.string,
-    /**
      * Class attribute to be applied to marker line
      */
     markerLineClassName: PropTypes.string,
@@ -83,15 +79,16 @@ class PieChart extends React.Component {
 
     onMouseEnterLine: PropTypes.func,
     onMouseMoveLine: PropTypes.func,
-    onMouseLeaveLine: PropTypes.func
+    onMouseLeaveLine: PropTypes.func,
+    onMouseEnterSlice: PropTypes.func,
+    onMouseMoveSlice: PropTypes.func,
+    onMouseLeaveSlice: PropTypes.func
   };
   static defaultProps = {
     getValue: null,
     centerLabelClassName: "",
     centerLabelStyle: {},
     pieSliceClassName: "",
-    // TODO deprecate
-    markerLineClass: "",
     markerLineClassName: "",
     markerLineOverhangInner: 2,
     markerLineOverhangOuter: 2,
@@ -238,11 +235,7 @@ class PieChart extends React.Component {
   }
 
   renderMarkerLine(pathData) {
-    const {
-      markerLineClass,
-      markerLineClassName,
-      markerLineStyle
-    } = this.props;
+    const { markerLineClassName, markerLineStyle } = this.props;
     const lineD = {
       value: this.props.markerLineValue
     };
@@ -260,9 +253,7 @@ class PieChart extends React.Component {
     return (
       <path
         style={markerLineStyle}
-        className={`rct-marker-line ${
-          markerLineClass ? markerLineClass : markerLineClassName
-        }`}
+        className={`rct-marker-line ${markerLineClassName}`}
         d={pathData}
         {...{ onMouseEnter, onMouseMove, onMouseLeave }}
       />
@@ -270,7 +261,7 @@ class PieChart extends React.Component {
   }
 
   renderCenterLabel(center) {
-    const { centerLabelStyle, centerLabelClassStyle } = this.props;
+    const { centerLabelStyle, centerLabelClassName, centerLabel } = this.props;
     const { x, y } = center;
     const style = Object.assign(
       {},
@@ -280,10 +271,10 @@ class PieChart extends React.Component {
 
     return (
       <text
-        className={`rct-pie-label-center ${centerLabelClassStyle}`}
+        className={`rct-pie-label-center ${centerLabelClassName}`}
         {...{ x, y, style }}
       >
-        {this.props.centerLabel}
+        {centerLabel}
       </text>
     );
   }
