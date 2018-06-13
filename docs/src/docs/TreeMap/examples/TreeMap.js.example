@@ -17,8 +17,8 @@ const TreeMapExample = props => {
     <div>
       <TreeMap
         data={data}
-        getValue="size"
-        getLabel="value"
+        getValue={d => d.size}
+        getLabel={d => d.value}
         nodeStyle={node => ({
           backgroundColor: colorScale(parseInt(node.data.size)),
           border: "1px solid #333"
