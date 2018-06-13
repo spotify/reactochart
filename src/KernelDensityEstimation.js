@@ -1,13 +1,8 @@
-import React from "react";
-import _ from "lodash";
 import { mean } from "d3";
 import PropTypes from "prop-types";
-
-import * as CustomPropTypes from "./utils/CustomPropTypes";
-import xyPropsEqual from "./utils/xyPropsEqual";
-
+import React from "react";
 import LineChart from "./LineChart.js";
-
+import xyPropsEqual from "./utils/xyPropsEqual";
 class KernelDensityEstimation extends React.Component {
   static propTypes = {
     /**
@@ -106,7 +101,7 @@ function kernelDensityEstimator(kernel, x) {
 
 function epanechnikovKernel(scale) {
   return function(u) {
-    return Math.abs((u /= scale)) <= 1 ? 0.75 * (1 - u * u) / scale : 0;
+    return Math.abs((u /= scale)) <= 1 ? (0.75 * (1 - u * u)) / scale : 0;
   };
 }
 
