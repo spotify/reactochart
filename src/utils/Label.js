@@ -67,7 +67,7 @@ export function getLabelXOverhang(scale, label, anchor = "middle") {
   return [overhangLeft, overhangRight];
 }
 
-function getLabelYOverhang(scale, label, anchor = "middle") {
+export function getLabelYOverhang(scale, label, anchor = "middle") {
   const [labelTop, labelBottom] = getLabelYRange(scale, label, anchor);
   const overhangTop = Math.ceil(Math.max(_.min(scale.range()) - labelTop, 0));
   const overhangBottom = Math.ceil(
