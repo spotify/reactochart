@@ -112,7 +112,7 @@ function kernelDensityEstimator(kernel, x) {
 
 function epanechnikovKernel(scale) {
   return function(u) {
-    return Math.abs((u /= scale)) <= 1 ? 0.75 * (1 - u * u) / scale : 0;
+    return Math.abs((u /= scale)) <= 1 ? (0.75 * (1 - u * u)) / scale : 0;
   };
 }
 
