@@ -1,14 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
-import _ from "lodash";
 import { area } from "d3";
-
-import { makeAccessor2, domainFromData, combineDomains } from "./utils/Data";
-import xyPropsEqual from "./utils/xyPropsEqual";
+import _ from "lodash";
+import PropTypes from "prop-types";
+import React from "react";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
+import { combineDomains, domainFromData, makeAccessor2 } from "./utils/Data";
+import xyPropsEqual from "./utils/xyPropsEqual";
 
-// AreaChart represents a simple bivariate area chart,
-// a filled path drawn between two lines (datasets).
+/**
+ * AreaChart represents a simple bivariate area chart,
+ * a filled path drawn between two lines (datasets).
+ */
 
 // todo horizontal prop, for filling area horizontally?
 // todo support ordinal (like days of the week) data?
