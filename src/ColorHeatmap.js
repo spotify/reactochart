@@ -1,26 +1,23 @@
-import React from "react";
-import _ from "lodash";
 import {
-  scaleLinear,
   interpolateHcl,
   interpolateHsl,
   interpolateLab,
-  interpolateRgb
+  interpolateRgb,
+  scaleLinear
 } from "d3";
-import invariant from "invariant";
+import _ from "lodash";
 import PropTypes from "prop-types";
-
+import React from "react";
+import RangeRect from "./RangeRect";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
 import {
-  makeAccessor2,
-  getValue,
   domainFromData,
-  domainFromRangeData
+  domainFromRangeData,
+  getValue,
+  makeAccessor2
 } from "./utils/Data";
 import { dataTypeFromScaleType } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
-
-import RangeRect from "./RangeRect";
 
 function interpolatorFromType(type) {
   switch (type.toLowerCase()) {
@@ -33,7 +30,7 @@ function interpolatorFromType(type) {
     case "rgb":
       return interpolateRgb;
     default:
-      return interpolateHsl;
+      return interpolateLab;
   }
 }
 
@@ -49,6 +46,9 @@ function makeColorScale(domain, colors, interpolator) {
     .interpolate(interpolator);
 }
 
+/**
+ * `ColorHeatmap` can be used to represent individual values contained in a matrix through colors.
+ */
 export default class ColorHeatmap extends React.Component {
   static propTypes = {
     /**
@@ -78,6 +78,9 @@ export default class ColorHeatmap extends React.Component {
      */
     colors: PropTypes.array,
     valueDomain: PropTypes.array,
+    /**
+     * Interpolator for colors. Possible options include "hcl", "hsl", "lab" and "rgb"
+     */
     interpolator: PropTypes.string,
     /**
      * Inline style object to be applied to each rect,
