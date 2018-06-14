@@ -1,7 +1,5 @@
-import React from "react";
-import _ from "lodash";
 import PropTypes from "prop-types";
-import invariant from "invariant";
+import React from "react";
 import RangeBarChart from "./RangeBarChart";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
 import xyPropsEqual from "./utils/xyPropsEqual";
@@ -21,7 +19,7 @@ function makeRangeBarChartProps(barChartProps) {
 }
 
 /**
- * BarChart represents a basic "Value/Value" bar chart,
+ * `BarChart` represents a basic "Value/Value" bar chart,
  * where each bar represents a single independent variable value and a single dependent value,
  * with bars that are centered horizontally on x-value and extend from 0 to y-value,
  * (or centered vertically on their y-value and extend from 0 to the x-value, in the case of horizontal chart variant)

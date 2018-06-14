@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "`AreaChart` represents a simple bivariate area chart,\na filled path drawn between two lines (datasets).",
   "methods": [
     {
       "name": "getDomain",

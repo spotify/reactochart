@@ -8,7 +8,7 @@ import { getValue, makeAccessor2 } from "./utils/Data";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
 /**
- * Area Heatmap is still undergoing experimental changes!
+ * `AreaHeatmap` is still undergoing experimental changes!
  * We do not consider this chart to be production ready as it does not support categorical data.
  */
 

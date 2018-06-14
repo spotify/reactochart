@@ -7,7 +7,7 @@ import { combineDomains, domainFromData, makeAccessor2 } from "./utils/Data";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
 /**
- * AreaChart represents a simple bivariate area chart,
+ * `AreaChart` represents a simple bivariate area chart,
  * a filled path drawn between two lines (datasets).
  */
 
