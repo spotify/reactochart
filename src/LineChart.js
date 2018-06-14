@@ -1,13 +1,14 @@
-import React from "react";
-import _ from "lodash";
 import { bisector } from "d3";
-import shallowEqual from "./utils/shallowEqual";
+import _ from "lodash";
 import PropTypes from "prop-types";
-
+import React from "react";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
 import { getValue } from "./utils/Data";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
+/**
+ * `LineChart` displays data a series of points connected by straight line segments.
+ */
 export default class LineChart extends React.Component {
   static propTypes = {
     /**
