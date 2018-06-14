@@ -288,8 +288,8 @@ function markerLine(
   overhangInner = 0
 ) {
   if (percentValue == 1) endPercent = 0.9999999; // arc cannot be a full circle
-  const startX = Math.sin((2 * Math.PI) / (1 / percentValue));
-  const startY = Math.cos((2 * Math.PI) / (1 / percentValue));
+  const startX = Math.sin(2 * Math.PI / (1 / percentValue));
+  const startY = Math.cos(2 * Math.PI / (1 / percentValue));
   const [c, r, rH, x0, y0] = [center, radius, holeRadius, startX, startY];
   const [r0, r1] = [Math.max(rH - overhangInner, 0), r + overhangOuter];
 
@@ -308,10 +308,10 @@ function pieSlicePath(
   holeRadius = 0
 ) {
   if (endPercent == 1) endPercent = 0.9999999; // arc cannot be a full circle
-  const startX = Math.sin((2 * Math.PI) / (1 / startPercent));
-  const startY = Math.cos((2 * Math.PI) / (1 / startPercent));
-  const endX = Math.sin((2 * Math.PI) / (1 / endPercent));
-  const endY = Math.cos((2 * Math.PI) / (1 / endPercent));
+  const startX = Math.sin(2 * Math.PI / (1 / startPercent));
+  const startY = Math.cos(2 * Math.PI / (1 / startPercent));
+  const endX = Math.sin(2 * Math.PI / (1 / endPercent));
+  const endY = Math.cos(2 * Math.PI / (1 / endPercent));
   const largeArc = endPercent - startPercent <= 0.5 ? 0 : 1;
   const [c, r, rH, x0, x1, y0, y1] = [
     center,
