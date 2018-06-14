@@ -2,6 +2,7 @@ import { mean } from "d3";
 import PropTypes from "prop-types";
 import React from "react";
 import LineChart from "./LineChart.js";
+import * as CustomPropTypes from "./utils/CustomPropTypes";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
 /**
