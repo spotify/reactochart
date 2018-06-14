@@ -7,7 +7,8 @@ import xyPropsEqual from "./utils/xyPropsEqual";
 
 /**
  * Kernel Density Estimation is still undergoing experimental changes!
- * We do not consider this chart to be production ready.
+ * We do not consider this chart to be production ready but
+ * encourage you to try it out and contribute to any of its missing features.
  */
 class KernelDensityEstimation extends React.Component {
   static propTypes = {
