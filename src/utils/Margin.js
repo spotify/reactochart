@@ -47,11 +47,12 @@ export function innerRangeY(outerHeight, margin = {}) {
   ];
 }
 
-function prefixKeys(obj, prefix) {
+export function prefixKeys(obj, prefix) {
   if (!prefix) return obj;
   return _.mapKeys(obj, (value, key) => prefix + _.upperFirst(key));
 }
 
+// TODO this isn't used anywhere, deprecate?
 export function maxMargins(margins = [], keyPrefix) {
   return margins.reduce((result, margin) => {
     return _.mapValues(result, (value, key) => {

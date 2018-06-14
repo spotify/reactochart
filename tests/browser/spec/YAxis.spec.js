@@ -1,7 +1,15 @@
 import { expect } from "chai";
 import { mount } from "enzyme";
 import React from "react";
-import { LineChart, XYPlot, YAxis, YAxisLabels, YAxisTitle, YGrid, YTicks } from "src/index.js";
+import {
+  LineChart,
+  XYPlot,
+  YAxis,
+  YAxisLabels,
+  YAxisTitle,
+  YGrid,
+  YTicks
+} from "src/index.js";
 
 // YAxis tests must run in browser since YAxis uses measureText
 

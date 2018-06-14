@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "Kernel Density Estimation is still undergoing experimental changes!\nWe do not consider this chart to be production ready.",
   "methods": [
     {
       "name": "getDomain",
@@ -66,6 +66,14 @@
       },
       "required": false,
       "description": "Class attribute to be applied to the line path"
+    },
+    "x": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.valueOrAccessor"
+      },
+      "required": false,
+      "description": "X value or accessor function"
     },
     "name": {
       "type": {

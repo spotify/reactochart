@@ -1,13 +1,11 @@
-import _ from "lodash";
-import React from "react";
-import * as d3 from "d3";
 import { expect } from "chai";
-
 import {
-  innerWidth,
   innerHeight,
   innerRangeX,
-  innerRangeY
+  innerRangeY,
+  innerWidth,
+  prefixKeys,
+  sumMargins
 } from "../../../src/utils/Margin";
 
 describe("Scale utils", () => {
@@ -68,6 +66,33 @@ describe("Scale utils", () => {
         100,
         100
       ]);
+    });
+  });
+
+  describe("prefixKeys", () => {
+    const obj = { a: 1, b: 2, c: 3 };
+    const prefix = "woot";
+
+    expect(prefixKeys(obj, prefix)).to.eql({
+      wootA: 1,
+      wootB: 2,
+      wootC: 3
+    });
+  });
+
+  describe("sumMargins", () => {
+    const margins = [
+      { marginBottom: 5, marginTop: 0, marginLeft: 0, marginRight: 0 },
+      { marginTop: 0, marginBottom: 29, marginLeft: 0, marginRight: 0 },
+      { marginBottom: 17, marginLeft: 16, marginRight: 16, marginTop: 0 }
+    ];
+    const prefix = "margin";
+
+    expect(sumMargins(margins, prefix)).to.eql({
+      marginTop: 0,
+      marginBottom: 51,
+      marginLeft: 16,
+      marginRight: 16
     });
   });
 });

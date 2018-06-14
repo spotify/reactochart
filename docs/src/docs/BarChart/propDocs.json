@@ -1,5 +1,5 @@
 {
-  "description": "BarChart represents a basic \"Value/Value\" bar chart,\nwhere each bar represents a single independent variable value and a single dependent value,\nwith bars that are centered horizontally on x-value and extend from 0 to y-value,\n(or centered vertically on their y-value and extend from 0 to the x-value, in the case of horizontal chart variant)\neg. http://www.snapsu rveys.com/wp-content/uploads/2012/10/bar_2d8.png\n\nFor other bar chart types, see RangeBarChart and AreaBarChart",
+  "description": "BarChart represents a basic \"Value/Value\" bar chart,\nwhere each bar represents a single independent variable value and a single dependent value,\nwith bars that are centered horizontally on x-value and extend from 0 to y-value,\n(or centered vertically on their y-value and extend from 0 to the x-value, in the case of horizontal chart variant)\neg. http://www.snapsurveys.com/wp-content/uploads/2012/10/bar_2d8.png\n\nFor other bar chart types, see RangeBarChart and AreaBarChart",
   "methods": [
     {
       "name": "getDomain",

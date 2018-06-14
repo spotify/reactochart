@@ -2,7 +2,13 @@ import { mean } from "d3";
 import PropTypes from "prop-types";
 import React from "react";
 import LineChart from "./LineChart.js";
+import * as CustomPropTypes from "./utils/CustomPropTypes";
 import xyPropsEqual from "./utils/xyPropsEqual";
+
+/**
+ * Kernel Density Estimation is still undergoing experimental changes!
+ * We do not consider this chart to be production ready.
+ */
 class KernelDensityEstimation extends React.Component {
   static propTypes = {
     /**
@@ -29,6 +35,10 @@ class KernelDensityEstimation extends React.Component {
      * Class attribute to be applied to the line path
      */
     lineClassName: PropTypes.string,
+    /**
+     * X value or accessor function
+     */
+    x: CustomPropTypes.valueOrAccessor,
     // common props from XYPlot
     // accessor for data values
     name: PropTypes.string,
@@ -69,6 +79,7 @@ class KernelDensityEstimation extends React.Component {
     const { data, bandwidth, sampleCount, xScale, width } = props;
     const kernel = epanechnikovKernel(bandwidth);
     const samples = xScale.ticks(sampleCount || Math.ceil(width / 2));
+
     this.setState({ kdeData: kernelDensityEstimator(kernel, samples)(data) });
   }
 

@@ -77,9 +77,7 @@ export default class ScatterPlot extends React.Component {
   }
 
   render() {
-    return (
-      <g className={this.props.name}>{this.props.data.map(this.renderPoint)}</g>
-    );
+    return <g>{this.props.data.map(this.renderPoint)}</g>;
   }
   renderPoint = (d, i) => {
     const [onMouseEnter, onMouseMove, onMouseLeave] = [
@@ -131,7 +129,7 @@ export default class ScatterPlot extends React.Component {
 
     // set positioning attributes based on symbol type
     if (pointSymbol.type === "circle" || pointSymbol.type === "ellipse") {
-      _.assign(symbolProps, { cx, cy, style: pointStyle });
+      _.assign(symbolProps, { cx, cy, style: { ...style } });
     } else if (pointSymbol.type === "text") {
       _.assign(symbolProps, {
         x: cx,
@@ -142,8 +140,7 @@ export default class ScatterPlot extends React.Component {
       _.assign(symbolProps, {
         x: cx,
         y: cy,
-        // TODO figure out why this translate is here
-        style: { transform: "translate(-50%, -50%)", ...style }
+        style: { ...style }
       });
     }
 
