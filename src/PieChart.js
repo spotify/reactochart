@@ -8,9 +8,14 @@ import { getValue, makeAccessor } from "./utils/Data";
 // default height/width, used only if height & width & radius are all undefined
 const DEFAULT_SIZE = 150;
 
+/**
+ * `PieChart` is a circular graphic that is divided into slices to illustrate proportions or percentages.
+ */
 class PieChart extends React.Component {
   static propTypes = {
-    // array of data to plot with pie chart
+    /**
+     * Array of data to plot with pie chart
+     */
     data: PropTypes.array.isRequired,
     /**
      * Accessor for getting the values plotted on the pie chart.
@@ -23,20 +28,31 @@ class PieChart extends React.Component {
      * If not provided, will be the sum of all values (ie. all values will always add up to 100%)
      */
     total: PropTypes.number,
-    // (optional) height and width of the SVG
-    // if only one is passed, same # is used for both (ie. width=100 means height=100 also)
-    // if neither is passed, but radius is, radius+margins is used
-    // if neither is passed, and radius isn't either, DEFAULTS.size is used
+    /**
+     * Optional width of the SVG
+     * if not passed in and height is passed in, same # is used for both (ie. width=100 means height=100 also)
+     * if neither is passed, but radius is, radius+margins is used
+     * if neither is passed, and radius isn't either, 150 is used
+     */
     width: PropTypes.number,
+    /**
+     * Optional height of the SVG
+     * if not passed in and width is passed in, same # is used for both (ie. width=100 means height=100 also)
+     * if neither is passed, but radius is, radius+margins is used
+     * if neither is passed, and radius isn't either, 150 is used
+     */
     height: PropTypes.number,
-    // (optional) main radius of the pie chart, inferred from margin/width/height if not provided
+    /**
+     * Optional radius of the pie chart, inferred from margin/width/height if not provided
+     */
     radius: PropTypes.number,
-
     marginTop: PropTypes.number,
     marginBottom: PropTypes.number,
     marginLeft: PropTypes.number,
     marginRight: PropTypes.number,
-    // (optional) radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
+    /**
+     * Optional radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
+     */
     holeRadius: PropTypes.number,
     /**
      * Optional label text to display in the middle of the pie/donut
