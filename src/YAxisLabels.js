@@ -1,16 +1,13 @@
-import React from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
-
+import React from "react";
 import MeasuredValueLabel from "./MeasuredValueLabel";
-import { getScaleTicks, inferScaleType, getTickDomain } from "./utils/Scale";
 import {
   checkLabelsDistinct,
-  countRangeOverlaps,
-  makeLabelFormatters,
-  getLabelXRange,
-  getLabelsYOverhang
+  getLabelsYOverhang,
+  makeLabelFormatters
 } from "./utils/Label";
+import { getScaleTicks, getTickDomain, inferScaleType } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
 function resolveYLabelsForValues(scale, values, formats, style, force = true) {
