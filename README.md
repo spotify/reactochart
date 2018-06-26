@@ -1,36 +1,47 @@
-## WARNING: THIS IS NOT YET PRODUCTION-QUALITY CODE. Docs and Tests are still being written. Use at your own risk. If your project requires composable React charts, we recommend using [Victory](https://github.com/FormidableLabs/victory).
+![Build Status](https://travis-ci.org/spotify/reactochart.svg?branch=master)](https://travis-ci.org/spotify/reactochart)
+![NPM version](https://img.shields.io/npm/v/reactochart.svg?style=flat-square)](https://npmjs.org/package/reactochart)
 
-# reactochart
+# Overview
 
-Charting library for React
+Reactochart is a library of React components for creating data visualization charts and graphs. Components include **line chart**, **bar chart**, **area chart**, **heat maps**, **scatterplot**, **histogram**, **pie chart**, **sankey diagram**, and **tree map**.
 
-# Styles
-In order to use reactochart, import the base styles
+# Getting started
 
-```
-import 'reactochart/styles.css'
-```
+1. Install reactochart using npm.
 
-# API
+  ```
+  npm i reactochart --save
+  ```
+
+2. Then you can import an individual Reactochart component:
+ ```
+ import LineChart from 'reactochart/LineChart'
+ ```
+
+3. If you prefer, you can import all of Reactochart at once, though this may hinder some optimizations, such as webpack tree-shaking:
+  ```
+  import {XYPlot, XAxis, YAxis, LineChart} from 'reactochart';
+  ```
+or
+  ```
+  import * as Reactochart from 'reactochart';
+  ```
+4. See your first chart rendered!
 
 
-### Non-XY charts
+# Live Examples
 
-* PieChart
-* TreeMap
+The examples contain more details about each component and the prop-types it accepts. To run the examples locally and play with the different types of charts in a live code editor:
 
-### XYPlot & XY charts
+1.  Clone this repo and `cd` to the newly-created directory
+2.  Run `npm run serve` in your terminal (note: if you're running Python in v3 or higher you'll need to run `python -m http.server`)
+3.  Go to [http://localhost:8000](http://localhost:8000)
 
-* XYPlot
-* BarChart
-* RangeBarChart
-* LineChart
-* ScatterPlot
-* MarkerLineChart
-* AreaHeatmap
-* Histogram
-* KernelDensityEstimation
-* _planned: AreaChart, StackedBarChart, GroupedBarChart_
+# Reactochart Components
+## Chart Foundations
+
+### XY Plot
+  * XYPlot
 
 ### XY Axis Components
 
@@ -40,12 +51,32 @@ import 'reactochart/styles.css'
 * XTicks, YTicks
 * XGrid, YGrid
 
+# Chart Types
+### Non-XY charts
+
+* PieChart
+* TreeMap
+
+### XY charts
+
+* AreaBarChart
+* AreaChart
+* AreaHeatmap
+* BarChart
+* ColorHeatmap
+* FunnelChart
+* Histogram
+* LineChart
+* MarkerLineChart
+* RangeBarChart
+* SankeyDiagram
+* ScatterPlot
+
 ### XY datum components (used by charts/axes)
 
 * Bar
 * RangeRect
 * XLine, YLine
-* _planned: AreaRect?, AreaCircle?_
 
 ### Higher-order components
 
@@ -59,14 +90,6 @@ import 'reactochart/styles.css'
 * Label
 * Margin
 * depthEqual
-
-# Examples
-
-If you just want to run the examples locally:
-
-1.  Clone this repo and `cd` to the newly-created directory
-2.  Run `npm run serve` in your terminal (note: if you're running Python in v3 or higher you'll need to run `python -m http.server`)
-3.  Go to [http://localhost:8000](http://localhost:8000)
 
 # Development
 
@@ -103,20 +126,6 @@ If you'd like to contribute to the development this project, first fork & clone 
 * The development server uses [react-hot-loader](https://github.com/gaearon/react-hot-loader) to automatically
   "hot reload" changes to React components, so refreshing your web browser is usually not necessary. However, some
   changes will still require a refresh to propagate.
-
-# TO DO:
-
-* write unit tests
-* ensure all charts have common proptypes
-* documentation
-
-## additional chart types
-
-* Range-Value Bar Chart
-* Value-Range Bar Chart
-* Range-Range Bar Chart
-* 2D Histogram (heatmap)
-* 2D KDE?
 
 ## Code of Conduct
 This project adheres to the [Open Code of Conduct][code-of-conduct]. By participating, you are expected to honor this code.
