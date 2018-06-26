@@ -1,15 +1,20 @@
-import React from "react";
-import PropTypes from "prop-types";
 import _ from "lodash";
-
-import { makeAccessor2, getValue } from "./utils/Data";
+import PropTypes from "prop-types";
+import React from "react";
 import { methodIfFuncProp } from "./util.js";
-import xyPropsEqual from "./utils/xyPropsEqual";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
+import { getValue } from "./utils/Data";
+import xyPropsEqual from "./utils/xyPropsEqual";
 
+/**
+ * `ScatterPlot` displays its data as a collection of points. Each point represents
+ * the relationship between two variables, one plotted along the x-axis and the other on the y-axis.
+ */
 export default class ScatterPlot extends React.Component {
   static propTypes = {
-    // the array of data objects
+    /**
+     * Array of data to be plotted.
+     */
     data: PropTypes.array.isRequired,
     /**
      * Accessor function for plot X values, called once per datum
@@ -27,14 +32,17 @@ export default class ScatterPlot extends React.Component {
      * D3 scale for Y axis - provided by XYPlot
      */
     yScale: PropTypes.func,
-    xScaleType: PropTypes.string,
-    yScaleType: PropTypes.string,
-
-    // used with the default point symbol (circle), defines the circle radius
+    /**
+     * Used with the default point symbol (circle), defines the circle radius
+     */
     pointRadius: PropTypes.number,
-    // text or SVG node to use as custom point symbol, or function which returns text/SVG
+    /**
+     * Text or SVG node to use as custom point symbol, or function which returns text/SVG
+     */
     pointSymbol: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    // manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered
+    /**
+     * Manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered
+     */
     pointOffset: PropTypes.arrayOf(PropTypes.number),
     /**
      * Inline style object to be applied to each point,
@@ -76,9 +84,6 @@ export default class ScatterPlot extends React.Component {
     return shouldUpdate;
   }
 
-  render() {
-    return <g>{this.props.data.map(this.renderPoint)}</g>;
-  }
   renderPoint = (d, i) => {
     const [onMouseEnter, onMouseMove, onMouseLeave] = [
       "onMouseEnterPoint",
@@ -146,4 +151,8 @@ export default class ScatterPlot extends React.Component {
 
     return React.cloneElement(pointSymbol, symbolProps);
   };
+
+  render() {
+    return <g>{this.props.data.map(this.renderPoint)}</g>;
+  }
 }
