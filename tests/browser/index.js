@@ -2,6 +2,8 @@ require("./spec/XAxis.spec");
 require("./spec/YAxis.spec");
 require("./spec/YAxisLabels.spec");
 require("./spec/XAxisLabels.spec");
+require("./spec/XAxisTitle.spec");
+require("./spec/YAxisTitle.spec");
 
 // some tests must be run in a browser environment
 // also it can be easier to debug tests in browser thanks to chrome debugger
