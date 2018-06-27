@@ -1,6 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
 import _ from "lodash";
+import React from "react";
 import remark from "remark";
 import remarkReact from "remark-react";
 
@@ -30,8 +29,7 @@ export default class ComponentDocs extends React.Component {
           {_.map(sortedProps, (propInfo, propKey) => {
             return (
               <div key={propKey} className="prop-doc">
-                <strong>{propKey}</strong>:{" "}
-                {_.get(propInfo, "type.name", "unknown")}
+                <strong>{propKey}</strong>: {renderType(propInfo)}
                 {propInfo.description ? <br /> : null}
                 {propInfo.description ? (
                   <span className="prop-description">
@@ -52,6 +50,34 @@ export default class ComponentDocs extends React.Component {
       </div>
     );
   }
+}
+
+function renderType(propInfo) {
+  const typeInfo = _.get(propInfo, "type");
+
+  if (!typeInfo) {
+    return "unknown";
+  }
+
+  const typeName = _.get(typeInfo, "name", "unknown");
+  let type = typeName;
+
+  if (typeName === "union") {
+    if (!typeInfo.computed) {
+      type = _.get(propInfo, "type.value", [])
+        .map(type => _.get(type, "name", ""))
+        .join(" || ");
+    } else {
+      // Handle custom proptypes
+      type = "func || value";
+    }
+  } else if (typeName === "custom") {
+    if (typeInfo.raw === "CustomPropTypes.valueOrAccessor") {
+      type = "func || value";
+    }
+  }
+
+  return type;
 }
 
 function renderMarkdown(markdownText = "") {

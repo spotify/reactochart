@@ -8,9 +8,14 @@ import { getValue, makeAccessor } from "./utils/Data";
 // default height/width, used only if height & width & radius are all undefined
 const DEFAULT_SIZE = 150;
 
+/**
+ * `PieChart` is a circular graphic that is divided into slices to illustrate proportions or percentages.
+ */
 class PieChart extends React.Component {
   static propTypes = {
-    // array of data to plot with pie chart
+    /**
+     * Array of data to plot with pie chart.
+     */
     data: PropTypes.array.isRequired,
     /**
      * Accessor for getting the values plotted on the pie chart.
@@ -23,31 +28,42 @@ class PieChart extends React.Component {
      * If not provided, will be the sum of all values (ie. all values will always add up to 100%)
      */
     total: PropTypes.number,
-    // (optional) height and width of the SVG
-    // if only one is passed, same # is used for both (ie. width=100 means height=100 also)
-    // if neither is passed, but radius is, radius+margins is used
-    // if neither is passed, and radius isn't either, DEFAULTS.size is used
+    /**
+     * Optional width of the SVG
+     * if not passed in and height is passed in, same # is used for both (ie. width=100 means height=100 also)
+     * if neither is passed, but radius is, radius+margins is used
+     * if neither is passed, and radius isn't either, 150 is used
+     */
     width: PropTypes.number,
+    /**
+     * Optional height of the SVG
+     * if not passed in and width is passed in, same # is used for both (ie. width=100 means height=100 also)
+     * if neither is passed, but radius is, radius+margins is used
+     * if neither is passed, and radius isn't either, 150 is used
+     */
     height: PropTypes.number,
-    // (optional) main radius of the pie chart, inferred from margin/width/height if not provided
+    /**
+     * Optional radius of the pie chart, inferred from margin/width/height if not provided.
+     */
     radius: PropTypes.number,
-
     marginTop: PropTypes.number,
     marginBottom: PropTypes.number,
     marginLeft: PropTypes.number,
     marginRight: PropTypes.number,
-    // (optional) radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart
+    /**
+     * Optional radius of the "donut hole" circle drawn on top of the pie chart to turn it into a donut chart.
+     */
     holeRadius: PropTypes.number,
     /**
-     * Optional label text to display in the middle of the pie/donut
+     * Optional label text to display in the middle of the pie/donut.
      */
     centerLabel: PropTypes.string,
     /**
-     * Class attribute to be applied to center label
+     * Class attribute to be applied to center label.
      */
     centerLabelClassName: PropTypes.string,
     /**
-     * Inline style object to be applied to center label
+     * Inline style object to be applied to center label.
      */
     centerLabelStyle: PropTypes.object,
     /**
@@ -56,31 +72,48 @@ class PieChart extends React.Component {
      */
     pieSliceClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     /**
-     * Value for where to place markerline
+     * Value for where to place markerline.
      */
     markerLineValue: PropTypes.number,
     /**
-     * Class attribute to be applied to marker line
+     * Class attribute to be applied to marker line.
      */
     markerLineClassName: PropTypes.string,
     /**
-     * Inline style object to be applied to marker line
+     * Inline style object to be applied to marker line.
      */
     markerLineStyle: PropTypes.object,
     /**
-     * Number of pixels marker line hangs inside the pie chart
+     * Number of pixels marker line hangs inside the pie chart.
      */
     markerLineOverhangInner: PropTypes.number,
     /**
-     * Number of pixels marker line hangs outside the pie chart
+     * Number of pixels marker line hangs outside the pie chart.
      */
     markerLineOverhangOuter: PropTypes.number,
-
+    /**
+     * `mouseenter` event handler callback, called when user's mouse enters the marker line.
+     */
     onMouseEnterLine: PropTypes.func,
+    /**
+     * `mousemove` event handler callback, called when user's mouse moves within the marker line.
+     */
     onMouseMoveLine: PropTypes.func,
+    /**
+     * `mouseleave` event handler callback, called when user's mouse leaves the marker line.
+     */
     onMouseLeaveLine: PropTypes.func,
+    /**
+     * `mouseenter` event handler callback, called when user's mouse enters a pie slice.
+     */
     onMouseEnterSlice: PropTypes.func,
+    /**
+     * `mousemove` event handler callback, called when user's mouse moves within a pie slice.
+     */
     onMouseMoveSlice: PropTypes.func,
+    /**
+     * `mouseleave` event handler callback, called when user's mouse leaves a pie slice.
+     */
     onMouseLeaveSlice: PropTypes.func
   };
   static defaultProps = {

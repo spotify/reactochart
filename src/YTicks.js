@@ -1,29 +1,57 @@
-import React from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
-
+import React from "react";
 import { getScaleTicks, getTickDomain } from "./utils/Scale";
 
 export default class YTicks extends React.Component {
   static propTypes = {
+    /**
+     * D3 scale for Y axis - provided by XYPlot.
+     */
     yScale: PropTypes.func,
+    /**
+     * Position of y ticks. Accepted options are "left" or "right".
+     */
     position: PropTypes.oneOf(["left", "right"]),
+    /**
+     * Placement of ticks in regards to the y axis. Accepted options are "before" or "after".
+     */
     placement: PropTypes.oneOf(["before", "after"]),
+    /**
+     * Custom ticks to display.
+     */
     ticks: PropTypes.array,
+    /**
+     * Number of ticks on axis.
+     */
     tickCount: PropTypes.number,
     tickLength: PropTypes.number,
+    /**
+     * Inline style object to be applied to each tick.
+     */
     tickStyle: PropTypes.object,
+    /**
+     * Class attribute to be applied to each tick.
+     */
     tickClassName: PropTypes.string,
+    /**
+     * Spacing - provided by XYPlot and used to determine the placement of the ticks given spacingLeft.
+     */
     spacingLeft: PropTypes.number,
-    spacingRight: PropTypes.number
+    /**
+     * Spacing - provided by XYPlot and used to determine the placement of the ticks given spacingRight.
+     */
+    spacingRight: PropTypes.number,
+    /**
+     * Round ticks to capture extent of given y domain from XYPlot.
+     */
+    nice: PropTypes.bool
   };
   static defaultProps = {
     position: "left",
     nice: true,
     tickLength: 5,
-    tickStyle: {},
-    spacingLeft: 0,
-    spacingRight: 0
+    tickStyle: {}
   };
 
   static getTickDomain(props) {
@@ -73,8 +101,8 @@ export default class YTicks extends React.Component {
     const className = `rct-chart-tick rct-chart-tick-y ${tickClassName || ""}`;
     const transform =
       position === "right"
-        ? `translate(${width + spacingRight}, 0)`
-        : `translate(${-spacingLeft}, 0)`;
+        ? `translate(${width + (spacingRight || 0)}, 0)`
+        : `translate(${-spacingLeft || 0}, 0)`;
 
     return (
       <g className="rct-chart-ticks-y" transform={transform}>

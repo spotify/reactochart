@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "`XLine` is a vertical line rendered on the x axis",
   "methods": [],
   "props": {
     "xScale": {
@@ -7,7 +7,7 @@
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "D3 scale for X axis - provided by XYPlot"
     },
     "value": {
       "type": {
@@ -21,7 +21,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Spacing top - provided by XYPlot",
       "defaultValue": {
         "value": "0",
         "computed": false
@@ -32,7 +32,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Spacing bottom - provided by XYPlot",
       "defaultValue": {
         "value": "0",
         "computed": false
@@ -43,7 +43,7 @@
         "name": "object"
       },
       "required": false,
-      "description": "",
+      "description": "Inline style object to be applied to the line",
       "defaultValue": {
         "value": "{}",
         "computed": false
@@ -54,7 +54,7 @@
         "name": "string"
       },
       "required": false,
-      "description": "",
+      "description": "Class attribute to be applied to the line",
       "defaultValue": {
         "value": "\"\"",
         "computed": false

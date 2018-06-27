@@ -1,5 +1,5 @@
 {
-  "description": "BarChart represents a basic \"Value/Value\" bar chart,\nwhere each bar represents a single independent variable value and a single dependent value,\nwith bars that are centered horizontally on x-value and extend from 0 to y-value,\n(or centered vertically on their y-value and extend from 0 to the x-value, in the case of horizontal chart variant)\neg. http://www.snapsurveys.com/wp-content/uploads/2012/10/bar_2d8.png\n\nFor other bar chart types, see RangeBarChart and AreaBarChart",
+  "description": "`BarChart` represents a basic \"Value/Value\" bar chart,\nwhere each bar represents a single independent variable value and a single dependent value,\nwith bars that are centered horizontally on x-value and extend from 0 to y-value,\n(or centered vertically on their y-value and extend from 0 to the x-value, in the case of horizontal chart variant)\neg. http://www.snapsurveys.com/wp-content/uploads/2012/10/bar_2d8.png\n\nFor other bar chart types, see RangeBarChart and AreaBarChart",
   "methods": [
     {
       "name": "getDomain",
@@ -48,7 +48,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for bar X values, called once per bar (datum), or a single value to be used for all bars.\nIf `horizontal` is `true`, this becomes 0.\nIf `horizontal` is `false`, this gets the *dependent* variable value, the end of the bar's length."
     },
     "y": {
       "type": {
@@ -56,21 +56,21 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for bar Y values, called once per bar (datum), or a single value to be used for all bars.\nIf `horizontal` is `false`, this becomes 0.\nIf `horizontal` is `true`, this gets the *dependent* variable value, the end of the bar's length."
     },
     "xScale": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": "D3 scale for X axis - provided by XYPlot"
+      "description": "D3 scale for X axis - provided by XYPlot."
     },
     "yScale": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": "D3 scale for Y axis - provided by XYPlot"
+      "description": "D3 scale for Y axis - provided by XYPlot."
     },
     "horizontal": {
       "type": {

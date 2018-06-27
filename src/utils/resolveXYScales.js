@@ -1,30 +1,21 @@
 import _ from "lodash";
-import { scalePoint } from "d3";
 import React from "react";
-import invariant from "invariant";
-
 import {
-  makeAccessor,
-  makeAccessor2,
-  getValue,
-  domainFromDatasets,
-  domainFromData,
-  inferDatasetsType,
-  datasetsFromPropsOrDescendants,
-  combineDomains,
   combineBorderObjects,
-  isValidDomain
+  combineDomains,
+  domainFromDatasets,
+  inferDatasetsType,
+  isValidDomain,
+  makeAccessor2
 } from "./Data";
-
+import { innerHeight, innerRangeX, innerRangeY, innerWidth } from "./Margin";
 import {
-  scaleTypeFromDataType,
   dataTypeFromScaleType,
   inferDataTypeFromDomain,
   initScale,
-  isValidScale
+  isValidScale,
+  scaleTypeFromDataType
 } from "./Scale";
-
-import { innerRangeX, innerRangeY, innerWidth, innerHeight } from "./Margin";
 
 /**
  * `resolveXYScales` is a higher-order-component.

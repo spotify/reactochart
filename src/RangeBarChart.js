@@ -1,21 +1,18 @@
-import React from "react";
 import _ from "lodash";
-import invariant from "invariant";
 import PropTypes from "prop-types";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
-import { hasXYScales, dataTypeFromScaleType } from "./utils/Scale";
-import {
-  makeAccessor2,
-  getValue,
-  domainFromRangeData,
-  domainFromData,
-  getDataDomainByAxis
-} from "./utils/Data";
-import xyPropsEqual from "./utils/xyPropsEqual";
+import React from "react";
 import Bar from "./Bar";
+import * as CustomPropTypes from "./utils/CustomPropTypes";
+import {
+  domainFromData,
+  domainFromRangeData,
+  getValue,
+  makeAccessor2
+} from "./utils/Data";
+import { dataTypeFromScaleType } from "./utils/Scale";
+import xyPropsEqual from "./utils/xyPropsEqual";
 
 /**
- *
  * `RangeBarChart` is a variation on the standard bar chart. Just like a normal bar chart, each bar represents a single
  * value on the *independent* axis (X axis for vertical bars), and is centered on this value.
  * However, on the *dependent* axis, each bar represents a *range* (min/max) of values,
@@ -41,7 +38,7 @@ export default class RangeBarChart extends React.Component {
      */
     x: CustomPropTypes.valueOrAccessor,
     /**
-     * Accessor function for the end (maximum X values) of the *dependent* variable range which is spanned by the bar's length,
+     * Accessor function for the end (maximum X-values) of the *dependent* variable range which is spanned by the bar's length,
      * or a single value to be used for all bars.
      * Should only be passed when `horizontal` is `true` (ignored otherwise).
      */
@@ -53,17 +50,17 @@ export default class RangeBarChart extends React.Component {
      */
     y: CustomPropTypes.valueOrAccessor,
     /**
-     * Accessor function for the end (maximum Y-value) of the *dependent* variable range which is spanned by the bar's length,
+     * Accessor function for the end (maximum Y-values) of the *dependent* variable range which is spanned by the bar's length,
      * or a single value to be used for all bars.
      * Should only be passed when `horizontal` is `false` (ignored otherwise).
      */
     yEnd: CustomPropTypes.valueOrAccessor,
     /**
-     * D3 scale for X axis - provided by XYPlot
+     * D3 scale for X axis - provided by XYPlot.
      */
     xScale: PropTypes.func,
     /**
-     * D3 scale for Y axis - provided by XYPlot
+     * D3 scale for Y axis - provided by XYPlot.
      */
     yScale: PropTypes.func,
     /**

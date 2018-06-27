@@ -106,7 +106,7 @@
         ]
       },
       "required": false,
-      "description": "Placement of labels in regards to the x axis. Accepted options are \"above\" or \"below\"",
+      "description": "Placement of labels in regards to the x axis. Accepted options are \"above\" or \"below\".",
       "defaultValue": {
         "value": "undefined",
         "computed": true
@@ -117,28 +117,28 @@
         "name": "func"
       },
       "required": false,
-      "description": "D3 scale for X axis - provided by XYPlot"
+      "description": "D3 scale for X axis - provided by XYPlot."
     },
     "spacingTop": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": "Spacing - provided by XYPlot"
+      "description": "Spacing - provided by XYPlot and used to determine the placement of the label given spacingTop."
     },
     "spacingBottom": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": "Spacing - provided by XYPlot"
+      "description": "Spacing - provided by XYPlot and used to determine the placement of the label given spacingBottom."
     },
     "distance": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": "Label distance from X Axis",
+      "description": "Label distance from X Axis.",
       "defaultValue": {
         "value": "4",
         "computed": false
@@ -149,7 +149,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "Number of ticks on axis",
+      "description": "Number of ticks on axis.",
       "defaultValue": {
         "value": "10",
         "computed": false
@@ -160,7 +160,7 @@
         "name": "array"
       },
       "required": false,
-      "description": "Custom ticks to display",
+      "description": "Custom ticks to display.",
       "defaultValue": {
         "value": "null",
         "computed": false
@@ -193,7 +193,7 @@
         "name": "string"
       },
       "required": false,
-      "description": "Format to use for the labels\n\nFor example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit",
+      "description": "Format to use for the labels.\n\nFor example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit.",
       "defaultValue": {
         "value": "undefined",
         "computed": true
@@ -204,7 +204,7 @@
         "name": "array"
       },
       "required": false,
-      "description": "Formats to use for the labels in priority order. XAxisLabels will try to be smart about which format\nto use that keeps the labels distinct and provides the least amount of collisions when rendered.\n\nFor example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit",
+      "description": "Formats to use for the labels in priority order. XAxisLabels will try to be smart about which format\nto use that keeps the labels distinct and provides the least amount of collisions when rendered.\n\nFor example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit.",
       "defaultValue": {
         "value": "undefined",
         "computed": true
@@ -215,7 +215,7 @@
         "name": "array"
       },
       "required": false,
-      "description": "Custom labels provided. Note that each object in the array has to be of shape\n`{\n value,\n text,\n height,\n width\n}`\nvalue - value you'd like this label to be aligned with\ntext - text you'd like displayed\nheight - height of the given label\nwidth - width of the given label",
+      "description": "Custom labels provided. Note that each object in the array has to be of shape.\n`{\n value,\n text,\n height,\n width\n}`\nvalue - value you'd like this label to be aligned with\ntext - text you'd like displayed\nheight - height of the given label\nwidth - width of the given label",
       "defaultValue": {
         "value": "undefined",
         "computed": true
@@ -226,7 +226,7 @@
         "name": "bool"
       },
       "required": false,
-      "description": "Round ticks to capture extent of given x Domain from XYPlot",
+      "description": "Round ticks to capture extent of given x domain from XYPlot.",
       "defaultValue": {
         "value": "true",
         "computed": false
@@ -237,21 +237,21 @@
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mouseenter` event handler callback, called when user's mouse enters the label."
     },
     "onMouseMoveLabel": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mousemove` event handler callback, called when user's mouse moves within the label."
     },
     "onMouseLeaveLabel": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mouseleave` event handler callback, called when user's mouse leaves the label."
     }
   }
 }

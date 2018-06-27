@@ -1,9 +1,8 @@
-import React from "react";
 import invariant from "invariant";
 import isUndefined from "lodash/isUndefined";
-import { hasOneOfTwo } from "./util";
-import { hasXYScales } from "./utils/Scale";
 import PropTypes from "prop-types";
+import React from "react";
+import { hasOneOfTwo } from "./util";
 
 /**
  * Bar is a low-level component to be used in XYPlot-type charts (namely BarChart).
@@ -54,35 +53,35 @@ export default class Bar extends React.Component {
     ]),
 
     /**
-     * The thickness of the bar, in pixels. (width of vertical bar, or height of horizontal bar)
+     * The thickness of the bar, in pixels. (width of vertical bar, or height of horizontal bar).
      */
     thickness: PropTypes.number,
     /**
-     * Class name(s) to be included on the bar's <rect> element
+     * Class name(s) to be included on the bar's <rect> element.
      */
     className: PropTypes.string,
     /**
-     * Inline style object to be included on the bar's <rect> element
+     * Inline style object to be included on the bar's <rect> element.
      */
     style: PropTypes.object,
     /**
-     * onMouseMove event handler callback, called when user's mouse moves within the bar.
+     * `mousemove` event handler callback, called when user's mouse moves within the bar.
      */
     onMouseMove: PropTypes.func,
     /**
-     * onMouseEnter event handler callback, called when user's mouse enters the bar.
+     * `mouseenter` event handler callback, called when user's mouse enters the bar.
      */
     onMouseEnter: PropTypes.func,
     /**
-     * onMouseLeave event handler callback, called when user's mouse leaves the bar.
+     * `mouseleave` event handler callback, called when user's mouse leaves the bar.
      */
     onMouseLeave: PropTypes.func,
     /**
-     * D3 scale for X axis - provided by XYPlot
+     * D3 scale for X axis - provided by XYPlot.
      */
     xScale: PropTypes.func,
     /**
-     * D3 scale for Y axis - provided by XYPlot
+     * D3 scale for Y axis - provided by XYPlot.
      */
     yScale: PropTypes.func
   };

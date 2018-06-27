@@ -57,17 +57,17 @@ function resolveYLabelsForValues(scale, values, formats, style, force = true) {
 class YAxisLabels extends React.Component {
   static propTypes = {
     /**
-     * D3 scale for Y axis - provided by XYPlot
+     * D3 scale for Y axis - provided by XYPlot.
      */
     yScale: PropTypes.func,
     height: PropTypes.number,
     width: PropTypes.number,
-    /***
-     * Position of y axis labels. Accepted options are "left" or "right"
+    /**
+     * Position of y axis labels. Accepted options are "left" or "right".
      */
     position: PropTypes.oneOf(["left", "right"]),
     /**
-     * Placement of labels in regards to the x axis. Accepted options are "before" or "after"
+     * Placement of labels in regards to the y axis. Accepted options are "before" or "after"
      */
     placement: PropTypes.oneOf(["before", "after"]),
     /**
@@ -75,7 +75,7 @@ class YAxisLabels extends React.Component {
      */
     distance: PropTypes.number,
     /**
-     * Round ticks to capture extent of given y Domain from XYPlot
+     * Round ticks to capture extent of given y domain from XYPlot
      */
     nice: PropTypes.bool,
     /**
@@ -98,11 +98,11 @@ class YAxisLabels extends React.Component {
     labelStyle: PropTypes.object,
     labelClassName: PropTypes.string,
     /**
-     * Spacing - provided by XYPlot
+     * Spacing - provided by XYPlot and used to determine the placement of the label given spacingLeft
      */
     spacingLeft: PropTypes.number,
     /**
-     * Spacing - provided by XYPlot
+     * Spacing - provided by XYPlot and used to determine the placement of the label given spacingRight
      */
     spacingRight: PropTypes.number,
     // Label Handling

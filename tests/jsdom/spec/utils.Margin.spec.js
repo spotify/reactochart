@@ -87,7 +87,6 @@ describe("Scale utils", () => {
       { marginBottom: 17, marginLeft: 16, marginRight: 16, marginTop: 0 }
     ];
     const prefix = "margin";
-
     expect(sumMargins(margins, prefix)).to.eql({
       marginTop: 0,
       marginBottom: 51,

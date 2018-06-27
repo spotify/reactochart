@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import _ from "lodash";
 import * as d3 from "d3";
+import _ from "lodash";
+import PropTypes from "prop-types";
+import React from "react";
 
 // todo: make sure this correctly handles new props getting passed in, doesn't double bind events
 
@@ -12,6 +12,9 @@ function zoomTransformFromProps(props) {
     .scale(zoomScale || 1);
 }
 
+/**
+ * `ZoomContainer` is a wrapper tnat gives users the ability to zoom in, zoom out and drag its children components.
+ */
 export default class ZoomContainer extends React.Component {
   static propTypes = {
     /**
@@ -36,15 +39,15 @@ export default class ZoomContainer extends React.Component {
      */
     controlled: PropTypes.bool,
     /**
-     * Disables wheel-driven zooming (say to not interfere with native scrolling)
+     * Disables wheel-driven zooming (say to not interfere with native scrolling).
      */
     disableMouseWheelZoom: PropTypes.bool,
     /**
-     * The X-coordinate of the zoom transformation (or initial X-coordinate, if `controlled` is false)
+     * The X-coordinate of the zoom transformation (or initial X-coordinate, if `controlled` is false).
      */
     zoomX: PropTypes.number,
     /**
-     * The Y-coordinate of the zoom transformation (or initial Y-coordinate, if `controlled` is false)
+     * The Y-coordinate of the zoom transformation (or initial Y-coordinate, if `controlled` is false).
      */
     zoomY: PropTypes.number,
     /**

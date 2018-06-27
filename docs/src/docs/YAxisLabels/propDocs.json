@@ -64,7 +64,7 @@
         "name": "func"
       },
       "required": false,
-      "description": "D3 scale for Y axis - provided by XYPlot"
+      "description": "D3 scale for Y axis - provided by XYPlot."
     },
     "height": {
       "type": {
@@ -103,7 +103,7 @@
         ]
       },
       "required": false,
-      "description": "",
+      "description": "Position of y axis labels. Accepted options are \"left\" or \"right\".",
       "defaultValue": {
         "value": "\"left\"",
         "computed": false
@@ -124,7 +124,7 @@
         ]
       },
       "required": false,
-      "description": "Placement of labels in regards to the x axis. Accepted options are \"before\" or \"after\""
+      "description": "Placement of labels in regards to the y axis. Accepted options are \"before\" or \"after\""
     },
     "distance": {
       "type": {
@@ -142,7 +142,7 @@
         "name": "bool"
       },
       "required": false,
-      "description": "Round ticks to capture extent of given y Domain from XYPlot",
+      "description": "Round ticks to capture extent of given y domain from XYPlot",
       "defaultValue": {
         "value": "true",
         "computed": false
@@ -197,14 +197,14 @@
         "name": "number"
       },
       "required": false,
-      "description": "Spacing - provided by XYPlot"
+      "description": "Spacing - provided by XYPlot and used to determine the placement of the label given spacingLeft"
     },
     "spacingRight": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": "Spacing - provided by XYPlot"
+      "description": "Spacing - provided by XYPlot and used to determine the placement of the label given spacingRight"
     },
     "onMouseEnterLabel": {
       "type": {

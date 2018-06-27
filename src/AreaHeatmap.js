@@ -7,10 +7,17 @@ import * as CustomPropTypes from "./utils/CustomPropTypes";
 import { getValue, makeAccessor2 } from "./utils/Data";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
+/**
+ * `AreaHeatmap` is still undergoing experimental changes!
+ * We do not consider this chart to be production ready as it does not support categorical data.
+ */
+
+// todo support categorical data
+
 export default class AreaHeatmap extends React.Component {
   static propTypes = {
     /**
-     * the array of data objects
+     * Array of data objects.
      */
     data: PropTypes.array.isRequired,
     x: CustomPropTypes.valueOrAccessor,

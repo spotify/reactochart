@@ -1,24 +1,34 @@
-import React from "react";
-import _ from "lodash";
 import { area, scaleOrdinal, schemeCategory20b } from "d3";
-import invariant from "invariant";
+import _ from "lodash";
 import PropTypes from "prop-types";
+import React from "react";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
 import {
-  makeAccessor2,
-  getValue,
+  combineDomains,
   domainFromData,
-  combineDomains
+  getValue,
+  makeAccessor2
 } from "./utils/Data";
 import { dataTypeFromScaleType } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
+/**
+ * `FunnelChart` is used to visualize the progressive reduction of data as it passes
+ * from one phase to another.
+ */
 export default class FunnelChart extends React.Component {
   static propTypes = {
-    // data array
+    /**
+     * Array of data to be plotted.
+     */
     data: PropTypes.array.isRequired,
-    // data getters
+    /**
+     * Accessor function for X values, called once per datum, or a single value to be used for all datums.
+     */
     x: CustomPropTypes.valueOrAccessor,
+    /**
+     * Accessor function for Y values, called once per datum, or a single value to be used for all datums.
+     */
     y: CustomPropTypes.valueOrAccessor,
     /**
      * Color applied to the path element,
@@ -39,11 +49,11 @@ export default class FunnelChart extends React.Component {
      */
     pathStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /**
-     * D3 scale for X axis - provided by XYPlot
+     * D3 scale for X axis - provided by XYPlot.
      */
     xScale: PropTypes.func,
     /**
-     * D3 scale for Y axis - provided by XYPlot
+     * D3 scale for Y axis - provided by XYPlot.
      */
     yScale: PropTypes.func
   };

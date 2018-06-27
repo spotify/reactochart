@@ -142,56 +142,56 @@
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Internal top margin, in pixels."
     },
     "marginBottom": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Internal bottom margin, in pixels."
     },
     "marginLeft": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Internal left margin, in pixels."
     },
     "marginRight": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Internal right margin, in pixels."
     },
     "spacingTop": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Internal top spacing of XYPlot, in pixels."
     },
     "spacingBottom": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Internal bottom spacing of XYPlot, in pixels."
     },
     "spacingLeft": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Internal left spacing of XYPlot, in pixels."
     },
     "spacingRight": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Internal right spacing of XYPlot, in pixels."
     },
     "onMouseMove": {
       "type": {

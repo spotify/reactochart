@@ -1,10 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import _ from "lodash";
 import { hierarchy, treemap, treemapResquarify } from "d3-hierarchy";
-
-import { makeAccessor } from "./utils/Data";
+import _ from "lodash";
+import PropTypes from "prop-types";
+import React from "react";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
+import { makeAccessor } from "./utils/Data";
 
 export class TreeMapNode extends React.Component {
   static propTypes = {
@@ -116,6 +115,9 @@ export class TreeMapNodeLabel extends React.Component {
   }
 }
 
+/**
+ *
+ */
 class TreeMap extends React.Component {
   static propTypes = {
     width: PropTypes.number.isRequired,
@@ -171,12 +173,30 @@ class TreeMap extends React.Component {
     minLabelWidth: PropTypes.number,
     minLabelHeight: PropTypes.number,
 
+    /**
+     * `onClick` event handler callback, called when user clicks a NodeComponent.
+     */
     onClickNode: PropTypes.func,
+    /**
+     * `mouseenter` event handler callback, called when user's mouse enters a NodeComponent.
+     */
     onMouseEnterNode: PropTypes.func,
+    /**
+     * `mouseleave` event handler callback, called when user's mouse leaves a NodeComponent.
+     */
     onMouseLeaveNode: PropTypes.func,
+    /**
+     * `mousemove` event handler callback, called when user's mouse moves within a NodeComponent.
+     */
     onMouseMoveNode: PropTypes.func,
 
+    /**
+     * Optional treemap node, otherwise we default to our TreeMapNode component
+     */
     NodeComponent: PropTypes.func,
+    /**
+     * Optional treemap node label, otherwise we default to our TreeMapNodeLabel component
+     */
     NodeLabelComponent: PropTypes.func
   };
   static defaultProps = {

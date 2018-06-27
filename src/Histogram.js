@@ -1,12 +1,17 @@
-import React from "react";
+import { extent, histogram, scaleLinear } from "d3";
 import _ from "lodash";
-import { histogram, extent, scaleLinear } from "d3";
 import PropTypes from "prop-types";
-
-import xyPropsEqual from "./utils/xyPropsEqual";
+import React from "react";
 import AreaBarChart from "./AreaBarChart";
+import xyPropsEqual from "./utils/xyPropsEqual";
+
+/**
+ * `Histogram` is used to represent the distribution of numerical data. Histograms, only relate
+ * to one variable, where data is typically "binned" and counted.
+ */
 
 // todo make histogram work horizontally *or* vertically
+// todo make histogram work with ordinal scale
 export default class Histogram extends React.Component {
   static propTypes = {
     /**
@@ -22,11 +27,11 @@ export default class Histogram extends React.Component {
      */
     value: PropTypes.func,
     /**
-     * D3 scale for X axis - provided by XYPlot
+     * D3 scale for X axis - provided by XYPlot.
      */
     xScale: PropTypes.func,
     /**
-     * D3 scale for Y axis - provided by XYPlot
+     * D3 scale for Y axis - provided by XYPlot.
      */
     yScale: PropTypes.func,
     /**
@@ -80,7 +85,6 @@ export default class Histogram extends React.Component {
   state = { histogramData: null };
 
   static getScaleType() {
-    // TODO make histogram work with ordinal scale
     return { xScaleType: "linear", yScaleType: "linear" };
   }
 

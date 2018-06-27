@@ -1,30 +1,58 @@
-import React from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
-
+import React from "react";
 import { getScaleTicks, getTickDomain } from "./utils/Scale";
 
 export default class XTicks extends React.Component {
   static propTypes = {
+    /**
+     * D3 scale for X axis - provided by XYPlot.
+     */
     xScale: PropTypes.func,
+    /**
+     * Position of x ticks. Accepted options are "bottom" or "top".
+     */
     position: PropTypes.oneOf(["bottom", "top"]),
+    /**
+     * Placement of ticks in regards to the x axis. Accepted options are "above" or "below".
+     */
     placement: PropTypes.oneOf(["above", "below"]),
+    /**
+     * Custom ticks to display.
+     */
     ticks: PropTypes.array,
+    /**
+     * Number of ticks on axis.
+     */
     tickCount: PropTypes.number,
     tickLength: PropTypes.number,
+    /**
+     * Inline style object applied to each tick.
+     */
     tickStyle: PropTypes.object,
+    /**
+     * Class attribute to be applied to each tick.
+     */
     tickClassName: PropTypes.string,
+    /**
+     * Spacing - provided by XYPlot and used to determine the placement of the ticks given spacingTop.
+     */
     spacingTop: PropTypes.number,
-    spacingBottom: PropTypes.number
+    /**
+     * Spacing - provided by XYPlot and used to determine the placement of the ticks given spacingBottom.
+     */
+    spacingBottom: PropTypes.number,
+    /**
+     * Round ticks to capture extent of given x domain from XYPlot.
+     */
+    nice: PropTypes.bool
   };
   static defaultProps = {
     position: "bottom",
     nice: true,
     tickLength: 5,
     tickStyle: {},
-    tickClassName: "",
-    spacingTop: 0,
-    spacingBottom: 0
+    tickClassName: ""
   };
 
   static getTickDomain(props) {
@@ -68,14 +96,15 @@ export default class XTicks extends React.Component {
       spacingTop,
       spacingBottom
     } = this.props;
+
     const placement =
       this.props.placement || (position === "top" ? "above" : "below");
     const ticks = this.props.ticks || getScaleTicks(xScale, null, tickCount);
     const className = `rct-chart-tick rct-chart-tick-x ${tickClassName || ""}`;
     const transform =
       position === "bottom"
-        ? `translate(0, ${height + spacingBottom})`
-        : `translate(0, ${-spacingTop})`;
+        ? `translate(0, ${height + (spacingBottom || 0)})`
+        : `translate(0, ${-spacingTop || 0})`;
 
     return (
       <g className="rct-chart-ticks-x" transform={transform}>

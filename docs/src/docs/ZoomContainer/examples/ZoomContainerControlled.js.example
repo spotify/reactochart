@@ -54,6 +54,7 @@ class ZoomControlledExample extends React.Component {
           zoomX={this.state.zoomX}
           zoomY={this.state.zoomY}
           zoomScale={this.state.zoomScale}
+          disableMouseWheelZoom={true}
         >
           <XYPlot scaleType="linear" width={600} height={350}>
             <XAxis title="Phase" />
