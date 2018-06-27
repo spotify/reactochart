@@ -56,11 +56,11 @@ export default class RangeBarChart extends React.Component {
      */
     yEnd: CustomPropTypes.valueOrAccessor,
     /**
-     * D3 scale for X axis - provided by XYPlot
+     * D3 scale for X axis - provided by XYPlot.
      */
     xScale: PropTypes.func,
     /**
-     * D3 scale for Y axis - provided by XYPlot
+     * D3 scale for Y axis - provided by XYPlot.
      */
     yScale: PropTypes.func,
     /**

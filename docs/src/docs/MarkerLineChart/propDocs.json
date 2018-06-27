@@ -116,7 +116,7 @@
         "name": "array"
       },
       "required": true,
-      "description": "the array of data objects"
+      "description": "Array of data objects. One marker line will be rendered per datum in the array."
     },
     "x": {
       "type": {

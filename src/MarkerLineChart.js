@@ -43,7 +43,7 @@ function getTickType(props) {
 export default class MarkerLineChart extends React.Component {
   static propTypes = {
     /**
-     * the array of data objects
+     * Array of data objects. One marker line will be rendered per datum in the array.
      */
     data: PropTypes.array.isRequired,
     /**
