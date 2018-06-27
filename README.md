@@ -1,5 +1,13 @@
-![Build Status](https://travis-ci.org/spotify/reactochart.svg?branch=master)](https://travis-ci.org/spotify/reactochart)
-![NPM version](https://img.shields.io/npm/v/reactochart.svg?style=flat-square)](https://npmjs.org/package/reactochart)
+<p align="right">
+    <a href="https://npmjs.org/package/reactochart">
+    <img src="https://img.shields.io/npm/v/reactochart.svg?style=flat-square" alt="version" />
+  </a>
+  <a href="https://travis-ci.org/spotify/reactochart">
+    <img src="https://travis-ci.org/spotify/reactochart.svg?branch=master" alt="build" />
+  </a>
+</p>
+
+<h1 align="center"> :chart_with_upwards_trend:  reactochart :chart_with_downwards_trend:</h1>
 
 # Overview
 
@@ -41,55 +49,46 @@ The examples contain more details about each component and the prop-types it acc
 ## Chart Foundations
 
 ### XY Plot
-  * XYPlot
+  * [XYPlot](http://spotify.github.io/reactochart/docs/build/#/xy-plot)
 
 ### XY Axis Components
 
-* XAxis, YAxis
-* XAxisTitle, YAxisTitle
-* XAxisLabels, YAxisLabels
-* XTicks, YTicks
-* XGrid, YGrid
+* [XAxis](http://spotify.github.io/reactochart/docs/build/#/x-axis), [YAxis](http://spotify.github.io/reactochart/docs/build/#/y-axis)
+* [XAxisTitle](http://spotify.github.io/reactochart/docs/build/#/x-axis-title), [YAxisTitle](http://spotify.github.io/reactochart/docs/build/#/y-axis-title)
+* [XAxisLabels](http://spotify.github.io/reactochart/docs/build/#/x-axis-labels), [YAxisLabels](http://spotify.github.io/reactochart/docs/build/#/y-axis-labels)
+* [XTicks](http://spotify.github.io/reactochart/docs/build/#/x-ticks), [YTicks](http://spotify.github.io/reactochart/docs/build/#/y-ticks)
+* [XGrid](http://spotify.github.io/reactochart/docs/build/#/x-grid), [YGrid](http://spotify.github.io/reactochart/docs/build/#/y-grid)
 
 # Chart Types
 ### Non-XY charts
 
-* PieChart
-* TreeMap
+* [PieChart](http://spotify.github.io/reactochart/docs/build/#/pie-chart)
+* [TreeMap](http://spotify.github.io/reactochart/docs/build/#/tree-map)
+* [SankeyDiagram](http://spotify.github.io/reactochart/docs/build/#/sankey)
 
 ### XY charts
 
-* AreaBarChart
-* AreaChart
-* AreaHeatmap
-* BarChart
-* ColorHeatmap
-* FunnelChart
-* Histogram
-* LineChart
-* MarkerLineChart
-* RangeBarChart
-* SankeyDiagram
-* ScatterPlot
+* [AreaBarChart](http://spotify.github.io/reactochart/docs/build/#/area-bar-chart)
+* [AreaChart](http://spotify.github.io/reactochart/docs/build/#/area-chart)
+* [AreaHeatmap](http://spotify.github.io/reactochart/docs/build/#/area-heatmap)
+* [BarChart](http://spotify.github.io/reactochart/docs/build/#/bar-chart)
+* [ColorHeatmap](http://spotify.github.io/reactochart/docs/build/#/color-heatmap)
+* [FunnelChart](http://spotify.github.io/reactochart/docs/build/#/funnel-chart)
+* [Histogram](http://spotify.github.io/reactochart/docs/build/#/histogram)
+* [LineChart](http://spotify.github.io/reactochart/docs/build/#/line-chart)
+* [MarkerLineChart](http://spotify.github.io/reactochart/docs/build/#/marker-line-chart)
+* [RangeBarChart](http://spotify.github.io/reactochart/docs/build/#/range-bar-chart)
+* [ScatterPlot](http://spotify.github.io/reactochart/docs/build/#/scatter-plot)
 
 ### XY datum components (used by charts/axes)
 
-* Bar
-* RangeRect
-* XLine, YLine
+* [Bar](http://spotify.github.io/reactochart/docs/build/#/bar)
+* [RangeRect](http://spotify.github.io/reactochart/docs/build/#/range-rect)
+* [XLine](http://spotify.github.io/reactochart/docs/build/#/x-line), [YLine](http://spotify.github.io/reactochart/docs/build/#/y-line)
 
-### Higher-order components
+### Other
 
-* resolveXYScales
-
-### Utilities
-
-* Data
-* Scale
-* Axis
-* Label
-* Margin
-* depthEqual
+* [ZoomContainer](http://spotify.github.io/reactochart/docs/build/#/zoom-container)
 
 # Development
 
