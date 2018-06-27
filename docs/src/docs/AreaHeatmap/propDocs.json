@@ -58,7 +58,7 @@
         "name": "array"
       },
       "required": true,
-      "description": "the array of data objects"
+      "description": "Array of data objects."
     },
     "x": {
       "type": {

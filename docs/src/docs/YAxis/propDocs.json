@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "`YAxis` is the vertical axis of the chart. `YAxis` is a wrapper around `YGrid`, `YTicks`,\n`YAxisLabels`, and `YAxisTitle`. See their respective docs for prop documentation.",
   "methods": [
     {
       "name": "getTickDomain",
@@ -108,7 +108,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Internal top spacing of YAxis, in pixels.",
       "defaultValue": {
         "value": "0",
         "computed": false
@@ -119,7 +119,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Internal bottom spacing of YAxis, in pixels.",
       "defaultValue": {
         "value": "0",
         "computed": false
@@ -130,7 +130,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Internal left spacing of YAxis, in pixels.",
       "defaultValue": {
         "value": "0",
         "computed": false
@@ -141,7 +141,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Internal right spacing of YAxis, in pixels.",
       "defaultValue": {
         "value": "0",
         "computed": false

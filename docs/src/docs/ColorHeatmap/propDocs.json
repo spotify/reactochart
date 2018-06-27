@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "`ColorHeatmap` can be used to represent individual values contained in a matrix through colors.",
   "methods": [
     {
       "name": "getDomain",
@@ -22,7 +22,7 @@
         "name": "array"
       },
       "required": true,
-      "description": "data array - should be 1D array of all grid values\n(if you have a 2D array, _.flatten it)"
+      "description": "Array of data to be plotted - should be 1D array of all grid values"
     },
     "value": {
       "type": {
@@ -38,7 +38,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for x values, called once per datum."
     },
     "xEnd": {
       "type": {
@@ -46,7 +46,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for x end values, called once per datum."
     },
     "y": {
       "type": {
@@ -54,7 +54,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for y values, called once per datum."
     },
     "yEnd": {
       "type": {
@@ -62,7 +62,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for y end values, called once per datum."
     },
     "xScale": {
       "type": {
@@ -97,14 +97,14 @@
         "name": "array"
       },
       "required": false,
-      "description": ""
+      "description": "Custom domain of the passed in data.\nOtherwise it will be the extent of your data."
     },
     "interpolator": {
       "type": {
         "name": "string"
       },
       "required": false,
-      "description": "",
+      "description": "Interpolator for colors. Possible options include \"hcl\", \"hsl\", \"lab\" and \"rgb\"",
       "defaultValue": {
         "value": "\"lab\"",
         "computed": false

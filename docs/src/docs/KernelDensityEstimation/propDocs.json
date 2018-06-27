@@ -1,5 +1,5 @@
 {
-  "description": "Kernel Density Estimation is still undergoing experimental changes!\nWe do not consider this chart to be production ready.",
+  "description": "Kernel Density Estimation is still undergoing experimental changes!\nWe do not consider this chart to be production ready but\nencourage you to try it out and contribute to any of its missing features.",
   "methods": [
     {
       "name": "getDomain",
@@ -29,7 +29,7 @@
         "name": "array"
       },
       "required": true,
-      "description": "the array of data objects"
+      "description": "Array of data objects."
     },
     "bandwidth": {
       "type": {
@@ -58,14 +58,14 @@
         "name": "object"
       },
       "required": false,
-      "description": "Inline style object to be applied to the line path"
+      "description": "Inline style object to be applied to the line path."
     },
     "lineClassName": {
       "type": {
         "name": "string"
       },
       "required": false,
-      "description": "Class attribute to be applied to the line path"
+      "description": "Class attribute to be applied to the line path."
     },
     "x": {
       "type": {
@@ -73,46 +73,21 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "X value or accessor function"
+      "description": "Accessor function for bar X values, called once per bar (datum)."
     },
-    "name": {
+    "xScale": {
       "type": {
-        "name": "string"
+        "name": "func"
       },
       "required": false,
-      "description": "",
-      "defaultValue": {
-        "value": "\"\"",
-        "computed": false
-      }
+      "description": "D3 scale for X axis - provided by XYPlot."
     },
-    "scale": {
+    "yScale": {
       "type": {
-        "name": "object"
+        "name": "func"
       },
       "required": false,
-      "description": ""
-    },
-    "axisType": {
-      "type": {
-        "name": "object"
-      },
-      "required": false,
-      "description": ""
-    },
-    "scaleWidth": {
-      "type": {
-        "name": "number"
-      },
-      "required": false,
-      "description": ""
-    },
-    "scaleHeight": {
-      "type": {
-        "name": "number"
-      },
-      "required": false,
-      "description": ""
+      "description": "D3 scale for Y axis - provided by XYPlot."
     }
   }
 }

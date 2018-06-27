@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "`XAxis` is the horizontal axis of the chart. `XAxis` is a wrapper around `XGrid`, `XTicks`,\n`XAxisLabels`, and `XAxisTitle`. See their respective docs for prop documentation.",
   "methods": [
     {
       "name": "getTickDomain",
@@ -108,7 +108,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Internal top spacing of XAxis, in pixels.",
       "defaultValue": {
         "value": "0",
         "computed": false
@@ -119,7 +119,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Internal bottom spacing of XAxis, in pixels.",
       "defaultValue": {
         "value": "0",
         "computed": false
@@ -130,7 +130,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Internal left spacing of XAxis, in pixels.",
       "defaultValue": {
         "value": "0",
         "computed": false
@@ -141,7 +141,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Internal right spacing of XAxis, in pixels.",
       "defaultValue": {
         "value": "0",
         "computed": false
