@@ -173,9 +173,21 @@ class TreeMap extends React.Component {
     minLabelWidth: PropTypes.number,
     minLabelHeight: PropTypes.number,
 
+    /**
+     * `onClick` event handler callback, called when user clicks a NodeComponent.
+     */
     onClickNode: PropTypes.func,
+    /**
+     * `mouseenter` event handler callback, called when user's mouse enters a NodeComponent.
+     */
     onMouseEnterNode: PropTypes.func,
+    /**
+     * `mouseleave` event handler callback, called when user's mouse leaves a NodeComponent.
+     */
     onMouseLeaveNode: PropTypes.func,
+    /**
+     * `mousemove` event handler callback, called when user's mouse moves within a NodeComponent.
+     */
     onMouseMoveNode: PropTypes.func,
 
     /**

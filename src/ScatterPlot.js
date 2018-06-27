@@ -17,31 +17,31 @@ export default class ScatterPlot extends React.Component {
      */
     data: PropTypes.array.isRequired,
     /**
-     * Accessor function for plot X values, called once per datum
+     * Accessor function for plot X values, called once per datum, or a single value to be used for all points.
      */
     x: CustomPropTypes.valueOrAccessor,
     /**
-     * Accessor function for plot Y values, called once per datum
+     * Accessor function for plot Y values, called once per datum, or a single value to be used for all points.
      */
     y: CustomPropTypes.valueOrAccessor,
     /**
-     * D3 scale for X axis - provided by XYPlot
+     * D3 scale for X axis - provided by XYPlot.
      */
     xScale: PropTypes.func,
     /**
-     * D3 scale for Y axis - provided by XYPlot
+     * D3 scale for Y axis - provided by XYPlot.
      */
     yScale: PropTypes.func,
     /**
-     * Used with the default point symbol (circle), defines the circle radius
+     * Used with the default point symbol (circle), defines the circle radius.
      */
     pointRadius: PropTypes.number,
     /**
-     * Text or SVG node to use as custom point symbol, or function which returns text/SVG
+     * Text or SVG node to use as custom point symbol, or function which returns text/SVG.
      */
     pointSymbol: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-     * Manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered
+     * Manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered.
      */
     pointOffset: PropTypes.arrayOf(PropTypes.number),
     /**
@@ -54,9 +54,17 @@ export default class ScatterPlot extends React.Component {
      * or accessor function which returns a class.
      */
     pointClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-
+    /**
+     * `mouseenter` event handler callback, called when user's mouse enters a point.
+     */
     onMouseEnterPoint: PropTypes.func,
+    /**
+     * `mousemove` event handler callback, called when user's mouse moves within a point.
+     */
     onMouseMovePoint: PropTypes.func,
+    /**
+     * `mouseleave` event handler callback, called when user's mouse leaves a point.
+     */
     onMouseLeavePoint: PropTypes.func
   };
   static defaultProps = {

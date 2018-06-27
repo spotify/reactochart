@@ -17,7 +17,7 @@ import xyPropsEqual from "./utils/xyPropsEqual";
 export default class AreaHeatmap extends React.Component {
   static propTypes = {
     /**
-     * the array of data objects
+     * Array of data objects.
      */
     data: PropTypes.array.isRequired,
     x: CustomPropTypes.valueOrAccessor,

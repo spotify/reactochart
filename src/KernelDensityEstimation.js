@@ -13,10 +13,9 @@ import xyPropsEqual from "./utils/xyPropsEqual";
 class KernelDensityEstimation extends React.Component {
   static propTypes = {
     /**
-     * the array of data objects
+     * Array of data objects.
      */
     data: PropTypes.array.isRequired,
-
     /**
      * Kernel bandwidth for kernel density estimator.
      * High bandwidth => oversmoothing & underfitting; low bandwidth => undersmoothing & overfitting
@@ -29,29 +28,29 @@ class KernelDensityEstimation extends React.Component {
      */
     sampleCount: PropTypes.number,
     /**
-     * Inline style object to be applied to the line path
+     * Inline style object to be applied to the line path.
      */
     lineStyle: PropTypes.object,
     /**
-     * Class attribute to be applied to the line path
+     * Class attribute to be applied to the line path.
      */
     lineClassName: PropTypes.string,
     /**
-     * X value or accessor function
+     * Accessor function for bar X values, called once per bar (datum).
      */
     x: CustomPropTypes.valueOrAccessor,
-    // common props from XYPlot
-    // accessor for data values
-    name: PropTypes.string,
-    scale: PropTypes.object,
-    axisType: PropTypes.object,
-    scaleWidth: PropTypes.number,
-    scaleHeight: PropTypes.number
+    /**
+     * D3 scale for X axis - provided by XYPlot.
+     */
+    xScale: PropTypes.func,
+    /**
+     * D3 scale for Y axis - provided by XYPlot.
+     */
+    yScale: PropTypes.func
   };
   static defaultProps = {
     bandwidth: 0.5,
-    sampleCount: null, // null = auto-determined based on width
-    name: ""
+    sampleCount: null // null = auto-determined based on width
   };
 
   state = {

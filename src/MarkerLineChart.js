@@ -76,16 +76,20 @@ export default class MarkerLineChart extends React.Component {
      */
     horizontal: PropTypes.bool,
     lineLength: PropTypes.number,
-
-    // x & y scale types
+    /**
+     * D3 scale type for X axis - provided by XYPlot.
+     */
     xScaleType: PropTypes.string,
+    /**
+     * D3 scale type for Y axis - provided by XYPlot.
+     */
     yScaleType: PropTypes.string,
     /**
-     * D3 scale for X axis - provided by XYPlot
+     * D3 scale for X axis - provided by XYPlot.
      */
     xScale: PropTypes.func,
     /**
-     * D3 scale for Y axis - provided by XYPlot
+     * D3 scale for Y axis - provided by XYPlot.
      */
     yScale: PropTypes.func,
     /**
@@ -98,9 +102,17 @@ export default class MarkerLineChart extends React.Component {
      * or accessor function which returns a style object.
      */
     lineStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-
+    /**
+     * `mouseenter` event handler callback, called when user's mouse enters a marker line.
+     */
     onMouseEnterLine: PropTypes.func,
+    /**
+     * `mousemove` event handler callback, called when user's mouse moves within a marker line.
+     */
     onMouseMoveLine: PropTypes.func,
+    /**
+     * `mouseleave` event handler callback, called when user's mouse leaves a marker line.
+     */
     onMouseLeaveLine: PropTypes.func
   };
   static defaultProps = {

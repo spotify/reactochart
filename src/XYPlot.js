@@ -1,11 +1,10 @@
-import React from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
-
-import resolveXYScales from "./utils/resolveXYScales";
-import { innerSize } from "./utils/Margin";
-import { inferScaleType } from "./utils/Scale";
+import React from "react";
 import { methodIfFuncProp } from "./util";
+import { innerSize } from "./utils/Margin";
+import resolveXYScales from "./utils/resolveXYScales";
+import { inferScaleType } from "./utils/Scale";
 
 function indexOfClosestNumberInList(number, list) {
   return list.reduce((closestI, current, i) => {
@@ -127,17 +126,38 @@ class XYPlot extends React.Component {
     includeYZero: PropTypes.bool,
 
     /**
-     *
+     * Internal top margin, in pixels.
      */
     marginTop: PropTypes.number,
+    /**
+     * Internal bottom margin, in pixels.
+     */
     marginBottom: PropTypes.number,
+    /**
+     * Internal left margin, in pixels.
+     */
     marginLeft: PropTypes.number,
+    /**
+     * Internal right margin, in pixels.
+     */
     marginRight: PropTypes.number,
 
     // todo spacing & padding...
+    /**
+     * Internal top spacing of XYPlot, in pixels.
+     */
     spacingTop: PropTypes.number,
+    /**
+     * Internal bottom spacing of XYPlot, in pixels.
+     */
     spacingBottom: PropTypes.number,
+    /**
+     * Internal left spacing of XYPlot, in pixels.
+     */
     spacingLeft: PropTypes.number,
+    /**
+     * Internal right spacing of XYPlot, in pixels.
+     */
     spacingRight: PropTypes.number,
 
     // todo implement padding (helper for spacing)

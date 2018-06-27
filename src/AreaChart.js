@@ -22,7 +22,8 @@ export default class AreaChart extends React.Component {
      */
     data: PropTypes.array.isRequired,
     /**
-     * Accessor function for area X values, called once per datum
+     * Accessor function for area X values, called once per datum,
+     * or a single Y value to be used for the entire line.
      */
     x: CustomPropTypes.valueOrAccessor,
     /**
@@ -38,48 +39,48 @@ export default class AreaChart extends React.Component {
      */
     yEnd: CustomPropTypes.valueOrAccessor,
     /**
-     * classname applied to area path element
+     * Class attribute to be applied to area path element.
      */
     pathClassName: PropTypes.string,
     /**
-     * style applied to area path element
+     * Inline style object to be applied to area path element.
      */
     pathStyle: PropTypes.object,
     /**
-     * if isDifference is true, AreaChart generates a "difference chart" with two area paths instead of one:
-     * one path which shows when YEnd > Y, and one vice versa, allowing them to be styled differently (eg red/green)
+     * If isDifference is true, AreaChart generates a "difference chart" with two area paths instead of one:
+     * one path which shows when YEnd > Y, and one vice versa, allowing them to be styled differently (eg red/green).
      */
     isDifference: PropTypes.bool,
     /**
-     * when isDifference is true, pathStylePositive and pathStyleNegative can be passed to give 2 different inline
+     * When isDifference is true, pathStylePositive and pathStyleNegative can be passed to give 2 different inline
      * styles to the two different paths which are generated.
      * Ignored if isDifference is false.
      */
     pathStylePositive: PropTypes.object,
     pathStyleNegative: PropTypes.object,
     /**
-     * if true, will show gaps in the shaded area for data where props.isDefined(datum) returns false
+     * If true, will show gaps in the shaded area for data where props.isDefined(datum) returns false.
      */
     shouldShowGaps: PropTypes.bool,
     /**
-     * if shouldShowGaps is true, isDefined function describes when a datum should be considered "defined" vs. when to show gap
-     * by default, shows gap if either y or yEnd are undefined
+     * If shouldShowGaps is true, isDefined function describes when a datum should be considered "defined" vs. when to show gap
+     * by default, shows gap if either y or yEnd are undefined.
      */
     isDefined: PropTypes.func,
     /**
-     * D3 scale for X axis - provided by XYPlot
+     * D3 scale for X axis - provided by XYPlot.
      */
     xScale: PropTypes.func,
     /**
-     * D3 scale for Y axis - provided by XYPlot
+     * D3 scale for Y axis - provided by XYPlot.
      */
     yScale: PropTypes.func,
     /**
-     * Type of X scale - provided by XYPlot
+     * Type of X scale - provided by XYPlot.
      */
     xScaleType: PropTypes.string,
     /**
-     * Type of Y scale - provided by XYPlot
+     * Type of Y scale - provided by XYPlot.
      */
     yScaleType: PropTypes.string
   };

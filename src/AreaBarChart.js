@@ -1,17 +1,11 @@
-import React from "react";
 import _ from "lodash";
-import invariant from "invariant";
 import PropTypes from "prop-types";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
-import { hasXYScales, dataTypeFromScaleType } from "./utils/Scale";
-import {
-  makeAccessor,
-  makeAccessor2,
-  getValue,
-  domainFromRangeData
-} from "./utils/Data";
-import xyPropsEqual from "./utils/xyPropsEqual";
+import React from "react";
 import RangeRect from "./RangeRect";
+import * as CustomPropTypes from "./utils/CustomPropTypes";
+import { domainFromRangeData, getValue, makeAccessor2 } from "./utils/Data";
+import { dataTypeFromScaleType } from "./utils/Scale";
+import xyPropsEqual from "./utils/xyPropsEqual";
 
 /**
  * `AreaBarChart` is a variation on the standard bar chart. Just like a normal bar chart, each bar represents a single
@@ -46,7 +40,7 @@ export default class AreaBarChart extends React.Component {
     horizontal: PropTypes.bool,
 
     /**
-     * Accessor function for bar X values, called once per bar (datum).
+     * Accessor function for bar X values, called once per bar (datum), or a single value to be used for all bars.
      * If `horizontal` is `false`, this gets the start (min value) of the *independent* variable range, spanned by the bar's thickness.
      * If `horizontal` is `true`, this gets the *dependent* variable value, the end of the bar's length
      */
@@ -57,7 +51,7 @@ export default class AreaBarChart extends React.Component {
      */
     xEnd: CustomPropTypes.valueOrAccessor,
     /**
-     * Accessor function for bar Y values, called once per bar (datum).
+     * Accessor function for bar Y values, called once per bar (datum), or a single value to be used for all bars.
      * If `horizontal` is `true`, this gets the start (min value) of the *independent* variable range which is spanned by the bar's thickness.
      * If `horizontal` is `false`, this gets the *dependent* variable value, the end of the bar's length
      */

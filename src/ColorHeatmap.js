@@ -52,14 +52,25 @@ function makeColorScale(domain, colors, interpolator) {
 export default class ColorHeatmap extends React.Component {
   static propTypes = {
     /**
-     * data array - should be 1D array of all grid values
-     * (if you have a 2D array, _.flatten it)
+     * Array of data to be plotted - should be 1D array of all grid values
      */
     data: PropTypes.array.isRequired,
     value: CustomPropTypes.valueOrAccessor,
+    /**
+     * Accessor function for x values, called once per datum.
+     */
     x: CustomPropTypes.valueOrAccessor,
+    /**
+     * Accessor function for x end values, called once per datum.
+     */
     xEnd: CustomPropTypes.valueOrAccessor,
+    /**
+     * Accessor function for y values, called once per datum.
+     */
     y: CustomPropTypes.valueOrAccessor,
+    /**
+     * Accessor function for y end values, called once per datum.
+     */
     yEnd: CustomPropTypes.valueOrAccessor,
     /**
      * D3 scale for X axis - provided by XYPlot
@@ -77,6 +88,10 @@ export default class ColorHeatmap extends React.Component {
      * ...or else one will be constructed from colors, valueDomain and interpolator
      */
     colors: PropTypes.array,
+    /**
+     * Custom domain of the passed in data.
+     * Otherwise it will be the extent of your data.
+     */
     valueDomain: PropTypes.array,
     /**
      * Interpolator for colors. Possible options include "hcl", "hsl", "lab" and "rgb"

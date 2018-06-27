@@ -39,15 +39,15 @@ export default class ZoomContainer extends React.Component {
      */
     controlled: PropTypes.bool,
     /**
-     * Disables wheel-driven zooming (say to not interfere with native scrolling)
+     * Disables wheel-driven zooming (say to not interfere with native scrolling).
      */
     disableMouseWheelZoom: PropTypes.bool,
     /**
-     * The X-coordinate of the zoom transformation (or initial X-coordinate, if `controlled` is false)
+     * The X-coordinate of the zoom transformation (or initial X-coordinate, if `controlled` is false).
      */
     zoomX: PropTypes.number,
     /**
-     * The Y-coordinate of the zoom transformation (or initial Y-coordinate, if `controlled` is false)
+     * The Y-coordinate of the zoom transformation (or initial Y-coordinate, if `controlled` is false).
      */
     zoomY: PropTypes.number,
     /**
