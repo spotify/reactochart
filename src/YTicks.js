@@ -51,9 +51,7 @@ export default class YTicks extends React.Component {
     position: "left",
     nice: true,
     tickLength: 5,
-    tickStyle: {},
-    spacingLeft: 0,
-    spacingRight: 0
+    tickStyle: {}
   };
 
   static getTickDomain(props) {
@@ -103,8 +101,8 @@ export default class YTicks extends React.Component {
     const className = `rct-chart-tick rct-chart-tick-y ${tickClassName || ""}`;
     const transform =
       position === "right"
-        ? `translate(${width + spacingRight}, 0)`
-        : `translate(${-spacingLeft}, 0)`;
+        ? `translate(${width + (spacingRight || 0)}, 0)`
+        : `translate(${-spacingLeft || 0}, 0)`;
 
     return (
       <g className="rct-chart-ticks-y" transform={transform}>

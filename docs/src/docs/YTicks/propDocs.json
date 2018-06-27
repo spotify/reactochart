@@ -124,22 +124,14 @@
         "name": "number"
       },
       "required": false,
-      "description": "Spacing - provided by XYPlot and used to determine the placement of the ticks given spacingLeft.",
-      "defaultValue": {
-        "value": "0",
-        "computed": false
-      }
+      "description": "Spacing - provided by XYPlot and used to determine the placement of the ticks given spacingLeft."
     },
     "spacingRight": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": "Spacing - provided by XYPlot and used to determine the placement of the ticks given spacingRight.",
-      "defaultValue": {
-        "value": "0",
-        "computed": false
-      }
+      "description": "Spacing - provided by XYPlot and used to determine the placement of the ticks given spacingRight."
     },
     "nice": {
       "type": {
