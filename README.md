@@ -34,7 +34,30 @@ or
   ```
   import * as Reactochart from 'reactochart';
   ```
-4. See your first chart rendered!
+4. Build your first chart and see it rendered! For example, the following code snippet:
+  ```
+  import XYPlot from 'reactochart/XYPlot';
+  import XAxis from 'reactochart/XAxis';
+  import YAxis from 'reactochart/YAxis';
+  import LineChart from 'reactochart/LineChart';
+
+  const MyFirstLineChart = (props) => (
+    <XYPlot>
+      <XAxis title="Phase" />
+      <YAxis title="Intensity" />
+      <LineChart
+        data={Array(100).fill().map((e, i) => i+1)}
+        x={d => d}
+        y={d => Math.sin(d*.1)}
+      />
+    </XYPlot>
+    )
+  ```
+
+should result in this:
+
+<img src="./docs/assets/MyFirstLineChart.png" style='margin-left:40px'/>
+
 
 
 # Live Examples
@@ -59,7 +82,7 @@ The examples contain more details about each component and the prop-types it acc
 * [XTicks](http://spotify.github.io/reactochart/docs/build/#/x-ticks), [YTicks](http://spotify.github.io/reactochart/docs/build/#/y-ticks)
 * [XGrid](http://spotify.github.io/reactochart/docs/build/#/x-grid), [YGrid](http://spotify.github.io/reactochart/docs/build/#/y-grid)
 
-# Chart Types
+## Chart Types
 ### Non-XY charts
 
 * [PieChart](http://spotify.github.io/reactochart/docs/build/#/pie-chart)
