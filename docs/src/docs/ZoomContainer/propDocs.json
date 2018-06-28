@@ -1,5 +1,5 @@
 {
-  "description": "`ZoomContainer` is a wrapper tnat gives users the ability to zoom in, zoom out and drag its children components.",
+  "description": "`ZoomContainer` is a wrapper that gives users the ability to zoom in, zoom out and drag its children components.",
   "methods": [
     {
       "name": "_updateZoomProps",
