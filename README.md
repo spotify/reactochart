@@ -1,5 +1,5 @@
 <p align="right">
-    <a href="https://npmjs.org/package/reactochart">
+  <a href="https://npmjs.org/package/reactochart">
     <img src="https://img.shields.io/npm/v/reactochart.svg?style=flat-square" alt="version" />
   </a>
   <a href="https://travis-ci.org/spotify/reactochart">
@@ -7,7 +7,7 @@
   </a>
 </p>
 
-<h1 align="center"> :chart_with_upwards_trend:  reactochart :chart_with_downwards_trend:</h1>
+<h1 align="center">:chart_with_upwards_trend:  reactochart :chart_with_downwards_trend:</h1>
 
 # Overview
 
@@ -34,12 +34,17 @@ or
   ```
   import * as Reactochart from 'reactochart';
   ```
-4. Build your first chart and see it rendered! For example, the following code snippet:
+4. Import reactochart's base styles
+  ```
+  import 'reactochart/styles.css'
+  ```
+5. Build your first chart and see it rendered! For example, the following code snippet:
   ```
   import XYPlot from 'reactochart/XYPlot';
   import XAxis from 'reactochart/XAxis';
   import YAxis from 'reactochart/YAxis';
   import LineChart from 'reactochart/LineChart';
+  import 'reactochart/styles.css'
 
   const MyFirstLineChart = (props) => (
     <XYPlot>
@@ -57,8 +62,6 @@ or
 should result in this:
 
 <img src="./docs/assets/MyFirstLineChart.png" style='margin-left:40px'/>
-
-
 
 # Live Examples
 
