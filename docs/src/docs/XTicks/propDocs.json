@@ -36,7 +36,7 @@
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "D3 scale for X axis - provided by XYPlot."
     },
     "position": {
       "type": {
@@ -53,7 +53,7 @@
         ]
       },
       "required": false,
-      "description": "",
+      "description": "Position of x ticks. Accepted options are \"bottom\" or \"top\".",
       "defaultValue": {
         "value": "\"bottom\"",
         "computed": false
@@ -74,21 +74,21 @@
         ]
       },
       "required": false,
-      "description": ""
+      "description": "Placement of ticks in regards to the x axis. Accepted options are \"above\" or \"below\"."
     },
     "ticks": {
       "type": {
         "name": "array"
       },
       "required": false,
-      "description": ""
+      "description": "Custom ticks to display."
     },
     "tickCount": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Number of ticks on axis."
     },
     "tickLength": {
       "type": {
@@ -106,7 +106,7 @@
         "name": "object"
       },
       "required": false,
-      "description": "",
+      "description": "Inline style object applied to each tick.",
       "defaultValue": {
         "value": "{}",
         "computed": false
@@ -117,7 +117,7 @@
         "name": "string"
       },
       "required": false,
-      "description": "",
+      "description": "Class attribute to be applied to each tick.",
       "defaultValue": {
         "value": "\"\"",
         "computed": false
@@ -128,24 +128,21 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
-      "defaultValue": {
-        "value": "0",
-        "computed": false
-      }
+      "description": "Spacing - provided by XYPlot and used to determine the placement of the ticks given spacingTop."
     },
     "spacingBottom": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": "",
-      "defaultValue": {
-        "value": "0",
-        "computed": false
-      }
+      "description": "Spacing - provided by XYPlot and used to determine the placement of the ticks given spacingBottom."
     },
     "nice": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "Round ticks to capture extent of given x domain from XYPlot.",
       "defaultValue": {
         "value": "true",
         "computed": false

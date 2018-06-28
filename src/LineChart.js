@@ -1,41 +1,42 @@
-import React from "react";
-import _ from "lodash";
 import { bisector } from "d3";
-import shallowEqual from "./utils/shallowEqual";
+import _ from "lodash";
 import PropTypes from "prop-types";
-
+import React from "react";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
 import { getValue } from "./utils/Data";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
+/**
+ * `LineChart` displays data a series of points connected by straight line segments.
+ */
 export default class LineChart extends React.Component {
   static propTypes = {
     /**
-     * the array of data objects
+     * Array of data objects
      */
     data: PropTypes.array.isRequired,
     /**
-     * Accessor function for line X values, called once per datum, or a single X value to be used for the entire line.
+     * Accessor function for line X values, called once per datum, or a single value to be used for the entire line.
      */
     x: CustomPropTypes.valueOrAccessor,
     /**
-     * Accessor function for line Y values, called once per datum, or a single Y value to be used for the entire line.
+     * Accessor function for line Y values, called once per datum, or a single value to be used for the entire line.
      */
     y: CustomPropTypes.valueOrAccessor,
     /**
-     * Inline style object to be applied to the line path
+     * Inline style object to be applied to the line path.
      */
     lineStyle: PropTypes.object,
     /**
-     * Class attribute to be applied to the line path
+     * Class attribute to be applied to the line path.
      */
     lineClassName: PropTypes.string,
     /**
-     * D3 scale for X axis - provided by XYPlot
+     * D3 scale for X axis - provided by XYPlot.
      */
     xScale: PropTypes.func,
     /**
-     * D3 scale for Y axis - provided by XYPlot
+     * D3 scale for Y axis - provided by XYPlot.
      */
     yScale: PropTypes.func
   };

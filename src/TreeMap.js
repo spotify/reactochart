@@ -1,12 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import _ from "lodash";
 import { hierarchy, treemap, treemapResquarify } from "d3-hierarchy";
-
-import { makeAccessor } from "./utils/Data";
+import _ from "lodash";
+import PropTypes from "prop-types";
+import React from "react";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
+import { makeAccessor } from "./utils/Data";
 
-class TreeMapNode extends React.Component {
+export class TreeMapNode extends React.Component {
   static propTypes = {
     node: PropTypes.shape({
       parent: PropTypes.object,
@@ -50,7 +49,7 @@ class TreeMapNode extends React.Component {
           parentName
         )} node-group-i-${parentNames.indexOf(parentName)}`
       : "";
-    const className = `tree-map-node node-depth-${depth} ${nodeGroupClass}`;
+    const className = `rct-tree-map-node node-depth-${depth} ${nodeGroupClass}`;
 
     let style = {
       position: "absolute",
@@ -88,7 +87,7 @@ class TreeMapNode extends React.Component {
   }
 }
 
-class TreeMapNodeLabel extends React.Component {
+export class TreeMapNodeLabel extends React.Component {
   static propTypes = {
     node: PropTypes.object,
     getLabel: CustomPropTypes.getter,
@@ -109,42 +108,95 @@ class TreeMapNodeLabel extends React.Component {
     _.assign(style, customStyle);
 
     return (
-      <div className="node-label" {...{ style }}>
+      <div className="rct-node-label" {...{ style }}>
         {makeAccessor(getLabel)(node)}
       </div>
     );
   }
 }
 
+/**
+ *
+ */
 class TreeMap extends React.Component {
   static propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
 
     data: PropTypes.object.isRequired,
+    /**
+     * Key or accessor to retrieve value of data point
+     */
     getValue: CustomPropTypes.getter,
+    /**
+     * Key or accessor to retrieve children of data point
+     */
     getChildren: CustomPropTypes.getter,
+    /**
+     * Key or accessor to retrieve label for given Node
+     */
     getLabel: CustomPropTypes.getter,
 
-    // options for d3 treemap layout - see d3 docs
+    /**
+     * Function passed in to sort nodes
+     */
     sort: PropTypes.func,
+    // options for d3 treemap layout - see d3 docs
+    /**
+     * See d3 docs for treemap - Adds outer and inner padding to tree
+     */
     padding: PropTypes.number,
+    /**
+     * See d3 docs for treemap - Enables or disables rounding
+     */
     round: PropTypes.bool,
+    /**
+     * If sticky, on data change the TreeMap will not force a recreation of the tree and animate data changes.
+     * Otherwise we recreate the tree given its new props
+     */
     sticky: PropTypes.bool,
-    mode: PropTypes.string,
+    /**
+     * Sets the desired aspect ratio of the generated rectangles
+     */
     ratio: PropTypes.number,
 
+    /**
+     * Inline style object applied to each Node,
+     * or accessor function which returns a style object
+     */
     nodeStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    /**
+     * Inline style object applied to each Label,
+     * or accessor function which returns a style object
+     */
     labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     minLabelWidth: PropTypes.number,
     minLabelHeight: PropTypes.number,
 
+    /**
+     * `onClick` event handler callback, called when user clicks a NodeComponent.
+     */
     onClickNode: PropTypes.func,
+    /**
+     * `mouseenter` event handler callback, called when user's mouse enters a NodeComponent.
+     */
     onMouseEnterNode: PropTypes.func,
+    /**
+     * `mouseleave` event handler callback, called when user's mouse leaves a NodeComponent.
+     */
     onMouseLeaveNode: PropTypes.func,
+    /**
+     * `mousemove` event handler callback, called when user's mouse moves within a NodeComponent.
+     */
     onMouseMoveNode: PropTypes.func,
 
+    /**
+     * Optional treemap node, otherwise we default to our TreeMapNode component
+     */
     NodeComponent: PropTypes.func,
+    /**
+     * Optional treemap node label, otherwise we default to our TreeMapNodeLabel component
+     */
     NodeLabelComponent: PropTypes.func
   };
   static defaultProps = {
@@ -203,7 +255,7 @@ class TreeMap extends React.Component {
     const parentNames = _.uniq(_.map(nodes, "parent.data.name"));
 
     return (
-      <div className="tree-map" {...{ style }}>
+      <div className="rct-tree-map" {...{ style }}>
         {nodes.map((node, i) => (
           <NodeComponent
             {...{

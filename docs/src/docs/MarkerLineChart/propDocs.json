@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "`MarkerLineChart` is similar to a bar chart,\nexcept that it just draws a line at the data value, rather than a full bar.\nIf the independent variable is a range, the length of the line will represent that range,\notherwise all lines will be the same length.\nThe dependent variable must be a single value, not a range.",
   "methods": [
     {
       "name": "getSpacing",
@@ -116,7 +116,7 @@
         "name": "array"
       },
       "required": true,
-      "description": ""
+      "description": "Array of data objects. One marker line will be rendered per datum in the array."
     },
     "x": {
       "type": {
@@ -124,7 +124,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for marker line's X values, called once per line (datum), or a single value to be used for all marker lines.\nIf `horizontal` is `false`, this gets the *independent* variable value on which the line is centered.\nIf `horizontal` is `true`, this gets the start (minimum value) of the *dependent* variable."
     },
     "y": {
       "type": {
@@ -132,7 +132,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for marker line's Y values, called once per line (datum), or a single value to be used for all marker lines.\nIf `horizontal` is `false`, this gets the start (minimum value) of the *dependent* variable.\nIf `horizontal` is `true`, this gets the *independent* variable value on which the line is centered."
     },
     "xEnd": {
       "type": {
@@ -140,7 +140,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for the end (maximum X-values) of the *dependent* variable, which is where the marker line is rendered,\nor a single value to be used for all marker lines.\nShould only be passed when `horizontal` is `true` (ignored otherwise)."
     },
     "yEnd": {
       "type": {
@@ -148,14 +148,14 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for the end (maximum Y-values) of the *dependent* variable range which is where the marker line is rendered,\nor a single value to be used for all marker lines.\nShould only be passed when `horizontal` is `false` (ignored otherwise)."
     },
     "horizontal": {
       "type": {
         "name": "bool"
       },
       "required": false,
-      "description": "",
+      "description": "Boolean which determines whether the chart will be horizontal.\nWhen `true` the X-axis will be treated as the dependent axis.",
       "defaultValue": {
         "value": "false",
         "computed": false
@@ -177,28 +177,28 @@
         "name": "string"
       },
       "required": false,
-      "description": ""
+      "description": "D3 scale type for X axis - provided by XYPlot."
     },
     "yScaleType": {
       "type": {
         "name": "string"
       },
       "required": false,
-      "description": ""
+      "description": "D3 scale type for Y axis - provided by XYPlot."
     },
     "xScale": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "D3 scale for X axis - provided by XYPlot."
     },
     "yScale": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "D3 scale for Y axis - provided by XYPlot."
     },
     "lineClassName": {
       "type": {
@@ -243,21 +243,21 @@
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mouseenter` event handler callback, called when user's mouse enters a marker line."
     },
     "onMouseMoveLine": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mousemove` event handler callback, called when user's mouse moves within a marker line."
     },
     "onMouseLeaveLine": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mouseleave` event handler callback, called when user's mouse leaves a marker line."
     }
   }
 }

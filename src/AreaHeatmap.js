@@ -1,17 +1,23 @@
-import React from "react";
-import _ from "lodash";
 import { extent } from "d3";
+import _ from "lodash";
 import PropTypes from "prop-types";
-
+import React from "react";
 import { methodIfFuncProp } from "./util.js";
-import { makeAccessor, makeAccessor2, getValue } from "./utils/Data";
-import xyPropsEqual from "./utils/xyPropsEqual";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
+import { getValue, makeAccessor2 } from "./utils/Data";
+import xyPropsEqual from "./utils/xyPropsEqual";
+
+/**
+ * `AreaHeatmap` is still undergoing experimental changes!
+ * We do not consider this chart to be production ready as it does not support categorical data.
+ */
+
+// todo support categorical data
 
 export default class AreaHeatmap extends React.Component {
   static propTypes = {
     /**
-     * the array of data objects
+     * Array of data objects.
      */
     data: PropTypes.array.isRequired,
     x: CustomPropTypes.valueOrAccessor,
@@ -33,9 +39,10 @@ export default class AreaHeatmap extends React.Component {
     /**
      * D3 scale for X axis - provided by XYPlot
      */
-    xScale: PropTypes.func /**
+    xScale: PropTypes.func,
+    /**
      * D3 scale for Y axis - provided by XYPlot
-     */,
+     */
     yScale: PropTypes.func
   };
   static defaultProps = { rectClassName: "", rectStyle: {} };

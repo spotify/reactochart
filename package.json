@@ -2,36 +2,40 @@
   "name": "reactochart",
   "description": "Reactochart - React Charts, graphs and data visualization",
   "author": "Dan Delany <dand@spotify.com>",
-  "contributors": ["Kris Salvador <kriss@spotify.com>"],
-  "version": "0.4.8",
+  "contributors": [
+    "Kris Salvador <kriss@spotify.com>"
+  ],
+  "version": "1.0.0",
   "main": "index.js",
-  "files": ["*.js", "*.js.map", "styles.css", "utils/", "src/"],
+  "files": [
+    "*.js",
+    "*.js.map",
+    "styles.css",
+    "utils/",
+    "src/"
+  ],
   "engines": {
     "node": ">=4.0.0"
   },
   "scripts": {
     "lint": "eslint ./src",
-    "lint-fix": "eslint ./src ./tests/jsdom/spec --ext .js --fix",
+    "lint-fix": "eslint ./src ./tests ./docs/src --ext .js --fix",
     "prepublish": "npm run build",
     "build": "npm run build-lib && npm run build-css && npm run docs",
     "dev": "webpack-dev-server --config webpack.config.base.js",
     "docs": "npm run make-docs && npm run build-docs",
     "build-lib": "npm run clean && babel src --out-dir ./ --source-maps",
     "build-css": "lessc ./styles/charts.less ./styles.css",
-    "build-docs":
-      "BABEL_ENV=production webpack --config webpack.config.build.js",
+    "build-docs": "BABEL_ENV=production webpack --config webpack.config.build.js",
     "make-docs": "node scripts/makeDocs.js",
     "clean": "node scripts/clean.js",
     "serve": "python -m SimpleHTTPServer",
-    "test": "npm run test-jsdom-and-lint",
-    "test-files":
-      "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive",
-    "test-browser":
-      "webpack-dev-server --config tests/browser/webpack.config.test.js",
-    "test-jsdom-and-lint":
-      "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec tests/eslint.spec.js",
-    "test-watch":
-      "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --watch --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec"
+    "test": "npm run test-jsdom && npm run test-lint",
+    "test-files": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive",
+    "test-browser": "webpack-dev-server --config tests/browser/webpack.config.test.js",
+    "test-jsdom": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec",
+    "test-lint": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/eslint.spec.js",
+    "test-watch": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --watch --compilers js:babel-register --require tests/jsdom/setup.js --recursive tests/jsdom/spec"
   },
   "dependencies": {
     "d3": "^4.4.0",
@@ -65,8 +69,8 @@
     "css-loader": "^0.28.4",
     "enzyme": "^2.9.1",
     "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-prettier": "2.6.0",
     "glob": "^7.1.2",
     "html-webpack-plugin": "^2.30.1",
     "jsdom": "^9.12.0",
@@ -74,7 +78,7 @@
     "less": "^3.0.4",
     "less-loader": "^4.0.5",
     "mocha": "4.0.1",
-    "prettier": "^1.12.1",
+    "prettier": "1.13",
     "raw-loader": "^0.5.1",
     "react": "^15.6.1",
     "react-addons-update": "^15.6.0",

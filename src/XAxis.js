@@ -1,18 +1,19 @@
-import React from "react";
 import _ from "lodash";
-import shallowEqual from "./utils/shallowEqual";
 import PropTypes from "prop-types";
-
-import { getTickDomain, scaleEqual } from "./utils/Scale";
-import { sumMargins } from "./utils/Margin";
+import React from "react";
 import { getAxisChildProps } from "./utils/Axis";
+import { sumMargins } from "./utils/Margin";
+import { getTickDomain } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
-
-import XTicks from "./XTicks";
-import XGrid from "./XGrid";
 import XAxisLabels from "./XAxisLabels";
 import XAxisTitle from "./XAxisTitle";
+import XGrid from "./XGrid";
+import XTicks from "./XTicks";
 
+/**
+ * `XAxis` is the horizontal axis of the chart. `XAxis` is a wrapper around `XGrid`, `XTicks`,
+ * `XAxisLabels`, and `XAxisTitle`. See their respective docs for prop documentation.
+ */
 export default class XAxis extends React.Component {
   static propTypes = {
     xScale: PropTypes.func,
@@ -23,9 +24,21 @@ export default class XAxis extends React.Component {
     nice: PropTypes.bool,
     ticks: PropTypes.array,
     tickCount: PropTypes.number,
+    /**
+     * Internal top spacing of XAxis, in pixels.
+     */
     spacingTop: PropTypes.number,
+    /**
+     * Internal bottom spacing of XAxis, in pixels.
+     */
     spacingBottom: PropTypes.number,
+    /**
+     * Internal left spacing of XAxis, in pixels.
+     */
     spacingLeft: PropTypes.number,
+    /**
+     * Internal right spacing of XAxis, in pixels.
+     */
     spacingRight: PropTypes.number,
 
     showTitle: PropTypes.bool,

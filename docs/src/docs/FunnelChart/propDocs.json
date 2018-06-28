@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "`FunnelChart` is used to visualize the progressive reduction of data as it passes\nfrom one phase to another.",
   "methods": [
     {
       "name": "getDomain",
@@ -22,7 +22,7 @@
         "name": "array"
       },
       "required": true,
-      "description": ""
+      "description": "Array of data to be plotted."
     },
     "x": {
       "type": {
@@ -30,7 +30,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for X values, called once per datum, or a single value to be used for all datums."
     },
     "y": {
       "type": {
@@ -38,7 +38,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for Y values, called once per datum, or a single value to be used for all datums."
     },
     "color": {
       "type": {
@@ -101,14 +101,14 @@
         "name": "func"
       },
       "required": false,
-      "description": "D3 scale for X axis - provided by XYPlot"
+      "description": "D3 scale for X axis - provided by XYPlot."
     },
     "yScale": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": "D3 scale for Y axis - provided by XYPlot"
+      "description": "D3 scale for Y axis - provided by XYPlot."
     }
   }
 }

@@ -5,7 +5,7 @@ import { expect } from "chai";
 import { mount, shallow } from "enzyme";
 
 import { testWithScales, expectProps } from "../utils";
-import { XYPlot, BarChart, RangeBarChart } from "../../../src/index.js";
+import { BarChart, RangeBarChart } from "../../../src/index.js";
 
 describe("BarChart", () => {
   it("passes most props through to RangeBarChart", () => {

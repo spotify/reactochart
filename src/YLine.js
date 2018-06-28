@@ -1,13 +1,31 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 
+/**
+ * `YLine` is a horizontal line rendered on the y axis
+ */
 export default class YLine extends React.Component {
   static propTypes = {
+    /**
+     * D3 scale for Y axis - provided by XYPlot
+     */
     yScale: PropTypes.func,
     value: PropTypes.any.isRequired,
+    /**
+     * Spacing left - provided by XYPlot
+     */
     spacingLeft: PropTypes.number,
+    /**
+     * Spacing right - provided by XYPlot
+     */
     spacingRight: PropTypes.number,
+    /**
+     * Inline style object to be applied to the line
+     */
     style: PropTypes.object,
+    /**
+     * Class attribute to be applied to the line
+     */
     className: PropTypes.string
   };
   static defaultProps = {

@@ -1,5 +1,6 @@
 import React from "react";
 import * as d3 from "d3";
+<<<<<<< HEAD
 import _ from "lodash";
 import { expect } from "chai";
 import { mount, shallow } from "enzyme";
@@ -10,9 +11,47 @@ function expectProps(el, expectedProps) {
   const props = el.props();
   _.forEach(expectedProps, (expectedValue, key) => {
     expect(props[key]).to.equal(expectedValue);
-  });
-}
+=======
+import { expect } from "chai";
+import sinon from "sinon";
+import { mount } from "enzyme";
 
+import { Bar, RangeBarChart } from "../../../src/index.js";
+
+describe("RangeBarChart", () => {
+  const props = {
+    xScale: d3
+      .scalePoint()
+      .domain(["a", "b", "c"])
+      .range([0, 100]),
+    yScale: d3
+      .scaleLinear()
+      .domain([0, 1])
+      .range([100, 0]),
+    data: [["a", [0.3, 0.5]], ["b", [0.6, 0.9]]],
+    x: d => d[0],
+    y: d => d[1][0],
+    yEnd: d => d[1][1],
+    barThickness: 10,
+    barClassName: "my-bar",
+    barStyle: { fill: "blue" },
+    onMouseEnterBar: sinon.spy(),
+    onMouseMoveBar: sinon.spy(),
+    onMouseLeaveBar: sinon.spy()
+  };
+
+  it("passes props to Bar elements", () => {
+    const chart = mount(<RangeBarChart {...props} />);
+    const bars = chart.find("rect");
+
+    bars.forEach(bar => {
+      expect(bar.props().className).to.contain(props.barClassName);
+      expect(bar.props().style).to.equal(props.barStyle);
+    });
+>>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
+  });
+
+<<<<<<< HEAD
 describe("RangeBarChart", () => {
   it("renders a bar chart with categorical X data & numerical Y data", () => {
     // make simple bar chart with 3 datapoints to make sure it renders correctly
@@ -35,6 +74,12 @@ describe("RangeBarChart", () => {
       barThickness: 10
     };
 
+=======
+  it("renders a bar chart with categorical X data & numerical Y data", () => {
+    // make simple bar chart with 3 datapoints to make sure it renders correctly
+    // this is more of an integration test/sanity check;
+    // most tests for render correctness are in RangeRect and Bar specs
+>>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
     const chart = mount(<RangeBarChart {...props} />);
     const group = chart.find("g");
     const bars = chart.find("rect");
@@ -51,4 +96,22 @@ describe("RangeBarChart", () => {
     expect(bars.at(1).props().y).to.equal(10);
     expect(bars.at(1).props().height).to.equal(30);
   });
+<<<<<<< HEAD
+=======
+
+  it("triggers event handlers", () => {
+    const chart = mount(<RangeBarChart {...props} />);
+    const bars = chart.find(Bar);
+
+    expect(props.onMouseMoveBar).not.to.have.been.called;
+    bars.at(1).simulate("mousemove");
+    expect(props.onMouseMoveBar).to.have.been.called;
+    expect(props.onMouseEnterBar).not.to.have.been.called;
+    bars.at(1).simulate("mouseenter");
+    expect(props.onMouseEnterBar).to.have.been.called;
+    expect(props.onMouseLeaveBar).not.to.have.been.called;
+    bars.at(1).simulate("mouseleave");
+    expect(props.onMouseLeaveBar).to.have.been.called;
+  });
+>>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
 });

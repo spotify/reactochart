@@ -1,26 +1,16 @@
-import React from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
-
+import React from "react";
 import { methodIfFuncProp } from "./util.js";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
-import { dataTypeFromScaleType } from "./utils/Scale";
 import {
-  makeAccessor2,
-  getValue,
-  domainFromRangeData,
   domainFromData,
-  getDataDomainByAxis
+  domainFromRangeData,
+  getValue,
+  makeAccessor2
 } from "./utils/Data";
+import { dataTypeFromScaleType } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
-
-/**
- * MarkerLine is similar to a bar chart,
- * except that it just draws a line at the data value, rather than a full bar.
- * If the independent variable is a range, the length of the line will represent that range,
- * otherwise all lines will be the same length.
- * The dependent variable must be a single value, not a range.
- */
 
 function getTickType(props) {
   const { xEnd, yEnd, horizontal } = props;
@@ -42,23 +32,65 @@ function getTickType(props) {
   return "ValueValue";
 }
 
+/**
+ * `MarkerLineChart` is similar to a bar chart,
+ * except that it just draws a line at the data value, rather than a full bar.
+ * If the independent variable is a range, the length of the line will represent that range,
+ * otherwise all lines will be the same length.
+ * The dependent variable must be a single value, not a range.
+ */
+
 export default class MarkerLineChart extends React.Component {
   static propTypes = {
-    // the array of data objects
+    /**
+     * Array of data objects. One marker line will be rendered per datum in the array.
+     */
     data: PropTypes.array.isRequired,
-    // accessor for X & Y coordinates
+    /**
+     * Accessor function for marker line's X values, called once per line (datum), or a single value to be used for all marker lines.
+     * If `horizontal` is `false`, this gets the *independent* variable value on which the line is centered.
+     * If `horizontal` is `true`, this gets the start (minimum value) of the *dependent* variable.
+     */
     x: CustomPropTypes.valueOrAccessor,
+    /**
+     * Accessor function for marker line's Y values, called once per line (datum), or a single value to be used for all marker lines.
+     * If `horizontal` is `false`, this gets the start (minimum value) of the *dependent* variable.
+     * If `horizontal` is `true`, this gets the *independent* variable value on which the line is centered.
+     */
     y: CustomPropTypes.valueOrAccessor,
+    /**
+     * Accessor function for the end (maximum X-values) of the *dependent* variable, which is where the marker line is rendered,
+     * or a single value to be used for all marker lines.
+     * Should only be passed when `horizontal` is `true` (ignored otherwise).
+     */
     xEnd: CustomPropTypes.valueOrAccessor,
+    /**
+     * Accessor function for the end (maximum Y-values) of the *dependent* variable range which is where the marker line is rendered,
+     * or a single value to be used for all marker lines.
+     * Should only be passed when `horizontal` is `false` (ignored otherwise).
+     */
     yEnd: CustomPropTypes.valueOrAccessor,
-
+    /**
+     * Boolean which determines whether the chart will be horizontal.
+     * When `true` the X-axis will be treated as the dependent axis.
+     */
     horizontal: PropTypes.bool,
     lineLength: PropTypes.number,
-
-    // x & y scale types
+    /**
+     * D3 scale type for X axis - provided by XYPlot.
+     */
     xScaleType: PropTypes.string,
+    /**
+     * D3 scale type for Y axis - provided by XYPlot.
+     */
     yScaleType: PropTypes.string,
+    /**
+     * D3 scale for X axis - provided by XYPlot.
+     */
     xScale: PropTypes.func,
+    /**
+     * D3 scale for Y axis - provided by XYPlot.
+     */
     yScale: PropTypes.func,
     /**
      * Class attribute to be applied to the line path,
@@ -70,9 +102,17 @@ export default class MarkerLineChart extends React.Component {
      * or accessor function which returns a style object.
      */
     lineStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-
+    /**
+     * `mouseenter` event handler callback, called when user's mouse enters a marker line.
+     */
     onMouseEnterLine: PropTypes.func,
+    /**
+     * `mousemove` event handler callback, called when user's mouse moves within a marker line.
+     */
     onMouseMoveLine: PropTypes.func,
+    /**
+     * `mouseleave` event handler callback, called when user's mouse leaves a marker line.
+     */
     onMouseLeaveLine: PropTypes.func
   };
   static defaultProps = {

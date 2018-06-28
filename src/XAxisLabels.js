@@ -1,16 +1,15 @@
-import React from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
-
+import React from "react";
 import MeasuredValueLabel from "./MeasuredValueLabel";
-import { getScaleTicks, inferScaleType, getTickDomain } from "./utils/Scale";
 import {
   checkLabelsDistinct,
   countRangeOverlaps,
-  makeLabelFormatters,
+  getLabelsXOverhang,
   getLabelXRange,
-  getLabelsXOverhang
+  makeLabelFormatters
 } from "./utils/Label";
+import { getScaleTicks, getTickDomain, inferScaleType } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
 function resolveXLabelsForValues(scale, values, formats, style, force = true) {
@@ -83,35 +82,35 @@ class XAxisLabels extends React.Component {
   static propTypes = {
     height: PropTypes.number,
     /***
-     * Position of x axis labels. Accepted options are "top" or "bottom"
+     * Position of x axis labels. Accepted options are "top" or "bottom".
      */
     position: PropTypes.oneOf(["top", "bottom"]),
     /**
-     * Placement of labels in regards to the x axis. Accepted options are "above" or "below"
+     * Placement of labels in regards to the x axis. Accepted options are "above" or "below".
      */
     placement: PropTypes.oneOf(["below", "above"]),
     /**
-     * D3 scale for X axis - provided by XYPlot
+     * D3 scale for X axis - provided by XYPlot.
      */
     xScale: PropTypes.func,
     /**
-     * Spacing - provided by XYPlot
+     * Spacing - provided by XYPlot and used to determine the placement of the label given spacingTop.
      */
     spacingTop: PropTypes.number,
     /**
-     * Spacing - provided by XYPlot
+     * Spacing - provided by XYPlot and used to determine the placement of the label given spacingBottom.
      */
     spacingBottom: PropTypes.number,
     /**
-     * Label distance from X Axis
+     * Label distance from X Axis.
      */
     distance: PropTypes.number,
     /**
-     * Number of ticks on axis
+     * Number of ticks on axis.
      */
     tickCount: PropTypes.number,
     /**
-     * Custom ticks to display
+     * Custom ticks to display.
      */
     ticks: PropTypes.array,
     /**
@@ -126,20 +125,20 @@ class XAxisLabels extends React.Component {
     labelStyle: PropTypes.object,
     labelClassName: PropTypes.string,
     /**
-     * Format to use for the labels
+     * Format to use for the labels.
      *
-     * For example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit
+     * For example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit.
      */
     format: PropTypes.string,
     /**
      * Formats to use for the labels in priority order. XAxisLabels will try to be smart about which format
      * to use that keeps the labels distinct and provides the least amount of collisions when rendered.
      *
-     * For example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit
+     * For example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit.
      */
     formats: PropTypes.array,
     /**
-     * Custom labels provided. Note that each object in the array has to be of shape
+     * Custom labels provided. Note that each object in the array has to be of shape.
      * `{
      *  value,
      *  text,
@@ -153,12 +152,20 @@ class XAxisLabels extends React.Component {
      */
     labels: PropTypes.array,
     /**
-     * Round ticks to capture extent of given x Domain from XYPlot
+     * Round ticks to capture extent of given x domain from XYPlot.
      */
     nice: PropTypes.bool,
-    // Label Handling
+    /**
+     * `mouseenter` event handler callback, called when user's mouse enters the label.
+     */
     onMouseEnterLabel: PropTypes.func,
+    /**
+     * `mousemove` event handler callback, called when user's mouse moves within the label.
+     */
     onMouseMoveLabel: PropTypes.func,
+    /**
+     * `mouseleave` event handler callback, called when user's mouse leaves the label.
+     */
     onMouseLeaveLabel: PropTypes.func
   };
   static defaultProps = {

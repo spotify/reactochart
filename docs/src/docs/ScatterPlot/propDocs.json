@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "`ScatterPlot` displays its data as a collection of points. Each point represents\nthe relationship between two variables, one plotted along the x-axis and the other on the y-axis.",
   "methods": [
     {
       "name": "onMouseEnterPoint",
@@ -72,7 +72,7 @@
         "name": "array"
       },
       "required": true,
-      "description": ""
+      "description": "Array of data to be plotted."
     },
     "x": {
       "type": {
@@ -80,7 +80,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Accessor function for plot X values, called once per datum"
+      "description": "Accessor function for plot X values, called once per datum, or a single value to be used for all points."
     },
     "y": {
       "type": {
@@ -88,42 +88,28 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Accessor function for plot Y values, called once per datum"
+      "description": "Accessor function for plot Y values, called once per datum, or a single value to be used for all points."
     },
     "xScale": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": "D3 scale for X axis - provided by XYPlot"
+      "description": "D3 scale for X axis - provided by XYPlot."
     },
     "yScale": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": "D3 scale for Y axis - provided by XYPlot"
-    },
-    "xScaleType": {
-      "type": {
-        "name": "string"
-      },
-      "required": false,
-      "description": ""
-    },
-    "yScaleType": {
-      "type": {
-        "name": "string"
-      },
-      "required": false,
-      "description": ""
+      "description": "D3 scale for Y axis - provided by XYPlot."
     },
     "pointRadius": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Used with the default point symbol (circle), defines the circle radius.",
       "defaultValue": {
         "value": "3",
         "computed": false
@@ -142,7 +128,7 @@
         ]
       },
       "required": false,
-      "description": "",
+      "description": "Text or SVG node to use as custom point symbol, or function which returns text/SVG.",
       "defaultValue": {
         "value": "<circle />",
         "computed": false
@@ -156,7 +142,7 @@
         }
       },
       "required": false,
-      "description": "",
+      "description": "Manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered.",
       "defaultValue": {
         "value": "[0, 0]",
         "computed": false
@@ -205,21 +191,21 @@
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mouseenter` event handler callback, called when user's mouse enters a point."
     },
     "onMouseMovePoint": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mousemove` event handler callback, called when user's mouse moves within a point."
     },
     "onMouseLeavePoint": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mouseleave` event handler callback, called when user's mouse leaves a point."
     }
   }
 }

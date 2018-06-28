@@ -1,20 +1,21 @@
-import React from "react";
-import _ from "lodash";
 import { mean } from "d3";
 import PropTypes from "prop-types";
-
+import React from "react";
+import LineChart from "./LineChart.js";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
-import LineChart from "./LineChart.js";
-
+/**
+ * Kernel Density Estimation is still undergoing experimental changes!
+ * We do not consider this chart to be production ready but
+ * encourage you to try it out and contribute to any of its missing features.
+ */
 class KernelDensityEstimation extends React.Component {
   static propTypes = {
     /**
-     * the array of data objects
+     * Array of data objects.
      */
     data: PropTypes.array.isRequired,
-
     /**
      * Kernel bandwidth for kernel density estimator.
      * High bandwidth => oversmoothing & underfitting; low bandwidth => undersmoothing & overfitting
@@ -27,25 +28,29 @@ class KernelDensityEstimation extends React.Component {
      */
     sampleCount: PropTypes.number,
     /**
-     * Inline style object to be applied to the line path
+     * Inline style object to be applied to the line path.
      */
     lineStyle: PropTypes.object,
     /**
-     * Class attribute to be applied to the line path
+     * Class attribute to be applied to the line path.
      */
     lineClassName: PropTypes.string,
-    // common props from XYPlot
-    // accessor for data values
-    name: PropTypes.string,
-    scale: PropTypes.object,
-    axisType: PropTypes.object,
-    scaleWidth: PropTypes.number,
-    scaleHeight: PropTypes.number
+    /**
+     * Accessor function for bar X values, called once per bar (datum).
+     */
+    x: CustomPropTypes.valueOrAccessor,
+    /**
+     * D3 scale for X axis - provided by XYPlot.
+     */
+    xScale: PropTypes.func,
+    /**
+     * D3 scale for Y axis - provided by XYPlot.
+     */
+    yScale: PropTypes.func
   };
   static defaultProps = {
     bandwidth: 0.5,
-    sampleCount: null, // null = auto-determined based on width
-    name: ""
+    sampleCount: null // null = auto-determined based on width
   };
 
   state = {
@@ -74,6 +79,7 @@ class KernelDensityEstimation extends React.Component {
     const { data, bandwidth, sampleCount, xScale, width } = props;
     const kernel = epanechnikovKernel(bandwidth);
     const samples = xScale.ticks(sampleCount || Math.ceil(width / 2));
+
     this.setState({ kdeData: kernelDensityEstimator(kernel, samples)(data) });
   }
 
@@ -106,7 +112,7 @@ function kernelDensityEstimator(kernel, x) {
 
 function epanechnikovKernel(scale) {
   return function(u) {
-    return Math.abs((u /= scale)) <= 1 ? 0.75 * (1 - u * u) / scale : 0;
+    return Math.abs((u /= scale)) <= 1 ? (0.75 * (1 - u * u)) / scale : 0;
   };
 }
 

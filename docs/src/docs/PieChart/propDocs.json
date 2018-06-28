@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "`PieChart` is a circular graphic that is divided into slices to illustrate proportions or percentages.",
   "methods": [
     {
       "name": "onMouseEnterSlice",
@@ -128,7 +128,7 @@
         "name": "array"
       },
       "required": true,
-      "description": ""
+      "description": "Array of data to plot with pie chart."
     },
     "getValue": {
       "type": {
@@ -154,21 +154,21 @@
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Optional width of the SVG\nif not passed in and height is passed in, same # is used for both (ie. width=100 means height=100 also)\nif neither is passed, but radius is, radius+margins is used\nif neither is passed, and radius isn't either, 150 is used"
     },
     "height": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Optional height of the SVG\nif not passed in and width is passed in, same # is used for both (ie. width=100 means height=100 also)\nif neither is passed, but radius is, radius+margins is used\nif neither is passed, and radius isn't either, 150 is used"
     },
     "radius": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Optional radius of the pie chart, inferred from margin/width/height if not provided."
     },
     "marginTop": {
       "type": {
@@ -219,21 +219,21 @@
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Optional radius of the \"donut hole\" circle drawn on top of the pie chart to turn it into a donut chart."
     },
     "centerLabel": {
       "type": {
         "name": "string"
       },
       "required": false,
-      "description": "Optional label text to display in the middle of the pie/donut"
+      "description": "Optional label text to display in the middle of the pie/donut."
     },
     "centerLabelClassName": {
       "type": {
         "name": "string"
       },
       "required": false,
-      "description": "Class attribute to be applied to center label",
+      "description": "Class attribute to be applied to center label.",
       "defaultValue": {
         "value": "\"\"",
         "computed": false
@@ -244,7 +244,7 @@
         "name": "object"
       },
       "required": false,
-      "description": "Inline style object to be applied to center label",
+      "description": "Inline style object to be applied to center label.",
       "defaultValue": {
         "value": "{}",
         "computed": false
@@ -274,25 +274,14 @@
         "name": "number"
       },
       "required": false,
-      "description": "Value for where to place markerline"
-    },
-    "markerLineClass": {
-      "type": {
-        "name": "string"
-      },
-      "required": false,
-      "description": "[TO BE DEPRECATED. USE markerLineClassName] Class attribute to be applied to marker line.",
-      "defaultValue": {
-        "value": "\"\"",
-        "computed": false
-      }
+      "description": "Value for where to place markerline."
     },
     "markerLineClassName": {
       "type": {
         "name": "string"
       },
       "required": false,
-      "description": "Class attribute to be applied to marker line",
+      "description": "Class attribute to be applied to marker line.",
       "defaultValue": {
         "value": "\"\"",
         "computed": false
@@ -303,7 +292,7 @@
         "name": "object"
       },
       "required": false,
-      "description": "Inline style object to be applied to marker line",
+      "description": "Inline style object to be applied to marker line.",
       "defaultValue": {
         "value": "{}",
         "computed": false
@@ -314,7 +303,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "Number of pixels marker line hangs inside the pie chart",
+      "description": "Number of pixels marker line hangs inside the pie chart.",
       "defaultValue": {
         "value": "2",
         "computed": false
@@ -325,7 +314,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "Number of pixels marker line hangs outside the pie chart",
+      "description": "Number of pixels marker line hangs outside the pie chart.",
       "defaultValue": {
         "value": "2",
         "computed": false
@@ -336,21 +325,42 @@
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mouseenter` event handler callback, called when user's mouse enters the marker line."
     },
     "onMouseMoveLine": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mousemove` event handler callback, called when user's mouse moves within the marker line."
     },
     "onMouseLeaveLine": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mouseleave` event handler callback, called when user's mouse leaves the marker line."
+    },
+    "onMouseEnterSlice": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`mouseenter` event handler callback, called when user's mouse enters a pie slice."
+    },
+    "onMouseMoveSlice": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`mousemove` event handler callback, called when user's mouse moves within a pie slice."
+    },
+    "onMouseLeaveSlice": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`mouseleave` event handler callback, called when user's mouse leaves a pie slice."
     }
   }
 }

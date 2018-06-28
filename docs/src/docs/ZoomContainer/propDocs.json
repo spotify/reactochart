@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "`ZoomContainer` is a wrapper tnat gives users the ability to zoom in, zoom out and drag its children components.",
   "methods": [
     {
       "name": "_updateZoomProps",
@@ -72,7 +72,7 @@
         "name": "bool"
       },
       "required": false,
-      "description": "Disables wheel-driven zooming (say to not interfere with native scrolling)",
+      "description": "Disables wheel-driven zooming (say to not interfere with native scrolling).",
       "defaultValue": {
         "value": "false",
         "computed": false
@@ -83,7 +83,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "The X-coordinate of the zoom transformation (or initial X-coordinate, if `controlled` is false)",
+      "description": "The X-coordinate of the zoom transformation (or initial X-coordinate, if `controlled` is false).",
       "defaultValue": {
         "value": "0",
         "computed": false
@@ -94,7 +94,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "The Y-coordinate of the zoom transformation (or initial Y-coordinate, if `controlled` is false)",
+      "description": "The Y-coordinate of the zoom transformation (or initial Y-coordinate, if `controlled` is false).",
       "defaultValue": {
         "value": "0",
         "computed": false

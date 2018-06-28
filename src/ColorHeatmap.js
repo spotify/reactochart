@@ -1,26 +1,23 @@
-import React from "react";
-import _ from "lodash";
 import {
-  scaleLinear,
   interpolateHcl,
   interpolateHsl,
   interpolateLab,
-  interpolateRgb
+  interpolateRgb,
+  scaleLinear
 } from "d3";
-import invariant from "invariant";
+import _ from "lodash";
 import PropTypes from "prop-types";
-
+import React from "react";
+import RangeRect from "./RangeRect";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
 import {
-  makeAccessor2,
-  getValue,
   domainFromData,
-  domainFromRangeData
+  domainFromRangeData,
+  getValue,
+  makeAccessor2
 } from "./utils/Data";
 import { dataTypeFromScaleType } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
-
-import RangeRect from "./RangeRect";
 
 function interpolatorFromType(type) {
   switch (type.toLowerCase()) {
@@ -33,7 +30,7 @@ function interpolatorFromType(type) {
     case "rgb":
       return interpolateRgb;
     default:
-      return interpolateHsl;
+      return interpolateLab;
   }
 }
 
@@ -49,17 +46,31 @@ function makeColorScale(domain, colors, interpolator) {
     .interpolate(interpolator);
 }
 
+/**
+ * `ColorHeatmap` can be used to represent individual values contained in a matrix through colors.
+ */
 export default class ColorHeatmap extends React.Component {
   static propTypes = {
     /**
-     * data array - should be 1D array of all grid values
-     * (if you have a 2D array, _.flatten it)
+     * Array of data to be plotted - should be 1D array of all grid values
      */
     data: PropTypes.array.isRequired,
     value: CustomPropTypes.valueOrAccessor,
+    /**
+     * Accessor function for x values, called once per datum.
+     */
     x: CustomPropTypes.valueOrAccessor,
+    /**
+     * Accessor function for x end values, called once per datum.
+     */
     xEnd: CustomPropTypes.valueOrAccessor,
+    /**
+     * Accessor function for y values, called once per datum.
+     */
     y: CustomPropTypes.valueOrAccessor,
+    /**
+     * Accessor function for y end values, called once per datum.
+     */
     yEnd: CustomPropTypes.valueOrAccessor,
     /**
      * D3 scale for X axis - provided by XYPlot
@@ -77,7 +88,14 @@ export default class ColorHeatmap extends React.Component {
      * ...or else one will be constructed from colors, valueDomain and interpolator
      */
     colors: PropTypes.array,
+    /**
+     * Custom domain of the passed in data.
+     * Otherwise it will be the extent of your data.
+     */
     valueDomain: PropTypes.array,
+    /**
+     * Interpolator for colors. Possible options include "hcl", "hsl", "lab" and "rgb"
+     */
     interpolator: PropTypes.string,
     /**
      * Inline style object to be applied to each rect,

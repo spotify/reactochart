@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "`Histogram` is used to represent the distribution of numerical data. Histograms, only relate\nto one variable, where data is typically \"binned\" and counted.",
   "methods": [
     {
       "name": "getScaleType",
@@ -79,14 +79,14 @@
         "name": "func"
       },
       "required": false,
-      "description": "D3 scale for X axis - provided by XYPlot"
+      "description": "D3 scale for X axis - provided by XYPlot."
     },
     "yScale": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": "D3 scale for Y axis - provided by XYPlot"
+      "description": "D3 scale for Y axis - provided by XYPlot."
     },
     "thresholds": {
       "type": {

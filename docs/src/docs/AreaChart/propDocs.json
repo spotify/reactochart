@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "`AreaChart` represents a simple bivariate area chart,\na filled path drawn between two lines (datasets).",
   "methods": [
     {
       "name": "getDomain",
@@ -30,7 +30,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Accessor function for area X values, called once per datum"
+      "description": "Accessor function for area X values, called once per datum,\nor a single Y value to be used for the entire line."
     },
     "y": {
       "type": {
@@ -53,7 +53,7 @@
         "name": "string"
       },
       "required": false,
-      "description": "classname applied to area path element",
+      "description": "Class attribute to be applied to area path element.",
       "defaultValue": {
         "value": "\"\"",
         "computed": false
@@ -64,21 +64,21 @@
         "name": "object"
       },
       "required": false,
-      "description": "style applied to area path element"
+      "description": "Inline style object to be applied to area path element."
     },
     "isDifference": {
       "type": {
         "name": "bool"
       },
       "required": false,
-      "description": "if isDifference is true, AreaChart generates a \"difference chart\" with two area paths instead of one:\none path which shows when YEnd > Y, and one vice versa, allowing them to be styled differently (eg red/green)"
+      "description": "If isDifference is true, AreaChart generates a \"difference chart\" with two area paths instead of one:\none path which shows when YEnd > Y, and one vice versa, allowing them to be styled differently (eg red/green)."
     },
     "pathStylePositive": {
       "type": {
         "name": "object"
       },
       "required": false,
-      "description": "when isDifference is true, pathStylePositive and pathStyleNegative can be passed to give 2 different inline\nstyles to the two different paths which are generated.\nIgnored if isDifference is false."
+      "description": "When isDifference is true, pathStylePositive and pathStyleNegative can be passed to give 2 different inline\nstyles to the two different paths which are generated.\nIgnored if isDifference is false."
     },
     "pathStyleNegative": {
       "type": {
@@ -92,7 +92,7 @@
         "name": "bool"
       },
       "required": false,
-      "description": "if true, will show gaps in the shaded area for data where props.isDefined(datum) returns false",
+      "description": "If true, will show gaps in the shaded area for data where props.isDefined(datum) returns false.",
       "defaultValue": {
         "value": "true",
         "computed": false
@@ -103,7 +103,7 @@
         "name": "func"
       },
       "required": false,
-      "description": "if shouldShowGaps is true, isDefined function describes when a datum should be considered \"defined\" vs. when to show gap\nby default, shows gap if either y or yEnd are undefined",
+      "description": "If shouldShowGaps is true, isDefined function describes when a datum should be considered \"defined\" vs. when to show gap\nby default, shows gap if either y or yEnd are undefined.",
       "defaultValue": {
         "value": "(d, i, accessors) => {\n  return (\n    !_.isUndefined(accessors.y(d, i)) &&\n    !_.isUndefined(accessors.yEnd(d, i))\n  );\n}",
         "computed": false
@@ -114,28 +114,28 @@
         "name": "func"
       },
       "required": false,
-      "description": "D3 scale for X axis - provided by XYPlot"
+      "description": "D3 scale for X axis - provided by XYPlot."
     },
     "yScale": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": "D3 scale for Y axis - provided by XYPlot"
+      "description": "D3 scale for Y axis - provided by XYPlot."
     },
     "xScaleType": {
       "type": {
         "name": "string"
       },
       "required": false,
-      "description": "Type of X scale - provided by XYPlot"
+      "description": "Type of X scale - provided by XYPlot."
     },
     "yScaleType": {
       "type": {
         "name": "string"
       },
       "required": false,
-      "description": "Type of Y scale - provided by XYPlot"
+      "description": "Type of Y scale - provided by XYPlot."
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "`LineChart` displays data a series of points connected by straight line segments.",
   "methods": [
     {
       "name": "initBisector",
@@ -36,7 +36,7 @@
         "name": "array"
       },
       "required": true,
-      "description": "the array of data objects"
+      "description": "Array of data objects"
     },
     "x": {
       "type": {
@@ -44,7 +44,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Accessor function for line X values, called once per datum, or a single X value to be used for the entire line."
+      "description": "Accessor function for line X values, called once per datum, or a single value to be used for the entire line."
     },
     "y": {
       "type": {
@@ -52,14 +52,14 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Accessor function for line Y values, called once per datum, or a single Y value to be used for the entire line."
+      "description": "Accessor function for line Y values, called once per datum, or a single value to be used for the entire line."
     },
     "lineStyle": {
       "type": {
         "name": "object"
       },
       "required": false,
-      "description": "Inline style object to be applied to the line path",
+      "description": "Inline style object to be applied to the line path.",
       "defaultValue": {
         "value": "{}",
         "computed": false
@@ -70,7 +70,7 @@
         "name": "string"
       },
       "required": false,
-      "description": "Class attribute to be applied to the line path",
+      "description": "Class attribute to be applied to the line path.",
       "defaultValue": {
         "value": "\"\"",
         "computed": false
@@ -81,14 +81,14 @@
         "name": "func"
       },
       "required": false,
-      "description": "D3 scale for X axis - provided by XYPlot"
+      "description": "D3 scale for X axis - provided by XYPlot."
     },
     "yScale": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": "D3 scale for Y axis - provided by XYPlot"
+      "description": "D3 scale for Y axis - provided by XYPlot."
     }
   }
 }

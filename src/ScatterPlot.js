@@ -1,40 +1,48 @@
-import React from "react";
-import PropTypes from "prop-types";
 import _ from "lodash";
-
-import { makeAccessor2, getValue } from "./utils/Data";
+import PropTypes from "prop-types";
+import React from "react";
 import { methodIfFuncProp } from "./util.js";
-import xyPropsEqual from "./utils/xyPropsEqual";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
+import { getValue } from "./utils/Data";
+import xyPropsEqual from "./utils/xyPropsEqual";
 
+/**
+ * `ScatterPlot` displays its data as a collection of points. Each point represents
+ * the relationship between two variables, one plotted along the x-axis and the other on the y-axis.
+ */
 export default class ScatterPlot extends React.Component {
   static propTypes = {
-    // the array of data objects
+    /**
+     * Array of data to be plotted.
+     */
     data: PropTypes.array.isRequired,
     /**
-     * Accessor function for plot X values, called once per datum
+     * Accessor function for plot X values, called once per datum, or a single value to be used for all points.
      */
     x: CustomPropTypes.valueOrAccessor,
     /**
-     * Accessor function for plot Y values, called once per datum
+     * Accessor function for plot Y values, called once per datum, or a single value to be used for all points.
      */
     y: CustomPropTypes.valueOrAccessor,
     /**
-     * D3 scale for X axis - provided by XYPlot
+     * D3 scale for X axis - provided by XYPlot.
      */
     xScale: PropTypes.func,
     /**
-     * D3 scale for Y axis - provided by XYPlot
+     * D3 scale for Y axis - provided by XYPlot.
      */
     yScale: PropTypes.func,
-    xScaleType: PropTypes.string,
-    yScaleType: PropTypes.string,
-
-    // used with the default point symbol (circle), defines the circle radius
+    /**
+     * Used with the default point symbol (circle), defines the circle radius.
+     */
     pointRadius: PropTypes.number,
-    // text or SVG node to use as custom point symbol, or function which returns text/SVG
+    /**
+     * Text or SVG node to use as custom point symbol, or function which returns text/SVG.
+     */
     pointSymbol: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    // manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered
+    /**
+     * Manual x and y offset applied to the point to center it, for custom point symbols which can't be auto-centered.
+     */
     pointOffset: PropTypes.arrayOf(PropTypes.number),
     /**
      * Inline style object to be applied to each point,
@@ -46,9 +54,17 @@ export default class ScatterPlot extends React.Component {
      * or accessor function which returns a class.
      */
     pointClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-
+    /**
+     * `mouseenter` event handler callback, called when user's mouse enters a point.
+     */
     onMouseEnterPoint: PropTypes.func,
+    /**
+     * `mousemove` event handler callback, called when user's mouse moves within a point.
+     */
     onMouseMovePoint: PropTypes.func,
+    /**
+     * `mouseleave` event handler callback, called when user's mouse leaves a point.
+     */
     onMouseLeavePoint: PropTypes.func
   };
   static defaultProps = {
@@ -76,11 +92,6 @@ export default class ScatterPlot extends React.Component {
     return shouldUpdate;
   }
 
-  render() {
-    return (
-      <g className={this.props.name}>{this.props.data.map(this.renderPoint)}</g>
-    );
-  }
   renderPoint = (d, i) => {
     const [onMouseEnter, onMouseMove, onMouseLeave] = [
       "onMouseEnterPoint",
@@ -131,7 +142,7 @@ export default class ScatterPlot extends React.Component {
 
     // set positioning attributes based on symbol type
     if (pointSymbol.type === "circle" || pointSymbol.type === "ellipse") {
-      _.assign(symbolProps, { cx, cy, style: pointStyle });
+      _.assign(symbolProps, { cx, cy, style: { ...style } });
     } else if (pointSymbol.type === "text") {
       _.assign(symbolProps, {
         x: cx,
@@ -142,11 +153,14 @@ export default class ScatterPlot extends React.Component {
       _.assign(symbolProps, {
         x: cx,
         y: cy,
-        // TODO figure out why this translate is here
-        style: { transform: "translate(-50%, -50%)", ...style }
+        style: { ...style }
       });
     }
 
     return React.cloneElement(pointSymbol, symbolProps);
   };
+
+  render() {
+    return <g>{this.props.data.map(this.renderPoint)}</g>;
+  }
 }

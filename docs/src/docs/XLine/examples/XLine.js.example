@@ -1,6 +1,6 @@
 const XLineExample = (props) => {
   return <div>
-    <XYPlot width={400} height={300} xDomain={[-20, 20]} yDomain={[-20, 20]}>
+    <XYPlot width={400} height={300} xDomain={[-20, 20]} yDomain={[-20, 20]} spacingTop={10}>
       <XAxis/><YAxis/>
       <XLine value={-12} style={{stroke: 'red'}} />
       <XLine value={15} style={{stroke: 'blue', strokeWidth: 3}} />

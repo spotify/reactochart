@@ -47,7 +47,7 @@ export default class YGrid extends React.Component {
     const className = `rct-chart-grid-line ${lineClassName || ""}`;
 
     return (
-      <g className="chart-grid-y">
+      <g className="rct-chart-grid-y">
         {ticks.map((tick, i) => {
           return (
             <YLine
