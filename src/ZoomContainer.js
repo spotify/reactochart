@@ -13,7 +13,7 @@ function zoomTransformFromProps(props) {
 }
 
 /**
- * `ZoomContainer` is a wrapper tnat gives users the ability to zoom in, zoom out and drag its children components.
+ * `ZoomContainer` is a wrapper that gives users the ability to zoom in, zoom out and drag its children components.
  */
 export default class ZoomContainer extends React.Component {
   static propTypes = {
