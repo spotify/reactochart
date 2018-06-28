@@ -1765,11 +1765,7 @@ commander@2, commander@2.15.x, commander@^2.11.0, commander@^2.9.0, commander@~2
 
 commander@2.11.0:
   version "2.11.0"
-<<<<<<< HEAD
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.11.0.tgz#157152fd1e7a6c8d98a5b715cf376df928004563"
-=======
   resolved "https://registry.npmjs.org/commander/-/commander-2.11.0.tgz#157152fd1e7a6c8d98a5b715cf376df928004563"
->>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
 
 commondir@^1.0.1:
   version "1.0.1"
@@ -2520,11 +2516,7 @@ detect-node@^2.0.3:
 
 diff@3.3.1:
   version "3.3.1"
-<<<<<<< HEAD
-  resolved "https://registry.yarnpkg.com/diff/-/diff-3.3.1.tgz#aa8567a6eed03c531fc89d3f711cd0e5259dec75"
-=======
   resolved "https://registry.npmjs.org/diff/-/diff-3.3.1.tgz#aa8567a6eed03c531fc89d3f711cd0e5259dec75"
->>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
 
 diff@^3.1.0:
   version "3.5.0"
@@ -3129,13 +3121,8 @@ faye-websocket@~0.11.0:
     websocket-driver ">=0.5.1"
 
 fbjs@^0.8.16, fbjs@^0.8.9:
-<<<<<<< HEAD
-  version "0.8.16"
-  resolved "https://registry.npmjs.org/fbjs/-/fbjs-0.8.16.tgz#5e67432f550dc41b572bf55847b8aca64e5337db"
-=======
   version "0.8.17"
   resolved "https://registry.npmjs.org/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
->>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
   dependencies:
     core-js "^1.0.0"
     isomorphic-fetch "^2.1.1"
@@ -3467,11 +3454,7 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.4:
 
 growl@1.10.3:
   version "1.10.3"
-<<<<<<< HEAD
-  resolved "https://registry.yarnpkg.com/growl/-/growl-1.10.3.tgz#1926ba90cf3edfe2adb4927f5880bc22c66c790f"
-=======
   resolved "https://registry.npmjs.org/growl/-/growl-1.10.3.tgz#1926ba90cf3edfe2adb4927f5880bc22c66c790f"
->>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
 
 handle-thing@^1.2.5:
   version "1.2.5"
@@ -4884,11 +4867,7 @@ mkdirp@0.5.1, mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@
 
 mocha@4.0.1:
   version "4.0.1"
-<<<<<<< HEAD
-  resolved "https://registry.yarnpkg.com/mocha/-/mocha-4.0.1.tgz#0aee5a95cf69a4618820f5e51fa31717117daf1b"
-=======
   resolved "https://registry.npmjs.org/mocha/-/mocha-4.0.1.tgz#0aee5a95cf69a4618820f5e51fa31717117daf1b"
->>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
   dependencies:
     browser-stdout "1.3.0"
     commander "2.11.0"
@@ -7013,11 +6992,7 @@ style-loader@~0.8.0:
 
 supports-color@4.4.0:
   version "4.4.0"
-<<<<<<< HEAD
-  resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-4.4.0.tgz#883f7ddabc165142b2a61427f3352ded195d1a3e"
-=======
   resolved "https://registry.npmjs.org/supports-color/-/supports-color-4.4.0.tgz#883f7ddabc165142b2a61427f3352ded195d1a3e"
->>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
   dependencies:
     has-flag "^2.0.0"
 
