@@ -237,12 +237,6 @@ export default class RangeBarChart extends React.Component {
           };
 
           return <Bar {...barProps} />;
-
-          return horizontal ? (
-            <Bar xEnd={getValue(xEnd, d, i)} {...barProps} />
-          ) : (
-            <Bar yEnd={getValue(yEnd, d, i)} {...barProps} />
-          );
         })}
       </g>
     );
