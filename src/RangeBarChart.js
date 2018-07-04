@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import React from "react";
 import Bar from "./Bar";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
-import { domainFromData, domainFromRangeData, getValue, makeAccessor2 } from "./utils/Data";
+import {
+  domainFromData,
+  domainFromRangeData,
+  getValue,
+  makeAccessor2
+} from "./utils/Data";
 import { dataTypeFromScaleType } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
