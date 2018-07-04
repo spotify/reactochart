@@ -3,12 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import Bar from "./Bar";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
-import {
-  domainFromData,
-  domainFromRangeData,
-  getValue,
-  makeAccessor2
-} from "./utils/Data";
+import { domainFromData, domainFromRangeData, getValue, makeAccessor2 } from "./utils/Data";
 import { dataTypeFromScaleType } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
@@ -237,12 +232,6 @@ export default class RangeBarChart extends React.Component {
           };
 
           return <Bar {...barProps} />;
-
-          return horizontal ? (
-            <Bar xEnd={getValue(xEnd, d, i)} {...barProps} />
-          ) : (
-            <Bar yEnd={getValue(yEnd, d, i)} {...barProps} />
-          );
         })}
       </g>
     );
