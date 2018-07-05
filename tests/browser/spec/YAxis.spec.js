@@ -17,14 +17,18 @@ describe("YAxis", () => {
   const width = 500;
   const height = 300;
 
-  it("extends the scale domain if to include custom `ticks` if passed", () => {
-    const props = {
-      width,
-      height,
-      scaleType: { x: "linear", y: "linear" },
-      margin: { top: 11, bottom: 22, left: 33, right: 44 }
-    };
+  const props = {
+    width,
+    height,
+    xScaleType: "linear",
+    yScaleType: "linear",
+    marginTop: 11,
+    marginBottom: 22,
+    marginLeft: 33,
+    marginRight: 44
+  };
 
+  it("extends the scale domain if to include custom `ticks` if passed", () => {
     const tree = (
       <XYPlot {...props}>
         <LineChart data={[[0, 0], [10, 10]]} x={d => d[0]} y={d => d[1]} />
@@ -37,13 +41,6 @@ describe("YAxis", () => {
   });
 
   it("rounds domain to nice numbers if `nice` option is true", () => {
-    const props = {
-      width,
-      height,
-      scaleType: { x: "linear", y: "linear" },
-      margin: { top: 11, bottom: 22, left: 33, right: 44 }
-    };
-
     const niceXChart = mount(
       <XYPlot {...props}>
         <LineChart
@@ -58,14 +55,8 @@ describe("YAxis", () => {
     expect(niceXChart.props().xDomain).to.deep.equal([0.3, 9.2]);
     expect(niceXChart.props().yDomain).to.deep.equal([0, 10]);
   });
-  it("renders every part of the yAxis", () => {
-    const props = {
-      width,
-      height,
-      scaleType: { x: "linear", y: "linear" },
-      margin: { top: 11, bottom: 22, left: 33, right: 44 }
-    };
 
+  it("renders every part of the yAxis", () => {
     const tree = (
       <XYPlot {...props} xDomain={[0, 10]} yDomain={[0, 10]}>
         <LineChart data={[[0, 0], [10, 10]]} x={d => d[0]} y={d => d[1]} />
