@@ -8,7 +8,7 @@ const YAxisLabelsExample = (props) => {
         xDomain={[-20, 20]} yDomain={[-20, 20]}
       >
         <YAxisLabels />
-        <YAxisLabels position="right" tickCount={5} />
+        <YAxisLabels format={"0.00"} position="right" tickCount={5} />
       </XYPlot>
     </div>
   </div>

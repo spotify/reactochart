@@ -260,7 +260,7 @@
         "name": "union",
         "value": [
           {
-            "name": "object"
+            "name": "string"
           },
           {
             "name": "func"
