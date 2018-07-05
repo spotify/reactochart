@@ -1,7 +1,7 @@
-import React from "react";
 import _ from "lodash";
 import measureText from "measure-text";
 import PropTypes from "prop-types";
+import React from "react";
 
 export default class YAxisTitle extends React.Component {
   static propTypes = {
@@ -17,9 +17,9 @@ export default class YAxisTitle extends React.Component {
     position: PropTypes.oneOf(["left", "right"]),
     alignment: PropTypes.oneOf(["top", "middle", "bottom"]),
     /**
-     * Placement of title in regards to the x axis. Accepted options are "above" or "below"
+     * Placement of title in regards to the y axis. Accepted options are "before" or "after"
      */
-    placement: PropTypes.oneOf(["above", "below"]),
+    placement: PropTypes.oneOf(["before", "after"]),
     rotate: PropTypes.bool,
     /**
      * Object declaring styles for label.
