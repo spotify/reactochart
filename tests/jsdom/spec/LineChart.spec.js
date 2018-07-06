@@ -18,6 +18,8 @@ describe("LineChart", () => {
     .domain([0, 1])
     .range([100, 0]);
 
+<<<<<<< HEAD
+=======
   it("passes props correctly to group and path elements", () => {
     const props = {
       xScale: d3
@@ -42,6 +44,7 @@ describe("LineChart", () => {
     expect(group.props().className).to.contain(props.lineClassName);
   });
 
+>>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
   it("renders a line with number X & Y scales", () => {
     // make simple number-number line chart with 3 datapoints
     const props = {

@@ -1,11 +1,23 @@
+<<<<<<< HEAD
+import _ from "lodash";
+import React from "react";
+import * as d3 from "d3";
 import { expect } from "chai";
+
+=======
+import { expect } from "chai";
+>>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
 import {
   innerHeight,
   innerRangeX,
+<<<<<<< HEAD
+  innerRangeY
+=======
   innerRangeY,
   innerWidth,
   prefixKeys,
   sumMargins
+>>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
 } from "../../../src/utils/Margin";
 
 describe("Scale utils", () => {
@@ -66,6 +78,8 @@ describe("Scale utils", () => {
         100,
         100
       ]);
+<<<<<<< HEAD
+=======
     });
   });
 
@@ -92,6 +106,7 @@ describe("Scale utils", () => {
       marginBottom: 51,
       marginLeft: 16,
       marginRight: 16
+>>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
     });
   });
 });
