@@ -1,3 +1,10 @@
+## 1.0.1 (2018-07-06)
+
+- [#94](https://github.com/spotify/reactochart/pull/94) Minor Bug Fixes
+  - Update propType `pointStyle` for ScatterPlot to be of type object or accessor func
+  - Update propType `format` XAxis and YAxis (which is passed to X and YAxisLabel) to be of type string or accessor function
+  - Update TreeMap and SankeyDiagram docs
+
 ## 1.0.0 (2018-06-28)
 
 Although this is a major release, there aren't many breaking changes that weren't noted in previous releases. Additions include more tests, clean up of component API docs, minor bug fixes and feature adds and better consistency for chart props.

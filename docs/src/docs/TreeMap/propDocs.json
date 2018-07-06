@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": "`TreeMap` displays hierarchical data where a leaf node's rectangle has an area proportional to a specified dimension of the data.",
   "methods": [],
   "props": {
     "width": {
@@ -29,7 +29,7 @@
         "raw": "CustomPropTypes.getter"
       },
       "required": false,
-      "description": "",
+      "description": "Key or accessor to retrieve value of data point",
       "defaultValue": {
         "value": "\"value\"",
         "computed": false
@@ -41,7 +41,7 @@
         "raw": "CustomPropTypes.getter"
       },
       "required": false,
-      "description": "",
+      "description": "Key or accessor to retrieve children of data point",
       "defaultValue": {
         "value": "\"children\"",
         "computed": false
@@ -53,7 +53,7 @@
         "raw": "CustomPropTypes.getter"
       },
       "required": false,
-      "description": "",
+      "description": "Key or accessor to retrieve label for given Node",
       "defaultValue": {
         "value": "\"name\"",
         "computed": false
@@ -64,42 +64,35 @@
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "Function passed in to sort nodes"
     },
     "padding": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "See d3 docs for treemap - Adds outer and inner padding to tree"
     },
     "round": {
       "type": {
         "name": "bool"
       },
       "required": false,
-      "description": ""
+      "description": "See d3 docs for treemap - Enables or disables rounding"
     },
     "sticky": {
       "type": {
         "name": "bool"
       },
       "required": false,
-      "description": ""
-    },
-    "mode": {
-      "type": {
-        "name": "string"
-      },
-      "required": false,
-      "description": ""
+      "description": "If sticky, on data change the TreeMap will not force a recreation of the tree and animate data changes.\nOtherwise we recreate the tree given its new props"
     },
     "ratio": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": ""
+      "description": "Sets the desired aspect ratio of the generated rectangles"
     },
     "nodeStyle": {
       "type": {
@@ -114,7 +107,7 @@
         ]
       },
       "required": false,
-      "description": ""
+      "description": "Inline style object applied to each Node,\nor accessor function which returns a style object"
     },
     "labelStyle": {
       "type": {
@@ -129,7 +122,7 @@
         ]
       },
       "required": false,
-      "description": ""
+      "description": "Inline style object applied to each Label,\nor accessor function which returns a style object"
     },
     "minLabelWidth": {
       "type": {
@@ -158,37 +151,37 @@
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`onClick` event handler callback, called when user clicks a NodeComponent."
     },
     "onMouseEnterNode": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mouseenter` event handler callback, called when user's mouse enters a NodeComponent."
     },
     "onMouseLeaveNode": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mouseleave` event handler callback, called when user's mouse leaves a NodeComponent."
     },
     "onMouseMoveNode": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mousemove` event handler callback, called when user's mouse moves within a NodeComponent."
     },
     "NodeComponent": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": "",
+      "description": "Optional treemap node, otherwise we default to our TreeMapNode component",
       "defaultValue": {
-        "value": "class TreeMapNode extends React.Component {\n  static propTypes = {\n    node: PropTypes.shape({\n      parent: PropTypes.object,\n      children: PropTypes.array,\n      value: PropTypes.number,\n      depth: PropTypes.number,\n      x: PropTypes.number,\n      y: PropTypes.number,\n      dx: PropTypes.number,\n      dy: PropTypes.number\n    }),\n    nodeStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),\n    minLabelWidth: PropTypes.number,\n    minLabelHeight: PropTypes.number,\n\n    getLabel: CustomPropTypes.getter,\n    labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),\n    NodeLabelComponent: PropTypes.func\n  };\n  static defaultProps = {\n    minLabelWidth: 0,\n    minLabelHeight: 0\n  };\n\n  render() {\n    const {\n      node,\n      getLabel,\n      nodeStyle,\n      labelStyle,\n      minLabelWidth,\n      minLabelHeight,\n      NodeLabelComponent,\n      parentNames\n    } = this.props;\n    const { depth, parent, x0, y0, x1, y1 } = node;\n\n    var parentName = _.get(parent, \"data.name\");\n    const nodeGroupClass = parent\n      ? `node-group-${_.kebabCase(\n          parentName\n        )} node-group-i-${parentNames.indexOf(parentName)}`\n      : \"\";\n    const className = `tree-map-node node-depth-${depth} ${nodeGroupClass}`;\n\n    let style = {\n      position: \"absolute\",\n      width: x1 - x0,\n      height: y1 - y0,\n      top: y0,\n      left: x0,\n      transition: \"all .2s\"\n    };\n    const customStyle = _.isFunction(nodeStyle)\n      ? nodeStyle(node)\n      : _.isObject(nodeStyle)\n        ? nodeStyle\n        : {};\n    _.assign(style, customStyle);\n\n    let handlers = [\n      \"onClick\",\n      \"onMouseEnter\",\n      \"onMouseLeave\",\n      \"onMouseMove\"\n    ].reduce((handlers, eventName) => {\n      const handler = this.props[`${eventName}Node`];\n      if (handler) handlers[eventName] = handler.bind(null, node);\n      return handlers;\n    }, {});\n\n    return (\n      <div {...{ className, style }} {...handlers}>\n        {x1 - x0 > minLabelWidth && y1 - y0 > minLabelHeight ? ( // show label if node is big enough\n          <NodeLabelComponent {...{ node, getLabel, labelStyle }} />\n        ) : null}\n      </div>\n    );\n  }\n}",
+        "value": "props => {\n  const {\n    node,\n    getLabel,\n    nodeStyle,\n    labelStyle,\n    minLabelWidth,\n    minLabelHeight,\n    NodeLabelComponent,\n    parentNames\n  } = props;\n  const { depth, parent, x0, y0, x1, y1 } = node;\n\n  var parentName = _.get(parent, \"data.name\");\n  const nodeGroupClass = parent\n    ? `node-group-${_.kebabCase(parentName)} node-group-i-${parentNames.indexOf(\n        parentName\n      )}`\n    : \"\";\n  const className = `rct-tree-map-node node-depth-${depth} ${nodeGroupClass}`;\n\n  let style = {\n    position: \"absolute\",\n    width: x1 - x0,\n    height: y1 - y0,\n    top: y0,\n    left: x0,\n    transition: \"all .2s\"\n  };\n  const customStyle = _.isFunction(nodeStyle)\n    ? nodeStyle(node)\n    : _.isObject(nodeStyle)\n      ? nodeStyle\n      : {};\n  _.assign(style, customStyle);\n\n  let handlers = [\n    \"onClick\",\n    \"onMouseEnter\",\n    \"onMouseLeave\",\n    \"onMouseMove\"\n  ].reduce((handlers, eventName) => {\n    const handler = props[`${eventName}Node`];\n    if (handler) handlers[eventName] = handler.bind(null, node);\n    return handlers;\n  }, {});\n\n  return (\n    <div {...{ className, style }} {...handlers}>\n      {x1 - x0 > minLabelWidth && y1 - y0 > minLabelHeight ? ( // show label if node is big enough\n        <NodeLabelComponent {...{ node, getLabel, labelStyle }} />\n      ) : null}\n    </div>\n  );\n}",
         "computed": false
       }
     },
@@ -197,9 +190,9 @@
         "name": "func"
       },
       "required": false,
-      "description": "",
+      "description": "Optional treemap node label, otherwise we default to our TreeMapNodeLabel component",
       "defaultValue": {
-        "value": "class TreeMapNodeLabel extends React.Component {\n  static propTypes = {\n    node: PropTypes.object,\n    getLabel: CustomPropTypes.getter,\n    labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),\n    minLabelWidth: PropTypes.number,\n    minLabelHeight: PropTypes.number\n  };\n\n  render() {\n    const { node, getLabel, labelStyle } = this.props;\n    const { x1, x0 } = node;\n    let style = { width: x1 - x0 };\n    const customStyle = _.isFunction(labelStyle)\n      ? labelStyle(node)\n      : _.isObject(labelStyle)\n        ? labelStyle\n        : {};\n    _.assign(style, customStyle);\n\n    return (\n      <div className=\"node-label\" {...{ style }}>\n        {makeAccessor(getLabel)(node)}\n      </div>\n    );\n  }\n}",
+        "value": "props => {\n  const { node, getLabel, labelStyle } = props;\n  const { x1, x0 } = node;\n  let style = { width: x1 - x0 };\n  const customStyle = _.isFunction(labelStyle)\n    ? labelStyle(node)\n    : _.isObject(labelStyle)\n      ? labelStyle\n      : {};\n  _.assign(style, customStyle);\n\n  return (\n    <div className=\"rct-node-label\" {...{ style }}>\n      {makeAccessor(getLabel)(node)}\n    </div>\n  );\n}",
         "computed": false
       }
     }
