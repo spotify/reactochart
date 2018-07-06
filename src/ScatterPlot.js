@@ -48,7 +48,7 @@ export default class ScatterPlot extends React.Component {
      * Inline style object to be applied to each point,
      * or accessor function which returns a style object.
      */
-    pointStyle: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    pointStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /**
      * Class attribute to be applied to each point,
      * or accessor function which returns a class.

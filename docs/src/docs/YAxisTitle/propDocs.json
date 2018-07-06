@@ -101,17 +101,17 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"above\"",
+            "value": "\"before\"",
             "computed": false
           },
           {
-            "value": "\"below\"",
+            "value": "\"after\"",
             "computed": false
           }
         ]
       },
       "required": false,
-      "description": "Placement of title in regards to the x axis. Accepted options are \"above\" or \"below\"",
+      "description": "Placement of title in regards to the y axis. Accepted options are \"before\" or \"after\"",
       "defaultValue": {
         "value": "undefined",
         "computed": true

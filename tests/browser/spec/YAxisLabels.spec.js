@@ -11,14 +11,18 @@ chai.use(sinonChai);
 describe("YAxisLabel", () => {
   const width = 500;
   const height = 300;
+  const props = {
+    width,
+    height,
+    xScaleType: "linear",
+    yScaleType: "linear",
+    marginTop: 11,
+    marginBottom: 22,
+    marginLeft: 33,
+    marginRight: 44
+  };
 
   it("Check how many labels are created and where", () => {
-    const props = {
-      width,
-      height,
-      scaleType: { x: "linear", y: "linear" },
-      margin: { top: 11, bottom: 22, left: 33, right: 44 }
-    };
     const chartStyle = { marginBottom: "10px" };
     const functions = {
       onMouseEnterLabel: sinon.spy(),
@@ -62,5 +66,33 @@ describe("YAxisLabel", () => {
     expect(first.props().onMouseLeaveLabel).not.to.have.been.called;
     firstChild.simulate("mouseleave");
     expect(first.props().onMouseLeaveLabel).to.have.been.calledOnce;
+  });
+
+  it("Renders labels with given format", () => {
+    const tree = (
+      <XYPlot width={400} height={150} xDomain={[-20, 20]} yDomain={[-20, 20]}>
+        <YAxisLabels
+          format={d => d + "%"}
+          position="left"
+          distance={2}
+          tickCount={5}
+        />
+      </XYPlot>
+    );
+
+    const rendered = mount(tree).find(YAxisLabels);
+    const labelWrapper = rendered.first("g");
+    const labels = labelWrapper
+      .children()
+      .find("text")
+      .getNodes();
+
+    const correctTickLabels = ["-20%", "-10%", "0%", "10%", "20%"];
+
+    const renderedTickLabels = labels.map(label => {
+      return label.textContent;
+    });
+
+    expect(renderedTickLabels).to.eql(correctTickLabels);
   });
 });

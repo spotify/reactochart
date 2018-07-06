@@ -229,10 +229,18 @@
     },
     "format": {
       "type": {
-        "name": "string"
+        "name": "union",
+        "value": [
+          {
+            "name": "string"
+          },
+          {
+            "name": "func"
+          }
+        ]
       },
       "required": false,
-      "description": "Format to use for the labels\n\nFor example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit"
+      "description": "Format to use for the labels or accessor that returns the updated label.\n\nFor example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit."
     },
     "formats": {
       "type": {

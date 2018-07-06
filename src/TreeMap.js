@@ -5,118 +5,114 @@ import React from "react";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
 import { makeAccessor } from "./utils/Data";
 
-export class TreeMapNode extends React.Component {
-  static propTypes = {
-    node: PropTypes.shape({
-      parent: PropTypes.object,
-      children: PropTypes.array,
-      value: PropTypes.number,
-      depth: PropTypes.number,
-      x: PropTypes.number,
-      y: PropTypes.number,
-      dx: PropTypes.number,
-      dy: PropTypes.number
-    }),
-    nodeStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    minLabelWidth: PropTypes.number,
-    minLabelHeight: PropTypes.number,
+export const TreeMapNode = props => {
+  const {
+    node,
+    getLabel,
+    nodeStyle,
+    labelStyle,
+    minLabelWidth,
+    minLabelHeight,
+    NodeLabelComponent,
+    parentNames
+  } = props;
+  const { depth, parent, x0, y0, x1, y1 } = node;
 
-    getLabel: CustomPropTypes.getter,
-    labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    NodeLabelComponent: PropTypes.func
+  var parentName = _.get(parent, "data.name");
+  const nodeGroupClass = parent
+    ? `node-group-${_.kebabCase(parentName)} node-group-i-${parentNames.indexOf(
+        parentName
+      )}`
+    : "";
+  const className = `rct-tree-map-node node-depth-${depth} ${nodeGroupClass}`;
+
+  let style = {
+    position: "absolute",
+    width: x1 - x0,
+    height: y1 - y0,
+    top: y0,
+    left: x0,
+    transition: "all .2s"
   };
-  static defaultProps = {
-    minLabelWidth: 0,
-    minLabelHeight: 0
-  };
+  const customStyle = _.isFunction(nodeStyle)
+    ? nodeStyle(node)
+    : _.isObject(nodeStyle)
+      ? nodeStyle
+      : {};
+  _.assign(style, customStyle);
 
-  render() {
-    const {
-      node,
-      getLabel,
-      nodeStyle,
-      labelStyle,
-      minLabelWidth,
-      minLabelHeight,
-      NodeLabelComponent,
-      parentNames
-    } = this.props;
-    const { depth, parent, x0, y0, x1, y1 } = node;
+  let handlers = [
+    "onClick",
+    "onMouseEnter",
+    "onMouseLeave",
+    "onMouseMove"
+  ].reduce((handlers, eventName) => {
+    const handler = props[`${eventName}Node`];
+    if (handler) handlers[eventName] = handler.bind(null, node);
+    return handlers;
+  }, {});
 
-    var parentName = _.get(parent, "data.name");
-    const nodeGroupClass = parent
-      ? `node-group-${_.kebabCase(
-          parentName
-        )} node-group-i-${parentNames.indexOf(parentName)}`
-      : "";
-    const className = `rct-tree-map-node node-depth-${depth} ${nodeGroupClass}`;
+  return (
+    <div {...{ className, style }} {...handlers}>
+      {x1 - x0 > minLabelWidth && y1 - y0 > minLabelHeight ? ( // show label if node is big enough
+        <NodeLabelComponent {...{ node, getLabel, labelStyle }} />
+      ) : null}
+    </div>
+  );
+};
 
-    let style = {
-      position: "absolute",
-      width: x1 - x0,
-      height: y1 - y0,
-      top: y0,
-      left: x0,
-      transition: "all .2s"
-    };
-    const customStyle = _.isFunction(nodeStyle)
-      ? nodeStyle(node)
-      : _.isObject(nodeStyle)
-        ? nodeStyle
-        : {};
-    _.assign(style, customStyle);
+TreeMapNode.propTypes = {
+  node: PropTypes.shape({
+    parent: PropTypes.object,
+    children: PropTypes.array,
+    value: PropTypes.number,
+    depth: PropTypes.number,
+    x: PropTypes.number,
+    y: PropTypes.number,
+    dx: PropTypes.number,
+    dy: PropTypes.number
+  }),
+  nodeStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  minLabelWidth: PropTypes.number,
+  minLabelHeight: PropTypes.number,
+  getLabel: CustomPropTypes.getter,
+  labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  NodeLabelComponent: PropTypes.func
+};
 
-    let handlers = [
-      "onClick",
-      "onMouseEnter",
-      "onMouseLeave",
-      "onMouseMove"
-    ].reduce((handlers, eventName) => {
-      const handler = this.props[`${eventName}Node`];
-      if (handler) handlers[eventName] = handler.bind(null, node);
-      return handlers;
-    }, {});
+TreeMapNode.defaultProps = {
+  minLabelWidth: 0,
+  minLabelHeight: 0
+};
 
-    return (
-      <div {...{ className, style }} {...handlers}>
-        {x1 - x0 > minLabelWidth && y1 - y0 > minLabelHeight ? ( // show label if node is big enough
-          <NodeLabelComponent {...{ node, getLabel, labelStyle }} />
-        ) : null}
-      </div>
-    );
-  }
-}
+export const TreeMapNodeLabel = props => {
+  const { node, getLabel, labelStyle } = props;
+  const { x1, x0 } = node;
+  let style = { width: x1 - x0 };
+  const customStyle = _.isFunction(labelStyle)
+    ? labelStyle(node)
+    : _.isObject(labelStyle)
+      ? labelStyle
+      : {};
+  _.assign(style, customStyle);
 
-export class TreeMapNodeLabel extends React.Component {
-  static propTypes = {
-    node: PropTypes.object,
-    getLabel: CustomPropTypes.getter,
-    labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    minLabelWidth: PropTypes.number,
-    minLabelHeight: PropTypes.number
-  };
+  return (
+    <div className="rct-node-label" {...{ style }}>
+      {makeAccessor(getLabel)(node)}
+    </div>
+  );
+};
 
-  render() {
-    const { node, getLabel, labelStyle } = this.props;
-    const { x1, x0 } = node;
-    let style = { width: x1 - x0 };
-    const customStyle = _.isFunction(labelStyle)
-      ? labelStyle(node)
-      : _.isObject(labelStyle)
-        ? labelStyle
-        : {};
-    _.assign(style, customStyle);
-
-    return (
-      <div className="rct-node-label" {...{ style }}>
-        {makeAccessor(getLabel)(node)}
-      </div>
-    );
-  }
-}
+TreeMapNodeLabel.propTypes = {
+  node: PropTypes.object,
+  getLabel: CustomPropTypes.getter,
+  labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  minLabelWidth: PropTypes.number,
+  minLabelHeight: PropTypes.number
+};
 
 /**
- *
+ * `TreeMap` displays hierarchical data where a leaf node's rectangle has an area proportional to a specified dimension of the data.
  */
 class TreeMap extends React.Component {
   static propTypes = {

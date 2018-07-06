@@ -1,5 +1,5 @@
 {
-  "description": "A Sankey diagram is a type of flow diagram which visualizes directed flow between nodes\nof a network graph. Currently only *acyclic* networks are supported.",
+  "description": "A `SankeyDiagram` is a type of flow diagram which visualizes directed flow between nodes\nof a network graph. Currently only *acyclic* networks are supported.",
   "methods": [
     {
       "name": "_makeSankeyGraph",
