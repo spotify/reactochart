@@ -6,25 +6,13 @@ import { CLIEngine } from "eslint";
 import glob from "glob";
 
 const srcPaths = glob.sync("./src/*.js");
-<<<<<<< HEAD
-const testPaths = glob.sync("./tests/jsdom/spec/*.js");
-=======
 const testPaths = glob.sync("./tests/*.js");
 const docPaths = glob.sync("./docs/src/*.js");
->>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
 const engine = new CLIEngine({
   envs: ["node", "mocha"],
   useEslintrc: true
 });
 
-<<<<<<< HEAD
-const srcResults = engine.executeOnFiles(srcPaths).results;
-const testResults = engine.executeOnFiles(testPaths).results;
-
-const results = srcResults.concat(testResults);
-
-=======
->>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
 describe("ESLint", () => {
   [srcPaths, testPaths, docPaths].forEach(path => {
     const results = engine.executeOnFiles(path).results;
