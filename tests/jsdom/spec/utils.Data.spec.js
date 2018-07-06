@@ -1,23 +1,16 @@
-import _ from "lodash";
-import React from "react";
-<<<<<<< HEAD
-import * as d3 from "d3";
-import { expect } from "chai";
-import { mount, shallow } from "enzyme";
-=======
 import { expect } from "chai";
 import { mount } from "enzyme";
->>>>>>> a1a2f8c323fcb23541086db024b8031a80b12b99
-
+import _ from "lodash";
+import React from "react";
 import {
-  makeAccessor,
+  combineDomains,
   datasetsFromPropsOrDescendants,
-  inferDataType,
-  inferDatasetsType,
   domainFromData,
   domainFromDatasets,
-  combineDomains,
-  isValidDomain
+  inferDatasetsType,
+  inferDataType,
+  isValidDomain,
+  makeAccessor
 } from "../../../src/utils/Data";
 
 const notImplemented = () => {
