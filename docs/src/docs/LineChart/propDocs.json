@@ -89,6 +89,17 @@
       },
       "required": false,
       "description": "D3 scale for Y axis - provided by XYPlot."
+    },
+    "curve": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 curve for path generation",
+      "defaultValue": {
+        "value": "curveLinear",
+        "computed": true
+      }
     }
   }
 }
