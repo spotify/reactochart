@@ -1,4 +1,4 @@
-import { bisector } from "d3";
+import { bisector, line, curveLinear } from "d3";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
@@ -38,11 +38,16 @@ export default class LineChart extends React.Component {
     /**
      * D3 scale for Y axis - provided by XYPlot.
      */
-    yScale: PropTypes.func
+    yScale: PropTypes.func,
+    /**
+     * D3 curve for path generation
+     */
+    curve: PropTypes.func
   };
   static defaultProps = {
     lineStyle: {},
-    lineClassName: ""
+    lineClassName: "",
+    curve: curveLinear
   };
 
   componentWillMount() {
@@ -66,13 +71,21 @@ export default class LineChart extends React.Component {
   };
 
   render() {
-    const { data, xScale, yScale, x, y, lineStyle, lineClassName } = this.props;
+    const {
+      data,
+      xScale,
+      yScale,
+      x,
+      y,
+      curve,
+      lineStyle,
+      lineClassName
+    } = this.props;
 
-    const points = _.map(data, (d, i) => [
-      xScale(getValue(x, d, i)),
-      yScale(getValue(y, d, i))
-    ]);
-    const pathStr = pointsToPathStr(points);
+    const pathStr = line()
+      .curve(curve)
+      .x((d, i) => xScale(getValue(x, d, i)))
+      .y((d, i) => yScale(getValue(y, d, i)))(data);
 
     return (
       <g className={`rct-line-chart ${lineClassName}`}>
@@ -80,15 +93,4 @@ export default class LineChart extends React.Component {
       </g>
     );
   }
-}
-
-function pointsToPathStr(points) {
-  // takes array of points in [[x, y], [x, y]... ] format
-  // returns SVG path string in "M X Y L X Y" format
-  // https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#Line_commands
-  // todo: replace this with d3 path generator
-  return _.map(points, ([x, y], i) => {
-    const command = i === 0 ? "M" : "L";
-    return `${command} ${x} ${y}`;
-  }).join(" ");
 }
