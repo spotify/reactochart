@@ -255,6 +255,17 @@
       },
       "required": false,
       "description": "Custom labels provided. Note that each object in the array has to be of shape\n`{\n value,\n text,\n height,\n width\n}`\nvalue - value you'd like this label to be aligned with\ntext - text you'd like displayed\nheight - height of the given label\nwidth - width of the given label"
+    },
+    "offset": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Adds vertical offset (along the YAxis) to the labels",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
     }
   }
 }

@@ -284,6 +284,13 @@
       "required": false,
       "description": ""
     },
+    "labelOffset": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Adds vertical offset (along the YAxis) to the labels"
+    },
     "tickLength": {
       "type": {
         "name": "number"
