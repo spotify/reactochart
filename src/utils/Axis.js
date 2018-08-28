@@ -25,6 +25,7 @@ export function getAxisChildProps(props) {
     labelStyle,
     labelFormat,
     labelFormats,
+    labelOffset,
     labels,
     gridLineClassName,
     gridLineStyle,
@@ -85,6 +86,7 @@ export function getAxisChildProps(props) {
     distance: labelDistance,
     format: labelFormat,
     formats: labelFormats,
+    offset: labelOffset,
     onMouseEnterLabel,
     onMouseMoveLabel,
     onMouseLeaveLabel
