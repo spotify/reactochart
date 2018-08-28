@@ -59,7 +59,7 @@ export default class XAxis extends React.Component {
     labelFormats: PropTypes.array,
     labels: PropTypes.array,
     /**
-     * Adds horizontal offset to the y axis labels
+     * Adds horizontal offset (along the XAxis) to the labels
      */
     labelOffset: PropTypes.number,
 

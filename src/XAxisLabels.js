@@ -168,7 +168,7 @@ class XAxisLabels extends React.Component {
      */
     onMouseLeaveLabel: PropTypes.func,
     /**
-     * Adds horizontal offset to the labels
+     * Adds horizontal offset (along the XAxis) to the labels
      */
     offset: PropTypes.func
   };

@@ -137,7 +137,7 @@ class YAxisLabels extends React.Component {
      */
     labels: PropTypes.array,
     /**
-     * Adds vertical offset to the labels
+     * Adds vertical offset (along the YAxis) to the labels
      */
     offset: PropTypes.number
   };
