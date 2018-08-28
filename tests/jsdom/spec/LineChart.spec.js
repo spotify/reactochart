@@ -60,7 +60,7 @@ describe("LineChart", () => {
     const chart = mount(<LineChart {...props} />);
     const path = chart.find("path");
     const pathData = path.getNode().getAttribute("d");
-    expect(pathData).to.equal("M 0 50 L 50 0 L 100 75");
+    expect(pathData).to.equal("M0,50L50,0L100,75");
   });
 
   it("renders a line with time X scale and number Y scale", () => {
@@ -90,7 +90,7 @@ describe("LineChart", () => {
     const chart = mount(<LineChart {...props} />);
     const path = chart.find("path");
     const pathData = path.getNode().getAttribute("d");
-    expect(pathData).to.equal("M 0 50 L 50 0 L 100 75");
+    expect(pathData).to.equal("M0,50L50,0L100,75");
   });
 
   it("renders a line with ordinal X scale and number Y scale", () => {
@@ -113,7 +113,7 @@ describe("LineChart", () => {
     const chart = mount(<LineChart {...props} />);
     const path = chart.find("path");
     const pathData = path.getNode().getAttribute("d");
-    expect(pathData).to.equal("M 0 50 L 50 0 L 100 75");
+    expect(pathData).to.equal("M0,50L50,0L100,75");
   });
 
   it("renders a line chart within an XYPlot", () => {

@@ -58,6 +58,10 @@ export default class YAxis extends React.Component {
     labelFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     labelFormats: PropTypes.array,
     labels: PropTypes.array,
+    /**
+     * Adds vertical offset (along the YAxis) to the labels
+     */
+    labelOffset: PropTypes.number,
 
     tickLength: PropTypes.number,
     tickClassName: PropTypes.string,

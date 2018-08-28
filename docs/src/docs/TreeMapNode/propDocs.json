@@ -1,0 +1,114 @@
+{
+  "description": "",
+  "methods": [],
+  "props": {
+    "node": {
+      "type": {
+        "name": "shape",
+        "value": {
+          "parent": {
+            "name": "object",
+            "required": false
+          },
+          "children": {
+            "name": "array",
+            "required": false
+          },
+          "value": {
+            "name": "number",
+            "required": false
+          },
+          "depth": {
+            "name": "number",
+            "required": false
+          },
+          "x": {
+            "name": "number",
+            "required": false
+          },
+          "y": {
+            "name": "number",
+            "required": false
+          },
+          "dx": {
+            "name": "number",
+            "required": false
+          },
+          "dy": {
+            "name": "number",
+            "required": false
+          }
+        }
+      },
+      "required": false,
+      "description": ""
+    },
+    "nodeStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "func"
+          },
+          {
+            "name": "object"
+          }
+        ]
+      },
+      "required": false,
+      "description": ""
+    },
+    "minLabelWidth": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "minLabelHeight": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
+    },
+    "getLabel": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "labelStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "func"
+          },
+          {
+            "name": "object"
+          }
+        ]
+      },
+      "required": false,
+      "description": ""
+    },
+    "NodeLabelComponent": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    }
+  }
+}

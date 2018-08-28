@@ -1,0 +1,50 @@
+{
+  "description": "",
+  "methods": [],
+  "props": {
+    "node": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": ""
+    },
+    "getLabel": {
+      "type": {
+        "name": "custom",
+        "raw": "CustomPropTypes.getter"
+      },
+      "required": false,
+      "description": ""
+    },
+    "labelStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "func"
+          },
+          {
+            "name": "object"
+          }
+        ]
+      },
+      "required": false,
+      "description": ""
+    },
+    "minLabelWidth": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    },
+    "minLabelHeight": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": ""
+    }
+  }
+}

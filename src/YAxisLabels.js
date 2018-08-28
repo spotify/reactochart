@@ -135,9 +135,15 @@ class YAxisLabels extends React.Component {
      * height - height of the given label
      * width - width of the given label
      */
-    labels: PropTypes.array
+    labels: PropTypes.array,
+    /**
+     * Adds vertical offset (along the YAxis) to the labels
+     */
+    offset: PropTypes.number
   };
+
   static defaultProps = {
+    offset: 0,
     height: 250,
     width: 400,
     position: "left",
@@ -255,7 +261,8 @@ class YAxisLabels extends React.Component {
       onMouseMoveLabel,
       onMouseLeaveLabel,
       spacingLeft,
-      spacingRight
+      spacingRight,
+      offset
     } = this.props;
     const placement =
       this.props.placement || (position === "left" ? "before" : "after");
@@ -275,7 +282,7 @@ class YAxisLabels extends React.Component {
     return (
       <g className="rct-chart-value-labels-y" transform={transform}>
         {labels.map((label, i) => {
-          const y = yScale(label.value);
+          const y = yScale(label.value) + offset;
           const x = placement === "before" ? -distance : distance;
 
           const [onMouseEnter, onMouseMove, onMouseLeave] = [

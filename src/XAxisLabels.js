@@ -166,9 +166,15 @@ class XAxisLabels extends React.Component {
     /**
      * `mouseleave` event handler callback, called when user's mouse leaves the label.
      */
-    onMouseLeaveLabel: PropTypes.func
+    onMouseLeaveLabel: PropTypes.func,
+    /**
+     * Adds horizontal offset (along the XAxis) to the labels
+     */
+    offset: PropTypes.number
   };
+
   static defaultProps = {
+    offset: 0,
     height: 250,
     position: "bottom",
     placement: undefined,
@@ -287,7 +293,8 @@ class XAxisLabels extends React.Component {
       onMouseMoveLabel,
       onMouseLeaveLabel,
       spacingTop,
-      spacingBottom
+      spacingBottom,
+      offset
     } = this.props;
     const labels = this.props.labels || XAxisLabels.getLabels(this.props);
     const placement =
@@ -303,7 +310,7 @@ class XAxisLabels extends React.Component {
     return (
       <g className="rct-chart-value-labels-x" transform={transform}>
         {labels.map((label, i) => {
-          const x = xScale(label.value);
+          const x = xScale(label.value) + offset;
           const y = placement === "above" ? -label.height - distance : distance;
           const [onMouseEnter, onMouseMove, onMouseLeave] = [
             "onMouseEnterLabel",

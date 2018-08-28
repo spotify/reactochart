@@ -19,7 +19,8 @@ describe("XAxisLabel", () => {
     marginTop: 11,
     marginBottom: 22,
     marginLeft: 33,
-    marginRight: 44
+    marginRight: 44,
+    offset: 5
   };
 
   it("Check how many labels are created and where", () => {
