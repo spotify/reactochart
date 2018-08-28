@@ -1,3 +1,9 @@
+## 1.1.0 (2018-08-28)
+
+- [#99](https://github.com/spotify/reactochart/pull/99) Adds d3 line generator and curve prop to LineChart - thanks @scottsheffield!
+- [#102](https://github.com/spotify/reactochart/pull/102) Adds offset prop to XAxis and YAxis labels
+- [#103](https://github.com/spotify/reactochart/pull/103) Fix issue with doc generation with TreeMap
+
 ## 1.0.1 (2018-07-06)
 
 - [#94](https://github.com/spotify/reactochart/pull/94) Minor Bug Fixes
