@@ -6,7 +6,8 @@ import sinon from "sinon";
 import { mount } from "enzyme";
 
 import { TreeMap } from "../../../src/index.js";
-import { TreeMapNode, TreeMapNodeLabel } from "../../../src/TreeMap.js";
+import TreeMapNode from "../../../src/TreeMapNode.js";
+import TreeMapNodeLabel from "../../../src/TreeMapNodeLabel.js";
 
 describe("TreeMap", () => {
   const data = {

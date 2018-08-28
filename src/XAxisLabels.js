@@ -170,8 +170,9 @@ class XAxisLabels extends React.Component {
     /**
      * Adds horizontal offset (along the XAxis) to the labels
      */
-    offset: PropTypes.func
+    offset: PropTypes.number
   };
+
   static defaultProps = {
     offset: 0,
     height: 250,

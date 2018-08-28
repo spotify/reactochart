@@ -260,6 +260,17 @@
       },
       "required": false,
       "description": "`mouseleave` event handler callback, called when user's mouse leaves the label."
+    },
+    "offset": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Adds horizontal offset (along the XAxis) to the labels",
+      "defaultValue": {
+        "value": "0",
+        "computed": false
+      }
     }
   }
 }
