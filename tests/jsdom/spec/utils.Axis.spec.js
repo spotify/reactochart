@@ -33,6 +33,7 @@ describe("Axis utils", () => {
       labelFormats: ["0a"],
       labels: ["what a label"],
       gridLineClassName: "my-grid",
+      labelOffset: 10,
       gridLineStyle: { stroke: "blue" },
       onMouseEnterLabel: () => {},
       onMouseMoveLabel: () => {},
@@ -114,7 +115,8 @@ describe("Axis utils", () => {
         {
           distance: axisProps.labelDistance,
           format: axisProps.labelFormat,
-          formats: axisProps.labelFormats
+          formats: axisProps.labelFormats,
+          offset: axisProps.labelOffset
         }
       )
     );
