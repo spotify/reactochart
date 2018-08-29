@@ -1,3 +1,7 @@
+## 1.2.0 (2018-08-29)
+
+- [#106](https://github.com/spotify/reactochart/pull/106) Adds showLine and lineStyle prop to X and Y Axis. Also adds default styling to provide X and Y Axis line with stroke color
+
 ## 1.1.0 (2018-08-28)
 
 - [#99](https://github.com/spotify/reactochart/pull/99) Adds d3 line generator and curve prop to LineChart - thanks @scottsheffield!
