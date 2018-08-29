@@ -79,7 +79,7 @@ export default class XAxis extends React.Component {
      */
     showLine: PropTypes.bool,
     /**
-     * Inline style object to be applied to the line path
+     * Inline style object to be applied to the X Axis line
      */
     lineStyle: PropTypes.object
   };

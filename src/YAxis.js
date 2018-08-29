@@ -78,7 +78,7 @@ export default class YAxis extends React.Component {
      */
     showLine: PropTypes.bool,
     /**
-     * Inline style object to be applied to the line path
+     * Inline style object to be applied to the Y Axis line
      */
     lineStyle: PropTypes.object
   };
