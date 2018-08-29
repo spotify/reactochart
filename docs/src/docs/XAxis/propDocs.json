@@ -350,6 +350,28 @@
       },
       "required": false,
       "description": ""
+    },
+    "showLine": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "Show X Axis line",
+      "defaultValue": {
+        "value": "true",
+        "computed": false
+      }
+    },
+    "lineStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "Inline style object to be applied to the X Axis line",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
     }
   }
 }

@@ -72,7 +72,16 @@ export default class XAxis extends React.Component {
 
     onMouseEnterLabel: PropTypes.func,
     onMouseMoveLabel: PropTypes.func,
-    onMouseLeaveLabel: PropTypes.func
+    onMouseLeaveLabel: PropTypes.func,
+
+    /**
+     * Show X Axis line
+     */
+    showLine: PropTypes.bool,
+    /**
+     * Inline style object to be applied to the X Axis line
+     */
+    lineStyle: PropTypes.object
   };
 
   static defaultProps = {
@@ -90,7 +99,9 @@ export default class XAxis extends React.Component {
     spacingTop: 0,
     spacingBottom: 0,
     spacingLeft: 0,
-    spacingRight: 0
+    spacingRight: 0,
+    showLine: true,
+    lineStyle: {}
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -132,7 +143,9 @@ export default class XAxis extends React.Component {
       showTitle,
       showLabels,
       showTicks,
-      showGrid
+      showGrid,
+      showLine,
+      lineStyle
     } = this.props;
 
     const {
@@ -168,13 +181,16 @@ export default class XAxis extends React.Component {
 
         {showTitle ? <XAxisTitle {...titleProps} /> : null}
 
-        <line
-          className="rct-chart-axis-line rct-chart-axis-line-x"
-          x1={-spacingLeft}
-          x2={width + spacingRight}
-          y1={axisLineY}
-          y2={axisLineY}
-        />
+        {showLine ? (
+          <line
+            className="rct-chart-axis-line rct-chart-axis-line-x"
+            x1={-spacingLeft}
+            x2={width + spacingRight}
+            y1={axisLineY}
+            y2={axisLineY}
+            style={lineStyle}
+          />
+        ) : null}
       </g>
     );
   }

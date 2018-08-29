@@ -59,25 +59,19 @@ describe("XAxis", () => {
   it("renders every part of the xAxis", () => {
     const tree = (
       <XYPlot {...props} xDomain={[0, 10]} yDomain={[0, 10]}>
-        <LineChart data={[[0, 0], [10, 10]]} x={d => d[0]} y={d => d[1]} />
         <XAxis ticks={[-5, 0, 5]} />
       </XYPlot>
     );
     const rendered = mount(tree);
-    const lineChart = rendered
-      .find(XAxis)
-      .childAt(4)
-      .props();
+    const line = rendered.find(".rct-chart-axis-line-x");
     expect(rendered.find(XGrid).props().ticks).to.have.length(3);
     expect(rendered.find(XAxisLabels)).to.have.length(1);
     expect(rendered.find(XAxisTitle)).to.have.length(1);
     expect(rendered.find(XTicks)).to.have.length(1);
-    expect(lineChart.className).to.equal(
-      "rct-chart-axis-line rct-chart-axis-line-x"
-    );
-    expect(lineChart.x1).to.be.a("number");
-    expect(lineChart.x2).to.be.a("number");
-    expect(lineChart.y1).to.be.a("number");
-    expect(lineChart.y2).to.be.a("number");
+    expect(line).to.have.length(1);
+    expect(line.props().x1).to.be.a("number");
+    expect(line.props().x2).to.be.a("number");
+    expect(line.props().y1).to.be.a("number");
+    expect(line.props().y2).to.be.a("number");
   });
 });
