@@ -72,7 +72,15 @@ export default class YAxis extends React.Component {
 
     onMouseEnterLabel: PropTypes.func,
     onMouseMoveLabel: PropTypes.func,
-    onMouseLeaveLabel: PropTypes.func
+    onMouseLeaveLabel: PropTypes.func,
+    /**
+     * Show Y Axis line
+     */
+    showLine: PropTypes.bool,
+    /**
+     * Inline style object to be applied to the Y Axis line
+     */
+    lineStyle: PropTypes.object
   };
 
   static defaultProps = {
@@ -90,7 +98,9 @@ export default class YAxis extends React.Component {
     spacingTop: 0,
     spacingBottom: 0,
     spacingLeft: 0,
-    spacingRight: 0
+    spacingRight: 0,
+    showLine: true,
+    lineStyle: {}
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -132,7 +142,9 @@ export default class YAxis extends React.Component {
       spacingTop,
       spacingBottom,
       spacingLeft,
-      spacingRight
+      spacingRight,
+      showLine,
+      lineStyle
     } = this.props;
 
     const {
@@ -165,13 +177,16 @@ export default class YAxis extends React.Component {
 
         {showTitle ? <YAxisTitle {...titleProps} /> : null}
 
-        <line
-          className="rct-chart-axis-line rct-chart-axis-line-y"
-          x1={axisLineX}
-          x2={axisLineX}
-          y1={-spacingTop}
-          y2={height + spacingBottom}
-        />
+        {showLine ? (
+          <line
+            className="rct-chart-axis-line rct-chart-axis-line-y"
+            x1={axisLineX}
+            x2={axisLineX}
+            y1={-spacingTop}
+            y2={height + spacingBottom}
+            style={lineStyle}
+          />
+        ) : null}
       </g>
     );
   }
