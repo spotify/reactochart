@@ -142,11 +142,7 @@
         "name": "func"
       },
       "required": false,
-      "description": "D3 curve for path generation",
-      "defaultValue": {
-        "value": "curveLinear",
-        "computed": true
-      }
+      "description": "D3 curve for path generation"
     }
   }
 }

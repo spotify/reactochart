@@ -1,4 +1,4 @@
-import { area, curveLinear } from "d3";
+import { area } from "d3";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
@@ -97,8 +97,7 @@ export default class AreaChart extends React.Component {
         !_.isUndefined(accessors.yEnd(d, i))
       );
     },
-    pathClassName: "",
-    curve: curveLinear
+    pathClassName: ""
   };
 
   static getDomain(props) {
@@ -159,10 +158,13 @@ export default class AreaChart extends React.Component {
     }
 
     areaGenerator
-      .curve(curve)
       .x((d, i) => xScale(accessors.x(d, i)))
       .y0((d, i) => yScale(accessors.y(d, i)))
       .y1((d, i) => yScale(accessors.yEnd(d, i)));
+
+    if (curve) {
+      areaGenerator.curve(curve);
+    }
 
     const areaPathStr = areaGenerator(data);
 
