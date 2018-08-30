@@ -1,4 +1,4 @@
-import { area } from "d3";
+import { area, curveLinear } from "d3";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
@@ -82,7 +82,11 @@ export default class AreaChart extends React.Component {
     /**
      * Type of Y scale - provided by XYPlot.
      */
-    yScaleType: PropTypes.string
+    yScaleType: PropTypes.string,
+    /**
+     * D3 curve for path generation
+     */
+    curve: PropTypes.func
   };
 
   static defaultProps = {
@@ -93,7 +97,8 @@ export default class AreaChart extends React.Component {
         !_.isUndefined(accessors.yEnd(d, i))
       );
     },
-    pathClassName: ""
+    pathClassName: "",
+    curve: curveLinear
   };
 
   static getDomain(props) {
@@ -135,7 +140,8 @@ export default class AreaChart extends React.Component {
       pathStyleNegative,
       shouldShowGaps,
       pathClassName,
-      isDefined
+      isDefined,
+      curve
     } = this.props;
     const accessors = {
       x: makeAccessor2(x),
@@ -153,6 +159,7 @@ export default class AreaChart extends React.Component {
     }
 
     areaGenerator
+      .curve(curve)
       .x((d, i) => xScale(accessors.x(d, i)))
       .y0((d, i) => yScale(accessors.y(d, i)))
       .y1((d, i) => yScale(accessors.yEnd(d, i)));
