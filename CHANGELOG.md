@@ -1,3 +1,11 @@
+## 1.2.2 (2018-08-31)
+
+- [#111](https://github.com/spotify/reactochart/pull/111) Rebuild docs for gh-pages branch
+
+## 1.2.1 (2018-08-30)
+
+- [#109](https://github.com/spotify/reactochart/pull/109) Adds curve prop to AreaChart for custom curves - thanks @dgdblank!
+
 ## 1.2.0 (2018-08-29)
 
 - [#106](https://github.com/spotify/reactochart/pull/106) Adds showLine and lineStyle prop to X and Y Axis. Also adds default styling to provide X and Y Axis line with stroke color
