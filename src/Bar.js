@@ -87,19 +87,19 @@ export default class Bar extends React.Component {
     /**
      * Conditional if column should display values above/beside bar.
      */
-    displayValue: PropTypes.bool,
+    showLabel: PropTypes.bool,
     /**
      * Format to use for the values or accessor that returns the updated value.
      */
-    textFormat: PropTypes.func,
+    labelFormat: PropTypes.func,
     /**
-     * The distance from the column the text appears in pixels - default is 24.
+     * The distance from the column the label appears in pixels - default is 24.
      */
-    textDistance: PropTypes.number,
+    labelDistance: PropTypes.number,
     /**
      * Class name(s) to be included on the bar's <text> element.
      */
-    textClassName: PropTypes.string
+    labelClassName: PropTypes.string
   };
   static defaultProps = {
     x: 0,
@@ -107,7 +107,7 @@ export default class Bar extends React.Component {
     thickness: 8,
     className: "",
     style: {},
-    textDistance: 24
+    labelDistance: 24
   };
 
   render() {
@@ -124,10 +124,10 @@ export default class Bar extends React.Component {
       onMouseEnter,
       onMouseMove,
       onMouseLeave,
-      displayValue,
-      textFormat,
-      textDistance,
-      textClassName
+      showLabel,
+      labelFormat,
+      labelDistance,
+      labelClassName
     } = this.props;
 
     invariant(
@@ -138,7 +138,7 @@ export default class Bar extends React.Component {
     const orientation = isUndefined(xEnd) ? "vertical" : "horizontal";
     const className = `rct-chart-bar rct-chart-bar-${orientation} ${this.props
       .className || ""}`;
-    const textClass = `rct-chart-bar-text ${this.props.textClassName || ""}`;
+    const labelClass = `rct-chart-bar-label ${this.props.labelClassName || ""}`;
 
     let rectX, rectY, width, height, xText, yText, textAnchor, textValue;
     if (orientation === "horizontal") {
@@ -150,7 +150,7 @@ export default class Bar extends React.Component {
       height = thickness;
 
       // horizontal text formatting to right of bar
-      xText = Math.max(x0, x1) + textDistance;
+      xText = Math.max(x0, x1) + labelDistance;
       yText = rectY + thickness / 2 + 5;
       textAnchor = "";
       textValue = xEnd;
@@ -165,12 +165,12 @@ export default class Bar extends React.Component {
 
       // vertical text formatting
       xText = rectX + thickness / 2;
-      yText = rectY - textDistance;
+      yText = rectY - labelDistance;
       textAnchor = "middle";
       textValue = yEnd;
     }
 
-    const RECT = (
+    const rect = (
       <rect
         {...{
           x: rectX,
@@ -186,28 +186,28 @@ export default class Bar extends React.Component {
       />
     );
 
-    const TEXT = (
+    const text = (
       <text
         {...{
           textAnchor,
           x: xText,
           y: yText,
-          className: textClass
+          className: labelClass
         }}
       >
-        {textFormat ? textFormat(textValue) : textValue}
+        {labelFormat ? labelFormat(textValue) : textValue}
       </text>
     );
 
-    if (displayValue) {
+    if (showLabel) {
       return (
         <g>
-          {RECT}
-          {TEXT}
+          {rect}
+          {text}
         </g>
       );
     }
 
-    return RECT;
+    return rect;
   }
 }

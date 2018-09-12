@@ -245,10 +245,10 @@ describe("Bar", () => {
     }).not.to.throw(Error);
   });
 
-  it("displays the x values when displayValue is true", () => {
+  it("displays the x values when showLabel is true", () => {
     const horizontalBarWithText = {
       ...horizontalBarProps,
-      displayValue: true
+      showLabel: true
     };
 
     const horizontalBar = shallow(<Bar {...horizontalBarWithText} />);
@@ -258,7 +258,7 @@ describe("Bar", () => {
 
     const verticalBarWithText = {
       ...verticalBarProps,
-      displayValue: true
+      showLabel: true
     };
 
     const verticalBar = shallow(<Bar {...verticalBarWithText} />);
@@ -267,11 +267,11 @@ describe("Bar", () => {
     expect(horizontalBar.find("text")).to.have.length(1);
   });
 
-  it("passes textClassName through to the bar's text element", () => {
+  it("passes labelClassName through to the bar's text element", () => {
     const verticalProps = {
       ...verticalBarProps,
-      textClassName: "foo-bar-test-class",
-      displayValue: true
+      labelClassName: "foo-bar-test-class",
+      showLabel: true
     };
 
     const verticalBar = shallow(<Bar {...verticalProps} />);
@@ -280,11 +280,11 @@ describe("Bar", () => {
     expect(text.props().className).to.include("foo-bar-test-class");
   });
 
-  it("passes textFormat through to the bar's text value", () => {
+  it("passes labelFormat through to the bar's text value", () => {
     const verticalProps = {
       ...verticalBarProps,
-      displayValue: true,
-      textFormat: d => `${d}%`
+      showLabel: true,
+      labelFormat: d => `${d}%`
     };
 
     const verticalBar = shallow(<Bar {...verticalProps} />);

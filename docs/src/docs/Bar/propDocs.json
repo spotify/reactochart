@@ -154,32 +154,32 @@
       "required": false,
       "description": "D3 scale for Y axis - provided by XYPlot."
     },
-    "displayValue": {
+    "showLabel": {
       "type": {
         "name": "bool"
       },
       "required": false,
       "description": "Conditional if column should display values above/beside bar."
     },
-    "textFormat": {
+    "labelFormat": {
       "type": {
         "name": "func"
       },
       "required": false,
       "description": "Format to use for the values or accessor that returns the updated value."
     },
-    "textDistance": {
+    "labelDistance": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": "The distance from the column the text appears in pixels - default is 24.",
+      "description": "The distance from the column the label appears in pixels - default is 24.",
       "defaultValue": {
         "value": "24",
         "computed": false
       }
     },
-    "textClassName": {
+    "labelClassName": {
       "type": {
         "name": "string"
       },

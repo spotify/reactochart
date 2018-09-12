@@ -95,19 +95,19 @@ export default class RangeBarChart extends React.Component {
     /**
      * Conditional if column should display values above/beside each bar.
      */
-    displayValues: PropTypes.bool,
+    showLabels: PropTypes.bool,
     /**
      * Format to use for the values or accessor that returns the updated value on each bar.
      */
-    barTextFormat: PropTypes.func,
+    barLabelFormat: PropTypes.func,
     /**
      * The distance from the column the text appears in pixels - default is 24.
      */
-    textDistance: PropTypes.number,
+    labelDistance: PropTypes.number,
     /**
      * Class name(s) to be included on each bar's <text> element.
      */
-    textClassName: PropTypes.string
+    labelClassName: PropTypes.string
   };
   static defaultProps = {
     data: [],
@@ -220,10 +220,10 @@ export default class RangeBarChart extends React.Component {
       barThickness,
       barClassName,
       barStyle,
-      displayValues,
-      barTextFormat,
-      textDistance,
-      textClassName
+      showLabels,
+      barLabelFormat,
+      labelDistance,
+      labelClassName
     } = this.props;
     // invariant(hasOneOfTwo(xEnd, yEnd), `RangeBarChart expects a xEnd *or* yEnd prop, but not both.`);
 
@@ -252,10 +252,10 @@ export default class RangeBarChart extends React.Component {
             onMouseMove,
             onMouseLeave,
             thickness: barThickness,
-            displayValue: displayValues,
-            textFormat: barTextFormat,
-            textDistance,
-            textClassName: getValue(textClassName, d, i),
+            showLabel: showLabels,
+            labelFormat: barLabelFormat,
+            labelDistance,
+            labelClassName: getValue(labelClassName, d, i),
             className: `rct-chart-bar ${getValue(barClassName, d, i) || ""}`,
             style: getValue(barStyle, d, i)
           };
