@@ -83,14 +83,31 @@ export default class Bar extends React.Component {
     /**
      * D3 scale for Y axis - provided by XYPlot.
      */
-    yScale: PropTypes.func
+    yScale: PropTypes.func,
+    /**
+     * Conditional if column should display values above/beside bar.
+     */
+    displayValue: PropTypes.bool,
+    /**
+     * Format to use for the values or accessor that returns the updated value.
+     */
+    textFormat: PropTypes.func,
+    /**
+     * The distance from the column the text appears in pixels - default is 24.
+     */
+    textDistance: PropTypes.number,
+    /**
+     * Class name(s) to be included on the bar's <text> element.
+     */
+    textClassName: PropTypes.string
   };
   static defaultProps = {
     x: 0,
     y: 0,
     thickness: 8,
     className: "",
-    style: {}
+    style: {},
+    textDistance: 24
   };
 
   render() {
@@ -106,7 +123,11 @@ export default class Bar extends React.Component {
       style,
       onMouseEnter,
       onMouseMove,
-      onMouseLeave
+      onMouseLeave,
+      displayValue,
+      textFormat,
+      textDistance,
+      textClassName
     } = this.props;
 
     invariant(
@@ -117,8 +138,9 @@ export default class Bar extends React.Component {
     const orientation = isUndefined(xEnd) ? "vertical" : "horizontal";
     const className = `rct-chart-bar rct-chart-bar-${orientation} ${this.props
       .className || ""}`;
+    const textClass = `rct-chart-bar-text ${this.props.textClassName || ""}`;
 
-    let rectX, rectY, width, height;
+    let rectX, rectY, width, height, xText, yText, textAnchor, textValue;
     if (orientation === "horizontal") {
       rectY = yScale(y) - thickness / 2;
       const x0 = xScale(x);
@@ -126,6 +148,12 @@ export default class Bar extends React.Component {
       rectX = Math.min(x0, x1);
       width = Math.abs(x1 - x0);
       height = thickness;
+
+      // horizontal text formatting to right of bar
+      xText = Math.max(x0, x1) + textDistance;
+      yText = rectY + thickness / 2 + 5;
+      textAnchor = "";
+      textValue = xEnd;
     } else {
       // vertical
       rectX = xScale(x) - thickness / 2;
@@ -134,9 +162,15 @@ export default class Bar extends React.Component {
       rectY = Math.min(y0, y1);
       height = Math.abs(y1 - y0);
       width = thickness;
+
+      // vertical text formatting
+      xText = rectX + thickness / 2;
+      yText = rectY - textDistance;
+      textAnchor = "middle";
+      textValue = yEnd;
     }
 
-    return (
+    const RECT = (
       <rect
         {...{
           x: rectX,
@@ -151,5 +185,29 @@ export default class Bar extends React.Component {
         }}
       />
     );
+
+    const TEXT = (
+      <text
+        {...{
+          textAnchor,
+          x: xText,
+          y: yText,
+          className: textClass
+        }}
+      >
+        {textFormat ? textFormat(textValue) : textValue}
+      </text>
+    );
+
+    if (displayValue) {
+      return (
+        <g>
+          {RECT}
+          {TEXT}
+        </g>
+      );
+    }
+
+    return RECT;
   }
 }
