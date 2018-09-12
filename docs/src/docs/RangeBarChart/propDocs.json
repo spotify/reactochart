@@ -168,6 +168,34 @@
       },
       "required": false,
       "description": "`mouseleave` event handler callback, called when user's mouse leaves a bar."
+    },
+    "showLabels": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "Conditional if column should display values above/beside each bar."
+    },
+    "barLabelFormat": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Format to use for the values or accessor that returns the updated value on each bar."
+    },
+    "labelDistance": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "The distance from the column the text appears in pixels - default is 24."
+    },
+    "labelClassName": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": "Class name(s) to be included on each bar's <text> element."
     }
   }
 }

@@ -91,7 +91,23 @@ export default class RangeBarChart extends React.Component {
     /**
      * `mouseleave` event handler callback, called when user's mouse leaves a bar.
      */
-    onMouseLeaveBar: PropTypes.func
+    onMouseLeaveBar: PropTypes.func,
+    /**
+     * Conditional if column should display values above/beside each bar.
+     */
+    showLabels: PropTypes.bool,
+    /**
+     * Format to use for the values or accessor that returns the updated value on each bar.
+     */
+    barLabelFormat: PropTypes.func,
+    /**
+     * The distance from the column the text appears in pixels - default is 24.
+     */
+    labelDistance: PropTypes.number,
+    /**
+     * Class name(s) to be included on each bar's <text> element.
+     */
+    labelClassName: PropTypes.string
   };
   static defaultProps = {
     data: [],
@@ -203,7 +219,11 @@ export default class RangeBarChart extends React.Component {
       yEnd,
       barThickness,
       barClassName,
-      barStyle
+      barStyle,
+      showLabels,
+      barLabelFormat,
+      labelDistance,
+      labelClassName
     } = this.props;
     // invariant(hasOneOfTwo(xEnd, yEnd), `RangeBarChart expects a xEnd *or* yEnd prop, but not both.`);
 
@@ -232,6 +252,10 @@ export default class RangeBarChart extends React.Component {
             onMouseMove,
             onMouseLeave,
             thickness: barThickness,
+            showLabel: showLabels,
+            labelFormat: barLabelFormat,
+            labelDistance,
+            labelClassName: getValue(labelClassName, d, i),
             className: `rct-chart-bar ${getValue(barClassName, d, i) || ""}`,
             style: getValue(barStyle, d, i)
           };
