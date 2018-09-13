@@ -1,6 +1,6 @@
 ## 1.3.0 (2018-09-12)
 
-- [#114](https://github.com/spotify/reactochart/pull/114)
+- [#114](https://github.com/spotify/reactochart/pull/114) Add optional label placement to barchart - thanks @dgdblank!
 - [#111](https://github.com/spotify/reactochart/pull/111) Rebuild docs for gh-pages branch
 - [#109](https://github.com/spotify/reactochart/pull/109) Adds curve prop to AreaChart for custom curves - thanks @dgdblank!
 
