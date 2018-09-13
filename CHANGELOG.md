@@ -1,9 +1,7 @@
-## 1.2.2 (2018-08-31)
+## 1.3.0 (2018-09-12)
 
+- [#114](https://github.com/spotify/reactochart/pull/114)
 - [#111](https://github.com/spotify/reactochart/pull/111) Rebuild docs for gh-pages branch
-
-## 1.2.1 (2018-08-30)
-
 - [#109](https://github.com/spotify/reactochart/pull/109) Adds curve prop to AreaChart for custom curves - thanks @dgdblank!
 
 ## 1.2.0 (2018-08-29)
