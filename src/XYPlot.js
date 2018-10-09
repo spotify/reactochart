@@ -159,6 +159,11 @@ class XYPlot extends React.Component {
      * Internal right spacing of XYPlot, in pixels.
      */
     spacingRight: PropTypes.number,
+    
+    /**
+     * Inline style object to be applied to the SVG element.
+     */
+    style: PropTypes.object,
 
     // todo implement padding (helper for spacing)
     // paddingTop: PropTypes.number,
@@ -185,6 +190,7 @@ class XYPlot extends React.Component {
     invertYScale: false,
     includeXZero: false,
     includeYZero: false,
+    style: {},
     xyPlotClassName: ""
   };
 
