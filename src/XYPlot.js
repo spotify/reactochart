@@ -159,7 +159,7 @@ class XYPlot extends React.Component {
      * Internal right spacing of XYPlot, in pixels.
      */
     spacingRight: PropTypes.number,
-    
+
     /**
      * Inline style object to be applied to the SVG element.
      */
@@ -219,6 +219,7 @@ class XYPlot extends React.Component {
       spacingBottom,
       spacingLeft,
       spacingRight,
+      style,
       xyPlotClassName,
       // Passed in as prop from resolveXYScales
       xScale,
@@ -268,7 +269,7 @@ class XYPlot extends React.Component {
     const className = `rct-xy-plot ${this.props.xyPlotClassName}`;
 
     return (
-      <svg {...{ width, height, className }} {...handlers}>
+      <svg {...{ width, height, className, style }} {...handlers}>
         <rect className="rct-chart-background" {...{ width, height }} />
         <g
           transform={`translate(${marginLeft + spacingLeft}, ${marginTop +
