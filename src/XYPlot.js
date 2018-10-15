@@ -160,6 +160,11 @@ class XYPlot extends React.Component {
      */
     spacingRight: PropTypes.number,
 
+    /**
+     * Inline style object to be applied to the SVG element.
+     */
+    style: PropTypes.object,
+
     // todo implement padding (helper for spacing)
     // paddingTop: PropTypes.number,
     // paddingBottom: PropTypes.number,
@@ -185,6 +190,7 @@ class XYPlot extends React.Component {
     invertYScale: false,
     includeXZero: false,
     includeYZero: false,
+    style: {},
     xyPlotClassName: ""
   };
 
@@ -213,6 +219,7 @@ class XYPlot extends React.Component {
       spacingBottom,
       spacingLeft,
       spacingRight,
+      style,
       xyPlotClassName,
       // Passed in as prop from resolveXYScales
       xScale,
@@ -262,7 +269,7 @@ class XYPlot extends React.Component {
     const className = `rct-xy-plot ${this.props.xyPlotClassName}`;
 
     return (
-      <svg {...{ width, height, className }} {...handlers}>
+      <svg {...{ width, height, className, style }} {...handlers}>
         <rect className="rct-chart-background" {...{ width, height }} />
         <g
           transform={`translate(${marginLeft + spacingLeft}, ${marginTop +
