@@ -257,9 +257,6 @@ class YAxisLabels extends React.Component {
       distance,
       labelStyle,
       labelClassName,
-      onMouseEnterLabel,
-      onMouseMoveLabel,
-      onMouseLeaveLabel,
       spacingLeft,
       spacingRight,
       offset

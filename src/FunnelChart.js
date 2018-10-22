@@ -86,7 +86,7 @@ export default class FunnelChart extends React.Component {
         };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     const shouldUpdate = !xyPropsEqual(this.props, nextProps, []);
     return shouldUpdate;
   }

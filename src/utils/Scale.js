@@ -1,5 +1,4 @@
 import _ from "lodash";
-import React from "react";
 import { scaleLinear, scaleTime, scalePoint, scaleLog, scalePow } from "d3";
 
 import { combineDomains, domainFromData } from "./Data";

@@ -289,9 +289,6 @@ class XAxisLabels extends React.Component {
       distance,
       labelStyle,
       labelClassName,
-      onMouseEnterLabel,
-      onMouseMoveLabel,
-      onMouseLeaveLabel,
       spacingTop,
       spacingBottom,
       offset

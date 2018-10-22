@@ -143,7 +143,7 @@ export default class Histogram extends React.Component {
     return bins;
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     const shouldUpdate = !xyPropsEqual(this.props, nextProps, []);
     return shouldUpdate;
   }

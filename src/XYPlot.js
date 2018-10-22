@@ -220,7 +220,6 @@ class XYPlot extends React.Component {
       spacingLeft,
       spacingRight,
       style,
-      xyPlotClassName,
       // Passed in as prop from resolveXYScales
       xScale,
       yScale

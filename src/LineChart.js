@@ -57,7 +57,7 @@ export default class LineChart extends React.Component {
     this.initBisector(nextProps);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     return !xyPropsEqual(this.props, nextProps, ["lineStyle", "lineClassName"]);
   }
 
