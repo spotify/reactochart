@@ -25,34 +25,34 @@ npm i reactochart --save
 2.  Then you can import an individual Reactochart component:
 
 
-```
+```jsx
 import LineChart from 'reactochart/LineChart'
 ```
 
 3.  If you prefer, you can import all of Reactochart at once, though this may hinder some optimizations, such as webpack tree-shaking:
 
 
-```
+```jsx
 import {XYPlot, XAxis, YAxis, LineChart} from 'reactochart';
 ```
 
 or
 
-```
+```jsx
 import * as Reactochart from 'reactochart';
 ```
 
 4.  Import reactochart's base styles
 
 
-```
+```jsx
 import 'reactochart/styles.css'
 ```
 
 5.  Build your first chart and see it rendered! For example, the following code snippet:
 
 
-```
+```jsx
 import XYPlot from 'reactochart/XYPlot';
 import XAxis from 'reactochart/XAxis';
 import YAxis from 'reactochart/YAxis';
