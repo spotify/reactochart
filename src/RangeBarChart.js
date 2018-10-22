@@ -202,7 +202,7 @@ export default class RangeBarChart extends React.Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     const shouldUpdate = !xyPropsEqual(this.props, nextProps, ["barStyle"]);
     return shouldUpdate;
   }

@@ -57,7 +57,7 @@ export default class LineChart extends React.Component {
     this.initBisector(nextProps);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     return !xyPropsEqual(this.props, nextProps, ["lineStyle", "lineClassName"]);
   }
 
@@ -84,13 +84,8 @@ export default class LineChart extends React.Component {
 
     const pathStr = line()
       .curve(curve)
-<<<<<<< HEAD
       .x((d, i) => xScale(getValue(x, d, i)))
       .y((d, i) => yScale(getValue(y, d, i)))(data);
-=======
-      .x(d => xScale(x(d)))
-      .y(d => yScale(y(d)))(data);
->>>>>>> Add d3 line generator and curve prop to LineChart
 
     return (
       <g className={`rct-line-chart ${lineClassName}`}>

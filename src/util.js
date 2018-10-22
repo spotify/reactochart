@@ -13,14 +13,3 @@ export function hasOneOfTwo(a, b) {
     _.some([a, b], _.isUndefined) && _.some([a, b], v => !_.isUndefined(v))
   );
 }
-
-function componentName(Component) {
-  return Component.displayName || "Component";
-}
-
-function hasSome(obj, keys) {
-  return _.isObject(obj) && _.some(keys, k => _.has(obj, k));
-}
-function hasAll(obj, keys) {
-  return _.isObject(obj) && _.every(keys, k => _.has(obj, k));
-}

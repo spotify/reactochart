@@ -24,24 +24,12 @@ import {
  * @returns {Component} - A Component which auto-resolves XY scales from given props
  */
 
-const errs = {
-  getDomain: C =>
-    `Components enhanced by resolveXYScales must have a static getDomain method, ${componentName(
-      C
-    )} does not have one`
-};
-function componentName(Component) {
-  return Component.displayName || "Component wrapped by resolveXYScales";
-}
-
 function isValidScaleType(scaleType) {
   const validScaleTypes = ["ordinal", "time", "log", "pow", "linear"];
 
   return _.includes(validScaleTypes, scaleType);
 }
-function areValidScales(scales) {
-  return _.every(scales, isValidScale);
-}
+
 function areValidScaleTypes(scaleTypes) {
   return _.every(scaleTypes, isValidScaleType);
 }

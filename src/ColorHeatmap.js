@@ -132,7 +132,7 @@ export default class ColorHeatmap extends React.Component {
     };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     const shouldUpdate = !xyPropsEqual(this.props, nextProps, [
       "colors",
       "valueDomain"

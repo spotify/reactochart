@@ -64,7 +64,7 @@ class KernelDensityEstimation extends React.Component {
     };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     const shouldUpdate = !xyPropsEqual(this.props, nextProps, []);
     return shouldUpdate;
   }

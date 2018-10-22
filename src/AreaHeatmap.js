@@ -59,7 +59,7 @@ export default class AreaHeatmap extends React.Component {
     };
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     const shouldUpdate = !xyPropsEqual(this.props, nextProps, ["rectStyle"]);
     return shouldUpdate;
   }

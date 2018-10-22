@@ -168,8 +168,6 @@ export default class XAxis extends React.Component {
 
     const axisLineY =
       position === "bottom" ? height + spacingBottom : -spacingTop;
-    // `width` is width of inner chart *not* including spacing - add spacing to figure out where to draw line
-    const axisLineWidth = width + spacingLeft + spacingRight;
 
     return (
       <g className="rct-chart-axis rct-chart-axis-x">
