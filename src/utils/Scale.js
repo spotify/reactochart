@@ -90,12 +90,13 @@ export function getScaleTicks(scale, scaleType, tickCount = 10) {
 
 export function getTickDomain(scale, { ticks, tickCount, nice } = {}) {
   const scaleType = inferScaleType(scale);
-  // bug - d3 linearScale.copy().nice() modifies original scale, so we must create a new scale instead of copy()ing
-  // todo replace this with d3-scale from d3 v4.0
-  // check if d3 still has this issue
+  const scaleDomain = scale.domain();
+
   if (nice && scaleType !== "ordinal") {
-    scale = initScale(scaleType)
-      .domain(scale.domain())
+    // If nicing, initialize a new scale and nice it
+    scale = scale
+      .copy()
+      .domain(scaleDomain)
       .nice(tickCount || 10);
   }
 

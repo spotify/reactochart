@@ -21,6 +21,11 @@ export default class YAxis extends React.Component {
     height: PropTypes.number,
     position: PropTypes.string,
     placement: PropTypes.string,
+    /**
+     * Extends the y domain to start and end on rounded values,
+     * guaranteeing the original domain will be covered.
+     * See d3 docs for more information
+     */
     nice: PropTypes.bool,
     ticks: PropTypes.array,
     tickCount: PropTypes.number,

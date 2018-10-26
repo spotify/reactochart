@@ -99,21 +99,30 @@ class XYPlot extends React.Component {
      */
     height: PropTypes.number,
     /**
-     * The X and/or Y domains of the data in {x: [...], y: [...]} format.
+     * The X domain of the data as an array.
      * For numerical scales, this is represented as [min, max] of the data;
      * for ordinal/categorical scales it is an array of known values ie. ['a', 'b', 'c'].
      * Automatically determined from data if not passed.
      */
     xDomain: PropTypes.array,
+    /**
+     * The Y domain of the data as an array.
+     * For numerical scales, this is represented as [min, max] of the data;
+     * for ordinal/categorical scales it is an array of known values ie. ['a', 'b', 'c'].
+     * Automatically determined from data if not passed.
+     */
     yDomain: PropTypes.array,
 
     xScaleType: PropTypes.string,
     yScaleType: PropTypes.string,
 
     /**
-     * Whether or not to invert the x and y scales
+     * Whether or not to invert the x scale
      */
     invertXScale: PropTypes.bool,
+    /**
+     * Whether or not to invert the y scale
+     */
     invertYScale: PropTypes.bool,
 
     /**
@@ -265,7 +274,7 @@ class XYPlot extends React.Component {
       ...scales
     };
 
-    const className = `rct-xy-plot ${this.props.xyPlotClassName}`;
+    const className = `rct-xy-plot ${xyPlotClassName}`;
 
     return (
       <svg {...{ width, height, className, style }} {...handlers}>
