@@ -70,14 +70,14 @@
         "name": "array"
       },
       "required": false,
-      "description": "The X and/or Y domains of the data in {x: [...], y: [...]} format.\nFor numerical scales, this is represented as [min, max] of the data;\nfor ordinal/categorical scales it is an array of known values ie. ['a', 'b', 'c'].\nAutomatically determined from data if not passed."
+      "description": "The X domain of the data as an array.\nFor numerical scales, this is represented as [min, max] of the data;\nfor ordinal/categorical scales it is an array of known values ie. ['a', 'b', 'c'].\nAutomatically determined from data if not passed."
     },
     "yDomain": {
       "type": {
         "name": "array"
       },
       "required": false,
-      "description": ""
+      "description": "The Y domain of the data as an array.\nFor numerical scales, this is represented as [min, max] of the data;\nfor ordinal/categorical scales it is an array of known values ie. ['a', 'b', 'c'].\nAutomatically determined from data if not passed."
     },
     "xScaleType": {
       "type": {
@@ -98,7 +98,7 @@
         "name": "bool"
       },
       "required": false,
-      "description": "Whether or not to invert the x and y scales",
+      "description": "Whether or not to invert the x scale",
       "defaultValue": {
         "value": "false",
         "computed": false
@@ -109,7 +109,7 @@
         "name": "bool"
       },
       "required": false,
-      "description": "",
+      "description": "Whether or not to invert the y scale",
       "defaultValue": {
         "value": "false",
         "computed": false
@@ -192,6 +192,17 @@
       },
       "required": false,
       "description": "Internal right spacing of XYPlot, in pixels."
+    },
+    "style": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "Inline style object to be applied to the SVG element.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
     },
     "onMouseMove": {
       "type": {

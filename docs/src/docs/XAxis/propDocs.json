@@ -83,7 +83,7 @@
         "name": "bool"
       },
       "required": false,
-      "description": "",
+      "description": "Extends the x domain to start and end on rounded values,\nguaranteeing the original domain will be covered.\nSee d3 docs for more information",
       "defaultValue": {
         "value": "true",
         "computed": false
