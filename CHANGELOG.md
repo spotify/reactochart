@@ -1,3 +1,9 @@
+## 1.3.1 (2018-09-12)
+
+- [#117](https://github.com/spotify/reactochart/pull/117) Add style prop to XYPlot component
+- [#115](https://github.com/spotify/reactochart/pull/115) Update documena
+- [#121](https://github.com/spotify/reactochart/pull/121) xyPlotClassName omission fix - thanks @rpjs!
+
 ## 1.3.0 (2018-09-12)
 
 - [#114](https://github.com/spotify/reactochart/pull/114) Add optional label placement to barchart - thanks @dgdblank!
