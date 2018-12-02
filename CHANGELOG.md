@@ -1,7 +1,11 @@
+## 1.4.0 (2018-09-12)
+
+- [#125](https://github.com/spotify/reactochart/pull/125) Omit certain XYPlot props from overriding children props downstream. Added xyPlotStyle prop.
+
 ## 1.3.1 (2018-09-12)
 
 - [#117](https://github.com/spotify/reactochart/pull/117) Add style prop to XYPlot component
-- [#115](https://github.com/spotify/reactochart/pull/115) Update documena
+- [#115](https://github.com/spotify/reactochart/pull/115) Update documentation
 - [#121](https://github.com/spotify/reactochart/pull/121) xyPlotClassName omission fix - thanks @rpjs!
 
 ## 1.3.0 (2018-09-12)
