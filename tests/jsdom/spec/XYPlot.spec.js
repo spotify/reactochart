@@ -1,31 +1,31 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import * as d3 from "d3";
 import sinon from "sinon";
 import { expect } from "chai";
 import { mount } from "enzyme";
 
-import { XYPlot } from "../../../src/index.js";
+import { XYPlot, RangeRect, Bar } from "../../../src/index.js";
 
 describe("XYPlot", () => {
   const commonXYProps = {
     xDomain: [0, 10],
     yDomain: [0, 100],
     xyPlotClassName: "xy-plot",
-    onMouseMove: sinon.spy(),
-    onMouseEnter: sinon.spy(),
-    onMouseLeave: sinon.spy(),
-    onMouseDown: sinon.spy(),
-    onMouseUp: sinon.spy()
+    xyPlotStyle: { fill: "blue" },
+    style: { opacity: "0.5" }
   };
 
-  it("renders SVG with given width, height and className (or a default)", () => {
+  it("renders SVG with given width, height, style and className (or a default)", () => {
     const chart = mount(<XYPlot width={600} height={800} {...commonXYProps} />);
     const svg = chart.find("svg");
+    const plot = chart.find(".rct-plot-background");
 
     expect(svg.getDOMNode().className).to.contain(
       commonXYProps.xyPlotClassName
     );
+
+    expect(svg.getDOMNode().style._values).to.eql(commonXYProps.style);
+    expect(plot.getDOMNode().style._values).to.eql(commonXYProps.xyPlotStyle);
 
     const node = svg.getNode();
     expect(node.tagName.toLowerCase()).to.equal("svg");
@@ -67,8 +67,49 @@ describe("XYPlot", () => {
     );
   });
 
+  it("renders children with correct props", () => {
+    const barProps = {
+      x: 0,
+      y: 0,
+      yEnd: 20,
+      style: { fill: "blue" },
+      onMouseMove: sinon.spy()
+    };
+    const chart = mount(
+      <XYPlot
+        width={600}
+        height={800}
+        {...commonXYProps}
+        onMouseMove={sinon.spy()}
+      >
+        <Bar {...barProps} />
+      </XYPlot>
+    );
+
+    const bar = chart.find(Bar);
+
+    // Make sure props passed into bar are correctly passed down by XYPlot and not overriden
+    Object.keys(barProps).forEach(k => {
+      expect(bar.props()[k]).to.equal(barProps[k]);
+    });
+
+    // Make sure click handlers passed into bar are correctly triggered
+    expect(chart.props().onMouseMove).not.to.have.been.called;
+    expect(bar.props().onMouseMove).not.to.have.been.called;
+    bar.simulate("mousemove");
+    expect(chart.props().onMouseMove).to.have.been.called;
+    expect(bar.props().onMouseMove).to.have.been.called;
+  });
+
   it("triggers event handlers", () => {
-    const chart = mount(<XYPlot {...commonXYProps} />);
+    const mouseHandlers = {
+      onMouseMove: sinon.spy(),
+      onMouseEnter: sinon.spy(),
+      onMouseLeave: sinon.spy(),
+      onMouseDown: sinon.spy(),
+      onMouseUp: sinon.spy()
+    };
+    const chart = mount(<XYPlot {...commonXYProps} {...mouseHandlers} />);
     expect(chart.props().onMouseMove).not.to.have.been.called;
     chart.simulate("mousemove");
     expect(chart.props().onMouseMove).to.have.been.called;

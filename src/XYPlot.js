@@ -150,8 +150,6 @@ class XYPlot extends React.Component {
      * Internal right margin, in pixels.
      */
     marginRight: PropTypes.number,
-
-    // todo spacing & padding...
     /**
      * Internal top spacing of XYPlot, in pixels.
      */
@@ -170,10 +168,14 @@ class XYPlot extends React.Component {
     spacingRight: PropTypes.number,
 
     /**
-     * Inline style object to be applied to the SVG element.
+     * Inline style object to be applied to the parent SVG element.
      */
     style: PropTypes.object,
-
+    /**
+     * Inline style object to be applied to the plot.
+     * This is the inner rect DOM element where the graphs are rendered within the axes.
+     */
+    xyPlotStyle: PropTypes.object,
     // todo implement padding (helper for spacing)
     // paddingTop: PropTypes.number,
     // paddingBottom: PropTypes.number,
@@ -200,6 +202,7 @@ class XYPlot extends React.Component {
     includeXZero: false,
     includeYZero: false,
     style: {},
+    xyPlotStyle: {},
     xyPlotClassName: ""
   };
 
@@ -229,6 +232,7 @@ class XYPlot extends React.Component {
       spacingLeft,
       spacingRight,
       style,
+      xyPlotStyle,
       xyPlotClassName,
       // Passed in as prop from resolveXYScales
       xScale,
@@ -268,12 +272,29 @@ class XYPlot extends React.Component {
       xScale,
       yScale
     };
-    const xyPlotPropKeys = _.keys(XYPlot.propTypes);
-    const propsToPass = {
-      ..._.pick(this.props, xyPlotPropKeys),
-      ...chartSize,
-      ...scales
-    };
+
+    // Props to omit since we don't want them to override child props
+    // TODO for v2: Namespace these props to be specific to XYPlot,
+    // but will be an incompatible API change
+    const omittedProps = [
+      "style",
+      "onMouseMove",
+      "onMouseEnter",
+      "onMouseLeave"
+    ];
+
+    const xyPlotPropKeys = Object.keys(XYPlot.propTypes).filter(
+      k => omittedProps.indexOf(k) === -1
+    );
+
+    const propsToPass = _.omit(
+      {
+        ..._.pick(this.props, xyPlotPropKeys),
+        ...chartSize,
+        ...scales
+      },
+      omittedProps
+    );
 
     const className = `rct-xy-plot ${xyPlotClassName}`;
 
@@ -288,6 +309,7 @@ class XYPlot extends React.Component {
           <rect
             transform={`translate(${-spacingLeft}, ${-spacingTop})`}
             className="rct-plot-background"
+            style={xyPlotStyle}
             {...panelSize}
           />
           {React.Children.map(this.props.children, child => {
