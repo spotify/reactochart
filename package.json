@@ -42,10 +42,10 @@
     "d3-sankey": "^0.7.1",
     "invariant": "^2.2.0",
     "lodash": "^4.5.1",
-    "measure-text": "0.0.4",
     "moment": "^2.10.6",
     "numeral": "^2.0.6",
-    "prop-types": "^15.5.10"
+    "prop-types": "^15.5.10",
+    "units-css": "^0.4.0"
   },
   "peerDependencies": {
     "react": ">=0.14.0, <16.0.0",

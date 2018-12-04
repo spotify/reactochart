@@ -198,7 +198,18 @@
         "name": "object"
       },
       "required": false,
-      "description": "Inline style object to be applied to the SVG element.",
+      "description": "Inline style object to be applied to the parent SVG element.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "xyPlotStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "Inline style object to be applied to the plot.\nThis is the inner rect DOM element where the graphs are rendered within the axes.",
       "defaultValue": {
         "value": "{}",
         "computed": false
