@@ -1,4 +1,8 @@
-## 1.4.0 (2018-09-12)
+## 1.4.1 (2018-12-04)
+
+- [#127](https://github.com/spotify/reactochart/pull/127) Import measure-text source code to fix [security vulnerability](https://github.com/FormidableLabs/measure-text/issues/5) and [dev dependencies issue](https://github.com/spotify/reactochart/issues/123)
+
+## 1.4.0 (2018-12-02)
 
 - [#125](https://github.com/spotify/reactochart/pull/125) Omit certain XYPlot props from overriding children props downstream. Added xyPlotStyle prop.
 
