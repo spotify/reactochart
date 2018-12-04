@@ -91,7 +91,7 @@ class YAxisLabels extends React.Component {
      *
      * Disclaimer: labelStyle will merge its defaults with the given labelStyle prop
      * in order to ensure that our collision library measureText is able to calculate the
-     * smallest amount of possible collissions along the axis. It's therefore dependent on
+     * smallest amount of possible collisions along the axis. It's therefore dependent on
      * fontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized
      * stylesheet, we suggest creating a styled label component that wraps YAxisLabels with your preferred styles.
      */

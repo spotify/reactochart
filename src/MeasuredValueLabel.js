@@ -1,6 +1,6 @@
 import React from "react";
 import _ from "lodash";
-import measureText from "measure-text";
+import measureText from "./utils/measureText";
 import PropTypes from "prop-types";
 
 export default class MeasuredValueLabel extends React.Component {
