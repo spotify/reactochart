@@ -27,13 +27,13 @@ describe("XYPlot", () => {
     expect(svg.getDOMNode().style._values).to.eql(commonXYProps.style);
     expect(plot.getDOMNode().style._values).to.eql(commonXYProps.xyPlotStyle);
 
-    const node = svg.getNode();
+    const node = svg.instance();
     expect(node.tagName.toLowerCase()).to.equal("svg");
     expect(node.getAttribute("width")).to.equal("600");
     expect(node.getAttribute("height")).to.equal("800");
 
     const chart2 = mount(<XYPlot {...commonXYProps} />);
-    const node2 = chart2.find("svg").getNode();
+    const node2 = chart2.find("svg").instance();
     expect(node2.tagName.toLowerCase()).to.equal("svg");
     expect(parseInt(node2.getAttribute("width")))
       .to.be.a("number")
@@ -54,8 +54,8 @@ describe("XYPlot", () => {
     const chart = mount(
       <XYPlot width={size} height={size} {...margin} {...commonXYProps} />
     );
-    const inner = chart.find(".rct-chart-inner").getNode();
-    const bg = chart.find(".rct-plot-background").getNode();
+    const inner = chart.find(".rct-chart-inner").instance();
+    const bg = chart.find(".rct-plot-background").instance();
     expect(inner.getAttribute("transform").replace(/\s/, "")).to.contain(
       `translate(${margin.marginLeft},${margin.marginTop})`
     );

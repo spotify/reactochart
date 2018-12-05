@@ -21,11 +21,11 @@ describe("YGrid", () => {
 
   it("passes props correctly to YLine", () => {
     const yGrid = mount(<YGrid {...props} />);
-    const xLines = yGrid.find(YLine);
+    const yLines = yGrid.find(YLine);
 
-    xLines.getNodes().forEach(yLine => {
-      const yLineProps = yLine.props;
-
+    yLines.forEach(yLine => {
+      const yLineProps = yLine.props();
+      
       expect(yLineProps.className).to.contain(props.lineClassName);
       expect(yLineProps.style).to.equal(props.lineStyle);
       expect(yLineProps.spacingTop).to.equal(props.spacingTop);
@@ -39,28 +39,28 @@ describe("YGrid", () => {
 
   it("renders the correct amount of YLines given tickCount", () => {
     const tickCount = 50;
-    const xGrid = mount(<YGrid {...props} tickCount={tickCount} />);
-    const group = xGrid.find("g");
+    const yGrid = mount(<YGrid {...props} tickCount={tickCount} />);
+    const group = yGrid.find("g");
 
     expect(group).to.have.lengthOf(1);
     expect(group.getDOMNode().className).to.equal("rct-chart-grid-y");
 
-    const xLines = xGrid.find(YLine);
+    const yLines = yGrid.find(YLine);
     const numTicksMade = getScaleTicks(props.yScale, null, tickCount);
 
-    expect(xLines).to.have.lengthOf(numTicksMade.length);
+    expect(yLines).to.have.lengthOf(numTicksMade.length);
   });
 
   it("renders the correct amount of YLines given ticks", () => {
     const ticks = [0, 25, 50, 100];
-    const xGrid = mount(<YGrid {...props} ticks={ticks} />);
-    const group = xGrid.find("g");
+    const yGrid = mount(<YGrid {...props} ticks={ticks} />);
+    const group = yGrid.find("g");
 
     expect(group).to.have.lengthOf(1);
     expect(group.getDOMNode().className).to.equal("rct-chart-grid-y");
 
-    const xLines = xGrid.find(YLine);
-    expect(xLines).to.have.lengthOf(ticks.length);
+    const yLines = yGrid.find(YLine);
+    expect(yLines).to.have.lengthOf(ticks.length);
   });
 
   it("getTickDomain works as expected", () => {
