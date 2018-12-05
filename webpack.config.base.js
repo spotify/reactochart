@@ -1,9 +1,10 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlPlugin = require('html-webpack-plugin');
-var CopyPlugin = require('copy-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+  mode: "development",
   context: __dirname,
   entry: [
     './docs/src/main.js'
@@ -44,10 +45,6 @@ module.exports = {
           {loader: 'css-loader'},
           {loader: 'less-loader'}
         ]
-      },
-      {
-        test: /\.json$/,
-        use: [{loader: 'json-loader'}]
       }
     ]
   }

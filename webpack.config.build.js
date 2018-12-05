@@ -1,16 +1,12 @@
-var path = require("path");
-var webpack = require("webpack");
-var _ = require("lodash");
-var config = require("./webpack.config.base");
-var CleanPlugin = require("clean-webpack-plugin");
+const path = require("path");
+const _ = require("lodash");
+const CleanPlugin = require("clean-webpack-plugin");
+
+let config = require("./webpack.config.base");
 
 config = _.merge(config, {
+  mode: "production",
   plugins: config.plugins.concat([
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("production")
-      }
-    }),
     new CleanPlugin([path.join(__dirname, "docs/build")])
   ])
 });
