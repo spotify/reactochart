@@ -1,8 +1,7 @@
 // see https://github.com/airbnb/enzyme/blob/master/docs/guides/jsdom.md
 
-var jsdom = require("jsdom").jsdom;
-
-var exposedProperties = ["window", "navigator", "document"];
+const jsdom = require("jsdom").jsdom;
+const exposedProperties = ["window", "navigator", "document"];
 
 global.document = jsdom("");
 global.window = document.defaultView;
@@ -21,3 +20,8 @@ global.navigator = {
 // see also https://github.com/chaijs/type-detect/issues/98
 global.HTMLElement = window.HTMLElement;
 global.SVGElement = function() {};
+
+const enzyme = require("enzyme");
+const adapter = require("enzyme-adapter-react-16");
+
+enzyme.configure({ adapter: new adapter() });

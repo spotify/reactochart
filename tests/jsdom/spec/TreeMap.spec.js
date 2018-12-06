@@ -53,15 +53,15 @@ describe("TreeMap", () => {
 
   it("recreates tree when sticky is false, and keeps tree when true", () => {
     let chart = mount(<TreeMap {...props} />);
-    let tree = chart.getNode()._tree;
+    let tree = chart.instance()._tree;
 
     chart.setProps({ data });
-    expect(tree).to.not.equal(chart.getNode()._tree);
+    expect(tree).to.not.equal(chart.instance()._tree);
 
     chart = mount(<TreeMap {...props} sticky={true} />);
-    tree = chart.getNode()._tree;
+    tree = chart.instance()._tree;
     chart.setProps({ data });
-    expect(tree).to.eql(chart.getNode()._tree);
+    expect(tree).to.eql(chart.instance()._tree);
   });
 
   it("triggers event handlers", () => {
