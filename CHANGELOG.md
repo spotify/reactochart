@@ -1,3 +1,8 @@
+## 1.5.0 (2018-12-11)
+
+- [#129](https://github.com/spotify/reactochart/pull/129) Upgrade webpack and resolve security dev dependencies
+- [#130](https://github.com/spotify/reactochart/pull/130) Upgrade to react v16 and update peer dependencies
+
 ## 1.4.1 (2018-12-04)
 
 - [#127](https://github.com/spotify/reactochart/pull/127) Import measure-text source code to fix [security vulnerability](https://github.com/FormidableLabs/measure-text/issues/5) and [dev dependencies issue](https://github.com/spotify/reactochart/issues/123)
