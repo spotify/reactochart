@@ -21,8 +21,8 @@ describe("ZoomContainer", () => {
   it("passes props correctly to DOM", () => {
     const zoomContainer = mount(<ZoomContainer {...uncontrolledProps} />);
 
-    let svg = zoomContainer.find("svg").getNode();
-    let group = zoomContainer.find("g").getNode();
+    let svg = zoomContainer.find("svg").instance();
+    let group = zoomContainer.find("g").instance();
 
     expect(parseInt(svg.getAttribute("width"))).to.equal(
       uncontrolledProps.width
@@ -41,8 +41,8 @@ describe("ZoomContainer", () => {
       <ZoomContainer {...controlledProps} />
     );
 
-    svg = controlledZoomContainer.find("svg").getNode();
-    group = controlledZoomContainer.find("g").getNode();
+    svg = controlledZoomContainer.find("svg").instance();
+    group = controlledZoomContainer.find("g").instance();
 
     expect(parseInt(svg.getAttribute("width"))).to.equal(controlledProps.width);
     expect(parseInt(svg.getAttribute("height"))).to.equal(

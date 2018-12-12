@@ -85,8 +85,7 @@ describe("XAxisLabel", () => {
     const labelWrapper = rendered.first("g");
     const labels = labelWrapper
       .children()
-      .find("text")
-      .getNodes();
+      .find("text");
 
     const correctTickLabels = ["-20%", "-10%", "0%", "10%", "20%"];
 

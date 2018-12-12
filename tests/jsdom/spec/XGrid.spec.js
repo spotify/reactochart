@@ -22,9 +22,13 @@ describe("XGrid", () => {
   it("passes props correctly to XLine", () => {
     const xGrid = mount(<XGrid {...props} />);
     const xLines = xGrid.find(XLine);
+    const group = xGrid.find("g");
 
-    xLines.getNodes().forEach(xLine => {
-      const xLineProps = xLine.props;
+    expect(group).to.have.lengthOf(1);
+    expect(group.getDOMNode().className).to.equal("rct-chart-grid-x");
+ 
+    xLines.forEach(xLine => {
+      const xLineProps = xLine.props();
 
       expect(xLineProps.className).to.contain(props.lineClassName);
       expect(xLineProps.style).to.equal(props.lineStyle);
