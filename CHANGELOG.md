@@ -1,3 +1,7 @@
+## 1.5.1 (2018-12-19)
+
+- [#132](https://github.com/spotify/reactochart/pull/132) Fix peer dependencies - thanks @ekh64!
+
 ## 1.5.0 (2018-12-11)
 
 - [#129](https://github.com/spotify/reactochart/pull/129) Upgrade webpack and resolve security dev dependencies
