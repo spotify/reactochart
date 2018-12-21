@@ -6,6 +6,7 @@ var CleanPlugin = require("clean-webpack-plugin");
 
 console.log("dirname", __dirname);
 module.exports = {
+  mode: "development",
   context: __dirname,
   entry: [path.join(__dirname, "index.js")],
   output: {
@@ -19,7 +20,10 @@ module.exports = {
       title: "Reactochart Tests",
       template: path.join(__dirname, "index_html.ejs")
     }),
-    new CleanPlugin([path.join(__dirname, "build")])
+    new CleanPlugin([
+      path.join(__dirname, "build"),
+      path.join(__dirname, "docs/build")
+    ])
   ],
   resolve: {
     extensions: [".js", ".jsx"],

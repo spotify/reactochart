@@ -168,10 +168,18 @@
     },
     "labelStyle": {
       "type": {
-        "name": "object"
+        "name": "union",
+        "value": [
+          {
+            "name": "func"
+          },
+          {
+            "name": "object"
+          }
+        ]
       },
       "required": false,
-      "description": "Object declaring styles for label.\n\nDisclaimer: labelStyle will merge its defaults with the given labelStyle prop\nin order to ensure that our collision library measureText is able to calculate the\nsmallest amount of possible collissions along the axis. It's therefore dependent on\nfontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized\nstylesheet, we suggest creating a styled label component that wraps XAxisLabels with your preferred styles.",
+      "description": "Inline style object applied to each label,\nor accessor function which returns a style object\n\nDisclaimer: labelStyle will merge its defaults with the given labelStyle prop\nin order to ensure that our collision library measureText is able to calculate the\nsmallest amount of possible collissions along the axis. It's therefore dependent on\nfontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized\nstylesheet, we suggest creating a styled label component that wraps XAxisLabels with your preferred styles.",
       "defaultValue": {
         "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: \"14px\",\n  lineHeight: 1,\n  textAnchor: \"middle\"\n}",
         "computed": false

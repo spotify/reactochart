@@ -1,3 +1,12 @@
+## 1.6.0 (2018-12-21)
+
+- [#134](https://github.com/spotify/reactochart/pull/134)
+  Make labelStyle a function accessor (still supports object). Fixes ZoomContainer dependencies issue.
+
+## 1.5.1 (2018-12-19)
+
+- [#132](https://github.com/spotify/reactochart/pull/132) Fix peer dependencies - thanks @ekh64!
+
 ## 1.5.0 (2018-12-11)
 
 - [#129](https://github.com/spotify/reactochart/pull/129) Upgrade webpack and resolve security dev dependencies

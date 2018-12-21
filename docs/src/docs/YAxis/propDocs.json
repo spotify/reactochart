@@ -250,7 +250,15 @@
     },
     "labelStyle": {
       "type": {
-        "name": "object"
+        "name": "union",
+        "value": [
+          {
+            "name": "func"
+          },
+          {
+            "name": "object"
+          }
+        ]
       },
       "required": false,
       "description": ""

@@ -124,14 +124,14 @@
         ]
       },
       "required": false,
-      "description": "Placement of labels in regards to the y axis. Accepted options are \"before\" or \"after\""
+      "description": "Placement of labels in regards to the y axis. Accepted options are \"before\" or \"after\"."
     },
     "distance": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": "Label distance from Y Axis",
+      "description": "Label distance from Y Axis.",
       "defaultValue": {
         "value": "4",
         "computed": false
@@ -142,7 +142,7 @@
         "name": "bool"
       },
       "required": false,
-      "description": "Round ticks to capture extent of given y domain from XYPlot",
+      "description": "Round ticks to capture extent of given y domain from XYPlot.",
       "defaultValue": {
         "value": "true",
         "computed": false
@@ -153,7 +153,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "Number of ticks on axis",
+      "description": "Number of ticks on axis.",
       "defaultValue": {
         "value": "10",
         "computed": false
@@ -164,7 +164,7 @@
         "name": "array"
       },
       "required": false,
-      "description": "Custom ticks to display",
+      "description": "Custom ticks to display.",
       "defaultValue": {
         "value": "null",
         "computed": false
@@ -172,10 +172,18 @@
     },
     "labelStyle": {
       "type": {
-        "name": "object"
+        "name": "union",
+        "value": [
+          {
+            "name": "func"
+          },
+          {
+            "name": "object"
+          }
+        ]
       },
       "required": false,
-      "description": "Object declaring styles for label.\n\nDisclaimer: labelStyle will merge its defaults with the given labelStyle prop\nin order to ensure that our collision library measureText is able to calculate the\nsmallest amount of possible collisions along the axis. It's therefore dependent on\nfontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized\nstylesheet, we suggest creating a styled label component that wraps YAxisLabels with your preferred styles.",
+      "description": "Inline style object applied to each label,\nor accessor function which returns a style object\n\nDisclaimer: labelStyle will merge its defaults with the given labelStyle prop\nin order to ensure that our collision library measureText is able to calculate the\nsmallest amount of possible collisions along the axis. It's therefore dependent on\nfontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized\nstylesheet, we suggest creating a styled label component that wraps YAxisLabels with your preferred styles.",
       "defaultValue": {
         "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: \"14px\",\n  lineHeight: 1,\n  textAnchor: \"end\"\n}",
         "computed": false
@@ -254,14 +262,14 @@
         "name": "array"
       },
       "required": false,
-      "description": "Custom labels provided. Note that each object in the array has to be of shape\n`{\n value,\n text,\n height,\n width\n}`\nvalue - value you'd like this label to be aligned with\ntext - text you'd like displayed\nheight - height of the given label\nwidth - width of the given label"
+      "description": "Custom labels provided. Note that each object in the array has to be of shape.\n`{\n value,\n text,\n height,\n width\n}`\nvalue - value you'd like this label to be aligned with\ntext - text you'd like displayed\nheight - height of the given label\nwidth - width of the given label"
     },
     "offset": {
       "type": {
         "name": "number"
       },
       "required": false,
-      "description": "Adds vertical offset (along the YAxis) to the labels",
+      "description": "Adds vertical offset (along the YAxis) to the labels.",
       "defaultValue": {
         "value": "0",
         "computed": false

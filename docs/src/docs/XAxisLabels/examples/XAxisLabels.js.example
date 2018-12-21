@@ -8,7 +8,18 @@ const XAxisLabelsExample = (props) => {
         xDomain={[-20, 20]} yDomain={[-20, 20]}
       >
         <XAxisLabels />
-        <XAxisLabels format={label => label + "%"} position="top" distance={2} tickCount={5} labelStyle={{fontSize: '10px'}} />
+        <XAxisLabels
+          format={label => label + "%"}
+          position="top"
+          distance={2}
+          tickCount={5}
+          labelStyle={(label) => {
+              return {
+                fontSize: '10px',
+                fill: label === "20%" ? "red" : "black"
+              };
+            }
+          } />
       </XYPlot>
     </div>
   </div>
