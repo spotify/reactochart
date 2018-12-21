@@ -136,8 +136,7 @@ class TreeMap extends React.Component {
       onMouseLeaveNode,
       onMouseMoveNode,
       NodeComponent,
-      NodeLabelComponent,
-      getValue
+      NodeLabelComponent
     } = this.props;
 
     const nodes = initTreemap(this._rootNode, this._tree, this.props);

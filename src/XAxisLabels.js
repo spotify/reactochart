@@ -9,6 +9,7 @@ import {
   getLabelXRange,
   makeLabelFormatters
 } from "./utils/Label";
+import { getValue } from "./utils/Data";
 import { getScaleTicks, getTickDomain, inferScaleType } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
@@ -21,8 +22,15 @@ function resolveXLabelsForValues(scale, values, formats, style, force = true) {
   let labels;
   let attempts = [];
   const goodFormat = _.find(formats, format => {
-    const testLabels = values.map(value =>
-      MeasuredValueLabel.getLabel({ value, format, style })
+    const testLabels = values.map((value, i) =>
+      MeasuredValueLabel.getLabel({
+        value,
+        format,
+        style: _.defaults(
+          getValue(style.labelStyle, value, i),
+          style.defaultStyle
+        )
+      })
     );
 
     const areLabelsDistinct = checkLabelsDistinct(testLabels);
@@ -114,7 +122,8 @@ class XAxisLabels extends React.Component {
      */
     ticks: PropTypes.array,
     /**
-     * Object declaring styles for label.
+     * Inline style object applied to each label,
+     * or accessor function which returns a style object
      *
      * Disclaimer: labelStyle will merge its defaults with the given labelStyle prop
      * in order to ensure that our collision library measureText is able to calculate the
@@ -122,7 +131,7 @@ class XAxisLabels extends React.Component {
      * fontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized
      * stylesheet, we suggest creating a styled label component that wraps XAxisLabels with your preferred styles.
      */
-    labelStyle: PropTypes.object,
+    labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     labelClassName: PropTypes.string,
     /**
      * Format to use for the labels or accessor that returns the updated label.
@@ -227,7 +236,7 @@ class XAxisLabels extends React.Component {
     const [marginLeft, marginRight] = getLabelsXOverhang(
       xScale,
       labels,
-      labelStyle.textAnchor || "middle"
+      "middle"
     );
 
     return _.defaults(
@@ -261,7 +270,10 @@ class XAxisLabels extends React.Component {
       XAxisLabels.defaultProps
     );
     const ticks = props.ticks || getScaleTicks(xScale, null, tickCount);
-    const style = _.defaults(labelStyle, XAxisLabels.defaultProps.labelStyle);
+    const style = {
+      labelStyle,
+      defaultStyle: XAxisLabels.defaultProps.labelStyle
+    };
 
     const scaleType = inferScaleType(xScale);
     const propsFormats = props.format ? [props.format] : props.formats;
@@ -321,6 +333,12 @@ class XAxisLabels extends React.Component {
               : null;
           });
 
+          const style = _.defaults(
+            { textAnchor: "middle" },
+            getValue(labelStyle, label.text, i),
+            XAxisLabels.defaultProps.labelStyle
+          );
+
           return (
             <g
               key={`x-axis-label-${i}`}
@@ -329,7 +347,13 @@ class XAxisLabels extends React.Component {
               {/* <XAxisLabelDebugRect {...{x, y, label}}/> */}
               <MeasuredValueLabel
                 value={label.value}
-                {...{ x, y, className, dy: "0.8em", style: labelStyle }}
+                {...{
+                  x,
+                  y,
+                  className,
+                  dy: "0.8em",
+                  style
+                }}
               >
                 {label.text}
               </MeasuredValueLabel>
