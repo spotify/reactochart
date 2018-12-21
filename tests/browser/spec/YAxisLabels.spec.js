@@ -69,7 +69,7 @@ describe("YAxisLabel", () => {
     expect(first.props().onMouseLeaveLabel).to.have.been.calledOnce;
   });
 
-  it("Renders labels with given format", () => {
+  it("Renders labels with given format and styles", () => {
     const tree = (
       <XYPlot width={400} height={150} xDomain={[-20, 20]} yDomain={[-20, 20]}>
         <YAxisLabels
@@ -77,21 +77,42 @@ describe("YAxisLabel", () => {
           position="left"
           distance={2}
           tickCount={5}
+          labelStyle={label => {
+            return {
+              fill: label === "0%" ? "green" : "blue"
+            };
+          }}
         />
       </XYPlot>
     );
 
     const rendered = mount(tree).find(YAxisLabels);
     const labelWrapper = rendered.first("g");
-    const labels = labelWrapper
-      .children()
-      .find("text")
-      .getNodes();
+    const labels = labelWrapper.children().find("text");
 
     const correctTickLabels = ["-20%", "-10%", "0%", "10%", "20%"];
 
     const renderedTickLabels = labels.map(label => {
-      return label.textContent;
+      const instance = label.instance();
+      const textContent = instance.textContent;
+      const expectedStyles = Object.assign(
+        YAxisLabels.defaultProps.labelStyle,
+        {
+          fill: textContent === "0%" ? "green" : "blue"
+        }
+      );
+
+      Object.keys(expectedStyles).forEach(styleKey => {
+        // Parse to int if lineHeight
+        const styleValue =
+          styleKey === "lineHeight"
+            ? parseInt(instance.style[styleKey], 10)
+            : instance.style[styleKey];
+
+        expect(expectedStyles[styleKey]).to.equal(styleValue);
+      });
+
+      return textContent;
     });
 
     expect(renderedTickLabels).to.eql(correctTickLabels);

@@ -7,6 +7,7 @@ import {
   getLabelsYOverhang,
   makeLabelFormatters
 } from "./utils/Label";
+import { getValue } from "./utils/Data";
 import { getScaleTicks, getTickDomain, inferScaleType } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
@@ -20,8 +21,15 @@ function resolveYLabelsForValues(scale, values, formats, style, force = true) {
   let labels;
   let attempts = [];
   const goodFormat = _.find(formats, format => {
-    const testLabels = values.map(value =>
-      MeasuredValueLabel.getLabel({ value, format, style })
+    const testLabels = values.map((value, i) =>
+      MeasuredValueLabel.getLabel({
+        value,
+        format,
+        style: _.defaults(
+          getValue(style.labelStyle, value, i),
+          style.defaultStyle
+        )
+      })
     );
 
     const areLabelsDistinct = checkLabelsDistinct(testLabels);
@@ -67,27 +75,28 @@ class YAxisLabels extends React.Component {
      */
     position: PropTypes.oneOf(["left", "right"]),
     /**
-     * Placement of labels in regards to the y axis. Accepted options are "before" or "after"
+     * Placement of labels in regards to the y axis. Accepted options are "before" or "after".
      */
     placement: PropTypes.oneOf(["before", "after"]),
     /**
-     * Label distance from Y Axis
+     * Label distance from Y Axis.
      */
     distance: PropTypes.number,
     /**
-     * Round ticks to capture extent of given y domain from XYPlot
+     * Round ticks to capture extent of given y domain from XYPlot.
      */
     nice: PropTypes.bool,
     /**
-     * Number of ticks on axis
+     * Number of ticks on axis.
      */
     tickCount: PropTypes.number,
     /**
-     * Custom ticks to display
+     * Custom ticks to display.
      */
     ticks: PropTypes.array,
     /**
-     * Object declaring styles for label.
+     * Inline style object applied to each label,
+     * or accessor function which returns a style object
      *
      * Disclaimer: labelStyle will merge its defaults with the given labelStyle prop
      * in order to ensure that our collision library measureText is able to calculate the
@@ -95,7 +104,7 @@ class YAxisLabels extends React.Component {
      * fontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized
      * stylesheet, we suggest creating a styled label component that wraps YAxisLabels with your preferred styles.
      */
-    labelStyle: PropTypes.object,
+    labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     labelClassName: PropTypes.string,
     /**
      * Spacing - provided by XYPlot and used to determine the placement of the label given spacingLeft
@@ -123,7 +132,7 @@ class YAxisLabels extends React.Component {
      */
     formats: PropTypes.array,
     /**
-     * Custom labels provided. Note that each object in the array has to be of shape
+     * Custom labels provided. Note that each object in the array has to be of shape.
      * `{
      *  value,
      *  text,
@@ -137,7 +146,7 @@ class YAxisLabels extends React.Component {
      */
     labels: PropTypes.array,
     /**
-     * Adds vertical offset (along the YAxis) to the labels
+     * Adds vertical offset (along the YAxis) to the labels.
      */
     offset: PropTypes.number
   };
@@ -172,7 +181,7 @@ class YAxisLabels extends React.Component {
 
   static getMargin(props) {
     props = _.defaults({}, props, YAxisLabels.defaultProps);
-    const { yScale, position, placement, distance, labelStyle } = props;
+    const { yScale, position, placement, distance } = props;
     const labels = props.labels || YAxisLabels.getLabels(props);
     const zeroMargin = {
       marginTop: 0,
@@ -227,8 +236,10 @@ class YAxisLabels extends React.Component {
       YAxisLabels.defaultProps
     );
     const ticks = props.ticks || getScaleTicks(yScale, null, tickCount);
-    const style = _.defaults(labelStyle, YAxisLabels.defaultProps.labelStyle);
-
+    const style = {
+      labelStyle,
+      defaultStyle: YAxisLabels.defaultProps.labelStyle
+    };
     const scaleType = inferScaleType(yScale);
     const propsFormats = props.format ? [props.format] : props.formats;
     const formatStrs =
@@ -265,11 +276,6 @@ class YAxisLabels extends React.Component {
       this.props.placement || (position === "left" ? "before" : "after");
     const className = `rct-chart-value-label rct-chart-value-label-y ${labelClassName}`;
     const textAnchor = placement === "before" ? "end" : "start";
-    const style = _.defaults(
-      { textAnchor },
-      labelStyle,
-      YAxisLabels.defaultProps.labelStyle
-    );
     const labels = this.props.labels || YAxisLabels.getLabels(this.props);
     const transform =
       position === "left"
@@ -294,15 +300,27 @@ class YAxisLabels extends React.Component {
               : null;
           });
 
+          const style = _.defaults(
+            { textAnchor },
+            getValue(labelStyle, label.text, i),
+            YAxisLabels.defaultProps.labelStyle
+          );
+
           return (
             <g
               key={`x-axis-label-${i}`}
               {...{ onMouseEnter, onMouseMove, onMouseLeave }}
             >
-              {/* <YAxisLabelDebugRect {...{x, y, label, style}}/> */}
+              {/* <YAxisLabelDebugRect {...{x, y, label, style: getValue(labelStyle, label.text, i)}}/> */}
               <MeasuredValueLabel
                 value={label.value}
-                {...{ x, y, className, dy: "0.35em", style }}
+                {...{
+                  x,
+                  y,
+                  className,
+                  dy: "0.35em",
+                  style
+                }}
               >
                 {label.text}
               </MeasuredValueLabel>
