@@ -5,7 +5,7 @@
   "contributors": [
     "Kris Salvador <kriss@spotify.com>"
   ],
-  "version": "1.6.0",
+  "version": "1.7.0",
   "main": "index.js",
   "files": [
     "*.js",
@@ -98,7 +98,7 @@
     "style-loader": "^0.18.2",
     "webpack": "^4.27.0",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "webpack-dev-server": "^3.1.14"
   },
   "license": "Apache-2.0",
   "repository": {

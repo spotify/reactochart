@@ -13,7 +13,7 @@ const YAxisLabelsExample = (props) => {
           position="right"
           tickCount={5}
           labelStyle={(label) => {
-            const is20 = label === "20.00"
+            const is20 = label.text === "20.00"
             return {
               fill: is20 ? "green" : "black",
               fontWeight: is20 ? 900 : 400
