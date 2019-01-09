@@ -16,7 +16,7 @@ const XAxisLabelsExample = (props) => {
           labelStyle={(label) => {
               return {
                 fontSize: '10px',
-                fill: label === "20%" ? "red" : "black"
+                fill: label.text === "20%" ? "red" : "black"
               };
             }
           } />

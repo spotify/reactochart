@@ -79,7 +79,7 @@ describe("YAxisLabel", () => {
           tickCount={5}
           labelStyle={label => {
             return {
-              fill: label === "0%" ? "green" : "blue"
+              fill: label.text === "0%" ? "green" : "blue"
             };
           }}
         />

@@ -26,7 +26,7 @@ describe("XGrid", () => {
 
     expect(group).to.have.lengthOf(1);
     expect(group.getDOMNode().className).to.equal("rct-chart-grid-x");
- 
+
     xLines.forEach(xLine => {
       const xLineProps = xLine.props();
 
