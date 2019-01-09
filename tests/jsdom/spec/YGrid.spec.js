@@ -25,7 +25,7 @@ describe("YGrid", () => {
 
     yLines.forEach(yLine => {
       const yLineProps = yLine.props();
-      
+
       expect(yLineProps.className).to.contain(props.lineClassName);
       expect(yLineProps.style).to.equal(props.lineStyle);
       expect(yLineProps.spacingTop).to.equal(props.spacingTop);

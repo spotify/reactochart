@@ -335,7 +335,7 @@ class XAxisLabels extends React.Component {
 
           const style = _.defaults(
             { textAnchor: "middle" },
-            getValue(labelStyle, label.text, i),
+            getValue(labelStyle, { x, y, ...label }, i),
             XAxisLabels.defaultProps.labelStyle
           );
 
