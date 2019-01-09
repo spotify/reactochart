@@ -1,3 +1,10 @@
+## 1.7.0 (2018-12-21)
+
+[Warning]: To those using the recent labelStyle function accessor prop, the function signature now returns
+an object containing { text, x, y, height, value } as opposed to just the text
+
+- [#136](https://github.com/spotify/reactochart/pull/136) Update labelStyle accessor to return more useful label information. Upgrade webpack-dev-server to fix security issue.
+
 ## 1.6.0 (2018-12-21)
 
 - [#134](https://github.com/spotify/reactochart/pull/134)
