@@ -326,7 +326,7 @@ class XAxisLabels extends React.Component {
             "onMouseMoveLabel",
             "onMouseLeaveLabel"
           ].map(eventName => {
-            // partially apply this bar's data point as 2nd callback argument
+            // partially apply this label's data point as 2nd callback argument
             const callback = _.get(this.props, eventName);
             return _.isFunction(callback)
               ? _.partial(callback, _, label.value)

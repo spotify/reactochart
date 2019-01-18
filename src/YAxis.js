@@ -3,12 +3,33 @@ import PropTypes from "prop-types";
 import React from "react";
 import { getAxisChildProps } from "./utils/Axis";
 import { sumMargins } from "./utils/Margin";
-import { getTickDomain } from "./utils/Scale";
+import { getTickDomain, inferScaleType, invertPointScale } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
 import YAxisLabels from "./YAxisLabels";
 import YAxisTitle from "./YAxisTitle";
 import YGrid from "./YGrid";
 import YTicks from "./YTicks";
+
+function getMouseOptions(event, yScale) {
+  const axisBoundingBox = event.currentTarget.getBoundingClientRect();
+  const outerX = Math.round(event.clientX - axisBoundingBox.left);
+  const outerY = Math.round(event.clientY - axisBoundingBox.top);
+  const yScaleType = inferScaleType(yScale);
+
+  const yValue = !_.inRange(outerY, 0, axisBoundingBox.height)
+    ? null
+    : yScaleType === "ordinal"
+      ? invertPointScale(yScale, outerY)
+      : yScale.invert(outerY);
+
+  return {
+    event,
+    outerX,
+    outerY,
+    yValue,
+    yScale
+  };
+}
 
 /**
  * `YAxis` is the vertical axis of the chart. `YAxis` is a wrapper around `YGrid`, `YTicks`,
@@ -78,6 +99,11 @@ export default class YAxis extends React.Component {
     onMouseEnterLabel: PropTypes.func,
     onMouseMoveLabel: PropTypes.func,
     onMouseLeaveLabel: PropTypes.func,
+
+    onMouseEnterAxis: PropTypes.func,
+    onMouseLeaveAxis: PropTypes.func,
+    onMouseClickAxis: PropTypes.func,
+
     /**
      * Show Y Axis line
      */
@@ -132,6 +158,39 @@ export default class YAxis extends React.Component {
     return sumMargins(margins, "margin");
   }
 
+  handleOnMouseEnter = event => {
+    const { onMouseEnterAxis, yScale } = this.props;
+
+    if (!_.isFunction(onMouseEnterAxis)) {
+      return;
+    }
+
+    const options = getMouseOptions(event, yScale);
+    onMouseEnterAxis(options);
+  };
+
+  handleOnMouseLeave = event => {
+    const { onMouseLeaveAxis, yScale } = this.props;
+
+    if (!_.isFunction(onMouseLeaveAxis)) {
+      return;
+    }
+
+    const options = getMouseOptions(event, yScale);
+    onMouseLeaveAxis(options);
+  };
+
+  handleOnClick = event => {
+    const { onMouseClickAxis, yScale } = this.props;
+
+    if (!_.isFunction(onMouseClickAxis)) {
+      return;
+    }
+
+    const options = getMouseOptions(event, yScale);
+    onMouseClickAxis(options);
+  };
+
   render() {
     const {
       width,
@@ -173,7 +232,12 @@ export default class YAxis extends React.Component {
     const axisLineX = position === "left" ? -spacingLeft : width + spacingRight;
 
     return (
-      <g className="rct-chart-axis rct-chart-axis-y">
+      <g
+        className="rct-chart-axis rct-chart-axis-y"
+        onMouseEnter={this.handleOnMouseEnter}
+        onMouseLeave={this.handleOnMouseLeave}
+        onClick={this.handleOnClick}
+      >
         {showGrid ? <YGrid {...gridProps} /> : null}
 
         {showTicks ? <YTicks {...ticksProps} /> : null}

@@ -3,12 +3,33 @@ import PropTypes from "prop-types";
 import React from "react";
 import { getAxisChildProps } from "./utils/Axis";
 import { sumMargins } from "./utils/Margin";
-import { getTickDomain } from "./utils/Scale";
+import { getTickDomain, inferScaleType, invertPointScale } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
 import XAxisLabels from "./XAxisLabels";
 import XAxisTitle from "./XAxisTitle";
 import XGrid from "./XGrid";
 import XTicks from "./XTicks";
+
+function getMouseOptions(event, xScale) {
+  const axisBoundingBox = event.currentTarget.getBoundingClientRect();
+  const outerX = Math.round(event.clientX - axisBoundingBox.left);
+  const outerY = Math.round(event.clientY - axisBoundingBox.top);
+  const xScaleType = inferScaleType(xScale);
+
+  const xValue = !_.inRange(outerX, 0, axisBoundingBox.width)
+    ? null
+    : xScaleType === "ordinal"
+      ? invertPointScale(xScale, outerX)
+      : xScale.invert(outerX);
+
+  return {
+    event,
+    outerX,
+    outerY,
+    xValue,
+    xScale
+  };
+}
 
 /**
  * `XAxis` is the horizontal axis of the chart. `XAxis` is a wrapper around `XGrid`, `XTicks`,
@@ -79,6 +100,10 @@ export default class XAxis extends React.Component {
     onMouseMoveLabel: PropTypes.func,
     onMouseLeaveLabel: PropTypes.func,
 
+    onMouseEnterAxis: PropTypes.func,
+    onMouseLeaveAxis: PropTypes.func,
+    onMouseClickAxis: PropTypes.func,
+
     /**
      * Show X Axis line
      */
@@ -133,6 +158,39 @@ export default class XAxis extends React.Component {
     return sumMargins(margins, "margin");
   }
 
+  handleOnMouseEnter = event => {
+    const { onMouseEnterAxis, xScale } = this.props;
+
+    if (!_.isFunction(onMouseEnterAxis)) {
+      return;
+    }
+
+    const options = getMouseOptions(event, xScale);
+    onMouseEnterAxis(options);
+  };
+
+  handleOnMouseLeave = event => {
+    const { onMouseLeaveAxis, xScale } = this.props;
+
+    if (!_.isFunction(onMouseLeaveAxis)) {
+      return;
+    }
+
+    const options = getMouseOptions(event, xScale);
+    onMouseLeaveAxis(options);
+  };
+
+  handleOnClick = event => {
+    const { onMouseClickAxis, xScale } = this.props;
+
+    if (!_.isFunction(onMouseClickAxis)) {
+      return;
+    }
+
+    const options = getMouseOptions(event, xScale);
+    onMouseClickAxis(options);
+  };
+
   render() {
     const {
       width,
@@ -175,7 +233,12 @@ export default class XAxis extends React.Component {
       position === "bottom" ? height + spacingBottom : -spacingTop;
 
     return (
-      <g className="rct-chart-axis rct-chart-axis-x">
+      <g
+        className="rct-chart-axis rct-chart-axis-x"
+        onMouseEnter={this.handleOnMouseEnter}
+        onMouseLeave={this.handleOnMouseLeave}
+        onClick={this.handleOnClick}
+      >
         {showGrid ? <XGrid {...gridProps} /> : null}
 
         {showTicks ? <XTicks {...ticksProps} /> : null}
