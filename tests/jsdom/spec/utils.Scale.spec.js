@@ -8,7 +8,8 @@ import {
   dataTypeFromScaleType,
   inferScaleType,
   initScale,
-  isValidScale
+  isValidScale,
+  invertPointScale
 } from "../../../src/utils/Scale";
 
 describe("Scale utils", () => {
@@ -78,6 +79,19 @@ describe("Scale utils", () => {
       expect(isValidScale({ range: [0, 100], domain: [500, 1000] })).to.equal(
         false
       );
+    });
+  });
+
+  describe("invertPointScale", () => {
+    it("returns a valid value for given rangeValue", () => {
+      const scale = d3
+        .scalePoint()
+        .domain(["a", "b", "c", "d", "e"])
+        .range([0, 300]);
+
+      expect(invertPointScale(scale, 1)).to.equal("a");
+      expect(invertPointScale(scale, 300)).to.equal("e");
+      expect(invertPointScale(scale, 150)).to.equal("c");
     });
   });
 });

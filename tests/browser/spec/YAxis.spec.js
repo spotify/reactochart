@@ -1,6 +1,8 @@
 import { expect } from "chai";
 import { mount } from "enzyme";
 import React from "react";
+import sinon from "sinon";
+import sinonChai from "sinon-chai";
 import {
   LineChart,
   XYPlot,
@@ -10,6 +12,8 @@ import {
   YGrid,
   YTicks
 } from "src/index.js";
+
+chai.use(sinonChai);
 
 // YAxis tests must run in browser since YAxis uses measureText
 
@@ -73,5 +77,36 @@ describe("YAxis", () => {
     expect(line.props().x2).to.be.a("number");
     expect(line.props().y1).to.be.a("number");
     expect(line.props().y2).to.be.a("number");
+  });
+
+  it("handles mouse events", () => {
+    const onMouseEnterAxis = sinon.spy();
+    const onMouseLeaveAxis = sinon.spy();
+    const onMouseClickAxis = sinon.spy();
+
+    const tree = (
+      <XYPlot {...props} xDomain={[0, 10]} yDomain={[0, 10]}>
+        <YAxis
+          onMouseEnterAxis={onMouseEnterAxis}
+          onMouseLeaveAxis={onMouseLeaveAxis}
+          onMouseClickAxis={onMouseClickAxis}
+          ticks={[-5, 0, 5]}
+        />
+      </XYPlot>
+    );
+    const rendered = mount(tree);
+    const yAxis = rendered.find(YAxis);
+
+    expect(onMouseEnterAxis).not.to.have.been.called;
+    yAxis.simulate("mouseenter");
+    expect(onMouseEnterAxis).to.have.been.calledOnce;
+
+    expect(onMouseLeaveAxis).not.to.have.been.called;
+    yAxis.simulate("mouseleave");
+    expect(onMouseLeaveAxis).to.have.been.calledOnce;
+
+    expect(onMouseClickAxis).not.to.have.been.called;
+    yAxis.simulate("click");
+    expect(onMouseClickAxis).to.have.been.calledOnce;
   });
 });
