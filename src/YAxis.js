@@ -100,8 +100,21 @@ export default class YAxis extends React.Component {
     onMouseMoveLabel: PropTypes.func,
     onMouseLeaveLabel: PropTypes.func,
 
+    /**
+     * `mouseenter` event handler callback, called when user's mouse enters the y axis.
+     */
     onMouseEnterAxis: PropTypes.func,
+    /**
+     * `mouseleave` event handler callback, called when user's mouse leaves the y axis.
+     */
     onMouseLeaveAxis: PropTypes.func,
+    /**
+     * `mousemove` event handler callback, called when user's mouse moves within the y axis.
+     */
+    onMouseMoveAxis: PropTypes.func,
+    /**
+     * `click` event handler callback, called when user's mouse clicks on the y axis.
+     */
     onMouseClickAxis: PropTypes.func,
 
     /**
@@ -157,6 +170,17 @@ export default class YAxis extends React.Component {
 
     return sumMargins(margins, "margin");
   }
+
+  handleOnMouseMove = event => {
+    const { onMouseMoveAxis, yScale } = this.props;
+
+    if (!_.isFunction(onMouseMoveAxis)) {
+      return;
+    }
+
+    const options = getMouseOptions(event, yScale);
+    onMouseMoveAxis(options);
+  };
 
   handleOnMouseEnter = event => {
     const { onMouseEnterAxis, yScale } = this.props;
@@ -234,6 +258,7 @@ export default class YAxis extends React.Component {
     return (
       <g
         className="rct-chart-axis rct-chart-axis-y"
+        onMouseMove={this.handleOnMouseMove}
         onMouseEnter={this.handleOnMouseEnter}
         onMouseLeave={this.handleOnMouseLeave}
         onClick={this.handleOnClick}

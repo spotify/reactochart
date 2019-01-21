@@ -100,8 +100,21 @@ export default class XAxis extends React.Component {
     onMouseMoveLabel: PropTypes.func,
     onMouseLeaveLabel: PropTypes.func,
 
+    /**
+     * `mouseenter` event handler callback, called when user's mouse enters the x axis.
+     */
     onMouseEnterAxis: PropTypes.func,
+    /**
+     * `mouseleave` event handler callback, called when user's mouse leaves the x axis.
+     */
     onMouseLeaveAxis: PropTypes.func,
+    /**
+     * `mousemove` event handler callback, called when user's mouse moves within the x axis.
+     */
+    onMouseMoveAxis: PropTypes.func,
+    /**
+     * `click` event handler callback, called when user's mouse clicks on the x axis.
+     */
     onMouseClickAxis: PropTypes.func,
 
     /**
@@ -157,6 +170,17 @@ export default class XAxis extends React.Component {
 
     return sumMargins(margins, "margin");
   }
+
+  handleOnMouseMove = event => {
+    const { onMouseMoveAxis, xScale } = this.props;
+
+    if (!_.isFunction(onMouseMoveAxis)) {
+      return;
+    }
+
+    const options = getMouseOptions(event, xScale);
+    onMouseMoveAxis(options);
+  };
 
   handleOnMouseEnter = event => {
     const { onMouseEnterAxis, xScale } = this.props;
@@ -235,6 +259,7 @@ export default class XAxis extends React.Component {
     return (
       <g
         className="rct-chart-axis rct-chart-axis-x"
+        onMouseMove={this.handleOnMouseMove}
         onMouseEnter={this.handleOnMouseEnter}
         onMouseLeave={this.handleOnMouseLeave}
         onClick={this.handleOnClick}
