@@ -1,36 +1,16 @@
 import _ from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
-import { getAxisChildProps } from "./utils/Axis";
+import { getAxisChildProps, getMouseAxisOptions } from "./utils/Axis";
 import { sumMargins } from "./utils/Margin";
-import { getTickDomain, inferScaleType, invertPointScale } from "./utils/Scale";
+import { getTickDomain } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
 import YAxisLabels from "./YAxisLabels";
 import YAxisTitle from "./YAxisTitle";
 import YGrid from "./YGrid";
 import YTicks from "./YTicks";
 
-function getMouseOptions(event, yScale) {
-  const axisBoundingBox = event.currentTarget.getBoundingClientRect();
-  const outerX = Math.round(event.clientX - axisBoundingBox.left);
-  const outerY = Math.round(event.clientY - axisBoundingBox.top);
-  const yScaleType = inferScaleType(yScale);
-
-  const yValue = !_.inRange(outerY, 0, axisBoundingBox.height)
-    ? null
-    : yScaleType === "ordinal"
-      ? invertPointScale(yScale, outerY)
-      : yScale.invert(outerY);
-
-  return {
-    event,
-    outerX,
-    outerY,
-    yValue,
-    yScale
-  };
-}
-
+const getMouseOptions = getMouseAxisOptions.bind(null, "y");
 /**
  * `YAxis` is the vertical axis of the chart. `YAxis` is a wrapper around `YGrid`, `YTicks`,
  * `YAxisLabels`, and `YAxisTitle`. See their respective docs for prop documentation.

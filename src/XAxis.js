@@ -1,7 +1,7 @@
 import _ from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
-import { getAxisChildProps } from "./utils/Axis";
+import { getAxisChildProps, getMouseAxisOptions } from "./utils/Axis";
 import { sumMargins } from "./utils/Margin";
 import { getTickDomain, inferScaleType, invertPointScale } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
@@ -10,26 +10,7 @@ import XAxisTitle from "./XAxisTitle";
 import XGrid from "./XGrid";
 import XTicks from "./XTicks";
 
-function getMouseOptions(event, xScale) {
-  const axisBoundingBox = event.currentTarget.getBoundingClientRect();
-  const outerX = Math.round(event.clientX - axisBoundingBox.left);
-  const outerY = Math.round(event.clientY - axisBoundingBox.top);
-  const xScaleType = inferScaleType(xScale);
-
-  const xValue = !_.inRange(outerX, 0, axisBoundingBox.width)
-    ? null
-    : xScaleType === "ordinal"
-      ? invertPointScale(xScale, outerX)
-      : xScale.invert(outerX);
-
-  return {
-    event,
-    outerX,
-    outerY,
-    xValue,
-    xScale
-  };
-}
+const getMouseOptions = getMouseAxisOptions.bind(null, "x");
 
 /**
  * `XAxis` is the horizontal axis of the chart. `XAxis` is a wrapper around `XGrid`, `XTicks`,

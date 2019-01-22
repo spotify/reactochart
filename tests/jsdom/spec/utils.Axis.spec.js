@@ -1,7 +1,10 @@
 import { expect } from "chai";
 import * as d3 from "d3";
 import _ from "lodash";
-import { getAxisChildProps } from "../../../src/utils/Axis";
+import {
+  getAxisChildProps,
+  getMouseAxisOptions
+} from "../../../src/utils/Axis";
 
 describe("Axis utils", () => {
   it("getAxisChildProps", () => {
@@ -143,5 +146,73 @@ describe("Axis utils", () => {
         }
       )
     );
+  });
+
+  describe("getMouseAxisOptions", () => {
+    it("throws error on invalid axis type", () => {
+      expect(() => {
+        getMouseAxisOptions("z", {}, {});
+      }).to.throw(Error);
+    });
+
+    it("returns valid mouse options for x axisType", () => {
+      const mockEvent = {
+        currentTarget: {
+          getBoundingClientRect: () => {
+            return {
+              top: 0,
+              left: 0,
+              height: 300,
+              width: 300
+            };
+          }
+        },
+        clientX: 50,
+        clientY: 0
+      };
+
+      const scale = d3
+        .scalePoint()
+        .domain(["a", "b", "c"])
+        .range([0, 100]);
+
+      expect(getMouseAxisOptions("x", mockEvent, scale)).to.eql({
+        event: mockEvent,
+        outerX: 50,
+        outerY: 0,
+        xScale: scale,
+        xValue: "b"
+      });
+    });
+
+    it("returns valid mouse options for y axisType", () => {
+      const mockEvent = {
+        currentTarget: {
+          getBoundingClientRect: () => {
+            return {
+              top: 0,
+              left: 0,
+              height: 300,
+              width: 300
+            };
+          }
+        },
+        clientX: 0,
+        clientY: 50
+      };
+
+      const scale = d3
+        .scalePoint()
+        .domain(["a", "b", "c"])
+        .range([0, 100]);
+
+      expect(getMouseAxisOptions("y", mockEvent, scale)).to.eql({
+        event: mockEvent,
+        outerX: 0,
+        outerY: 50,
+        yScale: scale,
+        yValue: "b"
+      });
+    });
   });
 });

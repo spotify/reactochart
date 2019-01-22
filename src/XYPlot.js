@@ -36,11 +36,7 @@ function getMouseOptions(
   const xScaleType = inferScaleType(xScale);
   const yScaleType = inferScaleType(yScale);
 
-  const xValue = !_.inRange(
-    innerX,
-    0,
-    chartSize.width + marginLeft + marginRight
-  )
+  const xValue = !_.inRange(innerX, 0, chartSize.width)
     ? null
     : xScaleType === "ordinal"
       ? invertPointScale(xScale, innerX)
