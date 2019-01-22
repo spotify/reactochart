@@ -4,23 +4,7 @@ import React from "react";
 import { methodIfFuncProp } from "./util";
 import { innerSize } from "./utils/Margin";
 import resolveXYScales from "./utils/resolveXYScales";
-import { inferScaleType } from "./utils/Scale";
-
-function indexOfClosestNumberInList(number, list) {
-  return list.reduce((closestI, current, i) => {
-    return Math.abs(current - number) < Math.abs(list[closestI] - number)
-      ? i
-      : closestI;
-  }, 0);
-}
-
-function invertPointScale(scale, rangeValue) {
-  // shim until d3.scalePoint.invert() is implemented for real
-  // given a value from the output range, returns the *nearest* corresponding value in the input domain
-  const rangePoints = scale.domain().map(domainValue => scale(domainValue));
-  const nearestPointIndex = indexOfClosestNumberInList(rangeValue, rangePoints);
-  return scale.domain()[nearestPointIndex];
-}
+import { inferScaleType, invertPointScale } from "./utils/Scale";
 
 function getMouseOptions(
   event,
@@ -52,20 +36,13 @@ function getMouseOptions(
   const xScaleType = inferScaleType(xScale);
   const yScaleType = inferScaleType(yScale);
 
-  const xValue = !_.inRange(
-    innerX,
-    0,
-    chartSize.width /* + padding.left + padding.right */
-  )
+  const xValue = !_.inRange(innerX, 0, chartSize.width)
     ? null
     : xScaleType === "ordinal"
       ? invertPointScale(xScale, innerX)
       : xScale.invert(innerX);
-  const yValue = !_.inRange(
-    innerY,
-    0,
-    chartSize.height /* + padding.top + padding.bottom */
-  )
+
+  const yValue = !_.inRange(innerY, 0, chartSize.height)
     ? null
     : yScaleType === "ordinal"
       ? invertPointScale(yScale, innerY)

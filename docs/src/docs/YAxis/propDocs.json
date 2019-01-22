@@ -28,6 +28,54 @@
         }
       ],
       "returns": null
+    },
+    {
+      "name": "handleOnMouseMove",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "event",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "handleOnMouseEnter",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "event",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "handleOnMouseLeave",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "event",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "handleOnClick",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "event",
+          "type": null
+        }
+      ],
+      "returns": null
     }
   ],
   "props": {
@@ -358,6 +406,34 @@
       },
       "required": false,
       "description": ""
+    },
+    "onMouseEnterAxis": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`mouseenter` event handler callback, called when user's mouse enters the y axis."
+    },
+    "onMouseLeaveAxis": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`mouseleave` event handler callback, called when user's mouse leaves the y axis."
+    },
+    "onMouseMoveAxis": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`mousemove` event handler callback, called when user's mouse moves within the y axis."
+    },
+    "onMouseClickAxis": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`click` event handler callback, called when user's mouse clicks on the y axis."
     },
     "showLine": {
       "type": {

@@ -116,3 +116,20 @@ export function scaleEqual(scaleA, scaleB) {
       _.isEqual(scaleA.domain(), scaleB.domain()) &&
         _.isEqual(scaleA.range(), scaleB.range());
 }
+
+function indexOfClosestNumberInList(number, list) {
+  return list.reduce((closestI, current, i) => {
+    return Math.abs(current - number) < Math.abs(list[closestI] - number)
+      ? i
+      : closestI;
+  }, 0);
+}
+
+export function invertPointScale(scale, rangeValue) {
+  // shim until d3.scalePoint.invert() is implemented for real
+  // given a value from the output range, returns the *nearest* corresponding value in the input domain
+  const rangePoints = scale.domain().map(domainValue => scale(domainValue));
+  const nearestPointIndex = indexOfClosestNumberInList(rangeValue, rangePoints);
+
+  return scale.domain()[nearestPointIndex];
+}
