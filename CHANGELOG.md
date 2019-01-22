@@ -1,3 +1,8 @@
+## 1.8.0 (2018-12-21)
+
+- [#139](https://github.com/spotify/reactochart/pull/139)
+  Update x and y axis to have onMouseEnterAxis, onMouseLeaveAxis, onMouseMoveAxis and onMouseClickAxis
+
 ## 1.7.0 (2018-12-21)
 
 [Warning]: To those using the recent labelStyle function accessor prop, the function signature now returns
