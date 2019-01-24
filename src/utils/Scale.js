@@ -128,11 +128,16 @@ export function indexOfClosestLeftNumberInList(number, sortedList) {
   const listCopy = isDescending ? sortedList.slice().reverse() : sortedList;
 
   // Get lower bound of where number falls
-  const indexForNumber = _.sortedIndex(listCopy, number) - 1;
+  let indexForNumber = _.sortedIndex(listCopy, number);
+  if (isDescending && indexForNumber < sortedList.length) {
+    indexForNumber += 1;
+  } else if (!isDescending && indexForNumber > 0) {
+    indexForNumber -= 1;
+  }
 
   return isDescending
     ? // If descending, remap indexForNumber to work with descending list
-      Math.abs(indexForNumber - sortedList.length) - 1
+      Math.abs(indexForNumber - sortedList.length)
     : indexForNumber;
 }
 
