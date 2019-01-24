@@ -76,6 +76,7 @@ export default class YAxis extends React.Component {
     gridLineClassName: PropTypes.string,
     gridLineStyle: PropTypes.object,
 
+    onMouseClickLabel: PropTypes.func,
     onMouseEnterLabel: PropTypes.func,
     onMouseMoveLabel: PropTypes.func,
     onMouseLeaveLabel: PropTypes.func,
