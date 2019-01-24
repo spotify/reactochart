@@ -40,7 +40,8 @@ describe("Axis utils", () => {
       gridLineStyle: { stroke: "blue" },
       onMouseEnterLabel: () => {},
       onMouseMoveLabel: () => {},
-      onMouseLeaveLabel: () => {}
+      onMouseLeaveLabel: () => {},
+      onMouseClickLabel: () => {}
     };
 
     const {
@@ -113,7 +114,8 @@ describe("Axis utils", () => {
           "labelStyle",
           "onMouseEnterLabel",
           "onMouseMoveLabel",
-          "onMouseLeaveLabel"
+          "onMouseLeaveLabel",
+          "onMouseClickLabel"
         ]),
         {
           distance: axisProps.labelDistance,
@@ -181,7 +183,7 @@ describe("Axis utils", () => {
         outerX: 50,
         outerY: 0,
         xScale: scale,
-        xValue: "b"
+        xValue: "a"
       });
     });
 
@@ -211,7 +213,7 @@ describe("Axis utils", () => {
         outerX: 0,
         outerY: 50,
         yScale: scale,
-        yValue: "b"
+        yValue: "a"
       });
     });
   });

@@ -28,7 +28,8 @@ describe("YAxisLabel", () => {
     const functions = {
       onMouseEnterLabel: sinon.spy(),
       onMouseMoveLabel: sinon.spy(),
-      onMouseLeaveLabel: sinon.spy()
+      onMouseLeaveLabel: sinon.spy(),
+      onMouseClickLabel: sinon.spy()
     };
     const tree = (
       <div>
@@ -67,6 +68,10 @@ describe("YAxisLabel", () => {
     expect(first.props().onMouseLeaveLabel).not.to.have.been.called;
     firstChild.simulate("mouseleave");
     expect(first.props().onMouseLeaveLabel).to.have.been.calledOnce;
+
+    expect(first.props().onMouseClickLabel).not.to.have.been.called;
+    firstChild.simulate("click");
+    expect(first.props().onMouseClickLabel).to.have.been.calledOnce;
   });
 
   it("Renders labels with given format and styles", () => {

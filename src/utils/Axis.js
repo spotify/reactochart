@@ -35,7 +35,8 @@ export function getAxisChildProps(props) {
     gridLineStyle,
     onMouseEnterLabel,
     onMouseMoveLabel,
-    onMouseLeaveLabel
+    onMouseLeaveLabel,
+    onMouseClickLabel
   } = props;
 
   const ticksProps = {
@@ -93,7 +94,8 @@ export function getAxisChildProps(props) {
     offset: labelOffset,
     onMouseEnterLabel,
     onMouseMoveLabel,
-    onMouseLeaveLabel
+    onMouseLeaveLabel,
+    onMouseClickLabel
   };
 
   const titleProps = {

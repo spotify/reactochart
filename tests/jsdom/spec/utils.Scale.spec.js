@@ -9,7 +9,8 @@ import {
   inferScaleType,
   initScale,
   isValidScale,
-  invertPointScale
+  invertPointScale,
+  indexOfClosestLeftNumberInList
 } from "../../../src/utils/Scale";
 
 describe("Scale utils", () => {
@@ -82,16 +83,25 @@ describe("Scale utils", () => {
     });
   });
 
+  describe("indexOfClosestLeftNumberInList", () => {
+    it("returns index of left closest to the number in the array", () => {
+      expect(indexOfClosestLeftNumberInList(1.5, [5, 4, 3, 2, 1])).to.equal(3);
+      expect(indexOfClosestLeftNumberInList(1.5, [1, 2, 3, 4, 5])).to.equal(0);
+    });
+  });
+
   describe("invertPointScale", () => {
     it("returns a valid value for given rangeValue", () => {
       const scale = d3
         .scalePoint()
         .domain(["a", "b", "c", "d", "e"])
-        .range([0, 300]);
+        .range([0, 100]);
 
-      expect(invertPointScale(scale, 1)).to.equal("a");
-      expect(invertPointScale(scale, 300)).to.equal("e");
-      expect(invertPointScale(scale, 150)).to.equal("c");
+      expect(invertPointScale(scale, 0)).to.equal("a");
+      expect(invertPointScale(scale, 26)).to.equal("b");
+      expect(invertPointScale(scale, 51)).to.equal("c");
+      expect(invertPointScale(scale, 76)).to.equal("d");
+      expect(invertPointScale(scale, 101)).to.equal("e");
     });
   });
 });

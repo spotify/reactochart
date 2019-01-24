@@ -114,10 +114,22 @@ class YAxisLabels extends React.Component {
      * Spacing - provided by XYPlot and used to determine the placement of the label given spacingRight
      */
     spacingRight: PropTypes.number,
-    // Label Handling
+    /**
+     * `mouseenter` event handler callback, called when user's mouse enters the label.
+     */
     onMouseEnterLabel: PropTypes.func,
+    /**
+     * `mousemove` event handler callback, called when user's mouse moves within the label.
+     */
     onMouseMoveLabel: PropTypes.func,
+    /**
+     * `mouseleave` event handler callback, called when user's mouse leaves the label.
+     */
     onMouseLeaveLabel: PropTypes.func,
+    /**
+     * `mouseclick` event handler callback, called when user's mouse clicks the label.
+     */
+    onMouseClickLabel: PropTypes.func,
     /**
      * Format to use for the labels or accessor that returns the updated label.
      *
@@ -288,10 +300,11 @@ class YAxisLabels extends React.Component {
           const y = yScale(label.value) + offset;
           const x = placement === "before" ? -distance : distance;
 
-          const [onMouseEnter, onMouseMove, onMouseLeave] = [
+          const [onMouseEnter, onMouseMove, onMouseLeave, onClick] = [
             "onMouseEnterLabel",
             "onMouseMoveLabel",
-            "onMouseLeaveLabel"
+            "onMouseLeaveLabel",
+            "onMouseClickLabel"
           ].map(eventName => {
             // partially apply this bar's data point as 2nd callback argument
             const callback = _.get(this.props, eventName);
@@ -309,7 +322,7 @@ class YAxisLabels extends React.Component {
           return (
             <g
               key={`x-axis-label-${i}`}
-              {...{ onMouseEnter, onMouseMove, onMouseLeave }}
+              {...{ onMouseEnter, onMouseMove, onMouseLeave, onClick }}
             >
               {/* <YAxisLabelDebugRect {...{x, y, label, style: getValue(labelStyle, label.text, i)}}/> */}
               <MeasuredValueLabel

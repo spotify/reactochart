@@ -269,6 +269,13 @@
       "required": false,
       "description": "`mouseleave` event handler callback, called when user's mouse leaves the label."
     },
+    "onMouseClickLabel": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`mouseclick` event handler callback, called when user's mouse clicks the label."
+    },
     "offset": {
       "type": {
         "name": "number"

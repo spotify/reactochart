@@ -386,6 +386,13 @@
       "required": false,
       "description": ""
     },
+    "onMouseClickLabel": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
     "onMouseEnterLabel": {
       "type": {
         "name": "func"

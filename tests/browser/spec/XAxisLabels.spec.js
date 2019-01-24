@@ -28,7 +28,8 @@ describe("XAxisLabel", () => {
     const functions = {
       onMouseEnterLabel: sinon.spy(),
       onMouseMoveLabel: sinon.spy(),
-      onMouseLeaveLabel: sinon.spy()
+      onMouseLeaveLabel: sinon.spy(),
+      onMouseClickLabel: sinon.spy()
     };
     const tree = (
       <div>
@@ -67,6 +68,10 @@ describe("XAxisLabel", () => {
     expect(first.props().onMouseLeaveLabel).not.to.have.been.called;
     firstChild.simulate("mouseleave");
     expect(first.props().onMouseLeaveLabel).to.have.been.calledOnce;
+
+    expect(first.props().onMouseClickLabel).not.to.have.been.called;
+    firstChild.simulate("click");
+    expect(first.props().onMouseClickLabel).to.have.been.calledOnce;
   });
 
   it("Renders labels with given format and styles", () => {
@@ -102,8 +107,6 @@ describe("XAxisLabel", () => {
         }
       );
 
-      console.log(expectedStyles);
-      console.log(instance.style);
       Object.keys(expectedStyles).forEach(styleKey => {
         // Parse to int if lineHeight
         const styleValue =
