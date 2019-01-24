@@ -1,7 +1,10 @@
+## 1.9.0 (2018-12-21)
+
+- [#142](https://github.com/spotify/reactochart/pull/142) Update logic for getting invertPointScale & add click handlers to labels themselves
+
 ## 1.8.0 (2018-12-21)
 
-- [#139](https://github.com/spotify/reactochart/pull/139)
-  Update x and y axis to have onMouseEnterAxis, onMouseLeaveAxis, onMouseMoveAxis and onMouseClickAxis
+- [#139](https://github.com/spotify/reactochart/pull/139) Update x and y axis to have onMouseEnterAxis, onMouseLeaveAxis, onMouseMoveAxis and onMouseClickAxis
 
 ## 1.7.0 (2018-12-21)
 
