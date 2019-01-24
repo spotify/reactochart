@@ -95,11 +95,13 @@ describe("Scale utils", () => {
       const scale = d3
         .scalePoint()
         .domain(["a", "b", "c", "d", "e"])
-        .range([0, 300]);
+        .range([0, 100]);
 
-      expect(invertPointScale(scale, 1)).to.equal("a");
-      expect(invertPointScale(scale, 300)).to.equal("d");
-      expect(invertPointScale(scale, 150)).to.equal("b");
+      expect(invertPointScale(scale, 0)).to.equal("a");
+      expect(invertPointScale(scale, 26)).to.equal("b");
+      expect(invertPointScale(scale, 51)).to.equal("c");
+      expect(invertPointScale(scale, 76)).to.equal("d");
+      expect(invertPointScale(scale, 101)).to.equal("e");
     });
   });
 });
