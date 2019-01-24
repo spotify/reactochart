@@ -219,21 +219,28 @@
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mouseenter` event handler callback, called when user's mouse enters the label."
     },
     "onMouseMoveLabel": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mousemove` event handler callback, called when user's mouse moves within the label."
     },
     "onMouseLeaveLabel": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": ""
+      "description": "`mouseleave` event handler callback, called when user's mouse leaves the label."
+    },
+    "onMouseClickLabel": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`mouseclick` event handler callback, called when user's mouse clicks the label."
     },
     "format": {
       "type": {

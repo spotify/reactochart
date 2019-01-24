@@ -177,6 +177,10 @@ class XAxisLabels extends React.Component {
      */
     onMouseLeaveLabel: PropTypes.func,
     /**
+     * `mouseclick` event handler callback, called when user's mouse clicks the label.
+     */
+    onMouseClickLabel: PropTypes.func,
+    /**
      * Adds horizontal offset (along the XAxis) to the labels
      */
     offset: PropTypes.number
@@ -321,12 +325,13 @@ class XAxisLabels extends React.Component {
         {labels.map((label, i) => {
           const x = xScale(label.value) + offset;
           const y = placement === "above" ? -label.height - distance : distance;
-          const [onMouseEnter, onMouseMove, onMouseLeave] = [
+          const [onMouseEnter, onMouseMove, onMouseLeave, onClick] = [
             "onMouseEnterLabel",
             "onMouseMoveLabel",
-            "onMouseLeaveLabel"
+            "onMouseLeaveLabel",
+            "onMouseClickLabel"
           ].map(eventName => {
-            // partially apply this bar's data point as 2nd callback argument
+            // partially apply this label's data point as 2nd callback argument
             const callback = _.get(this.props, eventName);
             return _.isFunction(callback)
               ? _.partial(callback, _, label.value)
@@ -342,7 +347,7 @@ class XAxisLabels extends React.Component {
           return (
             <g
               key={`x-axis-label-${i}`}
-              {...{ onMouseEnter, onMouseMove, onMouseLeave }}
+              {...{ onMouseEnter, onMouseMove, onMouseLeave, onClick }}
             >
               {/* <XAxisLabelDebugRect {...{x, y, label}}/> */}
               <MeasuredValueLabel
