@@ -341,13 +341,13 @@ class PieChart extends React.Component {
       dominantBaseline: "central"
     };
 
-    if (typeof pieSliceLabelStyle === "function") {
-      Object.assign(style, pieSliceLabelStyle(value));
-    } else if (pieSliceLabelStyle) {
-      Object.assign(style, pieSliceLabelStyle);
+    if (pieSliceLabelStyle) {
+      Object.assign(style, getValue(pieSliceLabelStyle, value));
     }
 
-    const r = pieSliceLabelDistance ? radius + pieSliceLabelDistance : radius;
+    const r = pieSliceLabelDistance
+      ? radius + getValue(pieSliceLabelDistance, value)
+      : radius;
     const x = center.x + Math.sin((2 * Math.PI) / (1 / labelPercent)) * r;
     const y = center.y - Math.cos((2 * Math.PI) / (1 / labelPercent)) * r;
 
