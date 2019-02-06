@@ -115,4 +115,39 @@ describe("PieChart", () => {
     markerLine.simulate("mouseleave");
     expect(markerLineProps.onMouseLeaveLine).to.have.been.called;
   });
+
+  it("renders slices labels with custom styles and distances", () => {
+    const sliceStyle = { color: "red" };
+    const chart = mount(
+      <PieChart
+        {...props}
+        getPieSliceLabel={value => `${value}%`}
+        pieSliceLabelDistance={20}
+        pieSliceLabelStyle={sliceStyle}
+      />
+    );
+
+    props.data.forEach(value => {
+      const textNode = chart.find(`text[children="${value}%"]`);
+      expect(textNode.exists()).to.be.true;
+      expect(textNode.prop("style")).to.include(sliceStyle);
+    });
+  });
+
+  it("calls factory props to compute slice label distances and styles", () => {
+    const chart = mount(
+      <PieChart
+        {...props}
+        getPieSliceLabel={value => `${value}%`}
+        pieSliceLabelDistance={value => value}
+        pieSliceLabelStyle={value => ({ fontSize: value })}
+      />
+    );
+
+    props.data.forEach(value => {
+      const textNode = chart.find(`text[children="${value}%"]`);
+      expect(textNode.exists()).to.be.true;
+      expect(textNode.prop("style")).to.include({ fontSize: value });
+    });
+  });
 });

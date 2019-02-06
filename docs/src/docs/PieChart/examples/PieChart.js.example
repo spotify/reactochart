@@ -37,6 +37,17 @@ class PieChartExample extends React.Component {
         holeRadius={50}
         centerLabel={(this.state.sinVal * 50).toFixed(0)}
       />
+      <PieChart
+        data={[45, 35, 20]}
+        getPieSliceLabel={val => `${val}%`}
+        pieSliceLabelDistance={20}
+        holeRadius={75}
+        radius={100}
+        marginTop={50}
+        marginBottom={50}
+        marginLeft={50}
+        marginRight={50}
+      />
     </div>
   }
 }
