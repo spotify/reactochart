@@ -68,7 +68,7 @@ class PieChart extends React.Component {
     centerLabelStyle: PropTypes.object,
     /**
      * Accessor for getting labels that are rendered outside each slice of the pie chart.
-     * If not provided not labels will be rendered.
+     * If not provided no labels will be rendered.
      */
     getPieSliceLabel: PropTypes.func,
     /**
