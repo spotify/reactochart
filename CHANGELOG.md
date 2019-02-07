@@ -1,3 +1,7 @@
+## 1.10.0 (2018-12-21)
+
+- [#144](https://github.com/spotify/reactochart/pull/144) Support for pie chart slice labels - thanks @joeporpeglia!
+
 ## 1.9.0 (2018-12-21)
 
 - [#142](https://github.com/spotify/reactochart/pull/142) Update logic for getting invertPointScale & add click handlers to labels themselves
