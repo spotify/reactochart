@@ -67,6 +67,29 @@ class PieChart extends React.Component {
      */
     centerLabelStyle: PropTypes.object,
     /**
+     * Accessor for getting labels that are rendered outside each slice of the pie chart.
+     * If not provided no labels will be rendered.
+     */
+    getPieSliceLabel: PropTypes.func,
+    /**
+     * Inline style object applied to each slice label.
+     * When a function is provided it will receive the value for the slice and should return the
+     * style object for that slice's label.
+     * Used along with `getPieSliceLabel`.
+     */
+    pieSliceLabelStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    /**
+     * Distance to render the label from the outer edge of the pie chart. Positive numbers will
+     * move away from the center and negative numbers will move toward the center.
+     * When a function is provided it will receive the value for the slice and should return the
+     * distance for that slice's label.
+     * Used along with `getPieSliceLabel`.
+     */
+    pieSliceLabelDistance: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.func
+    ]),
+    /**
      * Class attribute to be applied to each pie slice,
      * or accessor function which returns a class.
      */
@@ -196,6 +219,17 @@ class PieChart extends React.Component {
       : null;
 
     let startPercent = 0;
+    const slices = this.props.data.map((d, i) => {
+      const slicePercent = valueAccessor(d) / total;
+      const slice = {
+        start: startPercent,
+        end: startPercent + slicePercent
+      };
+      startPercent += slicePercent;
+
+      return slice;
+    });
+
     return (
       <svg className="rct-pie-chart" {...{ width, height }}>
         {this.props.data.map((d, i) => {
@@ -214,16 +248,14 @@ class PieChart extends React.Component {
             d,
             i
           ) || ""}`;
-          const slicePercent = valueAccessor(d) / total;
-          const endPercent = startPercent + slicePercent;
+          const slice = slices[i];
           const pathStr = pieSlicePath(
-            startPercent,
-            endPercent,
+            slice.start,
+            slice.end,
             center,
             radius,
             holeRadius
           );
-          startPercent += slicePercent;
           const key = `pie-slice-${i}`;
 
           return (
@@ -262,6 +294,11 @@ class PieChart extends React.Component {
           : null}
 
         {this.props.centerLabel ? this.renderCenterLabel(center) : null}
+        {this.props.getPieSliceLabel
+          ? this.props.data.map((d, i) =>
+              this.renderSliceLabel(d, slices[i], center, radius, i)
+            )
+          : null}
       </svg>
     );
   }
@@ -289,6 +326,35 @@ class PieChart extends React.Component {
         d={pathData}
         {...{ onMouseEnter, onMouseMove, onMouseLeave }}
       />
+    );
+  }
+
+  renderSliceLabel(value, slice, center, radius, index) {
+    const {
+      getPieSliceLabel,
+      pieSliceLabelStyle,
+      pieSliceLabelDistance
+    } = this.props;
+    const labelPercent = (slice.end - slice.start) / 2 + slice.start;
+    const style = {
+      textAnchor: "middle",
+      dominantBaseline: "central"
+    };
+
+    if (pieSliceLabelStyle) {
+      Object.assign(style, getValue(pieSliceLabelStyle, value));
+    }
+
+    const r = pieSliceLabelDistance
+      ? radius + getValue(pieSliceLabelDistance, value)
+      : radius;
+    const x = center.x + Math.sin((2 * Math.PI) / (1 / labelPercent)) * r;
+    const y = center.y - Math.cos((2 * Math.PI) / (1 / labelPercent)) * r;
+
+    return (
+      <text key={index} x={x} y={y} style={style}>
+        {getPieSliceLabel(value)}
+      </text>
     );
   }
 
