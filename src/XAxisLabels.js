@@ -21,17 +21,18 @@ function resolveXLabelsForValues(scale, values, formats, style, force = true) {
 
   let labels;
   let attempts = [];
+
   const goodFormat = _.find(formats, format => {
-    const testLabels = values.map((value, i) =>
-      MeasuredValueLabel.getLabel({
+    const testLabels = values.map((value, i) => {
+      return MeasuredValueLabel.getLabel({
         value,
         format,
         style: _.defaults(
-          getValue(style.labelStyle, value, i),
+          getValue(style.labelStyle, { value }, i),
           style.defaultStyle
         )
-      })
-    );
+      });
+    });
 
     const areLabelsDistinct = checkLabelsDistinct(testLabels);
     if (!areLabelsDistinct) {
@@ -219,7 +220,7 @@ class XAxisLabels extends React.Component {
 
   static getMargin(props) {
     props = _.defaults({}, props, XAxisLabels.defaultProps);
-    const { xScale, position, placement, distance, labelStyle } = props;
+    const { xScale, position, placement, distance } = props;
     const labels = props.labels || XAxisLabels.getLabels(props);
     const zeroMargin = {
       marginTop: 0,
