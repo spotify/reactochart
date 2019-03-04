@@ -1,3 +1,8 @@
+## 1.10.1 (2018-12-21)
+
+- [#146](https://github.com/spotify/reactochart/pull/146) Fix labelStyle accessor argument
+- [#145](https://github.com/spotify/reactochart/pull/145) Fix minor vulnerabilities
+
 ## 1.10.0 (2018-12-21)
 
 - [#144](https://github.com/spotify/reactochart/pull/144) Support for pie chart slice labels - thanks @joeporpeglia!
