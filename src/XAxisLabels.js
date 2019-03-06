@@ -12,6 +12,7 @@ import {
 import { getValue } from "./utils/Data";
 import { getScaleTicks, getTickDomain, inferScaleType } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
+import measureText from "./utils/measureText";
 
 function resolveXLabelsForValues(scale, values, formats, style, force = true) {
   // given a set of values to label, and a list of formatters to try,
@@ -298,6 +299,46 @@ class XAxisLabels extends React.Component {
     return labels;
   }
 
+  wrapText = (text, width, x, y, style) => {
+    const words = text.split(/\s+/).reverse();
+    const tspans = [];
+
+    words.forEach(word => {
+      var line = [],
+        lineNumber = 0,
+        lineHeight = 1, // ems
+        dy = 0.8,
+        tspan;
+
+      while ((word = words.pop())) {
+        line.push(word);
+        const m = measureText(_.assign({ text: line.join(" ") }, style));
+
+        if (m.width.value > width) {
+          line.pop();
+          tspan = (
+            <tspan x={x} y={y} dy={`${lineNumber++ * lineHeight + dy}em`}>
+              {line.join(" ")}
+            </tspan>
+          );
+          line = [word];
+          tspans.push(tspan);
+        }
+      }
+
+      if (line.length) {
+        tspan = (
+          <tspan x={x} y={y} dy={`${lineNumber * lineHeight + dy}em`}>
+            {line.join(" ")}
+          </tspan>
+        );
+        tspans.push(tspan);
+      }
+    });
+
+    return tspans;
+  };
+
   render() {
     const {
       height,
@@ -361,7 +402,8 @@ class XAxisLabels extends React.Component {
                   style
                 }}
               >
-                {label.text}
+                {this.wrapText(label.text, xScale.step(), x, y, style)}
+                {/* {["hello", "there"].map(x => <tspan>x</tspan>)} */}
               </MeasuredValueLabel>
             </g>
           );
