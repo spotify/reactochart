@@ -1,3 +1,7 @@
+## 1.10.2 (2019-04-29)
+
+- [#150](https://github.com/spotify/reactochart/pull/150) Fix invert point scale logic to get option closest to mouse pointer
+
 ## 1.10.1 (2018-12-21)
 
 - [#146](https://github.com/spotify/reactochart/pull/146) Fix labelStyle accessor argument
