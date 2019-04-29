@@ -183,7 +183,7 @@ describe("Axis utils", () => {
         outerX: 50,
         outerY: 0,
         xScale: scale,
-        xValue: "a"
+        xValue: "b"
       });
     });
 
@@ -213,7 +213,7 @@ describe("Axis utils", () => {
         outerX: 0,
         outerY: 50,
         yScale: scale,
-        yValue: "a"
+        yValue: "b"
       });
     });
   });
