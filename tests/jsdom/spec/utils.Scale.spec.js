@@ -10,7 +10,7 @@ import {
   initScale,
   isValidScale,
   invertPointScale,
-  indexOfClosestLeftNumberInList
+  indexOfClosestNumberInList
 } from "../../../src/utils/Scale";
 
 describe("Scale utils", () => {
@@ -83,10 +83,10 @@ describe("Scale utils", () => {
     });
   });
 
-  describe("indexOfClosestLeftNumberInList", () => {
-    it("returns index of left closest to the number in the array", () => {
-      expect(indexOfClosestLeftNumberInList(1.5, [5, 4, 3, 2, 1])).to.equal(3);
-      expect(indexOfClosestLeftNumberInList(1.5, [1, 2, 3, 4, 5])).to.equal(0);
+  describe("indexOfClosestNumberInList", () => {
+    it("returns index of closest to the number in the array", () => {
+      expect(indexOfClosestNumberInList(1.5, [5, 4, 3, 2, 1])).to.equal(3);
+      expect(indexOfClosestNumberInList(1.5, [1, 2, 3, 4, 5])).to.equal(0);
     });
   });
 
