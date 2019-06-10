@@ -16,6 +16,27 @@
       "required": true,
       "description": ""
     },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for Y axis - provided by XYPlot"
+    },
+    "yLimit": {
+      "type": {
+        "name": "any"
+      },
+      "required": false,
+      "description": "Limit on the height of the line"
+    },
+    "yDomain": {
+      "type": {
+        "name": "array"
+      },
+      "required": false,
+      "description": "Y domain of the data as an array - provided by XYPlot"
+    },
     "spacingTop": {
       "type": {
         "name": "number"
