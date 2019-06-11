@@ -11,6 +11,9 @@
  * @flow
  */
 
+// TODO Recreate shallow equals to not use flow
+// we currently use "@babel/preset-flow" just to parse this file
+
 /*eslint-disable no-self-compare */
 
 "use strict";
