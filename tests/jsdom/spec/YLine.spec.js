@@ -110,4 +110,19 @@ describe("YLine", () => {
     );
     expect(findLine(wrapper).prop("style")).to.deep.equal(style);
   });
+
+  it("limits the line's width using xLimit", () => {
+    const limit = 2;
+    let wrapper = shallow(
+      <YLine 
+        yScale={linearScale}
+        xScale={linearScale}
+        value={linearValue}
+        xLimit={limit}
+        {...commonProps}
+      />
+    );
+    expect(getLineWidth(findLine(wrapper))).to.equal(linearScale(limit));
+  });
+
 });

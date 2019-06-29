@@ -62,8 +62,8 @@ export default class XLine extends React.Component {
     let y1 = -spacingTop;
     let y2 = height + spacingBottom;
 
-    if (yLimit) {
-      y1 = yScale(yDomain[0]);
+    if (typeof yLimit !== "undefined") {
+      y1 = yScale(yDomain[0]) + spacingBottom;
       y2 = yScale(yLimit);
     }
 

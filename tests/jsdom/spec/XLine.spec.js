@@ -110,4 +110,20 @@ describe("XLine", () => {
     );
     expect(findLine(wrapper).prop("style")).to.deep.equal(style);
   });
+
+  it("limits the line's height using yLimit", () => {
+    const limit = 2;
+    let wrapper = shallow(
+      <XLine 
+        yScale={linearScale}
+        xScale={linearScale}
+        yDomain={linearScale.domain}
+        value={linearValue}
+        yLimit={limit}
+        {...commonProps}
+      />
+    );
+    expect(getLineHeight(findLine(wrapper))).to.equal(linearScale(limit));
+  });
+
 });
