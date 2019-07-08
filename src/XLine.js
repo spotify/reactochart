@@ -12,6 +12,15 @@ export default class XLine extends React.Component {
     xScale: PropTypes.func,
     value: PropTypes.any.isRequired,
     /**
+     * D3 scale for Y axis - provided by XYPlot
+     */
+    yScale: PropTypes.func,
+    yLimit: PropTypes.any,
+    /**
+     * The Y domain of the data as an array - provided by XYPlot
+     */
+    yDomain: PropTypes.array,
+    /**
      * Spacing top - provided by XYPlot
      */
     spacingTop: PropTypes.number,
@@ -39,6 +48,9 @@ export default class XLine extends React.Component {
     const {
       xScale,
       value,
+      yScale,
+      yLimit,
+      yDomain,
       height,
       style,
       spacingTop,
@@ -47,13 +59,21 @@ export default class XLine extends React.Component {
     const className = `rct-chart-line-x ${this.props.className}`;
     const lineX = xScale(value);
 
+    let y1 = -spacingTop;
+    let y2 = height + spacingBottom;
+
+    if (typeof yLimit !== "undefined") {
+      y1 = yScale(yDomain[0]) + spacingBottom;
+      y2 = yScale(yLimit);
+    }
+
     return (
       <line
         {...{
           x1: lineX,
           x2: lineX,
-          y1: -spacingTop,
-          y2: height + spacingBottom,
+          y1: y1,
+          y2: y2,
           className,
           style
         }}

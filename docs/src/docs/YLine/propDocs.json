@@ -16,6 +16,20 @@
       "required": true,
       "description": ""
     },
+    "xScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for X axis - provided by XYPlot"
+    },
+    "xLimit": {
+      "type": {
+        "name": "any"
+      },
+      "required": false,
+      "description": "Limit on the width of the line"
+    },
     "spacingLeft": {
       "type": {
         "name": "number"
