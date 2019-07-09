@@ -110,6 +110,34 @@
       "returns": null
     },
     {
+      "name": "renderSliceLabel",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "value",
+          "type": null
+        },
+        {
+          "name": "slice",
+          "type": null
+        },
+        {
+          "name": "center",
+          "type": null
+        },
+        {
+          "name": "radius",
+          "type": null
+        },
+        {
+          "name": "index",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
       "name": "renderCenterLabel",
       "docblock": null,
       "modifiers": [],
@@ -249,6 +277,43 @@
         "value": "{}",
         "computed": false
       }
+    },
+    "getPieSliceLabel": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Accessor for getting labels that are rendered outside each slice of the pie chart.\nIf not provided no labels will be rendered."
+    },
+    "pieSliceLabelStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Inline style object applied to each slice label.\nWhen a function is provided it will receive the value for the slice and should return the\nstyle object for that slice's label.\nUsed along with `getPieSliceLabel`."
+    },
+    "pieSliceLabelDistance": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "number"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Distance to render the label from the outer edge of the pie chart. Positive numbers will\nmove away from the center and negative numbers will move toward the center.\nWhen a function is provided it will receive the value for the slice and should return the\ndistance for that slice's label.\nUsed along with `getPieSliceLabel`."
     },
     "pieSliceClassName": {
       "type": {

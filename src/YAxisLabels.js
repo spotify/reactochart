@@ -26,7 +26,7 @@ function resolveYLabelsForValues(scale, values, formats, style, force = true) {
         value,
         format,
         style: _.defaults(
-          getValue(style.labelStyle, value, i),
+          getValue(style.labelStyle, { value }, i),
           style.defaultStyle
         )
       })

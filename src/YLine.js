@@ -12,6 +12,11 @@ export default class YLine extends React.Component {
     yScale: PropTypes.func,
     value: PropTypes.any.isRequired,
     /**
+     * D3 scale for X axis - provided by XYPlot
+     */
+    xScale: PropTypes.func,
+    xLimit: PropTypes.any,
+    /**
      * Spacing left - provided by XYPlot
      */
     spacingLeft: PropTypes.number,
@@ -39,6 +44,8 @@ export default class YLine extends React.Component {
     const {
       yScale,
       value,
+      xScale,
+      xLimit,
       width,
       spacingLeft,
       spacingRight,
@@ -46,12 +53,14 @@ export default class YLine extends React.Component {
     } = this.props;
     const className = `rct-chart-line-y ${this.props.className || ""}`;
     const lineY = yScale(value);
+    const lineX =
+      typeof xLimit === "undefined" ? width + spacingRight : xScale(xLimit);
 
     return (
       <line
         {...{
           x1: -spacingLeft,
-          x2: width + spacingRight,
+          x2: lineX,
           y1: lineY,
           y2: lineY,
           className,

@@ -117,28 +117,12 @@ export function scaleEqual(scaleA, scaleB) {
         _.isEqual(scaleA.range(), scaleB.range());
 }
 
-export function indexOfClosestLeftNumberInList(number, sortedList) {
-  if (sortedList.length <= 1) {
-    return 0;
-  }
-
-  const isDescending = sortedList[0] > sortedList[1];
-  // _.sortedIndex works on ascending lists only
-  // so reverse if working with descending list
-  const listCopy = isDescending ? sortedList.slice().reverse() : sortedList;
-
-  // Get lower bound of where number falls
-  let indexForNumber = _.sortedIndex(listCopy, number);
-  if (isDescending && indexForNumber < sortedList.length) {
-    indexForNumber += 1;
-  } else if (!isDescending && indexForNumber > 0) {
-    indexForNumber -= 1;
-  }
-
-  return isDescending
-    ? // If descending, remap indexForNumber to work with descending list
-      Math.abs(indexForNumber - sortedList.length)
-    : indexForNumber;
+export function indexOfClosestNumberInList(number, list) {
+  return list.reduce((closestI, current, i) => {
+    return Math.abs(current - number) < Math.abs(list[closestI] - number)
+      ? i
+      : closestI;
+  }, 0);
 }
 
 export function invertPointScale(scale, rangeValue) {
@@ -147,10 +131,21 @@ export function invertPointScale(scale, rangeValue) {
   // shim until d3.scalePoint.invert() is implemented for real
   // given a value from the output range, returns the *nearest* corresponding value in the input domain
   const rangePoints = domain.map(domainValue => scale(domainValue));
-  const nearestLeftPointIndex = indexOfClosestLeftNumberInList(
-    rangeValue,
-    rangePoints
-  );
 
-  return domain[nearestLeftPointIndex];
+  if (rangePoints.length <= 1) {
+    return domain[0];
+  }
+
+  const isDescending = rangePoints[0] > rangePoints[1];
+
+  // _.sortedIndex works on ascending lists only
+  // so reverse if working with descending list
+  if (isDescending) {
+    domain.reverse();
+    rangePoints.reverse();
+  }
+
+  const nearestPointIndex = indexOfClosestNumberInList(rangeValue, rangePoints);
+
+  return domain[nearestPointIndex];
 }
