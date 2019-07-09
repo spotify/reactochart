@@ -38,8 +38,8 @@
     "test-watch": "env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --watch --compilers js:@babel/register --require tests/jsdom/setup.js --recursive tests/jsdom/spec"
   },
   "dependencies": {
-    "d3": "^4.4.0",
-    "d3-sankey": "^0.7.1",
+    "d3": "^5.9.7",
+    "d3-sankey": "^0.12.1",
     "invariant": "^2.2.0",
     "lodash": "^4.17.11",
     "moment": "^2.10.6",

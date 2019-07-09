@@ -1,4 +1,4 @@
-import { area, scaleOrdinal, schemeCategory20b } from "d3";
+import { area, scaleOrdinal, schemeCategory10 } from "d3";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
@@ -117,7 +117,7 @@ export default class FunnelChart extends React.Component {
         .y1((d, i) => yScale(getValue(y, d, i)));
     }
 
-    const colors = scaleOrdinal(schemeCategory20b).domain(_.range(10));
+    const colors = scaleOrdinal(schemeCategory10).domain(_.range(10));
 
     return (
       <g className="rct-funnel-chart">
