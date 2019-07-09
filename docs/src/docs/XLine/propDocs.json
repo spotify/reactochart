@@ -28,14 +28,14 @@
         "name": "any"
       },
       "required": false,
-      "description": "Limit on the height of the line"
+      "description": ""
     },
     "yDomain": {
       "type": {
         "name": "array"
       },
       "required": false,
-      "description": "Y domain of the data as an array - provided by XYPlot"
+      "description": "The Y domain of the data as an array - provided by XYPlot"
     },
     "spacingTop": {
       "type": {
