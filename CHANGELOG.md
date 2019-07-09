@@ -1,3 +1,9 @@
+## 1.11.0 (2019-07-09)
+
+- [#155](https://github.com/spotify/reactochart/pull/155) Update d3 to v5 - thanks @ekh64!
+- [#152](https://github.com/spotify/reactochart/pull/152) Add limit props to set height and width of XLine and YLine - thanks @tanayv!
+- [#153](https://github.com/spotify/reactochart/pull/153) Upgrade to babel 7 and css loader v3
+
 ## 1.10.2 (2019-04-29)
 
 - [#150](https://github.com/spotify/reactochart/pull/150) Fix invert point scale logic to get option closest to mouse pointer

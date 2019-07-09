@@ -28,7 +28,7 @@
         "name": "any"
       },
       "required": false,
-      "description": "Limit on the width of the line"
+      "description": ""
     },
     "spacingLeft": {
       "type": {
