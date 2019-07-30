@@ -1,5 +1,7 @@
 import { extent, histogram, scaleLinear } from "d3";
-import _ from "lodash";
+import first from "lodash/first";
+import last from "lodash/last";
+import maxBy from "lodash/maxBy";
 import PropTypes from "prop-types";
 import React from "react";
 import AreaBarChart from "./AreaBarChart";
@@ -100,8 +102,8 @@ export default class Histogram extends React.Component {
     );
 
     const domains = {
-      xDomain: [_.first(bins).x0, _.last(bins).x1],
-      yDomain: [0, _.maxBy(bins, bin => bin.length).length]
+      xDomain: [first(bins).x0, last(bins).x1],
+      yDomain: [0, maxBy(bins, bin => bin.length).length]
     };
 
     return domains;
@@ -133,8 +135,8 @@ export default class Histogram extends React.Component {
 
       // Set nicely rounded domain as domain for makeHistogram
       makeHistogram = makeHistogram.domain([
-        _.first(niceBinDomain),
-        _.last(niceBinDomain)
+        first(niceBinDomain),
+        last(niceBinDomain)
       ]);
     }
 

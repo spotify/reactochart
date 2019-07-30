@@ -1,5 +1,8 @@
 import React from "react";
-import _ from "lodash";
+import defaults from "lodash/defaults";
+import assign from "lodash/assign";
+import omit from "lodash/omit";
+import identity from "lodash/identity";
 import measureText from "./utils/measureText";
 import PropTypes from "prop-types";
 
@@ -8,7 +11,7 @@ export default class MeasuredValueLabel extends React.Component {
     value: PropTypes.any
   };
   static defaultProps = {
-    format: _.identity,
+    format: identity,
     style: {
       fontFamily: "Helvetica, sans-serif",
       fontSize: "20px",
@@ -18,12 +21,9 @@ export default class MeasuredValueLabel extends React.Component {
   };
   static getLabel(props) {
     const { value, format } = props;
-    const style = _.defaults(
-      props.style,
-      MeasuredValueLabel.defaultProps.style
-    );
+    const style = defaults(props.style, MeasuredValueLabel.defaultProps.style);
     const labelStr = format(value);
-    const measured = measureText(_.assign({ text: labelStr }, style));
+    const measured = measureText(assign({ text: labelStr }, style));
 
     return {
       value: props.value,
@@ -35,7 +35,7 @@ export default class MeasuredValueLabel extends React.Component {
 
   render() {
     const { value, format } = this.props;
-    const passedProps = _.omit(this.props, ["value", "format"]);
+    const passedProps = omit(this.props, ["value", "format"]);
 
     return (
       <text {...passedProps}>

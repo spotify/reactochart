@@ -1,4 +1,7 @@
-import _ from "lodash";
+import omit from "lodash/omit";
+import every from "lodash/every";
+import isEqual from "lodash/isEqual";
+import get from "lodash/get";
 import shallowEqual from "./shallowEqual";
 import { scaleEqual } from "./Scale";
 
@@ -32,23 +35,21 @@ export default function xyPropsEqual(
 
   const propKeysToSkipShallowCheck = propKeysToDeepCheck.concat("scale");
 
-  const isEqual =
+  const equalityCheck =
     // most keys just get shallow-equality checked
     shallowEqual(
-      _.omit(propsA, propKeysToSkipShallowCheck),
-      _.omit(propsB, propKeysToSkipShallowCheck)
+      omit(propsA, propKeysToSkipShallowCheck),
+      omit(propsB, propKeysToSkipShallowCheck)
     ) &&
-    // propKeysToDeepCheck get deep-equality checked using _.isEqual
-    _.every(propKeysToDeepCheck, key => _.isEqual(propsA[key], propsB[key])) &&
-    // d3 scales are special, get deep-checked using custom `scaleEqual` utility
-    _.every(["x", "y"], key => {
+    every(propKeysToDeepCheck, key => isEqual(propsA[key], propsB[key])) &&
+    every(["x", "y"], key => {
       return scaleEqual(
-        _.get(propsA, `scale[${key}]`),
-        _.get(propsA, `scale[${key}]`)
+        get(propsA, `scale[${key}]`),
+        get(propsA, `scale[${key}]`)
       );
     });
 
-  return isEqual;
+  return equalityCheck;
 }
 
 export function xyPropsEqualDebug(
@@ -67,15 +68,15 @@ export function xyPropsEqualDebug(
   const isEqual =
     // most keys just get shallow-equality checked
     shallowEqual(
-      _.omit(propsA, propKeysToSkipShallowCheck),
-      _.omit(propsB, propKeysToSkipShallowCheck)
+      omit(propsA, propKeysToSkipShallowCheck),
+      omit(propsB, propKeysToSkipShallowCheck)
     ) &&
-    _.every(propKeysToDeepCheck, key => {
-      const isDeepEqual = _.isEqual(propsA[key], propsB[key]);
+    every(propKeysToDeepCheck, key => {
+      const isDeepEqual = isEqual(propsA[key], propsB[key]);
       if (!isDeepEqual) console.log(`xyProps: ${key} not equal`);
       return isDeepEqual;
     }) &&
-    _.every(["x", "y"], key => {
+    every(["x", "y"], key => {
       const isScaleEqual = scaleEqual(propsA.scale[key], propsB.scale[key]);
       if (!isScaleEqual) console.log(`xyProps: scale.${key} not equal`);
       return isScaleEqual;

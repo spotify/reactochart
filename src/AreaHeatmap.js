@@ -1,5 +1,8 @@
 import { extent } from "d3";
-import _ from "lodash";
+import flatten from "lodash/flatten";
+import isFunction from "lodash/isFunction";
+import every from "lodash/every";
+import isFinite from "lodash/isFinite";
 import PropTypes from "prop-types";
 import React from "react";
 import { methodIfFuncProp } from "./util.js";
@@ -51,10 +54,10 @@ export default class AreaHeatmap extends React.Component {
     const { data, x, xEnd, y, yEnd } = props;
     return {
       x: extent(
-        _.flatten([data.map(makeAccessor2(x)), data.map(makeAccessor2(xEnd))])
+        flatten([data.map(makeAccessor2(x)), data.map(makeAccessor2(xEnd))])
       ),
       y: extent(
-        _.flatten([data.map(makeAccessor2(y)), data.map(makeAccessor2(yEnd))])
+        flatten([data.map(makeAccessor2(y)), data.map(makeAccessor2(yEnd))])
       )
     };
   }
@@ -74,7 +77,7 @@ export default class AreaHeatmap extends React.Component {
 
   onMouseMove = e => {
     const { xScale, yScale, onMouseMove } = this.props;
-    if (!_.isFunction(onMouseMove)) return;
+    if (!isFunction(onMouseMove)) return;
 
     const boundBox = this.refs.background.getBoundingClientRect();
     if (!boundBox) return;
@@ -174,7 +177,7 @@ export default class AreaHeatmap extends React.Component {
           const rectX = fullRectX + (fullWidth - width) / 2;
           const rectY = fullRectY + (fullHeight - height) / 2;
 
-          if (!_.every([rectX, rectY, width, height], _.isFinite)) return null;
+          if (!every([rectX, rectY, width, height], isFinite)) return null;
 
           const className = `rct-area-heatmap-rect ${getValue(
             rectClassName,

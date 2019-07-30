@@ -1,5 +1,4 @@
 import React from "react";
-import * as d3 from "d3";
 import _ from "lodash";
 import sinon from "sinon";
 import { expect } from "chai";

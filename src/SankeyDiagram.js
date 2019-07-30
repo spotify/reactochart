@@ -6,18 +6,31 @@ import {
   sankeyLinkHorizontal,
   sankeyRight
 } from "d3-sankey";
-import _ from "lodash";
+import isFunction from "lodash/isFunction";
+import isNull from "lodash/isNull";
+import isUndefined from "lodash/isUndefined";
+import isString from "lodash/isString";
+import isNumber from "lodash/isNumber";
+import omit from "lodash/omit";
+import get from "lodash/get";
+import maxBy from "lodash/maxBy";
+import has from "lodash/has";
+import isFinite from "lodash/isFinite";
+import cloneDeep from "lodash/cloneDeep";
+import some from "lodash/some";
+import map from "lodash/map";
 import numeral from "numeral";
 import PropTypes from "prop-types";
 import React from "react";
 import { getValue } from "./utils/Data";
+import { bindTrailingArgs } from "./util.js";
 
 const SankeyNode = props => {
   const { graph, node, nodeClassName, nodeStyle } = props;
   // create partial functions for handlers - callbacks with the current node/graph arguments attached
   const makeHandler = origHandler =>
-    _.isFunction(origHandler)
-      ? _.partial(origHandler, _, { node, graph })
+    isFunction(origHandler)
+      ? bindTrailingArgs(origHandler, { node, graph })
       : null;
 
   return (
@@ -42,8 +55,8 @@ const SankeyLink = props => {
   const { graph, link, linkPath, linkClassName, linkStyle } = props;
   // create partial functions for handlers - callbacks with the current graph/link arguments attached
   const makeHandler = origHandler =>
-    _.isFunction(origHandler)
-      ? _.partial(origHandler, _, { link, graph })
+    isFunction(origHandler)
+      ? bindTrailingArgs(origHandler, { link, graph })
       : null;
 
   return (
@@ -68,8 +81,8 @@ const SankeyNodeTerminal = props => {
   const { node, graph } = props;
   if (!node.terminalValue) return null;
   const makeHandler = origHandler =>
-    _.isFunction(origHandler)
-      ? _.partial(origHandler, _, { node, graph, props })
+    isFunction(origHandler)
+      ? bindTrailingArgs(origHandler, { node, graph, props })
       : null;
   const getWithNode = accessor => getValue(accessor, node, graph, props);
   const width = getWithNode(props.nodeTerminalWidth) || 0;
@@ -102,14 +115,14 @@ const SankeyNodeTerminal = props => {
 const SankeyNodeLabel = props => {
   const { node, graph, nodeLabelText, nodeId } = props;
   const getWithNode = accessor => getValue(accessor, node, graph, props);
-  const getLabelText = _.isFunction(nodeLabelText) ? nodeLabelText : nodeId;
+  const getLabelText = isFunction(nodeLabelText) ? nodeLabelText : nodeId;
   const placement = getWithNode(props.nodeLabelPlacement);
   const distance = getWithNode(props.nodeLabelDistance) || 0;
   const labelContent = getWithNode(getLabelText);
   // don't render empty labels
   if (
-    _.isNull(labelContent) ||
-    _.isUndefined(labelContent) ||
+    isNull(labelContent) ||
+    isUndefined(labelContent) ||
     labelContent === false ||
     labelContent === ""
   ) {
@@ -119,7 +132,7 @@ const SankeyNodeLabel = props => {
   // if `labelContent` is a string or number, it is rendered as text within a SVG <text> element
   // otherwise, it is rendered as arbitrary SVG content
   // allows users to render components inside a node label (eg. to add icon or link)
-  const isTextLabel = _.isString(labelContent) || _.isNumber(labelContent);
+  const isTextLabel = isString(labelContent) || isNumber(labelContent);
   if (!isTextLabel) {
     return labelContent;
   }
@@ -166,7 +179,7 @@ const SankeyNodeLabel = props => {
       y: node.y0 + Math.abs(node.y1 - node.y0) / 2
     };
   } else {
-    if (!_.isUndefined(placement) && placement !== "after")
+    if (!isUndefined(placement) && placement !== "after")
       console.warn(
         `${placement} is not a valid value for nodeLabelPlacement - defaulting to "after"`
       );
@@ -222,7 +235,7 @@ const SankeyStepLabel = props => {
 
   let yPos = y;
 
-  if (_.isNumber(stepLabelPadding)) {
+  if (isNumber(stepLabelPadding)) {
     yPos = yPos - stepLabelPadding;
   }
 
@@ -240,7 +253,7 @@ const SankeyStepLabel = props => {
 };
 
 const SVGContainer = props => {
-  const otherProps = _.omit(props, ["standalone"]);
+  const otherProps = omit(props, ["standalone"]);
   if (props.standalone) {
     return <svg {...otherProps} />;
   }
@@ -261,13 +274,11 @@ function enhanceGraph(graph) {
     node.terminalValue = Math.max(node.value - sourceLinksSum, 0);
   });
   graph.links.forEach(link => {
-    link.valueSourceRelative =
-      (link.value || 0) / _.get(link, "source.value", 0);
-    link.valueTargetRelative =
-      (link.value || 0) / _.get(link, "target.value", 0);
+    link.valueSourceRelative = (link.value || 0) / get(link, "source.value", 0);
+    link.valueTargetRelative = (link.value || 0) / get(link, "target.value", 0);
   });
 
-  graph.maxDepth = _.maxBy(graph.nodes, "depth");
+  graph.maxDepth = maxBy(graph.nodes, "depth");
   graph.maxDepth = graph.nodes.reduce(
     (max, node) => Math.max(node.depth || 0, max),
     0
@@ -734,8 +745,8 @@ export default class SankeyDiagram extends React.Component {
     },
     nodeLabelDistance: 4,
     nodeLabelText: (node, graph, props) => {
-      if (_.has(node, "name")) return node.name;
-      if (_.has(node, "label")) return node.label;
+      if (has(node, "name")) return node.name;
+      if (has(node, "label")) return node.label;
       return getValue(props.nodeId, node, graph, props);
     },
     nodeLabelClassName: "",
@@ -764,7 +775,7 @@ export default class SankeyDiagram extends React.Component {
     showLinkSourceLabels: false,
     linkSourceLabelText: (link, graph, props) => {
       const valueRelative = link.valueSourceRelative;
-      if (!_.isFinite(valueRelative)) return "";
+      if (!isFinite(valueRelative)) return "";
       const percentText =
         valueRelative < 0.001
           ? "<0.1%"
@@ -783,7 +794,7 @@ export default class SankeyDiagram extends React.Component {
     showLinkTargetLabels: false,
     linkTargetLabelText: (link, graph, props) => {
       const valueRelative = link.valueTargetRelative;
-      if (!_.isFinite(valueRelative)) return "";
+      if (!isFinite(valueRelative)) return "";
       const percentText =
         valueRelative < 0.001
           ? "<0.1%"
@@ -817,10 +828,10 @@ export default class SankeyDiagram extends React.Component {
       );
 
     const nodes = this.props.shouldClone
-      ? _.cloneDeep(this.props.nodes)
+      ? cloneDeep(this.props.nodes)
       : this.props.nodes;
     const links = this.props.shouldClone
-      ? _.cloneDeep(this.props.links)
+      ? cloneDeep(this.props.links)
       : this.props.links;
     const sankeyGraph = makeSankey({ nodes, links });
     this._graph = enhanceGraph(sankeyGraph);
@@ -846,7 +857,7 @@ export default class SankeyDiagram extends React.Component {
       "nodeAlignment"
     ];
 
-    const hasChangedSankey = _.some(sankeyLayoutPropKeys, key => {
+    const hasChangedSankey = some(sankeyLayoutPropKeys, key => {
       return nextProps[key] !== this.props[key];
     });
     if (hasChangedSankey) this._makeSankeyGraph();
@@ -922,7 +933,7 @@ export default class SankeyDiagram extends React.Component {
 
       return (
         <g className="rct-step-labels" width={innerWidth} height={100}>
-          {_.map(depthMapXPos, (x, step) => {
+          {map(depthMapXPos, (x, step) => {
             const stepLabelProps = {
               y: depthMapYPos[step],
               step,

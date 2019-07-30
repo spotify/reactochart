@@ -1,4 +1,11 @@
-import _ from "lodash";
+import inRange from "lodash/inRange";
+import isFunction from "lodash/isFunction";
+import partial from "lodash/partial";
+import fromPairs from "lodash/fromPairs";
+import omit from "lodash/omit";
+import pick from "lodash/pick";
+import isNull from "lodash/isNull";
+import isUndefined from "lodash/isUndefined";
 import PropTypes from "prop-types";
 import React from "react";
 import { methodIfFuncProp } from "./util";
@@ -36,13 +43,13 @@ function getMouseOptions(
   const xScaleType = inferScaleType(xScale);
   const yScaleType = inferScaleType(yScale);
 
-  const xValue = !_.inRange(innerX, 0, chartSize.width)
+  const xValue = !inRange(innerX, 0, chartSize.width)
     ? null
     : xScaleType === "ordinal"
       ? invertPointScale(xScale, innerX)
       : xScale.invert(innerX);
 
-  const yValue = !_.inRange(innerY, 0, chartSize.height)
+  const yValue = !inRange(innerY, 0, chartSize.height)
     ? null
     : yScaleType === "ordinal"
       ? invertPointScale(yScale, innerY)
@@ -185,14 +192,16 @@ class XYPlot extends React.Component {
 
   onXYMouseEvent = (callbackKey, event) => {
     const callback = this.props[callbackKey];
-    if (!_.isFunction(callback)) return;
+    if (!isFunction(callback)) return;
     const options = getMouseOptions(event, this.props);
     callback(options);
   };
-  onMouseMove = _.partial(this.onXYMouseEvent, "onMouseMove");
-  onMouseDown = _.partial(this.onXYMouseEvent, "onMouseDown");
-  onMouseUp = _.partial(this.onXYMouseEvent, "onMouseUp");
-  onClick = _.partial(this.onXYMouseEvent, "onClick");
+
+  onMouseMove = partial(this.onXYMouseEvent, "onMouseMove");
+  onMouseDown = partial(this.onXYMouseEvent, "onMouseDown");
+  onMouseUp = partial(this.onXYMouseEvent, "onMouseUp");
+  onClick = partial(this.onXYMouseEvent, "onClick");
+
   onMouseEnter = event => this.props.onMouseEnter({ event });
   onMouseLeave = event => this.props.onMouseLeave({ event });
 
@@ -242,7 +251,7 @@ class XYPlot extends React.Component {
       "onMouseUp",
       "onClick"
     ];
-    const handlers = _.fromPairs(
+    const handlers = fromPairs(
       handlerNames.map(n => [n, methodIfFuncProp(n, this.props, this)])
     );
     const scales = {
@@ -264,9 +273,9 @@ class XYPlot extends React.Component {
       k => omittedProps.indexOf(k) === -1
     );
 
-    const propsToPass = _.omit(
+    const propsToPass = omit(
       {
-        ..._.pick(this.props, xyPlotPropKeys),
+        ...pick(this.props, xyPlotPropKeys),
         ...chartSize,
         ...scales
       },
@@ -290,7 +299,7 @@ class XYPlot extends React.Component {
             {...panelSize}
           />
           {React.Children.map(this.props.children, child => {
-            return _.isNull(child) || _.isUndefined(child)
+            return isNull(child) || isUndefined(child)
               ? null
               : React.cloneElement(child, propsToPass);
           })}

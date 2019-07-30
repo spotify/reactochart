@@ -668,7 +668,7 @@
       "required": false,
       "description": "Accessor function `nodeLabelText(node, graph)` which returns the content to be used for node labels.\nThe function may return a string/number (rendered as SVG `<text>`),\nor arbitrary React SVG element(s) (rendered as-is inside the SVG).\nNOTE: in the latter case (returning arbitrary SVG), `nodeLabelPlacement`, `nodeLabelDistance`,\n`nodeLabelClassName` and `nodeLabelStyle` props will not be applied -\nuser is responsible for all positioning and attributes on this element.",
       "defaultValue": {
-        "value": "(node, graph, props) => {\n  if (_.has(node, \"name\")) return node.name;\n  if (_.has(node, \"label\")) return node.label;\n  return getValue(props.nodeId, node, graph, props);\n}",
+        "value": "(node, graph, props) => {\n  if (has(node, \"name\")) return node.name;\n  if (has(node, \"label\")) return node.label;\n  return getValue(props.nodeId, node, graph, props);\n}",
         "computed": false
       }
     },
@@ -842,7 +842,7 @@
       "required": false,
       "description": "Accessor function `f(link, graph)` which returns the text to be used for link *source* labels.",
       "defaultValue": {
-        "value": "(link, graph, props) => {\n  const valueRelative = link.valueSourceRelative;\n  if (!_.isFinite(valueRelative)) return \"\";\n  const percentText =\n    valueRelative < 0.001\n      ? \"<0.1%\"\n      : numeral(valueRelative).format(\"0.[0]%\");\n  return `${percentText} to ${getValue(\n    props.nodeLabelText,\n    link.target,\n    graph,\n    props\n  )}`;\n}",
+        "value": "(link, graph, props) => {\n  const valueRelative = link.valueSourceRelative;\n  if (!isFinite(valueRelative)) return \"\";\n  const percentText =\n    valueRelative < 0.001\n      ? \"<0.1%\"\n      : numeral(valueRelative).format(\"0.[0]%\");\n  return `${percentText} to ${getValue(\n    props.nodeLabelText,\n    link.target,\n    graph,\n    props\n  )}`;\n}",
         "computed": false
       }
     },
@@ -948,7 +948,7 @@
       "required": false,
       "description": "Accessor function `f(link, graph)` which returns the text to be used for link *target* labels.",
       "defaultValue": {
-        "value": "(link, graph, props) => {\n  const valueRelative = link.valueTargetRelative;\n  if (!_.isFinite(valueRelative)) return \"\";\n  const percentText =\n    valueRelative < 0.001\n      ? \"<0.1%\"\n      : numeral(valueRelative).format(\"0.[0]%\");\n  return `${percentText} from ${getValue(\n    props.nodeLabelText,\n    link.source,\n    graph,\n    props\n  )}`;\n}",
+        "value": "(link, graph, props) => {\n  const valueRelative = link.valueTargetRelative;\n  if (!isFinite(valueRelative)) return \"\";\n  const percentText =\n    valueRelative < 0.001\n      ? \"<0.1%\"\n      : numeral(valueRelative).format(\"0.[0]%\");\n  return `${percentText} from ${getValue(\n    props.nodeLabelText,\n    link.source,\n    graph,\n    props\n  )}`;\n}",
         "computed": false
       }
     },

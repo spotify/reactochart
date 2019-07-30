@@ -16,6 +16,23 @@ module.exports = {
     contentBase: path.join(__dirname, "docs/build")
   },
   devtool: "source-map",
+  module: {
+    rules: [
+      {
+        use: "babel-loader",
+        test: /\.jsx?$/,
+        exclude: /node_modules/
+      },
+      {
+        test: /\.less?$/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          { loader: "less-loader" }
+        ]
+      }
+    ]
+  },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlPlugin({
@@ -30,22 +47,5 @@ module.exports = {
   ],
   resolve: {
     extensions: [".js", ".jsx"]
-  },
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: "babel-loader"
-      },
-      {
-        test: /\.less?$/,
-        use: [
-          { loader: "style-loader" },
-          { loader: "css-loader" },
-          { loader: "less-loader" }
-        ]
-      }
-    ]
   }
 };
