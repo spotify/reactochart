@@ -1,4 +1,14 @@
-import _ from "lodash";
+import find from "lodash/find";
+import defaults from "lodash/defaults";
+import isUndefined from "lodash/isUndefined";
+import last from "lodash/last";
+import max from "lodash/max";
+import capitalize from "lodash/capitalize";
+import isArray from "lodash/isArray";
+import get from "lodash/get";
+import isFunction from "lodash/isFunction";
+import partial from "lodash/partial";
+import identity from "lodash/identity";
 import PropTypes from "prop-types";
 import React from "react";
 import MeasuredValueLabel from "./MeasuredValueLabel";
@@ -20,12 +30,12 @@ function resolveYLabelsForValues(scale, values, formats, style, force = true) {
 
   let labels;
   let attempts = [];
-  const goodFormat = _.find(formats, format => {
+  const goodFormat = find(formats, format => {
     const testLabels = values.map((value, i) =>
       MeasuredValueLabel.getLabel({
         value,
         format,
-        style: _.defaults(
+        style: defaults(
           getValue(style.labelStyle, { value }, i),
           style.defaultStyle
         )
@@ -43,7 +53,7 @@ function resolveYLabelsForValues(scale, values, formats, style, force = true) {
     return true;
   });
 
-  if (!_.isUndefined(goodFormat)) {
+  if (!isUndefined(goodFormat)) {
     // found labels which work, return them
     return {
       labels,
@@ -58,7 +68,7 @@ function resolveYLabelsForValues(scale, values, formats, style, force = true) {
 
     // forced to decide, choose the least bad option
     // super bad, we don't have any label sets with distinct labels. return the last attempt.
-    return _.last(attempts);
+    return last(attempts);
   }
 }
 
@@ -187,12 +197,12 @@ class YAxisLabels extends React.Component {
 
   static getTickDomain(props) {
     if (!props.yScale) return;
-    props = _.defaults({}, props, YAxisLabels.defaultProps);
+    props = defaults({}, props, YAxisLabels.defaultProps);
     return { yTickDomain: getTickDomain(props.yScale, props) };
   }
 
   static getMargin(props) {
-    props = _.defaults({}, props, YAxisLabels.defaultProps);
+    props = defaults({}, props, YAxisLabels.defaultProps);
     const { yScale, position, placement, distance } = props;
     const labels = props.labels || YAxisLabels.getLabels(props);
     const zeroMargin = {
@@ -208,17 +218,15 @@ class YAxisLabels extends React.Component {
     )
       return zeroMargin;
 
-    const marginX = _.max(
-      labels.map(label => Math.ceil(distance + label.width))
-    );
+    const marginX = max(labels.map(label => Math.ceil(distance + label.width)));
     const [marginTop, marginBottom] = getLabelsYOverhang(
       yScale,
       labels,
       "middle"
     );
 
-    return _.defaults(
-      { [`margin${_.capitalize(position)}`]: marginX, marginTop, marginBottom },
+    return defaults(
+      { [`margin${capitalize(position)}`]: marginX, marginTop, marginBottom },
       zeroMargin
     );
   }
@@ -235,14 +243,14 @@ class YAxisLabels extends React.Component {
     ];
 
     return scaleType === "ordinal"
-      ? [_.identity]
+      ? [identity]
       : scaleType === "time"
         ? timeFormatStrs
         : numberFormatStrs;
   }
 
   static getLabels(props) {
-    const { tickCount, labelStyle, yScale } = _.defaults(
+    const { tickCount, labelStyle, yScale } = defaults(
       props,
       {},
       YAxisLabels.defaultProps
@@ -255,7 +263,7 @@ class YAxisLabels extends React.Component {
     const scaleType = inferScaleType(yScale);
     const propsFormats = props.format ? [props.format] : props.formats;
     const formatStrs =
-      _.isArray(propsFormats) && propsFormats.length
+      isArray(propsFormats) && propsFormats.length
         ? propsFormats
         : YAxisLabels.getDefaultFormats(scaleType);
     const formats = makeLabelFormatters(formatStrs, scaleType);
@@ -307,13 +315,13 @@ class YAxisLabels extends React.Component {
             "onMouseClickLabel"
           ].map(eventName => {
             // partially apply this bar's data point as 2nd callback argument
-            const callback = _.get(this.props, eventName);
-            return _.isFunction(callback)
-              ? _.partial(callback, _, label.value)
+            const callback = get(this.props, eventName);
+            return isFunction(callback)
+              ? partial(callback, _, label.value)
               : null;
           });
 
-          const style = _.defaults(
+          const style = defaults(
             { textAnchor },
             getValue(labelStyle, { x, y, ...label }, i),
             YAxisLabels.defaultProps.labelStyle

@@ -1,4 +1,6 @@
-import _ from "lodash";
+import isFunction from "lodash/isFunction";
+import isObject from "lodash/isObject";
+import assign from "lodash/assign";
 import PropTypes from "prop-types";
 import React from "react";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
@@ -8,12 +10,12 @@ const TreeMapNodeLabel = props => {
   const { node, getLabel, labelStyle } = props;
   const { x1, x0 } = node;
   let style = { width: x1 - x0 };
-  const customStyle = _.isFunction(labelStyle)
+  const customStyle = isFunction(labelStyle)
     ? labelStyle(node)
-    : _.isObject(labelStyle)
+    : isObject(labelStyle)
       ? labelStyle
       : {};
-  _.assign(style, customStyle);
+  assign(style, customStyle);
 
   return (
     <div className="rct-node-label" {...{ style }}>

@@ -1,4 +1,5 @@
-import _ from "lodash";
+import defaults from "lodash/defaults";
+import assign from "lodash/assign";
 import measureText from "./utils/measureText";
 import PropTypes from "prop-types";
 import React from "react";
@@ -60,7 +61,7 @@ export default class YAxisTitle extends React.Component {
   };
 
   static getMargin(props) {
-    props = _.defaults({}, props, YAxisTitle.defaultProps);
+    props = defaults({}, props, YAxisTitle.defaultProps);
     const { distance, position, rotate } = props;
     const placement =
       props.placement || (position === "left" ? "before" : "after");
@@ -78,8 +79,8 @@ export default class YAxisTitle extends React.Component {
       return zeroMargin;
 
     const title = props.title || props.children;
-    const style = _.defaults(props.style, YAxisTitle.defaultProps.style);
-    const measured = measureText(_.assign({ text: title }, style));
+    const style = defaults(props.style, YAxisTitle.defaultProps.style);
+    const measured = measureText(assign({ text: title }, style));
 
     const marginValue =
       distance +

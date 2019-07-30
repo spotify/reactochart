@@ -1,4 +1,6 @@
-import _ from "lodash";
+import get from "lodash/get";
+import isFunction from "lodash/isFunction";
+import partial from "lodash/partial";
 import PropTypes from "prop-types";
 import React from "react";
 import RangeRect from "./RangeRect";
@@ -146,8 +148,8 @@ export default class AreaBarChart extends React.Component {
             "onMouseLeaveBar"
           ].map(eventName => {
             // partially apply this bar's data point as 2nd callback argument
-            const callback = _.get(this.props, eventName);
-            return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+            const callback = get(this.props, eventName);
+            return isFunction(callback) ? partial(callback, _, d) : null;
           });
 
           return (

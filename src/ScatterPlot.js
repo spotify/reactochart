@@ -1,4 +1,9 @@
-import _ from "lodash";
+import isFunction from "lodash/isFunction";
+import partial from "lodash/partial";
+import isString from "lodash/isString";
+import isNumber from "lodash/isNumber";
+import isUndefined from "lodash/isUndefined";
+import assign from "lodash/assign";
 import PropTypes from "prop-types";
 import React from "react";
 import { methodIfFuncProp } from "./util.js";
@@ -100,7 +105,7 @@ export default class ScatterPlot extends React.Component {
     ].map(eventName => {
       // partially apply this bar's data point as 2nd callback argument
       const callback = methodIfFuncProp(eventName, this.props, this);
-      return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+      return isFunction(callback) ? partial(callback, _, d) : null;
     });
     const {
       xScale,
@@ -128,12 +133,12 @@ export default class ScatterPlot extends React.Component {
     };
 
     // resolve symbol-generating functions into real symbols
-    if (_.isFunction(pointSymbol)) pointSymbol = pointSymbol(d, i);
+    if (isFunction(pointSymbol)) pointSymbol = pointSymbol(d, i);
     // wrap string/number symbols in <text> container
-    if (_.isString(pointSymbol) || _.isNumber(pointSymbol))
+    if (isString(pointSymbol) || isNumber(pointSymbol))
       pointSymbol = <text>{pointSymbol}</text>;
     // use props.pointRadius for circle radius
-    if (pointSymbol.type === "circle" && _.isUndefined(pointSymbol.props.r))
+    if (pointSymbol.type === "circle" && isUndefined(pointSymbol.props.r))
       symbolProps.r = pointRadius;
 
     // x,y coords of center of symbol
@@ -142,15 +147,15 @@ export default class ScatterPlot extends React.Component {
 
     // set positioning attributes based on symbol type
     if (pointSymbol.type === "circle" || pointSymbol.type === "ellipse") {
-      _.assign(symbolProps, { cx, cy, style: { ...style } });
+      assign(symbolProps, { cx, cy, style: { ...style } });
     } else if (pointSymbol.type === "text") {
-      _.assign(symbolProps, {
+      assign(symbolProps, {
         x: cx,
         y: cy,
         style: { textAnchor: "middle", dominantBaseline: "central", ...style }
       });
     } else {
-      _.assign(symbolProps, {
+      assign(symbolProps, {
         x: cx,
         y: cy,
         style: { ...style }

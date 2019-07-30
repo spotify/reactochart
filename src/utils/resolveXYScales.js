@@ -1,4 +1,15 @@
-import _ from "lodash";
+import includes from "lodash/includes";
+import every from "lodash/every";
+import isFunction from "lodash/isFunction";
+import compact from "lodash/compact";
+import omitBy from "lodash/omitBy";
+import isUndefined from "lodash/isUndefined";
+import isNull from "lodash/isNull";
+import assign from "lodash/assign";
+import isArray from "lodash/isArray";
+import uniq from "lodash/uniq";
+import inRange from "lodash/inRange";
+import defaults from "lodash/defaults";
 import React from "react";
 import {
   combineBorderObjects,
@@ -27,20 +38,20 @@ import {
 function isValidScaleType(scaleType) {
   const validScaleTypes = ["ordinal", "time", "log", "pow", "linear"];
 
-  return _.includes(validScaleTypes, scaleType);
+  return includes(validScaleTypes, scaleType);
 }
 
 function areValidScaleTypes(scaleTypes) {
-  return _.every(scaleTypes, isValidScaleType);
+  return every(scaleTypes, isValidScaleType);
 }
 
 function mapOverChildren(children, iteratee, ...iterateeArgs) {
   // loop over all children (react elements) and call iteratee (a function) on each one
   // iteratee is called with parameters (child.props, child.type, ...iterateeArgs)
-  if (!_.isFunction(iteratee))
+  if (!isFunction(iteratee))
     throw new Error("mapOverChildren iteratee must be a function");
 
-  return _.compact(
+  return compact(
     React.Children.map(children, child => {
       if (!child || !React.isValidElement(child)) return null;
       return iteratee(child.props, child.type, ...iterateeArgs);
@@ -48,7 +59,7 @@ function mapOverChildren(children, iteratee, ...iterateeArgs) {
   );
 }
 function omitNullUndefined(obj) {
-  return _.omitBy(obj, v => _.isUndefined(v) || _.isNull(v));
+  return omitBy(obj, v => isUndefined(v) || isNull(v));
 }
 
 // not currently being used but potentially has some learnings
@@ -118,11 +129,11 @@ export default function resolveXYScales(ComposedComponent) {
 
       // if Component provides a custom static getScaleType method
       // use it to determine remaining scale types
-      if (_.isFunction(Component.getScaleType)) {
+      if (isFunction(Component.getScaleType)) {
         const componentScaleTypes = omitNullUndefined(
           Component.getScaleType(props)
         );
-        ({ xScaleType, yScaleType } = _.assign(
+        ({ xScaleType, yScaleType } = assign(
           componentScaleTypes,
           omitNullUndefined({ xScaleType, yScaleType })
         ));
@@ -145,8 +156,8 @@ export default function resolveXYScales(ComposedComponent) {
 
       // if Component has data or datasets props,
       // infer the data type, & use that to get scale type
-      if (_.isArray(props.data) || _.isArray(props.datasets)) {
-        const datasets = _.isArray(props.datasets)
+      if (isArray(props.data) || isArray(props.datasets)) {
+        const datasets = isArray(props.datasets)
           ? props.datasets
           : [props.data];
 
@@ -172,8 +183,8 @@ export default function resolveXYScales(ComposedComponent) {
         );
 
         if (!isValidScaleType(xScaleType)) {
-          const childXScaleTypes = _.compact(
-            _.uniq(
+          const childXScaleTypes = compact(
+            uniq(
               childrenScaleTypes.map(
                 childScaleTypes => childScaleTypes.xScaleType
               )
@@ -187,8 +198,8 @@ export default function resolveXYScales(ComposedComponent) {
             childXScaleTypes.length === 1 ? childXScaleTypes[0] : "ordinal";
         }
         if (!isValidScaleType(yScaleType)) {
-          const childYScaleTypes = _.compact(
-            _.uniq(
+          const childYScaleTypes = compact(
+            uniq(
               childrenScaleTypes.map(
                 childScaleTypes => childScaleTypes.yScaleType
               )
@@ -222,7 +233,7 @@ export default function resolveXYScales(ComposedComponent) {
 
       // if Component provides a custom static getScaleType method
       // use it to determine remaining scale types
-      if (_.isFunction(Component.getDomain)) {
+      if (isFunction(Component.getDomain)) {
         const {
           xDomain: componentXDomain,
           yDomain: componentYDomain
@@ -253,8 +264,8 @@ export default function resolveXYScales(ComposedComponent) {
 
       // if Component has data or datasets props,
       // use the default domainFromDatasets function to determine a domain from them
-      if (!isDone() && (_.isArray(props.data) || _.isArray(props.datasets))) {
-        const datasets = _.isArray(props.datasets)
+      if (!isDone() && (isArray(props.data) || isArray(props.datasets))) {
+        const datasets = isArray(props.datasets)
           ? props.datasets
           : [props.data];
         if (!isXDone()) {
@@ -285,13 +296,13 @@ export default function resolveXYScales(ComposedComponent) {
         );
 
         if (!isXDone()) {
-          const childXDomains = _.compact(
+          const childXDomains = compact(
             childrenDomains.map(childDomains => childDomains.xDomain)
           );
           xDomain = combineDomains(childXDomains, xDataType);
         }
         if (!isYDone()) {
-          const childYDomains = _.compact(
+          const childYDomains = compact(
             childrenDomains.map(childDomains => childDomains.yDomain)
           );
           yDomain = combineDomains(childYDomains, yDataType);
@@ -299,7 +310,7 @@ export default function resolveXYScales(ComposedComponent) {
       }
 
       if (isDone()) {
-        if (includeXZero && !_.inRange(0, ...xDomain)) {
+        if (includeXZero && !inRange(0, ...xDomain)) {
           // If both are negative set max of domain to 0
           if (xDomain[0] < 0 && xDomain[1] < 0) {
             xDomain[1] = 0;
@@ -308,7 +319,7 @@ export default function resolveXYScales(ComposedComponent) {
           }
         }
 
-        if (includeYZero && !_.inRange(0, ...yDomain)) {
+        if (includeYZero && !inRange(0, ...yDomain)) {
           // If both are negative set max of domain to 0
           if (yDomain[0] < 0 && yDomain[1] < 0) {
             yDomain[1] = 0;
@@ -333,7 +344,7 @@ export default function resolveXYScales(ComposedComponent) {
       Component,
       { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale }
     ) {
-      if (_.isFunction(Component.getTickDomain)) {
+      if (isFunction(Component.getTickDomain)) {
         const componentTickDomains = Component.getTickDomain({
           xScaleType,
           yScaleType,
@@ -353,7 +364,7 @@ export default function resolveXYScales(ComposedComponent) {
           { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale }
         );
 
-        const childrenXTickDomains = _.compact(
+        const childrenXTickDomains = compact(
           childrenTickDomains.map(
             childTickDomains => childTickDomains.xTickDomain
           )
@@ -365,7 +376,7 @@ export default function resolveXYScales(ComposedComponent) {
             )
           : undefined;
 
-        const childrenYTickDomains = _.compact(
+        const childrenYTickDomains = compact(
           childrenTickDomains.map(
             childTickDomains => childTickDomains.yTickDomain
           )
@@ -391,14 +402,14 @@ export default function resolveXYScales(ComposedComponent) {
       let { marginTop, marginBottom, marginLeft, marginRight } = props;
 
       const isDone = () =>
-        _.every([marginTop, marginBottom, marginLeft, marginRight], _.isNumber);
+        every([marginTop, marginBottom, marginLeft, marginRight], _.isNumber);
 
       // short-circuit if all margins provided
       if (isDone()) return { marginTop, marginBottom, marginLeft, marginRight };
 
       // if Component provides a custom static getMargin method
       // use it to determine remaining domains
-      if (_.isFunction(Component.getMargin)) {
+      if (isFunction(Component.getMargin)) {
         const componentMargin = omitNullUndefined(
           Component.getMargin({
             ...props,
@@ -410,7 +421,7 @@ export default function resolveXYScales(ComposedComponent) {
             yScale
           })
         );
-        ({ marginTop, marginBottom, marginLeft, marginRight } = _.assign(
+        ({ marginTop, marginBottom, marginLeft, marginRight } = assign(
           componentMargin,
           omitNullUndefined({
             marginTop,
@@ -443,14 +454,12 @@ export default function resolveXYScales(ComposedComponent) {
           }))
         );
 
-        marginTop = _.isUndefined(marginTop) ? childrenMargin.top : marginTop;
-        marginBottom = _.isUndefined(marginBottom)
+        marginTop = isUndefined(marginTop) ? childrenMargin.top : marginTop;
+        marginBottom = isUndefined(marginBottom)
           ? childrenMargin.bottom
           : marginBottom;
-        marginLeft = _.isUndefined(marginLeft)
-          ? childrenMargin.left
-          : marginLeft;
-        marginRight = _.isUndefined(marginRight)
+        marginLeft = isUndefined(marginLeft) ? childrenMargin.left : marginLeft;
+        marginRight = isUndefined(marginRight)
           ? childrenMargin.right
           : marginRight;
       }
@@ -466,7 +475,7 @@ export default function resolveXYScales(ComposedComponent) {
       let { spacingTop, spacingBottom, spacingLeft, spacingRight } = props;
 
       const isDone = () =>
-        _.every(
+        every(
           [spacingTop, spacingBottom, spacingLeft, spacingRight],
           _.isNumber
         );
@@ -477,7 +486,7 @@ export default function resolveXYScales(ComposedComponent) {
 
       // if Component provides a custom static getSpacing method
       // use it to determine remaining domains
-      if (_.isFunction(Component.getSpacing)) {
+      if (isFunction(Component.getSpacing)) {
         const componentSpacing = omitNullUndefined(
           Component.getSpacing({
             ...props,
@@ -489,7 +498,7 @@ export default function resolveXYScales(ComposedComponent) {
             yScale
           })
         );
-        ({ spacingTop, spacingBottom, spacingLeft, spacingRight } = _.assign(
+        ({ spacingTop, spacingBottom, spacingLeft, spacingRight } = assign(
           componentSpacing,
           omitNullUndefined({
             spacingTop,
@@ -521,16 +530,14 @@ export default function resolveXYScales(ComposedComponent) {
           }))
         );
 
-        spacingTop = _.isUndefined(spacingTop)
-          ? childrenSpacing.top
-          : spacingTop;
-        spacingBottom = _.isUndefined(spacingBottom)
+        spacingTop = isUndefined(spacingTop) ? childrenSpacing.top : spacingTop;
+        spacingBottom = isUndefined(spacingBottom)
           ? childrenSpacing.bottom
           : spacingBottom;
-        spacingLeft = _.isUndefined(spacingLeft)
+        spacingLeft = isUndefined(spacingLeft)
           ? childrenSpacing.left
           : spacingLeft;
-        spacingRight = _.isUndefined(spacingRight)
+        spacingRight = isUndefined(spacingRight)
           ? childrenSpacing.right
           : spacingRight;
       }
@@ -692,7 +699,7 @@ export default function resolveXYScales(ComposedComponent) {
       tempScale = this._makeScales(scaleOptions);
 
       // then resolve the margins
-      const { marginTop, marginBottom, marginLeft, marginRight } = _.defaults(
+      const { marginTop, marginBottom, marginLeft, marginRight } = defaults(
         this._resolveMargin(props, ComposedComponent, {
           xScaleType,
           yScaleType,
@@ -709,12 +716,7 @@ export default function resolveXYScales(ComposedComponent) {
         }
       );
 
-      const {
-        spacingTop,
-        spacingBottom,
-        spacingLeft,
-        spacingRight
-      } = _.defaults(
+      const { spacingTop, spacingBottom, spacingLeft, spacingRight } = defaults(
         this._resolveSpacing(props, ComposedComponent, {
           xScaleType,
           yScaleType,
@@ -745,7 +747,7 @@ export default function resolveXYScales(ComposedComponent) {
       };
       const { xScale, yScale } = this._makeScales(scaleOptions);
 
-      const passedProps = _.assign({}, this.props, {
+      const passedProps = assign({}, this.props, {
         xScale,
         yScale,
         xDomain,

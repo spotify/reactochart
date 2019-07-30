@@ -1,4 +1,7 @@
-import _ from "lodash";
+import sumBy from "lodash/sumBy";
+import isFinite from "lodash/isFinite";
+import isFunction from "lodash/isFunction";
+import partial from "lodash/partial";
 import PropTypes from "prop-types";
 import React from "react";
 import { methodIfFuncProp } from "./util.js";
@@ -212,9 +215,9 @@ class PieChart extends React.Component {
     } = this.props;
 
     const valueAccessor = makeAccessor(this.props.getValue);
-    const sum = _.sumBy(this.props.data, valueAccessor);
+    const sum = sumBy(this.props.data, valueAccessor);
     const total = this.props.total || sum;
-    const markerLinePercent = _.isFinite(markerLineValue)
+    const markerLinePercent = isFinite(markerLineValue)
       ? markerLineValue / total
       : null;
 
@@ -240,7 +243,7 @@ class PieChart extends React.Component {
           ].map(eventName => {
             // partially apply this bar's data point as 2nd callback argument
             const callback = methodIfFuncProp(eventName, this.props, this);
-            return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+            return isFunction(callback) ? partial(callback, _, d) : null;
           });
 
           const className = `rct-pie-slice rct-pie-slice-${i} ${getValue(
@@ -280,7 +283,7 @@ class PieChart extends React.Component {
           />
         ) : null}
 
-        {_.isFinite(markerLinePercent)
+        {isFinite(markerLinePercent)
           ? this.renderMarkerLine(
               markerLine(
                 markerLinePercent,
@@ -316,7 +319,7 @@ class PieChart extends React.Component {
     ].map(eventName => {
       // partially apply this bar's data point as 2nd callback argument
       const callback = methodIfFuncProp(eventName, this.props, this);
-      return _.isFunction(callback) ? _.partial(callback, _, lineD) : null;
+      return isFunction(callback) ? partial(callback, _, lineD) : null;
     });
 
     return (
