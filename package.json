@@ -5,7 +5,7 @@
   "contributors": [
     "Kris Salvador <kriss@spotify.com>"
   ],
-  "version": "1.11.1",
+  "version": "2.0.0-rc.0",
   "main": "index.js",
   "files": [
     "*.js",
