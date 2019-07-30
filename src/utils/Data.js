@@ -208,19 +208,21 @@ export function combineDatasets(datasetsInfo = [], combineKey = "x") {
     return _.keyBy(data, datasetInfo.combineKey || combineKey);
   });
 
-  // create a unique sorted array containing all of the data values for combineKey in all datasets
-  const allCombineValues = _(datasetsInfo)
-    .map(datasetInfo =>
+  // Grab combineKey from each dataset and flatten into one array
+  const allCombineValues = [].concat(
+    ...datasetsInfo.map(datasetInfo =>
       datasetInfo.data.map(makeAccessor(datasetInfo.combineKey || combineKey))
     )
-    .flatten()
-    .uniqBy(_.toString) // uniq by string, otherwise dates etc. are not unique
-    .sortBy()
-    .value();
+  );
 
-  // for each of the unique combineKey data values, go through each dataset and look for a combineKey value that matches
+  // Get all unique values
+  const uniqueValues = _.uniqBy(allCombineValues, value => {
+    return value instanceof Date ? value.toString() : value;
+  });
+
+  // For each of the unique combineKey data values, go through each dataset and look for a combineKey value that matches
   // if we find it, combine the values for that datum's dataKeys into the final combinedDatum object
-  return allCombineValues.map(combineValue => {
+  return uniqueValues.map(combineValue => {
     let combinedDatum = { [combineKey]: combineValue };
 
     datasetsInfo.forEach((datasetInfo, datasetIndex) => {

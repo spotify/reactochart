@@ -150,21 +150,19 @@ export default class MarkerLineChart extends React.Component {
     const markAccessor = horizontal ? makeAccessor2(y) : makeAccessor2(x);
     const markDataDomain = domainFromData(data, markAccessor);
 
-    // todo refactor/add better comments to clarify
     // find the edges of the tick domain, and map them through the scale function
-    const [domainHead, domainTail] = _([
-      _.first(markDomain),
-      _.last(markDomain)
-    ])
+    const [domainHead, domainTail] = [_.first(markDomain), _.last(markDomain)]
       .map(markScale)
-      .sortBy(); //sort the pixel values return by the domain extents
+      .sort(); // sort the pixel values return by the domain extents
+
     // find the edges of the data domain, and map them through the scale function
-    const [dataDomainHead, dataDomainTail] = _([
+    const [dataDomainHead, dataDomainTail] = [
       _.first(markDataDomain),
       _.last(markDataDomain)
-    ])
+    ]
       .map(markScale)
-      .sortBy(); //sort the pixel values return by the domain extents
+      .sort(); // sort the pixel values return by the domain extents
+
     // find the necessary spacing (based on bar width) to push the bars completely inside the tick domain
     const [spacingTail, spacingHead] = [
       _.clamp(P - (domainTail - dataDomainTail), 0, P),
