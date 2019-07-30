@@ -1,5 +1,5 @@
 import React from "react";
-import _ from "lodash";
+import defaults from "lodash/defaults";
 import PropTypes from "prop-types";
 
 import { getScaleTicks, getTickDomain } from "./utils/Scale";
@@ -27,7 +27,7 @@ export default class XGrid extends React.Component {
 
   static getTickDomain(props) {
     if (!props.xScale) return;
-    props = _.defaults({}, props, XGrid.defaultProps);
+    props = defaults({}, props, XGrid.defaultProps);
     return { xTickDomain: getTickDomain(props.xScale, props) };
   }
 

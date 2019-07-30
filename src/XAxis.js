@@ -1,4 +1,6 @@
-import _ from "lodash";
+import defaults from "lodash/defaults";
+import isFunction from "lodash/isFunction";
+import upperFirst from "lodash/upperFirst";
 import PropTypes from "prop-types";
 import React from "react";
 import { getAxisChildProps, getMouseAxisOptions } from "./utils/Axis";
@@ -135,7 +137,7 @@ export default class XAxis extends React.Component {
 
   static getTickDomain(props) {
     if (!props.xScale) return;
-    props = _.defaults({}, props, XAxis.defaultProps);
+    props = defaults({}, props, XAxis.defaultProps);
     return { xTickDomain: getTickDomain(props.xScale, props) };
   }
 
@@ -156,7 +158,7 @@ export default class XAxis extends React.Component {
   handleOnMouseMove = event => {
     const { onMouseMoveAxis, xScale } = this.props;
 
-    if (!_.isFunction(onMouseMoveAxis)) {
+    if (!isFunction(onMouseMoveAxis)) {
       return;
     }
 
@@ -167,7 +169,7 @@ export default class XAxis extends React.Component {
   handleOnMouseEnter = event => {
     const { onMouseEnterAxis, xScale } = this.props;
 
-    if (!_.isFunction(onMouseEnterAxis)) {
+    if (!isFunction(onMouseEnterAxis)) {
       return;
     }
 
@@ -178,7 +180,7 @@ export default class XAxis extends React.Component {
   handleOnMouseLeave = event => {
     const { onMouseLeaveAxis, xScale } = this.props;
 
-    if (!_.isFunction(onMouseLeaveAxis)) {
+    if (!isFunction(onMouseLeaveAxis)) {
       return;
     }
 
@@ -189,7 +191,7 @@ export default class XAxis extends React.Component {
   handleOnClick = event => {
     const { onMouseClickAxis, xScale } = this.props;
 
-    if (!_.isFunction(onMouseClickAxis)) {
+    if (!isFunction(onMouseClickAxis)) {
       return;
     }
 
@@ -230,7 +232,7 @@ export default class XAxis extends React.Component {
       // todo optimize so we don't generate labels twice
       const labelsMargin = XAxisLabels.getMargin(labelsProps);
       titleProps.distance =
-        titleDistance + labelsMargin[`margin${_.upperFirst(position)}`];
+        titleDistance + labelsMargin[`margin${upperFirst(position)}`];
     } else if (showTitle && showTicks) {
       titleProps.distance = titleDistance + tickLength;
     }

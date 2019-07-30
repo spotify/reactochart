@@ -1,5 +1,6 @@
 import { area, scaleOrdinal, schemeCategory10 } from "d3";
-import _ from "lodash";
+import range from "lodash/range";
+import defaults from "lodash/defaults";
 import PropTypes from "prop-types";
 import React from "react";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
@@ -117,7 +118,7 @@ export default class FunnelChart extends React.Component {
         .y1((d, i) => yScale(getValue(y, d, i)));
     }
 
-    const colors = scaleOrdinal(schemeCategory10).domain(_.range(10));
+    const colors = scaleOrdinal(schemeCategory10).domain(range(10));
 
     return (
       <g className="rct-funnel-chart">
@@ -127,7 +128,7 @@ export default class FunnelChart extends React.Component {
           const fill = color ? getValue(color, d, i) : colors(i - 1);
           let style = pathStyle ? getValue(pathStyle, d, i) : {};
 
-          style = _.defaults({}, style, { fill, stroke: "transparent" });
+          style = defaults({}, style, { fill, stroke: "transparent" });
 
           return (
             <path

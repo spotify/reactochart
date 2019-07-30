@@ -1,4 +1,5 @@
-import _ from "lodash";
+import defaults from "lodash/defaults";
+import capitalize from "lodash/capitalize";
 import PropTypes from "prop-types";
 import React from "react";
 import { getScaleTicks, getTickDomain } from "./utils/Scale";
@@ -56,12 +57,12 @@ export default class YTicks extends React.Component {
 
   static getTickDomain(props) {
     if (!props.yScale) return;
-    props = _.defaults({}, props, YTicks.defaultProps);
+    props = defaults({}, props, YTicks.defaultProps);
     return { yTickDomain: getTickDomain(props.yScale, props) };
   }
 
   static getMargin(props) {
-    const { tickLength, position } = _.defaults({}, props, YTicks.defaultProps);
+    const { tickLength, position } = defaults({}, props, YTicks.defaultProps);
     const placement =
       props.placement || (position === "left" ? "before" : "after");
     const zeroMargin = {
@@ -77,8 +78,8 @@ export default class YTicks extends React.Component {
     )
       return zeroMargin;
 
-    return _.defaults(
-      { [`margin${_.capitalize(position)}`]: tickLength || 0 },
+    return defaults(
+      { [`margin${capitalize(position)}`]: tickLength || 0 },
       zeroMargin
     );
   }

@@ -80,7 +80,6 @@ function expectXYScaledComponentEnzyme(
 
   expect(rendered.props().margin).to.deep.equal(margin);
 
-  console.log("renderedprops", rendered.props());
   const renderedScale = rendered.props().scale;
   expectXYScales(renderedScale);
   ["x", "y"].forEach(k => {
@@ -529,24 +528,6 @@ describe("resolveXYScales", () => {
     expect(rendered.props().xDomain).to.deep.equal([12, 22]);
     expect(rendered.props().yDomain).to.deep.equal(["a", "b", "c"]);
   });
-
-  // it('works with resolveObjectProps', () => {
-  //   const containerProps = {
-  //     width, height,
-  //     domain: [-12, 12],
-  //     scaleType: 'linear'
-  //   };
-  //   const tree = <XYContainerChartWithObjectProps {...containerProps}>
-  //     <XYChartWithCustomMarginAndObjectProps />
-  //   </XYContainerChartWithObjectProps>;
-  //   const wrapped = mount(tree);
-  //   const rendered = wrapped.find(ContainerChart);
-  //
-  //   expect(rendered.props().margin).to.deep.equal(customMargin);
-  //   expect(rendered.props().scaleType).to.deep.equal({x: 'linear', y: 'linear'});
-  //   expect(rendered.props().domain.x).to.deep.equal([-12, 12]);
-  //   expect(rendered.props().domain.y).to.deep.equal([-12, 12]);
-  // });
 
   it("inverts the scale domain if `invertScale` option is true", () => {
     const props = {

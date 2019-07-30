@@ -1,5 +1,6 @@
 import { area } from "d3";
-import _ from "lodash";
+import isUndefined from "lodash/isUndefined";
+import uniqueId from "lodash/uniqueId";
 import PropTypes from "prop-types";
 import React from "react";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
@@ -93,8 +94,7 @@ export default class AreaChart extends React.Component {
     shouldShowGaps: true,
     isDefined: (d, i, accessors) => {
       return (
-        !_.isUndefined(accessors.y(d, i)) &&
-        !_.isUndefined(accessors.yEnd(d, i))
+        !isUndefined(accessors.y(d, i)) && !isUndefined(accessors.yEnd(d, i))
       );
     },
     pathClassName: ""
@@ -176,7 +176,7 @@ export default class AreaChart extends React.Component {
       const clipAbovePathStr = areaGenerator(data);
 
       // make sure we have a unique ID for this chart, so clip path IDs don't affect other charts
-      const chartId = _.uniqueId();
+      const chartId = uniqueId();
       const clipAboveId = `clip-above-area-${chartId}`;
       const clipBelowId = `clip-below-area-${chartId}`;
       const pathStyleAbove = pathStylePositive || pathStyle || {};

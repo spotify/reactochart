@@ -105,7 +105,7 @@
       "required": false,
       "description": "If shouldShowGaps is true, isDefined function describes when a datum should be considered \"defined\" vs. when to show gap\nby default, shows gap if either y or yEnd are undefined.",
       "defaultValue": {
-        "value": "(d, i, accessors) => {\n  return (\n    !_.isUndefined(accessors.y(d, i)) &&\n    !_.isUndefined(accessors.yEnd(d, i))\n  );\n}",
+        "value": "(d, i, accessors) => {\n  return (\n    !isUndefined(accessors.y(d, i)) && !isUndefined(accessors.yEnd(d, i))\n  );\n}",
         "computed": false
       }
     },

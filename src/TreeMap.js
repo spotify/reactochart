@@ -1,5 +1,10 @@
 import { hierarchy, treemap, treemapResquarify } from "d3-hierarchy";
-import _ from "lodash";
+import cloneDeep from "lodash/cloneDeep";
+import uniq from "lodash/uniq";
+import map from "lodash/map";
+import isUndefined from "lodash/isUndefined";
+import isFunction from "lodash/isFunction";
+import isString from "lodash/isString";
 import PropTypes from "prop-types";
 import React from "react";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
@@ -105,7 +110,7 @@ class TreeMap extends React.Component {
     // initialize the layout function
     this._tree = getTree(this.props);
     // clone the data because d3 mutates it!
-    this._rootNode = getRootNode(_.cloneDeep(data), this.props);
+    this._rootNode = getRootNode(cloneDeep(data), this.props);
   }
   componentWillReceiveProps(newProps) {
     const { width, height, data, sticky } = this.props;
@@ -119,7 +124,7 @@ class TreeMap extends React.Component {
       JSON.stringify(data) != JSON.stringify(newProps.data)
     ) {
       this._tree = getTree(newProps);
-      this._rootNode = getRootNode(_.cloneDeep(newProps.data), this.props);
+      this._rootNode = getRootNode(cloneDeep(newProps.data), this.props);
     }
   }
   render() {
@@ -143,7 +148,7 @@ class TreeMap extends React.Component {
 
     const style = { position: "relative", width, height };
 
-    const parentNames = _.uniq(_.map(nodes, "parent.data.name"));
+    const parentNames = uniq(map(nodes, "parent.data.name"));
 
     return (
       <div className="rct-tree-map" {...{ style }}>
@@ -178,14 +183,14 @@ function getRootNode(data, options) {
 
 function getTree(options) {
   const { width, height, ratio, round, padding } = options;
-  const tiling = !_.isUndefined(ratio)
+  const tiling = !isUndefined(ratio)
     ? treemapResquarify.ratio(ratio)
     : treemapResquarify;
   const tree = treemap()
     .tile(tiling)
     .size([width, height]);
-  if (!_.isUndefined(padding)) tree.paddingOuter(padding);
-  if (!_.isUndefined(round)) tree.round(round);
+  if (!isUndefined(padding)) tree.paddingOuter(padding);
+  if (!isUndefined(round)) tree.round(round);
   return tree;
 }
 
@@ -194,8 +199,8 @@ function initTreemap(rootNode, tree, options) {
   // and configure it with the given options
   const { getValue, sort } = options;
   const treeRoot = rootNode.sum(d => {
-    if (_.isFunction(getValue)) return getValue(d);
-    else if (_.isString(getValue)) return d[getValue];
+    if (isFunction(getValue)) return getValue(d);
+    else if (isString(getValue)) return d[getValue];
     else return 0;
   });
   return tree(sort ? treeRoot.sort(sort) : treeRoot).descendants();
