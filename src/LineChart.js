@@ -1,5 +1,4 @@
 import { bisector, line, curveLinear } from "d3";
-import _ from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
 import * as CustomPropTypes from "./utils/CustomPropTypes";

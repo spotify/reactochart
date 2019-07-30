@@ -114,7 +114,7 @@ describe("XLine", () => {
   it("limits the line's height using yLimit", () => {
     const limit = 2;
     let wrapper = shallow(
-      <XLine 
+      <XLine
         yScale={linearScale}
         xScale={linearScale}
         yDomain={linearScale.domain}
@@ -125,5 +125,4 @@ describe("XLine", () => {
     );
     expect(getLineHeight(findLine(wrapper))).to.equal(linearScale(limit));
   });
-
 });

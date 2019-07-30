@@ -1,5 +1,6 @@
 import React from "react";
-import _ from "lodash";
+import defaults from "lodash/defaults";
+import assign from "lodash/assign";
 import measureText from "./utils/measureText";
 import PropTypes from "prop-types";
 
@@ -59,7 +60,7 @@ export default class XAxisTitle extends React.Component {
   };
 
   static getMargin(props) {
-    props = _.defaults({}, props, XAxisTitle.defaultProps);
+    props = defaults({}, props, XAxisTitle.defaultProps);
     const { distance, position, rotate } = props;
     const placement =
       props.placement || (position === "bottom" ? "below" : "above");
@@ -77,8 +78,8 @@ export default class XAxisTitle extends React.Component {
       return zeroMargin;
 
     const title = props.title || props.children;
-    const style = _.defaults(props.style, XAxisTitle.defaultProps.style);
-    const measured = measureText(_.assign({ text: title }, style));
+    const style = defaults(props.style, XAxisTitle.defaultProps.style);
+    const measured = measureText(assign({ text: title }, style));
 
     const marginValue =
       distance +

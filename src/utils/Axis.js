@@ -1,6 +1,6 @@
 import { inferScaleType, invertPointScale } from "./Scale";
 import invariant from "invariant";
-import _ from "lodash";
+import inRange from "lodash/inRange";
 
 export function getAxisChildProps(props) {
   const {
@@ -134,7 +134,7 @@ export function getMouseAxisOptions(axisType, event, scale) {
     ? axisBoundingBox.height
     : axisBoundingBox.width;
 
-  const value = !_.inRange(mousePos, 0, boundingBoxLimit)
+  const value = !inRange(mousePos, 0, boundingBoxLimit)
     ? null
     : scaleType === "ordinal"
       ? invertPointScale(scale, mousePos)

@@ -1,4 +1,8 @@
-import _ from "lodash";
+import get from "lodash/get";
+import kebabCase from "lodash/kebabCase";
+import isFunction from "lodash/isFunction";
+import isObject from "lodash/isObject";
+import assign from "lodash/assign";
 import PropTypes from "prop-types";
 import React from "react";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
@@ -16,9 +20,9 @@ const TreeMapNode = props => {
   } = props;
   const { depth, parent, x0, y0, x1, y1 } = node;
 
-  var parentName = _.get(parent, "data.name");
+  var parentName = get(parent, "data.name");
   const nodeGroupClass = parent
-    ? `node-group-${_.kebabCase(parentName)} node-group-i-${parentNames.indexOf(
+    ? `node-group-${kebabCase(parentName)} node-group-i-${parentNames.indexOf(
         parentName
       )}`
     : "";
@@ -32,12 +36,12 @@ const TreeMapNode = props => {
     left: x0,
     transition: "all .2s"
   };
-  const customStyle = _.isFunction(nodeStyle)
+  const customStyle = isFunction(nodeStyle)
     ? nodeStyle(node)
-    : _.isObject(nodeStyle)
+    : isObject(nodeStyle)
       ? nodeStyle
       : {};
-  _.assign(style, customStyle);
+  assign(style, customStyle);
 
   let handlers = [
     "onClick",

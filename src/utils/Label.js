@@ -1,10 +1,19 @@
-import _ from "lodash";
+import isString from "lodash/isString";
+import map from "lodash/map";
+import uniq from "lodash/uniq";
+import every from "lodash/every";
+import isArray from "lodash/isArray";
+import tail from "lodash/tail";
+import min from "lodash/min";
+import max from "lodash/max";
+import reduce from "lodash/reduce";
+import isFinite from "lodash/isFinite";
 import moment from "moment";
 import numeral from "numeral";
 
 export function makeLabelFormatters(formatStrs, scaleType) {
   return formatStrs.map(formatStr => {
-    if (!_.isString(formatStr)) return formatStr;
+    if (!isString(formatStr)) return formatStr;
     return scaleType === "time"
       ? v => moment(v).format(formatStr)
       : v => numeral(v).format(formatStr);
@@ -14,18 +23,17 @@ export function makeLabelFormatters(formatStrs, scaleType) {
 export function checkLabelsDistinct(labels) {
   // given a set of label objects with text properties,
   // return true iff each label has distinct text (ie. no duplicate label texts)
-  const labelStrs = _.map(labels, "text");
-  return _.uniq(labelStrs).length === labelStrs.length;
+  const labelStrs = map(labels, "text");
+  return uniq(labelStrs).length === labelStrs.length;
 }
 
 export function checkRangesOverlap(a, b) {
   // given two number or date ranges of the form [start, end],
   // returns true if the ranges overlap
   if (
-    !_.every(
+    !every(
       [a, b],
-      r =>
-        _.isArray(r) && r.length === 2 && _.every(r, _.isFinite) && r[0] <= r[1]
+      r => isArray(r) && r.length === 2 && every(r, isFinite) && r[0] <= r[1]
     )
   )
     throw new Error(
@@ -40,7 +48,7 @@ export function countRangeOverlaps(ranges) {
   // counts the number of adjacent ranges which touch or overlap each other
   // todo: instead of counting overlaps, sum the amount by which they overlap & choose least overlap
 
-  return _.tail(ranges).reduce((sum, range, i) => {
+  return tail(ranges).reduce((sum, range, i) => {
     const prevRange = ranges[i]; // (not [i-1], _.tail skips first range)
     return checkRangesOverlap(prevRange, range) ? sum + 1 : sum;
   }, 0);
@@ -60,24 +68,22 @@ export function getLabelYRange(scale, label, anchor = "middle") {
 
 export function getLabelXOverhang(scale, label, anchor = "middle") {
   const [labelLeft, labelRight] = getLabelXRange(scale, label, anchor);
-  const overhangLeft = Math.ceil(Math.max(_.min(scale.range()) - labelLeft, 0));
-  const overhangRight = Math.ceil(
-    Math.max(labelRight - _.max(scale.range()), 0)
-  );
+  const overhangLeft = Math.ceil(Math.max(min(scale.range()) - labelLeft, 0));
+  const overhangRight = Math.ceil(Math.max(labelRight - max(scale.range()), 0));
   return [overhangLeft, overhangRight];
 }
 
 export function getLabelYOverhang(scale, label, anchor = "middle") {
   const [labelTop, labelBottom] = getLabelYRange(scale, label, anchor);
-  const overhangTop = Math.ceil(Math.max(_.min(scale.range()) - labelTop, 0));
+  const overhangTop = Math.ceil(Math.max(min(scale.range()) - labelTop, 0));
   const overhangBottom = Math.ceil(
-    Math.max(labelBottom - _.max(scale.range()), 0)
+    Math.max(labelBottom - max(scale.range()), 0)
   );
   return [overhangTop, overhangBottom];
 }
 
 export function getLabelsXOverhang(scale, labels, anchor = "middle") {
-  return _.reduce(
+  return reduce(
     labels,
     ([left, right], label) => {
       const [thisLeft, thisRight] = getLabelXOverhang(scale, label, anchor);
@@ -88,7 +94,7 @@ export function getLabelsXOverhang(scale, labels, anchor = "middle") {
 }
 
 export function getLabelsYOverhang(scale, labels, anchor = "middle") {
-  return _.reduce(
+  return reduce(
     labels,
     ([top, bottom], label) => {
       const [thisTop, thisBottom] = getLabelYOverhang(scale, label, anchor);

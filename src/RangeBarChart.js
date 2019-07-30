@@ -1,4 +1,8 @@
-import _ from "lodash";
+import first from "lodash/first";
+import last from "lodash/last";
+import clamp from "lodash/clamp";
+import get from "lodash/get";
+import isFunction from "lodash/isFunction";
 import PropTypes from "prop-types";
 import React from "react";
 import Bar from "./Bar";
@@ -9,6 +13,7 @@ import {
   getValue,
   makeAccessor2
 } from "./utils/Data";
+import { bindTrailingArgs } from "./util.js";
 import { dataTypeFromScaleType } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
@@ -165,26 +170,25 @@ export default class RangeBarChart extends React.Component {
     const barsAccessor = horizontal ? makeAccessor2(y) : makeAccessor2(x);
     const barsDataDomain = domainFromData(data, barsAccessor);
 
-    // todo refactor/add better comments to clarify
-    //find the edges of the tick domain, and map them through the scale function
-    const [domainHead, domainTail] = _([
-      _.first(barsDomain),
-      _.last(barsDomain)
-    ])
+    // find the edges of the tick domain, and map them through the scale function
+    const [domainHead, domainTail] = [first(barsDomain), last(barsDomain)]
       .map(barsScale)
-      .sortBy(); //sort the pixel values return by the domain extents
+      .sort(); //sort the pixel values return by the domain extents
+
     //find the edges of the data domain, and map them through the scale function
-    const [dataDomainHead, dataDomainTail] = _([
-      _.first(barsDataDomain),
-      _.last(barsDataDomain)
-    ])
+    const [dataDomainHead, dataDomainTail] = [
+      first(barsDataDomain),
+      last(barsDataDomain)
+    ]
       .map(barsScale)
-      .sortBy(); //sort the pixel values return by the domain extents
-    //find the necessary spacing (based on bar width) to push the bars completely inside the tick domain
+      .sort(); //sort the pixel values return by the domain extents
+
+    // find the necessary spacing (based on bar width) to push the bars completely inside the tick domain
     const [spacingTail, spacingHead] = [
-      _.clamp(P - (domainTail - dataDomainTail), 0, P),
-      _.clamp(P - (dataDomainHead - domainHead), 0, P)
+      clamp(P - (domainTail - dataDomainTail), 0, P),
+      clamp(P - (dataDomainHead - domainHead), 0, P)
     ];
+
     if (horizontal) {
       return {
         spacingTop: spacingHead,
@@ -225,7 +229,6 @@ export default class RangeBarChart extends React.Component {
       labelDistance,
       labelClassName
     } = this.props;
-    // invariant(hasOneOfTwo(xEnd, yEnd), `RangeBarChart expects a xEnd *or* yEnd prop, but not both.`);
 
     return (
       <g>
@@ -236,8 +239,8 @@ export default class RangeBarChart extends React.Component {
             "onMouseLeaveBar"
           ].map(eventName => {
             // partially apply this bar's data point as 2nd callback argument
-            const callback = _.get(this.props, eventName);
-            return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+            const callback = get(this.props, eventName);
+            return isFunction(callback) ? bindTrailingArgs(callback, d) : null;
           });
 
           const barProps = {
