@@ -8,7 +8,7 @@ import capitalize from "lodash/capitalize";
 import isArray from "lodash/isArray";
 import get from "lodash/get";
 import isFunction from "lodash/isFunction";
-import partial from "lodash/partial";
+import identity from "lodash/identity";
 import PropTypes from "prop-types";
 import React from "react";
 import MeasuredValueLabel from "./MeasuredValueLabel";
@@ -21,6 +21,7 @@ import {
 } from "./utils/Label";
 import { getValue } from "./utils/Data";
 import { getScaleTicks, getTickDomain, inferScaleType } from "./utils/Scale";
+import { bindTrailingArgs } from "./util.js";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
 function resolveXLabelsForValues(scale, values, formats, style, force = true) {
@@ -46,7 +47,6 @@ function resolveXLabelsForValues(scale, values, formats, style, force = true) {
 
     const areLabelsDistinct = checkLabelsDistinct(testLabels);
     if (!areLabelsDistinct) {
-      // console.log('labels are not distinct', _.map(testLabels, 'text'));
       attempts.push({ labels: testLabels, format, areLabelsDistinct });
       return false;
     }
@@ -343,7 +343,7 @@ class XAxisLabels extends React.Component {
             // partially apply this label's data point as 2nd callback argument
             const callback = get(this.props, eventName);
             return isFunction(callback)
-              ? partial(callback, _, label.value)
+              ? bindTrailingArgs(callback, label.value)
               : null;
           });
 

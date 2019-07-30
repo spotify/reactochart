@@ -10,6 +10,7 @@ import isArray from "lodash/isArray";
 import uniq from "lodash/uniq";
 import inRange from "lodash/inRange";
 import defaults from "lodash/defaults";
+import isNumber from "lodash/isNumber";
 import React from "react";
 import {
   combineBorderObjects,
@@ -58,57 +59,10 @@ function mapOverChildren(children, iteratee, ...iterateeArgs) {
     })
   );
 }
+
 function omitNullUndefined(obj) {
   return omitBy(obj, v => isUndefined(v) || isNull(v));
 }
-
-// not currently being used but potentially has some learnings
-// attempt at condensing all the resolve functions below
-// function resolveXYPropsOnComponentOrChildren(propKeys, props, reducers = {}, validators = {}, result = {}) {
-//   const isDone = (o) => (_.every(propKeys, k => _.isObject(o[k]) && _.every(['x', 'y'], xy => _.has(o[k][xy]))));
-//   result = _.pick({...props, ...result}, propKeys);
-
-//   let resolved = {};
-//   _.forEach(propKeys, propKey => {
-//     _.forEach(['x', 'y'], k => {
-//       const isValid = validators[propKey] || (() => true);
-//       if(_.isObject(props[propKey]) && _.has(props[propKey], k) && isValid(props[propKey][k])) {
-//         if(!_.has(result, propKey)) result[propKey] = {};
-//         result[propKey][k] = props[propKey][k];
-//       }
-//     });
-//   });
-
-//   if(isDone(result)) return result;
-
-//   if(React.Children.count(props.children)) {
-//     let childProps = mapOverChildren(props.children, resolveXYPropsOnComponentOrChildren, propKeys, 'props', result);
-//     React.Children.forEach(props.children, child => {
-//       if(!child) return;
-//       childProps.push(resolveXYPropsOnComponentOrChildren(propKeys, child.props, result));
-//     });
-//       let childDomains = [];
-//       React.Children.forEach(props.children, child => {
-//         childDomains = childDomains.concat(this._resolveDomain(child.props, child.type, scaleType));
-//       });
-
-//       console.log('combining domains', childDomains);
-//       const childDomain =  _.fromPairs(['x', 'y'].map(k => {
-//         console.log(_.compact(_.map(childDomains, k)), scaleType[k]);
-//         const kDomain = combineDomains(_.compact(_.map(childDomains, k)), dataTypeFromScaleType(scaleType[k]));
-//         console.log(kDomain);
-//         return [k, kDomain];
-//       }));
-//       console.log('combined domains', childDomain);
-
-//       domain = _.assign(childDomain, domain);
-//       return domain;
-//   }
-
-//   propKeys.forEach(k => {
-//     result[propKeys] = props
-//   })
-// }
 
 export default function resolveXYScales(ComposedComponent) {
   return class extends React.Component {
@@ -402,7 +356,7 @@ export default function resolveXYScales(ComposedComponent) {
       let { marginTop, marginBottom, marginLeft, marginRight } = props;
 
       const isDone = () =>
-        every([marginTop, marginBottom, marginLeft, marginRight], _.isNumber);
+        every([marginTop, marginBottom, marginLeft, marginRight], isNumber);
 
       // short-circuit if all margins provided
       if (isDone()) return { marginTop, marginBottom, marginLeft, marginRight };
@@ -475,10 +429,7 @@ export default function resolveXYScales(ComposedComponent) {
       let { spacingTop, spacingBottom, spacingLeft, spacingRight } = props;
 
       const isDone = () =>
-        every(
-          [spacingTop, spacingBottom, spacingLeft, spacingRight],
-          _.isNumber
-        );
+        every([spacingTop, spacingBottom, spacingLeft, spacingRight], isNumber);
 
       // short-circuit if all spacing provided
       if (isDone())

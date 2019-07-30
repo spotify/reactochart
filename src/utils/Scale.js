@@ -5,6 +5,7 @@ import isDate from "lodash/isDate";
 import isFunction from "lodash/isFunction";
 import isObject from "lodash/isObject";
 import isEqual from "lodash/isEqual";
+import isNumber from "lodash/isNumber";
 import identity from "lodash/identity";
 import { scaleLinear, scaleTime, scalePoint, scaleLog, scalePow } from "d3";
 
@@ -44,9 +45,9 @@ export function inferDataTypeFromDomain(domain) {
 
   return domain.length !== 2
     ? "categorical"
-    : every(domain, _.isNumber)
+    : every(domain, isNumber)
       ? "number"
-      : every(domain, _.isDate)
+      : every(domain, isDate)
         ? "time"
         : "categorical";
 }
@@ -143,8 +144,6 @@ export function invertPointScale(scale, rangeValue) {
 
   const isDescending = rangePoints[0] > rangePoints[1];
 
-  // _.sortedIndex works on ascending lists only
-  // so reverse if working with descending list
   if (isDescending) {
     domain.reverse();
     rangePoints.reverse();

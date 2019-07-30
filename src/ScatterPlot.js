@@ -1,12 +1,11 @@
 import isFunction from "lodash/isFunction";
-import partial from "lodash/partial";
 import isString from "lodash/isString";
 import isNumber from "lodash/isNumber";
 import isUndefined from "lodash/isUndefined";
 import assign from "lodash/assign";
 import PropTypes from "prop-types";
 import React from "react";
-import { methodIfFuncProp } from "./util.js";
+import { methodIfFuncProp, bindTrailingArgs } from "./util.js";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
 import { getValue } from "./utils/Data";
 import xyPropsEqual from "./utils/xyPropsEqual";
@@ -105,7 +104,7 @@ export default class ScatterPlot extends React.Component {
     ].map(eventName => {
       // partially apply this bar's data point as 2nd callback argument
       const callback = methodIfFuncProp(eventName, this.props, this);
-      return isFunction(callback) ? partial(callback, _, d) : null;
+      return isFunction(callback) ? bindTrailingArgs(callback, d) : null;
     });
     const {
       xScale,

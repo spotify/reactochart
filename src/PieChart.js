@@ -1,10 +1,9 @@
 import sumBy from "lodash/sumBy";
 import isFinite from "lodash/isFinite";
 import isFunction from "lodash/isFunction";
-import partial from "lodash/partial";
 import PropTypes from "prop-types";
 import React from "react";
-import { methodIfFuncProp } from "./util.js";
+import { methodIfFuncProp, bindTrailingArgs } from "./util.js";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
 import { getValue, makeAccessor } from "./utils/Data";
 
@@ -241,9 +240,9 @@ class PieChart extends React.Component {
             "onMouseMoveSlice",
             "onMouseLeaveSlice"
           ].map(eventName => {
-            // partially apply this bar's data point as 2nd callback argument
+            // partially apply this slice's data point as 2nd callback argument
             const callback = methodIfFuncProp(eventName, this.props, this);
-            return isFunction(callback) ? partial(callback, _, d) : null;
+            return isFunction(callback) ? bindTrailingArgs(callback, d) : null;
           });
 
           const className = `rct-pie-slice rct-pie-slice-${i} ${getValue(
@@ -317,9 +316,9 @@ class PieChart extends React.Component {
       "onMouseMoveLine",
       "onMouseLeaveLine"
     ].map(eventName => {
-      // partially apply this bar's data point as 2nd callback argument
+      // partially apply this line's data point as 2nd callback argument
       const callback = methodIfFuncProp(eventName, this.props, this);
-      return isFunction(callback) ? partial(callback, _, lineD) : null;
+      return isFunction(callback) ? bindTrailingArgs(callback, lineD) : null;
     });
 
     return (

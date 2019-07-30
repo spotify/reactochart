@@ -3,11 +3,11 @@ import first from "lodash/first";
 import last from "lodash/last";
 import clamp from "lodash/clamp";
 import isFunction from "lodash/isFunction";
-import partial from "lodash/partial";
 import every from "lodash/every";
+import isFinite from "lodash/isFinite";
 import PropTypes from "prop-types";
 import React from "react";
-import { methodIfFuncProp } from "./util.js";
+import { methodIfFuncProp, bindTrailingArgs } from "./util.js";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
 import {
   domainFromData,
@@ -247,9 +247,9 @@ export default class MarkerLineChart extends React.Component {
       "onMouseMoveLine",
       "onMouseLeaveLine"
     ].map(eventName => {
-      // partially apply this bar's data point as 2nd callback argument
+      // partially apply this line's data point as 2nd callback argument
       const callback = methodIfFuncProp(eventName, this.props, this);
-      return isFunction(callback) ? partial(callback, _, d) : null;
+      return isFunction(callback) ? bindTrailingArgs(callback, d) : null;
     });
 
     const {
@@ -272,7 +272,7 @@ export default class MarkerLineChart extends React.Component {
     const y2 = horizontal ? yEndVal : yVal;
     const key = `marker-line-${i}`;
 
-    if (!every([x1, x2, y1, y2], _.isFinite)) return null;
+    if (!every([x1, x2, y1, y2], isFinite)) return null;
     return (
       <line
         className={`${getValue(lineClassName, d, i)}`}
@@ -288,9 +288,9 @@ export default class MarkerLineChart extends React.Component {
       "onMouseMoveLine",
       "onMouseLeaveLine"
     ].map(eventName => {
-      // partially apply this bar's data point as 2nd callback argument
+      // partially apply this line's data point as 2nd callback argument
       const callback = methodIfFuncProp(eventName, this.props, this);
-      return isFunction(callback) ? partial(callback, _, d) : null;
+      return isFunction(callback) ? bindTrailingArgs(callback, d) : null;
     });
 
     const {
@@ -311,7 +311,7 @@ export default class MarkerLineChart extends React.Component {
     const y2 = !horizontal ? yVal : yVal + lineLength / 2;
     const key = `marker-line-${i}`;
 
-    if (!every([x1, x2, y1, y2], _.isFinite)) return null;
+    if (!every([x1, x2, y1, y2], isFinite)) return null;
     return (
       <line
         className={`${getValue(lineClassName, d, i)}`}

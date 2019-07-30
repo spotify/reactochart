@@ -1,12 +1,12 @@
 import get from "lodash/get";
 import isFunction from "lodash/isFunction";
-import partial from "lodash/partial";
 import PropTypes from "prop-types";
 import React from "react";
 import RangeRect from "./RangeRect";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
 import { domainFromRangeData, getValue, makeAccessor2 } from "./utils/Data";
 import { dataTypeFromScaleType } from "./utils/Scale";
+import { bindTrailingArgs } from "./util.js";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
 /**
@@ -149,7 +149,7 @@ export default class AreaBarChart extends React.Component {
           ].map(eventName => {
             // partially apply this bar's data point as 2nd callback argument
             const callback = get(this.props, eventName);
-            return isFunction(callback) ? partial(callback, _, d) : null;
+            return isFunction(callback) ? bindTrailingArgs(callback, d) : null;
           });
 
           return (

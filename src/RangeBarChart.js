@@ -3,7 +3,6 @@ import last from "lodash/last";
 import clamp from "lodash/clamp";
 import get from "lodash/get";
 import isFunction from "lodash/isFunction";
-import partial from "lodash/partial";
 import PropTypes from "prop-types";
 import React from "react";
 import Bar from "./Bar";
@@ -14,6 +13,7 @@ import {
   getValue,
   makeAccessor2
 } from "./utils/Data";
+import { bindTrailingArgs } from "./util.js";
 import { dataTypeFromScaleType } from "./utils/Scale";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
@@ -229,7 +229,6 @@ export default class RangeBarChart extends React.Component {
       labelDistance,
       labelClassName
     } = this.props;
-    // invariant(hasOneOfTwo(xEnd, yEnd), `RangeBarChart expects a xEnd *or* yEnd prop, but not both.`);
 
     return (
       <g>
@@ -241,7 +240,7 @@ export default class RangeBarChart extends React.Component {
           ].map(eventName => {
             // partially apply this bar's data point as 2nd callback argument
             const callback = get(this.props, eventName);
-            return isFunction(callback) ? partial(callback, _, d) : null;
+            return isFunction(callback) ? bindTrailingArgs(callback, d) : null;
           });
 
           const barProps = {

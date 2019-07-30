@@ -35,7 +35,7 @@ export default function xyPropsEqual(
 
   const propKeysToSkipShallowCheck = propKeysToDeepCheck.concat("scale");
 
-  const isEqual =
+  const equalityCheck =
     // most keys just get shallow-equality checked
     shallowEqual(
       omit(propsA, propKeysToSkipShallowCheck),
@@ -49,7 +49,7 @@ export default function xyPropsEqual(
       );
     });
 
-  return isEqual;
+  return equalityCheck;
 }
 
 export function xyPropsEqualDebug(

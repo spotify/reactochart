@@ -196,10 +196,12 @@ class XYPlot extends React.Component {
     const options = getMouseOptions(event, this.props);
     callback(options);
   };
+
   onMouseMove = partial(this.onXYMouseEvent, "onMouseMove");
   onMouseDown = partial(this.onXYMouseEvent, "onMouseDown");
   onMouseUp = partial(this.onXYMouseEvent, "onMouseUp");
   onClick = partial(this.onXYMouseEvent, "onClick");
+
   onMouseEnter = event => this.props.onMouseEnter({ event });
   onMouseLeave = event => this.props.onMouseLeave({ event });
 

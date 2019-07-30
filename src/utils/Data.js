@@ -123,8 +123,8 @@ export function isValidDomain(domain, type = "categorical") {
     // categorical domain can be any array of anything
     (type === "categorical" ||
       // number/time domains should look like [min, max]
-      (type === "number" && domain.length === 2 && every(domain, _.isNumber)) ||
-      (type === "time" && domain.length === 2 && every(domain, _.isDate)))
+      (type === "number" && domain.length === 2 && every(domain, isNumber)) ||
+      (type === "time" && domain.length === 2 && every(domain, isDate)))
   );
 }
 

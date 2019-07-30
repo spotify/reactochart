@@ -7,7 +7,6 @@ import {
   sankeyRight
 } from "d3-sankey";
 import isFunction from "lodash/isFunction";
-import partial from "lodash/partial";
 import isNull from "lodash/isNull";
 import isUndefined from "lodash/isUndefined";
 import isString from "lodash/isString";
@@ -24,12 +23,15 @@ import numeral from "numeral";
 import PropTypes from "prop-types";
 import React from "react";
 import { getValue } from "./utils/Data";
+import { bindTrailingArgs } from "./util.js";
 
 const SankeyNode = props => {
   const { graph, node, nodeClassName, nodeStyle } = props;
   // create partial functions for handlers - callbacks with the current node/graph arguments attached
   const makeHandler = origHandler =>
-    isFunction(origHandler) ? partial(origHandler, _, { node, graph }) : null;
+    isFunction(origHandler)
+      ? bindTrailingArgs(origHandler, { node, graph })
+      : null;
 
   return (
     <rect
@@ -53,7 +55,9 @@ const SankeyLink = props => {
   const { graph, link, linkPath, linkClassName, linkStyle } = props;
   // create partial functions for handlers - callbacks with the current graph/link arguments attached
   const makeHandler = origHandler =>
-    isFunction(origHandler) ? partial(origHandler, _, { link, graph }) : null;
+    isFunction(origHandler)
+      ? bindTrailingArgs(origHandler, { link, graph })
+      : null;
 
   return (
     <path
@@ -78,7 +82,7 @@ const SankeyNodeTerminal = props => {
   if (!node.terminalValue) return null;
   const makeHandler = origHandler =>
     isFunction(origHandler)
-      ? partial(origHandler, _, { node, graph, props })
+      ? bindTrailingArgs(origHandler, { node, graph, props })
       : null;
   const getWithNode = accessor => getValue(accessor, node, graph, props);
   const width = getWithNode(props.nodeTerminalWidth) || 0;
