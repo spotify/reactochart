@@ -1,6 +1,5 @@
 import React from "react";
 import defaults from "lodash/defaults";
-import assign from "lodash/assign";
 import measureText from "./utils/measureText";
 import PropTypes from "prop-types";
 
@@ -79,7 +78,8 @@ export default class XAxisTitle extends React.Component {
 
     const title = props.title || props.children;
     const style = defaults(props.style, XAxisTitle.defaultProps.style);
-    const measured = measureText(assign({ text: title }, style));
+    const titleWithStyle = Object.assign({ text: title }, style);
+    const measured = measureText(titleWithStyle);
 
     const marginValue =
       distance +
