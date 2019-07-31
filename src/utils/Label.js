@@ -1,13 +1,10 @@
 import isString from "lodash/isString";
 import map from "lodash/map";
 import uniq from "lodash/uniq";
-import every from "lodash/every";
-import isArray from "lodash/isArray";
 import tail from "lodash/tail";
 import min from "lodash/min";
 import max from "lodash/max";
 import reduce from "lodash/reduce";
-import isFinite from "lodash/isFinite";
 import moment from "moment";
 import numeral from "numeral";
 
@@ -31,9 +28,12 @@ export function checkRangesOverlap(a, b) {
   // given two number or date ranges of the form [start, end],
   // returns true if the ranges overlap
   if (
-    !every(
-      [a, b],
-      r => isArray(r) && r.length === 2 && every(r, isFinite) && r[0] <= r[1]
+    ![a, b].every(
+      range =>
+        Array.isArray(range) &&
+        range.length === 2 &&
+        range.every(rangeVal => rangeVal !== null && isFinite(rangeVal)) &&
+        range[0] <= range[1]
     )
   )
     throw new Error(

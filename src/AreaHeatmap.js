@@ -1,8 +1,6 @@
 import { extent } from "d3";
 import flatten from "lodash/flatten";
 import isFunction from "lodash/isFunction";
-import every from "lodash/every";
-import isFinite from "lodash/isFinite";
 import PropTypes from "prop-types";
 import React from "react";
 import { methodIfFuncProp } from "./util.js";
@@ -177,7 +175,12 @@ export default class AreaHeatmap extends React.Component {
           const rectX = fullRectX + (fullWidth - width) / 2;
           const rectY = fullRectY + (fullHeight - height) / 2;
 
-          if (!every([rectX, rectY, width, height], isFinite)) return null;
+          if (
+            ![rectX, rectY, width, height].every(
+              val => val !== null && isFinite(val)
+            )
+          )
+            return null;
 
           const className = `rct-area-heatmap-rect ${getValue(
             rectClassName,

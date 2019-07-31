@@ -15,9 +15,7 @@ import omit from "lodash/omit";
 import get from "lodash/get";
 import maxBy from "lodash/maxBy";
 import has from "lodash/has";
-import isFinite from "lodash/isFinite";
 import cloneDeep from "lodash/cloneDeep";
-import some from "lodash/some";
 import map from "lodash/map";
 import numeral from "numeral";
 import PropTypes from "prop-types";
@@ -775,7 +773,7 @@ export default class SankeyDiagram extends React.Component {
     showLinkSourceLabels: false,
     linkSourceLabelText: (link, graph, props) => {
       const valueRelative = link.valueSourceRelative;
-      if (!isFinite(valueRelative)) return "";
+      if (valueRelative === null || !isFinite(valueRelative)) return "";
       const percentText =
         valueRelative < 0.001
           ? "<0.1%"
@@ -794,7 +792,7 @@ export default class SankeyDiagram extends React.Component {
     showLinkTargetLabels: false,
     linkTargetLabelText: (link, graph, props) => {
       const valueRelative = link.valueTargetRelative;
-      if (!isFinite(valueRelative)) return "";
+      if (valueRelative === null || !isFinite(valueRelative)) return "";
       const percentText =
         valueRelative < 0.001
           ? "<0.1%"
@@ -857,7 +855,7 @@ export default class SankeyDiagram extends React.Component {
       "nodeAlignment"
     ];
 
-    const hasChangedSankey = some(sankeyLayoutPropKeys, key => {
+    const hasChangedSankey = sankeyLayoutPropKeys.some(key => {
       return nextProps[key] !== this.props[key];
     });
     if (hasChangedSankey) this._makeSankeyGraph();

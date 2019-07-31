@@ -2,7 +2,6 @@ import isFunction from "lodash/isFunction";
 import isString from "lodash/isString";
 import isNumber from "lodash/isNumber";
 import isUndefined from "lodash/isUndefined";
-import assign from "lodash/assign";
 import PropTypes from "prop-types";
 import React from "react";
 import { methodIfFuncProp, bindTrailingArgs } from "./util.js";
@@ -146,15 +145,15 @@ export default class ScatterPlot extends React.Component {
 
     // set positioning attributes based on symbol type
     if (pointSymbol.type === "circle" || pointSymbol.type === "ellipse") {
-      assign(symbolProps, { cx, cy, style: { ...style } });
+      Object.assign(symbolProps, { cx, cy, style: { ...style } });
     } else if (pointSymbol.type === "text") {
-      assign(symbolProps, {
+      Object.assign(symbolProps, {
         x: cx,
         y: cy,
         style: { textAnchor: "middle", dominantBaseline: "central", ...style }
       });
     } else {
-      assign(symbolProps, {
+      Object.assign(symbolProps, {
         x: cx,
         y: cy,
         style: { ...style }

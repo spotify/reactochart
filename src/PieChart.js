@@ -1,5 +1,4 @@
 import sumBy from "lodash/sumBy";
-import isFinite from "lodash/isFinite";
 import isFunction from "lodash/isFunction";
 import PropTypes from "prop-types";
 import React from "react";
@@ -282,7 +281,7 @@ class PieChart extends React.Component {
           />
         ) : null}
 
-        {isFinite(markerLinePercent)
+        {markerLinePercent !== null && isFinite(markerLinePercent)
           ? this.renderMarkerLine(
               markerLine(
                 markerLinePercent,
