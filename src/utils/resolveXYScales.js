@@ -1,10 +1,8 @@
-import includes from "lodash/includes";
 import isFunction from "lodash/isFunction";
 import compact from "lodash/compact";
 import omitBy from "lodash/omitBy";
 import isUndefined from "lodash/isUndefined";
 import isNull from "lodash/isNull";
-import assign from "lodash/assign";
 import uniq from "lodash/uniq";
 import inRange from "lodash/inRange";
 import defaults from "lodash/defaults";
@@ -37,7 +35,7 @@ import {
 function isValidScaleType(scaleType) {
   const validScaleTypes = ["ordinal", "time", "log", "pow", "linear"];
 
-  return includes(validScaleTypes, scaleType);
+  return validScaleTypes.includes(scaleType);
 }
 
 function areValidScaleTypes(scaleTypes) {
@@ -85,7 +83,7 @@ export default function resolveXYScales(ComposedComponent) {
         const componentScaleTypes = omitNullUndefined(
           Component.getScaleType(props)
         );
-        ({ xScaleType, yScaleType } = assign(
+        ({ xScaleType, yScaleType } = Object.assign(
           componentScaleTypes,
           omitNullUndefined({ xScaleType, yScaleType })
         ));
@@ -376,7 +374,7 @@ export default function resolveXYScales(ComposedComponent) {
             yScale
           })
         );
-        ({ marginTop, marginBottom, marginLeft, marginRight } = assign(
+        ({ marginTop, marginBottom, marginLeft, marginRight } = Object.assign(
           componentMargin,
           omitNullUndefined({
             marginTop,
@@ -450,7 +448,12 @@ export default function resolveXYScales(ComposedComponent) {
             yScale
           })
         );
-        ({ spacingTop, spacingBottom, spacingLeft, spacingRight } = assign(
+        ({
+          spacingTop,
+          spacingBottom,
+          spacingLeft,
+          spacingRight
+        } = Object.assign(
           componentSpacing,
           omitNullUndefined({
             spacingTop,
@@ -699,7 +702,7 @@ export default function resolveXYScales(ComposedComponent) {
       };
       const { xScale, yScale } = this._makeScales(scaleOptions);
 
-      const passedProps = assign({}, this.props, {
+      const passedProps = Object.assign({}, this.props, {
         xScale,
         yScale,
         xDomain,

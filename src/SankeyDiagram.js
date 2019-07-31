@@ -16,7 +16,6 @@ import get from "lodash/get";
 import maxBy from "lodash/maxBy";
 import has from "lodash/has";
 import cloneDeep from "lodash/cloneDeep";
-import some from "lodash/some";
 import map from "lodash/map";
 import numeral from "numeral";
 import PropTypes from "prop-types";
@@ -856,7 +855,7 @@ export default class SankeyDiagram extends React.Component {
       "nodeAlignment"
     ];
 
-    const hasChangedSankey = some(sankeyLayoutPropKeys, key => {
+    const hasChangedSankey = sankeyLayoutPropKeys.some(key => {
       return nextProps[key] !== this.props[key];
     });
     if (hasChangedSankey) this._makeSankeyGraph();

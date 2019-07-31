@@ -1,5 +1,4 @@
 import isFunction from "lodash/isFunction";
-import some from "lodash/some";
 import isUndefined from "lodash/isUndefined";
 
 /**
@@ -28,5 +27,5 @@ export function bindTrailingArgs(fn, ...boundArgs) {
 }
 
 export function hasOneOfTwo(a, b) {
-  return some([a, b], isUndefined) && some([a, b], v => !isUndefined(v));
+  return [a, b].some(isUndefined) && [a, b].some(v => !isUndefined(v));
 }

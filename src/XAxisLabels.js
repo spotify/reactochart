@@ -1,4 +1,3 @@
-import find from "lodash/find";
 import defaults from "lodash/defaults";
 import isUndefined from "lodash/isUndefined";
 import last from "lodash/last";
@@ -23,7 +22,13 @@ import { getScaleTicks, getTickDomain, inferScaleType } from "./utils/Scale";
 import { bindTrailingArgs } from "./util.js";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
-function resolveXLabelsForValues(scale, values, formats, style, force = true) {
+function resolveXLabelsForValues(
+  scale,
+  values,
+  formats = [],
+  style,
+  force = true
+) {
   // given a set of values to label, and a list of formatters to try,
   // find the first formatter that produces a set of labels
   // which are A) distinct and B) fit on the axis without colliding with each other
@@ -32,7 +37,7 @@ function resolveXLabelsForValues(scale, values, formats, style, force = true) {
   let labels;
   let attempts = [];
 
-  const goodFormat = find(formats, format => {
+  const goodFormat = formats.find(format => {
     const testLabels = values.map((value, i) => {
       return MeasuredValueLabel.getLabel({
         value,
