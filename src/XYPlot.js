@@ -1,6 +1,5 @@
 import inRange from "lodash/inRange";
 import isFunction from "lodash/isFunction";
-import partial from "lodash/partial";
 import fromPairs from "lodash/fromPairs";
 import omit from "lodash/omit";
 import pick from "lodash/pick";
@@ -197,10 +196,10 @@ class XYPlot extends React.Component {
     callback(options);
   };
 
-  onMouseMove = partial(this.onXYMouseEvent, "onMouseMove");
-  onMouseDown = partial(this.onXYMouseEvent, "onMouseDown");
-  onMouseUp = partial(this.onXYMouseEvent, "onMouseUp");
-  onClick = partial(this.onXYMouseEvent, "onClick");
+  onMouseMove = this.onXYMouseEvent.bind("onMouseMove");
+  onMouseDown = this.onXYMouseEvent.bind("onMouseDown");
+  onMouseUp = this.onXYMouseEvent.bind("onMouseUp");
+  onClick = this.onXYMouseEvent.bind("onClick");
 
   onMouseEnter = event => this.props.onMouseEnter({ event });
   onMouseLeave = event => this.props.onMouseLeave({ event });
