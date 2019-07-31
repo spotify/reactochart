@@ -1,6 +1,4 @@
 import * as d3 from "d3";
-import isArray from "lodash/isArray";
-import isFinite from "lodash/isFinite";
 import isFunction from "lodash/isFunction";
 import PropTypes from "prop-types";
 import React from "react";
@@ -143,11 +141,13 @@ export default class ZoomContainer extends React.Component {
       wheelDelta
     } = props;
 
-    if (isArray(extent)) this.zoom.extent(extent);
-    if (isArray(scaleExtent)) this.zoom.scaleExtent(scaleExtent);
-    if (isArray(translateExtent)) this.zoom.translateExtent(translateExtent);
-    if (isFinite(clickDistance)) this.zoom.clickDistance(clickDistance);
-    if (isFinite(duration)) this.zoom.duration(duration);
+    if (Array.isArray(extent)) this.zoom.extent(extent);
+    if (Array.isArray(scaleExtent)) this.zoom.scaleExtent(scaleExtent);
+    if (Array.isArray(translateExtent))
+      this.zoom.translateExtent(translateExtent);
+    if (clickDistance !== null && isFinite(clickDistance))
+      this.zoom.clickDistance(clickDistance);
+    if (duration !== null && isFinite(duration)) this.zoom.duration(duration);
     if (isFunction(interpolate)) this.zoom.interpolate(interpolate);
     if (isFunction(constrain)) this.zoom.constrain(constrain);
     if (isFunction(filter)) this.zoom.filter(filter);

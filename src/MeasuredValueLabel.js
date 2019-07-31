@@ -1,6 +1,5 @@
 import React from "react";
 import defaults from "lodash/defaults";
-import assign from "lodash/assign";
 import omit from "lodash/omit";
 import identity from "lodash/identity";
 import measureText from "./utils/measureText";
@@ -23,7 +22,8 @@ export default class MeasuredValueLabel extends React.Component {
     const { value, format } = props;
     const style = defaults(props.style, MeasuredValueLabel.defaultProps.style);
     const labelStr = format(value);
-    const measured = measureText(assign({ text: labelStr }, style));
+    const labelWithStyle = Object.assign({ text: labelStr }, style);
+    const measured = measureText(labelWithStyle);
 
     return {
       value: props.value,
