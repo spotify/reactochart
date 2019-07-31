@@ -4,7 +4,6 @@ import isUndefined from "lodash/isUndefined";
 import last from "lodash/last";
 import max from "lodash/max";
 import capitalize from "lodash/capitalize";
-import isArray from "lodash/isArray";
 import get from "lodash/get";
 import isFunction from "lodash/isFunction";
 import identity from "lodash/identity";
@@ -262,7 +261,7 @@ class YAxisLabels extends React.Component {
     const scaleType = inferScaleType(yScale);
     const propsFormats = props.format ? [props.format] : props.formats;
     const formatStrs =
-      isArray(propsFormats) && propsFormats.length
+      Array.isArray(propsFormats) && propsFormats.length
         ? propsFormats
         : YAxisLabels.getDefaultFormats(scaleType);
     const formats = makeLabelFormatters(formatStrs, scaleType);

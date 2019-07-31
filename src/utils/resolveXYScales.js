@@ -1,12 +1,10 @@
 import includes from "lodash/includes";
-import every from "lodash/every";
 import isFunction from "lodash/isFunction";
 import compact from "lodash/compact";
 import omitBy from "lodash/omitBy";
 import isUndefined from "lodash/isUndefined";
 import isNull from "lodash/isNull";
 import assign from "lodash/assign";
-import isArray from "lodash/isArray";
 import uniq from "lodash/uniq";
 import inRange from "lodash/inRange";
 import defaults from "lodash/defaults";
@@ -43,7 +41,7 @@ function isValidScaleType(scaleType) {
 }
 
 function areValidScaleTypes(scaleTypes) {
-  return every(scaleTypes, isValidScaleType);
+  return scaleTypes.every(isValidScaleType);
 }
 
 function mapOverChildren(children, iteratee, ...iterateeArgs) {
@@ -110,8 +108,8 @@ export default function resolveXYScales(ComposedComponent) {
 
       // if Component has data or datasets props,
       // infer the data type, & use that to get scale type
-      if (isArray(props.data) || isArray(props.datasets)) {
-        const datasets = isArray(props.datasets)
+      if (Array.isArray(props.data) || Array.isArray(props.datasets)) {
+        const datasets = Array.isArray(props.datasets)
           ? props.datasets
           : [props.data];
 
@@ -218,8 +216,11 @@ export default function resolveXYScales(ComposedComponent) {
 
       // if Component has data or datasets props,
       // use the default domainFromDatasets function to determine a domain from them
-      if (!isDone() && (isArray(props.data) || isArray(props.datasets))) {
-        const datasets = isArray(props.datasets)
+      if (
+        !isDone() &&
+        (Array.isArray(props.data) || Array.isArray(props.datasets))
+      ) {
+        const datasets = Array.isArray(props.datasets)
           ? props.datasets
           : [props.data];
         if (!isXDone()) {
@@ -356,7 +357,7 @@ export default function resolveXYScales(ComposedComponent) {
       let { marginTop, marginBottom, marginLeft, marginRight } = props;
 
       const isDone = () =>
-        every([marginTop, marginBottom, marginLeft, marginRight], isNumber);
+        [marginTop, marginBottom, marginLeft, marginRight].every(isNumber);
 
       // short-circuit if all margins provided
       if (isDone()) return { marginTop, marginBottom, marginLeft, marginRight };
@@ -429,7 +430,7 @@ export default function resolveXYScales(ComposedComponent) {
       let { spacingTop, spacingBottom, spacingLeft, spacingRight } = props;
 
       const isDone = () =>
-        every([spacingTop, spacingBottom, spacingLeft, spacingRight], isNumber);
+        [spacingTop, spacingBottom, spacingLeft, spacingRight].every(isNumber);
 
       // short-circuit if all spacing provided
       if (isDone())

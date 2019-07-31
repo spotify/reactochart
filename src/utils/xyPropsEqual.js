@@ -1,5 +1,4 @@
 import omit from "lodash/omit";
-import every from "lodash/every";
 import isEqual from "lodash/isEqual";
 import get from "lodash/get";
 import shallowEqual from "./shallowEqual";
@@ -41,8 +40,8 @@ export default function xyPropsEqual(
       omit(propsA, propKeysToSkipShallowCheck),
       omit(propsB, propKeysToSkipShallowCheck)
     ) &&
-    every(propKeysToDeepCheck, key => isEqual(propsA[key], propsB[key])) &&
-    every(["x", "y"], key => {
+    propKeysToDeepCheck.every(key => isEqual(propsA[key], propsB[key])) &&
+    ["x", "y"].every(key => {
       return scaleEqual(
         get(propsA, `scale[${key}]`),
         get(propsA, `scale[${key}]`)
@@ -71,12 +70,12 @@ export function xyPropsEqualDebug(
       omit(propsA, propKeysToSkipShallowCheck),
       omit(propsB, propKeysToSkipShallowCheck)
     ) &&
-    every(propKeysToDeepCheck, key => {
+    propKeysToDeepCheck.every(key => {
       const isDeepEqual = isEqual(propsA[key], propsB[key]);
       if (!isDeepEqual) console.log(`xyProps: ${key} not equal`);
       return isDeepEqual;
     }) &&
-    every(["x", "y"], key => {
+    ["x", "y"].every(key => {
       const isScaleEqual = scaleEqual(propsA.scale[key], propsB.scale[key]);
       if (!isScaleEqual) console.log(`xyProps: scale.${key} not equal`);
       return isScaleEqual;

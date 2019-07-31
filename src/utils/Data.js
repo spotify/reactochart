@@ -2,8 +2,6 @@ import isFunction from "lodash/isFunction";
 import isNull from "lodash/isNull";
 import isUndefined from "lodash/isUndefined";
 import property from "lodash/property";
-import isArray from "lodash/isArray";
-import every from "lodash/every";
 import isNumber from "lodash/isNumber";
 import isDate from "lodash/isDate";
 import uniq from "lodash/uniq";
@@ -73,9 +71,9 @@ export function getValue(accessor, ...args) {
  * @returns {Array.<Array>} datasets - An array of arrays of data objects
  */
 export function datasetsFromPropsOrDescendants(props) {
-  if (isArray(props.datasets)) {
+  if (Array.isArray(props.datasets)) {
     return props.datasets;
-  } else if (isArray(props.data)) {
+  } else if (Array.isArray(props.data)) {
     return [props.data];
   } else if (React.Children.count(props.children)) {
     let datasets = [];
@@ -89,26 +87,26 @@ export function datasetsFromPropsOrDescendants(props) {
 }
 
 export function inferDataType(data, accessor = identity) {
-  if (!isArray(data)) throw new Error("inferDataType expects a data array");
-  else if (every(data, (d, i) => isUndefined(accessor(d, i))))
+  if (!Array.isArray(data))
+    throw new Error("inferDataType expects a data array");
+  else if (data.every((d, i) => accessor(d, i) === undefined))
     return "categorical";
   // should this be allowed?
   else if (
-    every(
-      data,
-      (d, i) => isNumber(accessor(d, i)) || isUndefined(accessor(d, i))
+    data.every(
+      (d, i) => isNumber(accessor(d, i)) || accessor(d, i) === undefined
     )
   )
     return "number";
   else if (
-    every(data, (d, i) => isDate(accessor(d, i)) || isUndefined(accessor(d, i)))
+    data.every((d, i) => isDate(accessor(d, i)) || accessor(d, i) === undefined)
   )
     return "time";
   else return "categorical";
 }
 
 export function inferDatasetsType(datasets, accessor = identity) {
-  if (!isArray(datasets))
+  if (!Array.isArray(datasets))
     throw new Error("inferDatasetsType expects a datasets array");
 
   const types = datasets.map(data => inferDataType(data, accessor));
@@ -118,18 +116,18 @@ export function inferDatasetsType(datasets, accessor = identity) {
 
 export function isValidDomain(domain, type = "categorical") {
   return (
-    isArray(domain) &&
+    Array.isArray(domain) &&
     !!domain.length &&
     // categorical domain can be any array of anything
     (type === "categorical" ||
       // number/time domains should look like [min, max]
-      (type === "number" && domain.length === 2 && every(domain, isNumber)) ||
-      (type === "time" && domain.length === 2 && every(domain, isDate)))
+      (type === "number" && domain.length === 2 && domain.every(isNumber)) ||
+      (type === "time" && domain.length === 2 && domain.every(isDate)))
   );
 }
 
 export function combineDomains(domains, dataType) {
-  if (!isArray(domains)) return undefined;
+  if (!Array.isArray(domains)) return undefined;
   return dataType === "categorical"
     ? uniq(flatten(compact(domains)))
     : extent(flatten(domains));

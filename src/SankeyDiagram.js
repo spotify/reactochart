@@ -15,7 +15,6 @@ import omit from "lodash/omit";
 import get from "lodash/get";
 import maxBy from "lodash/maxBy";
 import has from "lodash/has";
-import isFinite from "lodash/isFinite";
 import cloneDeep from "lodash/cloneDeep";
 import some from "lodash/some";
 import map from "lodash/map";
