@@ -23,7 +23,6 @@ function getFuzzy(obj = {}, fuzzyKey) {
 }
 
 export function innerWidth(width, margin = {}) {
-  console.log("FUUZYYY", getFuzzy(margin, "left"));
   return Math.max(
     width -
       ((getFuzzy(margin, "left") || 0) + (getFuzzy(margin, "right") || 0)),
