@@ -1,3 +1,7 @@
+## 1.12.0-rc.0 (2019-07-20)
+
+- [#163](https://github.com/spotify/reactochart/pull/163) Modularize lodash
+
 ## 1.11.0 (2019-07-09)
 
 - [#155](https://github.com/spotify/reactochart/pull/155) Update d3 to v5 - thanks @ekh64!
