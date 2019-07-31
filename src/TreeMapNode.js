@@ -2,7 +2,7 @@ import get from "lodash/get";
 import kebabCase from "lodash/kebabCase";
 import isFunction from "lodash/isFunction";
 import isObject from "lodash/isObject";
-import assign from "lodash/assign";
+
 import PropTypes from "prop-types";
 import React from "react";
 import * as CustomPropTypes from "./utils/CustomPropTypes";
@@ -41,7 +41,7 @@ const TreeMapNode = props => {
     : isObject(nodeStyle)
       ? nodeStyle
       : {};
-  assign(style, customStyle);
+  Object.assign(style, customStyle);
 
   let handlers = [
     "onClick",
