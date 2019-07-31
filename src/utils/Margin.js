@@ -8,7 +8,7 @@ export const zeroMargin = { top: 0, bottom: 0, left: 0, right: 0 };
 // find a fuzzy match for key in object and return the value
 // eg getFuzzy({marginLeft: 10}, 'left') returns 10
 function getFuzzy(obj = {}, fuzzyKey) {
-  const keyMatch = Object.keys({ a: 1, marginLeft: 10 }).find(key => {
+  const keyMatch = Object.keys(obj).find(key => {
     if (!!key.match(new RegExp(fuzzyKey, "i"))) {
       return true;
     }
@@ -23,6 +23,7 @@ function getFuzzy(obj = {}, fuzzyKey) {
 }
 
 export function innerWidth(width, margin = {}) {
+  console.log("FUUZYYY", getFuzzy(margin, "left"));
   return Math.max(
     width -
       ((getFuzzy(margin, "left") || 0) + (getFuzzy(margin, "right") || 0)),

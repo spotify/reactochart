@@ -29,8 +29,11 @@ export function checkRangesOverlap(a, b) {
   // returns true if the ranges overlap
   if (
     ![a, b].every(
-      r =>
-        Array.isArray(r) && r.length === 2 && r.every(isFinite) && r[0] <= r[1]
+      range =>
+        Array.isArray(range) &&
+        range.length === 2 &&
+        range.every(rangeVal => rangeVal !== null && isFinite(rangeVal)) &&
+        range[0] <= range[1]
     )
   )
     throw new Error(

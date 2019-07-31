@@ -145,8 +145,9 @@ export default class ZoomContainer extends React.Component {
     if (Array.isArray(scaleExtent)) this.zoom.scaleExtent(scaleExtent);
     if (Array.isArray(translateExtent))
       this.zoom.translateExtent(translateExtent);
-    if (isFinite(clickDistance)) this.zoom.clickDistance(clickDistance);
-    if (isFinite(duration)) this.zoom.duration(duration);
+    if (clickDistance !== null && isFinite(clickDistance))
+      this.zoom.clickDistance(clickDistance);
+    if (duration !== null && isFinite(duration)) this.zoom.duration(duration);
     if (isFunction(interpolate)) this.zoom.interpolate(interpolate);
     if (isFunction(constrain)) this.zoom.constrain(constrain);
     if (isFunction(filter)) this.zoom.filter(filter);

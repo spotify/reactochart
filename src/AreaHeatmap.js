@@ -175,7 +175,12 @@ export default class AreaHeatmap extends React.Component {
           const rectX = fullRectX + (fullWidth - width) / 2;
           const rectY = fullRectY + (fullHeight - height) / 2;
 
-          if (![rectX, rectY, width, height].every(isFinite)) return null;
+          if (
+            ![rectX, rectY, width, height].every(
+              val => val !== null && isFinite(val)
+            )
+          )
+            return null;
 
           const className = `rct-area-heatmap-rect ${getValue(
             rectClassName,

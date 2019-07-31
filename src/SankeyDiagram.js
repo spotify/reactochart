@@ -773,7 +773,7 @@ export default class SankeyDiagram extends React.Component {
     showLinkSourceLabels: false,
     linkSourceLabelText: (link, graph, props) => {
       const valueRelative = link.valueSourceRelative;
-      if (!isFinite(valueRelative)) return "";
+      if (valueRelative === null || !isFinite(valueRelative)) return "";
       const percentText =
         valueRelative < 0.001
           ? "<0.1%"
@@ -792,7 +792,7 @@ export default class SankeyDiagram extends React.Component {
     showLinkTargetLabels: false,
     linkTargetLabelText: (link, graph, props) => {
       const valueRelative = link.valueTargetRelative;
-      if (!isFinite(valueRelative)) return "";
+      if (valueRelative === null || !isFinite(valueRelative)) return "";
       const percentText =
         valueRelative < 0.001
           ? "<0.1%"

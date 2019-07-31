@@ -281,7 +281,7 @@ class PieChart extends React.Component {
           />
         ) : null}
 
-        {isFinite(markerLinePercent)
+        {markerLinePercent !== null && isFinite(markerLinePercent)
           ? this.renderMarkerLine(
               markerLine(
                 markerLinePercent,
