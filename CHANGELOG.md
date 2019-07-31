@@ -1,4 +1,8 @@
-## 1.12.0-rc.0 (2019-07-20)
+## 1.12.0-rc.1 (2019-07-31)
+
+- [#164](https://github.com/spotify/reactochart/pull/164) Replace lodash functions with native JS versions
+
+## 1.12.0-rc.0 (2019-07-30)
 
 - [#163](https://github.com/spotify/reactochart/pull/163) Modularize lodash
 
