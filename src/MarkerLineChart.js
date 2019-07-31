@@ -3,8 +3,6 @@ import first from "lodash/first";
 import last from "lodash/last";
 import clamp from "lodash/clamp";
 import isFunction from "lodash/isFunction";
-import every from "lodash/every";
-import isFinite from "lodash/isFinite";
 import PropTypes from "prop-types";
 import React from "react";
 import { methodIfFuncProp, bindTrailingArgs } from "./util.js";
@@ -272,7 +270,8 @@ export default class MarkerLineChart extends React.Component {
     const y2 = horizontal ? yEndVal : yVal;
     const key = `marker-line-${i}`;
 
-    if (!every([x1, x2, y1, y2], isFinite)) return null;
+    if (![x1, x2, y1, y2].every(val => val !== null && isFinite(val)))
+      return null;
     return (
       <line
         className={`${getValue(lineClassName, d, i)}`}
@@ -311,7 +310,8 @@ export default class MarkerLineChart extends React.Component {
     const y2 = !horizontal ? yVal : yVal + lineLength / 2;
     const key = `marker-line-${i}`;
 
-    if (!every([x1, x2, y1, y2], isFinite)) return null;
+    if (![x1, x2, y1, y2].every(val => val !== null && isFinite(val)))
+      return null;
     return (
       <line
         className={`${getValue(lineClassName, d, i)}`}

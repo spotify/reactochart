@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import isArray from "lodash/isArray";
 
 export const xyObjectOf = type => PropTypes.shape({ x: type, y: type });
 
@@ -38,6 +37,7 @@ export const valueOrAccessor = PropTypes.oneOfType([
 ]);
 
 export const accessorOrType = type => {
-  if (isArray(type)) return PropTypes.oneOfType([PropTypes.func, ...type]);
+  if (Array.isArray(type))
+    return PropTypes.oneOfType([PropTypes.func, ...type]);
   return PropTypes.oneOfType([PropTypes.func, type]);
 };

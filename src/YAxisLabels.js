@@ -1,10 +1,8 @@
-import find from "lodash/find";
 import defaults from "lodash/defaults";
 import isUndefined from "lodash/isUndefined";
 import last from "lodash/last";
 import max from "lodash/max";
 import capitalize from "lodash/capitalize";
-import isArray from "lodash/isArray";
 import get from "lodash/get";
 import isFunction from "lodash/isFunction";
 import identity from "lodash/identity";
@@ -21,7 +19,13 @@ import { getScaleTicks, getTickDomain, inferScaleType } from "./utils/Scale";
 import { bindTrailingArgs } from "./util.js";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
-function resolveYLabelsForValues(scale, values, formats, style, force = true) {
+function resolveYLabelsForValues(
+  scale,
+  values,
+  formats = [],
+  style,
+  force = true
+) {
   // given a set of Y-values to label, and a list of formatters to try,
   // find the first formatter that produces a set of labels which are distinct
   // since we currently do not support rotated axis value labels,
@@ -30,7 +34,7 @@ function resolveYLabelsForValues(scale, values, formats, style, force = true) {
 
   let labels;
   let attempts = [];
-  const goodFormat = find(formats, format => {
+  const goodFormat = formats.find(format => {
     const testLabels = values.map((value, i) =>
       MeasuredValueLabel.getLabel({
         value,
@@ -262,7 +266,7 @@ class YAxisLabels extends React.Component {
     const scaleType = inferScaleType(yScale);
     const propsFormats = props.format ? [props.format] : props.formats;
     const formatStrs =
-      isArray(propsFormats) && propsFormats.length
+      Array.isArray(propsFormats) && propsFormats.length
         ? propsFormats
         : YAxisLabels.getDefaultFormats(scaleType);
     const formats = makeLabelFormatters(formatStrs, scaleType);

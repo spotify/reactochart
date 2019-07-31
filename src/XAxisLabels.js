@@ -1,11 +1,9 @@
-import find from "lodash/find";
 import defaults from "lodash/defaults";
 import isUndefined from "lodash/isUndefined";
 import last from "lodash/last";
 import minBy from "lodash/minBy";
 import max from "lodash/max";
 import capitalize from "lodash/capitalize";
-import isArray from "lodash/isArray";
 import get from "lodash/get";
 import isFunction from "lodash/isFunction";
 import identity from "lodash/identity";
@@ -24,7 +22,13 @@ import { getScaleTicks, getTickDomain, inferScaleType } from "./utils/Scale";
 import { bindTrailingArgs } from "./util.js";
 import xyPropsEqual from "./utils/xyPropsEqual";
 
-function resolveXLabelsForValues(scale, values, formats, style, force = true) {
+function resolveXLabelsForValues(
+  scale,
+  values,
+  formats = [],
+  style,
+  force = true
+) {
   // given a set of values to label, and a list of formatters to try,
   // find the first formatter that produces a set of labels
   // which are A) distinct and B) fit on the axis without colliding with each other
@@ -33,7 +37,7 @@ function resolveXLabelsForValues(scale, values, formats, style, force = true) {
   let labels;
   let attempts = [];
 
-  const goodFormat = find(formats, format => {
+  const goodFormat = formats.find(format => {
     const testLabels = values.map((value, i) => {
       return MeasuredValueLabel.getLabel({
         value,
@@ -291,7 +295,7 @@ class XAxisLabels extends React.Component {
     const scaleType = inferScaleType(xScale);
     const propsFormats = props.format ? [props.format] : props.formats;
     const formatStrs =
-      isArray(propsFormats) && propsFormats.length
+      Array.isArray(propsFormats) && propsFormats.length
         ? propsFormats
         : XAxisLabels.getDefaultFormats(scaleType);
     const formats = makeLabelFormatters(formatStrs, scaleType);

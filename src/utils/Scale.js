@@ -1,6 +1,4 @@
 import get from "lodash/get";
-import isArray from "lodash/isArray";
-import every from "lodash/every";
 import isDate from "lodash/isDate";
 import isFunction from "lodash/isFunction";
 import isObject from "lodash/isObject";
@@ -38,16 +36,16 @@ export function dataTypeFromScaleType(scaleType) {
 }
 
 export function inferDataTypeFromDomain(domain) {
-  if (!isArray(domain))
+  if (!Array.isArray(domain))
     throw new Error(
       "invalid domain, inferDataTypeFromDomain cannot infer data type"
     );
 
   return domain.length !== 2
     ? "categorical"
-    : every(domain, isNumber)
+    : domain.every(isNumber)
       ? "number"
-      : every(domain, isDate)
+      : domain.every(isDate)
         ? "time"
         : "categorical";
 }
@@ -106,7 +104,7 @@ export function getTickDomain(scale, { ticks, tickCount, nice } = {}) {
       .nice(tickCount || 10);
   }
 
-  if (isArray(ticks)) {
+  if (Array.isArray(ticks)) {
     return combineDomains([
       scale.domain(),
       domainFromData(ticks, identity, dataTypeFromScaleType(scaleType))
