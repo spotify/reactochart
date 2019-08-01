@@ -1,4 +1,9 @@
 {
   "parser": "babel-eslint",
-  "extends": ["plugin:prettier/recommended"]
+  "extends": [
+    "@spotify/eslint-config-react",
+    "@spotify/eslint-config-base",
+    "prettier"
+  ],
+  "plugins": ["jest"]
 }
