@@ -1,3 +1,7 @@
+## 1.11.1 (2019-07-31)
+
+- [#167](https://github.com/spotify/reactochart/pull/167) Integrate cross-env
+
 ## 1.11.0 (2019-07-09)
 
 - [#155](https://github.com/spotify/reactochart/pull/155) Update d3 to v5 - thanks @ekh64!
