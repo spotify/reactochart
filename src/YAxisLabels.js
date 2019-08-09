@@ -5,14 +5,14 @@ import max from "lodash/max";
 import capitalize from "lodash/capitalize";
 import get from "lodash/get";
 import isFunction from "lodash/isFunction";
-import identity from "lodash/identity";
 import PropTypes from "prop-types";
 import React from "react";
 import MeasuredValueLabel from "./MeasuredValueLabel";
 import {
   checkLabelsDistinct,
   getLabelsYOverhang,
-  makeLabelFormatters
+  makeLabelFormatters,
+  getDefaultFormats
 } from "./utils/Label";
 import { getValue } from "./utils/Data";
 import { getScaleTicks, getTickDomain, inferScaleType } from "./utils/Scale";
@@ -234,24 +234,6 @@ class YAxisLabels extends React.Component {
     );
   }
 
-  static getDefaultFormats(scaleType) {
-    const timeFormatStrs = ["YYYY", "'YY", "MMM YYYY", "M/YY"];
-    const numberFormatStrs = [
-      "0.[00]a",
-      "0,0",
-      "0.[0]",
-      "0.[00]",
-      "0.[0000]",
-      "0.[000000]"
-    ];
-
-    return scaleType === "ordinal"
-      ? [identity]
-      : scaleType === "time"
-        ? timeFormatStrs
-        : numberFormatStrs;
-  }
-
   static getLabels(props) {
     const { tickCount, labelStyle, yScale } = defaults(
       props,
@@ -268,7 +250,7 @@ class YAxisLabels extends React.Component {
     const formatStrs =
       Array.isArray(propsFormats) && propsFormats.length
         ? propsFormats
-        : YAxisLabels.getDefaultFormats(scaleType);
+        : getDefaultFormats(scaleType);
     const formats = makeLabelFormatters(formatStrs, scaleType);
 
     // todo resolve ticks also
