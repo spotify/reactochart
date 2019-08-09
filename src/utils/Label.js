@@ -5,14 +5,36 @@ import tail from "lodash/tail";
 import min from "lodash/min";
 import max from "lodash/max";
 import reduce from "lodash/reduce";
-import moment from "moment";
 import numeral from "numeral";
+import { timeFormat } from "d3";
+
+export function getDefaultFormats(scaleType) {
+  const defaultTimeFormats = ["%Y", "'%y", "%b %Y", "%m/%Y"];
+  const defaultNumberFormats = [
+    "0.[00]a",
+    "0,0",
+    "0.[0]",
+    "0.[00]",
+    "0.[0000]",
+    "0.[000000]"
+  ];
+
+  return scaleType === "ordinal"
+    ? [identity]
+    : scaleType === "time"
+      ? defaultTimeFormats
+      : defaultNumberFormats;
+}
 
 export function makeLabelFormatters(formatStrs, scaleType) {
   return formatStrs.map(formatStr => {
     if (!isString(formatStr)) return formatStr;
     return scaleType === "time"
-      ? v => moment(v).format(formatStr)
+      ? v => {
+          const timeFormatter = timeFormat(formatStr);
+
+          return timeFormatter(v);
+        }
       : v => numeral(v).format(formatStr);
   });
 }
