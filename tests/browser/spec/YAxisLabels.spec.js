@@ -122,4 +122,46 @@ describe("YAxisLabel", () => {
 
     expect(renderedTickLabels).to.eql(correctTickLabels);
   });
+
+  it("Renders date labels given formats array", () => {
+    const tree = (
+      <XYPlot
+        width={400}
+        height={150}
+        yDomain={[new Date("01/01/2015"), new Date("01/01/2019")]}
+        xDomain={[-20, 20]}
+      >
+        <YAxisLabels
+          formats={["%B %d, %Y", "%m/%Y"]}
+          position="top"
+          distance={2}
+          tickCount={5}
+        />
+      </XYPlot>
+    );
+
+    const rendered = mount(tree).find(YAxisLabels);
+    const labelWrapper = rendered.first("g");
+    const labels = labelWrapper.children().find("text");
+
+    // Logic should pick our first format "%B %d, %Y"
+    // which would format the labels like so January 30, 2015
+    // because YAxisLabels (rendered vertically) wouldn't have collisions
+    const correctTickLabels = [
+      "January 01, 2015",
+      "January 01, 2016",
+      "January 01, 2017",
+      "January 01, 2018",
+      "January 01, 2019"
+    ];
+
+    const renderedTickLabels = labels.map(label => {
+      const instance = label.instance();
+      const textContent = instance.textContent;
+      console.log(textContent);
+      return textContent;
+    });
+
+    expect(renderedTickLabels).to.eql(correctTickLabels);
+  });
 });

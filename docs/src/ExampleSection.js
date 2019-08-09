@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import _ from "lodash";
-import moment from "moment";
 import * as d3 from "d3";
 import Playground from "component-playground";
 
@@ -12,8 +11,7 @@ import * as Reactochart from "../../src";
 import {
   randomWalk,
   randomWalkSeries,
-  randomWalkTimeSeries,
-  removeRandomData
+  randomWalkTimeSeries
 } from "./data/util";
 window.Reactochart = Reactochart;
 
@@ -55,7 +53,6 @@ export default class ExampleSection extends React.Component {
       ReactDOM,
       d3,
       _,
-      moment,
       randomWalk,
       randomWalkSeries,
       randomWalkTimeSeries,
