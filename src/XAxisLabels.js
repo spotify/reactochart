@@ -210,7 +210,6 @@ class XAxisLabels extends React.Component {
       lineHeight: 1,
       textAnchor: "middle"
     },
-    format: undefined,
     formats: undefined,
     labels: undefined
   };
@@ -268,9 +267,8 @@ class XAxisLabels extends React.Component {
       labelStyle,
       defaultStyle: XAxisLabels.defaultProps.labelStyle
     };
-
+    const { formats: propsFormats } = props;
     const scaleType = inferScaleType(xScale);
-    const propsFormats = props.format ? [props.format] : props.formats;
     const formatStrs =
       Array.isArray(propsFormats) && propsFormats.length
         ? propsFormats

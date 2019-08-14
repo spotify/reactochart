@@ -241,7 +241,8 @@ class YAxisLabels extends React.Component {
       defaultStyle: YAxisLabels.defaultProps.labelStyle
     };
     const scaleType = inferScaleType(yScale);
-    const propsFormats = props.format ? [props.format] : props.formats;
+    const { formats: propsFormats } = props;
+    const scaleType = inferScaleType(xScale);
     const formatStrs =
       Array.isArray(propsFormats) && propsFormats.length
         ? propsFormats
