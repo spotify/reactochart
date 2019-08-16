@@ -147,6 +147,13 @@ class XAxisLabels extends React.Component {
     labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     labelClassName: PropTypes.string,
     /**
+     * An accessor function that returns the updated label
+     *
+     * For example, given labels with real numbers on can pass in one can pass in the following accessor
+     * (value) => d3.format(".0%")(value) for a rounded percentage label, like 12%.
+     */
+    format: PropTypes.func,
+    /**
      * Formats to use for the labels in priority order. XAxisLabels will try to be smart about which format
      * to use that keeps the labels distinct and provides the least amount of collisions when rendered. Formats
      * can be either string(s) or function(s), utilizing d3-format.
@@ -210,6 +217,7 @@ class XAxisLabels extends React.Component {
       lineHeight: 1,
       textAnchor: "middle"
     },
+    format: undefined,
     formats: undefined,
     labels: undefined
   };
@@ -267,7 +275,7 @@ class XAxisLabels extends React.Component {
       labelStyle,
       defaultStyle: XAxisLabels.defaultProps.labelStyle
     };
-    const { formats: propsFormats } = props;
+    const propsFormats = props.format ? [props.format] : props.formats;
     const scaleType = inferScaleType(xScale);
     const formatStrs =
       Array.isArray(propsFormats) && propsFormats.length
