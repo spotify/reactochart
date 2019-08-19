@@ -228,6 +228,13 @@
       "required": false,
       "description": "`mouseclick` event handler callback, called when user's mouse clicks the label."
     },
+    "format": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "An accessor function that returns the updated label\n\nFor example, given labels with real numbers on can pass in one can pass in the following accessor\n(label) => `{label}%` for a percentage label."
+    },
     "formats": {
       "type": {
         "name": "array"

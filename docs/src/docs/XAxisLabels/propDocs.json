@@ -182,6 +182,17 @@
         "computed": false
       }
     },
+    "format": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "An accessor function that returns the updated label\n\nFor example, given labels with real numbers on can pass in one can pass in the following accessor\n(label) => `{label}%` for a percentage label.",
+      "defaultValue": {
+        "value": "undefined",
+        "computed": true
+      }
+    },
     "formats": {
       "type": {
         "name": "array"
