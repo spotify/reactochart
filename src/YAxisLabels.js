@@ -144,7 +144,7 @@ class YAxisLabels extends React.Component {
      */
     onMouseClickLabel: PropTypes.func,
     /**
-     * An accessor function that returns the updated label
+     * An accessor function that returns the updated label.
      *
      * For example, given labels with real numbers one can pass in the following accessor:
      * (label) => `{label}%`.
