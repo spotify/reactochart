@@ -144,16 +144,18 @@ class YAxisLabels extends React.Component {
      */
     onMouseClickLabel: PropTypes.func,
     /**
-     * Format to use for the labels or accessor that returns the updated label.
+     * An accessor function that returns the updated label.
      *
-     * For example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit.
+     * For example, given labels with real numbers one can pass in the following accessor,
+     * (label) => `${label}%`, to display percentages.
      */
-    format: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    format: PropTypes.func,
     /**
      * Formats to use for the labels in priority order. XAxisLabels will try to be smart about which format
-     * to use that keeps the labels distinct and provides the least amount of collisions when rendered.
+     * to use that keeps the labels distinct and provides the least amount of collisions when rendered. Formats
+     * can be either string(s) or function(s), utilizing d3-format.
      *
-     * For example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit
+     * For example, given labels with real numbers one can pass in [".0%"] for a rounded percentage, like 12%.
      */
     formats: PropTypes.array,
     /**

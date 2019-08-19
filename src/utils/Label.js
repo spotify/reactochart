@@ -5,18 +5,20 @@ import tail from "lodash/tail";
 import min from "lodash/min";
 import max from "lodash/max";
 import reduce from "lodash/reduce";
-import numeral from "numeral";
 import { timeFormat } from "d3";
+import { format as numberFormat } from "d3-format";
 
 export function getDefaultFormats(scaleType) {
   const defaultTimeFormats = ["%Y", "'%y", "%b %Y", "%m/%Y"];
+  // Number format examples for a value of 1234.55555
+  // https://github.com/d3/d3-format
   const defaultNumberFormats = [
-    "0.[00]a",
-    "0,0",
-    "0.[0]",
-    "0.[00]",
-    "0.[0000]",
-    "0.[000000]"
+    "~s", // 1.23456k
+    ",d", // 1,235
+    ".1~f", // 1234.6
+    ".2~f", // 1234.56
+    ".4~f", // 1234.5556
+    ".6~f" // 1234.555555
   ];
 
   return scaleType === "ordinal"
@@ -26,16 +28,12 @@ export function getDefaultFormats(scaleType) {
       : defaultNumberFormats;
 }
 
-export function makeLabelFormatters(formatStrs, scaleType) {
-  return formatStrs.map(formatStr => {
-    if (!isString(formatStr)) return formatStr;
+export function makeLabelFormatters(formats, scaleType) {
+  return formats.map(format => {
+    if (!isString(format)) return format;
     return scaleType === "time"
-      ? v => {
-          const timeFormatter = timeFormat(formatStr);
-
-          return timeFormatter(v);
-        }
-      : v => numeral(v).format(formatStr);
+      ? value => timeFormat(format)(value)
+      : value => numberFormat(format)(value);
   });
 }
 
