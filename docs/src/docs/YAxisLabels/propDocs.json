@@ -233,7 +233,7 @@
         "name": "func"
       },
       "required": false,
-      "description": "An accessor function that returns the updated label.\n\nFor example, given labels with real numbers one can pass in the following accessor:\n(label) => `{label}%`."
+      "description": "An accessor function that returns the updated label.\n\nFor example, given labels with real numbers one can pass in the following accessor,\n(label) => `${label}%`, to display percentages."
     },
     "formats": {
       "type": {
