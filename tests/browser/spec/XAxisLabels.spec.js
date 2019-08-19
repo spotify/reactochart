@@ -165,7 +165,7 @@ describe("XAxisLabel", () => {
     const labelWrapper = rendered.first("g");
     const labels = labelWrapper.children().find("text");
 
-    // Logic should pick the ".0%" format since ".8%"
+    // Logic should pick the ".0%" format since "+20"
     // would have too many collisions when rendered
     const correctTickLabels = ["-100%", "-50%", "0%", "50%", "100%"];
 
