@@ -17,7 +17,7 @@ import maxBy from "lodash/maxBy";
 import has from "lodash/has";
 import cloneDeep from "lodash/cloneDeep";
 import map from "lodash/map";
-import numeral from "numeral";
+import { format as numberFormat, formatPrefix } from "d3-format";
 import PropTypes from "prop-types";
 import React from "react";
 import { getValue } from "./utils/Data";
@@ -751,7 +751,8 @@ export default class SankeyDiagram extends React.Component {
     nodeLabelStyle: {},
     showLinkLabels: false,
     linkLabelText: (link, graph, props) => {
-      const valueText = numeral(link.value || 0).format("0.[0]a");
+      const linkValue = link.value || 0;
+      const valueText = formatPrefix(".1~f", linkValue)(linkValue);
       const sourceText = getValue(
         props.nodeLabelText,
         link.source,
@@ -775,9 +776,7 @@ export default class SankeyDiagram extends React.Component {
       const valueRelative = link.valueSourceRelative;
       if (valueRelative === null || !isFinite(valueRelative)) return "";
       const percentText =
-        valueRelative < 0.001
-          ? "<0.1%"
-          : numeral(valueRelative).format("0.[0]%");
+        valueRelative < 0.001 ? "<0.1%" : numberFormat(".1~%")(valueRelative);
       return `${percentText} to ${getValue(
         props.nodeLabelText,
         link.target,
@@ -794,9 +793,7 @@ export default class SankeyDiagram extends React.Component {
       const valueRelative = link.valueTargetRelative;
       if (valueRelative === null || !isFinite(valueRelative)) return "";
       const percentText =
-        valueRelative < 0.001
-          ? "<0.1%"
-          : numeral(valueRelative).format("0.[0]%");
+        valueRelative < 0.001 ? "<0.1%" : numberFormat(".1~%")(valueRelative);
       return `${percentText} from ${getValue(
         props.nodeLabelText,
         link.source,

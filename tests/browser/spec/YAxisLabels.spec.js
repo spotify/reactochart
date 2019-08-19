@@ -133,7 +133,7 @@ describe("YAxisLabel", () => {
       >
         <YAxisLabels
           formats={["%B %d, %Y", "%m/%Y"]}
-          position="top"
+          position="left"
           distance={2}
           tickCount={5}
         />
@@ -158,7 +158,36 @@ describe("YAxisLabel", () => {
     const renderedTickLabels = labels.map(label => {
       const instance = label.instance();
       const textContent = instance.textContent;
-      console.log(textContent);
+      return textContent;
+    });
+
+    expect(renderedTickLabels).to.eql(correctTickLabels);
+  });
+
+  it("Renders number labels given formats array", () => {
+    const tree = (
+      <XYPlot width={400} height={150} xDomain={[-20, 20]} yDomain={[-1, 1]}>
+        <YAxisLabels
+          formats={[".1%", ".0%"]}
+          position="left"
+          distance={2}
+          tickCount={5}
+        />
+      </XYPlot>
+    );
+
+    const rendered = mount(tree).find(YAxisLabels);
+    const labelWrapper = rendered.first("g");
+    const labels = labelWrapper.children().find("text");
+
+    // Logic should pick our first format ".1%"
+    // which would format the labels like so: 1.0%
+    // because YAxisLabels (rendered vertically) wouldn't have collisions
+    const correctTickLabels = ["-100.0%", "-50.0%", "0.0%", "50.0%", "100.0%"];
+
+    const renderedTickLabels = labels.map(label => {
+      const instance = label.instance();
+      const textContent = instance.textContent;
       return textContent;
     });
 

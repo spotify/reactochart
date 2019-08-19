@@ -148,4 +148,33 @@ describe("XAxisLabel", () => {
 
     expect(renderedTickLabels).to.eql(correctTickLabels);
   });
+
+  it("Renders number labels given formats array", () => {
+    const tree = (
+      <XYPlot width={400} height={150} xDomain={[-1, 1]} yDomain={[-20, 20]}>
+        <XAxisLabels
+          formats={["+20", ".0%"]}
+          position="top"
+          distance={2}
+          tickCount={5}
+        />
+      </XYPlot>
+    );
+
+    const rendered = mount(tree).find(XAxisLabels);
+    const labelWrapper = rendered.first("g");
+    const labels = labelWrapper.children().find("text");
+
+    // Logic should pick the ".0%" format since "+20"
+    // would have too many collisions when rendered
+    const correctTickLabels = ["-100%", "-50%", "0%", "50%", "100%"];
+
+    const renderedTickLabels = labels.map(label => {
+      const instance = label.instance();
+      const textContent = instance.textContent;
+      return textContent;
+    });
+
+    expect(renderedTickLabels).to.eql(correctTickLabels);
+  });
 });

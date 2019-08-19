@@ -30,20 +30,6 @@
       "returns": null
     },
     {
-      "name": "getDefaultFormats",
-      "docblock": null,
-      "modifiers": [
-        "static"
-      ],
-      "params": [
-        {
-          "name": "scaleType",
-          "type": null
-        }
-      ],
-      "returns": null
-    },
-    {
       "name": "getLabels",
       "docblock": null,
       "modifiers": [
@@ -244,25 +230,17 @@
     },
     "format": {
       "type": {
-        "name": "union",
-        "value": [
-          {
-            "name": "string"
-          },
-          {
-            "name": "func"
-          }
-        ]
+        "name": "func"
       },
       "required": false,
-      "description": "Format to use for the labels or accessor that returns the updated label.\n\nFor example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit."
+      "description": "An accessor function that returns the updated label.\n\nFor example, given labels with real numbers one can pass in the following accessor,\n(label) => `${label}%`, to display percentages."
     },
     "formats": {
       "type": {
         "name": "array"
       },
       "required": false,
-      "description": "Formats to use for the labels in priority order. XAxisLabels will try to be smart about which format\nto use that keeps the labels distinct and provides the least amount of collisions when rendered.\n\nFor example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit"
+      "description": "Formats to use for the labels in priority order. XAxisLabels will try to be smart about which format\nto use that keeps the labels distinct and provides the least amount of collisions when rendered. Formats\ncan be either string(s) or function(s), utilizing d3-format.\n\nFor example, given labels with real numbers one can pass in [\".0%\"] for a rounded percentage, like 12%."
     },
     "labels": {
       "type": {
