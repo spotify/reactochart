@@ -28,12 +28,12 @@ export function getDefaultFormats(scaleType) {
       : defaultNumberFormats;
 }
 
-export function makeLabelFormatters(formatStrs, scaleType) {
-  return formatStrs.map(formatStr => {
-    if (!isString(formatStr)) return formatStr;
+export function makeLabelFormatters(formats, scaleType) {
+  return formats.map(format => {
+    if (!isString(format)) return format;
     return scaleType === "time"
-      ? value => timeFormat(formatStr)(value)
-      : value => numberFormat(formatStr)(value);
+      ? value => timeFormat(format)(value)
+      : value => numberFormat(format)(value);
   });
 }
 

@@ -150,7 +150,7 @@ class XAxisLabels extends React.Component {
      * An accessor function that returns the updated label
      *
      * For example, given labels with real numbers on can pass in one can pass in the following accessor
-     * (value) => d3.format(".0%")(value) for a rounded percentage label, like 12%.
+     * (label) => `{label}%` for a percentage label.
      */
     format: PropTypes.func,
     /**
