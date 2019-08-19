@@ -146,8 +146,8 @@ class YAxisLabels extends React.Component {
     /**
      * An accessor function that returns the updated label
      *
-     * For example, given labels with real numbers on can pass in one can pass in the following accessor
-     * (label) => `{label}%` for a percentage label.
+     * For example, given labels with real numbers one can pass in the following accessor:
+     * (label) => `{label}%`.
      */
     format: PropTypes.func,
     /**
