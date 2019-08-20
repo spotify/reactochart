@@ -314,8 +314,8 @@ class YAxisLabels extends React.Component {
           });
 
           const style = _.defaults(
-            { textAnchor },
             getValue(labelStyle, { x, y, ...label }, i),
+            { textAnchor },
             YAxisLabels.defaultProps.labelStyle
           );
 
