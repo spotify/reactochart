@@ -2,7 +2,6 @@ import inRange from "lodash/inRange";
 import isFunction from "lodash/isFunction";
 import fromPairs from "lodash/fromPairs";
 import omit from "lodash/omit";
-import pick from "lodash/pick";
 import isNull from "lodash/isNull";
 import isUndefined from "lodash/isUndefined";
 import PropTypes from "prop-types";
@@ -185,7 +184,7 @@ class XYPlot extends React.Component {
     invertYScale: false,
     includeXZero: false,
     includeYZero: false,
-    style: {},
+    xyPlotContainerStyle: {},
     xyPlotStyle: {},
     xyPlotClassName: ""
   };
@@ -274,7 +273,7 @@ class XYPlot extends React.Component {
     ];
 
     const propsForChildren = {
-      ...pick(this.props, omittedProps),
+      ...omit(this.props, omittedProps),
       ...chartSize,
       ...scales
     };
