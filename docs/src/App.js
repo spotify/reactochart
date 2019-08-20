@@ -1,6 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { HashRouter as Router, Link, Route } from "react-router-dom";
+import _ from "lodash";
 
 import * as Docs from "./docs";
 import * as Lessons from "./lessons";

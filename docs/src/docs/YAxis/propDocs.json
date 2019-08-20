@@ -313,15 +313,7 @@
     },
     "labelFormat": {
       "type": {
-        "name": "union",
-        "value": [
-          {
-            "name": "string"
-          },
-          {
-            "name": "func"
-          }
-        ]
+        "name": "func"
       },
       "required": false,
       "description": ""

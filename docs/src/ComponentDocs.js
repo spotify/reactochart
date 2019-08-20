@@ -6,11 +6,13 @@ import remarkReact from "remark-react";
 export default class ComponentDocs extends React.Component {
   render() {
     const { name, propDocs, children } = this.props;
-    const sortedProps = _(_.get(propDocs, "props"))
-      .toPairs()
-      .sortBy(0)
-      .fromPairs()
-      .value();
+    const props = _.get(propDocs, "props", {});
+    const sortedProps = Object.entries(props)
+      .sort((a, b) => a[0] - b[0])
+      .reduce((acc, [key, value]) => {
+        acc[key] = value;
+        return acc;
+      }, {});
 
     return (
       <div className="container-fluid component-docs">
