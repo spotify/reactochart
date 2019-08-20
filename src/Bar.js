@@ -125,6 +125,7 @@ export default class Bar extends React.Component {
       onMouseMove,
       onMouseLeave,
       showLabel,
+      className,
       labelFormat,
       labelDistance,
       labelClassName
@@ -136,9 +137,8 @@ export default class Bar extends React.Component {
     );
 
     const orientation = isUndefined(xEnd) ? "vertical" : "horizontal";
-    const className = `rct-chart-bar rct-chart-bar-${orientation} ${this.props
-      .className || ""}`;
-    const labelClass = `rct-chart-bar-label ${this.props.labelClassName || ""}`;
+    const classNameForBar = `rct-chart-bar rct-chart-bar-${orientation} ${className}`;
+    const labelClass = `rct-chart-bar-label ${labelClassName || ""}`;
 
     let rectX, rectY, width, height, xText, yText, textAnchor, textValue;
     if (orientation === "horizontal") {
@@ -175,9 +175,9 @@ export default class Bar extends React.Component {
         {...{
           x: rectX,
           y: rectY,
+          className: classNameForBar,
           width,
           height,
-          className,
           style,
           onMouseEnter,
           onMouseMove,
