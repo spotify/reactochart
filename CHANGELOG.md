@@ -1,5 +1,6 @@
 ## 2.0.0-rc.0 (2019-08-20)
 
+- [#169](https://github.com/spotify/reactochart/pull/169) Deprecate numeral.js in favor of d3.format
 - [#164](https://github.com/spotify/reactochart/pull/164) Replace lodash functions with native JS versions
 - [#163](https://github.com/spotify/reactochart/pull/163) Modularize lodash
 
