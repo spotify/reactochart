@@ -8,7 +8,7 @@ const YAxisExample = (props) => {
   return <div>
     <div style={chartStyle}>
       <XYPlot xDomain={numberDomain} yDomain={numberDomain} {...size}>
-        <YAxis title="Number"/>
+        <YAxis title="Number" />
       </XYPlot>
     </div>
     <div style={chartStyle}>
@@ -18,7 +18,7 @@ const YAxisExample = (props) => {
     </div>
     <div style={chartStyle}>
       <XYPlot xDomain={numberDomain} yDomain={categoricalDomain} {...size}>
-        <YAxis title="Categorical"/>
+        <YAxis title="Categorical" />
       </XYPlot>
     </div>
   </div>

@@ -9,20 +9,6 @@ chai.use(sinonChai);
 // YAxisLabels tests must run in browser since YAxisLabels uses measureText
 
 describe("YAxisLabel", () => {
-  const width = 500;
-  const height = 300;
-  const props = {
-    width,
-    height,
-    xScaleType: "linear",
-    yScaleType: "linear",
-    marginTop: 11,
-    marginBottom: 22,
-    marginLeft: 33,
-    marginRight: 44,
-    offset: 5
-  };
-
   it("Check how many labels are created and where", () => {
     const chartStyle = { marginBottom: "10px" };
     const functions = {
@@ -101,6 +87,7 @@ describe("YAxisLabel", () => {
       const instance = label.instance();
       const textContent = instance.textContent;
       const expectedStyles = Object.assign(
+        {},
         YAxisLabels.defaultProps.labelStyle,
         {
           fill: textContent === "0%" ? "green" : "blue"

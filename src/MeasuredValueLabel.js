@@ -19,6 +19,7 @@ export default class MeasuredValueLabel extends React.Component {
   static getLabel(props) {
     const { value, format } = props;
     const style = _.defaults(
+      {},
       props.style,
       MeasuredValueLabel.defaultProps.style
     );

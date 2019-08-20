@@ -26,6 +26,7 @@ function resolveYLabelsForValues(scale, values, formats, style, force = true) {
         value,
         format,
         style: _.defaults(
+          {},
           getValue(style.labelStyle, { value }, i),
           style.defaultStyle
         )
@@ -176,13 +177,23 @@ class YAxisLabels extends React.Component {
     labelStyle: {
       fontFamily: "Helvetica, sans-serif",
       fontSize: "14px",
-      lineHeight: 1,
-      textAnchor: "end"
+      lineHeight: 1
     }
   };
 
   shouldComponentUpdate(nextProps, nextState) {
     return !xyPropsEqual(this.props, nextProps);
+  }
+
+  static getDefaultTextAnchor(props) {
+    if (props.labelStyle.textAnchor) {
+      return props.labelStyle.textAnchor;
+    }
+
+    const placement =
+      props.placement || (props.position === "left" ? "before" : "after");
+
+    return placement === "before" ? "end" : "start";
   }
 
   static getTickDomain(props) {
@@ -243,8 +254,8 @@ class YAxisLabels extends React.Component {
 
   static getLabels(props) {
     const { tickCount, labelStyle, yScale } = _.defaults(
-      props,
       {},
+      props,
       YAxisLabels.defaultProps
     );
     const ticks = props.ticks || getScaleTicks(yScale, null, tickCount);
@@ -252,6 +263,7 @@ class YAxisLabels extends React.Component {
       labelStyle,
       defaultStyle: YAxisLabels.defaultProps.labelStyle
     };
+
     const scaleType = inferScaleType(yScale);
     const propsFormats = props.format ? [props.format] : props.formats;
     const formatStrs =
@@ -284,10 +296,10 @@ class YAxisLabels extends React.Component {
       spacingRight,
       offset
     } = this.props;
+
     const placement =
       this.props.placement || (position === "left" ? "before" : "after");
     const className = `rct-chart-value-label rct-chart-value-label-y ${labelClassName}`;
-    const textAnchor = placement === "before" ? "end" : "start";
     const labels = this.props.labels || YAxisLabels.getLabels(this.props);
     const transform =
       position === "left"
@@ -314,8 +326,9 @@ class YAxisLabels extends React.Component {
           });
 
           const style = _.defaults(
+            {},
             getValue(labelStyle, { x, y, ...label }, i),
-            { textAnchor },
+            { textAnchor: YAxisLabels.getDefaultTextAnchor(this.props) },
             YAxisLabels.defaultProps.labelStyle
           );
 

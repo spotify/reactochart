@@ -53,7 +53,7 @@ export function getLabelXRange(scale, label, anchor = "middle") {
 }
 
 export function getLabelYRange(scale, label, anchor = "middle") {
-  const anchorOffsets = { top: 0, middle: -0.5, bottom: -1 };
+  const anchorOffsets = { start: 0, middle: -0.5, end: -1 };
   const y1 = scale(label.value) + (anchorOffsets[anchor] || 0) * label.height;
   return [y1, y1 + label.height];
 }
