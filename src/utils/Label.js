@@ -5,6 +5,7 @@ import tail from "lodash/tail";
 import min from "lodash/min";
 import max from "lodash/max";
 import reduce from "lodash/reduce";
+import identity from "lodash/identity";
 import { timeFormat } from "d3";
 import { format as numberFormat } from "d3-format";
 
