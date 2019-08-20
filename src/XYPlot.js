@@ -2,7 +2,6 @@ import inRange from "lodash/inRange";
 import isFunction from "lodash/isFunction";
 import fromPairs from "lodash/fromPairs";
 import omit from "lodash/omit";
-import pick from "lodash/pick";
 import isNull from "lodash/isNull";
 import isUndefined from "lodash/isUndefined";
 import PropTypes from "prop-types";
@@ -150,15 +149,6 @@ class XYPlot extends React.Component {
      */
     spacingRight: PropTypes.number,
 
-    /**
-     * Inline style object to be applied to the parent SVG element.
-     */
-    style: PropTypes.object,
-    /**
-     * Inline style object to be applied to the plot.
-     * This is the inner rect DOM element where the graphs are rendered within the axes.
-     */
-    xyPlotStyle: PropTypes.object,
     // todo implement padding (helper for spacing)
     // paddingTop: PropTypes.number,
     // paddingBottom: PropTypes.number,
@@ -170,7 +160,17 @@ class XYPlot extends React.Component {
     onMouseLeave: PropTypes.func,
     onMouseDown: PropTypes.func,
     onMouseUp: PropTypes.func,
+    onClick: PropTypes.func,
 
+    /**
+     * Inline style object to be applied to the parent SVG element that wraps XYPlot.
+     */
+    xyPlotContainerStyle: PropTypes.object,
+    /**
+     * Inline style object to be applied to the plot.
+     * This is the inner rect DOM element where the graphs are rendered within the axes.
+     */
+    xyPlotStyle: PropTypes.object,
     /**
      * Class attribute applied to xy plot
      */
@@ -184,7 +184,7 @@ class XYPlot extends React.Component {
     invertYScale: false,
     includeXZero: false,
     includeYZero: false,
-    style: {},
+    xyPlotContainerStyle: {},
     xyPlotStyle: {},
     xyPlotClassName: ""
   };
@@ -216,13 +216,14 @@ class XYPlot extends React.Component {
       spacingBottom,
       spacingLeft,
       spacingRight,
-      style,
+      xyPlotContainerStyle,
       xyPlotStyle,
       xyPlotClassName,
       // Passed in as prop from resolveXYScales
       xScale,
       yScale
     } = this.props;
+
     // subtract margin + spacing from width/height to obtain inner width/height of panel & chart area
     // panelSize is the area including chart + spacing but NOT margin
     // chartSize is smaller, chart *only*, not including margin or spacing
@@ -251,40 +252,39 @@ class XYPlot extends React.Component {
       "onClick"
     ];
     const handlers = fromPairs(
-      handlerNames.map(n => [n, methodIfFuncProp(n, this.props, this)])
+      handlerNames.map(handlerName => [
+        handlerName,
+        methodIfFuncProp(handlerName, this.props, this)
+      ])
     );
     const scales = {
       xScale,
       yScale
     };
 
-    // Props to omit since we don't want them to override child props
-    // TODO for v2: Namespace these props to be specific to XYPlot,
-    // but will be an incompatible API change
+    // Props that shouldn't be sent down to children
+    // because they're either unnecessary or we don't want them to
+    // override any children props
     const omittedProps = [
-      "style",
-      "onMouseMove",
-      "onMouseEnter",
-      "onMouseLeave"
+      ...handlerNames,
+      "xyPlotContainerStyle",
+      "xyPlotStyle",
+      "xyPlotClassName"
     ];
 
-    const xyPlotPropKeys = Object.keys(XYPlot.propTypes).filter(
-      k => omittedProps.indexOf(k) === -1
-    );
-
-    const propsToPass = omit(
-      {
-        ...pick(this.props, xyPlotPropKeys),
-        ...chartSize,
-        ...scales
-      },
-      omittedProps
-    );
+    const propsForChildren = {
+      ...omit(this.props, omittedProps),
+      ...chartSize,
+      ...scales
+    };
 
     const className = `rct-xy-plot ${xyPlotClassName}`;
 
     return (
-      <svg {...{ width, height, className, style }} {...handlers}>
+      <svg
+        {...{ width, height, className, style: xyPlotContainerStyle }}
+        {...handlers}
+      >
         <rect className="rct-chart-background" {...{ width, height }} />
         <g
           transform={`translate(${marginLeft + spacingLeft}, ${marginTop +
@@ -300,7 +300,7 @@ class XYPlot extends React.Component {
           {React.Children.map(this.props.children, child => {
             return isNull(child) || isUndefined(child)
               ? null
-              : React.cloneElement(child, propsToPass);
+              : React.cloneElement(child, propsForChildren);
           })}
         </g>
       </svg>

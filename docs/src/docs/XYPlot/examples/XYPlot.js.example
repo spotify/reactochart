@@ -1,6 +1,6 @@
 const MultipleXYExample = (props) => {
   return <div>
-    <XYPlot xyPlotStyle={{fill: "white"}} xDomain={[-2, 2]} yDomain={[-2, 2]} {...{width: 400, height: 400}}>
+    <XYPlot xyPlotContainerStyle={{ transform: "translateX(50px)" }} xyPlotStyle={{fill: "white"}} xDomain={[-2, 2]} yDomain={[-2, 2]} {...{width: 400, height: 400}}>
       <XAxis title="Phase" />
       <YAxis title="Intensity" />
 
