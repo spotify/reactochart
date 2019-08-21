@@ -31,6 +31,13 @@
     }
   ],
   "props": {
+    "width": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Width of chart - provided by XYPlot."
+    },
     "yScale": {
       "type": {
         "name": "func"
@@ -43,11 +50,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"left\"",
+            "value": "'left'",
             "computed": false
           },
           {
-            "value": "\"right\"",
+            "value": "'right'",
             "computed": false
           }
         ]
@@ -55,7 +62,7 @@
       "required": false,
       "description": "Position of y ticks. Accepted options are \"left\" or \"right\".",
       "defaultValue": {
-        "value": "\"left\"",
+        "value": "'left'",
         "computed": false
       }
     },
@@ -64,11 +71,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"before\"",
+            "value": "'before'",
             "computed": false
           },
           {
-            "value": "\"after\"",
+            "value": "'after'",
             "computed": false
           }
         ]

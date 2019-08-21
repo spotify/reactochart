@@ -1,4 +1,21 @@
 {
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "parser": "babel-eslint",
-  "extends": ["plugin:prettier/recommended"]
+  "extends": [
+    "@spotify/eslint-config-react",
+    "@spotify/eslint-config-base",
+    "prettier"
+  ],
+  "plugins": ["jest"],
+  "rules": {
+    "consistent-return": "off",
+    "no-nested-ternary": "off",
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off"
+  }
 }

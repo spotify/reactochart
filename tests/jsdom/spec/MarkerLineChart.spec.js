@@ -41,7 +41,7 @@ describe("MarkerLineChart", () => {
 
     // test with xEnd and yEnd
     chart = mount(
-      <MarkerLineChart {...props} horizontal={true} yEnd={d => d + 10} />
+      <MarkerLineChart {...props} horizontal yEnd={d => d + 10} />
     );
     lines = chart.find("line");
 
@@ -54,7 +54,7 @@ describe("MarkerLineChart", () => {
   it("renders the correct amount of group and line elements and has proper width/height", () => {
     let chart = mount(<MarkerLineChart {...props} />);
     let lines = chart.find("line");
-    let group = chart.find("g");
+    const group = chart.find("g");
 
     expect(group).to.have.lengthOf(1);
     expect(lines).to.have.lengthOf(props.data.length);
@@ -68,8 +68,8 @@ describe("MarkerLineChart", () => {
     lines = chart.find("line");
 
     lines.forEach((line, idx) => {
-      let d = props.data[idx];
-      let difference = Math.abs(
+      const d = props.data[idx];
+      const difference = Math.abs(
         props.xScale(props.x(d)) - props.xScale(xEnd(d))
       );
 
@@ -77,12 +77,12 @@ describe("MarkerLineChart", () => {
     });
 
     const yEnd = d => d + 10;
-    chart = mount(<MarkerLineChart {...props} horizontal={true} yEnd={yEnd} />);
+    chart = mount(<MarkerLineChart {...props} horizontal yEnd={yEnd} />);
     lines = chart.find("line");
 
     lines.forEach((line, idx) => {
-      let d = props.data[idx];
-      let difference = Math.abs(
+      const d = props.data[idx];
+      const difference = Math.abs(
         props.yScale(props.y(d)) - props.yScale(yEnd(d))
       );
 

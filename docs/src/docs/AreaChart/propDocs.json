@@ -55,7 +55,7 @@
       "required": false,
       "description": "Class attribute to be applied to area path element.",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },
@@ -137,12 +137,19 @@
       "required": false,
       "description": "Type of Y scale - provided by XYPlot."
     },
+    "height": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Height of chart - provided by XYPlot."
+    },
     "curve": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": "D3 curve for path generation"
+      "description": "D3 curve for path generation."
     }
   }
 }

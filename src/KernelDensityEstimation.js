@@ -1,9 +1,9 @@
-import { mean } from "d3";
-import PropTypes from "prop-types";
-import React from "react";
-import LineChart from "./LineChart.js";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
-import xyPropsEqual from "./utils/xyPropsEqual";
+import { mean } from 'd3';
+import PropTypes from 'prop-types';
+import React from 'react';
+import LineChart from './LineChart.js';
+import * as CustomPropTypes from './utils/CustomPropTypes';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 /**
  * Kernel Density Estimation is still undergoing experimental changes!
@@ -46,21 +46,21 @@ class KernelDensityEstimation extends React.Component {
     /**
      * D3 scale for Y axis - provided by XYPlot.
      */
-    yScale: PropTypes.func
+    yScale: PropTypes.func,
   };
   static defaultProps = {
     bandwidth: 0.5,
-    sampleCount: null // null = auto-determined based on width
+    sampleCount: null, // null = auto-determined based on width
   };
 
   state = {
-    kdeData: null
+    kdeData: null,
   };
 
   static getDomain() {
     // todo implement real static getDomain method
     return {
-      yDomain: [0, 200]
+      yDomain: [0, 200],
     };
   }
 
@@ -104,7 +104,7 @@ function kernelDensityEstimator(kernel, x) {
         x,
         mean(sample, function(v) {
           return kernel(x - v);
-        })
+        }),
       ];
     });
   };

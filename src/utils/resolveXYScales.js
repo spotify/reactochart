@@ -1,29 +1,30 @@
-import isFunction from "lodash/isFunction";
-import compact from "lodash/compact";
-import omitBy from "lodash/omitBy";
-import isUndefined from "lodash/isUndefined";
-import isNull from "lodash/isNull";
-import uniq from "lodash/uniq";
-import inRange from "lodash/inRange";
-import defaults from "lodash/defaults";
-import isNumber from "lodash/isNumber";
-import React from "react";
+import isFunction from 'lodash/isFunction';
+import compact from 'lodash/compact';
+import omitBy from 'lodash/omitBy';
+import isUndefined from 'lodash/isUndefined';
+import isNull from 'lodash/isNull';
+import uniq from 'lodash/uniq';
+import inRange from 'lodash/inRange';
+import defaults from 'lodash/defaults';
+import isNumber from 'lodash/isNumber';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   combineBorderObjects,
   combineDomains,
   domainFromDatasets,
   inferDatasetsType,
   isValidDomain,
-  makeAccessor2
-} from "./Data";
-import { innerHeight, innerRangeX, innerRangeY, innerWidth } from "./Margin";
+  makeAccessor2,
+} from './Data';
+import { innerHeight, innerRangeX, innerRangeY, innerWidth } from './Margin';
 import {
   dataTypeFromScaleType,
   inferDataTypeFromDomain,
   initScale,
   isValidScale,
-  scaleTypeFromDataType
-} from "./Scale";
+  scaleTypeFromDataType,
+} from './Scale';
 
 /**
  * `resolveXYScales` is a higher-order-component.
@@ -33,7 +34,7 @@ import {
  */
 
 function isValidScaleType(scaleType) {
-  const validScaleTypes = ["ordinal", "time", "log", "pow", "linear"];
+  const validScaleTypes = ['ordinal', 'time', 'log', 'pow', 'linear'];
 
   return validScaleTypes.includes(scaleType);
 }
@@ -46,13 +47,13 @@ function mapOverChildren(children, iteratee, ...iterateeArgs) {
   // loop over all children (react elements) and call iteratee (a function) on each one
   // iteratee is called with parameters (child.props, child.type, ...iterateeArgs)
   if (!isFunction(iteratee))
-    throw new Error("mapOverChildren iteratee must be a function");
+    throw new Error('mapOverChildren iteratee must be a function');
 
   return compact(
     React.Children.map(children, child => {
       if (!child || !React.isValidElement(child)) return null;
       return iteratee(child.props, child.type, ...iterateeArgs);
-    })
+    }),
   );
 }
 
@@ -62,6 +63,67 @@ function omitNullUndefined(obj) {
 
 export default function resolveXYScales(ComposedComponent) {
   return class extends React.Component {
+    static propTypes = {
+      /**
+       * Scale determined by our resolveXYScales higher order component.
+       * Override this prop if you'd like to pass in your own d3 scale.
+       */
+      xScale: PropTypes.func,
+      /**
+       * Scale determined by our resolveXYScales higher order component.
+       * Override this prop if you'd like to pass in your own d3 scale.
+       */
+      yScale: PropTypes.func,
+      /**
+       * Internal top margin, in pixels.
+       */
+      marginTop: PropTypes.number,
+      /**
+       * Internal bottom margin, in pixels.
+       */
+      marginBottom: PropTypes.number,
+      /**
+       * Internal left margin, in pixels.
+       */
+      marginLeft: PropTypes.number,
+      /**
+       * Internal right margin, in pixels.
+       */
+      marginRight: PropTypes.number,
+      /**
+       * Internal top spacing of XYPlot, in pixels.
+       */
+      spacingTop: PropTypes.number,
+      /**
+       * Internal bottom spacing of XYPlot, in pixels.
+       */
+      spacingBottom: PropTypes.number,
+      /**
+       * Internal left spacing of XYPlot, in pixels.
+       */
+      spacingLeft: PropTypes.number,
+      /**
+       * Internal right spacing of XYPlot, in pixels.
+       */
+      spacingRight: PropTypes.number,
+      /**
+       * Whether or not to invert the x scale
+       */
+      invertXScale: PropTypes.bool,
+      /**
+       * Whether or not to invert the y scale
+       */
+      invertYScale: PropTypes.bool,
+      /**
+       * (outer) width of the chart (SVG element).
+       */
+      width: PropTypes.number,
+      /**
+       * (outer) width of the chart (SVG element).
+       */
+      height: PropTypes.number,
+    };
+
     // todo better way for HOC's to pass statics through?
     static getScaleType = ComposedComponent.getScaleType;
     static getSpacing = ComposedComponent.getSpacing;
@@ -81,11 +143,11 @@ export default function resolveXYScales(ComposedComponent) {
       // use it to determine remaining scale types
       if (isFunction(Component.getScaleType)) {
         const componentScaleTypes = omitNullUndefined(
-          Component.getScaleType(props)
+          Component.getScaleType(props),
         );
         ({ xScaleType, yScaleType } = Object.assign(
           componentScaleTypes,
-          omitNullUndefined({ xScaleType, yScaleType })
+          omitNullUndefined({ xScaleType, yScaleType }),
         ));
         if (isDone()) return { xScaleType, yScaleType };
       }
@@ -94,12 +156,12 @@ export default function resolveXYScales(ComposedComponent) {
       // infer the data type, & use that to get scale type
       if (!isValidScaleType(xScaleType) && isValidDomain(props.xDomain)) {
         xScaleType = scaleTypeFromDataType(
-          inferDataTypeFromDomain(props.xDomain)
+          inferDataTypeFromDomain(props.xDomain),
         );
       }
       if (!isValidScaleType(yScaleType) && isValidDomain(props.yDomain)) {
         yScaleType = scaleTypeFromDataType(
-          inferDataTypeFromDomain(props.yDomain)
+          inferDataTypeFromDomain(props.yDomain),
         );
       }
       if (isDone()) return { xScaleType, yScaleType };
@@ -113,12 +175,12 @@ export default function resolveXYScales(ComposedComponent) {
 
         if (!isValidScaleType(xScaleType)) {
           xScaleType = scaleTypeFromDataType(
-            inferDatasetsType(datasets, makeAccessor2(props.x))
+            inferDatasetsType(datasets, makeAccessor2(props.x)),
           );
         }
         if (!isValidScaleType(yScaleType)) {
           yScaleType = scaleTypeFromDataType(
-            inferDatasetsType(datasets, makeAccessor2(props.y))
+            inferDatasetsType(datasets, makeAccessor2(props.y)),
           );
         }
         if (isDone()) return { xScaleType, yScaleType };
@@ -127,40 +189,40 @@ export default function resolveXYScales(ComposedComponent) {
       // if Component has children,
       // recurse through descendants to resolve their scale types the same way
       if (React.Children.count(props.children)) {
-        let childrenScaleTypes = mapOverChildren(
+        const childrenScaleTypes = mapOverChildren(
           props.children,
-          this._resolveScaleType.bind(this)
+          this._resolveScaleType.bind(this),
         );
 
         if (!isValidScaleType(xScaleType)) {
           const childXScaleTypes = compact(
             uniq(
               childrenScaleTypes.map(
-                childScaleTypes => childScaleTypes.xScaleType
-              )
-            )
+                childScaleTypes => childScaleTypes.xScaleType,
+              ),
+            ),
           );
           if (!childXScaleTypes.length === 1)
             console.warn(
-              "Multiple children with different X scale types found - defaulting to 'ordinal'"
+              "Multiple children with different X scale types found - defaulting to 'ordinal'",
             );
           xScaleType =
-            childXScaleTypes.length === 1 ? childXScaleTypes[0] : "ordinal";
+            childXScaleTypes.length === 1 ? childXScaleTypes[0] : 'ordinal';
         }
         if (!isValidScaleType(yScaleType)) {
           const childYScaleTypes = compact(
             uniq(
               childrenScaleTypes.map(
-                childScaleTypes => childScaleTypes.yScaleType
-              )
-            )
+                childScaleTypes => childScaleTypes.yScaleType,
+              ),
+            ),
           );
           if (!childYScaleTypes.length === 1)
             console.warn(
-              "Multiple children with different Y scale types found - defaulting to 'ordinal'"
+              "Multiple children with different Y scale types found - defaulting to 'ordinal'",
             );
           yScaleType =
-            childYScaleTypes.length === 1 ? childYScaleTypes[0] : "ordinal";
+            childYScaleTypes.length === 1 ? childYScaleTypes[0] : 'ordinal';
         }
       }
 
@@ -170,7 +232,8 @@ export default function resolveXYScales(ComposedComponent) {
     }
 
     _resolveDomain(props, Component, xScaleType, yScaleType) {
-      let { xDomain, yDomain, includeXZero, includeYZero } = props;
+      let { xDomain, yDomain } = props;
+      const { includeXZero, includeYZero } = props;
       const xDataType = dataTypeFromScaleType(xScaleType);
       const yDataType = dataTypeFromScaleType(yScaleType);
 
@@ -186,7 +249,7 @@ export default function resolveXYScales(ComposedComponent) {
       if (isFunction(Component.getDomain)) {
         const {
           xDomain: componentXDomain,
-          yDomain: componentYDomain
+          yDomain: componentYDomain,
         } = Component.getDomain({ ...props, xScaleType, yScaleType });
 
         if (
@@ -195,7 +258,7 @@ export default function resolveXYScales(ComposedComponent) {
           !isValidDomain(componentXDomain, xDataType)
         )
           console.warn(
-            `Component.getDomain returned an invalid domain for data type '${xDataType}': ${componentXDomain} - ignoring`
+            `Component.getDomain returned an invalid domain for data type '${xDataType}': ${componentXDomain} - ignoring`,
           );
         if (!isXDone() && isValidDomain(componentXDomain, xDataType))
           xDomain = componentXDomain;
@@ -206,7 +269,7 @@ export default function resolveXYScales(ComposedComponent) {
           !isValidDomain(componentYDomain, yDataType)
         )
           console.warn(
-            `Component.getDomain returned an invalid domain for data type '${yDataType}': ${componentYDomain} - ignoring`
+            `Component.getDomain returned an invalid domain for data type '${yDataType}': ${componentYDomain} - ignoring`,
           );
         if (!isYDone() && isValidDomain(componentYDomain, yDataType))
           yDomain = componentYDomain;
@@ -225,14 +288,14 @@ export default function resolveXYScales(ComposedComponent) {
           xDomain = domainFromDatasets(
             datasets,
             makeAccessor2(props.x),
-            xDataType
+            xDataType,
           );
         }
         if (!isYDone()) {
           yDomain = domainFromDatasets(
             datasets,
             makeAccessor2(props.y),
-            yDataType
+            yDataType,
           );
         }
       }
@@ -241,22 +304,22 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their domains the same way,
       // and combine them into a single domain, if there are multiple
       if (!isDone() && React.Children.count(props.children)) {
-        let childrenDomains = mapOverChildren(
+        const childrenDomains = mapOverChildren(
           props.children,
           this._resolveDomain.bind(this),
           xScaleType,
-          yScaleType
+          yScaleType,
         );
 
         if (!isXDone()) {
           const childXDomains = compact(
-            childrenDomains.map(childDomains => childDomains.xDomain)
+            childrenDomains.map(childDomains => childDomains.xDomain),
           );
           xDomain = combineDomains(childXDomains, xDataType);
         }
         if (!isYDone()) {
           const childYDomains = compact(
-            childrenDomains.map(childDomains => childDomains.yDomain)
+            childrenDomains.map(childDomains => childDomains.yDomain),
           );
           yDomain = combineDomains(childYDomains, yDataType);
         }
@@ -295,7 +358,7 @@ export default function resolveXYScales(ComposedComponent) {
     _resolveTickDomain(
       props,
       Component,
-      { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale }
+      { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale },
     ) {
       if (isFunction(Component.getTickDomain)) {
         const componentTickDomains = Component.getTickDomain({
@@ -305,39 +368,39 @@ export default function resolveXYScales(ComposedComponent) {
           yDomain,
           xScale,
           yScale,
-          ...props
+          ...props,
         });
         return omitNullUndefined(componentTickDomains);
       }
 
       if (React.Children.count(props.children)) {
-        let childrenTickDomains = mapOverChildren(
+        const childrenTickDomains = mapOverChildren(
           props.children,
           this._resolveTickDomain.bind(this),
-          { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale }
+          { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale },
         );
 
         const childrenXTickDomains = compact(
           childrenTickDomains.map(
-            childTickDomains => childTickDomains.xTickDomain
-          )
+            childTickDomains => childTickDomains.xTickDomain,
+          ),
         );
         const xTickDomain = childrenXTickDomains.length
           ? combineDomains(
               childrenXTickDomains,
-              dataTypeFromScaleType(xScaleType)
+              dataTypeFromScaleType(xScaleType),
             )
           : undefined;
 
         const childrenYTickDomains = compact(
           childrenTickDomains.map(
-            childTickDomains => childTickDomains.yTickDomain
-          )
+            childTickDomains => childTickDomains.yTickDomain,
+          ),
         );
         const yTickDomain = childrenYTickDomains.length
           ? combineDomains(
               childrenYTickDomains,
-              dataTypeFromScaleType(yScaleType)
+              dataTypeFromScaleType(yScaleType),
             )
           : undefined;
 
@@ -350,7 +413,7 @@ export default function resolveXYScales(ComposedComponent) {
     _resolveMargin(
       props,
       Component,
-      { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale }
+      { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale },
     ) {
       let { marginTop, marginBottom, marginLeft, marginRight } = props;
 
@@ -371,8 +434,8 @@ export default function resolveXYScales(ComposedComponent) {
             xDomain,
             yDomain,
             xScale,
-            yScale
-          })
+            yScale,
+          }),
         );
         ({ marginTop, marginBottom, marginLeft, marginRight } = Object.assign(
           componentMargin,
@@ -380,8 +443,8 @@ export default function resolveXYScales(ComposedComponent) {
             marginTop,
             marginBottom,
             marginLeft,
-            marginRight
-          })
+            marginRight,
+          }),
         ));
         if (isDone())
           return { marginTop, marginBottom, marginLeft, marginRight };
@@ -391,10 +454,10 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their margins the same way,
       // and combine them into a single margin, if there are multiple
       if (React.Children.count(props.children)) {
-        let childrenMargins = mapOverChildren(
+        const childrenMargins = mapOverChildren(
           props.children,
           this._resolveMargin.bind(this),
-          { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale }
+          { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale },
         );
 
         // console.log('combining child margins', childMargins);
@@ -403,8 +466,8 @@ export default function resolveXYScales(ComposedComponent) {
             top: childMargins.marginTop,
             bottom: childMargins.marginBottom,
             left: childMargins.marginLeft,
-            right: childMargins.marginRight
-          }))
+            right: childMargins.marginRight,
+          })),
         );
 
         marginTop = isUndefined(marginTop) ? childrenMargin.top : marginTop;
@@ -423,7 +486,7 @@ export default function resolveXYScales(ComposedComponent) {
     _resolveSpacing(
       props,
       Component,
-      { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale }
+      { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale },
     ) {
       let { spacingTop, spacingBottom, spacingLeft, spacingRight } = props;
 
@@ -445,22 +508,22 @@ export default function resolveXYScales(ComposedComponent) {
             xDomain,
             yDomain,
             xScale,
-            yScale
-          })
+            yScale,
+          }),
         );
         ({
           spacingTop,
           spacingBottom,
           spacingLeft,
-          spacingRight
+          spacingRight,
         } = Object.assign(
           componentSpacing,
           omitNullUndefined({
             spacingTop,
             spacingBottom,
             spacingLeft,
-            spacingRight
-          })
+            spacingRight,
+          }),
         ));
         if (isDone())
           return { spacingTop, spacingBottom, spacingLeft, spacingRight };
@@ -470,10 +533,10 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their spacings the same way,
       // and combine them into a single spacing, if there are multiple
       if (React.Children.count(props.children)) {
-        let childrenSpacings = mapOverChildren(
+        const childrenSpacings = mapOverChildren(
           props.children,
           this._resolveSpacing.bind(this),
-          { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale }
+          { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale },
         );
 
         const childrenSpacing = combineBorderObjects(
@@ -481,8 +544,8 @@ export default function resolveXYScales(ComposedComponent) {
             top: childSpacing.spacingTop,
             bottom: childSpacing.spacingBottom,
             left: childSpacing.spacingLeft,
-            right: childSpacing.spacingRight
-          }))
+            right: childSpacing.spacingRight,
+          })),
         );
 
         spacingTop = isUndefined(spacingTop) ? childrenSpacing.top : spacingTop;
@@ -519,54 +582,57 @@ export default function resolveXYScales(ComposedComponent) {
       spacingTop,
       spacingBottom,
       spacingLeft,
-      spacingRight
+      spacingRight,
     }) => {
       const spacing = {
         top: spacingTop,
         bottom: spacingBottom,
         left: spacingLeft,
-        right: spacingRight
+        right: spacingRight,
       };
       const margin = {
         top: marginTop,
         bottom: marginBottom,
         left: marginLeft,
-        right: marginRight
+        right: marginRight,
       };
       const innerChartWidth = innerWidth(width, margin);
       const innerChartHeight = innerHeight(height, margin);
 
+      let xScaleResult = xScale;
+      let yScaleResult = yScale;
+
       // use existing scales if provided, otherwise create new
-      if (!isValidScale(xScale)) {
-        //innerRange functions produce range (i.e. [5,20]) and map function normalizes to 0 (i.e. [0,15])
+      if (!isValidScale(xScaleResult)) {
+        // innerRange functions produce range (i.e. [5,20]) and map function normalizes to 0 (i.e. [0,15])
         const xRange = innerRangeX(innerChartWidth, spacing).map(
-          v => v - (spacing.left || 0)
+          v => v - (spacing.left || 0),
         );
-        xScale = initScale(xScaleType)
+        xScaleResult = initScale(xScaleType)
           .domain(xDomain)
           .range(xRange);
 
         // reverse scale domain if `invertXScale` is passed
         if (invertXScale) {
-          xScale.domain(xScale.domain().reverse());
+          xScaleResult.domain(xScaleResult.domain().reverse());
         }
       }
 
       if (!isValidScale(yScale)) {
         const yRange = innerRangeY(innerChartHeight, spacing).map(
-          v => v - (spacing.top || 0)
+          v => v - (spacing.top || 0),
         );
-        yScale = initScale(yScaleType)
+        yScaleResult = initScale(yScaleType)
           .domain(yDomain)
           .range(yRange);
 
         // reverse scale domain if `invertYScale` is passed
         if (invertYScale) {
-          yScale.domain(yScale.domain().reverse());
+          yScaleResult.domain(yScaleResult.domain().reverse());
         }
       }
 
-      return { xScale, yScale };
+      return { xScale: xScaleResult, yScale: yScaleResult };
     };
 
     render() {
@@ -578,7 +644,7 @@ export default function resolveXYScales(ComposedComponent) {
       // const scaleType = this._resolveScaleType(props, ComposedComponent);
       const { xScaleType, yScaleType } = this._resolveScaleType(
         props,
-        ComposedComponent
+        ComposedComponent,
       );
 
       // const domain = this._resolveDomain(props, ComposedComponent, scaleType);
@@ -586,7 +652,7 @@ export default function resolveXYScales(ComposedComponent) {
         props,
         ComposedComponent,
         xScaleType,
-        yScaleType
+        yScaleType,
       );
       if (invertXScale) xDomain = xDomain.slice().reverse();
       if (invertYScale) yDomain = yDomain.slice().reverse();
@@ -603,8 +669,6 @@ export default function resolveXYScales(ComposedComponent) {
         yDomain,
         invertXScale,
         invertYScale,
-        scaleX: props.scaleX,
-        scaleY: props.scaleY,
         marginTop: props.marginTop,
         marginBottom: props.marginBottom,
         marginLeft: props.marginLeft,
@@ -614,12 +678,12 @@ export default function resolveXYScales(ComposedComponent) {
         spacingLeft: props.spacingLeft,
         spacingRight: props.spacingRight,
         xScale: props.xScale,
-        yScale: props.yScale
+        yScale: props.yScale,
       };
       // create a temporary scale with size & domain, which may be used by the Component to calculate margin/tickDomain
       // (eg. to create and measure labels for the scales)
       let tempScale = this._makeScales(scaleOptions);
-      let { xScale: tempXScale, yScale: tempYScale } = tempScale;
+      const { xScale: tempXScale, yScale: tempYScale } = tempScale;
 
       // getTickDomain gives children the opportunity to modify the domain to include their scale ticks
       // (can't happen in getDomain, because it can't be done until the base domain/tempScale has been created)
@@ -633,19 +697,19 @@ export default function resolveXYScales(ComposedComponent) {
           xDomain,
           yDomain,
           xScale: tempXScale,
-          yScale: tempYScale
-        }
+          yScale: tempYScale,
+        },
       );
       if (isValidDomain(xTickDomain, dataTypeFromScaleType(xScaleType))) {
         xDomain = combineDomains(
           [xDomain, xTickDomain],
-          dataTypeFromScaleType(xScaleType)
+          dataTypeFromScaleType(xScaleType),
         );
       }
       if (isValidDomain(yTickDomain, dataTypeFromScaleType(yScaleType))) {
         yDomain = combineDomains(
           [yDomain, yTickDomain],
-          dataTypeFromScaleType(yScaleType)
+          dataTypeFromScaleType(yScaleType),
         );
       }
 
@@ -661,14 +725,14 @@ export default function resolveXYScales(ComposedComponent) {
           xDomain,
           yDomain,
           xScale: tempScale.xScale,
-          yScale: tempScale.yScale
+          yScale: tempScale.yScale,
         }),
         {
           marginTop: 0,
           marginBottom: 0,
           marginLeft: 0,
-          marginRight: 0
-        }
+          marginRight: 0,
+        },
       );
 
       const { spacingTop, spacingBottom, spacingLeft, spacingRight } = defaults(
@@ -678,14 +742,14 @@ export default function resolveXYScales(ComposedComponent) {
           xDomain,
           yDomain,
           xScale: tempScale.xScale,
-          yScale: tempScale.yScale
+          yScale: tempScale.yScale,
         }),
         {
           spacingTop: 0,
           spacingBottom: 0,
           spacingLeft: 0,
-          spacingRight: 0
-        }
+          spacingRight: 0,
+        },
       );
 
       // create real scales from resolved margins
@@ -698,7 +762,7 @@ export default function resolveXYScales(ComposedComponent) {
         spacingTop,
         spacingBottom,
         spacingLeft,
-        spacingRight
+        spacingRight,
       };
       const { xScale, yScale } = this._makeScales(scaleOptions);
 
@@ -716,7 +780,7 @@ export default function resolveXYScales(ComposedComponent) {
         spacingTop,
         spacingBottom,
         spacingLeft,
-        spacingRight
+        spacingRight,
       });
       return <ComposedComponent {...passedProps} />;
 

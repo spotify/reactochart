@@ -3,7 +3,7 @@ const RatesByAge = (props) => {
     <h3 style={{textAlign: 'center'}}>US Smoking Rates by Age Group</h3>
     <XYPlot width={500} height={320} yDomain={[0, .2]}>
       <XAxis title="Age" ticks={[18, 25, 45, 65]} nice={false}/>
-      <YAxis title="Cigarette Use" tickCount={4} labelFormat={'.1%'} />
+      <YAxis title="Cigarette Use" tickCount={4} labelFormats={['.1%']} />
       <AreaBarChart
         data={[
           {ageMin: 18, ageMax: 25, rate: .13},

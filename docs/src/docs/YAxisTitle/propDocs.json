@@ -55,11 +55,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"left\"",
+            "value": "'left'",
             "computed": false
           },
           {
-            "value": "\"right\"",
+            "value": "'right'",
             "computed": false
           }
         ]
@@ -67,7 +67,7 @@
       "required": false,
       "description": "Position of title in regards to the y axis. Accepted options are \"left\" or \"right\"",
       "defaultValue": {
-        "value": "\"left\"",
+        "value": "'left'",
         "computed": false
       }
     },
@@ -76,15 +76,15 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"top\"",
+            "value": "'top'",
             "computed": false
           },
           {
-            "value": "\"middle\"",
+            "value": "'middle'",
             "computed": false
           },
           {
-            "value": "\"bottom\"",
+            "value": "'bottom'",
             "computed": false
           }
         ]
@@ -92,7 +92,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "\"middle\"",
+        "value": "'middle'",
         "computed": false
       }
     },
@@ -101,11 +101,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"before\"",
+            "value": "'before'",
             "computed": false
           },
           {
-            "value": "\"after\"",
+            "value": "'after'",
             "computed": false
           }
         ]
@@ -135,7 +135,7 @@
       "required": false,
       "description": "Object declaring styles for label.\n\nDisclaimer: style will merge its defaults with the given style prop\nin order to ensure that our collision library measureText is able to calculate the\nsmallest amount of possible collisions along the axis. It's therefore dependent on\nfontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized\nstylesheet, we suggest creating a styled title component that wraps YAxisTitle with your preferred styles.",
       "defaultValue": {
-        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: \"24px\",\n  fontWeight: \"bold\",\n  lineHeight: 1\n}",
+        "value": "{\n  fontFamily: 'Helvetica, sans-serif',\n  fontSize: '24px',\n  fontWeight: 'bold',\n  lineHeight: 1,\n}",
         "computed": false
       }
     },
@@ -160,6 +160,20 @@
         "value": "0",
         "computed": false
       }
+    },
+    "title": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": ""
+    },
+    "children": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": ""
     }
   }
 }

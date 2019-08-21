@@ -1,16 +1,16 @@
-import { hierarchy, treemap, treemapResquarify } from "d3-hierarchy";
-import cloneDeep from "lodash/cloneDeep";
-import uniq from "lodash/uniq";
-import map from "lodash/map";
-import isUndefined from "lodash/isUndefined";
-import isFunction from "lodash/isFunction";
-import isString from "lodash/isString";
-import PropTypes from "prop-types";
-import React from "react";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
-import { makeAccessor } from "./utils/Data";
-import TreeMapNode from "./TreeMapNode";
-import TreeMapNodeLabel from "./TreeMapNodeLabel";
+import { hierarchy, treemap, treemapResquarify } from 'd3-hierarchy';
+import cloneDeep from 'lodash/cloneDeep';
+import uniq from 'lodash/uniq';
+import map from 'lodash/map';
+import isUndefined from 'lodash/isUndefined';
+import isFunction from 'lodash/isFunction';
+import isString from 'lodash/isString';
+import PropTypes from 'prop-types';
+import React from 'react';
+import * as CustomPropTypes from './utils/CustomPropTypes';
+import { makeAccessor } from './utils/Data';
+import TreeMapNode from './TreeMapNode';
+import TreeMapNodeLabel from './TreeMapNodeLabel';
 
 /**
  * `TreeMap` displays hierarchical data where a leaf node's rectangle has an area proportional to a specified dimension of the data.
@@ -94,16 +94,16 @@ class TreeMap extends React.Component {
     /**
      * Optional treemap node label, otherwise we default to our TreeMapNodeLabel component
      */
-    NodeLabelComponent: PropTypes.func
+    NodeLabelComponent: PropTypes.func,
   };
   static defaultProps = {
-    getValue: "value",
-    getChildren: "children",
-    getLabel: "name",
+    getValue: 'value',
+    getChildren: 'children',
+    getLabel: 'name',
     minLabelWidth: 0,
     minLabelHeight: 0,
     NodeComponent: TreeMapNode,
-    NodeLabelComponent: TreeMapNodeLabel
+    NodeLabelComponent: TreeMapNodeLabel,
   };
   componentWillMount() {
     const { data } = this.props;
@@ -119,9 +119,9 @@ class TreeMap extends React.Component {
     // todo reevaluate this logic
     if (
       !sticky ||
-      width != newProps.width ||
-      height != newProps.height ||
-      JSON.stringify(data) != JSON.stringify(newProps.data)
+      width !== newProps.width ||
+      height !== newProps.height ||
+      JSON.stringify(data) !== JSON.stringify(newProps.data)
     ) {
       this._tree = getTree(newProps);
       this._rootNode = getRootNode(cloneDeep(newProps.data), this.props);
@@ -141,14 +141,14 @@ class TreeMap extends React.Component {
       onMouseLeaveNode,
       onMouseMoveNode,
       NodeComponent,
-      NodeLabelComponent
+      NodeLabelComponent,
     } = this.props;
 
     const nodes = initTreemap(this._rootNode, this._tree, this.props);
 
-    const style = { position: "relative", width, height };
+    const style = { position: 'relative', width, height };
 
-    const parentNames = uniq(map(nodes, "parent.data.name"));
+    const parentNames = uniq(map(nodes, 'parent.data.name'));
 
     return (
       <div className="rct-tree-map" {...{ style }}>
@@ -167,7 +167,7 @@ class TreeMap extends React.Component {
               onMouseEnterNode,
               onMouseLeaveNode,
               onMouseMoveNode,
-              key: `node-${i}`
+              key: `node-${i}`,
             }}
           />
         ))}
@@ -201,7 +201,7 @@ function initTreemap(rootNode, tree, options) {
   const treeRoot = rootNode.sum(d => {
     if (isFunction(getValue)) return getValue(d);
     else if (isString(getValue)) return d[getValue];
-    else return 0;
+    return 0;
   });
   return tree(sort ? treeRoot.sort(sort) : treeRoot).descendants();
 }

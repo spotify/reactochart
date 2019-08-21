@@ -1,8 +1,8 @@
-import invariant from "invariant";
-import isUndefined from "lodash/isUndefined";
-import PropTypes from "prop-types";
-import React from "react";
-import { hasOneOfTwo } from "./util";
+import invariant from 'invariant';
+import isUndefined from 'lodash/isUndefined';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { hasOneOfTwo } from './util';
 
 /**
  * Bar is a low-level component to be used in XYPlot-type charts (namely BarChart).
@@ -22,7 +22,7 @@ export default class Bar extends React.Component {
     x: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string,
-      PropTypes.instanceOf(Date)
+      PropTypes.instanceOf(Date),
     ]),
     /**
      * For a horizontal bar, `y` represents the Y data value on which the bar is centered.
@@ -31,7 +31,7 @@ export default class Bar extends React.Component {
     y: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string,
-      PropTypes.instanceOf(Date)
+      PropTypes.instanceOf(Date),
     ]),
     /**
      * For a horizontal bar, `xEnd` represents the *ending* X data value of the bar, ie. the maximum of the range it spans.
@@ -40,7 +40,7 @@ export default class Bar extends React.Component {
     xEnd: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string,
-      PropTypes.instanceOf(Date)
+      PropTypes.instanceOf(Date),
     ]),
     /**
      * For a vertical bar, `yEnd` represents the *ending* Y data value of the bar, ie. the maximum of the range it spans.
@@ -49,7 +49,7 @@ export default class Bar extends React.Component {
     yEnd: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string,
-      PropTypes.instanceOf(Date)
+      PropTypes.instanceOf(Date),
     ]),
 
     /**
@@ -99,15 +99,15 @@ export default class Bar extends React.Component {
     /**
      * Class name(s) to be included on the bar's <text> element.
      */
-    labelClassName: PropTypes.string
+    labelClassName: PropTypes.string,
   };
   static defaultProps = {
     x: 0,
     y: 0,
     thickness: 8,
-    className: "",
+    className: '',
     style: {},
-    labelDistance: 24
+    labelDistance: 24,
   };
 
   render() {
@@ -128,20 +128,28 @@ export default class Bar extends React.Component {
       className,
       labelFormat,
       labelDistance,
-      labelClassName
+      labelClassName,
     } = this.props;
 
     invariant(
       hasOneOfTwo(xEnd, yEnd),
-      `Bar expects an xEnd *or* yEnd prop, but not both.`
+      `Bar expects an xEnd *or* yEnd prop, but not both.`,
     );
 
-    const orientation = isUndefined(xEnd) ? "vertical" : "horizontal";
+    const orientation = isUndefined(xEnd) ? 'vertical' : 'horizontal';
     const classNameForBar = `rct-chart-bar rct-chart-bar-${orientation} ${className}`;
-    const labelClass = `rct-chart-bar-label ${labelClassName || ""}`;
+    const labelClass = `rct-chart-bar-label ${labelClassName || ''}`;
 
-    let rectX, rectY, width, height, xText, yText, textAnchor, textValue;
-    if (orientation === "horizontal") {
+    let rectX;
+    let rectY;
+    let width;
+    let height;
+    let xText;
+    let yText;
+    let textAnchor;
+    let textValue;
+
+    if (orientation === 'horizontal') {
       rectY = yScale(y) - thickness / 2;
       const x0 = xScale(x);
       const x1 = xScale(xEnd);
@@ -152,7 +160,7 @@ export default class Bar extends React.Component {
       // horizontal text formatting to right of bar
       xText = Math.max(x0, x1) + labelDistance;
       yText = rectY + thickness / 2 + 5;
-      textAnchor = "";
+      textAnchor = '';
       textValue = xEnd;
     } else {
       // vertical
@@ -166,7 +174,7 @@ export default class Bar extends React.Component {
       // vertical text formatting
       xText = rectX + thickness / 2;
       yText = rectY - labelDistance;
-      textAnchor = "middle";
+      textAnchor = 'middle';
       textValue = yEnd;
     }
 
@@ -181,7 +189,7 @@ export default class Bar extends React.Component {
           style,
           onMouseEnter,
           onMouseMove,
-          onMouseLeave
+          onMouseLeave,
         }}
       />
     );
@@ -192,7 +200,7 @@ export default class Bar extends React.Component {
           textAnchor,
           x: xText,
           y: yText,
-          className: labelClass
+          className: labelClass,
         }}
       >
         {labelFormat ? labelFormat(textValue) : textValue}

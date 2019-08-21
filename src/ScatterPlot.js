@@ -1,13 +1,13 @@
-import isFunction from "lodash/isFunction";
-import isString from "lodash/isString";
-import isNumber from "lodash/isNumber";
-import isUndefined from "lodash/isUndefined";
-import PropTypes from "prop-types";
-import React from "react";
-import { methodIfFuncProp, bindTrailingArgs } from "./util.js";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
-import { getValue } from "./utils/Data";
-import xyPropsEqual from "./utils/xyPropsEqual";
+import isFunction from 'lodash/isFunction';
+import isString from 'lodash/isString';
+import isNumber from 'lodash/isNumber';
+import isUndefined from 'lodash/isUndefined';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { methodIfFuncProp, bindTrailingArgs } from './util.js';
+import * as CustomPropTypes from './utils/CustomPropTypes';
+import { getValue } from './utils/Data';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 /**
  * `ScatterPlot` displays its data as a collection of points. Each point represents
@@ -68,16 +68,20 @@ export default class ScatterPlot extends React.Component {
     /**
      * `mouseleave` event handler callback, called when user's mouse leaves a point.
      */
-    onMouseLeavePoint: PropTypes.func
+    onMouseLeavePoint: PropTypes.func,
   };
   static defaultProps = {
     pointRadius: 3,
     pointSymbol: <circle />,
     pointOffset: [0, 0],
     pointStyle: {},
-    pointClassName: ""
+    pointClassName: '',
   };
 
+  shouldComponentUpdate(nextProps) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['pointStyle']);
+    return shouldUpdate;
+  }
   // todo: implement getSpacing or getPadding static
 
   onMouseEnterPoint = (e, d) => {
@@ -90,16 +94,11 @@ export default class ScatterPlot extends React.Component {
     this.props.onMouseLeavePoint(e, d);
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ["pointStyle"]);
-    return shouldUpdate;
-  }
-
   renderPoint = (d, i) => {
     const [onMouseEnter, onMouseMove, onMouseLeave] = [
-      "onMouseEnterPoint",
-      "onMouseMovePoint",
-      "onMouseLeavePoint"
+      'onMouseEnterPoint',
+      'onMouseMovePoint',
+      'onMouseLeavePoint',
     ].map(eventName => {
       // partially apply this bar's data point as 2nd callback argument
       const callback = methodIfFuncProp(eventName, this.props, this);
@@ -113,21 +112,21 @@ export default class ScatterPlot extends React.Component {
       pointRadius,
       pointOffset,
       pointStyle,
-      pointClassName
+      pointClassName,
     } = this.props;
     let { pointSymbol } = this.props;
     const className = `rct-chart-scatterplot-point ${getValue(
       pointClassName,
       d,
-      i
+      i,
     )}`;
     const style = getValue(pointStyle, d, i);
-    let symbolProps = {
+    const symbolProps = {
       className,
       onMouseEnter,
       onMouseMove,
       onMouseLeave,
-      key: `scatter-point-${i}`
+      key: `scatter-point-${i}`,
     };
 
     // resolve symbol-generating functions into real symbols
@@ -136,7 +135,7 @@ export default class ScatterPlot extends React.Component {
     if (isString(pointSymbol) || isNumber(pointSymbol))
       pointSymbol = <text>{pointSymbol}</text>;
     // use props.pointRadius for circle radius
-    if (pointSymbol.type === "circle" && isUndefined(pointSymbol.props.r))
+    if (pointSymbol.type === 'circle' && isUndefined(pointSymbol.props.r))
       symbolProps.r = pointRadius;
 
     // x,y coords of center of symbol
@@ -144,19 +143,19 @@ export default class ScatterPlot extends React.Component {
     const cy = yScale(getValue(y, d, i)) + pointOffset[1];
 
     // set positioning attributes based on symbol type
-    if (pointSymbol.type === "circle" || pointSymbol.type === "ellipse") {
+    if (pointSymbol.type === 'circle' || pointSymbol.type === 'ellipse') {
       Object.assign(symbolProps, { cx, cy, style: { ...style } });
-    } else if (pointSymbol.type === "text") {
+    } else if (pointSymbol.type === 'text') {
       Object.assign(symbolProps, {
         x: cx,
         y: cy,
-        style: { textAnchor: "middle", dominantBaseline: "central", ...style }
+        style: { textAnchor: 'middle', dominantBaseline: 'central', ...style },
       });
     } else {
       Object.assign(symbolProps, {
         x: cx,
         y: cy,
-        style: { ...style }
+        style: { ...style },
       });
     }
 

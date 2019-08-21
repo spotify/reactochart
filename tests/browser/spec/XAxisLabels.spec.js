@@ -64,7 +64,7 @@ describe("XAxisLabel", () => {
     const tree = (
       <XYPlot width={400} height={150} xDomain={[-20, 20]} yDomain={[-20, 20]}>
         <XAxisLabels
-          format={d => d + "%"}
+          format={d => `${d  }%`}
           position="top"
           distance={2}
           tickCount={5}

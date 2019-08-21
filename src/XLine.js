@@ -1,11 +1,15 @@
-import PropTypes from "prop-types";
-import React from "react";
+import PropTypes from 'prop-types';
+import React from 'react';
 
 /**
  * `XLine` is a vertical line rendered on the x axis
  */
 export default class XLine extends React.Component {
   static propTypes = {
+    /**
+     * DHeight of chart - provided by XYPlot
+     */
+    height: PropTypes.number,
     /**
      * D3 scale for X axis - provided by XYPlot
      */
@@ -35,13 +39,13 @@ export default class XLine extends React.Component {
     /**
      * Class attribute to be applied to the line
      */
-    className: PropTypes.string
+    className: PropTypes.string,
   };
   static defaultProps = {
     style: {},
-    className: "",
+    className: '',
     spacingTop: 0,
-    spacingBottom: 0
+    spacingBottom: 0,
   };
 
   render() {
@@ -54,7 +58,7 @@ export default class XLine extends React.Component {
       height,
       style,
       spacingTop,
-      spacingBottom
+      spacingBottom,
     } = this.props;
     const className = `rct-chart-line-x ${this.props.className}`;
     const lineX = xScale(value);
@@ -62,7 +66,7 @@ export default class XLine extends React.Component {
     let y1 = -spacingTop;
     let y2 = height + spacingBottom;
 
-    if (typeof yLimit !== "undefined") {
+    if (typeof yLimit !== 'undefined') {
       y1 = yScale(yDomain[0]) + spacingBottom;
       y2 = yScale(yLimit);
     }
@@ -75,7 +79,7 @@ export default class XLine extends React.Component {
           y1: y1,
           y2: y2,
           className,
-          style
+          style,
         }}
       />
     );

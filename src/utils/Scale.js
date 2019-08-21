@@ -1,79 +1,81 @@
-import get from "lodash/get";
-import isDate from "lodash/isDate";
-import isFunction from "lodash/isFunction";
-import isObject from "lodash/isObject";
-import isEqual from "lodash/isEqual";
-import isNumber from "lodash/isNumber";
-import identity from "lodash/identity";
-import { scaleLinear, scaleTime, scalePoint, scaleLog, scalePow } from "d3";
+import get from 'lodash/get';
+import isDate from 'lodash/isDate';
+import isFunction from 'lodash/isFunction';
+import isObject from 'lodash/isObject';
+import isEqual from 'lodash/isEqual';
+import isNumber from 'lodash/isNumber';
+import identity from 'lodash/identity';
+import { scaleLinear, scaleTime, scalePoint, scaleLog, scalePow } from 'd3';
 
-import { combineDomains, domainFromData } from "./Data";
+import { combineDomains, domainFromData } from './Data';
 
 export function scaleTypeFromDataType(dataType) {
   return get(
     {
-      number: "linear",
-      time: "time",
-      categorical: "ordinal"
+      number: 'linear',
+      time: 'time',
+      categorical: 'ordinal',
     },
     dataType,
-    "ordinal"
+    'ordinal',
   );
 }
 
 export function dataTypeFromScaleType(scaleType) {
   return get(
     {
-      linear: "number",
-      log: "number",
-      pow: "number",
-      time: "time",
-      ordinal: "categorical"
+      linear: 'number',
+      log: 'number',
+      pow: 'number',
+      time: 'time',
+      ordinal: 'categorical',
     },
     scaleType,
-    "categorical"
+    'categorical',
   );
 }
 
 export function inferDataTypeFromDomain(domain) {
   if (!Array.isArray(domain))
     throw new Error(
-      "invalid domain, inferDataTypeFromDomain cannot infer data type"
+      'invalid domain, inferDataTypeFromDomain cannot infer data type',
     );
 
   return domain.length !== 2
-    ? "categorical"
+    ? 'categorical'
     : domain.every(isNumber)
-      ? "number"
+      ? 'number'
       : domain.every(isDate)
-        ? "time"
-        : "categorical";
+        ? 'time'
+        : 'categorical';
 }
 
 export function inferScaleType(scale) {
   return !scale.ticks
-    ? "ordinal"
+    ? 'ordinal'
     : isDate(scale.domain()[0])
-      ? "time"
+      ? 'time'
       : scale.base
-        ? "log"
+        ? 'log'
         : scale.exponent
-          ? "pow"
-          : "linear";
+          ? 'pow'
+          : 'linear';
 }
 
 export function initScale(scaleType) {
   switch (scaleType) {
-    case "linear":
+    case 'linear':
       return scaleLinear();
-    case "time":
+    case 'time':
       return scaleTime();
-    case "ordinal":
+    case 'ordinal':
       return scalePoint();
-    case "log":
+    case 'log':
       return scaleLog();
-    case "pow":
+    case 'pow':
       return scalePow();
+    default:
+      return;
   }
 }
 
@@ -88,16 +90,18 @@ export function hasXYScales(scale) {
 }
 
 export function getScaleTicks(scale, scaleType, tickCount = 10) {
-  scaleType = scaleType || inferScaleType(scale);
-  return scaleType === "ordinal" ? scale.domain() : scale.ticks(tickCount);
+  return (scaleType || inferScaleType(scale)) === 'ordinal'
+    ? scale.domain()
+    : scale.ticks(tickCount);
 }
 
 export function getTickDomain(scale, { ticks, tickCount, nice } = {}) {
   const scaleType = inferScaleType(scale);
   const scaleDomain = scale.domain();
 
-  if (nice && scaleType !== "ordinal") {
+  if (nice && scaleType !== 'ordinal') {
     // If nicing, initialize a new scale and nice it
+    // eslint-disable-next-line no-param-reassign
     scale = scale
       .copy()
       .domain(scaleDomain)
@@ -107,9 +111,9 @@ export function getTickDomain(scale, { ticks, tickCount, nice } = {}) {
   if (Array.isArray(ticks)) {
     return combineDomains([
       scale.domain(),
-      domainFromData(ticks, identity, dataTypeFromScaleType(scaleType))
+      domainFromData(ticks, identity, dataTypeFromScaleType(scaleType)),
     ]);
-  } else if (nice && scaleType !== "ordinal") return scale.domain();
+  } else if (nice && scaleType !== 'ordinal') return scale.domain();
   // return undefined by default, if we have no options pertaining to ticks
 }
 

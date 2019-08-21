@@ -1,9 +1,9 @@
-import React from "react";
-import defaults from "lodash/defaults";
-import PropTypes from "prop-types";
+import React from 'react';
+import defaults from 'lodash/defaults';
+import PropTypes from 'prop-types';
 
-import YLine from "./YLine";
-import { getScaleTicks, getTickDomain } from "./utils/Scale";
+import YLine from './YLine';
+import { getScaleTicks, getTickDomain } from './utils/Scale';
 
 export default class YGrid extends React.Component {
   static propTypes = {
@@ -18,17 +18,17 @@ export default class YGrid extends React.Component {
     ticks: PropTypes.array,
     tickCount: PropTypes.number,
     lineClassName: PropTypes.string,
-    lineStyle: PropTypes.object
+    lineStyle: PropTypes.object,
   };
   static defaultProps = {
     nice: true,
-    lineStyle: {}
+    lineStyle: {},
   };
 
   static getTickDomain(props) {
     if (!props.yScale) return;
-    props = defaults({}, props, YGrid.defaultProps);
-    return { yTickDomain: getTickDomain(props.yScale, props) };
+    const propsWithDefaults = defaults({}, props, YGrid.defaultProps);
+    return { yTickDomain: getTickDomain(props.yScale, propsWithDefaults) };
   }
 
   render() {
@@ -41,10 +41,10 @@ export default class YGrid extends React.Component {
       spacingTop,
       spacingBottom,
       spacingLeft,
-      spacingRight
+      spacingRight,
     } = this.props;
     const ticks = this.props.ticks || getScaleTicks(yScale, null, tickCount);
-    const className = `rct-chart-grid-line ${lineClassName || ""}`;
+    const className = `rct-chart-grid-line ${lineClassName || ''}`;
 
     return (
       <g className="rct-chart-grid-y">
@@ -61,7 +61,7 @@ export default class YGrid extends React.Component {
                 spacingRight,
                 value: tick,
                 style: lineStyle,
-                key: `grid-y-line-${i}`
+                key: `grid-y-line-${i}`,
               }}
             />
           );

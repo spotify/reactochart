@@ -115,7 +115,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "\"bottom\"",
+        "value": "'bottom'",
         "computed": false
       }
     },

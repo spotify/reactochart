@@ -263,7 +263,7 @@
       "required": false,
       "description": "Class attribute to be applied to center label.",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },
@@ -330,7 +330,7 @@
       "required": false,
       "description": "Class attribute to be applied to each pie slice,\nor accessor function which returns a class.",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },
@@ -348,7 +348,7 @@
       "required": false,
       "description": "Class attribute to be applied to marker line.",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },

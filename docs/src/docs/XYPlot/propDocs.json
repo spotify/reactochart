@@ -264,9 +264,30 @@
       "required": false,
       "description": "Class attribute applied to xy plot",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
+    },
+    "xScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Scale determined by our resolveXYScales higher order component.\nOverride this prop if you'd like to pass in your own d3 scale."
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Scale determined by our resolveXYScales higher order component.\nOverride this prop if you'd like to pass in your own d3 scale."
+    },
+    "children": {
+      "type": {
+        "name": "any"
+      },
+      "required": false,
+      "description": ""
     }
   }
 }
