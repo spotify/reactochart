@@ -1,11 +1,11 @@
-import { extent, histogram, scaleLinear } from "d3";
-import first from "lodash/first";
-import last from "lodash/last";
-import maxBy from "lodash/maxBy";
-import PropTypes from "prop-types";
-import React from "react";
-import AreaBarChart from "./AreaBarChart";
-import xyPropsEqual from "./utils/xyPropsEqual";
+import { extent, histogram, scaleLinear } from 'd3';
+import first from 'lodash/first';
+import last from 'lodash/last';
+import maxBy from 'lodash/maxBy';
+import PropTypes from 'prop-types';
+import React from 'react';
+import AreaBarChart from './AreaBarChart';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 /**
  * `Histogram` is used to represent the distribution of numerical data. Histograms, only relate
@@ -79,7 +79,7 @@ export default class Histogram extends React.Component {
     /**
      * `mouseleave` event handler callback, called when user's mouse leaves a bar.
      */
-    onMouseLeaveBar: PropTypes.func
+    onMouseLeaveBar: PropTypes.func,
   };
 
   static defaultProps = { data: [], thresholds: 30, nice: false };
@@ -87,7 +87,7 @@ export default class Histogram extends React.Component {
   state = { histogramData: null };
 
   static getScaleType() {
-    return { xScaleType: "linear", yScaleType: "linear" };
+    return { xScaleType: 'linear', yScaleType: 'linear' };
   }
 
   static getDomain(props) {
@@ -98,12 +98,12 @@ export default class Histogram extends React.Component {
       thresholds,
       value,
       binDomain,
-      nice
+      nice,
     );
 
     const domains = {
       xDomain: [first(bins).x0, last(bins).x1],
-      yDomain: [0, maxBy(bins, bin => bin.length).length]
+      yDomain: [0, maxBy(bins, bin => bin.length).length],
     };
 
     return domains;
@@ -118,7 +118,7 @@ export default class Histogram extends React.Component {
       // Throw warning if nice = true and binDomain is defined
       if (nice) {
         console.warn(
-          "Warning: if binDomain is defined and nice = true, histogram prioritizes binDomain and disregards nice."
+          'Warning: if binDomain is defined and nice = true, histogram prioritizes binDomain and disregards nice.',
         );
       }
 
@@ -136,7 +136,7 @@ export default class Histogram extends React.Component {
       // Set nicely rounded domain as domain for makeHistogram
       makeHistogram = makeHistogram.domain([
         first(niceBinDomain),
-        last(niceBinDomain)
+        last(niceBinDomain),
       ]);
     }
 
@@ -158,7 +158,7 @@ export default class Histogram extends React.Component {
       thresholds,
       value,
       binDomain,
-      nice
+      nice,
     );
 
     if (!bins) return <g />;

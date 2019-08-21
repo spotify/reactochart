@@ -1,18 +1,18 @@
-import defaults from "lodash/defaults";
-import isFunction from "lodash/isFunction";
-import upperFirst from "lodash/upperFirst";
-import PropTypes from "prop-types";
-import React from "react";
-import { getAxisChildProps, getMouseAxisOptions } from "./utils/Axis";
-import { sumMargins } from "./utils/Margin";
-import { getTickDomain } from "./utils/Scale";
-import xyPropsEqual from "./utils/xyPropsEqual";
-import YAxisLabels from "./YAxisLabels";
-import YAxisTitle from "./YAxisTitle";
-import YGrid from "./YGrid";
-import YTicks from "./YTicks";
+import defaults from 'lodash/defaults';
+import isFunction from 'lodash/isFunction';
+import upperFirst from 'lodash/upperFirst';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { getAxisChildProps, getMouseAxisOptions } from './utils/Axis';
+import { sumMargins } from './utils/Margin';
+import { getTickDomain } from './utils/Scale';
+import xyPropsEqual from './utils/xyPropsEqual';
+import YAxisLabels from './YAxisLabels';
+import YAxisTitle from './YAxisTitle';
+import YGrid from './YGrid';
+import YTicks from './YTicks';
 
-const getMouseOptions = getMouseAxisOptions.bind(null, "y");
+const getMouseOptions = getMouseAxisOptions.bind(null, 'y');
 /**
  * `YAxis` is the vertical axis of the chart. `YAxis` is a wrapper around `YGrid`, `YTicks`,
  * `YAxisLabels`, and `YAxisTitle`. See their respective docs for prop documentation.
@@ -107,13 +107,13 @@ export default class YAxis extends React.Component {
     /**
      * Inline style object to be applied to the Y Axis line
      */
-    lineStyle: PropTypes.object
+    lineStyle: PropTypes.object,
   };
 
   static defaultProps = {
     width: 400,
     height: 250,
-    position: "left",
+    position: 'left',
     nice: true,
     showTitle: true,
     showLabels: true,
@@ -127,7 +127,7 @@ export default class YAxis extends React.Component {
     spacingLeft: 0,
     spacingRight: 0,
     showLine: true,
-    lineStyle: {}
+    lineStyle: {},
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -151,7 +151,7 @@ export default class YAxis extends React.Component {
 
     if (props.showLabels) margins.push(YAxisLabels.getMargin(labelsProps));
 
-    return sumMargins(margins, "margin");
+    return sumMargins(margins, 'margin');
   }
 
   handleOnMouseMove = event => {
@@ -215,14 +215,14 @@ export default class YAxis extends React.Component {
       spacingLeft,
       spacingRight,
       showLine,
-      lineStyle
+      lineStyle,
     } = this.props;
 
     const {
       ticksProps,
       gridProps,
       labelsProps,
-      titleProps
+      titleProps,
     } = getAxisChildProps(this.props);
 
     labelsProps.distance = labelDistance + (showTicks ? tickLength : 0);
@@ -236,7 +236,7 @@ export default class YAxis extends React.Component {
       titleProps.distance = titleDistance + tickLength;
     }
 
-    const axisLineX = position === "left" ? -spacingLeft : width + spacingRight;
+    const axisLineX = position === 'left' ? -spacingLeft : width + spacingRight;
 
     return (
       <g

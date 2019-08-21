@@ -1,5 +1,5 @@
-import isFunction from "lodash/isFunction";
-import isUndefined from "lodash/isUndefined";
+import isFunction from 'lodash/isFunction';
+import isUndefined from 'lodash/isUndefined';
 
 /**
  * Convenience function for event callbacks... we often want to say

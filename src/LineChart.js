@@ -1,9 +1,9 @@
-import { bisector, line, curveLinear } from "d3";
-import PropTypes from "prop-types";
-import React from "react";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
-import { getValue } from "./utils/Data";
-import xyPropsEqual from "./utils/xyPropsEqual";
+import { bisector, line, curveLinear } from 'd3';
+import PropTypes from 'prop-types';
+import React from 'react';
+import * as CustomPropTypes from './utils/CustomPropTypes';
+import { getValue } from './utils/Data';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 /**
  * `LineChart` displays data a series of points connected by straight line segments.
@@ -41,12 +41,12 @@ export default class LineChart extends React.Component {
     /**
      * D3 curve for path generation
      */
-    curve: PropTypes.func
+    curve: PropTypes.func,
   };
   static defaultProps = {
     lineStyle: {},
-    lineClassName: "",
-    curve: curveLinear
+    lineClassName: '',
+    curve: curveLinear,
   };
 
   componentWillMount() {
@@ -57,7 +57,7 @@ export default class LineChart extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return !xyPropsEqual(this.props, nextProps, ["lineStyle", "lineClassName"]);
+    return !xyPropsEqual(this.props, nextProps, ['lineStyle', 'lineClassName']);
   }
 
   initBisector(props) {
@@ -78,7 +78,7 @@ export default class LineChart extends React.Component {
       y,
       curve,
       lineStyle,
-      lineClassName
+      lineClassName,
     } = this.props;
 
     const pathStr = line()

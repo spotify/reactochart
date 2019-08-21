@@ -1,15 +1,15 @@
-import inRange from "lodash/inRange";
-import isFunction from "lodash/isFunction";
-import fromPairs from "lodash/fromPairs";
-import omit from "lodash/omit";
-import isNull from "lodash/isNull";
-import isUndefined from "lodash/isUndefined";
-import PropTypes from "prop-types";
-import React from "react";
-import { methodIfFuncProp } from "./util";
-import { innerSize } from "./utils/Margin";
-import resolveXYScales from "./utils/resolveXYScales";
-import { inferScaleType, invertPointScale } from "./utils/Scale";
+import inRange from 'lodash/inRange';
+import isFunction from 'lodash/isFunction';
+import fromPairs from 'lodash/fromPairs';
+import omit from 'lodash/omit';
+import isNull from 'lodash/isNull';
+import isUndefined from 'lodash/isUndefined';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { methodIfFuncProp } from './util';
+import { innerSize } from './utils/Margin';
+import resolveXYScales from './utils/resolveXYScales';
+import { inferScaleType, invertPointScale } from './utils/Scale';
 
 function getMouseOptions(
   event,
@@ -21,8 +21,8 @@ function getMouseOptions(
     marginTop,
     marginBottom,
     marginLeft,
-    marginRight
-  }
+    marginRight,
+  },
 ) {
   const chartBB = event.currentTarget.getBoundingClientRect();
   const outerX = Math.round(event.clientX - chartBB.left);
@@ -35,23 +35,23 @@ function getMouseOptions(
       top: marginTop,
       bottom: marginBottom,
       left: marginLeft,
-      right: marginRight
-    }
+      right: marginRight,
+    },
   );
   const xScaleType = inferScaleType(xScale);
   const yScaleType = inferScaleType(yScale);
 
   const xValue = !inRange(innerX, 0, chartSize.width)
     ? null
-    : xScaleType === "ordinal"
-      ? invertPointScale(xScale, innerX)
-      : xScale.invert(innerX);
+    : xScaleType === 'ordinal'
+    ? invertPointScale(xScale, innerX)
+    : xScale.invert(innerX);
 
   const yValue = !inRange(innerY, 0, chartSize.height)
     ? null
-    : yScaleType === "ordinal"
-      ? invertPointScale(yScale, innerY)
-      : yScale.invert(innerY);
+    : yScaleType === 'ordinal'
+    ? invertPointScale(yScale, innerY)
+    : yScale.invert(innerY);
 
   return {
     event,
@@ -66,7 +66,7 @@ function getMouseOptions(
     marginTop,
     marginBottom,
     marginLeft,
-    marginRight
+    marginRight,
   };
 }
 
@@ -174,7 +174,7 @@ class XYPlot extends React.Component {
     /**
      * Class attribute applied to xy plot
      */
-    xyPlotClassName: PropTypes.string
+    xyPlotClassName: PropTypes.string,
   };
 
   static defaultProps = {
@@ -186,7 +186,7 @@ class XYPlot extends React.Component {
     includeYZero: false,
     xyPlotContainerStyle: {},
     xyPlotStyle: {},
-    xyPlotClassName: ""
+    xyPlotClassName: '',
   };
 
   onXYMouseEvent = (callbackKey, event) => {
@@ -196,10 +196,10 @@ class XYPlot extends React.Component {
     callback(options);
   };
 
-  onMouseMove = this.onXYMouseEvent.bind(this, "onMouseMove");
-  onMouseDown = this.onXYMouseEvent.bind(this, "onMouseDown");
-  onMouseUp = this.onXYMouseEvent.bind(this, "onMouseUp");
-  onClick = this.onXYMouseEvent.bind(this, "onClick");
+  onMouseMove = this.onXYMouseEvent.bind(this, 'onMouseMove');
+  onMouseDown = this.onXYMouseEvent.bind(this, 'onMouseDown');
+  onMouseUp = this.onXYMouseEvent.bind(this, 'onMouseUp');
+  onClick = this.onXYMouseEvent.bind(this, 'onClick');
 
   onMouseEnter = event => this.props.onMouseEnter({ event });
   onMouseLeave = event => this.props.onMouseLeave({ event });
@@ -221,7 +221,7 @@ class XYPlot extends React.Component {
       xyPlotClassName,
       // Passed in as prop from resolveXYScales
       xScale,
-      yScale
+      yScale,
     } = this.props;
 
     // subtract margin + spacing from width/height to obtain inner width/height of panel & chart area
@@ -233,33 +233,33 @@ class XYPlot extends React.Component {
         top: marginTop,
         bottom: marginBottom,
         left: marginLeft,
-        right: marginRight
-      }
+        right: marginRight,
+      },
     );
     const chartSize = innerSize(panelSize, {
       top: spacingTop,
       bottom: spacingBottom,
       left: spacingLeft,
-      right: spacingRight
+      right: spacingRight,
     });
 
     const handlerNames = [
-      "onMouseMove",
-      "onMouseEnter",
-      "onMouseLeave",
-      "onMouseDown",
-      "onMouseUp",
-      "onClick"
+      'onMouseMove',
+      'onMouseEnter',
+      'onMouseLeave',
+      'onMouseDown',
+      'onMouseUp',
+      'onClick',
     ];
     const handlers = fromPairs(
       handlerNames.map(handlerName => [
         handlerName,
-        methodIfFuncProp(handlerName, this.props, this)
-      ])
+        methodIfFuncProp(handlerName, this.props, this),
+      ]),
     );
     const scales = {
       xScale,
-      yScale
+      yScale,
     };
 
     // Props that shouldn't be sent down to children
@@ -267,15 +267,15 @@ class XYPlot extends React.Component {
     // override any children props
     const omittedProps = [
       ...handlerNames,
-      "xyPlotContainerStyle",
-      "xyPlotStyle",
-      "xyPlotClassName"
+      'xyPlotContainerStyle',
+      'xyPlotStyle',
+      'xyPlotClassName',
     ];
 
     const propsForChildren = {
       ...omit(this.props, omittedProps),
       ...chartSize,
-      ...scales
+      ...scales,
     };
 
     const className = `rct-xy-plot ${xyPlotClassName}`;

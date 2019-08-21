@@ -1,18 +1,18 @@
-import defaults from "lodash/defaults";
-import isFunction from "lodash/isFunction";
-import upperFirst from "lodash/upperFirst";
-import PropTypes from "prop-types";
-import React from "react";
-import { getAxisChildProps, getMouseAxisOptions } from "./utils/Axis";
-import { sumMargins } from "./utils/Margin";
-import { getTickDomain, inferScaleType, invertPointScale } from "./utils/Scale";
-import xyPropsEqual from "./utils/xyPropsEqual";
-import XAxisLabels from "./XAxisLabels";
-import XAxisTitle from "./XAxisTitle";
-import XGrid from "./XGrid";
-import XTicks from "./XTicks";
+import defaults from 'lodash/defaults';
+import isFunction from 'lodash/isFunction';
+import upperFirst from 'lodash/upperFirst';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { getAxisChildProps, getMouseAxisOptions } from './utils/Axis';
+import { sumMargins } from './utils/Margin';
+import { getTickDomain, inferScaleType, invertPointScale } from './utils/Scale';
+import xyPropsEqual from './utils/xyPropsEqual';
+import XAxisLabels from './XAxisLabels';
+import XAxisTitle from './XAxisTitle';
+import XGrid from './XGrid';
+import XTicks from './XTicks';
 
-const getMouseOptions = getMouseAxisOptions.bind(null, "x");
+const getMouseOptions = getMouseAxisOptions.bind(null, 'x');
 
 /**
  * `XAxis` is the horizontal axis of the chart. `XAxis` is a wrapper around `XGrid`, `XTicks`,
@@ -108,13 +108,13 @@ export default class XAxis extends React.Component {
     /**
      * Inline style object to be applied to the X Axis line
      */
-    lineStyle: PropTypes.object
+    lineStyle: PropTypes.object,
   };
 
   static defaultProps = {
     width: 400,
     height: 250,
-    position: "bottom",
+    position: 'bottom',
     nice: true,
     showTitle: true,
     showLabels: true,
@@ -128,7 +128,7 @@ export default class XAxis extends React.Component {
     spacingLeft: 0,
     spacingRight: 0,
     showLine: true,
-    lineStyle: {}
+    lineStyle: {},
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -152,7 +152,7 @@ export default class XAxis extends React.Component {
 
     if (props.showLabels) margins.push(XAxisLabels.getMargin(labelsProps));
 
-    return sumMargins(margins, "margin");
+    return sumMargins(margins, 'margin');
   }
 
   handleOnMouseMove = event => {
@@ -216,14 +216,14 @@ export default class XAxis extends React.Component {
       showTicks,
       showGrid,
       showLine,
-      lineStyle
+      lineStyle,
     } = this.props;
 
     const {
       ticksProps,
       gridProps,
       labelsProps,
-      titleProps
+      titleProps,
     } = getAxisChildProps(this.props);
 
     labelsProps.distance = labelDistance + (showTicks ? tickLength : 0);
@@ -238,7 +238,7 @@ export default class XAxis extends React.Component {
     }
 
     const axisLineY =
-      position === "bottom" ? height + spacingBottom : -spacingTop;
+      position === 'bottom' ? height + spacingBottom : -spacingTop;
 
     return (
       <g

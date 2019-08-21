@@ -1,7 +1,7 @@
-import * as d3 from "d3";
-import isFunction from "lodash/isFunction";
-import PropTypes from "prop-types";
-import React from "react";
+import * as d3 from 'd3';
+import isFunction from 'lodash/isFunction';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 // todo: make sure this correctly handles new props getting passed in, doesn't double bind events
 
@@ -109,7 +109,7 @@ export default class ZoomContainer extends React.Component {
      * Sets the wheel delta function to the specified function.
      * See d3-zoom docs for more information.
      */
-    wheelDelta: PropTypes.func
+    wheelDelta: PropTypes.func,
   };
   static defaultProps = {
     width: 800,
@@ -118,12 +118,12 @@ export default class ZoomContainer extends React.Component {
     disableMouseWheelZoom: false,
     zoomX: 0,
     zoomY: 0,
-    zoomScale: 1
+    zoomScale: 1,
   };
 
   state = {
     lastZoomTransform: null,
-    selection: null
+    selection: null,
   };
 
   _updateZoomProps(props) {
@@ -138,7 +138,7 @@ export default class ZoomContainer extends React.Component {
       constrain,
       filter,
       touchable,
-      wheelDelta
+      wheelDelta,
     } = props;
 
     if (Array.isArray(extent)) this.zoom.extent(extent);
@@ -163,18 +163,18 @@ export default class ZoomContainer extends React.Component {
     selection.call(this.zoom);
 
     if (this.props.disableMouseWheelZoom) {
-      selection.call(this.zoom).on("wheel.zoom", null);
+      selection.call(this.zoom).on('wheel.zoom', null);
     } else {
       selection.call(this.zoom);
     }
 
     this.zoom.transform(selection, initialZoomTransform);
     this._updateZoomProps();
-    this.zoom.on("zoom", this.handleZoom);
+    this.zoom.on('zoom', this.handleZoom);
 
     this.setState({
       selection,
-      lastZoomTransform: initialZoomTransform
+      lastZoomTransform: initialZoomTransform,
     });
   }
 
@@ -190,10 +190,10 @@ export default class ZoomContainer extends React.Component {
         nextProps.zoomScale !== this.props.zoomScale;
 
       if (hasChangedZoom) {
-        this.zoom.on("zoom", null);
+        this.zoom.on('zoom', null);
         const nextZoomTransform = zoomTransformFromProps(nextProps);
         this.zoom.transform(this.state.selection, nextZoomTransform);
-        this.zoom.on("zoom", this.handleZoom);
+        this.zoom.on('zoom', this.handleZoom);
 
         // update state.lastZoomTransform so we can revert d3-zoom to this next time it's changed internally
         this.setState({ lastZoomTransform: nextZoomTransform });
@@ -211,9 +211,9 @@ export default class ZoomContainer extends React.Component {
       const { selection, lastZoomTransform } = this.state;
 
       // unbind zoom event first, so that manually setting transform doesn't trigger handleZoom infinite loop
-      this.zoom.on("zoom", null);
+      this.zoom.on('zoom', null);
       this.zoom.transform(selection, lastZoomTransform);
-      this.zoom.on("zoom", this.handleZoom);
+      this.zoom.on('zoom', this.handleZoom);
     } else {
       // *uncontrolled* (stateful) ZoomContainer, we want to keep the transform applied by d3-zoom;
       // but since the state is inside d3-zoom, we need to update something on this.state to trigger re-render

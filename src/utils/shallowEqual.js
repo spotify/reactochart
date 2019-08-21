@@ -16,7 +16,7 @@
 
 /*eslint-disable no-self-compare */
 
-"use strict";
+'use strict';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -47,9 +47,9 @@ function shallowEqual(objA: mixed, objB: mixed): boolean {
   }
 
   if (
-    typeof objA !== "object" ||
+    typeof objA !== 'object' ||
     objA === null ||
-    typeof objB !== "object" ||
+    typeof objB !== 'object' ||
     objB === null
   ) {
     // console.log('shallowEqual: not object??');

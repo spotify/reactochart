@@ -1,11 +1,11 @@
-import { area } from "d3";
-import isUndefined from "lodash/isUndefined";
-import uniqueId from "lodash/uniqueId";
-import PropTypes from "prop-types";
-import React from "react";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
-import { combineDomains, domainFromData, makeAccessor2 } from "./utils/Data";
-import xyPropsEqual from "./utils/xyPropsEqual";
+import { area } from 'd3';
+import isUndefined from 'lodash/isUndefined';
+import uniqueId from 'lodash/uniqueId';
+import PropTypes from 'prop-types';
+import React from 'react';
+import * as CustomPropTypes from './utils/CustomPropTypes';
+import { combineDomains, domainFromData, makeAccessor2 } from './utils/Data';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 /**
  * `AreaChart` represents a simple bivariate area chart,
@@ -87,7 +87,7 @@ export default class AreaChart extends React.Component {
     /**
      * D3 curve for path generation
      */
-    curve: PropTypes.func
+    curve: PropTypes.func,
   };
 
   static defaultProps = {
@@ -97,7 +97,7 @@ export default class AreaChart extends React.Component {
         !isUndefined(accessors.y(d, i)) && !isUndefined(accessors.yEnd(d, i))
       );
     },
-    pathClassName: ""
+    pathClassName: '',
   };
 
   static getDomain(props) {
@@ -106,21 +106,21 @@ export default class AreaChart extends React.Component {
     const accessors = {
       x: makeAccessor2(x),
       y: makeAccessor2(y),
-      yEnd: makeAccessor2(yEnd)
+      yEnd: makeAccessor2(yEnd),
     };
     return {
       yDomain: combineDomains([
         domainFromData(data, accessors.y),
-        domainFromData(data, accessors.yEnd)
-      ])
+        domainFromData(data, accessors.yEnd),
+      ]),
     };
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     const shouldUpdate = !xyPropsEqual(this.props, nextProps, [
-      "pathStyle",
-      "pathStylePositive",
-      "pathStyleNegative"
+      'pathStyle',
+      'pathStylePositive',
+      'pathStyleNegative',
     ]);
     return shouldUpdate;
   }
@@ -140,12 +140,12 @@ export default class AreaChart extends React.Component {
       shouldShowGaps,
       pathClassName,
       isDefined,
-      curve
+      curve,
     } = this.props;
     const accessors = {
       x: makeAccessor2(x),
       y: makeAccessor2(y),
-      yEnd: makeAccessor2(yEnd)
+      yEnd: makeAccessor2(yEnd),
     };
 
     // create d3 area path generator

@@ -1,33 +1,33 @@
-import isUndefined from "lodash/isUndefined";
-import first from "lodash/first";
-import last from "lodash/last";
-import clamp from "lodash/clamp";
-import isFunction from "lodash/isFunction";
-import PropTypes from "prop-types";
-import React from "react";
-import { methodIfFuncProp, bindTrailingArgs } from "./util.js";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
+import isUndefined from 'lodash/isUndefined';
+import first from 'lodash/first';
+import last from 'lodash/last';
+import clamp from 'lodash/clamp';
+import isFunction from 'lodash/isFunction';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { methodIfFuncProp, bindTrailingArgs } from './util.js';
+import * as CustomPropTypes from './utils/CustomPropTypes';
 import {
   domainFromData,
   domainFromRangeData,
   getValue,
-  makeAccessor2
-} from "./utils/Data";
-import { dataTypeFromScaleType } from "./utils/Scale";
-import xyPropsEqual from "./utils/xyPropsEqual";
+  makeAccessor2,
+} from './utils/Data';
+import { dataTypeFromScaleType } from './utils/Scale';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 function getTickType(props) {
   const { xEnd, yEnd, horizontal } = props;
   // warn if a range is passed for the dependent variable, which is expected to be a value
   if ((!horizontal && !isUndefined(yEnd)) || (horizontal && !isUndefined(xEnd)))
     console.warn(
-      "Warning: MarkerLineChart can only show the independent variable as a range, not the dependent variable."
+      'Warning: MarkerLineChart can only show the independent variable as a range, not the dependent variable.',
     );
 
   if ((!horizontal && !isUndefined(xEnd)) || (horizontal && !isUndefined(yEnd)))
-    return "RangeValue";
+    return 'RangeValue';
 
-  return "ValueValue";
+  return 'ValueValue';
 }
 
 /**
@@ -111,24 +111,24 @@ export default class MarkerLineChart extends React.Component {
     /**
      * `mouseleave` event handler callback, called when user's mouse leaves a marker line.
      */
-    onMouseLeaveLine: PropTypes.func
+    onMouseLeaveLine: PropTypes.func,
   };
   static defaultProps = {
     horizontal: false,
     lineLength: 10,
-    lineClassName: "",
-    lineStyle: {}
+    lineClassName: '',
+    lineStyle: {},
   };
 
   static getSpacing(props) {
     const tickType = getTickType(props);
     //no spacing for rangeValue marker charts since line start and end are set explicitly
-    if (tickType === "RangeValue")
+    if (tickType === 'RangeValue')
       return {
         spacingTop: 0,
         spacingRight: 0,
         spacingBottom: 0,
-        spacingLeft: 0
+        spacingLeft: 0,
       };
 
     const {
@@ -140,7 +140,7 @@ export default class MarkerLineChart extends React.Component {
       xScale,
       yScale,
       x,
-      y
+      y,
     } = props;
     const P = lineLength / 2; //padding
     const markDomain = horizontal ? yDomain : xDomain;
@@ -156,7 +156,7 @@ export default class MarkerLineChart extends React.Component {
     // find the edges of the data domain, and map them through the scale function
     const [dataDomainHead, dataDomainTail] = [
       first(markDataDomain),
-      last(markDataDomain)
+      last(markDataDomain),
     ]
       .map(markScale)
       .sort(); // sort the pixel values return by the domain extents
@@ -164,7 +164,7 @@ export default class MarkerLineChart extends React.Component {
     // find the necessary spacing (based on bar width) to push the bars completely inside the tick domain
     const [spacingTail, spacingHead] = [
       clamp(P - (domainTail - dataDomainTail), 0, P),
-      clamp(P - (dataDomainHead - domainHead), 0, P)
+      clamp(P - (dataDomainHead - domainHead), 0, P),
     ];
 
     if (horizontal) {
@@ -172,20 +172,20 @@ export default class MarkerLineChart extends React.Component {
         spacingTop: spacingHead,
         spacingBottom: spacingTail,
         spacingLeft: 0,
-        spacingRight: 0
+        spacingRight: 0,
       };
     } else {
       return {
         spacingTop: 0,
         spacingBottom: 0,
         spacingLeft: spacingHead,
-        spacingRight: spacingTail
+        spacingRight: spacingTail,
       };
     }
   }
 
   static getDomain(props) {
-    if (getTickType(props) === "RangeValue") {
+    if (getTickType(props) === 'RangeValue') {
       // set range domain for range type
       const {
         data,
@@ -195,12 +195,12 @@ export default class MarkerLineChart extends React.Component {
         yEnd,
         xScaleType,
         yScaleType,
-        horizontal
+        horizontal,
       } = props;
 
       // only have to specify range axis domain, other axis uses default domainFromData
       // in this chart type, the range axis, if there is one, is always the *independent* variable
-      const rangeAxis = horizontal ? "y" : "x";
+      const rangeAxis = horizontal ? 'y' : 'x';
       const rangeStartAccessor = horizontal
         ? makeAccessor2(y)
         : makeAccessor2(x);
@@ -208,7 +208,7 @@ export default class MarkerLineChart extends React.Component {
         ? makeAccessor2(yEnd)
         : makeAccessor2(xEnd);
       const rangeDataType = dataTypeFromScaleType(
-        horizontal ? yScaleType : xScaleType
+        horizontal ? yScaleType : xScaleType,
       );
 
       return {
@@ -216,8 +216,8 @@ export default class MarkerLineChart extends React.Component {
           data,
           rangeStartAccessor,
           rangeEndAccessor,
-          rangeDataType
-        )
+          rangeDataType,
+        ),
       };
     } else {
       return {};
@@ -241,9 +241,9 @@ export default class MarkerLineChart extends React.Component {
 
   renderRangeValueLine = (d, i) => {
     const [onMouseEnter, onMouseMove, onMouseLeave] = [
-      "onMouseEnterLine",
-      "onMouseMoveLine",
-      "onMouseLeaveLine"
+      'onMouseEnterLine',
+      'onMouseMoveLine',
+      'onMouseLeaveLine',
     ].map(eventName => {
       // partially apply this line's data point as 2nd callback argument
       const callback = methodIfFuncProp(eventName, this.props, this);
@@ -259,7 +259,7 @@ export default class MarkerLineChart extends React.Component {
       xScale,
       yScale,
       lineClassName,
-      lineStyle
+      lineStyle,
     } = this.props;
     const xVal = xScale(makeAccessor2(x)(d));
     const yVal = yScale(makeAccessor2(y)(d));
@@ -283,9 +283,9 @@ export default class MarkerLineChart extends React.Component {
 
   renderValueValueLine = (d, i) => {
     const [onMouseEnter, onMouseMove, onMouseLeave] = [
-      "onMouseEnterLine",
-      "onMouseMoveLine",
-      "onMouseLeaveLine"
+      'onMouseEnterLine',
+      'onMouseMoveLine',
+      'onMouseLeaveLine',
     ].map(eventName => {
       // partially apply this line's data point as 2nd callback argument
       const callback = methodIfFuncProp(eventName, this.props, this);
@@ -300,7 +300,7 @@ export default class MarkerLineChart extends React.Component {
       xScale,
       yScale,
       lineClassName,
-      lineStyle
+      lineStyle,
     } = this.props;
     const xVal = xScale(makeAccessor2(x)(d));
     const yVal = yScale(makeAccessor2(y)(d));
@@ -325,7 +325,7 @@ export default class MarkerLineChart extends React.Component {
     const tickType = getTickType(this.props);
     return (
       <g className="rct-marker-line-chart">
-        {tickType === "RangeValue"
+        {tickType === 'RangeValue'
           ? this.props.data.map(this.renderRangeValueLine)
           : this.props.data.map(this.renderValueValueLine)}
       </g>

@@ -1,33 +1,33 @@
-import defaults from "lodash/defaults";
-import isUndefined from "lodash/isUndefined";
-import last from "lodash/last";
-import minBy from "lodash/minBy";
-import max from "lodash/max";
-import capitalize from "lodash/capitalize";
-import get from "lodash/get";
-import isFunction from "lodash/isFunction";
-import PropTypes from "prop-types";
-import React from "react";
-import MeasuredValueLabel from "./MeasuredValueLabel";
+import defaults from 'lodash/defaults';
+import isUndefined from 'lodash/isUndefined';
+import last from 'lodash/last';
+import minBy from 'lodash/minBy';
+import max from 'lodash/max';
+import capitalize from 'lodash/capitalize';
+import get from 'lodash/get';
+import isFunction from 'lodash/isFunction';
+import PropTypes from 'prop-types';
+import React from 'react';
+import MeasuredValueLabel from './MeasuredValueLabel';
 import {
   checkLabelsDistinct,
   countRangeOverlaps,
   getLabelsXOverhang,
   getLabelXRange,
   makeLabelFormatters,
-  getDefaultFormats
-} from "./utils/Label";
-import { getValue } from "./utils/Data";
-import { getScaleTicks, getTickDomain, inferScaleType } from "./utils/Scale";
-import { bindTrailingArgs } from "./util.js";
-import xyPropsEqual from "./utils/xyPropsEqual";
+  getDefaultFormats,
+} from './utils/Label';
+import { getValue } from './utils/Data';
+import { getScaleTicks, getTickDomain, inferScaleType } from './utils/Scale';
+import { bindTrailingArgs } from './util.js';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 function resolveXLabelsForValues(
   scale,
   values,
   formats = [],
   style,
-  force = true
+  force = true,
 ) {
   // given a set of values to label, and a list of formatters to try,
   // find the first formatter that produces a set of labels
@@ -44,8 +44,8 @@ function resolveXLabelsForValues(
         format,
         style: defaults(
           getValue(style.labelStyle, { value }, i),
-          style.defaultStyle
-        )
+          style.defaultStyle,
+        ),
       });
     });
 
@@ -56,7 +56,7 @@ function resolveXLabelsForValues(
     }
 
     const labelXRanges = testLabels.map(label =>
-      getLabelXRange(scale, label, style.textAnchor || "middle")
+      getLabelXRange(scale, label, style.textAnchor || 'middle'),
     );
     const collisionCount = countRangeOverlaps(labelXRanges);
     if (collisionCount) {
@@ -65,7 +65,7 @@ function resolveXLabelsForValues(
         labels: testLabels,
         format,
         areLabelsDistinct,
-        collisionCount
+        collisionCount,
       });
       return false;
     }
@@ -80,7 +80,7 @@ function resolveXLabelsForValues(
       labels,
       format: goodFormat,
       areLabelsDistinct: true,
-      collisionCount: 0
+      collisionCount: 0,
     };
   } else {
     // none of the sets of labels are good
@@ -91,11 +91,11 @@ function resolveXLabelsForValues(
     // forced to decide, choose the least bad option
     // todo warn that we couldn't find good labels
     const distinctAttempts = attempts.filter(
-      attempt => attempt.areLabelsDistinct
+      attempt => attempt.areLabelsDistinct,
     );
     return distinctAttempts.length === 0
       ? last(attempts)
-      : minBy(distinctAttempts, "collisionCount");
+      : minBy(distinctAttempts, 'collisionCount');
   }
 }
 
@@ -105,11 +105,11 @@ class XAxisLabels extends React.Component {
     /***
      * Position of x axis labels. Accepted options are "top" or "bottom".
      */
-    position: PropTypes.oneOf(["top", "bottom"]),
+    position: PropTypes.oneOf(['top', 'bottom']),
     /**
      * Placement of labels in regards to the x axis. Accepted options are "above" or "below".
      */
-    placement: PropTypes.oneOf(["below", "above"]),
+    placement: PropTypes.oneOf(['below', 'above']),
     /**
      * D3 scale for X axis - provided by XYPlot.
      */
@@ -198,28 +198,28 @@ class XAxisLabels extends React.Component {
     /**
      * Adds horizontal offset (along the XAxis) to the labels
      */
-    offset: PropTypes.number
+    offset: PropTypes.number,
   };
 
   static defaultProps = {
     offset: 0,
     height: 250,
-    position: "bottom",
+    position: 'bottom',
     placement: undefined,
     distance: 4,
     nice: true,
     tickCount: 10,
     ticks: null,
-    labelClassName: "",
+    labelClassName: '',
     labelStyle: {
-      fontFamily: "Helvetica, sans-serif",
-      fontSize: "14px",
+      fontFamily: 'Helvetica, sans-serif',
+      fontSize: '14px',
       lineHeight: 1,
-      textAnchor: "middle"
+      textAnchor: 'middle',
     },
     format: undefined,
     formats: undefined,
-    labels: undefined
+    labels: undefined,
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -240,27 +240,27 @@ class XAxisLabels extends React.Component {
       marginTop: 0,
       marginBottom: 0,
       marginLeft: 0,
-      marginRight: 0
+      marginRight: 0,
     };
 
     if (
-      (position === "bottom" && placement === "above") ||
-      (position === "top" && placement === "below")
+      (position === 'bottom' && placement === 'above') ||
+      (position === 'top' && placement === 'below')
     )
       return zeroMargin;
 
     const marginY = max(
-      labels.map(label => Math.ceil(distance + label.height))
+      labels.map(label => Math.ceil(distance + label.height)),
     );
     const [marginLeft, marginRight] = getLabelsXOverhang(
       xScale,
       labels,
-      "middle"
+      'middle',
     );
 
     return defaults(
       { [`margin${capitalize(position)}`]: marginY, marginLeft, marginRight },
-      zeroMargin
+      zeroMargin,
     );
   }
 
@@ -268,12 +268,12 @@ class XAxisLabels extends React.Component {
     const { tickCount, labelStyle, xScale } = defaults(
       props,
       {},
-      XAxisLabels.defaultProps
+      XAxisLabels.defaultProps,
     );
     const ticks = props.ticks || getScaleTicks(xScale, null, tickCount);
     const style = {
       labelStyle,
-      defaultStyle: XAxisLabels.defaultProps.labelStyle
+      defaultStyle: XAxisLabels.defaultProps.labelStyle,
     };
     const propsFormats = props.format ? [props.format] : props.formats;
     const scaleType = inferScaleType(xScale);
@@ -303,14 +303,14 @@ class XAxisLabels extends React.Component {
       labelClassName,
       spacingTop,
       spacingBottom,
-      offset
+      offset,
     } = this.props;
     const labels = this.props.labels || XAxisLabels.getLabels(this.props);
     const placement =
-      this.props.placement || (position === "top" ? "above" : "below");
+      this.props.placement || (position === 'top' ? 'above' : 'below');
     const className = `rct-chart-value-label rct-chart-value-label-x ${labelClassName}`;
     const transform =
-      position === "bottom"
+      position === 'bottom'
         ? `translate(0, ${height + spacingBottom})`
         : `translate(0, ${-spacingTop})`;
     // todo: position: 'zero' to position along the zero line
@@ -320,12 +320,12 @@ class XAxisLabels extends React.Component {
       <g className="rct-chart-value-labels-x" transform={transform}>
         {labels.map((label, i) => {
           const x = xScale(label.value) + offset;
-          const y = placement === "above" ? -label.height - distance : distance;
+          const y = placement === 'above' ? -label.height - distance : distance;
           const [onMouseEnter, onMouseMove, onMouseLeave, onClick] = [
-            "onMouseEnterLabel",
-            "onMouseMoveLabel",
-            "onMouseLeaveLabel",
-            "onMouseClickLabel"
+            'onMouseEnterLabel',
+            'onMouseMoveLabel',
+            'onMouseLeaveLabel',
+            'onMouseClickLabel',
           ].map(eventName => {
             // partially apply this label's data point as 2nd callback argument
             const callback = get(this.props, eventName);
@@ -335,9 +335,9 @@ class XAxisLabels extends React.Component {
           });
 
           const style = defaults(
-            { textAnchor: "middle" },
+            { textAnchor: 'middle' },
             getValue(labelStyle, { x, y, ...label }, i),
-            XAxisLabels.defaultProps.labelStyle
+            XAxisLabels.defaultProps.labelStyle,
           );
 
           return (
@@ -352,8 +352,8 @@ class XAxisLabels extends React.Component {
                   x,
                   y,
                   className,
-                  dy: "0.8em",
-                  style
+                  dy: '0.8em',
+                  style,
                 }}
               >
                 {label.text}
@@ -376,7 +376,7 @@ class XAxisLabelDebugRect extends React.Component {
           y: y,
           width: label.width,
           height: label.height,
-          fill: "orange"
+          fill: 'orange',
         }}
       />
     );
