@@ -95,12 +95,6 @@ export default class AreaBarChart extends React.Component {
     barStyle: {},
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['barStyle']);
-    // console.log('should areabarchart update?', shouldUpdate);
-    return shouldUpdate;
-  }
-
   static getDomain(props) {
     const { xScaleType, yScaleType, horizontal, data } = props;
 
@@ -116,13 +110,19 @@ export default class AreaBarChart extends React.Component {
     const rangeEndAccessor = makeAccessor2(props[`${rangeAxis}End`]);
 
     return {
-      [rangeAxis + 'Domain']: domainFromRangeData(
+      [`${rangeAxis}Domain`]: domainFromRangeData(
         data,
         rangeStartAccessor,
         rangeEndAccessor,
         rangeDataType,
       ),
     };
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['barStyle']);
+
+    return shouldUpdate;
   }
 
   render() {

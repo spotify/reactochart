@@ -27,8 +27,8 @@ export default class YGrid extends React.Component {
 
   static getTickDomain(props) {
     if (!props.yScale) return;
-    props = defaults({}, props, YGrid.defaultProps);
-    return { yTickDomain: getTickDomain(props.yScale, props) };
+    const propsWithDefaults = defaults({}, props, YGrid.defaultProps);
+    return { yTickDomain: getTickDomain(props.yScale, propsWithDefaults) };
   }
 
   render() {

@@ -21,7 +21,7 @@ export function methodIfFuncProp(propName, props, context) {
  * @param  {...any} args - arguments to be appended to the function
  */
 export function bindTrailingArgs(fn, ...boundArgs) {
-  return function(...args) {
+  return (...args) => {
     return fn(...args, ...boundArgs);
   };
 }

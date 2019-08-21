@@ -102,7 +102,7 @@ export default class BarChart extends React.Component {
     return RangeBarChart.getSpacing(makeRangeBarChartProps(props));
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['barStyle']);
     return shouldUpdate;
   }

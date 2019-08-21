@@ -7,6 +7,10 @@ import { getScaleTicks, getTickDomain } from './utils/Scale';
 export default class YTicks extends React.Component {
   static propTypes = {
     /**
+     * Width of chart - provided by XYPlot.
+     */
+    width: PropTypes.number,
+    /**
      * D3 scale for Y axis - provided by XYPlot.
      */
     yScale: PropTypes.func,
@@ -56,9 +60,12 @@ export default class YTicks extends React.Component {
   };
 
   static getTickDomain(props) {
-    if (!props.yScale) return;
-    props = defaults({}, props, YTicks.defaultProps);
-    return { yTickDomain: getTickDomain(props.yScale, props) };
+    if (!props.yScale) {
+      return;
+    }
+
+    const propsWithDefaults = defaults({}, props, YTicks.defaultProps);
+    return { yTickDomain: getTickDomain(props.yScale, propsWithDefaults) };
   }
 
   static getMargin(props) {

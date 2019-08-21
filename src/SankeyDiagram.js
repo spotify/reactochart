@@ -24,7 +24,18 @@ import { getValue } from './utils/Data';
 import { bindTrailingArgs } from './util.js';
 
 const SankeyNode = props => {
-  const { graph, node, nodeClassName, nodeStyle } = props;
+  const {
+    graph,
+    node,
+    nodeClassName,
+    nodeStyle,
+    onMouseEnterNode,
+    onMouseLeaveNode,
+    onMouseMoveNode,
+    onMouseDownNode,
+    onMouseUpNode,
+    onClickNode,
+  } = props;
   // create partial functions for handlers - callbacks with the current node/graph arguments attached
   const makeHandler = origHandler =>
     isFunction(origHandler)
@@ -39,18 +50,44 @@ const SankeyNode = props => {
       height={Math.abs(node.y1 - node.y0)}
       className={`rct-sankey-node ${getValue(nodeClassName, node, graph)}`}
       style={getValue(nodeStyle, node, graph)}
-      onMouseEnter={makeHandler(props.onMouseEnterNode)}
-      onMouseLeave={makeHandler(props.onMouseLeaveNode)}
-      onMouseMove={makeHandler(props.onMouseMoveNode)}
-      onMouseDown={makeHandler(props.onMouseDownNode)}
-      onMouseUp={makeHandler(props.onMouseUpNode)}
-      onClick={makeHandler(props.onClickNode)}
+      onMouseEnter={makeHandler(onMouseEnterNode)}
+      onMouseLeave={makeHandler(onMouseLeaveNode)}
+      onMouseMove={makeHandler(onMouseMoveNode)}
+      onMouseDown={makeHandler(onMouseDownNode)}
+      onMouseUp={makeHandler(onMouseUpNode)}
+      onClick={makeHandler(onClickNode)}
     />
   );
 };
 
+SankeyNode.propTypes = {
+  graph: PropTypes.object,
+  node: PropTypes.object,
+  nodeClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  nodeStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  onMouseEnterNode: PropTypes.func,
+  onMouseLeaveNode: PropTypes.func,
+  onMouseMoveNode: PropTypes.func,
+  onMouseDownNode: PropTypes.func,
+  onMouseUpNode: PropTypes.func,
+  onClickNode: PropTypes.func,
+};
+
 const SankeyLink = props => {
-  const { graph, link, linkPath, linkClassName, linkStyle } = props;
+  const {
+    graph,
+    link,
+    linkPath,
+    linkClassName,
+    linkStyle,
+    onMouseEnterLink,
+    onMouseLeaveLink,
+    onMouseMoveLink,
+    onMouseDownLink,
+    onMouseUpLink,
+    onClickLink,
+  } = props;
+
   // create partial functions for handlers - callbacks with the current graph/link arguments attached
   const makeHandler = origHandler =>
     isFunction(origHandler)
@@ -65,34 +102,63 @@ const SankeyLink = props => {
         ...getValue(linkStyle, link, graph),
         strokeWidth: link.width,
       }}
-      onMouseEnter={makeHandler(props.onMouseEnterLink)}
-      onMouseLeave={makeHandler(props.onMouseLeaveLink)}
-      onMouseMove={makeHandler(props.onMouseMoveLink)}
-      onMouseDown={makeHandler(props.onMouseDownLink)}
-      onMouseUp={makeHandler(props.onMouseUpLink)}
-      onClick={makeHandler(props.onClickLink)}
+      onMouseEnter={makeHandler(onMouseEnterLink)}
+      onMouseLeave={makeHandler(onMouseLeaveLink)}
+      onMouseMove={makeHandler(onMouseMoveLink)}
+      onMouseDown={makeHandler(onMouseDownLink)}
+      onMouseUp={makeHandler(onMouseUpLink)}
+      onClick={makeHandler(onClickLink)}
     />
   );
 };
 
+SankeyLink.propTypes = {
+  graph: PropTypes.object,
+  link: PropTypes.object,
+  linkPath: PropTypes.string,
+  linkClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  linkStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  onMouseEnterLink: PropTypes.func,
+  onMouseLeaveLink: PropTypes.func,
+  onMouseMoveLink: PropTypes.func,
+  onMouseDownLink: PropTypes.func,
+  onMouseUpLink: PropTypes.func,
+  onClickLink: PropTypes.func,
+};
+
 const SankeyNodeTerminal = props => {
-  const { node, graph } = props;
+  const {
+    node,
+    graph,
+    nodeTerminalWidth,
+    nodeTerminalDistance,
+    nodeTerminalStyle,
+    nodeTerminalClassName,
+    nodeTerminalAttributes,
+    onMouseEnterNodeTerminal,
+    onMouseLeaveNodeTerminal,
+    onMouseMoveNodeTerminal,
+    onMouseDownNodeTerminal,
+    onMouseUpNodeTerminal,
+    onClickNodeTerminal,
+  } = props;
+
   if (!node.terminalValue) return null;
   const makeHandler = origHandler =>
     isFunction(origHandler)
       ? bindTrailingArgs(origHandler, { node, graph, props })
       : null;
   const getWithNode = accessor => getValue(accessor, node, graph, props);
-  const width = getWithNode(props.nodeTerminalWidth) || 0;
-  const distance = getWithNode(props.nodeTerminalDistance) || 0;
+  const width = getWithNode(nodeTerminalWidth) || 0;
+  const distance = getWithNode(nodeTerminalDistance) || 0;
   const nodeHeight = Math.abs(node.y1 - node.y0) || 0;
   const height =
     (nodeHeight * node.terminalValue || 0) / (node.value || 0) || 0;
-  const style = getWithNode(props.nodeTerminalStyle);
+  const style = getWithNode(nodeTerminalStyle);
   const className = `rct-sankey-node-terminal ${getWithNode(
-    props.nodeTerminalClassName,
+    nodeTerminalClassName,
   )}`;
-  const attributes = getWithNode(props.nodeTerminalAttributes);
+  const attributes = getWithNode(nodeTerminalAttributes);
 
   return (
     <rect
@@ -100,22 +166,51 @@ const SankeyNodeTerminal = props => {
       y={node.y0 + (nodeHeight - height)}
       {...{ width, height, style, className }}
       {...attributes}
-      onMouseEnter={makeHandler(props.onMouseEnterNodeTerminal)}
-      onMouseLeave={makeHandler(props.onMouseLeaveNodeTerminal)}
-      onMouseMove={makeHandler(props.onMouseMoveNodeTerminal)}
-      onMouseDown={makeHandler(props.onMouseDownNodeTerminal)}
-      onMouseUp={makeHandler(props.onMouseUpNodeTerminal)}
-      onClick={makeHandler(props.onClickNodeTerminal)}
+      onMouseEnter={makeHandler(onMouseEnterNodeTerminal)}
+      onMouseLeave={makeHandler(onMouseLeaveNodeTerminal)}
+      onMouseMove={makeHandler(onMouseMoveNodeTerminal)}
+      onMouseDown={makeHandler(onMouseDownNodeTerminal)}
+      onMouseUp={makeHandler(onMouseUpNodeTerminal)}
+      onClick={makeHandler(onClickNodeTerminal)}
     />
   );
 };
 
+SankeyNodeTerminal.propTypes = {
+  node: PropTypes.object,
+  graph: PropTypes.object,
+  nodeTerminalWidth: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
+  nodeTerminalDistance: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
+  nodeTerminalStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  nodeTerminalClassName: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+  ]),
+  nodeTerminalAttributes: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.func,
+  ]),
+  onMouseEnterNodeTerminal: PropTypes.func,
+  onMouseLeaveNodeTerminal: PropTypes.func,
+  onMouseMoveNodeTerminal: PropTypes.func,
+  onMouseDownNodeTerminal: PropTypes.func,
+  onMouseUpNodeTerminal: PropTypes.func,
+  onClickNodeTerminal: PropTypes.func,
+};
+
 const SankeyNodeLabel = props => {
-  const { node, graph, nodeLabelText, nodeId } = props;
+  const {
+    node,
+    graph,
+    nodeLabelText,
+    nodeId,
+    nodeLabelPlacement,
+    nodeLabelDistance,
+  } = props;
   const getWithNode = accessor => getValue(accessor, node, graph, props);
   const getLabelText = isFunction(nodeLabelText) ? nodeLabelText : nodeId;
-  const placement = getWithNode(props.nodeLabelPlacement);
-  const distance = getWithNode(props.nodeLabelDistance) || 0;
+  const placement = getWithNode(nodeLabelPlacement);
+  const distance = getWithNode(nodeLabelDistance) || 0;
   const labelContent = getWithNode(getLabelText);
   // don't render empty labels
   if (
@@ -178,6 +273,7 @@ const SankeyNodeLabel = props => {
     };
   } else {
     if (!isUndefined(placement) && placement !== 'after')
+      // eslint-disable-next-line no-console
       console.warn(
         `${placement} is not a valid value for nodeLabelPlacement - defaulting to "after"`,
       );
@@ -201,23 +297,60 @@ const SankeyNodeLabel = props => {
   );
 };
 
+SankeyNodeLabel.propTypes = {
+  node: PropTypes.object,
+  graph: PropTypes.object,
+  nodeLabelClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  nodeLabelStyle: PropTypes.oneOfType(PropTypes.object, PropTypes.func),
+  nodeLabelText: PropTypes.func,
+  nodeId: PropTypes.func,
+  nodeLabelPlacement: PropTypes.oneOfType([
+    PropTypes.oneOf(['before', 'after', 'above', 'below']),
+    PropTypes.func,
+  ]),
+  nodeLabelDistance: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
+};
+
 const SankeyLinkLabel = props => {
-  const { link, graph } = props;
+  const {
+    link,
+    graph,
+    linkLabelClassName,
+    linkLabelStyle,
+    linkLabelAttributes,
+    linkLabelStartOffset,
+    linkLabelText,
+    linkPathId,
+  } = props;
   const getWithLink = accessor => getValue(accessor, link, graph, props);
   const className = `rct-sankey-link-label ${getWithLink(
-    props.linkLabelClassName || '',
+    linkLabelClassName || '',
   )}`;
-  const style = getWithLink(props.linkLabelStyle || {});
-  const attributes = getWithLink(props.linkLabelAttributes || {});
-  const startOffset = getWithLink(props.linkLabelStartOffset || 0);
+  const style = getWithLink(linkLabelStyle || {});
+  const attributes = getWithLink(linkLabelAttributes || {});
+  const startOffset = getWithLink(linkLabelStartOffset || 0);
 
   return (
     <text className={className} style={style} {...attributes}>
-      <textPath startOffset={startOffset} xlinkHref={`#${props.linkPathId}`}>
-        {getWithLink(props.linkLabelText)}
+      <textPath startOffset={startOffset} xlinkHref={`#${linkPathId}`}>
+        {getWithLink(linkLabelText)}
       </textPath>
     </text>
   );
+};
+
+SankeyLinkLabel.propTypes = {
+  link: PropTypes.object,
+  graph: PropTypes.object,
+  linkLabelClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  linkLabelStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  linkLabelAttributes: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  linkLabelStartOffset: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  linkLabelText: PropTypes.func,
+  linkPathId: PropTypes.string,
 };
 
 const SankeyStepLabel = props => {
@@ -250,12 +383,26 @@ const SankeyStepLabel = props => {
   );
 };
 
+SankeyStepLabel.propTypes = {
+  x: PropTypes.number,
+  y: PropTypes.number,
+  stepLabelPadding: PropTypes.number,
+  stepLabelText: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  stepLabelClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  stepLabelStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  step: PropTypes.string,
+};
+
 const SVGContainer = props => {
   const otherProps = omit(props, ['standalone']);
   if (props.standalone) {
     return <svg {...otherProps} />;
   }
   return <g {...otherProps} />;
+};
+
+SVGContainer.propTypes = {
+  standalone: PropTypes.bool,
 };
 
 /**
@@ -707,7 +854,6 @@ export default class SankeyDiagram extends React.Component {
      * Vertical padding (in pixels) between step label and uppermost positioned node of that step
      */
     stepLabelPadding: PropTypes.number,
-    //standalone
   };
   static defaultProps = {
     width: 400,

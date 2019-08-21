@@ -77,7 +77,7 @@
       "required": false,
       "description": "Classname applied to each path element,\nor accessor function which returns a class.",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },

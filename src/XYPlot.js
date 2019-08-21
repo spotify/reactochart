@@ -44,14 +44,14 @@ function getMouseOptions(
   const xValue = !inRange(innerX, 0, chartSize.width)
     ? null
     : xScaleType === 'ordinal'
-    ? invertPointScale(xScale, innerX)
-    : xScale.invert(innerX);
+      ? invertPointScale(xScale, innerX)
+      : xScale.invert(innerX);
 
   const yValue = !inRange(innerY, 0, chartSize.height)
     ? null
     : yScaleType === 'ordinal'
-    ? invertPointScale(yScale, innerY)
-    : yScale.invert(innerY);
+      ? invertPointScale(yScale, innerY)
+      : yScale.invert(innerY);
 
   return {
     event,
@@ -175,6 +175,17 @@ class XYPlot extends React.Component {
      * Class attribute applied to xy plot
      */
     xyPlotClassName: PropTypes.string,
+    /**
+     * Scale determined by our resolveXYScales higher order component.
+     * Override this prop if you'd like to pass in your own d3 scale.
+     */
+    xScale: PropTypes.func,
+    /**
+     * Scale determined by our resolveXYScales higher order component.
+     * Override this prop if you'd like to pass in your own d3 scale.
+     */
+    yScale: PropTypes.func,
+    children: PropTypes.any,
   };
 
   static defaultProps = {

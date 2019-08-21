@@ -140,7 +140,15 @@ export default class Bar extends React.Component {
     const classNameForBar = `rct-chart-bar rct-chart-bar-${orientation} ${className}`;
     const labelClass = `rct-chart-bar-label ${labelClassName || ''}`;
 
-    let rectX, rectY, width, height, xText, yText, textAnchor, textValue;
+    let rectX;
+    let rectY;
+    let width;
+    let height;
+    let xText;
+    let yText;
+    let textAnchor;
+    let textValue;
+
     if (orientation === 'horizontal') {
       rectY = yScale(y) - thickness / 2;
       const x0 = xScale(x);

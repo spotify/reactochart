@@ -39,6 +39,8 @@ export default class YAxisTitle extends React.Component {
      * Spacing - provided by XYPlot
      */
     spacingRight: PropTypes.number,
+    title: PropTypes.string,
+    children: PropTypes.string,
   };
 
   static defaultProps = {
@@ -60,10 +62,10 @@ export default class YAxisTitle extends React.Component {
   };
 
   static getMargin(props) {
-    props = defaults({}, props, YAxisTitle.defaultProps);
-    const { distance, position, rotate } = props;
+    const propsWithDefault = defaults({}, props, YAxisTitle.defaultProps);
+    const { distance, position, rotate } = propsWithDefault;
     const placement =
-      props.placement || (position === 'left' ? 'before' : 'after');
+      propsWithDefault.placement || (position === 'left' ? 'before' : 'after');
     const zeroMargin = {
       marginTop: 0,
       marginBottom: 0,
@@ -77,8 +79,11 @@ export default class YAxisTitle extends React.Component {
     )
       return zeroMargin;
 
-    const title = props.title || props.children;
-    const style = defaults(props.style, YAxisTitle.defaultProps.style);
+    const title = propsWithDefault.title || propsWithDefault.children;
+    const style = defaults(
+      propsWithDefault.style,
+      YAxisTitle.defaultProps.style,
+    );
     const titleWithStyle = Object.assign({ text: title }, style);
     const measured = measureText(titleWithStyle);
 
@@ -115,22 +120,22 @@ export default class YAxisTitle extends React.Component {
       rotate && alignment === 'top'
         ? 'end'
         : rotate && alignment === 'middle'
-        ? 'middle'
-        : rotate && alignment === 'bottom'
-        ? 'start'
-        : placement === 'before'
-        ? 'end'
-        : 'start';
+          ? 'middle'
+          : rotate && alignment === 'bottom'
+            ? 'start'
+            : placement === 'before'
+              ? 'end'
+              : 'start';
     const dy =
-      rotate && placement == 'before'
+      rotate && placement === 'before'
         ? '-0.2em'
         : rotate
-        ? '0.8em'
-        : alignment === 'top'
-        ? '0.8em'
-        : alignment === 'middle'
-        ? '0.3em'
-        : null;
+          ? '0.8em'
+          : alignment === 'top'
+            ? '0.8em'
+            : alignment === 'middle'
+              ? '0.3em'
+              : null;
 
     return (
       <g transform={`translate(${translateX},${translateY})`}>

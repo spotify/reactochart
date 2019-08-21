@@ -175,6 +175,80 @@ class PieChart extends React.Component {
     this.props.onMouseLeaveLine(e, d);
   };
 
+  renderMarkerLine(pathData) {
+    const { markerLineClassName, markerLineStyle } = this.props;
+    const lineD = {
+      value: this.props.markerLineValue,
+    };
+
+    const [onMouseEnter, onMouseMove, onMouseLeave] = [
+      'onMouseEnterLine',
+      'onMouseMoveLine',
+      'onMouseLeaveLine',
+    ].map(eventName => {
+      // partially apply this line's data point as 2nd callback argument
+      const callback = methodIfFuncProp(eventName, this.props, this);
+      return isFunction(callback) ? bindTrailingArgs(callback, lineD) : null;
+    });
+
+    return (
+      <path
+        style={markerLineStyle}
+        className={`rct-marker-line ${markerLineClassName}`}
+        d={pathData}
+        {...{ onMouseEnter, onMouseMove, onMouseLeave }}
+      />
+    );
+  }
+
+  renderSliceLabel(value, slice, center, radius, index) {
+    const {
+      getPieSliceLabel,
+      pieSliceLabelStyle,
+      pieSliceLabelDistance,
+    } = this.props;
+    const labelPercent = (slice.end - slice.start) / 2 + slice.start;
+    const style = {
+      textAnchor: 'middle',
+      dominantBaseline: 'central',
+    };
+
+    if (pieSliceLabelStyle) {
+      Object.assign(style, getValue(pieSliceLabelStyle, value));
+    }
+
+    const r = pieSliceLabelDistance
+      ? radius + getValue(pieSliceLabelDistance, value)
+      : radius;
+    const x = center.x + Math.sin((2 * Math.PI) / (1 / labelPercent)) * r;
+    const y = center.y - Math.cos((2 * Math.PI) / (1 / labelPercent)) * r;
+
+    return (
+      <text key={index} x={x} y={y} style={style}>
+        {getPieSliceLabel(value)}
+      </text>
+    );
+  }
+
+  renderCenterLabel(center) {
+    const { centerLabelStyle, centerLabelClassName, centerLabel } = this.props;
+    const { x, y } = center;
+    const style = Object.assign(
+      {},
+      { textAnchor: 'middle', dominantBaseline: 'central' },
+      centerLabelStyle,
+    );
+
+    return (
+      <text
+        className={`rct-pie-label-center ${centerLabelClassName}`}
+        {...{ x, y, style }}
+      >
+        {centerLabel}
+      </text>
+    );
+  }
+
   render() {
     const {
       marginLeft,
@@ -220,7 +294,7 @@ class PieChart extends React.Component {
       : null;
 
     let startPercent = 0;
-    const slices = this.props.data.map((d, i) => {
+    const slices = this.props.data.map(d => {
       const slicePercent = valueAccessor(d) / total;
       const slice = {
         start: startPercent,
@@ -303,80 +377,6 @@ class PieChart extends React.Component {
       </svg>
     );
   }
-
-  renderMarkerLine(pathData) {
-    const { markerLineClassName, markerLineStyle } = this.props;
-    const lineD = {
-      value: this.props.markerLineValue,
-    };
-
-    const [onMouseEnter, onMouseMove, onMouseLeave] = [
-      'onMouseEnterLine',
-      'onMouseMoveLine',
-      'onMouseLeaveLine',
-    ].map(eventName => {
-      // partially apply this line's data point as 2nd callback argument
-      const callback = methodIfFuncProp(eventName, this.props, this);
-      return isFunction(callback) ? bindTrailingArgs(callback, lineD) : null;
-    });
-
-    return (
-      <path
-        style={markerLineStyle}
-        className={`rct-marker-line ${markerLineClassName}`}
-        d={pathData}
-        {...{ onMouseEnter, onMouseMove, onMouseLeave }}
-      />
-    );
-  }
-
-  renderSliceLabel(value, slice, center, radius, index) {
-    const {
-      getPieSliceLabel,
-      pieSliceLabelStyle,
-      pieSliceLabelDistance,
-    } = this.props;
-    const labelPercent = (slice.end - slice.start) / 2 + slice.start;
-    const style = {
-      textAnchor: 'middle',
-      dominantBaseline: 'central',
-    };
-
-    if (pieSliceLabelStyle) {
-      Object.assign(style, getValue(pieSliceLabelStyle, value));
-    }
-
-    const r = pieSliceLabelDistance
-      ? radius + getValue(pieSliceLabelDistance, value)
-      : radius;
-    const x = center.x + Math.sin((2 * Math.PI) / (1 / labelPercent)) * r;
-    const y = center.y - Math.cos((2 * Math.PI) / (1 / labelPercent)) * r;
-
-    return (
-      <text key={index} x={x} y={y} style={style}>
-        {getPieSliceLabel(value)}
-      </text>
-    );
-  }
-
-  renderCenterLabel(center) {
-    const { centerLabelStyle, centerLabelClassName, centerLabel } = this.props;
-    const { x, y } = center;
-    const style = Object.assign(
-      {},
-      { textAnchor: 'middle', dominantBaseline: 'central' },
-      centerLabelStyle,
-    );
-
-    return (
-      <text
-        className={`rct-pie-label-center ${centerLabelClassName}`}
-        {...{ x, y, style }}
-      >
-        {centerLabel}
-      </text>
-    );
-  }
 }
 
 function markerLine(
@@ -387,7 +387,6 @@ function markerLine(
   overhangOuter = 0,
   overhangInner = 0,
 ) {
-  if (percentValue == 1) endPercent = 0.9999999; // arc cannot be a full circle
   const startX = Math.sin((2 * Math.PI) / (1 / percentValue));
   const startY = Math.cos((2 * Math.PI) / (1 / percentValue));
   const [c, r, rH, x0, y0] = [center, radius, holeRadius, startX, startY];
@@ -407,13 +406,18 @@ function pieSlicePath(
   radius,
   holeRadius = 0,
 ) {
-  if (endPercent == 1) endPercent = 0.9999999; // arc cannot be a full circle
+  let parsedEndPercent = endPercent;
+
+  if (parsedEndPercent === 1) {
+    parsedEndPercent = 0.9999999; // arc cannot be a full circle
+  }
+
   const startX = Math.sin((2 * Math.PI) / (1 / startPercent));
   const startY = Math.cos((2 * Math.PI) / (1 / startPercent));
-  const endX = Math.sin((2 * Math.PI) / (1 / endPercent));
-  const endY = Math.cos((2 * Math.PI) / (1 / endPercent));
+  const endX = Math.sin((2 * Math.PI) / (1 / parsedEndPercent));
+  const endY = Math.cos((2 * Math.PI) / (1 / parsedEndPercent));
 
-  const largeArc = endPercent - startPercent <= 0.5 ? 0 : 1;
+  const largeArc = parsedEndPercent - startPercent <= 0.5 ? 0 : 1;
   const [c, r, rH, x0, x1, y0, y1] = [
     center,
     radius,

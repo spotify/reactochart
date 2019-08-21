@@ -19,8 +19,8 @@
   },
   "scripts": {
     "analyze-bundle": "source-map-explorer node_modules ./*.js ./*.js.map ./utils styles.css src/",
-    "lint": "eslint ./src",
-    "lint-fix": "eslint ./src ./tests ./docs/src --ext .js --fix",
+    "lint": "eslint ./src ./docs/src",
+    "lint-fix": "eslint ./src --fix",
     "prepublishOnly": "npm run build",
     "build": "npm run build-lib && npm run build-css && npm run docs",
     "dev": "webpack-dev-server --config webpack.config.base.js",

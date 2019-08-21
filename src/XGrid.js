@@ -27,8 +27,10 @@ export default class XGrid extends React.Component {
 
   static getTickDomain(props) {
     if (!props.xScale) return;
-    props = defaults({}, props, XGrid.defaultProps);
-    return { xTickDomain: getTickDomain(props.xScale, props) };
+    const propsWithDefaults = defaults({}, props, XGrid.defaultProps);
+    return {
+      xTickDomain: getTickDomain(propsWithDefaults.xScale, propsWithDefaults),
+    };
   }
 
   render() {

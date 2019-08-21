@@ -28,38 +28,30 @@ export default class YAxis extends React.Component {
      * Extends the y domain to start and end on rounded values,
      * guaranteeing the original domain will be covered.
      * See d3 docs for more information
-     */
-    nice: PropTypes.bool,
+     */ nice: PropTypes.bool,
     ticks: PropTypes.array,
     tickCount: PropTypes.number,
     /**
      * Internal top spacing of YAxis, in pixels.
-     */
-    spacingTop: PropTypes.number,
+     */ spacingTop: PropTypes.number,
     /**
      * Internal bottom spacing of YAxis, in pixels.
-     */
-    spacingBottom: PropTypes.number,
+     */ spacingBottom: PropTypes.number,
     /**
      * Internal left spacing of YAxis, in pixels.
-     */
-    spacingLeft: PropTypes.number,
+     */ spacingLeft: PropTypes.number,
     /**
      * Internal right spacing of YAxis, in pixels.
-     */
-    spacingRight: PropTypes.number,
-
+     */ spacingRight: PropTypes.number,
     showTitle: PropTypes.bool,
     showLabels: PropTypes.bool,
     showTicks: PropTypes.bool,
     showGrid: PropTypes.bool,
-
     title: PropTypes.string,
     titleDistance: PropTypes.number,
     titleAlign: PropTypes.string,
     titleRotate: PropTypes.bool,
     titleStyle: PropTypes.object,
-
     labelDistance: PropTypes.number,
     labelClassName: PropTypes.string,
     labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
@@ -68,46 +60,36 @@ export default class YAxis extends React.Component {
     labels: PropTypes.array,
     /**
      * Adds vertical offset (along the YAxis) to the labels
-     */
-    labelOffset: PropTypes.number,
-
+     */ labelOffset: PropTypes.number,
     tickLength: PropTypes.number,
     tickClassName: PropTypes.string,
     tickStyle: PropTypes.object,
-
     gridLineClassName: PropTypes.string,
     gridLineStyle: PropTypes.object,
-
     onMouseClickLabel: PropTypes.func,
     onMouseEnterLabel: PropTypes.func,
     onMouseMoveLabel: PropTypes.func,
     onMouseLeaveLabel: PropTypes.func,
-
     /**
      * `mouseenter` event handler callback, called when user's mouse enters the y axis.
      */
     onMouseEnterAxis: PropTypes.func,
     /**
      * `mouseleave` event handler callback, called when user's mouse leaves the y axis.
-     */
-    onMouseLeaveAxis: PropTypes.func,
+     */ onMouseLeaveAxis: PropTypes.func,
     /**
      * `mousemove` event handler callback, called when user's mouse moves within the y axis.
-     */
-    onMouseMoveAxis: PropTypes.func,
+     */ onMouseMoveAxis: PropTypes.func,
     /**
      * `click` event handler callback, called when user's mouse clicks on the y axis.
-     */
-    onMouseClickAxis: PropTypes.func,
-
+     */ onMouseClickAxis: PropTypes.func,
     /**
      * Show Y Axis line
      */
     showLine: PropTypes.bool,
     /**
      * Inline style object to be applied to the Y Axis line
-     */
-    lineStyle: PropTypes.object,
+     */ lineStyle: PropTypes.object,
   };
 
   static defaultProps = {
@@ -130,19 +112,17 @@ export default class YAxis extends React.Component {
     lineStyle: {},
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return !xyPropsEqual(this.props, nextProps);
-  }
-
   static getTickDomain(props) {
     if (!props.yScale) return;
-    props = defaults({}, props, YAxis.defaultProps);
-    return { yTickDomain: getTickDomain(props.yScale, props) };
+    const propsWithDefaults = defaults({}, props, YAxis.defaultProps);
+    return {
+      yTickDomain: getTickDomain(propsWithDefaults.yScale, propsWithDefaults),
+    };
   }
 
   static getMargin(props) {
     const { ticksProps, labelsProps, titleProps } = getAxisChildProps(props);
-    let margins = [];
+    const margins = [];
 
     if (props.showTicks) margins.push(YTicks.getMargin(ticksProps));
 
@@ -152,6 +132,10 @@ export default class YAxis extends React.Component {
     if (props.showLabels) margins.push(YAxisLabels.getMargin(labelsProps));
 
     return sumMargins(margins, 'margin');
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return !xyPropsEqual(this.props, nextProps);
   }
 
   handleOnMouseMove = event => {

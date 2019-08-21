@@ -119,9 +119,9 @@ class TreeMap extends React.Component {
     // todo reevaluate this logic
     if (
       !sticky ||
-      width != newProps.width ||
-      height != newProps.height ||
-      JSON.stringify(data) != JSON.stringify(newProps.data)
+      width !== newProps.width ||
+      height !== newProps.height ||
+      JSON.stringify(data) !== JSON.stringify(newProps.data)
     ) {
       this._tree = getTree(newProps);
       this._rootNode = getRootNode(cloneDeep(newProps.data), this.props);
@@ -201,7 +201,7 @@ function initTreemap(rootNode, tree, options) {
   const treeRoot = rootNode.sum(d => {
     if (isFunction(getValue)) return getValue(d);
     else if (isString(getValue)) return d[getValue];
-    else return 0;
+    return 0;
   });
   return tree(sort ? treeRoot.sort(sort) : treeRoot).descendants();
 }

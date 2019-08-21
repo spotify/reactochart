@@ -7,6 +7,10 @@ import React from 'react';
 export default class XLine extends React.Component {
   static propTypes = {
     /**
+     * DHeight of chart - provided by XYPlot
+     */
+    height: PropTypes.number,
+    /**
      * D3 scale for X axis - provided by XYPlot
      */
     xScale: PropTypes.func,

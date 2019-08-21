@@ -84,8 +84,6 @@ export default class Histogram extends React.Component {
 
   static defaultProps = { data: [], thresholds: 30, nice: false };
 
-  state = { histogramData: null };
-
   static getScaleType() {
     return { xScaleType: 'linear', yScaleType: 'linear' };
   }
@@ -117,9 +115,11 @@ export default class Histogram extends React.Component {
     if (binDomain) {
       // Throw warning if nice = true and binDomain is defined
       if (nice) {
+        /* eslint-disable no-console */
         console.warn(
           'Warning: if binDomain is defined and nice = true, histogram prioritizes binDomain and disregards nice.',
         );
+        /* eslint-enable no-console */
       }
 
       // Use user's passed in binDomain to makeHistogram
@@ -144,6 +144,8 @@ export default class Histogram extends React.Component {
 
     return bins;
   }
+
+  state = { histogramData: null };
 
   shouldComponentUpdate(nextProps) {
     const shouldUpdate = !xyPropsEqual(this.props, nextProps, []);

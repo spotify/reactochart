@@ -14,7 +14,7 @@
 // TODO Recreate shallow equals to not use flow
 // we currently use "@babel/preset-flow" just to parse this file
 
-/*eslint-disable no-self-compare */
+/* eslint-disable no-self-compare */
 
 'use strict';
 
@@ -30,10 +30,9 @@ function is(x: mixed, y: mixed): boolean {
     // Steps 1-5, 7-10
     // Steps 6.b-6.e: +0 != -0
     return x !== 0 || 1 / (x: $FlowIssue) === 1 / (y: $FlowIssue);
-  } else {
-    // Step 6.a: NaN == NaN
-    return x !== x && y !== y;
   }
+  // Step 6.a: NaN == NaN
+  return x !== x && y !== y;
 }
 
 /**

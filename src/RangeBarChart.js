@@ -164,7 +164,7 @@ export default class RangeBarChart extends React.Component {
       xDomain,
       yDomain,
     } = props;
-    const P = barThickness / 2; //padding
+    const P = barThickness / 2; // padding
     const barsDomain = horizontal ? yDomain : xDomain;
     const barsScale = horizontal ? yScale : xScale;
     const barsAccessor = horizontal ? makeAccessor2(y) : makeAccessor2(x);
@@ -173,15 +173,15 @@ export default class RangeBarChart extends React.Component {
     // find the edges of the tick domain, and map them through the scale function
     const [domainHead, domainTail] = [first(barsDomain), last(barsDomain)]
       .map(barsScale)
-      .sort(); //sort the pixel values return by the domain extents
+      .sort(); // sort the pixel values return by the domain extents
 
-    //find the edges of the data domain, and map them through the scale function
+    // find the edges of the data domain, and map them through the scale function
     const [dataDomainHead, dataDomainTail] = [
       first(barsDataDomain),
       last(barsDataDomain),
     ]
       .map(barsScale)
-      .sort(); //sort the pixel values return by the domain extents
+      .sort(); // sort the pixel values return by the domain extents
 
     // find the necessary spacing (based on bar width) to push the bars completely inside the tick domain
     const [spacingTail, spacingHead] = [
@@ -196,14 +196,14 @@ export default class RangeBarChart extends React.Component {
         spacingLeft: 0,
         spacingRight: 0,
       };
-    } else {
-      return {
-        spacingTop: 0,
-        spacingBottom: 0,
-        spacingLeft: spacingHead,
-        spacingRight: spacingTail,
-      };
     }
+
+    return {
+      spacingTop: 0,
+      spacingBottom: 0,
+      spacingLeft: spacingHead,
+      spacingRight: spacingTail,
+    };
   }
 
   shouldComponentUpdate(nextProps) {

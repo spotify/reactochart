@@ -39,8 +39,8 @@ export function makeAccessor(key) {
   return isFunction(key)
     ? key
     : isNull(key) || isUndefined(key)
-    ? identity
-    : property(key);
+      ? identity
+      : property(key);
 }
 
 /**
@@ -143,8 +143,11 @@ export function combineBorderObjects(borderObjects) {
 }
 
 export function domainFromData(data, accessor = identity, type = undefined) {
-  if (!type) type = inferDataType(data, accessor);
-  return type === 'number' || type === 'time'
+  let typeToUse = type;
+
+  if (!typeToUse) typeToUse = inferDataType(data, accessor);
+
+  return typeToUse === 'number' || typeToUse === 'time'
     ? extent(data.map(accessor))
     : uniq(data.map(accessor));
 }
@@ -166,9 +169,12 @@ export function domainFromDatasets(
   // returns the default domain of a collection of datasets with an accessor function
   // for numeric and date-type datasets, returns the extent (min and max) of the numbers/dates
   // for categorical datasets, returns the set of distinct category values
-  if (!type) type = inferDatasetsType(datasets, accessor);
-  const domains = datasets.map(data => domainFromData(data, accessor, type));
-  return combineDomains(domains, type);
+  let typeToUse = type;
+  if (!typeToUse) typeToUse = inferDatasetsType(datasets, accessor);
+  const domains = datasets.map(data =>
+    domainFromData(data, accessor, typeToUse),
+  );
+  return combineDomains(domains, typeToUse);
 }
 
 export function domainFromRangeData(
@@ -180,9 +186,10 @@ export function domainFromRangeData(
   // returns the domain of dataset for which each datum represents a range of values
   // ie. has a start and end value rather than a single value
   // for example, time ranges
+  let dataTypeToUse = dataType;
+  if (!dataTypeToUse) dataTypeToUse = inferDataType(data, rangeStartAccessor);
 
-  if (!dataType) dataType = inferDataType(data, rangeStartAccessor);
-  switch (dataType) {
+  switch (dataTypeToUse) {
     case 'number':
     case 'time':
       return extent(
@@ -195,8 +202,9 @@ export function domainFromRangeData(
       return uniq(
         flatten([data.map(rangeStartAccessor), data.map(rangeEndAccessor)]),
       );
+    default:
+      return [];
   }
-  return [];
 }
 
 export function combineDatasets(datasetsInfo = [], combineKey = 'x') {
@@ -234,7 +242,7 @@ export function combineDatasets(datasetsInfo = [], combineKey = 'x') {
   // For each of the unique combineKey data values, go through each dataset and look for a combineKey value that matches
   // if we find it, combine the values for that datum's dataKeys into the final combinedDatum object
   return uniqueValues.map(combineValue => {
-    let combinedDatum = { [combineKey]: combineValue };
+    const combinedDatum = { [combineKey]: combineValue };
 
     datasetsInfo.forEach((datasetInfo, datasetIndex) => {
       if (!datasetInfo.dataKeys || !Object.keys(datasetInfo.dataKeys).length)

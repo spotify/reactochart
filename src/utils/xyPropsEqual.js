@@ -51,6 +51,7 @@ export default function xyPropsEqual(
   return equalityCheck;
 }
 
+/* eslint-disable */
 export function xyPropsEqualDebug(
   propsA,
   propsB,
@@ -64,7 +65,7 @@ export function xyPropsEqualDebug(
   // const start = performance.now();
   const propKeysToSkipShallowCheck = propKeysToDeepCheck.concat('scale');
 
-  const isEqual =
+  const result =
     // most keys just get shallow-equality checked
     shallowEqual(
       omit(propsA, propKeysToSkipShallowCheck),
@@ -83,5 +84,6 @@ export function xyPropsEqualDebug(
 
   // console.log('xyProps isEqual', isEqual);
   // console.log('took', performance.now() - start);
-  return isEqual;
+  return result;
 }
+/* eslint-enable */

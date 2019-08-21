@@ -57,7 +57,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Height of chart - provided by XYPlot.",
       "defaultValue": {
         "value": "250",
         "computed": false
@@ -68,7 +68,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Width of chart - provided by XYPlot.",
       "defaultValue": {
         "value": "400",
         "computed": false
@@ -79,11 +79,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"left\"",
+            "value": "'left'",
             "computed": false
           },
           {
-            "value": "\"right\"",
+            "value": "'right'",
             "computed": false
           }
         ]
@@ -91,7 +91,7 @@
       "required": false,
       "description": "Position of y axis labels. Accepted options are \"left\" or \"right\".",
       "defaultValue": {
-        "value": "\"left\"",
+        "value": "'left'",
         "computed": false
       }
     },
@@ -100,11 +100,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"before\"",
+            "value": "'before'",
             "computed": false
           },
           {
-            "value": "\"after\"",
+            "value": "'after'",
             "computed": false
           }
         ]
@@ -171,7 +171,7 @@
       "required": false,
       "description": "Inline style object applied to each label,\nor accessor function which returns a style object\n\nDisclaimer: labelStyle will merge its defaults with the given labelStyle prop\nin order to ensure that our collision library measureText is able to calculate the\nsmallest amount of possible collisions along the axis. It's therefore dependent on\nfontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized\nstylesheet, we suggest creating a styled label component that wraps YAxisLabels with your preferred styles.",
       "defaultValue": {
-        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: \"14px\",\n  lineHeight: 1,\n  textAnchor: \"end\"\n}",
+        "value": "{\n  fontFamily: 'Helvetica, sans-serif',\n  fontSize: '14px',\n  lineHeight: 1,\n  textAnchor: 'end',\n}",
         "computed": false
       }
     },
@@ -182,7 +182,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },

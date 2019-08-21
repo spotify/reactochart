@@ -8,7 +8,7 @@ import { makeAccessor } from './utils/Data';
 const TreeMapNodeLabel = props => {
   const { node, getLabel, labelStyle } = props;
   const { x1, x0 } = node;
-  let style = { width: x1 - x0 };
+  const style = { width: x1 - x0 };
   const customStyle = isFunction(labelStyle)
     ? labelStyle(node)
     : isObject(labelStyle)

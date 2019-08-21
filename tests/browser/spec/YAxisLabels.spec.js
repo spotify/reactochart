@@ -78,7 +78,7 @@ describe("YAxisLabel", () => {
     const tree = (
       <XYPlot width={400} height={150} xDomain={[-20, 20]} yDomain={[-20, 20]}>
         <YAxisLabels
-          format={d => d + "%"}
+          format={d => `${d  }%`}
           position="left"
           distance={2}
           tickCount={5}

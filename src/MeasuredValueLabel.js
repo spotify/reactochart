@@ -8,7 +8,10 @@ import PropTypes from 'prop-types';
 export default class MeasuredValueLabel extends React.Component {
   static propTypes = {
     value: PropTypes.any,
+    format: PropTypes.func,
+    children: PropTypes.any,
   };
+
   static defaultProps = {
     format: identity,
     style: {
@@ -18,6 +21,7 @@ export default class MeasuredValueLabel extends React.Component {
       textAnchor: 'middle',
     },
   };
+
   static getLabel(props) {
     const { value, format } = props;
     const style = defaults(props.style, MeasuredValueLabel.defaultProps.style);

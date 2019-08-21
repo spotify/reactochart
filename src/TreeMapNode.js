@@ -20,7 +20,7 @@ const TreeMapNode = props => {
   } = props;
   const { depth, parent, x0, y0, x1, y1 } = node;
 
-  var parentName = get(parent, 'data.name');
+  const parentName = get(parent, 'data.name');
   const nodeGroupClass = parent
     ? `node-group-${kebabCase(parentName)} node-group-i-${parentNames.indexOf(
         parentName,
@@ -28,7 +28,7 @@ const TreeMapNode = props => {
     : '';
   const className = `rct-tree-map-node node-depth-${depth} ${nodeGroupClass}`;
 
-  let style = {
+  const style = {
     position: 'absolute',
     width: x1 - x0,
     height: y1 - y0,
@@ -39,19 +39,19 @@ const TreeMapNode = props => {
   const customStyle = isFunction(nodeStyle)
     ? nodeStyle(node)
     : isObject(nodeStyle)
-    ? nodeStyle
-    : {};
+      ? nodeStyle
+      : {};
   Object.assign(style, customStyle);
 
-  let handlers = [
+  const handlers = [
     'onClick',
     'onMouseEnter',
     'onMouseLeave',
     'onMouseMove',
-  ].reduce((handlers, eventName) => {
+  ].reduce((acc, eventName) => {
     const handler = props[`${eventName}Node`];
     if (handler) handlers[eventName] = handler.bind(null, node);
-    return handlers;
+    return acc;
   }, {});
 
   return (
@@ -73,6 +73,10 @@ TreeMapNode.propTypes = {
     y: PropTypes.number,
     dx: PropTypes.number,
     dy: PropTypes.number,
+    x0: PropTypes.number,
+    y0: PropTypes.number,
+    x1: PropTypes.number,
+    y1: PropTypes.number,
   }),
   nodeStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   minLabelWidth: PropTypes.number,
@@ -80,6 +84,7 @@ TreeMapNode.propTypes = {
   getLabel: CustomPropTypes.getter,
   labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   NodeLabelComponent: PropTypes.func,
+  parentNames: PropTypes.arrayOf(PropTypes.string),
 };
 
 TreeMapNode.defaultProps = {

@@ -16,32 +16,25 @@ export default class LineChart extends React.Component {
     data: PropTypes.array.isRequired,
     /**
      * Accessor function for line X values, called once per datum, or a single value to be used for the entire line.
-     */
-    x: CustomPropTypes.valueOrAccessor,
+     */ x: CustomPropTypes.valueOrAccessor,
     /**
      * Accessor function for line Y values, called once per datum, or a single value to be used for the entire line.
-     */
-    y: CustomPropTypes.valueOrAccessor,
+     */ y: CustomPropTypes.valueOrAccessor,
     /**
      * Inline style object to be applied to the line path.
-     */
-    lineStyle: PropTypes.object,
+     */ lineStyle: PropTypes.object,
     /**
      * Class attribute to be applied to the line path.
-     */
-    lineClassName: PropTypes.string,
+     */ lineClassName: PropTypes.string,
     /**
      * D3 scale for X axis - provided by XYPlot.
-     */
-    xScale: PropTypes.func,
+     */ xScale: PropTypes.func,
     /**
      * D3 scale for Y axis - provided by XYPlot.
-     */
-    yScale: PropTypes.func,
+     */ yScale: PropTypes.func,
     /**
      * D3 curve for path generation
-     */
-    curve: PropTypes.func,
+     */ curve: PropTypes.func,
   };
   static defaultProps = {
     lineStyle: {},
@@ -49,22 +42,25 @@ export default class LineChart extends React.Component {
     curve: curveLinear,
   };
 
-  componentWillMount() {
-    this.initBisector(this.props);
-  }
-  componentWillReceiveProps(nextProps) {
-    this.initBisector(nextProps);
-  }
-
   shouldComponentUpdate(nextProps) {
     return !xyPropsEqual(this.props, nextProps, ['lineStyle', 'lineClassName']);
   }
 
-  initBisector(props) {
-    this.setState({ bisectX: bisector(d => getValue(props.x, d)).left });
+  componentWillMount() {
+    this.initBisector(this.props);
   }
 
-  getHovered = (x, y) => {
+  componentWillReceiveProps(nextProps) {
+    this.initBisector(nextProps);
+  }
+
+  initBisector(props) {
+    this.setState({
+      bisectX: bisector(d => getValue(props.x, d)).left,
+    });
+  }
+
+  getHovered = x => {
     const closestDataIndex = this.state.bisectX(this.props.data, x);
     return this.props.data[closestDataIndex];
   };

@@ -19,10 +19,15 @@ import xyPropsEqual from './utils/xyPropsEqual';
 function getTickType(props) {
   const { xEnd, yEnd, horizontal } = props;
   // warn if a range is passed for the dependent variable, which is expected to be a value
-  if ((!horizontal && !isUndefined(yEnd)) || (horizontal && !isUndefined(xEnd)))
+  if (
+    (!horizontal && !isUndefined(yEnd)) ||
+    (horizontal && !isUndefined(xEnd))
+  ) {
+    // eslint-disable-next-line no-console
     console.warn(
       'Warning: MarkerLineChart can only show the independent variable as a range, not the dependent variable.',
     );
+  }
 
   if ((!horizontal && !isUndefined(xEnd)) || (horizontal && !isUndefined(yEnd)))
     return 'RangeValue';
@@ -122,7 +127,7 @@ export default class MarkerLineChart extends React.Component {
 
   static getSpacing(props) {
     const tickType = getTickType(props);
-    //no spacing for rangeValue marker charts since line start and end are set explicitly
+    // no spacing for rangeValue marker charts since line start and end are set explicitly
     if (tickType === 'RangeValue')
       return {
         spacingTop: 0,
@@ -142,7 +147,7 @@ export default class MarkerLineChart extends React.Component {
       x,
       y,
     } = props;
-    const P = lineLength / 2; //padding
+    const P = lineLength / 2; // padding
     const markDomain = horizontal ? yDomain : xDomain;
     const markScale = horizontal ? yScale : xScale;
     const markAccessor = horizontal ? makeAccessor2(y) : makeAccessor2(x);
@@ -174,14 +179,13 @@ export default class MarkerLineChart extends React.Component {
         spacingLeft: 0,
         spacingRight: 0,
       };
-    } else {
-      return {
-        spacingTop: 0,
-        spacingBottom: 0,
-        spacingLeft: spacingHead,
-        spacingRight: spacingTail,
-      };
     }
+    return {
+      spacingTop: 0,
+      spacingBottom: 0,
+      spacingLeft: spacingHead,
+      spacingRight: spacingTail,
+    };
   }
 
   static getDomain(props) {
@@ -219,9 +223,9 @@ export default class MarkerLineChart extends React.Component {
           rangeDataType,
         ),
       };
-    } else {
-      return {};
     }
+
+    return {};
   }
 
   shouldComponentUpdate(nextProps) {

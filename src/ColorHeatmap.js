@@ -4,6 +4,7 @@ import {
   interpolateLab,
   interpolateRgb,
   scaleLinear,
+  schemeCategory10,
 } from 'd3';
 import isString from 'lodash/isString';
 import times from 'lodash/times';
@@ -37,14 +38,16 @@ function interpolatorFromType(type) {
 }
 
 function makeColorScale(domain, colors, interpolator) {
-  // invariant(domain.length === colors.length, 'ColorHeatmap makeColorScale: domain.length should equal colors.length');
+  let interpolatorForColorScale = interpolator;
 
-  if (isString(interpolator)) interpolator = interpolatorFromType(interpolator);
+  if (isString(interpolatorForColorScale)) {
+    interpolatorForColorScale = interpolatorFromType(interpolator);
+  }
 
   return scaleLinear()
     .domain(domain)
     .range(colors)
-    .interpolate(interpolator);
+    .interpolate(interpolatorForColorScale);
 }
 
 /**
@@ -167,10 +170,7 @@ export default class ColorHeatmap extends React.Component {
         this.props.colors ||
         (valueDomain.length === 2
           ? ['#000000', '#ffffff']
-          : times(
-              valueDomain.length,
-              scale.schemeCategory10().domain(range(10)),
-            ));
+          : times(valueDomain.length, schemeCategory10().domain(range(10))));
       colorScale = makeColorScale(valueDomain, colors, interpolator);
     }
 

@@ -55,7 +55,6 @@ export default class ZoomContainer extends React.Component {
      * 1.0 is normal size, 2.0 is double size, 0.5 is half size.
      */
     zoomScale: PropTypes.number,
-
     /**
      * Sets the viewport extent to the specified array of points [[x0, y0], [x1, y1]],
      * where [x0, y0] is the top-left corner of the viewport and [x1, y1] is the bottom-right corner of the viewport.
@@ -110,6 +109,7 @@ export default class ZoomContainer extends React.Component {
      * See d3-zoom docs for more information.
      */
     wheelDelta: PropTypes.func,
+    children: PropTypes.any,
   };
   static defaultProps = {
     width: 800,
@@ -121,39 +121,7 @@ export default class ZoomContainer extends React.Component {
     zoomScale: 1,
   };
 
-  state = {
-    lastZoomTransform: null,
-    selection: null,
-  };
-
-  _updateZoomProps(props) {
-    if (!props) props = this.props;
-    const {
-      extent,
-      scaleExtent,
-      translateExtent,
-      clickDistance,
-      duration,
-      interpolate,
-      constrain,
-      filter,
-      touchable,
-      wheelDelta,
-    } = props;
-
-    if (Array.isArray(extent)) this.zoom.extent(extent);
-    if (Array.isArray(scaleExtent)) this.zoom.scaleExtent(scaleExtent);
-    if (Array.isArray(translateExtent))
-      this.zoom.translateExtent(translateExtent);
-    if (clickDistance !== null && isFinite(clickDistance))
-      this.zoom.clickDistance(clickDistance);
-    if (duration !== null && isFinite(duration)) this.zoom.duration(duration);
-    if (isFunction(interpolate)) this.zoom.interpolate(interpolate);
-    if (isFunction(constrain)) this.zoom.constrain(constrain);
-    if (isFunction(filter)) this.zoom.filter(filter);
-    if (isFunction(touchable)) this.zoom.touchable(touchable);
-    if (isFunction(wheelDelta)) this.zoom.wheelDelta(wheelDelta);
-  }
+  state = { lastZoomTransform: null, selection: null };
 
   componentDidMount() {
     const initialZoomTransform = zoomTransformFromProps(this.props);
@@ -178,30 +146,6 @@ export default class ZoomContainer extends React.Component {
     });
   }
 
-  // React is deprecating componentWillReceiveProps, but it's pretty much necessary in this case
-  // TODO: change to UNSAFE_componentWillReceiveProps when upgrading React
-  componentWillReceiveProps(nextProps) {
-    if (this.props.controlled) {
-      // if controlled component and zoom props have changed, apply the new zoom props to d3-zoom
-      // (unbind handler first so as not to create infinite callback loop)
-      const hasChangedZoom =
-        nextProps.zoomX !== this.props.zoomX ||
-        nextProps.zoomY !== this.props.zoomY ||
-        nextProps.zoomScale !== this.props.zoomScale;
-
-      if (hasChangedZoom) {
-        this.zoom.on('zoom', null);
-        const nextZoomTransform = zoomTransformFromProps(nextProps);
-        this.zoom.transform(this.state.selection, nextZoomTransform);
-        this.zoom.on('zoom', this.handleZoom);
-
-        // update state.lastZoomTransform so we can revert d3-zoom to this next time it's changed internally
-        this.setState({ lastZoomTransform: nextZoomTransform });
-      }
-    }
-    this._updateZoomProps(nextProps);
-  }
-
   handleZoom = (...args) => {
     const nextZoomTransform = d3.event.transform;
 
@@ -222,6 +166,63 @@ export default class ZoomContainer extends React.Component {
 
     if (this.props.onZoom) this.props.onZoom(nextZoomTransform, ...args);
   };
+
+  // React is deprecating componentWillReceiveProps, but it's pretty much necessary in this case
+  // TODO: change to UNSAFE_componentWillReceiveProps when upgrading React
+  componentWillReceiveProps(nextProps) {
+    if (this.props.controlled) {
+      // if controlled component and zoom props have changed, apply the new zoom props to d3-zoom
+      // (unbind handler first so as not to create infinite callback loop)
+      const hasChangedZoom =
+        nextProps.zoomX !== this.props.zoomX ||
+        nextProps.zoomY !== this.props.zoomY ||
+        nextProps.zoomScale !== this.props.zoomScale;
+
+      if (hasChangedZoom) {
+        this.zoom.on('zoom', null);
+        const nextZoomTransform = zoomTransformFromProps(nextProps);
+        this.zoom.transform(this.state.selection, nextZoomTransform);
+        this.zoom.on('zoom', this.handleZoom);
+
+        // update state.lastZoomTransform so we can revert d3-zoom to this next time it's changed internally
+        this.setState({
+          lastZoomTransform: nextZoomTransform,
+        });
+      }
+    }
+    this._updateZoomProps(nextProps);
+  }
+
+  _updateZoomProps(props) {
+    let propsToUse = props;
+
+    if (!propsToUse) propsToUse = this.props;
+    const {
+      extent,
+      scaleExtent,
+      translateExtent,
+      clickDistance,
+      duration,
+      interpolate,
+      constrain,
+      filter,
+      touchable,
+      wheelDelta,
+    } = propsToUse;
+
+    if (Array.isArray(extent)) this.zoom.extent(extent);
+    if (Array.isArray(scaleExtent)) this.zoom.scaleExtent(scaleExtent);
+    if (Array.isArray(translateExtent))
+      this.zoom.translateExtent(translateExtent);
+    if (clickDistance !== null && isFinite(clickDistance))
+      this.zoom.clickDistance(clickDistance);
+    if (duration !== null && isFinite(duration)) this.zoom.duration(duration);
+    if (isFunction(interpolate)) this.zoom.interpolate(interpolate);
+    if (isFunction(constrain)) this.zoom.constrain(constrain);
+    if (isFunction(filter)) this.zoom.filter(filter);
+    if (isFunction(touchable)) this.zoom.touchable(touchable);
+    if (isFunction(wheelDelta)) this.zoom.wheelDelta(wheelDelta);
+  }
 
   render() {
     const zoomTransform = this.refs.svg

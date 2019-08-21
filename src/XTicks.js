@@ -7,6 +7,10 @@ import { getScaleTicks, getTickDomain } from './utils/Scale';
 export default class XTicks extends React.Component {
   static propTypes = {
     /**
+     * Height of chart - provided by XYPlot.
+     */
+    height: PropTypes.number,
+    /**
      * D3 scale for X axis - provided by XYPlot.
      */
     xScale: PropTypes.func,
@@ -58,8 +62,10 @@ export default class XTicks extends React.Component {
 
   static getTickDomain(props) {
     if (!props.xScale) return;
-    props = defaults({}, props, XTicks.defaultProps);
-    return { xTickDomain: getTickDomain(props.xScale, props) };
+    const propsWithDefaults = defaults({}, props, XTicks.defaultProps);
+    return {
+      xTickDomain: getTickDomain(propsWithDefaults.xScale, propsWithDefaults),
+    };
   }
 
   static getMargin(props) {

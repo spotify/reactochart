@@ -44,22 +44,22 @@ export function inferDataTypeFromDomain(domain) {
   return domain.length !== 2
     ? 'categorical'
     : domain.every(isNumber)
-    ? 'number'
-    : domain.every(isDate)
-    ? 'time'
-    : 'categorical';
+      ? 'number'
+      : domain.every(isDate)
+        ? 'time'
+        : 'categorical';
 }
 
 export function inferScaleType(scale) {
   return !scale.ticks
     ? 'ordinal'
     : isDate(scale.domain()[0])
-    ? 'time'
-    : scale.base
-    ? 'log'
-    : scale.exponent
-    ? 'pow'
-    : 'linear';
+      ? 'time'
+      : scale.base
+        ? 'log'
+        : scale.exponent
+          ? 'pow'
+          : 'linear';
 }
 
 export function initScale(scaleType) {
@@ -74,6 +74,8 @@ export function initScale(scaleType) {
       return scaleLog();
     case 'pow':
       return scalePow();
+    default:
+      return;
   }
 }
 
@@ -88,8 +90,9 @@ export function hasXYScales(scale) {
 }
 
 export function getScaleTicks(scale, scaleType, tickCount = 10) {
-  scaleType = scaleType || inferScaleType(scale);
-  return scaleType === 'ordinal' ? scale.domain() : scale.ticks(tickCount);
+  return (scaleType || inferScaleType(scale)) === 'ordinal'
+    ? scale.domain()
+    : scale.ticks(tickCount);
 }
 
 export function getTickDomain(scale, { ticks, tickCount, nice } = {}) {
@@ -98,6 +101,7 @@ export function getTickDomain(scale, { ticks, tickCount, nice } = {}) {
 
   if (nice && scaleType !== 'ordinal') {
     // If nicing, initialize a new scale and nice it
+    // eslint-disable-next-line no-param-reassign
     scale = scale
       .copy()
       .domain(scaleDomain)

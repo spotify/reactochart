@@ -78,6 +78,10 @@ export default class ScatterPlot extends React.Component {
     pointClassName: '',
   };
 
+  shouldComponentUpdate(nextProps) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['pointStyle']);
+    return shouldUpdate;
+  }
   // todo: implement getSpacing or getPadding static
 
   onMouseEnterPoint = (e, d) => {
@@ -89,11 +93,6 @@ export default class ScatterPlot extends React.Component {
   onMouseLeavePoint = (e, d) => {
     this.props.onMouseLeavePoint(e, d);
   };
-
-  shouldComponentUpdate(nextProps, nextState) {
-    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['pointStyle']);
-    return shouldUpdate;
-  }
 
   renderPoint = (d, i) => {
     const [onMouseEnter, onMouseMove, onMouseLeave] = [
@@ -122,7 +121,7 @@ export default class ScatterPlot extends React.Component {
       i,
     )}`;
     const style = getValue(pointStyle, d, i);
-    let symbolProps = {
+    const symbolProps = {
       className,
       onMouseEnter,
       onMouseMove,

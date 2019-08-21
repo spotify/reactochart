@@ -1,8 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import _ from "lodash";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class Lesson extends React.Component {
+  static propTypes = {
+    name: PropTypes.string,
+    children: PropTypes.any,
+  };
+
   render() {
     const { name, children } = this.props;
 

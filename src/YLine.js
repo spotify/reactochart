@@ -10,6 +10,10 @@ export default class YLine extends React.Component {
      * D3 scale for Y axis - provided by XYPlot
      */
     yScale: PropTypes.func,
+    /**
+     * Width of chart - provided by XYPlot.
+     */
+    width: PropTypes.number,
     value: PropTypes.any.isRequired,
     /**
      * D3 scale for X axis - provided by XYPlot
@@ -42,11 +46,11 @@ export default class YLine extends React.Component {
 
   render() {
     const {
+      width,
       yScale,
       value,
       xScale,
       xLimit,
-      width,
       spacingLeft,
       spacingRight,
       style,

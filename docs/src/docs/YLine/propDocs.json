@@ -9,6 +9,13 @@
       "required": false,
       "description": "D3 scale for Y axis - provided by XYPlot"
     },
+    "width": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Width of chart - provided by XYPlot."
+    },
     "value": {
       "type": {
         "name": "any"
@@ -70,7 +77,7 @@
       "required": false,
       "description": "Class attribute to be applied to the line",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     }

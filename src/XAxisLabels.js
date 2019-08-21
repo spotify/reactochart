@@ -35,7 +35,7 @@ function resolveXLabelsForValues(
   // returns the formatter and the generated labels
 
   let labels;
-  let attempts = [];
+  const attempts = [];
 
   const goodFormat = formats.find(format => {
     const testLabels = values.map((value, i) => {
@@ -82,27 +82,26 @@ function resolveXLabelsForValues(
       areLabelsDistinct: true,
       collisionCount: 0,
     };
-  } else {
-    // none of the sets of labels are good
-    if (!force)
-      // if we're not forced to decide, return all the labels we tried (let someone else decide)
-      return { attempts };
-
-    // forced to decide, choose the least bad option
-    // todo warn that we couldn't find good labels
-    const distinctAttempts = attempts.filter(
-      attempt => attempt.areLabelsDistinct,
-    );
-    return distinctAttempts.length === 0
-      ? last(attempts)
-      : minBy(distinctAttempts, 'collisionCount');
   }
+  // none of the sets of labels are good
+  if (!force)
+    // if we're not forced to decide, return all the labels we tried (let someone else decide)
+    return { attempts };
+
+  // forced to decide, choose the least bad option
+  // todo warn that we couldn't find good labels
+  const distinctAttempts = attempts.filter(
+    attempt => attempt.areLabelsDistinct,
+  );
+  return distinctAttempts.length === 0
+    ? last(attempts)
+    : minBy(distinctAttempts, 'collisionCount');
 }
 
 class XAxisLabels extends React.Component {
   static propTypes = {
     height: PropTypes.number,
-    /***
+    /** *
      * Position of x axis labels. Accepted options are "top" or "bottom".
      */
     position: PropTypes.oneOf(['top', 'bottom']),
@@ -222,20 +221,19 @@ class XAxisLabels extends React.Component {
     labels: undefined,
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return !xyPropsEqual(this.props, nextProps);
-  }
-
   static getTickDomain(props) {
     if (!props.xScale) return;
-    props = defaults({}, props, XAxisLabels.defaultProps);
-    return { xTickDomain: getTickDomain(props.xScale, props) };
+    const propsWithDefaults = defaults({}, props, XAxisLabels.defaultProps);
+    return {
+      xTickDomain: getTickDomain(propsWithDefaults.xScale, propsWithDefaults),
+    };
   }
 
   static getMargin(props) {
-    props = defaults({}, props, XAxisLabels.defaultProps);
-    const { xScale, position, placement, distance } = props;
-    const labels = props.labels || XAxisLabels.getLabels(props);
+    const propsWithDefaults = defaults({}, props, XAxisLabels.defaultProps);
+    const { xScale, position, placement, distance } = propsWithDefaults;
+    const labels =
+      propsWithDefaults.labels || XAxisLabels.getLabels(propsWithDefaults);
     const zeroMargin = {
       marginTop: 0,
       marginBottom: 0,
@@ -291,6 +289,10 @@ class XAxisLabels extends React.Component {
     const { labels } = resolveXLabelsForValues(xScale, ticks, formats, style);
 
     return labels;
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return !xyPropsEqual(this.props, nextProps);
   }
 
   render() {
@@ -366,6 +368,7 @@ class XAxisLabels extends React.Component {
   }
 }
 
+/* eslint-disable */
 class XAxisLabelDebugRect extends React.Component {
   render() {
     const { x, y, label } = this.props;
@@ -382,5 +385,6 @@ class XAxisLabelDebugRect extends React.Component {
     );
   }
 }
+/* eslint-enable */
 
 export default XAxisLabels;

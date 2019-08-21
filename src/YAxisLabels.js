@@ -33,7 +33,7 @@ function resolveYLabelsForValues(
   // returns the formatter and the generated labels
 
   let labels;
-  let attempts = [];
+  const attempts = [];
   const goodFormat = formats.find(format => {
     const testLabels = values.map((value, i) =>
       MeasuredValueLabel.getLabel({
@@ -64,15 +64,14 @@ function resolveYLabelsForValues(
       areLabelsDistinct: true,
       collisionCount: 0,
     };
-  } else {
-    // none of the sets of labels are good
-    // if we're not forced to decide, return all the labels we tried (let someone else decide)
-    if (!force) return { attempts };
-
-    // forced to decide, choose the least bad option
-    // super bad, we don't have any label sets with distinct labels. return the last attempt.
-    return last(attempts);
   }
+  // none of the sets of labels are good
+  // if we're not forced to decide, return all the labels we tried (let someone else decide)
+  if (!force) return { attempts };
+
+  // forced to decide, choose the least bad option
+  // super bad, we don't have any label sets with distinct labels. return the last attempt.
+  return last(attempts);
 }
 
 class YAxisLabels extends React.Component {
@@ -81,7 +80,13 @@ class YAxisLabels extends React.Component {
      * D3 scale for Y axis - provided by XYPlot.
      */
     yScale: PropTypes.func,
+    /**
+     * Height of chart - provided by XYPlot.
+     */
     height: PropTypes.number,
+    /**
+     * Width of chart - provided by XYPlot.
+     */
     width: PropTypes.number,
     /**
      * Position of y axis labels. Accepted options are "left" or "right".
@@ -196,20 +201,19 @@ class YAxisLabels extends React.Component {
     },
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return !xyPropsEqual(this.props, nextProps);
-  }
-
   static getTickDomain(props) {
     if (!props.yScale) return;
-    props = defaults({}, props, YAxisLabels.defaultProps);
-    return { yTickDomain: getTickDomain(props.yScale, props) };
+    const propsWithDefaults = defaults({}, props, YAxisLabels.defaultProps);
+    return {
+      yTickDomain: getTickDomain(propsWithDefaults.yScale, propsWithDefaults),
+    };
   }
 
   static getMargin(props) {
-    props = defaults({}, props, YAxisLabels.defaultProps);
-    const { yScale, position, placement, distance } = props;
-    const labels = props.labels || YAxisLabels.getLabels(props);
+    const propsWithDefaults = defaults({}, props, YAxisLabels.defaultProps);
+    const { yScale, position, placement, distance } = propsWithDefaults;
+    const labels =
+      propsWithDefaults.labels || YAxisLabels.getLabels(propsWithDefaults);
     const zeroMargin = {
       marginTop: 0,
       marginBottom: 0,
@@ -264,6 +268,10 @@ class YAxisLabels extends React.Component {
     // console.log('resolveYLabelsForValues took ', performance.now() - start);
     // console.log('found labels', labels);
     return labels;
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return !xyPropsEqual(this.props, nextProps);
   }
 
   render() {
@@ -340,22 +348,22 @@ class YAxisLabels extends React.Component {
   }
 }
 
-class YAxisLabelDebugRect extends React.Component {
-  render() {
-    const { x, y, label, style } = this.props;
-    const xAdj = style.textAnchor === 'end' ? x - label.width : x;
-    return (
-      <rect
-        {...{
-          x: xAdj,
-          y: y - label.height / 2,
-          width: label.width,
-          height: label.height,
-          fill: 'orange',
-        }}
-      />
-    );
-  }
-}
+/* eslint-disable */
+const YAxisLabelDebugRect = () => {
+  const { x, y, label, style } = this.props;
+  const xAdj = style.textAnchor === 'end' ? x - label.width : x;
+  return (
+    <rect
+      {...{
+        x: xAdj,
+        y: y - label.height / 2,
+        width: label.width,
+        height: label.height,
+        fill: 'orange',
+      }}
+    />
+  );
+};
+/* eslint-enable */
 
 export default YAxisLabels;

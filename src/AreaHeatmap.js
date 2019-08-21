@@ -45,6 +45,9 @@ export default class AreaHeatmap extends React.Component {
      * D3 scale for Y axis - provided by XYPlot
      */
     yScale: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
+    onMouseMove: PropTypes.func,
   };
   static defaultProps = { rectClassName: '', rectStyle: {} };
 

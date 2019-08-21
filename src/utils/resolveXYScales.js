@@ -8,6 +8,7 @@ import inRange from 'lodash/inRange';
 import defaults from 'lodash/defaults';
 import isNumber from 'lodash/isNumber';
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   combineBorderObjects,
   combineDomains,
@@ -62,6 +63,67 @@ function omitNullUndefined(obj) {
 
 export default function resolveXYScales(ComposedComponent) {
   return class extends React.Component {
+    static propTypes = {
+      /**
+       * Scale determined by our resolveXYScales higher order component.
+       * Override this prop if you'd like to pass in your own d3 scale.
+       */
+      xScale: PropTypes.func,
+      /**
+       * Scale determined by our resolveXYScales higher order component.
+       * Override this prop if you'd like to pass in your own d3 scale.
+       */
+      yScale: PropTypes.func,
+      /**
+       * Internal top margin, in pixels.
+       */
+      marginTop: PropTypes.number,
+      /**
+       * Internal bottom margin, in pixels.
+       */
+      marginBottom: PropTypes.number,
+      /**
+       * Internal left margin, in pixels.
+       */
+      marginLeft: PropTypes.number,
+      /**
+       * Internal right margin, in pixels.
+       */
+      marginRight: PropTypes.number,
+      /**
+       * Internal top spacing of XYPlot, in pixels.
+       */
+      spacingTop: PropTypes.number,
+      /**
+       * Internal bottom spacing of XYPlot, in pixels.
+       */
+      spacingBottom: PropTypes.number,
+      /**
+       * Internal left spacing of XYPlot, in pixels.
+       */
+      spacingLeft: PropTypes.number,
+      /**
+       * Internal right spacing of XYPlot, in pixels.
+       */
+      spacingRight: PropTypes.number,
+      /**
+       * Whether or not to invert the x scale
+       */
+      invertXScale: PropTypes.bool,
+      /**
+       * Whether or not to invert the y scale
+       */
+      invertYScale: PropTypes.bool,
+      /**
+       * (outer) width of the chart (SVG element).
+       */
+      width: PropTypes.number,
+      /**
+       * (outer) width of the chart (SVG element).
+       */
+      height: PropTypes.number,
+    };
+
     // todo better way for HOC's to pass statics through?
     static getScaleType = ComposedComponent.getScaleType;
     static getSpacing = ComposedComponent.getSpacing;
@@ -127,7 +189,7 @@ export default function resolveXYScales(ComposedComponent) {
       // if Component has children,
       // recurse through descendants to resolve their scale types the same way
       if (React.Children.count(props.children)) {
-        let childrenScaleTypes = mapOverChildren(
+        const childrenScaleTypes = mapOverChildren(
           props.children,
           this._resolveScaleType.bind(this),
         );
@@ -170,7 +232,8 @@ export default function resolveXYScales(ComposedComponent) {
     }
 
     _resolveDomain(props, Component, xScaleType, yScaleType) {
-      let { xDomain, yDomain, includeXZero, includeYZero } = props;
+      let { xDomain, yDomain } = props;
+      const { includeXZero, includeYZero } = props;
       const xDataType = dataTypeFromScaleType(xScaleType);
       const yDataType = dataTypeFromScaleType(yScaleType);
 
@@ -241,7 +304,7 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their domains the same way,
       // and combine them into a single domain, if there are multiple
       if (!isDone() && React.Children.count(props.children)) {
-        let childrenDomains = mapOverChildren(
+        const childrenDomains = mapOverChildren(
           props.children,
           this._resolveDomain.bind(this),
           xScaleType,
@@ -311,7 +374,7 @@ export default function resolveXYScales(ComposedComponent) {
       }
 
       if (React.Children.count(props.children)) {
-        let childrenTickDomains = mapOverChildren(
+        const childrenTickDomains = mapOverChildren(
           props.children,
           this._resolveTickDomain.bind(this),
           { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale },
@@ -391,7 +454,7 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their margins the same way,
       // and combine them into a single margin, if there are multiple
       if (React.Children.count(props.children)) {
-        let childrenMargins = mapOverChildren(
+        const childrenMargins = mapOverChildren(
           props.children,
           this._resolveMargin.bind(this),
           { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale },
@@ -470,7 +533,7 @@ export default function resolveXYScales(ComposedComponent) {
       // recurse through descendants to resolve their spacings the same way,
       // and combine them into a single spacing, if there are multiple
       if (React.Children.count(props.children)) {
-        let childrenSpacings = mapOverChildren(
+        const childrenSpacings = mapOverChildren(
           props.children,
           this._resolveSpacing.bind(this),
           { xScaleType, yScaleType, xDomain, yDomain, xScale, yScale },
@@ -536,19 +599,22 @@ export default function resolveXYScales(ComposedComponent) {
       const innerChartWidth = innerWidth(width, margin);
       const innerChartHeight = innerHeight(height, margin);
 
+      let xScaleResult = xScale;
+      let yScaleResult = yScale;
+
       // use existing scales if provided, otherwise create new
-      if (!isValidScale(xScale)) {
-        //innerRange functions produce range (i.e. [5,20]) and map function normalizes to 0 (i.e. [0,15])
+      if (!isValidScale(xScaleResult)) {
+        // innerRange functions produce range (i.e. [5,20]) and map function normalizes to 0 (i.e. [0,15])
         const xRange = innerRangeX(innerChartWidth, spacing).map(
           v => v - (spacing.left || 0),
         );
-        xScale = initScale(xScaleType)
+        xScaleResult = initScale(xScaleType)
           .domain(xDomain)
           .range(xRange);
 
         // reverse scale domain if `invertXScale` is passed
         if (invertXScale) {
-          xScale.domain(xScale.domain().reverse());
+          xScaleResult.domain(xScaleResult.domain().reverse());
         }
       }
 
@@ -556,17 +622,17 @@ export default function resolveXYScales(ComposedComponent) {
         const yRange = innerRangeY(innerChartHeight, spacing).map(
           v => v - (spacing.top || 0),
         );
-        yScale = initScale(yScaleType)
+        yScaleResult = initScale(yScaleType)
           .domain(yDomain)
           .range(yRange);
 
         // reverse scale domain if `invertYScale` is passed
         if (invertYScale) {
-          yScale.domain(yScale.domain().reverse());
+          yScaleResult.domain(yScaleResult.domain().reverse());
         }
       }
 
-      return { xScale, yScale };
+      return { xScale: xScaleResult, yScale: yScaleResult };
     };
 
     render() {
@@ -603,8 +669,6 @@ export default function resolveXYScales(ComposedComponent) {
         yDomain,
         invertXScale,
         invertYScale,
-        scaleX: props.scaleX,
-        scaleY: props.scaleY,
         marginTop: props.marginTop,
         marginBottom: props.marginBottom,
         marginLeft: props.marginLeft,
@@ -619,7 +683,7 @@ export default function resolveXYScales(ComposedComponent) {
       // create a temporary scale with size & domain, which may be used by the Component to calculate margin/tickDomain
       // (eg. to create and measure labels for the scales)
       let tempScale = this._makeScales(scaleOptions);
-      let { xScale: tempXScale, yScale: tempYScale } = tempScale;
+      const { xScale: tempXScale, yScale: tempYScale } = tempScale;
 
       // getTickDomain gives children the opportunity to modify the domain to include their scale ticks
       // (can't happen in getDomain, because it can't be done until the base domain/tempScale has been created)
