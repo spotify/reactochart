@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import remark from 'remark';
 import remarkReact from 'remark-react';
 
-const ComponentDocs = () => {
-  const { name, propDocs, children } = this.props;
-  const props = _.get(propDocs, 'props', {});
+const ComponentDocs = props => {
+  const { name, propDocs = {}, children } = props;
+
   const sortedProps = Object.entries(props)
     .sort((a, b) => a[0] - b[0])
     .reduce((acc, [key, value]) => {
