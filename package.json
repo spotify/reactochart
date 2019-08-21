@@ -31,11 +31,10 @@
     "make-docs": "node scripts/makeDocs.js",
     "clean": "node scripts/clean.js",
     "serve": "python -m SimpleHTTPServer",
-    "test": "npm run test-jsdom && npm run test-lint",
+    "test": "npm run test-jsdom && npm run lint",
     "test-files": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:@babel/register --require tests/jsdom/setup.js --recursive",
     "test-browser": "webpack-dev-server --config tests/browser/webpack.config.test.js",
     "test-jsdom": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:@babel/register --require tests/jsdom/setup.js --recursive tests/jsdom/spec",
-    "test-lint": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:@babel/register --require tests/jsdom/setup.js --recursive tests/eslint.spec.js",
     "test-watch": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --watch --compilers js:@babel/register --require tests/jsdom/setup.js --recursive tests/jsdom/spec"
   },
   "dependencies": {
