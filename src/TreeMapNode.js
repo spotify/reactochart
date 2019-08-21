@@ -50,7 +50,7 @@ const TreeMapNode = props => {
     'onMouseMove',
   ].reduce((acc, eventName) => {
     const handler = props[`${eventName}Node`];
-    if (handler) handlers[eventName] = handler.bind(null, node);
+    if (handler) acc[eventName] = handler.bind(null, node);
     return acc;
   }, {});
 
