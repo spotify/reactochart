@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import React from "react";
+import PropTypes from 'prop-types';
+import React from 'react';
 
 /**
  * `YLine` is a horizontal line rendered on the y axis
@@ -10,6 +10,10 @@ export default class YLine extends React.Component {
      * D3 scale for Y axis - provided by XYPlot
      */
     yScale: PropTypes.func,
+    /**
+     * Width of chart - provided by XYPlot.
+     */
+    width: PropTypes.number,
     value: PropTypes.any.isRequired,
     /**
      * D3 scale for X axis - provided by XYPlot
@@ -31,30 +35,30 @@ export default class YLine extends React.Component {
     /**
      * Class attribute to be applied to the line
      */
-    className: PropTypes.string
+    className: PropTypes.string,
   };
   static defaultProps = {
     style: {},
-    className: "",
+    className: '',
     spacingLeft: 0,
-    spacingRight: 0
+    spacingRight: 0,
   };
 
   render() {
     const {
+      width,
       yScale,
       value,
       xScale,
       xLimit,
-      width,
       spacingLeft,
       spacingRight,
-      style
+      style,
     } = this.props;
-    const className = `rct-chart-line-y ${this.props.className || ""}`;
+    const className = `rct-chart-line-y ${this.props.className || ''}`;
     const lineY = yScale(value);
     const lineX =
-      typeof xLimit === "undefined" ? width + spacingRight : xScale(xLimit);
+      typeof xLimit === 'undefined' ? width + spacingRight : xScale(xLimit);
 
     return (
       <line
@@ -64,7 +68,7 @@ export default class YLine extends React.Component {
           y1: lineY,
           y2: lineY,
           className,
-          style
+          style,
         }}
       />
     );

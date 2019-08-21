@@ -543,13 +543,13 @@ describe("resolveXYScales", () => {
       marginRight: 44
     };
 
-    const invertXChart = mount(<XYChart {...props} invertXScale={true} />).find(
+    const invertXChart = mount(<XYChart {...props} invertXScale />).find(
       Chart
     );
     expect(invertXChart.props().xDomain).to.deep.equal([3, -3]);
     expect(invertXChart.props().yDomain).to.deep.equal([0, 10]);
 
-    const invertYChart = mount(<XYChart {...props} invertYScale={true} />).find(
+    const invertYChart = mount(<XYChart {...props} invertYScale />).find(
       Chart
     );
     expect(invertYChart.props().xDomain).to.deep.equal([-3, 3]);

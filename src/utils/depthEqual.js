@@ -9,9 +9,9 @@ export default function depthEqual(objA, objB, depth = 1) {
 
   if (
     depth === 0 ||
-    typeof objA !== "object" ||
+    typeof objA !== 'object' ||
     objA === null ||
-    typeof objB !== "object" ||
+    typeof objB !== 'object' ||
     objB === null
   ) {
     // console.log('different obj', objA, objB);

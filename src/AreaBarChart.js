@@ -1,13 +1,13 @@
-import get from "lodash/get";
-import isFunction from "lodash/isFunction";
-import PropTypes from "prop-types";
-import React from "react";
-import RangeRect from "./RangeRect";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
-import { domainFromRangeData, getValue, makeAccessor2 } from "./utils/Data";
-import { dataTypeFromScaleType } from "./utils/Scale";
-import { bindTrailingArgs } from "./util.js";
-import xyPropsEqual from "./utils/xyPropsEqual";
+import get from 'lodash/get';
+import isFunction from 'lodash/isFunction';
+import PropTypes from 'prop-types';
+import React from 'react';
+import RangeRect from './RangeRect';
+import * as CustomPropTypes from './utils/CustomPropTypes';
+import { domainFromRangeData, getValue, makeAccessor2 } from './utils/Data';
+import { dataTypeFromScaleType } from './utils/Scale';
+import { bindTrailingArgs } from './util.js';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 /**
  * `AreaBarChart` is a variation on the standard bar chart. Just like a normal bar chart, each bar represents a single
@@ -86,20 +86,14 @@ export default class AreaBarChart extends React.Component {
     /**
      * `mouseleave` event handler callback, called when user's mouse leaves a bar.
      */
-    onMouseLeaveBar: PropTypes.func
+    onMouseLeaveBar: PropTypes.func,
   };
   static defaultProps = {
     data: [],
     horizontal: false,
-    barClassName: "",
-    barStyle: {}
+    barClassName: '',
+    barStyle: {},
   };
-
-  shouldComponentUpdate(nextProps, nextState) {
-    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ["barStyle"]);
-    // console.log('should areabarchart update?', shouldUpdate);
-    return shouldUpdate;
-  }
 
   static getDomain(props) {
     const { xScaleType, yScaleType, horizontal, data } = props;
@@ -107,22 +101,28 @@ export default class AreaBarChart extends React.Component {
     // only have to specify range axis domain, other axis uses default domainFromData
     // for area bar chart, the independent variable is the range
     // ie. the range controls the thickness of the bar
-    const rangeAxis = horizontal ? "y" : "x";
+    const rangeAxis = horizontal ? 'y' : 'x';
     const rangeDataType = dataTypeFromScaleType(
-      rangeAxis === "x" ? xScaleType : yScaleType
+      rangeAxis === 'x' ? xScaleType : yScaleType,
     );
     // make accessor functions from getX|Y and getX|YEnd
     const rangeStartAccessor = makeAccessor2(props[`${rangeAxis}`]);
     const rangeEndAccessor = makeAccessor2(props[`${rangeAxis}End`]);
 
     return {
-      [rangeAxis + "Domain"]: domainFromRangeData(
+      [`${rangeAxis}Domain`]: domainFromRangeData(
         data,
         rangeStartAccessor,
         rangeEndAccessor,
-        rangeDataType
-      )
+        rangeDataType,
+      ),
     };
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['barStyle']);
+
+    return shouldUpdate;
   }
 
   render() {
@@ -136,16 +136,16 @@ export default class AreaBarChart extends React.Component {
       y,
       yEnd,
       barClassName,
-      barStyle
+      barStyle,
     } = this.props;
 
     return (
       <g>
         {data.map((d, i) => {
           const [onMouseEnter, onMouseMove, onMouseLeave] = [
-            "onMouseEnterBar",
-            "onMouseMoveBar",
-            "onMouseLeaveBar"
+            'onMouseEnterBar',
+            'onMouseMoveBar',
+            'onMouseLeaveBar',
           ].map(eventName => {
             // partially apply this bar's data point as 2nd callback argument
             const callback = get(this.props, eventName);
@@ -166,7 +166,7 @@ export default class AreaBarChart extends React.Component {
                 key: `rct-chart-area-bar-${i}`,
                 onMouseEnter,
                 onMouseMove,
-                onMouseLeave
+                onMouseLeave,
               }}
             />
           );

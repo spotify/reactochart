@@ -31,7 +31,7 @@
       "required": false,
       "description": "Key or accessor to retrieve value of data point",
       "defaultValue": {
-        "value": "\"value\"",
+        "value": "'value'",
         "computed": false
       }
     },
@@ -43,7 +43,7 @@
       "required": false,
       "description": "Key or accessor to retrieve children of data point",
       "defaultValue": {
-        "value": "\"children\"",
+        "value": "'children'",
         "computed": false
       }
     },
@@ -55,7 +55,7 @@
       "required": false,
       "description": "Key or accessor to retrieve label for given Node",
       "defaultValue": {
-        "value": "\"name\"",
+        "value": "'name'",
         "computed": false
       }
     },

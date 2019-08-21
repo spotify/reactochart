@@ -115,7 +115,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "\"left\"",
+        "value": "'left'",
         "computed": false
       }
     },

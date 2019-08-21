@@ -31,6 +31,13 @@
     }
   ],
   "props": {
+    "height": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "Height of chart - provided by XYPlot."
+    },
     "xScale": {
       "type": {
         "name": "func"
@@ -43,11 +50,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"bottom\"",
+            "value": "'bottom'",
             "computed": false
           },
           {
-            "value": "\"top\"",
+            "value": "'top'",
             "computed": false
           }
         ]
@@ -55,7 +62,7 @@
       "required": false,
       "description": "Position of x ticks. Accepted options are \"bottom\" or \"top\".",
       "defaultValue": {
-        "value": "\"bottom\"",
+        "value": "'bottom'",
         "computed": false
       }
     },
@@ -64,11 +71,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"above\"",
+            "value": "'above'",
             "computed": false
           },
           {
-            "value": "\"below\"",
+            "value": "'below'",
             "computed": false
           }
         ]
@@ -119,7 +126,7 @@
       "required": false,
       "description": "Class attribute to be applied to each tick.",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },

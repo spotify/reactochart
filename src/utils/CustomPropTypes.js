@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 export const xyObjectOf = type => PropTypes.shape({ x: type, y: type });
 
@@ -7,33 +7,33 @@ export const fourDirectionsOf = type =>
     top: type,
     bottom: type,
     left: type,
-    right: type
+    right: type,
   });
 
 export const getter = PropTypes.oneOfType([
   PropTypes.string,
   PropTypes.number,
   PropTypes.array,
-  PropTypes.func
+  PropTypes.func,
 ]);
 
 export const scaleType = PropTypes.oneOf([
-  "linear",
-  "time",
-  "ordinal",
-  "log",
-  "pow"
+  'linear',
+  'time',
+  'ordinal',
+  'log',
+  'pow',
 ]);
 
 export const datumValueTypes = [
   PropTypes.number,
   PropTypes.string,
-  PropTypes.instanceOf(Date)
+  PropTypes.instanceOf(Date),
 ];
 
 export const valueOrAccessor = PropTypes.oneOfType([
   ...datumValueTypes,
-  PropTypes.func
+  PropTypes.func,
 ]);
 
 export const accessorOrType = type => {

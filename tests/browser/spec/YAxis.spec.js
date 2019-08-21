@@ -52,7 +52,7 @@ describe("YAxis", () => {
           x={d => d[0]}
           y={d => d[1]}
         />
-        <YAxis nice={true} />
+        <YAxis nice />
       </XYPlot>
     ).find(LineChart);
 
