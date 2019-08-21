@@ -27,7 +27,7 @@
     "docs": "npm run make-docs && npm run build-docs",
     "build-lib": "npm run clean && BABEL_ENV=production babel src --out-dir ./ --source-maps",
     "build-css": "lessc ./styles/charts.less ./styles.css",
-    "build-docs": "cross-env BABEL_ENV=production webpack --config webpack.config.build.js",
+    "build-docs": "cross-env webpack --config webpack.config.build.js",
     "make-docs": "node scripts/makeDocs.js",
     "clean": "node scripts/clean.js",
     "serve": "python -m SimpleHTTPServer",

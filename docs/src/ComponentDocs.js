@@ -5,9 +5,10 @@ import remark from 'remark';
 import remarkReact from 'remark-react';
 
 const ComponentDocs = props => {
-  const { name, propDocs = {}, children } = props;
+  const { name, propDocs, children } = props;
+  const componentProps = _.get(propDocs, 'props');
 
-  const sortedProps = Object.entries(props)
+  const sortedProps = Object.entries(componentProps)
     .sort((a, b) => a[0] - b[0])
     .reduce((acc, [key, value]) => {
       acc[key] = value;
@@ -82,6 +83,9 @@ function renderType(propInfo) {
     if (typeInfo.raw === 'CustomPropTypes.valueOrAccessor') {
       type = 'func || value';
     }
+  } else if (typeName === 'arrayOf') {
+    const arrayType = _.get(propInfo, 'type.value.name', {});
+    type = `Array<${arrayType}>`;
   }
 
   return type;

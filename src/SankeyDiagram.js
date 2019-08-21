@@ -301,7 +301,7 @@ SankeyNodeLabel.propTypes = {
   node: PropTypes.object,
   graph: PropTypes.object,
   nodeLabelClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  nodeLabelStyle: PropTypes.oneOfType(PropTypes.object, PropTypes.func),
+  nodeLabelStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   nodeLabelText: PropTypes.func,
   nodeId: PropTypes.func,
   nodeLabelPlacement: PropTypes.oneOfType([
