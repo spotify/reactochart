@@ -9,7 +9,7 @@ const ComponentDocs = props => {
   const componentProps = _.get(propDocs, 'props');
 
   const sortedProps = Object.entries(componentProps)
-    .sort((a, b) => a[0] - b[0])
+    .sort((a, b) => (a[0] < b[0] ? -1 : 1))
     .reduce((acc, [key, value]) => {
       acc[key] = value;
       return acc;
