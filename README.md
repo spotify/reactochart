@@ -7,7 +7,7 @@
   </a>
 </p>
 
-<h1 align="center">:chart_with_upwards_trend:  reactochart :chart_with_downwards_trend:</h1>
+<a href="https://spotify.github.io/reactochart/docs/"><h1 align="center">Reactochart<a href=""></h1></a>
 
 # Overview
 
@@ -72,7 +72,7 @@ const MyFirstLineChart = (props) => (
   )
 ```
 
-should result in this:
+results in this:
 
 <img src="./docs/assets/MyFirstLineChart.png" style='margin-left:40px'/>
 
@@ -151,22 +151,19 @@ If you'd like to contribute to the development this project, first fork & clone 
 
 ### Development process
 
-- Run `npm run dev` to run the development server (webpack-dev-server), which will serve a live development version of
-  the examples at [localhost:9876](http://localhost:9876)
-- Make changes to the library code in the `src` directory, and/or changes to the examples in the `examples/src`
-  directory.
-- Once you are happy with your changes, run `npm run build` to generate a production build. (This transpiles the ES6
-  library code, and transpiles + bundles the examples).
-- `git commit` and `git push` your changes to your forked version of the repo.
-- Open a Github pull request if you'd like to get your changes merged into the official repository.
+- Run `npm run dev` to run the development server (webpack-dev-server), which will serve a live development version of the examples at [localhost:9876](http://localhost:9876).
+- Make changes to the library code in the `src` directory, and/or changes to the examples in the `examples/src` directory.
+- If you'd like to make changes or add further component documentation, follow the example on [`react-docgen`](https://github.com/reactjs/react-docgen#example). 
+- Once you're happy with your library and/or documentation changes, run `npm run docs`. This allows the documentation build to run with your updated `src` code. `git add` and `git commit` the updated build.
+- `git push` to your forked version of the repo.
+- Open a Github pull request with your changes against `master`. 🎉
 
 ### Notes
 
 - **Do not make any changes in the `lib` or `examples/build` directories**, as these directories are destroyed and
   regenerated on each build.
 - The development server uses [react-hot-loader](https://github.com/gaearon/react-hot-loader) to automatically
-  "hot reload" changes to React components, so refreshing your web browser is usually not necessary. However, some
-  changes will still require a refresh to propagate.
+  "hot reload" changes to React components, so refreshing your web browser is not necessary.
 
 ## Code of Conduct
 
