@@ -1,8 +1,8 @@
-import React from "react";
-import invariant from "invariant";
-import PropTypes from "prop-types";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
-import { isValidScale } from "./utils/Scale";
+import React from 'react';
+import invariant from 'invariant';
+import PropTypes from 'prop-types';
+import * as CustomPropTypes from './utils/CustomPropTypes';
+import { isValidScale } from './utils/Scale';
 
 /**
  * RangeRect is a low-level component to be used in XYPlot-type charts (namely AreaBarChart).
@@ -55,11 +55,11 @@ export default class RangeRect extends React.Component {
     /**
      * `mouseleave` event handler callback, called when user's mouse leaves the rectangle.
      */
-    onMouseLeave: PropTypes.func
+    onMouseLeave: PropTypes.func,
   };
   static defaultProps = {
-    className: "",
-    style: {}
+    className: '',
+    style: {},
   };
 
   render() {
@@ -74,16 +74,16 @@ export default class RangeRect extends React.Component {
       onMouseEnter,
       onMouseMove,
       onMouseLeave,
-      className
+      className,
     } = this.props;
 
     invariant(
       isValidScale(xScale),
-      `RangeRect.props.xScale is not a valid d3 scale`
+      `RangeRect.props.xScale is not a valid d3 scale`,
     );
     invariant(
       isValidScale(yScale),
-      `RangeRect.props.yScale is not a valid d3 scale`
+      `RangeRect.props.yScale is not a valid d3 scale`,
     );
 
     const x0 = xScale(x);
@@ -106,7 +106,7 @@ export default class RangeRect extends React.Component {
           style,
           onMouseEnter,
           onMouseMove,
-          onMouseLeave
+          onMouseLeave,
         }}
       />
     );

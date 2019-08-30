@@ -7,9 +7,11 @@ const YAxisLabelsExample = (props) => {
         width={300} height={300}
         xDomain={[-20, 20]} yDomain={[-20, 20]}
       >
-        <YAxisLabels />
         <YAxisLabels
-          format={"0.00"}
+          formats={["+"]}
+        />
+        <YAxisLabels
+          format={label => label + "%"}
           position="right"
           tickCount={5}
           labelStyle={(label) => {

@@ -1,16 +1,18 @@
-import _ from "lodash";
-import PropTypes from "prop-types";
-import React from "react";
-import { getAxisChildProps, getMouseAxisOptions } from "./utils/Axis";
-import { sumMargins } from "./utils/Margin";
-import { getTickDomain } from "./utils/Scale";
-import xyPropsEqual from "./utils/xyPropsEqual";
-import YAxisLabels from "./YAxisLabels";
-import YAxisTitle from "./YAxisTitle";
-import YGrid from "./YGrid";
-import YTicks from "./YTicks";
+import defaults from 'lodash/defaults';
+import isFunction from 'lodash/isFunction';
+import upperFirst from 'lodash/upperFirst';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { getAxisChildProps, getMouseAxisOptions } from './utils/Axis';
+import { sumMargins } from './utils/Margin';
+import { getTickDomain } from './utils/Scale';
+import xyPropsEqual from './utils/xyPropsEqual';
+import YAxisLabels from './YAxisLabels';
+import YAxisTitle from './YAxisTitle';
+import YGrid from './YGrid';
+import YTicks from './YTicks';
 
-const getMouseOptions = getMouseAxisOptions.bind(null, "y");
+const getMouseOptions = getMouseAxisOptions.bind(null, 'y');
 /**
  * `YAxis` is the vertical axis of the chart. `YAxis` is a wrapper around `YGrid`, `YTicks`,
  * `YAxisLabels`, and `YAxisTitle`. See their respective docs for prop documentation.
@@ -26,92 +28,74 @@ export default class YAxis extends React.Component {
      * Extends the y domain to start and end on rounded values,
      * guaranteeing the original domain will be covered.
      * See d3 docs for more information
-     */
-    nice: PropTypes.bool,
+     */ nice: PropTypes.bool,
     ticks: PropTypes.array,
     tickCount: PropTypes.number,
     /**
      * Internal top spacing of YAxis, in pixels.
-     */
-    spacingTop: PropTypes.number,
+     */ spacingTop: PropTypes.number,
     /**
      * Internal bottom spacing of YAxis, in pixels.
-     */
-    spacingBottom: PropTypes.number,
+     */ spacingBottom: PropTypes.number,
     /**
      * Internal left spacing of YAxis, in pixels.
-     */
-    spacingLeft: PropTypes.number,
+     */ spacingLeft: PropTypes.number,
     /**
      * Internal right spacing of YAxis, in pixels.
-     */
-    spacingRight: PropTypes.number,
-
+     */ spacingRight: PropTypes.number,
     showTitle: PropTypes.bool,
     showLabels: PropTypes.bool,
     showTicks: PropTypes.bool,
     showGrid: PropTypes.bool,
-
     title: PropTypes.string,
     titleDistance: PropTypes.number,
     titleAlign: PropTypes.string,
     titleRotate: PropTypes.bool,
     titleStyle: PropTypes.object,
-
     labelDistance: PropTypes.number,
     labelClassName: PropTypes.string,
     labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    labelFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    labelFormat: PropTypes.func,
     labelFormats: PropTypes.array,
     labels: PropTypes.array,
     /**
      * Adds vertical offset (along the YAxis) to the labels
-     */
-    labelOffset: PropTypes.number,
-
+     */ labelOffset: PropTypes.number,
     tickLength: PropTypes.number,
     tickClassName: PropTypes.string,
     tickStyle: PropTypes.object,
-
     gridLineClassName: PropTypes.string,
     gridLineStyle: PropTypes.object,
-
     onMouseClickLabel: PropTypes.func,
     onMouseEnterLabel: PropTypes.func,
     onMouseMoveLabel: PropTypes.func,
     onMouseLeaveLabel: PropTypes.func,
-
     /**
      * `mouseenter` event handler callback, called when user's mouse enters the y axis.
      */
     onMouseEnterAxis: PropTypes.func,
     /**
      * `mouseleave` event handler callback, called when user's mouse leaves the y axis.
-     */
-    onMouseLeaveAxis: PropTypes.func,
+     */ onMouseLeaveAxis: PropTypes.func,
     /**
      * `mousemove` event handler callback, called when user's mouse moves within the y axis.
-     */
-    onMouseMoveAxis: PropTypes.func,
+     */ onMouseMoveAxis: PropTypes.func,
     /**
      * `click` event handler callback, called when user's mouse clicks on the y axis.
-     */
-    onMouseClickAxis: PropTypes.func,
-
+     */ onMouseClickAxis: PropTypes.func,
     /**
      * Show Y Axis line
      */
     showLine: PropTypes.bool,
     /**
      * Inline style object to be applied to the Y Axis line
-     */
-    lineStyle: PropTypes.object
+     */ lineStyle: PropTypes.object,
   };
 
   static defaultProps = {
     width: 400,
     height: 250,
-    position: "left",
+    position: 'left',
     nice: true,
     showTitle: true,
     showLabels: true,
@@ -125,22 +109,20 @@ export default class YAxis extends React.Component {
     spacingLeft: 0,
     spacingRight: 0,
     showLine: true,
-    lineStyle: {}
+    lineStyle: {},
   };
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !xyPropsEqual(this.props, nextProps);
-  }
 
   static getTickDomain(props) {
     if (!props.yScale) return;
-    props = _.defaults({}, props, YAxis.defaultProps);
-    return { yTickDomain: getTickDomain(props.yScale, props) };
+    const propsWithDefaults = defaults({}, props, YAxis.defaultProps);
+    return {
+      yTickDomain: getTickDomain(propsWithDefaults.yScale, propsWithDefaults),
+    };
   }
 
   static getMargin(props) {
     const { ticksProps, labelsProps, titleProps } = getAxisChildProps(props);
-    let margins = [];
+    const margins = [];
 
     if (props.showTicks) margins.push(YTicks.getMargin(ticksProps));
 
@@ -149,13 +131,17 @@ export default class YAxis extends React.Component {
 
     if (props.showLabels) margins.push(YAxisLabels.getMargin(labelsProps));
 
-    return sumMargins(margins, "margin");
+    return sumMargins(margins, 'margin');
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return !xyPropsEqual(this.props, nextProps);
   }
 
   handleOnMouseMove = event => {
     const { onMouseMoveAxis, yScale } = this.props;
 
-    if (!_.isFunction(onMouseMoveAxis)) {
+    if (!isFunction(onMouseMoveAxis)) {
       return;
     }
 
@@ -166,7 +152,7 @@ export default class YAxis extends React.Component {
   handleOnMouseEnter = event => {
     const { onMouseEnterAxis, yScale } = this.props;
 
-    if (!_.isFunction(onMouseEnterAxis)) {
+    if (!isFunction(onMouseEnterAxis)) {
       return;
     }
 
@@ -177,7 +163,7 @@ export default class YAxis extends React.Component {
   handleOnMouseLeave = event => {
     const { onMouseLeaveAxis, yScale } = this.props;
 
-    if (!_.isFunction(onMouseLeaveAxis)) {
+    if (!isFunction(onMouseLeaveAxis)) {
       return;
     }
 
@@ -188,7 +174,7 @@ export default class YAxis extends React.Component {
   handleOnClick = event => {
     const { onMouseClickAxis, yScale } = this.props;
 
-    if (!_.isFunction(onMouseClickAxis)) {
+    if (!isFunction(onMouseClickAxis)) {
       return;
     }
 
@@ -213,14 +199,14 @@ export default class YAxis extends React.Component {
       spacingLeft,
       spacingRight,
       showLine,
-      lineStyle
+      lineStyle,
     } = this.props;
 
     const {
       ticksProps,
       gridProps,
       labelsProps,
-      titleProps
+      titleProps,
     } = getAxisChildProps(this.props);
 
     labelsProps.distance = labelDistance + (showTicks ? tickLength : 0);
@@ -229,12 +215,12 @@ export default class YAxis extends React.Component {
       // todo optimize so we don't generate labels twice
       const labelsMargin = YAxisLabels.getMargin(labelsProps);
       titleProps.distance =
-        titleDistance + labelsMargin[`margin${_.upperFirst(position)}`];
+        titleDistance + labelsMargin[`margin${upperFirst(position)}`];
     } else if (showTitle && showTicks) {
       titleProps.distance = titleDistance + tickLength;
     }
 
-    const axisLineX = position === "left" ? -spacingLeft : width + spacingRight;
+    const axisLineX = position === 'left' ? -spacingLeft : width + spacingRight;
 
     return (
       <g

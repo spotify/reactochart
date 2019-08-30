@@ -1,7 +1,7 @@
 const AreaBarChartExample = (props) => {
   return <div>
     <XYPlot width={500} height={320}>
-      <XAxis /><YAxis />
+      <XAxis /><YAxis labelFormats={['0.1f']} />
       <AreaBarChart
         data={_.range(15)}
         x={d => Math.sin(d / 10) * 10}

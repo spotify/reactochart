@@ -1,14 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Lesson from "../../Lesson";
-import ExampleSection from "../../ExampleSection";
+import React from 'react';
+import Lesson from '../../Lesson';
+import ExampleSection from '../../ExampleSection';
 
 const examples = [
   {
-    id: "basic",
-    label: "Quick Start Example",
-    codeText: require("raw-loader!./examples/QuickStart.js.example")
-  }
+    id: 'basic',
+    label: 'Quick Start Example',
+    codeText: require('raw-loader!./examples/QuickStart.js.example'),
+  },
 ];
 
 export default class QuickStartLesson extends React.Component {
@@ -16,7 +15,7 @@ export default class QuickStartLesson extends React.Component {
     return (
       <Lesson name="Quick Start" componentName="QuickStart">
         <p>
-          To get started using Reactochart, first install it using{" "}
+          To get started using Reactochart, first install it using{' '}
           <code>npm</code>:
         </p>
         <pre>npm install --save reactochart</pre>
@@ -38,11 +37,11 @@ export default class QuickStartLesson extends React.Component {
         </pre>
         <p>
           If you prefer, you can import all of Reactochart at once, though this
-          may hinder some optimizations, such as <code>webpack</code>{" "}
+          may hinder some optimizations, such as <code>webpack</code>{' '}
           tree-shaking:
         </p>
         <pre>
-          import {"{"}XYPlot, XAxis, YAxis, LineChart{"}"} from 'reactochart';<br />
+          import {'{'}XYPlot, XAxis, YAxis, LineChart{'}'} from 'reactochart';<br />
           // or <br />
           import * as Reactochart from 'reactochart';
         </pre>

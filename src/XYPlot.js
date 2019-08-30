@@ -1,10 +1,15 @@
-import _ from "lodash";
-import PropTypes from "prop-types";
-import React from "react";
-import { methodIfFuncProp } from "./util";
-import { innerSize } from "./utils/Margin";
-import resolveXYScales from "./utils/resolveXYScales";
-import { inferScaleType, invertPointScale } from "./utils/Scale";
+import inRange from 'lodash/inRange';
+import isFunction from 'lodash/isFunction';
+import fromPairs from 'lodash/fromPairs';
+import omit from 'lodash/omit';
+import isNull from 'lodash/isNull';
+import isUndefined from 'lodash/isUndefined';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { methodIfFuncProp } from './util';
+import { innerSize } from './utils/Margin';
+import resolveXYScales from './utils/resolveXYScales';
+import { inferScaleType, invertPointScale } from './utils/Scale';
 
 function getMouseOptions(
   event,
@@ -16,8 +21,8 @@ function getMouseOptions(
     marginTop,
     marginBottom,
     marginLeft,
-    marginRight
-  }
+    marginRight,
+  },
 ) {
   const chartBB = event.currentTarget.getBoundingClientRect();
   const outerX = Math.round(event.clientX - chartBB.left);
@@ -30,21 +35,21 @@ function getMouseOptions(
       top: marginTop,
       bottom: marginBottom,
       left: marginLeft,
-      right: marginRight
-    }
+      right: marginRight,
+    },
   );
   const xScaleType = inferScaleType(xScale);
   const yScaleType = inferScaleType(yScale);
 
-  const xValue = !_.inRange(innerX, 0, chartSize.width)
+  const xValue = !inRange(innerX, 0, chartSize.width)
     ? null
-    : xScaleType === "ordinal"
+    : xScaleType === 'ordinal'
       ? invertPointScale(xScale, innerX)
       : xScale.invert(innerX);
 
-  const yValue = !_.inRange(innerY, 0, chartSize.height)
+  const yValue = !inRange(innerY, 0, chartSize.height)
     ? null
-    : yScaleType === "ordinal"
+    : yScaleType === 'ordinal'
       ? invertPointScale(yScale, innerY)
       : yScale.invert(innerY);
 
@@ -61,7 +66,7 @@ function getMouseOptions(
     marginTop,
     marginBottom,
     marginLeft,
-    marginRight
+    marginRight,
   };
 }
 
@@ -144,15 +149,6 @@ class XYPlot extends React.Component {
      */
     spacingRight: PropTypes.number,
 
-    /**
-     * Inline style object to be applied to the parent SVG element.
-     */
-    style: PropTypes.object,
-    /**
-     * Inline style object to be applied to the plot.
-     * This is the inner rect DOM element where the graphs are rendered within the axes.
-     */
-    xyPlotStyle: PropTypes.object,
     // todo implement padding (helper for spacing)
     // paddingTop: PropTypes.number,
     // paddingBottom: PropTypes.number,
@@ -164,11 +160,32 @@ class XYPlot extends React.Component {
     onMouseLeave: PropTypes.func,
     onMouseDown: PropTypes.func,
     onMouseUp: PropTypes.func,
+    onClick: PropTypes.func,
 
+    /**
+     * Inline style object to be applied to the parent SVG element that wraps XYPlot.
+     */
+    xyPlotContainerStyle: PropTypes.object,
+    /**
+     * Inline style object to be applied to the plot.
+     * This is the inner rect DOM element where the graphs are rendered within the axes.
+     */
+    xyPlotStyle: PropTypes.object,
     /**
      * Class attribute applied to xy plot
      */
-    xyPlotClassName: PropTypes.string
+    xyPlotClassName: PropTypes.string,
+    /**
+     * Scale determined by our resolveXYScales higher order component.
+     * Override this prop if you'd like to pass in your own d3 scale.
+     */
+    xScale: PropTypes.func,
+    /**
+     * Scale determined by our resolveXYScales higher order component.
+     * Override this prop if you'd like to pass in your own d3 scale.
+     */
+    yScale: PropTypes.func,
+    children: PropTypes.any,
   };
 
   static defaultProps = {
@@ -178,21 +195,23 @@ class XYPlot extends React.Component {
     invertYScale: false,
     includeXZero: false,
     includeYZero: false,
-    style: {},
+    xyPlotContainerStyle: {},
     xyPlotStyle: {},
-    xyPlotClassName: ""
+    xyPlotClassName: '',
   };
 
   onXYMouseEvent = (callbackKey, event) => {
     const callback = this.props[callbackKey];
-    if (!_.isFunction(callback)) return;
+    if (!isFunction(callback)) return;
     const options = getMouseOptions(event, this.props);
     callback(options);
   };
-  onMouseMove = _.partial(this.onXYMouseEvent, "onMouseMove");
-  onMouseDown = _.partial(this.onXYMouseEvent, "onMouseDown");
-  onMouseUp = _.partial(this.onXYMouseEvent, "onMouseUp");
-  onClick = _.partial(this.onXYMouseEvent, "onClick");
+
+  onMouseMove = this.onXYMouseEvent.bind(this, 'onMouseMove');
+  onMouseDown = this.onXYMouseEvent.bind(this, 'onMouseDown');
+  onMouseUp = this.onXYMouseEvent.bind(this, 'onMouseUp');
+  onClick = this.onXYMouseEvent.bind(this, 'onClick');
+
   onMouseEnter = event => this.props.onMouseEnter({ event });
   onMouseLeave = event => this.props.onMouseLeave({ event });
 
@@ -208,13 +227,14 @@ class XYPlot extends React.Component {
       spacingBottom,
       spacingLeft,
       spacingRight,
-      style,
+      xyPlotContainerStyle,
       xyPlotStyle,
       xyPlotClassName,
       // Passed in as prop from resolveXYScales
       xScale,
-      yScale
+      yScale,
     } = this.props;
+
     // subtract margin + spacing from width/height to obtain inner width/height of panel & chart area
     // panelSize is the area including chart + spacing but NOT margin
     // chartSize is smaller, chart *only*, not including margin or spacing
@@ -224,59 +244,58 @@ class XYPlot extends React.Component {
         top: marginTop,
         bottom: marginBottom,
         left: marginLeft,
-        right: marginRight
-      }
+        right: marginRight,
+      },
     );
     const chartSize = innerSize(panelSize, {
       top: spacingTop,
       bottom: spacingBottom,
       left: spacingLeft,
-      right: spacingRight
+      right: spacingRight,
     });
 
     const handlerNames = [
-      "onMouseMove",
-      "onMouseEnter",
-      "onMouseLeave",
-      "onMouseDown",
-      "onMouseUp",
-      "onClick"
+      'onMouseMove',
+      'onMouseEnter',
+      'onMouseLeave',
+      'onMouseDown',
+      'onMouseUp',
+      'onClick',
     ];
-    const handlers = _.fromPairs(
-      handlerNames.map(n => [n, methodIfFuncProp(n, this.props, this)])
+    const handlers = fromPairs(
+      handlerNames.map(handlerName => [
+        handlerName,
+        methodIfFuncProp(handlerName, this.props, this),
+      ]),
     );
     const scales = {
       xScale,
-      yScale
+      yScale,
     };
 
-    // Props to omit since we don't want them to override child props
-    // TODO for v2: Namespace these props to be specific to XYPlot,
-    // but will be an incompatible API change
+    // Props that shouldn't be sent down to children
+    // because they're either unnecessary or we don't want them to
+    // override any children props
     const omittedProps = [
-      "style",
-      "onMouseMove",
-      "onMouseEnter",
-      "onMouseLeave"
+      ...handlerNames,
+      'xyPlotContainerStyle',
+      'xyPlotStyle',
+      'xyPlotClassName',
     ];
 
-    const xyPlotPropKeys = Object.keys(XYPlot.propTypes).filter(
-      k => omittedProps.indexOf(k) === -1
-    );
-
-    const propsToPass = _.omit(
-      {
-        ..._.pick(this.props, xyPlotPropKeys),
-        ...chartSize,
-        ...scales
-      },
-      omittedProps
-    );
+    const propsForChildren = {
+      ...omit(this.props, omittedProps),
+      ...chartSize,
+      ...scales,
+    };
 
     const className = `rct-xy-plot ${xyPlotClassName}`;
 
     return (
-      <svg {...{ width, height, className, style }} {...handlers}>
+      <svg
+        {...{ width, height, className, style: xyPlotContainerStyle }}
+        {...handlers}
+      >
         <rect className="rct-chart-background" {...{ width, height }} />
         <g
           transform={`translate(${marginLeft + spacingLeft}, ${marginTop +
@@ -290,9 +309,9 @@ class XYPlot extends React.Component {
             {...panelSize}
           />
           {React.Children.map(this.props.children, child => {
-            return _.isNull(child) || _.isUndefined(child)
+            return isNull(child) || isUndefined(child)
               ? null
-              : React.cloneElement(child, propsToPass);
+              : React.cloneElement(child, propsForChildren);
           })}
         </g>
       </svg>

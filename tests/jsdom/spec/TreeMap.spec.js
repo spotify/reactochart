@@ -58,7 +58,7 @@ describe("TreeMap", () => {
     chart.setProps({ data });
     expect(tree).to.not.equal(chart.instance()._tree);
 
-    chart = mount(<TreeMap {...props} sticky={true} />);
+    chart = mount(<TreeMap {...props} sticky />);
     tree = chart.instance()._tree;
     chart.setProps({ data });
     expect(tree).to.eql(chart.instance()._tree);

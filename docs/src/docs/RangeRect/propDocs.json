@@ -59,7 +59,7 @@
       "required": false,
       "description": "Class attribute to be applied to the rectangle element",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },

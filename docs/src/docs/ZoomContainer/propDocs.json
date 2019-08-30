@@ -2,24 +2,24 @@
   "description": "`ZoomContainer` is a wrapper that gives users the ability to zoom in, zoom out and drag its children components.",
   "methods": [
     {
-      "name": "_updateZoomProps",
-      "docblock": null,
-      "modifiers": [],
-      "params": [
-        {
-          "name": "props",
-          "type": null
-        }
-      ],
-      "returns": null
-    },
-    {
       "name": "handleZoom",
       "docblock": null,
       "modifiers": [],
       "params": [
         {
           "name": "...args",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "_updateZoomProps",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "props",
           "type": null
         }
       ],
@@ -180,6 +180,13 @@
       },
       "required": false,
       "description": "Sets the wheel delta function to the specified function.\nSee d3-zoom docs for more information."
+    },
+    "children": {
+      "type": {
+        "name": "any"
+      },
+      "required": false,
+      "description": ""
     }
   }
 }

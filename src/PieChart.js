@@ -1,9 +1,10 @@
-import _ from "lodash";
-import PropTypes from "prop-types";
-import React from "react";
-import { methodIfFuncProp } from "./util.js";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
-import { getValue, makeAccessor } from "./utils/Data";
+import sumBy from 'lodash/sumBy';
+import isFunction from 'lodash/isFunction';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { methodIfFuncProp, bindTrailingArgs } from './util.js';
+import * as CustomPropTypes from './utils/CustomPropTypes';
+import { getValue, makeAccessor } from './utils/Data';
 
 // default height/width, used only if height & width & radius are all undefined
 const DEFAULT_SIZE = 150;
@@ -87,7 +88,7 @@ class PieChart extends React.Component {
      */
     pieSliceLabelDistance: PropTypes.oneOfType([
       PropTypes.number,
-      PropTypes.func
+      PropTypes.func,
     ]),
     /**
      * Class attribute to be applied to each pie slice,
@@ -137,21 +138,21 @@ class PieChart extends React.Component {
     /**
      * `mouseleave` event handler callback, called when user's mouse leaves a pie slice.
      */
-    onMouseLeaveSlice: PropTypes.func
+    onMouseLeaveSlice: PropTypes.func,
   };
   static defaultProps = {
     getValue: null,
-    centerLabelClassName: "",
+    centerLabelClassName: '',
     centerLabelStyle: {},
-    pieSliceClassName: "",
-    markerLineClassName: "",
+    pieSliceClassName: '',
+    markerLineClassName: '',
     markerLineOverhangInner: 2,
     markerLineOverhangOuter: 2,
     markerLineStyle: {},
     marginTop: 0,
     marginBottom: 0,
     marginLeft: 0,
-    marginRight: 0
+    marginRight: 0,
   };
 
   onMouseEnterSlice = (e, d) => {
@@ -174,149 +175,20 @@ class PieChart extends React.Component {
     this.props.onMouseLeaveLine(e, d);
   };
 
-  render() {
-    const {
-      marginLeft,
-      marginRight,
-      marginTop,
-      marginBottom,
-      holeRadius
-    } = this.props;
-
-    // sizes fallback based on provided info: given dimension -> radius + margin -> other dimension -> default
-    const width =
-      this.props.width ||
-      (this.props.radius
-        ? this.props.radius * 2 + marginLeft + marginRight
-        : this.props.height) ||
-      DEFAULT_SIZE;
-    const height =
-      this.props.height ||
-      (this.props.radius
-        ? this.props.radius * 2 + marginTop + marginBottom
-        : this.props.width) ||
-      DEFAULT_SIZE;
-    const radius =
-      this.props.radius ||
-      Math.min(
-        (width - (marginLeft + marginRight)) / 2,
-        (height - (marginTop + marginBottom)) / 2
-      );
-    const center = { x: marginLeft + radius, y: marginTop + radius };
-
-    const {
-      markerLineValue,
-      pieSliceClassName,
-      markerLineOverhangInner,
-      markerLineOverhangOuter
-    } = this.props;
-
-    const valueAccessor = makeAccessor(this.props.getValue);
-    const sum = _.sumBy(this.props.data, valueAccessor);
-    const total = this.props.total || sum;
-    const markerLinePercent = _.isFinite(markerLineValue)
-      ? markerLineValue / total
-      : null;
-
-    let startPercent = 0;
-    const slices = this.props.data.map((d, i) => {
-      const slicePercent = valueAccessor(d) / total;
-      const slice = {
-        start: startPercent,
-        end: startPercent + slicePercent
-      };
-      startPercent += slicePercent;
-
-      return slice;
-    });
-
-    return (
-      <svg className="rct-pie-chart" {...{ width, height }}>
-        {this.props.data.map((d, i) => {
-          const [onMouseEnter, onMouseMove, onMouseLeave] = [
-            "onMouseEnterSlice",
-            "onMouseMoveSlice",
-            "onMouseLeaveSlice"
-          ].map(eventName => {
-            // partially apply this bar's data point as 2nd callback argument
-            const callback = methodIfFuncProp(eventName, this.props, this);
-            return _.isFunction(callback) ? _.partial(callback, _, d) : null;
-          });
-
-          const className = `rct-pie-slice rct-pie-slice-${i} ${getValue(
-            pieSliceClassName,
-            d,
-            i
-          ) || ""}`;
-          const slice = slices[i];
-          const pathStr = pieSlicePath(
-            slice.start,
-            slice.end,
-            center,
-            radius,
-            holeRadius
-          );
-          const key = `pie-slice-${i}`;
-
-          return (
-            <path
-              {...{
-                className,
-                d: pathStr,
-                onMouseEnter,
-                onMouseMove,
-                onMouseLeave,
-                key
-              }}
-            />
-          );
-        })}
-
-        {sum < total ? ( // draw empty slice if the sum of slices is less than expected total
-          <path
-            className={`rct-pie-slice rct-pie-slice-empty`}
-            d={pieSlicePath(startPercent, 1, center, radius, holeRadius)}
-            key="pie-slice-empty"
-          />
-        ) : null}
-
-        {_.isFinite(markerLinePercent)
-          ? this.renderMarkerLine(
-              markerLine(
-                markerLinePercent,
-                center,
-                radius,
-                holeRadius,
-                markerLineOverhangOuter,
-                markerLineOverhangInner
-              )
-            )
-          : null}
-
-        {this.props.centerLabel ? this.renderCenterLabel(center) : null}
-        {this.props.getPieSliceLabel
-          ? this.props.data.map((d, i) =>
-              this.renderSliceLabel(d, slices[i], center, radius, i)
-            )
-          : null}
-      </svg>
-    );
-  }
-
   renderMarkerLine(pathData) {
     const { markerLineClassName, markerLineStyle } = this.props;
     const lineD = {
-      value: this.props.markerLineValue
+      value: this.props.markerLineValue,
     };
 
     const [onMouseEnter, onMouseMove, onMouseLeave] = [
-      "onMouseEnterLine",
-      "onMouseMoveLine",
-      "onMouseLeaveLine"
+      'onMouseEnterLine',
+      'onMouseMoveLine',
+      'onMouseLeaveLine',
     ].map(eventName => {
-      // partially apply this bar's data point as 2nd callback argument
+      // partially apply this line's data point as 2nd callback argument
       const callback = methodIfFuncProp(eventName, this.props, this);
-      return _.isFunction(callback) ? _.partial(callback, _, lineD) : null;
+      return isFunction(callback) ? bindTrailingArgs(callback, lineD) : null;
     });
 
     return (
@@ -333,12 +205,12 @@ class PieChart extends React.Component {
     const {
       getPieSliceLabel,
       pieSliceLabelStyle,
-      pieSliceLabelDistance
+      pieSliceLabelDistance,
     } = this.props;
     const labelPercent = (slice.end - slice.start) / 2 + slice.start;
     const style = {
-      textAnchor: "middle",
-      dominantBaseline: "central"
+      textAnchor: 'middle',
+      dominantBaseline: 'central',
     };
 
     if (pieSliceLabelStyle) {
@@ -363,8 +235,8 @@ class PieChart extends React.Component {
     const { x, y } = center;
     const style = Object.assign(
       {},
-      { textAnchor: "middle", dominantBaseline: "central" },
-      centerLabelStyle
+      { textAnchor: 'middle', dominantBaseline: 'central' },
+      centerLabelStyle,
     );
 
     return (
@@ -376,6 +248,135 @@ class PieChart extends React.Component {
       </text>
     );
   }
+
+  render() {
+    const {
+      marginLeft,
+      marginRight,
+      marginTop,
+      marginBottom,
+      holeRadius,
+    } = this.props;
+
+    // sizes fallback based on provided info: given dimension -> radius + margin -> other dimension -> default
+    const width =
+      this.props.width ||
+      (this.props.radius
+        ? this.props.radius * 2 + marginLeft + marginRight
+        : this.props.height) ||
+      DEFAULT_SIZE;
+    const height =
+      this.props.height ||
+      (this.props.radius
+        ? this.props.radius * 2 + marginTop + marginBottom
+        : this.props.width) ||
+      DEFAULT_SIZE;
+    const radius =
+      this.props.radius ||
+      Math.min(
+        (width - (marginLeft + marginRight)) / 2,
+        (height - (marginTop + marginBottom)) / 2,
+      );
+    const center = { x: marginLeft + radius, y: marginTop + radius };
+
+    const {
+      markerLineValue,
+      pieSliceClassName,
+      markerLineOverhangInner,
+      markerLineOverhangOuter,
+    } = this.props;
+
+    const valueAccessor = makeAccessor(this.props.getValue);
+    const sum = sumBy(this.props.data, valueAccessor);
+    const total = this.props.total || sum;
+    const markerLinePercent = isFinite(markerLineValue)
+      ? markerLineValue / total
+      : null;
+
+    let startPercent = 0;
+    const slices = this.props.data.map(d => {
+      const slicePercent = valueAccessor(d) / total;
+      const slice = {
+        start: startPercent,
+        end: startPercent + slicePercent,
+      };
+      startPercent += slicePercent;
+
+      return slice;
+    });
+
+    return (
+      <svg className="rct-pie-chart" {...{ width, height }}>
+        {this.props.data.map((d, i) => {
+          const [onMouseEnter, onMouseMove, onMouseLeave] = [
+            'onMouseEnterSlice',
+            'onMouseMoveSlice',
+            'onMouseLeaveSlice',
+          ].map(eventName => {
+            // partially apply this slice's data point as 2nd callback argument
+            const callback = methodIfFuncProp(eventName, this.props, this);
+            return isFunction(callback) ? bindTrailingArgs(callback, d) : null;
+          });
+
+          const className = `rct-pie-slice rct-pie-slice-${i} ${getValue(
+            pieSliceClassName,
+            d,
+            i,
+          ) || ''}`;
+          const slice = slices[i];
+          const pathStr = pieSlicePath(
+            slice.start,
+            slice.end,
+            center,
+            radius,
+            holeRadius,
+          );
+          const key = `pie-slice-${i}`;
+
+          return (
+            <path
+              {...{
+                className,
+                d: pathStr,
+                onMouseEnter,
+                onMouseMove,
+                onMouseLeave,
+                key,
+              }}
+            />
+          );
+        })}
+
+        {sum < total ? ( // draw empty slice if the sum of slices is less than expected total
+          <path
+            className={`rct-pie-slice rct-pie-slice-empty`}
+            d={pieSlicePath(startPercent, 1, center, radius, holeRadius)}
+            key="pie-slice-empty"
+          />
+        ) : null}
+
+        {markerLinePercent !== null && isFinite(markerLinePercent)
+          ? this.renderMarkerLine(
+              markerLine(
+                markerLinePercent,
+                center,
+                radius,
+                holeRadius,
+                markerLineOverhangOuter,
+                markerLineOverhangInner,
+              ),
+            )
+          : null}
+
+        {this.props.centerLabel ? this.renderCenterLabel(center) : null}
+        {this.props.getPieSliceLabel
+          ? this.props.data.map((d, i) =>
+              this.renderSliceLabel(d, slices[i], center, radius, i),
+            )
+          : null}
+      </svg>
+    );
+  }
 }
 
 function markerLine(
@@ -384,9 +385,8 @@ function markerLine(
   radius,
   holeRadius = 0,
   overhangOuter = 0,
-  overhangInner = 0
+  overhangInner = 0,
 ) {
-  if (percentValue == 1) endPercent = 0.9999999; // arc cannot be a full circle
   const startX = Math.sin((2 * Math.PI) / (1 / percentValue));
   const startY = Math.cos((2 * Math.PI) / (1 / percentValue));
   const [c, r, rH, x0, y0] = [center, radius, holeRadius, startX, startY];
@@ -395,8 +395,8 @@ function markerLine(
   return [
     // construct a string representing the marker line
     `M ${c.x + x0 * r0},${c.y - y0 * r0}`, // start at edge of inner (hole) circle, or center if no hole
-    `L ${c.x + x0 * r1},${c.y - y0 * r1} z` // straight line to outer circle, along radius
-  ].join(" ");
+    `L ${c.x + x0 * r1},${c.y - y0 * r1} z`, // straight line to outer circle, along radius
+  ].join(' ');
 }
 
 function pieSlicePath(
@@ -404,15 +404,20 @@ function pieSlicePath(
   endPercent,
   center,
   radius,
-  holeRadius = 0
+  holeRadius = 0,
 ) {
-  if (endPercent == 1) endPercent = 0.9999999; // arc cannot be a full circle
+  let parsedEndPercent = endPercent;
+
+  if (parsedEndPercent === 1) {
+    parsedEndPercent = 0.9999999; // arc cannot be a full circle
+  }
+
   const startX = Math.sin((2 * Math.PI) / (1 / startPercent));
   const startY = Math.cos((2 * Math.PI) / (1 / startPercent));
-  const endX = Math.sin((2 * Math.PI) / (1 / endPercent));
-  const endY = Math.cos((2 * Math.PI) / (1 / endPercent));
+  const endX = Math.sin((2 * Math.PI) / (1 / parsedEndPercent));
+  const endY = Math.cos((2 * Math.PI) / (1 / parsedEndPercent));
 
-  const largeArc = endPercent - startPercent <= 0.5 ? 0 : 1;
+  const largeArc = parsedEndPercent - startPercent <= 0.5 ? 0 : 1;
   const [c, r, rH, x0, x1, y0, y1] = [
     center,
     radius,
@@ -420,25 +425,25 @@ function pieSlicePath(
     startX,
     endX,
     startY,
-    endY
+    endY,
   ];
 
   return [
     // construct a string representing the pie slice path
     `M ${c.x + x0 * rH},${c.y - y0 * rH}`, // start at edge of inner (hole) circle, or center if no hole
     `L ${c.x + x0 * r},${c.y - y0 * r}`, // straight line to outer circle, along radius
-    `A ${r},${r} 0 ${largeArc} 1 ${c.x + x1 * r},${c.y - y1 * r}` // outer arc
+    `A ${r},${r} 0 ${largeArc} 1 ${c.x + x1 * r},${c.y - y1 * r}`, // outer arc
   ]
     .concat(
       holeRadius
         ? [
             // if we have an inner (donut) hole, draw an inner arc too, otherwise we're done
             `L ${c.x + x1 * rH},${c.y - y1 * rH}`, // straight line to inner (hole) circle, along radius
-            `A ${rH},${rH} 0 ${largeArc} 0 ${c.x + x0 * rH},${c.y - y0 * rH} z` // inner arc
+            `A ${rH},${rH} 0 ${largeArc} 0 ${c.x + x0 * rH},${c.y - y0 * rH} z`, // inner arc
           ]
-        : "z"
+        : 'z',
     )
-    .join(" ");
+    .join(' ');
 }
 
 export default PieChart;

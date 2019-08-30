@@ -193,28 +193,6 @@
       "required": false,
       "description": "Internal right spacing of XYPlot, in pixels."
     },
-    "style": {
-      "type": {
-        "name": "object"
-      },
-      "required": false,
-      "description": "Inline style object to be applied to the parent SVG element.",
-      "defaultValue": {
-        "value": "{}",
-        "computed": false
-      }
-    },
-    "xyPlotStyle": {
-      "type": {
-        "name": "object"
-      },
-      "required": false,
-      "description": "Inline style object to be applied to the plot.\nThis is the inner rect DOM element where the graphs are rendered within the axes.",
-      "defaultValue": {
-        "value": "{}",
-        "computed": false
-      }
-    },
     "onMouseMove": {
       "type": {
         "name": "func"
@@ -250,6 +228,35 @@
       "required": false,
       "description": ""
     },
+    "onClick": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": ""
+    },
+    "xyPlotContainerStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "Inline style object to be applied to the parent SVG element that wraps XYPlot.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
+    "xyPlotStyle": {
+      "type": {
+        "name": "object"
+      },
+      "required": false,
+      "description": "Inline style object to be applied to the plot.\nThis is the inner rect DOM element where the graphs are rendered within the axes.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
+    },
     "xyPlotClassName": {
       "type": {
         "name": "string"
@@ -257,9 +264,30 @@
       "required": false,
       "description": "Class attribute applied to xy plot",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
+    },
+    "xScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Scale determined by our resolveXYScales higher order component.\nOverride this prop if you'd like to pass in your own d3 scale."
+    },
+    "yScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Scale determined by our resolveXYScales higher order component.\nOverride this prop if you'd like to pass in your own d3 scale."
+    },
+    "children": {
+      "type": {
+        "name": "any"
+      },
+      "required": false,
+      "description": ""
     }
   }
 }

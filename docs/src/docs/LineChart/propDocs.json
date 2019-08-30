@@ -21,10 +21,6 @@
         {
           "name": "x",
           "type": null
-        },
-        {
-          "name": "y",
-          "type": null
         }
       ],
       "returns": null
@@ -72,7 +68,7 @@
       "required": false,
       "description": "Class attribute to be applied to the line path.",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },

@@ -1,0 +1,9 @@
+# Ignore charts that are still experimental
+/src/AreaHeatmap.js
+/src/KernelDensityEstimation.js
+
+# Ignore shallowEqual
+/src/utils/shallowEqual.js
+
+# Ignore lessons
+/docs/src/lessons

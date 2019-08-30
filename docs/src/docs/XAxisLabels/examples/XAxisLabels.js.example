@@ -7,7 +7,9 @@ const XAxisLabelsExample = (props) => {
         width={400} height={150}
         xDomain={[-20, 20]} yDomain={[-20, 20]}
       >
-        <XAxisLabels />
+        <XAxisLabels
+          formats={["+"]}
+        />
         <XAxisLabels
           format={label => label + "%"}
           position="top"

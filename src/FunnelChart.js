@@ -1,16 +1,17 @@
-import { area, scaleOrdinal, schemeCategory10 } from "d3";
-import _ from "lodash";
-import PropTypes from "prop-types";
-import React from "react";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
+import { area, scaleOrdinal, schemeCategory10 } from 'd3';
+import range from 'lodash/range';
+import defaults from 'lodash/defaults';
+import PropTypes from 'prop-types';
+import React from 'react';
+import * as CustomPropTypes from './utils/CustomPropTypes';
 import {
   combineDomains,
   domainFromData,
   getValue,
-  makeAccessor2
-} from "./utils/Data";
-import { dataTypeFromScaleType } from "./utils/Scale";
-import xyPropsEqual from "./utils/xyPropsEqual";
+  makeAccessor2,
+} from './utils/Data';
+import { dataTypeFromScaleType } from './utils/Scale';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 /**
  * `FunnelChart` is used to visualize the progressive reduction of data as it passes
@@ -55,10 +56,10 @@ export default class FunnelChart extends React.Component {
     /**
      * D3 scale for Y axis - provided by XYPlot.
      */
-    yScale: PropTypes.func
+    yScale: PropTypes.func,
   };
   static defaultProps = {
-    pathClassName: ""
+    pathClassName: '',
   };
 
   static getDomain(props) {
@@ -66,23 +67,23 @@ export default class FunnelChart extends React.Component {
     const [xAccessor, yAccessor] = [makeAccessor2(x), makeAccessor2(y)];
     const [xDataType, yDataType] = [
       dataTypeFromScaleType(xScaleType),
-      dataTypeFromScaleType(yScaleType)
+      dataTypeFromScaleType(yScaleType),
     ];
 
     return horizontal
       ? {
           xDomain: combineDomains([
             domainFromData(data, xAccessor, xDataType),
-            domainFromData(data, (d, i) => -xAccessor(d, i), xDataType)
+            domainFromData(data, (d, i) => -xAccessor(d, i), xDataType),
           ]),
-          yDomain: domainFromData(data, yAccessor, yDataType)
+          yDomain: domainFromData(data, yAccessor, yDataType),
         }
       : {
           xDomain: domainFromData(data, xAccessor, xDataType),
           yDomain: combineDomains([
             domainFromData(data, yAccessor, yDataType),
-            domainFromData(data, (d, i) => -yAccessor(d, i), yDataType)
-          ])
+            domainFromData(data, (d, i) => -yAccessor(d, i), yDataType),
+          ]),
         };
   }
 
@@ -101,7 +102,7 @@ export default class FunnelChart extends React.Component {
       x,
       y,
       horizontal,
-      pathClassName
+      pathClassName,
     } = this.props;
 
     const funnelArea = area();
@@ -117,7 +118,7 @@ export default class FunnelChart extends React.Component {
         .y1((d, i) => yScale(getValue(y, d, i)));
     }
 
-    const colors = scaleOrdinal(schemeCategory10).domain(_.range(10));
+    const colors = scaleOrdinal(schemeCategory10).domain(range(10));
 
     return (
       <g className="rct-funnel-chart">
@@ -127,12 +128,12 @@ export default class FunnelChart extends React.Component {
           const fill = color ? getValue(color, d, i) : colors(i - 1);
           let style = pathStyle ? getValue(pathStyle, d, i) : {};
 
-          style = _.defaults({}, style, { fill, stroke: "transparent" });
+          style = defaults({}, style, { fill, stroke: 'transparent' });
 
           return (
             <path
               d={pathStr}
-              className={`${getValue(pathClassName, d, i) || ""}`}
+              className={`${getValue(pathClassName, d, i) || ''}`}
               style={style}
               key={i}
             />
