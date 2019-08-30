@@ -1,4 +1,4 @@
-## 2.0.0-rc.0 (2019-08-20)
+## 2.0.0 (2019-08-30)
 
 - [#173](https://github.com/spotify/reactochart/pull/173) Migrate to Spotify web scripts - thanks @arjbholu!
 - [#171](https://github.com/spotify/reactochart/pull/171) Update format examples
