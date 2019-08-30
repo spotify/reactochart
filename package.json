@@ -116,5 +116,10 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "web-scripts precommit"
+    }
   }
 }
