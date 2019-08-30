@@ -100,7 +100,7 @@
       "required": false,
       "description": "`className` attribute to be applied to the SVG element.",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },
@@ -227,19 +227,19 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"left\"",
+            "value": "'left'",
             "computed": false
           },
           {
-            "value": "\"right\"",
+            "value": "'right'",
             "computed": false
           },
           {
-            "value": "\"center\"",
+            "value": "'center'",
             "computed": false
           },
           {
-            "value": "\"justify\"",
+            "value": "'justify'",
             "computed": false
           }
         ]
@@ -247,7 +247,7 @@
       "required": false,
       "description": "Node alignment method used to layout the nodes.\nMay be 'left', 'right', 'center', 'justify', or a custom function.\nSee [d3-sankey alignment docs](https://github.com/d3/d3-sankey#alignments) for more details.",
       "defaultValue": {
-        "value": "\"justify\"",
+        "value": "'justify'",
         "computed": false
       }
     },
@@ -266,7 +266,7 @@
       "required": false,
       "description": "`className` attribute to be applied to each node,\nor accessor function which returns a class (string).",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },
@@ -365,7 +365,7 @@
       "required": false,
       "description": "Class attribute to be applied to each link,\nor accessor function which returns a class (string).",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },
@@ -502,7 +502,7 @@
       "required": false,
       "description": "`className` attribute to be applied to each node terminal,\nor accessor function which returns a class (string).",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },
@@ -613,19 +613,19 @@
             "name": "enum",
             "value": [
               {
-                "value": "\"before\"",
+                "value": "'before'",
                 "computed": false
               },
               {
-                "value": "\"after\"",
+                "value": "'after'",
                 "computed": false
               },
               {
-                "value": "\"above\"",
+                "value": "'above'",
                 "computed": false
               },
               {
-                "value": "\"below\"",
+                "value": "'below'",
                 "computed": false
               }
             ]
@@ -638,7 +638,7 @@
       "required": false,
       "description": "Placement of the node label relative to the node rectangle.\nExpects 'before', 'after', 'above' or 'below', or a function which returns one of these.\nBy default, labels in the left half of the diagram are placed 'after' and those in the right half 'before'",
       "defaultValue": {
-        "value": "(node, graph) => {\n  return node.depth < graph.maxDepth / 2 ? \"after\" : \"before\";\n}",
+        "value": "(node, graph) => {\n  return node.depth < graph.maxDepth / 2 ? 'after' : 'before';\n}",
         "computed": false
       }
     },
@@ -668,7 +668,7 @@
       "required": false,
       "description": "Accessor function `nodeLabelText(node, graph)` which returns the content to be used for node labels.\nThe function may return a string/number (rendered as SVG `<text>`),\nor arbitrary React SVG element(s) (rendered as-is inside the SVG).\nNOTE: in the latter case (returning arbitrary SVG), `nodeLabelPlacement`, `nodeLabelDistance`,\n`nodeLabelClassName` and `nodeLabelStyle` props will not be applied -\nuser is responsible for all positioning and attributes on this element.",
       "defaultValue": {
-        "value": "(node, graph, props) => {\n  if (_.has(node, \"name\")) return node.name;\n  if (_.has(node, \"label\")) return node.label;\n  return getValue(props.nodeId, node, graph, props);\n}",
+        "value": "(node, graph, props) => {\n  if (has(node, 'name')) return node.name;\n  if (has(node, 'label')) return node.label;\n  return getValue(props.nodeId, node, graph, props);\n}",
         "computed": false
       }
     },
@@ -687,7 +687,7 @@
       "required": false,
       "description": "`className` attribute to be applied to each node label,\nor accessor function which returns a class (string).",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },
@@ -736,7 +736,7 @@
       "required": false,
       "description": "Accessor function `f(link, graph)` which returns the text to be used for link labels.",
       "defaultValue": {
-        "value": "(link, graph, props) => {\n  const valueText = numeral(link.value || 0).format(\"0.[0]a\");\n  const sourceText = getValue(\n    props.nodeLabelText,\n    link.source,\n    graph,\n    props\n  );\n  const targetText = getValue(\n    props.nodeLabelText,\n    link.target,\n    graph,\n    props\n  );\n  return `${sourceText}→${targetText}: ${valueText}`;\n}",
+        "value": "(link, graph, props) => {\n  const linkValue = link.value || 0;\n  const valueText = formatPrefix('.1~f', linkValue)(linkValue);\n  const sourceText = getValue(\n    props.nodeLabelText,\n    link.source,\n    graph,\n    props,\n  );\n  const targetText = getValue(\n    props.nodeLabelText,\n    link.target,\n    graph,\n    props,\n  );\n  return `${sourceText}→${targetText}: ${valueText}`;\n}",
         "computed": false
       }
     },
@@ -755,7 +755,7 @@
       "required": false,
       "description": "`className` attribute to be applied to each link label,\nor accessor function which returns a class (string).",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },
@@ -812,7 +812,7 @@
       "required": false,
       "description": "`startOffset` attribute to apply to the link label `<textpath>` element.\nMay be a number (in SVG units) or percent string (`\"25%\"`)",
       "defaultValue": {
-        "value": "\"25%\"",
+        "value": "'25%'",
         "computed": false
       }
     },
@@ -842,7 +842,7 @@
       "required": false,
       "description": "Accessor function `f(link, graph)` which returns the text to be used for link *source* labels.",
       "defaultValue": {
-        "value": "(link, graph, props) => {\n  const valueRelative = link.valueSourceRelative;\n  if (!_.isFinite(valueRelative)) return \"\";\n  const percentText =\n    valueRelative < 0.001\n      ? \"<0.1%\"\n      : numeral(valueRelative).format(\"0.[0]%\");\n  return `${percentText} to ${getValue(\n    props.nodeLabelText,\n    link.target,\n    graph,\n    props\n  )}`;\n}",
+        "value": "(link, graph, props) => {\n  const valueRelative = link.valueSourceRelative;\n  if (valueRelative === null || !isFinite(valueRelative)) return '';\n  const percentText =\n    valueRelative < 0.001 ? '<0.1%' : numberFormat('.1~%')(valueRelative);\n  return `${percentText} to ${getValue(\n    props.nodeLabelText,\n    link.target,\n    graph,\n    props,\n  )}`;\n}",
         "computed": false
       }
     },
@@ -861,7 +861,7 @@
       "required": false,
       "description": "`className` attribute to be applied to each link *source* label,\nor accessor function which returns a class (string).",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },
@@ -918,7 +918,7 @@
       "required": false,
       "description": "`startOffset` attribute to apply to the link *source* label `<textpath>` element.\nMay be a number (in SVG units) or percent string (`\"25%\"`)",
       "defaultValue": {
-        "value": "\"2%\"",
+        "value": "'2%'",
         "computed": false
       }
     },
@@ -948,7 +948,7 @@
       "required": false,
       "description": "Accessor function `f(link, graph)` which returns the text to be used for link *target* labels.",
       "defaultValue": {
-        "value": "(link, graph, props) => {\n  const valueRelative = link.valueTargetRelative;\n  if (!_.isFinite(valueRelative)) return \"\";\n  const percentText =\n    valueRelative < 0.001\n      ? \"<0.1%\"\n      : numeral(valueRelative).format(\"0.[0]%\");\n  return `${percentText} from ${getValue(\n    props.nodeLabelText,\n    link.source,\n    graph,\n    props\n  )}`;\n}",
+        "value": "(link, graph, props) => {\n  const valueRelative = link.valueTargetRelative;\n  if (valueRelative === null || !isFinite(valueRelative)) return '';\n  const percentText =\n    valueRelative < 0.001 ? '<0.1%' : numberFormat('.1~%')(valueRelative);\n  return `${percentText} from ${getValue(\n    props.nodeLabelText,\n    link.source,\n    graph,\n    props,\n  )}`;\n}",
         "computed": false
       }
     },
@@ -967,7 +967,7 @@
       "required": false,
       "description": "`className` attribute to be applied to each link *target* label,\nor accessor function which returns a class (string).",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },
@@ -1024,7 +1024,7 @@
       "required": false,
       "description": "`startOffset` attribute to apply to the link *target* label `<textpath>` element.\nMay be a number (in SVG units) or percent string (`\"25%\"`)",
       "defaultValue": {
-        "value": "\"98%\"",
+        "value": "'98%'",
         "computed": false
       }
     },

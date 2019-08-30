@@ -128,7 +128,7 @@
       "required": false,
       "description": "Class attribute to be applied to each bar,\nor accessor function which returns a class.",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },

@@ -30,20 +30,6 @@
       "returns": null
     },
     {
-      "name": "getDefaultFormats",
-      "docblock": null,
-      "modifiers": [
-        "static"
-      ],
-      "params": [
-        {
-          "name": "scaleType",
-          "type": null
-        }
-      ],
-      "returns": null
-    },
-    {
       "name": "getLabels",
       "docblock": null,
       "modifiers": [
@@ -75,19 +61,19 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"top\"",
+            "value": "'top'",
             "computed": false
           },
           {
-            "value": "\"bottom\"",
+            "value": "'bottom'",
             "computed": false
           }
         ]
       },
       "required": false,
-      "description": "",
+      "description": "*\nPosition of x axis labels. Accepted options are \"top\" or \"bottom\".",
       "defaultValue": {
-        "value": "\"bottom\"",
+        "value": "'bottom'",
         "computed": false
       }
     },
@@ -96,11 +82,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"below\"",
+            "value": "'below'",
             "computed": false
           },
           {
-            "value": "\"above\"",
+            "value": "'above'",
             "computed": false
           }
         ]
@@ -181,7 +167,7 @@
       "required": false,
       "description": "Inline style object applied to each label,\nor accessor function which returns a style object\n\nDisclaimer: labelStyle will merge its defaults with the given labelStyle prop\nin order to ensure that our collision library measureText is able to calculate the\nsmallest amount of possible collissions along the axis. It's therefore dependent on\nfontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized\nstylesheet, we suggest creating a styled label component that wraps XAxisLabels with your preferred styles.",
       "defaultValue": {
-        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: \"14px\",\n  lineHeight: 1,\n  textAnchor: \"middle\"\n}",
+        "value": "{\n  fontFamily: 'Helvetica, sans-serif',\n  fontSize: '14px',\n  lineHeight: 1,\n  textAnchor: 'middle',\n}",
         "computed": false
       }
     },
@@ -192,24 +178,16 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },
     "format": {
       "type": {
-        "name": "union",
-        "value": [
-          {
-            "name": "string"
-          },
-          {
-            "name": "func"
-          }
-        ]
+        "name": "func"
       },
       "required": false,
-      "description": "Format to use for the labels or accessor that returns the updated label.\n\nFor example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit.",
+      "description": "An accessor function that returns the updated label.\n\nFor example, given labels with real numbers one can pass in the following accessor,\n(label) => `${label}%`, to display percentages.",
       "defaultValue": {
         "value": "undefined",
         "computed": true
@@ -220,7 +198,7 @@
         "name": "array"
       },
       "required": false,
-      "description": "Formats to use for the labels in priority order. XAxisLabels will try to be smart about which format\nto use that keeps the labels distinct and provides the least amount of collisions when rendered.\n\nFor example, given labels with real numbers one can pass in 0.[0] to round to the first significant digit.",
+      "description": "Formats to use for the labels in priority order. XAxisLabels will try to be smart about which format\nto use that keeps the labels distinct and provides the least amount of collisions when rendered. Formats\ncan be either string(s) or function(s), utilizing d3-format.\n\nFor example, given labels with real numbers one can pass in [\".0%\"] for a rounded percentage, like 12%.",
       "defaultValue": {
         "value": "undefined",
         "computed": true

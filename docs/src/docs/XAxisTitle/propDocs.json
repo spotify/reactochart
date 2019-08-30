@@ -55,11 +55,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"top\"",
+            "value": "'top'",
             "computed": false
           },
           {
-            "value": "\"bottom\"",
+            "value": "'bottom'",
             "computed": false
           }
         ]
@@ -67,7 +67,7 @@
       "required": false,
       "description": "Position of title in regards to the x axis. Accepted options are \"top\" or \"bottom\"",
       "defaultValue": {
-        "value": "\"bottom\"",
+        "value": "'bottom'",
         "computed": false
       }
     },
@@ -76,11 +76,11 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"above\"",
+            "value": "'above'",
             "computed": false
           },
           {
-            "value": "\"below\"",
+            "value": "'below'",
             "computed": false
           }
         ]
@@ -97,15 +97,15 @@
         "name": "enum",
         "value": [
           {
-            "value": "\"left\"",
+            "value": "'left'",
             "computed": false
           },
           {
-            "value": "\"center\"",
+            "value": "'center'",
             "computed": false
           },
           {
-            "value": "\"right\"",
+            "value": "'right'",
             "computed": false
           }
         ]
@@ -113,7 +113,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "\"center\"",
+        "value": "'center'",
         "computed": false
       }
     },
@@ -135,7 +135,7 @@
       "required": false,
       "description": "Object declaring styles for label.\n\nDisclaimer: labelStyle will merge its defaults with the given labelStyle prop\nin order to ensure that our collision library measureText is able to calculate the\nsmallest amount of possible collisions along the axis. It's therefore dependent on\nfontFamily, size and fontStyle to always be passed in. If you're looking to have a centralized\nstylesheet, we suggest creating a styled title component that wraps XAxisTitle with your preferred styles.",
       "defaultValue": {
-        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: \"24px\",\n  fontWeight: \"bold\",\n  lineHeight: 1\n}",
+        "value": "{\n  fontFamily: 'Helvetica, sans-serif',\n  fontSize: '24px',\n  fontWeight: 'bold',\n  lineHeight: 1,\n}",
         "computed": false
       }
     },
@@ -160,6 +160,20 @@
         "value": "0",
         "computed": false
       }
+    },
+    "title": {
+      "type": {
+        "name": "string"
+      },
+      "required": false,
+      "description": ""
+    },
+    "children": {
+      "type": {
+        "name": "any"
+      },
+      "required": false,
+      "description": ""
     }
   }
 }

@@ -17,7 +17,7 @@ function expectTicksToExist(wrapper) {
 }
 
 function expectCorrectTickPlacement(wrapper, ticks, scale) {
-  let tickLines = wrapper.find("line.rct-chart-tick-y");
+  const tickLines = wrapper.find("line.rct-chart-tick-y");
   expect(tickLines).to.have.length(ticks.length);
   tickLines.forEach((line, i) => {
     expect(Math.round(+line.prop("y1"))).to.equal(Math.round(scale(ticks[i])));
@@ -155,7 +155,7 @@ describe("YTicks", () => {
   });
 
   it("passes className to the ticks", () => {
-    let wrapper = expectTicksToExist(
+    const wrapper = expectTicksToExist(
       shallow(<YTicks yScale={linearScale} tickClassName={"test-tick-class"} />)
     );
     expect(wrapper).to.have.descendants("line.test-tick-class");
@@ -163,7 +163,7 @@ describe("YTicks", () => {
 
   it("passes style to the ticks", () => {
     const style = { fill: "red" };
-    let wrapper = expectTicksToExist(
+    const wrapper = expectTicksToExist(
       shallow(<YTicks yScale={linearScale} tickStyle={style} />)
     );
     wrapper

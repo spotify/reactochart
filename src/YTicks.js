@@ -1,10 +1,15 @@
-import _ from "lodash";
-import PropTypes from "prop-types";
-import React from "react";
-import { getScaleTicks, getTickDomain } from "./utils/Scale";
+import defaults from 'lodash/defaults';
+import capitalize from 'lodash/capitalize';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { getScaleTicks, getTickDomain } from './utils/Scale';
 
 export default class YTicks extends React.Component {
   static propTypes = {
+    /**
+     * Width of chart - provided by XYPlot.
+     */
+    width: PropTypes.number,
     /**
      * D3 scale for Y axis - provided by XYPlot.
      */
@@ -12,11 +17,11 @@ export default class YTicks extends React.Component {
     /**
      * Position of y ticks. Accepted options are "left" or "right".
      */
-    position: PropTypes.oneOf(["left", "right"]),
+    position: PropTypes.oneOf(['left', 'right']),
     /**
      * Placement of ticks in regards to the y axis. Accepted options are "before" or "after".
      */
-    placement: PropTypes.oneOf(["before", "after"]),
+    placement: PropTypes.oneOf(['before', 'after']),
     /**
      * Custom ticks to display.
      */
@@ -45,41 +50,44 @@ export default class YTicks extends React.Component {
     /**
      * Round ticks to capture extent of given y domain from XYPlot.
      */
-    nice: PropTypes.bool
+    nice: PropTypes.bool,
   };
   static defaultProps = {
-    position: "left",
+    position: 'left',
     nice: true,
     tickLength: 5,
-    tickStyle: {}
+    tickStyle: {},
   };
 
   static getTickDomain(props) {
-    if (!props.yScale) return;
-    props = _.defaults({}, props, YTicks.defaultProps);
-    return { yTickDomain: getTickDomain(props.yScale, props) };
+    if (!props.yScale) {
+      return;
+    }
+
+    const propsWithDefaults = defaults({}, props, YTicks.defaultProps);
+    return { yTickDomain: getTickDomain(props.yScale, propsWithDefaults) };
   }
 
   static getMargin(props) {
-    const { tickLength, position } = _.defaults({}, props, YTicks.defaultProps);
+    const { tickLength, position } = defaults({}, props, YTicks.defaultProps);
     const placement =
-      props.placement || (position === "left" ? "before" : "after");
+      props.placement || (position === 'left' ? 'before' : 'after');
     const zeroMargin = {
       marginTop: 0,
       marginBottom: 0,
       marginLeft: 0,
-      marginRight: 0
+      marginRight: 0,
     };
 
     if (
-      (position === "left" && placement === "after") ||
-      (position === "right" && placement === "before")
+      (position === 'left' && placement === 'after') ||
+      (position === 'right' && placement === 'before')
     )
       return zeroMargin;
 
-    return _.defaults(
-      { [`margin${_.capitalize(position)}`]: tickLength || 0 },
-      zeroMargin
+    return defaults(
+      { [`margin${capitalize(position)}`]: tickLength || 0 },
+      zeroMargin,
     );
   }
 
@@ -93,14 +101,14 @@ export default class YTicks extends React.Component {
       tickStyle,
       tickClassName,
       spacingLeft,
-      spacingRight
+      spacingRight,
     } = this.props;
     const placement =
-      this.props.placement || (position === "left" ? "before" : "after");
+      this.props.placement || (position === 'left' ? 'before' : 'after');
     const ticks = this.props.ticks || getScaleTicks(yScale, null, tickCount);
-    const className = `rct-chart-tick rct-chart-tick-y ${tickClassName || ""}`;
+    const className = `rct-chart-tick rct-chart-tick-y ${tickClassName || ''}`;
     const transform =
-      position === "right"
+      position === 'right'
         ? `translate(${width + (spacingRight || 0)}, 0)`
         : `translate(${-spacingLeft || 0}, 0)`;
 
@@ -108,7 +116,7 @@ export default class YTicks extends React.Component {
       <g className="rct-chart-ticks-y" transform={transform}>
         {ticks.map((tick, i) => {
           const y1 = yScale(tick);
-          const x2 = placement === "before" ? -tickLength : tickLength;
+          const x2 = placement === 'before' ? -tickLength : tickLength;
 
           return (
             <line
@@ -119,7 +127,7 @@ export default class YTicks extends React.Component {
                 y2: y1,
                 className,
                 style: tickStyle,
-                key: `tick-${i}`
+                key: `tick-${i}`,
               }}
             />
           );

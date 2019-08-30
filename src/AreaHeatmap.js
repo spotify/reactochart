@@ -1,11 +1,12 @@
-import { extent } from "d3";
-import _ from "lodash";
-import PropTypes from "prop-types";
-import React from "react";
-import { methodIfFuncProp } from "./util.js";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
-import { getValue, makeAccessor2 } from "./utils/Data";
-import xyPropsEqual from "./utils/xyPropsEqual";
+import { extent } from 'd3';
+import flatten from 'lodash/flatten';
+import isFunction from 'lodash/isFunction';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { methodIfFuncProp } from './util.js';
+import * as CustomPropTypes from './utils/CustomPropTypes';
+import { getValue, makeAccessor2 } from './utils/Data';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 /**
  * `AreaHeatmap` is still undergoing experimental changes!
@@ -43,24 +44,27 @@ export default class AreaHeatmap extends React.Component {
     /**
      * D3 scale for Y axis - provided by XYPlot
      */
-    yScale: PropTypes.func
+    yScale: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
+    onMouseMove: PropTypes.func,
   };
-  static defaultProps = { rectClassName: "", rectStyle: {} };
+  static defaultProps = { rectClassName: '', rectStyle: {} };
 
   static getDomain(props) {
     const { data, x, xEnd, y, yEnd } = props;
     return {
       x: extent(
-        _.flatten([data.map(makeAccessor2(x)), data.map(makeAccessor2(xEnd))])
+        flatten([data.map(makeAccessor2(x)), data.map(makeAccessor2(xEnd))]),
       ),
       y: extent(
-        _.flatten([data.map(makeAccessor2(y)), data.map(makeAccessor2(yEnd))])
-      )
+        flatten([data.map(makeAccessor2(y)), data.map(makeAccessor2(yEnd))]),
+      ),
     };
   }
 
   shouldComponentUpdate(nextProps) {
-    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ["rectStyle"]);
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['rectStyle']);
     return shouldUpdate;
   }
 
@@ -74,13 +78,13 @@ export default class AreaHeatmap extends React.Component {
 
   onMouseMove = e => {
     const { xScale, yScale, onMouseMove } = this.props;
-    if (!_.isFunction(onMouseMove)) return;
+    if (!isFunction(onMouseMove)) return;
 
     const boundBox = this.refs.background.getBoundingClientRect();
     if (!boundBox) return;
     const [x, y] = [
       e.clientX - (boundBox.left || 0),
-      e.clientY - (boundBox.top || 0)
+      e.clientY - (boundBox.top || 0),
     ];
     const [xVal, yVal] = [xScale.invert(x), yScale.invert(y)];
 
@@ -100,14 +104,14 @@ export default class AreaHeatmap extends React.Component {
       scaleWidth,
       scaleHeight,
       rectClassName,
-      rectStyle
+      rectStyle,
     } = this.props;
     const [areaAccessor, xAccessor, xEndAccessor, yAccessor, yEndAccessor] = [
       area,
       x,
       xEnd,
       y,
-      yEnd
+      yEnd,
     ].map(makeAccessor2);
 
     // to determine how many data units are represented by 1 square pixel of area,
@@ -122,16 +126,16 @@ export default class AreaHeatmap extends React.Component {
             getValue(area, d, i) /
             Math.abs(
               (xScale(getValue(xEnd, d, i)) - xScale(getValue(x, d, i))) *
-                (yScale(getValue(yEnd, d, i)) - yScale(getValue(y, d, i)))
+                (yScale(getValue(yEnd, d, i)) - yScale(getValue(y, d, i))),
             )
           );
-        })
+        }),
       );
 
     const handlers = {
-      onMouseMove: methodIfFuncProp("onMouseMove", this.props, this),
-      onMouseEnter: methodIfFuncProp("onMouseEnter", this.props, this),
-      onMouseLeave: methodIfFuncProp("onMouseLeave", this.props, this)
+      onMouseMove: methodIfFuncProp('onMouseMove', this.props, this),
+      onMouseEnter: methodIfFuncProp('onMouseEnter', this.props, this),
+      onMouseLeave: methodIfFuncProp('onMouseLeave', this.props, this),
     };
 
     return (
@@ -150,7 +154,7 @@ export default class AreaHeatmap extends React.Component {
             xEnd,
             y,
             yEnd,
-            area
+            area,
           ].map(getter => getValue(getter, d, i));
           // full width and height of the containing rectangle
           const fullWidth = Math.abs(xScale(xEndVal) - xScale(xVal));
@@ -174,12 +178,17 @@ export default class AreaHeatmap extends React.Component {
           const rectX = fullRectX + (fullWidth - width) / 2;
           const rectY = fullRectY + (fullHeight - height) / 2;
 
-          if (!_.every([rectX, rectY, width, height], _.isFinite)) return null;
+          if (
+            ![rectX, rectY, width, height].every(
+              val => val !== null && isFinite(val),
+            )
+          )
+            return null;
 
           const className = `rct-area-heatmap-rect ${getValue(
             rectClassName,
             d,
-            i
+            i,
           )}`;
           const style = getValue(rectStyle, d, i);
           const key = `rect-${i}`;

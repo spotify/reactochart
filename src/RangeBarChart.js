@@ -1,16 +1,21 @@
-import _ from "lodash";
-import PropTypes from "prop-types";
-import React from "react";
-import Bar from "./Bar";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
+import first from 'lodash/first';
+import last from 'lodash/last';
+import clamp from 'lodash/clamp';
+import get from 'lodash/get';
+import isFunction from 'lodash/isFunction';
+import PropTypes from 'prop-types';
+import React from 'react';
+import Bar from './Bar';
+import * as CustomPropTypes from './utils/CustomPropTypes';
 import {
   domainFromData,
   domainFromRangeData,
   getValue,
-  makeAccessor2
-} from "./utils/Data";
-import { dataTypeFromScaleType } from "./utils/Scale";
-import xyPropsEqual from "./utils/xyPropsEqual";
+  makeAccessor2,
+} from './utils/Data';
+import { bindTrailingArgs } from './util.js';
+import { dataTypeFromScaleType } from './utils/Scale';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 /**
  * `RangeBarChart` is a variation on the standard bar chart. Just like a normal bar chart, each bar represents a single
@@ -107,14 +112,14 @@ export default class RangeBarChart extends React.Component {
     /**
      * Class name(s) to be included on each bar's <text> element.
      */
-    labelClassName: PropTypes.string
+    labelClassName: PropTypes.string,
   };
   static defaultProps = {
     data: [],
     horizontal: false,
     barThickness: 8,
-    barClassName: "",
-    barStyle: {}
+    barClassName: '',
+    barStyle: {},
   };
 
   static getDomain(props) {
@@ -126,11 +131,11 @@ export default class RangeBarChart extends React.Component {
       x,
       xEnd,
       y,
-      yEnd
+      yEnd,
     } = props;
 
     // only have to specify range axis domain, other axis uses default domainFromData
-    const rangeAxis = horizontal ? "x" : "y";
+    const rangeAxis = horizontal ? 'x' : 'y';
     const rangeStartAccessor = horizontal ? makeAccessor2(x) : makeAccessor2(y);
     const rangeEndAccessor = horizontal
       ? makeAccessor2(xEnd)
@@ -143,8 +148,8 @@ export default class RangeBarChart extends React.Component {
         data,
         rangeStartAccessor,
         rangeEndAccessor,
-        rangeDataType
-      )
+        rangeDataType,
+      ),
     };
   }
   static getSpacing(props) {
@@ -157,53 +162,52 @@ export default class RangeBarChart extends React.Component {
       yScale,
       data,
       xDomain,
-      yDomain
+      yDomain,
     } = props;
-    const P = barThickness / 2; //padding
+    const P = barThickness / 2; // padding
     const barsDomain = horizontal ? yDomain : xDomain;
     const barsScale = horizontal ? yScale : xScale;
     const barsAccessor = horizontal ? makeAccessor2(y) : makeAccessor2(x);
     const barsDataDomain = domainFromData(data, barsAccessor);
 
-    // todo refactor/add better comments to clarify
-    //find the edges of the tick domain, and map them through the scale function
-    const [domainHead, domainTail] = _([
-      _.first(barsDomain),
-      _.last(barsDomain)
-    ])
+    // find the edges of the tick domain, and map them through the scale function
+    const [domainHead, domainTail] = [first(barsDomain), last(barsDomain)]
       .map(barsScale)
-      .sortBy(); //sort the pixel values return by the domain extents
-    //find the edges of the data domain, and map them through the scale function
-    const [dataDomainHead, dataDomainTail] = _([
-      _.first(barsDataDomain),
-      _.last(barsDataDomain)
-    ])
+      .sort(); // sort the pixel values return by the domain extents
+
+    // find the edges of the data domain, and map them through the scale function
+    const [dataDomainHead, dataDomainTail] = [
+      first(barsDataDomain),
+      last(barsDataDomain),
+    ]
       .map(barsScale)
-      .sortBy(); //sort the pixel values return by the domain extents
-    //find the necessary spacing (based on bar width) to push the bars completely inside the tick domain
+      .sort(); // sort the pixel values return by the domain extents
+
+    // find the necessary spacing (based on bar width) to push the bars completely inside the tick domain
     const [spacingTail, spacingHead] = [
-      _.clamp(P - (domainTail - dataDomainTail), 0, P),
-      _.clamp(P - (dataDomainHead - domainHead), 0, P)
+      clamp(P - (domainTail - dataDomainTail), 0, P),
+      clamp(P - (dataDomainHead - domainHead), 0, P),
     ];
+
     if (horizontal) {
       return {
         spacingTop: spacingHead,
         spacingBottom: spacingTail,
         spacingLeft: 0,
-        spacingRight: 0
-      };
-    } else {
-      return {
-        spacingTop: 0,
-        spacingBottom: 0,
-        spacingLeft: spacingHead,
-        spacingRight: spacingTail
+        spacingRight: 0,
       };
     }
+
+    return {
+      spacingTop: 0,
+      spacingBottom: 0,
+      spacingLeft: spacingHead,
+      spacingRight: spacingTail,
+    };
   }
 
   shouldComponentUpdate(nextProps) {
-    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ["barStyle"]);
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['barStyle']);
     return shouldUpdate;
   }
 
@@ -223,21 +227,20 @@ export default class RangeBarChart extends React.Component {
       showLabels,
       barLabelFormat,
       labelDistance,
-      labelClassName
+      labelClassName,
     } = this.props;
-    // invariant(hasOneOfTwo(xEnd, yEnd), `RangeBarChart expects a xEnd *or* yEnd prop, but not both.`);
 
     return (
       <g>
         {data.map((d, i) => {
           const [onMouseEnter, onMouseMove, onMouseLeave] = [
-            "onMouseEnterBar",
-            "onMouseMoveBar",
-            "onMouseLeaveBar"
+            'onMouseEnterBar',
+            'onMouseMoveBar',
+            'onMouseLeaveBar',
           ].map(eventName => {
             // partially apply this bar's data point as 2nd callback argument
-            const callback = _.get(this.props, eventName);
-            return _.isFunction(callback) ? _.partial(callback, _, d) : null;
+            const callback = get(this.props, eventName);
+            return isFunction(callback) ? bindTrailingArgs(callback, d) : null;
           });
 
           const barProps = {
@@ -256,8 +259,8 @@ export default class RangeBarChart extends React.Component {
             labelFormat: barLabelFormat,
             labelDistance,
             labelClassName: getValue(labelClassName, d, i),
-            className: `rct-chart-bar ${getValue(barClassName, d, i) || ""}`,
-            style: getValue(barStyle, d, i)
+            className: `rct-chart-bar ${getValue(barClassName, d, i) || ''}`,
+            style: getValue(barStyle, d, i),
           };
 
           return <Bar {...barProps} />;

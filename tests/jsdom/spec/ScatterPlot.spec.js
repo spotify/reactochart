@@ -3,7 +3,6 @@ import * as d3 from "d3";
 import { expect } from "chai";
 import sinon from "sinon";
 import { mount } from "enzyme";
-
 import { ScatterPlot } from "../../../src/index.js";
 
 describe("ScatterPlot", () => {

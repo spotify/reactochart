@@ -3,31 +3,34 @@ import {
   interpolateHsl,
   interpolateLab,
   interpolateRgb,
-  scaleLinear
-} from "d3";
-import _ from "lodash";
-import PropTypes from "prop-types";
-import React from "react";
-import RangeRect from "./RangeRect";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
+  scaleLinear,
+  schemeCategory10,
+} from 'd3';
+import isString from 'lodash/isString';
+import times from 'lodash/times';
+import range from 'lodash/range';
+import PropTypes from 'prop-types';
+import React from 'react';
+import RangeRect from './RangeRect';
+import * as CustomPropTypes from './utils/CustomPropTypes';
 import {
   domainFromData,
   domainFromRangeData,
   getValue,
-  makeAccessor2
-} from "./utils/Data";
-import { dataTypeFromScaleType } from "./utils/Scale";
-import xyPropsEqual from "./utils/xyPropsEqual";
+  makeAccessor2,
+} from './utils/Data';
+import { dataTypeFromScaleType } from './utils/Scale';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 function interpolatorFromType(type) {
   switch (type.toLowerCase()) {
-    case "hcl":
+    case 'hcl':
       return interpolateHcl;
-    case "hsl":
+    case 'hsl':
       return interpolateHsl;
-    case "lab":
+    case 'lab':
       return interpolateLab;
-    case "rgb":
+    case 'rgb':
       return interpolateRgb;
     default:
       return interpolateLab;
@@ -35,15 +38,16 @@ function interpolatorFromType(type) {
 }
 
 function makeColorScale(domain, colors, interpolator) {
-  // invariant(domain.length === colors.length, 'ColorHeatmap makeColorScale: domain.length should equal colors.length');
+  let interpolatorForColorScale = interpolator;
 
-  if (_.isString(interpolator))
-    interpolator = interpolatorFromType(interpolator);
+  if (isString(interpolatorForColorScale)) {
+    interpolatorForColorScale = interpolatorFromType(interpolator);
+  }
 
   return scaleLinear()
     .domain(domain)
     .range(colors)
-    .interpolate(interpolator);
+    .interpolate(interpolatorForColorScale);
 }
 
 /**
@@ -106,12 +110,12 @@ export default class ColorHeatmap extends React.Component {
      * Class attribute to be applied to each rect,
      * or accessor function which returns a class.
      */
-    rectClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+    rectClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   };
   static defaultProps = {
-    interpolator: "lab",
+    interpolator: 'lab',
     rectStyle: {},
-    rectClassName: ""
+    rectClassName: '',
   };
 
   static getDomain(props) {
@@ -121,21 +125,21 @@ export default class ColorHeatmap extends React.Component {
         data,
         makeAccessor2(x),
         makeAccessor2(xEnd),
-        dataTypeFromScaleType(xScaleType)
+        dataTypeFromScaleType(xScaleType),
       ),
       y: domainFromRangeData(
         data,
         makeAccessor2(y),
         makeAccessor2(yEnd),
-        dataTypeFromScaleType(yScaleType)
-      )
+        dataTypeFromScaleType(yScaleType),
+      ),
     };
   }
 
   shouldComponentUpdate(nextProps) {
     const shouldUpdate = !xyPropsEqual(this.props, nextProps, [
-      "colors",
-      "valueDomain"
+      'colors',
+      'valueDomain',
     ]);
     return shouldUpdate;
   }
@@ -152,7 +156,7 @@ export default class ColorHeatmap extends React.Component {
       yEnd,
       interpolator,
       rectStyle,
-      rectClassName
+      rectClassName,
     } = this.props;
     const valueAccessor = makeAccessor2(value);
     let colorScale;
@@ -165,11 +169,8 @@ export default class ColorHeatmap extends React.Component {
       const colors =
         this.props.colors ||
         (valueDomain.length === 2
-          ? ["#000000", "#ffffff"]
-          : _.times(
-              valueDomain.length,
-              scale.schemeCategory10().domain(_.range(10))
-            ));
+          ? ['#000000', '#ffffff']
+          : times(valueDomain.length, schemeCategory10().domain(range(10))));
       colorScale = makeColorScale(valueDomain, colors, interpolator);
     }
 

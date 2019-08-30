@@ -1,16 +1,18 @@
-import _ from "lodash";
-import PropTypes from "prop-types";
-import React from "react";
-import { getAxisChildProps, getMouseAxisOptions } from "./utils/Axis";
-import { sumMargins } from "./utils/Margin";
-import { getTickDomain, inferScaleType, invertPointScale } from "./utils/Scale";
-import xyPropsEqual from "./utils/xyPropsEqual";
-import XAxisLabels from "./XAxisLabels";
-import XAxisTitle from "./XAxisTitle";
-import XGrid from "./XGrid";
-import XTicks from "./XTicks";
+import defaults from 'lodash/defaults';
+import isFunction from 'lodash/isFunction';
+import upperFirst from 'lodash/upperFirst';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { getAxisChildProps, getMouseAxisOptions } from './utils/Axis';
+import { sumMargins } from './utils/Margin';
+import { getTickDomain } from './utils/Scale';
+import xyPropsEqual from './utils/xyPropsEqual';
+import XAxisLabels from './XAxisLabels';
+import XAxisTitle from './XAxisTitle';
+import XGrid from './XGrid';
+import XTicks from './XTicks';
 
-const getMouseOptions = getMouseAxisOptions.bind(null, "x");
+const getMouseOptions = getMouseAxisOptions.bind(null, 'x');
 
 /**
  * `XAxis` is the horizontal axis of the chart. `XAxis` is a wrapper around `XGrid`, `XTicks`,
@@ -27,92 +29,75 @@ export default class XAxis extends React.Component {
      * Extends the x domain to start and end on rounded values,
      * guaranteeing the original domain will be covered.
      * See d3 docs for more information
-     */
-    nice: PropTypes.bool,
+     */ nice: PropTypes.bool,
     ticks: PropTypes.array,
     tickCount: PropTypes.number,
     /**
      * Internal top spacing of XAxis, in pixels.
-     */
-    spacingTop: PropTypes.number,
+     */ spacingTop: PropTypes.number,
     /**
      * Internal bottom spacing of XAxis, in pixels.
-     */
-    spacingBottom: PropTypes.number,
+     */ spacingBottom: PropTypes.number,
     /**
      * Internal left spacing of XAxis, in pixels.
-     */
-    spacingLeft: PropTypes.number,
+     */ spacingLeft: PropTypes.number,
     /**
      * Internal right spacing of XAxis, in pixels.
-     */
-    spacingRight: PropTypes.number,
-
+     */ spacingRight: PropTypes.number,
     showTitle: PropTypes.bool,
     showLabels: PropTypes.bool,
     showTicks: PropTypes.bool,
     showGrid: PropTypes.bool,
-
     title: PropTypes.string,
     titleDistance: PropTypes.number,
     titleAlign: PropTypes.string,
     titleRotate: PropTypes.bool,
     titleStyle: PropTypes.object,
-
     labelDistance: PropTypes.number,
     labelClassName: PropTypes.string,
     labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-    labelFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    labelFormat: PropTypes.func,
     labelFormats: PropTypes.array,
     labels: PropTypes.array,
     /**
      * Adds horizontal offset (along the XAxis) to the labels
      */
     labelOffset: PropTypes.number,
-
     tickLength: PropTypes.number,
     tickClassName: PropTypes.string,
     tickStyle: PropTypes.object,
-
     gridLineClassName: PropTypes.string,
     gridLineStyle: PropTypes.object,
-
     onMouseClickLabel: PropTypes.func,
     onMouseEnterLabel: PropTypes.func,
     onMouseMoveLabel: PropTypes.func,
     onMouseLeaveLabel: PropTypes.func,
-
     /**
      * `mouseenter` event handler callback, called when user's mouse enters the x axis.
      */
     onMouseEnterAxis: PropTypes.func,
     /**
      * `mouseleave` event handler callback, called when user's mouse leaves the x axis.
-     */
-    onMouseLeaveAxis: PropTypes.func,
+     */ onMouseLeaveAxis: PropTypes.func,
     /**
      * `mousemove` event handler callback, called when user's mouse moves within the x axis.
-     */
-    onMouseMoveAxis: PropTypes.func,
+     */ onMouseMoveAxis: PropTypes.func,
     /**
      * `click` event handler callback, called when user's mouse clicks on the x axis.
-     */
-    onMouseClickAxis: PropTypes.func,
-
+     */ onMouseClickAxis: PropTypes.func,
     /**
      * Show X Axis line
      */
     showLine: PropTypes.bool,
     /**
      * Inline style object to be applied to the X Axis line
-     */
-    lineStyle: PropTypes.object
+     */ lineStyle: PropTypes.object,
   };
 
   static defaultProps = {
     width: 400,
     height: 250,
-    position: "bottom",
+    position: 'bottom',
     nice: true,
     showTitle: true,
     showLabels: true,
@@ -126,22 +111,20 @@ export default class XAxis extends React.Component {
     spacingLeft: 0,
     spacingRight: 0,
     showLine: true,
-    lineStyle: {}
+    lineStyle: {},
   };
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !xyPropsEqual(this.props, nextProps);
-  }
 
   static getTickDomain(props) {
     if (!props.xScale) return;
-    props = _.defaults({}, props, XAxis.defaultProps);
-    return { xTickDomain: getTickDomain(props.xScale, props) };
+    const propsWithDefaults = defaults({}, props, XAxis.defaultProps);
+    return {
+      xTickDomain: getTickDomain(propsWithDefaults.xScale, propsWithDefaults),
+    };
   }
 
   static getMargin(props) {
     const { ticksProps, labelsProps, titleProps } = getAxisChildProps(props);
-    let margins = [];
+    const margins = [];
 
     if (props.showTicks) margins.push(XTicks.getMargin(ticksProps));
 
@@ -150,13 +133,17 @@ export default class XAxis extends React.Component {
 
     if (props.showLabels) margins.push(XAxisLabels.getMargin(labelsProps));
 
-    return sumMargins(margins, "margin");
+    return sumMargins(margins, 'margin');
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return !xyPropsEqual(this.props, nextProps);
   }
 
   handleOnMouseMove = event => {
     const { onMouseMoveAxis, xScale } = this.props;
 
-    if (!_.isFunction(onMouseMoveAxis)) {
+    if (!isFunction(onMouseMoveAxis)) {
       return;
     }
 
@@ -167,7 +154,7 @@ export default class XAxis extends React.Component {
   handleOnMouseEnter = event => {
     const { onMouseEnterAxis, xScale } = this.props;
 
-    if (!_.isFunction(onMouseEnterAxis)) {
+    if (!isFunction(onMouseEnterAxis)) {
       return;
     }
 
@@ -178,7 +165,7 @@ export default class XAxis extends React.Component {
   handleOnMouseLeave = event => {
     const { onMouseLeaveAxis, xScale } = this.props;
 
-    if (!_.isFunction(onMouseLeaveAxis)) {
+    if (!isFunction(onMouseLeaveAxis)) {
       return;
     }
 
@@ -189,7 +176,7 @@ export default class XAxis extends React.Component {
   handleOnClick = event => {
     const { onMouseClickAxis, xScale } = this.props;
 
-    if (!_.isFunction(onMouseClickAxis)) {
+    if (!isFunction(onMouseClickAxis)) {
       return;
     }
 
@@ -214,14 +201,14 @@ export default class XAxis extends React.Component {
       showTicks,
       showGrid,
       showLine,
-      lineStyle
+      lineStyle,
     } = this.props;
 
     const {
       ticksProps,
       gridProps,
       labelsProps,
-      titleProps
+      titleProps,
     } = getAxisChildProps(this.props);
 
     labelsProps.distance = labelDistance + (showTicks ? tickLength : 0);
@@ -230,13 +217,13 @@ export default class XAxis extends React.Component {
       // todo optimize so we don't generate labels twice
       const labelsMargin = XAxisLabels.getMargin(labelsProps);
       titleProps.distance =
-        titleDistance + labelsMargin[`margin${_.upperFirst(position)}`];
+        titleDistance + labelsMargin[`margin${upperFirst(position)}`];
     } else if (showTitle && showTicks) {
       titleProps.distance = titleDistance + tickLength;
     }
 
     const axisLineY =
-      position === "bottom" ? height + spacingBottom : -spacingTop;
+      position === 'bottom' ? height + spacingBottom : -spacingTop;
 
     return (
       <g

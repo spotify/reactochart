@@ -22,13 +22,13 @@ describe("XAxisTitle", () => {
 
         <XAxisTitle title="DDDD" alignment="left" placement="above" />
 
-        <XAxisTitle title="HHHH" alignment="center" rotate={true} />
+        <XAxisTitle title="HHHH" alignment="center" rotate />
 
         <XAxisTitle
           title="JJJJ"
           alignment="left"
           placement="above"
-          rotate={true}
+          rotate
         />
 
         <XAxisTitle title="MMMM" position="top" alignment="left" />
@@ -43,7 +43,7 @@ describe("XAxisTitle", () => {
           title="SSSS"
           position="top"
           alignment="left"
-          rotate={true}
+          rotate
         />
       </XYPlot>
     );

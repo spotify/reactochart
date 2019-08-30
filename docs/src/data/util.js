@@ -1,12 +1,12 @@
-import _ from "lodash";
+import _ from 'lodash';
 
 export function randomWalk(length = 100, start = 0, variance = 10) {
   return _.reduce(
     _.range(length - 1),
-    (sequence, i) => {
+    sequence => {
       return sequence.concat(_.last(sequence) + _.random(-variance, variance));
     },
-    [start]
+    [start],
   );
 }
 
@@ -18,10 +18,10 @@ export function randomWalkTimeSeries(
   length = 100,
   start = 0,
   variance = 10,
-  startDate = new Date(2015, 0, 1)
+  startDate = new Date(2015, 0, 1),
 ) {
   let date = startDate;
-  return randomWalk(length, start, variance).map((n, i) => {
+  return randomWalk(length, start, variance).map(n => {
     date = new Date(date.getTime() + 24 * 60 * 60 * 1000);
     return [date, n];
   });

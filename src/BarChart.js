@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
-import React from "react";
-import RangeBarChart from "./RangeBarChart";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
-import xyPropsEqual from "./utils/xyPropsEqual";
+import PropTypes from 'prop-types';
+import React from 'react';
+import RangeBarChart from './RangeBarChart';
+import * as CustomPropTypes from './utils/CustomPropTypes';
+import xyPropsEqual from './utils/xyPropsEqual';
 
 function makeRangeBarChartProps(barChartProps) {
   // this component is a simple wrapper around RangeBarChart,
@@ -14,7 +14,7 @@ function makeRangeBarChartProps(barChartProps) {
     x: horizontal ? 0 : x,
     y: horizontal ? y : 0,
     xEnd: horizontal ? x : undefined,
-    yEnd: horizontal ? undefined : y
+    yEnd: horizontal ? undefined : y,
   };
 }
 
@@ -84,14 +84,14 @@ export default class BarChart extends React.Component {
     /**
      * `mouseleave` event handler callback, called when user's mouse leaves a bar.
      */
-    onMouseLeaveBar: PropTypes.func
+    onMouseLeaveBar: PropTypes.func,
   };
   static defaultProps = {
     data: [],
     horizontal: false,
     barThickness: 8,
-    barClassName: "",
-    barStyle: {}
+    barClassName: '',
+    barStyle: {},
   };
 
   // gets data domain of independent variable
@@ -102,8 +102,8 @@ export default class BarChart extends React.Component {
     return RangeBarChart.getSpacing(makeRangeBarChartProps(props));
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ["barStyle"]);
+  shouldComponentUpdate(nextProps) {
+    const shouldUpdate = !xyPropsEqual(this.props, nextProps, ['barStyle']);
     return shouldUpdate;
   }
 

@@ -1,7 +1,11 @@
-import _ from "lodash";
-import PropTypes from "prop-types";
-import React from "react";
-import * as CustomPropTypes from "./utils/CustomPropTypes";
+import get from 'lodash/get';
+import kebabCase from 'lodash/kebabCase';
+import isFunction from 'lodash/isFunction';
+import isObject from 'lodash/isObject';
+
+import PropTypes from 'prop-types';
+import React from 'react';
+import * as CustomPropTypes from './utils/CustomPropTypes';
 
 const TreeMapNode = props => {
   const {
@@ -12,42 +16,42 @@ const TreeMapNode = props => {
     minLabelWidth,
     minLabelHeight,
     NodeLabelComponent,
-    parentNames
+    parentNames,
   } = props;
   const { depth, parent, x0, y0, x1, y1 } = node;
 
-  var parentName = _.get(parent, "data.name");
+  const parentName = get(parent, 'data.name');
   const nodeGroupClass = parent
-    ? `node-group-${_.kebabCase(parentName)} node-group-i-${parentNames.indexOf(
-        parentName
+    ? `node-group-${kebabCase(parentName)} node-group-i-${parentNames.indexOf(
+        parentName,
       )}`
-    : "";
+    : '';
   const className = `rct-tree-map-node node-depth-${depth} ${nodeGroupClass}`;
 
-  let style = {
-    position: "absolute",
+  const style = {
+    position: 'absolute',
     width: x1 - x0,
     height: y1 - y0,
     top: y0,
     left: x0,
-    transition: "all .2s"
+    transition: 'all .2s',
   };
-  const customStyle = _.isFunction(nodeStyle)
+  const customStyle = isFunction(nodeStyle)
     ? nodeStyle(node)
-    : _.isObject(nodeStyle)
+    : isObject(nodeStyle)
       ? nodeStyle
       : {};
-  _.assign(style, customStyle);
+  Object.assign(style, customStyle);
 
-  let handlers = [
-    "onClick",
-    "onMouseEnter",
-    "onMouseLeave",
-    "onMouseMove"
-  ].reduce((handlers, eventName) => {
+  const handlers = [
+    'onClick',
+    'onMouseEnter',
+    'onMouseLeave',
+    'onMouseMove',
+  ].reduce((acc, eventName) => {
     const handler = props[`${eventName}Node`];
-    if (handler) handlers[eventName] = handler.bind(null, node);
-    return handlers;
+    if (handler) acc[eventName] = handler.bind(null, node);
+    return acc;
   }, {});
 
   return (
@@ -68,19 +72,24 @@ TreeMapNode.propTypes = {
     x: PropTypes.number,
     y: PropTypes.number,
     dx: PropTypes.number,
-    dy: PropTypes.number
+    dy: PropTypes.number,
+    x0: PropTypes.number,
+    y0: PropTypes.number,
+    x1: PropTypes.number,
+    y1: PropTypes.number,
   }),
   nodeStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   minLabelWidth: PropTypes.number,
   minLabelHeight: PropTypes.number,
   getLabel: CustomPropTypes.getter,
   labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  NodeLabelComponent: PropTypes.func
+  NodeLabelComponent: PropTypes.func,
+  parentNames: PropTypes.arrayOf(PropTypes.string),
 };
 
 TreeMapNode.defaultProps = {
   minLabelWidth: 0,
-  minLabelHeight: 0
+  minLabelHeight: 0,
 };
 
 export default TreeMapNode;

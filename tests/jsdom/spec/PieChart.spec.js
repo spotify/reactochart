@@ -1,5 +1,4 @@
 import React from "react";
-import * as d3 from "d3";
 import _ from "lodash";
 import sinon from "sinon";
 import { expect } from "chai";
@@ -79,6 +78,7 @@ describe("PieChart", () => {
     const text = chart.find("text");
 
     expect(paths).to.have.lengthOf(3);
+
     expect(text).to.have.lengthOf(1);
 
     chart = mount(<PieChart {...props} {...markerLineProps} />);
@@ -94,7 +94,7 @@ describe("PieChart", () => {
     const markerLine = paths.last();
 
     // test pie slice
-    expect(props.onMouseMoveSlice).not.to.have.been.called;
+    expect(props.onMouseMoveSlice).to.have.not.been.called;
     pieSlice.simulate("mousemove");
     expect(props.onMouseMoveSlice).to.have.been.called;
     expect(props.onMouseEnterSlice).not.to.have.been.called;

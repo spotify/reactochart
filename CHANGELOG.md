@@ -1,6 +1,11 @@
-## 1.11.1 (2019-07-31)
+## 2.0.0 (2019-08-30)
 
-- [#167](https://github.com/spotify/reactochart/pull/167) Integrate cross-env
+- [#173](https://github.com/spotify/reactochart/pull/173) Migrate to Spotify web scripts - thanks @arjbholu!
+- [#171](https://github.com/spotify/reactochart/pull/171) Update format examples
+- [#170](https://github.com/spotify/reactochart/pull/170) Namespace XYPlot props
+- [#169](https://github.com/spotify/reactochart/pull/169) Deprecate numeral.js in favor of d3.format - thanks @acmei!
+- [#164](https://github.com/spotify/reactochart/pull/164) Replace lodash functions with native JS versions
+- [#163](https://github.com/spotify/reactochart/pull/163) Modularize lodash
 
 ## 1.11.0 (2019-07-09)
 

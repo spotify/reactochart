@@ -1,8 +1,8 @@
-var path = require("path");
-var webpack = require("webpack");
-var _ = require("lodash");
-var HtmlPlugin = require("html-webpack-plugin");
-var CleanPlugin = require("clean-webpack-plugin");
+const path = require("path");
+const webpack = require("webpack");
+const _ = require("lodash");
+const HtmlPlugin = require("html-webpack-plugin");
+const CleanPlugin = require("clean-webpack-plugin");
 
 console.log("dirname", __dirname);
 module.exports = {

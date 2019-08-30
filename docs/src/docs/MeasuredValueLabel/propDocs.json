@@ -25,14 +25,26 @@
       "description": ""
     },
     "format": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "",
       "defaultValue": {
-        "value": "_.identity",
+        "value": "identity",
         "computed": true
       }
     },
+    "children": {
+      "type": {
+        "name": "any"
+      },
+      "required": false,
+      "description": ""
+    },
     "style": {
       "defaultValue": {
-        "value": "{\n  fontFamily: \"Helvetica, sans-serif\",\n  fontSize: \"20px\",\n  lineHeight: 1,\n  textAnchor: \"middle\"\n}",
+        "value": "{\n  fontFamily: 'Helvetica, sans-serif',\n  fontSize: '20px',\n  lineHeight: 1,\n  textAnchor: 'middle',\n}",
         "computed": false
       }
     }

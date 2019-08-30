@@ -104,7 +104,7 @@
       "required": false,
       "description": "Class name(s) to be included on the bar's <rect> element.",
       "defaultValue": {
-        "value": "\"\"",
+        "value": "''",
         "computed": false
       }
     },

@@ -51,7 +51,7 @@ describe("XAxis", () => {
           x={d => d[0]}
           y={d => d[1]}
         />
-        <XAxis nice={true} />
+        <XAxis nice />
       </XYPlot>
     ).find(LineChart);
 

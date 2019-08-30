@@ -87,7 +87,7 @@ describe("YLine", () => {
   });
 
   it("passes className to the line", () => {
-    let wrapper = shallow(
+    const wrapper = shallow(
       <YLine
         yScale={linearScale}
         value={linearValue}
@@ -100,7 +100,7 @@ describe("YLine", () => {
 
   it("passes style to the line", () => {
     const style = { fill: "red" };
-    let wrapper = shallow(
+    const wrapper = shallow(
       <YLine
         yScale={linearScale}
         value={linearValue}
@@ -113,8 +113,8 @@ describe("YLine", () => {
 
   it("limits the line's width using xLimit", () => {
     const limit = 2;
-    let wrapper = shallow(
-      <YLine 
+    const wrapper = shallow(
+      <YLine
         yScale={linearScale}
         xScale={linearScale}
         value={linearValue}
@@ -124,5 +124,4 @@ describe("YLine", () => {
     );
     expect(getLineWidth(findLine(wrapper))).to.equal(linearScale(limit));
   });
-
 });

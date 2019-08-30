@@ -115,7 +115,7 @@
       "required": false,
       "description": "",
       "defaultValue": {
-        "value": "\"bottom\"",
+        "value": "'bottom'",
         "computed": false
       }
     },
@@ -313,15 +313,7 @@
     },
     "labelFormat": {
       "type": {
-        "name": "union",
-        "value": [
-          {
-            "name": "string"
-          },
-          {
-            "name": "func"
-          }
-        ]
+        "name": "func"
       },
       "required": false,
       "description": ""

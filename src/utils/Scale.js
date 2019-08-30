@@ -1,111 +1,119 @@
-import _ from "lodash";
-import { scaleLinear, scaleTime, scalePoint, scaleLog, scalePow } from "d3";
+import get from 'lodash/get';
+import isDate from 'lodash/isDate';
+import isFunction from 'lodash/isFunction';
+import isObject from 'lodash/isObject';
+import isEqual from 'lodash/isEqual';
+import isNumber from 'lodash/isNumber';
+import identity from 'lodash/identity';
+import { scaleLinear, scaleTime, scalePoint, scaleLog, scalePow } from 'd3';
 
-import { combineDomains, domainFromData } from "./Data";
+import { combineDomains, domainFromData } from './Data';
 
 export function scaleTypeFromDataType(dataType) {
-  return _.get(
+  return get(
     {
-      number: "linear",
-      time: "time",
-      categorical: "ordinal"
+      number: 'linear',
+      time: 'time',
+      categorical: 'ordinal',
     },
     dataType,
-    "ordinal"
+    'ordinal',
   );
 }
 
 export function dataTypeFromScaleType(scaleType) {
-  return _.get(
+  return get(
     {
-      linear: "number",
-      log: "number",
-      pow: "number",
-      time: "time",
-      ordinal: "categorical"
+      linear: 'number',
+      log: 'number',
+      pow: 'number',
+      time: 'time',
+      ordinal: 'categorical',
     },
     scaleType,
-    "categorical"
+    'categorical',
   );
 }
 
 export function inferDataTypeFromDomain(domain) {
-  if (!_.isArray(domain))
+  if (!Array.isArray(domain))
     throw new Error(
-      "invalid domain, inferDataTypeFromDomain cannot infer data type"
+      'invalid domain, inferDataTypeFromDomain cannot infer data type',
     );
 
   return domain.length !== 2
-    ? "categorical"
-    : _.every(domain, _.isNumber)
-      ? "number"
-      : _.every(domain, _.isDate)
-        ? "time"
-        : "categorical";
+    ? 'categorical'
+    : domain.every(isNumber)
+      ? 'number'
+      : domain.every(isDate)
+        ? 'time'
+        : 'categorical';
 }
 
 export function inferScaleType(scale) {
   return !scale.ticks
-    ? "ordinal"
-    : _.isDate(scale.domain()[0])
-      ? "time"
+    ? 'ordinal'
+    : isDate(scale.domain()[0])
+      ? 'time'
       : scale.base
-        ? "log"
+        ? 'log'
         : scale.exponent
-          ? "pow"
-          : "linear";
+          ? 'pow'
+          : 'linear';
 }
 
 export function initScale(scaleType) {
   switch (scaleType) {
-    case "linear":
+    case 'linear':
       return scaleLinear();
-    case "time":
+    case 'time':
       return scaleTime();
-    case "ordinal":
+    case 'ordinal':
       return scalePoint();
-    case "log":
+    case 'log':
       return scaleLog();
-    case "pow":
+    case 'pow':
       return scalePow();
+    default:
+      return;
   }
 }
 
 export function isValidScale(scale) {
   return (
-    _.isFunction(scale) &&
-    _.isFunction(scale.domain) &&
-    _.isFunction(scale.range)
+    isFunction(scale) && isFunction(scale.domain) && isFunction(scale.range)
   );
 }
 
 export function hasXYScales(scale) {
-  return _.isObject(scale) && isValidScale(scale.x) && isValidScale(scale.y);
+  return isObject(scale) && isValidScale(scale.x) && isValidScale(scale.y);
 }
 
 export function getScaleTicks(scale, scaleType, tickCount = 10) {
-  scaleType = scaleType || inferScaleType(scale);
-  return scaleType === "ordinal" ? scale.domain() : scale.ticks(tickCount);
+  return (scaleType || inferScaleType(scale)) === 'ordinal'
+    ? scale.domain()
+    : scale.ticks(tickCount);
 }
 
 export function getTickDomain(scale, { ticks, tickCount, nice } = {}) {
   const scaleType = inferScaleType(scale);
   const scaleDomain = scale.domain();
 
-  if (nice && scaleType !== "ordinal") {
+  if (nice && scaleType !== 'ordinal') {
     // If nicing, initialize a new scale and nice it
+    // eslint-disable-next-line no-param-reassign
     scale = scale
       .copy()
       .domain(scaleDomain)
       .nice(tickCount || 10);
   }
 
-  if (_.isArray(ticks)) {
+  if (Array.isArray(ticks)) {
     return combineDomains([
       scale.domain(),
-      domainFromData(ticks, _.identity, dataTypeFromScaleType(scaleType))
+      domainFromData(ticks, identity, dataTypeFromScaleType(scaleType)),
     ]);
-  } else if (nice && scaleType !== "ordinal") return scale.domain();
+  } else if (nice && scaleType !== 'ordinal') return scale.domain();
   // return undefined by default, if we have no options pertaining to ticks
 }
 
@@ -113,8 +121,8 @@ export function scaleEqual(scaleA, scaleB) {
   return !isValidScale(scaleA) || !isValidScale(scaleB)
     ? scaleA === scaleB // safe fallback
     : // check scale equality
-      _.isEqual(scaleA.domain(), scaleB.domain()) &&
-        _.isEqual(scaleA.range(), scaleB.range());
+      isEqual(scaleA.domain(), scaleB.domain()) &&
+        isEqual(scaleA.range(), scaleB.range());
 }
 
 export function indexOfClosestNumberInList(number, list) {
@@ -138,8 +146,6 @@ export function invertPointScale(scale, rangeValue) {
 
   const isDescending = rangePoints[0] > rangePoints[1];
 
-  // _.sortedIndex works on ascending lists only
-  // so reverse if working with descending list
   if (isDescending) {
     domain.reverse();
     rangePoints.reverse();

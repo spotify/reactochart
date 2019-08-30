@@ -1,6 +1,6 @@
-import { inferScaleType, invertPointScale } from "./Scale";
-import invariant from "invariant";
-import _ from "lodash";
+import { inferScaleType, invertPointScale } from './Scale';
+import invariant from 'invariant';
+import inRange from 'lodash/inRange';
 
 export function getAxisChildProps(props) {
   const {
@@ -36,7 +36,7 @@ export function getAxisChildProps(props) {
     onMouseEnterLabel,
     onMouseMoveLabel,
     onMouseLeaveLabel,
-    onMouseClickLabel
+    onMouseClickLabel,
   } = props;
 
   const ticksProps = {
@@ -54,7 +54,7 @@ export function getAxisChildProps(props) {
     placement,
     tickLength,
     tickStyle,
-    tickClassName
+    tickClassName,
   };
 
   const gridProps = {
@@ -69,7 +69,7 @@ export function getAxisChildProps(props) {
     spacingLeft,
     spacingRight,
     lineClassName: gridLineClassName,
-    lineStyle: gridLineStyle
+    lineStyle: gridLineStyle,
   };
 
   const labelsProps = {
@@ -95,7 +95,7 @@ export function getAxisChildProps(props) {
     onMouseEnterLabel,
     onMouseMoveLabel,
     onMouseLeaveLabel,
-    onMouseClickLabel
+    onMouseClickLabel,
   };
 
   const titleProps = {
@@ -111,7 +111,7 @@ export function getAxisChildProps(props) {
     style: titleStyle,
     distance: titleDistance,
     alignment: titleAlign,
-    rotate: titleRotate
+    rotate: titleRotate,
   };
 
   return { ticksProps, gridProps, labelsProps, titleProps };
@@ -119,31 +119,31 @@ export function getAxisChildProps(props) {
 
 export function getMouseAxisOptions(axisType, event, scale) {
   invariant(
-    axisType === "x" || axisType === "y",
-    "axisType should be either x or y."
+    axisType === 'x' || axisType === 'y',
+    'axisType should be either x or y.',
   );
 
   const axisBoundingBox = event.currentTarget.getBoundingClientRect();
   const scaleType = inferScaleType(scale);
   const outerY = Math.round(event.clientY - axisBoundingBox.top);
   const outerX = Math.round(event.clientX - axisBoundingBox.left);
-  const isYAxis = axisType === "y";
+  const isYAxis = axisType === 'y';
 
   const mousePos = isYAxis ? outerY : outerX;
   const boundingBoxLimit = isYAxis
     ? axisBoundingBox.height
     : axisBoundingBox.width;
 
-  const value = !_.inRange(mousePos, 0, boundingBoxLimit)
+  const value = !inRange(mousePos, 0, boundingBoxLimit)
     ? null
-    : scaleType === "ordinal"
-      ? invertPointScale(scale, mousePos)
-      : scale.invert(mousePos);
+    : scaleType === 'ordinal'
+    ? invertPointScale(scale, mousePos)
+    : scale.invert(mousePos);
 
   const mouseOptions = {
     event,
     outerX,
-    outerY
+    outerY,
   };
 
   if (isYAxis) {
