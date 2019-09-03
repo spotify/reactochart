@@ -170,7 +170,7 @@
     },
     "children": {
       "type": {
-        "name": "string"
+        "name": "any"
       },
       "required": false,
       "description": ""
