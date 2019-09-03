@@ -40,7 +40,7 @@ export default class YAxisTitle extends React.Component {
      */
     spacingRight: PropTypes.number,
     title: PropTypes.string,
-    children: PropTypes.string,
+    children: PropTypes.any,
   };
 
   static defaultProps = {
