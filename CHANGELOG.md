@@ -1,6 +1,6 @@
 ## 2.0.1 (2019-09-03)
 
-- [#179](https://github.com/spotify/reactochart/pull/179) Fix children proptype for YAXisTitle
+- [#179](https://github.com/spotify/reactochart/pull/179) Fix children proptype for YAxisTitle
 
 ## 2.0.0 (2019-08-30)
 
