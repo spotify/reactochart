@@ -8,9 +8,11 @@
   "extends": [
     "@spotify/eslint-config-react",
     "@spotify/eslint-config-base",
-    "prettier"
+    "prettier",
+    "plugin:chai-friendly/recommended"
   ],
-  "plugins": ["jest"],
+  "env": { "jest": true },
+  "plugins": ["jest", "chai-friendly"],
   "rules": {
     "consistent-return": "off",
     "no-nested-ternary": "off",
