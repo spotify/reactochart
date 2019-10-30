@@ -1,7 +1,6 @@
-import _ from "lodash";
 import * as d3 from "d3";
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import chaiEnzyme from "chai-enzyme";
 import chai from "chai";
 chai.use(chaiEnzyme());
@@ -117,7 +116,7 @@ describe("XLine", () => {
       <XLine
         yScale={linearScale}
         xScale={linearScale}
-        yDomain={linearScale.domain}
+        yDomain={linearScale.domain()}
         value={linearValue}
         yLimit={limit}
         {...commonProps}
