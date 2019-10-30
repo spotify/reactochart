@@ -981,6 +981,7 @@ export default class SankeyDiagram extends React.Component {
   componentWillMount() {
     this._makeSankeyGraph();
   }
+
   componentWillReceiveProps(nextProps) {
     // only update this._graph if a prop which affects the sankey layout has changed (most don't)
     const sankeyLayoutPropKeys = [
