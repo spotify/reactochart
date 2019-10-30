@@ -10,13 +10,6 @@ const { expect } = chai;
 
 import { Bar } from "../../../src/index.js";
 
-function expectProps(el, expectedProps) {
-  const props = el.props();
-  _.forEach(expectedProps, (expectedValue, key) => {
-    expect(props[key]).to.equal(expectedValue);
-  });
-}
-
 describe("Bar", () => {
   let horizontalBarProps;
   let verticalBarProps;
@@ -138,38 +131,26 @@ describe("Bar", () => {
   });
 
   it("passes className and style props through to the bar's rectangle element", () => {
-    const verticalProps = {
-      ...verticalBarProps,
+    const barProps = {
       className: "foo-bar-test-class",
       style: { fill: "thistle" }
     };
 
-    const verticalBar = shallow(<Bar {...verticalProps} />);
+    const verticalBar = shallow(<Bar {...verticalBarProps} {...barProps} />);
     const rect = verticalBar.find("rect");
     expect(rect).to.have.length(1);
     expect(rect.props().className).to.include("foo-bar-test-class");
-    expect(rect.props().style).to.deep.equal(verticalProps.style);
+    expect(rect.props().style).to.deep.equal(barProps.style);
   });
 
   it("attaches onMouseMove, onMouseEnter and onMouseLeave handlers to the bar's rectangle", () => {
     const barProps = {
-      xScale: d3
-        .scaleLinear()
-        .domain([0, 1])
-        .range([0, 100]),
-      yScale: d3
-        .scalePoint()
-        .domain(["a", "b", "c"])
-        .range([100, 0]),
-      x: "a",
-      y: 0,
-      yEnd: 1,
       onMouseMove: sinon.spy(),
       onMouseEnter: sinon.spy(),
       onMouseLeave: sinon.spy()
     };
 
-    const bar = mount(<Bar {...barProps} />);
+    const bar = mount(<Bar {...verticalBarProps} {...barProps} />);
     const rect = bar.find("rect");
 
     expect(barProps.onMouseEnter).not.to.have.been.called;
@@ -203,10 +184,6 @@ describe("Bar", () => {
     // throw if one scale is missing
     expect(() => {
       shallow(<Bar {...{ ...barProps, xScale }} />);
-    }).to.throw(Error);
-    // throw if one scale is invalid
-    expect(() => {
-      shallow(<Bar {...{ ...barProps, xScale: "bad", yScale }} />);
     }).to.throw(Error);
     // don't throw if both are provided
     expect(() => {
