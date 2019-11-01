@@ -11,6 +11,8 @@
 
 # Overview
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/spotify/reactochart.svg)](https://greenkeeper.io/)
+
 Reactochart is a library of React components for creating data visualization charts and graphs. Components include **line chart**, **bar chart**, **area chart**, **heat maps**, **scatterplot**, **histogram**, **pie chart**, **sankey diagram**, and **tree map**.
 
 # Getting started
