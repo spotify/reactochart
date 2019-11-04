@@ -1,3 +1,8 @@
+## 2.0.2 (2019-11-04)
+
+- [#182](https://github.com/spotify/reactochart/pull/182) Decorate XYPlot onMouseEnter and onMouseLeave events - thanks @tanayv!
+- [#184](https://github.com/spotify/reactochart/pull/184) Fix warnings in tests and add SankeyNodeTerminal tests
+
 ## 2.0.1 (2019-09-03)
 
 - [#179](https://github.com/spotify/reactochart/pull/179) Fix children proptype for YAxisTitle
