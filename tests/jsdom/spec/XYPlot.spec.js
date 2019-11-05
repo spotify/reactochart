@@ -36,10 +36,10 @@ describe("XYPlot", () => {
     const chart2 = mount(<XYPlot {...commonXYProps} />);
     const node2 = chart2.find("svg").instance();
     expect(node2.tagName.toLowerCase()).to.equal("svg");
-    expect(parseInt(node2.getAttribute("width")))
+    expect(parseInt(node2.getAttribute("width"), 10))
       .to.be.a("number")
       .and.to.be.above(0);
-    expect(parseInt(node2.getAttribute("height")))
+    expect(parseInt(node2.getAttribute("height"), 10))
       .to.be.a("number")
       .and.to.be.above(0);
   });
@@ -60,10 +60,10 @@ describe("XYPlot", () => {
     expect(inner.getAttribute("transform").replace(/\s/, "")).to.contain(
       `translate(${margin.marginLeft},${margin.marginTop})`
     );
-    expect(parseInt(bg.getAttribute("width"))).to.equal(
+    expect(parseInt(bg.getAttribute("width"), 10)).to.equal(
       size - (margin.marginLeft + margin.marginRight)
     );
-    expect(parseInt(bg.getAttribute("height"))).to.equal(
+    expect(parseInt(bg.getAttribute("height"), 10)).to.equal(
       size - (margin.marginTop + margin.marginBottom)
     );
   });
@@ -108,23 +108,34 @@ describe("XYPlot", () => {
       onMouseEnter: sinon.spy(),
       onMouseLeave: sinon.spy(),
       onMouseDown: sinon.spy(),
-      onMouseUp: sinon.spy()
+      onMouseUp: sinon.spy(),
+      onClick: sinon.spy(),
     };
     const chart = mount(<XYPlot {...commonXYProps} {...mouseHandlers} />);
-    expect(chart.props().onMouseMove).not.to.have.been.called;
-    chart.simulate("mousemove");
-    expect(chart.props().onMouseMove).to.have.been.called;
-    // expect(chart.props().onMouseEnter).not.to.have.been.called;
-    // chart.simulate("mouseenter");
-    // expect(chart.props().onMouseEnter).to.have.been.called;
-    // expect(chart.props().onMouseLeave).not.to.have.been.called;
-    // chart.simulate("mouseleave");
-    // expect(chart.props().onMouseLeave).to.have.been.called;
-    // expect(chart.props().onMouseDown).not.to.have.been.called;
-    // chart.simulate("mousedown");
-    // expect(chart.props().onMouseDown).to.have.been.called;
-    // expect(chart.props().onMouseUp).not.to.have.been.called;
-    // chart.simulate("mouseup");
-    // expect(chart.props().onMouseUp).to.have.been.called;
+    const chartProps = chart.props();
+    const expectedKeys = [
+      'event',
+      'outerX',
+      'outerY',
+      'innerX',
+      'innerY',
+      'xValue',
+      'yValue',
+      'xScale',
+      'yScale',
+      'marginTop',
+      'marginBottom',
+      'marginLeft',
+      'marginRight',
+    ];
+
+    Object.keys(mouseHandlers).forEach(handler => {
+      const handlerSimulateEventName = handler.substring(2).toLowerCase();
+
+      expect(chartProps[handler]).not.to.have.been.called;
+      chart.simulate(handlerSimulateEventName);
+      expect(chartProps[handler]).to.have.been.called;
+      expect(Object.keys(chartProps[handler].args[0][0])).to.eql(expectedKeys);
+    });
   });
 });

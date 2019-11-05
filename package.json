@@ -5,7 +5,7 @@
   "contributors": [
     "Kris Salvador <kriss@spotify.com>"
   ],
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "index.js",
   "files": [
     "*.js",
@@ -75,6 +75,7 @@
     "enzyme-adapter-react-16": "^1.7.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-chai-friendly": "^0.5.0",
     "eslint-plugin-jest": "^22.14.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
