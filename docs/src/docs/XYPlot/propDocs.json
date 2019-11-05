@@ -16,30 +16,6 @@
         }
       ],
       "returns": null
-    },
-    {
-      "name": "onMouseEnter",
-      "docblock": null,
-      "modifiers": [],
-      "params": [
-        {
-          "name": "event",
-          "type": null
-        }
-      ],
-      "returns": null
-    },
-    {
-      "name": "onMouseLeave",
-      "docblock": null,
-      "modifiers": [],
-      "params": [
-        {
-          "name": "event",
-          "type": null
-        }
-      ],
-      "returns": null
     }
   ],
   "props": {
