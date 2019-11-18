@@ -588,7 +588,8 @@ describe("SankeyDiagram", () => {
       const infoArg = nodeProps.onClickNode.args[0][1];
       expect(eventArg).to.be.an("object");
       expect(eventArg).to.have.property("target");
-      expect(eventArg.target).to.be.an("object");
+      // SVG <rects> are treated as HTMLUnknownElement since jsdom doesn't support SVG
+      expect(eventArg.target).to.be.an("HTMLUnknownElement");
       expect(infoArg).to.be.an("object");
       expect(infoArg.node).to.equal(basicNodeObj);
       expect(infoArg.graph).to.equal(nodeProps.graph);
@@ -675,7 +676,8 @@ describe("SankeyDiagram", () => {
       const infoArg = linkProps.onClickLink.args[0][1];
       expect(eventArg).to.be.an("object");
       expect(eventArg).to.have.property("target");
-      expect(eventArg.target).to.be.an("object");
+      // SVG <rects> are treated as HTMLUnknownElement since jsdom doesn't support SVG
+      expect(eventArg.target).to.be.an("HTMLUnknownElement");
       expect(infoArg).to.be.an("object");
       expect(infoArg.link).to.equal(linkObj);
       expect(infoArg.graph).to.equal(linkProps.graph);
@@ -1106,7 +1108,8 @@ describe("SankeyDiagram", () => {
       const infoArg = nodeTerminalProps.onClickNodeTerminal.args[0][1];
       expect(eventArg).to.be.an("object");
       expect(eventArg).to.have.property("target");
-      expect(eventArg.target).to.be.an("object");
+      // SVG <rects> are treated as HTMLUnknownElement since jsdom doesn't support SVG
+      expect(eventArg.target).to.be.an("HTMLUnknownElement");
       expect(infoArg).to.be.an("object");
       expect(infoArg.node).to.equal(basicNodeObj);
       expect(infoArg.graph).to.equal(nodeTerminalProps.graph);
