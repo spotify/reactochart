@@ -32,10 +32,10 @@
     "clean": "node scripts/clean.js",
     "serve": "python -m SimpleHTTPServer",
     "test": "npm run test-jsdom && npm run lint",
-    "test-files": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:@babel/register --require tests/jsdom/setup.js --recursive",
+    "test-files": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --require @babel/register tests/jsdom/setup.js --recursive",
     "test-browser": "webpack-dev-server --config tests/browser/webpack.config.test.js",
-    "test-jsdom": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --compilers js:@babel/register --require tests/jsdom/setup.js --recursive tests/jsdom/spec",
-    "test-watch": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --watch --compilers js:@babel/register --require tests/jsdom/setup.js --recursive tests/jsdom/spec"
+    "test-jsdom": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --require @babel/register tests/jsdom/setup.js --recursive tests/jsdom/spec",
+    "test-watch": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --watch --require @babel/register tests/jsdom/setup.js --recursive tests/jsdom/spec"
   },
   "dependencies": {
     "d3": "^5.9.7",
@@ -69,7 +69,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "component-playground": "^3.2.1",
     "copy-webpack-plugin": "^5.0.4",
-    "cross-env": "^6.0.3",
+    "cross-env": "^5.2.1",
     "css-loader": "^3.0.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
@@ -116,5 +116,10 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  "greenkeeper": {
+    "ignore": [
+      "cross-env"
+    ]
   }
 }
