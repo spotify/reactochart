@@ -15,7 +15,7 @@
     "src/"
   ],
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "scripts": {
     "analyze-bundle": "source-map-explorer node_modules ./*.js ./*.js.map ./utils styles.css src/",
