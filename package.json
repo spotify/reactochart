@@ -61,7 +61,6 @@
     "@spotify/eslint-config-base": "^1.1.4",
     "@spotify/eslint-config-react": "^1.1.4",
     "@spotify/prettier-config": "^1.1.4",
-    "@spotify/web-scripts": "^3.0.1",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-lodash": "^3.3.4",
@@ -82,7 +81,6 @@
     "eslint-plugin-react": "^7.14.3",
     "glob": "^7.1.2",
     "html-webpack-plugin": "^3.2.0",
-    "husky": "^3.1.0",
     "jsdom": "^9.12.0",
     "json-loader": "^0.5.2",
     "less": "^3.0.4",
@@ -118,10 +116,5 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "web-scripts precommit"
-    }
   }
 }
