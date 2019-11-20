@@ -61,6 +61,7 @@
     "@spotify/eslint-config-base": "^3.0.0",
     "@spotify/eslint-config-react": "^3.0.1",
     "@spotify/prettier-config": "^3.0.0",
+    "@spotify/web-scripts": "^3.0.1",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-lodash": "^3.3.4",
@@ -69,7 +70,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "component-playground": "^3.2.1",
     "copy-webpack-plugin": "^5.0.4",
-    "cross-env": "^5.2.1",
+    "cross-env": "^6.0.0",
     "css-loader": "^3.0.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
@@ -82,6 +83,7 @@
     "glob": "^7.1.2",
     "html-webpack-plugin": "^3.2.0",
     "jsdom": "^15.2.0",
+    "husky": "^3.1.0",
     "json-loader": "^0.5.2",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
@@ -117,9 +119,9 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "greenkeeper": {
-    "ignore": [
-      "cross-env"
-    ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "web-scripts precommit"
+    }
   }
 }
