@@ -22,7 +22,7 @@ class PieChart extends React.Component {
      * Accessor for getting the values plotted on the pie chart.
      * If not provided, just uses the value itself at given index.
      */
-    getValue: CustomPropTypes.getter,
+    slice: CustomPropTypes.getter.isRequired,
     /**
      * Total expected sum of all the pie slice values.
      * If provided && slices don't add up to total, an "empty" slice will be rendered for the rest
@@ -96,6 +96,12 @@ class PieChart extends React.Component {
      */
     pieSliceClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     /**
+     * Inline style object applied to each pie slice.
+     * When a function is provided it will receive the value for the slice and should return the
+     * style object for the slice.
+     */
+    pieSliceStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    /**
      * Value for where to place markerline.
      */
     markerLineValue: PropTypes.number,
@@ -141,10 +147,11 @@ class PieChart extends React.Component {
     onMouseLeaveSlice: PropTypes.func,
   };
   static defaultProps = {
-    getValue: null,
+    slice: null,
     centerLabelClassName: '',
     centerLabelStyle: {},
     pieSliceClassName: '',
+    pieSliceStyle: {},
     markerLineClassName: '',
     markerLineOverhangInner: 2,
     markerLineOverhangOuter: 2,
@@ -286,7 +293,7 @@ class PieChart extends React.Component {
       markerLineOverhangOuter,
     } = this.props;
 
-    const valueAccessor = makeAccessor(this.props.getValue);
+    const valueAccessor = makeAccessor(this.props.slice);
     const sum = sumBy(this.props.data, valueAccessor);
     const total = this.props.total || sum;
     const markerLinePercent = isFinite(markerLineValue)
@@ -342,6 +349,7 @@ class PieChart extends React.Component {
                 onMouseMove,
                 onMouseLeave,
                 key,
+                style: getValue(this.props.pieSliceStyle, d, i),
               }}
             />
           );
