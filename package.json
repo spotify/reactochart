@@ -76,7 +76,7 @@
     "eslint": "^5.16.0",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-chai-friendly": "^0.5.0",
-    "eslint-plugin-jest": "^22.14.1",
+    "eslint-plugin-jest": "^23.0.5",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.3",
     "glob": "^7.1.2",
