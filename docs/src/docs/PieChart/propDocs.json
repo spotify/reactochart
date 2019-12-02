@@ -158,10 +158,10 @@
       "required": true,
       "description": "Array of data to plot with pie chart."
     },
-    "getValue": {
+    "slice": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.getter.isRequired"
       },
       "required": false,
       "description": "Accessor for getting the values plotted on the pie chart.\nIf not provided, just uses the value itself at given index.",
@@ -331,6 +331,25 @@
       "description": "Class attribute to be applied to each pie slice,\nor accessor function which returns a class.",
       "defaultValue": {
         "value": "''",
+        "computed": false
+      }
+    },
+    "pieSliceStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Inline style object applied to each pie slice.\nWhen a function is provided it will receive the value for the slice and should return the\nstyle object for the slice.",
+      "defaultValue": {
+        "value": "{}",
         "computed": false
       }
     },
