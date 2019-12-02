@@ -18,21 +18,21 @@ class PieChartExample extends React.Component {
     clearInterval(this._interval);
   }
 
+  getPieSliceFill = datum => {
+    const color = d3.interpolateSinebow(datum / 100);
+    return {
+      fill: color,
+    };
+  };
+
   render() {
-    const colorPicker = (d, i, c) => (i === c ? (d / 45) * 255 : 200);
     const slice = d => d;
     return (
       <div>
         <PieChart
           slice={slice}
-          data={[45, 25, 50]}
-          pieSliceStyle={(d, i) => ({
-            fill: `rgb(${colorPicker(d, i, 0)}, ${colorPicker(
-              d,
-              i,
-              1,
-            )}, ${colorPicker(d, i, 2)}`,
-          })}
+          data={[45, 25, 78]}
+          pieSliceStyle={this.getPieSliceFill}
         />
         <PieChart
           slice={slice}
