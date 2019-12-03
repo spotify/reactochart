@@ -8,12 +8,12 @@ const examples = [
   {
     id: 'rates-by-age',
     label: 'Smoking Rates by Age',
-    codeText: require('raw-loader!./examples/RatesByAge.js.example'),
+    codeText: require('./examples/RatesByAge.js.example').default,
   },
   {
     id: 'basic',
     label: 'Basic AreaBarChart',
-    codeText: require('raw-loader!./examples/AreaBarChart.js.example'),
+    codeText: require('./examples/AreaBarChart.js.example').default,
   },
 ];
 

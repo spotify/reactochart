@@ -8,12 +8,12 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic TreeMap',
-    codeText: require('raw-loader!./examples/TreeMap.js.example'),
+    codeText: require('./examples/TreeMap.js.example').default,
   },
   {
     id: 'animated',
     label: 'Animated TreeMap',
-    codeText: require('raw-loader!./examples/AnimatedTreeMap.js.example'),
+    codeText: require('./examples/AnimatedTreeMap.js.example').default,
   },
 ];
 

@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic XTicks',
-    codeText: require('raw-loader!./examples/XTicks.js.example'),
+    codeText: require('./examples/XTicks.js.example').default,
   },
 ];
 

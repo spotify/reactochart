@@ -8,12 +8,12 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic XAxis',
-    codeText: require('raw-loader!./examples/XAxis.js.example'),
+    codeText: require('./examples/XAxis.js.example').default,
   },
   {
     id: 'customTicks',
     label: 'XAxis with custom ticks',
-    codeText: require('raw-loader!./examples/XAxisCustomTicks.js.example'),
+    codeText: require('./examples/XAxisCustomTicks.js.example').default,
   },
 ];
 

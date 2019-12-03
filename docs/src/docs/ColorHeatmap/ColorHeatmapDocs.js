@@ -8,12 +8,12 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic ColorHeatmap',
-    codeText: require('raw-loader!./examples/ColorHeatmap.js.example'),
+    codeText: require('./examples/ColorHeatmap.js.example').default,
   },
   {
     id: 'categorical',
     label: 'Categorical ColorHeatmap',
-    codeText: require('raw-loader!./examples/CategoricalColorHeatmap.js.example'),
+    codeText: require('./examples/CategoricalColorHeatmap.js.example').default,
   },
 ];
 
