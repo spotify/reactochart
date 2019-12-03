@@ -8,12 +8,12 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic LineChart',
-    codeText: require('raw-loader!./examples/LineChart.js.example'),
+    codeText: require('./examples/LineChart.js.example').default,
   },
   {
     id: 'interactive',
     label: 'Interactive LineChart',
-    codeText: require('raw-loader!./examples/InteractiveLineChart.js.example'),
+    codeText: require('./examples/InteractiveLineChart.js.example').default,
   },
 ];
 

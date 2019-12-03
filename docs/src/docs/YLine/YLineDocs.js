@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic YLine',
-    codeText: require('raw-loader!./examples/YLine.js.example'),
+    codeText: require('./examples/YLine.js.example').default,
   },
 ];
 

@@ -6,7 +6,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Quick Start Example',
-    codeText: require('raw-loader!./examples/QuickStart.js.example'),
+    codeText: require('./examples/QuickStart.js.example').default,
   },
 ];
 
@@ -30,9 +30,12 @@ export default class QuickStartLesson extends React.Component {
           following components:
         </p>
         <pre>
-          import XYPlot from 'reactochart/XYPlot';<br />
-          import XAxis from 'reactochart/XAxis';<br />
-          import YAxis from 'reactochart/YAxis';<br />
+          import XYPlot from 'reactochart/XYPlot';
+          <br />
+          import XAxis from 'reactochart/XAxis';
+          <br />
+          import YAxis from 'reactochart/YAxis';
+          <br />
           import LineChart from 'reactochart/LineChart';
         </pre>
         <p>
@@ -41,7 +44,8 @@ export default class QuickStartLesson extends React.Component {
           tree-shaking:
         </p>
         <pre>
-          import {'{'}XYPlot, XAxis, YAxis, LineChart{'}'} from 'reactochart';<br />
+          import {'{'}XYPlot, XAxis, YAxis, LineChart{'}'} from 'reactochart';
+          <br />
           // or <br />
           import * as Reactochart from 'reactochart';
         </pre>

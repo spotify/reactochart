@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic Histogram',
-    codeText: require('raw-loader!./examples/Histogram.js.example'),
+    codeText: require('./examples/Histogram.js.example').default,
   },
 ];
 

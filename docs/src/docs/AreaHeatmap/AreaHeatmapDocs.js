@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic AreaHeatmap',
-    codeText: require('raw-loader!./examples/AreaHeatmap.js.example'),
+    codeText: require('./examples/AreaHeatmap.js.example').default,
   },
 ];
 

@@ -8,12 +8,12 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic XAxisTitle',
-    codeText: require('raw-loader!./examples/XAxisTitle.js.example'),
+    codeText: require('./examples/XAxisTitle.js.example').default,
   },
   {
     id: 'all',
     label: 'All XAxisTitle Options',
-    codeText: require('raw-loader!./examples/XAxisTitleAll.js.example'),
+    codeText: require('./examples/XAxisTitleAll.js.example').default,
   },
 ];
 
