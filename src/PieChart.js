@@ -286,7 +286,6 @@ class PieChart extends React.Component {
 
     const {
       data,
-      slice,
       total,
       centerLabel,
       getPieSliceLabel,
@@ -296,7 +295,7 @@ class PieChart extends React.Component {
       pieSliceClassName,
     } = this.props;
 
-    const valueAccessor = makeAccessor(slice);
+    const valueAccessor = makeAccessor(this.props.slice);
     const sum = sumBy(data, valueAccessor);
     const newTotal = total || sum;
     const markerLinePercent = isFinite(markerLineValue)
