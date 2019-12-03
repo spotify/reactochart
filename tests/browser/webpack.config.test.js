@@ -18,7 +18,9 @@ module.exports = {
       title: 'Reactochart Tests',
       template: path.join(__dirname, 'index_html.ejs'),
     }),
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanAfterEveryBuildPatterns: path.join(__dirname, 'docs/build'),
+    }),
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
