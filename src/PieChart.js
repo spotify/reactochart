@@ -18,9 +18,8 @@ class PieChart extends React.Component {
      * Array of data to plot with pie chart.
      */
     data: PropTypes.array.isRequired,
-    /**
-     * Accessor for getting the values plotted on the pie chart.
-     * If not provided, just uses the value itself at given index.
+    /* Accessor function for getting the pie slices plotted on the pie chart.
+     * If not provided, just uses the data value itself at given index.
      */
     slice: CustomPropTypes.getter.isRequired,
     /**
@@ -97,8 +96,8 @@ class PieChart extends React.Component {
     pieSliceClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     /**
      * Inline style object applied to each pie slice.
-     * When a function is provided it will receive the value for the slice and should return the
-     * style object for the slice.
+     * When a function is provided it will receive the value and index for the
+     * slice as its parameters, and should return the style object for the slice.
      */
     pieSliceStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /**
@@ -147,7 +146,6 @@ class PieChart extends React.Component {
     onMouseLeaveSlice: PropTypes.func,
   };
   static defaultProps = {
-    slice: null,
     centerLabelClassName: '',
     centerLabelStyle: {},
     pieSliceClassName: '',
@@ -287,22 +285,27 @@ class PieChart extends React.Component {
     const center = { x: marginLeft + radius, y: marginTop + radius };
 
     const {
+      data,
+      slice,
+      total,
+      centerLabel,
+      getPieSliceLabel,
       markerLineValue,
-      pieSliceClassName,
       markerLineOverhangInner,
       markerLineOverhangOuter,
+      pieSliceClassName,
     } = this.props;
 
-    const valueAccessor = makeAccessor(this.props.slice);
-    const sum = sumBy(this.props.data, valueAccessor);
-    const total = this.props.total || sum;
+    const valueAccessor = makeAccessor(slice);
+    const sum = sumBy(data, valueAccessor);
+    const newTotal = total || sum;
     const markerLinePercent = isFinite(markerLineValue)
-      ? markerLineValue / total
+      ? markerLineValue / newTotal
       : null;
 
     let startPercent = 0;
-    const slices = this.props.data.map(d => {
-      const slicePercent = valueAccessor(d) / total;
+    const slices = data.map(d => {
+      const slicePercent = valueAccessor(d) / newTotal;
       const slice = {
         start: startPercent,
         end: startPercent + slicePercent,
@@ -314,7 +317,7 @@ class PieChart extends React.Component {
 
     return (
       <svg className="rct-pie-chart" {...{ width, height }}>
-        {this.props.data.map((d, i) => {
+        {data.map((d, i) => {
           const [onMouseEnter, onMouseMove, onMouseLeave] = [
             'onMouseEnterSlice',
             'onMouseMoveSlice',
@@ -355,7 +358,7 @@ class PieChart extends React.Component {
           );
         })}
 
-        {sum < total ? ( // draw empty slice if the sum of slices is less than expected total
+        {sum < newTotal ? ( // draw empty slice if the sum of slices is less than expected total
           <path
             className={`rct-pie-slice rct-pie-slice-empty`}
             d={pieSlicePath(startPercent, 1, center, radius, holeRadius)}
@@ -376,9 +379,9 @@ class PieChart extends React.Component {
             )
           : null}
 
-        {this.props.centerLabel ? this.renderCenterLabel(center) : null}
-        {this.props.getPieSliceLabel
-          ? this.props.data.map((d, i) =>
+        {centerLabel ? this.renderCenterLabel(center) : null}
+        {getPieSliceLabel
+          ? data.map((d, i) =>
               this.renderSliceLabel(d, slices[i], center, radius, i),
             )
           : null}
