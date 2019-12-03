@@ -1,5 +1,6 @@
 {
   "description": "`PieChart` is a circular graphic that is divided into slices to illustrate proportions or percentages.",
+  "displayName": "PieChart",
   "methods": [
     {
       "name": "onMouseEnterSlice",
@@ -164,11 +165,7 @@
         "raw": "CustomPropTypes.getter.isRequired"
       },
       "required": false,
-      "description": "Accessor for getting the values plotted on the pie chart.\nIf not provided, just uses the value itself at given index.",
-      "defaultValue": {
-        "value": "null",
-        "computed": false
-      }
+      "description": ""
     },
     "total": {
       "type": {
@@ -347,7 +344,7 @@
         ]
       },
       "required": false,
-      "description": "Inline style object applied to each pie slice.\nWhen a function is provided it will receive the value for the slice and should return the\nstyle object for the slice.",
+      "description": "Inline style object applied to each pie slice.\nWhen a function is provided it will receive the value and index for the\nslice as its parameters, and should return the style object for the slice.",
       "defaultValue": {
         "value": "{}",
         "computed": false

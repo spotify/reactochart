@@ -1,12 +1,11 @@
 {
   "description": "",
+  "displayName": "YAxisTitle",
   "methods": [
     {
       "name": "getMargin",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",

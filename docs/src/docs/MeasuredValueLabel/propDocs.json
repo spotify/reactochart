@@ -1,12 +1,11 @@
 {
   "description": "",
+  "displayName": "MeasuredValueLabel",
   "methods": [
     {
       "name": "getLabel",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",
@@ -46,7 +45,8 @@
       "defaultValue": {
         "value": "{\n  fontFamily: 'Helvetica, sans-serif',\n  fontSize: '20px',\n  lineHeight: 1,\n  textAnchor: 'middle',\n}",
         "computed": false
-      }
+      },
+      "required": false
     }
   }
 }

@@ -1,12 +1,11 @@
 {
   "description": "`FunnelChart` is used to visualize the progressive reduction of data as it passes\nfrom one phase to another.",
+  "displayName": "FunnelChart",
   "methods": [
     {
       "name": "getDomain",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",

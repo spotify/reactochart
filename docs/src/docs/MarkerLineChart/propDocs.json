@@ -1,12 +1,11 @@
 {
   "description": "`MarkerLineChart` is similar to a bar chart,\nexcept that it just draws a line at the data value, rather than a full bar.\nIf the independent variable is a range, the length of the line will represent that range,\notherwise all lines will be the same length.\nThe dependent variable must be a single value, not a range.",
+  "displayName": "MarkerLineChart",
   "methods": [
     {
       "name": "getSpacing",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",
@@ -18,9 +17,7 @@
     {
       "name": "getDomain",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",

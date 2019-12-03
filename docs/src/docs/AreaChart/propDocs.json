@@ -1,12 +1,11 @@
 {
   "description": "`AreaChart` represents a simple bivariate area chart,\na filled path drawn between two lines (datasets).",
+  "displayName": "AreaChart",
   "methods": [
     {
       "name": "getDomain",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",

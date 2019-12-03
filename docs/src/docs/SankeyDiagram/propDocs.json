@@ -1,5 +1,6 @@
 {
   "description": "A `SankeyDiagram` is a type of flow diagram which visualizes directed flow between nodes\nof a network graph. Currently only *acyclic* networks are supported.",
+  "displayName": "SankeyDiagram",
   "methods": [
     {
       "name": "_makeSankeyGraph",
@@ -64,7 +65,7 @@
       "type": {
         "name": "number"
       },
-      "required": true,
+      "required": false,
       "description": "Width of the SVG element.",
       "defaultValue": {
         "value": "400",
@@ -75,7 +76,7 @@
       "type": {
         "name": "number"
       },
-      "required": true,
+      "required": false,
       "description": "Height of the SVG element.",
       "defaultValue": {
         "value": "300",
