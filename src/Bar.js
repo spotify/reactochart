@@ -6,18 +6,19 @@ import { hasOneOfTwo } from './util';
 
 /**
  * Bar is a low-level component to be used in XYPlot-type charts (namely BarChart).
- * It is specified in terms of a range (min & max) of values on one axis (the bar's long axis)
- * and a single value on the other axis.
- * Passing props `x`, `xEnd` and `y` specifies a horizontal bar,
- * centered on `y` and spanning from `x` to `xEnd`;
- * passing props `x`, `y`, and `yEnd' specifies a vertical bar.
+ * It is specified in terms of a range (min & max) of values on one axis and a
+ * single value on the other axis.
+ * Passing props `x`, `xEnd` and `y` specifies a horizontal bar, centered on `y`
+ * and spanning from `x` to `xEnd`.
+ * Passing props `x`, `y`, and `yEnd' specifies a vertical bar, centered on `x`
+ * and spanning from `y` to `yEnd`.
  */
 
 export default class Bar extends React.Component {
   static propTypes = {
     /**
      * For a vertical bar, `x` represents the X data value on which the bar is centered.
-     * For a horizontal bar, represents the *starting* X value of the bar, ie. the minimum of the range it spans
+     * For a horizontal bar, `x` represents the *starting* X value of the bar, ie. the minimum of the range it spans
      */
     x: PropTypes.oneOfType([
       PropTypes.number,
@@ -26,7 +27,7 @@ export default class Bar extends React.Component {
     ]),
     /**
      * For a horizontal bar, `y` represents the Y data value on which the bar is centered.
-     * For a vertical bar, represents the *starting* Y value of the bar, ie. the minimum of the range it spans
+     * For a vertical bar, `y` represents the *starting* Y value of the bar, ie. the minimum of the range it spans
      */
     y: PropTypes.oneOfType([
       PropTypes.number,
@@ -35,7 +36,7 @@ export default class Bar extends React.Component {
     ]),
     /**
      * For a horizontal bar, `xEnd` represents the *ending* X data value of the bar, ie. the maximum of the range it spans.
-     * Should be undefined if the bar is vertical.
+     * This prop should not be defined if the bar is vertical.
      */
     xEnd: PropTypes.oneOfType([
       PropTypes.number,
@@ -44,7 +45,7 @@ export default class Bar extends React.Component {
     ]),
     /**
      * For a vertical bar, `yEnd` represents the *ending* Y data value of the bar, ie. the maximum of the range it spans.
-     * Should be undefined if the bar is horizontal.
+     * This prop should not be defined if the bar is horizontal.
      */
     yEnd: PropTypes.oneOfType([
       PropTypes.number,
@@ -93,7 +94,7 @@ export default class Bar extends React.Component {
      */
     labelFormat: PropTypes.func,
     /**
-     * The distance from the column the label appears in pixels - default is 24.
+     * The distance from the column the label appears in pixels.
      */
     labelDistance: PropTypes.number,
     /**
