@@ -25,7 +25,7 @@ export default class Histogram extends React.Component {
     data: PropTypes.array.isRequired,
     /**
      * Data value accessor function, called once per datum, which returns the values to bin and plot in the histogram.
-     * If `data` is just an array of numbers, this may be the identity function (`function(d) { return d }`).
+     * If `data` is just an array of numbers, this may be the identity function (`d => d`).
      */
     value: PropTypes.func,
     /**
@@ -44,8 +44,7 @@ export default class Histogram extends React.Component {
      * If an array `[x0, x1 ... xN]` is specified, then any value less than `x0` will be placed in the first bin; any value greater than
      * or equal to `x0` but less than `x1` will be placed in the second bin; and so on. The generated histogram will have `array.length` + 1 bins.
      */
-    thresholds: PropTypes.oneOfType([PropTypes.number, PropTypes.array])
-      .isRequired,
+    thresholds: PropTypes.oneOfType([PropTypes.number, PropTypes.array]),
     /**
      * The domain over which your data will be binned. Defined as an array `[min, max]`.
      * If not provided, binDomain will be the domain of your data values by default.
@@ -82,7 +81,13 @@ export default class Histogram extends React.Component {
     onMouseLeaveBar: PropTypes.func,
   };
 
-  static defaultProps = { data: [], thresholds: 30, nice: false };
+  static defaultProps = {
+    data: [],
+    thresholds: 30,
+    nice: false,
+    barClassName: '',
+    barStyle: {},
+  };
 
   static getScaleType() {
     return { xScaleType: 'linear', yScaleType: 'linear' };
