@@ -63,6 +63,7 @@ export default class FunnelChart extends React.Component {
   };
   static defaultProps = {
     pathClassName: '',
+    pathStyle: {},
   };
 
   static getDomain(props) {
@@ -129,7 +130,7 @@ export default class FunnelChart extends React.Component {
           if (i === 0) return null;
           const pathStr = funnelArea([data[i - 1], d]);
           const fill = color ? getValue(color, d, i) : colors(i - 1);
-          let style = pathStyle ? getValue(pathStyle, d, i) : {};
+          let style = getValue(pathStyle, d, i);
 
           style = defaults({}, style, { fill, stroke: 'transparent' });
 
