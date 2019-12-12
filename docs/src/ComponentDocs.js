@@ -33,6 +33,7 @@ const ComponentDocs = props => {
           return (
             <div key={propKey} className="prop-doc">
               <strong>{propKey}</strong>: {renderType(propInfo)}
+              <i>{propInfo.required && ' (required)'}</i>
               {propInfo.description ? <br /> : null}
               {propInfo.description ? (
                 <span className="prop-description">
