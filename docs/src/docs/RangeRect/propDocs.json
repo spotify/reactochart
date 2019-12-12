@@ -1,5 +1,6 @@
 {
   "description": "RangeRect is a low-level component to be used in XYPlot-type charts (namely AreaBarChart).\nIt is a rectangle which represents a range (min & max) of values on both (X & Y) axes.\nIt takes a single datum object, and getters which specify how to retrieve the range values from it.",
+  "displayName": "RangeRect",
   "methods": [],
   "props": {
     "xScale": {

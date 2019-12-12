@@ -1,5 +1,6 @@
 {
   "description": "`YLine` is a horizontal line rendered on the y axis",
+  "displayName": "YLine",
   "methods": [],
   "props": {
     "yScale": {

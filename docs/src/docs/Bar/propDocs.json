@@ -1,5 +1,6 @@
 {
   "description": "Bar is a low-level component to be used in XYPlot-type charts (namely BarChart).\nIt is specified in terms of a range (min & max) of values on one axis (the bar's long axis)\nand a single value on the other axis.\nPassing props `x`, `xEnd` and `y` specifies a horizontal bar,\ncentered on `y` and spanning from `x` to `xEnd`;\npassing props `x`, `y`, and `yEnd' specifies a vertical bar.",
+  "displayName": "Bar",
   "methods": [],
   "props": {
     "x": {

@@ -1,12 +1,11 @@
 {
   "description": "`ColorHeatmap` can be used to represent individual values contained in a matrix through colors.",
+  "displayName": "ColorHeatmap",
   "methods": [
     {
       "name": "getDomain",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",

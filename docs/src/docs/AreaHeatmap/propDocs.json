@@ -1,12 +1,11 @@
 {
   "description": "`AreaHeatmap` is still undergoing experimental changes!\nWe do not consider this chart to be production ready as it does not support categorical data.",
+  "displayName": "AreaHeatmap",
   "methods": [
     {
       "name": "getDomain",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",
