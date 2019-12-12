@@ -1,5 +1,6 @@
 {
   "description": "`XLine` is a vertical line rendered on the x axis",
+  "displayName": "XLine",
   "methods": [],
   "props": {
     "height": {

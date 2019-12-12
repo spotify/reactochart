@@ -1,12 +1,11 @@
 {
   "description": "Kernel Density Estimation is still undergoing experimental changes!\nWe do not consider this chart to be production ready but\nencourage you to try it out and contribute to any of its missing features.",
+  "displayName": "KernelDensityEstimation",
   "methods": [
     {
       "name": "getDomain",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [],
       "returns": null
     },
