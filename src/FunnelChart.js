@@ -24,11 +24,11 @@ export default class FunnelChart extends React.Component {
      */
     data: PropTypes.array.isRequired,
     /**
-     * Accessor function for X values, called once per datum, or a single value to be used for all datums.
+     * Accessor function for X values, called once per datum, or a single value to be used for all data.
      */
     x: CustomPropTypes.valueOrAccessor,
     /**
-     * Accessor function for Y values, called once per datum, or a single value to be used for all datums.
+     * Accessor function for Y values, called once per datum, or a single value to be used for all data.
      */
     y: CustomPropTypes.valueOrAccessor,
     /**
@@ -38,6 +38,9 @@ export default class FunnelChart extends React.Component {
      * Note that the first datum's color would not be applied since it fills in the area of the path
      */
     color: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    /**
+     * Boolean which determines whether the chart will be horizontal.
+     */
     horizontal: PropTypes.bool,
     /**
      * Classname applied to each path element,
