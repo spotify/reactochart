@@ -570,7 +570,6 @@ export default class SankeyDiagram extends React.Component {
      * Node `click` event handler, called when user clicks within a node.
      */
     onClickNode: PropTypes.func,
-
     /**
      * Boolean which determines if link paths should be shown,
      * or function (`showLink(link, graph)`) which returns a boolean
@@ -610,7 +609,6 @@ export default class SankeyDiagram extends React.Component {
      * Link `click` event handler, called when user clicks within a link.
      */
     onClickLink: PropTypes.func,
-
     /**
      * Boolean which determines if node terminals should be shown,
      * or function (`showLink(link, graph)`) which returns a boolean.
