@@ -8,17 +8,17 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic AreaChart',
-    codeText: require('raw-loader!./examples/AreaChart.js.example'),
+    codeText: require('./examples/AreaChart.js.example').default,
   },
   {
     id: 'twoDatasets',
     label: 'Area Chart with Two Datasets',
-    codeText: require('raw-loader!./examples/Area2Datasets.js.example'),
+    codeText: require('./examples/Area2Datasets.js.example').default,
   },
   {
     id: 'difference',
     label: 'Difference Area Chart',
-    codeText: require('raw-loader!./examples/AreaDifference.js.example'),
+    codeText: require('./examples/AreaDifference.js.example').default,
   },
 ];
 

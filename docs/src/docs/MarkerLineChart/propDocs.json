@@ -1,12 +1,11 @@
 {
   "description": "`MarkerLineChart` is similar to a bar chart,\nexcept that it just draws a line at the data value, rather than a full bar.\nIf the independent variable is a range, the length of the line will represent that range,\notherwise all lines will be the same length.\nThe dependent variable must be a single value, not a range.",
+  "displayName": "MarkerLineChart",
   "methods": [
     {
       "name": "getSpacing",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",
@@ -18,9 +17,7 @@
     {
       "name": "getDomain",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",
@@ -166,7 +163,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Length of the marker line.",
       "defaultValue": {
         "value": "10",
         "computed": false
@@ -213,7 +210,7 @@
         ]
       },
       "required": false,
-      "description": "Class attribute to be applied to the line path,\nor accessor function which returns a class.",
+      "description": "Class attribute to be applied to the line path,\nor an accessor function which returns a class.",
       "defaultValue": {
         "value": "''",
         "computed": false
@@ -232,7 +229,7 @@
         ]
       },
       "required": false,
-      "description": "Inline style object to be applied to each marker line,\nor accessor function which returns a style object.",
+      "description": "Inline style object to be applied to each marker line,\nor an accessor function which returns a style object.",
       "defaultValue": {
         "value": "{}",
         "computed": false

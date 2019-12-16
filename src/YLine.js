@@ -14,12 +14,20 @@ export default class YLine extends React.Component {
      * Width of chart - provided by XYPlot.
      */
     width: PropTypes.number,
-    value: PropTypes.any.isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+      PropTypes.instanceOf(Date),
+    ]).isRequired,
     /**
      * D3 scale for X axis - provided by XYPlot
      */
     xScale: PropTypes.func,
-    xLimit: PropTypes.any,
+    xLimit: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+      PropTypes.instanceOf(Date),
+    ]),
     /**
      * Spacing left - provided by XYPlot
      */

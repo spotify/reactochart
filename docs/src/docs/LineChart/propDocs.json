@@ -1,5 +1,6 @@
 {
-  "description": "`LineChart` displays data a series of points connected by straight line segments.",
+  "description": "`LineChart` displays a series of points connected by straight line segments.\nEach `LineChart` renders one line.",
+  "displayName": "LineChart",
   "methods": [
     {
       "name": "initBisector",

@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic XGrid',
-    codeText: require('raw-loader!./examples/XGrid.js.example'),
+    codeText: require('./examples/XGrid.js.example').default,
   },
 ];
 

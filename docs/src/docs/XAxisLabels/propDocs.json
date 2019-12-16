@@ -1,12 +1,11 @@
 {
   "description": "",
+  "displayName": "XAxisLabels",
   "methods": [
     {
       "name": "getTickDomain",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",
@@ -18,9 +17,7 @@
     {
       "name": "getMargin",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",
@@ -32,9 +29,7 @@
     {
       "name": "getLabels",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",
@@ -71,7 +66,7 @@
         ]
       },
       "required": false,
-      "description": "*\nPosition of x axis labels. Accepted options are \"top\" or \"bottom\".",
+      "description": "Position of x axis labels. Accepted options are \"top\" or \"bottom\".",
       "defaultValue": {
         "value": "'bottom'",
         "computed": false
@@ -92,11 +87,7 @@
         ]
       },
       "required": false,
-      "description": "Placement of labels in regards to the x axis. Accepted options are \"above\" or \"below\".",
-      "defaultValue": {
-        "value": "undefined",
-        "computed": true
-      }
+      "description": "Placement of labels in regards to the x axis. Accepted options are \"above\" or \"below\"."
     },
     "xScale": {
       "type": {
@@ -187,33 +178,21 @@
         "name": "func"
       },
       "required": false,
-      "description": "An accessor function that returns the updated label.\n\nFor example, given labels with real numbers one can pass in the following accessor,\n(label) => `${label}%`, to display percentages.",
-      "defaultValue": {
-        "value": "undefined",
-        "computed": true
-      }
+      "description": "An accessor function that returns the updated label.\n\nFor example, given labels with real numbers one can pass in the following accessor,\n(label) => `${label}%`, to display percentages."
     },
     "formats": {
       "type": {
         "name": "array"
       },
       "required": false,
-      "description": "Formats to use for the labels in priority order. XAxisLabels will try to be smart about which format\nto use that keeps the labels distinct and provides the least amount of collisions when rendered. Formats\ncan be either string(s) or function(s), utilizing d3-format.\n\nFor example, given labels with real numbers one can pass in [\".0%\"] for a rounded percentage, like 12%.",
-      "defaultValue": {
-        "value": "undefined",
-        "computed": true
-      }
+      "description": "Formats to use for the labels in priority order. XAxisLabels will try to be smart about which format\nto use that keeps the labels distinct and provides the least amount of collisions when rendered. Formats\ncan be either string(s) or function(s), utilizing d3-format.\n\nFor example, given labels with real numbers one can pass in [\".0%\"] for a rounded percentage, like 12%."
     },
     "labels": {
       "type": {
         "name": "array"
       },
       "required": false,
-      "description": "Custom labels provided. Note that each object in the array has to be of shape.\n`{\n value,\n text,\n height,\n width\n}`\nvalue - value you'd like this label to be aligned with\ntext - text you'd like displayed\nheight - height of the given label\nwidth - width of the given label",
-      "defaultValue": {
-        "value": "undefined",
-        "computed": true
-      }
+      "description": "Custom labels provided. Note that each object in the array has to be of shape.\n`{\n value,\n text,\n height,\n width\n}`\nvalue - value you'd like this label to be aligned with\ntext - text you'd like displayed\nheight - height of the given label\nwidth - width of the given label"
     },
     "nice": {
       "type": {

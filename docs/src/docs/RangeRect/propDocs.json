@@ -1,5 +1,6 @@
 {
   "description": "RangeRect is a low-level component to be used in XYPlot-type charts (namely AreaBarChart).\nIt is a rectangle which represents a range (min & max) of values on both (X & Y) axes.\nIt takes a single datum object, and getters which specify how to retrieve the range values from it.",
+  "displayName": "RangeRect",
   "methods": [],
   "props": {
     "xScale": {
@@ -19,8 +20,18 @@
     "x": {
       "type": {
         "name": "union",
-        "computed": true,
-        "value": "CustomPropTypes.datumValueTypes"
+        "value": [
+          {
+            "name": "number"
+          },
+          {
+            "name": "string"
+          },
+          {
+            "name": "instanceOf",
+            "value": "Date"
+          }
+        ]
       },
       "required": true,
       "description": "Starting (minimum) X value (left edge, usually) of the rectangle range"
@@ -28,8 +39,18 @@
     "xEnd": {
       "type": {
         "name": "union",
-        "computed": true,
-        "value": "CustomPropTypes.datumValueTypes"
+        "value": [
+          {
+            "name": "number"
+          },
+          {
+            "name": "string"
+          },
+          {
+            "name": "instanceOf",
+            "value": "Date"
+          }
+        ]
       },
       "required": true,
       "description": "Ending (maximum) X value (right edge, usually) of the rectangle range"
@@ -37,8 +58,18 @@
     "y": {
       "type": {
         "name": "union",
-        "computed": true,
-        "value": "CustomPropTypes.datumValueTypes"
+        "value": [
+          {
+            "name": "number"
+          },
+          {
+            "name": "string"
+          },
+          {
+            "name": "instanceOf",
+            "value": "Date"
+          }
+        ]
       },
       "required": true,
       "description": "Starting (minimum) Y value (bottom edge, usually) of the rectangle range"
@@ -46,8 +77,18 @@
     "yEnd": {
       "type": {
         "name": "union",
-        "computed": true,
-        "value": "CustomPropTypes.datumValueTypes"
+        "value": [
+          {
+            "name": "number"
+          },
+          {
+            "name": "string"
+          },
+          {
+            "name": "instanceOf",
+            "value": "Date"
+          }
+        ]
       },
       "required": true,
       "description": "Ending (maximum) Y value (top edge, usually) of the rectangle range"

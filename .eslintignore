@@ -7,3 +7,9 @@
 
 # Ignore lessons
 /docs/src/lessons
+
+# Ignore docs build
+/docs/build/*
+
+# test setup
+/tests/jsdom/setup.js

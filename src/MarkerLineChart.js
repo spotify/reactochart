@@ -78,6 +78,9 @@ export default class MarkerLineChart extends React.Component {
      * When `true` the X-axis will be treated as the dependent axis.
      */
     horizontal: PropTypes.bool,
+    /**
+     * Length of the marker line.
+     */
     lineLength: PropTypes.number,
     /**
      * D3 scale type for X axis - provided by XYPlot.
@@ -97,12 +100,12 @@ export default class MarkerLineChart extends React.Component {
     yScale: PropTypes.func,
     /**
      * Class attribute to be applied to the line path,
-     * or accessor function which returns a class.
+     * or an accessor function which returns a class.
      */
     lineClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     /**
      * Inline style object to be applied to each marker line,
-     * or accessor function which returns a style object.
+     * or an accessor function which returns a style object.
      */
     lineStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /**

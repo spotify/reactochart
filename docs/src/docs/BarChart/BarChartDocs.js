@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic BarChart',
-    codeText: require('raw-loader!./examples/BarChart.js.example'),
+    codeText: require('./examples/BarChart.js.example').default,
   },
 ];
 

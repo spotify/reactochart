@@ -29,21 +29,26 @@ export default class XAxis extends React.Component {
      * Extends the x domain to start and end on rounded values,
      * guaranteeing the original domain will be covered.
      * See d3 docs for more information
-     */ nice: PropTypes.bool,
+     */
+    nice: PropTypes.bool,
     ticks: PropTypes.array,
     tickCount: PropTypes.number,
     /**
      * Internal top spacing of XAxis, in pixels.
-     */ spacingTop: PropTypes.number,
+     */
+    spacingTop: PropTypes.number,
     /**
      * Internal bottom spacing of XAxis, in pixels.
-     */ spacingBottom: PropTypes.number,
+     */
+    spacingBottom: PropTypes.number,
     /**
      * Internal left spacing of XAxis, in pixels.
-     */ spacingLeft: PropTypes.number,
+     */
+    spacingLeft: PropTypes.number,
     /**
      * Internal right spacing of XAxis, in pixels.
-     */ spacingRight: PropTypes.number,
+     */
+    spacingRight: PropTypes.number,
     showTitle: PropTypes.bool,
     showLabels: PropTypes.bool,
     showTicks: PropTypes.bool,
@@ -78,20 +83,24 @@ export default class XAxis extends React.Component {
     onMouseEnterAxis: PropTypes.func,
     /**
      * `mouseleave` event handler callback, called when user's mouse leaves the x axis.
-     */ onMouseLeaveAxis: PropTypes.func,
+     */
+    onMouseLeaveAxis: PropTypes.func,
     /**
      * `mousemove` event handler callback, called when user's mouse moves within the x axis.
-     */ onMouseMoveAxis: PropTypes.func,
+     */
+    onMouseMoveAxis: PropTypes.func,
     /**
      * `click` event handler callback, called when user's mouse clicks on the x axis.
-     */ onMouseClickAxis: PropTypes.func,
+     */
+    onMouseClickAxis: PropTypes.func,
     /**
      * Show X Axis line
      */
     showLine: PropTypes.bool,
     /**
      * Inline style object to be applied to the X Axis line
-     */ lineStyle: PropTypes.object,
+     */
+    lineStyle: PropTypes.object,
   };
 
   static defaultProps = {

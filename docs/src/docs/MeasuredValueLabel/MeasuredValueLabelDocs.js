@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic MeasuredValueLabel',
-    codeText: require('raw-loader!./examples/MeasuredValueLabel.js.example'),
+    codeText: require('./examples/MeasuredValueLabel.js.example').default,
   },
 ];
 

@@ -8,12 +8,12 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic YAxis',
-    codeText: require('raw-loader!./examples/YAxis.js.example'),
+    codeText: require('./examples/YAxis.js.example').default,
   },
   {
     id: 'customTicks',
     label: 'YAxis with custom ticks',
-    codeText: require('raw-loader!./examples/YAxisCustomTicks.js.example'),
+    codeText: require('./examples/YAxisCustomTicks.js.example').default,
   },
 ];
 

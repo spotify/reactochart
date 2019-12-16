@@ -8,12 +8,12 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic XYPlot',
-    codeText: require('raw-loader!./examples/XYPlot.js.example'),
+    codeText: require('./examples/XYPlot.js.example').default,
   },
   {
     id: 'spacing',
     label: 'Custom Spacing',
-    codeText: require('raw-loader!./examples/CustomSpacing.js.example'),
+    codeText: require('./examples/CustomSpacing.js.example').default,
   },
 ];
 

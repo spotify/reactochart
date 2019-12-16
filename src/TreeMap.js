@@ -19,7 +19,10 @@ class TreeMap extends React.Component {
   static propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-
+    /**
+     * Data is an object with a key of `children` and an array of objects as its value.
+     * i.e. { children: [{ children: [{ size: 3 }, { size: 8 }] }, { size: 4 }]}
+     */
     data: PropTypes.object.isRequired,
     /**
      * Key or accessor to retrieve value of data point
@@ -69,7 +72,6 @@ class TreeMap extends React.Component {
     labelStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
     minLabelWidth: PropTypes.number,
     minLabelHeight: PropTypes.number,
-
     /**
      * `onClick` event handler callback, called when user clicks a NodeComponent.
      */
@@ -86,7 +88,6 @@ class TreeMap extends React.Component {
      * `mousemove` event handler callback, called when user's mouse moves within a NodeComponent.
      */
     onMouseMoveNode: PropTypes.func,
-
     /**
      * Optional treemap node, otherwise we default to our TreeMapNode component
      */

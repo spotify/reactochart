@@ -1,12 +1,11 @@
 {
   "description": "`RangeBarChart` is a variation on the standard bar chart. Just like a normal bar chart, each bar represents a single\nvalue on the *independent* axis (X axis for vertical bars), and is centered on this value.\nHowever, on the *dependent* axis, each bar represents a *range* (min/max) of values,\nrather than always starting at zero.",
+  "displayName": "RangeBarChart",
   "methods": [
     {
       "name": "getDomain",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",
@@ -18,9 +17,7 @@
     {
       "name": "getSpacing",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",
@@ -35,12 +32,8 @@
       "type": {
         "name": "array"
       },
-      "required": false,
-      "description": "Array of data to be plotted. One bar will be rendered per datum in this array.",
-      "defaultValue": {
-        "value": "[]",
-        "computed": false
-      }
+      "required": true,
+      "description": "Array of data to be plotted. One bar will be rendered per datum in this array."
     },
     "horizontal": {
       "type": {

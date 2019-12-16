@@ -1,12 +1,11 @@
 {
   "description": "`YAxis` is the vertical axis of the chart. `YAxis` is a wrapper around `YGrid`, `YTicks`,\n`YAxisLabels`, and `YAxisTitle`. See their respective docs for prop documentation.",
+  "displayName": "YAxis",
   "methods": [
     {
       "name": "getTickDomain",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",
@@ -18,9 +17,7 @@
     {
       "name": "getMargin",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",

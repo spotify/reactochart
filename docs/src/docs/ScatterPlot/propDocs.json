@@ -1,5 +1,6 @@
 {
   "description": "`ScatterPlot` displays its data as a collection of points. Each point represents\nthe relationship between two variables, one plotted along the x-axis and the other on the y-axis.",
+  "displayName": "ScatterPlot",
   "methods": [
     {
       "name": "onMouseEnterPoint",

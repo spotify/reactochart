@@ -1,5 +1,6 @@
 {
-  "description": "Bar is a low-level component to be used in XYPlot-type charts (namely BarChart).\nIt is specified in terms of a range (min & max) of values on one axis (the bar's long axis)\nand a single value on the other axis.\nPassing props `x`, `xEnd` and `y` specifies a horizontal bar,\ncentered on `y` and spanning from `x` to `xEnd`;\npassing props `x`, `y`, and `yEnd' specifies a vertical bar.",
+  "description": "Bar is a low-level component to be used in XYPlot-type charts (namely BarChart).\nIt is specified in terms of a range (min & max) of values on one axis and a\nsingle value on the other axis.\nPassing props `x`, `xEnd` and `y` specifies a horizontal bar, centered on `y`\nand spanning from `x` to `xEnd`.\nPassing props `x`, `y`, and `yEnd' specifies a vertical bar, centered on `x`\nand spanning from `y` to `yEnd`.",
+  "displayName": "Bar",
   "methods": [],
   "props": {
     "x": {
@@ -19,7 +20,7 @@
         ]
       },
       "required": false,
-      "description": "For a vertical bar, `x` represents the X data value on which the bar is centered.\nFor a horizontal bar, represents the *starting* X value of the bar, ie. the minimum of the range it spans",
+      "description": "For a vertical bar, `x` represents the X data value on which the bar is centered.\nFor a horizontal bar, `x` represents the *starting* X value of the bar, ie. the minimum of the range it spans",
       "defaultValue": {
         "value": "0",
         "computed": false
@@ -42,7 +43,7 @@
         ]
       },
       "required": false,
-      "description": "For a horizontal bar, `y` represents the Y data value on which the bar is centered.\nFor a vertical bar, represents the *starting* Y value of the bar, ie. the minimum of the range it spans",
+      "description": "For a horizontal bar, `y` represents the Y data value on which the bar is centered.\nFor a vertical bar, `y` represents the *starting* Y value of the bar, ie. the minimum of the range it spans",
       "defaultValue": {
         "value": "0",
         "computed": false
@@ -65,7 +66,7 @@
         ]
       },
       "required": false,
-      "description": "For a horizontal bar, `xEnd` represents the *ending* X data value of the bar, ie. the maximum of the range it spans.\nShould be undefined if the bar is vertical."
+      "description": "For a horizontal bar, `xEnd` represents the *ending* X data value of the bar, ie. the maximum of the range it spans.\nThis prop should not be defined if the bar is vertical."
     },
     "yEnd": {
       "type": {
@@ -84,7 +85,7 @@
         ]
       },
       "required": false,
-      "description": "For a vertical bar, `yEnd` represents the *ending* Y data value of the bar, ie. the maximum of the range it spans.\nShould be undefined if the bar is horizontal."
+      "description": "For a vertical bar, `yEnd` represents the *ending* Y data value of the bar, ie. the maximum of the range it spans.\nThis prop should not be defined if the bar is horizontal."
     },
     "thickness": {
       "type": {
@@ -173,7 +174,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "The distance from the column the label appears in pixels - default is 24.",
+      "description": "The distance from the column the label appears in pixels.",
       "defaultValue": {
         "value": "24",
         "computed": false

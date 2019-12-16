@@ -49,7 +49,6 @@ export default class YAxisTitle extends React.Component {
     distance: 5,
     position: 'left',
     alignment: 'middle',
-    placement: undefined,
     rotate: true,
     style: {
       fontFamily: 'Helvetica, sans-serif',
@@ -120,22 +119,22 @@ export default class YAxisTitle extends React.Component {
       rotate && alignment === 'top'
         ? 'end'
         : rotate && alignment === 'middle'
-          ? 'middle'
-          : rotate && alignment === 'bottom'
-            ? 'start'
-            : placement === 'before'
-              ? 'end'
-              : 'start';
+        ? 'middle'
+        : rotate && alignment === 'bottom'
+        ? 'start'
+        : placement === 'before'
+        ? 'end'
+        : 'start';
     const dy =
       rotate && placement === 'before'
         ? '-0.2em'
         : rotate
-          ? '0.8em'
-          : alignment === 'top'
-            ? '0.8em'
-            : alignment === 'middle'
-              ? '0.3em'
-              : null;
+        ? '0.8em'
+        : alignment === 'top'
+        ? '0.8em'
+        : alignment === 'middle'
+        ? '0.3em'
+        : null;
 
     return (
       <g transform={`translate(${translateX},${translateY})`}>

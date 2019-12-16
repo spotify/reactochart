@@ -8,12 +8,12 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic SankeyDiagram',
-    codeText: require('raw-loader!./examples/SankeyDiagram.js.example'),
+    codeText: require('./examples/SankeyDiagram.js.example').default,
   },
   {
     id: 'interactive',
     label: 'Interactive Sankey Diagram',
-    codeText: require('raw-loader!./examples/SankeyInteractive.js.example'),
+    codeText: require('./examples/SankeyInteractive.js.example').default,
   },
 ];
 
