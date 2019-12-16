@@ -8,7 +8,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "DHeight of chart - provided by XYPlot"
+      "description": "Height of chart - provided by XYPlot"
     },
     "xScale": {
       "type": {
@@ -19,7 +19,19 @@
     },
     "value": {
       "type": {
-        "name": "any"
+        "name": "union",
+        "value": [
+          {
+            "name": "number"
+          },
+          {
+            "name": "string"
+          },
+          {
+            "name": "instanceOf",
+            "value": "Date"
+          }
+        ]
       },
       "required": true,
       "description": ""
@@ -33,7 +45,19 @@
     },
     "yLimit": {
       "type": {
-        "name": "any"
+        "name": "union",
+        "value": [
+          {
+            "name": "number"
+          },
+          {
+            "name": "string"
+          },
+          {
+            "name": "instanceOf",
+            "value": "Date"
+          }
+        ]
       },
       "required": false,
       "description": ""

@@ -18,7 +18,7 @@ export default class XLine extends React.Component {
       PropTypes.number,
       PropTypes.string,
       PropTypes.instanceOf(Date),
-    ]),
+    ]).isRequired,
     /**
      * D3 scale for Y axis - provided by XYPlot
      */

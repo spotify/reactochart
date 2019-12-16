@@ -85,11 +85,7 @@
         ]
       },
       "required": false,
-      "description": "Placement of title in regards to the x axis. Accepted options are \"above\" or \"below\"",
-      "defaultValue": {
-        "value": "undefined",
-        "computed": true
-      }
+      "description": "Placement of title in regards to the x axis. Accepted options are \"above\" or \"below\""
     },
     "alignment": {
       "type": {
