@@ -19,7 +19,9 @@ describe("XYPlot", () => {
     const svg = chart.find("svg");
     const plot = chart.find(".rct-plot-background");
 
-    expect(svg.getDOMNode().className).to.contain(
+    // svg className returns SvgAnimatedString, so access baseVal to get string
+    // for chai contains to test against
+    expect(svg.getDOMNode().className.baseVal).to.contain(
       commonXYProps.xyPlotClassName
     );
 

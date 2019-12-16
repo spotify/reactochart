@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic RangeBarChart',
-    codeText: require('raw-loader!./examples/RangeBarChart.js.example'),
+    codeText: require('./examples/RangeBarChart.js.example').default,
   },
 ];
 

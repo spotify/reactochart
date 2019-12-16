@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic YTicks',
-    codeText: require('raw-loader!./examples/YTicks.js.example'),
+    codeText: require('./examples/YTicks.js.example').default,
   },
 ];
 

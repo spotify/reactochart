@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic ScatterPlot',
-    codeText: require('raw-loader!./examples/ScatterPlot.js.example'),
+    codeText: require('./examples/ScatterPlot.js.example').default,
   },
 ];
 

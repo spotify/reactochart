@@ -1,5 +1,6 @@
 {
   "description": "`PieChart` is a circular graphic that is divided into slices to illustrate proportions or percentages.",
+  "displayName": "PieChart",
   "methods": [
     {
       "name": "onMouseEnterSlice",
@@ -158,17 +159,13 @@
       "required": true,
       "description": "Array of data to plot with pie chart."
     },
-    "getValue": {
+    "slice": {
       "type": {
         "name": "custom",
-        "raw": "CustomPropTypes.getter"
+        "raw": "CustomPropTypes.getter.isRequired"
       },
       "required": false,
-      "description": "Accessor for getting the values plotted on the pie chart.\nIf not provided, just uses the value itself at given index.",
-      "defaultValue": {
-        "value": "null",
-        "computed": false
-      }
+      "description": ""
     },
     "total": {
       "type": {
@@ -331,6 +328,25 @@
       "description": "Class attribute to be applied to each pie slice,\nor accessor function which returns a class.",
       "defaultValue": {
         "value": "''",
+        "computed": false
+      }
+    },
+    "pieSliceStyle": {
+      "type": {
+        "name": "union",
+        "value": [
+          {
+            "name": "object"
+          },
+          {
+            "name": "func"
+          }
+        ]
+      },
+      "required": false,
+      "description": "Inline style object applied to each pie slice.\nWhen a function is provided it will receive the value and index for the\nslice as its parameters, and should return the style object for the slice.",
+      "defaultValue": {
+        "value": "{}",
         "computed": false
       }
     },

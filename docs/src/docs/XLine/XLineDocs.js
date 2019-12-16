@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic XLine',
-    codeText: require('raw-loader!./examples/XLine.js.example'),
+    codeText: require('./examples/XLine.js.example').default,
   },
 ];
 

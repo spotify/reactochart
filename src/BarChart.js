@@ -23,7 +23,6 @@ function makeRangeBarChartProps(barChartProps) {
  * where each bar represents a single independent variable value and a single dependent value,
  * with bars that are centered horizontally on x-value and extend from 0 to y-value,
  * (or centered vertically on their y-value and extend from 0 to the x-value, in the case of horizontal chart variant)
- * eg. http://www.snapsurveys.com/wp-content/uploads/2012/10/bar_2d8.png
  *
  * For other bar chart types, see RangeBarChart and AreaBarChart
  */
@@ -33,7 +32,7 @@ export default class BarChart extends React.Component {
     /**
      * Array of data to be plotted. One bar will be rendered per datum in the array.
      */
-    data: PropTypes.array,
+    data: PropTypes.array.isRequired,
     /**
      * Accessor function for bar X values, called once per bar (datum), or a single value to be used for all bars.
      * If `horizontal` is `true`, this becomes 0.

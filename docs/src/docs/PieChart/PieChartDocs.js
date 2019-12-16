@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic PieChart',
-    codeText: require('raw-loader!./examples/PieChart.js.example'),
+    codeText: require('./examples/PieChart.js.example').default,
   },
 ];
 

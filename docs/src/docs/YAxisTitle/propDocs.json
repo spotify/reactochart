@@ -1,12 +1,11 @@
 {
   "description": "",
+  "displayName": "YAxisTitle",
   "methods": [
     {
       "name": "getMargin",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",
@@ -111,11 +110,7 @@
         ]
       },
       "required": false,
-      "description": "Placement of title in regards to the y axis. Accepted options are \"before\" or \"after\"",
-      "defaultValue": {
-        "value": "undefined",
-        "computed": true
-      }
+      "description": "Placement of title in regards to the y axis. Accepted options are \"before\" or \"after\""
     },
     "rotate": {
       "type": {

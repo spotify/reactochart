@@ -1,5 +1,6 @@
 {
   "description": "`YLine` is a horizontal line rendered on the y axis",
+  "displayName": "YLine",
   "methods": [],
   "props": {
     "yScale": {
@@ -18,7 +19,19 @@
     },
     "value": {
       "type": {
-        "name": "any"
+        "name": "union",
+        "value": [
+          {
+            "name": "number"
+          },
+          {
+            "name": "string"
+          },
+          {
+            "name": "instanceOf",
+            "value": "Date"
+          }
+        ]
       },
       "required": true,
       "description": ""
@@ -32,7 +45,19 @@
     },
     "xLimit": {
       "type": {
-        "name": "any"
+        "name": "union",
+        "value": [
+          {
+            "name": "number"
+          },
+          {
+            "name": "string"
+          },
+          {
+            "name": "instanceOf",
+            "value": "Date"
+          }
+        ]
       },
       "required": false,
       "description": ""

@@ -29,7 +29,7 @@ export default class RangeBarChart extends React.Component {
     /**
      * Array of data to be plotted. One bar will be rendered per datum in this array.
      */
-    data: PropTypes.array,
+    data: PropTypes.array.isRequired,
     /**
      * Boolean which determines whether the chart will use horizontal or vertical bars.
      * When `true`, bars will be horizontal, ie. the X-axis will be treated as the dependent axis.
@@ -115,7 +115,6 @@ export default class RangeBarChart extends React.Component {
     labelClassName: PropTypes.string,
   };
   static defaultProps = {
-    data: [],
     horizontal: false,
     barThickness: 8,
     barClassName: '',

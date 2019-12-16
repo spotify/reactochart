@@ -1,12 +1,11 @@
 {
   "description": "`AreaBarChart` is a variation on the standard bar chart. Just like a normal bar chart, each bar represents a single\nvalue on the *dependent* axis (Y axis for vertical bars), and the bar stretches from zero to this value.\nHowever, on the *independent* axis, each bar represents a *range* (min/max) of values,\nrather than being centered on a specific value.\nIn other words, the bar *lengths* act the same way as standard bar chart bars,\nbut their *thicknesses* are variable and meaningful.\n`AreaBarChart`s are the correct way to display histograms with variable bin sizes.\nThey are so named because, in cases like these histograms, since both the bar thickness and length are meaningful,\nso too is the bar's total *area*, unlike in other bar charts.",
+  "displayName": "AreaBarChart",
   "methods": [
     {
       "name": "getDomain",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",
@@ -35,12 +34,8 @@
       "type": {
         "name": "array"
       },
-      "required": false,
-      "description": "Array of data to be plotted. One bar will be rendered per datum in this array.",
-      "defaultValue": {
-        "value": "[]",
-        "computed": false
-      }
+      "required": true,
+      "description": "Array of data to be plotted. One bar will be rendered per datum in this array."
     },
     "horizontal": {
       "type": {
@@ -98,7 +93,7 @@
         ]
       },
       "required": false,
-      "description": "Class attribute to be applied to each bar.\nor accessor function which returns a class;",
+      "description": "Class attribute to be applied to each bar\nor accessor function which returns a class.",
       "defaultValue": {
         "value": "''",
         "computed": false
@@ -117,7 +112,7 @@
         ]
       },
       "required": false,
-      "description": "Inline style object to be applied to each bar,\nor accessor function which returns a style object;",
+      "description": "Inline style object to be applied to each bar\nor accessor function which returns a style object.",
       "defaultValue": {
         "value": "{}",
         "computed": false

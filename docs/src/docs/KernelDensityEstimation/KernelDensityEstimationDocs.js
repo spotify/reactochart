@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic KernelDensityEstimation',
-    codeText: require('raw-loader!./examples/KernelDensityEstimation.js.example'),
+    codeText: require('./examples/KernelDensityEstimation.js.example').default,
   },
 ];
 

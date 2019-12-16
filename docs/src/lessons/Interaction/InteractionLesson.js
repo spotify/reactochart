@@ -6,7 +6,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Interaction Example',
-    codeText: require('raw-loader!./examples/Interaction.js.example'),
+    codeText: require('./examples/Interaction.js.example').default,
   },
 ];
 

@@ -19,12 +19,12 @@ import xyPropsEqual from './utils/xyPropsEqual';
 export default class AreaChart extends React.Component {
   static propTypes = {
     /**
-     * the array of data objects
+     * The array of data objects
      */
     data: PropTypes.array.isRequired,
     /**
      * Accessor function for area X values, called once per datum,
-     * or a single Y value to be used for the entire line.
+     * or a single X value to be used for the entire line.
      */
     x: CustomPropTypes.valueOrAccessor,
     /**
@@ -42,10 +42,12 @@ export default class AreaChart extends React.Component {
     /**
      * Class attribute to be applied to area path element.
      */
+    // TODO: update to allow function to be passed
     pathClassName: PropTypes.string,
     /**
      * Inline style object to be applied to area path element.
      */
+    // TODO: update to allow function to be passed
     pathStyle: PropTypes.object,
     /**
      * If isDifference is true, AreaChart generates a "difference chart" with two area paths instead of one:
@@ -53,19 +55,25 @@ export default class AreaChart extends React.Component {
      */
     isDifference: PropTypes.bool,
     /**
-     * When isDifference is true, pathStylePositive and pathStyleNegative can be passed to give 2 different inline
-     * styles to the two different paths which are generated.
+     * When isDifference is true, pathStylePositive can be passed to style the
+     * positive area difference.
      * Ignored if isDifference is false.
      */
     pathStylePositive: PropTypes.object,
+    /**
+     * When isDifference is true, pathStyleNegative can be passed to style the
+     * negative area difference.
+     * Ignored if isDifference is false.
+     */
     pathStyleNegative: PropTypes.object,
     /**
      * If true, will show gaps in the shaded area for data where props.isDefined(datum) returns false.
      */
     shouldShowGaps: PropTypes.bool,
     /**
-     * If shouldShowGaps is true, isDefined function describes when a datum should be considered "defined" vs. when to show gap
-     * by default, shows gap if either y or yEnd are undefined.
+     * If shouldShowGaps is true, isDefined function describes when a datum
+     * should be considered "defined" vs. when to show gap by default.
+     * Shows gap if either y or yEnd are undefined.
      */
     isDefined: PropTypes.func,
     /**
@@ -102,6 +110,7 @@ export default class AreaChart extends React.Component {
       );
     },
     pathClassName: '',
+    pathStyle: {},
   };
 
   static getDomain(props) {

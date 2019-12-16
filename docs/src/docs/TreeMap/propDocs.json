@@ -1,5 +1,6 @@
 {
   "description": "`TreeMap` displays hierarchical data where a leaf node's rectangle has an area proportional to a specified dimension of the data.",
+  "displayName": "TreeMap",
   "methods": [],
   "props": {
     "width": {
@@ -21,7 +22,7 @@
         "name": "object"
       },
       "required": true,
-      "description": ""
+      "description": "Data is an object with a key of `children` and an array of objects as its value.\ni.e. { children: [{ children: [{ size: 3 }, { size: 8 }] }, { size: 4 }]}"
     },
     "getValue": {
       "type": {

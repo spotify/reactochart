@@ -8,12 +8,12 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic MarkerLineChart',
-    codeText: require('raw-loader!./examples/MarkerLineChart.js.example'),
+    codeText: require('./examples/MarkerLineChart.js.example').default,
   },
   {
     id: 'withBar',
     label: 'MarkerLineChart with BarChart',
-    codeText: require('raw-loader!./examples/MarkerLineWithBarChart.js.example'),
+    codeText: require('./examples/MarkerLineWithBarChart.js.example').default,
   },
 ];
 

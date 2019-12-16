@@ -101,7 +101,7 @@ function resolveXLabelsForValues(
 class XAxisLabels extends React.Component {
   static propTypes = {
     height: PropTypes.number,
-    /** *
+    /**
      * Position of x axis labels. Accepted options are "top" or "bottom".
      */
     position: PropTypes.oneOf(['top', 'bottom']),
@@ -204,7 +204,6 @@ class XAxisLabels extends React.Component {
     offset: 0,
     height: 250,
     position: 'bottom',
-    placement: undefined,
     distance: 4,
     nice: true,
     tickCount: 10,
@@ -216,9 +215,6 @@ class XAxisLabels extends React.Component {
       lineHeight: 1,
       textAnchor: 'middle',
     },
-    format: undefined,
-    formats: undefined,
-    labels: undefined,
   };
 
   static getTickDomain(props) {

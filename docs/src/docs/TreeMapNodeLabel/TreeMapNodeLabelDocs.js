@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic TreeMapNodeLabel',
-    codeText: require('raw-loader!./examples/TreeMapNodeLabel.js.example'),
+    codeText: require('./examples/TreeMapNodeLabel.js.example').default,
   },
 ];
 

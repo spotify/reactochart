@@ -8,12 +8,12 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic ZoomContainer',
-    codeText: require('raw-loader!./examples/ZoomContainer.js.example'),
+    codeText: require('./examples/ZoomContainer.js.example').default,
   },
   {
     id: 'controlled',
     label: 'Controlled ZoomContainer',
-    codeText: require('raw-loader!./examples/ZoomContainerControlled.js.example'),
+    codeText: require('./examples/ZoomContainerControlled.js.example').default,
   },
 ];
 

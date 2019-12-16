@@ -25,14 +25,10 @@ export const scaleType = PropTypes.oneOf([
   'pow',
 ]);
 
-export const datumValueTypes = [
+export const valueOrAccessor = PropTypes.oneOfType([
   PropTypes.number,
   PropTypes.string,
   PropTypes.instanceOf(Date),
-];
-
-export const valueOrAccessor = PropTypes.oneOfType([
-  ...datumValueTypes,
   PropTypes.func,
 ]);
 

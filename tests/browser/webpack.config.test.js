@@ -1,61 +1,56 @@
-const path = require("path");
-const webpack = require("webpack");
-const _ = require("lodash");
-const HtmlPlugin = require("html-webpack-plugin");
-const CleanPlugin = require("clean-webpack-plugin");
+const path = require('path');
+const webpack = require('webpack');
+const HtmlPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-console.log("dirname", __dirname);
 module.exports = {
-  mode: "development",
+  mode: 'development',
   context: __dirname,
-  entry: [path.join(__dirname, "index.js")],
+  entry: [path.join(__dirname, 'index.js')],
   output: {
-    path: path.join(__dirname, "build"),
-    filename: "bundle.[hash].js"
+    path: path.join(__dirname, 'build'),
+    filename: 'bundle.[hash].js',
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlPlugin({
-      title: "Reactochart Tests",
-      template: path.join(__dirname, "index_html.ejs")
+      title: 'Reactochart Tests',
+      template: path.join(__dirname, 'index_html.ejs'),
     }),
-    new CleanPlugin([
-      path.join(__dirname, "build"),
-      path.join(__dirname, "docs/build")
-    ])
+    new CleanWebpackPlugin(),
   ],
   resolve: {
-    extensions: [".js", ".jsx"],
-    modules: ["node_modules", path.resolve(__dirname, "../..")]
+    extensions: ['.js', '.jsx'],
+    modules: ['node_modules', path.resolve(__dirname, '../..')],
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: "babel-loader"
+        use: 'babel-loader',
       },
       {
         test: /\.less?$/,
         use: [
-          { loader: "style-loader" },
-          { loader: "css-loader" },
-          { loader: "less-loader" }
-        ]
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'less-loader' },
+        ],
       },
       {
         test: /\.json$/,
-        use: [{ loader: "json-loader" }]
-      }
-    ]
+        use: [{ loader: 'json-loader' }],
+      },
+    ],
   },
   // https://github.com/airbnb/enzyme/issues/503
   externals: {
-    jsdom: "window",
-    cheerio: "window",
-    "react/lib/ExecutionEnvironment": true,
-    "react/addons": true,
-    "react/lib/ReactContext": "window"
-  }
+    jsdom: 'window',
+    cheerio: 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/addons': true,
+    'react/lib/ReactContext': 'window',
+  },
 };
