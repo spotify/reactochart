@@ -31,6 +31,10 @@ module.exports = {
           { loader: 'less-loader' },
         ],
       },
+      {
+        test: /\.js.example/,
+        use: 'raw-loader',
+      },
     ],
   },
   plugins: [

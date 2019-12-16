@@ -51,6 +51,8 @@ class KernelDensityEstimation extends React.Component {
   static defaultProps = {
     bandwidth: 0.5,
     sampleCount: null, // null = auto-determined based on width
+    lineClassName: '',
+    lineStyle: {},
   };
 
   state = {

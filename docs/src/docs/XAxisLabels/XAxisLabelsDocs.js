@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic XAxisLabels',
-    codeText: require('raw-loader!./examples/XAxisLabels.js.example'),
+    codeText: require('./examples/XAxisLabels.js.example').default,
   },
 ];
 

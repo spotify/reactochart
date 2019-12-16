@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic RangeRect',
-    codeText: require('raw-loader!./examples/RangeRect.js.example'),
+    codeText: require('./examples/RangeRect.js.example').default,
   },
 ];
 

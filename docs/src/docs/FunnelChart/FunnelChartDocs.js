@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic FunnelChart',
-    codeText: require('raw-loader!./examples/FunnelChart.js.example'),
+    codeText: require('./examples/FunnelChart.js.example').default,
   },
 ];
 

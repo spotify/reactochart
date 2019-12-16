@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic YGrid',
-    codeText: require('raw-loader!./examples/YGrid.js.example'),
+    codeText: require('./examples/YGrid.js.example').default,
   },
 ];
 

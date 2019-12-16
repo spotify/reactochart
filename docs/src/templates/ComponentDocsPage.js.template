@@ -9,7 +9,7 @@ const examples = [
   {
     id: "basic",
     label: "Basic ${componentName}",
-    codeText: require('raw-loader!./examples/${componentName}.js.example'),
+    codeText: require('./examples/${componentName}.js.example').default,
   },
 ];
 

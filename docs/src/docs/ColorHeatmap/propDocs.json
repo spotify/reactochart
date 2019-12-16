@@ -1,12 +1,11 @@
 {
   "description": "`ColorHeatmap` can be used to represent individual values contained in a matrix through colors.",
+  "displayName": "ColorHeatmap",
   "methods": [
     {
       "name": "getDomain",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",
@@ -30,7 +29,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": ""
+      "description": "Accessor function for the value of the datum, called once per datum, or a\nsingle value to be used for all data."
     },
     "x": {
       "type": {
@@ -38,7 +37,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Accessor function for x values, called once per datum."
+      "description": "Accessor function for x values, called once per datum, or a\nsingle value to be used for all `x` data."
     },
     "xEnd": {
       "type": {
@@ -46,7 +45,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Accessor function for x end values, called once per datum."
+      "description": "Accessor function for x end values, called once per datum, or a\nsingle value to be used for all `xEnd` data."
     },
     "y": {
       "type": {
@@ -54,7 +53,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Accessor function for y values, called once per datum."
+      "description": "Accessor function for y values, called once per datum, or a\nsingle value to be used for all `y` data."
     },
     "yEnd": {
       "type": {
@@ -62,7 +61,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Accessor function for y end values, called once per datum."
+      "description": "Accessor function for y end values, called once per datum, or a\nsingle value to be used for all `yEnd` data."
     },
     "xScale": {
       "type": {
@@ -83,21 +82,21 @@
         "name": "func"
       },
       "required": false,
-      "description": "a custom d3 color scale may be passed..."
+      "description": "A d3 color scale or function which receives the datum value as an argument.\nThis will be constructred from the `colors`, `valueDomain` and\n`interpolator` props, if `colorScale` is undefined."
     },
     "colors": {
       "type": {
         "name": "array"
       },
       "required": false,
-      "description": "...or else one will be constructed from colors, valueDomain and interpolator"
+      "description": "An array of color strings"
     },
     "valueDomain": {
       "type": {
         "name": "array"
       },
       "required": false,
-      "description": "Custom domain of the passed in data.\nOtherwise it will be the extent of your data."
+      "description": "Custom domain of the data.\nOtherwise it will be the extent of your data."
     },
     "interpolator": {
       "type": {

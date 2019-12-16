@@ -1,12 +1,11 @@
 {
   "description": "`FunnelChart` is used to visualize the progressive reduction of data as it passes\nfrom one phase to another.",
+  "displayName": "FunnelChart",
   "methods": [
     {
       "name": "getDomain",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",
@@ -30,7 +29,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Accessor function for X values, called once per datum, or a single value to be used for all datums."
+      "description": "Accessor function for X values, called once per datum, or a single value to be used for all data."
     },
     "y": {
       "type": {
@@ -38,7 +37,7 @@
         "raw": "CustomPropTypes.valueOrAccessor"
       },
       "required": false,
-      "description": "Accessor function for Y values, called once per datum, or a single value to be used for all datums."
+      "description": "Accessor function for Y values, called once per datum, or a single value to be used for all data."
     },
     "color": {
       "type": {
@@ -60,7 +59,7 @@
         "name": "bool"
       },
       "required": false,
-      "description": ""
+      "description": "Boolean which determines whether the chart will be horizontal."
     },
     "pathClassName": {
       "type": {
@@ -94,7 +93,11 @@
         ]
       },
       "required": false,
-      "description": "Style applied to each path element,\nor accessor function which returns a style object."
+      "description": "Style applied to each path element,\nor accessor function which returns a style object.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
     },
     "xScale": {
       "type": {

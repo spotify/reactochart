@@ -7,19 +7,27 @@ import React from 'react';
 export default class XLine extends React.Component {
   static propTypes = {
     /**
-     * DHeight of chart - provided by XYPlot
+     * Height of chart - provided by XYPlot
      */
     height: PropTypes.number,
     /**
      * D3 scale for X axis - provided by XYPlot
      */
     xScale: PropTypes.func,
-    value: PropTypes.any.isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+      PropTypes.instanceOf(Date),
+    ]).isRequired,
     /**
      * D3 scale for Y axis - provided by XYPlot
      */
     yScale: PropTypes.func,
-    yLimit: PropTypes.any,
+    yLimit: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+      PropTypes.instanceOf(Date),
+    ]),
     /**
      * The Y domain of the data as an array - provided by XYPlot
      */

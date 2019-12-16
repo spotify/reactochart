@@ -1,12 +1,11 @@
 {
   "description": "",
+  "displayName": "YGrid",
   "methods": [
     {
       "name": "getTickDomain",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",

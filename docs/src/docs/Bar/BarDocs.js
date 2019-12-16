@@ -8,7 +8,7 @@ const examples = [
   {
     id: 'basic',
     label: 'Basic Bar',
-    codeText: require('raw-loader!./examples/Bar.js.example'),
+    codeText: require('./examples/Bar.js.example').default,
   },
 ];
 

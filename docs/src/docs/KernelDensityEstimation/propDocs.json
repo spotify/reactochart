@@ -1,12 +1,11 @@
 {
   "description": "Kernel Density Estimation is still undergoing experimental changes!\nWe do not consider this chart to be production ready but\nencourage you to try it out and contribute to any of its missing features.",
+  "displayName": "KernelDensityEstimation",
   "methods": [
     {
       "name": "getDomain",
       "docblock": null,
-      "modifiers": [
-        "static"
-      ],
+      "modifiers": ["static"],
       "params": [],
       "returns": null
     },
@@ -58,14 +57,22 @@
         "name": "object"
       },
       "required": false,
-      "description": "Inline style object to be applied to the line path."
+      "description": "Inline style object to be applied to the line path.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
     },
     "lineClassName": {
       "type": {
         "name": "string"
       },
       "required": false,
-      "description": "Class attribute to be applied to the line path."
+      "description": "Class attribute to be applied to the line path.",
+      "defaultValue": {
+        "value": "''",
+        "computed": false
+      }
     },
     "x": {
       "type": {
