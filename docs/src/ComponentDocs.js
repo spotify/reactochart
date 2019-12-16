@@ -61,6 +61,19 @@ ComponentDocs.propTypes = {
   children: PropTypes.any,
 };
 
+function renderTypeValues(propInfo, propKey) {
+  return _.get(propInfo, 'value', [])
+    .map(propType => {
+      const type = _.get(propType, propKey, '');
+      if (type === 'enum') {
+        return renderTypeValues(propType, 'value');
+      } 
+        return type;
+      
+    })
+    .join(' || ');
+}
+
 function renderType(propInfo) {
   const typeInfo = _.get(propInfo, 'type');
 
@@ -73,9 +86,7 @@ function renderType(propInfo) {
 
   if (typeName === 'union') {
     if (!typeInfo.computed) {
-      type = _.get(propInfo, 'type.value', [])
-        .map(propTypes => _.get(propTypes, 'name', ''))
-        .join(' || ');
+      type = renderTypeValues(typeInfo, 'name');
     } else {
       // Handle custom proptypes
       type = 'func || value';
@@ -87,6 +98,8 @@ function renderType(propInfo) {
   } else if (typeName === 'arrayOf') {
     const arrayType = _.get(propInfo, 'type.value.name', {});
     type = `Array<${arrayType}>`;
+  } else if (typeName === 'enum') {
+    type = renderTypeValues(typeInfo, 'value');
   }
 
   return type;

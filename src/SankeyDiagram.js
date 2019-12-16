@@ -495,7 +495,7 @@ export default class SankeyDiagram extends React.Component {
      */
     standalone: PropTypes.bool,
     /**
-     * Internal top margin, in pixels. Generally used to eg. leave extra space inside the SVG for labels.
+     * Internal top margin, in pixels. Generally used to leave extra space inside the SVG for labels.
      */
     marginTop: PropTypes.number,
     /**
@@ -532,7 +532,7 @@ export default class SankeyDiagram extends React.Component {
     nodePadding: PropTypes.number,
     /**
      * Node alignment method used to layout the nodes.
-     * May be 'left', 'right', 'center', 'justify', or a custom function.
+     * Must be 'left', 'right', 'center', or 'justify'.
      * See [d3-sankey alignment docs](https://github.com/d3/d3-sankey#alignments) for more details.
      */
     nodeAlignment: PropTypes.oneOf(['left', 'right', 'center', 'justify']),
