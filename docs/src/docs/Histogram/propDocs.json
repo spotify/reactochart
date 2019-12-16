@@ -67,7 +67,7 @@
         "name": "func"
       },
       "required": false,
-      "description": "Data value accessor function, called once per datum, which returns the values to bin and plot in the histogram.\nIf `data` is just an array of numbers, this may be the identity function (`function(d) { return d }`)."
+      "description": "Data value accessor function, called once per datum, which returns the values to bin and plot in the histogram.\nIf `data` is just an array of numbers, this may be the identity function (`d => d`)."
     },
     "xScale": {
       "type": {
@@ -133,7 +133,11 @@
         ]
       },
       "required": false,
-      "description": "Class attribute to be applied to each bar,\nor accessor function which returns a class."
+      "description": "Class attribute to be applied to each bar,\nor accessor function which returns a class.",
+      "defaultValue": {
+        "value": "''",
+        "computed": false
+      }
     },
     "barStyle": {
       "type": {
@@ -148,7 +152,11 @@
         ]
       },
       "required": false,
-      "description": "Inline style object to be applied to each bar,\nor accessor function which returns a style object."
+      "description": "Inline style object to be applied to each bar,\nor accessor function which returns a style object.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
     },
     "onMouseMoveBar": {
       "type": {

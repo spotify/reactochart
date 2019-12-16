@@ -34,13 +34,12 @@ export default class AreaBarChart extends React.Component {
     /**
      * Array of data to be plotted. One bar will be rendered per datum in this array.
      */
-    data: PropTypes.array,
+    data: PropTypes.array.isRequired,
     /**
      * Boolean which determines whether the chart will use horizontal or vertical bars.
      * When `true`, bars will be horizontal, ie. the X-axis will be treated as the dependent axis.
      */
     horizontal: PropTypes.bool,
-
     /**
      * Accessor function for bar X values, called once per bar (datum), or a single value to be used for all bars.
      * If `horizontal` is `false`, this gets the start (min value) of the *independent* variable range, spanned by the bar's thickness.
@@ -65,13 +64,13 @@ export default class AreaBarChart extends React.Component {
     yEnd: CustomPropTypes.valueOrAccessor,
 
     /**
-     * Class attribute to be applied to each bar.
-     * or accessor function which returns a class;
+     * Class attribute to be applied to each bar
+     * or accessor function which returns a class.
      */
     barClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     /**
-     * Inline style object to be applied to each bar,
-     * or accessor function which returns a style object;
+     * Inline style object to be applied to each bar
+     * or accessor function which returns a style object.
      */
     barStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 
@@ -89,7 +88,6 @@ export default class AreaBarChart extends React.Component {
     onMouseLeaveBar: PropTypes.func,
   };
   static defaultProps = {
-    data: [],
     horizontal: false,
     barClassName: '',
     barStyle: {},

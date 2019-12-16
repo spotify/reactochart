@@ -33,6 +33,7 @@ const ComponentDocs = props => {
           return (
             <div key={propKey} className="prop-doc">
               <strong>{propKey}</strong>: {renderType(propInfo)}
+              <i>{propInfo.required && ' (required)'}</i>
               {propInfo.description ? <br /> : null}
               {propInfo.description ? (
                 <span className="prop-description">
@@ -60,6 +61,20 @@ ComponentDocs.propTypes = {
   children: PropTypes.any,
 };
 
+function renderTypeValues(propInfo, propKey) {
+  return _.get(propInfo, 'value', [])
+    .map(propType => {
+      const type = _.get(propType, propKey, '');
+      if (type === 'enum') {
+        return renderTypeValues(propType, 'value');
+      } else if (type === 'instanceOf') {
+        return _.get(propType, 'value', '').toLowerCase();
+      }
+      return type;
+    })
+    .join(' || ');
+}
+
 function renderType(propInfo) {
   const typeInfo = _.get(propInfo, 'type');
 
@@ -72,20 +87,22 @@ function renderType(propInfo) {
 
   if (typeName === 'union') {
     if (!typeInfo.computed) {
-      type = _.get(propInfo, 'type.value', [])
-        .map(propTypes => _.get(propTypes, 'name', ''))
-        .join(' || ');
+      type = renderTypeValues(typeInfo, 'name');
     } else {
       // Handle custom proptypes
       type = 'func || value';
     }
   } else if (typeName === 'custom') {
     if (typeInfo.raw === 'CustomPropTypes.valueOrAccessor') {
-      type = 'func || value';
+      type = 'date || func || number || string';
+    } else if (typeInfo.raw === 'CustomPropTypes.getter') {
+      type = 'array || func || number || string';
     }
   } else if (typeName === 'arrayOf') {
     const arrayType = _.get(propInfo, 'type.value.name', {});
     type = `Array<${arrayType}>`;
+  } else if (typeName === 'enum') {
+    type = renderTypeValues(typeInfo, 'value');
   }
 
   return type;

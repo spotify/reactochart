@@ -6,7 +6,8 @@ import { getValue } from './utils/Data';
 import xyPropsEqual from './utils/xyPropsEqual';
 
 /**
- * `LineChart` displays data a series of points connected by straight line segments.
+ * `LineChart` displays a series of points connected by straight line segments.
+ * Each `LineChart` renders one line.
  */
 export default class LineChart extends React.Component {
   static propTypes = {

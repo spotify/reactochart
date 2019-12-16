@@ -59,21 +59,29 @@ export default class ColorHeatmap extends React.Component {
      * Array of data to be plotted - should be 1D array of all grid values
      */
     data: PropTypes.array.isRequired,
+    /**
+     * Accessor function for the value of the datum, called once per datum, or a
+     * single value to be used for all data.
+     */
     value: CustomPropTypes.valueOrAccessor,
     /**
-     * Accessor function for x values, called once per datum.
+     * Accessor function for x values, called once per datum, or a
+     * single value to be used for all `x` data.
      */
     x: CustomPropTypes.valueOrAccessor,
     /**
-     * Accessor function for x end values, called once per datum.
+     * Accessor function for x end values, called once per datum, or a
+     * single value to be used for all `xEnd` data.
      */
     xEnd: CustomPropTypes.valueOrAccessor,
     /**
-     * Accessor function for y values, called once per datum.
+     * Accessor function for y values, called once per datum, or a
+     * single value to be used for all `y` data.
      */
     y: CustomPropTypes.valueOrAccessor,
     /**
-     * Accessor function for y end values, called once per datum.
+     * Accessor function for y end values, called once per datum, or a
+     * single value to be used for all `yEnd` data.
      */
     yEnd: CustomPropTypes.valueOrAccessor,
     /**
@@ -85,15 +93,17 @@ export default class ColorHeatmap extends React.Component {
      */
     yScale: PropTypes.func,
     /**
-     * a custom d3 color scale may be passed...
+     * A d3 color scale or function which receives the datum value as an argument.
+     * This will be constructred from the `colors`, `valueDomain` and
+     * `interpolator` props, if `colorScale` is undefined.
      */
     colorScale: PropTypes.func,
     /**
-     * ...or else one will be constructed from colors, valueDomain and interpolator
+     * An array of color strings
      */
     colors: PropTypes.array,
     /**
-     * Custom domain of the passed in data.
+     * Custom domain of the data.
      * Otherwise it will be the extent of your data.
      */
     valueDomain: PropTypes.array,

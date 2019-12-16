@@ -47,7 +47,6 @@ export default class XAxisTitle extends React.Component {
     width: 400,
     distance: 5,
     position: 'bottom',
-    placement: undefined,
     alignment: 'center',
     rotate: false,
     style: {
@@ -121,23 +120,23 @@ export default class XAxisTitle extends React.Component {
       rotate && placement === 'above'
         ? 'start'
         : rotate && placement === 'below'
-          ? 'end'
-          : alignment === 'left'
-            ? 'start'
-            : alignment === 'right'
-              ? 'end'
-              : 'middle';
+        ? 'end'
+        : alignment === 'left'
+        ? 'start'
+        : alignment === 'right'
+        ? 'end'
+        : 'middle';
 
     const dy =
       rotate && alignment === 'right'
         ? '-0.2em'
         : rotate && alignment === 'center'
-          ? '0.3em'
-          : rotate
-            ? '0.8em'
-            : placement === 'below'
-              ? '0.8em'
-              : '-0.2em';
+        ? '0.3em'
+        : rotate
+        ? '0.8em'
+        : placement === 'below'
+        ? '0.8em'
+        : '-0.2em';
 
     return (
       <g transform={`translate(${translateX},${translateY})`}>
