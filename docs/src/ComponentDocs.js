@@ -67,6 +67,8 @@ function renderTypeValues(propInfo, propKey) {
       const type = _.get(propType, propKey, '');
       if (type === 'enum') {
         return renderTypeValues(propType, 'value');
+      } else if (type === 'instanceOf') {
+        return _.get(propType, 'value', '').toLowerCase();
       }
       return type;
     })
