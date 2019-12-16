@@ -67,9 +67,8 @@ function renderTypeValues(propInfo, propKey) {
       const type = _.get(propType, propKey, '');
       if (type === 'enum') {
         return renderTypeValues(propType, 'value');
-      } 
-        return type;
-      
+      }
+      return type;
     })
     .join(' || ');
 }
@@ -94,6 +93,8 @@ function renderType(propInfo) {
   } else if (typeName === 'custom') {
     if (typeInfo.raw === 'CustomPropTypes.valueOrAccessor') {
       type = 'func || value';
+    } else if (typeInfo.raw === 'CustomPropTypes.getter') {
+      type = 'string || number || array || func';
     }
   } else if (typeName === 'arrayOf') {
     const arrayType = _.get(propInfo, 'type.value.name', {});
