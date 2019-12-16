@@ -94,9 +94,9 @@ function renderType(propInfo) {
     }
   } else if (typeName === 'custom') {
     if (typeInfo.raw === 'CustomPropTypes.valueOrAccessor') {
-      type = 'func || value';
+      type = 'date || func || number || string';
     } else if (typeInfo.raw === 'CustomPropTypes.getter') {
-      type = 'string || number || array || func';
+      type = 'array || func || number || string';
     }
   } else if (typeName === 'arrayOf') {
     const arrayType = _.get(propInfo, 'type.value.name', {});

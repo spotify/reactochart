@@ -57,14 +57,22 @@
         "name": "object"
       },
       "required": false,
-      "description": "Inline style object to be applied to the line path."
+      "description": "Inline style object to be applied to the line path.",
+      "defaultValue": {
+        "value": "{}",
+        "computed": false
+      }
     },
     "lineClassName": {
       "type": {
         "name": "string"
       },
       "required": false,
-      "description": "Class attribute to be applied to the line path."
+      "description": "Class attribute to be applied to the line path.",
+      "defaultValue": {
+        "value": "''",
+        "computed": false
+      }
     },
     "x": {
       "type": {

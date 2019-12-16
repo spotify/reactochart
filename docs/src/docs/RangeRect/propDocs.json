@@ -20,8 +20,18 @@
     "x": {
       "type": {
         "name": "union",
-        "computed": true,
-        "value": "CustomPropTypes.datumValueTypes"
+        "value": [
+          {
+            "name": "number"
+          },
+          {
+            "name": "string"
+          },
+          {
+            "name": "instanceOf",
+            "value": "Date"
+          }
+        ]
       },
       "required": true,
       "description": "Starting (minimum) X value (left edge, usually) of the rectangle range"
@@ -29,8 +39,18 @@
     "xEnd": {
       "type": {
         "name": "union",
-        "computed": true,
-        "value": "CustomPropTypes.datumValueTypes"
+        "value": [
+          {
+            "name": "number"
+          },
+          {
+            "name": "string"
+          },
+          {
+            "name": "instanceOf",
+            "value": "Date"
+          }
+        ]
       },
       "required": true,
       "description": "Ending (maximum) X value (right edge, usually) of the rectangle range"
@@ -38,8 +58,18 @@
     "y": {
       "type": {
         "name": "union",
-        "computed": true,
-        "value": "CustomPropTypes.datumValueTypes"
+        "value": [
+          {
+            "name": "number"
+          },
+          {
+            "name": "string"
+          },
+          {
+            "name": "instanceOf",
+            "value": "Date"
+          }
+        ]
       },
       "required": true,
       "description": "Starting (minimum) Y value (bottom edge, usually) of the rectangle range"
@@ -47,8 +77,18 @@
     "yEnd": {
       "type": {
         "name": "union",
-        "computed": true,
-        "value": "CustomPropTypes.datumValueTypes"
+        "value": [
+          {
+            "name": "number"
+          },
+          {
+            "name": "string"
+          },
+          {
+            "name": "instanceOf",
+            "value": "Date"
+          }
+        ]
       },
       "required": true,
       "description": "Ending (maximum) Y value (top edge, usually) of the rectangle range"

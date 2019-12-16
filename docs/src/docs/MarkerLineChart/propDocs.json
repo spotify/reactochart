@@ -163,7 +163,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "",
+      "description": "Length of the marker line.",
       "defaultValue": {
         "value": "10",
         "computed": false
@@ -210,7 +210,7 @@
         ]
       },
       "required": false,
-      "description": "Class attribute to be applied to the line path,\nor accessor function which returns a class.",
+      "description": "Class attribute to be applied to the line path,\nor an accessor function which returns a class.",
       "defaultValue": {
         "value": "''",
         "computed": false
@@ -229,7 +229,7 @@
         ]
       },
       "required": false,
-      "description": "Inline style object to be applied to each marker line,\nor accessor function which returns a style object.",
+      "description": "Inline style object to be applied to each marker line,\nor an accessor function which returns a style object.",
       "defaultValue": {
         "value": "{}",
         "computed": false

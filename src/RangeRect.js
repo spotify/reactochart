@@ -1,7 +1,6 @@
 import React from 'react';
 import invariant from 'invariant';
 import PropTypes from 'prop-types';
-import * as CustomPropTypes from './utils/CustomPropTypes';
 import { isValidScale } from './utils/Scale';
 
 /**
@@ -23,19 +22,35 @@ export default class RangeRect extends React.Component {
     /**
      * Starting (minimum) X value (left edge, usually) of the rectangle range
      */
-    x: PropTypes.oneOfType(CustomPropTypes.datumValueTypes).isRequired,
+    x: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+      PropTypes.instanceOf(Date),
+    ]).isRequired,
     /**
      * Ending (maximum) X value (right edge, usually) of the rectangle range
      */
-    xEnd: PropTypes.oneOfType(CustomPropTypes.datumValueTypes).isRequired,
+    xEnd: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+      PropTypes.instanceOf(Date),
+    ]).isRequired,
     /**
      * Starting (minimum) Y value (bottom edge, usually) of the rectangle range
      */
-    y: PropTypes.oneOfType(CustomPropTypes.datumValueTypes).isRequired,
+    y: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+      PropTypes.instanceOf(Date),
+    ]).isRequired,
     /**
      * Ending (maximum) Y value (top edge, usually) of the rectangle range
      */
-    yEnd: PropTypes.oneOfType(CustomPropTypes.datumValueTypes).isRequired,
+    yEnd: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+      PropTypes.instanceOf(Date),
+    ]).isRequired,
     /**
      * Class attribute to be applied to the rectangle element
      */

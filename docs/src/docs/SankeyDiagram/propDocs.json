@@ -132,7 +132,7 @@
         "name": "number"
       },
       "required": false,
-      "description": "Internal top margin, in pixels. Generally used to eg. leave extra space inside the SVG for labels.",
+      "description": "Internal top margin, in pixels. Generally used to leave extra space inside the SVG for labels.",
       "defaultValue": {
         "value": "0",
         "computed": false
@@ -246,7 +246,7 @@
         ]
       },
       "required": false,
-      "description": "Node alignment method used to layout the nodes.\nMay be 'left', 'right', 'center', 'justify', or a custom function.\nSee [d3-sankey alignment docs](https://github.com/d3/d3-sankey#alignments) for more details.",
+      "description": "Node alignment method used to layout the nodes.\nMust be 'left', 'right', 'center', or 'justify'.\nSee [d3-sankey alignment docs](https://github.com/d3/d3-sankey#alignments) for more details.",
       "defaultValue": {
         "value": "'justify'",
         "computed": false
