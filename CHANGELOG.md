@@ -1,3 +1,10 @@
+## 3.0.0 (2019-12-16)
+
+- [#187](https://github.com/spotify/reactochart/pull/187) Dependency upgrades
+- [#194](https://github.com/spotify/reactochart/pull/194) Addition of pre-commit hooks
+- [#201](https://github.com/spotify/reactochart/pull/201) PieChart updates
+- [#207](https://github.com/spotify/reactochart/pull/207) Documentation updates
+
 ## 2.0.2 (2019-11-04)
 
 - [#182](https://github.com/spotify/reactochart/pull/182) Decorate XYPlot onMouseEnter and onMouseLeave events - thanks @tanayv!
