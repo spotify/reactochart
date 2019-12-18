@@ -33,7 +33,7 @@ export default class XYPlotsLesson extends React.Component {
         <ExampleSection
           id="basic"
           label="XYPlot and LineChart"
-          codeText={require('./examples/LineChart.js.example')}
+          codeText={require('./examples/LineChart.js.example').default}
         />
 
         <p>
@@ -58,7 +58,7 @@ export default class XYPlotsLesson extends React.Component {
         <ExampleSection
           id="lineChartWithAxis"
           label="LineChart with axes"
-          codeText={require('./examples/LineChartWithAxis.js.example')}
+          codeText={require('./examples/LineChartWithAxis.js.example').default}
         />
 
         <p>
@@ -79,7 +79,7 @@ export default class XYPlotsLesson extends React.Component {
         <ExampleSection
           id="multiChart"
           label="Multiple Charts in one XYPlot"
-          codeText={require('./examples/MultiChart.js.example')}
+          codeText={require('./examples/MultiChart.js.example').default}
         />
       </Lesson>
     );
