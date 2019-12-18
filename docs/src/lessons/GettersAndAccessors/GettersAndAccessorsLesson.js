@@ -93,7 +93,9 @@ export default class GettersAndAccessorsLesson extends React.Component {
         <ExampleSection
           id="basic"
           label="Getter Usage Example"
-          codeText={require('./examples/GettersAndAccessors.js.example')}
+          codeText={
+            require('./examples/GettersAndAccessors.js.example').default
+          }
         />
 
         <p>
@@ -111,7 +113,7 @@ export default class GettersAndAccessorsLesson extends React.Component {
         <ExampleSection
           id="basic"
           label="Graphing Calculator Example"
-          codeText={require('./examples/GraphingCalculator.js.example')}
+          codeText={require('./examples/GraphingCalculator.js.example').default}
         />
       </Lesson>
     );
