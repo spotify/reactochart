@@ -1,3 +1,8 @@
+## 3.0.1 (2019-12-18)
+
+- [#211](https://github.com/spotify/reactochart/pull/211) Fix XYPlots lesson in docs
+- [#212](https://github.com/spotify/reactochart/pull/212) Add prettierignore
+
 ## 3.0.0 (2019-12-16)
 
 - [#187](https://github.com/spotify/reactochart/pull/187) Dependency upgrades

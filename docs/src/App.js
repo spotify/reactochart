@@ -13,7 +13,9 @@ const lessons = [
     Component: Lessons.QuickStartLesson,
   },
   { name: 'XY Plots', path: '/xy-plots', Component: Lessons.XYPlotsLesson },
+  // TODO lesson needs to be cleaned up, see lessons/GettersAndAccessors
   // {name: "Getters & Accessors", path: '/getters-and-accessors', Component: Lessons.GettersAndAccessorsLesson},
+  // TODO lesson needs to be cleaned up, see lessons/Interaction
   // {name: "Interaction", path: '/interaction', Component: Lessons.InteractionLesson},
 ];
 
