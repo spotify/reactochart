@@ -71,10 +71,10 @@ class KernelDensityEstimation extends React.Component {
     return shouldUpdate;
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.initKDE(this.props);
   }
-  componentWillReceiveProps(newProps) {
+  UNSAFE_componentWillReceiveProps(newProps) {
     this.initKDE(newProps);
   }
   initKDE(props) {

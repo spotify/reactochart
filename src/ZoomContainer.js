@@ -23,92 +23,75 @@ export default class ZoomContainer extends React.Component {
     width: PropTypes.number,
     /**
      * (outer) width of the chart (SVG element).
-     */
-    height: PropTypes.number,
+     */ height: PropTypes.number,
     /**
      * Zoom callback function, called when zoom changes.
      * For controlled version of this component, you should update zoomX, zoomY and zoomScale props in this callback.
-     */
-    onZoom: PropTypes.func,
+     */ onZoom: PropTypes.func,
     /**
      * Boolean which determines whether the component is "controlled" (true) or "stateful" (false).
      * When true, zoom transformation is controlled entirely by the `zoomX`, `zoomY` and `zoomScale` props, which
      * you are responsible for updating in the `onZoom` callback function.
      * When false, zoom transformation is handled by internal state, and the `zoomX`, `zoomY` and `zoomScale` props
      * specify only the initial X, Y and scale transformation of the component.
-     */
-    controlled: PropTypes.bool,
+     */ controlled: PropTypes.bool,
     /**
      * Disables wheel-driven zooming (say to not interfere with native scrolling).
-     */
-    disableMouseWheelZoom: PropTypes.bool,
+     */ disableMouseWheelZoom: PropTypes.bool,
     /**
      * The X-coordinate of the zoom transformation (or initial X-coordinate, if `controlled` is false).
-     */
-    zoomX: PropTypes.number,
+     */ zoomX: PropTypes.number,
     /**
      * The Y-coordinate of the zoom transformation (or initial Y-coordinate, if `controlled` is false).
-     */
-    zoomY: PropTypes.number,
+     */ zoomY: PropTypes.number,
     /**
      * The scaling factor of the zoom transformation (or initial scaling, if `controlled` is false).
      * 1.0 is normal size, 2.0 is double size, 0.5 is half size.
-     */
-    zoomScale: PropTypes.number,
+     */ zoomScale: PropTypes.number,
     /**
      * Sets the viewport extent to the specified array of points [[x0, y0], [x1, y1]],
      * where [x0, y0] is the top-left corner of the viewport and [x1, y1] is the bottom-right corner of the viewport.
      * See d3-zoom docs for more information.
-     */
-    extent: PropTypes.array,
+     */ extent: PropTypes.array,
     /**
      * Sets the scale extent to the specified array of numbers [k0, k1]
      * where k0 is the minimum allowed scale factor and k1 is the maximum allowed scale factor.
      * See d3-zoom docs for more information.
-     */
-    scaleExtent: PropTypes.array,
+     */ scaleExtent: PropTypes.array,
     /**
      * Sets the translate extent to the specified array of points [[x0, y0], [x1, y1]],
      * where [x0, y0] is the top-left corner of the world and [x1, y1] is the bottom-right corner of the world.
      * See d3-zoom docs for more information.
-     */
-    translateExtent: PropTypes.array,
+     */ translateExtent: PropTypes.array,
     /**
      * Sets the maximum distance that the mouse can move between mousedown and mouseup that will trigger
      * a subsequent click event.
      * See d3-zoom docs for more information.
-     */
-    clickDistance: PropTypes.number,
+     */ clickDistance: PropTypes.number,
     /**
      * Sets the duration for zoom transitions on double-click and double-tap to the specified number of milliseconds.
      * See d3-zoom docs for more information.
-     */
-    duration: PropTypes.number,
+     */ duration: PropTypes.number,
     /**
      * Sets the interpolation factory for zoom transitions to the specified function.
      * See d3-zoom docs for more information.
-     */
-    interpolate: PropTypes.func,
+     */ interpolate: PropTypes.func,
     /**
      * Sets the transform constraint function to the specified function.
      * See d3-zoom docs for more information.
-     */
-    constrain: PropTypes.func,
+     */ constrain: PropTypes.func,
     /**
      * Sets the zoom event filter to the specified function.
      * See d3-zoom docs for more information.
-     */
-    filter: PropTypes.func,
+     */ filter: PropTypes.func,
     /**
      * Sets the touch support detector to the specified function.
      * See d3-zoom docs for more information.
-     */
-    touchable: PropTypes.func,
+     */ touchable: PropTypes.func,
     /**
      * Sets the wheel delta function to the specified function.
      * See d3-zoom docs for more information.
-     */
-    wheelDelta: PropTypes.func,
+     */ wheelDelta: PropTypes.func,
     children: PropTypes.any,
   };
   static defaultProps = {
@@ -167,9 +150,8 @@ export default class ZoomContainer extends React.Component {
     if (this.props.onZoom) this.props.onZoom(nextZoomTransform, ...args);
   };
 
-  // React is deprecating componentWillReceiveProps, but it's pretty much necessary in this case
-  // TODO: change to UNSAFE_componentWillReceiveProps when upgrading React
-  componentWillReceiveProps(nextProps) {
+  /* eslint-disable-next-line camelcase */
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.controlled) {
       // if controlled component and zoom props have changed, apply the new zoom props to d3-zoom
       // (unbind handler first so as not to create infinite callback loop)
