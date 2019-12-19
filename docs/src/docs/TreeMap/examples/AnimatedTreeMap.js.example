@@ -8,7 +8,7 @@ class AnimatedTreeMapExample extends React.Component {
       this.setState({getValue: "size"});
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this._interval = setInterval(this._animateValue, 1000);
     this._data = {
       children: _.range(1, 5).map(n => ({
