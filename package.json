@@ -38,7 +38,7 @@
     "test-watch": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --watch --require @babel/register tests/jsdom/setup.js --recursive tests/jsdom/spec"
   },
   "dependencies": {
-    "d3": "^5.9.7",
+    "d3": "^5.15.0",
     "d3-sankey": "^0.12.1",
     "invariant": "^2.2.0",
     "lodash": "^4.17.15",
