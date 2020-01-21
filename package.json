@@ -61,7 +61,7 @@
     "@spotify/eslint-config-base": "^6.0.0",
     "@spotify/eslint-config-react": "^6.0.0",
     "@spotify/prettier-config": "^6.0.0",
-    "@spotify/web-scripts": "^3.0.1",
+    "@spotify/web-scripts": "^5.0.2",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-lodash": "^3.3.4",
