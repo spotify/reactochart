@@ -88,7 +88,7 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "lessc": "^1.0.2",
-    "mocha": "^6.2.2",
+    "mocha": "^7.0.1",
     "prettier": "~1.18.2",
     "raw-loader": "^3.1.0",
     "react": "^16.6.3",
