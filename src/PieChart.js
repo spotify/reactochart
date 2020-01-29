@@ -359,7 +359,7 @@ class PieChart extends React.Component {
 
         {sum < newTotal ? ( // draw empty slice if the sum of slices is less than expected total
           <path
-            className={`rct-pie-slice rct-pie-slice-empty`}
+            className="rct-pie-slice rct-pie-slice-empty"
             d={pieSlicePath(startPercent, 1, center, radius, holeRadius)}
             key="pie-slice-empty"
           />

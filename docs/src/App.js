@@ -234,7 +234,7 @@ export const App = () => (
     <div className="row docs-home">
       <Nav />
       <div className="col-md-10">
-        <Route exact path={'/'} component={Home} />
+        <Route exact path="/" component={Home} />
         {allComponents.map((c, i) => (
           <Route path={c.path} component={c.Component} key={i} />
         ))}
@@ -326,7 +326,7 @@ class MultipleXYExample extends React.Component {
             yEnd={([i, j]) => j + 0.1}
             /* eslint-enable */
             colors={['#d0d1e6', '#016450']}
-            interpolator={'lab'}
+            interpolator="lab"
           />
 
           <AreaHeatmap
