@@ -59,7 +59,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.4.4",
     "@spotify/eslint-config-base": "^6.0.0",
-    "@spotify/eslint-config-react": "^3.0.1",
+    "@spotify/eslint-config-react": "^6.0.0",
     "@spotify/prettier-config": "^6.0.0",
     "@spotify/web-scripts": "^3.0.1",
     "babel-eslint": "^10.0.3",

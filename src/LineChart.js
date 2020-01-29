@@ -94,7 +94,7 @@ export default class LineChart extends React.Component {
 
     return (
       <g className={`rct-line-chart ${lineClassName}`}>
-        <path className={`rct-line-path`} d={pathStr} style={lineStyle} />
+        <path className="rct-line-path" d={pathStr} style={lineStyle} />
       </g>
     );
   }
