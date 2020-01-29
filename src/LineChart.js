@@ -54,11 +54,13 @@ export default class LineChart extends React.Component {
     return !xyPropsEqual(this.props, nextProps, ['lineStyle', 'lineClassName']);
   }
 
-  componentWillMount() {
+  /* eslint-disable-next-line camelcase */
+  UNSAFE_componentWillMount() {
     this.initBisector(this.props);
   }
 
-  componentWillReceiveProps(nextProps) {
+  /* eslint-disable-next-line camelcase */
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.initBisector(nextProps);
   }
 

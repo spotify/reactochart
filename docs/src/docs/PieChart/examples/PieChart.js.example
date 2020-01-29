@@ -11,7 +11,7 @@ class PieChartExample extends React.Component {
     this.setState({ sinVal });
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this._interval = setInterval(this._animateValue, 20);
   }
   componentWillUnmount() {

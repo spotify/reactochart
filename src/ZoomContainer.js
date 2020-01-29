@@ -167,9 +167,8 @@ export default class ZoomContainer extends React.Component {
     if (this.props.onZoom) this.props.onZoom(nextZoomTransform, ...args);
   };
 
-  // React is deprecating componentWillReceiveProps, but it's pretty much necessary in this case
-  // TODO: change to UNSAFE_componentWillReceiveProps when upgrading React
-  componentWillReceiveProps(nextProps) {
+  /* eslint-disable-next-line camelcase */
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.controlled) {
       // if controlled component and zoom props have changed, apply the new zoom props to d3-zoom
       // (unbind handler first so as not to create infinite callback loop)

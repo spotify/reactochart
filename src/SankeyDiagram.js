@@ -976,11 +976,13 @@ export default class SankeyDiagram extends React.Component {
     this._graph = enhanceGraph(sankeyGraph);
   }
 
-  componentWillMount() {
+  /* eslint-disable-next-line camelcase */
+  UNSAFE_componentWillMount() {
     this._makeSankeyGraph();
   }
 
-  componentWillReceiveProps(nextProps) {
+  /* eslint-disable-next-line camelcase */
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // only update this._graph if a prop which affects the sankey layout has changed (most don't)
     const sankeyLayoutPropKeys = [
       'nodes',

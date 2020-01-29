@@ -106,14 +106,18 @@ class TreeMap extends React.Component {
     NodeComponent: TreeMapNode,
     NodeLabelComponent: TreeMapNodeLabel,
   };
-  componentWillMount() {
+
+  /* eslint-disable-next-line camelcase */
+  UNSAFE_componentWillMount() {
     const { data } = this.props;
     // initialize the layout function
     this._tree = getTree(this.props);
     // clone the data because d3 mutates it!
     this._rootNode = getRootNode(cloneDeep(data), this.props);
   }
-  componentWillReceiveProps(newProps) {
+
+  /* eslint-disable-next-line camelcase */
+  UNSAFE_componentWillReceiveProps(newProps) {
     const { width, height, data, sticky } = this.props;
 
     // if height, width, or the data changes, or if the treemap is not sticky, re-initialize the layout function
