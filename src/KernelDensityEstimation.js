@@ -71,18 +71,16 @@ class KernelDensityEstimation extends React.Component {
     return shouldUpdate;
   }
 
-  UNSAFE_componentWillMount() {
-    this.initKDE(this.props);
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const kdeData = KernelDensityEstimation.getKdeData(nextProps);
+    return { kdeData };
   }
-  UNSAFE_componentWillReceiveProps(newProps) {
-    this.initKDE(newProps);
-  }
-  initKDE(props) {
+
+  static getKdeData(props) {
     const { data, bandwidth, sampleCount, xScale, width } = props;
     const kernel = epanechnikovKernel(bandwidth);
     const samples = xScale.ticks(sampleCount || Math.ceil(width / 2));
-
-    this.setState({ kdeData: kernelDensityEstimator(kernel, samples)(data) });
+    return kernelDensityEstimator(kernel, samples)(data);
   }
 
   render() {
