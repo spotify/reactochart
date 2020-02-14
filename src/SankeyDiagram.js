@@ -951,38 +951,9 @@ export default class SankeyDiagram extends React.Component {
     linkTargetLabelStartOffset: '98%',
   };
 
-  _makeSankeyGraph() {
-    const innerWidth =
-      this.props.width - (this.props.marginLeft + this.props.marginRight);
-    const innerHeight =
-      this.props.height - (this.props.marginTop + this.props.marginBottom);
-    const makeSankey = sankey()
-      .size([innerWidth, innerHeight])
-      .nodeId(this.props.nodeId)
-      .nodeWidth(this.props.nodeWidth)
-      .nodePadding(this.props.nodePadding)
-      .nodeAlign(
-        nodeAlignmentsByName[this.props.nodeAlignment] ||
-          nodeAlignmentsByName.justify,
-      );
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { prevProps } = prevState;
 
-    const nodes = this.props.shouldClone
-      ? cloneDeep(this.props.nodes)
-      : this.props.nodes;
-    const links = this.props.shouldClone
-      ? cloneDeep(this.props.links)
-      : this.props.links;
-    const sankeyGraph = makeSankey({ nodes, links });
-    this._graph = enhanceGraph(sankeyGraph);
-  }
-
-  /* eslint-disable-next-line camelcase */
-  UNSAFE_componentWillMount() {
-    this._makeSankeyGraph();
-  }
-
-  /* eslint-disable-next-line camelcase */
-  UNSAFE_componentWillReceiveProps(nextProps) {
     // only update this._graph if a prop which affects the sankey layout has changed (most don't)
     const sankeyLayoutPropKeys = [
       'nodes',
@@ -1000,9 +971,43 @@ export default class SankeyDiagram extends React.Component {
     ];
 
     const hasChangedSankey = sankeyLayoutPropKeys.some(key => {
-      return nextProps[key] !== this.props[key];
+      return nextProps[key] !== prevProps[key];
     });
-    if (hasChangedSankey) this._makeSankeyGraph();
+    if (hasChangedSankey) {
+      const graph = SankeyDiagram.makeSankeyGraph(nextProps);
+      return {
+        graph,
+        prevProps: cloneDeep(nextProps),
+      };
+    }
+
+    return null;
+  }
+
+  static makeSankeyGraph(props) {
+    const innerWidth = props.width - (props.marginLeft + props.marginRight);
+    const innerHeight = props.height - (props.marginTop + props.marginBottom);
+    const makeSankey = sankey()
+      .size([innerWidth, innerHeight])
+      .nodeId(props.nodeId)
+      .nodeWidth(props.nodeWidth)
+      .nodePadding(props.nodePadding)
+      .nodeAlign(
+        nodeAlignmentsByName[props.nodeAlignment] ||
+          nodeAlignmentsByName.justify,
+      );
+
+    const nodes = props.shouldClone ? cloneDeep(props.nodes) : props.nodes;
+    const links = props.shouldClone ? cloneDeep(props.links) : props.links;
+    const sankeyGraph = makeSankey({ nodes, links });
+    return enhanceGraph(sankeyGraph);
+  }
+
+  constructor(props) {
+    super(props);
+    const graph = SankeyDiagram.makeSankeyGraph(props);
+    const prevProps = cloneDeep(props);
+    this.state = { graph, prevProps };
   }
 
   render() {
@@ -1018,7 +1023,7 @@ export default class SankeyDiagram extends React.Component {
       marginRight,
     } = this.props;
 
-    const graph = this._graph;
+    const { graph } = this.state;
     const makeLinkPath = sankeyLinkHorizontal();
     const className = `rct-sankey-diagram ${this.props.className}`;
     const innerWidth = width - (marginLeft + marginRight);
