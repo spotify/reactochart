@@ -107,18 +107,27 @@ class TreeMap extends React.Component {
     NodeLabelComponent: TreeMapNodeLabel,
   };
 
-  /* eslint-disable-next-line camelcase */
-  UNSAFE_componentWillMount() {
-    const { data } = this.props;
-    // initialize the layout function
-    this._tree = getTree(this.props);
-    // clone the data because d3 mutates it!
-    this._rootNode = getRootNode(cloneDeep(data), this.props);
+  static initTreemap(rootNode, tree, options) {
+    // create a d3 treemap layout function,
+    // and configure it with the given options
+    const { getValue, sort } = options;
+    const treeRoot = rootNode.sum(d => {
+      if (isFunction(getValue)) return getValue(d);
+      else if (isString(getValue)) return d[getValue];
+      return 0;
+    });
+    return tree(sort ? treeRoot.sort(sort) : treeRoot).descendants();
   }
 
-  /* eslint-disable-next-line camelcase */
-  UNSAFE_componentWillReceiveProps(newProps) {
-    const { width, height, data, sticky } = this.props;
+  static getStateFromProps(props) {
+    const tree = getTree(props);
+    const rootNode = getRootNode(cloneDeep(props.data), props);
+    const prevProps = cloneDeep(props);
+    return { tree, rootNode, prevProps };
+  }
+
+  static getDerivedStateFromProps(newProps, state) {
+    const { width, height, data, sticky } = state.prevProps;
 
     // if height, width, or the data changes, or if the treemap is not sticky, re-initialize the layout function
     // todo reevaluate this logic
@@ -128,10 +137,18 @@ class TreeMap extends React.Component {
       height !== newProps.height ||
       JSON.stringify(data) !== JSON.stringify(newProps.data)
     ) {
-      this._tree = getTree(newProps);
-      this._rootNode = getRootNode(cloneDeep(newProps.data), this.props);
+      return TreeMap.getStateFromProps(newProps);
     }
+
+    return null;
   }
+
+  constructor(props) {
+    super(props);
+
+    this.state = TreeMap.getStateFromProps(props);
+  }
+
   render() {
     const {
       width,
@@ -149,7 +166,9 @@ class TreeMap extends React.Component {
       NodeLabelComponent,
     } = this.props;
 
-    const nodes = initTreemap(this._rootNode, this._tree, this.props);
+    const { rootNode, tree } = this.state;
+
+    const nodes = TreeMap.initTreemap(rootNode, tree, this.props);
 
     const style = { position: 'relative', width, height };
 
@@ -197,18 +216,6 @@ function getTree(options) {
   if (!isUndefined(padding)) tree.paddingOuter(padding);
   if (!isUndefined(round)) tree.round(round);
   return tree;
-}
-
-function initTreemap(rootNode, tree, options) {
-  // create a d3 treemap layout function,
-  // and configure it with the given options
-  const { getValue, sort } = options;
-  const treeRoot = rootNode.sum(d => {
-    if (isFunction(getValue)) return getValue(d);
-    else if (isString(getValue)) return d[getValue];
-    return 0;
-  });
-  return tree(sort ? treeRoot.sort(sort) : treeRoot).descendants();
 }
 
 export default TreeMap;
