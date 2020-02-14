@@ -50,24 +50,25 @@ export default class LineChart extends React.Component {
     curve: curveLinear,
   };
 
+  static getBisectorState(props) {
+    const bisectX = bisector(d => getValue(props.x, d)).left;
+    return { bisectX };
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    if (nextProps.x) {
+      return LineChart.getBisectorState(nextProps);
+    }
+
+    return null;
+  }
+
+  state = {
+    bisectX: null,
+  };
+
   shouldComponentUpdate(nextProps) {
     return !xyPropsEqual(this.props, nextProps, ['lineStyle', 'lineClassName']);
-  }
-
-  /* eslint-disable-next-line camelcase */
-  UNSAFE_componentWillMount() {
-    this.initBisector(this.props);
-  }
-
-  /* eslint-disable-next-line camelcase */
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.initBisector(nextProps);
-  }
-
-  initBisector(props) {
-    this.setState({
-      bisectX: bisector(d => getValue(props.x, d)).left,
-    });
   }
 
   getHovered = x => {
