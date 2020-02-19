@@ -146,6 +146,32 @@ export default class ZoomContainer extends React.Component {
     });
   }
 
+  componentDidUpdate(prevProps) {
+    const nextProps = this.props;
+    if (prevProps.controlled) {
+      // if controlled component and zoom props have changed, apply the new zoom props to d3-zoom
+      // (unbind handler first so as not to create infinite callback loop)
+      const hasChangedZoom =
+        nextProps.zoomX !== prevProps.zoomX ||
+        nextProps.zoomY !== prevProps.zoomY ||
+        nextProps.zoomScale !== prevProps.zoomScale;
+
+      if (hasChangedZoom) {
+        this.zoom.on('zoom', null);
+        const nextZoomTransform = zoomTransformFromProps(nextProps);
+        this.zoom.transform(this.state.selection, nextZoomTransform);
+        this.zoom.on('zoom', this.handleZoom);
+
+        // update state.lastZoomTransform so we can revert d3-zoom to this next time it's changed internally
+        // eslint-disable-next-line react/no-did-update-set-state
+        this.setState({
+          lastZoomTransform: nextZoomTransform,
+        });
+      }
+    }
+    this._updateZoomProps(nextProps);
+  }
+
   handleZoom = (...args) => {
     const nextZoomTransform = d3.event.transform;
 
@@ -166,31 +192,6 @@ export default class ZoomContainer extends React.Component {
 
     if (this.props.onZoom) this.props.onZoom(nextZoomTransform, ...args);
   };
-
-  /* eslint-disable-next-line camelcase */
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.props.controlled) {
-      // if controlled component and zoom props have changed, apply the new zoom props to d3-zoom
-      // (unbind handler first so as not to create infinite callback loop)
-      const hasChangedZoom =
-        nextProps.zoomX !== this.props.zoomX ||
-        nextProps.zoomY !== this.props.zoomY ||
-        nextProps.zoomScale !== this.props.zoomScale;
-
-      if (hasChangedZoom) {
-        this.zoom.on('zoom', null);
-        const nextZoomTransform = zoomTransformFromProps(nextProps);
-        this.zoom.transform(this.state.selection, nextZoomTransform);
-        this.zoom.on('zoom', this.handleZoom);
-
-        // update state.lastZoomTransform so we can revert d3-zoom to this next time it's changed internally
-        this.setState({
-          lastZoomTransform: nextZoomTransform,
-        });
-      }
-    }
-    this._updateZoomProps(nextProps);
-  }
 
   _updateZoomProps(props) {
     let propsToUse = props;

@@ -1,5 +1,18 @@
 class AnimatedTreeMapExample extends React.Component {
-  state = {getValue: "size"};
+  constructor(props) {
+    super(props);
+
+    const data = {
+      children: _.range(1, 5).map(n => ({
+        children: _.times(n * n, m => ({
+          size:  (n +1) * (m + 1) + (100 * Math.random()),
+          size2: (n +1) * (m + 1) + (100 * Math.random())
+        }))
+      }))
+    };
+
+    this.state = { getValue: "size", data };
+  }
 
   _animateValue = () => {
     if(this.state.getValue === "size")
@@ -8,23 +21,16 @@ class AnimatedTreeMapExample extends React.Component {
       this.setState({getValue: "size"});
   };
 
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     this._interval = setInterval(this._animateValue, 1000);
-    this._data = {
-      children: _.range(1, 5).map(n => ({
-        children: _.times(n * n, m => ({
-          size:  (n +1) * (m + 1) + (100 * Math.random()),
-          size2: (n +1) * (m + 1) + (100 * Math.random())
-        }))
-      }))
-    };
   }
+
   componentWillUnmount() {
     clearInterval(this._interval);
   }
 
   render() {
-    const {getValue} = this.state;
+    const {getValue, data} = this.state;
 
     const colorScale = d3.scaleLinear()
       .domain([0, 65])
@@ -33,7 +39,7 @@ class AnimatedTreeMapExample extends React.Component {
 
     return <div>
       <TreeMap
-        data={this._data}
+        data={data}
         getValue={getValue}
         getLabel="size"
         nodeStyle={(node) => ({
