@@ -103,7 +103,7 @@
     "remark-react": "^6.0.0",
     "rewire": "^4.0.1",
     "shelljs": "^0.8.3",
-    "sinon": "^8.0.0",
+    "sinon": "^9.0.0",
     "sinon-chai": "^3.3.0",
     "source-map-explorer": "^2.0.1",
     "style-loader": "^1.0.0",
