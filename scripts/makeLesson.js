@@ -2,21 +2,14 @@ const fs = require('fs');
 const sh = require('shelljs');
 const _ = require('lodash');
 
-const {
-  isUpperCase,
-  fileExists,
-  dirExists,
-  ensureDir,
-  fileNameFromPath,
-  stripFileExtension,
-} = require('./utils');
+const { fileExists, ensureDir } = require('./utils');
 
 const lessonsDirPath = `${__dirname}/../docs/src/lessons`;
 const lessonTemplatePath = `${__dirname}/../docs/src/templates/Lesson.js.template`;
 const exampleTemplatePath = `${__dirname}/../docs/src/templates/ComponentExample.js.template`;
 
 if (process.argv.length <= 2) {
-  console.log('Usage: ' + __filename + ' LESSON_NAME');
+  console.log(`Usage: ${__filename} LESSON_NAME`);
   process.exit(-1);
 }
 

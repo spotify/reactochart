@@ -5,7 +5,7 @@ require('./spec/XAxisLabels.spec');
 require('./spec/XAxisTitle.spec');
 require('./spec/YAxisTitle.spec');
 const enzyme = require('enzyme');
-const adapter = require('enzyme-adapter-react-16');
+const Adapter = require('enzyme-adapter-react-16');
 
 // some tests must be run in a browser environment
 // also it can be easier to debug tests in browser thanks to chrome debugger
@@ -13,10 +13,10 @@ const adapter = require('enzyme-adapter-react-16');
 
 // run mocha
 (function() {
-  enzyme.configure({ adapter: new adapter() });
+  enzyme.configure({ adapter: new Adapter() });
 
   if (window.mochaPhantomJS) {
-    mochaPhantomJS.run();
+    window.mochaPhantomJS.run();
   } else {
     mocha.run();
   }

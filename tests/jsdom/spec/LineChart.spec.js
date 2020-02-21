@@ -4,18 +4,7 @@ import { mount } from 'enzyme';
 import React from 'react';
 import { LineChart, XYPlot } from '../../../src/index.js';
 
-const getXYArrayValue = {
-  // accessors for (X, Y) data from simple arrays that look like [[x, y], [x, y]]
-  x: d => d[0],
-  y: d => d[1],
-};
-
 describe('LineChart', () => {
-  const linearYScale = d3
-    .scaleLinear()
-    .domain([0, 1])
-    .range([100, 0]);
-
   it('passes props correctly to group and path elements', () => {
     const props = {
       xScale: d3

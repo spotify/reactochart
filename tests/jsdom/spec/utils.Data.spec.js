@@ -13,11 +13,6 @@ import {
   makeAccessor,
 } from '../../../src/utils/Data';
 
-const notImplemented = () => {
-  console.log('* * * TEST NOT YET IMPLEMENTED * * *');
-  throw new Error('not implemented');
-};
-
 describe('Data utils', () => {
   describe('makeAccessor', () => {
     it('passes existing accessor functions through', () => {

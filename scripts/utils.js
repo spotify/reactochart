@@ -1,4 +1,3 @@
-const fs = require('fs');
 const sh = require('shelljs');
 const _ = require('lodash');
 

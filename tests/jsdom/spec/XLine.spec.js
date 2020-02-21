@@ -90,7 +90,7 @@ describe('XLine', () => {
       <XLine
         xScale={linearScale}
         value={linearValue}
-        className={'test-line-class'}
+        className="test-line-class"
         {...commonProps}
       />,
     );

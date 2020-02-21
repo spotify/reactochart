@@ -29,9 +29,12 @@ module.exports = {
       plugins: ['jest', 'chai-friendly'],
       globals: {
         chai: true,
+        mocha: true,
       },
       rules: {
         'no-console': 'off',
+        'react/prop-types': 'off',
+        'react/no-multi-comp': 'off',
       },
     },
     {

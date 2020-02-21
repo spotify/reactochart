@@ -5,7 +5,6 @@ const _ = require('lodash');
 const {
   isUpperCase,
   fileExists,
-  dirExists,
   ensureDir,
   fileNameFromPath,
   stripFileExtension,

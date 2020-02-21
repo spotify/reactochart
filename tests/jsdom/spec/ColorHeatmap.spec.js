@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import { XYPlot, ColorHeatmap, RangeRect } from '../../../src/index.js';
+import { ColorHeatmap, RangeRect } from '../../../src/index.js';
 import { getValue } from '../../../src/utils/Data.js';
 
 describe('ColorHeatmap', () => {
@@ -42,7 +42,6 @@ describe('ColorHeatmap', () => {
 
   it('renders a color heatmap', () => {
     const chart = mount(<ColorHeatmap {...props} />);
-    const group = chart.find('g');
     const rangeRects = chart.find(RangeRect);
     expect(rangeRects).to.have.length(props.data.length);
   });
@@ -96,10 +95,10 @@ describe('ColorHeatmap', () => {
     describe('when colorScale prop is passed', () => {
       it('sets the color scale to the prop value', () => {
         const propsWithColorScale = { ...props, colorScale: () => 'rgb' };
-        const chart = mount(<ColorHeatmap {...propsWithColorScale} />);
+        const myChart = mount(<ColorHeatmap {...propsWithColorScale} />);
 
         expect(
-          chart
+          myChart
             .find(RangeRect)
             .first()
             .props().style,

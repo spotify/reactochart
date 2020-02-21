@@ -6,7 +6,6 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 
 import { AreaHeatmap } from '../../../src/index.js';
-import { getValue } from '../../../src/utils/Data.js';
 
 describe('AreaHeatmap', () => {
   const gridData = _.range(30).map(m => {
