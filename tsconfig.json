@@ -1,0 +1,9 @@
+{
+  "extends": "@spotify/tsconfig/tsconfig.json",
+  "include": ["src"],
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "jsx": "react"
+  }
+}

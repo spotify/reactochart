@@ -8,11 +8,7 @@
  *
  * @providesModule shallowEqual
  * @typechecks
- * @flow
  */
-
-// TODO Recreate shallow equals to not use flow
-// we currently use "@babel/preset-flow" just to parse this file
 
 /* eslint-disable no-self-compare */
 
@@ -24,12 +20,12 @@ const hasOwnProperty = Object.prototype.hasOwnProperty;
  * inlined Object.is polyfill to avoid requiring consumers ship their own
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
  */
-function is(x: mixed, y: mixed): boolean {
+function is(x, y) {
   // SameValue algorithm
   if (x === y) {
     // Steps 1-5, 7-10
     // Steps 6.b-6.e: +0 != -0
-    return x !== 0 || 1 / (x: $FlowIssue) === 1 / (y: $FlowIssue);
+    return x !== 0 || 1 / x === 1 / y;
   }
   // Step 6.a: NaN == NaN
   return x !== x && y !== y;
@@ -40,7 +36,7 @@ function is(x: mixed, y: mixed): boolean {
  * when any key has values which are not strictly equal between the arguments.
  * Returns true when the values of all keys are strictly equal.
  */
-function shallowEqual(objA: mixed, objB: mixed): boolean {
+function shallowEqual(objA, objB) {
   if (is(objA, objB)) {
     return true;
   }
