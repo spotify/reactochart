@@ -6,7 +6,9 @@
     "Kris Salvador <kriss@spotify.com>"
   ],
   "version": "3.0.1",
-  "main": "index.js",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "types": "types",
   "files": [
     "*.js",
     "*.js.map",
@@ -25,7 +27,7 @@
     "build": "npm run build-lib && npm run build-css",
     "dev": "webpack-dev-server --config webpack.config.base.js",
     "docs": "npm run make-docs && npm run build-docs",
-    "build-lib": "npm run clean && BABEL_ENV=production babel src --out-dir ./ --source-maps",
+    "build-lib": "web-scripts build",
     "build-css": "lessc ./styles/charts.less ./styles.css",
     "build-docs": "cross-env webpack --config webpack.config.build.js",
     "make-docs": "node scripts/makeDocs.js",

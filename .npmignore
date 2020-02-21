@@ -1,0 +1,9 @@
+src/
+tests/
+scripts/
+docs/
+
+prettier.config.js
+tsconfig.json
+webpack.config.base.js
+webpack.config.build.js

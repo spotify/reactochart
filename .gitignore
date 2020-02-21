@@ -4,3 +4,8 @@ node_modules
 .DS_Store
 Thumbs.db
 npm-debug.log
+
+cjs/
+esm/
+types/
+/styles.css
