@@ -1,3 +1,3 @@
 module.exports = {
-    ...require('@spotify/prettier-config')
-  };
+  ...require('@spotify/prettier-config')
+};
