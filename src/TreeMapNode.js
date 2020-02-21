@@ -39,8 +39,8 @@ const TreeMapNode = props => {
   const customStyle = isFunction(nodeStyle)
     ? nodeStyle(node)
     : isObject(nodeStyle)
-      ? nodeStyle
-      : {};
+    ? nodeStyle
+    : {};
   Object.assign(style, customStyle);
 
   const handlers = [
