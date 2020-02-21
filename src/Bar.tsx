@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { hasOneOfTwo } from './util';
 
-console.log('DO THIS OWRK');
-
 /**
  * Bar is a low-level component to be used in XYPlot-type charts (namely BarChart).
  * It is specified in terms of a range (min & max) of values on one axis and a
