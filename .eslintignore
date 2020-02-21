@@ -10,7 +10,3 @@
 
 # Ignore docs build
 /docs/build/*
-
-/src
-/tests
-/scripts
