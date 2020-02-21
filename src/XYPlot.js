@@ -44,14 +44,14 @@ function getMouseOptions(
   const xValue = !inRange(innerX, 0, chartSize.width)
     ? null
     : xScaleType === 'ordinal'
-      ? invertPointScale(xScale, innerX)
-      : xScale.invert(innerX);
+    ? invertPointScale(xScale, innerX)
+    : xScale.invert(innerX);
 
   const yValue = !inRange(innerY, 0, chartSize.height)
     ? null
     : yScaleType === 'ordinal'
-      ? invertPointScale(yScale, innerY)
-      : yScale.invert(innerY);
+    ? invertPointScale(yScale, innerY)
+    : yScale.invert(innerY);
 
   return {
     event,
@@ -212,7 +212,7 @@ class XYPlot extends React.Component {
   onMouseUp = this.onXYMouseEvent.bind(this, 'onMouseUp');
   onClick = this.onXYMouseEvent.bind(this, 'onClick');
   onMouseEnter = this.onXYMouseEvent.bind(this, 'onMouseEnter');
-  onMouseLeave = this.onXYMouseEvent.bind(this, 'onMouseLeave')
+  onMouseLeave = this.onXYMouseEvent.bind(this, 'onMouseLeave');
 
   render() {
     const {

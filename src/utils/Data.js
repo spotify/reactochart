@@ -39,8 +39,8 @@ export function makeAccessor(key) {
   return isFunction(key)
     ? key
     : isNull(key) || isUndefined(key)
-      ? identity
-      : property(key);
+    ? identity
+    : property(key);
 }
 
 /**

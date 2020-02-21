@@ -1,5 +1,6 @@
 // see https://github.com/airbnb/enzyme/blob/master/docs/guides/jsdom.md
 
+require('@babel/register')({ extensions: ['.js', '.jsx', '.ts', '.tsx'] });
 const { JSDOM } = require('jsdom');
 
 const jsdom = new JSDOM('<!doctype html><html><body></body></html>', {
@@ -33,6 +34,6 @@ global.HTMLElement = window.HTMLElement;
 global.SVGElement = function() {};
 
 const enzyme = require('enzyme');
-const adapter = require('enzyme-adapter-react-16');
+const Adapter = require('enzyme-adapter-react-16');
 
-enzyme.configure({ adapter: new adapter() });
+enzyme.configure({ adapter: new Adapter() });

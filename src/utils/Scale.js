@@ -44,22 +44,22 @@ export function inferDataTypeFromDomain(domain) {
   return domain.length !== 2
     ? 'categorical'
     : domain.every(isNumber)
-      ? 'number'
-      : domain.every(isDate)
-        ? 'time'
-        : 'categorical';
+    ? 'number'
+    : domain.every(isDate)
+    ? 'time'
+    : 'categorical';
 }
 
 export function inferScaleType(scale) {
   return !scale.ticks
     ? 'ordinal'
     : isDate(scale.domain()[0])
-      ? 'time'
-      : scale.base
-        ? 'log'
-        : scale.exponent
-          ? 'pow'
-          : 'linear';
+    ? 'time'
+    : scale.base
+    ? 'log'
+    : scale.exponent
+    ? 'pow'
+    : 'linear';
 }
 
 export function initScale(scaleType) {

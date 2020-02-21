@@ -19,9 +19,9 @@
   },
   "scripts": {
     "analyze-bundle": "source-map-explorer node_modules ./*.js ./*.js.map ./utils styles.css src/",
-    "lint": "eslint ./src ./docs/src",
-    "lint-fix": "eslint ./src --fix",
+    "lint": "web-scripts lint --config .eslintrc.js",
     "prepublishOnly": "npm run build",
+    "format": "web-scripts format",
     "build": "npm run build-lib && npm run build-css",
     "dev": "webpack-dev-server --config webpack.config.base.js",
     "docs": "npm run make-docs && npm run build-docs",
@@ -32,9 +32,9 @@
     "clean": "node scripts/clean.js",
     "serve": "python -m SimpleHTTPServer",
     "test": "npm run test-jsdom && npm run lint",
-    "test-files": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --require @babel/register tests/jsdom/setup.js --recursive",
+    "test-files": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha tests/jsdom/setup.js --recursive",
     "test-browser": "webpack-dev-server --config tests/browser/webpack.config.test.js",
-    "test-jsdom": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --require @babel/register tests/jsdom/setup.js --recursive tests/jsdom/spec",
+    "test-jsdom": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --require tests/jsdom/setup.js --recursive tests/jsdom/spec",
     "test-watch": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --watch --require @babel/register tests/jsdom/setup.js --recursive tests/jsdom/spec"
   },
   "dependencies": {
