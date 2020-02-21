@@ -37,7 +37,7 @@ describe('ScatterPlot', () => {
       expect(point.props().style).to.eql(props.pointStyle);
     });
 
-    chart = mount(<ScatterPlot {...props} pointSymbol={d => 'a'} />);
+    chart = mount(<ScatterPlot {...props} pointSymbol={() => 'a'} />);
     points = chart.find('text');
 
     points.forEach(point => {

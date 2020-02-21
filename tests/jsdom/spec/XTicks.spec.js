@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import * as d3 from 'd3';
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import chai from 'chai';
 chai.use(chaiEnzyme());
@@ -154,9 +154,7 @@ describe('XTicks', () => {
 
   it('passes className to the ticks', () => {
     const wrapper = expectTicksToExist(
-      shallow(
-        <XTicks xScale={linearScale} tickClassName={'test-tick-class'} />,
-      ),
+      shallow(<XTicks xScale={linearScale} tickClassName="test-tick-class" />),
     );
     expect(wrapper).to.have.descendants('line.test-tick-class');
   });

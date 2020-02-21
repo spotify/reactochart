@@ -2,10 +2,10 @@ import React from 'react';
 import * as d3 from 'd3';
 import _ from 'lodash';
 import { expect } from 'chai';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
-import { testWithScales, expectProps } from '../utils';
-import { XYPlot, Histogram, AreaBarChart } from '../../../src/index.js';
+import { expectProps } from '../utils';
+import { Histogram, AreaBarChart } from '../../../src/index.js';
 
 describe('Histogram', () => {
   it('it passes most props through to AreaBarChart', () => {

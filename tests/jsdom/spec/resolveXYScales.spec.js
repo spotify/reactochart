@@ -1,102 +1,14 @@
-import _ from 'lodash';
 import React from 'react';
 import * as d3 from 'd3';
 import { expect } from 'chai';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import { isValidScale } from '../../../src/utils/Scale';
-import { innerRangeX, innerRangeY } from '../../../src/utils/Margin';
-
 import resolveXYScales from '../../../src/utils/resolveXYScales';
-
-class NotImplementedError extends Error {
-  constructor(message = 'Not Implemented Yet') {
-    super(message);
-  }
-}
 
 function expectRefAndDeepEqual(a, b) {
   expect(a).to.equal(b);
   expect(a).to.deep.equal(b);
-}
-
-function expectXYScales(scales) {
-  expect(scales).to.be.an('object');
-  ['x', 'y'].forEach(k => {
-    expect(scales).to.have.property(k);
-    expect(isValidScale(scales[k])).to.equal(true);
-  });
-}
-
-function expectXYScaledComponent(
-  rendered,
-  { width, height, scaleType, domain, margin, range },
-) {
-  // checks that a given rendered component has been created with XY scales/margin
-  // that match the expected domain, range & margin
-  // if range not provided, it should be width/height minus margins
-  range = range || {
-    x: innerRangeX(width, margin),
-    y: innerRangeY(height, margin),
-  };
-  expect(scaleType).to.be.an('object');
-  console.log('expected domains', domain);
-  console.log('expected range', range);
-
-  expect(rendered.props).to.be.an('object');
-  expect(rendered.props.margin).to.deep.equal(margin);
-
-  const renderedScale = rendered.props.scale;
-  expectXYScales(renderedScale);
-  ['x', 'y'].forEach(k => {
-    expect(rendered.props.scaleType[k]).to.equal(scaleType[k]);
-    console.log('domain', renderedScale[k].domain());
-    console.log('expected domain', domain[k]);
-    expect(renderedScale[k].domain()).to.deep.equal(domain[k]);
-    if (scaleType[k] === 'ordinal')
-      expect(renderedScale[k].range()).to.deep.equal(
-        d3
-          .scaleOrdinal()
-          .domain(domain[k])
-          .rangePoints(range[k])
-          .range(),
-      );
-    else expect(renderedScale[k].range()).to.deep.equal(range[k]);
-  });
-}
-
-function expectXYScaledComponentEnzyme(
-  rendered,
-  { width, height, scaleType, domain, margin, range },
-) {
-  // checks that a given rendered component has been created with XY scales/margin
-  // that match the expected domain, range & margin
-  // if range not provided, it should be width/height minus margins
-  range = range || {
-    x: innerRangeX(width, margin),
-    y: innerRangeY(height, margin),
-  };
-  expect(scaleType).to.be.an('object');
-
-  expect(rendered.props().margin).to.deep.equal(margin);
-
-  const renderedScale = rendered.props().scale;
-  expectXYScales(renderedScale);
-  ['x', 'y'].forEach(k => {
-    expect(rendered.props().scaleType[k]).to.equal(scaleType[k]);
-    console.log('domain', renderedScale[k].domain());
-    console.log('expected domain', domain[k]);
-    expect(renderedScale[k].domain()).to.deep.equal(domain[k]);
-    if (scaleType[k] === 'ordinal')
-      expect(renderedScale[k].range()).to.deep.equal(
-        d3
-          .scaleOrdinal()
-          .domain(domain[k])
-          .rangePoints(range[k])
-          .range(),
-      );
-    else expect(renderedScale[k].range()).to.deep.equal(range[k]);
-  });
 }
 
 describe('resolveXYScales', () => {
@@ -122,21 +34,21 @@ describe('resolveXYScales', () => {
   const XYChart = resolveXYScales(Chart);
 
   class ChartWithCustomScaleType extends ComponentWithChildren {
-    static getScaleType(props) {
+    static getScaleType() {
       return customScaleType;
     }
   }
   const XYChartWithCustomScaleType = resolveXYScales(ChartWithCustomScaleType);
 
   class ChartWithCustomDomain extends ComponentWithChildren {
-    static getDomain(props) {
+    static getDomain() {
       return customDomain;
     }
   }
   const XYChartWithCustomDomain = resolveXYScales(ChartWithCustomDomain);
 
   class ChartWithCustomMargin extends ComponentWithChildren {
-    static getMargin(props) {
+    static getMargin() {
       return customMargin;
     }
   }
@@ -145,8 +57,8 @@ describe('resolveXYScales', () => {
   class ContainerChart extends React.Component {
     render() {
       const {
-        width,
-        height,
+        width: widthProp,
+        height: heightProp,
         xScale,
         yScale,
         xScaleType,
@@ -158,25 +70,22 @@ describe('resolveXYScales', () => {
         xDomain,
         yDomain,
       } = this.props;
-      const newChildren = React.Children.map(
-        this.props.children,
-        (child, i) => {
-          return React.cloneElement(child, {
-            width,
-            height,
-            xScale,
-            yScale,
-            xScaleType,
-            yScaleType,
-            marginTop,
-            marginBottom,
-            marginLeft,
-            marginRight,
-            xDomain,
-            yDomain,
-          });
-        },
-      );
+      const newChildren = React.Children.map(this.props.children, child => {
+        return React.cloneElement(child, {
+          width: widthProp,
+          height: heightProp,
+          xScale,
+          yScale,
+          xScaleType,
+          yScaleType,
+          marginTop,
+          marginBottom,
+          marginLeft,
+          marginRight,
+          xDomain,
+          yDomain,
+        });
+      });
       return <div>{newChildren}</div>;
     }
   }

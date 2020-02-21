@@ -1,10 +1,8 @@
 import React from 'react';
-import * as d3 from 'd3';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import { XYPlot, ZoomContainer } from '../../../src/index.js';
-import { getValue } from '../../../src/utils/Data.js';
+import { ZoomContainer } from '../../../src/index.js';
 
 describe('ZoomContainer', () => {
   const uncontrolledProps = {
@@ -24,16 +22,16 @@ describe('ZoomContainer', () => {
     let svg = zoomContainer.find('svg').instance();
     let group = zoomContainer.find('g').instance();
 
-    expect(parseInt(svg.getAttribute('width'))).to.equal(
+    expect(parseInt(svg.getAttribute('width'), 10)).to.equal(
       uncontrolledProps.width,
     );
-    expect(parseInt(svg.getAttribute('height'))).to.equal(
+    expect(parseInt(svg.getAttribute('height'), 10)).to.equal(
       uncontrolledProps.height,
     );
-    expect(parseInt(group.getAttribute('width'))).to.equal(
+    expect(parseInt(group.getAttribute('width'), 10)).to.equal(
       uncontrolledProps.width,
     );
-    expect(parseInt(group.getAttribute('height'))).to.equal(
+    expect(parseInt(group.getAttribute('height'), 10)).to.equal(
       uncontrolledProps.height,
     );
 
@@ -44,14 +42,16 @@ describe('ZoomContainer', () => {
     svg = controlledZoomContainer.find('svg').instance();
     group = controlledZoomContainer.find('g').instance();
 
-    expect(parseInt(svg.getAttribute('width'))).to.equal(controlledProps.width);
-    expect(parseInt(svg.getAttribute('height'))).to.equal(
-      controlledProps.height,
-    );
-    expect(parseInt(group.getAttribute('width'))).to.equal(
+    expect(parseInt(svg.getAttribute('width'), 10)).to.equal(
       controlledProps.width,
     );
-    expect(parseInt(group.getAttribute('height'))).to.equal(
+    expect(parseInt(svg.getAttribute('height'), 10)).to.equal(
+      controlledProps.height,
+    );
+    expect(parseInt(group.getAttribute('width'), 10)).to.equal(
+      controlledProps.width,
+    );
+    expect(parseInt(group.getAttribute('height'), 10)).to.equal(
       controlledProps.height,
     );
   });

@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import sinon from 'sinon';
 import { expect } from 'chai';
 import { mount } from 'enzyme';

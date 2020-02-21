@@ -1,6 +1,5 @@
 import React from 'react';
 import * as d3 from 'd3';
-import _ from 'lodash';
 import chai from 'chai';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
@@ -57,7 +56,7 @@ describe('Bar', () => {
           .scaleLinear()
           .domain([0, 1])
           .range([100, 0])}
-        x={'b'}
+        x="b"
         y={0.25}
         yEnd={0.75}
         thickness={20}
@@ -89,7 +88,7 @@ describe('Bar', () => {
           .range([100, 0])}
         x={0.1}
         xEnd={0.7}
-        y={'b'}
+        y="b"
         thickness={20}
       />,
     );

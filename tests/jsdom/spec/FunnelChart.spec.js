@@ -1,12 +1,9 @@
 import React from 'react';
 import * as d3 from 'd3';
-import _ from 'lodash';
-import sinon from 'sinon';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
 import { FunnelChart } from '../../../src/index.js';
-import { getValue } from '../../../src/utils/Data.js';
 
 describe('FunnelChart', () => {
   const funnelData = [
