@@ -35,7 +35,7 @@
     "test-files": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha tests/jsdom/setup.js --recursive",
     "test-browser": "webpack-dev-server --config tests/browser/webpack.config.test.js",
     "test-jsdom": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --require tests/jsdom/setup.js --recursive tests/jsdom/spec",
-    "test-watch": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --watch --require @babel/register tests/jsdom/setup.js --recursive tests/jsdom/spec"
+    "test-watch": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=production mocha --watch tests/jsdom/setup.js --recursive tests/jsdom/spec"
   },
   "dependencies": {
     "d3": "^5.15.0",
