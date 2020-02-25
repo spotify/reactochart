@@ -1,7 +1,40 @@
 {
   "description": "`TreeMap` displays hierarchical data where a leaf node's rectangle has an area proportional to a specified dimension of the data.",
   "displayName": "TreeMap",
-  "methods": [],
+  "methods": [
+    {
+      "name": "initTreemap",
+      "docblock": null,
+      "modifiers": ["static"],
+      "params": [
+        {
+          "name": "rootNode",
+          "type": null
+        },
+        {
+          "name": "tree",
+          "type": null
+        },
+        {
+          "name": "options",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
+      "name": "getStateFromProps",
+      "docblock": null,
+      "modifiers": ["static"],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
+      "returns": null
+    }
+  ],
   "props": {
     "width": {
       "type": {
