@@ -50,22 +50,25 @@ export default class LineChart extends React.Component {
     curve: curveLinear,
   };
 
+  static getBisectorState(props) {
+    const bisectX = bisector(d => getValue(props.x, d)).left;
+    return { bisectX };
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    if (nextProps.x) {
+      return LineChart.getBisectorState(nextProps);
+    }
+
+    return null;
+  }
+
+  state = {
+    bisectX: null,
+  };
+
   shouldComponentUpdate(nextProps) {
     return !xyPropsEqual(this.props, nextProps, ['lineStyle', 'lineClassName']);
-  }
-
-  componentWillMount() {
-    this.initBisector(this.props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.initBisector(nextProps);
-  }
-
-  initBisector(props) {
-    this.setState({
-      bisectX: bisector(d => getValue(props.x, d)).left,
-    });
   }
 
   getHovered = x => {
@@ -92,7 +95,7 @@ export default class LineChart extends React.Component {
 
     return (
       <g className={`rct-line-chart ${lineClassName}`}>
-        <path className={`rct-line-path`} d={pathStr} style={lineStyle} />
+        <path className="rct-line-path" d={pathStr} style={lineStyle} />
       </g>
     );
   }

@@ -1,3 +1,8 @@
+## 3.0.2 (2020-02-25)
+
+- [#234](https://github.com/spotify/reactochart/pull/234) Remove deprecated React lifecycle hooks
+- Update dependencies via Greenkeeper
+
 ## 3.0.1 (2019-12-18)
 
 - [#211](https://github.com/spotify/reactochart/pull/211) Fix XYPlots lesson in docs
