@@ -76,12 +76,26 @@ function renderTypeValues(propInfo, propKey) {
 }
 
 function renderType(propInfo) {
-  const typeInfo = _.get(propInfo, 'type');
-
-  if (!typeInfo) {
-    return 'unknown';
+  if (propInfo.type) {
+    return renderJsType(propInfo);
   }
+  if (propInfo.tsType) {
+    return renderTsType(propInfo);
+  }
+  return 'unknown';
+}
 
+function renderTsType(propInfo) {
+  const tsTypeInfo = _.get(propInfo, 'tsType');
+  const typeName = _.get(tsTypeInfo, 'name');
+  if (tsTypeInfo.raw) {
+    return tsTypeInfo.raw;
+  }
+  return typeName || 'unknown';
+}
+
+function renderJsType(propInfo) {
+  const typeInfo = _.get(propInfo, 'type');
   const typeName = _.get(typeInfo, 'name', 'unknown');
   let type = typeName;
 
