@@ -3,9 +3,9 @@
   "displayName": "LineChart",
   "methods": [
     {
-      "name": "initBisector",
+      "name": "getBisectorState",
       "docblock": null,
-      "modifiers": [],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",

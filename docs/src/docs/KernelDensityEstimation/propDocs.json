@@ -10,9 +10,9 @@
       "returns": null
     },
     {
-      "name": "initKDE",
+      "name": "getKdeData",
       "docblock": null,
-      "modifiers": [],
+      "modifiers": ["static"],
       "params": [
         {
           "name": "props",

@@ -3,10 +3,15 @@
   "displayName": "SankeyDiagram",
   "methods": [
     {
-      "name": "_makeSankeyGraph",
+      "name": "makeSankeyGraph",
       "docblock": null,
-      "modifiers": [],
-      "params": [],
+      "modifiers": ["static"],
+      "params": [
+        {
+          "name": "props",
+          "type": null
+        }
+      ],
       "returns": null
     }
   ],
