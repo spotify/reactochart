@@ -3,16 +3,6 @@ import isUndefined from 'lodash/isUndefined';
 import React from 'react';
 import { hasOneOfTwo } from './util';
 
-/**
- * Bar is a low-level component to be used in XYPlot-type charts (namely BarChart).
- * It is specified in terms of a range (min & max) of values on one axis and a
- * single value on the other axis.
- * Passing props `x`, `xEnd` and `y` specifies a horizontal bar, centered on `y`
- * and spanning from `x` to `xEnd`.
- * Passing props `x`, `y`, and `yEnd' specifies a vertical bar, centered on `x`
- * and spanning from `y` to `yEnd`.
- */
-
 type Props = {
   /**
    * For a vertical bar, `x` represents the X data value on which the bar is centered.
@@ -99,6 +89,15 @@ type Props = {
   labelClassName: string;
 };
 
+/**
+ * Bar is a low-level component to be used in XYPlot-type charts (namely BarChart).
+ * It is specified in terms of a range (min & max) of values on one axis and a
+ * single value on the other axis.
+ * Passing props `x`, `xEnd` and `y` specifies a horizontal bar, centered on `y`
+ * and spanning from `x` to `xEnd`.
+ * Passing props `x`, `y`, and `yEnd' specifies a vertical bar, centered on `x`
+ * and spanning from `y` to `yEnd`.
+ */
 const Bar = (props: Props) => {
   // x/y are values in the *data* domain, not pixel domain
   const {

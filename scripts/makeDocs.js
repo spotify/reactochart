@@ -18,7 +18,7 @@ const exampleTemplatePath = `${__dirname}/../docs/src/templates/ComponentExample
 
 // generate a list of all JS files in `src` that start with an uppercase letter
 // these are the components for which we will generate docs
-const jsFilePaths = sh.ls(`${__dirname}/../src/*.js`);
+const jsFilePaths = sh.ls(`${__dirname}/../src/*.{js,jsx,ts,tsx}`);
 const componentPaths = jsFilePaths.filter(
   path =>
     !EXCLUDED_DOCGEN_FILES.includes(fileNameFromPath(path)) &&
