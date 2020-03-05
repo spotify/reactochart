@@ -3,7 +3,7 @@
   "include": ["src"],
   "compilerOptions": {
     "allowJs": true,
-    "declaration": true,
+    "declaration": false,
     "jsx": "react"
   }
 }
