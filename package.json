@@ -57,7 +57,7 @@
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-flow": "^7.9.0",
     "@babel/preset-react": "^7.9.1",
-    "@babel/register": "^7.4.4",
+    "@babel/register": "^7.9.0",
     "@spotify/eslint-config-base": "^6.0.0",
     "@spotify/eslint-config-react": "^6.0.0",
     "@spotify/prettier-config": "^6.0.0",
