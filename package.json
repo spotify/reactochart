@@ -89,7 +89,7 @@
     "less-loader": "^5.0.0",
     "lessc": "^1.0.2",
     "mocha": "^7.0.1",
-    "prettier": "~1.18.2",
+    "prettier": "~2.0.1",
     "raw-loader": "^4.0.0",
     "react": "^16.6.3",
     "react-addons-update": "^15.6.0",
