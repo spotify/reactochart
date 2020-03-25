@@ -1,0 +1,27 @@
+const BarChartWithDefs = (props) => {
+  const data = [
+    {x: 0, y: 80},
+    {x: 5, y: 60},
+    {x: 10, y: 90},
+    {x: 15, y: 30},
+  ];
+  return <XYPlot width={400} height={300} defs={
+    <linearGradient id="Gradient" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stopColor="blue" />
+      <stop offset="50%" stopColor="white" />
+      <stop offset="100%" stopColor="red" />
+    </linearGradient>
+  }>
+    <XAxis showGrid={false} title="Days since Zombiepocalypse" />
+    <YAxis title="Zombie Attacks"/>
+    <BarChart
+      barStyle={{fill: "url(#Gradient)"}}
+      data={data}
+      x={d => d.x}
+      y={d => d.y}
+      barThickness={40}
+    />
+  </XYPlot>
+};
+
+ReactDOM.render(<BarChartWithDefs />, mountNode);

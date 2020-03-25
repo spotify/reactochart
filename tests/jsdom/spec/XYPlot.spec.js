@@ -140,4 +140,23 @@ describe('XYPlot', () => {
       expect(Object.keys(chartProps[handler].args[0][0])).to.eql(expectedKeys);
     });
   });
+
+  it('renders SVG with defs when provided', () => {
+    const chart = mount(
+      <XYPlot
+        width={600}
+        height={800}
+        defs={
+          <linearGradient id="Gradient" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stopColor="blue" />
+            <stop offset="50%" stopColor="white" />
+            <stop offset="100%" stopColor="red" />
+          </linearGradient>
+        }
+        {...commonXYProps}
+      />,
+    );
+    const linearGradient = chart.find('#Gradient');
+    expect(linearGradient).to.have.length(1);
+  });
 });

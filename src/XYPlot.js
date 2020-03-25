@@ -185,6 +185,12 @@ class XYPlot extends React.Component {
      * Override this prop if you'd like to pass in your own d3 scale.
      */
     yScale: PropTypes.func,
+
+    /**
+     * Optionally define SVG defs for example LinearGradient.
+     */
+    defs: PropTypes.object,
+
     children: PropTypes.any,
   };
 
@@ -198,6 +204,7 @@ class XYPlot extends React.Component {
     xyPlotContainerStyle: {},
     xyPlotStyle: {},
     xyPlotClassName: '',
+    defs: null,
   };
 
   onXYMouseEvent = (callbackKey, event) => {
@@ -216,6 +223,7 @@ class XYPlot extends React.Component {
 
   render() {
     const {
+      defs,
       width,
       height,
       marginTop,
@@ -295,6 +303,7 @@ class XYPlot extends React.Component {
         {...{ width, height, className, style: xyPlotContainerStyle }}
         {...handlers}
       >
+        {defs ? <defs>{defs}</defs> : null}
         <rect className="rct-chart-background" {...{ width, height }} />
         <g
           transform={`translate(${marginLeft + spacingLeft}, ${marginTop +

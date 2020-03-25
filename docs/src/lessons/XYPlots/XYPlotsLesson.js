@@ -81,6 +81,15 @@ export default class XYPlotsLesson extends React.Component {
           label="Multiple Charts in one XYPlot"
           codeText={require('./examples/MultiChart.js.example').default}
         />
+        <p>
+          It's possible to explicitly supply an SVG <code>defs</code> section,
+          for example to define linear gradients.
+        </p>
+        <ExampleSection
+          id="barChartwithDefs"
+          label="Bar Chart With Defs"
+          codeText={require('./examples/BarChartWithDefs.js.example').default}
+        />
       </Lesson>
     );
   }
