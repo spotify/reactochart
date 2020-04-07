@@ -71,7 +71,7 @@
     "component-playground": "^3.2.1",
     "copy-webpack-plugin": "^5.0.4",
     "cross-env": "^7.0.0",
-    "css-loader": "^3.0.0",
+    "css-loader": "^3.5.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "eslint": "^6.6.0",
