@@ -86,7 +86,7 @@
     "husky": "^4.2.3",
     "json-loader": "^0.5.2",
     "less": "^3.0.4",
-    "less-loader": "^5.0.0",
+    "less-loader": "^6.0.0",
     "lessc": "^1.0.2",
     "mocha": "^7.0.1",
     "prettier": "~1.18.2",
