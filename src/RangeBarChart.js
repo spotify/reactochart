@@ -98,6 +98,10 @@ export default class RangeBarChart extends React.Component {
      */
     onMouseLeaveBar: PropTypes.func,
     /**
+     * `click` event handler callback, called when user clicks the bar.
+     */
+    onClick: PropTypes.func,
+    /**
      * Conditional if column should display values above/beside each bar.
      */
     showLabels: PropTypes.bool,
@@ -232,10 +236,11 @@ export default class RangeBarChart extends React.Component {
     return (
       <g>
         {data.map((d, i) => {
-          const [onMouseEnter, onMouseMove, onMouseLeave] = [
+          const [onMouseEnter, onMouseMove, onMouseLeave, onClick] = [
             'onMouseEnterBar',
             'onMouseMoveBar',
             'onMouseLeaveBar',
+            'onClick',
           ].map(eventName => {
             // partially apply this bar's data point as 2nd callback argument
             const callback = get(this.props, eventName);
@@ -253,6 +258,7 @@ export default class RangeBarChart extends React.Component {
             onMouseEnter,
             onMouseMove,
             onMouseLeave,
+            onClick,
             thickness: barThickness,
             showLabel: showLabels,
             labelFormat: barLabelFormat,
