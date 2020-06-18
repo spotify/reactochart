@@ -99,6 +99,22 @@
       "returns": null
     },
     {
+      "name": "onClick",
+      "docblock": null,
+      "modifiers": [],
+      "params": [
+        {
+          "name": "e",
+          "type": null
+        },
+        {
+          "name": "d",
+          "type": null
+        }
+      ],
+      "returns": null
+    },
+    {
       "name": "renderMarkerLine",
       "docblock": null,
       "modifiers": [],
@@ -442,6 +458,13 @@
       },
       "required": false,
       "description": "`mouseleave` event handler callback, called when user's mouse leaves a pie slice."
+    },
+    "onClick": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`click` event handler callback, called when user click a pie slice."
     }
   }
 }
