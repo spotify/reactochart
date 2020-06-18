@@ -78,6 +78,10 @@ export default class Bar extends React.Component {
      */
     onMouseLeave: PropTypes.func,
     /**
+     * `click` event handler callback, called when user clicks the bar.
+     */
+    onClick: PropTypes.func,
+    /**
      * D3 scale for X axis - provided by XYPlot.
      */
     xScale: PropTypes.func,
@@ -125,6 +129,7 @@ export default class Bar extends React.Component {
       onMouseEnter,
       onMouseMove,
       onMouseLeave,
+      onClick,
       showLabel,
       className,
       labelFormat,
@@ -191,6 +196,7 @@ export default class Bar extends React.Component {
           onMouseEnter,
           onMouseMove,
           onMouseLeave,
+          onClick,
         }}
       />
     );

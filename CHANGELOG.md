@@ -1,3 +1,9 @@
+## 3.0.3 (2020-06-18)
+
+- [#257](https://github.com/spotify/reactochart/pull/257) Added onClick event handler for Bar, BarChart, RangeBarChart, and PieChart - Thanks @jrydberg!
+- [#258](https://github.com/spotify/reactochart/pull/258) Updated docs and added testing for onClick event handlers
+- Update dependencies via Greenkeeper
+
 ## 3.0.2 (2020-02-25)
 
 - [#234](https://github.com/spotify/reactochart/pull/234) Remove deprecated React lifecycle hooks

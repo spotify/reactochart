@@ -149,6 +149,13 @@
       },
       "required": false,
       "description": "`mouseleave` event handler callback, called when user's mouse leaves a bar."
+    },
+    "onClick": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`click` event handler callback, called when user clicks the bar."
     }
   }
 }
