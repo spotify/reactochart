@@ -55,7 +55,7 @@ describe('RangeBarChart', () => {
 
     expect(bars.at(1).props().x).to.equal(50 - props.barThickness / 2);
     expect(bars.at(1).props().width).to.equal(props.barThickness);
-    expect(bars.at(1).props().y).to.equal(10);
+    expect(Math.round(bars.at(1).props().y)).to.equal(10);
     expect(bars.at(1).props().height).to.equal(30);
   });
 
