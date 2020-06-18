@@ -19,23 +19,20 @@ Reactochart is a library of React components for creating data visualization cha
 
 1.  Install reactochart using npm.
 
-
 ```
 npm i reactochart --save
 ```
 
 2.  Then you can import an individual Reactochart component:
 
-
 ```jsx
-import LineChart from 'reactochart/LineChart'
+import LineChart from 'reactochart/LineChart';
 ```
 
 3.  If you prefer, you can import all of Reactochart at once, though this may hinder some optimizations, such as webpack tree-shaking:
 
-
 ```jsx
-import {XYPlot, XAxis, YAxis, LineChart} from 'reactochart';
+import { XYPlot, XAxis, YAxis, LineChart } from 'reactochart';
 ```
 
 or
@@ -46,32 +43,32 @@ import * as Reactochart from 'reactochart';
 
 4.  Import reactochart's base styles
 
-
 ```jsx
-import 'reactochart/styles.css'
+import 'reactochart/styles.css';
 ```
 
 5.  Build your first chart and see it rendered! For example, the following code snippet:
-
 
 ```jsx
 import XYPlot from 'reactochart/XYPlot';
 import XAxis from 'reactochart/XAxis';
 import YAxis from 'reactochart/YAxis';
 import LineChart from 'reactochart/LineChart';
-import 'reactochart/styles.css'
+import 'reactochart/styles.css';
 
-const MyFirstLineChart = (props) => (
+const MyFirstLineChart = props => (
   <XYPlot>
     <XAxis title="Phase" />
     <YAxis title="Intensity" />
     <LineChart
-      data={Array(100).fill().map((e, i) => i+1)}
+      data={Array(100)
+        .fill()
+        .map((e, i) => i + 1)}
       x={d => d}
-      y={d => Math.sin(d*.1)}
+      y={d => Math.sin(d * 0.1)}
     />
   </XYPlot>
-  )
+);
 ```
 
 results in this:
@@ -155,7 +152,7 @@ If you'd like to contribute to the development this project, first fork & clone 
 
 - Run `npm run dev` to run the development server (webpack-dev-server), which will serve a live development version of the examples at [localhost:9876](http://localhost:9876).
 - Make changes to the library code in the `src` directory, and/or changes to the examples in the `examples/src` directory.
-- If you'd like to make changes or add further component documentation, follow the example on [`react-docgen`](https://github.com/reactjs/react-docgen#example). 
+- If you'd like to make changes or add further component documentation, follow the example on [`react-docgen`](https://github.com/reactjs/react-docgen#example).
 - Once you're happy with your library and/or documentation changes, run `npm run docs`. This allows the documentation build to run with your updated `src` code. `git add` and `git commit` the updated build.
 - `git push` to your forked version of the repo.
 - Open a Github pull request with your changes against `master`. 🎉
