@@ -344,7 +344,7 @@ class XAxisLabels extends React.Component {
           let textAnchor = 'middle';
           if (this.props.noLabelOverhang) {
             if (i === 0) textAnchor = 'start';
-            if (i === labels.length - 1 && xScale(xScale.domain()[1]) === x)
+            if (i === labels.length - 1 && xScale.range()[1] === x)
               textAnchor = 'end';
           }
 
