@@ -175,6 +175,12 @@ class XAxisLabels extends React.Component {
      */
     labels: PropTypes.array,
     /**
+     * Override default label positioning that center-aligns labels below their data point, which can lead to
+     * variable left spacing in typical charts.
+     * TODO: does not yet account for any right-aligned treatments, e.g. Y axis on the right side.
+     */
+    noLabelOverhang: PropTypes.bool,
+    /**
      * Round ticks to capture extent of given x domain from XYPlot.
      */
     nice: PropTypes.bool,
@@ -246,10 +252,14 @@ class XAxisLabels extends React.Component {
     const marginY = max(
       labels.map(label => Math.ceil(distance + label.height)),
     );
+    let textAnchor = 'middle';
+    if (propsWithDefaults.noLabelOverhang) {
+      textAnchor = 'start';
+    }
     const [marginLeft, marginRight] = getLabelsXOverhang(
       xScale,
       labels,
-      'middle',
+      textAnchor,
     );
 
     return defaults(
@@ -331,9 +341,15 @@ class XAxisLabels extends React.Component {
               ? bindTrailingArgs(callback, label.value)
               : null;
           });
+          let textAnchor = 'middle';
+          if (this.props.noLabelOverhang) {
+            if (i === 0) textAnchor = 'start';
+            if (i === labels.length - 1 && xScale(xScale.domain()[1]) === x)
+              textAnchor = 'end';
+          }
 
           const style = defaults(
-            { textAnchor: 'middle' },
+            { textAnchor },
             getValue(labelStyle, { x, y, ...label }, i),
             XAxisLabels.defaultProps.labelStyle,
           );
