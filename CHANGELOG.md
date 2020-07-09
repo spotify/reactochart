@@ -1,3 +1,6 @@
+## 3.1.0 (2020-07-09)
+- [#264](https://github.com/spotify/reactochart/pull/264) Added noLabelOverhang prop to XAxisLabels
+
 ## 3.0.3 (2020-06-18)
 
 - [#257](https://github.com/spotify/reactochart/pull/257) Added onClick event handler for Bar, BarChart, RangeBarChart, and PieChart - Thanks @jrydberg!
