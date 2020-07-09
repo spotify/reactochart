@@ -329,6 +329,13 @@
       "required": false,
       "description": ""
     },
+    "noLabelOverhang": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": ""
+    },
     "labelOffset": {
       "type": {
         "name": "number"
