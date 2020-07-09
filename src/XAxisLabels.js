@@ -175,9 +175,13 @@ class XAxisLabels extends React.Component {
      */
     labels: PropTypes.array,
     /**
-     * Override default label positioning that center-aligns labels below their data point, which can lead to
-     * variable left spacing in typical charts, by making the points at the edges of the range align underneath
-     * the chart contents.
+     * Default label behavior places the text centered below the data point it delineates. This can allow
+     * overhang where the first and possibly last labels' text hangs over the edges of the x axis range.
+     * Setting this to `true` will force the first and last labels to align in such a way that their text does
+     * not exceed the x range. That is, the first label will be text-anchor: "start" instead of "middle", and
+     * the label marking the right edge of the chart will be anchored to the "end" instead of "middle".
+     *
+     * This affects spacing calculations.
      */
     noLabelOverhang: PropTypes.bool,
     /**
