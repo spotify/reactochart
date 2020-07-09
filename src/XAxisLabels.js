@@ -176,8 +176,8 @@ class XAxisLabels extends React.Component {
     labels: PropTypes.array,
     /**
      * Override default label positioning that center-aligns labels below their data point, which can lead to
-     * variable left spacing in typical charts.
-     * TODO: does not yet account for any right-aligned treatments, e.g. Y axis on the right side.
+     * variable left spacing in typical charts, by making the points at the edges of the range align underneath
+     * the chart contents.
      */
     noLabelOverhang: PropTypes.bool,
     /**
