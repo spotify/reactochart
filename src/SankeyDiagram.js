@@ -547,6 +547,10 @@ export default class SankeyDiagram extends React.Component {
      */
     nodeStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /**
+     * Node sort function
+     */
+    nodeSort: PropTypes.func,
+    /**
      * Node `mouseenter` event handler, called when user's mouse enters a node.
      */
     onMouseEnterNode: PropTypes.func,
@@ -580,6 +584,10 @@ export default class SankeyDiagram extends React.Component {
      * or accessor function which returns a class (string).
      */
     linkClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    /**
+     * Link sort function
+     */
+    linkSort: PropTypes.func,
     /**
      * Inline style object to be applied to each link,
      * or accessor function which returns a style object.
@@ -992,6 +1000,8 @@ export default class SankeyDiagram extends React.Component {
       .nodeId(props.nodeId)
       .nodeWidth(props.nodeWidth)
       .nodePadding(props.nodePadding)
+      .nodeSort(props.nodeSort)
+      .linkSort(props.linkSort)
       .nodeAlign(
         nodeAlignmentsByName[props.nodeAlignment] ||
           nodeAlignmentsByName.justify,
