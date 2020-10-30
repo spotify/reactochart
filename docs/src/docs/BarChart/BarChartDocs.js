@@ -10,6 +10,11 @@ const examples = [
     label: 'Basic BarChart',
     codeText: require('./examples/BarChart.js.example').default,
   },
+  {
+    id: 'gradient',
+    label: 'BarChart with Linear Gradient',
+    codeText: require('./examples/BarChartLinearGradient.js.example').default,
+  },
 ];
 
 export default class BarChartExamples extends React.Component {

@@ -1,4 +1,9 @@
+## 3.2.0 (2020-10-30)
+
+- [#269](https://github.com/spotify/reactochart/pull/269) add nodeSort and linkSort hooks to SankeyDiagram. Remove deprecated refs definition using strings
+
 ## 3.1.0 (2020-07-09)
+
 - [#264](https://github.com/spotify/reactochart/pull/264) Added noLabelOverhang prop to XAxisLabels
 
 ## 3.0.3 (2020-06-18)
