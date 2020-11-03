@@ -295,6 +295,13 @@
         "computed": false
       }
     },
+    "nodeSort": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Node sort function"
+    },
     "onMouseEnterNode": {
       "type": {
         "name": "func"
@@ -374,6 +381,13 @@
         "value": "''",
         "computed": false
       }
+    },
+    "linkSort": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "Link sort function"
     },
     "linkStyle": {
       "type": {

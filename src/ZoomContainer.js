@@ -123,9 +123,14 @@ export default class ZoomContainer extends React.Component {
 
   state = { lastZoomTransform: null, selection: null };
 
+  constructor(props) {
+    super(props);
+    this.svgRef = React.createRef();
+  }
+
   componentDidMount() {
     const initialZoomTransform = zoomTransformFromProps(this.props);
-    const selection = d3.select(this.refs.svg);
+    const selection = d3.select(this.svgRef.current);
 
     this.zoom = d3.zoom();
     selection.call(this.zoom);
@@ -225,12 +230,17 @@ export default class ZoomContainer extends React.Component {
   }
 
   render() {
-    const zoomTransform = this.refs.svg
-      ? d3.zoomTransform(this.refs.svg)
-      : null;
+    const zoomTransform =
+      this.svgRef && this.svgRef.current
+        ? d3.zoomTransform(this.svgRef.current)
+        : null;
 
     return (
-      <svg ref="svg" width={this.props.width} height={this.props.height}>
+      <svg
+        ref={this.svgRef}
+        width={this.props.width}
+        height={this.props.height}
+      >
         <g
           width={this.props.width}
           height={this.props.height}
