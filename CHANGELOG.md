@@ -1,3 +1,7 @@
+## 3.2.1 (2020-12-04)
+
+- [#271](https://github.com/spotify/reactochart/pull/271) Fix YAxisLabels formatting example. (Thanks @mbonaci)
+
 ## 3.2.0 (2020-10-30)
 
 - [#269](https://github.com/spotify/reactochart/pull/269) add nodeSort and linkSort hooks to SankeyDiagram. Remove deprecated refs definition using strings
