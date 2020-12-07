@@ -125,7 +125,7 @@ export default class FunnelChart extends React.Component {
     const colors = scaleOrdinal(schemeCategory10).domain(range(10));
 
     return (
-      <g className="rct-funnel-chart">
+      <g className="rct-funnel-chart" aria-hidden="true">
         {data.map((d, i) => {
           if (i === 0) return null;
           const pathStr = funnelArea([data[i - 1], d]);

@@ -298,7 +298,11 @@ class YAxisLabels extends React.Component {
         : `translate(${width + spacingRight}, 0)`;
 
     return (
-      <g className="rct-chart-value-labels-y" transform={transform}>
+      <g
+        className="rct-chart-value-labels-y"
+        transform={transform}
+        aria-hidden="true"
+      >
         {labels.map((label, i) => {
           const y = yScale(label.value) + offset;
           const x = placement === 'before' ? -distance : distance;

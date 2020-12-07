@@ -186,6 +186,7 @@ export default class Bar extends React.Component {
 
     const rect = (
       <rect
+        aria-hidden="true"
         {...{
           x: rectX,
           y: rectY,
@@ -216,7 +217,7 @@ export default class Bar extends React.Component {
 
     if (showLabel) {
       return (
-        <g>
+        <g aria-hidden="true">
           {rect}
           {text}
         </g>

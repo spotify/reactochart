@@ -185,7 +185,7 @@ export default class ColorHeatmap extends React.Component {
     }
 
     return (
-      <g className="rct-color-heatmap-chart">
+      <g className="rct-color-heatmap-chart" aria-hidden="true">
         {data.map((d, i) => {
           const color = colorScale(valueAccessor(d));
           const style = { ...getValue(rectStyle, d, i), fill: color };

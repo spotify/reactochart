@@ -361,6 +361,7 @@ class XAxisLabels extends React.Component {
           return (
             <g
               key={`x-axis-label-${i}`}
+              aria-hidden="true"
               {...{ onMouseEnter, onMouseMove, onMouseLeave, onClick }}
             >
               {/* <XAxisLabelDebugRect {...{x, y, label}}/> */}

@@ -304,12 +304,12 @@ class XYPlot extends React.Component {
           transform={`translate(${marginLeft + spacingLeft}, ${marginTop +
             spacingTop})`}
           className="rct-chart-inner"
-          aria-hidden="true"
         >
           <rect
             transform={`translate(${-spacingLeft}, ${-spacingTop})`}
             className="rct-plot-background"
             style={xyPlotStyle}
+            aria-hidden="true"
             {...panelSize}
           />
           {React.Children.map(this.props.children, child => {

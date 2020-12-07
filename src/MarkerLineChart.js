@@ -331,7 +331,7 @@ export default class MarkerLineChart extends React.Component {
   render() {
     const tickType = getTickType(this.props);
     return (
-      <g className="rct-marker-line-chart">
+      <g className="rct-marker-line-chart" aria-hidden="true">
         {tickType === 'RangeValue'
           ? this.props.data.map(this.renderRangeValueLine)
           : this.props.data.map(this.renderValueValueLine)}

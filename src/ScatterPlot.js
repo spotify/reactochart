@@ -163,6 +163,6 @@ export default class ScatterPlot extends React.Component {
   };
 
   render() {
-    return <g>{this.props.data.map(this.renderPoint)}</g>;
+    return <g aria-hidden="true">{this.props.data.map(this.renderPoint)}</g>;
   }
 }

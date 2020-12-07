@@ -229,6 +229,7 @@ export default class YAxis extends React.Component {
         onMouseEnter={this.handleOnMouseEnter}
         onMouseLeave={this.handleOnMouseLeave}
         onClick={this.handleOnClick}
+        aria-hidden="true"
       >
         {showGrid ? <YGrid {...gridProps} /> : null}
 

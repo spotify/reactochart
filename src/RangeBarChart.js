@@ -234,7 +234,7 @@ export default class RangeBarChart extends React.Component {
     } = this.props;
 
     return (
-      <g>
+      <g aria-hidden="true">
         {data.map((d, i) => {
           const [onMouseEnter, onMouseMove, onMouseLeave, onClick] = [
             'onMouseEnterBar',

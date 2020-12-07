@@ -223,7 +223,7 @@ export default class AreaChart extends React.Component {
     }
 
     return (
-      <g className="rct-area-chart">
+      <g className="rct-area-chart" aria-hidden="true">
         <path
           className={`rct-area-chart-path ${pathClassName}`}
           d={areaPathStr}
