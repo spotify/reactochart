@@ -1,3 +1,7 @@
+## 3.2.2 (2020-12-10)
+
+- [#273](https://github.com/spotify/reactochart/pull/273) Add `aria-hidden="true"` attributes to XYPlot components.
+
 ## 3.2.1 (2020-12-04)
 
 - [#271](https://github.com/spotify/reactochart/pull/271) Fix YAxisLabels formatting example. (Thanks @mbonaci)
