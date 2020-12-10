@@ -175,6 +175,16 @@ class XAxisLabels extends React.Component {
      */
     labels: PropTypes.array,
     /**
+     * Default label behavior places the text centered below the data point it delineates. This can allow
+     * overhang where the first and possibly last labels' text hangs over the edges of the x axis range.
+     * Setting this to `true` will force the first and last labels to align in such a way that their text does
+     * not exceed the x range. That is, the first label will be text-anchor: "start" instead of "middle", and
+     * the label marking the right edge of the chart will be anchored to the "end" instead of "middle".
+     *
+     * This affects spacing calculations.
+     */
+    noLabelOverhang: PropTypes.bool,
+    /**
      * Round ticks to capture extent of given x domain from XYPlot.
      */
     nice: PropTypes.bool,
@@ -246,10 +256,14 @@ class XAxisLabels extends React.Component {
     const marginY = max(
       labels.map(label => Math.ceil(distance + label.height)),
     );
+    let textAnchor = 'middle';
+    if (propsWithDefaults.noLabelOverhang) {
+      textAnchor = 'start';
+    }
     const [marginLeft, marginRight] = getLabelsXOverhang(
       xScale,
       labels,
-      'middle',
+      textAnchor,
     );
 
     return defaults(
@@ -331,9 +345,15 @@ class XAxisLabels extends React.Component {
               ? bindTrailingArgs(callback, label.value)
               : null;
           });
+          let textAnchor = 'middle';
+          if (this.props.noLabelOverhang) {
+            if (i === 0) textAnchor = 'start';
+            if (i === labels.length - 1 && xScale.range()[1] === x)
+              textAnchor = 'end';
+          }
 
           const style = defaults(
-            { textAnchor: 'middle' },
+            { textAnchor },
             getValue(labelStyle, { x, y, ...label }, i),
             XAxisLabels.defaultProps.labelStyle,
           );

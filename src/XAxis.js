@@ -64,6 +64,7 @@ export default class XAxis extends React.Component {
     labelFormat: PropTypes.func,
     labelFormats: PropTypes.array,
     labels: PropTypes.array,
+    noLabelOverhang: PropTypes.bool,
     /**
      * Adds horizontal offset (along the XAxis) to the labels
      */

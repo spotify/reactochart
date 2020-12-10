@@ -144,6 +144,10 @@ class PieChart extends React.Component {
      * `mouseleave` event handler callback, called when user's mouse leaves a pie slice.
      */
     onMouseLeaveSlice: PropTypes.func,
+    /**
+     * `click` event handler callback, called when user click a pie slice.
+     */
+    onClick: PropTypes.func,
   };
   static defaultProps = {
     centerLabelClassName: '',
@@ -179,6 +183,9 @@ class PieChart extends React.Component {
   onMouseLeaveLine = (e, d) => {
     this.props.onMouseLeaveLine(e, d);
   };
+  onClick = (e, d) => {
+    this.props.onClick(e, d);
+  };
 
   renderMarkerLine(pathData) {
     const { markerLineClassName, markerLineStyle } = this.props;
@@ -186,10 +193,11 @@ class PieChart extends React.Component {
       value: this.props.markerLineValue,
     };
 
-    const [onMouseEnter, onMouseMove, onMouseLeave] = [
+    const [onMouseEnter, onMouseMove, onMouseLeave, onClick] = [
       'onMouseEnterLine',
       'onMouseMoveLine',
       'onMouseLeaveLine',
+      'onClick',
     ].map(eventName => {
       // partially apply this line's data point as 2nd callback argument
       const callback = methodIfFuncProp(eventName, this.props, this);
@@ -201,7 +209,7 @@ class PieChart extends React.Component {
         style={markerLineStyle}
         className={`rct-marker-line ${markerLineClassName}`}
         d={pathData}
-        {...{ onMouseEnter, onMouseMove, onMouseLeave }}
+        {...{ onMouseEnter, onMouseMove, onMouseLeave, onClick }}
       />
     );
   }
@@ -317,10 +325,11 @@ class PieChart extends React.Component {
     return (
       <svg className="rct-pie-chart" {...{ width, height }}>
         {data.map((d, i) => {
-          const [onMouseEnter, onMouseMove, onMouseLeave] = [
+          const [onMouseEnter, onMouseMove, onMouseLeave, onClick] = [
             'onMouseEnterSlice',
             'onMouseMoveSlice',
             'onMouseLeaveSlice',
+            'onClick',
           ].map(eventName => {
             // partially apply this slice's data point as 2nd callback argument
             const callback = methodIfFuncProp(eventName, this.props, this);
@@ -350,6 +359,7 @@ class PieChart extends React.Component {
                 onMouseEnter,
                 onMouseMove,
                 onMouseLeave,
+                onClick,
                 key,
                 style: getValue(this.props.pieSliceStyle, d, i),
               }}

@@ -84,6 +84,10 @@ export default class BarChart extends React.Component {
      * `mouseleave` event handler callback, called when user's mouse leaves a bar.
      */
     onMouseLeaveBar: PropTypes.func,
+    /**
+     * `click` event handler callback, called when user clicks the bar.
+     */
+    onClick: PropTypes.func,
   };
   static defaultProps = {
     data: [],

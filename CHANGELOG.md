@@ -1,3 +1,21 @@
+## 3.2.1 (2020-12-04)
+
+- [#271](https://github.com/spotify/reactochart/pull/271) Fix YAxisLabels formatting example. (Thanks @mbonaci)
+
+## 3.2.0 (2020-10-30)
+
+- [#269](https://github.com/spotify/reactochart/pull/269) add nodeSort and linkSort hooks to SankeyDiagram. Remove deprecated refs definition using strings
+
+## 3.1.0 (2020-07-09)
+
+- [#264](https://github.com/spotify/reactochart/pull/264) Added noLabelOverhang prop to XAxisLabels
+
+## 3.0.3 (2020-06-18)
+
+- [#257](https://github.com/spotify/reactochart/pull/257) Added onClick event handler for Bar, BarChart, RangeBarChart, and PieChart - Thanks @jrydberg!
+- [#258](https://github.com/spotify/reactochart/pull/258) Updated docs and added testing for onClick event handlers
+- Update dependencies via Greenkeeper
+
 ## 3.0.2 (2020-02-25)
 
 - [#234](https://github.com/spotify/reactochart/pull/234) Remove deprecated React lifecycle hooks

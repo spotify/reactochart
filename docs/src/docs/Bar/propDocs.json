@@ -141,6 +141,13 @@
       "required": false,
       "description": "`mouseleave` event handler callback, called when user's mouse leaves the bar."
     },
+    "onClick": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "`click` event handler callback, called when user clicks the bar."
+    },
     "xScale": {
       "type": {
         "name": "func"

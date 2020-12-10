@@ -194,6 +194,13 @@
       "required": false,
       "description": "Custom labels provided. Note that each object in the array has to be of shape.\n`{\n value,\n text,\n height,\n width\n}`\nvalue - value you'd like this label to be aligned with\ntext - text you'd like displayed\nheight - height of the given label\nwidth - width of the given label"
     },
+    "noLabelOverhang": {
+      "type": {
+        "name": "bool"
+      },
+      "required": false,
+      "description": "Default label behavior places the text centered below the data point it delineates. This can allow\noverhang where the first and possibly last labels' text hangs over the edges of the x axis range.\nSetting this to `true` will force the first and last labels to align in such a way that their text does\nnot exceed the x range. That is, the first label will be text-anchor: \"start\" instead of \"middle\", and\nthe label marking the right edge of the chart will be anchored to the \"end\" instead of \"middle\".\n\nThis affects spacing calculations."
+    },
     "nice": {
       "type": {
         "name": "bool"
