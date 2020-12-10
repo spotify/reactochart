@@ -114,7 +114,7 @@ export default class XTicks extends React.Component {
         : `translate(0, ${-spacingTop || 0})`;
 
     return (
-      <g className="rct-chart-ticks-x" transform={transform}>
+      <g className="rct-chart-ticks-x" transform={transform} aria-hidden="true">
         {ticks.map((tick, i) => {
           const x1 = xScale(tick);
           const y2 = placement === 'above' ? -tickLength : tickLength;

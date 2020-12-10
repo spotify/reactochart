@@ -70,6 +70,7 @@ export default class YLine extends React.Component {
 
     return (
       <line
+        aria-hidden="true"
         {...{
           x1: -spacingLeft,
           x2: lineX,

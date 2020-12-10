@@ -113,7 +113,7 @@ export default class YTicks extends React.Component {
         : `translate(${-spacingLeft || 0}, 0)`;
 
     return (
-      <g className="rct-chart-ticks-y" transform={transform}>
+      <g className="rct-chart-ticks-y" transform={transform} aria-hidden="true">
         {ticks.map((tick, i) => {
           const y1 = yScale(tick);
           const x2 = placement === 'before' ? -tickLength : tickLength;

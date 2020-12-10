@@ -139,7 +139,10 @@ export default class XAxisTitle extends React.Component {
         : '-0.2em';
 
     return (
-      <g transform={`translate(${translateX},${translateY})`}>
+      <g
+        transform={`translate(${translateX},${translateY})`}
+        aria-hidden="true"
+      >
         <text
           style={{ ...style, textAnchor }}
           transform={`rotate(${rotate})`}

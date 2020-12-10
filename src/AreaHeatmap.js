@@ -139,7 +139,7 @@ export default class AreaHeatmap extends React.Component {
     };
 
     return (
-      <g className="rct-area-heatmap-chart" {...handlers}>
+      <g className="rct-area-heatmap-chart" aria-hidden="true" {...handlers}>
         <rect
           x="0"
           y="0"
