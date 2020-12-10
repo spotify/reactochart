@@ -44,14 +44,14 @@ function getMouseOptions(
   const xValue = !inRange(innerX, 0, chartSize.width)
     ? null
     : xScaleType === 'ordinal'
-      ? invertPointScale(xScale, innerX)
-      : xScale.invert(innerX);
+    ? invertPointScale(xScale, innerX)
+    : xScale.invert(innerX);
 
   const yValue = !inRange(innerY, 0, chartSize.height)
     ? null
     : yScaleType === 'ordinal'
-      ? invertPointScale(yScale, innerY)
-      : yScale.invert(innerY);
+    ? invertPointScale(yScale, innerY)
+    : yScale.invert(innerY);
 
   return {
     event,
@@ -212,7 +212,7 @@ class XYPlot extends React.Component {
   onMouseUp = this.onXYMouseEvent.bind(this, 'onMouseUp');
   onClick = this.onXYMouseEvent.bind(this, 'onClick');
   onMouseEnter = this.onXYMouseEvent.bind(this, 'onMouseEnter');
-  onMouseLeave = this.onXYMouseEvent.bind(this, 'onMouseLeave')
+  onMouseLeave = this.onXYMouseEvent.bind(this, 'onMouseLeave');
 
   render() {
     const {
@@ -295,7 +295,11 @@ class XYPlot extends React.Component {
         {...{ width, height, className, style: xyPlotContainerStyle }}
         {...handlers}
       >
-        <rect className="rct-chart-background" {...{ width, height }} />
+        <rect
+          className="rct-chart-background"
+          {...{ width, height }}
+          aria-hidden="true"
+        />
         <g
           transform={`translate(${marginLeft + spacingLeft}, ${marginTop +
             spacingTop})`}
@@ -305,6 +309,7 @@ class XYPlot extends React.Component {
             transform={`translate(${-spacingLeft}, ${-spacingTop})`}
             className="rct-plot-background"
             style={xyPlotStyle}
+            aria-hidden="true"
             {...panelSize}
           />
           {React.Children.map(this.props.children, child => {

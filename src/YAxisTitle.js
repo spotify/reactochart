@@ -137,7 +137,10 @@ export default class YAxisTitle extends React.Component {
         : null;
 
     return (
-      <g transform={`translate(${translateX},${translateY})`}>
+      <g
+        transform={`translate(${translateX},${translateY})`}
+        aria-hidden="true"
+      >
         <text
           style={{ ...style, textAnchor }}
           transform={`rotate(${rotate})`}

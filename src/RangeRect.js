@@ -112,6 +112,7 @@ export default class RangeRect extends React.Component {
 
     return (
       <rect
+        aria-hidden="true"
         {...{
           x: rectX,
           y: rectY,
