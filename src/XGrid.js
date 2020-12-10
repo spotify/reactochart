@@ -49,7 +49,7 @@ export default class XGrid extends React.Component {
     const className = `rct-chart-grid-line ${lineClassName || ''}`;
 
     return (
-      <g className="rct-chart-grid-x">
+      <g className="rct-chart-grid-x" aria-hidden="true">
         {ticks.map((tick, i) => {
           return (
             <XLine

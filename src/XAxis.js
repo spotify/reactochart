@@ -238,6 +238,7 @@ export default class XAxis extends React.Component {
     return (
       <g
         className="rct-chart-axis rct-chart-axis-x"
+        aria-hidden="true"
         onMouseMove={this.handleOnMouseMove}
         onMouseEnter={this.handleOnMouseEnter}
         onMouseLeave={this.handleOnMouseLeave}

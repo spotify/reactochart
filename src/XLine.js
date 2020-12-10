@@ -81,6 +81,7 @@ export default class XLine extends React.Component {
 
     return (
       <line
+        aria-hidden="true"
         {...{
           x1: lineX,
           x2: lineX,
