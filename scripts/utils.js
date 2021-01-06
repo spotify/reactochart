@@ -12,7 +12,7 @@ function dirExists(path) {
   return sh.test('-d', path);
 }
 function ensureDir(path) {
-  if(!dirExists(path)) sh.mkdir('-p', path);
+  if (!dirExists(path)) sh.mkdir('-p', path);
 }
 function fileNameFromPath(path) {
   return _.last(path.split('/'));
@@ -22,5 +22,10 @@ function stripFileExtension(fileName) {
 }
 
 module.exports = {
-  isUpperCase, fileExists, dirExists, ensureDir, fileNameFromPath, stripFileExtension
+  isUpperCase,
+  fileExists,
+  dirExists,
+  ensureDir,
+  fileNameFromPath,
+  stripFileExtension,
 };
