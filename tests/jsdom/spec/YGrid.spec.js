@@ -1,6 +1,5 @@
 import React from 'react';
-import * as d3 from 'd3';
-import _ from 'lodash';
+import { scaleLinear } from 'd3-scale';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
@@ -16,7 +15,7 @@ describe('YGrid', () => {
     spacingRight: 10,
     lineClassName: 'ygrid-line-class',
     lineStyle: { stroke: 'blue' },
-    yScale: d3.scaleLinear().domain([0, 100]),
+    yScale: scaleLinear().domain([0, 100]),
   };
 
   it('passes props correctly to YLine', () => {

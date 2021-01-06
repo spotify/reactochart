@@ -1,12 +1,11 @@
 import React from 'react';
-import * as d3 from 'd3';
+import { scaleLinear } from 'd3-scale';
 import _ from 'lodash';
 import sinon from 'sinon';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
 import { AreaHeatmap } from '../../../src/index.js';
-import { getValue } from '../../../src/utils/Data.js';
 
 describe('AreaHeatmap', () => {
   const gridData = _.range(30).map(m => {
@@ -29,12 +28,10 @@ describe('AreaHeatmap', () => {
     y: d => d.y,
     yEnd: d => d.yEnd,
     rectClassName: 'rect-class',
-    xScale: d3
-      .scaleLinear()
+    xScale: scaleLinear()
       .domain([-1, 0, 1])
       .range([0, 30]),
-    yScale: d3
-      .scaleLinear()
+    yScale: scaleLinear()
       .domain([0, 10])
       .range([0, 30]),
     onMouseMove: sinon.spy(),

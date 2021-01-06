@@ -1,19 +1,12 @@
-import _ from 'lodash';
 import React from 'react';
-import * as d3 from 'd3';
+import { scaleLinear, scaleOrdinal } from 'd3-scale';
 import { expect } from 'chai';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import { isValidScale } from '../../../src/utils/Scale';
 import { innerRangeX, innerRangeY } from '../../../src/utils/Margin';
 
 import resolveXYScales from '../../../src/utils/resolveXYScales';
-
-class NotImplementedError extends Error {
-  constructor(message = 'Not Implemented Yet') {
-    super(message);
-  }
-}
 
 function expectRefAndDeepEqual(a, b) {
   expect(a).to.equal(b);
@@ -55,8 +48,7 @@ function expectXYScaledComponent(
     expect(renderedScale[k].domain()).to.deep.equal(domain[k]);
     if (scaleType[k] === 'ordinal')
       expect(renderedScale[k].range()).to.deep.equal(
-        d3
-          .scaleOrdinal()
+        scaleOrdinal()
           .domain(domain[k])
           .rangePoints(range[k])
           .range(),
@@ -89,8 +81,7 @@ function expectXYScaledComponentEnzyme(
     expect(renderedScale[k].domain()).to.deep.equal(domain[k]);
     if (scaleType[k] === 'ordinal')
       expect(renderedScale[k].range()).to.deep.equal(
-        d3
-          .scaleOrdinal()
+        scaleOrdinal()
           .domain(domain[k])
           .rangePoints(range[k])
           .range(),
@@ -184,12 +175,10 @@ describe('resolveXYScales', () => {
 
   it('passes XY scales and margins through if both are provided', () => {
     const props = {
-      xScale: d3
-        .scaleLinear()
+      xScale: scaleLinear()
         .domain([-1, 1])
         .range([0, 400]),
-      yScale: d3
-        .scaleLinear()
+      yScale: scaleLinear()
         .domain([-2, 2])
         .range([10, 300]),
       marginTop: 11,

@@ -1,5 +1,5 @@
 import React from 'react';
-import * as d3 from 'd3';
+import { scaleLinear } from 'd3-scale';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
@@ -9,12 +9,10 @@ import { getValue } from '../../../src/utils/Data.js';
 describe('AreaBarChart', () => {
   describe('renders and passes props correctly to RangeRect', () => {
     const props = {
-      xScale: d3
-        .scaleLinear()
+      xScale: scaleLinear()
         .domain([0, 100])
         .range([0, 100]),
-      yScale: d3
-        .scaleLinear()
+      yScale: scaleLinear()
         .domain([0, 1])
         .range([100, 0]),
       data: [

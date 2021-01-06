@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import * as d3 from 'd3';
+import { scaleLinear, scalePoint } from 'd3-scale';
 import _ from 'lodash';
 import {
   getAxisChildProps,
@@ -11,8 +11,8 @@ describe('Axis utils', () => {
     const axisProps = {
       width: 400,
       height: 250,
-      xScale: d3.scaleLinear(),
-      yScale: d3.scaleLinear(),
+      xScale: scaleLinear(),
+      yScale: scaleLinear(),
       spacingTop: 10,
       spacingBottom: 10,
       spacingLeft: 10,
@@ -174,8 +174,7 @@ describe('Axis utils', () => {
         clientY: 0,
       };
 
-      const scale = d3
-        .scalePoint()
+      const scale = scalePoint()
         .domain(['a', 'b', 'c'])
         .range([0, 100]);
 
@@ -204,8 +203,7 @@ describe('Axis utils', () => {
         clientY: 50,
       };
 
-      const scale = d3
-        .scalePoint()
+      const scale = scalePoint()
         .domain(['a', 'b', 'c'])
         .range([0, 100]);
 

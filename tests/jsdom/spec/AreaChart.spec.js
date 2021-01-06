@@ -1,5 +1,5 @@
 import React from 'react';
-import * as d3 from 'd3';
+import { scaleLinear } from 'd3-scale';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import _ from 'lodash';
@@ -10,7 +10,7 @@ import { combineDatasets } from '../../../src/utils/Data.js';
 function randomWalk(length = 100, start = 0, variance = 10) {
   return _.reduce(
     _.range(length - 1),
-    (sequence, i) => {
+    sequence => {
       return sequence.concat(_.last(sequence) + _.random(-variance, variance));
     },
     [start],
@@ -24,7 +24,7 @@ function randomWalkTimeSeries(
   startDate = new Date(2015, 0, 1),
 ) {
   let date = startDate;
-  return randomWalk(length, start, variance).map((n, i) => {
+  return randomWalk(length, start, variance).map(n => {
     date = new Date(date.getTime() + 24 * 60 * 60 * 1000);
     return [date, n];
   });
@@ -37,8 +37,8 @@ describe('AreaChart', () => {
     y: d => Math.sin(d / 10) * 10,
     yEnd: d => Math.cos((d + 1) / 10) * 10,
     pathClassName: 'my-path',
-    xScale: d3.scaleLinear().domain([0, 41]),
-    yScale: d3.scaleLinear().domain([0, 10]),
+    xScale: scaleLinear().domain([0, 41]),
+    yScale: scaleLinear().domain([0, 10]),
     pathStyle: { fill: 'red' },
   };
 
@@ -83,7 +83,7 @@ describe('AreaChart', () => {
         expect(p.props().className).to.not.contain(
           areaChartProps.pathClassName,
         );
-      } else if (index == 3) {
+      } else if (index === 3) {
         expect(p.props().style.fill).to.equal(
           differenceAreaChartProps.pathStyleNegative.fill,
         );
@@ -120,7 +120,7 @@ describe('AreaChart', () => {
   it('getDomain returns correctly', () => {
     const domainProps = {
       data: _.range(10),
-      x: () => x,
+      x: x => x,
       y: () => 0,
       yEnd: d => d + 2,
     };

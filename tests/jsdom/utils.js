@@ -1,5 +1,5 @@
-import * as d3 from 'd3';
 import _ from 'lodash';
+import { scaleLinear, scalePoint } from 'd3-scale';
 import { expect } from 'chai';
 
 export function expectProps(el, expectedProps) {
@@ -12,16 +12,14 @@ export function expectProps(el, expectedProps) {
 export function testWithScales(scaleTypes, callback) {
   const testScales = {
     linear: {
-      scale: d3
-        .scaleLinear()
+      scale: scaleLinear()
         .domain([-3, 3])
         .range([20, 100]),
       testValues: [-1.4, 1.7, 2.8],
     },
     // time: {},
     ordinal: {
-      scale: d3
-        .scalePoint()
+      scale: scalePoint()
         .domain(['a', 'b', 'c', 'd', 'e'])
         .range([0, 100]),
       testValues: ['a', 'c', 'e'],

@@ -1,12 +1,9 @@
 import React from 'react';
-import * as d3 from 'd3';
-import _ from 'lodash';
-import sinon from 'sinon';
+import { scaleLinear } from 'd3-scale';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
 import { FunnelChart } from '../../../src/index.js';
-import { getValue } from '../../../src/utils/Data.js';
 
 describe('FunnelChart', () => {
   const funnelData = [
@@ -23,12 +20,10 @@ describe('FunnelChart', () => {
     y: d => d.observation,
     pathClassName: 'path-class',
     horizontal: true,
-    xScale: d3
-      .scaleLinear()
+    xScale: scaleLinear()
       .domain([-1, 0, 1])
       .range([0, 30]),
-    yScale: d3
-      .scaleLinear()
+    yScale: scaleLinear()
       .domain([0, 10])
       .range([0, 30]),
     pathStyle: { fill: 'yellow' },

@@ -1,6 +1,12 @@
-import _ from 'lodash';
 import React from 'react';
-import * as d3 from 'd3';
+import {
+  scaleLinear,
+  scaleTime,
+  scaleOrdinal,
+  scaleLog,
+  scalePoint,
+  scalePow,
+} from 'd3-scale';
 import { expect } from 'chai';
 
 import {
@@ -42,11 +48,11 @@ describe('Scale utils', () => {
 
   describe('inferScaleType', () => {
     it('infers the correct scale type, given a scale', () => {
-      expect(inferScaleType(d3.scaleLinear())).to.equal('linear');
-      expect(inferScaleType(d3.scaleTime())).to.equal('time');
-      expect(inferScaleType(d3.scaleOrdinal())).to.equal('ordinal');
-      expect(inferScaleType(d3.scaleLog())).to.equal('log');
-      expect(inferScaleType(d3.scalePow())).to.equal('pow');
+      expect(inferScaleType(scaleLinear())).to.equal('linear');
+      expect(inferScaleType(scaleTime())).to.equal('time');
+      expect(inferScaleType(scaleOrdinal())).to.equal('ordinal');
+      expect(inferScaleType(scaleLog())).to.equal('log');
+      expect(inferScaleType(scalePow())).to.equal('pow');
     });
   });
 
@@ -67,11 +73,11 @@ describe('Scale utils', () => {
 
   describe('isValidScale', () => {
     it('returns true for all known scale types', () => {
-      expect(isValidScale(d3.scaleLinear())).to.equal(true);
-      expect(isValidScale(d3.scaleTime())).to.equal(true);
-      expect(isValidScale(d3.scaleOrdinal())).to.equal(true);
-      expect(isValidScale(d3.scaleLog())).to.equal(true);
-      expect(isValidScale(d3.scalePow())).to.equal(true);
+      expect(isValidScale(scaleLinear())).to.equal(true);
+      expect(isValidScale(scaleTime())).to.equal(true);
+      expect(isValidScale(scaleOrdinal())).to.equal(true);
+      expect(isValidScale(scaleLog())).to.equal(true);
+      expect(isValidScale(scalePow())).to.equal(true);
     });
     it('returns false for non-scale things', () => {
       expect(isValidScale(9)).to.equal(false);
@@ -92,8 +98,7 @@ describe('Scale utils', () => {
 
   describe('invertPointScale', () => {
     it('returns a valid value for given rangeValue', () => {
-      const scale = d3
-        .scalePoint()
+      const scale = scalePoint()
         .domain(['a', 'b', 'c', 'd', 'e'])
         .range([0, 100]);
 

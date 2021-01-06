@@ -1,7 +1,7 @@
 import _ from 'lodash';
-import * as d3 from 'd3';
+import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import chai from 'chai';
 chai.use(chaiEnzyme());
@@ -32,16 +32,13 @@ function getLineWidth(line) {
 }
 
 describe('YTicks', () => {
-  const linearScale = d3
-    .scaleLinear()
+  const linearScale = scaleLinear()
     .domain([-5, 5])
     .range([0, 500]);
-  const timeScale = d3
-    .scaleTime()
+  const timeScale = scaleTime()
     .domain([new Date(2009, 0, 1), new Date(2010, 0, 1)])
     .range([0, 500]);
-  const ordinalScale = d3
-    .scalePoint()
+  const ordinalScale = scalePoint()
     .domain(['a', 'b', 'c', 'd'])
     .range([0, 300]);
 

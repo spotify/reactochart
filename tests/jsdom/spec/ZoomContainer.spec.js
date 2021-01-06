@@ -1,10 +1,8 @@
 import React from 'react';
-import * as d3 from 'd3';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import { XYPlot, ZoomContainer } from '../../../src/index.js';
-import { getValue } from '../../../src/utils/Data.js';
+import { ZoomContainer } from '../../../src/index.js';
 
 describe('ZoomContainer', () => {
   const uncontrolledProps = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import * as d3 from 'd3';
+import { scaleLinear } from 'd3-scale';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { mount } from 'enzyme';
@@ -12,8 +12,8 @@ describe('ScatterPlot', () => {
     y: d => d[1],
     pointClassName: 'my-point',
     pointStyle: { fill: 'blue' },
-    xScale: d3.scaleLinear().domain([0, 5]),
-    yScale: d3.scaleLinear().domain([0, 5]),
+    xScale: scaleLinear().domain([0, 5]),
+    yScale: scaleLinear().domain([0, 5]),
     onMouseEnterPoint: sinon.spy(),
     onMouseMovePoint: sinon.spy(),
     onMouseLeavePoint: sinon.spy(),
@@ -29,7 +29,7 @@ describe('ScatterPlot', () => {
       expect(point.props().style).to.eql(props.pointStyle);
     });
 
-    chart = mount(<ScatterPlot {...props} pointSymbol={d => 'a'} />);
+    chart = mount(<ScatterPlot {...props} pointSymbol={() => 'a'} />);
     points = chart.find('text');
 
     points.forEach(point => {

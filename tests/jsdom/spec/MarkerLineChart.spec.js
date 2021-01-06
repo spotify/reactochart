@@ -1,5 +1,5 @@
 import React from 'react';
-import * as d3 from 'd3';
+import { scaleLinear } from 'd3-scale';
 import _ from 'lodash';
 import sinon from 'sinon';
 import { expect } from 'chai';
@@ -9,8 +9,8 @@ import { MarkerLineChart } from '../../../src/index.js';
 
 describe('MarkerLineChart', () => {
   const props = {
-    xScale: d3.scaleLinear().domain([0, 30]),
-    yScale: d3.scaleLinear().domain([0, 1]),
+    xScale: scaleLinear().domain([0, 30]),
+    yScale: scaleLinear().domain([0, 1]),
     data: _.range(30),
     x: d => d,
     y: d => d + 5,

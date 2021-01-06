@@ -1,8 +1,8 @@
 import React from 'react';
-import * as d3 from 'd3';
+import { scaleLinear, scalePoint } from 'd3-scale';
 import _ from 'lodash';
 import { expect } from 'chai';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import { testWithScales, expectProps } from '../utils';
 import { BarChart, RangeBarChart } from '../../../src/index.js';
@@ -11,12 +11,10 @@ describe('BarChart', () => {
   it('passes most props through to RangeBarChart', () => {
     // bar chart is just a simple wrapper around RangeBarChart, most props are passed through
     const props = {
-      xScale: d3
-        .scalePoint()
+      xScale: scalePoint()
         .domain(['a', 'b', 'c'])
         .range([0, 100]),
-      yScale: d3
-        .scaleLinear()
+      yScale: scaleLinear()
         .domain([0, 1])
         .range([100, 0]),
       data: [['a', 0.25], ['b', 0.5], ['c', 0.67]],

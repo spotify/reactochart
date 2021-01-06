@@ -1,10 +1,10 @@
 import React from 'react';
-import * as d3 from 'd3';
+import { scaleLinear } from 'd3-scale';
 import _ from 'lodash';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import { XYPlot, ColorHeatmap, RangeRect } from '../../../src/index.js';
+import { ColorHeatmap, RangeRect } from '../../../src/index.js';
 import { getValue } from '../../../src/utils/Data.js';
 
 describe('ColorHeatmap', () => {
@@ -27,12 +27,10 @@ describe('ColorHeatmap', () => {
     xEnd: d => d.xEnd,
     y: d => d.y,
     yEnd: d => d.yEnd,
-    xScale: d3
-      .scaleLinear()
+    xScale: scaleLinear()
       .domain([-1, 0, 1])
       .range([0, 30]),
-    yScale: d3
-      .scaleLinear()
+    yScale: scaleLinear()
       .domain([0, 10])
       .range([0, 30]),
     colors: ['rebeccapurple', 'goldenrod'],
@@ -42,7 +40,6 @@ describe('ColorHeatmap', () => {
 
   it('renders a color heatmap', () => {
     const chart = mount(<ColorHeatmap {...props} />);
-    const group = chart.find('g');
     const rangeRects = chart.find(RangeRect);
     expect(rangeRects).to.have.length(props.data.length);
   });
@@ -96,10 +93,10 @@ describe('ColorHeatmap', () => {
     describe('when colorScale prop is passed', () => {
       it('sets the color scale to the prop value', () => {
         const propsWithColorScale = { ...props, colorScale: () => 'rgb' };
-        const chart = mount(<ColorHeatmap {...propsWithColorScale} />);
+        const updatedChart = mount(<ColorHeatmap {...propsWithColorScale} />);
 
         expect(
-          chart
+          updatedChart
             .find(RangeRect)
             .first()
             .props().style,

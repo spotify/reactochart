@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import * as d3 from 'd3';
+import { scaleLinear, scalePoint } from 'd3-scale';
 import { mount } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
@@ -7,12 +7,10 @@ import { Bar, RangeBarChart } from '../../../src/index.js';
 
 describe('RangeBarChart', () => {
   const props = {
-    xScale: d3
-      .scalePoint()
+    xScale: scalePoint()
       .domain(['a', 'b', 'c'])
       .range([0, 100]),
-    yScale: d3
-      .scaleLinear()
+    yScale: scaleLinear()
       .domain([0, 1])
       .range([100, 0]),
     data: [['a', [0.3, 0.5]], ['b', [0.6, 0.9]]],

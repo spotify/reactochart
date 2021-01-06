@@ -1,5 +1,5 @@
 import React from 'react';
-import * as d3 from 'd3';
+import { scaleLinear } from 'd3-scale';
 import _ from 'lodash';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
@@ -11,12 +11,10 @@ describe('Histogram', () => {
   it('it passes most props through to AreaBarChart', () => {
     // histogram is a wrapper around AreaBarChart
     const props = {
-      xScale: d3
-        .scaleLinear()
+      xScale: scaleLinear()
         .domain([-1, 0, 1])
         .range([0, 100]),
-      yScale: d3
-        .scaleLinear()
+      yScale: scaleLinear()
         .domain([0, 10])
         .range([100, 0]),
       data: [-1, 0, 1, -1, 0, 1, 1, 1],
@@ -55,12 +53,10 @@ describe('Histogram', () => {
   it('renders histogram', () => {
     // histogram is a wrapper around AreaBarChart
     const props = {
-      xScale: d3
-        .scaleLinear()
+      xScale: scaleLinear()
         .domain([-1, 0, 1])
         .range([0, 100]),
-      yScale: d3
-        .scaleLinear()
+      yScale: scaleLinear()
         .domain([0, 10])
         .range([100, 0]),
       data: [-1, 0, 1, -1, 0, 1, 1, 1],

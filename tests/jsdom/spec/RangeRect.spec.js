@@ -1,8 +1,6 @@
 import React from 'react';
-import * as d3 from 'd3';
-import _ from 'lodash';
 import chai from 'chai';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 chai.use(sinonChai);

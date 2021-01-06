@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import * as d3 from 'd3';
+import { scaleLinear } from 'd3-scale';
 import {
   checkLabelsDistinct,
   checkRangesOverlap,
@@ -77,7 +77,7 @@ describe('Label utils', () => {
   });
 
   it('getLabelXRange', () => {
-    const scale = d3.scaleLinear().domain([-30, 30]);
+    const scale = scaleLinear().domain([-30, 30]);
     const label = { value: -20, text: '-20', height: 14, width: 20.234375 };
 
     expect(getLabelXRange(scale, label)).to.eql([
@@ -87,7 +87,7 @@ describe('Label utils', () => {
   });
 
   it('getLabelYRange', () => {
-    const scale = d3.scaleLinear().domain([-30, 30]);
+    const scale = scaleLinear().domain([-30, 30]);
     const label = { value: -20, text: '-20', height: 14, width: 20.234375 };
 
     expect(getLabelYRange(scale, label)).to.eql([
@@ -97,21 +97,21 @@ describe('Label utils', () => {
   });
 
   it('getLabelXOverhang', () => {
-    const scale = d3.scaleLinear().domain([-30, 30]);
+    const scale = scaleLinear().domain([-30, 30]);
     const label = { value: -20, text: '-20', height: 14, width: 20.234375 };
 
     expect(getLabelXOverhang(scale, label)).to.eql([10, 10]);
   });
 
   it('getLabelYOverhang', () => {
-    const scale = d3.scaleLinear().domain([-30, 30]);
+    const scale = scaleLinear().domain([-30, 30]);
     const label = { value: -20, text: '-20', height: 14, width: 20.234375 };
 
     expect(getLabelYOverhang(scale, label)).to.eql([7, 7]);
   });
 
   it('getLabelsXOverhang', () => {
-    const scale = d3.scaleLinear().domain([-30, 30]);
+    const scale = scaleLinear().domain([-30, 30]);
     const labels = [
       { value: -20, text: '-20', height: 14, width: 20.234375 },
       { value: -15, text: '-15', height: 14, width: 20.234375 },
@@ -125,7 +125,7 @@ describe('Label utils', () => {
   });
 
   it('getLabelsYOverhang', () => {
-    const scale = d3.scaleLinear().domain([-30, 30]);
+    const scale = scaleLinear().domain([-30, 30]);
     const labels = [
       { value: -20, text: '-20', height: 14, width: 20.234375 },
       { value: -15, text: '-15', height: 14, width: 20.234375 },

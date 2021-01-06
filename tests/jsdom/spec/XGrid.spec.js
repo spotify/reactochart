@@ -1,6 +1,5 @@
 import React from 'react';
-import * as d3 from 'd3';
-import _ from 'lodash';
+import { scaleLinear } from 'd3-scale';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 
@@ -16,7 +15,7 @@ describe('XGrid', () => {
     spacingRight: 10,
     lineClassName: 'xgrid-line-class',
     lineStyle: { stroke: 'blue' },
-    xScale: d3.scaleLinear().domain([0, 100]),
+    xScale: scaleLinear().domain([0, 100]),
   };
 
   it('passes props correctly to XLine', () => {
