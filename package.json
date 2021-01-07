@@ -8,7 +8,7 @@
     "Erica Hyman <ehyman@spotify.com>",
     "Isaac Ezer <isaace@spotify.com>"
   ],
-  "version": "3.2.2",
+  "version": "4.0.0",
   "main": "index.js",
   "files": [
     "*.js",
