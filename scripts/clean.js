@@ -1,9 +1,9 @@
-const fs = require("fs");
-const sh = require("shelljs");
+const fs = require('fs');
+const sh = require('shelljs');
 
-const { fileExists, dirExists } = require("./utils");
+const { fileExists, dirExists } = require('./utils');
 
-const srcContents = sh.ls("src");
+const srcContents = sh.ls('src');
 
 // We don't want to commit built files, so it is useful to have a `clean` script which deletes them if they exist.
 // However, Reactochart is built in the root directory
@@ -19,7 +19,7 @@ srcContents.forEach(fileOrDir => {
     sh.rm(`./${fileOrDir}`);
   } else if (dirExists(`src/${fileOrDir}`) && dirExists(fileOrDir)) {
     console.log(`deleting directory ./${fileOrDir}`);
-    sh.rm("-rf", `./${fileOrDir}`);
+    sh.rm('-rf', `./${fileOrDir}`);
   }
   // check for source maps too
   if (fileExists(`./${fileOrDir}.map`)) {
@@ -29,6 +29,6 @@ srcContents.forEach(fileOrDir => {
 });
 
 // Clean compiled css file
-if (fileExists("./styles.css")) {
-  sh.rm("./styles.css");
+if (fileExists('./styles.css')) {
+  sh.rm('./styles.css');
 }

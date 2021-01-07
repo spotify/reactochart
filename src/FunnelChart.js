@@ -1,4 +1,6 @@
-import { area, scaleOrdinal, schemeCategory10 } from 'd3';
+import { area } from 'd3-shape';
+import { scaleOrdinal } from 'd3-scale';
+import { schemeCategory10 } from 'd3-scale-chromatic';
 import range from 'lodash/range';
 import defaults from 'lodash/defaults';
 import PropTypes from 'prop-types';
