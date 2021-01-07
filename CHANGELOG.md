@@ -1,3 +1,7 @@
+## 4.0.0 (2021-01-07)
+
+- [#276](https://github.com/spotify/reactochart/pull/276) Upgrade D3 to 6.3.1.
+
 ## 3.2.2 (2020-12-10)
 
 - [#273](https://github.com/spotify/reactochart/pull/273) Add `aria-hidden="true"` attributes to XYPlot components.

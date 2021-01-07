@@ -8,6 +8,10 @@
       "modifiers": [],
       "params": [
         {
+          "name": "event",
+          "type": null
+        },
+        {
           "name": "...args",
           "type": null
         }
