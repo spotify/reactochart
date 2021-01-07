@@ -1,4 +1,6 @@
-import { bisector, line, curveLinear } from 'd3';
+import { line, curveLinear } from 'd3-shape';
+import { bisector } from 'd3-array';
+
 import PropTypes from 'prop-types';
 import React from 'react';
 import * as CustomPropTypes from './utils/CustomPropTypes';

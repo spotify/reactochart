@@ -1,4 +1,5 @@
-import { extent, histogram, scaleLinear } from 'd3';
+import { histogram, extent } from 'd3-array';
+import { scaleLinear } from 'd3-scale';
 import first from 'lodash/first';
 import last from 'lodash/last';
 import maxBy from 'lodash/maxBy';

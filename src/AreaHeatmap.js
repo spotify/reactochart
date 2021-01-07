@@ -1,4 +1,4 @@
-import { extent } from 'd3';
+import { extent } from 'd3-array';
 import flatten from 'lodash/flatten';
 import isFunction from 'lodash/isFunction';
 import PropTypes from 'prop-types';

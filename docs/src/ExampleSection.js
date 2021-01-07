@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import * as d3 from 'd3';
+import * as d3 from 'd3'; // eslint-disable-line no-restricted-imports
 import Playground from 'component-playground';
 
 // import *all* reactochart components/utils - usually you'd import one at a time

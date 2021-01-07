@@ -1,4 +1,4 @@
-import { area } from 'd3';
+import { area } from 'd3-shape';
 import isUndefined from 'lodash/isUndefined';
 import uniqueId from 'lodash/uniqueId';
 import PropTypes from 'prop-types';

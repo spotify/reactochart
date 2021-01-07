@@ -3,9 +3,9 @@ import {
   interpolateHsl,
   interpolateLab,
   interpolateRgb,
-  scaleLinear,
-  schemeCategory10,
-} from 'd3';
+} from 'd3-interpolate';
+import { scaleLinear } from 'd3-scale';
+import { schemeCategory10 } from 'd3-scale-chromatic';
 import isString from 'lodash/isString';
 import times from 'lodash/times';
 import range from 'lodash/range';

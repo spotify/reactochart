@@ -1,5 +1,5 @@
 import React from 'react';
-import * as d3 from 'd3';
+import { scalePoint, scaleLinear } from 'd3-scale';
 import chai from 'chai';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
@@ -15,12 +15,10 @@ describe('Bar', () => {
 
   beforeEach(() => {
     verticalBarProps = {
-      xScale: d3
-        .scalePoint()
+      xScale: scalePoint()
         .domain(['a', 'b', 'c'])
         .range([0, 100]),
-      yScale: d3
-        .scaleLinear()
+      yScale: scaleLinear()
         .domain([0, 1])
         .range([100, 0]),
       x: 'a',
@@ -30,12 +28,10 @@ describe('Bar', () => {
     };
 
     horizontalBarProps = {
-      xScale: d3
-        .scaleLinear()
+      xScale: scaleLinear()
         .domain([0, 1])
         .range([0, 100]),
-      yScale: d3
-        .scalePoint()
+      yScale: scalePoint()
         .domain(['a', 'b', 'c'])
         .range([100, 0]),
       x: 0.2,
@@ -48,12 +44,10 @@ describe('Bar', () => {
   it('renders a basic vertical bar correctly', () => {
     const bar = shallow(
       <Bar
-        xScale={d3
-          .scalePoint()
+        xScale={scalePoint()
           .domain(['a', 'b', 'c'])
           .range([0, 100])}
-        yScale={d3
-          .scaleLinear()
+        yScale={scaleLinear()
           .domain([0, 1])
           .range([100, 0])}
         x="b"
@@ -78,12 +72,10 @@ describe('Bar', () => {
   it('renders a basic horizontal bar correctly', () => {
     const bar = shallow(
       <Bar
-        xScale={d3
-          .scaleLinear()
+        xScale={scaleLinear()
           .domain([0, 1])
           .range([0, 100])}
-        yScale={d3
-          .scalePoint()
+        yScale={scalePoint()
           .domain(['a', 'b', 'c'])
           .range([100, 0])}
         x={0.1}
@@ -172,12 +164,10 @@ describe('Bar', () => {
 
   it('throws an error if x/y scale(s) are missing or invalid', () => {
     const barProps = { x: 'a', y: 0, yEnd: 1 };
-    const xScale = d3
-      .scalePoint()
+    const xScale = scalePoint()
       .domain(['a', 'b', 'c'])
       .range([0, 100]);
-    const yScale = d3
-      .scaleLinear()
+    const yScale = scaleLinear()
       .domain([0, 1])
       .range([100, 0]);
 
@@ -197,12 +187,10 @@ describe('Bar', () => {
 
   it('throws an error if exactly ONE of xEnd OR yEnd are not provided', () => {
     const barProps = {
-      xScale: d3
-        .scalePoint()
+      xScale: scalePoint()
         .domain(['a', 'b', 'c'])
         .range([0, 100]),
-      yScale: d3
-        .scaleLinear()
+      yScale: scaleLinear()
         .domain([0, 1])
         .range([100, 0]),
       x: 'a',

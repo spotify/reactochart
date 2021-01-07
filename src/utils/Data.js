@@ -15,7 +15,7 @@ import uniqBy from 'lodash/uniqBy';
 import has from 'lodash/has';
 import forEach from 'lodash/forEach';
 import identity from 'lodash/identity';
-import { extent } from 'd3';
+import { extent } from 'd3-array';
 import React from 'react';
 
 /**
@@ -39,8 +39,8 @@ export function makeAccessor(key) {
   return isFunction(key)
     ? key
     : isNull(key) || isUndefined(key)
-      ? identity
-      : property(key);
+    ? identity
+    : property(key);
 }
 
 /**

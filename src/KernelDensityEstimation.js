@@ -1,4 +1,4 @@
-import { mean } from 'd3';
+import { mean } from 'd3-array';
 import PropTypes from 'prop-types';
 import React from 'react';
 import LineChart from './LineChart.js';
