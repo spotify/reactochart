@@ -5,7 +5,13 @@ import isObject from 'lodash/isObject';
 import isEqual from 'lodash/isEqual';
 import isNumber from 'lodash/isNumber';
 import identity from 'lodash/identity';
-import { scaleLinear, scaleTime, scalePoint, scaleLog, scalePow } from 'd3';
+import {
+  scaleLinear,
+  scaleTime,
+  scalePoint,
+  scaleLog,
+  scalePow,
+} from 'd3-scale';
 
 import { combineDomains, domainFromData } from './Data';
 
@@ -44,22 +50,22 @@ export function inferDataTypeFromDomain(domain) {
   return domain.length !== 2
     ? 'categorical'
     : domain.every(isNumber)
-      ? 'number'
-      : domain.every(isDate)
-        ? 'time'
-        : 'categorical';
+    ? 'number'
+    : domain.every(isDate)
+    ? 'time'
+    : 'categorical';
 }
 
 export function inferScaleType(scale) {
   return !scale.ticks
     ? 'ordinal'
     : isDate(scale.domain()[0])
-      ? 'time'
-      : scale.base
-        ? 'log'
-        : scale.exponent
-          ? 'pow'
-          : 'linear';
+    ? 'time'
+    : scale.base
+    ? 'log'
+    : scale.exponent
+    ? 'pow'
+    : 'linear';
 }
 
 export function initScale(scaleType) {

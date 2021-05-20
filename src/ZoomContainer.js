@@ -1,4 +1,5 @@
-import * as d3 from 'd3';
+import { select } from 'd3-selection';
+import { zoom, zoomIdentity, zoomTransform } from 'd3-zoom';
 import isFunction from 'lodash/isFunction';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -7,9 +8,7 @@ import React from 'react';
 
 function zoomTransformFromProps(props) {
   const { zoomScale, zoomX, zoomY } = props;
-  return d3.zoomIdentity
-    .translate(zoomX || 0, zoomY || 0)
-    .scale(zoomScale || 1);
+  return zoomIdentity.translate(zoomX || 0, zoomY || 0).scale(zoomScale || 1);
 }
 
 /**
@@ -130,9 +129,9 @@ export default class ZoomContainer extends React.Component {
 
   componentDidMount() {
     const initialZoomTransform = zoomTransformFromProps(this.props);
-    const selection = d3.select(this.svgRef.current);
+    const selection = select(this.svgRef.current);
 
-    this.zoom = d3.zoom();
+    this.zoom = zoom();
     selection.call(this.zoom);
 
     if (this.props.disableMouseWheelZoom) {
@@ -177,8 +176,8 @@ export default class ZoomContainer extends React.Component {
     this._updateZoomProps(nextProps);
   }
 
-  handleZoom = (...args) => {
-    const nextZoomTransform = d3.event.transform;
+  handleZoom = (event, ...args) => {
+    const nextZoomTransform = event.transform;
 
     if (this.props.controlled) {
       // zoom transform should be controlled by props, but d3-zoom has already applied new transform to this.zoom
@@ -230,9 +229,9 @@ export default class ZoomContainer extends React.Component {
   }
 
   render() {
-    const zoomTransform =
+    const theZoomTransform =
       this.svgRef && this.svgRef.current
-        ? d3.zoomTransform(this.svgRef.current)
+        ? zoomTransform(this.svgRef.current)
         : null;
 
     return (
@@ -244,7 +243,7 @@ export default class ZoomContainer extends React.Component {
         <g
           width={this.props.width}
           height={this.props.height}
-          transform={zoomTransform}
+          transform={theZoomTransform}
         >
           {this.props.children}
         </g>

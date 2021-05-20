@@ -6,7 +6,7 @@ import min from 'lodash/min';
 import max from 'lodash/max';
 import reduce from 'lodash/reduce';
 import identity from 'lodash/identity';
-import { timeFormat } from 'd3';
+import { timeFormat } from 'd3-time-format';
 import { format as numberFormat } from 'd3-format';
 
 export function getDefaultFormats(scaleType) {
