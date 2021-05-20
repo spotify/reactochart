@@ -1,3 +1,8 @@
+## 5.0.0 (2021-05-20)
+
+- Remove support for Node 8-10. Support 12 and up.
+- Some security patches to dependencies.
+
 ## 4.0.0 (2021-01-07)
 
 - [#276](https://github.com/spotify/reactochart/pull/276) Upgrade D3 to 6.3.1.
