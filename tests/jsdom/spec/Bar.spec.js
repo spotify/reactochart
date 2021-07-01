@@ -1,13 +1,8 @@
 import React from 'react';
 import { scalePoint, scaleLinear } from 'd3-scale';
-import chai from 'chai';
 import { mount, shallow } from 'enzyme';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-chai.use(sinonChai);
-const { expect } = chai;
 
-import { Bar } from '../../../src/index.js';
+import { Bar } from '../../../src';
 
 describe('Bar', () => {
   let horizontalBarProps;
@@ -58,15 +53,15 @@ describe('Bar', () => {
     );
 
     const rect = bar.find('rect');
-    expect(rect).to.have.length(1);
+    expect(rect).toHaveLength(1);
 
     const rectProps = rect.props();
-    expect(rectProps.className).to.include('rct-chart-bar');
-    expect(rectProps.className).to.include('rct-chart-bar-vertical');
-    expect(rectProps.x).to.equal(50 - 20 / 2);
-    expect(rectProps.y).to.equal(25);
-    expect(rectProps.height).to.equal(50);
-    expect(rectProps.width).to.equal(20);
+    expect(rectProps.className).toContain('rct-chart-bar');
+    expect(rectProps.className).toContain('rct-chart-bar-vertical');
+    expect(rectProps.x).toEqual(50 - 20 / 2);
+    expect(rectProps.y).toEqual(25);
+    expect(rectProps.height).toEqual(50);
+    expect(rectProps.width).toEqual(20);
   });
 
   it('renders a basic horizontal bar correctly', () => {
@@ -86,39 +81,39 @@ describe('Bar', () => {
     );
 
     const rect = bar.find('rect');
-    expect(rect).to.have.length(1);
+    expect(rect).toHaveLength(1);
 
     const rectProps = rect.props();
-    expect(rectProps.className).to.include('rct-chart-bar');
-    expect(rectProps.className).to.include('rct-chart-bar-horizontal');
-    expect(rectProps.x).to.equal(10);
-    expect(rectProps.y).to.equal(50 - 20 / 2);
-    expect(rectProps.height).to.equal(20);
-    expect(rectProps.width).to.equal(60);
+    expect(rectProps.className).toContain('rct-chart-bar');
+    expect(rectProps.className).toContain('rct-chart-bar-horizontal');
+    expect(rectProps.x).toEqual(10);
+    expect(rectProps.y).toEqual(50 - 20 / 2);
+    expect(rectProps.height).toEqual(20);
+    expect(rectProps.width).toEqual(60);
   });
 
   it('has a thickness prop which controls the thickness of the bar', () => {
     // verticalBar
     const verticalBar = shallow(<Bar {...verticalBarProps} />);
-    expect(verticalBar.find('rect')).to.have.length(1);
-    expect(verticalBar.find('rect').props().width).to.equal(10);
+    expect(verticalBar.find('rect')).toHaveLength(1);
+    expect(verticalBar.find('rect').props().width).toEqual(10);
 
     const thickVerticalBar = shallow(
       <Bar {...verticalBarProps} thickness={40} />,
     );
-    expect(thickVerticalBar.find('rect')).to.have.length(1);
-    expect(thickVerticalBar.find('rect').props().width).to.equal(40);
+    expect(thickVerticalBar.find('rect')).toHaveLength(1);
+    expect(thickVerticalBar.find('rect').props().width).toEqual(40);
 
     // horizontalBar
     const horizontalBar = shallow(<Bar {...horizontalBarProps} />);
-    expect(horizontalBar.find('rect')).to.have.length(1);
-    expect(horizontalBar.find('rect').props().height).to.equal(12);
+    expect(horizontalBar.find('rect')).toHaveLength(1);
+    expect(horizontalBar.find('rect').props().height).toEqual(12);
 
     const thickHorizontalBar = shallow(
       <Bar {...horizontalBarProps} thickness={56} />,
     );
-    expect(thickHorizontalBar.find('rect')).to.have.length(1);
-    expect(thickHorizontalBar.find('rect').props().height).to.equal(56);
+    expect(thickHorizontalBar.find('rect')).toHaveLength(1);
+    expect(thickHorizontalBar.find('rect').props().height).toEqual(56);
   });
 
   it("passes className and style props through to the bar's rectangle element", () => {
@@ -129,37 +124,37 @@ describe('Bar', () => {
 
     const verticalBar = shallow(<Bar {...verticalBarProps} {...barProps} />);
     const rect = verticalBar.find('rect');
-    expect(rect).to.have.length(1);
-    expect(rect.props().className).to.include('foo-bar-test-class');
-    expect(rect.props().style).to.deep.equal(barProps.style);
+    expect(rect).toHaveLength(1);
+    expect(rect.props().className).toContain('foo-bar-test-class');
+    expect(rect.props().style).toEqual(barProps.style);
   });
 
   it("attaches onMouseMove, onMouseEnter and onMouseLeave handlers to the bar's rectangle", () => {
     const barProps = {
-      onMouseMove: sinon.spy(),
-      onMouseEnter: sinon.spy(),
-      onMouseLeave: sinon.spy(),
-      onClick: sinon.spy(),
+      onMouseMove: jest.fn(),
+      onMouseEnter: jest.fn(),
+      onMouseLeave: jest.fn(),
+      onClick: jest.fn(),
     };
 
     const bar = mount(<Bar {...verticalBarProps} {...barProps} />);
     const rect = bar.find('rect');
 
-    expect(barProps.onMouseEnter).not.to.have.been.called;
+    expect(barProps.onMouseEnter).not.toHaveBeenCalled();
     rect.simulate('mouseenter');
-    expect(barProps.onMouseEnter).to.have.been.calledOnce;
+    expect(barProps.onMouseEnter).toHaveBeenCalledTimes(1);
 
-    expect(barProps.onMouseMove).not.to.have.been.called;
+    expect(barProps.onMouseMove).not.toHaveBeenCalled();
     rect.simulate('mousemove');
-    expect(barProps.onMouseMove).to.have.been.calledOnce;
+    expect(barProps.onMouseMove).toHaveBeenCalledTimes(1);
 
-    expect(barProps.onMouseLeave).not.to.have.been.called;
+    expect(barProps.onMouseLeave).not.toHaveBeenCalled();
     rect.simulate('mouseleave');
-    expect(barProps.onMouseLeave).to.have.been.calledOnce;
+    expect(barProps.onMouseLeave).toHaveBeenCalledTimes(1);
 
-    expect(barProps.onClick).not.to.have.been.called;
+    expect(barProps.onClick).not.toHaveBeenCalled();
     rect.simulate('click');
-    expect(barProps.onClick).to.have.been.calledOnce;
+    expect(barProps.onClick).toHaveBeenCalledTimes(1);
   });
 
   it('throws an error if x/y scale(s) are missing or invalid', () => {
@@ -174,15 +169,15 @@ describe('Bar', () => {
     // throw if no scale prop passed
     expect(() => {
       shallow(<Bar {...barProps} />);
-    }).to.throw(Error);
+    }).toThrowError();
     // throw if one scale is missing
     expect(() => {
       shallow(<Bar {...{ ...barProps, xScale }} />);
-    }).to.throw(Error);
+    }).toThrowError();
     // don't throw if both are provided
     expect(() => {
       shallow(<Bar {...{ ...barProps, xScale, yScale }} />);
-    }).not.to.throw(Error);
+    }).not.toThrowError();
   });
 
   it('throws an error if exactly ONE of xEnd OR yEnd are not provided', () => {
@@ -200,18 +195,18 @@ describe('Bar', () => {
     // throw if neither xEnd or yEnd passed
     expect(() => {
       shallow(<Bar {...barProps} />);
-    }).to.throw(Error);
+    }).toThrowError();
     // throw if both xEnd and yEnd passed
     expect(() => {
       shallow(<Bar {...{ ...barProps, xEnd: 'b', yEnd: 1 }} />);
-    }).to.throw(Error);
+    }).toThrowError();
     // OK if one or other is passed
     expect(() => {
       shallow(<Bar {...{ ...barProps, xEnd: 'b' }} />);
-    }).not.to.throw(Error);
+    }).not.toThrowError();
     expect(() => {
       shallow(<Bar {...{ ...barProps, yEnd: 1 }} />);
-    }).not.to.throw(Error);
+    }).not.toThrowError();
   });
 
   it('displays the x values when showLabel is true', () => {
@@ -221,9 +216,9 @@ describe('Bar', () => {
     };
 
     const horizontalBar = shallow(<Bar {...horizontalBarWithText} />);
-    expect(horizontalBar.find('rect')).to.have.length(1);
-    expect(horizontalBar.find('rect').props().height).to.equal(12);
-    expect(horizontalBar.find('text')).to.have.length(1);
+    expect(horizontalBar.find('rect')).toHaveLength(1);
+    expect(horizontalBar.find('rect').props().height).toEqual(12);
+    expect(horizontalBar.find('text')).toHaveLength(1);
 
     const verticalBarWithText = {
       ...verticalBarProps,
@@ -231,9 +226,9 @@ describe('Bar', () => {
     };
 
     const verticalBar = shallow(<Bar {...verticalBarWithText} />);
-    expect(verticalBar.find('rect')).to.have.length(1);
-    expect(verticalBar.find('rect').props().width).to.equal(10);
-    expect(horizontalBar.find('text')).to.have.length(1);
+    expect(verticalBar.find('rect')).toHaveLength(1);
+    expect(verticalBar.find('rect').props().width).toEqual(10);
+    expect(horizontalBar.find('text')).toHaveLength(1);
   });
 
   it("passes labelClassName through to the bar's text element", () => {
@@ -245,8 +240,8 @@ describe('Bar', () => {
 
     const verticalBar = shallow(<Bar {...verticalProps} />);
     const text = verticalBar.find('text');
-    expect(text).to.have.length(1);
-    expect(text.props().className).to.include('foo-bar-test-class');
+    expect(text).toHaveLength(1);
+    expect(text.props().className).toContain('foo-bar-test-class');
   });
 
   it("passes labelFormat through to the bar's text value", () => {
@@ -258,7 +253,7 @@ describe('Bar', () => {
 
     const verticalBar = shallow(<Bar {...verticalProps} />);
     const text = verticalBar.find('text');
-    expect(text).to.have.length(1);
-    expect(text.props().children).to.equal('1%');
+    expect(text).toHaveLength(1);
+    expect(text.props().children).toEqual('1%');
   });
 });

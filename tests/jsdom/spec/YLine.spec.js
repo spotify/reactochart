@@ -1,10 +1,6 @@
 import React from 'react';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { shallow } from 'enzyme';
-import chaiEnzyme from 'chai-enzyme';
-import chai from 'chai';
-chai.use(chaiEnzyme());
-const { expect } = chai;
 
 import YLine from '../../../src/YLine';
 
@@ -14,10 +10,10 @@ function findLine(wrapper) {
 
 function expectCorrectLinePlacement(wrapper, value, scale) {
   const lines = wrapper.find('line.rct-chart-line-y');
-  expect(lines).to.have.length(1);
+  expect(lines).toHaveLength(1);
   const line = lines.first();
-  expect(line.first().prop('y1')).to.equal(scale(value));
-  expect(line.first().prop('y2')).to.equal(scale(value));
+  expect(line.first().prop('y1')).toEqual(scale(value));
+  expect(line.first().prop('y2')).toEqual(scale(value));
   return wrapper;
 }
 
@@ -69,7 +65,7 @@ describe('YLine', () => {
         {...commonProps}
       />,
     );
-    expect(getLineWidth(findLine(wrapper))).to.equal(200);
+    expect(getLineWidth(findLine(wrapper))).toEqual(200);
 
     wrapper = shallow(
       <YLine
@@ -79,7 +75,7 @@ describe('YLine', () => {
         {...commonProps}
       />,
     );
-    expect(getLineWidth(findLine(wrapper))).to.equal(400);
+    expect(getLineWidth(findLine(wrapper))).toEqual(400);
   });
 
   it('passes className to the line', () => {
@@ -91,7 +87,7 @@ describe('YLine', () => {
         {...commonProps}
       />,
     );
-    expect(wrapper).to.have.descendants('line.test-line-class');
+    expect(wrapper).toContainMatchingElement('line.test-line-class');
   });
 
   it('passes style to the line', () => {
@@ -104,7 +100,7 @@ describe('YLine', () => {
         {...commonProps}
       />,
     );
-    expect(findLine(wrapper).prop('style')).to.deep.equal(style);
+    expect(findLine(wrapper).prop('style')).toEqual(style);
   });
 
   it("limits the line's width using xLimit", () => {
@@ -118,6 +114,6 @@ describe('YLine', () => {
         {...commonProps}
       />,
     );
-    expect(getLineWidth(findLine(wrapper))).to.equal(linearScale(limit));
+    expect(getLineWidth(findLine(wrapper))).toEqual(linearScale(limit));
   });
 });

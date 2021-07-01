@@ -1,9 +1,8 @@
 import React from 'react';
 import { scaleLinear } from 'd3-scale';
-import { expect } from 'chai';
 import { mount } from 'enzyme';
 import _ from 'lodash';
-import { AreaChart } from '../../../src/index.js';
+import { AreaChart } from '../../../src';
 
 import { combineDatasets } from '../../../src/utils/Data.js';
 
@@ -70,8 +69,8 @@ describe('AreaChart', () => {
     let chart = mount(<AreaChart {...areaChartProps} />);
     let path = chart.find('path');
 
-    expect(path.props().className).to.contain('my-path');
-    expect(path.props().style).to.equal(areaChartProps.pathStyle);
+    expect(path.props().className).toContain('my-path');
+    expect(path.props().style).toEqual(areaChartProps.pathStyle);
 
     chart = mount(
       <AreaChart {...areaChartProps} {...differenceAreaChartProps} />,
@@ -80,19 +79,19 @@ describe('AreaChart', () => {
 
     path.forEach((p, index) => {
       if (index < 2) {
-        expect(p.props().className).to.not.contain(
+        expect(p.props().className).not.toContain(
           areaChartProps.pathClassName,
         );
       } else if (index === 3) {
-        expect(p.props().style.fill).to.equal(
+        expect(p.props().style.fill).toEqual(
           differenceAreaChartProps.pathStyleNegative.fill,
         );
-        expect(p.props().className).to.contain(areaChartProps.pathClassName);
+        expect(p.props().className).toContain(areaChartProps.pathClassName);
       } else {
-        expect(p.props().style.fill).to.equal(
+        expect(p.props().style.fill).toEqual(
           differenceAreaChartProps.pathStylePositive.fill,
         );
-        expect(p.props().className).to.contain(areaChartProps.pathClassName);
+        expect(p.props().className).toContain(areaChartProps.pathClassName);
       }
     });
   });
@@ -102,9 +101,9 @@ describe('AreaChart', () => {
     let path = chart.find('path');
     let group = chart.find('g');
 
-    expect(group.length).to.equal(1);
-    expect(group.props().className).to.equal('rct-area-chart');
-    expect(path.length).to.equal(1);
+    expect(group.length).toEqual(1);
+    expect(group.props().className).toEqual('rct-area-chart');
+    expect(path.length).toEqual(1);
 
     chart = mount(
       <AreaChart {...areaChartProps} {...differenceAreaChartProps} />,
@@ -112,9 +111,9 @@ describe('AreaChart', () => {
     path = chart.find('path');
     group = chart.find('g');
 
-    expect(group.length).to.equal(1);
-    expect(group.props().className).to.equal('rct-area-chart--difference');
-    expect(path.length).to.equal(4);
+    expect(group.length).toEqual(1);
+    expect(group.props().className).toEqual('rct-area-chart--difference');
+    expect(path.length).toEqual(4);
   });
 
   it('getDomain returns correctly', () => {
@@ -126,6 +125,6 @@ describe('AreaChart', () => {
     };
     const domain = { yDomain: [0, 11] };
 
-    expect(AreaChart.getDomain(domainProps)).to.eql(domain);
+    expect(AreaChart.getDomain(domainProps)).toEqual(domain);
   });
 });

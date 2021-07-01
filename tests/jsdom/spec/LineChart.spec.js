@@ -1,8 +1,7 @@
-import { expect } from 'chai';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { mount } from 'enzyme';
 import React from 'react';
-import { LineChart, XYPlot } from '../../../src/index.js';
+import { LineChart, XYPlot } from '../../../src';
 
 describe('LineChart', () => {
   it('passes props correctly to group and path elements', () => {
@@ -23,8 +22,8 @@ describe('LineChart', () => {
     const group = chart.find('g');
     const path = chart.find('path');
 
-    expect(path.props().style).to.equal(props.lineStyle);
-    expect(group.props().className).to.contain(props.lineClassName);
+    expect(path.props().style).toEqual(props.lineStyle);
+    expect(group.props().className).toContain(props.lineClassName);
   });
 
   it('renders a line with number X & Y scales', () => {
@@ -45,7 +44,7 @@ describe('LineChart', () => {
     const chart = mount(<LineChart {...props} />);
     const path = chart.find('path');
     const pathData = path.instance().getAttribute('d');
-    expect(pathData).to.equal('M0,50L50,0L100,75');
+    expect(pathData).toEqual('M0,50L50,0L100,75');
   });
 
   it('renders a line with time X scale and number Y scale', () => {
@@ -73,7 +72,7 @@ describe('LineChart', () => {
     const chart = mount(<LineChart {...props} />);
     const path = chart.find('path');
     const pathData = path.instance().getAttribute('d');
-    expect(pathData).to.equal('M0,50L50,0L100,75');
+    expect(pathData).toEqual('M0,50L50,0L100,75');
   });
 
   it('renders a line with ordinal X scale and number Y scale', () => {
@@ -94,7 +93,7 @@ describe('LineChart', () => {
     const chart = mount(<LineChart {...props} />);
     const path = chart.find('path');
     const pathData = path.instance().getAttribute('d');
-    expect(pathData).to.equal('M0,50L50,0L100,75');
+    expect(pathData).toEqual('M0,50L50,0L100,75');
   });
 
   it('renders a line chart within an XYPlot', () => {
@@ -112,8 +111,8 @@ describe('LineChart', () => {
     );
 
     const path = chart.find('path');
-    expect(path).to.have.length(1);
+    expect(path).toHaveLength(1);
     const pathData = path.instance().getAttribute('d');
-    expect(pathData).not.to.include('NaN');
+    expect(pathData).not.toContain('NaN');
   });
 });

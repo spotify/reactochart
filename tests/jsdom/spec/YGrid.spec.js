@@ -1,6 +1,5 @@
 import React from 'react';
 import { scaleLinear } from 'd3-scale';
-import { expect } from 'chai';
 import { mount } from 'enzyme';
 
 import { YGrid, YLine } from '../../../src/index.js';
@@ -25,14 +24,14 @@ describe('YGrid', () => {
     yLines.forEach(yLine => {
       const yLineProps = yLine.props();
 
-      expect(yLineProps.className).to.contain(props.lineClassName);
-      expect(yLineProps.style).to.equal(props.lineStyle);
-      expect(yLineProps.spacingTop).to.equal(props.spacingTop);
-      expect(yLineProps.spacingBottom).to.equal(props.spacingBottom);
-      expect(yLineProps.spacingLeft).to.equal(props.spacingLeft);
-      expect(yLineProps.spacingRight).to.equal(props.spacingRight);
-      expect(yLineProps.yScale).to.equal(props.yScale);
-      expect(yLineProps.width).to.equal(props.width);
+      expect(yLineProps.className).toContain(props.lineClassName);
+      expect(yLineProps.style).toEqual(props.lineStyle);
+      expect(yLineProps.spacingTop).toEqual(props.spacingTop);
+      expect(yLineProps.spacingBottom).toEqual(props.spacingBottom);
+      expect(yLineProps.spacingLeft).toEqual(props.spacingLeft);
+      expect(yLineProps.spacingRight).toEqual(props.spacingRight);
+      expect(yLineProps.yScale).toEqual(props.yScale);
+      expect(yLineProps.width).toEqual(props.width);
     });
   });
 
@@ -41,13 +40,13 @@ describe('YGrid', () => {
     const yGrid = mount(<YGrid {...props} tickCount={tickCount} />);
     const group = yGrid.find('g');
 
-    expect(group).to.have.lengthOf(1);
-    expect(group.getDOMNode().className).to.equal('rct-chart-grid-y');
+    expect(group).toHaveLength(1);
+    expect(group.getDOMNode().className).toEqual('rct-chart-grid-y');
 
     const yLines = yGrid.find(YLine);
     const numTicksMade = getScaleTicks(props.yScale, null, tickCount);
 
-    expect(yLines).to.have.lengthOf(numTicksMade.length);
+    expect(yLines).toHaveLength(numTicksMade.length);
   });
 
   it('renders the correct amount of YLines given ticks', () => {
@@ -55,11 +54,11 @@ describe('YGrid', () => {
     const yGrid = mount(<YGrid {...props} ticks={ticks} />);
     const group = yGrid.find('g');
 
-    expect(group).to.have.lengthOf(1);
-    expect(group.getDOMNode().className).to.equal('rct-chart-grid-y');
+    expect(group).toHaveLength(1);
+    expect(group.getDOMNode().className).toEqual('rct-chart-grid-y');
 
     const yLines = yGrid.find(YLine);
-    expect(yLines).to.have.lengthOf(ticks.length);
+    expect(yLines).toHaveLength(ticks.length);
   });
 
   it('getTickDomain works as expected', () => {
@@ -67,7 +66,7 @@ describe('YGrid', () => {
 
     const result = getTickDomain(props.yScale, { ...props, ticks });
 
-    expect(YGrid.getTickDomain({ ...props, ticks })).to.eql({
+    expect(YGrid.getTickDomain({ ...props, ticks })).toEqual({
       yTickDomain: result,
     });
   });

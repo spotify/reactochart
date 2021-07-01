@@ -1,9 +1,7 @@
 import React from 'react';
 import { scaleLinear } from 'd3-scale';
-import { expect } from 'chai';
-import sinon from 'sinon';
 import { mount } from 'enzyme';
-import { ScatterPlot } from '../../../src/index.js';
+import { ScatterPlot } from '../../../src';
 
 describe('ScatterPlot', () => {
   const props = {
@@ -14,9 +12,9 @@ describe('ScatterPlot', () => {
     pointStyle: { fill: 'blue' },
     xScale: scaleLinear().domain([0, 5]),
     yScale: scaleLinear().domain([0, 5]),
-    onMouseEnterPoint: sinon.spy(),
-    onMouseMovePoint: sinon.spy(),
-    onMouseLeavePoint: sinon.spy(),
+    onMouseEnterPoint: jest.fn(),
+    onMouseMovePoint: jest.fn(),
+    onMouseLeavePoint: jest.fn(),
     pointOffset: [2, 2],
   };
 
@@ -25,16 +23,16 @@ describe('ScatterPlot', () => {
     let points = chart.find('circle');
 
     points.forEach(point => {
-      expect(point.props().className).to.contain(props.pointClassName);
-      expect(point.props().style).to.eql(props.pointStyle);
+      expect(point.props().className).toContain(props.pointClassName);
+      expect(point.props().style).toEqual(props.pointStyle);
     });
 
     chart = mount(<ScatterPlot {...props} pointSymbol={() => 'a'} />);
     points = chart.find('text');
 
     points.forEach(point => {
-      expect(point.props().className).to.contain(props.pointClassName);
-      expect(point.props().style).to.eql({
+      expect(point.props().className).toContain(props.pointClassName);
+      expect(point.props().style).toEqual({
         textAnchor: 'middle',
         dominantBaseline: 'central',
         ...props.pointStyle,
@@ -46,15 +44,15 @@ describe('ScatterPlot', () => {
     const chart = mount(<ScatterPlot {...props} />);
     const points = chart.find('circle');
 
-    expect(points).to.have.lengthOf(props.data.length);
+    expect(points).toHaveLength(props.data.length);
 
     points.forEach((point, idx) => {
       const { xScale, yScale, data, x, y, pointOffset } = props;
       const xPos = xScale(x(data[idx])) + pointOffset[0];
       const yPos = yScale(y(data[idx])) + pointOffset[1];
 
-      expect(point.props().cx).to.equal(xPos);
-      expect(point.props().cy).to.equal(yPos);
+      expect(point.props().cx).toEqual(xPos);
+      expect(point.props().cy).toEqual(yPos);
     });
   });
 
@@ -62,14 +60,14 @@ describe('ScatterPlot', () => {
     const chart = mount(<ScatterPlot {...props} />);
     const points = chart.find('circle');
 
-    expect(props.onMouseMovePoint).not.to.have.been.called;
+    expect(props.onMouseMovePoint).not.toHaveBeenCalled();
     points.at(1).simulate('mousemove');
-    expect(props.onMouseMovePoint).to.have.been.called;
-    expect(props.onMouseEnterPoint).not.to.have.been.called;
+    expect(props.onMouseMovePoint).toHaveBeenCalled();
+    expect(props.onMouseEnterPoint).not.toHaveBeenCalled();
     points.at(1).simulate('mouseenter');
-    expect(props.onMouseEnterPoint).to.have.been.called;
-    expect(props.onMouseLeavePoint).not.to.have.been.called;
+    expect(props.onMouseEnterPoint).toHaveBeenCalled();
+    expect(props.onMouseLeavePoint).not.toHaveBeenCalled();
     points.at(1).simulate('mouseleave');
-    expect(props.onMouseLeavePoint).to.have.been.called;
+    expect(props.onMouseLeavePoint).toHaveBeenCalled();
   });
 });

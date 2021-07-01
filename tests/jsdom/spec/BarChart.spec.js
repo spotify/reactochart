@@ -1,11 +1,10 @@
 import React from 'react';
 import { scaleLinear, scalePoint } from 'd3-scale';
 import _ from 'lodash';
-import { expect } from 'chai';
 import { mount } from 'enzyme';
 
 import { testWithScales, expectProps } from '../utils';
-import { BarChart, RangeBarChart } from '../../../src/index.js';
+import { BarChart, RangeBarChart } from '../../../src';
 
 describe('BarChart', () => {
   it('passes most props through to RangeBarChart', () => {
@@ -36,7 +35,7 @@ describe('BarChart', () => {
     expectProps(rangeBarChart, _.omit(props, ['y']));
 
     // vertical bar chart - y is passed to RangeBarChart as yEnd
-    expect(rangeBarChart.props().yEnd).to.equal(props.y);
+    expect(rangeBarChart.props().yEnd).toEqual(props.y);
 
     // check that correct props are passed through in horizontal case
     const horizontalProps = { ...props, horizontal: true };
@@ -48,7 +47,7 @@ describe('BarChart', () => {
     expectProps(horizontalRangeBarChart, _.omit(horizontalProps, ['x']));
 
     // vertical bar chart - x is passed to RangeBarChart as xEnd
-    expect(horizontalRangeBarChart.props().xEnd).to.equal(horizontalProps.x);
+    expect(horizontalRangeBarChart.props().xEnd).toEqual(horizontalProps.x);
   });
 
   it('renders a bar chart with categorical X data & numerical Y data', () => {
@@ -74,19 +73,19 @@ describe('BarChart', () => {
             const chart = mount(<BarChart {...props} />);
             const group = chart.find('g');
             const bars = chart.find('rect');
-            expect(group).to.have.length(1);
-            expect(bars).to.have.length(3);
+            expect(group).toHaveLength(1);
+            expect(bars).toHaveLength(3);
 
             [0, 1, 2].forEach(i => {
               const barProps = bars.at(i).props();
-              expect(barProps.x).to.equal(
+              expect(barProps.x).toEqual(
                 xScale(xTestValues[i]) - props.barThickness / 2,
               );
-              expect(barProps.width).to.equal(props.barThickness);
+              expect(barProps.width).toEqual(props.barThickness);
               const yZero = yScale(0);
               const yVal = yScale(yTestValues[i]);
-              expect(barProps.y).to.equal(Math.min(yZero, yVal));
-              expect(barProps.height).to.equal(Math.abs(yVal - yZero));
+              expect(barProps.y).toEqual(Math.min(yZero, yVal));
+              expect(barProps.height).toEqual(Math.abs(yVal - yZero));
             });
           },
         );
