@@ -30,6 +30,11 @@ const mainComponents = [
 
 const xyChartComponents = [
   {
+    name: 'A11yInterface',
+    path: '/a11y-interface',
+    Component: Docs.A11yInterfaceDocs,
+  },
+  {
     name: 'AreaBarChart',
     path: '/area-bar-chart',
     Component: Docs.AreaBarChartDocs,

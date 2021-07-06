@@ -1,16 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/**
- * `A11yInterface` provides a mechanism for keyboard navigation of
- * `LineChart` and `AreaChart` graphs within `XYPlot`. This component renders
- * a rectangle for a given `numFrames` across a Line/Area chart. Users can navigate to a frame
- * either by pressing `Tab`, or through their assistive technology. `A11yInterface`
- * takes an `ariaLabelGenerator`, which generates an aria-label for each frame of the chart.
- * [aria-labels](https://www.w3.org/TR/WCAG20-TECHS/ARIA6.html#ARIA6-description) are critical for users accessing
- * the web with screenreaders or other assistive technologies.
- */
-
 A11yInterface.propTypes = {
   /**
    * A function that takes the index of the frame,
@@ -35,16 +25,26 @@ A11yInterface.propTypes = {
    */
   onKeyDown: PropTypes.func,
   /**
-   * height of the chart - provided by XYPlot
+   * height of the chart - provided by `XYPlot`
    */
   height: PropTypes.number,
   /**
-   * width of the chart - provided by XYPlot
+   * width of the chart - provided by `XYPlot`
    */
   width: PropTypes.number,
 };
 
-export function A11yInterface(props) {
+/**
+ * `A11yInterface` provides a mechanism for keyboard navigation of
+ * `LineChart` and `AreaChart` graphs within `XYPlot`. This component renders
+ * a rectangle for a given `numFrames` across a Line/Area chart. Users can navigate to a frame
+ * either by pressing `Tab`, or through their assistive technology. `A11yInterface`
+ * takes an `ariaLabelGenerator`, which generates an aria-label for each frame of the chart.
+ * [aria-labels](https://www.w3.org/TR/WCAG20-TECHS/ARIA6.html#ARIA6-description) are critical for users accessing
+ * the web with screenreaders or other assistive technologies.
+ */
+
+export default function A11yInterface(props) {
   const { ariaLabelGenerator, numFrames, onKeyDown, height, width } = props;
   const sliceWidth = width / numFrames;
 
