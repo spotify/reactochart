@@ -51,43 +51,28 @@ export default function A11yInterface(props) {
 
   return (
     <g className="rct-chart-a11y">
-      {[...Array(numFrames).keys()].map((_d, frameIndex) =>
-        frameIndex === numFrames - 1 ? (
-          <rect
-            className="rct-chart-visually-hidden-rect"
-            aria-label={ariaLabelGenerator(frameIndex)}
-            key={frameIndex}
-            height={height}
-            width={sliceWidth}
-            x={sliceWidth * (frameIndex - 1)}
-            y={0}
-            role="button"
-            tabIndex={0}
-            onKeyDown={event => {
-              if (!!onKeyDown) {
-                onKeyDown(event, frameIndex);
-              }
-            }}
-          />
-        ) : (
-          <rect
-            className="rct-chart-visually-hidden-rect"
-            aria-label={ariaLabelGenerator(frameIndex)}
-            key={frameIndex}
-            height={height}
-            width={sliceWidth}
-            x={sliceWidth * frameIndex}
-            y={0}
-            role="button"
-            tabIndex={0}
-            onKeyDown={event => {
-              if (!!onKeyDown) {
-                onKeyDown(event, frameIndex);
-              }
-            }}
-          />
-        ),
-      )}
+      {[...Array(numFrames).keys()].map((_d, frameIndex) => (
+        <rect
+          className="rct-chart-visually-hidden-rect"
+          aria-label={ariaLabelGenerator(frameIndex)}
+          key={frameIndex}
+          height={height}
+          width={sliceWidth}
+          x={
+            sliceWidth *
+            (frameIndex === numFrames - 1 ? frameIndex - 1 : frameIndex)
+            // otherwise the last rect renders outside the chart
+          }
+          y={0}
+          role="button"
+          tabIndex={0}
+          onKeyDown={event => {
+            if (!!onKeyDown) {
+              onKeyDown(event, frameIndex);
+            }
+          }}
+        />
+      ))}
     </g>
   );
 }
