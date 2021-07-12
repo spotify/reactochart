@@ -6,9 +6,19 @@ import propDocs from './propDocs.json';
 
 const examples = [
   {
-    id: 'basic',
-    label: 'Basic A11yInterface',
-    codeText: require('./examples/A11yInterface.js.example').default,
+    id: 'one-dataset',
+    label: 'With One Dataset',
+    codeText: require('./examples/OneDataset.js.example').default,
+  },
+  {
+    id: 'two-dataset',
+    label: 'With Two Datasets With Equal X Values',
+    codeText: require('./examples/TwoDatasets.js.example').default,
+  },
+  {
+    id: 'action',
+    label: 'With Interactions',
+    codeText: require('./examples/WithActions.js.example').default,
   },
 ];
 

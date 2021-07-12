@@ -1,0 +1,54 @@
+const A11yInterfaceExample = (props) => {
+  const [selectedValue, setSelectedValue] = React.useState();
+
+  const data = _.range(10).map(d => ({
+    x: d,
+    y: d * 50,
+  }))
+
+  const onMouseMove = ({xValue, yValue}) => {
+    setSelectedValue({ xValue, yValue });
+  }  
+
+  const onMouseLeave = () => setSelectedValue();
+
+  const onKeyDown = (event, frameIndex) => {
+    switch (event.keyCode) {
+        // enter key code
+        case 13:
+          setSelectedValue({ xValue: data[frameIndex].x, yValue: data[frameIndex].y });
+          break;
+        default:
+          break;
+      }
+  }
+
+
+  return (<div>
+    <XYPlot
+      scaleType="linear"
+      width={600}
+      height={350}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}>
+        <XAxis title="X Axis" />
+        <YAxis title="Y Axis" />
+        <LineChart
+          data={data}
+          x={d => d.x}
+          y={d => d.y}
+          lineStyle={{stroke: '#ff7f0e', strokeWidth: 3}}
+        />
+        <A11yInterface
+          ariaLabelGenerator={frameIndex => 
+          `x Value: ${data[frameIndex].x}, y Value: ${data[frameIndex].y}`
+          }
+          numFrames={data.length}
+          onKeyDown={onKeyDown}
+        />
+      </XYPlot>
+      {selectedValue && <h3>{`(${selectedValue.xValue}, ${selectedValue.yValue})`}</h3>}
+    </div>);
+};
+
+ReactDOM.render(<A11yInterfaceExample />, mountNode);

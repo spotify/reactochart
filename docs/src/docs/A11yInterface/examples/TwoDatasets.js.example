@@ -1,0 +1,36 @@
+const A11yInterfaceExample = (props) => {
+  const data0 = _.range(10).map(d => ({
+    x: d,
+    y: Math.round(d * Math.random() * 10)
+  }))
+  const data1 = _.range(10).map(d => ({
+    x: d,
+    y: Math.round(d * Math.random() * 10)
+  }))
+
+  const ariaLabelGenerator = frameIndex => 
+        `x Value: ${data0[frameIndex].x}, data0 y Value: ${data0[frameIndex].y}; data1 yValue: ${data1[frameIndex].y}`
+        
+  return <XYPlot scaleType="linear" width={600} height={350}>
+      <XAxis title="X Axis" />
+      <YAxis title="Y Axis" />
+      <LineChart
+        data={data0}
+        x={d => d.x}
+        y={d => d.y}
+        lineStyle={{stroke: '#ff7f0e', strokeWidth: 3}}
+      />
+      <LineChart
+        data={data1}
+        x={d => d.x}
+        y={d => d.y}
+        lineStyle={{stroke: '#2ca02c', strokeWidth: 3}}
+      />
+      <A11yInterface
+        ariaLabelGenerator={ariaLabelGenerator}
+        numFrames={data0.length}
+       />
+    </XYPlot>;
+};
+
+ReactDOM.render(<A11yInterfaceExample />, mountNode);

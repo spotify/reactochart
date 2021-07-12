@@ -1,5 +1,0 @@
-const A11yInterfaceExample = (props) => {
-  return <div>insert example here</div>;
-};
-
-ReactDOM.render(<A11yInterfaceExample />, mountNode);
