@@ -18,6 +18,9 @@
   env: {
     production: {
       plugins: ["lodash"]
+    },
+    test: {
+      plugins: ["babel-plugin-rewire"]
     }
   }
 }

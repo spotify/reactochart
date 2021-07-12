@@ -1,11 +1,10 @@
 import React from 'react';
 import { scaleLinear } from 'd3-scale';
 import _ from 'lodash';
-import { expect } from 'chai';
 import { mount } from 'enzyme';
 
 import { expectProps } from '../utils';
-import { Histogram, AreaBarChart } from '../../../src/index.js';
+import { Histogram, AreaBarChart } from '../../../src';
 
 describe('Histogram', () => {
   it('it passes most props through to AreaBarChart', () => {
@@ -47,7 +46,7 @@ describe('Histogram', () => {
     // Omit data since expectProps will check for reference equality on the data instead of
     expectProps(areaBarChart, _.omit(parsedProps, ['data']));
     // Check value of data prop is equal
-    expect(areaBarChart.props().data).to.eql(parsedProps.data);
+    expect(areaBarChart.props().data).toEqual(parsedProps.data);
   });
 
   it('renders histogram', () => {
@@ -77,6 +76,6 @@ describe('Histogram', () => {
     const bars = group.find('rect');
 
     // histogram creates 4 bars
-    expect(bars).to.have.length(4);
+    expect(bars).toHaveLength(4);
   });
 });

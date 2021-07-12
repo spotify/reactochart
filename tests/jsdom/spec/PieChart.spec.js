@@ -1,9 +1,7 @@
 import React from 'react';
-import sinon from 'sinon';
-import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import { PieChart } from '../../../src/index.js';
+import { PieChart } from '../../../src';
 
 describe('PieChart', () => {
   const props = {
@@ -18,10 +16,10 @@ describe('PieChart', () => {
       dominantBaseline: 'center',
       fill: 'blue',
     },
-    onMouseEnterSlice: sinon.spy(),
-    onMouseMoveSlice: sinon.spy(),
-    onMouseLeaveSlice: sinon.spy(),
-    onClick: sinon.spy(),
+    onMouseEnterSlice: jest.fn(),
+    onMouseMoveSlice: jest.fn(),
+    onMouseLeaveSlice: jest.fn(),
+    onClick: jest.fn(),
   };
 
   const markerLineProps = {
@@ -30,9 +28,9 @@ describe('PieChart', () => {
     markerLineStyle: {
       fill: 'blue',
     },
-    onMouseEnterLine: sinon.spy(),
-    onMouseMoveLine: sinon.spy(),
-    onMouseLeaveLine: sinon.spy(),
+    onMouseEnterLine: jest.fn(),
+    onMouseMoveLine: jest.fn(),
+    onMouseLeaveLine: jest.fn(),
   };
 
   it('passes props correctly to path and text elements', () => {
@@ -44,15 +42,15 @@ describe('PieChart', () => {
       const className = path.props().className;
       // Check if markerline vs pie slice
       if (className.includes('rct-marker-line')) {
-        expect(className).to.contain(markerLineProps.markerLineClassName);
-        expect(path.props().style).to.equal(markerLineProps.markerLineStyle);
+        expect(className).toContain(markerLineProps.markerLineClassName);
+        expect(path.props().style).toEqual(markerLineProps.markerLineStyle);
       } else {
-        expect(className).to.contain(props.pieSliceClassName);
+        expect(className).toContain(props.pieSliceClassName);
       }
     });
 
-    expect(text.props().className).to.contain(props.centerLabelClassName);
-    expect(text.props().style).to.eql(props.centerLabelStyle);
+    expect(text.props().className).toContain(props.centerLabelClassName);
+    expect(text.props().style).toEqual(props.centerLabelStyle);
   });
 
   it('correctly calculates width and height given margins', () => {
@@ -68,8 +66,8 @@ describe('PieChart', () => {
     );
     const svg = chart.find('svg');
 
-    expect(svg.props().width).to.equal(200);
-    expect(svg.props().height).to.equal(200);
+    expect(svg.props().width).toEqual(200);
+    expect(svg.props().height).toEqual(200);
   });
 
   it('renders correct amount of pie slices, markerlines, text elements', () => {
@@ -77,14 +75,14 @@ describe('PieChart', () => {
     let paths = chart.find('path');
     const text = chart.find('text');
 
-    expect(paths).to.have.lengthOf(3);
+    expect(paths).toHaveLength(3);
 
-    expect(text).to.have.lengthOf(1);
+    expect(text).toHaveLength(1);
 
     chart = mount(<PieChart {...props} {...markerLineProps} />);
     paths = chart.find('path');
 
-    expect(paths).to.have.lengthOf(4);
+    expect(paths).toHaveLength(4);
   });
 
   it('triggers event handlers', () => {
@@ -94,29 +92,29 @@ describe('PieChart', () => {
     const markerLine = paths.last();
 
     // test pie slice
-    expect(props.onMouseMoveSlice).to.have.not.been.called;
+    expect(props.onMouseMoveSlice).not.toHaveBeenCalled();
     pieSlice.simulate('mousemove');
-    expect(props.onMouseMoveSlice).to.have.been.called;
-    expect(props.onMouseEnterSlice).not.to.have.been.called;
+    expect(props.onMouseMoveSlice).toHaveBeenCalled();
+    expect(props.onMouseEnterSlice).not.toHaveBeenCalled();
     pieSlice.simulate('mouseenter');
-    expect(props.onMouseEnterSlice).to.have.been.called;
-    expect(props.onMouseLeaveSlice).not.to.have.been.called;
+    expect(props.onMouseEnterSlice).toHaveBeenCalled();
+    expect(props.onMouseLeaveSlice).not.toHaveBeenCalled();
     pieSlice.simulate('mouseleave');
-    expect(props.onMouseLeaveSlice).to.have.been.called;
-    expect(props.onClick).not.to.have.been.called;
+    expect(props.onMouseLeaveSlice).toHaveBeenCalled();
+    expect(props.onClick).not.toHaveBeenCalled();
     pieSlice.simulate('click');
-    expect(props.onClick).to.have.been.called;
+    expect(props.onClick).toHaveBeenCalled();
 
     // test markerline
-    expect(markerLineProps.onMouseMoveLine).not.to.have.been.called;
+    expect(markerLineProps.onMouseMoveLine).not.toHaveBeenCalled();
     markerLine.simulate('mousemove');
-    expect(markerLineProps.onMouseMoveLine).to.have.been.called;
-    expect(markerLineProps.onMouseEnterLine).not.to.have.been.called;
+    expect(markerLineProps.onMouseMoveLine).toHaveBeenCalled();
+    expect(markerLineProps.onMouseEnterLine).not.toHaveBeenCalled();
     markerLine.simulate('mouseenter');
-    expect(markerLineProps.onMouseEnterLine).to.have.been.called;
-    expect(markerLineProps.onMouseLeaveLine).not.to.have.been.called;
+    expect(markerLineProps.onMouseEnterLine).toHaveBeenCalled();
+    expect(markerLineProps.onMouseLeaveLine).not.toHaveBeenCalled();
     markerLine.simulate('mouseleave');
-    expect(markerLineProps.onMouseLeaveLine).to.have.been.called;
+    expect(markerLineProps.onMouseLeaveLine).toHaveBeenCalled();
   });
 
   it('renders slices labels with custom styles and distances', () => {
@@ -132,8 +130,8 @@ describe('PieChart', () => {
 
     props.data.forEach(value => {
       const textNode = chart.find(`text[children="${value}%"]`);
-      expect(textNode.exists()).to.be.true;
-      expect(textNode.prop('style')).to.include(sliceStyle);
+      expect(textNode.exists()).toBe(true);
+      expect(textNode.prop('style')).toHaveProperty('color', sliceStyle.color);
     });
   });
 
@@ -149,8 +147,8 @@ describe('PieChart', () => {
 
     props.data.forEach(value => {
       const textNode = chart.find(`text[children="${value}%"]`);
-      expect(textNode.exists()).to.be.true;
-      expect(textNode.prop('style')).to.include({ fontSize: value });
+      expect(textNode.exists()).toBe(true);
+      expect(textNode.prop('style')).toHaveProperty('fontSize', value);
     });
   });
 });

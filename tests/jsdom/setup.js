@@ -1,5 +1,6 @@
-// see https://github.com/airbnb/enzyme/blob/master/docs/guides/jsdom.md
+import "jest-canvas-mock";
 
+// see https://github.com/airbnb/enzyme/blob/master/docs/guides/jsdom.md
 const { JSDOM } = require('jsdom');
 
 const jsdom = new JSDOM('<!doctype html><html><body></body></html>', {
