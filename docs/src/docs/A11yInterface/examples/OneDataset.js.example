@@ -13,10 +13,18 @@ const A11yInterfaceExample = (props) => {
         lineStyle={{stroke: '#ff7f0e', strokeWidth: 3}}
       />
       <A11yInterface
-        ariaLabelGenerator={frameIndex => 
-        `x Value: ${data[frameIndex].x}, y Value: ${data[frameIndex].y}`
+        ariaLabelGenerator={xValue => {
+          const dataPoint = data.find(d => d.x === xValue);
+          if(dataPoint){
+            return `xValue, ${dataPoint.x}; yValue, ${dataPoint.y}`
+          }
+        }}
+        datasetWithAccessor={
+          [{
+            data: data,
+            accessor: d => d.x
+          }]
         }
-        numFrames={data.length}
        />
     </XYPlot>;
 };

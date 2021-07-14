@@ -12,7 +12,7 @@ const examples = [
   },
   {
     id: 'two-dataset',
-    label: 'With Two Datasets With Equal X Values',
+    label: 'With Two Datasets',
     codeText: require('./examples/TwoDatasets.js.example').default,
   },
   {

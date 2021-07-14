@@ -7,16 +7,16 @@ const A11yInterfaceExample = (props) => {
   }))
 
   const onMouseMove = ({xValue, yValue}) => {
-    setSelectedValue({ xValue, yValue });
+    setSelectedValue({ x: xValue, y: yValue });
   }  
 
   const onMouseLeave = () => setSelectedValue();
 
-  const onKeyDown = (event, frameIndex) => {
+  const onKeyDown = (event, xValue) => {
     switch (event.keyCode) {
         // enter key code
         case 13:
-          setSelectedValue({ xValue: data[frameIndex].x, yValue: data[frameIndex].y });
+          setSelectedValue(data.find(d => d.x === xValue));
           break;
         default:
           break;
@@ -40,14 +40,22 @@ const A11yInterfaceExample = (props) => {
           lineStyle={{stroke: '#ff7f0e', strokeWidth: 3}}
         />
         <A11yInterface
-          ariaLabelGenerator={frameIndex => 
-          `x Value: ${data[frameIndex].x}, y Value: ${data[frameIndex].y}`
-          }
-          numFrames={data.length}
+          ariaLabelGenerator={xValue => {
+            const dataPoint = data.find(d => d.x === xValue)
+            if(dataPoint) {
+              return `x Value, ${dataPoint.x}; y Value: ${dataPoint.y}`
+            } 
+          }}
           onKeyDown={onKeyDown}
+          datasetWithAccessor={[
+            {
+              data,
+              accessor: d => d.x
+            }
+          ]}
         />
       </XYPlot>
-      {selectedValue && <h3>{`(${selectedValue.xValue}, ${selectedValue.yValue})`}</h3>}
+      {selectedValue && <h3>{`(${selectedValue.x}, ${selectedValue.y})`}</h3>}
     </div>);
 };
 

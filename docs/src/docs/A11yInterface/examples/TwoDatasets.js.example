@@ -3,13 +3,24 @@ const A11yInterfaceExample = (props) => {
     x: d,
     y: Math.round(d * Math.random() * 10)
   }))
-  const data1 = _.range(10).map(d => ({
+  const data1 = _.range(7).map(d => ({
     x: d,
     y: Math.round(d * Math.random() * 10)
   }))
 
-  const ariaLabelGenerator = frameIndex => 
-        `x Value: ${data0[frameIndex].x}, data0 y Value: ${data0[frameIndex].y}; data1 yValue: ${data1[frameIndex].y}`
+  const ariaLabelGenerator = xValue => {
+    const data0Point = data0.find(d => d.x === xValue);
+    const data1Point = data1.find(d => d.x === xValue);
+    let ariaLabelString = `x Value, ${xValue}`;
+    if(data0Point) {
+      ariaLabelString += `, data0 y Value ${data0Point.y}`;
+    }
+    if(data1Point) {
+      ariaLabelString += `, data1 y Value ${data1Point.y}`;
+    }
+    return ariaLabelString;
+  }
+        
         
   return <XYPlot scaleType="linear" width={600} height={350}>
       <XAxis title="X Axis" />
@@ -28,7 +39,16 @@ const A11yInterfaceExample = (props) => {
       />
       <A11yInterface
         ariaLabelGenerator={ariaLabelGenerator}
-        numFrames={data0.length}
+        datasetWithAccessor={[
+          {
+            data: data0,
+            accessor: d => d.x,
+          },
+          {
+            data: data1,
+            accessor: d => d.x,
+          }
+        ]}
        />
     </XYPlot>;
 };

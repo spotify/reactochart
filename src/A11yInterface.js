@@ -1,27 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import union from 'lodash/union';
+import * as CustomPropTypes from './utils/CustomPropTypes';
+import { getValue } from './utils/Data';
 
 A11yInterface.propTypes = {
   /**
-   * A function that takes the index of the frame,
+   * An array containing n objects in the following shape:
+   * [{
+   *    data: Array of your data points, normally used in rendering specific line or area charts
+   *    accessor: A function used to access the data point on the x axis from the `data` attribute
+   *              (datum) => number
+   * }]
+   */
+  datasetWithAccessor: PropTypes.arrayOf(
+    PropTypes.shape({
+      data: PropTypes.arrayOf(PropTypes.object).isRequired,
+      accessor: CustomPropTypes.valueOrAccessor.isRequired,
+    }),
+  ).isRequired,
+  /**
+   * A function that takes the xValue at the start of the frame,
    * and returns a string to render as an aria label
    * for the specific frame in the Interface.
    *
-   * (frameIndex) => string
+   * (xValue) => string
    */
   ariaLabelGenerator: PropTypes.func.isRequired,
-  /**
-   * the number of frames to render across the visualization
-   * (e.g. the number of data points to message via screen reader)
-   */
-  numFrames: PropTypes.number,
   /**
    * an optional `onKeyDown` event handler to provide for each frame
    * when selected.
    * Best practices are to describe how the user will interact with the chart in
    * the ariaLabelGenerator
    *
-   * (event, frameIndex) => void
+   * (event, xValue) => void
    */
   onKeyDown: PropTypes.func,
   /**
@@ -32,6 +44,10 @@ A11yInterface.propTypes = {
    * width of the chart - provided by `XYPlot`
    */
   width: PropTypes.number,
+  /**
+   * D3 scale for X axis - provided by XYPlot
+   */
+  xScale: PropTypes.func,
 };
 
 /**
@@ -46,21 +62,36 @@ A11yInterface.propTypes = {
  */
 
 export default function A11yInterface(props) {
-  const { ariaLabelGenerator, numFrames, onKeyDown, height, width } = props;
+  const {
+    ariaLabelGenerator,
+    onKeyDown,
+    height,
+    width,
+    datasetWithAccessor,
+    xScale,
+  } = props;
+
+  const domain = xScale.domain();
+
+  // determine number of frames from n datasets with potentially different accessors
+  const mappedDatasets = datasetWithAccessor.map(({ data, accessor }) =>
+    data.map(d => getValue(accessor, d)),
+  );
+  const unionDatapoints = union(...mappedDatasets);
+  const numFrames = unionDatapoints.length;
   const sliceWidth = width / (numFrames - 1);
 
   return (
     <g className="rct-chart-a11y">
-      {[...Array(numFrames).keys()].map((_d, frameIndex) => (
+      {unionDatapoints.map((d, index) => (
         <rect
           className="rct-chart-visually-hidden-rect"
-          aria-label={ariaLabelGenerator(frameIndex)}
-          key={frameIndex}
+          aria-label={ariaLabelGenerator(d)}
+          key={index}
           height={height}
           width={sliceWidth}
           x={
-            sliceWidth *
-            (frameIndex === numFrames - 1 ? frameIndex - 1 : frameIndex)
+            d === domain[1] ? xScale(unionDatapoints[index - 1]) : xScale(d)
             // otherwise the last rect renders outside the chart
           }
           y={0}
@@ -68,7 +99,7 @@ export default function A11yInterface(props) {
           tabIndex={0}
           onKeyDown={event => {
             if (!!onKeyDown) {
-              onKeyDown(event, frameIndex);
+              onKeyDown(event, d);
             }
           }}
         />
