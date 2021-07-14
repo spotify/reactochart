@@ -1,0 +1,62 @@
+const AriaLabelContainerExample = (props) => {
+  const [selectedValue, setSelectedValue] = React.useState();
+
+  const data = _.range(10).map(d => ({
+    x: d,
+    y: d * 50,
+  }))
+
+  const onMouseMove = ({xValue, yValue}) => {
+    setSelectedValue({ x: xValue, y: yValue });
+  }  
+
+  const onMouseLeave = () => setSelectedValue();
+
+  const onKeyDown = (event, xValue) => {
+    switch (event.keyCode) {
+        // enter key code
+        case 13:
+          setSelectedValue(data.find(d => d.x === xValue));
+          break;
+        default:
+          break;
+      }
+  }
+
+
+  return (<div>
+    <XYPlot
+      scaleType="linear"
+      width={600}
+      height={350}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}>
+        <XAxis title="X Axis" />
+        <YAxis title="Y Axis" />
+        <LineChart
+          data={data}
+          x={d => d.x}
+          y={d => d.y}
+          lineStyle={{stroke: '#ff7f0e', strokeWidth: 3}}
+        />
+        <AriaLabelContainer
+          ariaLabelGenerator={xValue => {
+            const dataPoint = data.find(d => d.x === xValue)
+            if(dataPoint) {
+              return `x Value, ${dataPoint.x}; y Value: ${dataPoint.y}`
+            } 
+          }}
+          onKeyDown={onKeyDown}
+          datasetWithAccessor={[
+            {
+              data,
+              accessor: d => d.x
+            }
+          ]}
+        />
+      </XYPlot>
+      {selectedValue && <h3>{`(${selectedValue.x}, ${selectedValue.y})`}</h3>}
+    </div>);
+};
+
+ReactDOM.render(<AriaLabelContainerExample />, mountNode);

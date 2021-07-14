@@ -1,9 +1,9 @@
-export {
-  default as A11yInterfaceDocs,
-} from './A11yInterface/A11yInterfaceDocs';
 export { default as AreaBarChartDocs } from './AreaBarChart/AreaBarChartDocs';
 export { default as AreaChartDocs } from './AreaChart/AreaChartDocs';
 export { default as AreaHeatmapDocs } from './AreaHeatmap/AreaHeatmapDocs';
+export {
+  default as AriaLabelContainerDocs,
+} from './AriaLabelContainer/AriaLabelContainerDocs';
 export { default as BarDocs } from './Bar/BarDocs';
 export { default as BarChartDocs } from './BarChart/BarChartDocs';
 export { default as ColorHeatmapDocs } from './ColorHeatmap/ColorHeatmapDocs';

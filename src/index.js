@@ -17,7 +17,7 @@ export { default as AreaHeatmap } from './AreaHeatmap';
 export { default as Histogram } from './Histogram';
 export { default as KernelDensityEstimation } from './KernelDensityEstimation';
 export { default as FunnelChart } from './FunnelChart';
-export { default as A11yInterface } from './A11yInterface';
+export { default as AriaLabelContainer } from './AriaLabelContainer';
 
 // XY datum components (used by charts & axes)
 export { default as Bar } from './Bar';
