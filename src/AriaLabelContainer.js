@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import union from 'lodash/union';
+import zipWith from 'lodash/zipWith';
+import { ascending } from 'd3-array';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import { getValue } from './utils/Data';
 
@@ -20,11 +21,11 @@ AriaLabelContainer.propTypes = {
     }),
   ).isRequired,
   /**
-   * A function that takes the xValue at the start of the frame,
+   * A function that takes the xValue at the start of the frame, an array of datapoints at that xValue, and the index of the frame,
    * and returns a string to render as an aria label
    * for the specific frame in the Interface.
    *
-   * (xValue) => string
+   * (xValue, [datapoints], frameIndex) => string
    */
   ariaLabelGenerator: PropTypes.func.isRequired,
   /**
@@ -33,7 +34,7 @@ AriaLabelContainer.propTypes = {
    * Best practices are to describe how the user will interact with the chart in
    * the ariaLabelGenerator
    *
-   * (event, xValue) => void
+   * (event, xValue, [datapoints]) => void
    */
   onKeyDown: PropTypes.func,
   /**
@@ -75,23 +76,28 @@ export default function AriaLabelContainer(props) {
 
   // determine number of frames from n datasets with potentially different accessors
   const mappedDatasets = datasetWithAccessor.map(({ data, accessor }) =>
-    data.map(d => getValue(accessor, d)),
+    data.map(d => ({ xValue: getValue(accessor, d), datum: d })),
   );
-  const unionDatapoints = union(...mappedDatasets);
-  const numFrames = unionDatapoints.length;
+  const zippedDatapoints = zipWith(...mappedDatasets, (...datasets) => ({
+    xValue: datasets[0].xValue,
+    data: datasets.map(d => d.datum),
+  })).sort((a, b) => ascending(a.xValue, b.xValue));
+  const numFrames = zippedDatapoints.length;
   const sliceWidth = width / (numFrames - 1);
 
   return (
     <g className="rct-chart-a11y">
-      {unionDatapoints.map((d, index) => (
+      {zippedDatapoints.map(({ xValue, data }, index) => (
         <rect
           className="rct-chart-visually-hidden-rect"
-          aria-label={ariaLabelGenerator(d)}
+          aria-label={ariaLabelGenerator(xValue, data, index)}
           key={index}
           height={height}
           width={sliceWidth}
           x={
-            d === domain[1] ? xScale(unionDatapoints[index - 1]) : xScale(d)
+            xValue === domain[1]
+              ? xScale(zippedDatapoints[index - 1])
+              : xScale(xValue)
             // otherwise the last rect renders outside the chart
           }
           y={0}
@@ -99,7 +105,7 @@ export default function AriaLabelContainer(props) {
           tabIndex={0}
           onKeyDown={event => {
             if (!!onKeyDown) {
-              onKeyDown(event, d);
+              onKeyDown(event, xValue, data);
             }
           }}
         />
