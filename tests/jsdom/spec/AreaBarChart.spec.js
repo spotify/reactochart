@@ -53,8 +53,6 @@ describe('AreaBarChart', () => {
       expect(rangeRects.at(0).props().yEnd).toEqual(
         getValue(props.y, props.data[0]),
       );
-      // this should fail
-      expect(true).toBeFalsy();
     });
 
     it('when horizontal is true', () => {
