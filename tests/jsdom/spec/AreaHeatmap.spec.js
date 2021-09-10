@@ -1,11 +1,9 @@
 import React from 'react';
 import { scaleLinear } from 'd3-scale';
 import _ from 'lodash';
-import sinon from 'sinon';
-import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import { AreaHeatmap } from '../../../src/index.js';
+import { AreaHeatmap } from '../../../src';
 
 describe('AreaHeatmap', () => {
   const gridData = _.range(30).map(m => {
@@ -34,45 +32,45 @@ describe('AreaHeatmap', () => {
     yScale: scaleLinear()
       .domain([0, 10])
       .range([0, 30]),
-    onMouseMove: sinon.spy(),
-    onMouseEnter: sinon.spy(),
-    onMouseLeave: sinon.spy(),
+    onMouseMove: jest.fn(),
+    onMouseEnter: jest.fn(),
+    onMouseLeave: jest.fn(),
     rectStyle: { fill: 'rebeccapurple' },
   };
 
   it('renders a color heatmap', () => {
     const chart = mount(<AreaHeatmap {...props} />);
     const group = chart.find('g.rct-area-heatmap-chart');
-    expect(group).to.have.length(1);
-    expect(group.find('rect')).to.have.lengthOf.above(1);
+    expect(group).toHaveLength(1);
+    expect(group.find('rect').length).toBeGreaterThan(1);
   });
 
   it('passes props correctly', () => {
     const chart = mount(<AreaHeatmap {...props} />);
     const lastRect = chart.find('rect').last();
 
-    expect(chart.props().onMouseMove).to.be.a('function');
-    expect(chart.props().onMouseEnter).to.be.a('function');
-    expect(chart.props().onMouseLeave).to.be.a('function');
+    expect(typeof chart.props().onMouseMove).toBe('function');
+    expect(typeof chart.props().onMouseEnter).toBe('function');
+    expect(typeof chart.props().onMouseLeave).toBe('function');
 
-    expect(lastRect.props().x).to.be.a('number');
-    expect(lastRect.props().y).to.be.a('number');
-    expect(lastRect.props().width).to.be.a('number');
-    expect(lastRect.props().height).to.be.a('number');
-    expect(lastRect.props().className).to.include(props.rectClassName);
-    expect(lastRect.props().style).to.equal(props.rectStyle);
+    expect(typeof lastRect.props().x).toBe('number');
+    expect(typeof lastRect.props().y).toBe('number');
+    expect(typeof lastRect.props().width).toBe('number');
+    expect(typeof lastRect.props().height).toBe('number');
+    expect(lastRect.props().className).toContain(props.rectClassName);
+    expect(lastRect.props().style).toEqual(props.rectStyle);
   });
 
   it('triggers event handlers', () => {
     const chart = mount(<AreaHeatmap {...props} />);
-    expect(chart.props().onMouseMove).not.to.have.been.called;
+    expect(chart.props().onMouseMove).not.toHaveBeenCalled();
     chart.simulate('mousemove');
-    expect(chart.props().onMouseMove).to.have.been.called;
-    expect(chart.props().onMouseEnter).not.to.have.been.called;
+    expect(chart.props().onMouseMove).toHaveBeenCalled();
+    expect(chart.props().onMouseEnter).not.toHaveBeenCalled();
     chart.simulate('mouseenter');
-    expect(chart.props().onMouseEnter).to.have.been.called;
-    expect(chart.props().onMouseLeave).not.to.have.been.called;
+    expect(chart.props().onMouseEnter).toHaveBeenCalled();
+    expect(chart.props().onMouseLeave).not.toHaveBeenCalled();
     chart.simulate('mouseleave');
-    expect(chart.props().onMouseLeave).to.have.been.called;
+    expect(chart.props().onMouseLeave).toHaveBeenCalled();
   });
 });

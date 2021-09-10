@@ -1,8 +1,7 @@
 import React from 'react';
-import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import { ZoomContainer } from '../../../src/index.js';
+import { ZoomContainer } from '../../../src';
 
 describe('ZoomContainer', () => {
   const uncontrolledProps = {
@@ -22,16 +21,16 @@ describe('ZoomContainer', () => {
     let svg = zoomContainer.find('svg').instance();
     let group = zoomContainer.find('g').instance();
 
-    expect(parseInt(svg.getAttribute('width'))).to.equal(
+    expect(parseInt(svg.getAttribute('width'))).toEqual(
       uncontrolledProps.width,
     );
-    expect(parseInt(svg.getAttribute('height'))).to.equal(
+    expect(parseInt(svg.getAttribute('height'))).toEqual(
       uncontrolledProps.height,
     );
-    expect(parseInt(group.getAttribute('width'))).to.equal(
+    expect(parseInt(group.getAttribute('width'))).toEqual(
       uncontrolledProps.width,
     );
-    expect(parseInt(group.getAttribute('height'))).to.equal(
+    expect(parseInt(group.getAttribute('height'))).toEqual(
       uncontrolledProps.height,
     );
 
@@ -42,14 +41,14 @@ describe('ZoomContainer', () => {
     svg = controlledZoomContainer.find('svg').instance();
     group = controlledZoomContainer.find('g').instance();
 
-    expect(parseInt(svg.getAttribute('width'))).to.equal(controlledProps.width);
-    expect(parseInt(svg.getAttribute('height'))).to.equal(
+    expect(parseInt(svg.getAttribute('width'))).toEqual(controlledProps.width);
+    expect(parseInt(svg.getAttribute('height'))).toEqual(
       controlledProps.height,
     );
-    expect(parseInt(group.getAttribute('width'))).to.equal(
+    expect(parseInt(group.getAttribute('width'))).toEqual(
       controlledProps.width,
     );
-    expect(parseInt(group.getAttribute('height'))).to.equal(
+    expect(parseInt(group.getAttribute('height'))).toEqual(
       controlledProps.height,
     );
   });
@@ -74,33 +73,33 @@ describe('ZoomContainer', () => {
 
     const d3Zoom = zoomContainer.instance().zoom;
 
-    expect(d3Zoom.extent).to.be.a('function');
-    expect(d3Zoom.scaleExtent).to.be.a('function');
-    expect(d3Zoom.translateExtent).to.be.a('function');
-    expect(d3Zoom.clickDistance).to.be.a('function');
-    expect(d3Zoom.duration).to.be.a('function');
-    expect(d3Zoom.interpolate).to.be.a('function');
-    expect(d3Zoom.constrain).to.be.a('function');
-    expect(d3Zoom.filter).to.be.a('function');
-    expect(d3Zoom.touchable).to.be.a('function');
-    expect(d3Zoom.wheelDelta).to.be.a('function');
+    expect(d3Zoom.extent).toBeInstanceOf(Function);
+    expect(d3Zoom.scaleExtent).toBeInstanceOf(Function);
+    expect(d3Zoom.translateExtent).toBeInstanceOf(Function);
+    expect(d3Zoom.clickDistance).toBeInstanceOf(Function);
+    expect(d3Zoom.duration).toBeInstanceOf(Function);
+    expect(d3Zoom.interpolate).toBeInstanceOf(Function);
+    expect(d3Zoom.constrain).toBeInstanceOf(Function);
+    expect(d3Zoom.filter).toBeInstanceOf(Function);
+    expect(d3Zoom.touchable).toBeInstanceOf(Function);
+    expect(d3Zoom.wheelDelta).toBeInstanceOf(Function);
   });
 
   it('passes zoom props correctly when controlled', () => {
     const zoomContainer = mount(<ZoomContainer {...controlledProps} />);
 
-    expect(zoomContainer.prop('zoomX')).to.equal(0);
-    expect(zoomContainer.prop('zoomY')).to.equal(0);
-    expect(zoomContainer.prop('zoomScale')).to.equal(1);
-    expect(zoomContainer.state('lastZoomTransform').k).to.eql(1);
-    expect(zoomContainer.state('lastZoomTransform').x).to.eql(0);
-    expect(zoomContainer.state('lastZoomTransform').y).to.eql(0);
+    expect(zoomContainer.prop('zoomX')).toEqual(0);
+    expect(zoomContainer.prop('zoomY')).toEqual(0);
+    expect(zoomContainer.prop('zoomScale')).toEqual(1);
+    expect(zoomContainer.state('lastZoomTransform').k).toEqual(1);
+    expect(zoomContainer.state('lastZoomTransform').x).toEqual(0);
+    expect(zoomContainer.state('lastZoomTransform').y).toEqual(0);
 
     zoomContainer.setProps({ zoomX: 100, zoomY: 100, zoomScale: 2 });
 
-    expect(zoomContainer.state('lastZoomTransform').k).to.eql(2);
-    expect(zoomContainer.state('lastZoomTransform').x).to.eql(100);
-    expect(zoomContainer.state('lastZoomTransform').y).to.eql(100);
+    expect(zoomContainer.state('lastZoomTransform').k).toEqual(2);
+    expect(zoomContainer.state('lastZoomTransform').x).toEqual(100);
+    expect(zoomContainer.state('lastZoomTransform').y).toEqual(100);
   });
 
   it('renders correctly', () => {
@@ -109,8 +108,8 @@ describe('ZoomContainer', () => {
     let svg = zoomContainer.find('svg');
     let group = zoomContainer.find('g');
 
-    expect(svg.length).to.equal(1);
-    expect(group.length).to.equal(1);
+    expect(svg.length).toEqual(1);
+    expect(group.length).toEqual(1);
 
     const controlledZoomContainer = mount(
       <ZoomContainer {...controlledProps} />,
@@ -119,7 +118,7 @@ describe('ZoomContainer', () => {
     svg = controlledZoomContainer.find('svg');
     group = controlledZoomContainer.find('g');
 
-    expect(svg.length).to.equal(1);
-    expect(group.length).to.equal(1);
+    expect(svg.length).toEqual(1);
+    expect(group.length).toEqual(1);
   });
 });

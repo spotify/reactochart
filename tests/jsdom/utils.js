@@ -1,11 +1,10 @@
 import _ from 'lodash';
 import { scaleLinear, scalePoint } from 'd3-scale';
-import { expect } from 'chai';
 
 export function expectProps(el, expectedProps) {
   const props = el.props();
   _.forEach(expectedProps, (expectedValue, key) => {
-    expect(props[key]).to.equal(expectedValue);
+    expect(props[key]).toEqual(expectedValue);
   });
 }
 

@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { scaleLinear } from 'd3-scale';
 import {
   checkLabelsDistinct,
@@ -24,11 +23,11 @@ describe('Label utils', () => {
       { value: 5, text: '5', height: 14, width: 7.7861328125 },
     ];
 
-    expect(checkLabelsDistinct(labels)).to.equal(true);
+    expect(checkLabelsDistinct(labels)).toEqual(true);
 
     labels.push(labels[0]);
 
-    expect(checkLabelsDistinct(labels)).to.equal(false);
+    expect(checkLabelsDistinct(labels)).toEqual(false);
   });
 
   it('checkRangesOverlap', () => {
@@ -36,9 +35,9 @@ describe('Label utils', () => {
     const arr2 = [11, 15];
     const arr3 = [8, 12];
 
-    expect(checkRangesOverlap(arr1, arr2)).to.equal(false);
-    expect(checkRangesOverlap(arr1, arr3)).to.equal(true);
-    expect(checkRangesOverlap(arr2, arr3)).to.equal(true);
+    expect(checkRangesOverlap(arr1, arr2)).toEqual(false);
+    expect(checkRangesOverlap(arr1, arr3)).toEqual(true);
+    expect(checkRangesOverlap(arr2, arr3)).toEqual(true);
   });
 
   it('makeLabelFormatters', () => {
@@ -53,9 +52,9 @@ describe('Label utils', () => {
     const scaleType = 'linear';
 
     const results = makeLabelFormatters(formatStrs, scaleType);
-    expect(results).to.have.lengthOf(6);
+    expect(results).toHaveLength(6);
     results.forEach(r => {
-      expect(r).is.a('function');
+      expect(r).toBeInstanceOf(Function);
     });
   });
 
@@ -69,18 +68,18 @@ describe('Label utils', () => {
       [183.60693359375, 191.39306640625],
     ];
 
-    expect(countRangeOverlaps(ranges)).to.equal(0);
+    expect(countRangeOverlaps(ranges)).toEqual(0);
 
     ranges.push([183.60693359375, 191.39306640625]);
 
-    expect(countRangeOverlaps(ranges)).to.equal(1);
+    expect(countRangeOverlaps(ranges)).toEqual(1);
   });
 
   it('getLabelXRange', () => {
     const scale = scaleLinear().domain([-30, 30]);
     const label = { value: -20, text: '-20', height: 14, width: 20.234375 };
 
-    expect(getLabelXRange(scale, label)).to.eql([
+    expect(getLabelXRange(scale, label)).toEqual([
       -9.950520833333334,
       10.283854166666666,
     ]);
@@ -90,7 +89,7 @@ describe('Label utils', () => {
     const scale = scaleLinear().domain([-30, 30]);
     const label = { value: -20, text: '-20', height: 14, width: 20.234375 };
 
-    expect(getLabelYRange(scale, label)).to.eql([
+    expect(getLabelYRange(scale, label)).toEqual([
       -6.833333333333333,
       7.166666666666667,
     ]);
@@ -100,14 +99,14 @@ describe('Label utils', () => {
     const scale = scaleLinear().domain([-30, 30]);
     const label = { value: -20, text: '-20', height: 14, width: 20.234375 };
 
-    expect(getLabelXOverhang(scale, label)).to.eql([10, 10]);
+    expect(getLabelXOverhang(scale, label)).toEqual([10, 10]);
   });
 
   it('getLabelYOverhang', () => {
     const scale = scaleLinear().domain([-30, 30]);
     const label = { value: -20, text: '-20', height: 14, width: 20.234375 };
 
-    expect(getLabelYOverhang(scale, label)).to.eql([7, 7]);
+    expect(getLabelYOverhang(scale, label)).toEqual([7, 7]);
   });
 
   it('getLabelsXOverhang', () => {
@@ -121,7 +120,7 @@ describe('Label utils', () => {
       { value: 5, text: '5', height: 14, width: 7.7861328125 },
     ];
 
-    expect(getLabelsXOverhang(scale, labels)).to.eql([10, 10]);
+    expect(getLabelsXOverhang(scale, labels)).toEqual([10, 10]);
   });
 
   it('getLabelsYOverhang', () => {
@@ -135,6 +134,6 @@ describe('Label utils', () => {
       { value: 5, text: '5', height: 14, width: 7.7861328125 },
     ];
 
-    expect(getLabelsYOverhang(scale, labels)).to.eql([7, 7]);
+    expect(getLabelsYOverhang(scale, labels)).toEqual([7, 7]);
   });
 });

@@ -20,7 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { expect } from 'chai';
 import measureText from '../../../src/utils/measureText';
 
 class MockCtx {
@@ -48,10 +47,10 @@ describe('measure-text', () => {
       canvas: new MockCanvas(),
     });
 
-    expect(measurement).to.have.deep.nested.property('width.value', 42);
-    expect(measurement).to.have.deep.nested.property('height.value', 24 * 1.2);
-    expect(measurement).to.have.deep.nested.property('width.unit', 'px');
-    expect(measurement).to.have.deep.nested.property('height.unit', 'px');
+    expect(measurement).toHaveProperty('width.value', 42);
+    expect(measurement).toHaveProperty('height.value', 24 * 1.2);
+    expect(measurement).toHaveProperty('width.unit', 'px');
+    expect(measurement).toHaveProperty('height.unit', 'px');
   });
 
   it(`should measure multiline text provided a
@@ -69,13 +68,13 @@ describe('measure-text', () => {
       fontStyle: 'italic',
       canvas: new MockCanvas(),
     });
-    expect(measurement).to.have.deep.nested.property('width.value', 42);
-    expect(measurement).to.have.deep.nested.property(
+    expect(measurement).toHaveProperty('width.value', 42);
+    expect(measurement).toHaveProperty(
       'height.value',
       24 * 1.2 * 3,
     );
-    expect(measurement).to.have.deep.nested.property('width.unit', 'px');
-    expect(measurement).to.have.deep.nested.property('height.unit', 'px');
+    expect(measurement).toHaveProperty('width.unit', 'px');
+    expect(measurement).toHaveProperty('height.unit', 'px');
   });
 
   it(`should calculate height when provided a
@@ -90,8 +89,8 @@ describe('measure-text', () => {
       canvas: new MockCanvas(),
     });
 
-    expect(measurement).to.have.deep.nested.property('height.value', 2 * 1.3);
-    expect(measurement).to.have.deep.nested.property('height.unit', 'em');
+    expect(measurement).toHaveProperty('height.value', 2 * 1.3);
+    expect(measurement).toHaveProperty('height.unit', 'em');
   });
 
   it(`should calculate height when provided a
@@ -106,7 +105,7 @@ describe('measure-text', () => {
       canvas: new MockCanvas(),
     });
 
-    expect(measurement).to.have.deep.nested.property('height.value', 40);
-    expect(measurement).to.have.deep.nested.property('height.unit', 'px');
+    expect(measurement).toHaveProperty('height.value', 40);
+    expect(measurement).toHaveProperty('height.unit', 'px');
   });
 });

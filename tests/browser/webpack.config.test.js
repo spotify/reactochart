@@ -38,11 +38,7 @@ module.exports = {
           { loader: 'css-loader' },
           { loader: 'less-loader' },
         ],
-      },
-      {
-        test: /\.json$/,
-        use: [{ loader: 'json-loader' }],
-      },
+      }
     ],
   },
   // https://github.com/airbnb/enzyme/issues/503
