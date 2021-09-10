@@ -1,3 +1,8 @@
+## 6.0.0 (2021-09-10)
+
+- [#307](https://github.com/spotify/reactochart/pull/307) Enable support for d3 7, and still support 6
+- [#308](https://github.com/spotify/reactochart/pull/308) Enable GitHub Actions for CI
+
 ## 5.0.0 (2021-05-20)
 
 - Remove support for Node 8-10. Support 12 and up.

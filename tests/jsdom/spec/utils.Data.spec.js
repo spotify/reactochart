@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { mount } from 'enzyme';
 import _ from 'lodash';
 import React from 'react';
@@ -22,21 +21,21 @@ describe('Data utils', () => {
   describe('makeAccessor', () => {
     it('passes existing accessor functions through', () => {
       const getter = d => d + 1;
-      expect(makeAccessor(getter)).to.equal(getter);
+      expect(makeAccessor(getter)).toEqual(getter);
     });
 
     it('returns identity function given null or undefined', () => {
       const d = { x: 6 };
-      expect(makeAccessor(undefined)(d)).to.equal(d);
-      expect(makeAccessor(null)(d)).to.equal(d);
+      expect(makeAccessor(undefined)(d)).toEqual(d);
+      expect(makeAccessor(null)(d)).toEqual(d);
     });
 
     it('deeply retrieves object values given array indices and/or key strings', () => {
       const d = [{ x: [{ y: 'z' }] }];
-      expect(makeAccessor(0)(d)).to.equal(d[0]);
-      expect(makeAccessor('0.x')(d)).to.equal(d[0].x);
-      expect(makeAccessor('0.x.0.y')(d)).to.equal('z');
-      expect(makeAccessor('x.0.y')(d[0])).to.equal('z');
+      expect(makeAccessor(0)(d)).toEqual(d[0]);
+      expect(makeAccessor('0.x')(d)).toEqual(d[0].x);
+      expect(makeAccessor('0.x.0.y')(d)).toEqual('z');
+      expect(makeAccessor('x.0.y')(d[0])).toEqual('z');
     });
   });
 
@@ -44,16 +43,16 @@ describe('Data utils', () => {
     it('returns props.datasets', () => {
       const props = { datasets: [[1]] };
       const datasets = datasetsFromPropsOrDescendants(props);
-      expect(datasets).to.equal(props.datasets);
-      expect(datasets).to.deep.equal(props.datasets);
+      expect(datasets).toEqual(props.datasets);
+      expect(datasets).toEqual(props.datasets);
     });
 
     it('returns props.data wrapped in an array', () => {
       const props = { data: [2] };
       const datasets = datasetsFromPropsOrDescendants(props);
-      expect(datasets).to.be.an('array');
-      expect(datasets[0]).to.equal(props.data);
-      expect(datasets[0]).to.deep.equal(props.data);
+      expect(Array.isArray(datasets)).toBe(true);
+      expect(datasets[0]).toEqual(props.data);
+      expect(datasets[0]).toEqual(props.data);
     });
 
     it('traverses children and combines their props.data & props.datasets', () => {
@@ -77,37 +76,37 @@ describe('Data utils', () => {
 
       const rendered = mount(tree);
       const datasets = datasetsFromPropsOrDescendants(rendered.props());
-      expect(datasets).to.be.an('array');
-      expect(datasets).to.deep.equal([[0, 1], [2, 3], [4, 5], [6, 7]]);
+      expect(Array.isArray(datasets)).toBe(true);
+      expect(datasets).toEqual([[0, 1], [2, 3], [4, 5], [6, 7]]);
     });
   });
 
   describe('inferDataType', () => {
     it('returns `number` for dataset with all numbers', () => {
-      expect(inferDataType([-1, 0, 1.2, 4.5])).to.equal('number');
+      expect(inferDataType([-1, 0, 1.2, 4.5])).toEqual('number');
     });
 
     it('returns `time` for dataset with all Dates', () => {
-      expect(inferDataType([new Date(), new Date(2003, 2, 4)])).to.equal(
+      expect(inferDataType([new Date(), new Date(2003, 2, 4)])).toEqual(
         'time',
       );
     });
 
     it('returns `categorical` for dataset with all strings', () => {
-      expect(inferDataType(['a', 'b', 'c'])).to.equal('categorical');
+      expect(inferDataType(['a', 'b', 'c'])).toEqual('categorical');
     });
 
     it('returns `categorical` for mixed types', () => {
-      expect(inferDataType([42, new Date()])).to.equal('categorical');
+      expect(inferDataType([42, new Date()])).toEqual('categorical');
     });
 
     it('takes an accessor function for getting the data points', () => {
       const getD = d => d.a;
-      expect(inferDataType([{ a: 1 }, { a: 1.3 }], getD)).to.equal('number');
+      expect(inferDataType([{ a: 1 }, { a: 1.3 }], getD)).toEqual('number');
       expect(
         inferDataType([{ a: new Date() }, { a: new Date() }], getD),
-      ).to.equal('time');
-      expect(inferDataType([{ a: 'b' }, { a: 'c' }], getD)).to.equal(
+      ).toEqual('time');
+      expect(inferDataType([{ a: 'b' }, { a: 'c' }], getD)).toEqual(
         'categorical',
       );
     });
@@ -115,27 +114,27 @@ describe('Data utils', () => {
 
   describe('inferDatasetsType', () => {
     it('returns same as inferDataType if all datasets are same type', () => {
-      expect(inferDatasetsType([[-1, 0], [1.2, 4.5]])).to.equal('number');
+      expect(inferDatasetsType([[-1, 0], [1.2, 4.5]])).toEqual('number');
       expect(
         inferDatasetsType([[new Date()], [new Date(2003, 2, 4)]]),
-      ).to.equal('time');
-      expect(inferDatasetsType([['a'], ['b', 'c']])).to.equal('categorical');
-      expect(inferDatasetsType([[42, new Date()]])).to.equal('categorical');
+      ).toEqual('time');
+      expect(inferDatasetsType([['a'], ['b', 'c']])).toEqual('categorical');
+      expect(inferDatasetsType([[42, new Date()]])).toEqual('categorical');
 
       const getD = d => d.a;
-      expect(inferDatasetsType([[{ a: 1 }, { a: 1.3 }]], getD)).to.equal(
+      expect(inferDatasetsType([[{ a: 1 }, { a: 1.3 }]], getD)).toEqual(
         'number',
       );
       expect(
         inferDatasetsType([[{ a: new Date() }, { a: new Date() }]], getD),
-      ).to.equal('time');
-      expect(inferDatasetsType([[{ a: 'b' }, { a: 'c' }]], getD)).to.equal(
+      ).toEqual('time');
+      expect(inferDatasetsType([[{ a: 'b' }, { a: 'c' }]], getD)).toEqual(
         'categorical',
       );
     });
 
     it('returns `categorical` if datasets are mixed types', () => {
-      expect(inferDatasetsType([[7], [new Date()]])).to.equal('categorical');
+      expect(inferDatasetsType([[7], [new Date()]])).toEqual('categorical');
     });
   });
 
@@ -150,9 +149,9 @@ describe('Data utils', () => {
 
     it('determines domain from data when type is provided', () => {
       const numberDomain = domainFromData(numberData, _.identity, 'number');
-      expect(numberDomain).to.deep.equal([-2, 6]);
+      expect(numberDomain).toEqual([-2, 6]);
       const timeDomain = domainFromData(timeData, _.identity, 'time');
-      expect(timeDomain).to.deep.equal([
+      expect(timeDomain).toEqual([
         new Date(2006, 1, 1),
         new Date(2013, 1, 1),
       ]);
@@ -161,19 +160,19 @@ describe('Data utils', () => {
         _.identity,
         'categorical',
       );
-      expect(categoricalDomain).to.deep.equal(numberData);
+      expect(categoricalDomain).toEqual(numberData);
     });
 
     it('infers accessor & type when not provided', () => {
       const numberDomain = domainFromData(numberData);
-      expect(numberDomain).to.deep.equal([-2, 6]);
+      expect(numberDomain).toEqual([-2, 6]);
       const timeDomain = domainFromData(timeData);
-      expect(timeDomain).to.deep.equal([
+      expect(timeDomain).toEqual([
         new Date(2006, 1, 1),
         new Date(2013, 1, 1),
       ]);
       const categoricalDomain = domainFromData(categoricalData);
-      expect(categoricalDomain).to.deep.equal(categoricalData);
+      expect(categoricalDomain).toEqual(categoricalData);
     });
   });
 
@@ -198,12 +197,12 @@ describe('Data utils', () => {
         'categorical',
       );
 
-      expect(numberDomain).to.deep.equal([1, 8]);
-      expect(timeDomain).to.deep.equal([
+      expect(numberDomain).toEqual([1, 8]);
+      expect(timeDomain).toEqual([
         new Date('2002-03-12'),
         new Date('2009-01-09'),
       ]);
-      expect(categoricalDomain).to.deep.equal(['x', 'z', 'y']);
+      expect(categoricalDomain).toEqual(['x', 'z', 'y']);
     });
 
     it('infers accessor & type when not provided', () => {
@@ -211,19 +210,19 @@ describe('Data utils', () => {
       const timeDomain = domainFromDatasets(timeDatasets);
       const categoricalDomain = domainFromDatasets(categoricalDatasets);
 
-      expect(numberDomain).to.deep.equal([1, 8]);
-      expect(timeDomain).to.deep.equal([
+      expect(numberDomain).toEqual([1, 8]);
+      expect(timeDomain).toEqual([
         new Date('2002-03-12'),
         new Date('2009-01-09'),
       ]);
-      expect(categoricalDomain).to.deep.equal(['x', 'z', 'y']);
+      expect(categoricalDomain).toEqual(['x', 'z', 'y']);
     });
   });
 
   describe('combineDomains', () => {
     it('returns extent of domains for number-type data', () => {
       const domains = [[0, 3], [2, 9], [-2, 4]];
-      expect(combineDomains(domains, 'number')).to.deep.equal([-2, 9]);
+      expect(combineDomains(domains, 'number')).toEqual([-2, 9]);
     });
 
     it('returns extent of domains for time-type data', () => {
@@ -231,7 +230,7 @@ describe('Data utils', () => {
         [new Date(2004, 1, 1), new Date(2008, 1, 1)],
         [new Date(2006, 1, 1), new Date(2010, 1, 1)],
       ];
-      expect(combineDomains(domains, 'time')).to.deep.equal([
+      expect(combineDomains(domains, 'time')).toEqual([
         new Date(2004, 1, 1),
         new Date(2010, 1, 1),
       ]);
@@ -239,7 +238,7 @@ describe('Data utils', () => {
 
     it('returns all unique domain values for categorical-type data', () => {
       const domains = [['a', 'b', 'c'], ['b', 'd', 'c', 'e']];
-      expect(combineDomains(domains, 'categorical')).to.deep.equal([
+      expect(combineDomains(domains, 'categorical')).toEqual([
         'a',
         'b',
         'c',
@@ -251,40 +250,40 @@ describe('Data utils', () => {
 
   describe('isValidDomain', () => {
     it('returns false for non-arrays and empty arrays', () => {
-      expect(isValidDomain(4)).to.equal(false);
-      expect(isValidDomain('abc')).to.equal(false);
-      expect(isValidDomain([])).to.equal(false);
+      expect(isValidDomain(4)).toEqual(false);
+      expect(isValidDomain('abc')).toEqual(false);
+      expect(isValidDomain([])).toEqual(false);
     });
 
     it('returns true for any array with items if type is categorical', () => {
-      expect(isValidDomain([4])).to.equal(true);
-      expect(isValidDomain([4], 'categorical')).to.equal(true);
-      expect(isValidDomain(['abc', 'def', 'ghi'])).to.equal(true);
-      expect(isValidDomain(['abc', 'def', 'ghi'], 'categorical')).to.equal(
+      expect(isValidDomain([4])).toEqual(true);
+      expect(isValidDomain([4], 'categorical')).toEqual(true);
+      expect(isValidDomain(['abc', 'def', 'ghi'])).toEqual(true);
+      expect(isValidDomain(['abc', 'def', 'ghi'], 'categorical')).toEqual(
         true,
       );
-      expect(isValidDomain([new Date(), new Date()])).to.equal(true);
-      expect(isValidDomain([new Date(), new Date()], 'categorical')).to.equal(
+      expect(isValidDomain([new Date(), new Date()])).toEqual(true);
+      expect(isValidDomain([new Date(), new Date()], 'categorical')).toEqual(
         true,
       );
     });
 
     it('returns true for 2-item number arrays if type is number', () => {
-      expect(isValidDomain([4, 5], 'number')).to.equal(true);
-      expect(isValidDomain([4], 'number')).to.equal(false);
-      expect(isValidDomain([4, 5, 6], 'number')).to.equal(false);
-      expect(isValidDomain([new Date(), new Date()], 'number')).to.equal(false);
-      expect(isValidDomain(['abc', 'def'], 'number')).to.equal(false);
+      expect(isValidDomain([4, 5], 'number')).toEqual(true);
+      expect(isValidDomain([4], 'number')).toEqual(false);
+      expect(isValidDomain([4, 5, 6], 'number')).toEqual(false);
+      expect(isValidDomain([new Date(), new Date()], 'number')).toEqual(false);
+      expect(isValidDomain(['abc', 'def'], 'number')).toEqual(false);
     });
 
     it('returns true for 2-item date arrays if type is time', () => {
-      expect(isValidDomain([new Date(), new Date()], 'time')).to.equal(true);
-      expect(isValidDomain([new Date()], 'time')).to.equal(false);
+      expect(isValidDomain([new Date(), new Date()], 'time')).toEqual(true);
+      expect(isValidDomain([new Date()], 'time')).toEqual(false);
       expect(
         isValidDomain([new Date(), new Date(), new Date()], 'time'),
-      ).to.equal(false);
-      expect(isValidDomain([4, 5], 'time')).to.equal(false);
-      expect(isValidDomain(['abc', 'def'], 'time')).to.equal(false);
+      ).toEqual(false);
+      expect(isValidDomain([4, 5], 'time')).toEqual(false);
+      expect(isValidDomain(['abc', 'def'], 'time')).toEqual(false);
     });
   });
 });

@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
-import { XAxisLabels, XYPlot } from 'src/index.js';
+import { XAxisLabels, XYPlot } from '../../../src/index.js';
 chai.use(sinonChai);
 
 // XAxisLabels tests must run in browser since XAxisLabels uses measureText
@@ -167,7 +167,7 @@ describe('XAxisLabel', () => {
 
     // Logic should pick the ".0%" format since "+20"
     // would have too many collisions when rendered
-    const correctTickLabels = ['-100%', '-50%', '0%', '50%', '100%'];
+    const correctTickLabels = ['−100%', '−50%', '0%', '50%', '100%'];
 
     const renderedTickLabels = labels.map(label => {
       const instance = label.instance();

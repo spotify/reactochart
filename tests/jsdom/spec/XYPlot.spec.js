@@ -1,9 +1,7 @@
 import React from 'react';
-import sinon from 'sinon';
-import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import { XYPlot, Bar } from '../../../src/index.js';
+import { XYPlot, Bar } from '../../../src';
 
 describe('XYPlot', () => {
   const commonXYProps = {
@@ -21,29 +19,27 @@ describe('XYPlot', () => {
 
     // svg className returns SvgAnimatedString, so access baseVal to get string
     // for chai contains to test against
-    expect(svg.getDOMNode().className.baseVal).to.contain(
+    expect(svg.getDOMNode().className.baseVal).toContain(
       commonXYProps.xyPlotClassName,
     );
 
-    expect(svg.getDOMNode().style._values).to.eql(
+    expect(svg.getDOMNode().style._values).toEqual(
       commonXYProps.xyPlotContainerStyle,
     );
-    expect(plot.getDOMNode().style._values).to.eql(commonXYProps.xyPlotStyle);
+    expect(plot.getDOMNode().style._values).toEqual(commonXYProps.xyPlotStyle);
 
     const node = svg.instance();
-    expect(node.tagName.toLowerCase()).to.equal('svg');
-    expect(node.getAttribute('width')).to.equal('600');
-    expect(node.getAttribute('height')).to.equal('800');
+    expect(node.tagName.toLowerCase()).toEqual('svg');
+    expect(node.getAttribute('width')).toEqual('600');
+    expect(node.getAttribute('height')).toEqual('800');
 
     const chart2 = mount(<XYPlot {...commonXYProps} />);
     const node2 = chart2.find('svg').instance();
-    expect(node2.tagName.toLowerCase()).to.equal('svg');
-    expect(parseInt(node2.getAttribute('width'), 10))
-      .to.be.a('number')
-      .and.to.be.above(0);
-    expect(parseInt(node2.getAttribute('height'), 10))
-      .to.be.a('number')
-      .and.to.be.above(0);
+    expect(node2.tagName.toLowerCase()).toEqual('svg');
+    expect(parseInt(node2.getAttribute('width'), 10)).not.toBeNaN();
+    expect(parseInt(node2.getAttribute('width'), 10)).toBeGreaterThan(10);
+    expect(parseInt(node2.getAttribute('height'), 10)).not.toBeNaN();
+    expect(parseInt(node2.getAttribute('height'), 10)).toBeGreaterThan(10);
   });
 
   it('renders inner chart area with given margin', () => {
@@ -59,13 +55,13 @@ describe('XYPlot', () => {
     );
     const inner = chart.find('.rct-chart-inner').instance();
     const bg = chart.find('.rct-plot-background').instance();
-    expect(inner.getAttribute('transform').replace(/\s/, '')).to.contain(
+    expect(inner.getAttribute('transform').replace(/\s/, '')).toContain(
       `translate(${margin.marginLeft},${margin.marginTop})`,
     );
-    expect(parseInt(bg.getAttribute('width'), 10)).to.equal(
+    expect(parseInt(bg.getAttribute('width'), 10)).toEqual(
       size - (margin.marginLeft + margin.marginRight),
     );
-    expect(parseInt(bg.getAttribute('height'), 10)).to.equal(
+    expect(parseInt(bg.getAttribute('height'), 10)).toEqual(
       size - (margin.marginTop + margin.marginBottom),
     );
   });
@@ -76,14 +72,14 @@ describe('XYPlot', () => {
       y: 0,
       yEnd: 30,
       style: { fill: 'red' },
-      onMouseMove: sinon.spy(),
+      onMouseMove: jest.fn(),
     };
     const chart = mount(
       <XYPlot
         width={600}
         height={800}
         {...commonXYProps}
-        onMouseMove={sinon.spy()}
+        onMouseMove={jest.fn()}
       >
         <Bar {...barProps} />
       </XYPlot>,
@@ -93,25 +89,25 @@ describe('XYPlot', () => {
 
     // Make sure props passed into bar are correctly passed down by XYPlot and not overriden
     Object.keys(barProps).forEach(k => {
-      expect(bar.props()[k]).to.equal(barProps[k]);
+      expect(bar.props()[k]).toEqual(barProps[k]);
     });
 
     // Make sure click handlers passed into bar are correctly triggered
-    expect(chart.props().onMouseMove).not.to.have.been.called;
-    expect(bar.props().onMouseMove).not.to.have.been.called;
+    expect(chart.props().onMouseMove).not.toHaveBeenCalled();
+    expect(bar.props().onMouseMove).not.toHaveBeenCalled();
     bar.simulate('mousemove');
-    expect(chart.props().onMouseMove).to.have.been.called;
-    expect(bar.props().onMouseMove).to.have.been.called;
+    expect(chart.props().onMouseMove).toHaveBeenCalled();
+    expect(bar.props().onMouseMove).toHaveBeenCalled();
   });
 
   it('triggers event handlers', () => {
     const mouseHandlers = {
-      onMouseMove: sinon.spy(),
-      onMouseEnter: sinon.spy(),
-      onMouseLeave: sinon.spy(),
-      onMouseDown: sinon.spy(),
-      onMouseUp: sinon.spy(),
-      onClick: sinon.spy(),
+      onMouseMove: jest.fn(),
+      onMouseEnter: jest.fn(),
+      onMouseLeave: jest.fn(),
+      onMouseDown: jest.fn(),
+      onMouseUp: jest.fn(),
+      onClick: jest.fn(),
     };
     const chart = mount(<XYPlot {...commonXYProps} {...mouseHandlers} />);
     const chartProps = chart.props();
@@ -134,10 +130,10 @@ describe('XYPlot', () => {
     Object.keys(mouseHandlers).forEach(handler => {
       const handlerSimulateEventName = handler.substring(2).toLowerCase();
 
-      expect(chartProps[handler]).not.to.have.been.called;
+      expect(chartProps[handler]).not.toHaveBeenCalled();
       chart.simulate(handlerSimulateEventName);
-      expect(chartProps[handler]).to.have.been.called;
-      expect(Object.keys(chartProps[handler].args[0][0])).to.eql(expectedKeys);
+      expect(chartProps[handler]).toHaveBeenCalled();
+      expect(Object.keys(chartProps[handler].mock.calls[0][0])).toEqual(expectedKeys);
     });
   });
 });

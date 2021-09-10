@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import { scaleLinear, scalePoint } from 'd3-scale';
 import _ from 'lodash';
 import {
@@ -51,7 +50,7 @@ describe('Axis utils', () => {
       titleProps,
     } = getAxisChildProps(axisProps);
 
-    expect(ticksProps).to.eql(
+    expect(ticksProps).toEqual(
       _.pick(axisProps, [
         'width',
         'height',
@@ -71,7 +70,7 @@ describe('Axis utils', () => {
       ]),
     );
 
-    expect(gridProps).to.eql(
+    expect(gridProps).toEqual(
       Object.assign(
         {},
         _.pick(axisProps, [
@@ -93,7 +92,7 @@ describe('Axis utils', () => {
       ),
     );
 
-    expect(labelsProps).to.eql(
+    expect(labelsProps).toEqual(
       Object.assign(
         { noLabelOverhang: undefined },
         _.pick(axisProps, [
@@ -127,7 +126,7 @@ describe('Axis utils', () => {
       ),
     );
 
-    expect(titleProps).to.eql(
+    expect(titleProps).toEqual(
       Object.assign(
         {},
         _.pick(axisProps, [
@@ -155,7 +154,7 @@ describe('Axis utils', () => {
     it('throws error on invalid axis type', () => {
       expect(() => {
         getMouseAxisOptions('z', {}, {});
-      }).to.throw(Error);
+      }).toThrow(Error);
     });
 
     it('returns valid mouse options for x axisType', () => {
@@ -178,7 +177,7 @@ describe('Axis utils', () => {
         .domain(['a', 'b', 'c'])
         .range([0, 100]);
 
-      expect(getMouseAxisOptions('x', mockEvent, scale)).to.eql({
+      expect(getMouseAxisOptions('x', mockEvent, scale)).toEqual({
         event: mockEvent,
         outerX: 50,
         outerY: 0,
@@ -207,7 +206,7 @@ describe('Axis utils', () => {
         .domain(['a', 'b', 'c'])
         .range([0, 100]);
 
-      expect(getMouseAxisOptions('y', mockEvent, scale)).to.eql({
+      expect(getMouseAxisOptions('y', mockEvent, scale)).toEqual({
         event: mockEvent,
         outerX: 0,
         outerY: 50,

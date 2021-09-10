@@ -1,9 +1,8 @@
 import React from 'react';
 import { scaleLinear } from 'd3-scale';
-import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import { XGrid, XLine } from '../../../src/index.js';
+import { XGrid, XLine } from '../../../src';
 import { getScaleTicks, getTickDomain } from '../../../src/utils/Scale';
 
 describe('XGrid', () => {
@@ -23,20 +22,20 @@ describe('XGrid', () => {
     const xLines = xGrid.find(XLine);
     const group = xGrid.find('g');
 
-    expect(group).to.have.lengthOf(1);
-    expect(group.getDOMNode().className).to.equal('rct-chart-grid-x');
+    expect(group).toHaveLength(1);
+    expect(group.getDOMNode().className).toEqual('rct-chart-grid-x');
 
     xLines.forEach(xLine => {
       const xLineProps = xLine.props();
 
-      expect(xLineProps.className).to.contain(props.lineClassName);
-      expect(xLineProps.style).to.equal(props.lineStyle);
-      expect(xLineProps.spacingTop).to.equal(props.spacingTop);
-      expect(xLineProps.spacingBottom).to.equal(props.spacingBottom);
-      expect(xLineProps.spacingLeft).to.equal(props.spacingLeft);
-      expect(xLineProps.spacingRight).to.equal(props.spacingRight);
-      expect(xLineProps.xScale).to.equal(props.xScale);
-      expect(xLineProps.height).to.equal(props.height);
+      expect(xLineProps.className).toContain(props.lineClassName);
+      expect(xLineProps.style).toEqual(props.lineStyle);
+      expect(xLineProps.spacingTop).toEqual(props.spacingTop);
+      expect(xLineProps.spacingBottom).toEqual(props.spacingBottom);
+      expect(xLineProps.spacingLeft).toEqual(props.spacingLeft);
+      expect(xLineProps.spacingRight).toEqual(props.spacingRight);
+      expect(xLineProps.xScale).toEqual(props.xScale);
+      expect(xLineProps.height).toEqual(props.height);
     });
   });
 
@@ -45,13 +44,13 @@ describe('XGrid', () => {
     const xGrid = mount(<XGrid {...props} tickCount={tickCount} />);
     const group = xGrid.find('g');
 
-    expect(group).to.have.lengthOf(1);
-    expect(group.getDOMNode().className).to.equal('rct-chart-grid-x');
+    expect(group).toHaveLength(1);
+    expect(group.getDOMNode().className).toEqual('rct-chart-grid-x');
 
     const xLines = xGrid.find(XLine);
     const numTicksMade = getScaleTicks(props.xScale, null, tickCount);
 
-    expect(xLines).to.have.lengthOf(numTicksMade.length);
+    expect(xLines).toHaveLength(numTicksMade.length);
   });
 
   it('renders the correct amount of XLines given ticks', () => {
@@ -59,11 +58,11 @@ describe('XGrid', () => {
     const xGrid = mount(<XGrid {...props} ticks={ticks} />);
     const group = xGrid.find('g');
 
-    expect(group).to.have.lengthOf(1);
-    expect(group.getDOMNode().className).to.equal('rct-chart-grid-x');
+    expect(group).toHaveLength(1);
+    expect(group.getDOMNode().className).toEqual('rct-chart-grid-x');
 
     const xLines = xGrid.find(XLine);
-    expect(xLines).to.have.lengthOf(ticks.length);
+    expect(xLines).toHaveLength(ticks.length);
   });
 
   it('getTickDomain works as expected', () => {
@@ -71,7 +70,7 @@ describe('XGrid', () => {
 
     const result = getTickDomain(props.xScale, { ...props, ticks });
 
-    expect(XGrid.getTickDomain({ ...props, ticks })).to.eql({
+    expect(XGrid.getTickDomain({ ...props, ticks })).toEqual({
       xTickDomain: result,
     });
   });

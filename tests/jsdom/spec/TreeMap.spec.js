@@ -1,10 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
-import { expect } from 'chai';
-import sinon from 'sinon';
 import { mount } from 'enzyme';
 
-import { TreeMap } from '../../../src/index.js';
+import { TreeMap } from '../../../src';
 import TreeMapNode from '../../../src/TreeMapNode.js';
 import TreeMapNodeLabel from '../../../src/TreeMapNodeLabel.js';
 
@@ -21,10 +19,10 @@ describe('TreeMap', () => {
     nodeStyle: { border: '1px solid #333' },
     getLabel: d => d.name,
     getValue: d => d.size,
-    onClickNode: sinon.spy(),
-    onMouseEnterNode: sinon.spy(),
-    onMouseLeaveNode: sinon.spy(),
-    onMouseMoveNode: sinon.spy(),
+    onClickNode: jest.fn(),
+    onMouseEnterNode: jest.fn(),
+    onMouseLeaveNode: jest.fn(),
+    onMouseMoveNode: jest.fn(),
     width: 400,
     height: 500,
   };
@@ -34,7 +32,7 @@ describe('TreeMap', () => {
     const nodes = chart.find(TreeMapNode);
 
     nodes.forEach(node => {
-      expect(node.props().nodeStyle.border).to.eql(props.nodeStyle.border);
+      expect(node.props().nodeStyle.border).toEqual(props.nodeStyle.border);
     });
   });
 
@@ -42,10 +40,10 @@ describe('TreeMap', () => {
     const chart = mount(<TreeMap {...props} />);
     const nodes = chart.find(TreeMapNode);
 
-    expect(nodes).to.have.lengthOf(5);
+    expect(nodes).toHaveLength(5);
 
     nodes.forEach(node => {
-      expect(node.find(TreeMapNodeLabel)).to.have.lengthOf(1);
+      expect(node.find(TreeMapNodeLabel)).toHaveLength(1);
     });
   });
 
@@ -54,26 +52,26 @@ describe('TreeMap', () => {
     let tree = chart.instance().state.tree;
 
     chart.setProps({ data });
-    expect(tree).to.not.equal(chart.instance().state.tree);
+    expect(tree).not.toEqual(chart.instance().state.tree);
 
     chart = mount(<TreeMap {...props} sticky />);
     tree = chart.instance().state.tree;
     chart.setProps({ data });
-    expect(tree).to.eql(chart.instance().state.tree);
+    expect(tree).toEqual(chart.instance().state.tree);
   });
 
   it('triggers event handlers', () => {
     const chart = mount(<TreeMap {...props} />);
     const nodes = chart.find(TreeMapNode);
 
-    expect(props.onMouseMoveNode).not.to.have.been.called;
+    expect(props.onMouseMoveNode).not.toHaveBeenCalled();
     nodes.at(1).simulate('mousemove');
-    expect(props.onMouseMoveNode).to.have.been.called;
-    expect(props.onMouseEnterNode).not.to.have.been.called;
+    expect(props.onMouseMoveNode).toHaveBeenCalled();
+    expect(props.onMouseEnterNode).not.toHaveBeenCalled();
     nodes.at(1).simulate('mouseenter');
-    expect(props.onMouseEnterNode).to.have.been.called;
-    expect(props.onMouseLeaveNode).not.to.have.been.called;
+    expect(props.onMouseEnterNode).toHaveBeenCalled();
+    expect(props.onMouseLeaveNode).not.toHaveBeenCalled();
     nodes.at(1).simulate('mouseleave');
-    expect(props.onMouseLeaveNode).to.have.been.called;
+    expect(props.onMouseLeaveNode).toHaveBeenCalled();
   });
 });

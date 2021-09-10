@@ -1,9 +1,8 @@
 import React from 'react';
 import { scaleLinear } from 'd3-scale';
-import { expect } from 'chai';
 import { mount } from 'enzyme';
 
-import { AreaBarChart, RangeRect } from '../../../src/index.js';
+import { AreaBarChart, RangeRect } from '../../../src';
 import { getValue } from '../../../src/utils/Data.js';
 
 describe('AreaBarChart', () => {
@@ -36,22 +35,22 @@ describe('AreaBarChart', () => {
       const chart = mount(<AreaBarChart {...props} />);
       const group = chart.find('g');
       const rangeRects = chart.find(RangeRect);
-      expect(group).to.have.length(1);
-      expect(rangeRects).to.have.length(props.data.length);
+      expect(group).toHaveLength(1);
+      expect(rangeRects).toHaveLength(props.data.length);
 
       // sets / transforms props correctly for vertical bar chart
-      expect(rangeRects.at(0).props().xScale).to.equal(props.xScale);
-      expect(rangeRects.at(0).props().yScale).to.equal(props.yScale);
-      expect(rangeRects.at(0).props().className).to.contain(props.barClassName);
-      expect(rangeRects.at(0).props().style).to.equal(props.barStyle);
-      expect(rangeRects.at(0).props().x).to.equal(
+      expect(rangeRects.at(0).props().xScale).toEqual(props.xScale);
+      expect(rangeRects.at(0).props().yScale).toEqual(props.yScale);
+      expect(rangeRects.at(0).props().className).toContain(props.barClassName);
+      expect(rangeRects.at(0).props().style).toEqual(props.barStyle);
+      expect(rangeRects.at(0).props().x).toEqual(
         getValue(props.x, props.data[0]),
       );
-      expect(rangeRects.at(0).props().xEnd).to.equal(
+      expect(rangeRects.at(0).props().xEnd).toEqual(
         getValue(props.xEnd, props.data[0]),
       );
-      expect(rangeRects.at(0).props().y).to.equal(0);
-      expect(rangeRects.at(0).props().yEnd).to.equal(
+      expect(rangeRects.at(0).props().y).toEqual(0);
+      expect(rangeRects.at(0).props().yEnd).toEqual(
         getValue(props.y, props.data[0]),
       );
     });
@@ -65,14 +64,14 @@ describe('AreaBarChart', () => {
       );
       const horizontalRangeRects = horizontalAreaBarChart.find(RangeRect);
 
-      expect(horizontalRangeRects.at(0).props().x).to.equal(0);
-      expect(horizontalRangeRects.at(0).props().xEnd).to.equal(
+      expect(horizontalRangeRects.at(0).props().x).toEqual(0);
+      expect(horizontalRangeRects.at(0).props().xEnd).toEqual(
         getValue(props.x, props.data[0]),
       );
-      expect(horizontalRangeRects.at(0).props().y).to.equal(
+      expect(horizontalRangeRects.at(0).props().y).toEqual(
         getValue(props.y, props.data[0]),
       );
-      expect(horizontalRangeRects.at(0).props().yEnd).to.equal(
+      expect(horizontalRangeRects.at(0).props().yEnd).toEqual(
         getValue(props.yEnd, props.data[0]),
       );
     });

@@ -1,6 +1,5 @@
 import React from 'react';
 import { scaleLinear, scaleOrdinal } from 'd3-scale';
-import { expect } from 'chai';
 import { mount } from 'enzyme';
 
 import { isValidScale } from '../../../src/utils/Scale';
@@ -9,15 +8,15 @@ import { innerRangeX, innerRangeY } from '../../../src/utils/Margin';
 import resolveXYScales from '../../../src/utils/resolveXYScales';
 
 function expectRefAndDeepEqual(a, b) {
-  expect(a).to.equal(b);
-  expect(a).to.deep.equal(b);
+  expect(a).toBe(b);
+  expect(a).toEqual(b);
 }
 
 function expectXYScales(scales) {
-  expect(scales).to.be.an('object');
+  expect(scales).toBeInstanceOf('object');
   ['x', 'y'].forEach(k => {
-    expect(scales).to.have.property(k);
-    expect(isValidScale(scales[k])).to.equal(true);
+    expect(scales).toHaveProperty(k);
+    expect(isValidScale(scales[k])).toEqual(true);
   });
 }
 
@@ -32,28 +31,28 @@ function expectXYScaledComponent(
     x: innerRangeX(width, margin),
     y: innerRangeY(height, margin),
   };
-  expect(scaleType).to.be.an('object');
+  expect(scaleType).toBeInstanceOf('object');
   console.log('expected domains', domain);
   console.log('expected range', range);
 
-  expect(rendered.props).to.be.an('object');
-  expect(rendered.props.margin).to.deep.equal(margin);
+  expect(rendered.props).toBeInstanceOf('object');
+  expect(rendered.props.margin).toEqual(margin);
 
   const renderedScale = rendered.props.scale;
   expectXYScales(renderedScale);
   ['x', 'y'].forEach(k => {
-    expect(rendered.props.scaleType[k]).to.equal(scaleType[k]);
+    expect(rendered.props.scaleType[k]).toEqual(scaleType[k]);
     console.log('domain', renderedScale[k].domain());
     console.log('expected domain', domain[k]);
-    expect(renderedScale[k].domain()).to.deep.equal(domain[k]);
+    expect(renderedScale[k].domain()).toEqual(domain[k]);
     if (scaleType[k] === 'ordinal')
-      expect(renderedScale[k].range()).to.deep.equal(
+      expect(renderedScale[k].range()).toEqual(
         scaleOrdinal()
           .domain(domain[k])
           .rangePoints(range[k])
           .range(),
       );
-    else expect(renderedScale[k].range()).to.deep.equal(range[k]);
+    else expect(renderedScale[k].range()).toEqual(range[k]);
   });
 }
 
@@ -68,25 +67,25 @@ function expectXYScaledComponentEnzyme(
     x: innerRangeX(width, margin),
     y: innerRangeY(height, margin),
   };
-  expect(scaleType).to.be.an('object');
+  expect(scaleType).toBeInstanceOf('object');
 
-  expect(rendered.props().margin).to.deep.equal(margin);
+  expect(rendered.props().margin).toEqual(margin);
 
   const renderedScale = rendered.props().scale;
   expectXYScales(renderedScale);
   ['x', 'y'].forEach(k => {
-    expect(rendered.props().scaleType[k]).to.equal(scaleType[k]);
+    expect(rendered.props().scaleType[k]).toEqual(scaleType[k]);
     console.log('domain', renderedScale[k].domain());
     console.log('expected domain', domain[k]);
-    expect(renderedScale[k].domain()).to.deep.equal(domain[k]);
+    expect(renderedScale[k].domain()).toEqual(domain[k]);
     if (scaleType[k] === 'ordinal')
-      expect(renderedScale[k].range()).to.deep.equal(
+      expect(renderedScale[k].range()).toEqual(
         scaleOrdinal()
           .domain(domain[k])
           .rangePoints(range[k])
           .range(),
       );
-    else expect(renderedScale[k].range()).to.deep.equal(range[k]);
+    else expect(renderedScale[k].range()).toEqual(range[k]);
   });
 }
 
@@ -220,15 +219,15 @@ describe('resolveXYScales', () => {
     const renderedXScale = rendered.props().xScale;
     const renderedYScale = rendered.props().yScale;
 
-    expect(isValidScale(renderedXScale)).to.equal(true);
-    expect(isValidScale(renderedYScale)).to.equal(true);
-    expect(renderedXScale.domain()).to.deep.equal(props.xDomain);
-    expect(renderedYScale.domain()).to.deep.equal(props.yDomain);
-    expect(renderedXScale.range()).to.deep.equal([
+    expect(isValidScale(renderedXScale)).toEqual(true);
+    expect(isValidScale(renderedYScale)).toEqual(true);
+    expect(renderedXScale.domain()).toEqual(props.xDomain);
+    expect(renderedYScale.domain()).toEqual(props.yDomain);
+    expect(renderedXScale.range()).toEqual([
       0,
       width - (props.marginLeft + props.marginRight),
     ]);
-    expect(renderedYScale.range()).to.deep.equal([
+    expect(renderedYScale.range()).toEqual([
       height - (props.marginTop + props.marginBottom),
       0,
     ]);
@@ -249,8 +248,8 @@ describe('resolveXYScales', () => {
     const wrapped = mount(<XYChartWithCustomScaleType {...props} />);
     const rendered = wrapped.find(ChartWithCustomScaleType);
 
-    expect(rendered.props().xScaleType).to.equal(customScaleType.xScaleType);
-    expect(rendered.props().yScaleType).to.equal(customScaleType.yScaleType);
+    expect(rendered.props().xScaleType).toEqual(customScaleType.xScaleType);
+    expect(rendered.props().yScaleType).toEqual(customScaleType.yScaleType);
   });
 
   it('infers scaleType from data', () => {
@@ -271,8 +270,8 @@ describe('resolveXYScales', () => {
     const wrapped = mount(<XYChart {...props} />);
     const rendered = wrapped.find(Chart);
 
-    expect(rendered.props().xScaleType).to.equal('linear');
-    expect(rendered.props().yScaleType).to.deep.equal('ordinal');
+    expect(rendered.props().xScaleType).toEqual('linear');
+    expect(rendered.props().yScaleType).toEqual('ordinal');
   });
 
   // todo: fix this (only matters in edge case)
@@ -288,7 +287,7 @@ describe('resolveXYScales', () => {
   //   const rendered = wrapped.find(ContainerChart);
   //
   //   console.log(rendered.props());
-  //   expect(rendered.props().scaleType).to.deep.equal(customScaleType);
+  //   expect(rendered.props().scaleType).toEqual(customScaleType);
   // });
 
   it('infers scaleType from children data', () => {
@@ -316,8 +315,8 @@ describe('resolveXYScales', () => {
     const wrapped = mount(tree);
     const rendered = wrapped.find(ContainerChart);
 
-    expect(rendered.props().xScaleType).to.equal('linear');
-    expect(rendered.props().yScaleType).to.deep.equal('ordinal');
+    expect(rendered.props().xScaleType).toEqual('linear');
+    expect(rendered.props().yScaleType).toEqual('ordinal');
   });
 
   it('infers domain from Component.getDomain', () => {
@@ -334,8 +333,8 @@ describe('resolveXYScales', () => {
     const wrapped = mount(<XYChartWithCustomDomain {...props} />);
     const rendered = wrapped.find(ChartWithCustomDomain);
 
-    expect(rendered.props().xDomain).to.deep.equal(customDomain.xDomain);
-    expect(rendered.props().yDomain).to.deep.equal(customDomain.yDomain);
+    expect(rendered.props().xDomain).toEqual(customDomain.xDomain);
+    expect(rendered.props().yDomain).toEqual(customDomain.yDomain);
   });
 
   it('infers domain from data', () => {
@@ -355,8 +354,8 @@ describe('resolveXYScales', () => {
     const wrapped = mount(<XYChart {...props} />);
     const rendered = wrapped.find(Chart);
 
-    expect(rendered.props().xDomain).to.deep.equal([12, 22]);
-    expect(rendered.props().yDomain).to.deep.equal(['a', 'b', 'c']);
+    expect(rendered.props().xDomain).toEqual([12, 22]);
+    expect(rendered.props().yDomain).toEqual(['a', 'b', 'c']);
   });
 
   it('infers domain from children getDomain', () => {
@@ -377,8 +376,8 @@ describe('resolveXYScales', () => {
     );
     const wrapped = mount(tree);
     const rendered = wrapped.find(ContainerChart);
-    expect(rendered.props().xDomain).to.deep.equal(customDomain.xDomain);
-    expect(rendered.props().yDomain).to.deep.equal(customDomain.yDomain);
+    expect(rendered.props().xDomain).toEqual(customDomain.xDomain);
+    expect(rendered.props().yDomain).toEqual(customDomain.yDomain);
   });
 
   it('infers domain from children data', () => {
@@ -401,8 +400,8 @@ describe('resolveXYScales', () => {
     const wrapped = mount(tree);
     const rendered = wrapped.find(ContainerChart);
 
-    expect(rendered.props().xDomain).to.deep.equal([-2, 3]);
-    expect(rendered.props().yDomain).to.deep.equal([0, 5]);
+    expect(rendered.props().xDomain).toEqual([-2, 3]);
+    expect(rendered.props().yDomain).toEqual([0, 5]);
   });
 
   it('x and y domain includes 0 given inferred domain from children data', () => {
@@ -427,8 +426,8 @@ describe('resolveXYScales', () => {
     const wrapped = mount(tree);
     const rendered = wrapped.find(ContainerChart);
 
-    expect(rendered.props().xDomain).to.deep.equal([0, 10]);
-    expect(rendered.props().yDomain).to.deep.equal([0, 14]);
+    expect(rendered.props().xDomain).toEqual([0, 10]);
+    expect(rendered.props().yDomain).toEqual([0, 14]);
   });
 
   it('infers margin from Component.getMargin', () => {
@@ -442,10 +441,10 @@ describe('resolveXYScales', () => {
     };
     const wrapped = mount(<XYChartWithCustomMargin {...props} />);
     const rendered = wrapped.find(ChartWithCustomMargin);
-    expect(rendered.props().marginTop).to.equal(customMargin.marginTop);
-    expect(rendered.props().marginBottom).to.equal(customMargin.marginBottom);
-    expect(rendered.props().marginLeft).to.equal(customMargin.marginLeft);
-    expect(rendered.props().marginRight).to.equal(customMargin.marginRight);
+    expect(rendered.props().marginTop).toEqual(customMargin.marginTop);
+    expect(rendered.props().marginBottom).toEqual(customMargin.marginBottom);
+    expect(rendered.props().marginLeft).toEqual(customMargin.marginLeft);
+    expect(rendered.props().marginRight).toEqual(customMargin.marginRight);
   });
 
   it('infers margin from children getMargin', () => {
@@ -464,10 +463,10 @@ describe('resolveXYScales', () => {
     );
     const wrapped = mount(tree);
     const rendered = wrapped.find(ContainerChart);
-    expect(rendered.props().marginTop).to.equal(customMargin.marginTop);
-    expect(rendered.props().marginBottom).to.equal(customMargin.marginBottom);
-    expect(rendered.props().marginLeft).to.equal(customMargin.marginLeft);
-    expect(rendered.props().marginRight).to.equal(customMargin.marginRight);
+    expect(rendered.props().marginTop).toEqual(customMargin.marginTop);
+    expect(rendered.props().marginBottom).toEqual(customMargin.marginBottom);
+    expect(rendered.props().marginLeft).toEqual(customMargin.marginLeft);
+    expect(rendered.props().marginRight).toEqual(customMargin.marginRight);
   });
 
   it('infers margin from children margin props', () => {
@@ -487,10 +486,10 @@ describe('resolveXYScales', () => {
     );
     const wrapped = mount(tree);
     const rendered = wrapped.find(ContainerChart);
-    expect(rendered.props().marginTop).to.equal(20);
-    expect(rendered.props().marginBottom).to.equal(40);
-    expect(rendered.props().marginLeft).to.equal(30);
-    expect(rendered.props().marginRight).to.equal(50);
+    expect(rendered.props().marginTop).toEqual(20);
+    expect(rendered.props().marginBottom).toEqual(40);
+    expect(rendered.props().marginLeft).toEqual(30);
+    expect(rendered.props().marginRight).toEqual(50);
   });
 
   it('infers scaleType & domain from data, margin from getMargin', () => {
@@ -508,14 +507,14 @@ describe('resolveXYScales', () => {
     const wrapped = mount(tree);
     const rendered = wrapped.find(ChartWithCustomMargin);
 
-    expect(rendered.props().marginTop).to.equal(customMargin.marginTop);
-    expect(rendered.props().marginBottom).to.equal(customMargin.marginBottom);
-    expect(rendered.props().marginLeft).to.equal(customMargin.marginLeft);
-    expect(rendered.props().marginRight).to.equal(customMargin.marginRight);
-    expect(rendered.props().xScaleType).to.equal('linear');
-    expect(rendered.props().yScaleType).to.equal('ordinal');
-    expect(rendered.props().xDomain).to.deep.equal([12, 22]);
-    expect(rendered.props().yDomain).to.deep.equal(['a', 'b', 'c']);
+    expect(rendered.props().marginTop).toEqual(customMargin.marginTop);
+    expect(rendered.props().marginBottom).toEqual(customMargin.marginBottom);
+    expect(rendered.props().marginLeft).toEqual(customMargin.marginLeft);
+    expect(rendered.props().marginRight).toEqual(customMargin.marginRight);
+    expect(rendered.props().xScaleType).toEqual('linear');
+    expect(rendered.props().yScaleType).toEqual('ordinal');
+    expect(rendered.props().xDomain).toEqual([12, 22]);
+    expect(rendered.props().yDomain).toEqual(['a', 'b', 'c']);
   });
 
   it('inverts the scale domain if `invertScale` option is true', () => {
@@ -533,12 +532,12 @@ describe('resolveXYScales', () => {
     };
 
     const invertXChart = mount(<XYChart {...props} invertXScale />).find(Chart);
-    expect(invertXChart.props().xDomain).to.deep.equal([3, -3]);
-    expect(invertXChart.props().yDomain).to.deep.equal([0, 10]);
+    expect(invertXChart.props().xDomain).toEqual([3, -3]);
+    expect(invertXChart.props().yDomain).toEqual([0, 10]);
 
     const invertYChart = mount(<XYChart {...props} invertYScale />).find(Chart);
-    expect(invertYChart.props().xDomain).to.deep.equal([-3, 3]);
-    expect(invertYChart.props().yDomain).to.deep.equal([10, 0]);
+    expect(invertYChart.props().xDomain).toEqual([-3, 3]);
+    expect(invertYChart.props().yDomain).toEqual([10, 0]);
   });
 
   // todo test resolving scaleType from domains

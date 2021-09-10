@@ -2,25 +2,21 @@ import _ from 'lodash';
 import { scaleLinear, scalePoint, scaleTime } from 'd3-scale';
 import React from 'react';
 import { shallow } from 'enzyme';
-import chaiEnzyme from 'chai-enzyme';
-import chai from 'chai';
-chai.use(chaiEnzyme());
-const { expect } = chai;
 
 import XTicks from '../../../src/XTicks';
 
 function expectTicksToExist(wrapper) {
   const ticksGroup = wrapper.find('g.rct-chart-ticks-x');
-  expect(ticksGroup).to.have.length(1);
-  expect(ticksGroup).to.have.descendants('line.rct-chart-tick-x');
+  expect(ticksGroup).toHaveLength(1);
+  expect(ticksGroup).toContainMatchingElement('line.rct-chart-tick-x');
   return wrapper;
 }
 
 function expectCorrectTickPlacement(wrapper, ticks, scale) {
   const tickLines = wrapper.find('line.rct-chart-tick-x');
-  expect(tickLines).to.have.length(ticks.length);
+  expect(tickLines).toHaveLength(ticks.length);
   tickLines.forEach((line, i) => {
-    expect(Math.round(+line.prop('x1'))).to.equal(Math.round(scale(ticks[i])));
+    expect(Math.round(+line.prop('x1'))).toEqual(Math.round(scale(ticks[i])));
   });
   return wrapper;
 }
@@ -52,20 +48,20 @@ describe('XTicks', () => {
     let wrapper = expectTicksToExist(
       shallow(<XTicks xScale={linearScale} tickCount={11} />),
     );
-    expect(wrapper.find('line.rct-chart-tick-x')).to.have.length(11);
+    expect(wrapper.find('line.rct-chart-tick-x')).toHaveLength(11);
     wrapper = expectTicksToExist(
       shallow(<XTicks xScale={linearScale} tickCount={3} />),
     );
-    expect(wrapper.find('line.rct-chart-tick-x')).to.have.length(3);
+    expect(wrapper.find('line.rct-chart-tick-x')).toHaveLength(3);
 
     wrapper = expectTicksToExist(
       shallow(<XTicks xScale={timeScale} tickCount={13} />),
     );
-    expect(wrapper.find('line.rct-chart-tick-x')).to.have.length(13);
+    expect(wrapper.find('line.rct-chart-tick-x')).toHaveLength(13);
     wrapper = expectTicksToExist(
       shallow(<XTicks xScale={timeScale} tickCount={5} />),
     );
-    expect(wrapper.find('line.rct-chart-tick-x')).to.have.length(5);
+    expect(wrapper.find('line.rct-chart-tick-x')).toHaveLength(5);
   });
 
   it('uses `ticks` to determine which ticks to show', () => {
@@ -94,14 +90,14 @@ describe('XTicks', () => {
     );
     wrapper
       .find('line.rct-chart-tick-x')
-      .forEach(line => expect(getLineHeight(line)).to.equal(5));
+      .forEach(line => expect(getLineHeight(line)).toEqual(5));
 
     wrapper = expectTicksToExist(
       shallow(<XTicks xScale={linearScale} tickLength={13} />),
     );
     wrapper
       .find('line.rct-chart-tick-x')
-      .forEach(line => expect(getLineHeight(line)).to.equal(13));
+      .forEach(line => expect(getLineHeight(line)).toEqual(13));
   });
 
   it('uses `top` to draw the ticks at top of rectangle', () => {
@@ -109,7 +105,7 @@ describe('XTicks', () => {
     let wrapper = expectTicksToExist(
       shallow(<XTicks xScale={linearScale} height={height} />),
     );
-    expect(wrapper.find('g.rct-chart-ticks-x')).to.have.attr(
+    expect(wrapper.find('g.rct-chart-ticks-x')).toHaveProp(
       'transform',
       `translate(0, ${height})`,
     );
@@ -117,7 +113,7 @@ describe('XTicks', () => {
     wrapper = expectTicksToExist(
       shallow(<XTicks position="top" xScale={linearScale} height={height} />),
     );
-    expect(wrapper.find('g.rct-chart-ticks-x')).to.have.attr(
+    expect(wrapper.find('g.rct-chart-ticks-x')).toHaveProp(
       'transform',
       `translate(0, 0)`,
     );
@@ -127,33 +123,33 @@ describe('XTicks', () => {
     let wrapper = expectTicksToExist(shallow(<XTicks xScale={linearScale} />));
     wrapper
       .find('line.rct-chart-tick-x')
-      .forEach(line => expect(line.prop('y2')).to.be.above(0));
+      .forEach(line => expect(line.prop('y2')).toBeGreaterThan(0));
     wrapper = expectTicksToExist(
       shallow(<XTicks xScale={linearScale} placement="above" />),
     );
     wrapper
       .find('line.rct-chart-tick-x')
-      .forEach(line => expect(line.prop('y2')).to.be.below(0));
+      .forEach(line => expect(line.prop('y2')).toBeLessThan(0));
 
     wrapper = expectTicksToExist(
       shallow(<XTicks position="top" xScale={linearScale} />),
     );
     wrapper
       .find('line.rct-chart-tick-x')
-      .forEach(line => expect(line.prop('y2')).to.be.below(0));
+      .forEach(line => expect(line.prop('y2')).toBeLessThan(0));
     wrapper = expectTicksToExist(
       shallow(<XTicks position="top" xScale={linearScale} placement="below" />),
     );
     wrapper
       .find('line.rct-chart-tick-x')
-      .forEach(line => expect(line.prop('y2')).to.be.above(0));
+      .forEach(line => expect(line.prop('y2')).toBeGreaterThan(0));
   });
 
   it('passes className to the ticks', () => {
     const wrapper = expectTicksToExist(
       shallow(<XTicks xScale={linearScale} tickClassName="test-tick-class" />),
     );
-    expect(wrapper).to.have.descendants('line.test-tick-class');
+    expect(wrapper).toContainMatchingElement('line.test-tick-class');
   });
 
   it('passes style to the ticks', () => {
@@ -163,7 +159,7 @@ describe('XTicks', () => {
     );
     wrapper
       .find('line.rct-chart-tick-x')
-      .forEach(line => expect(line.prop('style')).to.deep.equal(style));
+      .forEach(line => expect(line.prop('style')).toEqual(style));
   });
 
   it('has a static getMargin method which returns the required outer margin space', () => {
@@ -179,25 +175,25 @@ describe('XTicks', () => {
       position: 'bottom',
       placement: 'below',
     });
-    expect(margin).to.deep.equal(_.defaults({ marginBottom: 10 }, zeroMargins));
+    expect(margin).toEqual(_.defaults({ marginBottom: 10 }, zeroMargins));
     margin = XTicks.getMargin({
       tickLength: 10,
       position: 'top',
       placement: 'above',
     });
-    expect(margin).to.deep.equal(_.defaults({ marginTop: 10 }, zeroMargins));
+    expect(margin).toEqual(_.defaults({ marginTop: 10 }, zeroMargins));
 
     margin = XTicks.getMargin({
       tickLength: 10,
       position: 'bottom',
       placement: 'above',
     });
-    expect(margin).to.deep.equal(zeroMargins);
+    expect(margin).toEqual(zeroMargins);
     margin = XTicks.getMargin({
       tickLength: 10,
       position: 'top',
       placement: 'below',
     });
-    expect(margin).to.deep.equal(zeroMargins);
+    expect(margin).toEqual(zeroMargins);
   });
 });

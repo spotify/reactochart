@@ -3,26 +3,12 @@ import { mount } from 'enzyme';
 import React from 'react';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
-import { XYPlot, YAxisLabels } from 'src/index.js';
+import { XYPlot, YAxisLabels } from '../../../src/index.js';
 chai.use(sinonChai);
 
 // YAxisLabels tests must run in browser since YAxisLabels uses measureText
 
 describe('YAxisLabel', () => {
-  const width = 500;
-  const height = 300;
-  const props = {
-    width,
-    height,
-    xScaleType: 'linear',
-    yScaleType: 'linear',
-    marginTop: 11,
-    marginBottom: 22,
-    marginLeft: 33,
-    marginRight: 44,
-    offset: 5,
-  };
-
   it('Check how many labels are created and where', () => {
     const chartStyle = { marginBottom: '10px' };
     const functions = {
@@ -183,7 +169,7 @@ describe('YAxisLabel', () => {
     // Logic should pick our first format ".1%"
     // which would format the labels like so: 1.0%
     // because YAxisLabels (rendered vertically) wouldn't have collisions
-    const correctTickLabels = ['-100.0%', '-50.0%', '0.0%', '50.0%', '100.0%'];
+    const correctTickLabels = ['−100.0%', '−50.0%', '0.0%', '50.0%', '100.0%'];
 
     const renderedTickLabels = labels.map(label => {
       const instance = label.instance();
