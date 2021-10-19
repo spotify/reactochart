@@ -64,7 +64,7 @@
     "@spotify/prettier-config": "^6.0.0",
     "@spotify/web-scripts": "^3.3.0",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^24.9.0",
+    "babel-jest": "^27.3.1",
     "babel-loader": "^8.1.0",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-rewire": "^1.2.0",
