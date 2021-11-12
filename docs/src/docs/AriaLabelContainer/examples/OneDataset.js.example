@@ -13,9 +13,9 @@ const AriaLabelContainerExample = (props) => {
         lineStyle={{stroke: '#ff7f0e', strokeWidth: 3}}
       />
       <AriaLabelContainer
-        ariaLabelGenerator={xValue => {
-          const dataPoint = data.find(d => d.x === xValue);
-          if(dataPoint){
+        ariaLabelGenerator={(xValue, datasets) => {
+          const { 0: dataPoint } = datasets;
+          if(xValue){
             return `xValue, ${dataPoint.x}; yValue, ${dataPoint.y}`
           }
         }}

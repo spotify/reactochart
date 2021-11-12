@@ -96,7 +96,7 @@ export default function AriaLabelContainer(props) {
           width={sliceWidth}
           x={
             xValue === domain[1]
-              ? xScale(zippedDatapoints[index - 1])
+              ? xScale(zippedDatapoints[index - 1].xValue)
               : xScale(xValue)
             // otherwise the last rect renders outside the chart
           }
