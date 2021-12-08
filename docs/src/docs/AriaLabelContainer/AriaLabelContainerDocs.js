@@ -10,16 +10,16 @@ const examples = [
     label: 'With One Dataset',
     codeText: require('./examples/OneDataset.js.example').default,
   },
-  // {
-  //   id: 'two-dataset',
-  //   label: 'With Two Datasets',
-  //   codeText: require('./examples/TwoDatasets.js.example').default,
-  // },
-  // {
-  //   id: 'action',
-  //   label: 'With Interactions',
-  //   codeText: require('./examples/WithActions.js.example').default,
-  // },
+  {
+    id: 'two-dataset',
+    label: 'With Two Datasets',
+    codeText: require('./examples/TwoDatasets.js.example').default,
+  },
+  {
+    id: 'action',
+    label: 'With Interactions',
+    codeText: require('./examples/WithActions.js.example').default,
+  },
 ];
 
 export default class AriaLabelContainerExamples extends React.Component {

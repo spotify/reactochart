@@ -8,9 +8,8 @@ const AriaLabelContainerExample = (props) => {
     y: Math.round(d * Math.random() * 10)
   }))
 
-  const ariaLabelGenerator = xValue => {
-    const data0Point = data0.find(d => d.x === xValue);
-    const data1Point = data1.find(d => d.x === xValue);
+  const ariaLabelGenerator = (xValue, datasets) => {
+    const { 0: data0Point, 1: data1Point } = datasets;
     let ariaLabelString = `x Value, ${xValue}`;
     if(data0Point) {
       ariaLabelString += `, data0 y Value ${data0Point.y}`;

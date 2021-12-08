@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import zipWith from 'lodash/zipWith';
 import { ascending } from 'd3-array';
 import * as CustomPropTypes from './utils/CustomPropTypes';
 import { getValue } from './utils/Data';
@@ -74,14 +73,27 @@ export default function AriaLabelContainer(props) {
 
   const domain = xScale.domain();
 
+  const groupedData = {};
   // determine number of frames from n datasets with potentially different accessors
-  const mappedDatasets = datasetWithAccessor.map(({ data, accessor }) =>
-    data.map(d => ({ xValue: getValue(accessor, d), datum: d })),
+  datasetWithAccessor.forEach(({ data, accessor }, index) => {
+    data.forEach(d => {
+      const xValue = getValue(accessor, d);
+      const key = xValue.toString();
+      if (!groupedData[key]) {
+        groupedData[key] = {
+          xValue,
+          data: new Array(datasetWithAccessor.length),
+          // account for missing datapoints in different datasets
+        };
+      }
+      groupedData[key].data[index] = d;
+    });
+  });
+
+  const zippedDatapoints = Object.values(groupedData).sort((a, b) =>
+    ascending(a.xValue, b.xValue),
   );
-  const zippedDatapoints = zipWith(...mappedDatasets, (...datasets) => ({
-    xValue: datasets[0].xValue,
-    data: datasets.map(d => d.datum),
-  })).sort((a, b) => ascending(a.xValue, b.xValue));
+
   const numFrames = zippedDatapoints.length;
   const sliceWidth = width / (numFrames - 1);
 
