@@ -1,0 +1,66 @@
+{
+  "description": "`AriaLabelContainer` provides a mechanism for keyboard navigation of\n`LineChart` and `AreaChart` graphs within `XYPlot`. This component renders\na rectangle for a given `numFrames` across a Line/Area chart. `numFrames` should\nbe equal to the number of data points in your dataset. Users can navigate to a frame\neither by pressing `Tab`, or through their assistive technology. `AriaLabelContainer`\ntakes an `ariaLabelGenerator`, which generates an aria-label for each frame of the chart.\n[aria-labels](https://www.w3.org/TR/WCAG20-TECHS/ARIA6.html#ARIA6-description) are critical for users accessing\nthe web with screenreaders or other assistive technologies.",
+  "displayName": "AriaLabelContainer",
+  "methods": [],
+  "props": {
+    "datasetWithAccessor": {
+      "type": {
+        "name": "arrayOf",
+        "value": {
+          "name": "shape",
+          "value": {
+            "data": {
+              "name": "arrayOf",
+              "value": {
+                "name": "object"
+              },
+              "required": true
+            },
+            "accessor": {
+              "name": "custom",
+              "raw": "CustomPropTypes.valueOrAccessor.isRequired",
+              "required": true
+            }
+          }
+        }
+      },
+      "required": true,
+      "description": "An array containing n objects in the following shape:\n[{\n   data: Array of your data points, normally used in rendering specific line or area charts\n   accessor: A function used to access the data point on the x axis from the `data` attribute\n             (datum) => number\n}]"
+    },
+    "ariaLabelGenerator": {
+      "type": {
+        "name": "func"
+      },
+      "required": true,
+      "description": "A function that takes the xValue at the start of the frame,\nand returns a string to render as an aria label\nfor the specific frame in the Interface.\n\n(xValue) => string"
+    },
+    "onKeyDown": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "an optional `onKeyDown` event handler to provide for each frame\nwhen selected.\nBest practices are to describe how the user will interact with the chart in\nthe ariaLabelGenerator\n\n(event, xValue) => void"
+    },
+    "height": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "height of the chart - provided by `XYPlot`"
+    },
+    "width": {
+      "type": {
+        "name": "number"
+      },
+      "required": false,
+      "description": "width of the chart - provided by `XYPlot`"
+    },
+    "xScale": {
+      "type": {
+        "name": "func"
+      },
+      "required": false,
+      "description": "D3 scale for X axis - provided by XYPlot"
+    }
+  }
+}

@@ -30,6 +30,11 @@ const mainComponents = [
 
 const xyChartComponents = [
   {
+    name: 'AriaLabelContainer',
+    path: '/aria-label-container',
+    Component: Docs.AriaLabelContainerDocs,
+  },
+  {
     name: 'AreaBarChart',
     path: '/area-bar-chart',
     Component: Docs.AreaBarChartDocs,
