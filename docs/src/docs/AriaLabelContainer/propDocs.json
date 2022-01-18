@@ -32,14 +32,14 @@
         "name": "func"
       },
       "required": true,
-      "description": "A function that takes the xValue at the start of the frame,\nand returns a string to render as an aria label\nfor the specific frame in the Interface.\n\n(xValue) => string"
+      "description": "A function that takes the xValue at the start of the frame, an array of datapoints at that xValue, and the index of the frame,\nand returns a string to render as an aria label\nfor the specific frame in the Interface.\n\n(xValue, [datapoints], frameIndex) => string"
     },
     "onKeyDown": {
       "type": {
         "name": "func"
       },
       "required": false,
-      "description": "an optional `onKeyDown` event handler to provide for each frame\nwhen selected.\nBest practices are to describe how the user will interact with the chart in\nthe ariaLabelGenerator\n\n(event, xValue) => void"
+      "description": "an optional `onKeyDown` event handler to provide for each frame\nwhen selected.\nBest practices are to describe how the user will interact with the chart in\nthe ariaLabelGenerator\n\n(event, xValue, [datapoints]) => void"
     },
     "height": {
       "type": {

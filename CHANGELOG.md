@@ -1,3 +1,7 @@
+## 6.1.0 (2022-01-18)
+
+- [#294](https://github.com/spotify/reactochart/pull/294) Accessible Interface for Line/Area Charts
+
 ## 6.0.0 (2021-09-10)
 
 - [#307](https://github.com/spotify/reactochart/pull/307) Enable support for d3 7, and still support 6
