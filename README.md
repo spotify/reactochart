@@ -157,6 +157,25 @@ If you'd like to contribute to the development this project, first fork & clone 
 - `git push` to your forked version of the repo.
 - Open a Github pull request with your changes against `master`. 🎉
 
+### NPM Link
+
+If you have an app that depends on reactochart and you want to develop locally, follow the following steps:
+
+1. In the folder for this repo, run `npm build` and then `npm link`
+2. In your app folder, run `npm link reactochart`. If you're using webpack, then you also may need the following config:
+
+```json
+{
+  "resolve": {
+    "symlinks": true,
+    "alias": {
+      "react": path.resolve("./node_modules/react"),
+      "react-dom": path.resolve("./node_modules/react-dom")
+    }
+  }
+}
+```
+
 ### Notes
 
 - **Do not make any changes in the `lib` or `examples/build` directories**, as these directories are destroyed and
