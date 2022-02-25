@@ -94,7 +94,7 @@
     "mocha": "^7.0.1",
     "prettier": "~1.18.2",
     "raw-loader": "^4.0.2",
-    "react": "^16.14.0",
+    "react": "^17.0.2",
     "react-addons-update": "^15.6.0",
     "react-docgen": "5.1.0",
     "react-dom": "^16.14.0",
