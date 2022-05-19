@@ -164,7 +164,7 @@ If you have an app that depends on reactochart and you want to develop locally, 
 1. In the folder for this repo, run `npm build` and then `npm link`
 2. In your app folder, run `npm link reactochart`. If you're using webpack, then you also may need the following config:
 
-```json
+```js
 {
   "resolve": {
     "symlinks": true,
