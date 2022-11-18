@@ -1,3 +1,7 @@
+## 6.1.1 (2022-11-18)
+
+- [#443](https://github.com/spotify/reactochart/pull/443) Bump d3-color from 3.0.1 to 3.1.0
+
 ## 6.1.0 (2022-01-18)
 
 - [#294](https://github.com/spotify/reactochart/pull/294) Accessible Interface for Line/Area Charts
