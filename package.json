@@ -6,7 +6,7 @@
     "Erica Hyman <ehyman@spotify.com>",
     "Isaac Ezer <isaace@spotify.com>"
   ],
-  "version": "6.1.0",
+  "version": "6.1.1",
   "main": "index.js",
   "files": [
     "*.js",
