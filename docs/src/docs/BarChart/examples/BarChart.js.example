@@ -13,12 +13,12 @@ const BarChartExample = (props) => {
   const chartDefs = _.zip([numbers, letters, dates], [getNumberValue, getLetterValue, getDateValue]);
 
   return <div>
-    {([true, false]).map(horizontal => {
-      return <div>
+    {([true, false]).map((horizontal, index) => {
+      return <div key={index}>
         <h4>{horizontal ? "Horizontal" : "Vertical"}</h4>
 
-        {chartDefs.map(([data, getValue]) => {
-          return <XYPlot width={320} height={320}>
+        {chartDefs.map(([data, getValue], index2) => {
+          return <XYPlot width={320} height={320} key={index2}>
             <XAxis /><YAxis />
             <BarChart
               data={data}

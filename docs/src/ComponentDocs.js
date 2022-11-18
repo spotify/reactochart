@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
-import remark from 'remark';
+import { remark } from 'remark';
 import remarkReact from 'remark-react';
 
 const ComponentDocs = props => {
@@ -110,7 +110,7 @@ function renderType(propInfo) {
 
 function renderMarkdown(markdownText = '') {
   return remark()
-    .use(remarkReact)
+    .use(remarkReact, React)
     .processSync(markdownText).contents;
 }
 
