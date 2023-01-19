@@ -100,7 +100,7 @@
     "react-dom": "^16.14.0",
     "react-pure-render-debug": "^1.1.1",
     "react-router": "^5.2.1",
-    "react-router-dom": "^5.3.0",
+    "react-router-dom": "^6.7.0",
     "react-test-renderer": "^16.14.0",
     "remark": "^14.0.2",
     "remark-react": "^9.0.1",
