@@ -37,7 +37,7 @@
     "test-jest": "cross-env NODE_PATH=$NODE_PATH:$PWD/src BABEL_ENV=test jest ./tests/jsdom"
   },
   "dependencies": {
-    "d3": "6 || 7",
+    "d3": "7.8.2",
     "d3-sankey": "^0.12.3",
     "invariant": "^2.2.0",
     "lodash": "^4.17.15",
