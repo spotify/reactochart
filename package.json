@@ -86,7 +86,7 @@
     "jest": "^24.9.0",
     "jest-canvas-mock": "^2.3.1",
     "jest-enzyme": "^7.1.2",
-    "jsdom": "^15.2.0",
+    "jsdom": "^22.0.0",
     "json-loader": "^0.5.2",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
