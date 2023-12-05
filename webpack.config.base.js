@@ -8,7 +8,7 @@ module.exports = {
   entry: ['./docs/src/main.js'],
   output: {
     path: path.join(__dirname, 'docs/build'),
-    filename: 'bundle.[hash].js',
+    filename: 'bundle.[fullhash].js',
   },
   devServer: {
     port: 9876,
